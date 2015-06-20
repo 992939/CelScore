@@ -1,0 +1,27 @@
+PODS:
+  - AsyncDisplayKit (1.2.1):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.1)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.2.1)
+  - Bolts/Tasks (1.2.0)
+  - Parse (1.7.4):
+    - Bolts/Tasks (>= 1.1.5)
+  - ReactiveCocoa (2.4.7):
+    - ReactiveCocoa/UI (= 2.4.7)
+  - ReactiveCocoa/Core (2.4.7):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.4.7)
+  - ReactiveCocoa/UI (2.4.7):
+    - ReactiveCocoa/Core
+
+DEPENDENCIES:
+  - AsyncDisplayKit (~> 1.2)
+  - Parse (~> 1.7)
+  - ReactiveCocoa (~> 2.4.7)
+
+SPEC CHECKSUMS:
+  AsyncDisplayKit: b2f777da3a246b4aad660b2a55d60bb4328049b9
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
+  ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
+
+COCOAPODS: 0.37.2
