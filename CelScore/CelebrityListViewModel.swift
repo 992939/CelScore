@@ -22,18 +22,8 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Initializers
     init(searchToken: String) {
-        
+    
         super.init()
-        
-        let validSearchSignal = RACObserve(self, "searchText").mapAs {
-            (text: NSString) -> NSNumber in
-            return text.length > 3
-            }.distinctUntilChanged()
-        
-        let executeSearch = RACCommand(enabled: validSearchSignal) {
-            (any:AnyObject!) -> RACSignal in
-            return self.searchForCelebritiesSignal(searchToken: self.searchText)
-        }
     }
     
     init(listName: String) {

@@ -33,6 +33,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         super.init(nibName: nil, bundle: nil)
         
         self.searchTextField.delegate = self
+        self.searchTextField.placeholder = "look up a celebrity or a #list"
+        
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
@@ -90,11 +92,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                 }, error :{ (_) -> Void in
                     print("RACObserve searchedCelebrityListVM error")
             })
-        
-        self.searchTextField.text = "tyra"
-        
-        //var searchSignal = RAC(self.celscoreVM, "searchText", nilValue:"bank")
-        
         
         /* checking network connectivity */
 //                let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
