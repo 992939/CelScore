@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
+		004B56E11B35332A008A75EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56E01B35332A008A75EB /* ViewController.swift */; };
+		004B56E41B35332A008A75EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E21B35332A008A75EB /* Main.storyboard */; };
+		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
+		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
+		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		004B56EF1B35332B008A75EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 004B56D81B35332A008A75EB;
+			remoteInfo = CelScore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		004B56D91B35332A008A75EB /* CelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		004B56DD1B35332A008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		004B56DE1B35332A008A75EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		004B56E01B35332A008A75EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		004B56E31B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		004B56E51B35332A008A75EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		004B56D61B35332A008A75EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EB1B35332B008A75EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		004B56D01B35332A008A75EB = {
+			isa = PBXGroup;
+			children = (
+				004B56DB1B35332A008A75EB /* CelScore */,
+				004B56F11B35332B008A75EB /* CelScoreTests */,
+				004B56DA1B35332A008A75EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		004B56DA1B35332A008A75EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				004B56D91B35332A008A75EB /* CelScore.app */,
+				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		004B56DB1B35332A008A75EB /* CelScore */ = {
+			isa = PBXGroup;
+			children = (
+				004B56DE1B35332A008A75EB /* AppDelegate.swift */,
+				004B56E01B35332A008A75EB /* ViewController.swift */,
+				004B56E21B35332A008A75EB /* Main.storyboard */,
+				004B56E51B35332A008A75EB /* Images.xcassets */,
+				004B56E71B35332A008A75EB /* LaunchScreen.xib */,
+				004B56DC1B35332A008A75EB /* Supporting Files */,
+			);
+			path = CelScore;
+			sourceTree = "<group>";
+		};
+		004B56DC1B35332A008A75EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				004B56DD1B35332A008A75EB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		004B56F11B35332B008A75EB /* CelScoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				004B56F41B35332B008A75EB /* CelScoreTests.swift */,
+				004B56F21B35332B008A75EB /* Supporting Files */,
+			);
+			path = CelScoreTests;
+			sourceTree = "<group>";
+		};
+		004B56F21B35332B008A75EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				004B56F31B35332B008A75EB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		004B56D81B35332A008A75EB /* CelScore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
+			buildPhases = (
+				004B56D51B35332A008A75EB /* Sources */,
+				004B56D61B35332A008A75EB /* Frameworks */,
+				004B56D71B35332A008A75EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CelScore;
+			productName = CelScore;
+			productReference = 004B56D91B35332A008A75EB /* CelScore.app */;
+			productType = "com.apple.product-type.application";
+		};
+		004B56ED1B35332B008A75EB /* CelScoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */;
+			buildPhases = (
+				004B56EA1B35332B008A75EB /* Sources */,
+				004B56EB1B35332B008A75EB /* Frameworks */,
+				004B56EC1B35332B008A75EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				004B56F01B35332B008A75EB /* PBXTargetDependency */,
+			);
+			name = CelScoreTests;
+			productName = CelScoreTests;
+			productReference = 004B56EE1B35332B008A75EB /* CelScoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		004B56D11B35332A008A75EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Gareth.K.Mensah;
+				TargetAttributes = {
+					004B56D81B35332A008A75EB = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					004B56ED1B35332B008A75EB = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 004B56D81B35332A008A75EB;
+					};
+				};
+			};
+			buildConfigurationList = 004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 004B56D01B35332A008A75EB;
+			productRefGroup = 004B56DA1B35332A008A75EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				004B56D81B35332A008A75EB /* CelScore */,
+				004B56ED1B35332B008A75EB /* CelScoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		004B56D71B35332A008A75EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				004B56E41B35332A008A75EB /* Main.storyboard in Resources */,
+				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
+				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EC1B35332B008A75EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		004B56D51B35332A008A75EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				004B56E11B35332A008A75EB /* ViewController.swift in Sources */,
+				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EA1B35332B008A75EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 004B56D81B35332A008A75EB /* CelScore */;
+			targetProxy = 004B56EF1B35332B008A75EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		004B56E21B35332A008A75EB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				004B56E31B35332A008A75EB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		004B56E71B35332A008A75EB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				004B56E81B35332A008A75EB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		004B56F61B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		004B56F71B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		004B56F91B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CelScore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		004B56FA1B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CelScore/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		004B56FC1B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CelScoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelScore.app/CelScore";
+			};
+			name = Debug;
+		};
+		004B56FD1B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CelScoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelScore.app/CelScore";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56F61B35332B008A75EB /* Debug */,
+				004B56F71B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56F91B35332B008A75EB /* Debug */,
+				004B56FA1B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56FC1B35332B008A75EB /* Debug */,
+				004B56FD1B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 004B56D11B35332A008A75EB /* Project object */;
+}
