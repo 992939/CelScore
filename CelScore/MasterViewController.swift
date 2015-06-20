@@ -71,27 +71,32 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //                println("dataSourceSignal error")
 //            })
         
-       /* search for a celebrity */
+       /* search for a celebrity or a #list */
        self.searchTextField.rac_textSignal()
+        .filter { (d:AnyObject!) -> Bool in
+            let token = d as! NSString
+            return token.length > 0
+        }
         .distinctUntilChanged()
         .throttle(1)
         .flattenMap { (d:AnyObject!) -> RACStream! in
-            self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: d as! String)
+            let token = d as! String
+            let isList = token.hasPrefix("#")
+            
+            var searchSignal : RACSignal
+            if isList {
+                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+            } else
+            {
+                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+            }
+            return searchSignal
         }
         .subscribeNext({ (d:AnyObject!) -> Void in
             println("searchTextField signal returned \(d)")
             }, error :{ (_) -> Void in
                 print("searchTextField error")
         })
-        
-        
-        RACObserve(self.celscoreVM, "searchedCelebrityListVM")
-            .distinctUntilChanged()
-            .subscribeNext({ (d:AnyObject!) -> Void in
-                println("RACObserve searchedCelebrityListVM is now \(d)")
-                }, error :{ (_) -> Void in
-                    print("RACObserve searchedCelebrityListVM error")
-            })
         
         /* checking network connectivity */
 //                let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()

@@ -88,7 +88,31 @@ class CelebrityListViewModel: NSObject {
             query.fromLocalDatastore()
             query.whereKey("nickName", matchesRegex: searchToken, modifiers: "i")
             query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
-                print("OBJECTS ARE \(objects)")
+                println("CELBRITIES ARE \(objects)")
+                if let object = objects
+                {
+                    self.celebrityList = object as Array
+                    self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
+                    
+                    subscriber.sendNext(object)
+                    subscriber.sendCompleted()
+                } else
+                {
+                    subscriber.sendError(NSError())
+                }
+            })
+            return nil
+        })
+    }
+    
+    func searchForListsSignal(#searchToken: String) -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            var query = PFQuery(className: "List")
+            query.fromLocalDatastore()
+            query.whereKey("name", matchesRegex: searchToken, modifiers: "i")
+            query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
+                println("LISTS ARE \(objects)")
                 if let object = objects
                 {
                     self.celebrityList = object as Array
