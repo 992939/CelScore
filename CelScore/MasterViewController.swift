@@ -32,8 +32,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         super.init(nibName: nil, bundle: nil)
         
-        //self.searchTextField.backgroundColor = UIColor.blackColor()
-        
         self.searchTextField.delegate = self
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
@@ -71,7 +69,19 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //                println("dataSourceSignal error")
 //            })
         
-       self.searchTextField.rac_textSignal() ~> RAC(self.celscoreVM.searchedCelebrityListVM, "searchText")
+       /* search for a celebrity */
+       self.searchTextField.rac_textSignal()
+        .distinctUntilChanged()
+        .throttle(1)
+        .flattenMap { (d:AnyObject!) -> RACStream! in
+            self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: d as! String)
+        }
+        .subscribeNext({ (d:AnyObject!) -> Void in
+            println("searchTextField signal returned \(d)")
+            }, error :{ (_) -> Void in
+                print("searchTextField error")
+        })
+        
         
         RACObserve(self.celscoreVM, "searchedCelebrityListVM")
             .distinctUntilChanged()
