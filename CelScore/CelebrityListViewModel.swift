@@ -17,7 +17,6 @@ class CelebrityListViewModel: NSObject {
     var executeSearch: RACCommand!
     var connectionErrors: RACSignal!
     var title : String = "Default"
-    var count : Int = 0
     var celebrityList : [AnyObject] = []
     
     //MARK: Initializers
@@ -33,9 +32,9 @@ class CelebrityListViewModel: NSObject {
         initializeListSignal(listName: listName)
             .deliverOn(RACScheduler.mainThreadScheduler())
             .subscribeNext({ (d:AnyObject!) -> Void in
-            println("dataSourceSignal success")
+            println("CelebrityListViewModel.initializeListSignal is \(d)")
             }, error :{ (_) -> Void in
-                println("dataSourceSignal error")
+                println("CelebrityListViewModel.initializeListSignal error")
         })
 
 //        if let currentList = list

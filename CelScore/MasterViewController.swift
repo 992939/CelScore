@@ -63,13 +63,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
         /* binds celscore VM */
-//        RACObserve(self.celscoreVM, "displayedCelebrityListVM")
-//            .distinctUntilChanged()
-//            .subscribeNext({ (d:AnyObject!) -> Void in
-//            println("dataSourceSignal success is \(d.description)")
-//            }, error :{ (_) -> Void in
-//                println("dataSourceSignal error")
-//            })
+        RACObserve(self.celscoreVM, "displayedCelebrityListVM")
+            .distinctUntilChanged()
+            .subscribeNext({ (d:AnyObject!) -> Void in
+            println("RACOBSERVE displayedCelebrityListVM success is \(d.description)")
+            }, error :{ (_) -> Void in
+                println("dataSourceSignal error")
+            })
         
        /* search for a celebrity or a #list */
        self.searchTextField.rac_textSignal()
@@ -133,23 +133,24 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //        signInButton.rac_command = executeSearch
         
 
-        /* ***PROLLY NO LONGER NEEDED*** updating table via LocalDataStore */
-//        let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
-//        updateTableSignal.subscribeNext({ (text: AnyObject!) -> Void in
-//            println("next:\(text)")
-//            var ratings: PFObject = PFObject(className:"ratings")
-//
-//            }, error: { (_) -> Void in
-//                println("error")
-//        })
+        /* xupdating table via LocalDataStore */
+        let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
+        updateTableSignal
+            .subscribeNext({ (text: AnyObject!) -> Void in
+            println("next:\(text)")
+            var ratings: PFObject = PFObject(className:"ratings")
+
+            }, error: { (_) -> Void in
+                println("error")
+        })
 
         /* update the celscore of all celebrities */
-//        let updateAllCelebritiesCelScoreSignal : RACSignal = celscoreVM!.updateAllCelebritiesCelScore()
-//        updateAllCelebritiesCelScoreSignal.subscribeNext({ (_) -> Void in
-//                        println("updateAllCelebritiesCelScore subscribe")
-//                        }, error: { (_) -> Void in
-//                            println("updateAllCelebritiesCelScore error")
-//        })
+        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.updateAllCelebritiesCelScore()
+        updateAllCelebritiesCelScoreSignal.subscribeNext({ (_) -> Void in
+                        println("updateAllCelebritiesCelScore subscribe")
+                        }, error: { (_) -> Void in
+                            println("updateAllCelebritiesCelScore error")
+        })
     }
     
 
@@ -160,19 +161,18 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     // MARK: ASTableView data source and delegate methods.
     
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        var celebrityVM : CelebrityViewModel = celscoreVM.searchedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-
-        let node = ASTextCellNode()
+        var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        
+        var node = ASTextCellNode()
         node.text = "Celebrity"
         
         celebrityVM.initCelebrityViewModelSignal!
-            .distinctUntilChanged()
+            //.distinctUntilChanged()
             .doNext { (object: AnyObject!) -> Void in
                 node.text = node.text + " \(celebrityVM.currentScore!)"
             }
             .subscribeNext({ (object: AnyObject!) -> Void in
                 println("celebrityViewModel Initialized: \(object)")
-                //println("celebrityViewModel celebrityVM \(celebrityVM.nickName!)")
                 },
                 error: { (error: NSError!) -> Void in
                     println("initCelebrityViewModelSignal error: \(error)")
@@ -185,7 +185,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return celscoreVM.searchedCelebrityListVM.celebrityList.count
+        return self.celscoreVM.displayedCelebrityListVM.celebrityList.count
     }
     
     

@@ -84,8 +84,6 @@ class CelebrityViewModel : NSObject {
                     self.height = object?.valueForKey("height") as? String
                     self.currentScore = object?.valueForKey("currentScore") as? Double
                     self.previousScore = object?.valueForKey("previousScore") as? Double
-                    
-                    println("CelebrityViewModel.fetchValuesSignal sendNext")
                     subscriber.sendNext(object)
                     subscriber.sendCompleted()
                 } else

@@ -94,25 +94,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         /* Daily updates of the LocalDataStore with ratings */
-        //        let updateLocalDataStoreWithRatingsSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-        //            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "ratings", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
-        //        }
-        //
-        //        updateLocalDataStoreWithRatingsSignal
-        //            .subscribeNext({ (text: AnyObject!) -> Void in
-        //                let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
-        //                println("updateLocalDataStoreWithListSignal: \(text)")
-        //                PFObject.pinAllInBackground(celebArray, withName: "ratings", block: { (success :Bool, error :NSError?) -> Void in
-        //                    if success {
-        //                        println("updateLocalDataStoreWithRatingsSignal success")
-        //                    } else
-        //                    {
-        //                        println("updateLocalDataStoreWithRatingsSignal error")
-        //                    }
-        //                })
-        //                }, error: { (text: AnyObject!) -> Void in
-        //                    println("executionSignals error: \(text)")
-        //            })
+//        let updateLocalDataStoreWithRatingsSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
+//            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "ratings", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
+//        }
+//        
+//        updateLocalDataStoreWithRatingsSignal
+//            .subscribeNext({ (text: AnyObject!) -> Void in
+//                let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
+//                println("updateLocalDataStoreWithListSignal: \(text)")
+//                PFObject.pinAllInBackground(celebArray, withName: "ratings", block: { (success :Bool, error :NSError?) -> Void in
+//                    if success {
+//                        println("updateLocalDataStoreWithRatingsSignal success")
+//                    } else
+//                    {
+//                        println("updateLocalDataStoreWithRatingsSignal error")
+//                    }
+//                })
+//                }, error: { (text: AnyObject!) -> Void in
+//                    println("executionSignals error: \(text)")
+//            })
         
         
         return celscoreVM
