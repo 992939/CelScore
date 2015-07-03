@@ -14,7 +14,7 @@ PODS:
     - ReactiveCocoa/Core
 
 DEPENDENCIES:
-  - AsyncDisplayKit (~> 1.2)
+  - AsyncDisplayKit (~> 1.2.1)
   - Parse (~> 1.7)
   - ReactiveCocoa (~> 2.4.7)
 

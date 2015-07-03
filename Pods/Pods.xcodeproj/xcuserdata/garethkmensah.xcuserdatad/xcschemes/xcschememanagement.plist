@@ -8,181 +8,151 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-CelScore-AsyncDisplayKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-CelScore-Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-CelScore-Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>Pods-CelScore-ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>Pods-CelScore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-CelScoreTests-AsyncDisplayKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>Pods-CelScoreTests-Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>Pods-CelScoreTests-Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>Pods-CelScoreTests-ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
 		<key>Pods-CelScoreTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>Pods-Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>Pods-ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12658150FE0D5C0E92628624</key>
+		<key>03DC563AFC331A2213417252</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1B6E454D5AF4859E66D50413</key>
+		<key>12A182ACBCE3EE8AD373B29B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2472E049FF6DAE4BBB48B256</key>
+		<key>1387E01D2F32559C2F21BE21</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26DFF1DF555AC5FB52A18C8D</key>
+		<key>155852D239E453B23DAB9461</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>31828E24E7FCD89D556AFBB9</key>
+		<key>1AD47AEC5E2B5CD3010F0027</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3187009EF78B7BDED239FB3A</key>
+		<key>460CB4FB0FA53B4942E06C77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>362F7C97F9FDD9E798EABDA6</key>
+		<key>514BE2EB125EEFDBE189E93F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4123E943C23A054890D08EE9</key>
+		<key>5E967868A29C40033D09EF3B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D58E595E6D462F458D46FAE</key>
+		<key>62EB1314917F46D5C595DC08</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>754969CCEF10D94C5E21EEC8</key>
+		<key>8968F915BDDF3B172CDBA6BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7EE1643CA650F975CB374226</key>
+		<key>8E89083EC7AC7D42196E6E90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>97DC2296E238ADC9F4EC9C92</key>
+		<key>AE9EE0656F4CE92AB8E4E3AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C457AAB91FE853C102A79FF0</key>
+		<key>B0B682AF73F50AEC29428D7A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CCB2961A09154245C5534926</key>
+		<key>F93CD941ACA8389AC109B165</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CDFBB73657DA15C903C292DD</key>
+		<key>FE4D898FBE3CC7C2633FC122</key>
 		<dict>
 			<key>primary</key>
 			<true/>

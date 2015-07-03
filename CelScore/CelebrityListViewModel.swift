@@ -32,7 +32,7 @@ class CelebrityListViewModel: NSObject {
         initializeListSignal(listName: listName)
             .deliverOn(RACScheduler.mainThreadScheduler())
             .subscribeNext({ (d:AnyObject!) -> Void in
-            println("CelebrityListViewModel.initializeListSignal is \(d)")
+            //println("CelebrityListViewModel.initializeListSignal is \(d)")
             }, error :{ (_) -> Void in
                 println("CelebrityListViewModel.initializeListSignal error")
         })
@@ -48,7 +48,7 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Methods
     func initializeListSignal(#listName: String) -> RACSignal {
-        let scheduler = RACScheduler(priority: RACSchedulerPriorityBackground)
+        let scheduler = RACScheduler(priority: RACSchedulerPriorityHigh)
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             var query = PFQuery(className: "List")
@@ -111,7 +111,7 @@ class CelebrityListViewModel: NSObject {
             query.fromLocalDatastore()
             query.whereKey("name", matchesRegex: searchToken, modifiers: "i")
             query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
-                println("LISTS ARE \(objects)")
+                //println("LISTS ARE \(objects)")
                 if let object = objects
                 {
                     self.celebrityList = object as Array

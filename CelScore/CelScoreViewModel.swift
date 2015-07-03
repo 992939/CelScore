@@ -17,7 +17,7 @@ class CelScoreViewModel: NSObject {
     dynamic var searchedCelebrityListVM : CelebrityListViewModel
 
     enum periodSetting: NSTimeInterval {
-        case Every_Minute = 60.0
+        case Every_Minute = 10.0
         case Daily = 86400.0
     }
     

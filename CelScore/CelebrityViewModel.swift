@@ -15,7 +15,7 @@ class CelebrityViewModel : NSObject {
     //MARK: Properties
     var firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
     var currentScore, previousScore: Double?
-    var initCelebrityViewModelSignal : RACSignal?
+    var initCelebrityViewModelSignal : RACSignal
     
     enum rank {
         case A_List
@@ -55,12 +55,14 @@ class CelebrityViewModel : NSObject {
     }
     
     enum periodSetting: NSTimeInterval {
-        case Every_Minute = 60.0
+        case Every_Minute = 10.0
         case Daily = 86400.0
     }
     
     init(celebrity: PFObject)
     {
+        initCelebrityViewModelSignal = RACSignal()
+        
         super.init()
         
         initCelebrityViewModelSignal = updateCelebrityViewModelSignal(celebrity: celebrity, frequency: periodSetting.Every_Minute.rawValue)

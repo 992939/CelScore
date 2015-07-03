@@ -16,7 +16,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
-    var celebrityTableView : ASTableView!
+    var celebrityTableView : ASTableView
     private var celscoreVM: CelScoreViewModel!
 
     required init(coder aDecoder: NSCoder)
@@ -66,7 +66,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         RACObserve(self.celscoreVM, "displayedCelebrityListVM")
             .distinctUntilChanged()
             .subscribeNext({ (d:AnyObject!) -> Void in
-            println("RACOBSERVE displayedCelebrityListVM success is \(d.description)")
+            //println("RACOBSERVE displayedCelebrityListVM success is \(d.description)")
             }, error :{ (_) -> Void in
                 println("dataSourceSignal error")
             })
@@ -137,7 +137,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
         updateTableSignal
             .subscribeNext({ (text: AnyObject!) -> Void in
-            println("next:\(text)")
+            //println("next:\(text)")
             var ratings: PFObject = PFObject(className:"ratings")
 
             }, error: { (_) -> Void in
@@ -166,17 +166,20 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         var node = ASTextCellNode()
         node.text = "Celebrity"
         
-        celebrityVM.initCelebrityViewModelSignal!
+        celebrityVM.initCelebrityViewModelSignal
             //.distinctUntilChanged()
+            .repeat()
             .doNext { (object: AnyObject!) -> Void in
                 node.text = node.text + " \(celebrityVM.currentScore!)"
+                println("REAL IS \(node.text)")
             }
             .subscribeNext({ (object: AnyObject!) -> Void in
-                println("celebrityViewModel Initialized: \(object)")
+                //println("celebrityViewModel Initialized: \(object)")
                 },
                 error: { (error: NSError!) -> Void in
                     println("initCelebrityViewModelSignal error: \(error)")
             })
+        println("DREAMIN OF \(node.text)")
         return node
     }
     
