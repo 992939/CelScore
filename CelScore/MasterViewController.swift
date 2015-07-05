@@ -16,8 +16,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
-    var celebrityTableView : ASTableView
+    var celebrityTableView : ASTableView!
     private var celscoreVM: CelScoreViewModel!
+    
+    enum periodSetting: NSTimeInterval {
+        case Every_Minute = 10.0
+        case Daily = 86400.0
+    }
 
     required init(coder aDecoder: NSCoder)
     {
@@ -28,6 +33,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     {
         self.celscoreVM = viewModel
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400))
+        //self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
         super.init(nibName: nil, bundle: nil)
@@ -50,9 +56,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         super.viewDidLoad()
     }
     
-    override func viewWillLayoutSubviews() {
-        //self.celebrityTableView.frame = self.view.bounds
-    }
+//    override func viewWillLayoutSubviews() {
+//        //self.celebrityTableView.frame = self.view.bounds
+//    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -62,41 +68,32 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     {
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
-        /* binds celscore VM */
-        RACObserve(self.celscoreVM, "displayedCelebrityListVM")
-            .distinctUntilChanged()
-            .subscribeNext({ (d:AnyObject!) -> Void in
-            //println("RACOBSERVE displayedCelebrityListVM success is \(d.description)")
-            }, error :{ (_) -> Void in
-                println("dataSourceSignal error")
-            })
-        
        /* search for a celebrity or a #list */
-       self.searchTextField.rac_textSignal()
-        .filter { (d:AnyObject!) -> Bool in
-            let token = d as! NSString
-            return token.length > 0
-        }
-        .distinctUntilChanged()
-        .throttle(1)
-        .flattenMap { (d:AnyObject!) -> RACStream! in
-            let token = d as! String
-            let isList = token.hasPrefix("#")
-            
-            var searchSignal : RACSignal
-            if isList {
-                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
-            } else
-            {
-                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
-            }
-            return searchSignal
-        }
-        .subscribeNext({ (d:AnyObject!) -> Void in
-            println("searchTextField signal returned \(d)")
-            }, error :{ (_) -> Void in
-                print("searchTextField error")
-        })
+//       self.searchTextField.rac_textSignal()
+//        .filter { (d:AnyObject!) -> Bool in
+//            let token = d as! NSString
+//            return token.length > 0
+//        }
+//        .distinctUntilChanged()
+//        .throttle(1)
+//        .flattenMap { (d:AnyObject!) -> RACStream! in
+//            let token = d as! String
+//            let isList = token.hasPrefix("#")
+//            
+//            var searchSignal : RACSignal
+//            if isList {
+//                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+//            } else
+//            {
+//                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+//            }
+//            return searchSignal
+//        }
+//        .subscribeNext({ (d:AnyObject!) -> Void in
+//            println("searchTextField signal returned \(d)")
+//            }, error :{ (_) -> Void in
+//                print("searchTextField error")
+//        })
         
         /* checking network connectivity */
 //                let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
@@ -133,20 +130,22 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //        signInButton.rac_command = executeSearch
         
 
-        /* xupdating table via LocalDataStore */
-        let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
-        updateTableSignal
-            .subscribeNext({ (text: AnyObject!) -> Void in
-            //println("next:\(text)")
-            var ratings: PFObject = PFObject(className:"ratings")
-
-            }, error: { (_) -> Void in
-                println("error")
-        })
+        /* updating table via LocalDataStore */
+//        let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
+//        updateTableSignal
+//            .subscribeNext({ (text: AnyObject!) -> Void in
+//            println("next:\(text)")
+//                var ratings: PFObject = PFObject(className:"ratings")
+//
+//            }, error: { (_) -> Void in
+//                println("error")
+//        })
 
         /* update the celscore of all celebrities */
-        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.updateAllCelebritiesCelScore()
-        updateAllCelebritiesCelScoreSignal.subscribeNext({ (_) -> Void in
+        var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
+        updateAllCelebritiesCelScoreSignal
+            .subscribeNext({ (object: AnyObject!) -> Void in
+                    self.celebrityTableView.setNeedsLayout()
                         println("updateAllCelebritiesCelScore subscribe")
                         }, error: { (_) -> Void in
                             println("updateAllCelebritiesCelScore error")
@@ -164,23 +163,25 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         var node = ASTextCellNode()
-        node.text = "Celebrity"
-        
+        node.text = "The reason you are here"
+        node.autoresizesSubviews = true
+        var a = 5
+
         celebrityVM.initCelebrityViewModelSignal
-            //.distinctUntilChanged()
-            .repeat()
             .doNext { (object: AnyObject!) -> Void in
-                node.text = node.text + " \(celebrityVM.currentScore!)"
-                println("REAL IS \(node.text)")
+                a = a + a
+                node.text = "\(celebrityVM.nickName!)" + " \(a)"
+                
+                println("NODE IS \(node.displayNodeRecursiveDescription())")
+                
             }
             .subscribeNext({ (object: AnyObject!) -> Void in
-                //println("celebrityViewModel Initialized: \(object)")
                 },
                 error: { (error: NSError!) -> Void in
                     println("initCelebrityViewModelSignal error: \(error)")
             })
         println("DREAMIN OF \(node.text)")
-        return node
+       return node
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {

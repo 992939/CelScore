@@ -73,7 +73,7 @@ class CelScoreViewModel: NSObject {
     }
     
     func recurringUpdateDataStoreSignal(#classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler = RACScheduler(priority: RACSchedulerPriorityDefault)
+        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
@@ -101,7 +101,7 @@ class CelScoreViewModel: NSObject {
     }
     
     func updateAllCelebritiesCelScore() -> RACSignal {
-        let signal = RACSignal.createSignal({
+        return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             var query = PFQuery(className: "Celebrity")
             query.includeKey("celebrity_ratings")
@@ -127,7 +127,14 @@ class CelScoreViewModel: NSObject {
             })
             return nil
         })
-        return signal
     }
-
+    
+    func recurringUpdateCelebritiesCelScoreSignal(#frequency: NSTimeInterval) -> RACSignal {
+        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
+        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+        
+        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
+            return self.updateAllCelebritiesCelScore()
+        })
+    }
 }
