@@ -15,6 +15,7 @@ class CelebrityViewModel : NSObject {
     //MARK: Properties
     var firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
     var currentScore, previousScore: Double?
+    var ratings: RatingsViewModel?
     var initCelebrityViewModelSignal : RACSignal
     
     enum rank {
@@ -86,6 +87,7 @@ class CelebrityViewModel : NSObject {
                     self.height = object?.valueForKey("height") as? String
                     self.currentScore = object?.valueForKey("currentScore") as? Double
                     self.previousScore = object?.valueForKey("previousScore") as? Double
+                    self.ratings = object?.valueForKey("celebrity_ratings") as? RatingsViewModel
                     subscriber.sendNext(object)
                     subscriber.sendCompleted()
                 } else

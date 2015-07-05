@@ -169,9 +169,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             .doNext { (object: AnyObject!) -> Void in
                 a = a + a
                 node.text = "\(celebrityVM.nickName!)" + " \(a)"
-                
-                println("NODE IS \(node.displayNodeRecursiveDescription())")
-                
             }
             .subscribeNext({ (object: AnyObject!) -> Void in
                 },
@@ -191,7 +188,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        println("ROW \(celebrityVM.nickName!)")
+        var ratings = celebrityVM.ratings
+        println("ROW \(ratings.description)")
     }
     
     

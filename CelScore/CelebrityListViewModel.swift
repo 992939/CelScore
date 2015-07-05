@@ -87,7 +87,7 @@ class CelebrityListViewModel: NSObject {
             query.fromLocalDatastore()
             query.whereKey("nickName", matchesRegex: searchToken, modifiers: "i")
             query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
-                println("CELBRITIES ARE \(objects)")
+                //println("CELBRITIES ARE \(objects)")
                 if let object = objects
                 {
                     self.celebrityList = object as Array
