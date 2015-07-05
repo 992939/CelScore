@@ -20,7 +20,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     private var celscoreVM: CelScoreViewModel!
     
     enum periodSetting: NSTimeInterval {
-        case Every_Minute = 10.0
+        case Every_Minute = 60.0
         case Daily = 86400.0
     }
 
@@ -32,8 +32,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     init(viewModel:CelScoreViewModel)
     {
         self.celscoreVM = viewModel
-        self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400))
-        //self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
+        self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
         super.init(nibName: nil, bundle: nil)
@@ -145,7 +144,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
         updateAllCelebritiesCelScoreSignal
             .subscribeNext({ (object: AnyObject!) -> Void in
-                    self.celebrityTableView.setNeedsLayout()
                         println("updateAllCelebritiesCelScore subscribe")
                         }, error: { (_) -> Void in
                             println("updateAllCelebritiesCelScore error")
