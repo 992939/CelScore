@@ -7,15 +7,13 @@
 //
 
 import Foundation
-//import ReactiveCocoa
-//import Parse
 
-struct UserViewModel {
+class UserViewModel : NSObject {
     
     //MARK: Properties
     var username, password, email : String
-    //var firstTimeLoggedIn, lastLoggedIn : NSDate
-    //var ratingsList : [RatingsViewModel]
+    var firstTimeLoggedIn, lastLoggedIn : NSDate
+    var ratingsList : [RatingsViewModel]
     
     enum listSetting {
         case A_List
@@ -41,6 +39,23 @@ struct UserViewModel {
         case Facebook_User
         case Twitter_User
         case Registered_User
+    }
+    
+    //MARK: Initializers
+    init(username: String, password: String, email: String) {
+        
+        self.username = String()
+        self.password = String()
+        self.email = String()
+        self.firstTimeLoggedIn = NSDate()
+        self.lastLoggedIn = NSDate()
+        self.ratingsList = Array()
+        
+        super.init()
+        
+        self.username = username
+        self.password = password
+        self.email = email
     }
     
     //MARK: Methods
