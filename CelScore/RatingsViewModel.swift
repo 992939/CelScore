@@ -27,5 +27,16 @@ class RatingsViewModel: NSObject {
         rating10 = 0
         
         super.init()
+        
+        rating1 = rating.valueForKey("ratingOne") as! Double
+        rating2 = rating.valueForKey("ratingTwo") as! Double
+        rating3 = rating.valueForKey("ratingThree") as! Double
+        rating4 = rating.valueForKey("ratingFour") as! Double
+        rating5 = rating.valueForKey("ratingFive") as! Double
+        rating6 = rating.valueForKey("ratingSix") as! Double
+        rating7 = rating.valueForKey("ratingSeven") as! Double
+        rating8 = rating.valueForKey("ratingEight") as! Double
+        rating9 = rating.valueForKey("ratingNine") as! Double
+        rating10 = rating.valueForKey("ratingTen") as! Double
     }
 }

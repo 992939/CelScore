@@ -188,7 +188,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        var ratings = celebrityVM.ratings
+        println("BOOM \(celebrityVM.ratings!)")
+        var ratings = RatingsViewModel(rating: celebrityVM.ratings!)
         println("ROW \(ratings.description)")
     }
     
