@@ -178,7 +178,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                 error: { (error: NSError!) -> Void in
                     println("initCelebrityViewModelSignal error: \(error)")
             })
-        println("DREAMIN OF \(node.text)")
        return node
     }
     
@@ -188,6 +187,11 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return self.celscoreVM.displayedCelebrityListVM.celebrityList.count
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        println("ROW \(celebrityVM.nickName!)")
     }
     
     
