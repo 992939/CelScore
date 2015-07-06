@@ -11,6 +11,7 @@
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
+		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00F6C9CE1B3539290078CA6E /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9CA1B3539290078CA6E /* IJReachability.swift */; };
 		00F6C9CF1B3539290078CA6E /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9CB1B3539290078CA6E /* RAC.swift */; };
 		00F6C9D01B3539290078CA6E /* RACObserve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9CC1B3539290078CA6E /* RACObserve.swift */; };
@@ -45,6 +46,7 @@
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
+		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00F6C9CA1B3539290078CA6E /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
 		00F6C9CB1B3539290078CA6E /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
 		00F6C9CC1B3539290078CA6E /* RACObserve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACObserve.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		004B56FF1B3533D8008A75EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				00B404291B4A465200B7627E /* RatingsModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
+				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
