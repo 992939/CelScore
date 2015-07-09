@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Daily updates of the LocalDataStore with ratings */
 //        let updateLocalDataStoreWithRatingsSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-//            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "ratings", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
+//            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "ratings", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
 //        }
 //        
 //        updateLocalDataStoreWithRatingsSignal
@@ -113,6 +113,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                }, error: { (text: AnyObject!) -> Void in
 //                    println("executionSignals error: \(text)")
 //            })
+        
+        /* Daily storage of ratings on AWS S3 */
+        let updateAWSS3WithUserRatingsSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
+            return celscoreVM.recurringUpdateAWSS3Signal(classTypeName: "userRatings", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
+        }
         
         
         return celscoreVM

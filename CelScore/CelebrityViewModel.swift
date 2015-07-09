@@ -16,7 +16,7 @@ class CelebrityViewModel : NSObject {
     var firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
     var currentScore, previousScore: Double?
     var ratings: PFObject?
-    var initCelebrityViewModelSignal : RACSignal
+    var initCelebrityViewModelSignal : RACSignal?
     
     enum rank {
         case A_List
@@ -62,7 +62,6 @@ class CelebrityViewModel : NSObject {
     
     init(celebrity: PFObject)
     {
-        initCelebrityViewModelSignal = RACSignal()
         
         super.init()
         
@@ -88,7 +87,7 @@ class CelebrityViewModel : NSObject {
                     self.currentScore = object?.valueForKey("currentScore") as? Double
                     self.previousScore = object?.valueForKey("previousScore") as? Double
                     self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
-                    println("TAI LOPEZ SAID WHAT \(self.ratings!)")
+
                     subscriber.sendNext(object)
                     subscriber.sendCompleted()
                 } else
@@ -109,6 +108,8 @@ class CelebrityViewModel : NSObject {
             return self.fetchValuesSignal(celebrity)
         })
     }
+    
+    
 }
 
 

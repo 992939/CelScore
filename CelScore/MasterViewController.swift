@@ -67,6 +67,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     {
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
+        //let ratingsOnEltonJohn = RatingsViewModel(
+
+        
        /* search for a celebrity or a #list */
 //       self.searchTextField.rac_textSignal()
 //        .filter { (d:AnyObject!) -> Bool in
@@ -127,18 +130,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //        })
 //        
 //        signInButton.rac_command = executeSearch
-        
-
-        /* updating table via LocalDataStore */
-//        let updateTableSignal : RACSignal = celscoreVM.getAllCelebritiesInfoSignal(classTypeName: "Celebrity")
-//        updateTableSignal
-//            .subscribeNext({ (text: AnyObject!) -> Void in
-//            println("next:\(text)")
-//                var ratings: PFObject = PFObject(className:"ratings")
-//
-//            }, error: { (_) -> Void in
-//                println("error")
-//        })
 
         /* update the celscore of all celebrities */
         var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
@@ -165,7 +156,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         node.autoresizesSubviews = true
         var a = 5
 
-        celebrityVM.initCelebrityViewModelSignal
+        celebrityVM.initCelebrityViewModelSignal!
             .doNext { (object: AnyObject!) -> Void in
                 a = a + a
                 node.text = "\(celebrityVM.nickName!)" + " \(a)"

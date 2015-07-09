@@ -44,7 +44,6 @@ class CelScoreViewModel: NSObject {
                 subscriber.sendError(NSError())
             }
             return nil
-            
         })
     }
     
@@ -81,26 +80,7 @@ class CelScoreViewModel: NSObject {
             })
     }
     
-    func getAllCelebritiesInfoSignal(#classTypeName: String) -> RACSignal {
-        let signal = RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            var query = PFQuery(className: classTypeName)
-            query.fromLocalDatastore()
-            query.findObjectsInBackgroundWithBlock({ (text: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    subscriber.sendNext(text)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    subscriber.sendError(NSError())
-                }
-            })
-            return nil
-        })
-        return signal
-    }
-    
-    func updateAllCelebritiesCelScore() -> RACSignal {
+    func updateCelebritiesCelScore() -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             var query = PFQuery(className: "Celebrity")
@@ -122,7 +102,6 @@ class CelScoreViewModel: NSObject {
                 } else
                 {
                     subscriber.sendError(NSError())
-                    println("error over here!")
                 }
             })
             return nil
@@ -134,7 +113,33 @@ class CelScoreViewModel: NSObject {
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateAllCelebritiesCelScore()
+            return self.updateCelebritiesCelScore()
+        })
+    }
+    
+    func updateAWSS3Signal(#classTypeName: String) -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            var query = PFQuery(className: classTypeName)
+            query.findObjectsInBackgroundWithBlock({ (celebrityArray: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    subscriber.sendNext(1)
+                    subscriber.sendCompleted()
+                } else
+                {
+                    subscriber.sendError(NSError())
+                }
+            })
+            return nil
+        })
+    }
+    
+    func recurringUpdateAWSS3Signal(#classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
+        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
+        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+        
+        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
+            return self.updateAWSS3Signal(classTypeName: classTypeName)
         })
     }
 }
