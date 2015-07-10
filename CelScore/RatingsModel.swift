@@ -9,12 +9,28 @@
 import Foundation
 
 class RatingsModel: RLMObject {
-    let rating1, rating2, rating3, rating4, rating5, rating6, rating7, rating8, rating9, rating10 : Double
+    var rating1 : Double = 0
+    var rating2 : Double = 0
+    var rating3 : Double = 0
+    var rating4 : Double = 0
+    var rating5 : Double = 0
+    var rating6 : Double = 0
+    var rating7 : Double = 0
+    var rating8 : Double = 0
+    var rating9 : Double = 0
+    var rating10 : Double = 0
     
     typealias allRatings = (Double, Double, Double, Double, Double, Double, Double, Double, Double, Double)
     
-    init (ratings : allRatings)
-    {
+    override init() {
+        super.init()
+    }
+    
+    override init(value: AnyObject!) {
+        super.init(value: value)
+        
+                let ratings = allRatings((value.valueForKey("ratingOne") as? Double)!, (value.valueForKey("ratingTwo") as? Double)!, (value.valueForKey("ratingThree") as? Double)!, (value.valueForKey("ratingFour") as? Double)!, (value.valueForKey("ratingFive") as? Double)!, (value.valueForKey("ratingSix") as? Double)!, (value.valueForKey("ratingSeven") as? Double)!, (value.valueForKey("ratingEight") as? Double)!, (value.valueForKey("ratingNine") as? Double)!, (value.valueForKey("ratingTen") as? Double)!)
+        
         self.rating1 = ratings.0
         self.rating2 = ratings.1
         self.rating3 = ratings.2
@@ -25,7 +41,5 @@ class RatingsModel: RLMObject {
         self.rating8 = ratings.7
         self.rating9 = ratings.8
         self.rating10 = ratings.9
-        
-        super.init()
     }
 }

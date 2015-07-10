@@ -13,7 +13,7 @@ class RatingsViewModel: NSObject {
     //MARK: Properties
     var ratings : RatingsModel?
     let celebrityId: String?
-    typealias allRatings = (Double, Double, Double, Double, Double, Double, Double, Double, Double, Double)
+    
     
     //MARK: Initializers
     init(rating: PFObject, celebrityId: String)
@@ -22,10 +22,7 @@ class RatingsViewModel: NSObject {
         
         super.init()
         
-        var ratingsCollection = allRatings((rating.valueForKey("ratingOne") as? Double)!, (rating.valueForKey("ratingTwo") as? Double)!, (rating.valueForKey("ratingThree") as? Double)!, (rating.valueForKey("ratingFour") as? Double)!, (rating.valueForKey("ratingFive") as? Double)!, (rating.valueForKey("ratingSix") as? Double)!, (rating.valueForKey("ratingSeven") as? Double)!, (rating.valueForKey("ratingEight") as? Double)!, (rating.valueForKey("ratingNine") as? Double)!, (rating.valueForKey("ratingTen") as? Double)!)
-        
-        ratings = RatingsModel(ratings: ratingsCollection)
-        
+        ratings = RatingsModel(value: rating)
     }
     
     func storeUserRatingsInRealmSignal(#userRatings: PFObject) -> RACSignal {
