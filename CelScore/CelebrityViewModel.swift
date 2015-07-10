@@ -13,7 +13,7 @@ import Foundation
 class CelebrityViewModel : NSObject {
     
     //MARK: Properties
-    var firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
+    var celebrityId, firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
     var currentScore, previousScore: Double?
     var ratings: PFObject?
     var initCelebrityViewModelSignal : RACSignal?
@@ -76,6 +76,7 @@ class CelebrityViewModel : NSObject {
             celebrity.fetchFromLocalDatastoreInBackgroundWithBlock({ (object: PFObject?, error :NSError?) -> Void in
                 if error == nil
                 {
+                    self.celebrityId = object?.valueForKey("objectId") as? String
                     self.firstName = object?.valueForKey("firstName") as? String
                     self.middleName = object?.valueForKey("middleName") as? String
                     self.lastName = object?.valueForKey("lastName") as? String

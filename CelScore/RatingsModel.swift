@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RatingsModel {
+class RatingsModel: RLMObject {
     let rating1, rating2, rating3, rating4, rating5, rating6, rating7, rating8, rating9, rating10 : Double
     
     typealias allRatings = (Double, Double, Double, Double, Double, Double, Double, Double, Double, Double)
@@ -25,5 +25,7 @@ struct RatingsModel {
         self.rating8 = ratings.7
         self.rating9 = ratings.8
         self.rating10 = ratings.9
+        
+        super.init()
     }
 }

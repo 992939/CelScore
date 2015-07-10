@@ -7,8 +7,6 @@
 //
 
 import Foundation
-//import ReactiveCocoa
-//import Parse
 
 class CelScoreViewModel: NSObject {
     
