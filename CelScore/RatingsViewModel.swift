@@ -12,8 +12,8 @@ class RatingsViewModel: NSObject {
     
     //MARK: Properties
     var ratings : RatingsModel?
+    var notificationToken: RLMNotificationToken?
     let celebrityId: String?
-    
     
     //MARK: Initializers
     init(rating: PFObject, celebrityId: String)
@@ -23,14 +23,22 @@ class RatingsViewModel: NSObject {
         super.init()
         
         ratings = RatingsModel(value: rating)
+        ratings?.id = celebrityId
     }
     
-    func storeUserRatingsInRealmSignal(#userRatings: PFObject) -> RACSignal {
+    func storeUserRatingsInRealmSignal() -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            let realm = RLMRealm()
-            realm.addObject(self.ratings)
             
+            let realm = RLMRealm.defaultRealm()
+            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
+                println("REALM NOTIFICATION \(text)")
+            })
+            
+            realm.beginWriteTransaction()
+            realm.addOrUpdateObject(self.ratings)
+            realm.commitWriteTransaction()
+            RLMRealm.defaultRealm().removeNotification(self.notificationToken)
             
             return nil
         })

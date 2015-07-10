@@ -9,6 +9,7 @@
 import Foundation
 
 class RatingsModel: RLMObject {
+    var id = ""
     var rating1 : Double = 0
     var rating2 : Double = 0
     var rating3 : Double = 0
@@ -37,5 +38,9 @@ class RatingsModel: RLMObject {
         self.rating8 = value.valueForKey("ratingEight") as! Double
         self.rating9 = value.valueForKey("ratingNine") as! Double
         self.rating10 = value.valueForKey("ratingTen") as! Double
+    }
+    
+    override class func primaryKey() -> String {
+        return "id"
     }
 }
