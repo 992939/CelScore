@@ -20,8 +20,6 @@ class RatingsModel: RLMObject {
     var rating9 : Double = 0
     var rating10 : Double = 0
     
-    typealias allRatings = (Double, Double, Double, Double, Double, Double, Double, Double, Double, Double)
-    
     override init() {
         super.init()
     }
@@ -29,17 +27,15 @@ class RatingsModel: RLMObject {
     override init(value: AnyObject!) {
         super.init(value: value)
         
-                let ratings = allRatings((value.valueForKey("ratingOne") as? Double)!, (value.valueForKey("ratingTwo") as? Double)!, (value.valueForKey("ratingThree") as? Double)!, (value.valueForKey("ratingFour") as? Double)!, (value.valueForKey("ratingFive") as? Double)!, (value.valueForKey("ratingSix") as? Double)!, (value.valueForKey("ratingSeven") as? Double)!, (value.valueForKey("ratingEight") as? Double)!, (value.valueForKey("ratingNine") as? Double)!, (value.valueForKey("ratingTen") as? Double)!)
-        
-        self.rating1 = ratings.0
-        self.rating2 = ratings.1
-        self.rating3 = ratings.2
-        self.rating4 = ratings.3
-        self.rating5 = ratings.4
-        self.rating6 = ratings.5
-        self.rating7 = ratings.6
-        self.rating8 = ratings.7
-        self.rating9 = ratings.8
-        self.rating10 = ratings.9
+        self.rating1 = value.valueForKey("ratingOne") as! Double
+        self.rating2 = value.valueForKey("ratingTwo") as! Double
+        self.rating3 = value.valueForKey("ratingThree") as! Double
+        self.rating4 = value.valueForKey("ratingFour") as! Double
+        self.rating5 = value.valueForKey("ratingFive") as! Double
+        self.rating6 = value.valueForKey("ratingSix") as! Double
+        self.rating7 = value.valueForKey("ratingSeven") as! Double
+        self.rating8 = value.valueForKey("ratingEight") as! Double
+        self.rating9 = value.valueForKey("ratingNine") as! Double
+        self.rating10 = value.valueForKey("ratingTen") as! Double
     }
 }
