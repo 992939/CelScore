@@ -23,4 +23,14 @@ class RatingsViewModel: NSObject {
         
         ratings = RatingsModel(ratings: ratingsCollection)
     }
+    
+    func storeUserRatingsInLocalDataStoreSignal(#ratings: PFObject) -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            
+            return nil
+        })
+    }
+
 }

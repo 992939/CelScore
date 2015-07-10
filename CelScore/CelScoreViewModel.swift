@@ -88,7 +88,8 @@ class CelScoreViewModel: NSObject {
             query.findObjectsInBackgroundWithBlock({ (celebrityArray: [AnyObject]?, error: NSError?) -> Void in
                 if error == nil {
                     for celebrity in celebrityArray! {
-                        var ratings: PFObject = celebrity["celebrity_ratings"] as! PFObject
+                        let celeb = celebrity as! PFObject
+                        var ratings: PFObject = celeb["celebrity_ratings"] as! PFObject
                         ratings.removeObjectForKey("voteNumber")
                         let ratingKeys = ratings.allKeys()
                         let ratingValues = ratingKeys.map({ratings[$0 as! String]! as! Double})
@@ -114,32 +115,6 @@ class CelScoreViewModel: NSObject {
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
             return self.updateCelebritiesCelScore()
-        })
-    }
-    
-    func updateAWSS3Signal(#classTypeName: String) -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            var query = PFQuery(className: classTypeName)
-            query.findObjectsInBackgroundWithBlock({ (celebrityArray: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    subscriber.sendNext(1)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    subscriber.sendError(NSError())
-                }
-            })
-            return nil
-        })
-    }
-    
-    func recurringUpdateAWSS3Signal(#classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
-        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-        
-        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateAWSS3Signal(classTypeName: classTypeName)
         })
     }
 }

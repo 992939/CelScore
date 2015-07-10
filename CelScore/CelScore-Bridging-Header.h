@@ -4,3 +4,4 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import <Parse/Parse.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import <Realm/Realm.h>

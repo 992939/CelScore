@@ -101,4 +101,29 @@ class UserViewModel : NSObject {
             return nil
         })
     }
+    
+    func storeUserRatingsLocallySignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            return nil
+        })
+    }
+    
+    func updateUserRatingsOnAWSS3Signal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+ 
+            return nil
+        })
+    }
+    
+    func recurringUpdateAWSS3Signal(#frequency: NSTimeInterval) -> RACSignal {
+        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
+        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+        
+        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
+            return self.updateUserRatingsOnAWSS3Signal()
+        })
+    }
 }

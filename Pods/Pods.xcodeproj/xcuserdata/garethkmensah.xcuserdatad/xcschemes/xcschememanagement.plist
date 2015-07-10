@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-CelScore-Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CelScore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -59,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-CelScoreTests-Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CelScoreTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -74,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,77 +97,92 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03DC563AFC331A2213417252</key>
+		<key>069C2D302C083C2661A39178</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12A182ACBCE3EE8AD373B29B</key>
+		<key>386C60EAECC903330872EFFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1387E01D2F32559C2F21BE21</key>
+		<key>40D1A02C8F1D1D043E882123</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>155852D239E453B23DAB9461</key>
+		<key>4EA3577B3C6C894269668990</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1AD47AEC5E2B5CD3010F0027</key>
+		<key>596DD02467BB2662224403BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>460CB4FB0FA53B4942E06C77</key>
+		<key>63B025520921314FD224C5C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>514BE2EB125EEFDBE189E93F</key>
+		<key>6CE3AC025828C33FB3D8FED2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E967868A29C40033D09EF3B</key>
+		<key>7B2824B15B5B93DC9EB91B8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>62EB1314917F46D5C595DC08</key>
+		<key>87DBDD8E8827ADE61CD1F1EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8968F915BDDF3B172CDBA6BE</key>
+		<key>ABE4292415068F03B9686CAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E89083EC7AC7D42196E6E90</key>
+		<key>B232A2A946BCE6CF1A705FD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AE9EE0656F4CE92AB8E4E3AE</key>
+		<key>BF7DCAE166D33DA227C8EE70</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B0B682AF73F50AEC29428D7A</key>
+		<key>C29900A6CDD190EB261F0022</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F93CD941ACA8389AC109B165</key>
+		<key>CBE99B47588B936104A6D3FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE4D898FBE3CC7C2633FC122</key>
+		<key>CE680B9F994866F0825293E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF1F364937273111B4E62BB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4E1A69AF4F7C5DAEE348567</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB0B49EBD003BCDE06E14A33</key>
 		<dict>
 			<key>primary</key>
 			<true/>
