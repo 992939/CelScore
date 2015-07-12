@@ -55,8 +55,7 @@ class RatingsViewModel: NSObject {
             
             realm.beginWriteTransaction()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
-            var object = RatingsModel.objectsInRealm(realm, withPredicate: predicate)
-            println("WHAT IZ DA OBJECT \(object)")
+            var userRatings = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
             realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken)
             
