@@ -43,5 +43,26 @@ class RatingsViewModel: NSObject {
             return nil
         })
     }
+    
+    func retrieveUserRatingsFromRealmSignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            let realm = RLMRealm.defaultRealm()
+            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
+                println("REALM NOTIFICATION \(text)")
+            })
+            
+            realm.beginWriteTransaction()
+            let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
+            var object = RatingsModel.objectsInRealm(realm, withPredicate: predicate)
+            println("WHAT IZ DA OBJECT \(object)")
+            realm.commitWriteTransaction()
+            RLMRealm.defaultRealm().removeNotification(self.notificationToken)
+            
+            return nil
+        })
+    }
+
 
 }

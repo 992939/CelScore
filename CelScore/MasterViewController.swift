@@ -66,8 +66,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func bindWithViewModels ()
     {
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
-        
-        //let ratingsOnEltonJohn = RatingsViewModel(
 
         
        /* search for a celebrity or a #list */
@@ -182,13 +180,22 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         //println("BOOM \(celebrityVM.ratings!)")
         var ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
         println("ROW \(ratings.ratings!.description)")
-        ratings.storeUserRatingsInRealmSignal()
-                .subscribeNext({ (object: AnyObject!) -> Void in
-                    println("storeUserRatingsInRealmSignal success")
+        
+//        ratings.storeUserRatingsInRealmSignal()
+//                .subscribeNext({ (object: AnyObject!) -> Void in
+//                    println("storeUserRatingsInRealmSignal success")
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    println("storeUserRatingsInRealmSignal error: \(error)")
+//                })
+        
+        ratings.retrieveUserRatingsFromRealmSignal()
+            .subscribeNext({ (object: AnyObject!) -> Void in
+                println("retrieveUserRatingsFromRealmSignal success")
                 },
                 error: { (error: NSError!) -> Void in
-                    println("storeUserRatingsInRealmSignal error: \(error)")
-                })
+                    println("retrieveUserRatingsFromRealmSignal error: \(error)")
+            })
 
     }
     

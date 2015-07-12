@@ -9,17 +9,17 @@
 import Foundation
 
 class RatingsModel: RLMObject {
-    var id = ""
-    var rating1 : Double = 0
-    var rating2 : Double = 0
-    var rating3 : Double = 0
-    var rating4 : Double = 0
-    var rating5 : Double = 0
-    var rating6 : Double = 0
-    var rating7 : Double = 0
-    var rating8 : Double = 0
-    var rating9 : Double = 0
-    var rating10 : Double = 0
+    dynamic var id = ""
+    dynamic var rating1 : Double = 0
+    dynamic var rating2 : Double = 0
+    dynamic var rating3 : Double = 0
+    dynamic var rating4 : Double = 0
+    dynamic var rating5 : Double = 0
+    dynamic var rating6 : Double = 0
+    dynamic var rating7 : Double = 0
+    dynamic var rating8 : Double = 0
+    dynamic var rating9 : Double = 0
+    dynamic var rating10 : Double = 0
     
     override init() {
         super.init()

@@ -50,48 +50,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
         /* Daily updates of the LocalDataStore with Celebrity Info */
-        //        let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-        //            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "Celebrity", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
-        //        }
-        //
-        //        updateLocalDataStoreWithCelebrityInfoSignal.subscribeNext({ (text: AnyObject!) -> Void in
-        //            let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
-        //            //let celeb : PFObject = celebArray[1]
-        //            //let rating: PFObject = celeb["celebrity_ratings"] as! PFObject
-        //            //println("updateLocalDataStoreWithCelebrityInfoSignal: \(rating)")
-        //            PFObject.pinAllInBackground(celebArray, withName: "Celebrity", block: { (success :Bool, error :NSError?) -> Void in
-        //                if success {
-        //                    println("updateLocalDataStoreWithCelebrityInfoSignal success")
-        //                } else
-        //                {
-        //                    println("updateLocalDataStoreWithCelebrityInfoSignal error")
-        //                }
-        //            })
-        //            }, error: { (text: AnyObject!) -> Void in
-        //                println("executionSignals error: \(text)")
-        //        })
+//                let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
+//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "Celebrity", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
+//                }
+//        
+//                updateLocalDataStoreWithCelebrityInfoSignal.subscribeNext({ (text: AnyObject!) -> Void in
+//                    let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
+//                    //let celeb : PFObject = celebArray[1]
+//                    //let rating: PFObject = celeb["celebrity_ratings"] as! PFObject
+//                    //println("updateLocalDataStoreWithCelebrityInfoSignal: \(rating)")
+//                    PFObject.pinAllInBackground(celebArray, withName: "Celebrity", block: { (success :Bool, error :NSError?) -> Void in
+//                        if success {
+//                            println("updateLocalDataStoreWithCelebrityInfoSignal success")
+//                        } else
+//                        {
+//                            println("updateLocalDataStoreWithCelebrityInfoSignal error")
+//                        }
+//                    })
+//                    }, error: { (text: AnyObject!) -> Void in
+//                        println("executionSignals error: \(text)")
+//                })
         
         
         /* Daily updates of the LocalDataStore with List */
-        //        let updateLocalDataStoreWithListSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-        //            return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "List", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
-        //        }
-        //
-        //        updateLocalDataStoreWithListSignal
-        //            .subscribeNext({ (text: AnyObject!) -> Void in
-        //                let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
-        //                println("updateLocalDataStoreWithListSignal: \(text)")
-        //                PFObject.pinAllInBackground(celebArray, withName: "List", block: { (success :Bool, error :NSError?) -> Void in
-        //                    if success {
-        //                        println("updateLocalDataStoreWithListSignal success")
-        //                    } else
-        //                    {
-        //                        println("updateLocalDataStoreWithListSignal error")
-        //                    }
-        //                })
-        //                }, error: { (text: AnyObject!) -> Void in
-        //                    println("executionSignals error: \(text)")
-        //            })
+//                let updateLocalDataStoreWithListSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
+//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "List", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
+//                }
+//        
+//                updateLocalDataStoreWithListSignal
+//                    .subscribeNext({ (text: AnyObject!) -> Void in
+//                        let celebArray : [PFObject] = ((text as? NSArray) as! Array?)!
+//                        println("updateLocalDataStoreWithListSignal: \(text)")
+//                        PFObject.pinAllInBackground(celebArray, withName: "List", block: { (success :Bool, error :NSError?) -> Void in
+//                            if success {
+//                                println("updateLocalDataStoreWithListSignal success")
+//                            } else
+//                            {
+//                                println("updateLocalDataStoreWithListSignal error")
+//                            }
+//                        })
+//                        }, error: { (text: AnyObject!) -> Void in
+//                            println("executionSignals error: \(text)")
+//                    })
         
         
         /* Daily updates of the LocalDataStore with ratings */
