@@ -23,7 +23,7 @@ class RatingsViewModel: NSObject {
         super.init()
         
         ratings = RatingsModel(value: rating)
-        ratings?.id = celebrityId
+        ratings!.id = celebrityId
     }
     
     func storeUserRatingsInRealmSignal() -> RACSignal {

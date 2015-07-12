@@ -66,7 +66,12 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func bindWithViewModels ()
     {
         let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
-
+        userVM.recurringUpdateAWSS3Signal(frequency: periodSetting.Every_Minute.rawValue)
+                        .subscribeNext({ (_) -> Void in
+                                        println("recurringUpdateAWSS3Signal subscribe")
+                                        }, error: { (_) -> Void in
+                                            println("recurringUpdateAWSS3Signal error")
+                        })
         
        /* search for a celebrity or a #list */
 //       self.searchTextField.rac_textSignal()
@@ -181,6 +186,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         var ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
         println("ROW \(ratings.ratings!.description)")
         
+        /* store ratings locally */
 //        ratings.storeUserRatingsInRealmSignal()
 //                .subscribeNext({ (object: AnyObject!) -> Void in
 //                    println("storeUserRatingsInRealmSignal success")
@@ -189,14 +195,14 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //                    println("storeUserRatingsInRealmSignal error: \(error)")
 //                })
         
-        ratings.retrieveUserRatingsFromRealmSignal()
-            .subscribeNext({ (object: AnyObject!) -> Void in
-                println("retrieveUserRatingsFromRealmSignal success")
-                },
-                error: { (error: NSError!) -> Void in
-                    println("retrieveUserRatingsFromRealmSignal error: \(error)")
-            })
-
+        /* retrieve user ratings */
+//        ratings.retrieveUserRatingsFromRealmSignal()
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                println("retrieveUserRatingsFromRealmSignal success")
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    println("retrieveUserRatingsFromRealmSignal error: \(error)")
+//            })
     }
     
     

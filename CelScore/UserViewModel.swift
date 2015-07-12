@@ -14,6 +14,7 @@ class UserViewModel : NSObject {
     var username, password, email : String
     var firstTimeLoggedIn, lastLoggedIn : NSDate
     var ratingsList : [RatingsViewModel]
+    var notificationToken: RLMNotificationToken?
     
     enum listSetting {
         case A_List
@@ -113,6 +114,18 @@ class UserViewModel : NSObject {
     func updateUserRatingsOnAWSS3Signal() -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            let realm = RLMRealm.defaultRealm()
+            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
+                println("REALM NOTIFICATION \(text)")
+            })
+            
+            realm.beginWriteTransaction()
+            let predicate = NSPredicate(format: "(rating1 != nil)")
+            var allUserRatings = RatingsModel.allObjects()
+            println("ARASH IS \(allUserRatings)")
+            realm.commitWriteTransaction()
+            RLMRealm.defaultRealm().removeNotification(self.notificationToken)
  
             return nil
         })
