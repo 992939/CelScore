@@ -121,7 +121,6 @@ class UserViewModel : NSObject {
             })
             
             realm.beginWriteTransaction()
-            let predicate = NSPredicate(format: "(rating1 != nil)")
             var allUserRatings = RatingsModel.allObjects()
             println("ARASH IS \(allUserRatings)")
             realm.commitWriteTransaction()
