@@ -73,6 +73,16 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                                             println("recurringUpdateAWSS3Signal error")
                         })
         
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        if let token = FBSDKAccessToken.currentAccessToken()
+        {
+            println("TOKEN IS \(token)")
+        } else
+        {
+            let loginButton = FBSDKLoginButton()
+            self.view.addSubview(loginButton)
+        }
+        
        /* search for a celebrity or a #list */
 //       self.searchTextField.rac_textSignal()
 //        .filter { (d:AnyObject!) -> Bool in

@@ -22,6 +22,8 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>197662803702116</string>
+	<key>FacebookDisplayName</key>
+	<string>The CelScore App</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -35,6 +37,19 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb197662803702116</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Facebook URL Handler</string>
+		</dict>
 	</array>
 </dict>
 </plist>
