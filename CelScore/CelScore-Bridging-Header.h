@@ -7,3 +7,5 @@
 #import <Realm/Realm.h>
 #import <AWSCognito/AWSCognito.h>
 #import <AWSCore/AWSCore.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
