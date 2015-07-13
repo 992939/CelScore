@@ -2,7 +2,28 @@ PODS:
   - AsyncDisplayKit (1.2.1):
     - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.1)
   - AsyncDisplayKit/ASDealloc2MainObject (1.2.1)
+  - AWSCognito (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSCore (2.2.1)
+  - AWSS3 (2.2.1):
+    - AWSCore (= 2.2.1)
+  - Bolts (1.2.0):
+    - Bolts/AppLinks (= 1.2.0)
+    - Bolts/Tasks (= 1.2.0)
+  - Bolts/AppLinks (1.2.0):
+    - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
+  - FBSDKCoreKit (4.4.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.4.0)
+    - FBSDKCoreKit/no-arc (= 4.4.0)
+  - FBSDKCoreKit/arc (4.4.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.4.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.4.0):
+    - FBSDKCoreKit
   - Parse (1.7.4):
     - Bolts/Tasks (>= 1.1.5)
   - ReactiveCocoa (2.4.7):
@@ -18,13 +39,23 @@ PODS:
 
 DEPENDENCIES:
   - AsyncDisplayKit (~> 1.2.1)
+  - AWSCognito (~> 2.2)
+  - AWSCore (~> 2.2)
+  - AWSS3 (~> 2.2)
+  - FBSDKCoreKit (~> 4.4)
+  - FBSDKLoginKit (~> 4.4)
   - Parse (~> 1.7)
   - ReactiveCocoa (~> 2.4.7)
   - Realm (~> 0.93)
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: b2f777da3a246b4aad660b2a55d60bb4328049b9
+  AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
+  AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
+  AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
+  FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220

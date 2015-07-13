@@ -83,6 +83,17 @@ class UserViewModel : NSObject {
         })
     }
     
+    func loginCognitoSignal(username: String, password: String) -> RACSignal
+    {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+
+            //var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            
+            return nil
+        })
+    }
+    
     func loginSignal(username: String, password: String) -> RACSignal
     {
         return RACSignal.createSignal({
