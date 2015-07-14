@@ -92,7 +92,8 @@ class UserViewModel : NSObject {
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            //var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 println("task is \(task.description)")
@@ -105,9 +106,6 @@ class UserViewModel : NSObject {
                 }
                 return task
             })
-            
-            
-            
             return nil
         })
     }
