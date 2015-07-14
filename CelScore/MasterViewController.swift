@@ -10,13 +10,14 @@ import UIKit
 //import ReactiveCocoa
 //import Parse
 
-class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate {
+class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
     var celebrityTableView : ASTableView!
+    var loginButton : FBSDKLoginButton!
     private var celscoreVM: CelScoreViewModel!
     
     enum periodSetting: NSTimeInterval {
@@ -73,13 +74,17 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                                             println("recurringUpdateAWSS3Signal error")
                         })
         
+        loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile"]
+        loginButton.delegate = self
+        
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        if let token = FBSDKAccessToken.currentAccessToken()
+        let accessToken = FBSDKAccessToken.currentAccessToken()
+        if let userId = FBSDKAccessToken.currentAccessToken()
         {
-            println("TOKEN IS \(token)")
+            println("TOKEN IS \(userId)")
         } else
         {
-            let loginButton = FBSDKLoginButton()
             self.view.addSubview(loginButton)
         }
         
@@ -232,6 +237,25 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         textField.resignFirstResponder()
         
         return true
+    }
+    
+    //MARK: FBSDKLoginButtonDelegate Methods.
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if ((error) != nil) {
+            println("Process error")
+        }
+        else if result.isCancelled {
+            println("Handle cancellations")
+        }
+        else {
+            println("Navigate to other view")
+        }
+        println("RESULT IS \(result.description)")
+        println("RESULT TOKEN IS \(result.token)")
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        
     }
 }
 
