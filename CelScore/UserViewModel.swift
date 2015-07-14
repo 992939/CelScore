@@ -15,6 +15,7 @@ class UserViewModel : NSObject {
     var firstTimeLoggedIn, lastLoggedIn : NSDate
     var ratingsList : [RatingsViewModel]
     var notificationToken: RLMNotificationToken?
+    let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     
     enum listSetting {
         case A_List
@@ -83,12 +84,20 @@ class UserViewModel : NSObject {
         })
     }
     
-    func loginCognitoSignal(username: String, password: String) -> RACSignal
+    func loginCognitoSignal(token: String) -> RACSignal
     {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-
-            //var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            credentialsProvider.logins = logins as [NSObject : AnyObject]
+            credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                println("task is \(task.description)")
+                return task
+            })
             
             return nil
         })

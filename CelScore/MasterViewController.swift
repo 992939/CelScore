@@ -19,6 +19,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     var celebrityTableView : ASTableView!
     var loginButton : FBSDKLoginButton!
     private var celscoreVM: CelScoreViewModel!
+    var userVM: UserViewModel!
     
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
@@ -66,7 +67,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func bindWithViewModels ()
     {
-        let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
+        userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         userVM.recurringUpdateAWSS3Signal(frequency: periodSetting.Every_Minute.rawValue)
                         .subscribeNext({ (_) -> Void in
                                         println("recurringUpdateAWSS3Signal subscribe")
@@ -79,10 +80,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         loginButton.delegate = self
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        let accessToken = FBSDKAccessToken.currentAccessToken()
-        if let userId = FBSDKAccessToken.currentAccessToken()
+        if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
-            println("TOKEN IS \(userId)")
+            println("TOKEN IS \(accessToken)")
         } else
         {
             self.view.addSubview(loginButton)
@@ -245,13 +245,17 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             println("Process error")
         }
         else if result.isCancelled {
-            println("Handle cancellations")
+            println("Process cancelled")
         }
         else {
-            println("Navigate to other view")
+            userVM.loginCognitoSignal(result.token.tokenString)
+                .subscribeNext({ (object: AnyObject!) -> Void in
+                    println("loginCognitoSignal success")
+                    },
+                    error: { (error: NSError!) -> Void in
+                        println("loginCognitoSignal error: \(error)")
+                })
         }
-        println("RESULT IS \(result.description)")
-        println("RESULT TOKEN IS \(result.token)")
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {

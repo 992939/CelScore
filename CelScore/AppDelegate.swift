@@ -13,17 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Properties
     var window: UIWindow?
-    let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
-    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("uzf1XbBjfA1xeajeEbsnksn7QhRKIJ4GiQlGDHYa", clientKey:"lN3gZKln1LxwysbYoRuJAaSpNmgOEhZllx9PTjDF")
-        
-        let credentialsProvider : AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: cognitoIdentityPoolId)
-        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
