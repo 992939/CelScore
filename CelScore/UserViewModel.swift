@@ -96,8 +96,17 @@ class UserViewModel : NSObject {
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 println("task is \(task.description)")
+                if (task.result != nil) {
+                    subscriber.sendNext(task)
+                    subscriber.sendCompleted()
+                } else
+                {
+                    subscriber.sendError(task.error)
+                }
                 return task
             })
+            
+            
             
             return nil
         })
@@ -142,7 +151,6 @@ class UserViewModel : NSObject {
             
             realm.beginWriteTransaction()
             var allUserRatings = RatingsModel.allObjects()
-            println("ARASH IS \(allUserRatings)")
             realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken)
  
