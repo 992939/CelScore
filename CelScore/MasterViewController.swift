@@ -76,7 +76,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                         })
         
         loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "email"]
+        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
         
@@ -162,7 +162,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func onProfileUpdated(notification: NSNotification)
     {
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, updated_time, verified"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, updated_time, verified, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 println("object is \(object)")
             } else
