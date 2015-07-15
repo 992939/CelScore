@@ -97,13 +97,12 @@ class UserViewModel : NSObject {
             
             let syncClient = AWSCognito.defaultCognito()
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.synchronizeOnConnectivity() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
+            dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
             dataset.setString("Gary Mensah", forKey: "name")
-            dataset.setString("25 to 35", forKey: "age range")
+            dataset.setString("25 to 45", forKey: "age range")
             dataset.setString("Male", forKey: "gender")
             dataset.setString("Oakland, CA", forKey: "locale")
             dataset.synchronize()
-            
             
             var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
