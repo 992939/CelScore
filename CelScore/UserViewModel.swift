@@ -92,7 +92,19 @@ class UserViewModel : NSObject {
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            //var logins: NSDictionary = NSDictionary(dictionary: ["graph.facebook.com" : token])
+            
+            AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
+            
+            let syncClient = AWSCognito.defaultCognito()
+            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
+            dataset.synchronizeOnConnectivity() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
+            dataset.setString("Gary Mensah", forKey: "name")
+            dataset.setString("25 to 35", forKey: "age range")
+            dataset.setString("Male", forKey: "gender")
+            dataset.setString("Oakland, CA", forKey: "locale")
+            dataset.synchronize()
+            
+            
             var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
