@@ -76,8 +76,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                         })
         
         loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile"]
+        loginButton.readPermissions = ["public_profile", "email"]
         loginButton.delegate = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
@@ -157,6 +158,18 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                         }, error: { (_) -> Void in
                             println("updateAllCelebritiesCelScore error")
         })
+    }
+    
+    func onProfileUpdated(notification: NSNotification)
+    {
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, updated_time, verified"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+            if error == nil {
+                println("object is \(object)")
+            } else
+            {
+                println("error is \(error)")
+            }
+        }
     }
     
 
@@ -248,6 +261,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             println("Process cancelled")
         }
         else {
+            //cache profile cacheProfile
+            println("NIN IS \(result.description)")
             userVM.loginCognitoSignal(result.token.tokenString)
                 .subscribeNext({ (object: AnyObject!) -> Void in
                     println("loginCognitoSignal success")
