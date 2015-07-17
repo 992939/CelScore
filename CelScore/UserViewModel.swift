@@ -16,6 +16,7 @@ class UserViewModel : NSObject {
     var ratingsList : [RatingsViewModel]
     var notificationToken: RLMNotificationToken?
     let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
+    var profileChangeSignal : RACSignal?
     
     enum listSetting {
         case A_List
@@ -58,9 +59,45 @@ class UserViewModel : NSObject {
         self.username = username
         self.password = password
         self.email = email
+        
+        NSNotificationCenter.defaultCenter()
+            .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
+            .flattenMap { (object: AnyObject!) -> RACStream! in
+                println("NSNotification is \(object)")
+                return self.getUserInfoFromFacebookSignal()
+        }
+            .subscribeNext({ (object: AnyObject!) -> Void in
+                }, error: { (error: NSError!) -> Void in
+                    println("NSNotification failed.")
+            })
+        
+        self.profileChangeSignal?.subscribeNext({ (object: AnyObject!) -> Void in
+            println("profileChangeSignal success.")
+        }, error: { (error: NSError!) -> Void in
+            println("profileChangeSignal failed.")
+        })
     }
     
     //MARK: Methods
+    func getUserInfoFromFacebookSignal() -> RACSignal
+    {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, updated_time, verified, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                if error == nil {
+                    println("getUserInfoFromFacebookSignal object is \(object)")
+                    subscriber.sendNext(object)
+                    subscriber.sendCompleted()
+                } else
+                {
+                    println("getUserInfoFromFacebookSignal error is \(error)")
+                    subscriber.sendError(error)
+                }
+            }
+            return nil
+        })
+    }
+    
     func registerSignal(username: String, password: String, email: String) -> RACSignal
     {
         let newUser = PFUser()

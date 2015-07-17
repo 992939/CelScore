@@ -69,16 +69,15 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     {
         userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         userVM.recurringUpdateAWSS3Signal(frequency: periodSetting.Every_Minute.rawValue)
-                        .subscribeNext({ (_) -> Void in
-                                        println("recurringUpdateAWSS3Signal subscribe")
-                                        }, error: { (_) -> Void in
-                                            println("recurringUpdateAWSS3Signal error")
-                        })
+            .subscribeNext({ (_) -> Void in
+                println("recurringUpdateAWSS3Signal subscribe")
+                }, error: { (_) -> Void in
+                    println("recurringUpdateAWSS3Signal error")
+            })
         
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
