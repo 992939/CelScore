@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func update () -> CelScoreViewModel
     {
         let celscoreVM = CelScoreViewModel()
-        let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
+        //let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
         /* Daily updates of the LocalDataStore with Celebrity Info */
 //                let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
@@ -114,12 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                }, error: { (text: AnyObject!) -> Void in
 //                    println("executionSignals error: \(text)")
 //            })
-        
-        /* Daily storage of ratings on AWS S3 */
-        let updateAWSS3WithUserRatingsSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-            return userVM.recurringUpdateAWSS3Signal(frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
-        }
-        
         
         return celscoreVM
     }

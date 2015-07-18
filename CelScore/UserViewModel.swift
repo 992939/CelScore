@@ -64,18 +64,12 @@ class UserViewModel : NSObject {
             .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
             .flattenMap { (object: AnyObject!) -> RACStream! in
                 println("NSNotification is \(object)")
-                return self.getUserInfoFromFacebookSignal()
+                return self.getUserInfoFromFacebookSignal().distinctUntilChanged()
         }
             .subscribeNext({ (object: AnyObject!) -> Void in
                 }, error: { (error: NSError!) -> Void in
                     println("NSNotification failed.")
             })
-        
-        self.profileChangeSignal?.subscribeNext({ (object: AnyObject!) -> Void in
-            println("profileChangeSignal success.")
-        }, error: { (error: NSError!) -> Void in
-            println("profileChangeSignal failed.")
-        })
     }
     
     //MARK: Methods
