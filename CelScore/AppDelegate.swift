@@ -47,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func update () -> CelScoreViewModel
     {
         let celscoreVM = CelScoreViewModel()
-        //let userVM = UserViewModel(username: "Gary", password: "myPassword", email: "gmensah@gmail.com")
         
         /* Daily updates of the LocalDataStore with Celebrity Info */
 //                let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in

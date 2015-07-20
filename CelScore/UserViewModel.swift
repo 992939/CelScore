@@ -11,12 +11,7 @@ import Foundation
 class UserViewModel : NSObject {
     
     //MARK: Properties
-    var username, password, email : String
-    var firstTimeLoggedIn, lastLoggedIn : NSDate
-    var ratingsList : [RatingsViewModel]
-    var notificationToken: RLMNotificationToken?
     let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
-    var profileChangeSignal : RACSignal?
     
     enum listSetting {
         case A_List
@@ -41,29 +36,17 @@ class UserViewModel : NSObject {
         case Guest
         case Facebook_User
         case Twitter_User
-        case Registered_User
+        case Google_User
     }
     
     //MARK: Initializers
-    init(username: String, password: String, email: String) {
-        
-        self.username = String()
-        self.password = String()
-        self.email = String()
-        self.firstTimeLoggedIn = NSDate()
-        self.lastLoggedIn = NSDate()
-        self.ratingsList = Array()
+    override init() {
         
         super.init()
-        
-        self.username = username
-        self.password = password
-        self.email = email
         
         NSNotificationCenter.defaultCenter()
             .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
             .flattenMap { (object: AnyObject!) -> RACStream! in
-                println("NSNotification is \(object)")
                 return self.getUserInfoFromFacebookSignal().distinctUntilChanged()
         }
             .subscribeNext({ (object: AnyObject!) -> Void in
@@ -92,43 +75,25 @@ class UserViewModel : NSObject {
         })
     }
     
-    func registerSignal(username: String, password: String, email: String) -> RACSignal
-    {
-        let newUser = PFUser()
-        newUser.username = username
-        newUser.password = password
-        newUser.email = email
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            newUser.signUpInBackgroundWithBlock({
-                (status: Bool, error: NSError?) -> Void in
-                if status {
-                    println("User Registered!.")
-                    subscriber.sendCompleted()
-                } else
-                {
-                    println("Registration failed.")
-                    subscriber.sendError(error)
-                }
-            })
-            return nil
-        })
-    }
-    
     func loginCognitoSignal(token: String) -> RACSignal
     {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
+            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
             
             let syncClient = AWSCognito.defaultCognito()
+            
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
+            //dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
+
             dataset.setString("Gary Mensah", forKey: "name")
             dataset.setString("25 to 45", forKey: "age range")
             dataset.setString("Male", forKey: "gender")
@@ -138,13 +103,13 @@ class UserViewModel : NSObject {
             var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                println("task is \(task.description)")
-                if (task.result != nil) {
+                if (task.error == nil) {
                     subscriber.sendNext(task)
                     subscriber.sendCompleted()
                 } else
                 {
                     subscriber.sendError(task.error)
+                    println("credentialsProvider.refresh() error \(task.error)")
                 }
                 return task
             })
@@ -181,18 +146,19 @@ class UserViewModel : NSObject {
     }
     
     func updateUserRatingsOnAWSS3Signal() -> RACSignal {
+        var notificationToken: RLMNotificationToken?
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let realm = RLMRealm.defaultRealm()
-            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
+            notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
                 println("REALM NOTIFICATION \(text)")
             })
             
             realm.beginWriteTransaction()
             var allUserRatings = RatingsModel.allObjects()
             realm.commitWriteTransaction()
-            RLMRealm.defaultRealm().removeNotification(self.notificationToken)
+            RLMRealm.defaultRealm().removeNotification(notificationToken)
  
             return nil
         })
