@@ -48,19 +48,49 @@ class UserViewModel : NSObject {
             .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
             .flattenMap { (object: AnyObject!) -> RACStream! in
                 return self.getUserInfoFromFacebookSignal().distinctUntilChanged()
-        }
+            }
             .subscribeNext({ (object: AnyObject!) -> Void in
+                self.updateUserInfoOnCognitoSignal(object)
+                    .subscribeNext({ (object: AnyObject!) -> Void in
+                        println("updateUserInfoOnCognitoSignal success.")
+                        }, error: { (error: NSError!) -> Void in
+                            println("updateUserInfoOnCognitoSignal failed.")
+                    })
                 }, error: { (error: NSError!) -> Void in
                     println("NSNotification failed.")
             })
     }
     
     //MARK: Methods
+    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> RACSignal
+    {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            let syncClient = AWSCognito.defaultCognito()
+            //dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
+            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
+            dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+            dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+            dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+            dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+            dataset.setString(object.objectForKey("age_range") as! String, forKey: "age_range")
+            let timezone = object.objectForKey("timezone") as! NSNumber
+            dataset.setString(timezone.stringValue, forKey: "timezone")
+            dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+            dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+            dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+            dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+            dataset.synchronize()
+            
+            return nil
+        })
+    }
+    
     func getUserInfoFromFacebookSignal() -> RACSignal
     {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, updated_time, verified, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 if error == nil {
                     println("getUserInfoFromFacebookSignal object is \(object)")
                     subscriber.sendNext(object)
@@ -88,17 +118,6 @@ class UserViewModel : NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
-            
-            let syncClient = AWSCognito.defaultCognito()
-            
-            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            //dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
-
-            dataset.setString("Gary Mensah", forKey: "name")
-            dataset.setString("25 to 45", forKey: "age range")
-            dataset.setString("Male", forKey: "gender")
-            dataset.setString("Oakland, CA", forKey: "locale")
-            dataset.synchronize()
             
             var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
