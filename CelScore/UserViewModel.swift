@@ -73,7 +73,6 @@ class UserViewModel : NSObject {
             dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
             dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
             dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-            dataset.setString(object.objectForKey("age_range") as! String, forKey: "age_range")
             let timezone = object.objectForKey("timezone") as! NSNumber
             dataset.setString(timezone.stringValue, forKey: "timezone")
             dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
