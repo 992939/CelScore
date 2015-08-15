@@ -67,20 +67,22 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             let syncClient = AWSCognito.defaultCognito()
-            //dataset.synchronize() //SEPERATE TASK? AS IN REGISTRATION + dataset.conflictHandler HOW TO HANDLE CONFLICT?
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-            dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-            dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
-            dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-            let timezone = object.objectForKey("timezone") as! NSNumber
-            dataset.setString(timezone.stringValue, forKey: "timezone")
-            dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-            dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-            dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-            dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-            dataset.synchronize()
-            
+            dataset.synchronize() //dataset.conflictHandler
+            println("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            if dataset.getAll().count == 0 {
+                dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+                dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+                dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+                let timezone = object.objectForKey("timezone") as! NSNumber
+                dataset.setString(timezone.stringValue, forKey: "timezone")
+                dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+                dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+                dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                dataset.synchronize()
+            }
             return nil
         })
     }
@@ -109,7 +111,7 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
-            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+            //AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             
