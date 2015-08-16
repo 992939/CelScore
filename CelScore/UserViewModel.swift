@@ -137,35 +137,7 @@ class UserViewModel : NSObject {
             return nil
         })
     }
-    
-    func loginSignal(username: String, password: String) -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            PFUser.logInWithUsernameInBackground(username, password: password){
-                (user :PFUser?, error: NSError?) -> Void in
-                if user != nil {
-                    println("loginSignal success.")
-                    subscriber.sendNext(user)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    println("loginSignal errors")
-                    subscriber.sendError(error)
-                }
-            }
-            return nil
-        })
-    }
-    
-    func storeUserRatingsLocallySignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            
-            return nil
-        })
-    }
-    
+
     func updateUserRatingsOnAWSS3Signal() -> RACSignal {
         var notificationToken: RLMNotificationToken?
         return RACSignal.createSignal({
