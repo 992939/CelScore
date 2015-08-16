@@ -20,6 +20,7 @@ class RatingsModel: RLMObject {
     dynamic var rating8 : Double = 0
     dynamic var rating9 : Double = 0
     dynamic var rating10 : Double = 0
+    dynamic var isSynced: Bool = false
     
     override init() {
         super.init()

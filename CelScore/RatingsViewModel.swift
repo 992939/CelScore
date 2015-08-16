@@ -62,6 +62,4 @@ class RatingsViewModel: NSObject {
             return nil
         })
     }
-
-
 }

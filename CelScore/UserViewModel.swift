@@ -69,6 +69,7 @@ class UserViewModel : NSObject {
             let syncClient = AWSCognito.defaultCognito()
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize() //dataset.conflictHandler
+            
             println("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
@@ -111,7 +112,7 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
-            //AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             

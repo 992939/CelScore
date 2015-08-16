@@ -88,68 +88,45 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             self.view.addSubview(loginButton)
         }
         
-       /* search for a celebrity or a #list */
-//       self.searchTextField.rac_textSignal()
-//        .filter { (d:AnyObject!) -> Bool in
-//            let token = d as! NSString
-//            return token.length > 0
-//        }
-//        .distinctUntilChanged()
-//        .throttle(1)
-//        .flattenMap { (d:AnyObject!) -> RACStream! in
-//            let token = d as! String
-//            let isList = token.hasPrefix("#")
-//            
-//            var searchSignal : RACSignal
-//            if isList {
-//                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
-//            } else
-//            {
-//                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
-//            }
-//            return searchSignal
-//        }
-//        .subscribeNext({ (d:AnyObject!) -> Void in
-//            println("searchTextField signal returned \(d)")
-//            }, error :{ (_) -> Void in
-//                print("searchTextField error")
-//        })
         
-        /* checking network connectivity */
-//                let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
-//                networkSignal.subscribeNext({ (_) -> Void in
-//                                println("networkSignal subscribe")
-//                                }, error: { (_) -> Void in
-//                                    println("networkSignal error")
-//                })
+       // Signal to search for a celebrity or a #list
+       self.searchTextField.rac_textSignal()
+        .filter { (d:AnyObject!) -> Bool in
+            let token = d as! NSString
+            return token.length > 0
+        }
+        .distinctUntilChanged()
+        .throttle(1)
+        .flattenMap { (d:AnyObject!) -> RACStream! in
+            let token = d as! String
+            let isList = token.hasPrefix("#")
+            
+            var searchSignal : RACSignal
+            if isList {
+                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+            } else
+            {
+                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+            }
+            return searchSignal
+        }
+        .subscribeNext({ (d:AnyObject!) -> Void in
+            println("searchTextField signal returned \(d)")
+            }, error :{ (_) -> Void in
+                print("searchTextField error")
+        })
         
         
-        /* user registration */
-//                let signUpSignal = userVM.registerSignal(userVM.username, password: userVM.password, email: userVM.email)
-//                signUpSignal.subscribeNext({ (_) -> Void in
-//                    println("next")
-//                    }, error: { (_) -> Void in
-//                        println("error")
-//                })
+        // Signal to check network connectivity
+        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
+        networkSignal.subscribeNext({ (_) -> Void in
+            println("networkSignal subscribe")
+            }, error: { (_) -> Void in
+                println("networkSignal error")
+        })
         
-        
-        /* user logging in */
-//        let executeSearch = RACCommand(enabled: celscoreVM.checkNetworkConnectivitySignal()) {
-//            (any:AnyObject!) -> RACSignal in
-//            return userVM.loginSignal(userVM.username, password: userVM.password)
-//        }
-//        
-//        executeSearch.executionSignals
-//            .switchToLatest()
-//            .subscribeNext({ (text: AnyObject!) -> Void in
-//            println("executionSignals subscribe: \(text)")
-//            }, error: { (text: AnyObject!) -> Void in
-//                println("executionSignals error: \(text)")
-//        })
-//        
-//        signInButton.rac_command = executeSearch
 
-        /* update the celscore of all celebrities */
+        // Signal to update the celscore of all celebrities
         var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
         updateAllCelebritiesCelScoreSignal
             .subscribeNext({ (object: AnyObject!) -> Void in
@@ -163,6 +140,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     // MARK: ASTableView data source and delegate methods.
     
