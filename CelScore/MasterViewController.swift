@@ -68,7 +68,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func bindWithViewModels ()
     {
         userVM = UserViewModel()
-        userVM.recurringUpdateAWSS3Signal(frequency: periodSetting.Every_Minute.rawValue)
+        userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
             .subscribeNext({ (_) -> Void in
                 println("recurringUpdateAWSS3Signal subscribe")
                 }, error: { (_) -> Void in

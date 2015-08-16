@@ -138,7 +138,7 @@ class UserViewModel : NSObject {
         })
     }
 
-    func updateUserRatingsOnAWSS3Signal() -> RACSignal {
+    func updateUserRatingsOnCognitoSignal() -> RACSignal {
         var notificationToken: RLMNotificationToken?
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
@@ -149,7 +149,10 @@ class UserViewModel : NSObject {
             })
             
             realm.beginWriteTransaction()
+            
+            //CODE HERE
             var allUserRatings = RatingsModel.allObjects()
+            
             realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(notificationToken)
  
@@ -157,12 +160,12 @@ class UserViewModel : NSObject {
         })
     }
     
-    func recurringUpdateAWSS3Signal(#frequency: NSTimeInterval) -> RACSignal {
+    func recurringUpdateUserRatingsOnCognitoSignal(#frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateUserRatingsOnAWSS3Signal()
+            return self.updateUserRatingsOnCognitoSignal()
         })
     }
 }
