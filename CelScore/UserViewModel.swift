@@ -143,6 +143,8 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
+            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+            
             let predicate = NSPredicate(format: "isSynced = false")
             var userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
             

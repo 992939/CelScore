@@ -31,9 +31,9 @@ class RatingsViewModel: NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let realm = RLMRealm.defaultRealm()
-//            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
-//                println("REALM NOTIFICATION \(text)")
-//            })
+            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
+                println("REALM NOTIFICATION \(text)")
+            })
             
             realm.beginWriteTransaction()
             realm.addOrUpdateObject(self.ratings!)
@@ -49,9 +49,9 @@ class RatingsViewModel: NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let realm = RLMRealm.defaultRealm()
-//            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
-//                println("REALM NOTIFICATION \(text)")
-//            })
+            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
+                println("REALM NOTIFICATION \(text)")
+            })
             
             realm.beginWriteTransaction()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
