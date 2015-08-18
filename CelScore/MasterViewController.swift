@@ -68,13 +68,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func bindWithViewModels ()
     {
         userVM = UserViewModel()
-        //userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
-        userVM.updateUserRatingsOnCognitoSignal()
-            .subscribeNext({ (_) -> Void in
-                println("updateUserRatingsOnCognitoSignal subscribe")
-                }, error: { (_) -> Void in
-                    println("updateUserRatingsOnCognitoSignal error")
-            })
         
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -227,11 +220,18 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             println("Process cancelled")
         }
         else {
-            //cache profile cacheProfile
+            //cache profile
             println("NIN IS \(result.description)")
             userVM.loginCognitoSignal(result.token.tokenString)
                 .subscribeNext({ (object: AnyObject!) -> Void in
                     println("loginCognitoSignal success")
+                    //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+                       self.userVM.updateUserRatingsOnCognitoSignal()
+                                .subscribeNext({ (_) -> Void in
+                                    println("updateUserRatingsOnCognitoSignal subscribe")
+                                    }, error: { (_) -> Void in
+                                        println("updateUserRatingsOnCognitoSignal error")
+                                })
                     },
                     error: { (error: NSError!) -> Void in
                         println("loginCognitoSignal error: \(error)")
