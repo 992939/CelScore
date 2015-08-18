@@ -143,18 +143,15 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
-            let realm = RLMRealm.defaultRealm()
-            notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String!, realm) -> Void in
-                println("REALM NOTIFICATION \(text)")
-            })
+            let predicate = NSPredicate(format: "isSynced = false")
+            var userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
             
-            realm.beginWriteTransaction()
-            
-            //CODE HERE
-            var allUserRatings = RatingsModel.allObjects()
-            
-            realm.commitWriteTransaction()
-            RLMRealm.defaultRealm().removeNotification(notificationToken)
+            let syncClient = AWSCognito.defaultCognito()
+            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            dataset.synchronize()
+            dataset.setString("3/3/3/3/3/3/3/3/3/3", forKey: "X34r2i3r23r2W")
+            dataset.setString("6/6/6/6/6/6/6/6/6/6", forKey: "Q12312fwerweR")
+            dataset.synchronize()
  
             return nil
         })

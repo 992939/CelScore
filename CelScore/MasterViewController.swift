@@ -68,11 +68,12 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func bindWithViewModels ()
     {
         userVM = UserViewModel()
-        userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+        //userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+        userVM.updateUserRatingsOnCognitoSignal()
             .subscribeNext({ (_) -> Void in
-                println("recurringUpdateAWSS3Signal subscribe")
+                println("updateUserRatingsOnCognitoSignal subscribe")
                 }, error: { (_) -> Void in
-                    println("recurringUpdateAWSS3Signal error")
+                    println("updateUserRatingsOnCognitoSignal error")
             })
         
         loginButton = FBSDKLoginButton()
