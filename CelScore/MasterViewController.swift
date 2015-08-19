@@ -142,7 +142,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         var node = ASTextCellNode()
-        node.text = "The reason you are here"
+        node.text = "Celebrity"
         node.autoresizesSubviews = true
         var a = 5
 
@@ -169,18 +169,17 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        //println("BOOM \(celebrityVM.ratings!)")
         var ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
         println("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
-//        ratings.storeUserRatingsInRealmSignal()
-//                .subscribeNext({ (object: AnyObject!) -> Void in
-//                    println("storeUserRatingsInRealmSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    println("storeUserRatingsInRealmSignal error: \(error)")
-//                })
+        ratings.storeUserRatingsInRealmSignal()
+                .subscribeNext({ (object: AnyObject!) -> Void in
+                    println("storeUserRatingsInRealmSignal success")
+                },
+                error: { (error: NSError!) -> Void in
+                    println("storeUserRatingsInRealmSignal error: \(error)")
+                })
         
         /* retrieve user ratings */
 //        ratings.retrieveUserRatingsFromRealmSignal()

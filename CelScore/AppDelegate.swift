@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("uzf1XbBjfA1xeajeEbsnksn7QhRKIJ4GiQlGDHYa", clientKey:"lN3gZKln1LxwysbYoRuJAaSpNmgOEhZllx9PTjDF")
+        update()
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
@@ -50,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Daily updates of the LocalDataStore with Celebrity Info */
 //                let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "Celebrity", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
+//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "Celebrity", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
 //                }
 //        
 //                updateLocalDataStoreWithCelebrityInfoSignal.subscribeNext({ (text: AnyObject!) -> Void in
@@ -73,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Daily updates of the LocalDataStore with List */
 //                let updateLocalDataStoreWithListSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
-//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "List", frequency: CelScoreViewModel.periodSetting.Daily.rawValue)
+//                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "List", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
 //                }
 //        
 //                updateLocalDataStoreWithListSignal

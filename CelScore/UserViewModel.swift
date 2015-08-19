@@ -149,8 +149,12 @@ class UserViewModel : NSObject {
             let syncClient = AWSCognito.defaultCognito()
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
-            dataset.setString("3/3/3/3/3/3/3/3/3/3", forKey: "X34r2i3r23r2W")
-            dataset.setString("6/6/6/6/6/6/6/6/6/6", forKey: "Q12312fwerweR")
+            
+            for var index: UInt = 0; index < userRatingsArray.count; index++ {
+                let ratings: RatingsModel = userRatingsArray.objectAtIndex(index) as! RatingsModel
+                var ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
+                dataset.setString(ratingsString, forKey: ratings.id)
+            }
             dataset.synchronize()
  
             return nil
