@@ -145,16 +145,25 @@ class UserViewModel : NSObject {
             
             let predicate = NSPredicate(format: "isSynced = false")
             var userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
+            //println("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
             
-            for var index: UInt = 0; index < userRatingsArray.count; index++ {
+            let realm = RLMRealm.defaultRealm()
+            realm.beginWriteTransaction()
+            
+            for var index: UInt = 0; index < userRatingsArray.count; index++
+            {
                 let ratings: RatingsModel = userRatingsArray.objectAtIndex(index) as! RatingsModel
                 var ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
                 dataset.setString(ratingsString, forKey: ratings.id)
+                
+                ratings.isSynced = true
+                realm.addOrUpdateObject(ratings)
             }
+            realm.commitWriteTransaction()
             dataset.synchronize()
  
             return nil
