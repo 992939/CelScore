@@ -173,12 +173,12 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         println("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
-        ratings.storeUserRatingsInRealmSignal()
+        ratings.updateUserRatingsInRealmSignal()
                 .subscribeNext({ (object: AnyObject!) -> Void in
-                    println("storeUserRatingsInRealmSignal success")
+                    println("updateUserRatingsInRealmSignal success")
                 },
                 error: { (error: NSError!) -> Void in
-                    println("storeUserRatingsInRealmSignal error: \(error)")
+                    println("updateUserRatingsInRealmSignal error: \(error)")
                 })
         
         /* retrieve user ratings */

@@ -26,7 +26,7 @@ class RatingsViewModel: NSObject {
         ratings!.id = celebrityId
     }
     
-    func storeUserRatingsInRealmSignal() -> RACSignal {
+    func updateUserRatingsInRealmSignal() -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
@@ -36,6 +36,7 @@ class RatingsViewModel: NSObject {
             })
             
             realm.beginWriteTransaction()
+            self.ratings?.isSynced = false
             realm.addOrUpdateObject(self.ratings!)
             realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
