@@ -224,13 +224,26 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             userVM.loginCognitoSignal(result.token.tokenString)
                 .subscribeNext({ (object: AnyObject!) -> Void in
                     println("loginCognitoSignal success")
-                    //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
-                       self.userVM.updateUserRatingsOnCognitoSignal()
-                                .subscribeNext({ (_) -> Void in
-                                    println("updateUserRatingsOnCognitoSignal subscribe")
-                                    }, error: { (_) -> Void in
-                                        println("updateUserRatingsOnCognitoSignal error")
-                                })
+                    
+                    let userRatingsArray = RatingsModel.allObjects()
+                    if userRatingsArray.count > 0
+                    {
+                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+                        self.userVM.updateUserRatingsOnCognitoSignal()
+                            .subscribeNext({ (_) -> Void in
+                                println("updateUserRatingsOnCognitoSignal subscribe")
+                                }, error: { (_) -> Void in
+                                    println("updateUserRatingsOnCognitoSignal error")
+                            })
+                    } else
+                    {
+                        self.userVM.getUserRatingsFromCognitoSignal()
+                            .subscribeNext({ (_) -> Void in
+                                println("getUserRatingsFromCognitoSignal subscribe")
+                                }, error: { (_) -> Void in
+                                    println("getUserRatingsFromCognitoSignal error")
+                            })
+                    }
                     },
                     error: { (error: NSError!) -> Void in
                         println("loginCognitoSignal error: \(error)")

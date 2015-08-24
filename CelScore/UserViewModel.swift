@@ -144,7 +144,7 @@ class UserViewModel : NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let predicate = NSPredicate(format: "isSynced = false")
-            var userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
+            let userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
             //println("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
@@ -176,6 +176,19 @@ class UserViewModel : NSObject {
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
             return self.updateUserRatingsOnCognitoSignal()
+        })
+    }
+    
+    func getUserRatingsFromCognitoSignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            let syncClient = AWSCognito.defaultCognito()
+            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            dataset.synchronize()
+            println("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
+            
+            return nil
         })
     }
 }
