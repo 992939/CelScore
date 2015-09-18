@@ -5,6 +5,8 @@ PODS:
   - AWSCognito (2.2.1):
     - AWSCore (= 2.2.1)
   - AWSCore (2.2.1)
+  - AWSLambda (2.2.1):
+    - AWSCore (= 2.2.1)
   - AWSS3 (2.2.1):
     - AWSCore (= 2.2.1)
   - Bolts (1.2.0):
@@ -41,6 +43,7 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 1.2.1)
   - AWSCognito (~> 2.2)
   - AWSCore (~> 2.2)
+  - AWSLambda (~> 2.2)
   - AWSS3 (~> 2.2)
   - FBSDKCoreKit (~> 4.4)
   - FBSDKLoginKit (~> 4.4)
@@ -52,6 +55,7 @@ SPEC CHECKSUMS:
   AsyncDisplayKit: b2f777da3a246b4aad660b2a55d60bb4328049b9
   AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
   AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
+  AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
   AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474

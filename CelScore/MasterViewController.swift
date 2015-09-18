@@ -73,6 +73,15 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         
+        userVM.loadEmptyDataStoreLambdaSignal()
+            .subscribeNext({ (object: AnyObject!) -> Void in
+                println("loadEmptyDataStoreLambdaSignal success")
+                },
+                error: { (error: NSError!) -> Void in
+                    println("loadEmptyDataStoreLambdaSignal error: \(error)")
+            })
+
+        
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
@@ -139,6 +148,14 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     // MARK: ASTableView data source and delegate methods.
     
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
+        //1. REUSE CELL/NODE?!?!
+        
+        //2. NO DATA BINDING HERE, NO CELL ON SCREEN YET. USE WILLDISPLAYCELL()/willDisplayNodeForRowAtIndexPath
+        
+        //3. DON'T USE AUTOLAYOUT, SHIT IS SLOOOOOW
+        
+        //4. AVOID BLENDING AS IT MAKES RENDERING SLOW: RUN APP IN SIMULATOR, THEN DEBUG AND PICK ITEM "COLOR BLENDED LAYERS
+        
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         var node = ASTextCellNode()

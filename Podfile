@@ -7,6 +7,7 @@ pod 'Realm', '~> 0.94'
 pod 'AWSS3', '~> 2.2'
 pod 'AWSCognito', '~> 2.2'
 pod 'AWSCore', '~> 2.2'
+pod 'AWSLambda', '~> 2.2'
 pod 'FBSDKLoginKit', '~> 4.4'
 pod 'FBSDKCoreKit', '~> 4.4'
 

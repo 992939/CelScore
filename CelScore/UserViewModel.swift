@@ -62,6 +62,31 @@ class UserViewModel : NSObject {
     }
     
     //MARK: Methods
+    func loadEmptyDataStoreLambdaSignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
+            let task: AWSTask = lambdaInvoker.invokeFunction("CreateThumbnail", JSONObject: nil)
+            if task.error == nil {
+                println("loadEmptyDataStoreLambdaSignal object is \(task.result)")
+                subscriber.sendNext(task.result)
+                subscriber.sendCompleted()
+            } else {
+                println("loadEmptyDataStoreLambdaSignal error is \(task.error)")
+                subscriber.sendError(task.error)
+            }
+            return nil
+        })
+    }
+    
+    
     func updateUserInfoOnCognitoSignal(object: AnyObject!) -> RACSignal
     {
         return RACSignal.createSignal({
@@ -115,7 +140,6 @@ class UserViewModel : NSObject {
             AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
