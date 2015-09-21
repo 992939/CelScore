@@ -73,15 +73,17 @@ class UserViewModel : NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
-            let task: AWSTask = lambdaInvoker.invokeFunction("CreateThumbnail", JSONObject: nil)
-            if task.error == nil {
-                println("loadEmptyDataStoreLambdaSignal object is \(task.result)")
-                subscriber.sendNext(task.result)
-                subscriber.sendCompleted()
-            } else {
-                println("loadEmptyDataStoreLambdaSignal error is \(task.error)")
-                subscriber.sendError(task.error)
-            }
+            lambdaInvoker.invokeFunction("getCelebTablesFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                if task.error == nil {
+                    println("loadEmptyDataStoreLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    subscriber.sendNext(task.result)
+                    subscriber.sendCompleted()
+                } else {
+                    println("loadEmptyDataStoreLambdaSignal error is \(task.error)")
+                    subscriber.sendError(task.error)
+                }
+                return task
+            })
             return nil
         })
     }
