@@ -62,24 +62,46 @@ class UserViewModel : NSObject {
     }
     
     //MARK: Methods
-    func loadEmptyDataStoreLambdaSignal() -> RACSignal {
+    func getCelebInfoLambdaSignal() -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            
-            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
-            lambdaInvoker.invokeFunction("getCelebTablesFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            lambdaInvoker.invokeFunction("getCelebInfoFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 if task.error == nil {
-                    println("loadEmptyDataStoreLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    println("getCelebInfoLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
                     subscriber.sendNext(task.result)
                     subscriber.sendCompleted()
                 } else {
-                    println("loadEmptyDataStoreLambdaSignal error is \(task.error)")
+                    println("getCelebInfoLambdaSignal error is \(task.error)")
+                    subscriber.sendError(task.error)
+                }
+                return task
+            })
+            return nil
+        })
+    }
+    
+    func getCelebRatingsLambdaSignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
+            lambdaInvoker.invokeFunction("getCelebRatingsFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                if task.error == nil {
+                    println("getCelebRatingsLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    subscriber.sendNext(task.result)
+                    subscriber.sendCompleted()
+                } else {
+                    println("getCelebRatingsLambdaSignal error is \(task.error)")
                     subscriber.sendError(task.error)
                 }
                 return task
@@ -114,6 +136,7 @@ class UserViewModel : NSObject {
             return nil
         })
     }
+    
     
     func getUserInfoFromFacebookSignal() -> RACSignal
     {
