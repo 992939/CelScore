@@ -73,21 +73,22 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         
-//        userVM.getCelebInfoLambdaSignal()
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                println("getCelebInfoLambdaSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    println("getCelebInfoLambdaSignal error: \(error)")
-//            })
-        
-        userVM.getCelebRatingsLambdaSignal()
+        userVM.getCelebInfoLambdaSignal()
             .subscribeNext({ (object: AnyObject!) -> Void in
-                println("getCelebRatingsLambdaSignal success")
+                println("getCelebInfoLambdaSignal success")
                 },
                 error: { (error: NSError!) -> Void in
-                    println("getCelebRatingsLambdaSignal error: \(error)")
+                    println("getCelebInfoLambdaSignal error: \(error)")
             })
+        
+//        userVM.getCelebRatingsLambdaSignal()
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                println("getCelebRatingsLambdaSignal success")
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    println("getCelebRatingsLambdaSignal error: \(error)")
+//            })
+
 
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)

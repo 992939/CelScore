@@ -70,8 +70,13 @@ class UserViewModel : NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
-            let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
-            lambdaInvoker.invokeFunction("getCelebInfoFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            let transferManager: AWSS3TransferManager = AWSS3TransferManager.defaultS3TransferManager()
+            var downloadRequest: AWSS3TransferManagerDownloadRequest = AWSS3TransferManagerDownloadRequest()
+            downloadRequest.bucket = "celebjson"
+            downloadRequest.key = "celebInfo.json"
+            
+            transferManager.download(downloadRequest).continueWithExecutor(AWSExecutor.defaultExecutor(), withBlock: { (task: AWSTask!) -> AnyObject! in
+                
                 if task.error == nil {
                     println("getCelebInfoLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
                     subscriber.sendNext(task.result)
