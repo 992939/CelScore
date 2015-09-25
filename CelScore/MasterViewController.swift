@@ -75,10 +75,10 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         userVM.getCelebInfoLambdaSignal()
             .subscribeNext({ (object: AnyObject!) -> Void in
-                println("getCelebInfoLambdaSignal success")
+                print("getCelebInfoLambdaSignal success")
                 },
                 error: { (error: NSError!) -> Void in
-                    println("getCelebInfoLambdaSignal error: \(error)")
+                    print("getCelebInfoLambdaSignal error: \(error)")
             })
         
 //        userVM.getCelebRatingsLambdaSignal()
@@ -94,7 +94,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
-            println("TOKEN IS \(accessToken)")
+            print("TOKEN IS \(accessToken)")
         } else
         {
             self.view.addSubview(loginButton)
@@ -123,28 +123,28 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             return searchSignal
         }
         .subscribeNext({ (d:AnyObject!) -> Void in
-            println("searchTextField signal returned \(d)")
+            print("searchTextField signal returned \(d)")
             }, error :{ (_) -> Void in
                 print("searchTextField error")
         })
         
         
         // Signal to check network connectivity
-        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
-        networkSignal.subscribeNext({ (_) -> Void in
-            println("networkSignal subscribe")
-            }, error: { (_) -> Void in
-                println("networkSignal error")
-        })
+//        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
+//        networkSignal.subscribeNext({ (_) -> Void in
+//            print("networkSignal subscribe")
+//            }, error: { (_) -> Void in
+//                print("networkSignal error")
+//        })
         
 
         // Signal to update the celscore of all celebrities
         var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
         updateAllCelebritiesCelScoreSignal
             .subscribeNext({ (object: AnyObject!) -> Void in
-                        println("updateAllCelebritiesCelScore subscribe")
+                        print("updateAllCelebritiesCelScore subscribe")
                         }, error: { (_) -> Void in
-                            println("updateAllCelebritiesCelScore error")
+                            print("updateAllCelebritiesCelScore error")
         })
     }
     
@@ -165,9 +165,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         //4. AVOID BLENDING AS IT MAKES RENDERING SLOW: RUN APP IN SIMULATOR, THEN DEBUG AND PICK ITEM "COLOR BLENDED LAYERS
         
-        var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        let celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
-        var node = ASTextCellNode()
+        let node = ASTextCellNode()
         node.text = "Celebrity"
         node.autoresizesSubviews = true
         var a = 5
@@ -180,7 +180,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             .subscribeNext({ (object: AnyObject!) -> Void in
                 },
                 error: { (error: NSError!) -> Void in
-                    println("initCelebrityViewModelSignal error: \(error)")
+                    print("initCelebrityViewModelSignal error: \(error)")
             })
        return node
     }
@@ -196,15 +196,15 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         var ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
-        println("ROW \(ratings.ratings!.description)")
+        print("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
         ratings.updateUserRatingsInRealmSignal()
                 .subscribeNext({ (object: AnyObject!) -> Void in
-                    println("updateUserRatingsInRealmSignal success")
+                    print("updateUserRatingsInRealmSignal success")
                 },
                 error: { (error: NSError!) -> Void in
-                    println("updateUserRatingsInRealmSignal error: \(error)")
+                    print("updateUserRatingsInRealmSignal error: \(error)")
                 })
         
         /* retrieve user ratings */
@@ -221,16 +221,16 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     // MARK: UITextFieldDelegate methods.
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        println("textFieldDidBeginEditing")
+        print("textFieldDidBeginEditing")
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        println("textFieldShouldEndEditing")
+        print("textFieldShouldEndEditing")
         return false
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        println("textFieldShouldReturn")
+        print("textFieldShouldReturn")
         textField.resignFirstResponder()
         
         return true
@@ -239,17 +239,17 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if ((error) != nil) {
-            println("Process error")
+            print("Process error")
         }
         else if result.isCancelled {
-            println("Process cancelled")
+            print("Process cancelled")
         }
         else {
             //cache profile
-            println("NIN IS \(result.description)")
+            print("NIN IS \(result.description)")
             userVM.loginCognitoSignal(result.token.tokenString)
                 .subscribeNext({ (object: AnyObject!) -> Void in
-                    println("loginCognitoSignal success")
+                    print("loginCognitoSignal success")
                     
                     let userRatingsArray = RatingsModel.allObjects()
                     if userRatingsArray.count > 0
@@ -257,22 +257,22 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                         //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
                         self.userVM.updateUserRatingsOnCognitoSignal()
                             .subscribeNext({ (_) -> Void in
-                                println("updateUserRatingsOnCognitoSignal subscribe")
+                                print("updateUserRatingsOnCognitoSignal subscribe")
                                 }, error: { (_) -> Void in
-                                    println("updateUserRatingsOnCognitoSignal error")
+                                    print("updateUserRatingsOnCognitoSignal error")
                             })
                     } else
                     {
                         self.userVM.getUserRatingsFromCognitoSignal()
                             .subscribeNext({ (_) -> Void in
-                                println("getUserRatingsFromCognitoSignal subscribe")
+                                print("getUserRatingsFromCognitoSignal subscribe")
                                 }, error: { (_) -> Void in
-                                    println("getUserRatingsFromCognitoSignal error")
+                                    print("getUserRatingsFromCognitoSignal error")
                             })
                     }
                     },
                     error: { (error: NSError!) -> Void in
-                        println("loginCognitoSignal error: \(error)")
+                        print("loginCognitoSignal error: \(error)")
                 })
         }
     }

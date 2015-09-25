@@ -101,7 +101,7 @@ class CelebrityViewModel : NSObject {
         return signal
     }
     
-    func updateCelebrityViewModelSignal(#celebrity: PFObject, frequency: NSTimeInterval) -> RACSignal {
+    func updateCelebrityViewModelSignal(celebrity celebrity: PFObject, frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler = RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         

@@ -32,7 +32,7 @@ class RatingsViewModel: NSObject {
             
             let realm = RLMRealm.defaultRealm()
             self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
-                println("REALM NOTIFICATION \(text)")
+                print("REALM NOTIFICATION \(text)")
             })
             
             realm.beginWriteTransaction()
@@ -51,12 +51,12 @@ class RatingsViewModel: NSObject {
             
             let realm = RLMRealm.defaultRealm()
             self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
-                println("REALM NOTIFICATION \(text)")
+                print("REALM NOTIFICATION \(text)")
             })
             
             realm.beginWriteTransaction()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
-            var userRatings = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
+            _ = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
             realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
             

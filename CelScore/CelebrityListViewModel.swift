@@ -34,7 +34,7 @@ class CelebrityListViewModel: NSObject {
             .subscribeNext({ (d:AnyObject!) -> Void in
             //println("CelebrityListViewModel.initializeListSignal is \(d)")
             }, error :{ (_) -> Void in
-                println("CelebrityListViewModel.initializeListSignal error")
+                print("CelebrityListViewModel.initializeListSignal error")
         })
 
 //        if let currentList = list
@@ -47,11 +47,11 @@ class CelebrityListViewModel: NSObject {
     }
     
     //MARK: Methods
-    func initializeListSignal(#listName: String) -> RACSignal {
+    func initializeListSignal(listName listName: String) -> RACSignal {
         let scheduler = RACScheduler(priority: RACSchedulerPriorityHigh)
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            var query = PFQuery(className: "List")
+            let query = PFQuery(className: "List")
             query.fromLocalDatastore()
             query.whereKey("name", equalTo: listName)
             let objects: PFObject? = query.getFirstObject()
@@ -64,14 +64,14 @@ class CelebrityListViewModel: NSObject {
                 subscriber.sendCompleted()
             } else
             {
-                subscriber.sendError(NSError())
+                subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
             }
             return nil
         }).subscribeOn(scheduler).deliverOn(RACScheduler.mainThreadScheduler())
     }
     
     
-    func updateListSignal(#listName: String) -> RACSignal {
+    func updateListSignal(listName listName: String) -> RACSignal {
         let signal = RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             //
@@ -80,10 +80,10 @@ class CelebrityListViewModel: NSObject {
         return signal
     }
     
-    func searchForCelebritiesSignal(#searchToken: String) -> RACSignal {
+    func searchForCelebritiesSignal(searchToken searchToken: String) -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            var query = PFQuery(className: "Celebrity")
+            let query = PFQuery(className: "Celebrity")
             query.fromLocalDatastore()
             query.whereKey("nickName", matchesRegex: searchToken, modifiers: "i")
             query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
@@ -97,17 +97,17 @@ class CelebrityListViewModel: NSObject {
                     subscriber.sendCompleted()
                 } else
                 {
-                    subscriber.sendError(NSError())
+                    subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
                 }
             })
             return nil
         })
     }
     
-    func searchForListsSignal(#searchToken: String) -> RACSignal {
+    func searchForListsSignal(searchToken searchToken: String) -> RACSignal {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            var query = PFQuery(className: "List")
+            let query = PFQuery(className: "List")
             query.fromLocalDatastore()
             query.whereKey("name", matchesRegex: searchToken, modifiers: "i")
             query.findObjectsInBackgroundWithBlock({ ( objects: [AnyObject]?, error :NSError?) -> Void in
@@ -121,7 +121,7 @@ class CelebrityListViewModel: NSObject {
                     subscriber.sendCompleted()
                 } else
                 {
-                    subscriber.sendError(NSError())
+                    subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
                 }
             })
             return nil

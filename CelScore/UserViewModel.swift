@@ -52,12 +52,12 @@ class UserViewModel : NSObject {
             .subscribeNext({ (object: AnyObject!) -> Void in
                 self.updateUserInfoOnCognitoSignal(object)
                     .subscribeNext({ (object: AnyObject!) -> Void in
-                        println("updateUserInfoOnCognitoSignal success.")
+                        print("updateUserInfoOnCognitoSignal success.")
                         }, error: { (error: NSError!) -> Void in
-                            println("updateUserInfoOnCognitoSignal failed.")
+                            print("updateUserInfoOnCognitoSignal failed.")
                     })
                 }, error: { (error: NSError!) -> Void in
-                    println("NSNotification failed.")
+                    print("NSNotification failed.")
             })
     }
     
@@ -78,11 +78,12 @@ class UserViewModel : NSObject {
             transferManager.download(downloadRequest).continueWithExecutor(AWSExecutor.defaultExecutor(), withBlock: { (task: AWSTask!) -> AnyObject! in
                 
                 if task.error == nil {
-                    println("getCelebInfoLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    let result : AWSS3TransferManagerDownloadOutput = task.result as! AWSS3TransferManagerDownloadOutput
+                     print("getCelebInfoLambdaSignal object is \(result.body) and is canceled \(task.cancelled)")
                     subscriber.sendNext(task.result)
                     subscriber.sendCompleted()
                 } else {
-                    println("getCelebInfoLambdaSignal error is \(task.error)")
+                    print("getCelebInfoLambdaSignal error is \(task.error)")
                     subscriber.sendError(task.error)
                 }
                 return task
@@ -102,11 +103,11 @@ class UserViewModel : NSObject {
             let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
             lambdaInvoker.invokeFunction("getCelebRatingsFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 if task.error == nil {
-                    println("getCelebRatingsLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    print("getCelebRatingsLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
                     subscriber.sendNext(task.result)
                     subscriber.sendCompleted()
                 } else {
-                    println("getCelebRatingsLambdaSignal error is \(task.error)")
+                    print("getCelebRatingsLambdaSignal error is \(task.error)")
                     subscriber.sendError(task.error)
                 }
                 return task
@@ -124,7 +125,7 @@ class UserViewModel : NSObject {
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize() //dataset.conflictHandler
             
-            println("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
                 dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
@@ -149,12 +150,12 @@ class UserViewModel : NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 if error == nil {
-                    println("getUserInfoFromFacebookSignal object is \(object)")
+                    print("getUserInfoFromFacebookSignal object is \(object)")
                     subscriber.sendNext(object)
                     subscriber.sendCompleted()
                 } else
                 {
-                    println("getUserInfoFromFacebookSignal error is \(error)")
+                    print("getUserInfoFromFacebookSignal error is \(error)")
                     subscriber.sendError(error)
                 }
             }
@@ -184,7 +185,7 @@ class UserViewModel : NSObject {
                 } else
                 {
                     subscriber.sendError(task.error)
-                    println("credentialsProvider.refresh() error \(task.error)")
+                    print("credentialsProvider.refresh() error \(task.error)")
                 }
                 return task
             })
@@ -224,7 +225,7 @@ class UserViewModel : NSObject {
         })
     }
     
-    func recurringUpdateUserRatingsOnCognitoSignal(#frequency: NSTimeInterval) -> RACSignal {
+    func recurringUpdateUserRatingsOnCognitoSignal(frequency frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
@@ -240,7 +241,7 @@ class UserViewModel : NSObject {
             let syncClient = AWSCognito.defaultCognito()
             var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
-            println("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
+            print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
             
             return nil
         })

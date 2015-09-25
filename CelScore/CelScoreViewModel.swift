@@ -28,24 +28,24 @@ class CelScoreViewModel: NSObject {
         super.init()
     }
     
-    //MARK: Methods
-    func checkNetworkConnectivitySignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            if IJReachability.isConnectedToNetwork() {
-                println("Connected!.")
-                subscriber.sendNext(1)
-                subscriber.sendCompleted()
-            } else
-            {
-                println("Not connected!")
-                subscriber.sendError(NSError())
-            }
-            return nil
-        })
-    }
+//    //MARK: Methods
+//    func checkNetworkConnectivitySignal() -> RACSignal {
+//        return RACSignal.createSignal({
+//            (subscriber: RACSubscriber!) -> RACDisposable! in
+//            if IJReachability.isConnectedToNetwork() {
+//                print("Connected!.")
+//                subscriber.sendNext(1)
+//                subscriber.sendCompleted()
+//            } else
+//            {
+//                print("Not connected!")
+//                subscriber.sendError(NSError())
+//            }
+//            return nil
+//        })
+//    }
     
-    func updateLocalDataStoreSignal(#classTypeName: String) -> RACSignal {
+    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> RACSignal {
         let signal = RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             var query = PFQuery(className: classTypeName)
@@ -69,7 +69,7 @@ class CelScoreViewModel: NSObject {
         return signal
     }
     
-    func recurringUpdateDataStoreSignal(#classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
+    func recurringUpdateDataStoreSignal(classTypeName classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
@@ -100,14 +100,14 @@ class CelScoreViewModel: NSObject {
                     subscriber.sendCompleted()
                 } else
                 {
-                    subscriber.sendError(NSError())
+                    subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
                 }
             })
             return nil
         })
     }
     
-    func recurringUpdateCelebritiesCelScoreSignal(#frequency: NSTimeInterval) -> RACSignal {
+    func recurringUpdateCelebritiesCelScoreSignal(frequency frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
