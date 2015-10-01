@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        Parse.enableLocalDatastore()
-        Parse.setApplicationId("uzf1XbBjfA1xeajeEbsnksn7QhRKIJ4GiQlGDHYa", clientKey:"lN3gZKln1LxwysbYoRuJAaSpNmgOEhZllx9PTjDF")
         update()
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)

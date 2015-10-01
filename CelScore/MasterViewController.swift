@@ -8,7 +8,6 @@
 
 import UIKit
 //import ReactiveCocoa
-//import Parse
 
 class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
@@ -113,12 +112,12 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             let token = d as! String
             let isList = token.hasPrefix("#")
             
-            var searchSignal : RACSignal
+            let searchSignal : RACSignal
             if isList {
-                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+               searchSignal = RACSignal()// self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
             } else
             {
-                searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+                searchSignal = RACSignal() //self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
             }
             return searchSignal
         }

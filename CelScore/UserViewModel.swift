@@ -218,7 +218,7 @@ class UserViewModel : NSObject {
                 ratings.isSynced = true
                 realm.addOrUpdateObject(ratings)
             }
-            realm.commitWriteTransaction()
+            //realm.commitWriteTransaction()
             dataset.synchronize()
  
             return nil

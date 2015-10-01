@@ -7,15 +7,13 @@
 //
 
 import Foundation
-//import ReactiveCocoa
-//import Parse
 
 class CelebrityViewModel : NSObject {
     
     //MARK: Properties
     var celebrityId, firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
     var currentScore, previousScore: Double?
-    var ratings: PFObject?
+    var ratings: NSObject?
     var initCelebrityViewModelSignal : RACSignal?
     
     enum rank {
@@ -60,55 +58,55 @@ class CelebrityViewModel : NSObject {
         case Daily = 86400.0
     }
     
-    init(celebrity: PFObject)
+    init(celebrity: NSObject)
     {
         
         super.init()
         
-        initCelebrityViewModelSignal = updateCelebrityViewModelSignal(celebrity: celebrity, frequency: periodSetting.Every_Minute.rawValue)
+        //initCelebrityViewModelSignal = updateCelebrityViewModelSignal(celebrity: celebrity, frequency: periodSetting.Every_Minute.rawValue)
     }
     
     //MARK: Methods
-    func fetchValuesSignal(celebrity: PFObject) -> RACSignal
-    {
-        let signal = RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            celebrity.fetchFromLocalDatastoreInBackgroundWithBlock({ (object: PFObject?, error :NSError?) -> Void in
-                if error == nil
-                {
-                    self.celebrityId = object?.valueForKey("objectId") as? String
-                    self.firstName = object?.valueForKey("firstName") as? String
-                    self.middleName = object?.valueForKey("middleName") as? String
-                    self.lastName = object?.valueForKey("lastName") as? String
-                    self.nickName = object?.valueForKey("nickName") as? String
-                    self.born = object?.valueForKey("born") as? String
-                    self.from = object?.valueForKey("from") as? String
-                    self.netWorth = object?.valueForKey("netWorth") as? String
-                    self.height = object?.valueForKey("height") as? String
-                    self.currentScore = object?.valueForKey("currentScore") as? Double
-                    self.previousScore = object?.valueForKey("previousScore") as? Double
-                    self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
-
-                    subscriber.sendNext(object)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    subscriber.sendError(error)
-                }
-            })
-            return nil
-        })
-        return signal
-    }
+//    func fetchValuesSignal(celebrity: PFObject) -> RACSignal
+//    {
+//        let signal = RACSignal.createSignal({
+//            (subscriber: RACSubscriber!) -> RACDisposable! in
+//            celebrity.fetchFromLocalDatastoreInBackgroundWithBlock({ (object: PFObject?, error :NSError?) -> Void in
+//                if error == nil
+//                {
+//                    self.celebrityId = object?.valueForKey("objectId") as? String
+//                    self.firstName = object?.valueForKey("firstName") as? String
+//                    self.middleName = object?.valueForKey("middleName") as? String
+//                    self.lastName = object?.valueForKey("lastName") as? String
+//                    self.nickName = object?.valueForKey("nickName") as? String
+//                    self.born = object?.valueForKey("born") as? String
+//                    self.from = object?.valueForKey("from") as? String
+//                    self.netWorth = object?.valueForKey("netWorth") as? String
+//                    self.height = object?.valueForKey("height") as? String
+//                    self.currentScore = object?.valueForKey("currentScore") as? Double
+//                    self.previousScore = object?.valueForKey("previousScore") as? Double
+//                    self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
+//
+//                    subscriber.sendNext(object)
+//                    subscriber.sendCompleted()
+//                } else
+//                {
+//                    subscriber.sendError(error)
+//                }
+//            })
+//            return nil
+//        })
+//        return signal
+//    }
     
-    func updateCelebrityViewModelSignal(celebrity celebrity: PFObject, frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler = RACScheduler(priority: RACSchedulerPriorityDefault)
-        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-        
-        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.fetchValuesSignal(celebrity)
-        })
-    }
+//    func updateCelebrityViewModelSignal(celebrity celebrity: PFObject, frequency: NSTimeInterval) -> RACSignal {
+//        let scheduler : RACScheduler = RACScheduler(priority: RACSchedulerPriorityDefault)
+//        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+//        
+//        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
+//            return self.fetchValuesSignal(celebrity)
+//        })
+//    }
     
     
 }

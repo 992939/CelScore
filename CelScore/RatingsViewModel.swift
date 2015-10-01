@@ -16,7 +16,7 @@ class RatingsViewModel: NSObject {
     let celebrityId: String?
     
     //MARK: Initializers
-    init(rating: PFObject, celebrityId: String)
+    init(rating: NSObject, celebrityId: String)
     {
         self.celebrityId = celebrityId
         
@@ -38,7 +38,7 @@ class RatingsViewModel: NSObject {
             realm.beginWriteTransaction()
             self.ratings?.isSynced = false
             realm.addOrUpdateObject(self.ratings!)
-            realm.commitWriteTransaction()
+            //realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
             
             return nil
@@ -57,7 +57,7 @@ class RatingsViewModel: NSObject {
             realm.beginWriteTransaction()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
             _ = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
-            realm.commitWriteTransaction()
+            //realm.commitWriteTransaction()
             RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
             
             return nil
