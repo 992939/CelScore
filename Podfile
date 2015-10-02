@@ -1,6 +1,7 @@
 # Uncomment this line to define a global platform for your project
+use_frameworks!  
 platform :ios, '8.0'
-pod 'ReactiveCocoa', '~> 2.4.7'
+pod 'ReactiveCocoa', '4.0.2-alpha-1'
 pod 'AsyncDisplayKit', '~> 1.2.3'
 pod 'Realm', :git => "https://github.com/realm/realm-cocoa.git", :branch => "master"
 pod 'AWSS3', '~> 2.2'

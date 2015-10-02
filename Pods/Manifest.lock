@@ -26,16 +26,21 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.6.0):
     - FBSDKCoreKit
-  - ReactiveCocoa (2.4.7):
-    - ReactiveCocoa/UI (= 2.4.7)
-  - ReactiveCocoa/Core (2.4.7):
+  - ReactiveCocoa (4.0.2-alpha-1):
+    - ReactiveCocoa/UI (= 4.0.2-alpha-1)
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/Core (4.0.2-alpha-1):
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.4.7)
-  - ReactiveCocoa/UI (2.4.7):
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/no-arc (4.0.2-alpha-1):
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/UI (4.0.2-alpha-1):
     - ReactiveCocoa/Core
+    - Result (~> 0.6-beta.1)
   - Realm (0.95.2):
     - Realm/Headers (= 0.95.2)
   - Realm/Headers (0.95.2)
+  - Result (0.6.0-beta.3)
 
 DEPENDENCIES:
   - AsyncDisplayKit (~> 1.2.3)
@@ -45,7 +50,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.2)
   - FBSDKCoreKit (~> 4.6)
   - FBSDKLoginKit (~> 4.6)
-  - ReactiveCocoa (~> 2.4.7)
+  - ReactiveCocoa (= 4.0.2-alpha-1)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
 
 EXTERNAL SOURCES:
@@ -67,7 +72,8 @@ SPEC CHECKSUMS:
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
   FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
-  ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
+  ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
   Realm: 392c2662f18bd6d77c97a2cc1da1273b13c542c1
+  Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
 
 COCOAPODS: 0.38.2

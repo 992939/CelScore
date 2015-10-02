@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import AWSS3
+import AWSCognito
+import AWSLambda
 
 class UserViewModel : NSObject {
     
