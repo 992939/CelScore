@@ -138,7 +138,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
 
         // Signal to update the celscore of all celebrities
-        var updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
+        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
         updateAllCelebritiesCelScoreSignal
             .subscribeNext({ (object: AnyObject!) -> Void in
                         print("updateAllCelebritiesCelScore subscribe")
@@ -193,8 +193,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        var celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        var ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
+        let celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
         print("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */

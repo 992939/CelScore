@@ -71,7 +71,7 @@ class UserViewModel : NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let transferManager: AWSS3TransferManager = AWSS3TransferManager.defaultS3TransferManager()
-            var downloadRequest: AWSS3TransferManagerDownloadRequest = AWSS3TransferManagerDownloadRequest()
+            let downloadRequest: AWSS3TransferManagerDownloadRequest = AWSS3TransferManagerDownloadRequest()
             downloadRequest.bucket = "celebjson"
             downloadRequest.key = "celebInfo.json"
             
@@ -122,7 +122,7 @@ class UserViewModel : NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             let syncClient = AWSCognito.defaultCognito()
-            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize() //dataset.conflictHandler
             
             print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
@@ -148,7 +148,7 @@ class UserViewModel : NSObject {
     {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
-            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+            _ = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 if error == nil {
                     print("getUserInfoFromFacebookSignal object is \(object)")
                     subscriber.sendNext(object)
@@ -176,7 +176,7 @@ class UserViewModel : NSObject {
             
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
             
-            var logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
+            let logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 if (task.error == nil) {
@@ -194,7 +194,7 @@ class UserViewModel : NSObject {
     }
 
     func updateUserRatingsOnCognitoSignal() -> RACSignal {
-        var notificationToken: RLMNotificationToken?
+        //_ : RLMNotificationToken?
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
@@ -203,7 +203,7 @@ class UserViewModel : NSObject {
             //println("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
-            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
             
             let realm = RLMRealm.defaultRealm()
@@ -212,7 +212,7 @@ class UserViewModel : NSObject {
             for var index: UInt = 0; index < userRatingsArray.count; index++
             {
                 let ratings: RatingsModel = userRatingsArray.objectAtIndex(index) as! RatingsModel
-                var ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
+                let ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
                 dataset.setString(ratingsString, forKey: ratings.id)
                 
                 ratings.isSynced = true
@@ -239,7 +239,7 @@ class UserViewModel : NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let syncClient = AWSCognito.defaultCognito()
-            var dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
             print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
             

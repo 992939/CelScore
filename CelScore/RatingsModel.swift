@@ -26,7 +26,7 @@ class RatingsModel: RLMObject {
         super.init()
     }
     
-    override init(value: AnyObject!) {
+    override init(value: AnyObject) {
         super.init(value: value)
         
         self.rating1 = value.valueForKey("ratingOne") as! Double
