@@ -28,6 +28,7 @@ class CelebrityListViewModel: NSObject {
         super.init()
         
         initializeListSignal(listName: listName)
+            .take(3)
             .observeOn(RACScheduler.mainThreadScheduler())
             .start { event in
                 switch(event) {
