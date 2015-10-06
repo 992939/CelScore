@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import ReactiveCocoa
+import ReactiveCocoa
 
 
 class CelebrityListViewModel: NSObject {
@@ -30,12 +30,19 @@ class CelebrityListViewModel: NSObject {
         super.init()
         
         initializeListSignal(listName: listName)
-            .deliverOn(RACScheduler.mainThreadScheduler())
-            .subscribeNext({ (d:AnyObject!) -> Void in
-            //println("CelebrityListViewModel.initializeListSignal is \(d)")
-            }, error :{ (_) -> Void in
-                print("CelebrityListViewModel.initializeListSignal error")
-        })
+            .observeOn(RACScheduler.mainThreadScheduler())
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("Next: \(value)")
+                case let .Error(error):
+                    print("Error: \(error)")
+                case .Completed:
+                    print("Completed")
+                case .Interrupted:
+                    print("Interrupted")
+                }
+        }
 
 //        if let currentList = list
 //        {
@@ -47,10 +54,10 @@ class CelebrityListViewModel: NSObject {
     }
     
     //MARK: Methods
-    func initializeListSignal(listName listName: String) -> RACSignal {
-        let scheduler = RACScheduler(priority: RACSchedulerPriorityHigh)
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
+    
+    func initializeListSignal(listName listName: String) -> SignalProducer<Int, NSError> {
+        return SignalProducer {
+            sink, _ in
 //            let query = PFQuery(className: "List")
 //            query.fromLocalDatastore()
 //            query.whereKey("name", equalTo: listName)
@@ -59,24 +66,21 @@ class CelebrityListViewModel: NSObject {
 //                self.celebrityList = object.objectForKey("celebrities") as! Array
 //                self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
                 
-                subscriber.sendNext("winning")
-                subscriber.sendCompleted()
+                sendNext(sink, 2)
+                sendCompleted(sink)
             } else
             {
-                subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
+                sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
             }
-            return nil
-        }).subscribeOn(scheduler).deliverOn(RACScheduler.mainThreadScheduler())
+        }.observeOn(QueueScheduler())
     }
     
     
-    func updateListSignal(listName listName: String) -> RACSignal {
-        let signal = RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            //
-            return nil
-        })
-        return signal
+    func updateListSignal(listName listName: String) -> SignalProducer<Int, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+        }
     }
     
 //    func searchForCelebritiesSignal(searchToken searchToken: String) -> RACSignal {
