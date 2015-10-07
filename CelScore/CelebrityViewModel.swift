@@ -104,13 +104,18 @@ class CelebrityViewModel : NSObject {
             }
     }
     
-        func updateCelebrityViewModelSignal(celebrity celebrity: NSObject, frequency: NSTimeInterval) -> RACSignal {
-            let scheduler : RACScheduler = RACScheduler(priority: RACSchedulerPriorityDefault)
-            let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-    
-            return recurringSignal.flattenMap({ (text: AnyObject!) -> SignalProducer<NSObject, NSError>! in
-                return self.getCelebrityFromLocalStoreSignal()
-            })
+        func updateCelebrityViewModelSignal(celebrity celebrity: NSObject, frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
+            scheduler.scheduleAfter(NSDate(), repeatingEvery: 1,withLeeway: 0) { () -> () in
+                print("cheebah cheebah")
+            }
+            
+            return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)
+            
+//            let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+//    
+//            return recurringSignal.flattenMap({ (text: AnyObject!) -> SignalProducer<NSObject, NSError>! in
+//                return self.getCelebrityFromLocalStoreSignal()
+//            })
         }
 }
 
