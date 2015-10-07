@@ -174,16 +174,21 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         node.autoresizesSubviews = true
         var a = 5
 
-        celebrityVM.initCelebrityViewModelSignal!
-            .doNext { (object: AnyObject!) -> Void in
-                a = a + a
-                node.text = "\(celebrityVM.nickName!)" + " \(a)"
-            }
-            .subscribeNext({ (object: AnyObject!) -> Void in
-                },
-                error: { (error: NSError!) -> Void in
-                    print("initCelebrityViewModelSignal error: \(error)")
-            })
+// SAVE FOR NOW
+        
+//        celebrityVM.initCelebrityViewModelSignal!
+//            .doNext { (object: AnyObject!) -> Void in
+//                a = a + a
+//                node.text = "\(celebrityVM.nickName!)" + " \(a)"
+//            }
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    print("initCelebrityViewModelSignal error: \(error)")
+//            })
+        
+        celebrityVM.getCelebrityFromLocalStoreSignal()
+        
        return node
     }
     
