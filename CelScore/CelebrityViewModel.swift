@@ -75,7 +75,6 @@ class CelebrityViewModel : NSObject {
     //MARK: Methods
     func getCelebrityFromLocalStoreSignal() -> SignalProducer<NSObject, NSError>
     {
-        var count = 0
         return SignalProducer {
             sink, _ in
 
@@ -104,18 +103,11 @@ class CelebrityViewModel : NSObject {
             }
     }
     
-        func updateCelebrityViewModelSignal(celebrity celebrity: NSObject, frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
-            scheduler.scheduleAfter(NSDate(), repeatingEvery: 1,withLeeway: 0) { () -> () in
+        func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
+            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5,withLeeway: 0) { () -> () in
                 print("cheebah cheebah")
             }
-            
             return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)
-            
-//            let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-//    
-//            return recurringSignal.flattenMap({ (text: AnyObject!) -> SignalProducer<NSObject, NSError>! in
-//                return self.getCelebrityFromLocalStoreSignal()
-//            })
         }
 }
 
