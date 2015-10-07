@@ -187,7 +187,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //                    print("initCelebrityViewModelSignal error: \(error)")
 //            })
         
-        celebrityVM.getCelebrityFromLocalStoreSignal()
+        celebrityVM.updateCelebrityViewModelSignal(periodSetting.Every_Minute.rawValue)
         
        return node
     }

@@ -104,7 +104,7 @@ class CelebrityViewModel : NSObject {
     }
     
         func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
-            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5,withLeeway: 0) { () -> () in
+            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5, withLeeway: 0) { () -> () in
                 print("cheebah cheebah")
             }
             return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)

@@ -29,7 +29,7 @@ class CelebrityListViewModel: NSObject {
         
         initializeListSignal(listName: listName)
             .take(3)
-            .observeOn(RACScheduler.mainThreadScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in
                 switch(event) {
                 case let .Next(value):
