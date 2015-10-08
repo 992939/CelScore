@@ -8,6 +8,7 @@ pod 'AWSS3', '~> 2.2'
 pod 'AWSCognito', '~> 2.2'
 pod 'AWSCore', '~> 2.2'
 pod 'AWSLambda', '~> 2.2'
+pod 'AWSAPIGateway', '~> 2.2'
 pod 'FBSDKLoginKit', '~> 4.6'
 pod 'FBSDKCoreKit', '~> 4.6'
 

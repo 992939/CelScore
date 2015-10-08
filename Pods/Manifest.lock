@@ -2,6 +2,8 @@ PODS:
   - AsyncDisplayKit (1.2.3):
     - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.3)
   - AsyncDisplayKit/ASDealloc2MainObject (1.2.3)
+  - AWSAPIGateway (2.2.1):
+    - AWSCore (= 2.2.1)
   - AWSCognito (2.2.1):
     - AWSCore (= 2.2.1)
   - AWSCore (2.2.1)
@@ -44,6 +46,7 @@ PODS:
 
 DEPENDENCIES:
   - AsyncDisplayKit (~> 1.2.3)
+  - AWSAPIGateway (~> 2.2)
   - AWSCognito (~> 2.2)
   - AWSCore (~> 2.2)
   - AWSLambda (~> 2.2)
@@ -65,6 +68,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
+  AWSAPIGateway: d0b1194a788d93d48caae840c7d496c38fa7775b
   AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
   AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
   AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
