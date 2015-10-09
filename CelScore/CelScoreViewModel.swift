@@ -11,6 +11,7 @@ import Foundation
 class CelScoreViewModel: NSObject {
     
     //MARK: Properties
+    let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     dynamic var displayedCelebrityListVM : CelebrityListViewModel
     dynamic var searchedCelebrityListVM : CelebrityListViewModel
 
@@ -44,6 +45,31 @@ class CelScoreViewModel: NSObject {
 //            return nil
 //        })
 //    }
+    
+    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> SignalProducer<Int, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            
+            if 2 == 4
+            {
+                //                self.celebrityList = object.objectForKey("celebrities") as! Array
+                //                self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
+                
+                sendNext(sink, 2)
+                sendCompleted(sink)
+            } else
+            {
+                sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
+            }
+            }.observeOn(QueueScheduler())
+    }
+
     
     func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> RACSignal {
         let signal = RACSignal.createSignal({

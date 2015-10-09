@@ -10,3 +10,4 @@
 #import <AWSS3/AWSS3.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "CSCelScoreAPIClient.h"
