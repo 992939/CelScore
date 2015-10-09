@@ -54,7 +54,7 @@ class CelScoreViewModel: NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            _ = CSCelScoreAPIClient.defaultClient()
             
             if 2 == 4
             {
