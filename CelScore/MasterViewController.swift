@@ -75,13 +75,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         
-        userVM.getCelebInfoLambdaSignal()
-            .subscribeNext({ (object: AnyObject!) -> Void in
-                print("getCelebInfoLambdaSignal success")
-                },
-                error: { (error: NSError!) -> Void in
-                    print("getCelebInfoLambdaSignal error: \(error)")
-            })
+//        userVM.getCelebInfoLambdaSignal()
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                print("getCelebInfoLambdaSignal success")
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    print("getCelebInfoLambdaSignal error: \(error)")
+//            })
         
 //        userVM.getCelebRatingsLambdaSignal()
 //            .subscribeNext({ (object: AnyObject!) -> Void in
@@ -141,13 +141,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
 
         // Signal to update the celscore of all celebrities
-        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
-        updateAllCelebritiesCelScoreSignal
-            .subscribeNext({ (object: AnyObject!) -> Void in
-                        print("updateAllCelebritiesCelScore subscribe")
-                        }, error: { (_) -> Void in
-                            print("updateAllCelebritiesCelScore error")
-        })
+//        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
+//        updateAllCelebritiesCelScoreSignal
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                        print("updateAllCelebritiesCelScore subscribe")
+//                        }, error: { (_) -> Void in
+//                            print("updateAllCelebritiesCelScore error")
+//        })
     }
     
 

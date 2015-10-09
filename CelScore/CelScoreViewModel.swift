@@ -46,7 +46,7 @@ class CelScoreViewModel: NSObject {
 //        })
 //    }
     
-    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> SignalProducer<Int, NSError> {
+    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> SignalProducer<AWSTask, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -54,53 +54,28 @@ class CelScoreViewModel: NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
-            _ = CSCelScoreAPIClient.defaultClient()
-            
-            if 2 == 4
-            {
-                //                self.celebrityList = object.objectForKey("celebrities") as! Array
-                //                self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
-                
-                sendNext(sink, 2)
-                sendCompleted(sink)
-            } else
-            {
-                sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
-            }
-            }.observeOn(QueueScheduler())
+            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                if task.error == nil {
+                    print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    sendNext(sink, task)
+                    sendCompleted(sink)
+                } else {
+                    print("updateLocalDataStoreSignal error is \(task.error)")
+                    sendError(sink, task.error)
+                }
+                return task
+            })
+            }.observeOn(QueueScheduler.mainQueueScheduler)
     }
 
-    
-    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> RACSignal {
-        let signal = RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-//            var query = PFQuery(className: classTypeName)
-//            
-//            if classTypeName == "Celebrity" {
-//                query.orderByAscending("currentScore")
-//                query.includeKey("celebrity_ratings")
-//            }
-//
-//            query.findObjectsInBackgroundWithBlock({ (text: [AnyObject]?, error: NSError?) -> Void in
-//                if error == nil {
-//                    subscriber.sendNext(text)
-//                    subscriber.sendCompleted()
-//                } else
-//                {
-//                    subscriber.sendError(error)
-//                }
-            //})
-            return nil
-        })
-        return signal
-    }
     
     func recurringUpdateDataStoreSignal(classTypeName classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
         let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
         let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateLocalDataStoreSignal(classTypeName: classTypeName)
+            return RACSignal() //self.updateLocalDataStoreSignal(classTypeName: classTypeName)
             })
     }
     

@@ -47,6 +47,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let celscoreVM = CelScoreViewModel()
         
+        celscoreVM.updateLocalDataStoreSignal(classTypeName: "Celebrity")
+            .take(3)
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("updateLocalDataStoreSignal Next: \(value)")
+                case let .Error(error):
+                    print("updateLocalDataStoreSignal Error: \(error)")
+                case .Completed:
+                    print("updateLocalDataStoreSignal Completed")
+                case .Interrupted:
+                    print("updateLocalDataStoreSignal Interrupted")
+                }
+        }
+        
         /* Daily updates of the LocalDataStore with Celebrity Info */
 //                let updateLocalDataStoreWithCelebrityInfoSignal : RACSignal = RACSignal.defer { () -> RACSignal! in
 //                    return celscoreVM.recurringUpdateDataStoreSignal(classTypeName: "Celebrity", frequency: CelScoreViewModel.periodSetting.Every_Minute.rawValue)
