@@ -58,6 +58,15 @@ class CelScoreViewModel: NSObject {
             serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 if task.error == nil {
                     //print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    
+//                    let realm = RLMRealm.defaultRealm()
+//                    realm.beginWriteTransaction()
+//                    celebrity.isSynced = false
+//                    
+//                    
+//                    realm.addOrUpdateObject(celebrity)
+//                    realm.commitWriteTransaction()
+                    
                     sendNext(sink, task)
                     sendCompleted(sink)
                 } else {

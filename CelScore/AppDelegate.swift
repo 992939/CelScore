@@ -49,11 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         celscoreVM.updateLocalDataStoreSignal(classTypeName: "Celebrity")
             .take(2)
-            .observeOn(QueueScheduler())
+            .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in
                 switch(event) {
                 case let .Next(value):
                     print("updateLocalDataStoreSignal Next: \(value)")
+                    
                 case let .Error(error):
                     print("updateLocalDataStoreSignal Error: \(error)")
                 case .Completed:

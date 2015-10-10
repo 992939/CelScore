@@ -11,6 +11,7 @@ pod 'AWSLambda', '~> 2.2'
 pod 'AWSAPIGateway', '~> 2.2'
 pod 'FBSDKLoginKit', '~> 4.6'
 pod 'FBSDKCoreKit', '~> 4.6'
+pod 'SwiftyJSON', '~> 2.3'
 
 target 'CelScore' do
 
