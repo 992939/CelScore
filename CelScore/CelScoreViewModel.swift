@@ -57,16 +57,16 @@ class CelScoreViewModel: NSObject {
             let serviceClient = CSCelScoreAPIClient.defaultClient()
             serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 if task.error == nil {
-                    print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
+                    //print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
                     sendNext(sink, task)
                     sendCompleted(sink)
                 } else {
-                    print("updateLocalDataStoreSignal error is \(task.error)")
+                    //print("updateLocalDataStoreSignal error is \(task.error)")
                     sendError(sink, task.error)
                 }
                 return task
             })
-            }.observeOn(QueueScheduler.mainQueueScheduler)
+            }
     }
 
     

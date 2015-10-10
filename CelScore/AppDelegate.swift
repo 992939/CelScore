@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        update()
+        let celscoreVM = update()
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
-        window.rootViewController = MasterViewController(viewModel: self.update())
+        window.rootViewController = MasterViewController(viewModel: celscoreVM)
         window.makeKeyAndVisible()
         self.window = window
         return true
@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let celscoreVM = CelScoreViewModel()
         
         celscoreVM.updateLocalDataStoreSignal(classTypeName: "Celebrity")
-            .take(3)
-            .observeOn(QueueScheduler.mainQueueScheduler)
+            //.take(3)
+            //.observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in
                 switch(event) {
                 case let .Next(value):
