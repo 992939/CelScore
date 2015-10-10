@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let celscoreVM = CelScoreViewModel()
         
         celscoreVM.updateLocalDataStoreSignal(classTypeName: "Celebrity")
-            //.take(3)
-            //.observeOn(QueueScheduler.mainQueueScheduler)
+            .take(2)
+            .observeOn(QueueScheduler())
             .start { event in
                 switch(event) {
                 case let .Next(value):
