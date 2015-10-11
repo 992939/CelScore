@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class CelScoreViewModel: NSObject {
     
@@ -46,7 +47,7 @@ class CelScoreViewModel: NSObject {
 //        })
 //    }
     
-    func updateLocalDataStoreSignal(classTypeName classTypeName: String) -> SignalProducer<AWSTask, NSError> {
+    func getCelebsFromAWSSignal(classTypeName classTypeName: String) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -59,6 +60,8 @@ class CelScoreViewModel: NSObject {
                 if task.error == nil {
                     //print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
                     
+                    //print("WHAT IS \(task.result.)")
+                    
 //                    let realm = RLMRealm.defaultRealm()
 //                    realm.beginWriteTransaction()
 //                    celebrity.isSynced = false
@@ -67,7 +70,11 @@ class CelScoreViewModel: NSObject {
 //                    realm.addOrUpdateObject(celebrity)
 //                    realm.commitWriteTransaction()
                     
-                    sendNext(sink, task)
+                    //let json = JSON(data:)
+                    let myData = task.result as! String
+                    let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                    print(json["Items"][0])
+                    sendNext(sink, task.result)
                     sendCompleted(sink)
                 } else {
                     //print("updateLocalDataStoreSignal error is \(task.error)")

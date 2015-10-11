@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,20 +48,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let celscoreVM = CelScoreViewModel()
         
-        celscoreVM.updateLocalDataStoreSignal(classTypeName: "Celebrity")
+        celscoreVM.getCelebsFromAWSSignal(classTypeName: "Celebrity")
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("updateLocalDataStoreSignal Next: \(value)")
+                    //print("SAY WHAT: \(value.results)")
+                    let task = value
+//                    if let celebs : NSData = task.result.results {
+//                        let json = JSON(data:celebs)
+//                        print("YES")
+//                    }
                     
                 case let .Error(error):
-                    print("updateLocalDataStoreSignal Error: \(error)")
+                    print("getCelebsFromAWSSignal Error: \(error)")
                 case .Completed:
-                    print("updateLocalDataStoreSignal Completed")
+                    print("getCelebsFromAWSSignal Completed")
                 case .Interrupted:
-                    print("updateLocalDataStoreSignal Interrupted")
+                    print("getCelebsFromAWSSignal Interrupted")
                 }
         }
         
