@@ -54,13 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    //print("SAY WHAT: \(value.results)")
-                    let task = value
-//                    if let celebs : NSData = task.result.results {
-//                        let json = JSON(data:celebs)
-//                        print("YES")
-//                    }
-                    
+                    print("getCelebsFromAWSSignal Next: \(value)")
                 case let .Error(error):
                     print("getCelebsFromAWSSignal Error: \(error)")
                 case .Completed:
