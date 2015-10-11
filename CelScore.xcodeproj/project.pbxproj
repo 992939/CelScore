@@ -11,6 +11,7 @@
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
+		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; settings = {ASSET_TAGS = (); }; };
 		00AA9BAE1BB4AF1500A809C1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */; settings = {ASSET_TAGS = (); }; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */; settings = {ASSET_TAGS = (); }; };
@@ -45,6 +46,7 @@
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
+		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00B6F02D1BC79B6E000DA1C6 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				00B404291B4A465200B7627E /* RatingsModel.swift */,
+				0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
 				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
