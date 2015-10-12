@@ -12,7 +12,6 @@ class RatingsViewModel: NSObject {
     
     //MARK: Properties
     var ratings : RatingsModel?
-    var notificationToken: RLMNotificationToken?
     let celebrityId: String?
     
     //MARK: Initializers
@@ -31,16 +30,10 @@ class RatingsViewModel: NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let realm = RLMRealm.defaultRealm()
-            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
-                print("REALM NOTIFICATION \(text)")
-            })
-            
             realm.beginWriteTransaction()
             self.ratings?.isSynced = false
             realm.addOrUpdateObject(self.ratings!)
-            //realm.commitWriteTransaction()
-            RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
-            
+            try! realm.commitWriteTransaction()
             return nil
         })
     }
@@ -50,16 +43,10 @@ class RatingsViewModel: NSObject {
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
             let realm = RLMRealm.defaultRealm()
-            self.notificationToken = RLMRealm.defaultRealm().addNotificationBlock({ (text: String, realm) -> Void in
-                print("REALM NOTIFICATION \(text)")
-            })
-            
             realm.beginWriteTransaction()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
             _ = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
-            //realm.commitWriteTransaction()
-            RLMRealm.defaultRealm().removeNotification(self.notificationToken!)
-            
+            try! realm.commitWriteTransaction()
             return nil
         })
     }
