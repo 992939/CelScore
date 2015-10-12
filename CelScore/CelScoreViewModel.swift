@@ -62,17 +62,16 @@ class CelScoreViewModel: NSObject {
 
                     let myData = task.result as! String
                     let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                    json["Items"].arrayValue.map({ celeb -> JSON in
-                            let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
-                            print(celebrity)
-                            return celeb
+                    json["Items"].arrayValue.forEach({ celeb in
+                        let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
+                        print(celebrity)
+                        
+                        let realm = RLMRealm.defaultRealm()
+                        realm.beginWriteTransaction()
+                        celebrity.isSynced = true
+                        realm.addOrUpdateObject(celebrity)
+                        try! realm.commitWriteTransaction()
                     })
-                    
-                    //                    let realm = RLMRealm.defaultRealm()
-                    //                    realm.beginWriteTransaction()
-                    //                    celebrity.isSynced = false
-                    //                    realm.addOrUpdateObject(celebrity)
-                    //                    realm.commitWriteTransaction()
                     
                     sendNext(sink, task.result)
                     sendCompleted(sink)
