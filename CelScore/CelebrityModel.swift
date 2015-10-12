@@ -35,7 +35,7 @@ class CelebrityModel: RLMObject {
         self.firstName = value.valueForKey("firstName") as! String
         self.lastName = value.valueForKey("lastName") as! String
         self.middleName = value.valueForKey("middleName") as! String
-        self.nickName = value.valueForKey("nickName") as! String
+        self.nickName = value.valueForKey("nickname") as! String
         self.netWorth = value.valueForKey("netWorth") as! String
         self.status = value.valueForKey("status") as! String
         self.twitter = value.valueForKey("twitter") as! String

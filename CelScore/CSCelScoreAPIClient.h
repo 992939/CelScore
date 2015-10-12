@@ -179,4 +179,20 @@
  */
 - (AWSTask *)celebinfoscanservicePost;
 
+/**
+ 
+ 
+ 
+ return type: CSEmpty *
+ */
+- (AWSTask *)celeblistsserviceGet;
+
+/**
+ 
+ 
+ 
+ return type: CSEmpty *
+ */
+- (AWSTask *)celeblistsservicePost;
+
 @end
