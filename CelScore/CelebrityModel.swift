@@ -31,6 +31,7 @@ class CelebrityModel: RLMObject {
     override init(value: AnyObject) {
         super.init(value: value)
         
+        self.id = value.valueForKey("celebrityID") as! String
         self.birthdate = value.valueForKey("birthdate") as! String
         self.firstName = value.valueForKey("firstName") as! String
         self.lastName = value.valueForKey("lastName") as! String
