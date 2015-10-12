@@ -62,15 +62,11 @@ class CelScoreViewModel: NSObject {
 
                     let myData = task.result as! String
                     let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                    let celebArray = json["Items"].arrayValue
-                        .map({ celeb -> JSON in
-
+                    json["Items"].arrayValue.map({ celeb -> JSON in
                             let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
                             print(celebrity)
                             return celeb
                     })
-                    
-                    print(celebArray.first)
                     
                     //                    let realm = RLMRealm.defaultRealm()
                     //                    realm.beginWriteTransaction()
