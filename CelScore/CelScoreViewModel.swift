@@ -85,6 +85,84 @@ class CelScoreViewModel: NSObject {
             })
         }
     }
+    
+    func getCelebRatingsFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            serviceClient.celebratingservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                guard task.cancelled == false else {
+                    sendInterrupted(sink)
+                    return task
+                }
+                
+                let myData = task.result as! String
+                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                json["Items"].arrayValue.forEach({ celebRatings in
+                    let ratings = RatingsModel(value: celebRatings.dictionaryObject!)
+                    print(ratings)
+                    
+                    let realm = RLMRealm.defaultRealm()
+                    realm.beginWriteTransaction()
+                    ratings.isSynced = true
+                    realm.addOrUpdateObject(ratings)
+                    try! realm.commitWriteTransaction()
+                })
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
+        }
+    }
+    
+    func getCelebListsFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            serviceClient.celeblistsservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                guard task.cancelled == false else {
+                    sendInterrupted(sink)
+                    return task
+                }
+                
+                let myData = task.result as! String
+                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                json["Items"].arrayValue.forEach({ celeb in
+                    let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
+                    print(celebrity)
+                    
+                    let realm = RLMRealm.defaultRealm()
+                    realm.beginWriteTransaction()
+                    celebrity.isSynced = true
+                    realm.addOrUpdateObject(celebrity)
+                    try! realm.commitWriteTransaction()
+                })
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
+        }
+    }
 
     
     func recurringUpdateDataStoreSignal(classTypeName classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
