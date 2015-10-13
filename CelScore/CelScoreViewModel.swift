@@ -47,7 +47,7 @@ class CelScoreViewModel: NSObject {
 //        })
 //    }
     
-    func getCelebsFromAWSSignal(classTypeName classTypeName: String) -> SignalProducer<AnyObject!, NSError> {
+    func getCelebsInfoFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -84,28 +84,6 @@ class CelScoreViewModel: NSObject {
                 return task
             })
         }
-//            serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-//                guard task.error == nil else { sendError(sink, task.error) }
-//
-//                    let myData = task.result as! String
-//                    let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-//                    json["Items"].arrayValue.forEach({ celeb in
-//                        let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
-//                        print(celebrity)
-//                        
-//                        let realm = RLMRealm.defaultRealm()
-//                        realm.beginWriteTransaction()
-//                        celebrity.isSynced = true
-//                        realm.addOrUpdateObject(celebrity)
-//                        try! realm.commitWriteTransaction()
-//                    })
-//                    
-//                    sendNext(sink, task.result)
-//                    sendCompleted(sink)
-//                }
-//                return task
-//            })
-//            }
     }
 
     
