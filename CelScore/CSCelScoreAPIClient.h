@@ -195,4 +195,20 @@
  */
 - (AWSTask *)celeblistsservicePost;
 
+/**
+ 
+ 
+ 
+ return type: CSEmpty *
+ */
+- (AWSTask *)celebratingserviceGet;
+
+/**
+ 
+ 
+ 
+ return type: CSEmpty *
+ */
+- (AWSTask *)celebratingservicePost;
+
 @end
