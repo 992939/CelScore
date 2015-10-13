@@ -57,30 +57,55 @@ class CelScoreViewModel: NSObject {
             
             let serviceClient = CSCelScoreAPIClient.defaultClient()
             serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                if task.error == nil {
-                    //print("updateLocalDataStoreSignal object is \(task.result) and is canceled \(task.cancelled)")
-
-                    let myData = task.result as! String
-                    let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                    json["Items"].arrayValue.forEach({ celeb in
-                        let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
-                        print(celebrity)
-                        
-                        let realm = RLMRealm.defaultRealm()
-                        realm.beginWriteTransaction()
-                        celebrity.isSynced = true
-                        realm.addOrUpdateObject(celebrity)
-                        try! realm.commitWriteTransaction()
-                    })
-                    
-                    sendNext(sink, task.result)
-                    sendCompleted(sink)
-                } else {
+                guard task.error == nil else {
                     sendError(sink, task.error)
+                    return task
                 }
+                guard task.cancelled == false else {
+                    sendInterrupted(sink)
+                    return task
+                }
+                
+                let myData = task.result as! String
+                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                json["Items"].arrayValue.forEach({ celeb in
+                    let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
+                    print(celebrity)
+                    
+                    let realm = RLMRealm.defaultRealm()
+                    realm.beginWriteTransaction()
+                    celebrity.isSynced = true
+                    realm.addOrUpdateObject(celebrity)
+                    try! realm.commitWriteTransaction()
+                })
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
                 return task
             })
-            }
+        }
+//            serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+//                guard task.error == nil else { sendError(sink, task.error) }
+//
+//                    let myData = task.result as! String
+//                    let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+//                    json["Items"].arrayValue.forEach({ celeb in
+//                        let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
+//                        print(celebrity)
+//                        
+//                        let realm = RLMRealm.defaultRealm()
+//                        realm.beginWriteTransaction()
+//                        celebrity.isSynced = true
+//                        realm.addOrUpdateObject(celebrity)
+//                        try! realm.commitWriteTransaction()
+//                    })
+//                    
+//                    sendNext(sink, task.result)
+//                    sendCompleted(sink)
+//                }
+//                return task
+//            })
+//            }
     }
 
     
