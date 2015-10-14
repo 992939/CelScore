@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 class CelScoreViewModel: NSObject {
     
@@ -69,14 +70,14 @@ class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celeb in
-                    let celebrity = CelebrityModel(value: celeb.dictionaryObject!)
+                    let celebrity = CelebrityModel() //CelebrityModel(value: celeb.dictionaryObject!)
                     print(celebrity)
                     
-                    let realm = RLMRealm.defaultRealm()
-                    realm.beginWriteTransaction()
+                    let realm = try! Realm()
+                    realm.beginWrite()
                     celebrity.isSynced = true
-                    realm.addOrUpdateObject(celebrity)
-                    try! realm.commitWriteTransaction()
+                    realm.add(celebrity)
+                    try! realm.commitWrite()
                 })
                 
                 sendNext(sink, task.result)

@@ -39,11 +39,11 @@ PODS:
   - ReactiveCocoa/UI (4.0.2-alpha-1):
     - ReactiveCocoa/Core
     - Result (~> 0.6-beta.1)
-  - Realm (0.96.0-beta2):
-    - Realm/Headers (= 0.96.0-beta2)
-  - Realm/Headers (0.96.0-beta2)
-  - RealmSwift (0.96.0-beta2):
-    - Realm (= 0.96.0-beta2)
+  - Realm (0.95.3):
+    - Realm/Headers (= 0.95.3)
+  - Realm/Headers (0.95.3)
+  - RealmSwift (0.95.3):
+    - Realm (= 0.95.3)
   - Result (0.6.0-beta.3)
   - SwiftyJSON (2.3.0)
 
@@ -57,8 +57,23 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.6)
   - FBSDKLoginKit (~> 4.6)
   - ReactiveCocoa (= 4.0.2-alpha-1)
-  - RealmSwift (= 0.96.0-beta2)
+  - Realm (from `git@github.com:realm/realm-cocoa.git`)
+  - RealmSwift (from `git@github.com:realm/realm-cocoa.git`)
   - SwiftyJSON (~> 2.3)
+
+EXTERNAL SOURCES:
+  Realm:
+    :git: git@github.com:realm/realm-cocoa.git
+  RealmSwift:
+    :git: git@github.com:realm/realm-cocoa.git
+
+CHECKOUT OPTIONS:
+  Realm:
+    :commit: 002d71ea3c889342df772748ce21da1618bf0d0a
+    :git: git@github.com:realm/realm-cocoa.git
+  RealmSwift:
+    :commit: 002d71ea3c889342df772748ce21da1618bf0d0a
+    :git: git@github.com:realm/realm-cocoa.git
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
@@ -71,8 +86,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
   FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
   ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
-  Realm: a2154baf6fec1f12ded753f38081c775e9f06adf
-  RealmSwift: 00fc6388033f0dd4d27fb1ec2198614fcfc55ed2
+  Realm: 2cd1534b5f9e849900b26396295df08a46b43c8c
+  RealmSwift: 9b8714a96fff2e3373ecf2376af2c0ae4ab6dc3c
   Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
 
