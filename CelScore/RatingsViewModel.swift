@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class RatingsViewModel: NSObject {
     
@@ -21,7 +22,7 @@ class RatingsViewModel: NSObject {
         
         super.init()
         
-        ratings = RatingsModel(value: rating)
+        ratings = RatingsModel()
         ratings!.id = celebrityId
     }
     
@@ -29,11 +30,11 @@ class RatingsViewModel: NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
-            let realm = RLMRealm.defaultRealm()
-            realm.beginWriteTransaction()
+            let realm = try! Realm()
+            realm.beginWrite()
             self.ratings?.isSynced = false
-            realm.addOrUpdateObject(self.ratings!)
-            try! realm.commitWriteTransaction()
+            realm.add(self.ratings!)
+            try! realm.commitWrite()
             return nil
         })
     }
@@ -42,11 +43,11 @@ class RatingsViewModel: NSObject {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             
-            let realm = RLMRealm.defaultRealm()
-            realm.beginWriteTransaction()
+            let realm = try! Realm()
+            realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", self.celebrityId!)
-            _ = RatingsModel.objectsInRealm(realm, withPredicate: predicate).objectAtIndex(0) as! RatingsModel
-            try! realm.commitWriteTransaction()
+            _ = realm.objects(RatingsModel).filter(predicate)
+            try! realm.commitWrite()
             return nil
         })
     }

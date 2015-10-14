@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func update () -> CelScoreViewModel
     {
         let celscoreVM = CelScoreViewModel()
+        
+//        let celeb = CelebrityModel()
+//        celeb.firstName = "Ross"
         
         celscoreVM.getCelebsInfoFromAWSSignal()
             .take(2)

@@ -71,6 +71,7 @@ class CelScoreViewModel: NSObject {
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celeb in
                     let celebrity = CelebrityModel() //CelebrityModel(value: celeb.dictionaryObject!)
+                    celebrity.firstName = "Ross"
                     print(celebrity)
                     
                     let realm = try! Realm()
@@ -109,14 +110,14 @@ class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celebRatings in
-                    let ratings = RatingsModel(value: celebRatings.dictionaryObject!)
+                    let ratings = RatingsModel()
                     print(ratings)
                     
-                    let realm = RLMRealm.defaultRealm()
-                    realm.beginWriteTransaction()
+                    let realm = try! Realm()
+                    realm.beginWrite()
                     ratings.isSynced = true
-                    realm.addOrUpdateObject(ratings)
-                    try! realm.commitWriteTransaction()
+                    realm.add(ratings)
+                    try! realm.commitWrite()
                 })
                 
                 sendNext(sink, task.result)
@@ -148,14 +149,14 @@ class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ list in
-                    let celebList = ListsModel(value: list.dictionaryObject!)
+                    let celebList = ListsModel()
                     print(celebList)
                     
-                    let realm = RLMRealm.defaultRealm()
-                    realm.beginWriteTransaction()
+                    let realm = try! Realm()
+                    realm.beginWrite()
                     celebList.isSynced = true
-                    realm.addOrUpdateObject(celebList)
-                    try! realm.commitWriteTransaction()
+                    realm.add(celebList)
+                    try! realm.commitWrite()
                 })
                 
                 sendNext(sink, task.result)

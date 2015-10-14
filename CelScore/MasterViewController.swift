@@ -203,7 +203,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
-        print("ROW \(ratings.ratings!.description)")
+        //print("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
         ratings.updateUserRatingsInRealmSignal()
@@ -258,8 +258,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                 .subscribeNext({ (object: AnyObject!) -> Void in
                     print("loginCognitoSignal success")
                     
-                    let userRatingsArray = RatingsModel.allObjects()
-                    if userRatingsArray.count > 0
+                    //let userRatingsArray = RatingsModel.
+                    if 4 ==  4 //userRatingsArray.count > 0
                     {
                         //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
                         self.userVM.updateUserRatingsOnCognitoSignal()

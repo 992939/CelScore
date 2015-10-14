@@ -10,6 +10,7 @@ import Foundation
 import AWSS3
 import AWSCognito
 import AWSLambda
+import RealmSwift
 
 class UserViewModel : NSObject {
     
@@ -200,26 +201,27 @@ class UserViewModel : NSObject {
         //_ : RLMNotificationToken?
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
+            let realm = try! Realm()
             
             let predicate = NSPredicate(format: "isSynced = false")
-            let userRatingsArray = RatingsModel.objectsWithPredicate(predicate)
+            let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
             //println("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
             
-            let realm = RLMRealm.defaultRealm()
-            realm.beginWriteTransaction()
             
-            for var index: UInt = 0; index < userRatingsArray.count; index++
+            realm.beginWrite()
+            
+            for var index: UInt = 0; index < 10; index++ //userRatingsArray.count; index++
             {
-                let ratings: RatingsModel = userRatingsArray.objectAtIndex(index) as! RatingsModel
+                let ratings: RatingsModel = userRatingsArray.first!
                 let ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
                 dataset.setString(ratingsString, forKey: ratings.id)
                 
                 ratings.isSynced = true
-                realm.addOrUpdateObject(ratings)
+                realm.add(ratings)
             }
             //realm.commitWriteTransaction()
             dataset.synchronize()

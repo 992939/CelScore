@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class CelebrityModel: Object {
+public class CelebrityModel: Object {
     dynamic var id = ""
     dynamic var birthdate : String = ""
     dynamic var firstName : String = ""
@@ -25,7 +25,7 @@ class CelebrityModel: Object {
     dynamic var sex : Bool = false
     dynamic var isSynced: Bool = false
     
-    override class func primaryKey() -> String {
+    override public class func primaryKey() -> String {
         return "id"
     }
 }
