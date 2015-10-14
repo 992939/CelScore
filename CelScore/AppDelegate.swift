@@ -49,9 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let celscoreVM = CelScoreViewModel()
         
-//        let celeb = CelebrityModel()
-//        celeb.firstName = "Ross"
-        
         celscoreVM.getCelebsInfoFromAWSSignal()
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
