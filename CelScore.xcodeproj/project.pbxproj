@@ -25,7 +25,7 @@
 		00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */; };
 		00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DD1B3539480078CA6E /* MasterViewController.swift */; };
 		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
-		4E3678CD6B99D4407B061581 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C85D2008FC2F053995BEFFD /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4E3678CD6B99D4407B061581 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C85D2008FC2F053995BEFFD /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
