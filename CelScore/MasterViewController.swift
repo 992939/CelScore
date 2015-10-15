@@ -167,7 +167,8 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         //4. AVOID BLENDING AS IT MAKES RENDERING SLOW: RUN APP IN SIMULATOR, THEN DEBUG AND PICK ITEM "COLOR BLENDED LAYERS
         
-        let celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrity: NSObject())
+        //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         let node = ASTextCellNode()
         node.text = "Celebrity"
@@ -197,11 +198,12 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.celscoreVM.displayedCelebrityListVM.celebrityList.count
+        return self.celscoreVM.displayedCelebrityListVM.celebrityList.celebList.count
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let celebrityVM : CelebrityViewModel = self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
+        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrity: NSObject())
+        //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
         //print("ROW \(ratings.ratings!.description)")
         
