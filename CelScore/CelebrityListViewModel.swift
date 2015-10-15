@@ -11,7 +11,7 @@ import ReactiveCocoa
 import RealmSwift
 
 enum ListError : ErrorType {
-    case NotFound
+    case SearchTokenTooShort
     case Empty
 }
 
@@ -26,7 +26,8 @@ class CelebrityListViewModel: NSObject {
     init(searchToken: String) {
         super.init()
         
-        searchForCelebritiesSignal(searchToken: searchToken)
+        //searchForCelebritiesSignal(searchToken: searchToken)
+        searchForListsSignal(searchToken: "hip")
             .take(2)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in
@@ -89,8 +90,6 @@ class CelebrityListViewModel: NSObject {
             
             let realm = try! Realm()
             
-            let all = realm.objects(CelebrityModel)
-            print(all)
             let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             let list = realm.objects(CelebrityModel).filter(predicate)
             
