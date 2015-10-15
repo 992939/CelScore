@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
+import ReactiveCocoa
+
+enum CelebrityError : ErrorType {
+    case NoFound
+}
 
 class CelebrityViewModel : NSObject {
     
@@ -58,44 +64,45 @@ class CelebrityViewModel : NSObject {
         case Daily = 86400.0
     }
     
-    init(celebrity: NSObject)
+    init(celebrityId: String)
     {
         super.init()
         
-        celebrityId = "00001" // celebrity
-        
-        getCelebrityFromLocalStoreSignal()
+        getCelebrityWithIdFromLocalStoreSignal(celebId: celebrityId)
     }
     
     //MARK: Methods
-    func getCelebrityFromLocalStoreSignal() -> SignalProducer<NSObject, NSError>
+    func getCelebrityWithIdFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<AnyObject!, CelebrityError>
     {
         return SignalProducer {
             sink, _ in
-
-            //celebrity.fetchFromLocalDatastoreInBackgroundWithBlock({ (object: NSObject?, error :NSError?) -> Void in
-                if 4 == 4
-                {
-//                    self.celebrityId = object?.valueForKey("objectId") as? String
-//                    self.firstName = object?.valueForKey("firstName") as? String
-//                    self.middleName = object?.valueForKey("middleName") as? String
-//                    self.lastName = object?.valueForKey("lastName") as? String
-//                    self.nickName = object?.valueForKey("nickName") as? String
-//                    self.born = object?.valueForKey("born") as? String
-//                    self.from = object?.valueForKey("from") as? String
-//                    self.netWorth = object?.valueForKey("netWorth") as? String
-//                    self.height = object?.valueForKey("height") as? String
-//                    self.currentScore = object?.valueForKey("currentScore") as? Double
-//                    self.previousScore = object?.valueForKey("previousScore") as? Double
-//                    self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
-
-                    //sendNext(sink, "success")
-                    //sendCompleted(sink)
-                } else
-                {
-                    sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
-                }
+            
+            let realm = try! Realm()
+            
+            let predicate = NSPredicate(format: "id = %@", celebId)
+            let list = realm.objects(CelebrityModel).filter(predicate).first
+            
+            guard let celebList = list else {
+                sendError(sink, CelebrityError.NoFound)
+                return
             }
+            
+//            self.celebrityId = object?.valueForKey("objectId") as? String
+//            self.firstName = object?.valueForKey("firstName") as? String
+//            self.middleName = object?.valueForKey("middleName") as? String
+//            self.lastName = object?.valueForKey("lastName") as? String
+//            self.nickName = object?.valueForKey("nickName") as? String
+//            self.born = object?.valueForKey("born") as? String
+//            self.from = object?.valueForKey("from") as? String
+//            self.netWorth = object?.valueForKey("netWorth") as? String
+//            self.height = object?.valueForKey("height") as? String
+//            self.currentScore = object?.valueForKey("currentScore") as? Double
+//            self.previousScore = object?.valueForKey("previousScore") as? Double
+//            self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
+            
+            sendNext(sink, celebList)
+            sendCompleted(sink)
+        }
     }
     
 //        func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {

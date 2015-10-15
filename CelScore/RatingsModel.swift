@@ -27,4 +27,12 @@ public class RatingsModel: Object {
     override public class func primaryKey() -> String {
         return "id"
     }
+    
+    override public init(value: AnyObject) {
+        super.init(value: value)
+    }
+
+    required public init() {
+        fatalError("init() has not been implemented")
+    }
 }
