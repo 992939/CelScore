@@ -93,7 +93,7 @@ class CelScoreViewModel: NSObject {
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    realm.add(celebrity)
+                    realm.add(celebrity, update: true)
                     try! realm.commitWrite()
                 })
                 
@@ -148,7 +148,7 @@ class CelScoreViewModel: NSObject {
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    realm.add(ratings)
+                    realm.add(ratings, update: true)
                     try! realm.commitWrite()
                 })
                 
@@ -187,19 +187,20 @@ class CelScoreViewModel: NSObject {
                     
                     celebList.id = dictionary["listID"]!.stringValue
                     celebList.name = dictionary["name"]!.stringValue
-                    let items = dictionary["list"]!.array!
+                    let items: Array = dictionary["list"]!.array!
                     
-                    print("EASTSIDE!!!!!")
-                    print(items)
-                    
-                    print("Africa!!!!!")
+                    for (index, _) in items.enumerate() {
+                        let celebId = CelebId()
+                        celebId.id = items[index].stringValue
+                        celebList.celebList.append(celebId)
+                    }
+                    celebList.isSynced = true
                     
                     print(celebList)
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    celebList.isSynced = true
-                    realm.add(celebList)
+                    realm.add(celebList, update: true)
                     try! realm.commitWrite()
                 })
                 
