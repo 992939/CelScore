@@ -28,11 +28,26 @@ public class RatingsModel: Object {
         return "id"
     }
     
-    override public init(value: AnyObject) {
-        super.init(value: value)
+    public init(dictionary: Dictionary<String, AnyObject>) {
+        super.init(value: dictionary)
+        
+//        self.id = dictionary["celebrityID"]!.stringValue
+//        self.firstName = dictionary["firstName"]!
+//        self.lastName = dictionary["lastName"]!.stringValue
+//        self.middleName = dictionary["middleName"]!.stringValue
+//        self.nickName = dictionary["nickname"]!.stringValue
+//        self.birthdate = dictionary["birthdate"]!.stringValue
+//        self.netWorth = dictionary["netWorth"]!.stringValue
+//        self.picture2x = dictionary["picture2x"]!.stringValue
+//        self.picture3x = dictionary["picture3x"]!.stringValue
+//        self.rank = dictionary["rank"]!.stringValue
+//        self.status = dictionary["status"]!.stringValue
+//        self.twitter = dictionary["twitter"]!.stringValue
+//        self.sex = dictionary["sex"]!.bool!
+//        self.isSynced = true
     }
 
     required public init() {
-        fatalError("init() has not been implemented")
+        super.init()
     }
 }

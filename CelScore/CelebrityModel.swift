@@ -9,6 +9,16 @@
 import Foundation
 import RealmSwift
 
+extension String {
+    func toBool() -> Bool{
+        if self == "false" {
+            return false
+        }else{
+            return true
+        }
+    }
+}
+
 public class CelebrityModel: Object {
     dynamic var id = ""
     dynamic var birthdate : String = ""
@@ -27,5 +37,25 @@ public class CelebrityModel: Object {
     
     override public class func primaryKey() -> String {
         return "id"
+    }
+    
+    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+        self.init()
+        
+        print(dictionary)
+        self.id = dictionary["celebrityID"] as! String
+        self.firstName = dictionary["firstName"]!.stringValue
+        self.lastName = dictionary["lastName"]!.stringValue
+        self.middleName = dictionary["middleName"]!.stringValue
+        self.nickName = dictionary["nickname"]!.stringValue
+        self.birthdate = dictionary["birthdate"]!.stringValue
+        self.netWorth = dictionary["netWorth"]!.stringValue
+        self.picture2x = dictionary["picture2x"]!.stringValue
+        self.picture3x = dictionary["picture3x"]!.stringValue
+        self.rank = dictionary["rank"]!.stringValue
+        self.status = dictionary["status"]!.stringValue
+        self.twitter = dictionary["twitter"]!.stringValue
+        self.sex = dictionary["sex"]!.stringValue.toBool()
+        self.isSynced = true
     }
 }

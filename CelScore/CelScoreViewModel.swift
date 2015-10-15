@@ -87,23 +87,23 @@ class CelScoreViewModel: NSObject {
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celeb in
                     
-                    let celebrity = CelebrityModel()
-                    let dictionary: Dictionary = celeb.dictionary!
+                    let celebrity = CelebrityModel(dictionary: celeb.dictionaryObject!)
+                    //let dictionary: Dictionary = celeb.dictionary!
                     
-                    celebrity.id = dictionary["celebrityID"]!.stringValue
-                    celebrity.firstName = dictionary["firstName"]!.stringValue
-                    celebrity.lastName = dictionary["lastName"]!.stringValue
-                    celebrity.middleName = dictionary["middleName"]!.stringValue
-                    celebrity.nickName = dictionary["nickname"]!.stringValue
-                    celebrity.birthdate = dictionary["birthdate"]!.stringValue
-                    celebrity.netWorth = dictionary["netWorth"]!.stringValue
-                    celebrity.picture2x = dictionary["picture2x"]!.stringValue
-                    celebrity.picture3x = dictionary["picture3x"]!.stringValue
-                    celebrity.rank = dictionary["rank"]!.stringValue
-                    celebrity.status = dictionary["status"]!.stringValue
-                    celebrity.twitter = dictionary["twitter"]!.stringValue
-                    celebrity.sex = dictionary["sex"]!.bool!
-                    celebrity.isSynced = true
+//                    celebrity.id = dictionary["celebrityID"]!.stringValue
+//                    celebrity.firstName = dictionary["firstName"]!.stringValue
+//                    celebrity.lastName = dictionary["lastName"]!.stringValue
+//                    celebrity.middleName = dictionary["middleName"]!.stringValue
+//                    celebrity.nickName = dictionary["nickname"]!.stringValue
+//                    celebrity.birthdate = dictionary["birthdate"]!.stringValue
+//                    celebrity.netWorth = dictionary["netWorth"]!.stringValue
+//                    celebrity.picture2x = dictionary["picture2x"]!.stringValue
+//                    celebrity.picture3x = dictionary["picture3x"]!.stringValue
+//                    celebrity.rank = dictionary["rank"]!.stringValue
+//                    celebrity.status = dictionary["status"]!.stringValue
+//                    celebrity.twitter = dictionary["twitter"]!.stringValue
+//                    celebrity.sex = dictionary["sex"]!.bool!
+//                    celebrity.isSynced = true
                     
                     print(celebrity)
                     
