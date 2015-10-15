@@ -9,10 +9,15 @@
 import Foundation
 import RealmSwift
 
+class CelebId: Object {
+    dynamic var id = ""
+}
+
 public class ListsModel: Object {
     dynamic var id = ""
     dynamic var name : String = ""
-    //dynamic var celebList : [String] = Array()
+    dynamic var numberOfSearchByLocalUser: Double = 0
+    let celebList = List<CelebId>()
     dynamic var isSynced: Bool = false
     
     override public class func primaryKey() -> String {

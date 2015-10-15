@@ -73,6 +73,7 @@ class CelScoreViewModel: NSObject {
                     
                     let celebrity = CelebrityModel()
                     let dictionary: Dictionary = celeb.dictionary!
+                    
                     celebrity.id = dictionary["celebrityID"]!.stringValue
                     celebrity.firstName = dictionary["firstName"]!.stringValue
                     celebrity.lastName = dictionary["lastName"]!.stringValue
@@ -125,6 +126,7 @@ class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celebRatings in
+                    
                     let ratings = RatingsModel()
                     let dictionary: Dictionary = celebRatings.dictionary!
                     
@@ -179,7 +181,10 @@ class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ list in
+                    
                     let celebList = ListsModel()
+                    let dictionary: Dictionary = list.dictionary!
+                    
                     print(celebList)
                     
                     let realm = try! Realm()
