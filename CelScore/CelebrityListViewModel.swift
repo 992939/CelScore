@@ -26,8 +26,8 @@ class CelebrityListViewModel: NSObject {
     init(searchToken: String) {
         super.init()
         
-        //searchForCelebritiesSignal(searchToken: searchToken)
-        searchForListsSignal(searchToken: "hip")
+        searchForCelebritiesSignal(searchToken: searchToken)
+        //searchForListsSignal(searchToken: "hip")
             .take(2)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in

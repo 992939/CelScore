@@ -16,11 +16,6 @@ class CelebrityViewModel : NSObject {
     var ratings: NSObject?
     var initCelebrityViewModelSignal : SignalProducer<NSObject, NSError>?
     
-    lazy var scheduler: QueueScheduler = {
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
-        return QueueScheduler(queue: queue)
-        }()
-    
     enum rank {
         case A_List
         case B_List
@@ -103,12 +98,12 @@ class CelebrityViewModel : NSObject {
             }
     }
     
-        func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
-            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5, withLeeway: 0) { () -> () in
-                print("cheebah cheebah")
-            }
-            return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)
-        }
+//        func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
+//            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5, withLeeway: 0) { () -> () in
+//                print("cheebah cheebah")
+//            }
+//            return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)
+//        }
 }
 
 
