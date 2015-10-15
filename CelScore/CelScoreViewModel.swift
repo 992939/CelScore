@@ -31,22 +31,38 @@ class CelScoreViewModel: NSObject {
         super.init()
     }
     
-//    //MARK: Methods
-//    func checkNetworkConnectivitySignal() -> RACSignal {
-//        return RACSignal.createSignal({
-//            (subscriber: RACSubscriber!) -> RACDisposable! in
-//            if IJReachability.isConnectedToNetwork() {
-//                print("Connected!.")
-//                subscriber.sendNext(1)
-//                subscriber.sendCompleted()
-//            } else
-//            {
-//                print("Not connected!")
-//                subscriber.sendError(NSError())
-//            }
-//            return nil
-//        })
-//    }
+    //MARK: Methods
+    func checkNetworkConnectivitySignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            let reachability = Reachability.reachabilityForInternetConnection()
+            
+            reachability?.whenReachable = { reachability in
+                // keep in mind this is called on a background thread
+                // and if you are updating the UI it needs to happen
+                // on the main thread, like this:
+                dispatch_async(dispatch_get_main_queue()) {
+                    if reachability.isReachableViaWiFi() {
+                        print("Reachable via WiFi")
+                    } else {
+                        print("Reachable via Cellular")
+                    }
+                }
+                sendNext(sink, "Reachable")
+            }
+            reachability?.whenUnreachable = { reachability in
+                // keep in mind this is called on a background thread
+                // and if you are updating the UI it needs to happen
+                // on the main thread, like this:
+                dispatch_async(dispatch_get_main_queue()) {
+                    print("Not reachable")
+                }
+                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil))
+            }
+            reachability?.startNotifier()
+        }
+    }
     
     func getCelebsInfoFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
@@ -209,53 +225,5 @@ class CelScoreViewModel: NSObject {
                 return task
             })
         }
-    }
-
-    
-    func recurringUpdateDataStoreSignal(classTypeName classTypeName: String, frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
-        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-        
-        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return RACSignal() //self.updateLocalDataStoreSignal(classTypeName: classTypeName)
-            })
-    }
-    
-    func updateCelebritiesCelScore() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-//            var query = PFQuery(className: "Celebrity")
-//            query.includeKey("celebrity_ratings")
-//            query.findObjectsInBackgroundWithBlock({ (celebrityArray: [AnyObject]?, error: NSError?) -> Void in
-//                if error == nil {
-//                    for celebrity in celebrityArray! {
-//                        let celeb = celebrity as! PFObject
-//                        var ratings: PFObject = celeb["celebrity_ratings"] as! PFObject
-//                        ratings.removeObjectForKey("voteNumber")
-//                        let ratingKeys = ratings.allKeys()
-//                        let ratingValues = ratingKeys.map({ratings[$0 as! String]! as! Double})
-//                        let sumOfRatings = ratingValues.reduce(0){ return $0 + $1}
-//                        let newCelScore : Double = sumOfRatings / 10
-//                        
-//                        celebrity.setObject(newCelScore, forKey: "currentScore")
-//                    }
-//                    subscriber.sendNext(celebrityArray)
-//                    subscriber.sendCompleted()
-//                } else
-//                {
-//                    subscriber.sendError(NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
-//                }
-//            })
-            return nil
-        })
-    }
-    
-    func recurringUpdateCelebritiesCelScoreSignal(frequency frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
-        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-        
-        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateCelebritiesCelScore()
-        })
     }
 }

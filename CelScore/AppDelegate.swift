@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         let celscoreVM = update()
-        
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
@@ -52,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let celscoreVM = CelScoreViewModel()
         
-        celscoreVM.getCelebListsFromAWSSignal()
+        celscoreVM.checkNetworkConnectivitySignal()
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in
@@ -66,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .Interrupted:
                     print("getCelebsFromAWSSignal Interrupted")
                 }
-        }
+            }
         return celscoreVM
     }
 }
