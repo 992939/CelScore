@@ -185,6 +185,15 @@ class CelScoreViewModel: NSObject {
                     let celebList = ListsModel()
                     let dictionary: Dictionary = list.dictionary!
                     
+                    celebList.id = dictionary["listID"]!.stringValue
+                    celebList.name = dictionary["name"]!.stringValue
+                    let items = dictionary["list"]!.array!
+                    
+                    print("EASTSIDE!!!!!")
+                    print(items)
+                    
+                    print("Africa!!!!!")
+                    
                     print(celebList)
                     
                     let realm = try! Realm()
