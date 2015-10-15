@@ -126,11 +126,26 @@ class CelScoreViewModel: NSObject {
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celebRatings in
                     let ratings = RatingsModel()
+                    let dictionary: Dictionary = celebRatings.dictionary!
+                    
+                    ratings.id = dictionary["ratingID"]!.stringValue
+                    ratings.rating1 = dictionary["rating1"]!.doubleValue
+                    ratings.rating2 = dictionary["rating2"]!.doubleValue
+                    ratings.rating3 = dictionary["rating3"]!.doubleValue
+                    ratings.rating4 = dictionary["rating4"]!.doubleValue
+                    ratings.rating5 = dictionary["rating5"]!.doubleValue
+                    ratings.rating6 = dictionary["rating6"]!.doubleValue
+                    ratings.rating7 = dictionary["rating7"]!.doubleValue
+                    ratings.rating8 = dictionary["rating8"]!.doubleValue
+                    ratings.rating9 = dictionary["rating9"]!.doubleValue
+                    ratings.rating10 = dictionary["rating10"]!.doubleValue
+                    ratings.updatedAt = dictionary["updatedAt"]!.stringValue
+                    ratings.isSynced = true
+                    
                     print(ratings)
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    ratings.isSynced = true
                     realm.add(ratings)
                     try! realm.commitWrite()
                 })
