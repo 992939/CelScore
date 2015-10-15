@@ -86,12 +86,12 @@ class CelScoreViewModel: NSObject {
                     celebrity.status = dictionary["status"]!.stringValue
                     celebrity.twitter = dictionary["twitter"]!.stringValue
                     celebrity.sex = dictionary["sex"]!.bool!
+                    celebrity.isSynced = true
                     
                     print(celebrity)
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    celebrity.isSynced = true
                     realm.add(celebrity)
                     try! realm.commitWrite()
                 })
