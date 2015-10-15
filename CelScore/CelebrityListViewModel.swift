@@ -25,10 +25,25 @@ class CelebrityListViewModel: NSObject {
     //MARK: Initializers
     init(searchToken: String) {
         super.init()
+        
+        searchForCelebritiesSignal(searchToken: searchToken)
+            .take(2)
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("searchForCelebritiesSignal Next: \(value)")
+                case let .Error(error):
+                    print("searchForCelebritiesSignal Error: \(error)")
+                case .Completed:
+                    print("searchForCelebritiesSignal Completed")
+                case .Interrupted:
+                    print("searchForCelebritiesSignal Interrupted")
+                }
+        }
     }
     
     init(listId: String = "0001") {
-        
         super.init()
         
         initializeListSignal(listId: listId)
@@ -37,13 +52,13 @@ class CelebrityListViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("Next: \(value)")
+                    print("initializeListSignal Next: \(value)")
                 case let .Error(error):
-                    print("Error: \(error)")
+                    print("initializeListSignal Error: \(error)")
                 case .Completed:
-                    print("Completed")
+                    print("initializeListSignal Completed")
                 case .Interrupted:
-                    print("Interrupted")
+                    print("initializeListSignal Interrupted")
                 }
         }
     }
@@ -68,43 +83,42 @@ class CelebrityListViewModel: NSObject {
     }
 
     
-    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<Int, NSError> {
+    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject!, ListError> {
         return SignalProducer {
             sink, _ in
-            //let query = PFQuery(className: "Celebrity")
-            //query.fromLocalDatastore()
-            //query.whereKey("nickName", matchesRegex: searchToken, modifiers: "i")
-                if 2 == 4
-                {
-                    //self.celebrityList = object as Array
-                    //self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
-                    
-                    sendNext(sink, 2)
-                    sendCompleted(sink)
-                } else
-                {
-                    sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
-                }
-            }.observeOn(QueueScheduler())
-        }
-    
-    func searchForListsSignal(searchToken searchToken: String) -> SignalProducer<Int, NSError> {
-        return SignalProducer {
-            sink, _ in
-            //let query = PFQuery(className: "List")
-            //query.fromLocalDatastore()
-            //query.whereKey("name", matchesRegex: searchToken, modifiers: "i")
-                if 2 == 4
-                {
-                    //self.celebrityList = object as Array
-                    //self.celebrityList = self.celebrityList.map({ CelebrityViewModel(celebrity: $0 as! PFObject)})
-                    
-                    sendNext(sink, 2)
-                    sendCompleted(sink)
-                } else
-                {
-                    sendError(sink, NSError.init(domain: "com.celscore", code: 1, userInfo: nil))
+            
+            let realm = try! Realm()
+            
+            let all = realm.objects(CelebrityModel)
+            print(all)
+            let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
+            let list = realm.objects(CelebrityModel).filter(predicate)
+            
+            guard list.count > 0 else {
+                sendError(sink, ListError.Empty)
+                return
             }
-        }.observeOn(QueueScheduler())
+            sendNext(sink, list)
+            sendCompleted(sink)
+        }
+    }
+    
+    
+    func searchForListsSignal(searchToken searchToken: String) -> SignalProducer<AnyObject!, ListError> {
+        return SignalProducer {
+            sink, _ in
+
+            let realm = try! Realm()
+            
+            let predicate = NSPredicate(format: "name contains[c] %@", searchToken)
+            let list = realm.objects(ListsModel).filter(predicate)
+            
+            guard list.count > 0 else {
+                sendError(sink, ListError.Empty)
+                return
+            }
+            sendNext(sink, list)
+            sendCompleted(sink)
+        }
     }
 }
