@@ -74,7 +74,7 @@ class CelebrityViewModel : NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    self.celebrityInfo = value
+                    self.celebrityInfo = value!
                 case let .Error(error):
                     print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
                 case .Completed:
@@ -105,13 +105,6 @@ class CelebrityViewModel : NSObject {
             sendCompleted(sink)
         }
     }
-    
-//        func updateCelebrityViewModelSignal(frequency: NSTimeInterval) -> SignalProducer<NSObject, NSError> {
-//            scheduler.scheduleAfter(NSDate(), repeatingEvery: 5, withLeeway: 0) { () -> () in
-//                print("cheebah cheebah")
-//            }
-//            return self.getCelebrityFromLocalStoreSignal().observeOn(scheduler)
-//        }
 }
 
 

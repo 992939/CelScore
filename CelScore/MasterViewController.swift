@@ -69,6 +69,10 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func bindWithViewModels ()
     {
+        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
+        let starVM = celebrityVM.getCelebrityWithIdFromLocalStoreSignal(celebId: "0002")
+        print("HO HO \(starVM)")
+        
         userVM = UserViewModel()
         
         loginButton = FBSDKLoginButton()
@@ -167,7 +171,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         //4. AVOID BLENDING AS IT MAKES RENDERING SLOW: RUN APP IN SIMULATOR, THEN DEBUG AND PICK ITEM "COLOR BLENDED LAYERS
         
-        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
+//        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
+//        let starVM = celebrityVM.getCelebrityWithIdFromLocalStoreSignal(celebId: "0002")
+        
         //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         let node = ASTextCellNode()
