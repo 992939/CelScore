@@ -12,6 +12,11 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import ReactiveCocoa
 
+enum FBLoginError : ErrorType {
+    case Error
+    case Cancel
+}
+
 class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
@@ -231,7 +236,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     
     // MARK: UITextFieldDelegate methods.
-    
     func textFieldDidBeginEditing(textField: UITextField) {
         print("textFieldDidBeginEditing")
     }
@@ -244,66 +248,63 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         print("textFieldShouldReturn")
         textField.resignFirstResponder()
-        
         return true
     }
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if ((error) != nil) {
-            print("Process error")
+        if error != nil {
+            print(error)
+            return
         }
-        else if result.isCancelled {
-            print("Process cancelled")
+        
+        if result.isCancelled {
+            print("canceled")
+            return
         }
-        else {
-            //cache profile
-            print("NIN IS \(result.description)")
-            userVM.loginCognitoSignal(result.token.tokenString)
-                .start { event in
-                    switch(event) {
-                    case let .Next(value):
-                        print("userVM.loginCognitoSignal Next: \(value)")
-                    case let .Error(error):
-                        print("userVM.loginCognitoSignal Error: \(error)")
-                    case .Completed:
-                        print("userVM.loginCognitoSignal Completed")
-                    case .Interrupted:
-                        print("userVM.loginCognitoSignal Interrupted")
-                    }
 
-//                .subscribeNext({ (object: AnyObject!) -> Void in
-//                    print("loginCognitoSignal success")
-//                    
-//                    //let userRatingsArray = RatingsModel.
-//                    if 4 ==  4 //userRatingsArray.count > 0
-//                    {
-//                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
-//                        self.userVM.updateUserRatingsOnCognitoSignal()
-//                            .subscribeNext({ (_) -> Void in
-//                                print("updateUserRatingsOnCognitoSignal subscribe")
-//                                }, error: { (_) -> Void in
-//                                    print("updateUserRatingsOnCognitoSignal error")
-//                            })
-//                    } else
-//                    {
-//                        self.userVM.getUserRatingsFromCognitoSignal()
-//                            .subscribeNext({ (_) -> Void in
-//                                print("getUserRatingsFromCognitoSignal subscribe")
-//                                }, error: { (_) -> Void in
-//                                    print("getUserRatingsFromCognitoSignal error")
-//                            })
-//                    }
-//                    },
-//                    error: { (error: NSError!) -> Void in
-//                        print("loginCognitoSignal error: \(error)")
-//                })
-            }
+        userVM.loginCognitoSignal(result.token.tokenString)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("userVM.loginCognitoSignal Next: \(value)")
+                case let .Error(error):
+                    print("userVM.loginCognitoSignal Error: \(error)")
+                case .Completed:
+                    print("userVM.loginCognitoSignal Completed")
+                case .Interrupted:
+                    print("userVM.loginCognitoSignal Interrupted")
+                }
+                
+                //                .subscribeNext({ (object: AnyObject!) -> Void in
+                //                    print("loginCognitoSignal success")
+                //
+                //                    //let userRatingsArray = RatingsModel.
+                //                    if 4 ==  4 //userRatingsArray.count > 0
+                //                    {
+                //                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+                //                        self.userVM.updateUserRatingsOnCognitoSignal()
+                //                            .subscribeNext({ (_) -> Void in
+                //                                print("updateUserRatingsOnCognitoSignal subscribe")
+                //                                }, error: { (_) -> Void in
+                //                                    print("updateUserRatingsOnCognitoSignal error")
+                //                            })
+                //                    } else
+                //                    {
+                //                        self.userVM.getUserRatingsFromCognitoSignal()
+                //                            .subscribeNext({ (_) -> Void in
+                //                                print("getUserRatingsFromCognitoSignal subscribe")
+                //                                }, error: { (_) -> Void in
+                //                                    print("getUserRatingsFromCognitoSignal error")
+                //                            })
+                //                    }
+                //                    },
+                //                    error: { (error: NSError!) -> Void in
+                //                        print("loginCognitoSignal error: \(error)")
+                //                })
         }
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        
-    }
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
 }
 
