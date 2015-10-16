@@ -18,9 +18,8 @@ class CelebrityViewModel : NSObject {
     
     //MARK: Properties
     var celebrityInfo: CelebrityModel?
-    var currentScore, previousScore: Double?
-    var ratings: NSObject?
-    var initCelebrityViewModelSignal : SignalProducer<NSObject, NSError>?
+    var calculatedCelScore, previousScore: Double?
+    var ratings: RatingsViewModel?
     
     enum rank {
         case A_List
