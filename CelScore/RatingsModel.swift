@@ -23,6 +23,7 @@ public class RatingsModel: Object {
     dynamic var rating9 : Double = 0
     dynamic var rating10 : Double = 0
     dynamic var totalVotes: Double = 0
+    dynamic var prevScore: Double = 0
     dynamic var isSynced: Bool = false
     
     override public class func primaryKey() -> String {
@@ -44,6 +45,8 @@ public class RatingsModel: Object {
         self.rating8 = dictionary["rating8"] as! Double
         self.rating9 = dictionary["rating9"] as! Double
         self.rating10 = dictionary["rating10"] as! Double
+        self.totalVotes = dictionary["totalVote"] as! Double
+        self.prevScore = dictionary["previousScore"] as! Double
         self.isSynced = true
     }
 }

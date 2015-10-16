@@ -32,10 +32,9 @@ class CelebrityViewModel : NSObject {
     enum status {
         case Single
         case Married
-        case Shagged_Up
+        case Dating
         case Divorced
         case Engaged
-        case Pimping
     }
     
     enum sex {
