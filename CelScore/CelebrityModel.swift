@@ -44,18 +44,18 @@ public class CelebrityModel: Object {
         
         print(dictionary)
         self.id = dictionary["celebrityID"] as! String
-        self.firstName = dictionary["firstName"]!.stringValue
-        self.lastName = dictionary["lastName"]!.stringValue
-        self.middleName = dictionary["middleName"]!.stringValue
-        self.nickName = dictionary["nickname"]!.stringValue
-        self.birthdate = dictionary["birthdate"]!.stringValue
-        self.netWorth = dictionary["netWorth"]!.stringValue
-        self.picture2x = dictionary["picture2x"]!.stringValue
-        self.picture3x = dictionary["picture3x"]!.stringValue
-        self.rank = dictionary["rank"]!.stringValue
-        self.status = dictionary["status"]!.stringValue
-        self.twitter = dictionary["twitter"]!.stringValue
-        self.sex = dictionary["sex"]!.stringValue.toBool()
+        self.firstName = dictionary["firstName"] as! String
+        self.lastName = dictionary["lastName"] as! String
+        self.middleName = dictionary["middleName"] as! String
+        self.nickName = dictionary["nickname"] as! String
+        self.birthdate = dictionary["birthdate"] as! String
+        self.netWorth = dictionary["netWorth"] as! String
+        self.picture2x = dictionary["picture2x"] as! String
+        self.picture3x = dictionary["picture3x"] as! String
+        self.rank = dictionary["rank"] as! String
+        self.status = dictionary["status"] as! String
+        self.twitter = dictionary["twitter"] as! String
+        self.sex = dictionary["sex"] as! Bool
         self.isSynced = true
     }
 }
