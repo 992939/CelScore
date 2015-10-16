@@ -66,88 +66,7 @@ class UserViewModel : NSObject {
     }
     
     //MARK: Methods
-    func getCelebInfoLambdaSignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let transferManager: AWSS3TransferManager = AWSS3TransferManager.defaultS3TransferManager()
-            let downloadRequest: AWSS3TransferManagerDownloadRequest = AWSS3TransferManagerDownloadRequest()
-            downloadRequest.bucket = "celebjson"
-            downloadRequest.key = "celebInfo.json"
-            
-            transferManager.download(downloadRequest).continueWithExecutor(AWSExecutor.defaultExecutor(), withBlock: { (task: AWSTask!) -> AnyObject! in
-                
-                if task.error == nil {
-                    let result : AWSS3TransferManagerDownloadOutput = task.result as! AWSS3TransferManagerDownloadOutput
-                     print("getCelebInfoLambdaSignal object is \(result.body) and is canceled \(task.cancelled)")
-                    subscriber.sendNext(task.result)
-                    subscriber.sendCompleted()
-                } else {
-                    print("getCelebInfoLambdaSignal error is \(task.error)")
-                    subscriber.sendError(task.error)
-                }
-                return task
-            })
-            return nil
-        })
-    }
-    
-    func getCelebRatingsLambdaSignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let lambdaInvoker: AWSLambdaInvoker = AWSLambdaInvoker.defaultLambdaInvoker()
-            lambdaInvoker.invokeFunction("getCelebRatingsFunction", JSONObject: nil).continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                if task.error == nil {
-                    print("getCelebRatingsLambdaSignal object is \(task.result) and is canceled \(task.cancelled)")
-                    subscriber.sendNext(task.result)
-                    subscriber.sendCompleted()
-                } else {
-                    print("getCelebRatingsLambdaSignal error is \(task.error)")
-                    subscriber.sendError(task.error)
-                }
-                return task
-            })
-            return nil
-        })
-    }
-    
-    
-    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            let syncClient = AWSCognito.defaultCognito()
-            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.synchronize() //dataset.conflictHandler
-            
-            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
-            if dataset.getAll().count == 0 {
-                dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-                dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-                dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
-                dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                let timezone = object.objectForKey("timezone") as! NSNumber
-                dataset.setString(timezone.stringValue, forKey: "timezone")
-                dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-                dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-                dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                dataset.synchronize()
-            }
-            return nil
-        })
-    }
-    
-    
+
     func getUserInfoFromFacebookSignal() -> RACSignal
     {
         return RACSignal.createSignal({
@@ -196,16 +115,55 @@ class UserViewModel : NSObject {
             return nil
         })
     }
+    
+    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> RACSignal
+    {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            let syncClient = AWSCognito.defaultCognito()
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
+            dataset.synchronize() //dataset.conflictHandler
+            
+            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            if dataset.getAll().count == 0 {
+                dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+                dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+                dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+                let timezone = object.objectForKey("timezone") as! NSNumber
+                dataset.setString(timezone.stringValue, forKey: "timezone")
+                dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+                dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+                dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                dataset.synchronize()
+            }
+            return nil
+        })
+    }
+    
+    func getUserRatingsFromCognitoSignal() -> RACSignal {
+        return RACSignal.createSignal({
+            (subscriber: RACSubscriber!) -> RACDisposable! in
+            
+            let syncClient = AWSCognito.defaultCognito()
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            dataset.synchronize()
+            print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
+            
+            return nil
+        })
+    }
 
-    func updateUserRatingsOnCognitoSignal() -> RACSignal {
-        //_ : RLMNotificationToken?
+    func updateUserRatingsOnCognitoSignal() -> RACSignal
+    {
         return RACSignal.createSignal({
             (subscriber: RACSubscriber!) -> RACDisposable! in
             let realm = try! Realm()
             
             let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
-            //println("COUNT IS \(userRatingsArray.count)")
+            print("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
@@ -236,19 +194,6 @@ class UserViewModel : NSObject {
         
         return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
             return self.updateUserRatingsOnCognitoSignal()
-        })
-    }
-    
-    func getUserRatingsFromCognitoSignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            
-            let syncClient = AWSCognito.defaultCognito()
-            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
-            dataset.synchronize()
-            print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
-            
-            return nil
         })
     }
 }

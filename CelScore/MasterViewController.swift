@@ -41,18 +41,19 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
         super.init(nibName: nil, bundle: nil)
         
+        self.bindWithViewModels()
+        
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity or a #list"
         
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
-        self.bindWithViewModels()
-        
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
     }
 
+    
     //MARK: Methods
     override func viewDidLoad()
     {
