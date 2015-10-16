@@ -28,26 +28,21 @@ public class RatingsModel: Object {
         return "id"
     }
     
-    public init(dictionary: Dictionary<String, AnyObject>) {
-        super.init(value: dictionary)
+    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+        self.init()
         
-//        self.id = dictionary["celebrityID"]!.stringValue
-//        self.firstName = dictionary["firstName"]!
-//        self.lastName = dictionary["lastName"]!.stringValue
-//        self.middleName = dictionary["middleName"]!.stringValue
-//        self.nickName = dictionary["nickname"]!.stringValue
-//        self.birthdate = dictionary["birthdate"]!.stringValue
-//        self.netWorth = dictionary["netWorth"]!.stringValue
-//        self.picture2x = dictionary["picture2x"]!.stringValue
-//        self.picture3x = dictionary["picture3x"]!.stringValue
-//        self.rank = dictionary["rank"]!.stringValue
-//        self.status = dictionary["status"]!.stringValue
-//        self.twitter = dictionary["twitter"]!.stringValue
-//        self.sex = dictionary["sex"]!.bool!
-//        self.isSynced = true
-    }
-
-    required public init() {
-        super.init()
+        self.id = dictionary["ratingID"] as! String
+        self.updatedAt = dictionary["updatedAt"] as! String
+        self.rating1 = dictionary["rating1"] as! Double
+        self.rating2 = dictionary["rating2"] as! Double
+        self.rating3 = dictionary["rating3"] as! Double
+        self.rating4 = dictionary["rating4"] as! Double
+        self.rating5 = dictionary["rating5"] as! Double
+        self.rating6 = dictionary["rating6"] as! Double
+        self.rating7 = dictionary["rating7"] as! Double
+        self.rating8 = dictionary["rating8"] as! Double
+        self.rating9 = dictionary["rating9"] as! Double
+        self.rating10 = dictionary["rating10"] as! Double
+        self.isSynced = true
     }
 }

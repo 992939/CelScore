@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let celscoreVM = CelScoreViewModel()
         
-        celscoreVM.getCelebsInfoFromAWSSignal()
+        celscoreVM.getCelebListsFromAWSSignal()
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in

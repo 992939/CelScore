@@ -42,7 +42,6 @@ public class CelebrityModel: Object {
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         
-        print(dictionary)
         self.id = dictionary["celebrityID"] as! String
         self.firstName = dictionary["firstName"] as! String
         self.lastName = dictionary["lastName"] as! String

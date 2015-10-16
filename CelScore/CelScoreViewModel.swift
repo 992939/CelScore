@@ -125,24 +125,7 @@ class CelScoreViewModel: NSObject {
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ celebRatings in
                     
-                    let ratings = RatingsModel()
-                    let dictionary: Dictionary = celebRatings.dictionary!
-                    
-                    ratings.id = dictionary["ratingID"]!.stringValue
-                    ratings.rating1 = dictionary["rating1"]!.doubleValue
-                    ratings.rating2 = dictionary["rating2"]!.doubleValue
-                    ratings.rating3 = dictionary["rating3"]!.doubleValue
-                    ratings.rating4 = dictionary["rating4"]!.doubleValue
-                    ratings.rating5 = dictionary["rating5"]!.doubleValue
-                    ratings.rating6 = dictionary["rating6"]!.doubleValue
-                    ratings.rating7 = dictionary["rating7"]!.doubleValue
-                    ratings.rating8 = dictionary["rating8"]!.doubleValue
-                    ratings.rating9 = dictionary["rating9"]!.doubleValue
-                    ratings.rating10 = dictionary["rating10"]!.doubleValue
-                    ratings.updatedAt = dictionary["updatedAt"]!.stringValue
-                    ratings.isSynced = true
-                    
-                    print(ratings)
+                    let ratings = RatingsModel(dictionary: celebRatings.dictionaryObject!)
                     
                     let realm = try! Realm()
                     realm.beginWrite()
@@ -180,21 +163,7 @@ class CelScoreViewModel: NSObject {
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ list in
                     
-                    let celebList = ListsModel()
-                    let dictionary: Dictionary = list.dictionary!
-                    
-                    celebList.id = dictionary["listID"]!.stringValue
-                    celebList.name = dictionary["name"]!.stringValue
-                    let items: Array = dictionary["list"]!.array!
-                    
-                    for (index, _) in items.enumerate() {
-                        let celebId = CelebId()
-                        celebId.id = items[index].stringValue
-                        celebList.celebList.append(celebId)
-                    }
-                    celebList.isSynced = true
-                    
-                    print(celebList)
+                    let celebList = ListsModel(dictionary: list.dictionaryObject!)
                     
                     let realm = try! Realm()
                     realm.beginWrite()

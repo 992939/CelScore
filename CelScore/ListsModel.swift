@@ -23,4 +23,20 @@ public class ListsModel: Object {
     override public class func primaryKey() -> String {
         return "id"
     }
+    
+    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+        self.init()
+        
+        self.id = dictionary["listID"] as! String
+        self.name = dictionary["name"] as! String
+        print(dictionary["list"])
+        let items = dictionary["list"] as! NSArray
+        
+        for (index, _) in items.enumerate() {
+            let celebId = CelebId()
+            celebId.id = items[index] as! String
+            self.celebList.append(celebId)
+        }
+        self.isSynced = true
+    }
 }
