@@ -189,9 +189,7 @@ class UserViewModel : NSObject {
             for var index: Int = 0; index < userRatingsArray.count; index++
             {
                 let ratings: RatingsModel = userRatingsArray[index]
-                let ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
-                dataset.setString(ratingsString, forKey: ratings.id)
-                
+                dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 ratings.isSynced = true
                 realm.add(ratings)
             }

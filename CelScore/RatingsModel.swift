@@ -49,4 +49,9 @@ public class RatingsModel: Object {
         self.prevScore = dictionary["previousScore"] as! Double
         self.isSynced = true
     }
+    
+    public func interpolation() -> String
+    {
+        return "\(self.rating1)/\(self.rating2)/\(self.rating3)/\(self.rating4)/\(self.rating5)/\(self.rating6)/\(self.rating7)/\(self.rating8)/\(self.rating9)/\(self.rating10)"
+    }
 }
