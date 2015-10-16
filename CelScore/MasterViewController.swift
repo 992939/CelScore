@@ -204,7 +204,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
         //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: celebrityVM.celebrityId!)
+        let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: (celebrityVM.celebrityInfo?.id)!)
         //print("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */

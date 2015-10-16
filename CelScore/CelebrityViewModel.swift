@@ -17,7 +17,7 @@ enum CelebrityError : ErrorType {
 class CelebrityViewModel : NSObject {
     
     //MARK: Properties
-    var celebrityId, firstName, middleName, lastName, nickName, born, from, netWorth, height : String?
+    var celebrityInfo: CelebrityModel?
     var currentScore, previousScore: Double?
     var ratings: NSObject?
     var initCelebrityViewModelSignal : SignalProducer<NSObject, NSError>?
@@ -69,10 +69,24 @@ class CelebrityViewModel : NSObject {
         super.init()
         
         getCelebrityWithIdFromLocalStoreSignal(celebId: celebrityId)
+            .take(2)
+            .startOn(QueueScheduler.mainQueueScheduler)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    self.celebrityInfo = value
+                case let .Error(error):
+                    print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
+                case .Completed:
+                    print("getCelebrityWithIdFromLocalStoreSignal Completed")
+                case .Interrupted:
+                    print("getCelebrityWithIdFromLocalStoreSignal Interrupted")
+                }
+        }
     }
     
     //MARK: Methods
-    func getCelebrityWithIdFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<AnyObject!, CelebrityError>
+    func getCelebrityWithIdFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
     {
         return SignalProducer {
             sink, _ in
@@ -80,27 +94,14 @@ class CelebrityViewModel : NSObject {
             let realm = try! Realm()
             
             let predicate = NSPredicate(format: "id = %@", celebId)
-            let list = realm.objects(CelebrityModel).filter(predicate).first
+            let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             
-            guard let celebList = list else {
+            guard let celeb = celebrity else {
                 sendError(sink, CelebrityError.NoFound)
                 return
             }
             
-//            self.celebrityId = object?.valueForKey("objectId") as? String
-//            self.firstName = object?.valueForKey("firstName") as? String
-//            self.middleName = object?.valueForKey("middleName") as? String
-//            self.lastName = object?.valueForKey("lastName") as? String
-//            self.nickName = object?.valueForKey("nickName") as? String
-//            self.born = object?.valueForKey("born") as? String
-//            self.from = object?.valueForKey("from") as? String
-//            self.netWorth = object?.valueForKey("netWorth") as? String
-//            self.height = object?.valueForKey("height") as? String
-//            self.currentScore = object?.valueForKey("currentScore") as? Double
-//            self.previousScore = object?.valueForKey("previousScore") as? Double
-//            self.ratings = object?.valueForKey("celebrity_ratings") as? PFObject
-            
-            sendNext(sink, celebList)
+            sendNext(sink, celeb)
             sendCompleted(sink)
         }
     }
