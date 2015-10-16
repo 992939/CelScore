@@ -69,10 +69,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     func bindWithViewModels ()
     {
-        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
-        let starVM = celebrityVM.getCelebrityWithIdFromLocalStoreSignal(celebId: "0002")
-        print("HO HO \(starVM)")
-        
         userVM = UserViewModel()
         
         loginButton = FBSDKLoginButton()
