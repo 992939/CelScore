@@ -48,48 +48,45 @@ class UserViewModel : NSObject {
         
         super.init()
         
-        NSNotificationCenter.defaultCenter()
-            .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
-            .flattenMap { (object: AnyObject!) -> RACStream! in
-                return self.getUserInfoFromFacebookSignal().distinctUntilChanged()
-            }
-            .subscribeNext({ (object: AnyObject!) -> Void in
-                self.updateUserInfoOnCognitoSignal(object)
-                    .subscribeNext({ (object: AnyObject!) -> Void in
-                        print("updateUserInfoOnCognitoSignal success.")
-                        }, error: { (error: NSError!) -> Void in
-                            print("updateUserInfoOnCognitoSignal failed.")
-                    })
-                }, error: { (error: NSError!) -> Void in
-                    print("NSNotification failed.")
-            })
+//        NSNotificationCenter.defaultCenter()
+//            .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
+//            .flattenMap { (object: AnyObject!) -> RACStream! in
+//                return self.getUserInfoFromFacebookSignal()
+//            }
+//            .subscribeNext({ (object: AnyObject!) -> Void in
+//                self.updateUserInfoOnCognitoSignal(object)
+//                    .subscribeNext({ (object: AnyObject!) -> Void in
+//                        print("updateUserInfoOnCognitoSignal success.")
+//                        }, error: { (error: NSError!) -> Void in
+//                            print("updateUserInfoOnCognitoSignal failed.")
+//                    })
+//                }, error: { (error: NSError!) -> Void in
+//                    print("NSNotification failed.")
+//            })
     }
     
     //MARK: Methods
 
-    func getUserInfoFromFacebookSignal() -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
-            _ = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                if error == nil {
-                    print("getUserInfoFromFacebookSignal object is \(object)")
-                    subscriber.sendNext(object)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    print("getUserInfoFromFacebookSignal error is \(error)")
-                    subscriber.sendError(error)
+    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                
+                guard error == nil else {
+                    sendError(sink, error)
+                    return
                 }
+                
+                sendNext(sink, object)
+                sendCompleted(sink)
             }
-            return nil
-        })
+        }
     }
     
-    func loginCognitoSignal(token: String) -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
+    func loginCognitoSignal(token: String) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
             
             AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
             
@@ -102,29 +99,29 @@ class UserViewModel : NSObject {
             let logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                if (task.error == nil) {
-                    subscriber.sendNext(task)
-                    subscriber.sendCompleted()
-                } else
-                {
-                    subscriber.sendError(task.error)
-                    print("credentialsProvider.refresh() error \(task.error)")
+                
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
                 }
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
                 return task
             })
-            return nil
-        })
+        }
     }
     
-    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
+    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.synchronize() //dataset.conflictHandler
+            dataset.synchronize()
             
             print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
                 dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
@@ -136,29 +133,48 @@ class UserViewModel : NSObject {
                 dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
                 dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                 dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                dataset.synchronize()
+                
+                dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                    
+                    guard task.error == nil else {
+                        sendError(sink, task.error)
+                        return task
+                    }
+                    
+                    sendNext(sink, task.result)
+                    return task
+                })
             }
-            return nil
-        })
+            sendCompleted(sink)
+        }
     }
     
-    func getUserRatingsFromCognitoSignal() -> RACSignal {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
+    func getUserRatingsFromCognitoSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
-            dataset.synchronize()
             print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
             
-            return nil
-        })
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
+        }
     }
 
-    func updateUserRatingsOnCognitoSignal() -> RACSignal
-    {
-        return RACSignal.createSignal({
-            (subscriber: RACSubscriber!) -> RACDisposable! in
+    func updateUserRatingsOnCognitoSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
             let realm = try! Realm()
             
             let predicate = NSPredicate(format: "isSynced = false")
@@ -169,10 +185,8 @@ class UserViewModel : NSObject {
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize()
             
-            
             realm.beginWrite()
-            
-            for var index: UInt = 0; index < 10; index++ //userRatingsArray.count; index++
+            for var index: Int = 0; index < userRatingsArray.count; index++
             {
                 let ratings: RatingsModel = userRatingsArray.first!
                 let ratingsString = "\(ratings.rating1)/\(ratings.rating2)/\(ratings.rating3)/\(ratings.rating4)/\(ratings.rating5)/\(ratings.rating6)/\(ratings.rating7)/\(ratings.rating8)/\(ratings.rating9)/\(ratings.rating10)"
@@ -181,19 +195,27 @@ class UserViewModel : NSObject {
                 ratings.isSynced = true
                 realm.add(ratings)
             }
-            //realm.commitWriteTransaction()
-            dataset.synchronize()
- 
-            return nil
-        })
+            try! realm.commitWrite()
+            
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
+        }
     }
     
-    func recurringUpdateUserRatingsOnCognitoSignal(frequency frequency: NSTimeInterval) -> RACSignal {
-        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
-        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-        
-        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-            return self.updateUserRatingsOnCognitoSignal()
-        })
-    }
+//    func recurringUpdateUserRatingsOnCognitoSignal(frequency frequency: NSTimeInterval) -> RACSignal {
+//        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
+//        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
+//        
+//        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
+//            return self.updateUserRatingsOnCognitoSignal()
+//        })
+//    }
 }
