@@ -9,16 +9,6 @@
 import Foundation
 import RealmSwift
 
-extension String {
-    func toBool() -> Bool{
-        if self == "false" {
-            return false
-        }else{
-            return true
-        }
-    }
-}
-
 public class CelebrityModel: Object {
     dynamic var id = ""
     dynamic var birthdate : String = ""
