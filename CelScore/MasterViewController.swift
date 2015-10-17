@@ -25,7 +25,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     var searchTextField : UITextField!
     var celebrityTableView : ASTableView!
     var loginButton : FBSDKLoginButton!
-    private var celscoreVM: CelScoreViewModel!
+    var celscoreVM: CelScoreViewModel!
     var userVM: UserViewModel!
     
     enum periodSetting: NSTimeInterval {
@@ -181,7 +181,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         let node = ASTextCellNode()
         node.text = "Celebrity"
         node.autoresizesSubviews = true
-        var a = 5
 
 // SAVE FOR NOW
         

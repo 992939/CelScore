@@ -18,7 +18,7 @@ enum ListError : ErrorType {
 class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    dynamic var searchText = ""
+    var searchText = ""
     var title : String = ""
     var celebrityList = ListsModel()
     
