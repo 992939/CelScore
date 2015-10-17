@@ -48,12 +48,13 @@ class UserViewModel : NSObject {
         
         super.init()
         
-//        NSNotificationCenter.defaultCenter()
-//            .rac_addObserverForName(FBSDKProfileDidChangeNotification, object: nil)
-//            .flattenMap { (object: AnyObject!) -> RACStream! in
-//                return self.getUserInfoFromFacebookSignal()
-//            }
-//            .subscribeNext({ (object: AnyObject!) -> Void in
+        NSNotificationCenter.defaultCenter()
+            .rac_notifications(FBSDKProfileDidChangeNotification)
+            .start { _ in
+                return getUserInfoFromFacebookSignal()
+            }
+    
+//    .subscribeNext({ (object: AnyObject!) -> Void in
 //                self.updateUserInfoOnCognitoSignal(object)
 //                    .subscribeNext({ (object: AnyObject!) -> Void in
 //                        print("updateUserInfoOnCognitoSignal success.")

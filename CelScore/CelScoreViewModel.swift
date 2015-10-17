@@ -14,8 +14,8 @@ class CelScoreViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
-    dynamic var displayedCelebrityListVM : CelebrityListViewModel
-    dynamic var searchedCelebrityListVM : CelebrityListViewModel
+    var displayedCelebrityListVM : CelebrityListViewModel
+    var searchedCelebrityListVM : CelebrityListViewModel
 
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
