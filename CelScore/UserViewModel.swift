@@ -15,7 +15,8 @@ import RealmSwift
 class UserViewModel : NSObject {
     
     //MARK: Properties
-    let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
+    let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
+    //"us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     
     enum listSetting {
         case A_List
@@ -48,11 +49,24 @@ class UserViewModel : NSObject {
         
         super.init()
         
-        NSNotificationCenter.defaultCenter()
-            .rac_notifications(FBSDKProfileDidChangeNotification)
-            .start { _ in
-                return getUserInfoFromFacebookSignal()
-            }
+//        NSNotificationCenter.defaultCenter()
+//            .rac_notifications(FBSDKProfileDidChangeNotification)
+//            .skip(1)
+//            .start { _ in
+//                
+//                return updateUserRatingsOnCognitoSignal().start { event in
+//                    switch(event) {
+//                    case let .Next(value):
+//                        print("updateUserRatingsOnCognitoSignal Next: \(value)")
+//                    case let .Error(error):
+//                        print("updateUserRatingsOnCognitoSignal Error: \(error)")
+//                    case .Completed:
+//                        print("updateUserRatingsOnCognitoSignal Completed")
+//                    case .Interrupted:
+//                        print("updateUserRatingsOnCognitoSignal Interrupted")
+//                    }
+//                }
+//            }
     
 //    .subscribeNext({ (object: AnyObject!) -> Void in
 //                self.updateUserInfoOnCognitoSignal(object)
@@ -154,6 +168,10 @@ class UserViewModel : NSObject {
         return SignalProducer {
             sink, _ in
             
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
@@ -161,6 +179,7 @@ class UserViewModel : NSObject {
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 
                 guard task.error == nil else {
+                    credentialsProvider.clearKeychain()
                     sendError(sink, task.error)
                     return task
                 }
