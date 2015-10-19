@@ -216,13 +216,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         //print("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
-        ratings.updateUserRatingsInRealmSignal()
-                .subscribeNext({ (object: AnyObject!) -> Void in
-                    print("updateUserRatingsInRealmSignal success")
-                },
-                error: { (error: NSError!) -> Void in
-                    print("updateUserRatingsInRealmSignal error: \(error)")
-                })
+//        ratings.updateUserRatingsInRealmSignal()
+//                .subscribeNext({ (object: AnyObject!) -> Void in
+//                    print("updateUserRatingsInRealmSignal success")
+//                },
+//                error: { (error: NSError!) -> Void in
+//                    print("updateUserRatingsInRealmSignal error: \(error)")
+//                })
         
         /* retrieve user ratings */
 //        ratings.retrieveUserRatingsFromRealmSignal()
@@ -253,12 +253,11 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if error != nil {
+        guard error == nil else {
             print(error)
             return
         }
-        
-        if result.isCancelled {
+        guard result.isCancelled else {
             print("canceled")
             return
         }
@@ -273,7 +272,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                     let userRatingsArray = realm.objects(RatingsModel)
                     if userRatingsArray.count > 0
                     {
-                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
                         self.userVM.updateUserRatingsOnCognitoSignal()
                             .start { event in
                                 switch(event) {
