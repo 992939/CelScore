@@ -48,21 +48,21 @@ class UserViewModel : NSObject {
         
         super.init()
         
-//        NSNotificationCenter.defaultCenter()
-//            .rac_notifications(FBSDKProfileDidChangeNotification)
-//            .skip(1)
+        NSNotificationCenter.defaultCenter()
+            .rac_notifications(FBSDKProfileDidChangeNotification)
+            //.skip(1)
 //            .start { _ in
 //                
-//                return updateUserRatingsOnCognitoSignal().start { event in
+//                return updateUserInfoOnCognitoSignal().start { event in
 //                    switch(event) {
 //                    case let .Next(value):
-//                        print("updateUserRatingsOnCognitoSignal Next: \(value)")
+//                        loggingPrint("updateUserInfoOnCognitoSignal() Next: \(value)")
 //                    case let .Error(error):
-//                        print("updateUserRatingsOnCognitoSignal Error: \(error)")
+//                        loggingPrint("updateUserInfoOnCognitoSignal() Error: \(error)")
 //                    case .Completed:
-//                        print("updateUserRatingsOnCognitoSignal Completed")
+//                        loggingPrint("updateUserInfoOnCognitoSignal() Completed")
 //                    case .Interrupted:
-//                        print("updateUserRatingsOnCognitoSignal Interrupted")
+//                        loggingPrint("updateUserInfoOnCognitoSignal() Interrupted")
 //                    }
 //                }
 //            }
@@ -70,12 +70,12 @@ class UserViewModel : NSObject {
 //    .subscribeNext({ (object: AnyObject!) -> Void in
 //                self.updateUserInfoOnCognitoSignal(object)
 //                    .subscribeNext({ (object: AnyObject!) -> Void in
-//                        print("updateUserInfoOnCognitoSignal success.")
+//                        loggingPrint("updateUserInfoOnCognitoSignal success.")
 //                        }, error: { (error: NSError!) -> Void in
-//                            print("updateUserInfoOnCognitoSignal failed.")
+//                            loggingPrint("updateUserInfoOnCognitoSignal failed.")
 //                    })
 //                }, error: { (error: NSError!) -> Void in
-//                    print("NSNotification failed.")
+//                    loggingPrint("NSNotification failed.")
 //            })
     }
     
@@ -132,7 +132,7 @@ class UserViewModel : NSObject {
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize()
             
-            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            loggingPrint("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
             
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
@@ -196,7 +196,7 @@ class UserViewModel : NSObject {
             
             let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
-            print("COUNT IS \(userRatingsArray.count)")
+            loggingPrint("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")

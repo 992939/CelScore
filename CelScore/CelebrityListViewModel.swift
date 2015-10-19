@@ -33,13 +33,13 @@ class CelebrityListViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("searchForCelebritiesSignal Next: \(value)")
+                    loggingPrint("searchForCelebritiesSignal Next: \(value)")
                 case let .Error(error):
-                    print("searchForCelebritiesSignal Error: \(error)")
+                    loggingPrint("searchForCelebritiesSignal Error: \(error)")
                 case .Completed:
-                    print("searchForCelebritiesSignal Completed")
+                    loggingPrint("searchForCelebritiesSignal Completed")
                 case .Interrupted:
-                    print("searchForCelebritiesSignal Interrupted")
+                    loggingPrint("searchForCelebritiesSignal Interrupted")
                 }
         }
     }
@@ -53,13 +53,13 @@ class CelebrityListViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("initializeListSignal Next: \(value)")
+                    loggingPrint("initializeListSignal Next: \(value)")
                 case let .Error(error):
-                    print("initializeListSignal Error: \(error)")
+                    loggingPrint("initializeListSignal Error: \(error)")
                 case .Completed:
-                    print("initializeListSignal Completed")
+                    loggingPrint("initializeListSignal Completed")
                 case .Interrupted:
-                    print("initializeListSignal Interrupted")
+                    loggingPrint("initializeListSignal Interrupted")
                 }
         }
     }

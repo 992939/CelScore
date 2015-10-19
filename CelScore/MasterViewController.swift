@@ -84,10 +84,10 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         
 //        userVM.getCelebInfoLambdaSignal()
 //            .subscribeNext({ (object: AnyObject!) -> Void in
-//                print("getCelebInfoLambdaSignal success")
+//                loggingPrint("getCelebInfoLambdaSignal success")
 //                },
 //                error: { (error: NSError!) -> Void in
-//                    print("getCelebInfoLambdaSignal error: \(error)")
+//                    loggingPrint("getCelebInfoLambdaSignal error: \(error)")
 //            })
         
 //        userVM.getCelebRatingsLambdaSignal()
@@ -103,7 +103,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
-            print("TOKEN IS \(accessToken)")
+            loggingPrint("TOKEN IS \(accessToken)")
         } else
         {
             self.view.addSubview(loginButton)
@@ -132,18 +132,18 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             return searchSignal
         }
         .subscribeNext({ (d:AnyObject!) -> Void in
-            print("searchTextField signal returned \(d)")
+            loggingPrint("searchTextField signal returned \(d)")
             }, error :{ (_) -> Void in
-                print("searchTextField error")
+                loggingPrint("searchTextField error")
         })
         
         
         // Signal to check network connectivity
 //        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
 //        networkSignal.subscribeNext({ (_) -> Void in
-//            print("networkSignal subscribe")
+//            loggingPrint("networkSignal subscribe")
 //            }, error: { (_) -> Void in
-//                print("networkSignal error")
+//                loggingPrint("networkSignal error")
 //        })
         
 
@@ -151,9 +151,9 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
 //        updateAllCelebritiesCelScoreSignal
 //            .subscribeNext({ (object: AnyObject!) -> Void in
-//                        print("updateAllCelebritiesCelScore subscribe")
+//                        loggingPrint("updateAllCelebritiesCelScore subscribe")
 //                        }, error: { (_) -> Void in
-//                            print("updateAllCelebritiesCelScore error")
+//                            loggingPrint("updateAllCelebritiesCelScore error")
 //        })
     }
     
@@ -193,7 +193,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //            .subscribeNext({ (object: AnyObject!) -> Void in
 //                },
 //                error: { (error: NSError!) -> Void in
-//                    print("initCelebrityViewModelSignal error: \(error)")
+//                    loggingPrint("initCelebrityViewModelSignal error: \(error)")
 //            })
         
         //celebrityVM.updateCelebrityViewModelSignal(periodSetting.Every_Minute.rawValue)
@@ -213,15 +213,15 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
         let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
         //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: (celebrityVM.celebrityInfo?.id)!)
-        //print("ROW \(ratings.ratings!.description)")
+        //loggingPrint("ROW \(ratings.ratings!.description)")
         
         /* store ratings locally */
 //        ratings.updateUserRatingsInRealmSignal()
 //                .subscribeNext({ (object: AnyObject!) -> Void in
-//                    print("updateUserRatingsInRealmSignal success")
+//                    loggingPrint("updateUserRatingsInRealmSignal success")
 //                },
 //                error: { (error: NSError!) -> Void in
-//                    print("updateUserRatingsInRealmSignal error: \(error)")
+//                    loggingPrint("updateUserRatingsInRealmSignal error: \(error)")
 //                })
         
         /* retrieve user ratings */
@@ -237,16 +237,16 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     
     // MARK: UITextFieldDelegate methods.
     func textFieldDidBeginEditing(textField: UITextField) {
-        print("textFieldDidBeginEditing")
+        loggingPrint("textFieldDidBeginEditing")
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        print("textFieldShouldEndEditing")
+        loggingPrint("textFieldShouldEndEditing")
         return false
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
+        loggingPrint("textFieldShouldReturn")
         textField.resignFirstResponder()
         return true
     }
@@ -254,11 +254,11 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else {
-            print(error)
+            loggingPrint(error)
             return
         }
         guard result.isCancelled == false else {
-            print("canceled")
+            loggingPrint("canceled")
             return
         }
         
@@ -268,13 +268,13 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
 //            .start { event in
 //                switch(event) {
 //                case let .Next(value):
-//                    print("getCelebsFromAWSSignal Next: \(value)")
+//                    loggingPrint("getCelebsFromAWSSignal Next: \(value)")
 //                case let .Error(error):
-//                    print("getCelebsFromAWSSignal Error: \(error)")
+//                    loggingPrint("getCelebsFromAWSSignal Error: \(error)")
 //                case .Completed:
-//                    print("getCelebsFromAWSSignal Completed")
+//                    loggingPrint("getCelebsFromAWSSignal Completed")
 //                case .Interrupted:
-//                    print("getCelebsFromAWSSignal Interrupted")
+//                    loggingPrint("getCelebsFromAWSSignal Interrupted")
 //                }
 //        }
         
@@ -282,48 +282,48 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("userVM.loginCognitoSignal Next: \(value)")
-                    
-                    let realm = try! Realm()
-                    let userRatingsArray = realm.objects(RatingsModel)
-                    if userRatingsArray.count > 0
-                    {
-                        self.userVM.updateUserRatingsOnCognitoSignal()
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("userVM.loginCognitoSignal Value: \(value)")
-
-                                case let .Error(error):
-                                    print("userVM.loginCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("userVM.loginCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("userVM.loginCognitoSignal Interrupted")
-                                }
-                        }
-                    } else
-                    {
-                        self.userVM.getUserRatingsFromCognitoSignal()
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("userVM.loginCognitoSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("userVM.loginCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("userVM.loginCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("userVM.loginCognitoSignal Interrupted")
-                                }
-                        }
-                    }
+                    loggingPrint("userVM.loginCognitoSignal Next: \(value)")
+//                    
+//                    let realm = try! Realm()
+//                    let userRatingsArray = realm.objects(RatingsModel)
+//                    if userRatingsArray.count > 0
+//                    {
+//                        self.userVM.updateUserRatingsOnCognitoSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    loggingPrint("userVM.loginCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    loggingPrint("userVM.loginCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    loggingPrint("userVM.loginCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    loggingPrint("userVM.loginCognitoSignal Interrupted")
+//                                }
+//                        }
+//                    } else
+//                    {
+//                        self.userVM.getUserRatingsFromCognitoSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    loggingPrint("userVM.loginCognitoSignal Value: \(value)")
+//                                    
+//                                case let .Error(error):
+//                                    loggingPrint("userVM.loginCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    loggingPrint("userVM.loginCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    loggingPrint("userVM.loginCognitoSignal Interrupted")
+//                                }
+//                        }
+//                    }
                 case let .Error(error):
-                    print("userVM.loginCognitoSignal Error: \(error)")
+                    loggingPrint("userVM.loginCognitoSignal Error: \(error)")
                 case .Completed:
-                    print("userVM.loginCognitoSignal Completed")
+                    loggingPrint("userVM.loginCognitoSignal Completed")
                 case .Interrupted:
-                    print("userVM.loginCognitoSignal Interrupted")
+                    loggingPrint("userVM.loginCognitoSignal Interrupted")
                 }
         }
     }
