@@ -11,6 +11,7 @@ import AsyncDisplayKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 import ReactiveCocoa
+import RealmSwift
 
 enum FBLoginError : ErrorType {
     case Error
@@ -261,12 +262,47 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             print("canceled")
             return
         }
-
+        
         userVM.loginCognitoSignal(result.token.tokenString)
             .start { event in
                 switch(event) {
                 case let .Next(value):
                     print("userVM.loginCognitoSignal Next: \(value)")
+                    
+                    let realm = try! Realm()
+                    let userRatingsArray = realm.objects(RatingsModel)
+                    if userRatingsArray.count > 0
+                    {
+                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
+                        self.userVM.updateUserRatingsOnCognitoSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("userVM.loginCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("userVM.loginCognitoSignal Interrupted")
+                                }
+                        }
+                    } else
+                    {
+                        self.userVM.getUserRatingsFromCognitoSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("userVM.loginCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("userVM.loginCognitoSignal Interrupted")
+                                }
+                        }
+                    }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")
                 case .Completed:
@@ -274,33 +310,6 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                 case .Interrupted:
                     print("userVM.loginCognitoSignal Interrupted")
                 }
-                
-                //                .subscribeNext({ (object: AnyObject!) -> Void in
-                //                    print("loginCognitoSignal success")
-                //
-                //                    //let userRatingsArray = RatingsModel.
-                //                    if 4 ==  4 //userRatingsArray.count > 0
-                //                    {
-                //                        //self.userVM.recurringUpdateUserRatingsOnCognitoSignal(frequency: periodSetting.Daily.rawValue)
-                //                        self.userVM.updateUserRatingsOnCognitoSignal()
-                //                            .subscribeNext({ (_) -> Void in
-                //                                print("updateUserRatingsOnCognitoSignal subscribe")
-                //                                }, error: { (_) -> Void in
-                //                                    print("updateUserRatingsOnCognitoSignal error")
-                //                            })
-                //                    } else
-                //                    {
-                //                        self.userVM.getUserRatingsFromCognitoSignal()
-                //                            .subscribeNext({ (_) -> Void in
-                //                                print("getUserRatingsFromCognitoSignal subscribe")
-                //                                }, error: { (_) -> Void in
-                //                                    print("getUserRatingsFromCognitoSignal error")
-                //                            })
-                //                    }
-                //                    },
-                //                    error: { (error: NSError!) -> Void in
-                //                        print("loginCognitoSignal error: \(error)")
-                //                })
         }
     }
     
