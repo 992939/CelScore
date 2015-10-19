@@ -17,7 +17,6 @@
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */; settings = {ASSET_TAGS = (); }; };
 		00B6F0331BC79C8F000DA1C6 /* CSEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */; settings = {ASSET_TAGS = (); }; };
-		00ED60821BD54EB00048D227 /* LoggingPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED60811BD54EB00048D227 /* LoggingPrint.swift */; settings = {ASSET_TAGS = (); }; };
 		00F6C9D71B35393C0078CA6E /* CelebrityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* CelebrityListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -57,7 +56,6 @@
 		00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCelScoreAPIClient.m; sourceTree = "<group>"; };
 		00B6F0301BC79C8F000DA1C6 /* CSEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEmpty.h; sourceTree = "<group>"; };
 		00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEmpty.m; sourceTree = "<group>"; };
-		00ED60811BD54EB00048D227 /* LoggingPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingPrint.swift; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* CelebrityListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				00ED60811BD54EB00048D227 /* LoggingPrint.swift */,
 				00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */,
 			);
 			name = Utils;
@@ -379,7 +376,6 @@
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
 				00AA9BAE1BB4AF1500A809C1 /* Reachability.swift in Sources */,
 				00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */,
-				00ED60821BD54EB00048D227 /* LoggingPrint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +499,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
@@ -519,7 +515,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;

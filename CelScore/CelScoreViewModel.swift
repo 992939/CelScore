@@ -44,9 +44,9 @@ class CelScoreViewModel: NSObject {
                 // on the main thread, like this:
                 dispatch_async(dispatch_get_main_queue()) {
                     if reachability.isReachableViaWiFi() {
-                        loggingPrint("Reachable via WiFi")
+                        print("Reachable via WiFi")
                     } else {
-                        loggingPrint("Reachable via Cellular")
+                        print("Reachable via Cellular")
                     }
                 }
                 sendNext(sink, "Reachable")
@@ -56,7 +56,7 @@ class CelScoreViewModel: NSObject {
                 // and if you are updating the UI it needs to happen
                 // on the main thread, like this:
                 dispatch_async(dispatch_get_main_queue()) {
-                    loggingPrint("Not reachable")
+                    print("Not reachable")
                 }
                 sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil))
             }

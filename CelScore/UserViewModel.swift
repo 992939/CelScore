@@ -56,13 +56,13 @@ class UserViewModel : NSObject {
 //                return updateUserInfoOnCognitoSignal().start { event in
 //                    switch(event) {
 //                    case let .Next(value):
-//                        loggingPrint("updateUserInfoOnCognitoSignal() Next: \(value)")
+//                        print("updateUserInfoOnCognitoSignal() Next: \(value)")
 //                    case let .Error(error):
-//                        loggingPrint("updateUserInfoOnCognitoSignal() Error: \(error)")
+//                        print("updateUserInfoOnCognitoSignal() Error: \(error)")
 //                    case .Completed:
-//                        loggingPrint("updateUserInfoOnCognitoSignal() Completed")
+//                        print("updateUserInfoOnCognitoSignal() Completed")
 //                    case .Interrupted:
-//                        loggingPrint("updateUserInfoOnCognitoSignal() Interrupted")
+//                        print("updateUserInfoOnCognitoSignal() Interrupted")
 //                    }
 //                }
 //            }
@@ -70,12 +70,12 @@ class UserViewModel : NSObject {
 //    .subscribeNext({ (object: AnyObject!) -> Void in
 //                self.updateUserInfoOnCognitoSignal(object)
 //                    .subscribeNext({ (object: AnyObject!) -> Void in
-//                        loggingPrint("updateUserInfoOnCognitoSignal success.")
+//                        print("updateUserInfoOnCognitoSignal success.")
 //                        }, error: { (error: NSError!) -> Void in
-//                            loggingPrint("updateUserInfoOnCognitoSignal failed.")
+//                            print("updateUserInfoOnCognitoSignal failed.")
 //                    })
 //                }, error: { (error: NSError!) -> Void in
-//                    loggingPrint("NSNotification failed.")
+//                    print("NSNotification failed.")
 //            })
     }
     
@@ -132,7 +132,7 @@ class UserViewModel : NSObject {
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize()
             
-            loggingPrint("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
+            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
             
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
@@ -196,7 +196,7 @@ class UserViewModel : NSObject {
             
             let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
-            loggingPrint("COUNT IS \(userRatingsArray.count)")
+            print("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")

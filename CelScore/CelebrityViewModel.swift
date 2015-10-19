@@ -74,11 +74,11 @@ class CelebrityViewModel : NSObject {
                 case let .Next(value):
                     self.celebrityInfo = value!
                 case let .Error(error):
-                    loggingPrint("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
+                    print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
                 case .Completed:
-                    loggingPrint("getCelebrityWithIdFromLocalStoreSignal Completed")
+                    print("getCelebrityWithIdFromLocalStoreSignal Completed")
                 case .Interrupted:
-                    loggingPrint("getCelebrityWithIdFromLocalStoreSignal Interrupted")
+                    print("getCelebrityWithIdFromLocalStoreSignal Interrupted")
                 }
         }
     }

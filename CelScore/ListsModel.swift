@@ -29,7 +29,7 @@ public class ListsModel: Object {
         
         self.id = dictionary["listID"] as! String
         self.name = dictionary["name"] as! String
-        loggingPrint(dictionary["list"])
+        print(dictionary["list"])
         let items = dictionary["list"] as! NSArray
         
         for (index, _) in items.enumerate() {
