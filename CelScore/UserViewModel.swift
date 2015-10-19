@@ -16,7 +16,6 @@ class UserViewModel : NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    //"us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     
     enum listSetting {
         case A_List
@@ -195,7 +194,7 @@ class UserViewModel : NSObject {
             
             let realm = try! Realm()
             
-            let predicate = NSPredicate(format: "isSynced = true")// false")
+            let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
             print("COUNT IS \(userRatingsArray.count)")
             
