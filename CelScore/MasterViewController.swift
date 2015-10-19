@@ -257,10 +257,26 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
             print(error)
             return
         }
-        guard result.isCancelled else {
+        guard result.isCancelled == false else {
             print("canceled")
             return
         }
+        
+//        self.celscoreVM.getCelebRatingsFromAWSSignal()
+//            .take(2)
+//            .startOn(QueueScheduler.mainQueueScheduler)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("getCelebsFromAWSSignal Next: \(value)")
+//                case let .Error(error):
+//                    print("getCelebsFromAWSSignal Error: \(error)")
+//                case .Completed:
+//                    print("getCelebsFromAWSSignal Completed")
+//                case .Interrupted:
+//                    print("getCelebsFromAWSSignal Interrupted")
+//                }
+//        }
         
         userVM.loginCognitoSignal(result.token.tokenString)
             .start { event in
@@ -277,6 +293,7 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                                 switch(event) {
                                 case let .Next(value):
                                     print("userVM.loginCognitoSignal Value: \(value)")
+
                                 case let .Error(error):
                                     print("userVM.loginCognitoSignal Error: \(error)")
                                 case .Completed:

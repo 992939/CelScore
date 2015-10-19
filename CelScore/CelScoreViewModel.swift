@@ -14,7 +14,6 @@ class CelScoreViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    //"us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     var displayedCelebrityListVM : CelebrityListViewModel
     var searchedCelebrityListVM : CelebrityListViewModel
 

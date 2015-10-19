@@ -50,22 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func update () -> CelScoreViewModel
     {
         let celscoreVM = CelScoreViewModel()
-        
-        celscoreVM.getCelebRatingsFromAWSSignal()
-            .take(2)
-            .startOn(QueueScheduler.mainQueueScheduler)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("getCelebsFromAWSSignal Next: \(value)")
-                case let .Error(error):
-                    print("getCelebsFromAWSSignal Error: \(error)")
-                case .Completed:
-                    print("getCelebsFromAWSSignal Completed")
-                case .Interrupted:
-                    print("getCelebsFromAWSSignal Interrupted")
-                }
-            }
         return celscoreVM
     }
 }

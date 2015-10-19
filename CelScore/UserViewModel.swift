@@ -103,8 +103,6 @@ class UserViewModel : NSObject {
         return SignalProducer {
             sink, _ in
             
-            AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
-            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
@@ -197,7 +195,7 @@ class UserViewModel : NSObject {
             
             let realm = try! Realm()
             
-            let predicate = NSPredicate(format: "isSynced = false")
+            let predicate = NSPredicate(format: "isSynced = true")// false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
             print("COUNT IS \(userRatingsArray.count)")
             
