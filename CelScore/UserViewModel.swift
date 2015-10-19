@@ -169,10 +169,13 @@ class UserViewModel : NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
+            //AWSLogger.defaultLogger().logLevel = .Verbose
+            
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
-            print("Dataset is \(dataset.description) AND COUNT is \(dataset.numRecords)")
+            print("Dataset is \(dataset.getAll()) AND COUNT is \(dataset.numRecords)")
             
+            //dataset.datasetMergedHandler
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 
                 guard task.error == nil else {
