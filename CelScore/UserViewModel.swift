@@ -173,9 +173,6 @@ class UserViewModel : NSObject {
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
-            print("Dataset is \(dataset.getAll()) AND COUNT is \(dataset.numRecords)")
-            
-            //dataset.datasetMergedHandler
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 
                 guard task.error == nil else {
@@ -184,7 +181,7 @@ class UserViewModel : NSObject {
                     return task
                 }
                 
-                sendNext(sink, task.result)
+                sendNext(sink, dataset.getAll())
                 sendCompleted(sink)
                 return task
             })
