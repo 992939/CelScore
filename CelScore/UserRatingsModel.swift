@@ -1,15 +1,15 @@
 //
-//  RatingsModel.swift
+//  UserRatingsModel.swift
 //  CelScore
 //
-//  Created by Gareth.K.Mensah on 7/5/15.
-//  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
+//  Created by Gareth.K.Mensah on 10/18/15.
+//  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
 
-public class RatingsModel: Object {
+public class UserRatingsModel: Object {
     dynamic var id = ""
     dynamic var updatedAt = ""
     dynamic var rating1 : Double = 0
@@ -56,6 +56,3 @@ public class RatingsModel: Object {
     }
 }
 
-class UserRatingsModel : RatingsModel {
-    
-}
