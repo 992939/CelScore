@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class CelebrityModel: Object {
+public final class CelebrityModel: Object {
     dynamic var id = ""
     dynamic var birthdate : String = ""
     dynamic var firstName : String = ""

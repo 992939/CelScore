@@ -15,7 +15,7 @@ enum ListError : ErrorType {
     case Empty
 }
 
-class CelebrityListViewModel: NSObject {
+final class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
     var searchText = ""

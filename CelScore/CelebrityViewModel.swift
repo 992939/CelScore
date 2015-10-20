@@ -14,7 +14,7 @@ enum CelebrityError : ErrorType {
     case NoFound
 }
 
-class CelebrityViewModel : NSObject {
+final class CelebrityViewModel : NSObject {
     
     //MARK: Properties
     var celebrityInfo: CelebrityModel?

@@ -13,7 +13,7 @@ class CelebId: Object {
     dynamic var id = ""
 }
 
-public class ListsModel: Object {
+public final class ListsModel: Object {
     dynamic var id = ""
     dynamic var name : String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0

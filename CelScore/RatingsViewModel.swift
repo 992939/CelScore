@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RatingsViewModel: NSObject {
+final class RatingsViewModel: NSObject {
     
     //MARK: Properties
     var ratings : RatingsModel?

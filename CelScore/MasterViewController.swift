@@ -18,7 +18,7 @@ enum FBLoginError : ErrorType {
     case Cancel
 }
 
-class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
     var loadingIndicator: UIActivityIndicatorView!

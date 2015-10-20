@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class CelebrityTableViewCell: ASCellNode {
+final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     func bindViewModel(viewModel: AnyObject) {

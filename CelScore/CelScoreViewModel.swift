@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class CelScoreViewModel: NSObject {
+final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
