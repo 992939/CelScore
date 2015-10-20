@@ -48,24 +48,34 @@ class UserViewModel : NSObject {
         
         super.init()
         
-        NSNotificationCenter.defaultCenter()
-            .rac_notifications(FBSDKProfileDidChangeNotification)
-            //.skip(1)
-//            .start { _ in
-//                
-//                return updateUserInfoOnCognitoSignal().start { event in
-//                    switch(event) {
-//                    case let .Next(value):
-//                        print("updateUserInfoOnCognitoSignal() Next: \(value)")
-//                    case let .Error(error):
-//                        print("updateUserInfoOnCognitoSignal() Error: \(error)")
-//                    case .Completed:
-//                        print("updateUserInfoOnCognitoSignal() Completed")
-//                    case .Interrupted:
-//                        print("updateUserInfoOnCognitoSignal() Interrupted")
-//                    }
-//                }
-//            }
+        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
+            .start { _ in
+                
+                return getUserInfoFromFacebookSignal().start { event in
+                    switch(event) {
+                    case let .Next(value):
+                        print("updateUserInfoOnCognitoSignal() Next: \(value)")
+                        self.updateUserInfoOnCognitoSignal(value).start { event in
+                            switch(event) {
+                                case let .Next(value):
+                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
+                            case let .Error(error):
+                                print("getUserInfoFromFacebookSignal() Error: \(error)")
+                            case .Completed:
+                                print("getUserInfoFromFacebookSignal() Completed")
+                            case .Interrupted:
+                                print("getUserInfoFromFacebookSignal() Interrupted")
+                            }
+                            }
+                    case let .Error(error):
+                        print("getUserInfoFromFacebookSignal() Error: \(error)")
+                    case .Completed:
+                        print("getUserInfoFromFacebookSignal() Completed")
+                    case .Interrupted:
+                        print("getUserInfoFromFacebookSignal() Interrupted")
+                    }
+                }
+            }
     
 //    .subscribeNext({ (object: AnyObject!) -> Void in
 //                self.updateUserInfoOnCognitoSignal(object)
