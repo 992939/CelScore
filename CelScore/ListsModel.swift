@@ -17,6 +17,7 @@ public final class ListsModel: Object {
     dynamic var id = ""
     dynamic var name : String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
+    dynamic var count: Int = 0
     private let celebList = List<CelebId>()
     dynamic var isSynced: Bool = false
     
@@ -37,6 +38,7 @@ public final class ListsModel: Object {
             celebId.id = items[index] as! String
             self.celebList.append(celebId)
         }
+        self.count = self.celebList.count
         self.isSynced = true
     }
 }

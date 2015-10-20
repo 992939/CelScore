@@ -206,7 +206,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.celscoreVM.displayedCelebrityListVM.celebrityList.celebList.count
+        return self.celscoreVM.displayedCelebrityListVM.celebrityList.count
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
