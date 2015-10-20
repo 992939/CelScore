@@ -49,7 +49,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Initialization Logic
     func update () -> CelScoreViewModel
     {
-        let celscoreVM = CelScoreViewModel()
-        return celscoreVM
+        return CelScoreViewModel()
     }
 }
