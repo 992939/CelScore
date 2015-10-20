@@ -283,41 +283,40 @@ class MasterViewController: UIViewController, ASTableViewDataSource, ASTableView
                 switch(event) {
                 case let .Next(value):
                     print("userVM.loginCognitoSignal Next: \(value)")
-//                    
-//                    let realm = try! Realm()
-//                    let userRatingsArray = realm.objects(RatingsModel)
-//                    if userRatingsArray.count > 0
-//                    {
-//                        self.userVM.updateUserRatingsOnCognitoSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("userVM.loginCognitoSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("userVM.loginCognitoSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("userVM.loginCognitoSignal Completed")
-//                                case .Interrupted:
-//                                    print("userVM.loginCognitoSignal Interrupted")
-//                                }
-//                        }
-//                    } else
-//                    {
-//                        self.userVM.getUserRatingsFromCognitoSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("userVM.loginCognitoSignal Value: \(value)")
-//                                    
-//                                case let .Error(error):
-//                                    print("userVM.loginCognitoSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("userVM.loginCognitoSignal Completed")
-//                                case .Interrupted:
-//                                    print("userVM.loginCognitoSignal Interrupted")
-//                                }
-//                        }
-//                    }
+                    
+                    let realm = try! Realm()
+                    let userRatingsArray = realm.objects(RatingsModel)
+                    if userRatingsArray.count > 0
+                    {
+                        self.userVM.updateUserRatingsOnCognitoSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("userVM.loginCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("userVM.loginCognitoSignal Interrupted")
+                                }
+                        }
+                    } else
+                    {
+                        self.userVM.getUserRatingsFromCognitoSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("userVM.loginCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("userVM.loginCognitoSignal Interrupted")
+                                }
+                        }
+                    }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")
                 case .Completed:

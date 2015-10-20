@@ -158,7 +158,7 @@ class UserViewModel : NSObject {
         }
     }
     
-    func getUserRatingsFromCognitoSignal() -> SignalProducer<AnyObject!, NSError> {
+    func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -177,6 +177,10 @@ class UserViewModel : NSObject {
                     sendError(sink, task.error)
                     return task
                 }
+                
+                dataset.getAll().forEach({ dico in
+                    UserRatingsModel(string: dico.1 as! String, id: dico.0 as! String)
+                })
                 
                 sendNext(sink, dataset.getAll())
                 sendCompleted(sink)

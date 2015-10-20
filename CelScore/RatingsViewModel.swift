@@ -38,7 +38,7 @@ class RatingsViewModel: NSObject {
         }
     }
     
-    func retrieveRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
+    func retrieveUserRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -60,7 +60,7 @@ class RatingsViewModel: NSObject {
         }
     }
     
-    func retrieveUserRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
+    func retrieveRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
             

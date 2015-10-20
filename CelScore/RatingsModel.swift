@@ -57,5 +57,11 @@ public class RatingsModel: Object {
 }
 
 class UserRatingsModel : RatingsModel {
-    
+    internal convenience init(string: String, id: String) {
+        self.init()
+        
+        self.id = id
+        
+        self.isSynced = true
+    }
 }
