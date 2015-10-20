@@ -131,8 +131,6 @@ class UserViewModel : NSObject {
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
             dataset.synchronize()
             
-            print("HEY YA \(dataset.getAll().description) COUNT \(dataset.getAll().count)")
-            
             if dataset.getAll().count == 0 {
                 dataset.setString(object.objectForKey("name") as! String, forKey: "name")
                 dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
@@ -195,7 +193,6 @@ class UserViewModel : NSObject {
             
             let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
-            print("COUNT IS \(userRatingsArray.count)")
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
