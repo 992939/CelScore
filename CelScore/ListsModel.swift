@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class CelebId: Object {
+private class CelebId: Object {
     dynamic var id = ""
 }
 
@@ -17,7 +17,7 @@ public final class ListsModel: Object {
     dynamic var id = ""
     dynamic var name : String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
-    let celebList = List<CelebId>()
+    private let celebList = List<CelebId>()
     dynamic var isSynced: Bool = false
     
     override public class func primaryKey() -> String {
