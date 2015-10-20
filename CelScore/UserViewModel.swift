@@ -57,7 +57,7 @@ class UserViewModel : NSObject {
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
                         self.updateUserInfoOnCognitoSignal(value).start { event in
                             switch(event) {
-                                case let .Next(value):
+                            case let .Next(value):
                                 print("updateUserInfoOnCognitoSignal() Next: \(value)")
                             case let .Error(error):
                                 print("getUserInfoFromFacebookSignal() Error: \(error)")
@@ -66,7 +66,7 @@ class UserViewModel : NSObject {
                             case .Interrupted:
                                 print("getUserInfoFromFacebookSignal() Interrupted")
                             }
-                            }
+                        }
                     case let .Error(error):
                         print("getUserInfoFromFacebookSignal() Error: \(error)")
                     case .Completed:
@@ -75,18 +75,7 @@ class UserViewModel : NSObject {
                         print("getUserInfoFromFacebookSignal() Interrupted")
                     }
                 }
-            }
-    
-//    .subscribeNext({ (object: AnyObject!) -> Void in
-//                self.updateUserInfoOnCognitoSignal(object)
-//                    .subscribeNext({ (object: AnyObject!) -> Void in
-//                        print("updateUserInfoOnCognitoSignal success.")
-//                        }, error: { (error: NSError!) -> Void in
-//                            print("updateUserInfoOnCognitoSignal failed.")
-//                    })
-//                }, error: { (error: NSError!) -> Void in
-//                    print("NSNotification failed.")
-//            })
+        }
     }
     
     //MARK: Methods
@@ -234,13 +223,4 @@ class UserViewModel : NSObject {
             })
         }
     }
-    
-//    func recurringUpdateUserRatingsOnCognitoSignal(frequency frequency: NSTimeInterval) -> RACSignal {
-//        let scheduler : RACScheduler =  RACScheduler(priority: RACSchedulerPriorityDefault)
-//        let recurringSignal = RACSignal.interval(frequency, onScheduler: scheduler).startWith(NSDate())
-//        
-//        return recurringSignal.flattenMap({ (text: AnyObject!) -> RACStream! in
-//            return self.updateUserRatingsOnCognitoSignal()
-//        })
-//    }
 }
