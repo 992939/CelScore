@@ -91,32 +91,48 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
         
         
-       // Signal to search for a celebrity or a #list
-       self.searchTextField.rac_textSignal()
-        .filter { (d:AnyObject!) -> Bool in
-            let token = d as! NSString
-            return token.length > 0
-        }
-        .distinctUntilChanged()
-        .throttle(1)
-        .flattenMap { (d:AnyObject!) -> RACStream! in
-            let token = d as! String
-            let isList = token.hasPrefix("#")
-            
-            let searchSignal : RACSignal
-            if isList {
-               searchSignal = RACSignal()// self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
-            } else
-            {
-                searchSignal = RACSignal() //self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+       // SEARCH
+        let searchString = self.searchTextField.rac_textSignal().toSignalProducer()
+            .filter { $0!.count > 3 }
+            .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .flatMap(FlattenStrategy.Latest) { token in
+                
+                let searchSignal : SignalProducer<AnyObject!, NSError>
+                if token.hasPrefix("#") {
+                    searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+                } else
+                {
+                    searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+                }
+                return searchSignal
             }
-            return searchSignal
-        }
-        .subscribeNext({ (d:AnyObject!) -> Void in
-            print("searchTextField signal returned \(d)")
-            }, error :{ (_) -> Void in
-                print("searchTextField error")
-        })
+            .observeOn(UIScheduler())
+        
+
+//        .filter { (d:AnyObject!) -> Bool in
+//            let token = d as! NSString
+//            return token.length > 0
+//        }
+//        .distinctUntilChanged()
+//        .throttle(1)
+//        .flattenMap { (d:AnyObject!) -> RACStream! in
+//            let token = d as! String
+//            let isList = token.hasPrefix("#")
+//            
+//            let searchSignal : SignalProducer<AnyObject!, NSError>
+//            if isList {
+//               searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+//            } else
+//            {
+//                searchSignal = RACSignal() //self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+//            }
+//            return searchSignal
+//        }
+//        .subscribeNext({ (d:AnyObject!) -> Void in
+//            print("searchTextField signal returned \(d)")
+//            }, error :{ (_) -> Void in
+//                print("searchTextField error")
+//        })
         
         
         // Signal to check network connectivity

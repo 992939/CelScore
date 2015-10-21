@@ -12,8 +12,6 @@ import AsyncDisplayKit
 final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
-    func bindViewModel(viewModel: AnyObject) {
-        
-    }
+    func bindViewModel(viewModel: AnyObject) {}
 
 }
