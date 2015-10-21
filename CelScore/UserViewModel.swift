@@ -178,9 +178,17 @@ final class UserViewModel : NSObject {
                     return task
                 }
                 
+                let realm = try! Realm()
+                print(realm.objects(RatingsModel))
+                realm.beginWrite()
+                
                 dataset.getAll().forEach({ dico in
-                    UserRatingsModel(string: dico.1 as! String, id: dico.0 as! String)
+                    
+                    let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
+                    realm.add(userRatings, update: true)
                 })
+                
+                try! realm.commitWrite()
                 
                 sendNext(sink, dataset.getAll())
                 sendCompleted(sink)
@@ -208,7 +216,7 @@ final class UserViewModel : NSObject {
                 let ratings: RatingsModel = userRatingsArray[index]
                 dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 ratings.isSynced = true
-                realm.add(ratings)
+                realm.add(ratings, update: true)
             }
             try! realm.commitWrite()
             

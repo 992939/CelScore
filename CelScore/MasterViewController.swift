@@ -267,7 +267,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     
                     let realm = try! Realm()
                     let userRatingsArray = realm.objects(RatingsModel)
-                    if userRatingsArray.count > 0
+                    if userRatingsArray.count == 0
                     {
                         self.userVM.updateUserRatingsOnCognitoSignal()
                             .start { event in
@@ -284,33 +284,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         }
                     } else
                     {
-                        self.celscoreVM.getCelebRatingsFromAWSSignal()
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
-                                case .Completed:
-                                    print("getCelebRatingsFromAWSSignal Completed")
-                                case .Interrupted:
-                                    print("getCelebRatingsFromAWSSignal Interrupted")
-                                }
-                        }
-                        
-//                        self.userVM.getUserRatingsFromCognitoSignal()
+//                        self.celscoreVM.getCelebRatingsFromAWSSignal()
 //                            .start { event in
 //                                switch(event) {
 //                                case let .Next(value):
-//                                    print("userVM.loginCognitoSignal Value: \(value)")
+//                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
 //                                case let .Error(error):
-//                                    print("userVM.loginCognitoSignal Error: \(error)")
+//                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
 //                                case .Completed:
-//                                    print("userVM.loginCognitoSignal Completed")
+//                                    print("getCelebRatingsFromAWSSignal Completed")
 //                                case .Interrupted:
-//                                    print("userVM.loginCognitoSignal Interrupted")
+//                                    print("getCelebRatingsFromAWSSignal Interrupted")
 //                                }
 //                        }
+                        
+                        self.userVM.getUserRatingsFromCognitoSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("userVM.loginCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("userVM.loginCognitoSignal Interrupted")
+                                }
+                        }
                     }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")

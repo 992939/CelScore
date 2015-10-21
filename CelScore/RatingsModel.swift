@@ -57,11 +57,22 @@ public class RatingsModel: Object {
 }
 
 class UserRatingsModel : RatingsModel {
-    internal convenience init(string: String, id: String) {
+    internal convenience init(id: String, string: String) {
         self.init()
         
         self.id = id
-        
         self.isSynced = true
+        
+        let ratingArray = string.componentsSeparatedByString("/").flatMap { Double($0) }
+        self.rating1 = ratingArray[0]
+        self.rating2 = ratingArray[1]
+        self.rating3 = ratingArray[2]
+        self.rating4 = ratingArray[3]
+        self.rating5 = ratingArray[4]
+        self.rating6 = ratingArray[5]
+        self.rating7 = ratingArray[6]
+        self.rating8 = ratingArray[7]
+        self.rating9 = ratingArray[8]
+        self.rating10 = ratingArray[9]
     }
 }
