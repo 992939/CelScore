@@ -80,7 +80,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         userVM = UserViewModel()
         
         // LOGIN
-        
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
@@ -94,24 +93,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.view.addSubview(loginButton)
         }
         
-        
        // SEARCH
-        
-        self.searchSignalProducer
-            .skip(1)
-            .map { $0 as! String }
-            .filter { $0.characters.count > 3 }
-            .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .startWithNext { token in
-                if token.hasPrefix("#") {
-                    self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
-                } else
-                {
-                    self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
-                }
-        }
+        self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
 
-        
         
         // Signal to check network connectivity
 //        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
@@ -298,5 +282,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
+}
+
+//MARK: Extensions
+extension UITextField {
+    func rac_textSignalProducer() -> SignalProducer<String, NoError> {
+        return self.rac_textSignal().toSignalProducer()
+            .map { $0 as! String }
+            .flatMapError { _ in SignalProducer<String, NoError>.empty }
+    }
 }
 

@@ -26,9 +26,8 @@ final class CelebrityListViewModel: NSObject {
     init(searchToken: String) {
         super.init()
         
-        searchForCelebritiesSignal(searchToken: searchToken)
+        searchText.producer
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .map { $0 as! String }
             .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .startWithNext { token in
