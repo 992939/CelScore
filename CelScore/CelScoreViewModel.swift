@@ -24,7 +24,6 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Initializers
     override init() {
-        
         displayedCelebrityListVM = CelebrityListViewModel()
         searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
 
