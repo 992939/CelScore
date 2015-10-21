@@ -77,7 +77,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     {
         userVM = UserViewModel()
         
-        
         // LOGIN
         
         loginButton = FBSDKLoginButton()
@@ -96,7 +95,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
        // SEARCH
         
-        self.searchTextField.rac_textSignal().toSignalProducer()
+        let searchSignalProducer = self.searchTextField.rac_textSignal().toSignalProducer()
             .filter { $0!.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .map { token in
