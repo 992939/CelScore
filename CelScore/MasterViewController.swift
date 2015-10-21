@@ -77,6 +77,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     {
         userVM = UserViewModel()
         
+        
+        // LOGIN
+        
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
@@ -92,10 +95,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         
        // SEARCH
+        
         self.searchTextField.rac_textSignal().toSignalProducer()
             .filter { $0!.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .startWithNext { token in
+            .map { token in
                 
                 let tokenString = String(token)
                 
@@ -106,32 +110,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: tokenString)
                 }
         }
-        
 
-//        .filter { (d:AnyObject!) -> Bool in
-//            let token = d as! NSString
-//            return token.length > 0
-//        }
-//        .distinctUntilChanged()
-//        .throttle(1)
-//        .flattenMap { (d:AnyObject!) -> RACStream! in
-//            let token = d as! String
-//            let isList = token.hasPrefix("#")
-//            
-//            let searchSignal : SignalProducer<AnyObject!, NSError>
-//            if isList {
-//               searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
-//            } else
-//            {
-//                searchSignal = RACSignal() //self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
-//            }
-//            return searchSignal
-//        }
-//        .subscribeNext({ (d:AnyObject!) -> Void in
-//            print("searchTextField signal returned \(d)")
-//            }, error :{ (_) -> Void in
-//                print("searchTextField error")
-//        })
         
         
         // Signal to check network connectivity
