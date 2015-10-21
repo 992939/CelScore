@@ -98,10 +98,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
        // SEARCH
         
         self.searchSignalProducer
-            .map { text in text as! String }
+            .skip(1)
+            .map { $0 as! String }
             .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .map { token in
+            .startWithNext { token in
                 if token.hasPrefix("#") {
                     self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
                 } else

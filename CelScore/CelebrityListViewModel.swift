@@ -18,28 +18,25 @@ enum ListError : ErrorType {
 final class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    var searchText = ""
-    var title : String = ""
-    var celebrityList = ListsModel()
+    let searchText = MutableProperty("")
+    let title = MutableProperty("")
+    lazy var celebrityList = ListsModel()
     
     //MARK: Initializers
     init(searchToken: String) {
         super.init()
         
         searchForCelebritiesSignal(searchToken: searchToken)
-        //searchForListsSignal(searchToken: "hip")
-            .take(2)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("searchForCelebritiesSignal Next: \(value)")
-                case let .Error(error):
-                    print("searchForCelebritiesSignal Error: \(error)")
-                case .Completed:
-                    print("searchForCelebritiesSignal Completed")
-                case .Interrupted:
-                    print("searchForCelebritiesSignal Interrupted")
+            .map { $0 as! String }
+            .filter { $0.characters.count > 3 }
+            .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .startWithNext { token in
+                if token.hasPrefix("#") {
+                    self.searchForListsSignal(searchToken: token)
+                } else
+                {
+                    self.searchForCelebritiesSignal(searchToken: token)
                 }
         }
     }
