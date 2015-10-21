@@ -17,6 +17,9 @@ PODS:
   - Bolts/AppLinks (1.2.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
   - FBSDKCoreKit (4.6.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.6.0)
@@ -47,6 +50,8 @@ PODS:
     - Realm (= 0.96.0)
   - Result (0.6.0-beta.3)
   - SwiftyJSON (2.3.0)
+  - TwitterCore (1.12.0)
+  - TwitterKit (1.12.0)
 
 DEPENDENCIES:
   - AsyncDisplayKit (~> 1.2.3)
@@ -55,12 +60,15 @@ DEPENDENCIES:
   - AWSCore (~> 2.2)
   - AWSLambda (~> 2.2)
   - AWSS3 (~> 2.2)
+  - Fabric
   - FBSDKCoreKit (~> 4.6)
   - FBSDKLoginKit (~> 4.6)
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
   - ReactiveCocoa (= 4.0.2-alpha-1)
   - RealmSwift (~> 0.96)
   - SwiftyJSON (~> 2.3)
+  - TwitterCore
+  - TwitterKit
 
 EXTERNAL SOURCES:
   ReachabilitySwift:
@@ -79,6 +87,7 @@ SPEC CHECKSUMS:
   AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
   AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
   FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
   ReachabilitySwift: 227b98ae7ec99e1c01148b17fb22357aa91a5675
@@ -87,5 +96,7 @@ SPEC CHECKSUMS:
   RealmSwift: 40246e6f57a4e863bfdfc1ca1d7b967f0df607e2
   Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+  TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
+  TwitterKit: c27e7b997cd82d5c626fcfd8b1dead1e15dac7ca
 
 COCOAPODS: 0.39.0

@@ -13,6 +13,9 @@ pod 'FBSDKLoginKit', '~> 4.6'
 pod 'FBSDKCoreKit', '~> 4.6'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
+pod 'Fabric'
+pod 'TwitterKit'
+pod 'TwitterCore'
 
 target 'CelScore' do
 

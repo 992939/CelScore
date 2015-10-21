@@ -87,7 +87,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
-            print("TOKEN IS \(accessToken)")
+            print("fb token \(accessToken)")
         } else
         {
             self.view.addSubview(loginButton)
@@ -95,6 +95,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
        // SEARCH
         self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
+        
+        self.celscoreVM.searchedCelebrityListVM.searchText.producer
+            .start { event in
+            switch(event) {
+            case let .Next(value):
+                print("searchedCelebrityListVM Value: \(value)")
+            case let .Error(error):
+                print("searchedCelebrityListVM Error: \(error)")
+            case .Completed:
+                print("searchedCelebrityListVM Completed")
+            case .Interrupted:
+                print("searchedCelebrityListVM Interrupted")
+            }
+        }
+        
 
         
         // Signal to check network connectivity
