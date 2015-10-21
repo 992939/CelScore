@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 import Fabric
 import TwitterKit
+import AWSCognito
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
+        Fabric.with([Twitter.self])
         window.makeKeyAndVisible()
         self.window = window
         return true
