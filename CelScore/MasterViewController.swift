@@ -61,14 +61,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 
     
     //MARK: Methods
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-//    override func viewWillLayoutSubviews() {
-//        //self.celebrityTableView.frame = self.view.bounds
-//    }
+    override func viewWillLayoutSubviews() {
+        //self.celebrityTableView.frame = self.view.bounds
+    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -81,25 +80,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
-        
-//        userVM.getCelebInfoLambdaSignal()
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                print("getCelebInfoLambdaSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    print("getCelebInfoLambdaSignal error: \(error)")
-//            })
-        
-//        userVM.getCelebRatingsLambdaSignal()
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                println("getCelebRatingsLambdaSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    println("getCelebRatingsLambdaSignal error: \(error)")
-//            })
 
-
-        
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         if let accessToken = FBSDKAccessToken.currentAccessToken()
         {
@@ -303,19 +284,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         }
                     } else
                     {
-                        self.userVM.getUserRatingsFromCognitoSignal()
+                        self.celscoreVM.getCelebRatingsFromAWSSignal()
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
-                                    print("userVM.loginCognitoSignal Value: \(value)")
+                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
                                 case let .Error(error):
-                                    print("userVM.loginCognitoSignal Error: \(error)")
+                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
                                 case .Completed:
-                                    print("userVM.loginCognitoSignal Completed")
+                                    print("getCelebRatingsFromAWSSignal Completed")
                                 case .Interrupted:
-                                    print("userVM.loginCognitoSignal Interrupted")
+                                    print("getCelebRatingsFromAWSSignal Interrupted")
                                 }
                         }
+                        
+//                        self.userVM.getUserRatingsFromCognitoSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("userVM.loginCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("userVM.loginCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("userVM.loginCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    print("userVM.loginCognitoSignal Interrupted")
+//                                }
+//                        }
                     }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")

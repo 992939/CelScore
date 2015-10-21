@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-private class CelebId: Object {
+public class CelebId: Object {
     dynamic var id = ""
 }
 
