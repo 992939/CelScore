@@ -21,6 +21,7 @@ enum FBLoginError : ErrorType {
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
+    var searchSignalProducer: SignalProducer<AnyObject?, NSError>
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
@@ -44,6 +45,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celscoreVM = viewModel
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
+        self.searchSignalProducer = self.searchTextField.rac_textSignal().toSignalProducer()
         
         super.init(nibName: nil, bundle: nil)
         
@@ -95,18 +97,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
        // SEARCH
         
-        let searchSignalProducer = self.searchTextField.rac_textSignal().toSignalProducer()
-            .filter { $0!.count > 3 }
+        self.searchSignalProducer
+            .map { text in text as! String }
+            .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .map { token in
-                
-                let tokenString = String(token)
-                
-                if token!.hasPrefix("#") {
-                    self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: tokenString)
+                if token.hasPrefix("#") {
+                    self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
                 } else
                 {
-                    self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: tokenString)
+                    self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
                 }
         }
 
@@ -209,13 +209,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     
-    // MARK: UITextFieldDelegate methods.
-    func textFieldDidBeginEditing(textField: UITextField) {
-        print("textFieldDidBeginEditing")
-    }
-    
+    // MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        print("textFieldShouldEndEditing")
         return false
     }
     
@@ -224,6 +219,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {}
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
