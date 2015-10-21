@@ -92,21 +92,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         
        // SEARCH
-        let searchString = self.searchTextField.rac_textSignal().toSignalProducer()
+        self.searchTextField.rac_textSignal().toSignalProducer()
             .filter { $0!.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMap(FlattenStrategy.Latest) { token in
+            .startWithNext { token in
                 
-                let searchSignal : SignalProducer<AnyObject!, NSError>
-                if token.hasPrefix("#") {
-                    searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: token)
+                let tokenString = String(token)
+                
+                if token!.hasPrefix("#") {
+                    self.celscoreVM.searchedCelebrityListVM.searchForListsSignal(searchToken: tokenString)
                 } else
                 {
-                    searchSignal = self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: token)
+                    self.celscoreVM.searchedCelebrityListVM.searchForCelebritiesSignal(searchToken: tokenString)
                 }
-                return searchSignal
-            }
-            .observeOn(UIScheduler())
+        }
         
 
 //        .filter { (d:AnyObject!) -> Bool in
@@ -258,22 +257,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             print("canceled")
             return
         }
-        
-//        self.celscoreVM.getCelebRatingsFromAWSSignal()
-//            .take(2)
-//            .startOn(QueueScheduler.mainQueueScheduler)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("getCelebsFromAWSSignal Next: \(value)")
-//                case let .Error(error):
-//                    print("getCelebsFromAWSSignal Error: \(error)")
-//                case .Completed:
-//                    print("getCelebsFromAWSSignal Completed")
-//                case .Interrupted:
-//                    print("getCelebsFromAWSSignal Interrupted")
-//                }
-//        }
         
         userVM.loginCognitoSignal(result.token.tokenString)
             .start { event in
