@@ -95,7 +95,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
        // SEARCH
         self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
-
+        
         
         // Signal to check network connectivity
 //        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
@@ -225,8 +225,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     print("userVM.loginCognitoSignal Next: \(value)")
                     
                     let realm = try! Realm()
-                    let userRatingsArray = realm.objects(RatingsModel)
-                    if userRatingsArray.count == 0
+                    let userRatingsArray = realm.objects(UserRatingsModel)
+                    if userRatingsArray.count > 0
                     {
                         self.userVM.updateUserRatingsOnCognitoSignal()
                             .start { event in
@@ -243,6 +243,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         }
                     } else
                     {
+                        self.celscoreVM.getCelebsInfoFromAWSSignal()
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getCelebRatingsFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getCelebRatingsFromAWSSignal Interrupted")
+                                }
+                        }
 //                        self.celscoreVM.getCelebRatingsFromAWSSignal()
 //                            .start { event in
 //                                switch(event) {
@@ -257,19 +270,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.userVM.getUserRatingsFromCognitoSignal()
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("userVM.loginCognitoSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("userVM.loginCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("userVM.loginCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("userVM.loginCognitoSignal Interrupted")
-                                }
-                        }
+//                        self.userVM.getUserRatingsFromCognitoSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("userVM.loginCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("userVM.loginCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("userVM.loginCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    print("userVM.loginCognitoSignal Interrupted")
+//                                }
+//                        }
                     }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")

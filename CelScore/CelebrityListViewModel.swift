@@ -17,10 +17,6 @@ enum ListError : ErrorType {
 
 final class CelebrityListViewModel: NSObject {
     
-//    if token.hasPrefix("#") {
-//    self.searchForListsSignal(searchToken: token)
-//    } else
-//    {
     
     //MARK: Properties
     let searchText = MutableProperty("")
@@ -28,34 +24,29 @@ final class CelebrityListViewModel: NSObject {
     let isSearching = MutableProperty<Bool>(false)
     lazy var celebrityList = ListsModel()
     
+    
     //MARK: Initializers
     init(searchToken: String) {
         super.init()
         
-        let _ = MutableProperty<String>("")
-            
-        let searchResults = self.searchText.producer
+        self.searchText.producer
             .promoteErrors(ListError.self)
-            //.then(self.searchText.producer.mapError({ _ in return NSError(domain: "com.CelScore.error", code: 0, userInfo: nil)})
             .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
-                .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in
+            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in
                 return self.searchForCelebritiesSignal(searchToken: token)
-            }//)
+            }
             .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
                 print("Error \($0)")
                 },
                 next: {
                     response in
+                    print("Search results: \(response)")
                     self.isSearching.value = false
             }))
-
-        
-//        searchResults.startWithNext { results in
-//            print("Search results: \(results)")
-//        }
     }
+    
     
     init(listId: String = "0001") {
         super.init()
@@ -76,6 +67,7 @@ final class CelebrityListViewModel: NSObject {
                 }
         }
     }
+    
     
     //MARK: Methods
     func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
