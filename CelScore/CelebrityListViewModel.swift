@@ -17,27 +17,44 @@ enum ListError : ErrorType {
 
 final class CelebrityListViewModel: NSObject {
     
+//    if token.hasPrefix("#") {
+//    self.searchForListsSignal(searchToken: token)
+//    } else
+//    {
+    
     //MARK: Properties
     let searchText = MutableProperty("")
     let title = MutableProperty("")
+    let isSearching = MutableProperty<Bool>(false)
     lazy var celebrityList = ListsModel()
     
     //MARK: Initializers
     init(searchToken: String) {
         super.init()
         
-        searchText.producer
-            .observeOn(QueueScheduler.mainQueueScheduler)
+        let _ = MutableProperty<String>("")
+            
+        let searchResults = self.searchText.producer
+            .promoteErrors(NSError.self)
+            //.then(self.searchText.producer.mapError({ _ in return NSError(domain: "com.CelScore.error", code: 0, userInfo: nil)})
             .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .startWithNext { token in
-                if token.hasPrefix("#") {
-                    self.searchForListsSignal(searchToken: token)
-                } else
-                {
-                    self.searchForCelebritiesSignal(searchToken: token)
-                }
-        }
+            .on(next: { _ in self.isSearching.value = true })
+                .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NSError> in
+                return self.searchForCelebritiesSignal(searchToken: token)
+            }//)
+            .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
+                print("Error \($0)")
+                },
+                next: {
+                    response in
+                    self.isSearching.value = false
+            }))
+
+        
+//        searchResults.startWithNext { results in
+//            print("Search results: \(results)")
+//        }
     }
     
     init(listId: String = "0001") {
@@ -61,7 +78,7 @@ final class CelebrityListViewModel: NSObject {
     }
     
     //MARK: Methods
-    func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject!, ListError> {
+    func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer {
             sink, _ in
             
@@ -71,7 +88,7 @@ final class CelebrityListViewModel: NSObject {
             let list = realm.objects(ListsModel).filter(predicate).first
             
             guard let celebList = list else {
-                sendError(sink, ListError.Empty)
+                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil)) //ListError.Empty)
                 return
             }
             sendNext(sink, celebList)
@@ -80,9 +97,9 @@ final class CelebrityListViewModel: NSObject {
     }
 
     
-    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject!, ListError> {
+    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer {
-            sink, _ in
+            sink, disposable in
             
             let realm = try! Realm()
             
@@ -90,7 +107,7 @@ final class CelebrityListViewModel: NSObject {
             let list = realm.objects(CelebrityModel).filter(predicate)
             
             guard list.count > 0 else {
-                sendError(sink, ListError.Empty)
+                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil))    //ListError.Empty)
                 return
             }
             sendNext(sink, list)
@@ -99,7 +116,7 @@ final class CelebrityListViewModel: NSObject {
     }
     
     
-    func searchForListsSignal(searchToken searchToken: String) -> SignalProducer<AnyObject!, ListError> {
+    func searchForListsSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer {
             sink, _ in
 
