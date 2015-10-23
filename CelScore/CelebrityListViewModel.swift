@@ -35,12 +35,12 @@ final class CelebrityListViewModel: NSObject {
         let _ = MutableProperty<String>("")
             
         let searchResults = self.searchText.producer
-            .promoteErrors(NSError.self)
+            .promoteErrors(ListError.self)
             //.then(self.searchText.producer.mapError({ _ in return NSError(domain: "com.CelScore.error", code: 0, userInfo: nil)})
             .filter { $0.characters.count > 3 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
-                .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NSError> in
+                .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in
                 return self.searchForCelebritiesSignal(searchToken: token)
             }//)
             .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
@@ -78,7 +78,7 @@ final class CelebrityListViewModel: NSObject {
     }
     
     //MARK: Methods
-    func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
+    func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer {
             sink, _ in
             
@@ -88,7 +88,7 @@ final class CelebrityListViewModel: NSObject {
             let list = realm.objects(ListsModel).filter(predicate).first
             
             guard let celebList = list else {
-                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil)) //ListError.Empty)
+                sendError(sink, ListError.Empty)
                 return
             }
             sendNext(sink, celebList)
@@ -97,7 +97,7 @@ final class CelebrityListViewModel: NSObject {
     }
 
     
-    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NSError> {
+    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer {
             sink, disposable in
             
@@ -107,7 +107,7 @@ final class CelebrityListViewModel: NSObject {
             let list = realm.objects(CelebrityModel).filter(predicate)
             
             guard list.count > 0 else {
-                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil))    //ListError.Empty)
+                sendError(sink, ListError.Empty)
                 return
             }
             sendNext(sink, list)
