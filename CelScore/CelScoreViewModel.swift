@@ -47,6 +47,19 @@ final class CelScoreViewModel: NSObject {
                     response in
                     print("Search results: \(response)")
             }))
+        
+//        self.createSignal().start { event in
+//            switch(event) {
+//            case let .Next(value):
+//                print("timeNotifier Next: \(value)")
+//            case let .Error(error):
+//                print("timeNotifier Error: \(error)")
+//            case .Completed:
+//                print("timeNotifier Completed")
+//            case .Interrupted:
+//                print("timeNotifier Interrupted")
+//            }
+//        }
     }
     
     //MARK: Methods
