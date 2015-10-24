@@ -9,7 +9,9 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import ReactiveCocoa
 import WillowTreeReachability
+import AIRTimer
 
 final class CelScoreViewModel: NSObject {
     
@@ -17,6 +19,7 @@ final class CelScoreViewModel: NSObject {
     let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var displayedCelebrityListVM : CelebrityListViewModel
     var searchedCelebrityListVM : CelebrityListViewModel
+    let timeNotifier = MutableProperty("")
 
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
@@ -29,6 +32,21 @@ final class CelScoreViewModel: NSObject {
         self.searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
 
         super.init()
+        
+        self.timeNotifier <~ self.createSignal()
+        
+        self.timeNotifier.producer
+            .promoteErrors(NSError.self)
+            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
+                return self.getCelebsInfoFromAWSSignal()
+            }
+            .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
+                print("BIG MISTAKE \($0)")
+                },
+                next: {
+                    response in
+                    print("Search results: \(response)")
+            }))
     }
     
     //MARK: Methods
@@ -159,6 +177,17 @@ final class CelScoreViewModel: NSObject {
                 sendCompleted(sink)
                 return task
             })
+        }
+    }
+    
+    func createSignal() -> SignalProducer<String, NoError> {
+        var count = 0
+        return SignalProducer {
+            sink, _ in
+            
+            AIRTimer.every(5, userInfo: "FIRE!!") { timer in
+                sendNext(sink, "tick #\(count++)")
+            }
         }
     }
 }

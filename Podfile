@@ -16,6 +16,7 @@ pod 'WillowTreeReachability', '~> 1.0'
 pod 'Fabric'
 pod 'TwitterKit'
 pod 'TwitterCore'
+pod 'AIRTimer'
 
 target 'CelScore' do
 

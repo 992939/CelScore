@@ -79,7 +79,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     {
         userVM = UserViewModel()
         
-        // LOGIN
+        //LOGIN
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
@@ -93,10 +93,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.view.addSubview(loginButton)
         }
         
-       // SEARCH
+       //SEARCH
         self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
-        // REACHABILITY
+        //REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
             .start { event in
                 switch(event) {
@@ -110,18 +110,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     print("checkNetworkConnectivitySignal Interrupted")
                 }
         }
-        
-
-        // Signal to update the celscore of all celebrities
-//        let updateAllCelebritiesCelScoreSignal : RACSignal = self.celscoreVM.recurringUpdateCelebritiesCelScoreSignal(frequency: periodSetting.Every_Minute.rawValue)
-//        updateAllCelebritiesCelScoreSignal
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                        print("updateAllCelebritiesCelScore subscribe")
-//                        }, error: { (_) -> Void in
-//                            print("updateAllCelebritiesCelScore error")
-//        })
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -129,7 +118,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     
     // MARK: ASTableView data source and delegate methods.
-    
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         //1. REUSE CELL/NODE?!?!
         
@@ -212,6 +200,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {}
+    
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {

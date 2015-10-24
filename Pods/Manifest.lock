@@ -1,4 +1,5 @@
 PODS:
+  - AIRTimer (1.0.2)
   - AsyncDisplayKit (1.2.3):
     - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.3)
   - AsyncDisplayKit/ASDealloc2MainObject (1.2.3)
@@ -54,6 +55,7 @@ PODS:
   - WillowTreeReachability (1.0.0)
 
 DEPENDENCIES:
+  - AIRTimer
   - AsyncDisplayKit (~> 1.2.3)
   - AWSAPIGateway (~> 2.2)
   - AWSCognito (~> 2.2)
@@ -71,6 +73,7 @@ DEPENDENCIES:
   - WillowTreeReachability (~> 1.0)
 
 SPEC CHECKSUMS:
+  AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
   AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
   AWSAPIGateway: d0b1194a788d93d48caae840c7d496c38fa7775b
   AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
