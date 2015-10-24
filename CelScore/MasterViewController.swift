@@ -238,19 +238,34 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         }
                     } else
                     {
-                        self.celscoreVM.getCelebsInfoFromAWSSignal()
+//                        self.celscoreVM.getCelebsInfoFromAWSSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("getCelebRatingsFromAWSSignal Completed")
+//                                case .Interrupted:
+//                                    print("getCelebRatingsFromAWSSignal Interrupted")
+//                                }
+//                        }
+                        
+                        self.celscoreVM.timeNotifier.producer
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
-                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
+                                    print("celscoreVM.timeNotifier.producer Value: \(value)")
                                 case let .Error(error):
-                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
+                                    print("celscoreVM.timeNotifier.producer Error: \(error)")
                                 case .Completed:
-                                    print("getCelebRatingsFromAWSSignal Completed")
+                                    print("celscoreVM.timeNotifier.producer Completed")
                                 case .Interrupted:
-                                    print("getCelebRatingsFromAWSSignal Interrupted")
+                                    print("celscoreVM.timeNotifier.producer Interrupted")
                                 }
                         }
+                        
 //                        self.celscoreVM.getCelebRatingsFromAWSSignal()
 //                            .start { event in
 //                                switch(event) {

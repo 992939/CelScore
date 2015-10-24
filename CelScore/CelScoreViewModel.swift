@@ -19,7 +19,7 @@ final class CelScoreViewModel: NSObject {
     let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var displayedCelebrityListVM : CelebrityListViewModel
     var searchedCelebrityListVM : CelebrityListViewModel
-    let timeNotifier = MutableProperty("")
+    let timeNotifier = MutableProperty<String>("")
 
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
@@ -40,26 +40,19 @@ final class CelScoreViewModel: NSObject {
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
                 return self.getCelebsInfoFromAWSSignal()
             }
-            .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-                print("BIG MISTAKE \($0)")
-                },
-                next: {
-                    response in
-                    print("Search results: \(response)")
-            }))
-        
-//        self.createSignal().start { event in
-//            switch(event) {
-//            case let .Next(value):
-//                print("timeNotifier Next: \(value)")
-//            case let .Error(error):
-//                print("timeNotifier Error: \(error)")
-//            case .Completed:
-//                print("timeNotifier Completed")
-//            case .Interrupted:
-//                print("timeNotifier Interrupted")
-//            }
-//        }
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("timeNotifier Value: \(value)")
+                case let .Error(error):
+                    print("timeNotifier Error: \(error)")
+                case .Completed:
+                    print("timeNotifier Completed")
+                case .Interrupted:
+                    print("timeNotifier Interrupted")
+                }
+        }
     }
     
     //MARK: Methods
@@ -82,6 +75,8 @@ final class CelScoreViewModel: NSObject {
     func getCelebsInfoFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
+            
+            print("Fuck with me")
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
