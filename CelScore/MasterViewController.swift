@@ -238,6 +238,23 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         }
                     } else
                     {
+
+// **** DO NOT DELETE *****
+                        
+//                        self.celscoreVM.timeNotifier.producer
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("celscoreVM.timeNotifier.producer Value: \(value)")
+//                                case let .Error(error):
+//                                    print("celscoreVM.timeNotifier.producer Error: \(error)")
+//                                case .Completed:
+//                                    print("celscoreVM.timeNotifier.producer Completed")
+//                                case .Interrupted:
+//                                    print("celscoreVM.timeNotifier.producer Interrupted")
+//                                }
+//                        }
+                        
 //                        self.celscoreVM.getCelebsInfoFromAWSSignal()
 //                            .start { event in
 //                                switch(event) {
@@ -251,20 +268,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                    print("getCelebRatingsFromAWSSignal Interrupted")
 //                                }
 //                        }
-                        
-                        self.celscoreVM.timeNotifier.producer
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("celscoreVM.timeNotifier.producer Value: \(value)")
-                                case let .Error(error):
-                                    print("celscoreVM.timeNotifier.producer Error: \(error)")
-                                case .Completed:
-                                    print("celscoreVM.timeNotifier.producer Completed")
-                                case .Interrupted:
-                                    print("celscoreVM.timeNotifier.producer Interrupted")
-                                }
-                        }
                         
 //                        self.celscoreVM.getCelebRatingsFromAWSSignal()
 //                            .start { event in
