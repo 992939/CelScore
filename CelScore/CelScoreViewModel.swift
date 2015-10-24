@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import WillowTreeReachability
 
 final class CelScoreViewModel: NSObject {
     
@@ -31,35 +32,19 @@ final class CelScoreViewModel: NSObject {
     }
     
     //MARK: Methods
-    func checkNetworkConnectivitySignal() -> SignalProducer<AnyObject!, NSError> {
+    func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NSError> {
         return SignalProducer {
             sink, _ in
             
-            let reachability = Reachability.reachabilityForInternetConnection()
-            
-            reachability?.whenReachable = { reachability in
-                // keep in mind this is called on a background thread
-                // and if you are updating the UI it needs to happen
-                // on the main thread, like this:
-                dispatch_async(dispatch_get_main_queue()) {
-                    if reachability.isReachableViaWiFi() {
-                        print("Reachable via WiFi")
-                    } else {
-                        print("Reachable via Cellular")
-                    }
-                }
-                sendNext(sink, "Reachable")
+            let reachability = Monitor()
+            reachability!.startMonitoring()
+
+            if reachability?.reachabilityStatus == .NotReachable {
+                sendError(sink, NSError(domain: "com.CelScore.Network", code: 1, userInfo: nil))
+            } else
+            {
+                sendNext(sink, (reachability?.reachabilityStatus)!)
             }
-            reachability?.whenUnreachable = { reachability in
-                // keep in mind this is called on a background thread
-                // and if you are updating the UI it needs to happen
-                // on the main thread, like this:
-                dispatch_async(dispatch_get_main_queue()) {
-                    print("Not reachable")
-                }
-                sendError(sink, NSError(domain: "com.CelScore.error", code: 0, userInfo: nil))
-            }
-            reachability?.startNotifier()
         }
     }
     

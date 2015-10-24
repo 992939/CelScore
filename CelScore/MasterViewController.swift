@@ -79,6 +79,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     {
         userVM = UserViewModel()
         
+        
         // LOGIN
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -93,17 +94,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.view.addSubview(loginButton)
         }
         
+        
        // SEARCH
         self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         
-        // Signal to check network connectivity
-//        let networkSignal : RACSignal = celscoreVM.checkNetworkConnectivitySignal()
-//        networkSignal.subscribeNext({ (_) -> Void in
-//            print("networkSignal subscribe")
-//            }, error: { (_) -> Void in
-//                print("networkSignal error")
-//        })
+        // REACHABILITY
+        self.celscoreVM.checkNetworkConnectivitySignal()
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("checkNetworkConnectivitySignal Value: \(value)")
+                case let .Error(error):
+                    print("checkNetworkConnectivitySignal Error: \(error)")
+                case .Completed:
+                    print("checkNetworkConnectivitySignal Completed")
+                case .Interrupted:
+                    print("checkNetworkConnectivitySignal Interrupted")
+                }
+        }
         
 
         // Signal to update the celscore of all celebrities
