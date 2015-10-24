@@ -79,7 +79,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     {
         userVM = UserViewModel()
         
-        
         // LOGIN
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -94,10 +93,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.view.addSubview(loginButton)
         }
         
-        
        // SEARCH
         self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
-        
         
         // REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
