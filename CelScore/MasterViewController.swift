@@ -21,7 +21,6 @@ enum FBLoginError : ErrorType {
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
-    var searchSignalProducer: SignalProducer<AnyObject?, NSError>
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
@@ -45,7 +44,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celscoreVM = viewModel
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
-        self.searchSignalProducer = self.searchTextField.rac_textSignal().toSignalProducer()
         
         super.init(nibName: nil, bundle: nil)
         
@@ -117,16 +115,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     
-    // MARK: ASTableView data source and delegate methods.
+    // MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        //1. REUSE CELL/NODE?!?!
-        
-        //2. NO DATA BINDING HERE, NO CELL ON SCREEN YET. USE WILLDISPLAYCELL()/willDisplayNodeForRowAtIndexPath
-        
-        //3. DON'T USE AUTOLAYOUT, SHIT IS SLOOOOOW
-        
-        //4. AVOID BLENDING AS IT MAKES RENDERING SLOW: RUN APP IN SIMULATOR, THEN DEBUG AND PICK ITEM "COLOR BLENDED LAYERS
-        
 //        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
 //        let starVM = celebrityVM.getCelebrityWithIdFromLocalStoreSignal(celebId: "0002")
         
