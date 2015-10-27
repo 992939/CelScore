@@ -17,7 +17,6 @@ enum ListError : ErrorType {
 
 final class CelebrityListViewModel: NSObject {
     
-    
     //MARK: Properties
     let searchText = MutableProperty("")
     let title = MutableProperty("")
@@ -124,5 +123,9 @@ final class CelebrityListViewModel: NSObject {
             sendNext(sink, list)
             sendCompleted(sink)
         }
+    }
+    
+    func getCount() -> Int {
+        return self.celebrityList.count
     }
 }

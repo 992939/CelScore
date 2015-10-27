@@ -117,16 +117,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     // MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-//        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
-//        let starVM = celebrityVM.getCelebrityWithIdFromLocalStoreSignal(celebId: "0002")
         
         //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
         
         let node = ASTextCellNode()
         node.text = "Celebrity"
-        node.autoresizesSubviews = true
-
-// SAVE FOR NOW
         
 //        celebrityVM.initCelebrityViewModelSignal!
 //            .doNext { (object: AnyObject!) -> Void in
@@ -149,32 +144,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.celscoreVM.displayedCelebrityListVM.celebrityList.count
+        return self.celscoreVM.displayedCelebrityListVM.getCount()
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let celebrityVM : CelebrityViewModel = CelebrityViewModel(celebrityId: "0001")
-        //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        let ratings = RatingsViewModel(rating: celebrityVM.ratings!, celebrityId: (celebrityVM.celebrityInfo?.id)!)
-        //print("ROW \(ratings.ratings!.description)")
         
-        /* store ratings locally */
-//        ratings.updateUserRatingsInRealmSignal()
-//                .subscribeNext({ (object: AnyObject!) -> Void in
-//                    print("updateUserRatingsInRealmSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    print("updateUserRatingsInRealmSignal error: \(error)")
-//                })
-        
-        /* retrieve user ratings */
-//        ratings.retrieveUserRatingsFromRealmSignal()
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                println("retrieveUserRatingsFromRealmSignal success")
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    println("retrieveUserRatingsFromRealmSignal error: \(error)")
-//            })
     }
     
     
@@ -184,7 +158,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
         textField.resignFirstResponder()
         return true
     }
