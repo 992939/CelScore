@@ -22,6 +22,7 @@ public final class CelebrityModel: Object {
     dynamic var rank : String = ""
     dynamic var picture2x : String = ""
     dynamic var picture3x : String = ""
+    dynamic var prevScore: Double = 0
     dynamic var sex : Bool = false
     dynamic var isSynced: Bool = false
     
@@ -45,6 +46,7 @@ public final class CelebrityModel: Object {
         self.status = dictionary["status"] as! String
         self.twitter = dictionary["twitter"] as! String
         self.sex = dictionary["sex"] as! Bool
+        self.prevScore = dictionary["prevScore"] as! Double
         self.isSynced = true
     }
 }
