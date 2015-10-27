@@ -9,6 +9,21 @@
 import Foundation
 import RealmSwift
 
+public struct CelebrityProfile {
+    let id: String
+    let imageURL: String
+    let nickname: String
+    let prevScore: Double
+}
+
+extension CelebrityProfile : Equatable {}
+
+public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
+    return lhs.nickname == rhs.nickname && lhs.id == rhs.id
+}
+
+
+
 public final class CelebrityModel: Object {
     dynamic var id = ""
     dynamic var birthdate : String = ""
