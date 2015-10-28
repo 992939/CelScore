@@ -49,11 +49,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FBSDKLoginKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-CelScore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,7 +112,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>211FAF9D2E035FED0A3F9EEE73E38913</key>
+		<key>19E3F9759E3FEAEDC4739F1D98DDCA9D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>25AFDEF171A0B0BBB70987F972B429D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,42 +127,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40B119C13725317EA1DD20A57DAEE74B</key>
+		<key>4630ADBBF5A6ABE3627F5300FE8BA991</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>471EEB3247A42C5CDC1C54813612335C</key>
+		<key>57ADC05E440A960212657DE6DA1FEDD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4AAD744822D1FDF007BBEAB4FFB45C2A</key>
+		<key>688126DA07189E0F1D31BC2EF1F094CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
+		<key>796B6C3C9F5020058F84DBAF0DF95633</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>61803A9B69F8D1A1A8DCB9EEB19F0D15</key>
+		<key>8580C5181D1D8E96165A57966A891FE3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63A18C6A528BD7E47DDAF39B2AEAF1D1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9EC5C7B8AA178A7E4CB450BCD29DEC7E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB443CEF1A3E488A6BC1BB139C355125</key>
+		<key>A27FBE09278F8CB24AC3A914766E91AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,22 +167,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D87132B258299F0B584164D68789FDD9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DE8190A6BDD76F8E2A48F4BD4E46D48F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1F700133226455844E2CF82EB886CF6</key>
+		<key>E7DDB910A192E7CDFD55610705F2D68E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC47FEDA0EC45F092411266E379E9DED</key>
 		<dict>
 			<key>primary</key>
 			<true/>

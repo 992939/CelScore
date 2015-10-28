@@ -12,26 +12,24 @@ PODS:
     - AWSCore (= 2.2.1)
   - AWSS3 (2.2.1):
     - AWSCore (= 2.2.1)
-  - Bolts (1.2.0):
-    - Bolts/AppLinks (= 1.2.0)
-    - Bolts/Tasks (= 1.2.0)
-  - Bolts/AppLinks (1.2.0):
+  - Bolts (1.4.0):
+    - Bolts/AppLinks (= 1.4.0)
+    - Bolts/Tasks (= 1.4.0)
+  - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.2.0)
+  - Bolts/Tasks (1.4.0)
   - Fabric (1.5.5):
     - Fabric/Base (= 1.5.5)
   - Fabric/Base (1.5.5)
-  - FBSDKCoreKit (4.6.0):
+  - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.6.0)
-    - FBSDKCoreKit/no-arc (= 4.6.0)
-  - FBSDKCoreKit/arc (4.6.0):
+    - FBSDKCoreKit/arc (= 4.7.1)
+    - FBSDKCoreKit/no-arc (= 4.7.1)
+  - FBSDKCoreKit/arc (4.7.1):
     - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.6.0):
+  - FBSDKCoreKit/no-arc (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.6.0):
-    - FBSDKCoreKit
   - ReactiveCocoa (4.0.2-alpha-1):
     - ReactiveCocoa/UI (= 4.0.2-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -63,8 +61,7 @@ DEPENDENCIES:
   - AWSLambda (~> 2.2)
   - AWSS3 (~> 2.2)
   - Fabric
-  - FBSDKCoreKit (~> 4.6)
-  - FBSDKLoginKit (~> 4.6)
+  - FBSDKCoreKit (~> 4.7.1)
   - ReactiveCocoa (= 4.0.2-alpha-1)
   - RealmSwift (~> 0.96)
   - SwiftyJSON (~> 2.3)
@@ -80,10 +77,9 @@ SPEC CHECKSUMS:
   AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
   AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
   AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
-  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
-  FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
-  FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
+  FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
   Realm: d1b1eff5264cd6a3158b7a9b6c499d7f6ad3a860
   RealmSwift: 40246e6f57a4e863bfdfc1ca1d7b967f0df607e2
