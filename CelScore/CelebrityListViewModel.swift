@@ -56,7 +56,7 @@ final class CelebrityListViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("initializeListSignal Next: \(value)")
+                    self.celebrityList = value
                 case let .Error(error):
                     print("initializeListSignal Error: \(error)")
                 case .Completed:
@@ -69,7 +69,7 @@ final class CelebrityListViewModel: NSObject {
     
     
     //MARK: Methods
-    func initializeListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
+    func initializeListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
         return SignalProducer {
             sink, _ in
             
@@ -127,5 +127,24 @@ final class CelebrityListViewModel: NSObject {
     
     func getCount() -> Int {
         return self.celebrityList.count
+    }
+    
+    func getIdForCelebAtIndex(index: Int) -> String {
+        let celebId : CelebId = self.celebrityList.celebList[index]
+        return celebId.id
+    }
+    
+    func getCelebrityProfile(celebId celebId: String) throws -> CelebrityProfile
+    {
+        let realm = try! Realm()
+        
+        let predicate = NSPredicate(format: "id = %@", celebId)
+        let celebrity = realm.objects(CelebrityModel).filter(predicate).first
+        
+        guard let celeb = celebrity else {
+            throw ListError.Empty
+        }
+        
+        return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x , nickname:celeb.nickName, prevScore: celeb.prevScore)
     }
 }

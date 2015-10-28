@@ -66,7 +66,7 @@ final class CelebrityViewModel : NSObject {
     {
         super.init()
         
-        getCelebrityWithIdFromLocalStoreSignal(celebId: celebrityId)
+        getCelebrityFromLocalStoreSignal(celebId: celebrityId)
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in
@@ -84,7 +84,7 @@ final class CelebrityViewModel : NSObject {
     }
     
     //MARK: Methods
-    func getCelebrityWithIdFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
+    func getCelebrityFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
     {
         return SignalProducer {
             sink, _ in

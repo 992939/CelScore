@@ -13,9 +13,9 @@ import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
 
-enum FBLoginError : ErrorType {
-    case Error
-    case Cancel
+enum MasterViewError : ErrorType {
+    case FacebookError
+    case ProfileError
 }
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -117,26 +117,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     // MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        
-        //self.celscoreVM.displayedCelebrityListVM.celebrityList[indexPath.row] as! CelebrityViewModel
-        
-        let node = ASTextCellNode()
-        node.text = "Celebrity"
-        
-//        celebrityVM.initCelebrityViewModelSignal!
-//            .doNext { (object: AnyObject!) -> Void in
-//                a = a + a
-//                node.text = "\(celebrityVM.nickName!)" + " \(a)"
-//            }
-//            .subscribeNext({ (object: AnyObject!) -> Void in
-//                },
-//                error: { (error: NSError!) -> Void in
-//                    print("initCelebrityViewModelSignal error: \(error)")
-//            })
-        
-        //celebrityVM.updateCelebrityViewModelSignal(periodSetting.Every_Minute.rawValue)
-        
-       return node
+        let celebId = self.celscoreVM.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
+        let celebProfile = try! self.celscoreVM.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
+        let node = CelebrityTableViewCell(profile: celebProfile)
+        return node
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
@@ -232,19 +216,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.celscoreVM.getCelebRatingsFromAWSSignal()
+                        self.celscoreVM.getCelebListsFromAWSSignal()
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
-                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
+                                    print("getCelebListsFromAWSSignal Value: \(value)")
                                 case let .Error(error):
-                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
+                                    print("getCelebListsFromAWSSignal Error: \(error)")
                                 case .Completed:
-                                    print("getCelebRatingsFromAWSSignal Completed")
+                                    print("getCelebListsFromAWSSignal Completed")
                                 case .Interrupted:
-                                    print("getCelebRatingsFromAWSSignal Interrupted")
+                                    print("getCelebListsFromAWSSignal Interrupted")
                                 }
                         }
+                        
+//                        self.celscoreVM.getCelebRatingsFromAWSSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("getCelebRatingsFromAWSSignal Completed")
+//                                case .Interrupted:
+//                                    print("getCelebRatingsFromAWSSignal Interrupted")
+//                                }
+//                        }
                         
 //                        self.userVM.getUserRatingsFromCognitoSignal()
 //                            .start { event in

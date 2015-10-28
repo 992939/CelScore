@@ -18,8 +18,8 @@ public final class ListsModel: Object {
     dynamic var name : String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
     dynamic var count: Int = 0
-    private let celebList = List<CelebId>()
     dynamic var isSynced: Bool = false
+    let celebList = List<CelebId>()
     
     override public class func primaryKey() -> String {
         return "id"

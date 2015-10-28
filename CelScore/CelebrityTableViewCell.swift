@@ -11,7 +11,13 @@ import AsyncDisplayKit
 
 final class CelebrityTableViewCell: ASCellNode {
     
+    let profile: CelebrityProfile
+    
+    init(profile: CelebrityProfile) {
+        self.profile = profile
+        super.init()
+    }
+    
     //MARK: Methods
-    func bindViewModel(viewModel: AnyObject) {}
 
 }
