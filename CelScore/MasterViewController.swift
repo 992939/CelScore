@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
+import AWSCognito
 
 enum MasterViewError : ErrorType {
     case FacebookError
@@ -21,6 +22,7 @@ enum MasterViewError : ErrorType {
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
+    let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
@@ -81,18 +83,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
-
-        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        if let accessToken = FBSDKAccessToken.currentAccessToken()
-        {
-            print("fb token \(accessToken)")
-        } else
-        {
-            self.view.addSubview(loginButton)
-        }
+        self.view.addSubview(loginButton)
+        
+        //AWSLogger.defaultLogger().logLevel = .Verbose
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+        
+        let cognitoID = credentialsProvider.getIdentityId()
+        print("cognito is \(cognitoID)")
+        
+//        self.celscoreVM.getCelebListsFromAWSSignal()
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("getCelebListsFromAWSSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("getCelebListsFromAWSSignal Error: \(error)")
+//                case .Completed:
+//                    print("getCelebListsFromAWSSignal Completed")
+//                case .Interrupted:
+//                    print("getCelebListsFromAWSSignal Interrupted")
+//                }
+//        }
         
        //SEARCH
-        self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
+        //self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         //REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
@@ -160,6 +177,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             return
         }
         
+        //FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        print(FBSDKAccessToken.currentAccessToken())
+        if let accessToken = FBSDKAccessToken.currentAccessToken()
+        {
+            print("fb token \(accessToken)")
+        } else
+        {
+            print("fb error")
+        }
+        
         userVM.loginCognitoSignal(result.token.tokenString)
             .start { event in
                 switch(event) {
@@ -216,19 +243,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.celscoreVM.getCelebListsFromAWSSignal()
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("getCelebListsFromAWSSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("getCelebListsFromAWSSignal Error: \(error)")
-                                case .Completed:
-                                    print("getCelebListsFromAWSSignal Completed")
-                                case .Interrupted:
-                                    print("getCelebListsFromAWSSignal Interrupted")
-                                }
-                        }
+//                        self.celscoreVM.getCelebListsFromAWSSignal()
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("getCelebListsFromAWSSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("getCelebListsFromAWSSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("getCelebListsFromAWSSignal Completed")
+//                                case .Interrupted:
+//                                    print("getCelebListsFromAWSSignal Interrupted")
+//                                }
+//                        }
                         
 //                        self.celscoreVM.getCelebRatingsFromAWSSignal()
 //                            .start { event in

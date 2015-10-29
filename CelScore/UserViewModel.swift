@@ -115,6 +115,7 @@ final class UserViewModel : NSObject {
                     sendError(sink, task.error)
                     return task
                 }
+                print(credentialsProvider.getIdentityId())
                 
                 sendNext(sink, task.result)
                 sendCompleted(sink)
@@ -165,8 +166,6 @@ final class UserViewModel : NSObject {
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            //AWSLogger.defaultLogger().logLevel = .Verbose
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
