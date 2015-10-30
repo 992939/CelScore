@@ -87,12 +87,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         //AWSLogger.defaultLogger().logLevel = .Verbose
         
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-        
-        let cognitoID = credentialsProvider.getIdentityId()
-        print("cognito is \(cognitoID)")
+//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+//        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+//        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+//        
+//        let cognitoID = credentialsProvider.getIdentityId()
+//        print("cognito is \(cognitoID)")
         
 //        self.celscoreVM.getCelebListsFromAWSSignal()
 //            .start { event in
@@ -112,19 +112,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         //REACHABILITY
-        self.celscoreVM.checkNetworkConnectivitySignal()
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("checkNetworkConnectivitySignal Value: \(value)")
-                case let .Error(error):
-                    print("checkNetworkConnectivitySignal Error: \(error)")
-                case .Completed:
-                    print("checkNetworkConnectivitySignal Completed")
-                case .Interrupted:
-                    print("checkNetworkConnectivitySignal Interrupted")
-                }
-        }
+//        self.celscoreVM.checkNetworkConnectivitySignal()
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("checkNetworkConnectivitySignal Value: \(value)")
+//                case let .Error(error):
+//                    print("checkNetworkConnectivitySignal Error: \(error)")
+//                case .Completed:
+//                    print("checkNetworkConnectivitySignal Completed")
+//                case .Interrupted:
+//                    print("checkNetworkConnectivitySignal Interrupted")
+//                }
+//        }
     }
 
     override func didReceiveMemoryWarning() {
