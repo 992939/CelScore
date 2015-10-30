@@ -57,6 +57,7 @@ final class CelebrityListViewModel: NSObject {
                 switch(event) {
                 case let .Next(value):
                     self.celebrityList = value
+                    print("initializeListSignal value: \(value)")
                 case let .Error(error):
                     print("initializeListSignal Error: \(error)")
                 case .Completed:
