@@ -82,10 +82,6 @@ final class CelScoreViewModel: NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
-            //let cognitoID = credentialsProvider.getIdentityId()
-            //print("cognito is \(cognitoID)")
-            
-            
             let serviceClient = CSCelScoreAPIClient.defaultClient()
             serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
