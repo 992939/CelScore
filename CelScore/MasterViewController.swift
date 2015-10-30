@@ -22,7 +22,6 @@ enum MasterViewError : ErrorType {
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
-    let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
     var searchTextField : UITextField!
@@ -85,46 +84,27 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton.delegate = self
         self.view.addSubview(loginButton)
         
-        //AWSLogger.defaultLogger().logLevel = .Verbose
-        
-//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-//        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-//        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-//        
-//        let cognitoID = credentialsProvider.getIdentityId()
-//        print("cognito is \(cognitoID)")
-        
-//        self.celscoreVM.getCelebListsFromAWSSignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("getCelebListsFromAWSSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("getCelebListsFromAWSSignal Error: \(error)")
-//                case .Completed:
-//                    print("getCelebListsFromAWSSignal Completed")
-//                case .Interrupted:
-//                    print("getCelebListsFromAWSSignal Interrupted")
-//                }
-//        }
+        //Check if Already Logged In
+        //let cognitoID = credentialsProvider.getIdentityId()
+        //print("cognito is \(cognitoID)")
         
        //SEARCH
-        //self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
+        self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         //REACHABILITY
-//        self.celscoreVM.checkNetworkConnectivitySignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("checkNetworkConnectivitySignal Value: \(value)")
-//                case let .Error(error):
-//                    print("checkNetworkConnectivitySignal Error: \(error)")
-//                case .Completed:
-//                    print("checkNetworkConnectivitySignal Completed")
-//                case .Interrupted:
-//                    print("checkNetworkConnectivitySignal Interrupted")
-//                }
-//        }
+        self.celscoreVM.checkNetworkConnectivitySignal()
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("checkNetworkConnectivitySignal Value: \(value)")
+                case let .Error(error):
+                    print("checkNetworkConnectivitySignal Error: \(error)")
+                case .Completed:
+                    print("checkNetworkConnectivitySignal Completed")
+                case .Interrupted:
+                    print("checkNetworkConnectivitySignal Interrupted")
+                }
+        }
     }
 
     override func didReceiveMemoryWarning() {

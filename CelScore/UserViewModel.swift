@@ -48,6 +48,8 @@ final class UserViewModel : NSObject {
         
         super.init()
         
+        //AWSLogger.defaultLogger().logLevel = .Verbose
+        
         NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
             .start { _ in
                 
