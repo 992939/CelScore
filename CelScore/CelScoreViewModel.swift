@@ -17,8 +17,6 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
-    var displayedCelebrityListVM : CelebrityListViewModel
-    var searchedCelebrityListVM : CelebrityListViewModel
     let timeNotifier = MutableProperty<String>("")
 
     enum periodSetting: NSTimeInterval {
@@ -28,8 +26,6 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Initializers
     override init() {
-        self.displayedCelebrityListVM = CelebrityListViewModel()
-        self.searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
 
         super.init()
         

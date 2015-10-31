@@ -20,7 +20,6 @@ final class UserViewModel : NSObject {
     enum listSetting {
         case A_List
         case B_List
-        case Others
         case All
     }
     
@@ -37,7 +36,6 @@ final class UserViewModel : NSObject {
     }
     
     enum loginSetting {
-        case Guest
         case Facebook_User
         case Twitter_User
         case Google_User

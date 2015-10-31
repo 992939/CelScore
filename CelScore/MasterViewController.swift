@@ -27,8 +27,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var searchTextField : UITextField!
     var celebrityTableView : ASTableView!
     var loginButton : FBSDKLoginButton!
+    
     var celscoreVM: CelScoreViewModel!
     var userVM: UserViewModel!
+    var displayedCelebrityListVM : CelebrityListViewModel!
+    var searchedCelebrityListVM : CelebrityListViewModel!
     
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
@@ -88,8 +91,24 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //let cognitoID = credentialsProvider.getIdentityId()
         //print("cognito is \(cognitoID)")
         
-       //SEARCH
-        self.celscoreVM.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
+        //DISPLAY
+        self.displayedCelebrityListVM = CelebrityListViewModel()
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("checkNetworkConnectivitySignal Value: \(value)")
+//                case let .Error(error):
+//                    print("checkNetworkConnectivitySignal Error: \(error)")
+//                case .Completed:
+//                    print("checkNetworkConnectivitySignal Completed")
+//                case .Interrupted:
+//                    print("checkNetworkConnectivitySignal Interrupted")
+//                }
+//        }
+        
+        //SEARCH
+        self.searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
+        self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         //REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
@@ -114,8 +133,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     // MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        let celebId = self.celscoreVM.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
-        let celebProfile = try! self.celscoreVM.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
+        let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
+        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
         let node = CelebrityTableViewCell(profile: celebProfile)
         return node
     }
@@ -125,7 +144,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.celscoreVM.displayedCelebrityListVM.getCount()
+        return self.displayedCelebrityListVM.getCount()
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
