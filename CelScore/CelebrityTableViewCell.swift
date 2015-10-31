@@ -12,12 +12,17 @@ import AsyncDisplayKit
 final class CelebrityTableViewCell: ASCellNode {
     
     let profile: CelebrityProfile
+    let nickName: ASTextNode!
     
     init(profile: CelebrityProfile) {
         self.profile = profile
+        self.nickName = ASTextNode()
+        
         super.init()
+        
+        self.nickName.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
+        self.nickName.truncationAttributedString = NSMutableAttributedString(string:"H")
+        self.addSubnode(nickName)
     }
-    
-    //MARK: Methods
 
 }

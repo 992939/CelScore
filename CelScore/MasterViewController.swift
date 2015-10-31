@@ -93,18 +93,23 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         //DISPLAY
         self.displayedCelebrityListVM = CelebrityListViewModel()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("checkNetworkConnectivitySignal Value: \(value)")
-//                case let .Error(error):
-//                    print("checkNetworkConnectivitySignal Error: \(error)")
-//                case .Completed:
-//                    print("checkNetworkConnectivitySignal Completed")
-//                case .Interrupted:
-//                    print("checkNetworkConnectivitySignal Interrupted")
-//                }
-//        }
+        self.displayedCelebrityListVM.initializeListSignal(listId: "0001")
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("initializeListSignal Value: \(value)")
+                    self.celebrityTableView.beginUpdates()
+                    self.celebrityTableView.asyncDelegate = self
+                    self.celebrityTableView.reloadData()
+                    self.celebrityTableView.endUpdates()
+                case let .Error(error):
+                    print("initializeListSignal Error: \(error)")
+                case .Completed:
+                    print("initializeListSignal Completed")
+                case .Interrupted:
+                    print("initializeListSignal Interrupted")
+                }
+        }
         
         //SEARCH
         self.searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
@@ -136,6 +141,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
         let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
         let node = CelebrityTableViewCell(profile: celebProfile)
+        node.displaysAsynchronously = true
+        
         return node
     }
     
@@ -148,7 +155,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        
+        print("Node at \(indexPath.row)")
     }
     
     
