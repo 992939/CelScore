@@ -3,13 +3,9 @@ PODS:
   - AsyncDisplayKit (1.9):
     - AsyncDisplayKit/ASDealloc2MainObject (= 1.9)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9)
-  - AWSAPIGateway (2.2.1):
-    - AWSCore (= 2.2.1)
   - AWSCognito (2.2.1):
     - AWSCore (= 2.2.1)
   - AWSCore (2.2.1)
-  - AWSLambda (2.2.1):
-    - AWSCore (= 2.2.1)
   - AWSS3 (2.2.1):
     - AWSCore (= 2.2.1)
   - Bolts (1.4.0):
@@ -56,10 +52,8 @@ DEPENDENCIES:
   - AIRTimer
   - AsyncDisplayKit (from `https://github.com/facebook/AsyncDisplayKit.git`, branch
     `master`)
-  - AWSAPIGateway (~> 2.2)
   - AWSCognito (~> 2.2)
   - AWSCore (~> 2.2)
-  - AWSLambda (~> 2.2)
   - AWSS3 (~> 2.2)
   - Fabric
   - FBSDKCoreKit (~> 4.7.1)
@@ -83,10 +77,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
   AsyncDisplayKit: 957560ccfd103fdc8f53605e11e4bc30b16aaf67
-  AWSAPIGateway: d0b1194a788d93d48caae840c7d496c38fa7775b
   AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
   AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
-  AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
   AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
