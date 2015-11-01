@@ -91,6 +91,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //Check if Already Logged In
         //let cognitoID = credentialsProvider.getIdentityId()
         //print("cognito is \(cognitoID)")
+        //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        //        print(FBSDKAccessToken.currentAccessToken())
+        //        if let accessToken = FBSDKAccessToken.currentAccessToken()
+        //        {
+        //            print("fb token \(accessToken)")
+        //        } else
+        //        {
+        //            print("fb error")
+        //        }
         
         //DISPLAY
         self.displayedCelebrityListVM = CelebrityListViewModel()
@@ -142,8 +151,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
         let node = CelebrityTableViewCell(profile: celebProfile)
         
-        print("node is \(node.calculatedSize)")
-        
         return node
     }
     
@@ -152,7 +159,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        print("How many rows: \(self.displayedCelebrityListVM.getCount())")
         return self.displayedCelebrityListVM.getCount()
     }
     
@@ -183,16 +189,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard result.isCancelled == false else {
             print("canceled")
             return
-        }
-        
-        //FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        print(FBSDKAccessToken.currentAccessToken())
-        if let accessToken = FBSDKAccessToken.currentAccessToken()
-        {
-            print("fb token \(accessToken)")
-        } else
-        {
-            print("fb error")
         }
         
         userVM.loginCognitoSignal(result.token.tokenString)

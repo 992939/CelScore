@@ -21,9 +21,20 @@ final class CelebrityTableViewCell: ASCellNode {
         super.init()
         
         self.nickName.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
-        self.nickName.truncationAttributedString = NSMutableAttributedString(string:"H")
         self.nickName.placeholderEnabled = true;
         self.addSubnode(self.nickName)
     }
-
+    
+//    override func didLoad() {
+//        self.layer.as_allowsHighlightDrawing = true
+//        super.didLoad()
+//    }
+    
+    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec! {
+        return ASBackgroundLayoutSpec(
+            child: ASInsetLayoutSpec(
+                insets: UIEdgeInsetsMake(15, 15, 15, 15),
+                child: self.nickName),
+            background: nil)
+    }
 }
