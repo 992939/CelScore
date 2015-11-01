@@ -12,7 +12,6 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
-import AWSCognito
 
 enum MasterViewError : ErrorType {
     case FacebookError

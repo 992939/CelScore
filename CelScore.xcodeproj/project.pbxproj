@@ -13,7 +13,6 @@
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
-		00AA9BAE1BB4AF1500A809C1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */; };
 		00B6F0331BC79C8F000DA1C6 /* CSEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */; };
@@ -49,7 +48,6 @@
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
-		00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00B6F02D1BC79B6E000DA1C6 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		00B6F02E1BC79C8F000DA1C6 /* CSCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCelScoreAPIClient.h; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				00AA9BAD1BB4AF1500A809C1 /* Reachability.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -388,7 +385,6 @@
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
-				00AA9BAE1BB4AF1500A809C1 /* Reachability.swift in Sources */,
 				00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
