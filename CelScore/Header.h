@@ -12,7 +12,6 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <AWSCognito/AWSCognito.h>
-#import <AWSCore/AWSCore.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "CSCelScoreAPIClient.h"

@@ -51,7 +51,6 @@ DEPENDENCIES:
   - AsyncDisplayKit (from `https://github.com/facebook/AsyncDisplayKit.git`, branch
     `master`)
   - AWSCognito (~> 2.2)
-  - AWSCore (~> 2.2)
   - Fabric
   - FBSDKCoreKit (~> 4.7.1)
   - ReactiveCocoa (= 4.0.2-alpha-1)
