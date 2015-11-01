@@ -24,6 +24,12 @@ final class CelScoreViewModel: NSObject {
         case Daily = 86400.0
     }
     
+    enum AWSDataType {
+        case Celebrity
+        case List
+        case Ratings
+    }
+    
     //MARK: Initializers
     override init() {
 
@@ -65,6 +71,54 @@ final class CelScoreViewModel: NSObject {
             {
                 sendNext(sink, (reachability?.reachabilityStatus)!)
             }
+        }
+    }
+    
+    func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            AWSLogger.defaultLogger().logLevel = .Verbose
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            let serviceClient = CSCelScoreAPIClient.defaultClient()
+        
+            var awsCall : AWSTask!
+            
+            switch dataType {
+            case .Celebrity: awsCall = serviceClient.celebinfoscanservicePost()
+            case .List: awsCall = serviceClient.celeblistsservicePost()
+            case .Ratings: awsCall = serviceClient.celebratingservicePost()
+            }
+
+            awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                guard task.cancelled == false else {
+                    sendInterrupted(sink)
+                    return task
+                }
+                
+                let myData = task.result as! String
+                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                json["Items"].arrayValue.forEach({ celeb in
+                    
+                    let celebrity = CelebrityModel(dictionary: celeb.dictionaryObject!)
+                    
+                    let realm = try! Realm()
+                    realm.beginWrite()
+                    realm.add(celebrity, update: true)
+                    try! realm.commitWrite()
+                })
+                
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
         }
     }
     
