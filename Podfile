@@ -2,7 +2,8 @@
 use_frameworks!  
 platform :ios, '8.0'
 pod 'ReactiveCocoa', '4.0.2-alpha-1'
-pod 'AsyncDisplayKit', '~> 1.2.3'
+pod 'AsyncDisplayKit', :git => 'https://github.com/facebook/AsyncDisplayKit.git', :branch => 'master'
+#pod 'AsyncDisplayKit', '~> 1.2.3'
 pod 'RealmSwift', '~> 0.96'
 pod 'AWSS3', '~> 2.2'
 pod 'AWSCognito', '~> 2.2'

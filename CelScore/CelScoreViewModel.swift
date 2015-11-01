@@ -29,7 +29,7 @@ final class CelScoreViewModel: NSObject {
 
         super.init()
         
-        self.timeNotifier <~ self.createSignal()
+        //self.timeNotifier <~ self.createSignal()
         
         self.timeNotifier.producer
             .promoteErrors(NSError.self)

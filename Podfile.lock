@@ -1,8 +1,8 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.2.3):
-    - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.3)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.2.3)
+  - AsyncDisplayKit (1.9):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9)
   - AWSAPIGateway (2.2.1):
     - AWSCore (= 2.2.1)
   - AWSCognito (2.2.1):
@@ -54,7 +54,8 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer
-  - AsyncDisplayKit (~> 1.2.3)
+  - AsyncDisplayKit (from `https://github.com/facebook/AsyncDisplayKit.git`, branch
+    `master`)
   - AWSAPIGateway (~> 2.2)
   - AWSCognito (~> 2.2)
   - AWSCore (~> 2.2)
@@ -69,9 +70,19 @@ DEPENDENCIES:
   - TwitterKit
   - WillowTreeReachability (~> 1.0)
 
+EXTERNAL SOURCES:
+  AsyncDisplayKit:
+    :branch: master
+    :git: https://github.com/facebook/AsyncDisplayKit.git
+
+CHECKOUT OPTIONS:
+  AsyncDisplayKit:
+    :commit: e11007f906b522ad575d7956b2ae53118de114af
+    :git: https://github.com/facebook/AsyncDisplayKit.git
+
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 5c8f38225f7478e39c48196cec0dd0d2ac3455ed
+  AsyncDisplayKit: 957560ccfd103fdc8f53605e11e4bc30b16aaf67
   AWSAPIGateway: d0b1194a788d93d48caae840c7d496c38fa7775b
   AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
   AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc

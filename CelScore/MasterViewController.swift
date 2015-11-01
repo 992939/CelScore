@@ -80,6 +80,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func bindWithViewModels ()
     {
         userVM = UserViewModel()
+        self.celebrityTableView.asyncDelegate = self
         
         //LOGIN
         loginButton = FBSDKLoginButton()
@@ -99,7 +100,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 case let .Next(value):
                     print("initializeListSignal Value: \(value)")
                     self.celebrityTableView.beginUpdates()
-                    self.celebrityTableView.asyncDelegate = self
                     self.celebrityTableView.reloadData()
                     self.celebrityTableView.endUpdates()
                 case let .Error(error):
@@ -141,7 +141,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
         let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
         let node = CelebrityTableViewCell(profile: celebProfile)
-        node.displaysAsynchronously = true
+        
+        print("node is \(node.calculatedSize)")
         
         return node
     }
@@ -151,6 +152,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        print("How many rows: \(self.displayedCelebrityListVM.getCount())")
         return self.displayedCelebrityListVM.getCount()
     }
     

@@ -22,7 +22,8 @@ final class CelebrityTableViewCell: ASCellNode {
         
         self.nickName.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
         self.nickName.truncationAttributedString = NSMutableAttributedString(string:"H")
-        self.addSubnode(nickName)
+        self.nickName.placeholderEnabled = true;
+        self.addSubnode(self.nickName)
     }
 
 }
