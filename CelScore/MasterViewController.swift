@@ -217,7 +217,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     {
 
 // **** DO NOT DELETE *****
-                        
 //                        self.celscoreVM.timeNotifier.producer
 //                            .start { event in
 //                                switch(event) {
@@ -232,47 +231,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-//                        self.celscoreVM.getCelebsInfoFromAWSSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getCelebRatingsFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getCelebRatingsFromAWSSignal Interrupted")
-//                                }
-//                        }
-                        
-//                        self.celscoreVM.getCelebListsFromAWSSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getCelebListsFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getCelebListsFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getCelebListsFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getCelebListsFromAWSSignal Interrupted")
-//                                }
-//                        }
-                        
-//                        self.celscoreVM.getCelebRatingsFromAWSSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getCelebRatingsFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getCelebRatingsFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getCelebRatingsFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getCelebRatingsFromAWSSignal Interrupted")
-//                                }
-//                        }
+                        self.celscoreVM.getFromAWSSignal(.Ratings)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
                         
 //                        self.userVM.getUserRatingsFromCognitoSignal()
 //                            .start { event in

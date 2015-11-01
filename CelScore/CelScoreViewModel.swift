@@ -40,7 +40,7 @@ final class CelScoreViewModel: NSObject {
         self.timeNotifier.producer
             .promoteErrors(NSError.self)
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
-                return self.getCelebsInfoFromAWSSignal()
+                return self.getFromAWSSignal(.Celebrity)
             }
             .observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in
@@ -85,8 +85,7 @@ final class CelScoreViewModel: NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             let serviceClient = CSCelScoreAPIClient.defaultClient()
         
-            var awsCall : AWSTask!
-            
+            let awsCall : AWSTask
             switch dataType {
             case .Celebrity: awsCall = serviceClient.celebinfoscanservicePost()
             case .List: awsCall = serviceClient.celeblistsservicePost()
@@ -105,129 +104,18 @@ final class CelScoreViewModel: NSObject {
                 
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                json["Items"].arrayValue.forEach({ celeb in
+                json["Items"].arrayValue.forEach({ data in
                     
-                    let celebrity = CelebrityModel(dictionary: celeb.dictionaryObject!)
-                    
-                    let realm = try! Realm()
-                    realm.beginWrite()
-                    realm.add(celebrity, update: true)
-                    try! realm.commitWrite()
-                })
-                
-                sendNext(sink, task.result)
-                sendCompleted(sink)
-                return task
-            })
-        }
-    }
-    
-    func getCelebsInfoFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
-            
-            AWSLogger.defaultLogger().logLevel = .Verbose
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
-            serviceClient.celebinfoscanservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
-                guard task.cancelled == false else {
-                    sendInterrupted(sink)
-                    return task
-                }
-                
-                let myData = task.result as! String
-                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                json["Items"].arrayValue.forEach({ celeb in
-                    
-                    let celebrity = CelebrityModel(dictionary: celeb.dictionaryObject!)
-
-                    let realm = try! Realm()
-                    realm.beginWrite()
-                    realm.add(celebrity, update: true)
-                    try! realm.commitWrite()
-                })
-                
-                sendNext(sink, task.result)
-                sendCompleted(sink)
-                return task
-            })
-        }
-    }
-    
-    func getCelebRatingsFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
-            serviceClient.celebratingservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
-                guard task.cancelled == false else {
-                    sendInterrupted(sink)
-                    return task
-                }
-                
-                let myData = task.result as! String
-                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                json["Items"].arrayValue.forEach({ celebRatings in
-                    
-                    let ratings = RatingsModel(dictionary: celebRatings.dictionaryObject!)
+                    let awsObject : Object
+                    switch dataType {
+                    case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
+                    case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
+                    case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
+                    }
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    realm.add(ratings, update: true)
-                    try! realm.commitWrite()
-                })
-                
-                sendNext(sink, task.result)
-                sendCompleted(sink)
-                return task
-            })
-        }
-    }
-    
-    func getCelebListsFromAWSSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
-            serviceClient.celeblistsservicePost().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
-                guard task.cancelled == false else {
-                    sendInterrupted(sink)
-                    return task
-                }
-                
-                let myData = task.result as! String
-                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                json["Items"].arrayValue.forEach({ list in
-                    
-                    let celebList = ListsModel(dictionary: list.dictionaryObject!)
-                    
-                    let realm = try! Realm()
-                    realm.beginWrite()
-                    realm.add(celebList, update: true)
+                    realm.add(awsObject, update: true)
                     try! realm.commitWrite()
                 })
                 
