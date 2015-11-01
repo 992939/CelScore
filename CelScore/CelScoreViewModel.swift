@@ -35,7 +35,7 @@ final class CelScoreViewModel: NSObject {
 
         super.init()
         
-        //self.timeNotifier <~ self.createSignal()
+        //self.timeNotifier <~ self.timerSignal()
         
         self.timeNotifier.producer
             .promoteErrors(NSError.self)
@@ -78,7 +78,7 @@ final class CelScoreViewModel: NSObject {
         return SignalProducer {
             sink, _ in
             
-            AWSLogger.defaultLogger().logLevel = .Verbose
+            //AWSLogger.defaultLogger().logLevel = .Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
@@ -126,7 +126,7 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func createSignal() -> SignalProducer<String, NoError> {
+    func timerSignal() -> SignalProducer<String, NoError> {
         var count = 0
         return SignalProducer {
             sink, _ in
