@@ -90,7 +90,6 @@ final class CelebrityViewModel : NSObject {
             sink, _ in
             
             let realm = try! Realm()
-            
             let predicate = NSPredicate(format: "id = %@", celebId)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             

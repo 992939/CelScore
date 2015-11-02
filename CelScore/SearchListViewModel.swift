@@ -49,7 +49,6 @@ final class SearchListViewModel: CelebrityListViewModel {
             sink, disposable in
             
             let realm = try! Realm()
-            
             let predicate: NSPredicate
             let list: AnyObject
             

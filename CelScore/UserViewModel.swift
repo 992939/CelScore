@@ -42,10 +42,7 @@ final class UserViewModel : NSObject {
     
     //MARK: Initializers
     override init() {
-        
         super.init()
-        
-        //AWSLogger.defaultLogger().logLevel = .Verbose
         
         NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
             .start { _ in
@@ -78,24 +75,6 @@ final class UserViewModel : NSObject {
     }
     
     //MARK: Methods
-
-    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
-            
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                
-                guard error == nil else {
-                    sendError(sink, error)
-                    return
-                }
-                
-                sendNext(sink, object)
-                sendCompleted(sink)
-            }
-        }
-    }
-    
     func loginCognitoSignal(token: String) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
@@ -120,6 +99,23 @@ final class UserViewModel : NSObject {
                 sendCompleted(sink)
                 return task
             })
+        }
+    }
+    
+    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer {
+            sink, _ in
+            
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                
+                guard error == nil else {
+                    sendError(sink, error)
+                    return
+                }
+                
+                sendNext(sink, object)
+                sendCompleted(sink)
+            }
         }
     }
     
@@ -181,13 +177,11 @@ final class UserViewModel : NSObject {
                 realm.beginWrite()
                 
                 dataset.getAll().forEach({ dico in
-                    
                     let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
                     realm.add(userRatings, update: true)
                 })
                 
                 try! realm.commitWrite()
-                
                 sendNext(sink, dataset.getAll())
                 sendCompleted(sink)
                 return task
@@ -200,7 +194,6 @@ final class UserViewModel : NSObject {
             sink, _ in
             
             let realm = try! Realm()
-            
             let predicate = NSPredicate(format: "isSynced = false")
             let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
             
