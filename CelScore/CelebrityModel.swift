@@ -27,27 +27,23 @@ public final class CelebrityModel: Object {
     
     //MARK: Properties
     dynamic var id: String = ""
-    dynamic var birthdate : String = ""
-    dynamic var firstName : String = ""
-    dynamic var lastName : String = ""
-    dynamic var middleName : String = ""
-    dynamic var nickName : String = ""
-    dynamic var netWorth : String = ""
-    dynamic var status : String = ""
-    dynamic var twitter : String = ""
-    dynamic var rank : String = ""
-    dynamic var picture2x : String = ""
-    dynamic var picture3x : String = ""
+    dynamic var birthdate: String = ""
+    dynamic var firstName: String = ""
+    dynamic var lastName: String = ""
+    dynamic var middleName: String = ""
+    dynamic var nickName: String = ""
+    dynamic var netWorth: String = ""
+    dynamic var status: String = ""
+    dynamic var twitter: String = ""
+    dynamic var rank: String = ""
+    dynamic var picture2x: String = ""
+    dynamic var picture3x: String = ""
     dynamic var prevScore: Double = 0
-    dynamic var sex : Bool = false
+    dynamic var sex: Bool = false
     dynamic var isSynced: Bool = false
     
     
     //MARK: Initializers
-    override public class func primaryKey() -> String {
-        return "id"
-    }
-    
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         
@@ -67,4 +63,8 @@ public final class CelebrityModel: Object {
         self.prevScore = dictionary["prevScore"] as! Double
         self.isSynced = true
     }
+    
+    
+    //MARK: Methods
+    override public class func primaryKey() -> String { return "id" }
 }

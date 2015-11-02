@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		004B56D91B35332A008A75EB /* CelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56DD1B35332A008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56DE1B35332A008A75EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */,
 				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
+				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				008EE4C41BE6E38600E831BE /* SearchListViewModel.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
+				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
 				00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */,
 			);

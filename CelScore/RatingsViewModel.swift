@@ -12,8 +12,14 @@ import RealmSwift
 final class RatingsViewModel: NSObject {
     
     //MARK: Properties
-    var ratings : RatingsModel?
-    var userRatings : UserRatingsModel?
+    var ratings: RatingsModel!
+    var userRatings: UserRatingsModel!
+    var celScore: Double {
+        get {
+            let totalRatings = ratings.rating1 + ratings.rating2 + ratings.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings.rating8 + ratings.rating9 + ratings.rating10
+            return totalRatings / 10
+        }
+    }
     
     
     //MARK: Initializers
@@ -21,9 +27,9 @@ final class RatingsViewModel: NSObject {
         super.init()
         
         self.ratings = RatingsModel()
-        self.ratings!.id = celebrityId
+        self.ratings.id = celebrityId
         self.userRatings = UserRatingsModel()
-        self.userRatings!.id = celebrityId
+        self.userRatings.id = celebrityId
     }
     
     

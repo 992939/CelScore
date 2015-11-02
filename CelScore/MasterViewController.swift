@@ -106,7 +106,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //SEARCH
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
-        
         //REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
             .start { event in

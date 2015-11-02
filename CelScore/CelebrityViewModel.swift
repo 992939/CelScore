@@ -17,9 +17,9 @@ enum CelebrityError: ErrorType {
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    var celebrityInfo: CelebrityModel?
-    var calculatedCelScore, previousScore: Double?
-    var ratings: RatingsViewModel?
+    var celebrity: CelebrityModel!
+    var ratingsVM: RatingsViewModel!
+    
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
     enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
@@ -37,7 +37,7 @@ final class CelebrityViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    self.celebrityInfo = value!
+                    self.celebrity = value
                 case let .Error(error):
                     print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
                 case .Completed:
@@ -47,6 +47,7 @@ final class CelebrityViewModel: NSObject {
                 }
         }
     }
+    
     
     //MARK: Methods
     func getCelebrityFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
@@ -61,7 +62,6 @@ final class CelebrityViewModel: NSObject {
                 sendError(sink, CelebrityError.NoFound)
                 return
             }
-            
             sendNext(sink, celeb)
             sendCompleted(sink)
         }
