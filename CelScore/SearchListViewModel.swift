@@ -16,7 +16,7 @@ final class SearchListViewModel: CelebrityListViewModel {
     let searchText = MutableProperty("")
     let isSearching = MutableProperty<Bool>(false)
     
-    enum searchType {
+    enum SearchType {
         case Celebrity
         case List
     }
@@ -31,7 +31,7 @@ final class SearchListViewModel: CelebrityListViewModel {
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in
-                return self.searchForCelebritiesSignal(searchToken: token)
+                return self.searchForSignal(searchToken: token, searchType: .Celebrity)
             }
             .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
                 print("Error \($0)")
@@ -43,14 +43,24 @@ final class SearchListViewModel: CelebrityListViewModel {
             }))
     }
     
-    func searchForCelebritiesSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, ListError> {
+    //MARK: Methods
+    func searchForSignal(searchToken searchToken: String, searchType: SearchType) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer {
             sink, disposable in
             
             let realm = try! Realm()
             
-            let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
-            let list = realm.objects(CelebrityModel).filter(predicate)
+            let predicate: NSPredicate
+            let list: AnyObject
+            
+            switch searchType {
+            case .Celebrity:
+                predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
+                list = realm.objects(CelebrityModel).filter(predicate)
+            case .List:
+                predicate = NSPredicate(format: "name contains[c] %@", searchToken)
+                list = realm.objects(ListsModel).filter(predicate)
+            }
             
             guard list.count > 0 else {
                 sendError(sink, ListError.Empty)
@@ -60,24 +70,4 @@ final class SearchListViewModel: CelebrityListViewModel {
             sendCompleted(sink)
         }
     }
-    
-    //MARK: Methods
-    func searchForListsSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, ListError> {
-        return SignalProducer {
-            sink, _ in
-            
-            let realm = try! Realm()
-            
-            let predicate = NSPredicate(format: "name contains[c] %@", searchToken)
-            let list = realm.objects(ListsModel).filter(predicate)
-            
-            guard list.count > 0 else {
-                sendError(sink, ListError.Empty)
-                return
-            }
-            sendNext(sink, list)
-            sendCompleted(sink)
-        }
-    }
-
 }

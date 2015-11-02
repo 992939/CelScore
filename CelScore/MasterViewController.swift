@@ -61,7 +61,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
     }
-
     
     //MARK: Methods
     override func viewDidLoad() {
@@ -165,7 +164,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         print("Node at \(indexPath.row)")
     }
     
-    
     // MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         return false
@@ -177,7 +175,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {}
-    
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
