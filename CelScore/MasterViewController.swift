@@ -30,7 +30,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var celscoreVM: CelScoreViewModel!
     var userVM: UserViewModel!
     var displayedCelebrityListVM : CelebrityListViewModel!
-    var searchedCelebrityListVM : CelebrityListViewModel!
+    var searchedCelebrityListVM : SearchListViewModel!
     
     enum periodSetting: NSTimeInterval {
         case Every_Minute = 60.0
@@ -120,7 +120,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
         
         //SEARCH
-        self.searchedCelebrityListVM = CelebrityListViewModel(searchToken: "")
+        self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         //REACHABILITY
