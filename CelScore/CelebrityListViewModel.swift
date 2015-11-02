@@ -15,30 +15,11 @@ class CelebrityListViewModel: NSObject {
     //MARK: Properties
     final let title = MutableProperty("")
     final lazy var celebrityList: ListsModel = ListsModel()
-    //TO DO: add description of the error to throw in guard
     enum ListError: ErrorType { case Empty, IndexOutOfBounds }
     
     
     //MARK: Initializers
-    init(listId: String = "0001") {
-        super.init()
-        
-        initializeListSignal(listId: listId)
-            .take(2)
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("initializeListSignal value: \(value)")
-                case let .Error(error):
-                    print("initializeListSignal Error: \(error)")
-                case .Completed:
-                    print("initializeListSignal Completed")
-                case .Interrupted:
-                    print("initializeListSignal Interrupted")
-                }
-        }
-    }
+    override init() { super.init() }
     
     
     //MARK: Methods
