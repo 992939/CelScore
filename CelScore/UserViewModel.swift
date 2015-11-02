@@ -17,7 +17,6 @@ final class UserViewModel: NSObject {
     let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var votePercentage: Float = 0
     var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
-    
     enum ListSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
     enum LoginSetting: Int { case None = 0, Facebook_User, Twitter_User, Google_User }
@@ -68,7 +67,6 @@ final class UserViewModel: NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
-            
             let logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
@@ -76,7 +74,6 @@ final class UserViewModel: NSObject {
                     sendError(sink, task.error)
                     return task
                 }
-                print(credentialsProvider.getIdentityId())
                 
                 sendNext(sink, task.result)
                 sendCompleted(sink)

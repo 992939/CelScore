@@ -9,9 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class CelebId: Object {
-    dynamic var id = ""
-}
+public final class CelebId: Object { dynamic var id = "" }
 
 public final class ListsModel: Object {
     
@@ -25,9 +23,7 @@ public final class ListsModel: Object {
     
     
     //MARK: Initializers
-    override public class func primaryKey() -> String {
-        return "id"
-    }
+    override public class func primaryKey() -> String { return "id" }
     
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
