@@ -17,7 +17,7 @@ class CelebrityListViewModel: NSObject {
     final lazy var celebrityList: ListsModel = ListsModel()
     
     //TO DO: add description of the error to throw in guard
-    enum ListError: ErrorType { case EmptyList, case IndexOutOfBounds }
+    enum ListError: ErrorType { case Empty, IndexOutOfBounds }
     
     
     //MARK: Initializers
@@ -41,6 +41,7 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
+    
     //MARK: Methods
     final func initializeListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
         return SignalProducer {
@@ -61,9 +62,7 @@ class CelebrityListViewModel: NSObject {
     }
     
     //TODO : replace by computed properties count, idAtIndex & profileAtIndex
-    final func getCount() -> Int {
-        return self.celebrityList.count
-    }
+    final func getCount() -> Int { return self.celebrityList.count }
     
     final func getIdForCelebAtIndex(index: Int) -> String {
         //TODO add guard to check index is within bounds
@@ -76,7 +75,7 @@ class CelebrityListViewModel: NSObject {
         let realm = try! Realm()
         let predicate = NSPredicate(format: "id = %@", celebId)
         let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-        guard let celeb = celebrity else { throw ListError.EmptyList }
+        guard let celeb = celebrity else { throw ListError.Empty }
         
         return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore)
     }

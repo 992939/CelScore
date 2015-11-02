@@ -14,24 +14,22 @@ public class RatingsModel: Object {
     //MARK: Properties
     dynamic var id = ""
     dynamic var updatedAt = ""
-    dynamic var rating1 : Double = 0
-    dynamic var rating2 : Double = 0
-    dynamic var rating3 : Double = 0
-    dynamic var rating4 : Double = 0
-    dynamic var rating5 : Double = 0
-    dynamic var rating6 : Double = 0
-    dynamic var rating7 : Double = 0
-    dynamic var rating8 : Double = 0
-    dynamic var rating9 : Double = 0
-    dynamic var rating10 : Double = 0
+    dynamic var rating1: Double = 0
+    dynamic var rating2: Double = 0
+    dynamic var rating3: Double = 0
+    dynamic var rating4: Double = 0
+    dynamic var rating5: Double = 0
+    dynamic var rating6: Double = 0
+    dynamic var rating7: Double = 0
+    dynamic var rating8: Double = 0
+    dynamic var rating9: Double = 0
+    dynamic var rating10: Double = 0
     dynamic var totalVotes: Double = 0
     dynamic var isSynced: Bool = false
     
     
     //MARK: Initializers
-    override public class func primaryKey() -> String {
-        return "id"
-    }
+    override public class func primaryKey() -> String { return "id" }
     
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
@@ -61,6 +59,8 @@ public class RatingsModel: Object {
 }
 
 class UserRatingsModel: RatingsModel {
+    
+    //MARK: Initializers
     internal convenience init(id: String, string: String) {
         self.init()
         

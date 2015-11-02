@@ -13,36 +13,29 @@ import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
 
-enum MasterViewError : ErrorType {
-    case FacebookError
-    case ProfileError
-}
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
     var loadingIndicator: UIActivityIndicatorView!
     var signInButton: UIButton!
-    var searchTextField : UITextField!
-    var celebrityTableView : ASTableView!
-    var loginButton : FBSDKLoginButton!
+    var searchTextField: UITextField!
+    var celebrityTableView: ASTableView!
+    var loginButton: FBSDKLoginButton!
     
     var celscoreVM: CelScoreViewModel!
     var userVM: UserViewModel!
-    var displayedCelebrityListVM : CelebrityListViewModel!
-    var searchedCelebrityListVM : SearchListViewModel!
+    var displayedCelebrityListVM: CelebrityListViewModel!
+    var searchedCelebrityListVM: SearchListViewModel!
     
-    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
+    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
+    enum MasterViewError: ErrorType { case FacebookError, ProfileError }
 
     
     //MARK: Initializers
-    required init(coder aDecoder: NSCoder)
-    {
-        fatalError("storyboards are incompatible with truth and beauty")
-    }
+    required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(viewModel:CelScoreViewModel)
-    {
+    init(viewModel:CelScoreViewModel) {
         self.celscoreVM = viewModel
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
@@ -63,18 +56,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     
     //MARK: Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    override func viewDidLoad() { super.viewDidLoad() }
     
-    override func viewWillLayoutSubviews() {
-        //self.celebrityTableView.frame = self.view.bounds
-    }
+    override func viewWillLayoutSubviews() { /*self.celebrityTableView.frame = self.view.bounds */ }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+    override func prefersStatusBarHidden() -> Bool { return true }
     
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
+    
+    //MARK: ViewModel Binding
     func bindWithViewModels ()
     {
         userVM = UserViewModel()
@@ -122,6 +113,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
+        
         //REACHABILITY
         self.celscoreVM.checkNetworkConnectivitySignal()
             .start { event in
@@ -137,13 +129,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     
-    // MARK: ASTableView methods.
+    //MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
         let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
@@ -152,9 +140,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-        return 1
-    }
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return self.displayedCelebrityListVM.getCount()
@@ -164,17 +150,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         print("Node at \(indexPath.row)")
     }
     
+    
     // MARK: UITextFieldDelegate methods
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        return false
-    }
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {}
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {}
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {

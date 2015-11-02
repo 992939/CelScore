@@ -18,9 +18,9 @@ final class UserViewModel: NSObject {
     var votePercentage: Float = 0
     var defaultListIdSetting: String = "0001"
     
-    enum ListSetting: Int { case All = 0, case A_List, case B_List }
-    enum NotificationSetting: Int { case Daily = 0, case Weekly, case Never }
-    enum LoginSetting: Int { case None = 0, case Facebook_User, case Twitter_User, case Google_User }
+    enum ListSetting: Int { case All = 0, A_List, B_List }
+    enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
+    enum LoginSetting: Int { case None = 0, Facebook_User, Twitter_User, Google_User }
     
     
     //MARK: Initializers

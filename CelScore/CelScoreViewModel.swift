@@ -19,8 +19,8 @@ final class CelScoreViewModel: NSObject {
     let cognitoIdentityPoolId: String = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     let timeNotifier = MutableProperty<String>("")
 
-    enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
-    enum AWSDataType { case Celebrity, case List, case Ratings }
+    enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
+    enum AWSDataType { case Celebrity, List, Ratings }
     
     
     //MARK: Initializers

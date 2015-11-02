@@ -21,11 +21,11 @@ final class CelebrityViewModel: NSObject {
     var calculatedCelScore, previousScore: Double?
     var ratings: RatingsViewModel?
     
-    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
-    enum Rank { case A_List, case B_List, case Other }
-    enum Status { case Single, case Married, case Divorced, case Engaged }
-    enum Sex: Bool { case Man = true, case Woman = false }
-    enum Horoscope : Int { case Aries = 1, case Taurus, case Gemini, case Cancer, case Leo, case Virgo, case Libra, case Scorpio ,case Sagittarius, case Capricorn ,case Aquarius, case Pisces }
+    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
+    enum Sex: Int { case Woman = 0, Man }
+    enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
+    enum Rank { case A_List, B_List, Other }
+    enum Status { case Single, Married, Divorced, Engaged }
     
     
     //MARK: Initializers

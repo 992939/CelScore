@@ -16,7 +16,7 @@ final class SearchListViewModel: CelebrityListViewModel {
     let searchText = MutableProperty("")
     let isSearching = MutableProperty<Bool>(false)
     
-    enum SearchType { case Celebrity, case List }
+    enum SearchType { case Celebrity, List }
     
     
     //MARK: Initializers
