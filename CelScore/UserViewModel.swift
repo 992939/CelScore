@@ -11,34 +11,17 @@ import AWSCognito
 import AWSLambda
 import RealmSwift
 
-final class UserViewModel : NSObject {
+final class UserViewModel: NSObject {
     
     //MARK: Properties
-    let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
+    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
+    var votePercentage: Float = 0
+    var defaultListIdSetting: String = "0001"
     
-    enum listSetting {
-        case A_List
-        case B_List
-        case All
-    }
+    enum ListSetting: Int { case All = 0, case A_List, case B_List }
+    enum NotificationSetting: Int { case Daily = 0, case Weekly, case Never }
+    enum LoginSetting: Int { case None = 0, case Facebook_User, case Twitter_User, case Google_User }
     
-    enum searchSetting {
-        case Celebs
-        case Lists
-        case All
-    }
-    
-    enum notificationSetting {
-        case Daily
-        case Twice_Daily
-        case Never
-    }
-    
-    enum loginSetting {
-        case Facebook_User
-        case Twitter_User
-        case Google_User
-    }
     
     //MARK: Initializers
     override init() {
@@ -73,6 +56,7 @@ final class UserViewModel : NSObject {
                 }
         }
     }
+    
     
     //MARK: Methods
     func loginCognitoSignal(token: String) -> SignalProducer<AnyObject!, NSError> {

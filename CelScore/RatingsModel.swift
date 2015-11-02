@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 
 public class RatingsModel: Object {
+    
+    //MARK: Properties
     dynamic var id = ""
     dynamic var updatedAt = ""
     dynamic var rating1 : Double = 0
@@ -25,6 +27,8 @@ public class RatingsModel: Object {
     dynamic var totalVotes: Double = 0
     dynamic var isSynced: Bool = false
     
+    
+    //MARK: Initializers
     override public class func primaryKey() -> String {
         return "id"
     }
@@ -48,19 +52,20 @@ public class RatingsModel: Object {
         self.isSynced = true
     }
     
+    
+    //MARK: Methods
     public func interpolation() -> String
     {
         return "\(self.rating1)/\(self.rating2)/\(self.rating3)/\(self.rating4)/\(self.rating5)/\(self.rating6)/\(self.rating7)/\(self.rating8)/\(self.rating9)/\(self.rating10)"
     }
 }
 
-class UserRatingsModel : RatingsModel {
+class UserRatingsModel: RatingsModel {
     internal convenience init(id: String, string: String) {
         self.init()
         
         self.id = id
         self.isSynced = true
-        
         let ratingArray = string.componentsSeparatedByString("/").flatMap { Double($0) }
         self.rating1 = ratingArray[0]
         self.rating2 = ratingArray[1]

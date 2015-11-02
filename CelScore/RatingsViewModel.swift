@@ -15,9 +15,9 @@ final class RatingsViewModel: NSObject {
     var ratings : RatingsModel?
     var userRatings : UserRatingsModel?
     
+    
     //MARK: Initializers
-    init(rating: NSObject, celebrityId: String)
-    {
+    init(rating: NSObject, celebrityId: String) {
         super.init()
         
         self.ratings = RatingsModel()
@@ -26,6 +26,8 @@ final class RatingsViewModel: NSObject {
         self.userRatings!.id = celebrityId
     }
     
+    
+    //MARK: Methods
     func updateUserRatingsInRealmSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in

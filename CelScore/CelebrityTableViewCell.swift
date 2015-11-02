@@ -11,9 +11,12 @@ import AsyncDisplayKit
 
 final class CelebrityTableViewCell: ASCellNode {
     
+    //MARK: Properties
     let profile: CelebrityProfile
     let nickName: ASTextNode!
     
+    
+    //MARK: Initializers
     init(profile: CelebrityProfile) {
         self.profile = profile
         self.nickName = ASTextNode()
@@ -25,11 +28,8 @@ final class CelebrityTableViewCell: ASCellNode {
         self.addSubnode(self.nickName)
     }
     
-//    override func didLoad() {
-//        self.layer.as_allowsHighlightDrawing = true
-//        super.didLoad()
-//    }
     
+    //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec! {
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(

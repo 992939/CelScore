@@ -14,13 +14,17 @@ public class CelebId: Object {
 }
 
 public final class ListsModel: Object {
+    
+    //MARK: Properties
     dynamic var id = ""
-    dynamic var name : String = ""
+    dynamic var name: String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
     dynamic var count: Int = 0
     dynamic var isSynced: Bool = false
     let celebList = List<CelebId>()
     
+    
+    //MARK: Initializers
     override public class func primaryKey() -> String {
         return "id"
     }

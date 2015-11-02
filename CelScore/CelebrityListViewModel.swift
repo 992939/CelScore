@@ -14,13 +14,11 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
     final let title = MutableProperty("")
-    final lazy var celebrityList = ListsModel()
+    final lazy var celebrityList: ListsModel = ListsModel()
     
     //TO DO: add description of the error to throw in guard
-    enum ListError : ErrorType {
-        case EmptyList
-        case IndexOutOfBounds
-    }
+    enum ListError: ErrorType { case EmptyList, case IndexOutOfBounds }
+    
     
     //MARK: Initializers
     init(listId: String = "0001") {

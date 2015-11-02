@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 import ReactiveCocoa
 
-enum CelebrityError : ErrorType {
+enum CelebrityError: ErrorType {
     case NoFound
 }
 
-final class CelebrityViewModel : NSObject {
+final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     var celebrityInfo: CelebrityModel?
@@ -22,16 +22,13 @@ final class CelebrityViewModel : NSObject {
     var ratings: RatingsViewModel?
     
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
-    
     enum Rank { case A_List, case B_List, case Other }
-    
     enum Status { case Single, case Married, case Divorced, case Engaged }
-    
-    enum Sex : Bool { case Man = true, case Woman = false }
-    
+    enum Sex: Bool { case Man = true, case Woman = false }
     enum Horoscope : Int { case Aries = 1, case Taurus, case Gemini, case Cancer, case Leo, case Virgo, case Libra, case Scorpio ,case Sagittarius, case Capricorn ,case Aquarius, case Pisces }
     
     
+    //MARK: Initializers
     init(celebrityId: String) {
         super.init()
         

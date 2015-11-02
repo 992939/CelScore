@@ -32,11 +32,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var displayedCelebrityListVM : CelebrityListViewModel!
     var searchedCelebrityListVM : SearchListViewModel!
     
-    enum periodSetting: NSTimeInterval {
-        case Every_Minute = 60.0
-        case Daily = 86400.0
-    }
+    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
 
+    
+    //MARK: Initializers
     required init(coder aDecoder: NSCoder)
     {
         fatalError("storyboards are incompatible with truth and beauty")
@@ -61,6 +60,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
     }
+    
     
     //MARK: Methods
     override func viewDidLoad() {

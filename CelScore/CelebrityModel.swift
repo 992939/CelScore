@@ -16,7 +16,7 @@ public struct CelebrityProfile {
     let prevScore: Double
 }
 
-extension CelebrityProfile : Equatable {}
+extension CelebrityProfile: Equatable {}
 
 public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
     return lhs.nickname == rhs.nickname && lhs.id == rhs.id
@@ -24,6 +24,8 @@ public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
 
 
 public final class CelebrityModel: Object {
+    
+    //MARK: Properties
     dynamic var id = ""
     dynamic var birthdate : String = ""
     dynamic var firstName : String = ""
@@ -40,6 +42,8 @@ public final class CelebrityModel: Object {
     dynamic var sex : Bool = false
     dynamic var isSynced: Bool = false
     
+    
+    //MARK: Initializers
     override public class func primaryKey() -> String {
         return "id"
     }

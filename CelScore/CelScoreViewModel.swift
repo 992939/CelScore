@@ -16,26 +16,18 @@ import AIRTimer
 final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
-    let cognitoIdentityPoolId = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
+    let cognitoIdentityPoolId: String = "us-east-1:7201b11b-c8b4-443b-9918-cf6913c05a21"
     let timeNotifier = MutableProperty<String>("")
 
-    enum periodSetting: NSTimeInterval {
-        case Every_Minute = 60.0
-        case Daily = 86400.0
-    }
+    enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
+    enum AWSDataType { case Celebrity, case List, case Ratings }
     
-    enum AWSDataType {
-        case Celebrity
-        case List
-        case Ratings
-    }
     
     //MARK: Initializers
     override init() {
         super.init()
         
         //self.timeNotifier <~ self.timerSignal()
-        
         self.timeNotifier.producer
             .promoteErrors(NSError.self)
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
@@ -55,6 +47,7 @@ final class CelScoreViewModel: NSObject {
                 }
         }
     }
+    
     
     //MARK: Methods
     func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NSError> {
