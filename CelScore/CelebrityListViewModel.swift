@@ -61,6 +61,7 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
+    //TODO : replace by computed properties count, idAtIndex & profileAtIndex
     final func getCount() -> Int {
         return self.celebrityList.count
     }
