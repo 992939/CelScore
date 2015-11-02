@@ -21,49 +21,18 @@ final class CelebrityViewModel : NSObject {
     var calculatedCelScore, previousScore: Double?
     var ratings: RatingsViewModel?
     
-    enum rank {
-        case A_List
-        case B_List
-        case C_List
-        case D_List
-        case Z_List
-    }
+    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, case Daily = 86400.0 }
     
-    enum status {
-        case Single
-        case Married
-        case Dating
-        case Divorced
-        case Engaged
-    }
+    enum Rank { case A_List, case B_List, case Other }
     
-    enum sex {
-        case Man
-        case Woman
-    }
+    enum Status { case Single, case Married, case Divorced, case Engaged }
     
-    enum horoscope {
-        case Aries
-        case Taurus
-        case Gemini
-        case Cancer
-        case Leo
-        case Virgo
-        case Libra
-        case Scorpio
-        case Sagittarius
-        case Capricorn
-        case Aquarius
-        case Pisces
-    }
+    enum Sex : Bool { case Man = true, case Woman = false }
     
-    enum periodSetting: NSTimeInterval {
-        case Every_Minute = 60.0
-        case Daily = 86400.0
-    }
+    enum Horoscope : Int { case Aries = 1, case Taurus, case Gemini, case Cancer, case Leo, case Virgo, case Libra, case Scorpio ,case Sagittarius, case Capricorn ,case Aquarius, case Pisces }
     
-    init(celebrityId: String)
-    {
+    
+    init(celebrityId: String) {
         super.init()
         
         getCelebrityFromLocalStoreSignal(celebId: celebrityId)
