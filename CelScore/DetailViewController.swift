@@ -23,8 +23,13 @@ final class DetailViewController: ASViewController {
     
     
     //MARK: Methods
-    override func viewDidLoad() { super.viewDidLoad() }
     override func viewWillLayoutSubviews() {}
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //where the magic happens
+    }
 }

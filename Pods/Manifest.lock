@@ -48,8 +48,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer
-  - AsyncDisplayKit (from `https://github.com/facebook/AsyncDisplayKit.git`, branch
-    `master`)
+  - AsyncDisplayKit (~> 1.9)
   - AWSCognito (~> 2.2)
   - Fabric
   - FBSDKCoreKit (~> 4.7.1)
@@ -59,16 +58,6 @@ DEPENDENCIES:
   - TwitterCore
   - TwitterKit
   - WillowTreeReachability (~> 1.0)
-
-EXTERNAL SOURCES:
-  AsyncDisplayKit:
-    :branch: master
-    :git: https://github.com/facebook/AsyncDisplayKit.git
-
-CHECKOUT OPTIONS:
-  AsyncDisplayKit:
-    :commit: e11007f906b522ad575d7956b2ae53118de114af
-    :git: https://github.com/facebook/AsyncDisplayKit.git
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
