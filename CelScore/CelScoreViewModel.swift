@@ -32,7 +32,6 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Initializers
     override init() {
-
         super.init()
         
         //self.timeNotifier <~ self.timerSignal()
@@ -79,7 +78,6 @@ final class CelScoreViewModel: NSObject {
             sink, _ in
             
             //AWSLogger.defaultLogger().logLevel = .Verbose
-            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
