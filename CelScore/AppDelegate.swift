@@ -20,6 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Properties
     var window: UIWindow?
     
+    //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         let celscoreVM = CelScoreViewModel()
@@ -32,22 +33,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationWillResignActive(application: UIApplication) {
-    }
-    
-    func applicationDidEnterBackground(application: UIApplication) {
-    }
-    
-    func applicationWillEnterForeground(application: UIApplication) {
-    }
-    
-    func applicationDidBecomeActive(application: UIApplication) {
-    }
-    
-    func applicationWillTerminate(application: UIApplication) {
-    }
-    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
+    
+    func applicationWillResignActive(application: UIApplication) {}
+    
+    func applicationDidEnterBackground(application: UIApplication) {}
+    
+    func applicationWillEnterForeground(application: UIApplication) {}
+    
+    func applicationDidBecomeActive(application: UIApplication) {}
+    
+    func applicationWillTerminate(application: UIApplication) {}
 }
