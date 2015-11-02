@@ -16,7 +16,7 @@ final class UserViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    var votePercentage: Float = 0
+    var votePercentage: Float = 0 //TODO: NSUserStandards
     var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
     enum ListSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }

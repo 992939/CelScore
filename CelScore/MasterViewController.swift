@@ -24,8 +24,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var celebrityTableView: ASTableView!
     var loginButton: FBSDKLoginButton!
     
-    var celscoreVM: CelScoreViewModel!
-    var userVM: UserViewModel!
+    let celscoreVM: CelScoreViewModel
+    let userVM: UserViewModel
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
 
@@ -35,6 +35,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     init(viewModel:CelScoreViewModel) {
         self.celscoreVM = viewModel
+        self.userVM = UserViewModel()
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
@@ -63,7 +64,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ViewModel Binding
     func bindWithViewModels ()
     {
-        userVM = UserViewModel()
         self.celebrityTableView.asyncDelegate = self
         
         //LOGIN
