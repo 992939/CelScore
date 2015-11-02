@@ -24,8 +24,7 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Methods
     final func initializeListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)

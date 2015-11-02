@@ -50,8 +50,7 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Methods
     func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let reachability = Monitor()
             reachability!.startMonitoring()
@@ -66,8 +65,7 @@ final class CelScoreViewModel: NSObject {
     }
     
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             //AWSLogger.defaultLogger().logLevel = .Verbose
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
@@ -118,8 +116,7 @@ final class CelScoreViewModel: NSObject {
     
     func timerSignal() -> SignalProducer<String, NoError> {
         var count = 0
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             AIRTimer.every(5, userInfo: "FIRE!!") { timer in
                 sendNext(sink, "tick #\(count++)")

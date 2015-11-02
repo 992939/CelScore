@@ -43,8 +43,7 @@ final class SearchListViewModel: CelebrityListViewModel {
     
     //MARK: Methods
     func searchForSignal(searchToken searchToken: String, searchType: SearchType) -> SignalProducer<AnyObject, ListError> {
-        return SignalProducer {
-            sink, disposable in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate: NSPredicate

@@ -52,8 +52,7 @@ final class CelebrityViewModel: NSObject {
     //MARK: Methods
     func getCelebrityFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
     {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId)

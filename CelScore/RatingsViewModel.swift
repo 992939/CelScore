@@ -35,8 +35,7 @@ final class RatingsViewModel: NSObject {
     
     //MARK: Methods
     func updateUserRatingsInRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             realm.beginWrite()
@@ -47,8 +46,7 @@ final class RatingsViewModel: NSObject {
     }
     
     func retrieveUserRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", self.userRatings!.id)
@@ -57,8 +55,7 @@ final class RatingsViewModel: NSObject {
     }
     
     func updateRatingsInRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             realm.beginWrite()
@@ -69,8 +66,7 @@ final class RatingsViewModel: NSObject {
     }
     
     func retrieveRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", self.ratings!.id)

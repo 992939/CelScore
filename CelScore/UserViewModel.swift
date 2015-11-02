@@ -60,8 +60,7 @@ final class UserViewModel: NSObject {
     
     //MARK: Methods
     func loginSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
@@ -100,8 +99,7 @@ final class UserViewModel: NSObject {
     }
     
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else {
@@ -115,8 +113,7 @@ final class UserViewModel: NSObject {
     }
     
     func updateUserInfoOnCognitoSignal(object: AnyObject!) -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
@@ -148,8 +145,7 @@ final class UserViewModel: NSObject {
     }
     
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
@@ -182,8 +178,7 @@ final class UserViewModel: NSObject {
     }
 
     func updateUserRatingsOnCognitoSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer {
-            sink, _ in
+        return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isSynced = false")
