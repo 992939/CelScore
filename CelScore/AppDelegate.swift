@@ -28,7 +28,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
-        Fabric.with([Twitter.self])
+        Fabric.with([Twitter.self, AWSCognito.self])
         window.makeKeyAndVisible()
         self.window = window
         return true

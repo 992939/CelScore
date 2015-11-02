@@ -10,6 +10,7 @@ import Foundation
 import AWSCognito
 import AWSLambda
 import RealmSwift
+import TwitterKit
 
 final class UserViewModel: NSObject {
     
@@ -19,7 +20,7 @@ final class UserViewModel: NSObject {
     var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
     enum ListSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
-    enum LoginSetting: Int { case None = 0, Facebook_User, Twitter_User, Google_User }
+    enum LoginSetting: Int { case Facebook, Twitter }
     
     
     //MARK: Initializers
@@ -58,17 +59,33 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Methods
-    func loginCognitoSignal(token: String) -> SignalProducer<AnyObject!, NSError> {
+    func loginSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer {
             sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
-            let logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
-            credentialsProvider.logins = logins as [NSObject : AnyObject]
+            
+            let logins: NSDictionary
+            switch loginType {
+            case .Facebook:
+                logins = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
+                credentialsProvider.logins = logins as [NSObject: AnyObject]
+            case .Twitter:
+                Twitter.sharedInstance().logInWithCompletion {
+                    (session, error) -> Void in
+                    if (session != nil) {
+                        let value = session!.authToken + ";" + session!.authTokenSecret
+                        // Note: This overrides any existing logins
+                        credentialsProvider.logins = ["api.twitter.com": value]
+                    } else {
+                        print("error: \(error!.localizedDescription)")
+                    }
+                }
+            }
+
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     sendError(sink, task.error)
@@ -91,7 +108,6 @@ final class UserViewModel: NSObject {
                     sendError(sink, error)
                     return
                 }
-                
                 sendNext(sink, object)
                 sendCompleted(sink)
             }
@@ -117,7 +133,6 @@ final class UserViewModel: NSObject {
                 dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
                 dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                 dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         sendError(sink, task.error)

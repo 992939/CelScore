@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
+import TwitterKit
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -83,6 +84,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //        {
         //            print("fb error")
         //        }
+        
+        userVM.loginSignal("", loginType: .Twitter)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("loginSignal Value: \(value)")
+                case let .Error(error):
+                    print("loginSignal Error: \(error)")
+                case .Completed:
+                    print("loginSignal Completed")
+                case .Interrupted:
+                    print("loginSignal Interrupted")
+                }
+        }
         
         //DISPLAY
         self.displayedCelebrityListVM.initializeListSignal(listId: "0001")
@@ -165,7 +180,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             return
         }
         
-        userVM.loginCognitoSignal(result.token.tokenString)
+        userVM.loginSignal(result.token.tokenString, loginType: .Facebook)
             .start { event in
                 switch(event) {
                 case let .Next(value):
