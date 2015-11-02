@@ -92,7 +92,6 @@ final class CelebrityViewModel : NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-            
             guard let celeb = celebrity else {
                 sendError(sink, CelebrityError.NoFound)
                 return

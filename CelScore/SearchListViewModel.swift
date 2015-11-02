@@ -65,6 +65,7 @@ final class SearchListViewModel: CelebrityListViewModel {
                 sendError(sink, ListError.Empty)
                 return
             }
+            
             sendNext(sink, list)
             sendCompleted(sink)
         }

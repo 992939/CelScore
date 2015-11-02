@@ -51,11 +51,11 @@ class CelebrityListViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            
             guard let celebList = list else {
                 sendError(sink, ListError.Empty)
                 return
             }
+            
             self.celebrityList = celebList
             sendNext(sink, celebList)
             sendCompleted(sink)
@@ -78,10 +78,8 @@ class CelebrityListViewModel: NSObject {
         let realm = try! Realm()
         let predicate = NSPredicate(format: "id = %@", celebId)
         let celebrity = realm.objects(CelebrityModel).filter(predicate).first
+        guard let celeb = celebrity else { throw ListError.EmptyList }
         
-        guard let celeb = celebrity else {
-            throw ListError.EmptyList
-        }
         return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore)
     }
 }

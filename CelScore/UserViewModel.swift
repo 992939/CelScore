@@ -88,7 +88,6 @@ final class UserViewModel : NSObject {
             let logins: NSDictionary = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
             credentialsProvider.logins = logins as [NSObject : AnyObject]
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                
                 guard task.error == nil else {
                     sendError(sink, task.error)
                     return task
@@ -107,7 +106,6 @@ final class UserViewModel : NSObject {
             sink, _ in
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                
                 guard error == nil else {
                     sendError(sink, error)
                     return
@@ -140,7 +138,6 @@ final class UserViewModel : NSObject {
                 dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                 
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                    
                     guard task.error == nil else {
                         sendError(sink, task.error)
                         return task
@@ -165,7 +162,6 @@ final class UserViewModel : NSObject {
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                
                 guard task.error == nil else {
                     credentialsProvider.clearKeychain()
                     sendError(sink, task.error)
@@ -212,11 +208,11 @@ final class UserViewModel : NSObject {
             try! realm.commitWrite()
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                
                 guard task.error == nil else {
                     sendError(sink, task.error)
                     return task
                 }
+                
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task
