@@ -15,7 +15,6 @@ class CelebrityListViewModel: NSObject {
     //MARK: Properties
     final let title = MutableProperty("")
     final lazy var celebrityList: ListsModel = ListsModel()
-    
     //TO DO: add description of the error to throw in guard
     enum ListError: ErrorType { case Empty, IndexOutOfBounds }
     

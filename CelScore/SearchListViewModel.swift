@@ -40,6 +40,7 @@ final class SearchListViewModel: CelebrityListViewModel {
             }))
     }
     
+    
     //MARK: Methods
     func searchForSignal(searchToken searchToken: String, searchType: SearchType) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer {
