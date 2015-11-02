@@ -24,7 +24,7 @@ final class SearchListViewModel: CelebrityListViewModel {
         
         self.searchText.producer
             .promoteErrors(ListError.self)
-            .filter { $0.characters.count > 3 }
+            .filter { $0.characters.count > 2 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in

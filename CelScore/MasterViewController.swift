@@ -25,8 +25,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     var celscoreVM: CelScoreViewModel!
     var userVM: UserViewModel!
-    var displayedCelebrityListVM: CelebrityListViewModel!
-    var searchedCelebrityListVM: SearchListViewModel!
+    lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
+    lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
     
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum MasterViewError: ErrorType { case FacebookError, ProfileError }
@@ -91,7 +91,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //        }
         
         //DISPLAY
-        self.displayedCelebrityListVM = CelebrityListViewModel()
         self.displayedCelebrityListVM.initializeListSignal(listId: "0001")
             .start { event in
                 switch(event) {
@@ -110,7 +109,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
         
         //SEARCH
-        self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
         
