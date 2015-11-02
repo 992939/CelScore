@@ -11,14 +11,14 @@ import RealmSwift
 import ReactiveCocoa
 
 enum CelebrityError: ErrorType {
-    case NoFound
+    case NotFound
 }
 
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    var celebrity: CelebrityModel!
-    var ratingsVM: RatingsViewModel!
+    var celebrity: CelebrityModel?
+    var ratingsVM: RatingsViewModel?
     
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
@@ -59,7 +59,7 @@ final class CelebrityViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", celebId)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             guard let celeb = celebrity else {
-                sendError(sink, CelebrityError.NoFound)
+                sendError(sink, .NotFound)
                 return
             }
             sendNext(sink, celeb)
