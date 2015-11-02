@@ -12,8 +12,8 @@ import RealmSwift
 public class RatingsModel: Object {
     
     //MARK: Properties
-    dynamic var id = ""
-    dynamic var updatedAt = ""
+    dynamic var id: String = ""
+    dynamic var updatedAt: String = ""
     dynamic var rating1: Double = 0
     dynamic var rating2: Double = 0
     dynamic var rating3: Double = 0

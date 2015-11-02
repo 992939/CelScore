@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-public final class CelebId: Object { dynamic var id = "" }
+public final class CelebId: Object { dynamic var id: String = "" }
 
 public final class ListsModel: Object {
     
     //MARK: Properties
-    dynamic var id = ""
+    dynamic var id: String = ""
     dynamic var name: String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
     dynamic var count: Int = 0

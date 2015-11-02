@@ -20,6 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Properties
     var window: UIWindow?
     
+    
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
@@ -27,7 +28,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
-        //Fabric.with([Twitter.self])
+        Fabric.with([Twitter.self])
         window.makeKeyAndVisible()
         self.window = window
         return true
@@ -38,12 +39,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(application: UIApplication) {}
-    
     func applicationDidEnterBackground(application: UIApplication) {}
-    
     func applicationWillEnterForeground(application: UIApplication) {}
-    
     func applicationDidBecomeActive(application: UIApplication) {}
-    
     func applicationWillTerminate(application: UIApplication) {}
 }

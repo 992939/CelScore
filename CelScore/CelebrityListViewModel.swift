@@ -31,7 +31,7 @@ class CelebrityListViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
             guard let celebList = list else {
-                sendError(sink, ListError.Empty)
+                sendError(sink, .Empty)
                 return
             }
             

@@ -26,7 +26,7 @@ public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
 public final class CelebrityModel: Object {
     
     //MARK: Properties
-    dynamic var id = ""
+    dynamic var id: String = ""
     dynamic var birthdate : String = ""
     dynamic var firstName : String = ""
     dynamic var lastName : String = ""

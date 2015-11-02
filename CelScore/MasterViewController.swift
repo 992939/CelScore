@@ -27,9 +27,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var userVM: UserViewModel!
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
-    
-    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
-    enum MasterViewError: ErrorType { case FacebookError, ProfileError }
 
     
     //MARK: Initializers
@@ -57,11 +54,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: Methods
     override func viewDidLoad() { super.viewDidLoad() }
-    
     override func viewWillLayoutSubviews() { /*self.celebrityTableView.frame = self.view.bounds */ }
-    
     override func prefersStatusBarHidden() -> Bool { return true }
-    
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
     
@@ -138,8 +132,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
-    
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return self.displayedCelebrityListVM.getCount()
     }
@@ -147,6 +139,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         print("Node at \(indexPath.row)")
     }
+    
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
     
     
     // MARK: UITextFieldDelegate methods
