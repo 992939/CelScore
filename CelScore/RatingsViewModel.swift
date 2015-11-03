@@ -16,8 +16,16 @@ final class RatingsViewModel: NSObject {
     var userRatings: UserRatingsModel!
     var celScore: Double {
         get {
-            let totalRatings = ratings.rating1 + ratings.rating2 + ratings.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings.rating8 + ratings.rating9 + ratings.rating10
-            return totalRatings / 10
+            if userRatings.totalVotes > 0 {
+                var totalRatings = ratings.rating1 + ratings.rating2 + ratings.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings.rating8 + ratings.rating9 + ratings.rating10
+                totalRatings *= Double(ratings.totalVotes)
+                totalRatings += userRatings.rating1 + userRatings.rating2 + userRatings.rating3 + userRatings.rating4 + userRatings.rating5 + userRatings.rating6 + userRatings.rating7 + userRatings.rating8 + userRatings.rating9 + userRatings.rating10
+                return totalRatings / Double(ratings.totalVotes + 1)
+            } else
+            {
+                let totalRatings = ratings.rating1 + ratings!.rating2 + ratings!.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings!.rating8 + ratings.rating9 + ratings!.rating10
+                return totalRatings / 10
+            }
         }
     }
     enum RatingsType { case Ratings, UserRatings }
@@ -45,9 +53,9 @@ final class RatingsViewModel: NSObject {
                 return
             }
             
-            self.userRatings?.isSynced = false
-            self.userRatings?.totalVotes += 1
-            realm.add(self.userRatings!, update: true)
+            self.userRatings.isSynced = false
+            self.userRatings.totalVotes += 1
+            realm.add(self.userRatings, update: true)
             sendNext(sink, object)
             
             try! realm.commitWrite()
