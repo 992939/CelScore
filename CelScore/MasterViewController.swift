@@ -46,8 +46,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity or a #list"
         
-        self.celebrityTableView.asyncDataSource = self
-        self.celebrityTableView.asyncDelegate = self
+        //self.celebrityTableView.asyncDataSource = self
+        //self.celebrityTableView.asyncDelegate = self
         
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
@@ -64,6 +64,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ViewModel Binding
     func bindWithViewModels ()
     {
+        self.celebrityTableView.asyncDataSource = self
+        self.celebrityTableView.asyncDelegate = self
+        
         //LOGIN
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -136,6 +139,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         print("Node at \(indexPath.row)")
+        let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
+        let detailVC = DetailViewController(profile: node.profile)
+        self.presentViewController(detailVC, animated: false, completion: nil)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
@@ -204,7 +210,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.celscoreVM.getFromAWSSignal(.Ratings)
+                        self.celscoreVM.getFromAWSSignal(.List)
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
