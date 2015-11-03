@@ -20,7 +20,7 @@ final class DetailViewController: UIViewController {
     let profile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
-    enum PageType: Int { case Ratings = 0, Info, Consensus }
+    enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     
     //MARK: Initializers
@@ -71,19 +71,19 @@ final class DetailViewController: UIViewController {
 //                }
 //        }
         
-        self.ratingsVM.retrieveFromLocalStoreSignal(.UserRatings)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
-                case let .Error(error):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
-                case .Completed:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
-                case .Interrupted:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
-                }
-        }
+//        self.ratingsVM.retrieveFromLocalStoreSignal(.UserRatings)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
+//                case let .Error(error):
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
+//                case .Completed:
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
+//                case .Interrupted:
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
+//                }
+//        }
         
 //        self.ratingsVM.updateOnLocalStoreSignal(.UserRatings)
 //            .start { event in

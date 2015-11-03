@@ -34,32 +34,21 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Methods
-    func updateOnLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
+    func updateUserRatingsSignal() -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             realm.beginWrite()
             
-            switch ratingType {
-            case .Ratings:
-                guard let object = self.ratings else {
-                    sendError(sink, .RatingsNotFound)
-                    return
-                }
-                self.ratings.isSynced = false
-                realm.add(self.ratings!, update: true)
-                sendNext(sink, object)
-                
-            case .UserRatings:
-                guard let object = self.userRatings else {
-                    sendError(sink, .UserRatingsNotFound)
-                    return
-                }
-                
-                self.userRatings?.isSynced = false
-                realm.add(self.userRatings!, update: true)
-                sendNext(sink, object)
+            guard let object = self.userRatings else {
+                sendError(sink, .UserRatingsNotFound)
+                return
             }
+            
+            self.userRatings?.isSynced = false
+            self.userRatings?.totalVotes += 1
+            realm.add(self.userRatings!, update: true)
+            sendNext(sink, object)
             
             try! realm.commitWrite()
             sendCompleted(sink)

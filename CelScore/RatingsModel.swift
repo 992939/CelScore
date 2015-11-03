@@ -24,7 +24,7 @@ public class RatingsModel: Object {
     dynamic var rating8: Double = 0
     dynamic var rating9: Double = 0
     dynamic var rating10: Double = 0
-    dynamic var totalVotes: Double = 0
+    dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = false
     
     
@@ -46,7 +46,7 @@ public class RatingsModel: Object {
         self.rating8 = dictionary["rating8"] as! Double
         self.rating9 = dictionary["rating9"] as! Double
         self.rating10 = dictionary["rating10"] as! Double
-        self.totalVotes = dictionary["totalVote"] as! Double
+        self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
     }
     
@@ -54,13 +54,6 @@ public class RatingsModel: Object {
         self.init()
         
         self.id = id
-    }
-    
-    
-    //MARK: Methods
-    public func interpolation() -> String
-    {
-        return "\(self.rating1)/\(self.rating2)/\(self.rating3)/\(self.rating4)/\(self.rating5)/\(self.rating6)/\(self.rating7)/\(self.rating8)/\(self.rating9)/\(self.rating10)"
     }
 }
 
@@ -83,5 +76,12 @@ class UserRatingsModel: RatingsModel {
         self.rating8 = ratingArray[7]
         self.rating9 = ratingArray[8]
         self.rating10 = ratingArray[9]
+        self.totalVotes = Int(ratingArray[10])
+    }
+    
+    
+    //MARK: Methods
+    func interpolation() -> String {
+        return "\(self.rating1)/\(self.rating2)/\(self.rating3)/\(self.rating4)/\(self.rating5)/\(self.rating6)/\(self.rating7)/\(self.rating8)/\(self.rating9)/\(self.rating10)/\(self.totalVotes)"
     }
 }
