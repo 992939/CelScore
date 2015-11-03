@@ -24,7 +24,7 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Initializers
-    init(rating: NSObject, celebrityId: String) {
+    init(celebrityId: String) {
         super.init()
         
         self.ratings = RatingsModel(id: celebrityId)

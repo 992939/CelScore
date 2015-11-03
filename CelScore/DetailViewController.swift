@@ -19,6 +19,7 @@ final class DetailViewController: ASViewController {
     
     let profile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
+    let ratingsVM: RatingsViewModel
     enum PageType: Int { case Ratings = 0, Info, Consensus }
     
     
@@ -28,6 +29,7 @@ final class DetailViewController: ASViewController {
     init(profile: CelebrityProfile) {
         self.profile = profile
         self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
+        self.ratingsVM = RatingsViewModel(celebrityId: profile.id)
         
         super.init(nibName: nil, bundle: nil)
     }

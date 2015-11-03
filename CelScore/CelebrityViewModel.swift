@@ -18,8 +18,6 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     var celebrity: CelebrityModel?
-    var ratingsVM: RatingsViewModel?
-    
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
     enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
