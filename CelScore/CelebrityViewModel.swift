@@ -51,8 +51,7 @@ final class CelebrityViewModel: NSObject {
     
     
     //MARK: Methods
-    func getFromLocalStoreSignal(id id: String, dataType: DataType) -> SignalProducer<Object!, CelebrityError>
-    {
+    func getFromLocalStoreSignal(id id: String, dataType: DataType) -> SignalProducer<Object!, CelebrityError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -68,22 +67,6 @@ final class CelebrityViewModel: NSObject {
                 return
             }
             sendNext(sink, object)
-            sendCompleted(sink)
-        }
-    }
-    
-    func getCelebrityFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
-    {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", celebId)
-            let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-            guard let celeb = celebrity else {
-                sendError(sink, .NotFound)
-                return
-            }
-            sendNext(sink, celeb)
             sendCompleted(sink)
         }
     }
