@@ -85,7 +85,7 @@ final class DetailViewController: UIViewController {
 //                }
 //        }
         
-//        self.ratingsVM.updateOnLocalStoreSignal(.UserRatings)
+//        self.ratingsVM.updateUserRatingsSignal()
 //            .start { event in
 //                switch(event) {
 //                case let .Next(value):
