@@ -25,19 +25,20 @@ final class CelebrityViewModel: NSObject {
     enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
     enum Rank { case A_List, B_List, Other }
     enum Status { case Single, Married, Divorced, Engaged }
+    enum DataType { case Celebrity, List }
     
     
     //MARK: Initializers
     init(celebrityId: String) {
         super.init()
         
-        getCelebrityFromLocalStoreSignal(celebId: celebrityId)
+        getFromLocalStoreSignal(id: celebrityId, dataType: .Celebrity)
             .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    self.celebrity = value
+                    self.celebrity = value as? CelebrityModel
                 case let .Error(error):
                     print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
                 case .Completed:
@@ -50,6 +51,27 @@ final class CelebrityViewModel: NSObject {
     
     
     //MARK: Methods
+    func getFromLocalStoreSignal(id id: String, dataType: DataType) -> SignalProducer<Object!, CelebrityError>
+    {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", id)
+            
+            let awsObject: Object?
+            switch dataType {
+            case .Celebrity: awsObject = realm.objects(CelebrityModel).filter(predicate).first!
+            case .List: awsObject = realm.objects(RatingsModel).filter(predicate).first!
+            }
+            guard let object = awsObject else {
+                sendError(sink, .NotFound)
+                return
+            }
+            sendNext(sink, object)
+            sendCompleted(sink)
+        }
+    }
+    
     func getCelebrityFromLocalStoreSignal(celebId celebId: String) -> SignalProducer<CelebrityModel!, CelebrityError>
     {
         return SignalProducer { sink, _ in

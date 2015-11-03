@@ -12,12 +12,23 @@ import AsyncDisplayKit
 final class DetailViewController: ASViewController {
     
     //MARK: Properties
+    var nickNameNode: ASTextNode?
+    var celscoreNode: ASTextNode?
+    var marginErrorNode: ASTextNode?
+    var imageNode: ASImageNode?
+    
+    let profile: CelebrityProfile
+    let celebrityVM: CelebrityViewModel
+    enum PageType: Int { case Ratings = 0, Info, Consensus }
     
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(profile:CelebrityProfile) {
+    init(profile: CelebrityProfile) {
+        self.profile = profile
+        self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,6 +41,6 @@ final class DetailViewController: ASViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //where the magic happens
+        self.celebrityVM.getFromLocalStoreSignal(id: self.profile.id, dataType: .Celebrity)
     }
 }
