@@ -27,10 +27,8 @@ final class RatingsViewModel: NSObject {
     init(rating: NSObject, celebrityId: String) {
         super.init()
         
-        self.ratings = RatingsModel()
-        self.ratings.id = celebrityId
-        self.userRatings = UserRatingsModel()
-        self.userRatings.id = celebrityId
+        self.ratings = RatingsModel(id: celebrityId)
+        self.userRatings = UserRatingsModel(id: celebrityId)
     }
     
     

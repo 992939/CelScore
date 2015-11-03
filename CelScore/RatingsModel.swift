@@ -50,6 +50,12 @@ public class RatingsModel: Object {
         self.isSynced = true
     }
     
+    public convenience init(id: String) {
+        self.init()
+        
+        self.id = id
+    }
+    
     
     //MARK: Methods
     public func interpolation() -> String

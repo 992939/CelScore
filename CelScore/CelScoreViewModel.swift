@@ -93,7 +93,6 @@ final class CelScoreViewModel: NSObject {
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
                 json["Items"].arrayValue.forEach({ data in
-                    
                     let awsObject : Object
                     switch dataType {
                     case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
