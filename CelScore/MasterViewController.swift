@@ -210,19 +210,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.celscoreVM.getFromAWSSignal(.List)
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("getFromAWSSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("getFromAWSSignal Error: \(error)")
-                                case .Completed:
-                                    print("getFromAWSSignal Completed")
-                                case .Interrupted:
-                                    print("getFromAWSSignal Interrupted")
-                                }
-                        }
+//                        self.celscoreVM.getFromAWSSignal(.List)
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("getFromAWSSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("getFromAWSSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("getFromAWSSignal Completed")
+//                                case .Interrupted:
+//                                    print("getFromAWSSignal Interrupted")
+//                                }
+//                        }
                         
 //                        self.userVM.getUserRatingsFromCognitoSignal()
 //                            .start { event in

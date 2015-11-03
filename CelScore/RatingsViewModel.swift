@@ -20,6 +20,7 @@ final class RatingsViewModel: NSObject {
             return totalRatings / 10
         }
     }
+    enum RatingsType { case Ratings, UserRatings }
     
     
     //MARK: Initializers
@@ -34,43 +35,37 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Methods
-    func updateUserRatingsInRealmSignal() -> SignalProducer<AnyObject!, NSError> {
+    func updateOnLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             realm.beginWrite()
-            self.userRatings?.isSynced = false
-            realm.add(self.userRatings!, update: true)
+            
+            switch ratingType {
+            case .Ratings:
+                self.ratings?.isSynced = false
+                realm.add(self.ratings!, update: true)
+            case .UserRatings:
+                self.userRatings?.isSynced = false
+                realm.add(self.userRatings!, update: true)
+            }
             try! realm.commitWrite()
         }
     }
     
-    func retrieveUserRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
+    func retrieveFromLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", self.userRatings!.id)
-            self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-        }
-    }
-    
-    func updateRatingsInRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
             
-            let realm = try! Realm()
-            realm.beginWrite()
-            self.ratings?.isSynced = false
-            realm.add(self.ratings!, update: true)
-            try! realm.commitWrite()
-        }
-    }
-    
-    func retrieveRatingsFromRealmSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", self.ratings!.id)
-            self.ratings = realm.objects(RatingsModel).filter(predicate).first
+            switch ratingType {
+            case .Ratings:
+                let predicate = NSPredicate(format: "id = %@", self.ratings!.id)
+                self.ratings = realm.objects(RatingsModel).filter(predicate).first
+            case .UserRatings:
+                let predicate = NSPredicate(format: "id = %@", self.userRatings!.id)
+                self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            }
         }
     }
 }
