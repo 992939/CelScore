@@ -34,7 +34,7 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Methods
-    func updateOnLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<AnyObject!, NSError> {
+    func updateOnLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -42,13 +42,27 @@ final class RatingsViewModel: NSObject {
             
             switch ratingType {
             case .Ratings:
-                self.ratings?.isSynced = false
+                guard let object = self.ratings else {
+                    sendError(sink, .RatingsNotFound)
+                    return
+                }
+                self.ratings.isSynced = false
                 realm.add(self.ratings!, update: true)
+                sendNext(sink, object)
+                
             case .UserRatings:
+                guard let object = self.userRatings else {
+                    sendError(sink, .UserRatingsNotFound)
+                    return
+                }
+                
                 self.userRatings?.isSynced = false
                 realm.add(self.userRatings!, update: true)
+                sendNext(sink, object)
             }
+            
             try! realm.commitWrite()
+            sendCompleted(sink)
         }
     }
     
@@ -66,6 +80,7 @@ final class RatingsViewModel: NSObject {
                     return
                 }
                 sendNext(sink, object)
+                
             case .UserRatings:
                 let predicate = NSPredicate(format: "id = %@", self.userRatings.id)
                 self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
@@ -75,6 +90,7 @@ final class RatingsViewModel: NSObject {
                 }
                 sendNext(sink, object)
             }
+            
             sendCompleted(sink)
         }
     }
