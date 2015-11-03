@@ -10,9 +10,6 @@ import Foundation
 import RealmSwift
 import ReactiveCocoa
 
-enum CelebrityError: ErrorType {
-    case NotFound
-}
 
 final class CelebrityViewModel: NSObject {
     
@@ -23,6 +20,7 @@ final class CelebrityViewModel: NSObject {
     enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
     enum Rank { case A_List, B_List, Other }
     enum Status { case Single, Married, Divorced, Engaged }
+    enum CelebrityError: ErrorType { case NotFound }
     
     
     //MARK: Initializers

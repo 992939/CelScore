@@ -21,6 +21,7 @@ final class RatingsViewModel: NSObject {
         }
     }
     enum RatingsType { case Ratings, UserRatings }
+    enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound }
     
     
     //MARK: Initializers
@@ -51,19 +52,30 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func retrieveFromLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<AnyObject!, NSError> {
+    func retrieveFromLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             
             switch ratingType {
             case .Ratings:
-                let predicate = NSPredicate(format: "id = %@", self.ratings!.id)
+                let predicate = NSPredicate(format: "id = %@", self.ratings.id)
                 self.ratings = realm.objects(RatingsModel).filter(predicate).first
+                guard let object = self.ratings else {
+                    sendError(sink, .RatingsNotFound)
+                    return
+                }
+                sendNext(sink, object)
             case .UserRatings:
-                let predicate = NSPredicate(format: "id = %@", self.userRatings!.id)
+                let predicate = NSPredicate(format: "id = %@", self.userRatings.id)
                 self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+                guard let object = self.userRatings else {
+                    sendError(sink, .UserRatingsNotFound)
+                    return
+                }
+                sendNext(sink, object)
             }
+            sendCompleted(sink)
         }
     }
 }

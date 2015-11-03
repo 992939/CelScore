@@ -139,9 +139,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         print("Node at \(indexPath.row)")
-        let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        let detailVC = DetailViewController(profile: node.profile)
-        self.presentViewController(detailVC, animated: false, completion: nil)
+        //let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
+        let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
+        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
+        self.presentViewController(DetailViewController(profile: celebProfile), animated: false, completion: nil)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
@@ -210,19 +211,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-//                        self.celscoreVM.getFromAWSSignal(.List)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
+                        self.celscoreVM.getFromAWSSignal(.Ratings)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
                         
 //                        self.userVM.getUserRatingsFromCognitoSignal()
 //                            .start { event in

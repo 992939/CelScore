@@ -9,7 +9,7 @@
 import UIKit
 import AsyncDisplayKit
 
-final class DetailViewController: ASViewController {
+final class DetailViewController: UIViewController {
     
     //MARK: Properties
     var nickNameNode: ASTextNode?
@@ -27,6 +27,7 @@ final class DetailViewController: ASViewController {
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(profile: CelebrityProfile) {
+        
         self.profile = profile
         self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
         self.ratingsVM = RatingsViewModel(celebrityId: profile.id)
@@ -44,5 +45,45 @@ final class DetailViewController: ASViewController {
         super.viewDidLoad()
         
         self.celebrityVM.getFromLocalStoreSignal(id: self.profile.id)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("celebrityVM.getFromLocalStoreSignal Value: \(value)")
+                case let .Error(error):
+                    print("celebrityVM.getFromLocalStoreSignal Error: \(error)")
+                case .Completed:
+                    print("celebrityVM.getFromLocalStoreSignal Completed")
+                case .Interrupted:
+                    print("celebrityVM.getFromLocalStoreSignal Interrupted")
+                }
+        }
+        
+        self.ratingsVM.retrieveFromLocalStoreSignal(.Ratings)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Value: \(value)")
+                case let .Error(error):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Error: \(error)")
+                case .Completed:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Completed")
+                case .Interrupted:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted")
+                }
+        }
+        
+        self.ratingsVM.retrieveFromLocalStoreSignal(.UserRatings)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
+                case let .Error(error):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
+                case .Completed:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
+                case .Interrupted:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
+                }
+        }
     }
 }
