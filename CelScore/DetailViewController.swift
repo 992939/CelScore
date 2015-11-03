@@ -41,6 +41,6 @@ final class DetailViewController: ASViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.celebrityVM.getFromLocalStoreSignal(id: self.profile.id, dataType: .Celebrity)
+        self.celebrityVM.getFromLocalStoreSignal(id: self.profile.id)
     }
 }
