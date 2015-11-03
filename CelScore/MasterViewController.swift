@@ -64,8 +64,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ViewModel Binding
     func bindWithViewModels ()
     {
-        self.celebrityTableView.asyncDelegate = self
-        
         //LOGIN
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
