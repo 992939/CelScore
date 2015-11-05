@@ -182,7 +182,7 @@ final class UserViewModel: NSObject {
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isSynced = false")
-            let userRatingsArray = realm.objects(RatingsModel).filter(predicate)
+            let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
             
             let syncClient = AWSCognito.defaultCognito()
             let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
@@ -191,7 +191,7 @@ final class UserViewModel: NSObject {
             realm.beginWrite()
             for var index: Int = 0; index < userRatingsArray.count; index++
             {
-                let ratings: RatingsModel = userRatingsArray[index]
+                let ratings: UserRatingsModel = userRatingsArray[index]
                 dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 ratings.isSynced = true
                 realm.add(ratings, update: true)
