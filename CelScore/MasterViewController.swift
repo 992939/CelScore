@@ -74,8 +74,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(loginButton)
         
         //Check if Already Logged In
-        //let cognitoID = credentialsProvider.getIdentityId()
-        //print("cognito is \(cognitoID)")
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        print(FBSDKAccessToken.currentAccessToken())
         //        if let accessToken = FBSDKAccessToken.currentAccessToken()
@@ -178,7 +176,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     
                     let realm = try! Realm()
                     let userRatingsArray = realm.objects(UserRatingsModel)
-                    if userRatingsArray.count > 0
+                    if userRatingsArray.count == 0
                     {
                         self.userVM.updateUserRatingsOnCognitoSignal()
                             .start { event in
@@ -211,7 +209,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.celscoreVM.getFromAWSSignal(.Ratings)
+                        self.celscoreVM.getFromAWSSignal(.List)
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
@@ -229,13 +227,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                            .start { event in
 //                                switch(event) {
 //                                case let .Next(value):
-//                                    print("userVM.loginCognitoSignal Value: \(value)")
+//                                    print("getUserRatingsFromCognitoSignal Value: \(value)")
 //                                case let .Error(error):
-//                                    print("userVM.loginCognitoSignal Error: \(error)")
+//                                    print("getUserRatingsFromCognitoSignal Error: \(error)")
 //                                case .Completed:
-//                                    print("userVM.loginCognitoSignal Completed")
+//                                    print("getUserRatingsFromCognitoSignal Completed")
 //                                case .Interrupted:
-//                                    print("userVM.loginCognitoSignal Interrupted")
+//                                    print("getUserRatingsFromCognitoSignal Interrupted")
 //                                }
 //                        }
                     }

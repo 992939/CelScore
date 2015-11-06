@@ -29,7 +29,7 @@ final class RatingsViewModel: NSObject {
         }
     }
     enum RatingsType { case Ratings, UserRatings }
-    enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound }
+    enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
     
     
     //MARK: Initializers
@@ -42,7 +42,38 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Methods
-    func updateUserRatingsSignal() -> SignalProducer<RatingsModel!, RatingsError> {
+    func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel!, RatingsError> {
+        return SignalProducer { sink, _ in
+            guard let object = self.userRatings else {
+                sendError(sink, .UserRatingsNotFound)
+                return
+            }
+            guard newRating > 0 && newRating < 6 else {
+                sendError(sink, .RatingValueOutOfBounds)
+                return
+            }
+            guard ratingIndex >= 0 && ratingIndex < 10 else {
+                sendError(sink, .RatingIndexOutOfBounds)
+                return
+            }
+            
+            let realm = try! Realm()
+            realm.beginWrite()
+            
+            self.userRatings.setValue(newRating, forKey: "rating1")
+             print("Hey \(self.userRatings)")
+            
+            self.userRatings.isSynced = false
+            realm.add(self.userRatings, update: true)
+            sendNext(sink, object)
+            
+            try! realm.commitWrite()
+            sendCompleted(sink)
+        }
+    }
+    
+    
+    func saveUserRatingsSignal() -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()

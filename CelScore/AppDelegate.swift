@@ -19,6 +19,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Properties
     var window: UIWindow?
+    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     
     
     //MARK: Methods
@@ -30,6 +31,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
         //Twitter().startWithConsumerKey(Twitter.sharedInstance().consumerKey, consumerSecret: Twitter.sharedInstance().consumerSecret)
         //Fabric.with([Twitter.self, AWSCognito.self])
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+        let cognitoID = credentialsProvider.getIdentityId()
+        print("cognito is \(cognitoID) and session is \(credentialsProvider.sessionKey)")
+        
         window.makeKeyAndVisible()
         self.window = window
         return true

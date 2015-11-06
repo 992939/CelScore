@@ -85,18 +85,18 @@ final class DetailViewController: UIViewController {
 //                }
 //        }
         
-//        self.ratingsVM.updateUserRatingsSignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("ratingsVM.updateOnLocalStoreSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("ratingsVM.updateOnLocalStoreSignal Error: \(error)")
-//                case .Completed:
-//                    print("ratingsVM.updateOnLocalStoreSignal Completed")
-//                case .Interrupted:
-//                    print("ratingsVM.updateOnLocalStoreSignal Interrupted")
-//                }
-//        }
+        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 5)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("updateUserRatingsSignal Value: \(value)")
+                case let .Error(error):
+                    print("updateUserRatingsSignal Error: \(error)")
+                case .Completed:
+                    print("updateUserRatingsSignal Completed")
+                case .Interrupted:
+                    print("updateUserRatingsSignal Interrupted")
+                }
+        }
     }
 }

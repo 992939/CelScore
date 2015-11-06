@@ -147,6 +147,8 @@ final class UserViewModel: NSObject {
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
+            AWSLogger.defaultLogger().logLevel = .Verbose
+            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
