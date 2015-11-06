@@ -30,6 +30,22 @@ final class RatingsViewModel: NSObject {
     }
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
+    enum RatingsIndex: Int { case Rating1 = 0, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Rating8, Rating9, Rating10
+        var key: String {
+            switch self {
+            case Rating1: return "rating1"
+            case Rating2: return "rating2"
+            case Rating3: return "rating3"
+            case Rating4: return "rating4"
+            case Rating5: return "rating5"
+            case Rating6: return "rating6"
+            case Rating7: return "rating7"
+            case Rating8: return "rating8"
+            case Rating9: return "rating9"
+            case Rating10: return "rating10"
+            }
+        }
+    }
     
     
     //MARK: Initializers
@@ -60,9 +76,8 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             realm.beginWrite()
             
-            self.userRatings.setValue(newRating, forKey: "rating1")
-             print("Hey \(self.userRatings)")
-            
+            let rating: RatingsIndex = RatingsIndex(rawValue: ratingIndex)!
+            self.userRatings.setValue(newRating, forKey: rating.key)
             self.userRatings.isSynced = false
             realm.add(self.userRatings, update: true)
             sendNext(sink, object)
