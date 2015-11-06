@@ -16,7 +16,6 @@ import AIRTimer
 final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
-    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     let timeNotifier = MutableProperty<String>("")
     enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum AWSDataType { case Celebrity, List, Ratings }
@@ -67,8 +66,8 @@ final class CelScoreViewModel: NSObject {
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            AWSLogger.defaultLogger().logLevel = .Verbose
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: defaults.stringForKey("cognitoIdentityPoolId"))
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             let serviceClient = CSCelScoreAPIClient.defaultClient()

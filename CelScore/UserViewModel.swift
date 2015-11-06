@@ -15,12 +15,11 @@ import TwitterKit
 final class UserViewModel: NSObject {
     
     //MARK: Properties
-    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     var votePercentage: Float = 0 //TODO: NSUserStandards
     var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
-    enum ListSetting: Int { case All = 0, A_List, B_List }
-    enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
-    enum LoginSetting: Int { case Facebook, Twitter }
+    enum ListSetting: Int { case All = 0, A_List, B_List } //TODO: NSUserStandards
+    enum NotificationSetting: Int { case Daily = 0, Weekly, Never } //TODO: NSUserStandards
+    enum LoginSetting: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
     
     
     //MARK: Initializers
@@ -62,7 +61,8 @@ final class UserViewModel: NSObject {
     func loginSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: defaults.stringForKey("cognitoIdentityPoolId"))
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
@@ -147,9 +147,8 @@ final class UserViewModel: NSObject {
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
-            AWSLogger.defaultLogger().logLevel = .Verbose
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: defaults.objectForKey("cognitoIdentityPoolId") as! String)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
