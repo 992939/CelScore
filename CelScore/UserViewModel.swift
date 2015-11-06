@@ -20,6 +20,7 @@ final class UserViewModel: NSObject {
     enum ListSetting: Int { case All = 0, A_List, B_List } //TODO: NSUserStandards
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never } //TODO: NSUserStandards
     enum LoginSetting: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
+    enum CognitoDataSet: String { case UserInfo, UserVotes, UserSettings }
     
     
     //MARK: Initializers
@@ -33,7 +34,7 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateUserInfoOnCognitoSignal(value).start { event in
+                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
                             switch(event) {
                             case let .Next(value):
                                 print("updateUserInfoOnCognitoSignal() Next: \(value)")
@@ -98,6 +99,60 @@ final class UserViewModel: NSObject {
         }
     }
     
+    func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer { sink, _ in
+            
+            let syncClient = AWSCognito.defaultCognito()
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
+            dataset.synchronize()
+            
+            switch dataSetType {
+            case .UserInfo:
+                if dataset.getAll().count == 0 {
+                    dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+                    dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+                    dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                    dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+                    let timezone = object.objectForKey("timezone") as! NSNumber
+                    dataset.setString(timezone.stringValue, forKey: "timezone")
+                    dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                    dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+                    dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+                    dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                    
+                }
+            case .UserVotes:
+                let realm = try! Realm()
+                let predicate = NSPredicate(format: "isSynced = false")
+                let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
+                
+                realm.beginWrite()
+                for var index: Int = 0; index < userRatingsArray.count; index++
+                {
+                    let ratings: UserRatingsModel = userRatingsArray[index]
+                    dataset.setString(ratings.interpolation(), forKey: ratings.id)
+                    ratings.isSynced = true
+                    realm.add(ratings, update: true)
+                }
+                try! realm.commitWrite()
+            case .UserSettings:
+                if dataset.getAll().count == 0 {
+                    print("Settings")
+                }
+            }
+            
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else {
+                    sendError(sink, task.error)
+                    return task
+                }
+                sendNext(sink, task.result)
+                sendCompleted(sink)
+                return task
+            })
+        }
+    }
+    
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -109,38 +164,6 @@ final class UserViewModel: NSObject {
                 sendNext(sink, object)
                 sendCompleted(sink)
             }
-        }
-    }
-    
-    func updateUserInfoOnCognitoSignal(object: AnyObject!) -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
-            
-            let syncClient = AWSCognito.defaultCognito()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserInfo")
-            dataset.synchronize()
-            
-            if dataset.getAll().count == 0 {
-                dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-                dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-                dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
-                dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                let timezone = object.objectForKey("timezone") as! NSNumber
-                dataset.setString(timezone.stringValue, forKey: "timezone")
-                dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-                dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-                dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                    guard task.error == nil else {
-                        sendError(sink, task.error)
-                        return task
-                    }
-                    
-                    sendNext(sink, task.result)
-                    return task
-                })
-            }
-            sendCompleted(sink)
         }
     }
     
@@ -172,40 +195,6 @@ final class UserViewModel: NSObject {
                 
                 try! realm.commitWrite()
                 sendNext(sink, dataset.getAll())
-                sendCompleted(sink)
-                return task
-            })
-        }
-    }
-
-    func updateUserRatingsOnCognitoSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let predicate = NSPredicate(format: "isSynced = false")
-            let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
-            
-            let syncClient = AWSCognito.defaultCognito()
-            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
-            dataset.synchronize()
-            
-            realm.beginWrite()
-            for var index: Int = 0; index < userRatingsArray.count; index++
-            {
-                let ratings: UserRatingsModel = userRatingsArray[index]
-                dataset.setString(ratings.interpolation(), forKey: ratings.id)
-                ratings.isSynced = true
-                realm.add(ratings, update: true)
-            }
-            try! realm.commitWrite()
-            
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
-                
-                sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task
             })
