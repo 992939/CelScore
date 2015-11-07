@@ -161,10 +161,24 @@ final class UserViewModel: NSObject {
             case .UserSettings:
                 if dataset.getAll().count == 0 {
                     print("Checked once a day and only called when user actually changed a setting")
-                    dataset.setString("", forKey: "defaultListId")
-                    dataset.setValue(0, forKey: "rankSettingIndex")
-                    dataset.setValue(0, forKey: "notificationSettingIndex")
-                    dataset.setValue(0, forKey: "loginTypeIndex")
+                    
+                    let realm = try! Realm()
+                    let object: SettingsModel? = realm.objects(SettingsModel).first
+                    
+                    guard let settings = object else {
+                        sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil))
+                        return
+                    }
+                
+                    if settings.isSynced == false {
+                        dataset.setString(settings.defaultListId, forKey: "defaultListId")
+                        dataset.setValue(settings.rankSettingIndex, forKey: "rankSettingIndex")
+                        dataset.setValue(settings.notificationSettingIndex, forKey: "notificationSettingIndex")
+                        dataset.setValue(settings.loginTypeIndex, forKey: "loginTypeIndex")
+                    } else {
+                        sendCompleted(sink)
+                        return
+                    }
                 }
             }
             
