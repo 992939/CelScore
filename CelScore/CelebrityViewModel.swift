@@ -19,7 +19,8 @@ final class CelebrityViewModel: NSObject {
     enum Sex: Int { case Woman = 0, Man }
     enum Horoscope : Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
     enum Rank { case A_List, B_List, Other }
-    enum Status { case Single, Married, Divorced, Engaged }
+    enum PersonalStatus { case Single, Married, Divorced, Engaged }
+    enum FollowStatus: Int { case NotFollowing = 0, Following }
     enum CelebrityError: ErrorType { case NotFound }
     
     
@@ -61,7 +62,7 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
-    func followCebritySignal(id id: String) -> SignalProducer<Object!, CelebrityError> {
+    func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<Object!, CelebrityError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -71,7 +72,10 @@ final class CelebrityViewModel: NSObject {
                 sendError(sink, .NotFound)
                 return
             }
-            object.isFollowed = true
+            
+            if followStatus == .Following { object.isFollowed = true }
+            else { object.isFollowed = false }
+            
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()
