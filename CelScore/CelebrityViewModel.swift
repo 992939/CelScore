@@ -60,6 +60,27 @@ final class CelebrityViewModel: NSObject {
             sendCompleted(sink)
         }
     }
+    
+    func followCebritySignal(id id: String) -> SignalProducer<Object!, CelebrityError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", id)
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
+            guard let object = celebrity else {
+                sendError(sink, .NotFound)
+                return
+            }
+            object.isFollowed = true
+            object.isSynced = false
+            realm.add(object, update: true)
+            try! realm.commitWrite()
+            
+            sendNext(sink, object)
+            sendCompleted(sink)
+        }
+    }
+
 }
 
 

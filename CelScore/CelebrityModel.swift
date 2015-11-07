@@ -14,6 +14,7 @@ public struct CelebrityProfile {
     let imageURL: String
     let nickname: String
     let prevScore: Double
+    let isFollowed: Bool
 }
 
 extension CelebrityProfile: Equatable {}
@@ -41,6 +42,7 @@ public final class CelebrityModel: Object {
     dynamic var prevScore: Double = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = false
+    dynamic var isFollowed: Bool = false
     
     
     //MARK: Initializers

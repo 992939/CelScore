@@ -80,13 +80,12 @@ final class RatingsViewModel: NSObject {
             self.userRatings.setValue(newRating, forKey: rating.key)
             self.userRatings.isSynced = false
             realm.add(self.userRatings, update: true)
-            sendNext(sink, object)
-            
             try! realm.commitWrite()
+            
+            sendNext(sink, object)
             sendCompleted(sink)
         }
     }
-    
     
     func saveUserRatingsSignal() -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
@@ -102,9 +101,9 @@ final class RatingsViewModel: NSObject {
             self.userRatings.isSynced = false
             self.userRatings.totalVotes += 1
             realm.add(self.userRatings, update: true)
-            sendNext(sink, object)
-            
             try! realm.commitWrite()
+            
+            sendNext(sink, object)
             sendCompleted(sink)
         }
     }
