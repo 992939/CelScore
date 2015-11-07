@@ -40,8 +40,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
         let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-        let cognitoID = credentialsProvider.getIdentityId()
-        print("cognito is \(cognitoID) and session is \(credentialsProvider.sessionKey)")
+        
+        //let cognitoID = credentialsProvider.getIdentityId()
         
         window.makeKeyAndVisible()
         self.window = window
