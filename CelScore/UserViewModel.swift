@@ -119,7 +119,6 @@ final class UserViewModel: NSObject {
                     dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
                     dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                     dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                    
                 }
             case .UserVotes:
                 let realm = try! Realm()
@@ -137,7 +136,11 @@ final class UserViewModel: NSObject {
                 try! realm.commitWrite()
             case .UserSettings:
                 if dataset.getAll().count == 0 {
-                    print("Settings")
+                    print("Checked once a day and only called when user actually changed a setting")
+                    dataset.setString("", forKey: "rankSetting")
+                    dataset.setString("", forKey: "listSetting")
+                    dataset.setString("", forKey: "notificationSetting")
+                    dataset.setString("", forKey: "loginSetting")
                 }
             }
             
