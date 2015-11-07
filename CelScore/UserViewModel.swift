@@ -58,7 +58,7 @@ final class UserViewModel: NSObject {
     }
     
     
-    //MARK: Methods
+    //MARK: Login Methods
     func loginSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -99,6 +99,34 @@ final class UserViewModel: NSObject {
         }
     }
     
+    func logoutSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer { sink, _ in
+
+            switch loginType {
+            case .Facebook:
+                print("FB!")
+            case .Twitter:
+                print("Twitter.sharedInstance()")
+            }
+        }
+    }
+    
+    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer { sink, _ in
+            
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                guard error == nil else {
+                    sendError(sink, error)
+                    return
+                }
+                sendNext(sink, object)
+                sendCompleted(sink)
+            }
+        }
+    }
+    
+    
+    //MARK: Cognito Methods
     func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -156,20 +184,6 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
-            
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else {
-                    sendError(sink, error)
-                    return
-                }
-                sendNext(sink, object)
-                sendCompleted(sink)
-            }
-        }
-    }
-    
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -188,7 +202,6 @@ final class UserViewModel: NSObject {
                 }
                 
                 let realm = try! Realm()
-                print(realm.objects(RatingsModel))
                 realm.beginWrite()
                 
                 dataset.getAll().forEach({ dico in
@@ -203,4 +216,27 @@ final class UserViewModel: NSObject {
             })
         }
     }
+    
+    
+    //MARK: Settings Methods
+    func getUserVotePercentageSignal() -> SignalProducer<Int, NSError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let userRatingsCount: Int = realm.objects(UserRatingsModel).count
+            let celebrityCount: Int = realm.objects(CelebrityModel).count
+            
+            guard userRatingsCount == 0 || celebrityCount == 0 else {
+                sendError(sink, NSError(domain: "com.CelScore.Empty", code: 1, userInfo: nil))
+                return
+            }
+            
+            sendNext(sink, userRatingsCount/celebrityCount)
+            sendCompleted(sink)
+        }
+    }
 }
+
+
+
+

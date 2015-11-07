@@ -13,6 +13,7 @@ final class SettingsViewController: UIViewController {
     //MARK: Properties
     let userVM: UserViewModel
     
+    
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
