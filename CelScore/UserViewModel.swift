@@ -91,7 +91,6 @@ final class UserViewModel: NSObject {
                     sendError(sink, task.error)
                     return task
                 }
-                
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task
@@ -101,7 +100,7 @@ final class UserViewModel: NSObject {
     
     func logoutSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
-
+            //TODO: implementation
             switch loginType {
             case .Facebook:
                 print("FB!")
@@ -208,7 +207,6 @@ final class UserViewModel: NSObject {
                     let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
                     realm.add(userRatings, update: true)
                 })
-                
                 try! realm.commitWrite()
                 sendNext(sink, dataset.getAll())
                 sendCompleted(sink)
@@ -230,7 +228,6 @@ final class UserViewModel: NSObject {
                 sendError(sink, NSError(domain: "com.CelScore.Empty", code: 1, userInfo: nil))
                 return
             }
-            
             sendNext(sink, userRatingsCount/celebrityCount)
             sendCompleted(sink)
         }

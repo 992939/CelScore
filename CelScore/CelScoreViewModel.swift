@@ -104,7 +104,6 @@ final class CelScoreViewModel: NSObject {
                     realm.add(awsObject, update: true)
                     try! realm.commitWrite()
                 })
-                
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task

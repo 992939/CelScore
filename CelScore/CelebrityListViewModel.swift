@@ -33,18 +33,17 @@ class CelebrityListViewModel: NSObject {
                 sendError(sink, .Empty)
                 return
             }
-            
             self.celebrityList = celebList
             sendNext(sink, celebList)
             sendCompleted(sink)
         }
     }
     
-    //TODO : replace by computed properties count, idAtIndex & profileAtIndex
+    //TODO: replace by computed properties count, idAtIndex & profileAtIndex
     final func getCount() -> Int { return self.celebrityList.count }
     
     final func getIdForCelebAtIndex(index: Int) -> String {
-        //TODO add guard to check index is within bounds
+        //TODO: add guard to check index is within bounds
         let celebId : CelebId = self.celebrityList.celebList[index]
         return celebId.id
     }

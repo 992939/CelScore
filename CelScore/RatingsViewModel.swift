@@ -133,7 +133,6 @@ final class RatingsViewModel: NSObject {
                 }
                 sendNext(sink, object)
             }
-            
             sendCompleted(sink)
         }
     }
