@@ -9,5 +9,21 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-
+    
+    //MARK: Properties
+    
+    
+    //MARK: Initializers
+    required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
+    
+    
+    //MARK: Methods
+    override func viewWillLayoutSubviews() {}
+    override func prefersStatusBarHidden() -> Bool { return true }
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
 }
