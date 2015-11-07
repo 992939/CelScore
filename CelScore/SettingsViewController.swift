@@ -12,6 +12,9 @@ final class SettingsViewController: UIViewController {
     
     //MARK: Properties
     let userVM: UserViewModel
+    var defaultListId: String = "0001"
+    enum RankSetting: Int { case All = 0, A_List, B_List }
+    enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
     
     
     //MARK: Initializers
@@ -31,6 +34,9 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let id = defaults.stringForKey("defaultListId") { self.defaultListId = id }
+        
         self.userVM.getUserVotePercentageSignal()
             .start { event in
                 switch(event) {
@@ -44,5 +50,11 @@ final class SettingsViewController: UIViewController {
                     print("getUserVotePercentageSignal Interrupted")
                 }
         }
+        
+       //TO DO: switch that selects and saves defaultListId in NSUserDefaults
+       //TO DO: switch that selects and saves RankSetting in NSUserDefaults
+       //TO DO: switch that selects and saves NotificationSetting in NSUserDefaults
     }
+    
+    
 }

@@ -15,11 +15,7 @@ import TwitterKit
 final class UserViewModel: NSObject {
     
     //MARK: Properties
-    var votePercentageSetting: Int = 0 //TODO: NSUserStandards
-    var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
-    enum RankSetting: Int { case All = 0, A_List, B_List } //TODO: NSUserStandards
-    enum NotificationSetting: Int { case Daily = 0, Weekly, Never } //TODO: NSUserStandards
-    enum LoginSetting: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
+    enum LoginType: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
     enum CognitoDataSet: String { case UserInfo, UserVotes, UserSettings }
     
     
@@ -59,7 +55,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Login Methods
-    func loginSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
+    func loginSignal(token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -98,7 +94,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func logoutSignal(token: String, loginType: LoginSetting) -> SignalProducer<AnyObject!, NSError> {
+    func logoutSignal(token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             //TODO: implementation
             switch loginType {
@@ -164,10 +160,10 @@ final class UserViewModel: NSObject {
             case .UserSettings:
                 if dataset.getAll().count == 0 {
                     print("Checked once a day and only called when user actually changed a setting")
-                    dataset.setString("", forKey: "rankSetting")
-                    dataset.setString("", forKey: "listSetting")
-                    dataset.setString("", forKey: "notificationSetting")
-                    dataset.setString("", forKey: "loginSetting")
+                    dataset.setString("", forKey: "defaultListId")
+                    dataset.setValue(0, forKey: "rankSetting")
+                    dataset.setValue(0, forKey: "notificationSetting")
+                    dataset.setValue(0, forKey: "loginType")
                 }
             }
             
