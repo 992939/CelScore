@@ -15,7 +15,9 @@ import TwitterKit
 final class UserViewModel: NSObject {
     
     //MARK: Properties
-    enum LoginType: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
+    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
+    let settings: SettingsModel = SettingsModel()
+    enum LoginType: Int { case Facebook = 0, Twitter }
     enum CognitoDataSet: String { case UserInfo, UserVotes, UserSettings }
     
     
@@ -58,8 +60,7 @@ final class UserViewModel: NSObject {
     func loginSignal(token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: defaults.stringForKey("cognitoIdentityPoolId"))
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
@@ -161,9 +162,9 @@ final class UserViewModel: NSObject {
                 if dataset.getAll().count == 0 {
                     print("Checked once a day and only called when user actually changed a setting")
                     dataset.setString("", forKey: "defaultListId")
-                    dataset.setValue(0, forKey: "rankSetting")
-                    dataset.setValue(0, forKey: "notificationSetting")
-                    dataset.setValue(0, forKey: "loginType")
+                    dataset.setValue(0, forKey: "rankSettingIndex")
+                    dataset.setValue(0, forKey: "notificationSettingIndex")
+                    dataset.setValue(0, forKey: "loginTypeIndex")
                 }
             }
             
@@ -182,8 +183,7 @@ final class UserViewModel: NSObject {
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: defaults.objectForKey("cognitoIdentityPoolId") as! String)
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
