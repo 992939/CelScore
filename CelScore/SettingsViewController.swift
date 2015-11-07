@@ -34,17 +34,17 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userVM.getUserVotePercentageSignal()
+        self.userVM.getUserRatingsPercentageSignal()
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("getUserVotePercentageSignal Value: \(value)")
+                    print("getUserRatingsPercentageSignal Value: \(value)")
                 case let .Error(error):
-                    print("getUserVotePercentageSignal Error: \(error)")
+                    print("getUserRatingsPercentageSignal Error: \(error)")
                 case .Completed:
-                    print("getUserVotePercentageSignal Completed")
+                    print("getUserRatingsPercentageSignal Completed")
                 case .Interrupted:
-                    print("getUserVotePercentageSignal Interrupted")
+                    print("getUserRatingsPercentageSignal Interrupted")
                 }
         }
        //TO DO: switch that selects and saves defaultListId

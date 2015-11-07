@@ -178,7 +178,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     let userRatingsArray = realm.objects(UserRatingsModel)
                     if userRatingsArray.count > 0
                     {
-                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserVotes)
+                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserRatings)
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):

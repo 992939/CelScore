@@ -18,7 +18,7 @@ final class UserViewModel: NSObject {
     let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     let settings: SettingsModel = SettingsModel()
     enum LoginType: Int { case Facebook = 0, Twitter }
-    enum CognitoDataSet: String { case UserInfo, UserVotes, UserSettings }
+    enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
     
     
     //MARK: Initializers
@@ -144,7 +144,7 @@ final class UserViewModel: NSObject {
                     dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                     dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                 }
-            case .UserVotes:
+            case .UserRatings:
                 let realm = try! Realm()
                 let predicate = NSPredicate(format: "isSynced = false")
                 let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
@@ -202,12 +202,19 @@ final class UserViewModel: NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
-            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    credentialsProvider.clearKeychain()
+                    //credentialsProvider.clearKeychain()
                     sendError(sink, task.error)
                     return task
+                }
+                
+                switch dataSetType {
+                case .UserInfo:
+                    fatalError("there is no use to store user information from Facebook/Twitter locally")
+                case .UserRatings:
+                case .UserSettings:
                 }
                 
                 let realm = try! Realm()
@@ -233,7 +240,7 @@ final class UserViewModel: NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserRatings")
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     credentialsProvider.clearKeychain()
@@ -258,7 +265,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Settings Methods
-    func getUserVotePercentageSignal() -> SignalProducer<Int, NSError> {
+    func getUserRatingsPercentageSignal() -> SignalProducer<Int, NSError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
