@@ -224,7 +224,7 @@ final class UserViewModel: NSObject {
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             
-            guard userRatingsCount == 0 || celebrityCount == 0 else {
+            guard celebrityCount > 1 else {
                 sendError(sink, NSError(domain: "com.CelScore.Empty", code: 1, userInfo: nil))
                 return
             }

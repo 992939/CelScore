@@ -61,8 +61,8 @@ public final class CelebrityModel: Object {
         self.rank = dictionary["rank"] as! String
         self.status = dictionary["status"] as! String
         self.twitter = dictionary["twitter"] as! String
-        self.sex = dictionary["sex"] as! Bool
         self.prevScore = dictionary["prevScore"] as! Double
+        self.sex = dictionary["sex"] as! Bool
         self.isSynced = true
     }
     

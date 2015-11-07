@@ -55,6 +55,6 @@ class CelebrityListViewModel: NSObject {
         let celebrity = realm.objects(CelebrityModel).filter(predicate).first
         guard let celeb = celebrity else { throw ListError.Empty }
         
-        return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore)
+        return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
     }
 }

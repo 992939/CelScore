@@ -102,6 +102,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 }
         }
         
+        self.userVM.getUserVotePercentageSignal()
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("getUserVotePercentageSignalValue: \(value)")
+                case let .Error(error):
+                    print("getUserVotePercentageSignal Error: \(error)")
+                case .Completed:
+                    print("getUserVotePercentageSignal Completed")
+                case .Interrupted:
+                    print("getUserVotePercentageSignal Interrupted")
+                }
+        }
+        
         //SEARCH
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         
