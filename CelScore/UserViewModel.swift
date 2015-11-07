@@ -126,7 +126,7 @@ final class UserViewModel: NSObject {
     func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            let syncClient = AWSCognito.defaultCognito()
+            let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize()
             
@@ -194,6 +194,37 @@ final class UserViewModel: NSObject {
         }
     }
     
+    func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary!, NSError> {
+        return SignalProducer { sink, _ in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else {
+                    credentialsProvider.clearKeychain()
+                    sendError(sink, task.error)
+                    return task
+                }
+                
+                let realm = try! Realm()
+                realm.beginWrite()
+                
+                dataset.getAll().forEach({ dico in
+                    let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
+                    realm.add(userRatings, update: true)
+                })
+                try! realm.commitWrite()
+                sendNext(sink, dataset.getAll())
+                sendCompleted(sink)
+                return task
+            })
+        }
+    }
+    
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -201,8 +232,8 @@ final class UserViewModel: NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
-            let syncClient = AWSCognito.defaultCognito()
-            let dataset : AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
+            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserVotes")
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     credentialsProvider.clearKeychain()
