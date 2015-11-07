@@ -35,7 +35,7 @@ final class SettingsViewController: UIViewController {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    print("getUserVotePercentageSignalValue: \(value)")
+                    print("getUserVotePercentageSignal Value: \(value)")
                 case let .Error(error):
                     print("getUserVotePercentageSignal Error: \(error)")
                 case .Completed:
