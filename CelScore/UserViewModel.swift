@@ -15,9 +15,9 @@ import TwitterKit
 final class UserViewModel: NSObject {
     
     //MARK: Properties
-    var votePercentage: Float = 0 //TODO: NSUserStandards
+    var votePercentageSetting: Int = 0 //TODO: NSUserStandards
     var defaultListIdSetting: String = "0001" //TODO: NSUserStandards
-    enum ListSetting: Int { case All = 0, A_List, B_List } //TODO: NSUserStandards
+    enum RankSetting: Int { case All = 0, A_List, B_List } //TODO: NSUserStandards
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never } //TODO: NSUserStandards
     enum LoginSetting: Int { case Facebook = 0, Twitter } //TODO: NSUserStandards
     enum CognitoDataSet: String { case UserInfo, UserVotes, UserSettings }
