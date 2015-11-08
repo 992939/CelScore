@@ -130,7 +130,6 @@ final class UserViewModel: NSObject {
             dataset.synchronize()
             
             switch dataSetType {
-                
             case .UserInfo:
                 if dataset.getAll().count == 0 {
                     dataset.setString(object.objectForKey("name") as! String, forKey: "name")

@@ -14,6 +14,7 @@ final class SettingsViewModel: NSObject {
 
     //MARK: Properties
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
+    enum SettingType: Int { case DefaultListId = 0, RankSettingIndex, NotificationSettingIndex, LoginTypeIndex }
     
     
     //MARK: Initializers
@@ -37,7 +38,7 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel!, SettingsError> {
+    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel, SettingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -52,9 +53,34 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func setSettingsOnLocalStoreSignal() -> SignalProducer<SettingsModel!, SettingsError> {
+    func updateSettingOnLocalStoreSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, SettingsError> {
         return SignalProducer { sink, _ in
             
+            let realm = try! Realm()
+            realm.beginWrite()
+            
+            let model = realm.objects(SettingsModel).first
+            guard let settings = model else {
+                sendError(sink, .NoSettingsModel)
+                return
+            }
+            
+            switch settingType {
+            case .DefaultListId:
+                settings.defaultListId = value as! String
+            case .RankSettingIndex:
+                settings.rankSettingIndex = value as! Int
+            case .NotificationSettingIndex:
+                settings.notificationSettingIndex = value as! Int
+            case .LoginTypeIndex:
+                settings.loginTypeIndex = value as! Int
+            }
+            settings.isSynced = false
+            realm.add(settings, update: true)
+            try! realm.commitWrite()
+            
+            sendNext(sink, settings)
+            sendCompleted(sink)
         }
     }
 }
