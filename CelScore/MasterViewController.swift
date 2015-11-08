@@ -44,10 +44,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.bindWithViewModels()
         
         self.searchTextField.delegate = self
-        self.searchTextField.placeholder = "look up a celebrity or a #list"
-        
-        //self.celebrityTableView.asyncDataSource = self
-        //self.celebrityTableView.asyncDelegate = self
+        self.searchTextField.placeholder = "look up a celebrity"
         
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
@@ -73,7 +70,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton.delegate = self
         self.view.addSubview(loginButton)
         
-        //Check if Already Logged In
+        //Check Logged In
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        print(FBSDKAccessToken.currentAccessToken())
         //        if let accessToken = FBSDKAccessToken.currentAccessToken()
