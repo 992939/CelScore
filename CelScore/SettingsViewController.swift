@@ -15,6 +15,7 @@ final class SettingsViewController: UIViewController {
     var defaultListId: String = "0001"
     enum RankSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
+    enum LoginType: Int { case Facebook = 0, Twitter }
     
     
     //MARK: Initializers
@@ -47,10 +48,5 @@ final class SettingsViewController: UIViewController {
                     print("getUserRatingsPercentageSignal Interrupted")
                 }
         }
-       //TO DO: switch that selects and saves defaultListId
-       //TO DO: switch that selects and saves RankSetting
-       //TO DO: switch that selects and saves NotificationSetting
     }
-    
-    
 }
