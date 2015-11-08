@@ -15,7 +15,7 @@ final class SettingsViewController: UIViewController {
     var defaultListId: String = "0001"
     enum RankSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
-    enum LoginType: Int { case Facebook = 0, Twitter }
+    enum LoginType: Int { case None = 0, Facebook, Twitter }
     
     
     //MARK: Initializers
@@ -35,18 +35,46 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.settingsVM.getUserRatingsPercentageSignal()
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("getUserRatingsPercentageSignal Value: \(value)")
-                case let .Error(error):
-                    print("getUserRatingsPercentageSignal Error: \(error)")
-                case .Completed:
-                    print("getUserRatingsPercentageSignal Completed")
-                case .Interrupted:
-                    print("getUserRatingsPercentageSignal Interrupted")
-                }
-        }
+//        self.settingsVM.getUserRatingsPercentageSignal()
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("getUserRatingsPercentageSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("getUserRatingsPercentageSignal Error: \(error)")
+//                case .Completed:
+//                    print("getUserRatingsPercentageSignal Completed")
+//                case .Interrupted:
+//                    print("getUserRatingsPercentageSignal Interrupted")
+//                }
+//        }
+        
+//        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .RankSettingIndex)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("pdateSettingOnLocalStoreSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("pdateSettingOnLocalStoreSignal Error: \(error)")
+//                case .Completed:
+//                    print("pdateSettingOnLocalStoreSignal Completed")
+//                case .Interrupted:
+//                    print("pdateSettingOnLocalStoreSignal Interrupted")
+//                }
+//        }
+        
+//        self.settingsVM.getSettingsFromLocalStoreSignal()
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("getSettingsFromLocalStoreSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("getSettingsFromLocalStoreSignal Error: \(error)")
+//                case .Completed:
+//                    print("getSettingsFromLocalStoreSignal Completed")
+//                case .Interrupted:
+//                    print("getSettingsFromLocalStoreSignal Interrupted")
+//                }
+//        }
     }
 }

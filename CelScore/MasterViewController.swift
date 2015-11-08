@@ -138,9 +138,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         print("Node at \(indexPath.row)")
         //let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
-        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
-        self.presentViewController(DetailViewController(profile: celebProfile), animated: false, completion: nil)
+        //let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
+        //let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
+        //self.presentViewController(DetailViewController(profile: celebProfile), animated: false, completion: nil)
+        self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
@@ -222,6 +223,32 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                                     print("getFromAWSSignal Interrupted")
                                 }
                         }
+                        self.celscoreVM.getFromAWSSignal(.Celebrity)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
+                        self.celscoreVM.getFromAWSSignal(.Ratings)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
                         
 //                        self.userVM.getUserRatingsFromCognitoSignal()
 //                            .start { event in
@@ -234,6 +261,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                    print("getUserRatingsFromCognitoSignal Completed")
 //                                case .Interrupted:
 //                                    print("getUserRatingsFromCognitoSignal Interrupted")
+//                                }
+//                        }
+                        
+//                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserSettings)
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("updateCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("updateCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("updateCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    print("updateCognitoSignal Interrupted")
 //                                }
 //                        }
                     }

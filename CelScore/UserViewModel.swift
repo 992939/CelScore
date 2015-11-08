@@ -164,9 +164,9 @@ final class UserViewModel: NSObject {
                     print("Checked once a day and only called when user actually changed a setting")
                     
                     let realm = try! Realm()
-                    let object: SettingsModel? = realm.objects(SettingsModel).first
+                    let model: SettingsModel? = realm.objects(SettingsModel).first
                     
-                    guard let settings = object else {
+                    guard let settings = model else {
                         sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil))
                         return
                     }
@@ -210,7 +210,6 @@ final class UserViewModel: NSObject {
                     sendError(sink, task.error)
                     return task
                 }
-                
                 let realm = try! Realm()
                 realm.beginWrite()
                 
@@ -235,37 +234,6 @@ final class UserViewModel: NSObject {
         }
     }
     
-    //TODO: delete
-    func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
-        return SignalProducer { sink, _ in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
-            let syncClient: AWSCognito = AWSCognito.defaultCognito()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset("UserRatings")
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    credentialsProvider.clearKeychain()
-                    sendError(sink, task.error)
-                    return task
-                }
-                
-                let realm = try! Realm()
-                realm.beginWrite()
-                
-                dataset.getAll().forEach({ dico in
-                    let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
-                    realm.add(userRatings, update: true)
-                })
-                try! realm.commitWrite()
-                sendNext(sink, dataset.getAll())
-                sendCompleted(sink)
-                return task
-            })
-        }
-    }
 }
 
 

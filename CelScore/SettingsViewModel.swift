@@ -53,17 +53,15 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func updateSettingOnLocalStoreSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, SettingsError> {
+    func updateSettingOnLocalStoreSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             realm.beginWrite()
             
-            let model = realm.objects(SettingsModel).first
-            guard let settings = model else {
-                sendError(sink, .NoSettingsModel)
-                return
-            }
+            var model = realm.objects(SettingsModel).first
+            if model == nil { model = SettingsModel() }
+            let settings: SettingsModel = model!
             
             switch settingType {
             case .DefaultListId:
