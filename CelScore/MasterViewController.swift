@@ -250,33 +250,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-//                        self.userVM.getUserRatingsFromCognitoSignal()
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getUserRatingsFromCognitoSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getUserRatingsFromCognitoSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getUserRatingsFromCognitoSignal Completed")
-//                                case .Interrupted:
-//                                    print("getUserRatingsFromCognitoSignal Interrupted")
-//                                }
-//                        }
-                        
-                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserSettings)
+                        self.userVM.getFromCognitoSignal(.UserRatings)
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):
-                                    print("updateCognitoSignal Value: \(value)")
+                                    print("getFromCognitoSignal Value: \(value)")
                                 case let .Error(error):
-                                    print("updateCognitoSignal Error: \(error)")
+                                    print("getFromCognitoSignal Error: \(error)")
                                 case .Completed:
-                                    print("updateCognitoSignal Completed")
+                                    print("getFromCognitoSignal Completed")
                                 case .Interrupted:
-                                    print("updateCognitoSignal Interrupted")
+                                    print("getFromCognitoSignal Interrupted")
                                 }
                         }
+                        
+//                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserSettings)
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("updateCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("updateCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("updateCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    print("updateCognitoSignal Interrupted")
+//                                }
+//                        }
                     }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")

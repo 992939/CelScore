@@ -31,18 +31,18 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-//                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
-//                            switch(event) {
-//                            case let .Next(value):
-//                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
-//                            case let .Error(error):
-//                                print("getUserInfoFromFacebookSignal() Error: \(error)")
-//                            case .Completed:
-//                                print("getUserInfoFromFacebookSignal() Completed")
-//                            case .Interrupted:
-//                                print("getUserInfoFromFacebookSignal() Interrupted")
-//                            }
-//                        }
+                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
+                            switch(event) {
+                            case let .Next(value):
+                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
+                            case let .Error(error):
+                                print("getUserInfoFromFacebookSignal() Error: \(error)")
+                            case .Completed:
+                                print("getUserInfoFromFacebookSignal() Completed")
+                            case .Interrupted:
+                                print("getUserInfoFromFacebookSignal() Interrupted")
+                            }
+                        }
                     case let .Error(error):
                         print("getUserInfoFromFacebookSignal() Error: \(error)")
                     case .Completed:
@@ -208,6 +208,7 @@ final class UserViewModel: NSObject {
                     sendError(sink, task.error)
                     return task
                 }
+                
                 let realm = try! Realm()
                 realm.beginWrite()
                 
@@ -222,7 +223,17 @@ final class UserViewModel: NSObject {
                     })
                     
                 case .UserSettings:
-                    print(dataset)
+                    let dico = dataset.getAll()
+                    var model = realm.objects(SettingsModel).first
+                    if model == nil { model = SettingsModel() }
+                    let settings: SettingsModel = model!
+                    
+                    settings.defaultListId = dico["defaultListId"] as! String
+                    settings.notificationSettingIndex = (dico["notificationSettingIndex"] as! NSString).integerValue
+                    settings.rankSettingIndex = (dico["rankSettingIndex"] as! NSString).integerValue
+                    settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
+                    settings.isSynced = true
+                    realm.add(settings, update: true)
                 }
                 try! realm.commitWrite()
                 sendNext(sink, dataset.getAll())
@@ -231,7 +242,6 @@ final class UserViewModel: NSObject {
             })
         }
     }
-    
 }
 
 
