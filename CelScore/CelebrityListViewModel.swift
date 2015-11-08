@@ -15,6 +15,7 @@ class CelebrityListViewModel: NSObject {
     //MARK: Properties
     final let title = MutableProperty("")
     final lazy var celebrityList: ListsModel = ListsModel()
+    final var count: Int { get { return self.celebrityList.count }}
     enum ListError: ErrorType { case Empty, IndexOutOfBounds }
     
     
@@ -39,9 +40,7 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
-    //TODO: replace by computed properties count, idAtIndex & profileAtIndex
-    final func getCount() -> Int { return self.celebrityList.count }
-    
+    //TODO: replace by computed properties idAtIndex & profileAtIndex
     final func getIdForCelebAtIndex(index: Int) -> String {
         //TODO: add guard to check index is within bounds
         let celebId : CelebId = self.celebrityList.celebList[index]

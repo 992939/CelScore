@@ -129,7 +129,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.displayedCelebrityListVM.getCount()
+        return self.displayedCelebrityListVM.count
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
