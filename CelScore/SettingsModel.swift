@@ -20,8 +20,6 @@ public class SettingsModel: Object {
 
     
     //MARK: Initializers
-    override public class func primaryKey() -> String { return "settingsId" }
-    
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         
