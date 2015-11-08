@@ -31,18 +31,18 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
-                            switch(event) {
-                            case let .Next(value):
-                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                            case let .Error(error):
-                                print("getUserInfoFromFacebookSignal() Error: \(error)")
-                            case .Completed:
-                                print("getUserInfoFromFacebookSignal() Completed")
-                            case .Interrupted:
-                                print("getUserInfoFromFacebookSignal() Interrupted")
-                            }
-                        }
+//                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
+//                            switch(event) {
+//                            case let .Next(value):
+//                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
+//                            case let .Error(error):
+//                                print("getUserInfoFromFacebookSignal() Error: \(error)")
+//                            case .Completed:
+//                                print("getUserInfoFromFacebookSignal() Completed")
+//                            case .Interrupted:
+//                                print("getUserInfoFromFacebookSignal() Interrupted")
+//                            }
+//                        }
                     case let .Error(error):
                         print("getUserInfoFromFacebookSignal() Error: \(error)")
                     case .Completed:
@@ -160,26 +160,24 @@ final class UserViewModel: NSObject {
                 try! realm.commitWrite()
                 
             case .UserSettings:
-                if dataset.getAll().count == 0 {
-                    print("Checked once a day and only called when user actually changed a setting")
-                    
-                    let realm = try! Realm()
-                    let model: SettingsModel? = realm.objects(SettingsModel).first
-                    
-                    guard let settings = model else {
-                        sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil))
-                        return
-                    }
+                //TODO: Checked once a day and only called when user actually changed a setting
                 
-                    if settings.isSynced == false {
-                        dataset.setString(settings.defaultListId, forKey: "defaultListId")
-                        dataset.setValue(settings.rankSettingIndex, forKey: "rankSettingIndex")
-                        dataset.setValue(settings.notificationSettingIndex, forKey: "notificationSettingIndex")
-                        dataset.setValue(settings.loginTypeIndex, forKey: "loginTypeIndex")
-                    } else {
-                        sendCompleted(sink)
-                        return
-                    }
+                let realm = try! Realm()
+                let model: SettingsModel? = realm.objects(SettingsModel).first
+                
+                guard let settings = model else {
+                    sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil))
+                    return
+                }
+                
+                if settings.isSynced == false {
+                    dataset.setString(settings.defaultListId, forKey: "defaultListId")
+                    dataset.setString(String(settings.rankSettingIndex), forKey: "rankSettingIndex")
+                    dataset.setString(String(settings.notificationSettingIndex), forKey: "notificationSettingIndex")
+                    dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
+                } else {
+                    sendCompleted(sink)
+                    return
                 }
             }
             

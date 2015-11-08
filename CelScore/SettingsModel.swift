@@ -14,9 +14,9 @@ public class SettingsModel: Object {
     //MARK: Properties
     dynamic var id: String = "1"
     dynamic var defaultListId: String = "0001"
-    dynamic var rankSettingIndex: Int = 0
-    dynamic var notificationSettingIndex: Int = 0
-    dynamic var loginTypeIndex: Int = 0
+    dynamic var rankSettingIndex: Int = 1
+    dynamic var notificationSettingIndex: Int = 1
+    dynamic var loginTypeIndex: Int = 1
     dynamic var isSynced: Bool = false
 
     
