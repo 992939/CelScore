@@ -236,6 +236,7 @@ final class UserViewModel: NSObject {
         }
     }
     
+    //TODO: delete
     func getUserRatingsFromCognitoSignal() -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             

@@ -13,10 +13,15 @@ import RealmSwift
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
+    
+    
+    //MARK: Initializers
+    override init() { super.init() }
     
     
     //MARK: Methods
-    func getUserRatingsPercentageSignal() -> SignalProducer<Int, NSError> {
+    func getUserRatingsPercentageSignal() -> SignalProducer<Int, SettingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -24,7 +29,7 @@ final class SettingsViewModel: NSObject {
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             
             guard celebrityCount > 1 else {
-                sendError(sink, NSError(domain: "com.CelebrityCount.IsZero", code: 1, userInfo: nil))
+                sendError(sink, .NoCelebrityModels)
                 return
             }
             sendNext(sink, userRatingsCount/celebrityCount)
@@ -32,14 +37,14 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel!, NSError> {
+    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel!, SettingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
             
             guard let settings = model else {
-                sendError(sink, NSError(domain: "com.SettingsModel.IsMissing", code: 1, userInfo: nil))
+                sendError(sink, .NoSettingsModel)
                 return
             }
             sendNext(sink, settings)
@@ -47,7 +52,7 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func setSettingsOnLocalStoreSignal() -> SignalProducer<SettingsModel!, NSError> {
+    func setSettingsOnLocalStoreSignal() -> SignalProducer<SettingsModel!, SettingsError> {
         return SignalProducer { sink, _ in
             
         }
