@@ -16,7 +16,6 @@ final class UserViewModel: NSObject {
     
     //MARK: Properties
     let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    let settings: SettingsModel = SettingsModel()
     enum LoginType: Int { case Facebook = 0, Twitter }
     enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
     
@@ -131,6 +130,7 @@ final class UserViewModel: NSObject {
             dataset.synchronize()
             
             switch dataSetType {
+                
             case .UserInfo:
                 if dataset.getAll().count == 0 {
                     dataset.setString(object.objectForKey("name") as! String, forKey: "name")
@@ -144,6 +144,7 @@ final class UserViewModel: NSObject {
                     dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                     dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                 }
+                
             case .UserRatings:
                 let realm = try! Realm()
                 let predicate = NSPredicate(format: "isSynced = false")
@@ -158,6 +159,7 @@ final class UserViewModel: NSObject {
                     realm.add(ratings, update: true)
                 }
                 try! realm.commitWrite()
+                
             case .UserSettings:
                 if dataset.getAll().count == 0 {
                     print("Checked once a day and only called when user actually changed a setting")
@@ -210,20 +212,22 @@ final class UserViewModel: NSObject {
                     return task
                 }
                 
-                switch dataSetType {
-                case .UserInfo:
-                    fatalError("there is no use to store user information from Facebook/Twitter locally")
-                case .UserRatings:
-                case .UserSettings:
-                }
-                
                 let realm = try! Realm()
                 realm.beginWrite()
                 
-                dataset.getAll().forEach({ dico in
-                    let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
-                    realm.add(userRatings, update: true)
-                })
+                switch dataSetType {
+                case .UserInfo:
+                    fatalError("there is no use to store user information from Facebook/Twitter locally")
+                    
+                case .UserRatings:
+                    dataset.getAll().forEach({ dico in
+                        let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
+                        realm.add(userRatings, update: true)
+                    })
+                    
+                case .UserSettings:
+                    print(dataset)
+                }
                 try! realm.commitWrite()
                 sendNext(sink, dataset.getAll())
                 sendCompleted(sink)
@@ -260,24 +264,6 @@ final class UserViewModel: NSObject {
                 sendCompleted(sink)
                 return task
             })
-        }
-    }
-    
-    
-    //MARK: Settings Methods
-    func getUserRatingsPercentageSignal() -> SignalProducer<Int, NSError> {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let userRatingsCount: Int = realm.objects(UserRatingsModel).count
-            let celebrityCount: Int = realm.objects(CelebrityModel).count
-            
-            guard celebrityCount > 1 else {
-                sendError(sink, NSError(domain: "com.CelScore.Empty", code: 1, userInfo: nil))
-                return
-            }
-            sendNext(sink, userRatingsCount/celebrityCount)
-            sendCompleted(sink)
         }
     }
 }

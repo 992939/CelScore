@@ -11,7 +11,7 @@ import UIKit
 final class SettingsViewController: UIViewController {
     
     //MARK: Properties
-    let userVM: UserViewModel
+    let settingsVM: SettingsViewModel
     var defaultListId: String = "0001"
     enum RankSetting: Int { case All = 0, A_List, B_List }
     enum NotificationSetting: Int { case Daily = 0, Weekly, Never }
@@ -21,7 +21,7 @@ final class SettingsViewController: UIViewController {
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.userVM = UserViewModel()
+        self.settingsVM = SettingsViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,7 +34,7 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userVM.getUserRatingsPercentageSignal()
+        self.settingsVM.getUserRatingsPercentageSignal()
             .start { event in
                 switch(event) {
                 case let .Next(value):
