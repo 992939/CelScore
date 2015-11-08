@@ -136,12 +136,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        print("Node at \(indexPath.row)")
-        //let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        //let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
-        //let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
-        //self.presentViewController(DetailViewController(profile: celebProfile), animated: false, completion: nil)
-        self.presentViewController(SettingsViewController(), animated: false, completion: nil)
+        let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
+        self.presentViewController(DetailViewController(profile: node.profile), animated: false, completion: nil)
+        //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
@@ -250,19 +247,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-                        self.userVM.getFromCognitoSignal(.UserRatings)
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("getFromCognitoSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("getFromCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("getFromCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("getFromCognitoSignal Interrupted")
-                                }
-                        }
+//                        self.userVM.getFromCognitoSignal(.UserRatings)
+//                            .start { event in
+//                                switch(event) {
+//                                case let .Next(value):
+//                                    print("getFromCognitoSignal Value: \(value)")
+//                                case let .Error(error):
+//                                    print("getFromCognitoSignal Error: \(error)")
+//                                case .Completed:
+//                                    print("getFromCognitoSignal Completed")
+//                                case .Interrupted:
+//                                    print("getFromCognitoSignal Interrupted")
+//                                }
+//                        }
                         
 //                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserSettings)
 //                            .start { event in

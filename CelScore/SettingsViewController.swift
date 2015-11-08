@@ -49,19 +49,19 @@ final class SettingsViewController: UIViewController {
 //                }
 //        }
         
-        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .RankSettingIndex)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("pdateSettingOnLocalStoreSignal Value: \(value)")
-                case let .Error(error):
-                    print("pdateSettingOnLocalStoreSignal Error: \(error)")
-                case .Completed:
-                    print("pdateSettingOnLocalStoreSignal Completed")
-                case .Interrupted:
-                    print("pdateSettingOnLocalStoreSignal Interrupted")
-                }
-        }
+//        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .RankSettingIndex)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("pdateSettingOnLocalStoreSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("pdateSettingOnLocalStoreSignal Error: \(error)")
+//                case .Completed:
+//                    print("pdateSettingOnLocalStoreSignal Completed")
+//                case .Interrupted:
+//                    print("pdateSettingOnLocalStoreSignal Interrupted")
+//                }
+//        }
         
 //        self.settingsVM.getSettingsFromLocalStoreSignal()
 //            .start { event in
