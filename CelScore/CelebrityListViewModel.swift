@@ -62,16 +62,4 @@ class CelebrityListViewModel: NSObject {
             sendCompleted(sink)
         }
     }
-    
-    final func getCelebrityProfile(index index: Int) throws -> CelebrityProfile
-    {
-        let celebId : CelebId = self.celebrityList.celebList[index]
-        
-        let realm = try! Realm()
-        let predicate = NSPredicate(format: "id = %@", celebId.id)
-        let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-        guard let celeb = celebrity else { throw ListError.Empty }
-        
-        return CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
-    }
 }
