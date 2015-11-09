@@ -171,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				004B57011B3533E8008A75EB /* Views */,
-				004B57001B3533DF008A75EB /* ViiewModels */,
+				004B57001B3533DF008A75EB /* ViewModels */,
 				004B56FF1B3533D8008A75EB /* Models */,
 				004B56FE1B3533CE008A75EB /* Utils */,
 				004B56DE1B35332A008A75EB /* AppDelegate.swift */,
@@ -230,7 +230,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		004B57001B3533DF008A75EB /* ViiewModels */ = {
+		004B57001B3533DF008A75EB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				008EE4C31BE6E38600E831BE /* SearchListViewModel.swift */,
@@ -241,7 +241,7 @@
 				00F6C9D61B35393C0078CA6E /* UserViewModel.swift */,
 				00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */,
 			);
-			name = ViiewModels;
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		004B57011B3533E8008A75EB /* Views */ = {
@@ -736,6 +736,7 @@
 				00404AAB1BF093540009AD0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
 			isa = XCConfigurationList;

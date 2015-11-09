@@ -30,7 +30,7 @@ final class CelScoreViewModel: NSObject {
         self.timeNotifier.producer
             .promoteErrors(NSError.self)
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
-                return self.getFromAWSSignal(.Celebrity)
+                return self.getFromAWSSignal(dataType: .Celebrity)
             }
             .observeOn(QueueScheduler.mainQueueScheduler)
             .start { event in
@@ -64,7 +64,7 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
+    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)

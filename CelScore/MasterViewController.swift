@@ -174,7 +174,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             return
         }
         
-        userVM.loginSignal(result.token.tokenString, loginType: .Facebook)
+        userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .start { event in
                 switch(event) {
                 case let .Next(value):
@@ -184,7 +184,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     let userRatingsArray = realm.objects(UserRatingsModel)
                     if userRatingsArray.count > 0
                     {
-                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserRatings)
+                        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings)
                             .start { event in
                                 switch(event) {
                                 case let .Next(value):

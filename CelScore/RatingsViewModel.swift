@@ -108,7 +108,7 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func retrieveFromLocalStoreSignal(ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
+    func retrieveFromLocalStoreSignal(ratingType ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()

@@ -31,7 +31,7 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateCognitoSignal(value, dataSetType: .UserInfo).start { event in
+                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start { event in
                             switch(event) {
                             case let .Next(value):
                                 print("updateUserInfoOnCognitoSignal() Next: \(value)")
@@ -56,7 +56,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Login Methods
-    func loginSignal(token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
+    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
@@ -94,7 +94,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func logoutSignal(token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
+    func logoutSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             //TODO: implementation
             switch loginType {
@@ -122,7 +122,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Cognito Methods
-    func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
+    func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -193,7 +193,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary!, NSError> {
+    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary!, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
