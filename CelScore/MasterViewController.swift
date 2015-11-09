@@ -121,8 +121,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        let celebId = self.displayedCelebrityListVM.getIdForCelebAtIndex(indexPath.row)
-        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(celebId: celebId)
+        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(index: indexPath.row)
         let node = CelebrityTableViewCell(profile: celebProfile)
         
         return node

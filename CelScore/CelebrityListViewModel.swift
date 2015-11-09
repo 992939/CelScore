@@ -40,17 +40,12 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
-    //TODO: replace by computed properties idAtIndex & profileAtIndex
-    final func getIdForCelebAtIndex(index: Int) -> String {
-        //TODO: add guard to check index is within bounds
-        let celebId : CelebId = self.celebrityList.celebList[index]
-        return celebId.id
-    }
-    
-    final func getCelebrityProfile(celebId celebId: String) throws -> CelebrityProfile
+    final func getCelebrityProfile(index index: Int) throws -> CelebrityProfile
     {
+        let celebId : CelebId = self.celebrityList.celebList[index]
+        
         let realm = try! Realm()
-        let predicate = NSPredicate(format: "id = %@", celebId)
+        let predicate = NSPredicate(format: "id = %@", celebId.id)
         let celebrity = realm.objects(CelebrityModel).filter(predicate).first
         guard let celeb = celebrity else { throw ListError.Empty }
         
