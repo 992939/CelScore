@@ -1,0 +1,6 @@
+framework module AIRTimer {
+  umbrella header "AIRTimer-umbrella.h"
+
+  export *
+  module * { export * }
+}

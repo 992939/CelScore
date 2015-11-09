@@ -1,0 +1,6 @@
+framework module Pods_CelScoreTests {
+  umbrella header "Pods-CelScoreTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
