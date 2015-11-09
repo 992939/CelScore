@@ -43,11 +43,10 @@ class CelebrityListViewModel: NSObject {
     final func getCelebrityProfileSignal(index index: Int) -> SignalProducer<CelebrityProfile, ListError> {
         return SignalProducer { sink, _ in
             
-//            guard index > self.count else {
-//                sendError(sink, .IndexOutOfBounds)
-//                return
-//            }
-            
+            guard index < self.count else {
+                sendError(sink, .IndexOutOfBounds)
+                return
+            }
             let celebId : CelebId = self.celebrityList.celebList[index]
             
             let realm = try! Realm()
@@ -57,8 +56,7 @@ class CelebrityListViewModel: NSObject {
                 sendError(sink, .Empty)
                 return
             }
-        
-        sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
             sendCompleted(sink)
         }
     }
