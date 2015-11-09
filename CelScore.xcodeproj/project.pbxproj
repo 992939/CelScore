@@ -11,6 +11,10 @@
 		00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A931BED89430009AD0E /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
+		00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404AA11BF093540009AD0E /* TodayViewController.swift */; };
+		00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00404AA31BF093540009AD0E /* MainInterface.storyboard */; };
+		00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
@@ -33,6 +37,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		00404AA71BF093540009AD0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00404A9C1BF093530009AD0E;
+			remoteInfo = CelScoreWidget;
+		};
 		004B56EF1B35332B008A75EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
@@ -42,11 +53,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		00404AAD1BF093540009AD0E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00404A931BED89430009AD0E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		00404A9D1BF093530009AD0E /* CelScoreWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CelScoreWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		00404A9E1BF093540009AD0E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		00404AA11BF093540009AD0E /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		00404AA41BF093540009AD0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		00404AA61BF093540009AD0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56D91B35332A008A75EB /* CelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56DD1B35332A008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56DE1B35332A008A75EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +108,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		00404A9A1BF093530009AD0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D61B35332A008A75EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,11 +135,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00404AA01BF093540009AD0E /* CelScoreWidget */ = {
+			isa = PBXGroup;
+			children = (
+				00404AA11BF093540009AD0E /* TodayViewController.swift */,
+				00404AA31BF093540009AD0E /* MainInterface.storyboard */,
+				00404AA61BF093540009AD0E /* Info.plist */,
+			);
+			path = CelScoreWidget;
+			sourceTree = "<group>";
+		};
 		004B56D01B35332A008A75EB = {
 			isa = PBXGroup;
 			children = (
 				004B56DB1B35332A008A75EB /* CelScore */,
 				004B56F11B35332B008A75EB /* CelScoreTests */,
+				00404AA01BF093540009AD0E /* CelScoreWidget */,
 				004B56DA1B35332A008A75EB /* Products */,
 				55427DAB5E34D67E71A9FA41 /* Pods */,
 				272C664E3752319CD2080EBE /* Frameworks */,
@@ -113,6 +162,7 @@
 			children = (
 				004B56D91B35332A008A75EB /* CelScore.app */,
 				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
+				00404A9D1BF093530009AD0E /* CelScoreWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,6 +260,7 @@
 			children = (
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,
+				00404A9E1BF093540009AD0E /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,6 +277,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		00404A9C1BF093530009AD0E /* CelScoreWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */;
+			buildPhases = (
+				00404A991BF093530009AD0E /* Sources */,
+				00404A9A1BF093530009AD0E /* Frameworks */,
+				00404A9B1BF093530009AD0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CelScoreWidget;
+			productName = CelScoreWidget;
+			productReference = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		004B56D81B35332A008A75EB /* CelScore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
@@ -237,10 +305,12 @@
 				B634C1794C106DE3BE407397 /* Copy Pods Resources */,
 				53CD6D34CAF062CBA7F68E1B /* Embed Pods Frameworks */,
 				003FF5C51BD7879D00F7454E /* ShellScript */,
+				00404AAD1BF093540009AD0E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				00404AA81BF093540009AD0E /* PBXTargetDependency */,
 			);
 			name = CelScore;
 			productName = CelScore;
@@ -275,6 +345,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Gareth.K.Mensah;
 				TargetAttributes = {
+					00404A9C1BF093530009AD0E = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					004B56D81B35332A008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -299,11 +372,20 @@
 			targets = (
 				004B56D81B35332A008A75EB /* CelScore */,
 				004B56ED1B35332B008A75EB /* CelScoreTests */,
+				00404A9C1BF093530009AD0E /* CelScoreWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		00404A9B1BF093530009AD0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D71B35332A008A75EB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -384,6 +466,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		00404A991BF093530009AD0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D51B35332A008A75EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +510,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		00404AA81BF093540009AD0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00404A9C1BF093530009AD0E /* CelScoreWidget */;
+			targetProxy = 00404AA71BF093540009AD0E /* PBXContainerItemProxy */;
+		};
 		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 004B56D81B35332A008A75EB /* CelScore */;
@@ -428,6 +523,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		00404AA31BF093540009AD0E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00404AA41BF093540009AD0E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		004B56E71B35332A008A75EB /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -439,6 +542,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		00404AAA1BF093540009AD0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = CelScoreWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GrandPopo.CelScore.CelScoreWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		00404AAB1BF093540009AD0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CelScoreWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GrandPopo.CelScore.CelScoreWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		004B56F61B35332B008A75EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -531,6 +660,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
@@ -548,6 +678,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
@@ -598,6 +729,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00404AAA1BF093540009AD0E /* Debug */,
+				00404AAB1BF093540009AD0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
