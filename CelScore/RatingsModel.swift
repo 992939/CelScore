@@ -52,7 +52,6 @@ public class RatingsModel: Object {
     
     public convenience init(id: String) {
         self.init()
-        
         self.id = id
     }
 }
