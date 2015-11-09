@@ -121,8 +121,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods.
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
-        let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(index: indexPath.row)
-        let node = CelebrityTableViewCell(profile: celebProfile)
+        var node = ASCellNode()
+        self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("getCelebrityProfileSignal Value: \(value)")
+                    node = CelebrityTableViewCell(profile: value)
+                case let .Error(error):
+                    print("getCelebrityProfileSignal Error: \(error)")
+                case .Completed:
+                    print("getCelebrityProfileSignal Completed")
+                case .Interrupted:
+                    print("getCelebrityProfileSignal Interrupted")
+                }
+        }
         return node
     }
     

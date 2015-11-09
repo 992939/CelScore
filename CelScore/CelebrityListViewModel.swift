@@ -40,6 +40,29 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
+    final func getCelebrityProfileSignal(index index: Int) -> SignalProducer<CelebrityProfile, ListError> {
+        return SignalProducer { sink, _ in
+            
+//            guard index > self.count else {
+//                sendError(sink, .IndexOutOfBounds)
+//                return
+//            }
+            
+            let celebId : CelebId = self.celebrityList.celebList[index]
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", celebId.id)
+            let celebrity = realm.objects(CelebrityModel).filter(predicate).first
+            guard let celeb = celebrity else {
+                sendError(sink, .Empty)
+                return
+            }
+        
+        sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            sendCompleted(sink)
+        }
+    }
+    
     final func getCelebrityProfile(index index: Int) throws -> CelebrityProfile
     {
         let celebId : CelebId = self.celebrityList.celebList[index]
