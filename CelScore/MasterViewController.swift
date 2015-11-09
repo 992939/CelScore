@@ -123,7 +123,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         let celebProfile = try! self.displayedCelebrityListVM.getCelebrityProfile(index: indexPath.row)
         let node = CelebrityTableViewCell(profile: celebProfile)
-        
         return node
     }
     
