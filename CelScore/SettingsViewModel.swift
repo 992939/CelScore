@@ -14,7 +14,7 @@ final class SettingsViewModel: NSObject {
 
     //MARK: Properties
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
-    enum SettingType: Int { case DefaultListId = 0, RankSettingIndex, NotificationSettingIndex, LoginTypeIndex }
+    enum SettingType: Int { case DefaultListId = 0, RankSettingIndex, LoginTypeIndex }
     
     
     //MARK: Initializers
@@ -68,8 +68,6 @@ final class SettingsViewModel: NSObject {
                 settings.defaultListId = value as! String
             case .RankSettingIndex:
                 settings.rankSettingIndex = value as! Int
-            case .NotificationSettingIndex:
-                settings.notificationSettingIndex = value as! Int
             case .LoginTypeIndex:
                 settings.loginTypeIndex = value as! Int
             }

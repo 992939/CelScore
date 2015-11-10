@@ -173,7 +173,6 @@ final class UserViewModel: NSObject {
                 if settings.isSynced == false {
                     dataset.setString(settings.defaultListId, forKey: "defaultListId")
                     dataset.setString(String(settings.rankSettingIndex), forKey: "rankSettingIndex")
-                    dataset.setString(String(settings.notificationSettingIndex), forKey: "notificationSettingIndex")
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 } else {
                     sendCompleted(sink)
@@ -229,7 +228,6 @@ final class UserViewModel: NSObject {
                     let settings: SettingsModel = model!
                     
                     settings.defaultListId = dico["defaultListId"] as! String
-                    settings.notificationSettingIndex = (dico["notificationSettingIndex"] as! NSString).integerValue
                     settings.rankSettingIndex = (dico["rankSettingIndex"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.isSynced = true

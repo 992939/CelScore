@@ -70,7 +70,6 @@ final class DetailViewController: UIViewController {
 //                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted")
 //                }
 //        }
-        
                 
 // RETRIEVE AND UPDATE GO TOGETHER
 //

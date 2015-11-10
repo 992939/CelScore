@@ -14,7 +14,6 @@ final class SettingsViewController: UIViewController {
     let settingsVM: SettingsViewModel
     var defaultListId: String = "0001"
     enum RankSetting: Int { case All = 1, A_List, B_List }
-    enum NotificationSetting: Int { case Daily = 1, Weekly, Never }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
     
