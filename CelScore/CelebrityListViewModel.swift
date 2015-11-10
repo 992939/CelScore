@@ -16,7 +16,7 @@ class CelebrityListViewModel: NSObject {
     final let title = MutableProperty("")
     final lazy var celebrityList: ListsModel = ListsModel()
     final var count: Int { get { return self.celebrityList.count }}
-    enum ListError: ErrorType { case Empty, IndexOutOfBounds }
+    enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
     
     //MARK: Initializers
@@ -31,7 +31,7 @@ class CelebrityListViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
             guard let celebList = list else {
-                sendError(sink, .Empty)
+                sendError(sink, .EmptyList)
                 return
             }
             self.celebrityList = celebList.copy() as! ListsModel
@@ -53,10 +53,24 @@ class CelebrityListViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", celebId.id)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             guard let celeb = celebrity else {
-                sendError(sink, .Empty)
+                sendError(sink, .EmptyList)
                 return
             }
             sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            sendCompleted(sink)
+        }
+    }
+    
+    final func getListsFromLocalStoreSignal() -> SignalProducer<AnyObject, ListError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let list = realm.objects(ListsModel)
+            guard list.count > 0 else {
+                sendError(sink, .NoLists)
+                return
+            }
+            sendNext(sink, list)
             sendCompleted(sink)
         }
     }

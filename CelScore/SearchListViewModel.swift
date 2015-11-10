@@ -52,7 +52,7 @@ final class SearchListViewModel: CelebrityListViewModel {
             list = realm.objects(CelebrityModel).filter(predicate)
             
             guard list.count > 0 else {
-                sendError(sink, ListError.Empty)
+                sendError(sink, ListError.EmptyList)
                 return
             }
             sendNext(sink, list)
