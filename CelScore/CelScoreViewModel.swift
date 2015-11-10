@@ -97,10 +97,7 @@ final class CelScoreViewModel: NSObject {
                     case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
                     case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
                     case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
-                        print("original is \(awsObject)")
-                        print("copy is \(awsObject.copy())")
                     }
-                    
                     let realm = try! Realm()
                     realm.beginWrite()
                     realm.add(awsObject, update: true)

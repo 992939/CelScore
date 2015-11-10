@@ -34,7 +34,7 @@ final class CelebrityViewModel: NSObject {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    self.celebrity = value as? CelebrityModel
+                    self.celebrity = value
                 case let .Error(error):
                     print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
                 case .Completed:
@@ -47,12 +47,12 @@ final class CelebrityViewModel: NSObject {
     
     
     //MARK: Methods
-    func getFromLocalStoreSignal(id id: String) -> SignalProducer<Object!, CelebrityError> {
+    func getFromLocalStoreSignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!.copy() as? CelebrityModel
             guard let object = celebrity else {
                 sendError(sink, .NotFound)
                 return
@@ -62,7 +62,7 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
-    func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<Object!, CelebrityError> {
+    func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()

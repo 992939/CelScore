@@ -10,7 +10,10 @@ import Foundation
 import RealmSwift
 
 public final class CelebId: Object, NSCopying {
+    
+    //MARK: Properties
     dynamic var id: String = ""
+    
     
     //MARK: Methods
     public func copyWithZone(zone: NSZone) -> AnyObject {
@@ -62,7 +65,6 @@ public final class ListsModel: Object, NSCopying {
         copy.isSynced = self.isSynced
         let objectList = List<CelebId>()
         for object in self.celebList.enumerate() {
-            print("a copy of \(object.element.copy())")
             objectList.append(object.element.copy() as! CelebId)
         }
         copy.celebList = objectList

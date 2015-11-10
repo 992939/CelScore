@@ -52,8 +52,8 @@ final class RatingsViewModel: NSObject {
     init(celebrityId: String) {
         super.init()
         
-        self.ratings = RatingsModel(id: celebrityId)
-        self.userRatings = UserRatingsModel(id: celebrityId)
+        self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel
+        self.userRatings = UserRatingsModel(id: celebrityId)//.copy() as! UserRatingsModel
     }
     
     

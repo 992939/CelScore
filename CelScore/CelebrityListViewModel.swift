@@ -34,7 +34,7 @@ class CelebrityListViewModel: NSObject {
                 sendError(sink, .Empty)
                 return
             }
-            self.celebrityList = celebList
+            self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
             sendCompleted(sink)
         }
