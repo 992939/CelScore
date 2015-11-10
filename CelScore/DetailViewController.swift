@@ -43,33 +43,33 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("celebrityVM.getFromLocalStoreSignal Value: \(value)")
-                case let .Error(error):
-                    print("celebrityVM.getFromLocalStoreSignal Error: \(error)")
-                case .Completed:
-                    print("celebrityVM.getFromLocalStoreSignal Completed")
-                case .Interrupted:
-                    print("celebrityVM.getFromLocalStoreSignal Interrupted")
-                }
-        }
+//        self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("celebrityVM.getFromLocalStoreSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("celebrityVM.getFromLocalStoreSignal Error: \(error)")
+//                case .Completed:
+//                    print("celebrityVM.getFromLocalStoreSignal Completed")
+//                case .Interrupted:
+//                    print("celebrityVM.getFromLocalStoreSignal Interrupted")
+//                }
+//        }
         
-        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Value: \(value)")
-                case let .Error(error):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Error: \(error)")
-                case .Completed:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Completed")
-                case .Interrupted:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted")
-                }
-        }
+//        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Error: \(error)")
+//                case .Completed:
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Completed")
+//                case .Interrupted:
+//                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted")
+//                }
+//        }
         
 //        self.ratingsVM.retrieveFromLocalStoreSignal(.UserRatings)
 //            .start { event in
@@ -85,18 +85,18 @@ final class DetailViewController: UIViewController {
 //                }
 //        }
         
-//        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 5)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("updateUserRatingsSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("updateUserRatingsSignal Error: \(error)")
-//                case .Completed:
-//                    print("updateUserRatingsSignal Completed")
-//                case .Interrupted:
-//                    print("updateUserRatingsSignal Interrupted")
-//                }
-//        }
+        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 5)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("updateUserRatingsSignal Value: \(value)")
+                case let .Error(error):
+                    print("updateUserRatingsSignal Error: \(error)")
+                case .Completed:
+                    print("updateUserRatingsSignal Completed")
+                case .Interrupted:
+                    print("updateUserRatingsSignal Interrupted")
+                }
+        }
     }
 }
