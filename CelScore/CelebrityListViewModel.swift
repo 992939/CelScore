@@ -47,7 +47,7 @@ class CelebrityListViewModel: NSObject {
                 sendError(sink, .IndexOutOfBounds)
                 return
             }
-            let celebId : CelebId = self.celebrityList.celebList[index]
+            let celebId: CelebId = self.celebrityList.celebList[index]
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId.id)

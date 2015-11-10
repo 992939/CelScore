@@ -9,9 +9,18 @@
 import Foundation
 import RealmSwift
 
-public final class CelebId: Object { dynamic var id: String = "" }
+public final class CelebId: Object, NSCopying {
+    dynamic var id: String = ""
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = CelebId()
+        copy.id = self.id
+        return copy
+    }
+}
 
-public final class ListsModel: Object {
+public final class ListsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -19,7 +28,7 @@ public final class ListsModel: Object {
     dynamic var numberOfSearchByLocalUser: Double = 0
     dynamic var count: Int = 0
     dynamic var isSynced: Bool = false
-    let celebList = List<CelebId>()
+    var celebList = List<CelebId>()
     
     
     //MARK: Initializers
@@ -40,5 +49,23 @@ public final class ListsModel: Object {
         }
         self.count = self.celebList.count
         self.isSynced = true
+    }
+    
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = ListsModel()
+        copy.id = self.id
+        copy.name = self.name
+        copy.numberOfSearchByLocalUser = self.numberOfSearchByLocalUser
+        copy.count = self.count
+        copy.isSynced = self.isSynced
+        let objectList = List<CelebId>()
+        for object in self.celebList.enumerate() {
+            print("a copy of \(object.element.copy())")
+            objectList.append(object.element.copy() as! CelebId)
+        }
+        copy.celebList = objectList
+        return copy
     }
 }

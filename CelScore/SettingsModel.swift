@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class SettingsModel: Object {
+public class SettingsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = "1"
@@ -31,5 +31,18 @@ public class SettingsModel: Object {
         self.notificationSettingIndex = dictionary["notificationSettingIndex"] as! Int
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.isSynced = true
+    }
+    
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = SettingsModel()
+        copy.id = self.id
+        copy.defaultListId = self.defaultListId
+        copy.rankSettingIndex = self.rankSettingIndex
+        copy.notificationSettingIndex = self.notificationSettingIndex
+        copy.loginTypeIndex = self.loginTypeIndex
+        copy.isSynced = self.isSynced
+        return copy
     }
 }

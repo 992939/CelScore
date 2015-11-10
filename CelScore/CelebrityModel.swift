@@ -24,7 +24,7 @@ public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
 }
 
 
-public final class CelebrityModel: Object {
+public final class CelebrityModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -67,4 +67,30 @@ public final class CelebrityModel: Object {
         self.sex = dictionary["sex"] as! Bool
         self.isSynced = true
     }
+    
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = CelebrityModel()
+        copy.id = self.id
+        copy.birthdate = self.birthdate
+        copy.firstName = self.firstName
+        copy.lastName = self.lastName
+        copy.middleName = self.middleName
+        copy.nickName = self.nickName
+        copy.netWorth = self.netWorth
+        copy.status = self.status
+        copy.twitter = self.twitter
+        copy.rank = self.rank
+        copy.picture2x = self.picture2x
+        copy.picture3x = self.picture3x
+        copy.prevScore = self.prevScore
+        copy.sex = self.sex
+        copy.isFollowed = self.isFollowed
+        copy.isSynced = self.isSynced
+        return copy
+    }
 }
+
+
+

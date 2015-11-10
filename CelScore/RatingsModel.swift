@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class RatingsModel: Object {
+public class RatingsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -53,6 +53,26 @@ public class RatingsModel: Object {
     public convenience init(id: String) {
         self.init()
         self.id = id
+    }
+    
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = RatingsModel(id: self.id)
+        copy.updatedAt = self.updatedAt
+        copy.rating1 = self.rating1
+        copy.rating2 = self.rating2
+        copy.rating3 = self.rating3
+        copy.rating4 = self.rating4
+        copy.rating5 = self.rating5
+        copy.rating6 = self.rating6
+        copy.rating7 = self.rating7
+        copy.rating8 = self.rating8
+        copy.rating9 = self.rating9
+        copy.rating10 = self.rating10
+        copy.totalVotes = self.totalVotes
+        copy.isSynced = self.isSynced
+        return copy
     }
 }
 
