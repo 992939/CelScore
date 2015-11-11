@@ -9,12 +9,9 @@
 import UIKit
 import NotificationCenter
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
-    @IBOutlet var nickNameLabel: UILabel!
-    @IBOutlet var celscoreLabel: UILabel!
-    @IBOutlet var celebImage: UIImageView!
     
     
     //MARK: Methods
