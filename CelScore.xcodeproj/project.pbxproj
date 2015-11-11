@@ -26,7 +26,6 @@
 		00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */; };
 		00B6F0331BC79C8F000DA1C6 /* CSEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */; };
 		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		00D01BBA1BF32D2300EF8D0D /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; settings = {ASSET_TAGS = (); }; };
 		00F6C9D71B35393C0078CA6E /* CelebrityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* CelebrityListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -36,6 +35,7 @@
 		00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DD1B3539480078CA6E /* MasterViewController.swift */; };
 		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
 		4E3678CD6B99D4407B061581 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C85D2008FC2F053995BEFFD /* Pods.framework */; };
+		8F75F4719B45DBB038FD40D2 /* Pods_CelScoreWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0161736B33E560C7C92EDDC0 /* Pods_CelScoreWidget.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,10 @@
 		00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityTableViewCell.swift; sourceTree = "<group>"; };
 		00F6C9DD1B3539480078CA6E /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		00F6C9E11B353A670078CA6E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0161736B33E560C7C92EDDC0 /* Pods_CelScoreWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E096BDA0A4ABA9D42E0D2E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2E5BDBA97F9B261808F389B9 /* Pods-CelScoreWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig"; sourceTree = "<group>"; };
+		4DDDCCFBBD9D32F44B8B1E8E /* Pods-CelScoreWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		89E752B78F0CDF6ABBF31FFF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */,
+				8F75F4719B45DBB038FD40D2 /* Pods_CelScoreWidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +269,7 @@
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,
 				00404A9E1BF093540009AD0E /* NotificationCenter.framework */,
+				0161736B33E560C7C92EDDC0 /* Pods_CelScoreWidget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -274,6 +279,8 @@
 			children = (
 				1E096BDA0A4ABA9D42E0D2E7 /* Pods.debug.xcconfig */,
 				89E752B78F0CDF6ABBF31FFF /* Pods.release.xcconfig */,
+				4DDDCCFBBD9D32F44B8B1E8E /* Pods-CelScoreWidget.debug.xcconfig */,
+				2E5BDBA97F9B261808F389B9 /* Pods-CelScoreWidget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -285,9 +292,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */;
 			buildPhases = (
+				6ADCE2952048120C9AAB7928 /* Check Pods Manifest.lock */,
 				00404A991BF093530009AD0E /* Sources */,
 				00404A9A1BF093530009AD0E /* Frameworks */,
 				00404A9B1BF093530009AD0E /* Resources */,
+				3EE8F9B87BA07C6C6489BEC6 /* Embed Pods Frameworks */,
+				3CA812494AFB5A41B8A90DDE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -422,6 +432,36 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4 33cd1f8b9b661fc1d2413a92e0956503e0a5e4933cf9303f97f3ade74033b0f7";
 		};
+		3CA812494AFB5A41B8A90DDE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3EE8F9B87BA07C6C6489BEC6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		53CD6D34CAF062CBA7F68E1B /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +475,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ADCE2952048120C9AAB7928 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7E3852F6AD0892BB2A6CF6DC /* Check Pods Manifest.lock */ = {
@@ -475,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */,
-				00D01BBA1BF32D2300EF8D0D /* CelebrityModel.swift in Sources */,
 				00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +604,9 @@
 /* Begin XCBuildConfiguration section */
 		00404AAA1BF093540009AD0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DDDCCFBBD9D32F44B8B1E8E /* Pods-CelScoreWidget.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -564,7 +620,9 @@
 		};
 		00404AAB1BF093540009AD0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E5BDBA97F9B261808F389B9 /* Pods-CelScoreWidget.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -666,7 +724,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
@@ -684,7 +742,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = CelScore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";

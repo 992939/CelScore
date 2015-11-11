@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '19600020ED29463BD47289CE'
+               BlueprintIdentifier = 'D2A70DEF6E584DC82E1D6968'
                BlueprintName = 'WillowTreeReachability'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'WillowTreeReachability.framework'>

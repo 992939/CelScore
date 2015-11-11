@@ -7,32 +7,42 @@
 //
 
 import UIKit
-import RealmSwift
 import NotificationCenter
 
-class TodayViewController: UITableViewController, NCWidgetProviding {
+final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let expandButton = UIButton()
+    let settingsVM: SettingsViewModel
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    var expanded : Bool {
-        get {
-            return userDefaults.boolForKey("expanded")
-        }
+    var expanded: Bool {
+        get { return userDefaults.boolForKey("expanded") }
         set (newExpanded) {
             userDefaults.setBool(newExpanded, forKey: "expanded")
             userDefaults.synchronize()
         }
     }
     
-    let defaultNumRows = 3
-    let maxNumberOfRows = 10
+    
+    //MARK: Initializers
+    required init(coder aDecoder: NSCoder) {
+        self.settingsVM = SettingsViewModel()
+    }
     
     
     //MARK: Methods
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
-    override func viewDidLoad() { super.viewDidLoad() }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateExpandButtonTitle()
+        self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
+        tableView.sectionFooterHeight = 44
+        
+        items = cachedItems
+        updatePreferredContentSize()
+    }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
@@ -58,7 +68,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     // MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let items = items {
-            return min(items.count, expanded ? maxNumberOfRows : defaultNumRows)
+            return min(items.count, expanded ? self.settingsVM.maxTodayExtensionNumberOfRows : self.settingsVM.defaultTodayExtensionNumRows)
         }
         return 0
     }

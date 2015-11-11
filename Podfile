@@ -21,4 +21,9 @@ target 'CelScoreTests' do
 
 end
 
+target 'CelScoreWidget' do
+
+end
+
+
 

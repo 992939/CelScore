@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayTableViewCell: UITableViewCell {
+final class TodayTableViewCell: UITableViewCell {
     
     //MARK: Properties
     @IBOutlet internal var nickNameLabel: UILabel!

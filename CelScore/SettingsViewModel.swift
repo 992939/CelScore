@@ -9,11 +9,16 @@
 
 import Foundation
 import RealmSwift
+import ReactiveCocoa
+import SettingsModel
+import RatingsModel
 
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
     var defaultListId: String = "0001"
+    let defaultTodayExtensionNumRows = 3
+    let maxTodayExtensionNumberOfRows = 10
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
@@ -79,4 +84,18 @@ final class SettingsViewModel: NSObject {
             sendCompleted(sink)
         }
     }
+    
+    func getNumberOfFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            
+            let predicate = NSPredicate(format: "isFollowed = true")
+            let count = realm.objects(CelebrityModel).filter(predicate).count
+            
+            sendNext(sink, count)
+            sendCompleted(sink)
+        }
+    }
 }
+
