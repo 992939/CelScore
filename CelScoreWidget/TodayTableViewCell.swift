@@ -1,5 +1,5 @@
 //
-//  CelebTableViewCell.swift
+//  TodayTableViewCell.swift
 //  CelScore
 //
 //  Created by Gareth.K.Mensah on 11/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CelebTableViewCell: UITableViewCell {
+class TodayTableViewCell: UITableViewCell {
     
     //MARK: Properties
     @IBOutlet internal var nickNameLabel: UILabel!
