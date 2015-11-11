@@ -26,6 +26,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     let celscoreVM: CelScoreViewModel
     let userVM: UserViewModel
+    let settingsVM: SettingsViewModel
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
 
@@ -36,6 +37,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     init(viewModel:CelScoreViewModel) {
         self.celscoreVM = viewModel
         self.userVM = UserViewModel()
+        self.settingsVM = SettingsViewModel()
+        
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
@@ -228,6 +231,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                                     print("getFromAWSSignal Interrupted")
                                 }
                         }
+                        
                         self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
                             .start { event in
                                 switch(event) {
@@ -255,19 +259,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                                 }
                         }
                         
-//                        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromCognitoSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromCognitoSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromCognitoSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromCognitoSignal Interrupted")
-//                                }
-//                        }
+                        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromCognitoSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromCognitoSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromCognitoSignal Completed")
+                                case .Interrupted:
+                                    print("getFromCognitoSignal Interrupted")
+                                }
+                        }
                         
 //                        self.userVM.updateCognitoSignal(nil, dataSetType: .UserSettings)
 //                            .start { event in

@@ -14,7 +14,6 @@ public class SettingsModel: Object, NSCopying {
     //MARK: Properties
     dynamic var id: String = "1"
     dynamic var defaultListId: String = "0001"
-    dynamic var rankSettingIndex: Int = 1
     dynamic var loginTypeIndex: Int = 1
     dynamic var isSynced: Bool = false
 
@@ -26,7 +25,6 @@ public class SettingsModel: Object, NSCopying {
         self.init()
         
         self.defaultListId = dictionary["defaultListId"] as! String
-        self.rankSettingIndex = dictionary["rankSettingIndex"] as! Int
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.isSynced = true
     }
@@ -37,7 +35,6 @@ public class SettingsModel: Object, NSCopying {
         let copy = SettingsModel()
         copy.id = self.id
         copy.defaultListId = self.defaultListId
-        copy.rankSettingIndex = self.rankSettingIndex
         copy.loginTypeIndex = self.loginTypeIndex
         copy.isSynced = self.isSynced
         return copy

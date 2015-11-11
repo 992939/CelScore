@@ -12,9 +12,6 @@ final class SettingsViewController: UIViewController {
     
     //MARK: Properties
     let settingsVM: SettingsViewModel
-    var defaultListId: String = "0001"
-    enum RankSetting: Int { case All = 1, A_List, B_List }
-    enum LoginType: Int { case None = 1, Facebook, Twitter }
     
     
     //MARK: Initializers
@@ -48,7 +45,7 @@ final class SettingsViewController: UIViewController {
 //                }
 //        }
         
-//        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .RankSettingIndex)
+//        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId)
 //            .start { event in
 //                switch(event) {
 //                case let .Next(value):

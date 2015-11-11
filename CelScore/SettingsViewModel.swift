@@ -13,8 +13,10 @@ import RealmSwift
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
+    var defaultListId: String = "0001"
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
-    enum SettingType: Int { case DefaultListId = 0, RankSettingIndex, LoginTypeIndex }
+    enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
+    enum LoginType: Int { case None = 1, Facebook, Twitter }
     
     
     //MARK: Initializers
@@ -66,8 +68,6 @@ final class SettingsViewModel: NSObject {
             switch settingType {
             case .DefaultListId:
                 settings.defaultListId = value as! String
-            case .RankSettingIndex:
-                settings.rankSettingIndex = value as! Int
             case .LoginTypeIndex:
                 settings.loginTypeIndex = value as! Int
             }
