@@ -10,8 +10,7 @@
 import Foundation
 import RealmSwift
 import ReactiveCocoa
-import SettingsModel
-import RatingsModel
+
 
 final class SettingsViewModel: NSObject {
 

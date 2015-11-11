@@ -26,6 +26,10 @@
 		00B6F0321BC79C8F000DA1C6 /* CSCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F02F1BC79C8F000DA1C6 /* CSCelScoreAPIClient.m */; };
 		00B6F0331BC79C8F000DA1C6 /* CSEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */; };
 		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; settings = {ASSET_TAGS = (); }; };
+		00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; settings = {ASSET_TAGS = (); }; };
+		00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; settings = {ASSET_TAGS = (); }; };
 		00F6C9D71B35393C0078CA6E /* CelebrityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* CelebrityListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -529,8 +533,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */,
+				00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */,
+				00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */,
 				00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */,
 				00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */,
+				00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -185,6 +185,7 @@
 		2E4C4523C709816FCB5B93FF8A94013A /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = B932E3E4B84087DA372BAEBE928D8122 /* _ASAsyncTransactionGroup.m */; };
 		2EA76C7F772AFEE9C57D692E88F533F7 /* RACTestScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 06257AE9253108FD9E3265253C3AA905 /* RACTestScheduler.m */; };
 		2EBFA64C7D208150CEEAD419029C112E /* Pods-CelScoreTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C726D3D9513D8E7F7033998687646F /* Pods-CelScoreTests-dummy.m */; };
+		2F3F83EB5280AAFD9C2450ABA4645B0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235FF45D90A8E5B8D1E15CC0897E1905 /* Foundation.framework */; };
 		2F46456D1680696A0831544EEEDAE9D2 /* RLMConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = EE6C496B081CCC02B444F84AECAE8CE3 /* RLMConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2F4BBBD55D0521189638B75C548E8027 /* AsyncDisplayKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 212617242CC7B5C63F3CD33DF6A9E7C0 /* AsyncDisplayKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FB7D41C88BB3F3DCCA43A84084F5E2F /* BFAppLinkNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = C112CFB2552BC9878B813A438257E677 /* BFAppLinkNavigation.m */; };
@@ -224,7 +225,6 @@
 		36A971641591030E0CD9E4F17BF02B3A /* AWSMTLModel+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C61EFC1C84DBDD3A968CC61D0406685B /* AWSMTLModel+NSCoding.m */; };
 		36C937BC7583DADF5CC0871EFA361278 /* RACQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 115F9D04FD9A9DA77031985A4F8ABDF3 /* RACQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		371BA8EFCBDF141D932050D502A13702 /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D7CB222F08B94B8C5F195DDDA328F9B /* BFURL_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3731D645EFBA08DEB59239D80552FC05 /* Pods-CelScoreWidget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE743B1B2EC6812458E2EEE4E4C4FC25 /* Pods-CelScoreWidget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		375C7F5D41F9C6806918C4BAA82E9588 /* ASLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 146B85253C895392B2073FBFD8191102 /* ASLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37895A39C872507D30D0769EDFB85C19 /* FBSDKBridgeAPICrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 0200DB93518CD4BC9B63CC31478F8C6B /* FBSDKBridgeAPICrypto.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		38431A0364B09449164625541F707859 /* ASTextNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6F5A8EBB03AF485CBC23DCF1FA0541E /* ASTextNode.mm */; };
@@ -275,7 +275,6 @@
 		4271D59C9A663BD5C9C74C298DD9CFC2 /* BFAppLinkReturnToRefererView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF94EB773940D3A3EE1915C6995EC86B /* BFAppLinkReturnToRefererView.m */; };
 		427C580F92CE54302AFA832E78696BA2 /* RLMObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FF539F1F78C0E5DF1FC26C4985BF8375 /* RLMObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4347E1BFE848998CC540F3E3501839DE /* Bolts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7386D586F04DCBA3D16E8B049859F100 /* Bolts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4354059C57F97FD7947A9A9DAE6E06E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235FF45D90A8E5B8D1E15CC0897E1905 /* Foundation.framework */; };
 		4357B09653419C5EEA12F96537DE766F /* object_store_exceptions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2C1C07AED785E8CC7E445D76041F2572 /* object_store_exceptions.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		44595F7BE607DD97FD4EC2D4AC5E9E76 /* ASDisplayNodeExtraIvars.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DAFCBAC4A3807DE3800492791AD0DB1 /* ASDisplayNodeExtraIvars.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		44C2FF8306429B875026804A5E7DB6F3 /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DF1F7B3CEBFA7FCE77403DDEE02DC61 /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -438,6 +437,7 @@
 		6E6D6F08472471E5AB117018C14C1745 /* input_stream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB288A52F633116224597A8722CE70CD /* input_stream.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		6E73B843E9BCBDF06CDD34C1EE3B100E /* ASBackgroundLayoutSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7B704EB850CF868A596C601FFC4115B9 /* ASBackgroundLayoutSpec.mm */; };
 		6E84AAAE5C710E59799D0B9D37A71AE7 /* AWSFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D98E708F9084D47D4161BBFEF3C63 /* AWSFMDatabase.m */; };
+		6EAFF8F0451B8778B54E639BBB48B550 /* Pods-CelScoreWidget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74C96F2A2BF38718D73A98974995EC /* Pods-CelScoreWidget-dummy.m */; };
 		6EFF9A3538F5184D33D1BB67C6F41870 /* type_list.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CB4A99ABE5EBAFBA3BA02EAE83CEF447 /* type_list.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		6F0513AD63EA47CB16B467A4A7EDC824 /* ASInternalHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = DCD60DD805AEA6F4933087A2E63B6905 /* ASInternalHelpers.mm */; };
 		6F0B2EF5D2E6723A1C6636F6826FDD38 /* ASAbstractLayoutController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4D5EA92D0AD310C0471726772F249B /* ASAbstractLayoutController.mm */; };
@@ -720,6 +720,7 @@
 		BEF12C60150955343921CD0534D971A9 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F926AA3FB1FDA1B0046F12871693D65 /* FoundationExtensions.swift */; };
 		BF3EE99FDBE8BB36B95D08B064AD695B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506180FA437862A63C2C6D125C89F542 /* SwiftyJSON.swift */; };
 		BFB3E03521309A26336FDDBEB7B0FC1B /* _ASAsyncTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 68786CDE63D5DA31359BC193936099DA /* _ASAsyncTransaction.m */; };
+		BFC3AEE28816A20DE54066E3966ABE38 /* Pods-CelScoreWidget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE743B1B2EC6812458E2EEE4E4C4FC25 /* Pods-CelScoreWidget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFD1D0B7FCC51987D81CD73F6E9CF486 /* AWSUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7BF12A08C7355C5AD38CB0B4AB1CED /* AWSUICKeyChainStore.m */; };
 		BFD3FC361E14F917477F2C9BC527E037 /* FBSDKErrorRecoveryConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EC3E09A779100EB0968AB55FA6ADE29 /* FBSDKErrorRecoveryConfiguration.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BFE9917267B679024BD88275E72EBF7F /* RACStringSequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E72FA5FCF24F8E77CFC4572F96FD4C /* RACStringSequence.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -932,7 +933,6 @@
 		F0C06321E654C4658873D3FEEB50930F /* ASTableViewProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 01364DAEACFC72738539459BF3AA6EAA /* ASTableViewProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0DF4748D7531BFD6DE2A12DA325D52C /* array_basic.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 06D7FF187C0AD28C41E4E915395A148D /* array_basic.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		F11C628649D3C2C6697F18EE2ED7A39A /* RLMObjectBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 5164CC4D3939C1C5D388215FE7C2A0F6 /* RLMObjectBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F16C8EBD38C83E8C89FD54D8FE5C4088 /* Pods-CelScoreWidget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74C96F2A2BF38718D73A98974995EC /* Pods-CelScoreWidget-dummy.m */; };
 		F1C88F717B94FB174ECC9D2B0828FBBD /* FBSDKAppEventsDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A402D15803769289E83BE3B56E104A85 /* FBSDKAppEventsDeviceInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F23DD0DB90D87364B0B56EAA8BC36EE1 /* group_writer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64D73034080955FEC5AAE7AF3F5518C9 /* group_writer.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		F2D8E9669517D5D770EFB179698F2517 /* realm_nmmintrin.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DDF17D7CC26E3CB93ABA5245293FD3 /* realm_nmmintrin.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -977,13 +977,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		05F278E599102F2B82B9A917188B22A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BAA396C4D689A02A15029B49E076FAF0;
-			remoteInfo = AWSCognito;
-		};
 		121DB5CC226837F6074083D7387C9029 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1005,13 +998,6 @@
 			remoteGlobalIDString = 57ADC05E440A960212657DE6DA1FEDD5;
 			remoteInfo = Bolts;
 		};
-		1D6CFE582782844E56B8E3B42C262BCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F5ACF367AE3BD7A7F2AF2D430901DF7B;
-			remoteInfo = FBSDKCoreKit;
-		};
 		207F948231F2EEB26C3D1369F8692B87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1032,13 +1018,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D333F48EDD1A4D314F58CDE240A2D3B;
 			remoteInfo = AIRTimer;
-		};
-		302A511748F4A85C4EBD96C294209F78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1C84C5419A797879ADD49D27125027B6;
-			remoteInfo = RealmSwift;
 		};
 		33DFA36E2765606668FBE876EE727E59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1110,13 +1089,6 @@
 			remoteGlobalIDString = 74CC32C58E7AE782A588581C72E199BB;
 			remoteInfo = AWSCore;
 		};
-		66268108E6203F0C697065E798A12508 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 74CC32C58E7AE782A588581C72E199BB;
-			remoteInfo = AWSCore;
-		};
 		6768EE8C4B2C24798D03C2973FEB2A7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1124,12 +1096,12 @@
 			remoteGlobalIDString = 0605A608BAA805A0CB00F4FB644CA182;
 			remoteInfo = ReactiveCocoa;
 		};
-		691B3400FE3EBEAEE10EB13F39224F12 /* PBXContainerItemProxy */ = {
+		7494FBB230BB0E334E6D3A02EF1AC810 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0605A608BAA805A0CB00F4FB644CA182;
-			remoteInfo = ReactiveCocoa;
+			remoteGlobalIDString = 1C84C5419A797879ADD49D27125027B6;
+			remoteInfo = RealmSwift;
 		};
 		750BD1C0C2353416CABBD2F13D5A94EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1152,13 +1124,6 @@
 			remoteGlobalIDString = 59F444380A0A5C361384FD8C61AB3362;
 			remoteInfo = WillowTreeReachability;
 		};
-		85805CD8F5052E986FBACCBB6FC79740 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52CB3A5B5EB9E7CAA47307438703C287;
-			remoteInfo = Result;
-		};
 		8BB82E15C86F494B156E25E54E666A44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1166,12 +1131,12 @@
 			remoteGlobalIDString = FDC88A28E8D2562DC965083DD9EE3CD4;
 			remoteInfo = SwiftyJSON;
 		};
-		8BCB88390361B2B57E34B2872D664C53 /* PBXContainerItemProxy */ = {
+		939C0FFDC95E65EB31A961A497FD21AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2D333F48EDD1A4D314F58CDE240A2D3B;
-			remoteInfo = AIRTimer;
+			remoteGlobalIDString = 52CB3A5B5EB9E7CAA47307438703C287;
+			remoteInfo = Result;
 		};
 		972BEACC11305F6F36D1345FABBE6066 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1243,13 +1208,6 @@
 			remoteGlobalIDString = 74CC32C58E7AE782A588581C72E199BB;
 			remoteInfo = AWSCore;
 		};
-		AF16FB763A05535A234C58812617E08C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 59F444380A0A5C361384FD8C61AB3362;
-			remoteInfo = WillowTreeReachability;
-		};
 		B3131E69F2CF3F33BEE4FE2CCF07454D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1263,13 +1221,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 52CB3A5B5EB9E7CAA47307438703C287;
 			remoteInfo = Result;
-		};
-		BCA4BE38AC000303CBB581295B137D5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CF980E3B0EDB66BAC329339854C325F1;
-			remoteInfo = AsyncDisplayKit;
 		};
 		BFE8806DE8F05D02DB81323DD739D082 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1285,12 +1236,12 @@
 			remoteGlobalIDString = 0605A608BAA805A0CB00F4FB644CA182;
 			remoteInfo = ReactiveCocoa;
 		};
-		C40EDBF7E4C605A6E2D524CBB6E8657B /* PBXContainerItemProxy */ = {
+		C6E263027807DC862CB92DE784EB748A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FDC88A28E8D2562DC965083DD9EE3CD4;
-			remoteInfo = SwiftyJSON;
+			remoteGlobalIDString = 0605A608BAA805A0CB00F4FB644CA182;
+			remoteInfo = ReactiveCocoa;
 		};
 		D1A66469B15A7049501C6E6CAA6847D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1313,19 +1264,12 @@
 			remoteGlobalIDString = 1C84C5419A797879ADD49D27125027B6;
 			remoteInfo = RealmSwift;
 		};
-		E8A0918E0D747C9B1EF020CC53F84F31 /* PBXContainerItemProxy */ = {
+		F56BC667636E9489DF505A182A4B9B2E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CEA55364CE72FB04581F8C64DE42D733;
 			remoteInfo = Realm;
-		};
-		EF240A63B541AD7D250E9540D5E60C53 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 57ADC05E440A960212657DE6DA1FEDD5;
-			remoteInfo = Bolts;
 		};
 		F5888FF8AE08C2B900919B80081219F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2452,6 +2396,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6750B677A8A2A0D85A16D642B131A06A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F3F83EB5280AAFD9C2450ABA4645B0D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7482AE2092CC1828E4527EC315AE7887 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2501,14 +2453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF8B00C1317B8ABFAC5A41DE932A5C65 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CC582C63ED522F256A2F695230168CEA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4354059C57F97FD7947A9A9DAE6E06E3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4072,14 +4016,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		230B338764C7F2A9AF8A5AB4AB14517E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3731D645EFBA08DEB59239D80552FC05 /* Pods-CelScoreWidget-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5BE36B6D1FB7C71D0C0314B5FDF45752 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -4093,6 +4029,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				020143FDA71D6FDEEDBCB0500F1B31AE /* RealmSwift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95A7B37BAC87F52AB2E7FA21666EBE6B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC3AEE28816A20DE54066E3966ABE38 /* Pods-CelScoreWidget-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4815,29 +4759,21 @@
 			productReference = 69E3E9C2F5E253D0B9AF1EE76184A18D /* AWSCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B58D7E9C45EC87AA0E04B20708123D17 /* Pods-CelScoreWidget */ = {
+		977905796B49D337B1E17C83A4DC8904 /* Pods-CelScoreWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD3EC52CE475A28B3FE6202275105669 /* Build configuration list for PBXNativeTarget "Pods-CelScoreWidget" */;
+			buildConfigurationList = 594CE2C00DAE20362F02979435EF579E /* Build configuration list for PBXNativeTarget "Pods-CelScoreWidget" */;
 			buildPhases = (
-				D8B66D8B860934FD9A7DF49EBA420AA9 /* Sources */,
-				CC582C63ED522F256A2F695230168CEA /* Frameworks */,
-				230B338764C7F2A9AF8A5AB4AB14517E /* Headers */,
+				4A77755B6ED7B5E5A9C258E9CAC45D8F /* Sources */,
+				6750B677A8A2A0D85A16D642B131A06A /* Frameworks */,
+				95A7B37BAC87F52AB2E7FA21666EBE6B /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6E1457258BC1C4B878EF0B06DE0E179C /* PBXTargetDependency */,
-				E05543DF3B22FB7BED39DAB64FFA3216 /* PBXTargetDependency */,
-				89578C718548D406B823AE558DC760C6 /* PBXTargetDependency */,
-				6D0F426CD477CF5E21BE74C7A1534CBB /* PBXTargetDependency */,
-				23401D86AD3782139E5E95075E6C4F2B /* PBXTargetDependency */,
-				BAC87D17FB89AECDAB8C7262102F9729 /* PBXTargetDependency */,
-				30D59460F683E7BF8F625AA55DD3F3E7 /* PBXTargetDependency */,
-				7F8565AD003DDFF00923169825CE184F /* PBXTargetDependency */,
-				352F3C3EE6E0469D8FB6CDF531C2D107 /* PBXTargetDependency */,
-				6F0047BDEEB0D5B44AA0B4F287467293 /* PBXTargetDependency */,
-				6C16A89D1E42629FC5BB502D866B67B3 /* PBXTargetDependency */,
-				45DCACC91F261EDABDA9FA9E70EFEEAE /* PBXTargetDependency */,
+				9888D9816900C245D75E6887269F28B6 /* PBXTargetDependency */,
+				091D5D76113DA9091DE9C834D4316E40 /* PBXTargetDependency */,
+				BA321FB7C9AD8C5BFE1228F1436F0291 /* PBXTargetDependency */,
+				7247EE4F9E4A240675D9CC1AFA8A543D /* PBXTargetDependency */,
 			);
 			name = "Pods-CelScoreWidget";
 			productName = "Pods-CelScoreWidget";
@@ -5048,7 +4984,7 @@
 				CCD0D428EE077804E57A86D730131197 /* Pods */,
 				C041FD4C75A457C7F58494D33F5452A5 /* Pods-CelScore */,
 				EC9E6DB43A07FAEAB2DBC3A0CE875E0C /* Pods-CelScoreTests */,
-				B58D7E9C45EC87AA0E04B20708123D17 /* Pods-CelScoreWidget */,
+				977905796B49D337B1E17C83A4DC8904 /* Pods-CelScoreWidget */,
 				0605A608BAA805A0CB00F4FB644CA182 /* ReactiveCocoa */,
 				CEA55364CE72FB04581F8C64DE42D733 /* Realm */,
 				1C84C5419A797879ADD49D27125027B6 /* RealmSwift */,
@@ -5177,6 +5113,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3F5166B37300CD3C3E4E14E99DE8D98 /* Pods-CelScore-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A77755B6ED7B5E5A9C258E9CAC45D8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EAFF8F0451B8778B54E639BBB48B550 /* Pods-CelScoreWidget-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5383,14 +5327,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8B66D8B860934FD9A7DF49EBA420AA9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F16C8EBD38C83E8C89FD54D8FE5C4088 /* Pods-CelScoreWidget-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E1857D96CA5308A9165667EA36B4BA68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5568,6 +5504,12 @@
 			target = 57ADC05E440A960212657DE6DA1FEDD5 /* Bolts */;
 			targetProxy = 972BEACC11305F6F36D1345FABBE6066 /* PBXContainerItemProxy */;
 		};
+		091D5D76113DA9091DE9C834D4316E40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Realm;
+			target = CEA55364CE72FB04581F8C64DE42D733 /* Realm */;
+			targetProxy = F56BC667636E9489DF505A182A4B9B2E /* PBXContainerItemProxy */;
+		};
 		0B3A86DA25956D482578E62BF341078F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AsyncDisplayKit;
@@ -5604,24 +5546,6 @@
 			target = 59F444380A0A5C361384FD8C61AB3362 /* WillowTreeReachability */;
 			targetProxy = 81C51950D40F85971FB0961DB14239D3 /* PBXContainerItemProxy */;
 		};
-		23401D86AD3782139E5E95075E6C4F2B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Bolts;
-			target = 57ADC05E440A960212657DE6DA1FEDD5 /* Bolts */;
-			targetProxy = EF240A63B541AD7D250E9540D5E60C53 /* PBXContainerItemProxy */;
-		};
-		30D59460F683E7BF8F625AA55DD3F3E7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ReactiveCocoa;
-			target = 0605A608BAA805A0CB00F4FB644CA182 /* ReactiveCocoa */;
-			targetProxy = 691B3400FE3EBEAEE10EB13F39224F12 /* PBXContainerItemProxy */;
-		};
-		352F3C3EE6E0469D8FB6CDF531C2D107 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RealmSwift;
-			target = 1C84C5419A797879ADD49D27125027B6 /* RealmSwift */;
-			targetProxy = 302A511748F4A85C4EBD96C294209F78 /* PBXContainerItemProxy */;
-		};
 		409D8B9BEE6F62B7CC7DF97E880D38C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Realm;
@@ -5633,12 +5557,6 @@
 			name = AsyncDisplayKit;
 			target = CF980E3B0EDB66BAC329339854C325F1 /* AsyncDisplayKit */;
 			targetProxy = A953435F8298B587A548E2647AA6941E /* PBXContainerItemProxy */;
-		};
-		45DCACC91F261EDABDA9FA9E70EFEEAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = WillowTreeReachability;
-			target = 59F444380A0A5C361384FD8C61AB3362 /* WillowTreeReachability */;
-			targetProxy = AF16FB763A05535A234C58812617E08C /* PBXContainerItemProxy */;
 		};
 		575BBE2ACED0770879FF7841D7CCAF4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5682,41 +5600,17 @@
 			target = 0605A608BAA805A0CB00F4FB644CA182 /* ReactiveCocoa */;
 			targetProxy = B3131E69F2CF3F33BEE4FE2CCF07454D /* PBXContainerItemProxy */;
 		};
-		6C16A89D1E42629FC5BB502D866B67B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = FDC88A28E8D2562DC965083DD9EE3CD4 /* SwiftyJSON */;
-			targetProxy = C40EDBF7E4C605A6E2D524CBB6E8657B /* PBXContainerItemProxy */;
-		};
-		6D0F426CD477CF5E21BE74C7A1534CBB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AsyncDisplayKit;
-			target = CF980E3B0EDB66BAC329339854C325F1 /* AsyncDisplayKit */;
-			targetProxy = BCA4BE38AC000303CBB581295B137D5B /* PBXContainerItemProxy */;
-		};
-		6E1457258BC1C4B878EF0B06DE0E179C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AIRTimer;
-			target = 2D333F48EDD1A4D314F58CDE240A2D3B /* AIRTimer */;
-			targetProxy = 8BCB88390361B2B57E34B2872D664C53 /* PBXContainerItemProxy */;
-		};
-		6F0047BDEEB0D5B44AA0B4F287467293 /* PBXTargetDependency */ = {
+		7247EE4F9E4A240675D9CC1AFA8A543D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Result;
 			target = 52CB3A5B5EB9E7CAA47307438703C287 /* Result */;
-			targetProxy = 85805CD8F5052E986FBACCBB6FC79740 /* PBXContainerItemProxy */;
+			targetProxy = 939C0FFDC95E65EB31A961A497FD21AA /* PBXContainerItemProxy */;
 		};
 		7874E7606E2CE48727F617C6388C58F5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FBSDKCoreKit;
 			target = F5ACF367AE3BD7A7F2AF2D430901DF7B /* FBSDKCoreKit */;
 			targetProxy = BFE8806DE8F05D02DB81323DD739D082 /* PBXContainerItemProxy */;
-		};
-		7F8565AD003DDFF00923169825CE184F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Realm;
-			target = CEA55364CE72FB04581F8C64DE42D733 /* Realm */;
-			targetProxy = E8A0918E0D747C9B1EF020CC53F84F31 /* PBXContainerItemProxy */;
 		};
 		85737CD019AFB06AC7A0A11677A92CFD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5729,12 +5623,6 @@
 			name = AWSCognito;
 			target = BAA396C4D689A02A15029B49E076FAF0 /* AWSCognito */;
 			targetProxy = 33DFA36E2765606668FBE876EE727E59 /* PBXContainerItemProxy */;
-		};
-		89578C718548D406B823AE558DC760C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AWSCore;
-			target = 74CC32C58E7AE782A588581C72E199BB /* AWSCore */;
-			targetProxy = 66268108E6203F0C697065E798A12508 /* PBXContainerItemProxy */;
 		};
 		8E556A0F74402CDCC0EAD3DC45BB46CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5759,6 +5647,12 @@
 			name = Result;
 			target = 52CB3A5B5EB9E7CAA47307438703C287 /* Result */;
 			targetProxy = 9C0D30BA18D17EAFD7CBEDBCE568457D /* PBXContainerItemProxy */;
+		};
+		9888D9816900C245D75E6887269F28B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ReactiveCocoa;
+			target = 0605A608BAA805A0CB00F4FB644CA182 /* ReactiveCocoa */;
+			targetProxy = C6E263027807DC862CB92DE784EB748A /* PBXContainerItemProxy */;
 		};
 		98E92D609A2A7A60EE2ACF569ACD77C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5802,11 +5696,11 @@
 			target = 74CC32C58E7AE782A588581C72E199BB /* AWSCore */;
 			targetProxy = ADB180856044D0C59CE2518CD9DBF568 /* PBXContainerItemProxy */;
 		};
-		BAC87D17FB89AECDAB8C7262102F9729 /* PBXTargetDependency */ = {
+		BA321FB7C9AD8C5BFE1228F1436F0291 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = FBSDKCoreKit;
-			target = F5ACF367AE3BD7A7F2AF2D430901DF7B /* FBSDKCoreKit */;
-			targetProxy = 1D6CFE582782844E56B8E3B42C262BCD /* PBXContainerItemProxy */;
+			name = RealmSwift;
+			target = 1C84C5419A797879ADD49D27125027B6 /* RealmSwift */;
+			targetProxy = 7494FBB230BB0E334E6D3A02EF1AC810 /* PBXContainerItemProxy */;
 		};
 		CADBE66B5D5527B36C2A70DACCC67BE3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5831,12 +5725,6 @@
 			name = SwiftyJSON;
 			target = FDC88A28E8D2562DC965083DD9EE3CD4 /* SwiftyJSON */;
 			targetProxy = F5888FF8AE08C2B900919B80081219F5 /* PBXContainerItemProxy */;
-		};
-		E05543DF3B22FB7BED39DAB64FFA3216 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AWSCognito;
-			target = BAA396C4D689A02A15029B49E076FAF0 /* AWSCognito */;
-			targetProxy = 05F278E599102F2B82B9A917188B22A5 /* PBXContainerItemProxy */;
 		};
 		E1DEEE0299972A005DDD52C692AE20B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5877,6 +5765,33 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		003CF0085F245038A790EF66E8C35E21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57B97B97C5A8F311C3ADC70838831FD8 /* AWSCognito.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AWSCognito;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		04C41ABD672B71270DA78D60C86D4775 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 86B3B9BC8389A0C99542499C9F795AD0 /* Pods-CelScoreTests.debug.xcconfig */;
@@ -5908,11 +5823,10 @@
 			};
 			name = Debug;
 		};
-		0623A47E0B69F2EE0CED8B3A4490CFCE /* Debug */ = {
+		0B045C45908FA4AF3FB13B8B66933476 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D31BEEE5E6F1A39CA70F23A91F773CE /* Pods-CelScoreWidget.debug.xcconfig */;
+			baseConfigurationReference = 95F4EC66A1B5A10CFA56D18922A21C09 /* AIRTimer.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5920,46 +5834,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-CelScoreWidget/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_CelScoreWidget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		19386A0410972B9E49AEED7454E68974 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 080C7A5E118FF821C7A0E391CF8127C7 /* AsyncDisplayKit.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = AsyncDisplayKit;
+				PRODUCT_NAME = AIRTimer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5967,6 +5849,33 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		1BB67B332EB3C236722C1661EFFC3558 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 387EEC087178314149E612B556E049D4 /* Bolts.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Bolts;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		230EFE01622CCA644A95F29375CA5119 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5996,11 +5905,10 @@
 			};
 			name = Release;
 		};
-		2663CBA1E4D1EAA548E4AADC3D04CE26 /* Debug */ = {
+		301EF5771910C9E7665DFA3EB4A38E4B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 080C7A5E118FF821C7A0E391CF8127C7 /* AsyncDisplayKit.xcconfig */;
+			baseConfigurationReference = 29BC286A657C1639C8309615DA7365EC /* FBSDKCoreKit.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6008,50 +5916,21 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FBSDKCoreKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = AsyncDisplayKit;
+				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = FBSDKCoreKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
-		};
-		3801DC14CDCC82BAA70C72340E130BB9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D2E4E47D1D36E556E16CBD746A7C637 /* WillowTreeReachability.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/WillowTreeReachability/WillowTreeReachability-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WillowTreeReachability/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WillowTreeReachability/WillowTreeReachability.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = WillowTreeReachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
+			name = Release;
 		};
 		4551C5A9FACB732D2B3EE39F240C3540 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6081,63 +5960,7 @@
 			};
 			name = Debug;
 		};
-		4B687986AA2F72E6DA4C3D2816BEA6EB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29BC286A657C1639C8309615DA7365EC /* FBSDKCoreKit.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FBSDKCoreKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = FBSDKCoreKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		4E843CB893693B9C9D77E9BB30D53610 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 387EEC087178314149E612B556E049D4 /* Bolts.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Bolts;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5EFCF3412A3FFA7758988936532AC02B /* Release */ = {
+		5E357FD52D6236D3B91C2F044C1C3E37 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DB8CB805405ECF8CB2FE791DE12B4BE /* Pods-CelScoreWidget.release.xcconfig */;
 			buildSettings = {
@@ -6160,62 +5983,6 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods_CelScoreWidget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6063F02B765DF902E54246D64C472D11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D2E4E47D1D36E556E16CBD746A7C637 /* WillowTreeReachability.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/WillowTreeReachability/WillowTreeReachability-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WillowTreeReachability/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WillowTreeReachability/WillowTreeReachability.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = WillowTreeReachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6456BE7C1CEE6A30261E4F6CD0871C74 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 387EEC087178314149E612B556E049D4 /* Bolts.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6253,11 +6020,10 @@
 			};
 			name = Debug;
 		};
-		77CF88F3A0BF0BFC0C83B2B1B8B4AB2E /* Release */ = {
+		690B286E3126B8500FCC600652B30742 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29BC286A657C1639C8309615DA7365EC /* FBSDKCoreKit.xcconfig */;
+			baseConfigurationReference = 3CF4DC126147A82FEEC286A2E16EB4A9 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6265,14 +6031,123 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FBSDKCoreKit/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = FBSDKCoreKit;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		75B516D1B0134AC49E21CF2616A5D006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D240C70AFE44CBBF315F0EC27E08289 /* AWSCore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AWSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		78660DC1BD82814258EA0768570B23EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CF4DC126147A82FEEC286A2E16EB4A9 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		82D93B76E6F08BCA872BDB4E97D3D4B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D240C70AFE44CBBF315F0EC27E08289 /* AWSCore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AWSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8ABB7F75040F2855BE9728913CA69373 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57B97B97C5A8F311C3ADC70838831FD8 /* AWSCognito.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AWSCognito;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6466,11 +6341,10 @@
 			};
 			name = Debug;
 		};
-		AA1663D18456C11772E8FE66C46DDD95 /* Release */ = {
+		AE501808D2087A1DB398CF3EE30CC9AA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95F4EC66A1B5A10CFA56D18922A21C09 /* AIRTimer.xcconfig */;
+			baseConfigurationReference = 080C7A5E118FF821C7A0E391CF8127C7 /* AsyncDisplayKit.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6478,14 +6352,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
+				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = AIRTimer;
+				PRODUCT_NAME = AsyncDisplayKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6493,35 +6367,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		B20F223B8AF9706F7E12BB992912A730 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95F4EC66A1B5A10CFA56D18922A21C09 /* AIRTimer.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = AIRTimer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		B984B6E4233785E05E0A8A39E01710E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6640,11 +6485,10 @@
 			};
 			name = Debug;
 		};
-		C8476A2002291C2FC1CE7A64E45A6BE3 /* Debug */ = {
+		C87AFD59621D27E44FFBA01D8F7F6829 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D240C70AFE44CBBF315F0EC27E08289 /* AWSCore.xcconfig */;
+			baseConfigurationReference = 0D2E4E47D1D36E556E16CBD746A7C637 /* WillowTreeReachability.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6652,14 +6496,42 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/WillowTreeReachability/WillowTreeReachability-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WillowTreeReachability/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MODULEMAP_FILE = "Target Support Files/WillowTreeReachability/WillowTreeReachability.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = AWSCore;
+				PRODUCT_NAME = WillowTreeReachability;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D72579225C6862E1348F79636E7A8CE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 080C7A5E118FF821C7A0E391CF8127C7 /* AsyncDisplayKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AsyncDisplayKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6667,34 +6539,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		E58AFF130F23F9D56CF4763AF4003A43 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CF4DC126147A82FEEC286A2E16EB4A9 /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		E661F0B26610704EFAB884AA52F57B33 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6727,11 +6571,10 @@
 			};
 			name = Debug;
 		};
-		EB00F99CA551E8E02D5A58906EBBB76C /* Release */ = {
+		EDA56F895EF08ADDEC61157275D0CFCD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57B97B97C5A8F311C3ADC70838831FD8 /* AWSCognito.xcconfig */;
+			baseConfigurationReference = 387EEC087178314149E612B556E049D4 /* Bolts.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6739,14 +6582,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = AWSCognito;
+				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6755,11 +6598,10 @@
 			};
 			name = Release;
 		};
-		ECB6F812424238ABAE6655A3048F96EE /* Debug */ = {
+		EF3F13F727230E85F0BE5FF417A41A04 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57B97B97C5A8F311C3ADC70838831FD8 /* AWSCognito.xcconfig */;
+			baseConfigurationReference = 95F4EC66A1B5A10CFA56D18922A21C09 /* AIRTimer.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -6767,14 +6609,42 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
+				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = AWSCognito;
+				PRODUCT_NAME = AIRTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F0FA1453B13BC95E081118687C646BFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29BC286A657C1639C8309615DA7365EC /* FBSDKCoreKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FBSDKCoreKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = FBSDKCoreKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6783,9 +6653,9 @@
 			};
 			name = Debug;
 		};
-		FA673728E5C5467235E05C7282B5A31F /* Release */ = {
+		F105406EB3D60C4B7F1C2C40DA122DFC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D240C70AFE44CBBF315F0EC27E08289 /* AWSCore.xcconfig */;
+			baseConfigurationReference = 3D31BEEE5E6F1A39CA70F23A91F773CE /* Pods-CelScoreWidget.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6795,14 +6665,45 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-CelScoreWidget/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_CelScoreWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F50CE3D668795A16F4692BB130533481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D2E4E47D1D36E556E16CBD746A7C637 /* WillowTreeReachability.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WillowTreeReachability/WillowTreeReachability-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WillowTreeReachability/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WillowTreeReachability/WillowTreeReachability.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = AWSCore;
+				PRODUCT_NAME = WillowTreeReachability;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6845,43 +6746,14 @@
 			};
 			name = Release;
 		};
-		FFCD22E8D0BC96002CE5C0F9523EB60E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CF4DC126147A82FEEC286A2E16EB4A9 /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		2687C916A1C48C23F815747A1D32655C /* Build configuration list for PBXNativeTarget "AWSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C8476A2002291C2FC1CE7A64E45A6BE3 /* Debug */,
-				FA673728E5C5467235E05C7282B5A31F /* Release */,
+				75B516D1B0134AC49E21CF2616A5D006 /* Debug */,
+				82D93B76E6F08BCA872BDB4E97D3D4B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6898,8 +6770,8 @@
 		45BC9152B89A6ED3378CDAFEC3FFB02A /* Build configuration list for PBXNativeTarget "FBSDKCoreKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4B687986AA2F72E6DA4C3D2816BEA6EB /* Debug */,
-				77CF88F3A0BF0BFC0C83B2B1B8B4AB2E /* Release */,
+				F0FA1453B13BC95E081118687C646BFF /* Debug */,
+				301EF5771910C9E7665DFA3EB4A38E4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6907,8 +6779,17 @@
 		4CA7AC64EDC56C9A4E2800D4A6FE52FF /* Build configuration list for PBXNativeTarget "AIRTimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B20F223B8AF9706F7E12BB992912A730 /* Debug */,
-				AA1663D18456C11772E8FE66C46DDD95 /* Release */,
+				EF3F13F727230E85F0BE5FF417A41A04 /* Debug */,
+				0B045C45908FA4AF3FB13B8B66933476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		594CE2C00DAE20362F02979435EF579E /* Build configuration list for PBXNativeTarget "Pods-CelScoreWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F105406EB3D60C4B7F1C2C40DA122DFC /* Debug */,
+				5E357FD52D6236D3B91C2F044C1C3E37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6952,8 +6833,8 @@
 		89C8EA9903EBC83BF5D6F1ADF3198B2F /* Build configuration list for PBXNativeTarget "Bolts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E843CB893693B9C9D77E9BB30D53610 /* Debug */,
-				6456BE7C1CEE6A30261E4F6CD0871C74 /* Release */,
+				1BB67B332EB3C236722C1661EFFC3558 /* Debug */,
+				EDA56F895EF08ADDEC61157275D0CFCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6970,8 +6851,8 @@
 		9546088A33F3C5E6D0AD01C709AA1585 /* Build configuration list for PBXNativeTarget "WillowTreeReachability" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3801DC14CDCC82BAA70C72340E130BB9 /* Debug */,
-				6063F02B765DF902E54246D64C472D11 /* Release */,
+				C87AFD59621D27E44FFBA01D8F7F6829 /* Debug */,
+				F50CE3D668795A16F4692BB130533481 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6979,17 +6860,8 @@
 		C780707EB2908F5E58470E8E88888FE6 /* Build configuration list for PBXNativeTarget "AWSCognito" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECB6F812424238ABAE6655A3048F96EE /* Debug */,
-				EB00F99CA551E8E02D5A58906EBBB76C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CD3EC52CE475A28B3FE6202275105669 /* Build configuration list for PBXNativeTarget "Pods-CelScoreWidget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0623A47E0B69F2EE0CED8B3A4490CFCE /* Debug */,
-				5EFCF3412A3FFA7758988936532AC02B /* Release */,
+				003CF0085F245038A790EF66E8C35E21 /* Debug */,
+				8ABB7F75040F2855BE9728913CA69373 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6997,8 +6869,8 @@
 		D0AD581452DD1BCABD90431E05E5F116 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FFCD22E8D0BC96002CE5C0F9523EB60E /* Debug */,
-				E58AFF130F23F9D56CF4763AF4003A43 /* Release */,
+				78660DC1BD82814258EA0768570B23EA /* Debug */,
+				690B286E3126B8500FCC600652B30742 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -7015,8 +6887,8 @@
 		DE2DF1DC5FCFAC3E74E3016AD9A3DB45 /* Build configuration list for PBXNativeTarget "AsyncDisplayKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2663CBA1E4D1EAA548E4AADC3D04CE26 /* Debug */,
-				19386A0410972B9E49AEED7454E68974 /* Release */,
+				D72579225C6862E1348F79636E7A8CE6 /* Debug */,
+				AE501808D2087A1DB398CF3EE30CC9AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
