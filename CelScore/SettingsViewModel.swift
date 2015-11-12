@@ -18,7 +18,7 @@ final class SettingsViewModel: NSObject {
     var defaultListId: String = "0001"
     let defaultTodayExtensionNumRows = 3
     let maxTodayExtensionNumberOfRows = 10
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel }
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
@@ -88,11 +88,21 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
-            
             let predicate = NSPredicate(format: "isFollowed = true")
             let count = realm.objects(CelebrityModel).filter(predicate).count
             
             sendNext(sink, count)
+            sendCompleted(sink)
+        }
+    }
+    
+    func returnFollowedCelebritiesSignal() -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "isFollowed = true")
+            let celebs = realm.objects(CelebrityModel).filter(predicate)
+            
+            sendNext(sink, celebs)
             sendCompleted(sink)
         }
     }
