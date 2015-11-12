@@ -88,11 +88,15 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false")
-            let celebs = realm.objects(CelebrityModel).filter(predicate)
+            let celebList = realm.objects(CelebrityModel).filter(predicate)
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setInteger(42, forKey: "Robinson")
             
-            sendNext(sink, celebs)
+            for (index, celeb) in celebList.enumerate() {
+                let dico = ["nickName": celeb.nickName, "prevScore": celeb.prevScore, "image": celeb.picture2x]
+                userDefaults.setObject(dico, forKey: String(index))
+            }
+            
+            sendNext(sink, celebList)
             sendCompleted(sink)
         }
     }
