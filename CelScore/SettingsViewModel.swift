@@ -89,6 +89,8 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false")
             let celebs = realm.objects(CelebrityModel).filter(predicate)
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setInteger(42, forKey: "Robinson")
             
             sendNext(sink, celebs)
             sendCompleted(sink)
