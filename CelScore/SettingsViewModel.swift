@@ -89,11 +89,13 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false")
             let celebList = realm.objects(CelebrityModel).filter(predicate)
-//            let userDefaults = NSUserDefaults.standardUserDefaults()
-//            for (index, celeb) in celebList.enumerate() {
-//                let dico = ["nickName": celeb.nickName, "prevScore": celeb.prevScore, "image": celeb.picture2x]
-//                userDefaults.setObject(dico, forKey: String(index))
-//            }
+            let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
+            for (index, celeb) in celebList.enumerate() {
+                let dico = ["nickName": celeb.nickName, "prevScore": celeb.prevScore, "image": celeb.picture2x]
+                userDefaults!.setObject(dico, forKey: "1")
+                print(userDefaults!.objectForKey("1"))
+                userDefaults!.setInteger(4, forKey: "King")
+            }
             sendNext(sink, celebList)
             sendCompleted(sink)
         }

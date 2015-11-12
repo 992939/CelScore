@@ -84,6 +84,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //            print("fb error")
         //        }
         
+        //TODAY
+        self.settingsVM.getFollowedCelebritiesSignal()
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("getFollowedCelebritiesSignal Value: \(value)")
+                case let .Error(error):
+                    print("getFollowedCelebritiesSignal Error: \(error)")
+                case .Completed:
+                    print("getFollowedCelebritiesSignal Completed")
+                case .Interrupted:
+                    print("getFollowedCelebritiesSignalInterrupted")
+                }
+        }
+        
         //DISPLAY
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
             .start { event in

@@ -14,45 +14,36 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let expandButton = UIButton()
-    let settingsVM: SettingsViewModel
+    let defaultNumRows = 3
+    let maxNumberOfRows = 10
     var items: Results<CelebrityModel>!
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
     var expanded: Bool {
-        get { return userDefaults.boolForKey("expanded") }
+        get { return userDefaults!.boolForKey("expanded") }
         set (newExpanded) {
-            userDefaults.setBool(newExpanded, forKey: "expanded")
-            userDefaults.synchronize()
+            userDefaults!.setBool(newExpanded, forKey: "expanded")
+            userDefaults!.synchronize()
         }
     }
     
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
-        self.settingsVM = SettingsViewModel()
         super.init(coder: aDecoder)!
         
-        self.settingsVM.getFollowedCelebritiesSignal()
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("getFollowedCelebritiesSignal Value: \(value)")
-                    self.items = value
-                case let .Error(error):
-                    print("getFollowedCelebritiesSignal Error: \(error)")
-                case .Completed:
-                    print("getFollowedCelebritiesSignal Completed")
-                case .Interrupted:
-                    print("getFollowedCelebritiesSignalInterrupted")
-                }
-        }
+        let x = userDefaults!.integerForKey("King")
+        print(x)
     }
     
     
     //MARK: Methods
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.userDefaults?.synchronize()
         updateExpandButtonTitle()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         tableView.sectionFooterHeight = 44
@@ -69,6 +60,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.NewData)
     }
     
+    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) { return UIEdgeInsetsZero }
+    
     func updatePreferredContentSize() {
         preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(tableView(tableView, numberOfRowsInSection: 0)) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
     }
@@ -84,7 +77,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     // MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.count > 0 {
-            return min(items.count, expanded ? self.settingsVM.maxTodayExtensionNumberOfRows : self.settingsVM.defaultTodayExtensionNumRows)
+            return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows)
         }
         return 0
     }
