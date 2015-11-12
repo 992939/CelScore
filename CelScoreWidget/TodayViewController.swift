@@ -8,12 +8,14 @@
 
 import UIKit
 import NotificationCenter
+import RealmSwift
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let expandButton = UIButton()
-    let settingsVM: SettingsViewModel
+    var settingsVM: SettingsViewModel
+    var items: Results<CelebrityModel>!
     let userDefaults = NSUserDefaults.standardUserDefaults()
     var expanded: Bool {
         get { return userDefaults.boolForKey("expanded") }
@@ -27,6 +29,22 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
         self.settingsVM = SettingsViewModel()
+        super.init(coder: aDecoder)!
+        
+        self.settingsVM.getFollowedCelebritiesSignal()
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    self.items = value
+                    print("getFollowedCelebritiesSignal Value: \(value)")
+                case let .Error(error):
+                    print("getFollowedCelebritiesSignal Error: \(error)")
+                case .Completed:
+                    print("getFollowedCelebritiesSignal Completed")
+                case .Interrupted:
+                    print("getFollowedCelebritiesSignalInterrupted")
+                }
+        }
     }
     
     
@@ -35,12 +53,9 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateExpandButtonTitle()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         tableView.sectionFooterHeight = 44
-        
-        items = cachedItems
         updatePreferredContentSize()
     }
     
@@ -67,7 +82,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let items = items {
+        if items.count > 0 {
             return min(items.count, expanded ? self.settingsVM.maxTodayExtensionNumberOfRows : self.settingsVM.defaultTodayExtensionNumRows)
         }
         return 0
@@ -75,25 +90,16 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CelebItem", forIndexPath: indexPath) as! TodayTableViewCell
-        
-        if let item = items?[indexPath.row] {
-            cell.nickNameLabel.text = item.title
-            cell.celscoreLabel.text = item.author
-        }
+        cell.nickNameLabel.text = items[indexPath.row].nickName
+        cell.celscoreLabel.text = "3.0"
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let item = items?[indexPath.row] {
-            if let context = extensionContext {
-                context.openURL(item.link, completionHandler: nil)
-            }
-        }
+        print("celeb is \(items[indexPath.row].nickName)")
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return expandButton
-    }
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
     
     
     // MARK: expand
