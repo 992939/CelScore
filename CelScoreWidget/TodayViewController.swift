@@ -35,10 +35,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
             .start { event in
                 switch(event) {
                 case let .Next(value):
-                    let x = self.userDefaults.integerForKey("1")
-                    print(x)
-                    self.items = value
                     print("getFollowedCelebritiesSignal Value: \(value)")
+                    self.items = value
                 case let .Error(error):
                     print("getFollowedCelebritiesSignal Error: \(error)")
                 case .Completed:
