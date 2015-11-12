@@ -101,6 +101,7 @@
 		00B6F0301BC79C8F000DA1C6 /* CSEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEmpty.h; sourceTree = "<group>"; };
 		00B6F0311BC79C8F000DA1C6 /* CSEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEmpty.m; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
+		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* CelebrityListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		00404AA01BF093540009AD0E /* CelScoreWidget */ = {
 			isa = PBXGroup;
 			children = (
+				00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */,
 				00404AA11BF093540009AD0E /* TodayViewController.swift */,
 				00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */,
 				00404AA31BF093540009AD0E /* MainInterface.storyboard */,
@@ -365,6 +367,12 @@
 				TargetAttributes = {
 					00404A9C1BF093530009AD0E = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 6AEA7P6XSJ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					004B56D81B35332A008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -615,13 +623,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DDDCCFBBD9D32F44B8B1E8E /* Pods-CelScoreWidget.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -631,12 +642,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2E5BDBA97F9B261808F389B9 /* Pods-CelScoreWidget.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

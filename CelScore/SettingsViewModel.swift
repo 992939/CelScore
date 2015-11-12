@@ -87,7 +87,7 @@ final class SettingsViewModel: NSObject {
     func getFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "isFollowed = true")
+            let predicate = NSPredicate(format: "isFollowed = false")
             let celebs = realm.objects(CelebrityModel).filter(predicate)
             
             sendNext(sink, celebs)
