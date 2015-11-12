@@ -218,47 +218,47 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //                                }
 //                        }
                         
-//                        self.celscoreVM.getFromAWSSignal(dataType: .List)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//                        
-//                        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//                        self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//                        
+                        self.celscoreVM.getFromAWSSignal(dataType: .List)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
+                        
+                        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
+                        self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+                            .start { event in
+                                switch(event) {
+                                case let .Next(value):
+                                    print("getFromAWSSignal Value: \(value)")
+                                case let .Error(error):
+                                    print("getFromAWSSignal Error: \(error)")
+                                case .Completed:
+                                    print("getFromAWSSignal Completed")
+                                case .Interrupted:
+                                    print("getFromAWSSignal Interrupted")
+                                }
+                        }
+//
 //                        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
 //                            .start { event in
 //                                switch(event) {
