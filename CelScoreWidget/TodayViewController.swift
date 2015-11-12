@@ -74,9 +74,10 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ context in
-            self.tableView.frame = CGRectMake(0, 0, size.width, size.height)
-            }, completion: nil)
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+//        coordinator.animateAlongsideTransition(nil, completion:{ context in
+//            self.tableView.frame = CGRectMake(0, 0, size.width, size.height)
+//            })
     }
 
     
