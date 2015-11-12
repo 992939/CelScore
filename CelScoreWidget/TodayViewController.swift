@@ -14,7 +14,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let expandButton = UIButton()
-    var settingsVM: SettingsViewModel
+    let settingsVM: SettingsViewModel
     var items: Results<CelebrityModel>!
     let userDefaults = NSUserDefaults.standardUserDefaults()
     var expanded: Bool {
