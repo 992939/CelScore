@@ -19,6 +19,7 @@ final class CelScoreViewModel: NSObject {
     let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     let timeNotifier = MutableProperty<String>("")
     enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
+    enum SocialNetwork: Int { case Twitter = 0, Facebook, Wiebo }
     enum AWSDataType { case Celebrity, List, Ratings }
     
     
@@ -107,6 +108,12 @@ final class CelScoreViewModel: NSObject {
                 sendCompleted(sink)
                 return task
             })
+        }
+    }
+    
+    func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer { sink, _ in
+    
         }
     }
     
