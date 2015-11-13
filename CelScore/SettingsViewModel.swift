@@ -84,6 +84,7 @@ final class SettingsViewModel: NSObject {
         }
     }
     
+    //TODO: call in the background every 5 min
     func getFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
@@ -91,7 +92,10 @@ final class SettingsViewModel: NSObject {
             let celebList = realm.objects(CelebrityModel).filter(predicate)
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             for (index, celeb) in celebList.enumerate() {
-                let dico = ["nickName": celeb.nickName, "prevScore": celeb.prevScore, "image": celeb.picture2x]
+                let idPredicate = NSPredicate(format: "id = %@", celeb.id)
+                let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel
+                let currentScore: Double = (ratings.rating1 + ratings.rating2 + ratings.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings.rating8 + ratings.rating9 + ratings.rating10)/10
+                let dico = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": currentScore]
                 userDefaults!.setObject(dico, forKey: String(index))
             }
             userDefaults!.setInteger(celebList.count, forKey: "count")
