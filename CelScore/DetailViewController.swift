@@ -42,6 +42,8 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.screenShotMethod()
+        
 //        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
 //            .start { event in
 //                switch(event) {
@@ -128,5 +130,14 @@ final class DetailViewController: UIViewController {
 //                    print("updateUserRatingsSignal Interrupted")
 //                }
 //        }
+    }
+    
+    func screenShotMethod() {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
