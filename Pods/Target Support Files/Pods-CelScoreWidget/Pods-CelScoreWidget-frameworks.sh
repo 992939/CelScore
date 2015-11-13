@@ -84,12 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-CelScoreWidget/AIRTimer.framework"
   install_framework "Pods-CelScoreWidget/ReactiveCocoa.framework"
   install_framework "Pods-CelScoreWidget/Realm.framework"
   install_framework "Pods-CelScoreWidget/RealmSwift.framework"
   install_framework "Pods-CelScoreWidget/Result.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-CelScoreWidget/AIRTimer.framework"
   install_framework "Pods-CelScoreWidget/ReactiveCocoa.framework"
   install_framework "Pods-CelScoreWidget/Realm.framework"
   install_framework "Pods-CelScoreWidget/RealmSwift.framework"

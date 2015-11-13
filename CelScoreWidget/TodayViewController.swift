@@ -9,6 +9,7 @@
 import UIKit
 import NotificationCenter
 import RealmSwift
+import AIRTimer
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
@@ -48,11 +49,15 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userDefaults.synchronize()
         updateExpandButtonTitle()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         tableView.sectionFooterHeight = 44
         updatePreferredContentSize()
+        
+        AIRTimer.every(5, userInfo: "FIRE!!") { timer in
+            print("move it fool")
+            self.userDefaults.synchronize()
+        }
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
