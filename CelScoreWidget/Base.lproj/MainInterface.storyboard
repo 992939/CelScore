@@ -46,9 +46,7 @@
                                 <connections>
                                     <outlet property="celebImage" destination="fTw-4q-8q0" id="k6x-sc-lD6"/>
                                     <outlet property="celscoreLabel" destination="d5j-kZ-6yd" id="Oyf-nC-wTg"/>
-                                    <outlet property="dateLabel" destination="d5j-kZ-6yd" id="Ju8-wp-jXn"/>
                                     <outlet property="nickNameLabel" destination="hyN-fI-R96" id="gdE-il-SGW"/>
-                                    <outlet property="titleLabel" destination="hyN-fI-R96" id="cPn-2W-Nwb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

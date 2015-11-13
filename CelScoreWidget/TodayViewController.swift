@@ -13,26 +13,33 @@ import RealmSwift
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
+    let userDefaults: NSUserDefaults!
     let expandButton = UIButton()
     let defaultNumRows = 3
     let maxNumberOfRows = 10
-    var items: Results<CelebrityModel>!
-    let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
+    var items = [AnyObject]()
     var expanded: Bool {
-        get { return userDefaults!.boolForKey("expanded") }
+        get { return userDefaults.boolForKey("expanded") }
         set (newExpanded) {
-            userDefaults!.setBool(newExpanded, forKey: "expanded")
-            userDefaults!.synchronize()
+            self.userDefaults.setBool(newExpanded, forKey: "expanded")
+            self.userDefaults.synchronize()
         }
     }
     
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
+        self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
+        let rowsNumber = self.userDefaults.integerForKey("count") - 1
+
         super.init(coder: aDecoder)!
         
-        let x = userDefaults!.integerForKey("King")
-        print(x)
+        
+        for index in 0...rowsNumber {
+            print("WTF is \(self.userDefaults.objectForKey(String(index))!) and index is \(index) and count is \(rowsNumber)")
+            let x = self.userDefaults.objectForKey(String(index))!
+            self.items.append(x)
+        }
     }
     
     
@@ -43,7 +50,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userDefaults?.synchronize()
+        self.userDefaults.synchronize()
         updateExpandButtonTitle()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         tableView.sectionFooterHeight = 44
@@ -76,21 +83,20 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if items.count > 0 {
-            return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows)
-        }
+        if self.items.count > 0 { return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows) }
         return 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CelebItem", forIndexPath: indexPath) as! TodayTableViewCell
-        cell.nickNameLabel.text = items[indexPath.row].nickName
+        let celebDictionary = items[indexPath.row]
+        cell.nickNameLabel.text = celebDictionary["nickName"] as? String
         cell.celscoreLabel.text = "3.0"
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("celeb is \(items[indexPath.row].nickName)")
+        print("celeb is \(items[indexPath.row].description)")
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
