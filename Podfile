@@ -24,6 +24,7 @@ end
 target 'CelScoreWidget', :exclusive => true do
     pod 'RealmSwift', '~> 0.96'
     pod 'ReactiveCocoa', '4.0.2-alpha-1'
+    pod 'AIRTimer'
 end
 
 

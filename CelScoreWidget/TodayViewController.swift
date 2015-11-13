@@ -34,9 +34,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
 
         super.init(coder: aDecoder)!
         
-        
         for index in 0...rowsNumber {
-            print("WTF is \(self.userDefaults.objectForKey(String(index))!) and index is \(index) and count is \(rowsNumber)")
             let x = self.userDefaults.objectForKey(String(index))!
             self.items.append(x)
         }
