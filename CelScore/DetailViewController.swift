@@ -30,7 +30,6 @@ final class DetailViewController: UIViewController {
         self.celebrityProfile = profile
         self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
         self.ratingsVM = RatingsViewModel(celebrityId: profile.id)
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,6 +41,23 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
+//            .start { event in
+//                switch(event) {
+//                case let .Next(value):
+//                    let socialVC = value
+//                    let topVC = UIApplication.sharedApplication().keyWindow?.rootViewController
+//                    topVC!.presentViewController(socialVC, animated: true, completion: nil)
+//                    print("shareVoteOnSignal Value: \(value)")
+//                case let .Error(error):
+//                    print("shareVoteOnSignal Error: \(error)")
+//                case .Completed:
+//                    print("shareVoteOnSignal Completed")
+//                case .Interrupted:
+//                    print("shareVoteOnSignal Interrupted")
+//                }
+//        }
         
 //        self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id)
 //            .start { event in
