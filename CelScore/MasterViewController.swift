@@ -67,7 +67,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
-        //LOGIN
+        //Login
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
@@ -84,7 +84,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //            print("fb error")
         //        }
         
-        //TODAY
+        //Today's Extension
         self.settingsVM.getFollowedCelebritiesSignal()
             .start { event in
                 switch(event) {
