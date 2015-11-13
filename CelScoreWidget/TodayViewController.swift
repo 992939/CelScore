@@ -48,10 +48,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateExpandButtonTitle()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
-        tableView.sectionFooterHeight = 44
+        updateExpandButtonTitle()
         updatePreferredContentSize()
         
         AIRTimer.every(5, userInfo: "FIRE!!") { timer in
@@ -78,9 +76,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-//        coordinator.animateAlongsideTransition(nil, completion:{ context in
-//            self.tableView.frame = CGRectMake(0, 0, size.width, size.height)
-//            })
     }
 
     
