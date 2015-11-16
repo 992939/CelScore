@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class RatingsModel: Object, NSCopying {
+public class RatingsModel: Object, SequenceType, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -26,6 +26,8 @@ public class RatingsModel: Object, NSCopying {
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = false
+    
+    public typealias Generator = AnyGenerator<String>
     
     
     //MARK: Initializers
@@ -57,19 +59,49 @@ public class RatingsModel: Object, NSCopying {
     
     
     //MARK: Methods
+    public func generate() -> Generator {
+        var i = 0
+        return anyGenerator {
+            switch i++ {
+            case 0: return "rating1"
+            case 1: return "rating2"
+            case 2: return "rating3"
+            case 3: return "rating4"
+            case 4: return "rating5"
+            case 5: return "rating6"
+            case 6: return "rating7"
+            case 7: return "rating8"
+            case 8: return "rating9"
+            case 9: return "rating10"
+            default: return nil
+            }
+        }
+    }
+    
+//    public func generate() -> Generator {
+//        var i = 0
+//        return anyGenerator {
+//            switch i++ {
+//            case 0: return self.rating1
+//            case 1: return self.rating2
+//            case 2: return self.rating3
+//            case 3: return self.rating4
+//            case 4: return self.rating5
+//            case 5: return self.rating6
+//            case 6: return self.rating7
+//            case 7: return self.rating8
+//            case 8: return self.rating9
+//            case 9: return self.rating10
+//            default: return nil
+//            }
+//        }
+//    }
+    
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         copy.updatedAt = self.updatedAt
-        copy.rating1 = self.rating1
-        copy.rating2 = self.rating2
-        copy.rating3 = self.rating3
-        copy.rating4 = self.rating4
-        copy.rating5 = self.rating5
-        copy.rating6 = self.rating6
-        copy.rating7 = self.rating7
-        copy.rating8 = self.rating8
-        copy.rating9 = self.rating9
-        copy.rating10 = self.rating10
+        
+        for rating in copy { copy[rating] = self[rating] }
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
         return copy

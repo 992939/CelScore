@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import AsyncDisplayKit
+
 
 final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Properties
     let profile: CelebrityProfile
-    let nickName: ASTextNode
-    
+    var nickName: ASTextNode
+
     
     //MARK: Initializers
     init(profile: CelebrityProfile) {
