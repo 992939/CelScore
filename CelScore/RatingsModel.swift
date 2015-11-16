@@ -100,7 +100,6 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         copy.updatedAt = self.updatedAt
-        
         for rating in copy { copy[rating] = self[rating] }
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -135,16 +134,7 @@ class UserRatingsModel: RatingsModel {
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = UserRatingsModel(id: self.id)
         copy.updatedAt = self.updatedAt
-        copy.rating1 = self.rating1
-        copy.rating2 = self.rating2
-        copy.rating3 = self.rating3
-        copy.rating4 = self.rating4
-        copy.rating5 = self.rating5
-        copy.rating6 = self.rating6
-        copy.rating7 = self.rating7
-        copy.rating8 = self.rating8
-        copy.rating9 = self.rating9
-        copy.rating10 = self.rating10
+        for rating in copy { copy[rating] = self[rating] }
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
         return copy
