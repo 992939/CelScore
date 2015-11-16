@@ -26,7 +26,6 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = false
-    
     public typealias Generator = AnyGenerator<String>
     
     
@@ -99,8 +98,8 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
-        copy.updatedAt = self.updatedAt
         for rating in copy { copy[rating] = self[rating] }
+        copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
         return copy
@@ -133,8 +132,8 @@ class UserRatingsModel: RatingsModel {
     //MARK: Methods
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = UserRatingsModel(id: self.id)
-        copy.updatedAt = self.updatedAt
         for rating in copy { copy[rating] = self[rating] }
+        copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
         return copy
