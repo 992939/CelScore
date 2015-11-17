@@ -85,14 +85,8 @@ final class CelScoreViewModel: NSObject {
             }
 
             awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
-                guard task.cancelled == false else {
-                    sendInterrupted(sink)
-                    return task
-                }
+                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.cancelled == false else { sendInterrupted(sink); return task }
                 
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)

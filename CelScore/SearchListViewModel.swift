@@ -51,10 +51,8 @@ final class SearchListViewModel: CelebrityListViewModel {
             predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             list = realm.objects(CelebrityModel).filter(predicate)
             
-            guard list.count > 0 else {
-                sendError(sink, ListError.EmptyList)
-                return
-            }
+            guard list.count > 0 else { sendError(sink, ListError.EmptyList); return }
+
             sendNext(sink, list)
             sendCompleted(sink)
         }

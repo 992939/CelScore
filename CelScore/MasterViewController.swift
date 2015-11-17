@@ -184,14 +184,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        guard error == nil else {
-            print(error)
-            return
-        }
-        guard result.isCancelled == false else {
-            print("canceled")
-            return
-        }
+        guard error == nil else { print(error); return }
+        guard result.isCancelled == false else { return }
         
         userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .start { event in

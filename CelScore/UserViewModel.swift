@@ -180,10 +180,7 @@ final class UserViewModel: NSObject {
             }
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
+                guard task.error == nil else { sendError(sink, task.error); return task }
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task

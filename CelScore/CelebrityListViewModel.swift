@@ -30,10 +30,8 @@ class CelebrityListViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else {
-                sendError(sink, .EmptyList)
-                return
-            }
+            guard let celebList = list else { sendError(sink, .EmptyList); return }
+            
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
             sendCompleted(sink)
@@ -42,20 +40,14 @@ class CelebrityListViewModel: NSObject {
     
     final func getCelebrityProfileSignal(index index: Int) -> SignalProducer<CelebrityProfile, ListError> {
         return SignalProducer { sink, _ in
-            
-            guard index < self.count else {
-                sendError(sink, .IndexOutOfBounds)
-                return
-            }
+            guard index < self.count else { sendError(sink, .IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId.id)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-            guard let celeb = celebrity else {
-                sendError(sink, .EmptyList)
-                return
-            }
+            guard let celeb = celebrity else { sendError(sink, .EmptyList); return }
+            
             sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
             sendCompleted(sink)
         }
@@ -66,10 +58,8 @@ class CelebrityListViewModel: NSObject {
             
             let realm = try! Realm()
             let list = realm.objects(ListsModel)
-            guard list.count > 0 else {
-                sendError(sink, .NoLists)
-                return
-            }
+            guard list.count > 0 else { sendError(sink, .NoLists); return }
+            
             sendNext(sink, list)
             sendCompleted(sink)
         }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class RatingsModel: Object, SequenceType, NSCopying {
+public class RatingsModel: Object, CollectionType, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -26,8 +26,8 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = false
-    public typealias KeyValue = (key: String, value: Double)
-    public typealias Generator = AnyGenerator<KeyValue>
+    public typealias KeyIndex = (key: String, value: Int)
+    public typealias Generator = AnyGenerator<String>
     
     
     //MARK: Initializers
@@ -37,7 +37,7 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         self.init()
         
         self.id = dictionary["ratingID"] as! String
-        for ratings in self.generate() { self[ratings.key] = dictionary[ratings.key] as! Double}
+        for ratings in self.generate() { self[ratings] = dictionary[ratings] as! Double}
         self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
@@ -49,29 +49,57 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     }
     
     
-    //MARK: Methods
+    //MARK: Indexable Protocol Method
+    public var startIndex: Int {
+        return 0
+    }
+    
+    public var endIndex: Int {
+        return count
+    }
+    
+    public subscript(i: Int) -> String {
+        switch i {
+        case 0: return ("rating1")
+        case 1: return ("rating2")
+        case 2: return ("rating3")
+        case 3: return ("rating4")
+        case 4: return ("rating5")
+        case 5: return ("rating6")
+        case 6: return ("rating7")
+        case 7: return ("rating8")
+        case 8: return ("rating9")
+        case 9: return ("rating10")
+        default: return ""
+        }
+    }
+    
+    
+    //MARK: SequenceType Protocol Method
     public func generate() -> Generator {
         var i = 0
         return anyGenerator {
             switch i++ {
-            case 0: return ("rating1", self.rating1)
-            case 1: return ("rating2", self.rating2)
-            case 2: return ("rating3", self.rating3)
-            case 3: return ("rating4", self.rating4)
-            case 4: return ("rating5", self.rating5)
-            case 5: return ("rating6", self.rating6)
-            case 6: return ("rating7", self.rating7)
-            case 7: return ("rating8", self.rating8)
-            case 8: return ("rating9", self.rating9)
-            case 9: return ("rating10", self.rating10)
+            case 0: return ("rating1")
+            case 1: return ("rating2")
+            case 2: return ("rating3")
+            case 3: return ("rating4")
+            case 4: return ("rating5")
+            case 5: return ("rating6")
+            case 6: return ("rating7")
+            case 7: return ("rating8")
+            case 8: return ("rating9")
+            case 9: return ("rating10")
             default: return nil
             }
         }
     }
     
+    
+    //MARK: NSCopying Protocol Method
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
-        for ratings in self.generate() { copy[ratings.key] = self[ratings.key] }
+        for (index, ratings) in self.enumerate() { copy[ratings] = self[index] }
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -87,7 +115,10 @@ class UserRatingsModel: RatingsModel {
         
         self.id = id
         let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
-        for (index, ratings) in self.generate().enumerate() { self[ratings.key] = ratingArray[index] }
+        for (index, ratings) in self.generate().enumerate() {
+            print("index is \(index)")
+            self[ratings] = ratingArray[index]
+        }
         self.totalVotes = Int(ratingArray[10])
         self.isSynced = true
     }
@@ -96,7 +127,7 @@ class UserRatingsModel: RatingsModel {
     //MARK: Methods
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = UserRatingsModel(id: self.id)
-        for ratings in self.generate() { copy[ratings.key] = self[ratings.key] }
+        for ratings in self.generate() { copy[ratings] = self[ratings] }
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -104,7 +135,7 @@ class UserRatingsModel: RatingsModel {
     }
     
     func interpolation() -> String {
-        let allValues: [String] = self.generate().map{ String($0.value) }
+        let allValues: [String] = self.generate().map{ String(self[$0]) }
         return allValues.joinWithSeparator("/") + String(self.totalVotes)
     }
 }

@@ -137,7 +137,6 @@ final class DetailViewController: UIViewController {
         view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

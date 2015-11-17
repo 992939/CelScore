@@ -17,11 +17,11 @@ final class RatingsViewModel: NSObject {
     var celScore: Double {
         get {
             var totalRatings: Double = 0
-            for rating in ratings { totalRatings += rating.value }
+            for rating in ratings { totalRatings += ratings[rating] as! Double }
             if userRatings.totalVotes == 0 { return totalRatings / 10 }
             else {
                 totalRatings *= Double(ratings.totalVotes)
-                for rating in userRatings { totalRatings += rating.value }
+                for rating in userRatings { totalRatings += ratings[rating] as! Double }
                 return totalRatings / Double(ratings.totalVotes + 1)
             }
         }
@@ -60,45 +60,24 @@ final class RatingsViewModel: NSObject {
     //MARK: Methods
     func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
-            guard newRating > 0 && newRating < 6 else {
-                sendError(sink, .RatingValueOutOfBounds)
-                return
-            }
-            guard ratingIndex >= 0 && ratingIndex < 10 else {
-                sendError(sink, .RatingIndexOutOfBounds)
-                return
-            }
+            guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
+            guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
+            guard self.userRatings.isEmpty else { sendError(sink, .UserRatingsNotFound); return }
             
-            guard let userRated = self.userRatings else {
-                sendError(sink, .UserRatingsNotFound)
-                return
-            }
             
-            let realm = try! Realm()
-            realm.beginWrite()
+            self.userRatings.isSynced = false
             
-            let rating: RatingsIndex = RatingsIndex(rawValue: ratingIndex)!
-            userRated[rating.key] = newRating
-            userRated.isSynced = false
-            realm.add(userRated, update: true)
-            try! realm.commitWrite()
-            
-            sendNext(sink, userRated)
+            sendNext(sink, self.userRatings)
             sendCompleted(sink)
         }
     }
     
     func saveUserRatingsSignal() -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
+            guard let object = self.userRatings else { sendError(sink, .UserRatingsNotFound); return }
             
             let realm = try! Realm()
             realm.beginWrite()
-            
-            guard let object = self.userRatings else {
-                sendError(sink, .UserRatingsNotFound)
-                return
-            }
-            
             object.isSynced = false
             object.totalVotes += 1
             realm.add(object, update: true)
@@ -118,19 +97,13 @@ final class RatingsViewModel: NSObject {
             case .Ratings:
                 let predicate = NSPredicate(format: "id = %@", self.ratings.id)
                 self.ratings = realm.objects(RatingsModel).filter(predicate).first
-                guard let object = self.ratings else {
-                    sendError(sink, .RatingsNotFound)
-                    return
-                }
+                guard let object = self.ratings else { sendError(sink, .RatingsNotFound); return }
                 sendNext(sink, object)
                 
             case .UserRatings:
                 let predicate = NSPredicate(format: "id = %@", self.userRatings.id)
                 self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-                guard let object = self.userRatings else {
-                    sendError(sink, .UserRatingsNotFound)
-                    return
-                }
+                guard let object = self.userRatings else { sendError(sink, .UserRatingsNotFound); return }
                 sendNext(sink, object)
             }
             sendCompleted(sink)
