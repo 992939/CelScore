@@ -25,7 +25,8 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     dynamic var rating9: Double = 0
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
-    dynamic var isSynced: Bool = false
+    dynamic var isSynced: Bool = true
+    public typealias Index = Int
     public typealias KeyIndex = (key: String, value: Int)
     public typealias Generator = AnyGenerator<String>
     
@@ -50,9 +51,9 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     
     
     //MARK: Indexable Protocol Method
-    public var startIndex: Int { return 0 }
+    public var startIndex: Int { get { return 0 }}
     
-    public var endIndex: Int { return count }
+    public var endIndex: Int { get { return self.count }}
     
     public subscript(i: Int) -> String {
         switch i {

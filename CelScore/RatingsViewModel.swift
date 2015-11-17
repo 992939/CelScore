@@ -28,22 +28,6 @@ final class RatingsViewModel: NSObject {
     }
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-    enum RatingsIndex: Int { case Rating1 = 0, Rating2, Rating3, Rating4, Rating5, Rating6, Rating7, Rating8, Rating9, Rating10
-        var key: String {
-            switch self {
-            case Rating1: return "rating1"
-            case Rating2: return "rating2"
-            case Rating3: return "rating3"
-            case Rating4: return "rating4"
-            case Rating5: return "rating5"
-            case Rating6: return "rating6"
-            case Rating7: return "rating7"
-            case Rating8: return "rating8"
-            case Rating9: return "rating9"
-            case Rating10: return "rating10"
-            }
-        }
-    }
     
     
     //MARK: Initializers
@@ -62,13 +46,16 @@ final class RatingsViewModel: NSObject {
         return SignalProducer { sink, _ in
             guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
             guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
-            guard self.userRatings.isEmpty else { sendError(sink, .UserRatingsNotFound); return }
+            //guard self.userRatings.isEmpty else { sendError(sink, .UserRatingsNotFound); return }
             
+            let realm = try! Realm()
+            realm.beginWrite()
             let key = self.userRatings[ratingIndex]
             print("lord flacko was \(self.userRatings.description)")
             self.userRatings[key] = newRating
             print("lord flacko will be \(self.userRatings.description)")
-            self.userRatings.isSynced = false
+            self.userRatings.isSynced = true
+            try! realm.commitWrite()
             
             sendNext(sink, self.userRatings)
             sendCompleted(sink)

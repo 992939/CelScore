@@ -41,7 +41,7 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var picture3x: String = ""
     dynamic var prevScore: Double = 0
     dynamic var sex: Bool = false
-    dynamic var isSynced: Bool = false
+    dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
     
     

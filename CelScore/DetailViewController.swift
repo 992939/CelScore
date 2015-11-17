@@ -91,45 +91,45 @@ final class DetailViewController: UIViewController {
                 
 // RETRIEVE AND UPDATE GO TOGETHER
 //
-//        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
-//                case let .Error(error):
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
-//                case .Completed:
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
-//                case .Interrupted:
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
-//                }
-//        }
-//        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 3, newRating: 5)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("updateUserRatingsSignal Value: \(value)")
-//                    self.ratingsVM.saveUserRatingsSignal()
-//                        .start { event in
-//                            switch(event) {
-//                            case let .Next(value):
-//                                print("saveUserRatingsSignal Value: \(value)")
-//                            case let .Error(error):
-//                                print("saveUserRatingsSignal Error: \(error)")
-//                            case .Completed:
-//                                print("saveUserRatingsSignal Completed")
-//                            case .Interrupted:
-//                                print("saveUserRatingsSignal Interrupted")
-//                            }
-//                    }
-//                case let .Error(error):
-//                    print("updateUserRatingsSignal Error: \(error)")
-//                case .Completed:
-//                    print("updateUserRatingsSignal Completed")
-//                case .Interrupted:
-//                    print("updateUserRatingsSignal Interrupted")
-//                }
-//        }
+        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
+                case let .Error(error):
+                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
+                case .Completed:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
+                case .Interrupted:
+                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
+                }
+        }
+        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2)
+            .start { event in
+                switch(event) {
+                case let .Next(value):
+                    print("updateUserRatingsSignal Value: \(value)")
+                    self.ratingsVM.saveUserRatingsSignal()
+                        .start { event in
+                            switch(event) {
+                            case let .Next(value):
+                                print("saveUserRatingsSignal Value: \(value)")
+                            case let .Error(error):
+                                print("saveUserRatingsSignal Error: \(error)")
+                            case .Completed:
+                                print("saveUserRatingsSignal Completed")
+                            case .Interrupted:
+                                print("saveUserRatingsSignal Interrupted")
+                            }
+                    }
+                case let .Error(error):
+                    print("updateUserRatingsSignal Error: \(error)")
+                case .Completed:
+                    print("updateUserRatingsSignal Completed")
+                case .Interrupted:
+                    print("updateUserRatingsSignal Interrupted")
+                }
+        }
     }
     
     func screenShotMethod() {

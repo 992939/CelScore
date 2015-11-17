@@ -15,7 +15,7 @@ public class SettingsModel: Object, NSCopying {
     dynamic var id: String = "1"
     dynamic var defaultListId: String = "0001"
     dynamic var loginTypeIndex: Int = 1
-    dynamic var isSynced: Bool = false
+    dynamic var isSynced: Bool = true
 
     
     //MARK: Initializers
