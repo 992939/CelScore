@@ -14,15 +14,25 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Properties
     let profile: CelebrityProfile
     let nickName: ASTextNode
+    let celebPicNode: ASImageNode //ASMultiplexImageNode/ASNetworkImageNode
+    let celebRatingsNode: ASImageNode
+    let followSwitch: UISwitch
 
     
     //MARK: Initializers
     init(profile: CelebrityProfile) {
         self.profile = profile
         self.nickName = ASTextNode()
+        self.nickName.layerBacked = true
+        self.celebPicNode = ASImageNode()
+        self.celebPicNode.layerBacked = true
+        self.celebRatingsNode = ASImageNode()
+        self.celebRatingsNode.layerBacked = true
+        self.followSwitch = UISwitch()
         
         super.init()
         
+        self.backgroundColor = UIColor.whiteColor()
         self.nickName.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
         self.nickName.placeholderEnabled = true;
         self.addSubnode(self.nickName)

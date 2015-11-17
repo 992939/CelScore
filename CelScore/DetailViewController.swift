@@ -15,7 +15,7 @@ final class DetailViewController: UIViewController {
     let nickNameNode: ASTextNode
     let celscoreNode: ASTextNode
     let marginErrorNode: ASTextNode
-    let imageNode: ASImageNode
+    let celebPicNode: ASImageNode //ASMultiplexImageNode/ASNetworkImageNode
     let celebrityProfile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
@@ -32,7 +32,7 @@ final class DetailViewController: UIViewController {
         self.nickNameNode = ASTextNode()
         self.celscoreNode = ASTextNode()
         self.marginErrorNode = ASTextNode()
-        self.imageNode = ASImageNode()
+        self.celebPicNode = ASImageNode()
         
         super.init(nibName: nil, bundle: nil)
         
