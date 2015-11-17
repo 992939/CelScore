@@ -58,7 +58,7 @@ final class RatingsViewModel: NSObject {
     
     
     //MARK: Methods
-    func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel!, RatingsError> {
+    func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             guard newRating > 0 && newRating < 6 else {
                 sendError(sink, .RatingValueOutOfBounds)
@@ -69,7 +69,7 @@ final class RatingsViewModel: NSObject {
                 return
             }
             
-            guard let object = self.userRatings else {
+            guard let userRated = self.userRatings else {
                 sendError(sink, .UserRatingsNotFound)
                 return
             }
@@ -78,17 +78,17 @@ final class RatingsViewModel: NSObject {
             realm.beginWrite()
             
             let rating: RatingsIndex = RatingsIndex(rawValue: ratingIndex)!
-            object[rating.key] = newRating
-            object.isSynced = false
-            realm.add(object, update: true)
+            userRated[rating.key] = newRating
+            userRated.isSynced = false
+            realm.add(userRated, update: true)
             try! realm.commitWrite()
             
-            sendNext(sink, object)
+            sendNext(sink, userRated)
             sendCompleted(sink)
         }
     }
     
-    func saveUserRatingsSignal() -> SignalProducer<RatingsModel!, RatingsError> {
+    func saveUserRatingsSignal() -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
