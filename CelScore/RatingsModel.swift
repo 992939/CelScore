@@ -36,16 +36,7 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         self.init()
         
         self.id = dictionary["ratingID"] as! String
-        self.rating1 = dictionary["rating1"] as! Double
-        self.rating2 = dictionary["rating2"] as! Double
-        self.rating3 = dictionary["rating3"] as! Double
-        self.rating4 = dictionary["rating4"] as! Double
-        self.rating5 = dictionary["rating5"] as! Double
-        self.rating6 = dictionary["rating6"] as! Double
-        self.rating7 = dictionary["rating7"] as! Double
-        self.rating8 = dictionary["rating8"] as! Double
-        self.rating9 = dictionary["rating9"] as! Double
-        self.rating10 = dictionary["rating10"] as! Double
+        for rating in self.enumerate() { self[rating.element] = dictionary[rating.element] as! Double}
         self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
@@ -95,7 +86,7 @@ class UserRatingsModel: RatingsModel {
         
         self.id = id
         let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
-        for (index, rating) in self.enumerate() { self[rating] = ratingArray[index] }
+        for rating in self.enumerate() { self[rating.element] = ratingArray[rating.index] }
         self.totalVotes = Int(ratingArray[10])
         self.isSynced = true
     }
@@ -111,5 +102,6 @@ class UserRatingsModel: RatingsModel {
         return copy
     }
     
-    func interpolation() -> String { return self.joinWithSeparator("/") + String(self.totalVotes) }
+    func interpolation() -> String {
+        return self.joinWithSeparator("/") + String(self.totalVotes) }
 }
