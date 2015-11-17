@@ -13,29 +13,29 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Properties
     let profile: CelebrityProfile
-    let nickName: ASTextNode
-    let celebPicNode: ASImageNode //ASMultiplexImageNode/ASNetworkImageNode
-    let celebRatingsNode: ASImageNode
+    let nameNode: ASTextNode
+    let pictureNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
+    let ratingsNode: ASImageNode
     let followSwitch: UISwitch
 
     
     //MARK: Initializers
     init(profile: CelebrityProfile) {
         self.profile = profile
-        self.nickName = ASTextNode()
-        self.nickName.layerBacked = true
-        self.celebPicNode = ASImageNode()
-        self.celebPicNode.layerBacked = true
-        self.celebRatingsNode = ASImageNode()
-        self.celebRatingsNode.layerBacked = true
+        self.nameNode = ASTextNode()
+        self.nameNode.layerBacked = true
+        self.pictureNode = ASImageNode()
+        self.pictureNode.layerBacked = true
+        self.ratingsNode = ASImageNode()
+        self.ratingsNode.layerBacked = true
         self.followSwitch = UISwitch()
         
         super.init()
         
         self.backgroundColor = UIColor.whiteColor()
-        self.nickName.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
-        self.nickName.placeholderEnabled = true;
-        self.addSubnode(self.nickName)
+        self.nameNode.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
+        self.nameNode.placeholderEnabled = true;
+        self.addSubnode(self.nameNode)
     }
     
     
@@ -44,7 +44,7 @@ final class CelebrityTableViewCell: ASCellNode {
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(
                 insets: UIEdgeInsetsMake(15, 15, 15, 15),
-                child: self.nickName),
+                child: self.nameNode),
             background: nil)
     }
 }

@@ -134,7 +134,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     
-    //MARK: ASTableView methods.
+    //MARK: ASTableView methods
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
+    
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         var node = ASCellNode()
         self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
@@ -154,8 +157,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.displayedCelebrityListVM.count
+    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) {
+        
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
@@ -163,8 +166,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.presentViewController(DetailViewController(profile: node.profile), animated: false, completion: nil)
         //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
     
     
     // MARK: UITextFieldDelegate methods

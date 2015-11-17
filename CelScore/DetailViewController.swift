@@ -15,7 +15,7 @@ final class DetailViewController: UIViewController {
     let nickNameNode: ASTextNode
     let celscoreNode: ASTextNode
     let marginErrorNode: ASTextNode
-    let celebPicNode: ASImageNode //ASMultiplexImageNode/ASNetworkImageNode
+    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let celebrityProfile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
