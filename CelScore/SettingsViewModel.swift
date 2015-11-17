@@ -17,6 +17,7 @@ final class SettingsViewModel: NSObject {
     //MARK: Properties
     let defaultTodayExtensionNumRows = 3
     let maxTodayExtensionNumberOfRows = 10
+    var defaultListId: String { get { return SettingsModel().defaultListId }}
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
@@ -87,7 +88,7 @@ final class SettingsViewModel: NSObject {
     func getFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "isFollowed = false") //TODO: true
+            let predicate = NSPredicate(format: "isFollowed = true")
             let celebList = realm.objects(CelebrityModel).filter(predicate)
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             for (index, celeb) in celebList.enumerate() {
