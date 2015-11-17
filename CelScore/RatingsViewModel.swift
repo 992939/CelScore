@@ -36,8 +36,6 @@ final class RatingsViewModel: NSObject {
 
         self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel
         self.userRatings = UserRatingsModel(id: celebrityId).copy() as! UserRatingsModel
-        
-        print(self.celScore)
     }
     
     
@@ -46,7 +44,7 @@ final class RatingsViewModel: NSObject {
         return SignalProducer { sink, _ in
             guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
             guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
-            //guard self.userRatings.isEmpty else { sendError(sink, .UserRatingsNotFound); return }
+            guard self.userRatings != nil else { sendError(sink, .UserRatingsNotFound); return }
             
             let realm = try! Realm()
             realm.beginWrite()

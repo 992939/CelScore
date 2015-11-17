@@ -26,6 +26,10 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = true
+    
+    public var startIndex: Int { get { return 0 }}
+    public var endIndex: Int { get { return self.count }}
+    
     public typealias Index = Int
     public typealias KeyIndex = (key: String, value: Int)
     public typealias Generator = AnyGenerator<String>
@@ -50,11 +54,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     }
     
     
-    //MARK: Indexable Protocol Method
-    public var startIndex: Int { get { return 0 }}
-    
-    public var endIndex: Int { get { return self.count }}
-    
+    //MARK: Indexable Method
     public subscript(i: Int) -> String {
         switch i {
         case 0: return ("rating1")
@@ -72,7 +72,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     }
     
     
-    //MARK: SequenceType Protocol Method
+    //MARK: SequenceType Method
     public func generate() -> Generator {
         var i = 0
         return anyGenerator {
@@ -93,7 +93,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     }
     
     
-    //MARK: NSCopying Protocol Method
+    //MARK: NSCopying Method
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         for ratings in self.generate() { copy[ratings] = self[ratings] }
