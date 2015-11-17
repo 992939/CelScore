@@ -53,10 +53,8 @@ final class CelebrityViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!.copy() as? CelebrityModel
-            guard let object = celebrity else {
-                sendError(sink, .NotFound)
-                return
-            }
+            guard let object = celebrity else { sendError(sink, .NotFound); return }
+            
             sendNext(sink, object)
             sendCompleted(sink)
         }
@@ -68,10 +66,7 @@ final class CelebrityViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
-            guard let object = celebrity else {
-                sendError(sink, .NotFound)
-                return
-            }
+            guard let object = celebrity else { sendError(sink, .NotFound); return }
             
             if followStatus == .Following { object.isFollowed = true }
             else { object.isFollowed = false }
@@ -85,7 +80,6 @@ final class CelebrityViewModel: NSObject {
             sendCompleted(sink)
         }
     }
-
 }
 
 

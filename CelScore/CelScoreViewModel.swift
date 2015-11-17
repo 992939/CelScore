@@ -31,7 +31,7 @@ final class CelScoreViewModel: NSObject {
     override init() {
         super.init()
         
-        //self.timeNotifier <~ self.timerSignal()
+        //TODO: self.timeNotifier <~ self.timerSignal()
         self.timeNotifier.producer
             .promoteErrors(NSError.self)
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
@@ -114,15 +114,12 @@ final class CelScoreViewModel: NSObject {
             
             var socialVC: SLComposeViewController
             switch socialNetwork {
-            case .Twitter:
-                socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            case .Facebook:
-                socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            case .Weibo:
-                socialVC = SLComposeViewController(forServiceType: SLServiceTypeSinaWeibo)
+            case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            case .Weibo: socialVC = SLComposeViewController(forServiceType: SLServiceTypeSinaWeibo)
             }
             socialVC.setInitialText("Sharing CelScore")
-            //TODO: socialVC.addImage(<#T##image: UIImage!##UIImage!#>)
+            //TODO: socialVC.addImage()
             
             sendNext(sink, socialVC)
             sendCompleted(sink)
