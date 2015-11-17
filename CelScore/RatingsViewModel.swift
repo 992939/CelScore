@@ -16,15 +16,13 @@ final class RatingsViewModel: NSObject {
     var userRatings: UserRatingsModel!
     var celScore: Double {
         get {
-            if userRatings.totalVotes > 0 {
-                var totalRatings = ratings.rating1 + ratings.rating2 + ratings.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings.rating8 + ratings.rating9 + ratings.rating10
+            var totalRatings: Double = 0
+            for ratingKey in ratings { totalRatings += ratings[ratingKey] as! Double }
+            if userRatings.totalVotes == 0 { return totalRatings / 10 }
+            else {
                 totalRatings *= Double(ratings.totalVotes)
-                totalRatings += userRatings.rating1 + userRatings.rating2 + userRatings.rating3 + userRatings.rating4 + userRatings.rating5 + userRatings.rating6 + userRatings.rating7 + userRatings.rating8 + userRatings.rating9 + userRatings.rating10
+                for ratingKey in userRatings { totalRatings += userRatings[ratingKey] as! Double }
                 return totalRatings / Double(ratings.totalVotes + 1)
-            } else
-            {
-                let totalRatings = ratings.rating1 + ratings!.rating2 + ratings!.rating3 + ratings.rating4 + ratings.rating5 + ratings.rating6 + ratings.rating7 + ratings!.rating8 + ratings.rating9 + ratings!.rating10
-                return totalRatings / 10
             }
         }
     }
@@ -51,8 +49,11 @@ final class RatingsViewModel: NSObject {
     //MARK: Initializers
     init(celebrityId: String) {
         super.init()
+
         self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel
         self.userRatings = UserRatingsModel(id: celebrityId).copy() as! UserRatingsModel
+        
+        print(self.celScore)
     }
     
     
