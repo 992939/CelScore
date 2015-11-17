@@ -104,7 +104,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     }
 }
 
-class UserRatingsModel: RatingsModel {
+final class UserRatingsModel: RatingsModel {
     
     //MARK: Initializers
     internal convenience init(id: String, joinedString: String) {
