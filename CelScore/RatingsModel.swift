@@ -50,13 +50,9 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     
     
     //MARK: Indexable Protocol Method
-    public var startIndex: Int {
-        return 0
-    }
+    public var startIndex: Int { return 0 }
     
-    public var endIndex: Int {
-        return count
-    }
+    public var endIndex: Int { return count }
     
     public subscript(i: Int) -> String {
         switch i {
@@ -99,7 +95,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     //MARK: NSCopying Protocol Method
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
-        for (index, ratings) in self.enumerate() { copy[ratings] = self[index] }
+        for ratings in self.generate() { copy[ratings] = self[ratings] }
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -115,10 +111,7 @@ class UserRatingsModel: RatingsModel {
         
         self.id = id
         let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
-        for (index, ratings) in self.generate().enumerate() {
-            print("index is \(index)")
-            self[ratings] = ratingArray[index]
-        }
+        for (index, ratings) in self.generate().enumerate() { self[ratings] = ratingArray[index] }
         self.totalVotes = Int(ratingArray[10])
         self.isSynced = true
     }
@@ -135,7 +128,7 @@ class UserRatingsModel: RatingsModel {
     }
     
     func interpolation() -> String {
-        let allValues: [String] = self.generate().map{ String(self[$0]) }
-        return allValues.joinWithSeparator("/") + String(self.totalVotes)
+        let allValues: [String] = self.generate().flatMap{ String(self[$0]!) }
+        return allValues.joinWithSeparator("/") + "/" + String(self.totalVotes)
     }
 }

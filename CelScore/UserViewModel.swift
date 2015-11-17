@@ -146,7 +146,7 @@ final class UserViewModel: NSObject {
                 
             case .UserRatings:
                 let realm = try! Realm()
-                let predicate = NSPredicate(format: "isSynced = false")
+                let predicate = NSPredicate(format: "isSynced = true") //TODO: Change to false
                 let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
                 
                 realm.beginWrite()

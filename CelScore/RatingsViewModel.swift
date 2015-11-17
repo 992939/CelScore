@@ -64,7 +64,10 @@ final class RatingsViewModel: NSObject {
             guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
             guard self.userRatings.isEmpty else { sendError(sink, .UserRatingsNotFound); return }
             
-            
+            let key = self.userRatings[ratingIndex]
+            print("lord flacko was \(self.userRatings.description)")
+            self.userRatings[key] = newRating
+            print("lord flacko will be \(self.userRatings.description)")
             self.userRatings.isSynced = false
             
             sendNext(sink, self.userRatings)
