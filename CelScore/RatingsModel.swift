@@ -28,7 +28,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     dynamic var isSynced: Bool = true
     
     public var startIndex: Int { get { return 0 }}
-    public var endIndex: Int { get { return self.count }}
+    public var endIndex: Int { get { return 10 }}
     
     public typealias Index = Int
     public typealias KeyIndex = (key: String, value: Int)

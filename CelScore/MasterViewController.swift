@@ -82,7 +82,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //        }
         
         //Today's Extension
-        //TODO: check for existing celebrities in Realm before calling it
 //        self.settingsVM.getFollowedCelebritiesSignal()
 //            .start { event in
 //                switch(event) {
