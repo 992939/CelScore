@@ -216,7 +216,7 @@ final class UserViewModel: NSObject {
                     
                 case .UserRatings:
                     dataset.getAll().forEach({ dico in
-                        let userRatings = UserRatingsModel(id: dico.0 as! String, string: dico.1 as! String)
+                        let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
                         realm.add(userRatings, update: true)
                     })
                     

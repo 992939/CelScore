@@ -77,25 +77,6 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         }
     }
     
-//    public func generate() -> Generator {
-//        var i = 0
-//        return anyGenerator {
-//            switch i++ {
-//            case 0: return self.rating1
-//            case 1: return self.rating2
-//            case 2: return self.rating3
-//            case 3: return self.rating4
-//            case 4: return self.rating5
-//            case 5: return self.rating6
-//            case 6: return self.rating7
-//            case 7: return self.rating8
-//            case 8: return self.rating9
-//            case 9: return self.rating10
-//            default: return nil
-//            }
-//        }
-//    }
-    
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         for rating in copy { copy[rating] = self[rating] }
@@ -109,23 +90,14 @@ public class RatingsModel: Object, SequenceType, NSCopying {
 class UserRatingsModel: RatingsModel {
     
     //MARK: Initializers
-    internal convenience init(id: String, string: String) {
+    internal convenience init(id: String, joinedString: String) {
         self.init()
         
         self.id = id
-        self.isSynced = true
-        let ratingArray = string.componentsSeparatedByString("/").flatMap { Double($0) }
-        self.rating1 = ratingArray[0]
-        self.rating2 = ratingArray[1]
-        self.rating3 = ratingArray[2]
-        self.rating4 = ratingArray[3]
-        self.rating5 = ratingArray[4]
-        self.rating6 = ratingArray[5]
-        self.rating7 = ratingArray[6]
-        self.rating8 = ratingArray[7]
-        self.rating9 = ratingArray[8]
-        self.rating10 = ratingArray[9]
+        let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
+        for (index, rating) in self.enumerate() { self[rating] = ratingArray[index] }
         self.totalVotes = Int(ratingArray[10])
+        self.isSynced = true
     }
     
     
