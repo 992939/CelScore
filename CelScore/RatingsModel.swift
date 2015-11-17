@@ -36,7 +36,6 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         self.init()
         
         self.id = dictionary["ratingID"] as! String
-        self.updatedAt = dictionary["updatedAt"] as! String
         self.rating1 = dictionary["rating1"] as! Double
         self.rating2 = dictionary["rating2"] as! Double
         self.rating3 = dictionary["rating3"] as! Double
@@ -47,6 +46,7 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         self.rating8 = dictionary["rating8"] as! Double
         self.rating9 = dictionary["rating9"] as! Double
         self.rating10 = dictionary["rating10"] as! Double
+        self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
     }
@@ -139,7 +139,5 @@ class UserRatingsModel: RatingsModel {
         return copy
     }
     
-    func interpolation() -> String {
-        return "\(self.rating1)/\(self.rating2)/\(self.rating3)/\(self.rating4)/\(self.rating5)/\(self.rating6)/\(self.rating7)/\(self.rating8)/\(self.rating9)/\(self.rating10)/\(self.totalVotes)"
-    }
+    func interpolation() -> String { return self.joinWithSeparator("/") + String(self.totalVotes) }
 }
