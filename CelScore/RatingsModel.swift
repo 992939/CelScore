@@ -26,7 +26,8 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     dynamic var rating10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = false
-    public typealias Generator = AnyGenerator<String>
+    public typealias KeyValue = (key: String, value: Double)
+    public typealias Generator = AnyGenerator<KeyValue>
     
     
     //MARK: Initializers
@@ -36,7 +37,7 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         self.init()
         
         self.id = dictionary["ratingID"] as! String
-        for rating in self.enumerate() { self[rating.element] = dictionary[rating.element] as! Double}
+        for ratings in self.generate() { self[ratings.key] = dictionary[ratings.key] as! Double}
         self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
@@ -53,16 +54,16 @@ public class RatingsModel: Object, SequenceType, NSCopying {
         var i = 0
         return anyGenerator {
             switch i++ {
-            case 0: return "rating1"
-            case 1: return "rating2"
-            case 2: return "rating3"
-            case 3: return "rating4"
-            case 4: return "rating5"
-            case 5: return "rating6"
-            case 6: return "rating7"
-            case 7: return "rating8"
-            case 8: return "rating9"
-            case 9: return "rating10"
+            case 0: return ("rating1", self.rating1)
+            case 1: return ("rating2", self.rating2)
+            case 2: return ("rating3", self.rating3)
+            case 3: return ("rating4", self.rating4)
+            case 4: return ("rating5", self.rating5)
+            case 5: return ("rating6", self.rating6)
+            case 6: return ("rating7", self.rating7)
+            case 7: return ("rating8", self.rating8)
+            case 8: return ("rating9", self.rating9)
+            case 9: return ("rating10", self.rating10)
             default: return nil
             }
         }
@@ -70,7 +71,7 @@ public class RatingsModel: Object, SequenceType, NSCopying {
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
-        for rating in copy { copy[rating] = self[rating] }
+        for ratings in self.generate() { copy[ratings.key] = self[ratings.key] }
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -86,7 +87,7 @@ class UserRatingsModel: RatingsModel {
         
         self.id = id
         let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
-        for rating in self.enumerate() { self[rating.element] = ratingArray[rating.index] }
+        for (index, ratings) in self.generate().enumerate() { self[ratings.key] = ratingArray[index] }
         self.totalVotes = Int(ratingArray[10])
         self.isSynced = true
     }
@@ -95,7 +96,7 @@ class UserRatingsModel: RatingsModel {
     //MARK: Methods
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = UserRatingsModel(id: self.id)
-        for rating in copy { copy[rating] = self[rating] }
+        for ratings in self.generate() { copy[ratings.key] = self[ratings.key] }
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
@@ -103,5 +104,7 @@ class UserRatingsModel: RatingsModel {
     }
     
     func interpolation() -> String {
-        return self.joinWithSeparator("/") + String(self.totalVotes) }
+        let allValues: [String] = self.generate().map{ String($0.value) }
+        return allValues.joinWithSeparator("/") + String(self.totalVotes)
+    }
 }

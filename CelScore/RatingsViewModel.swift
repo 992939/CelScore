@@ -17,11 +17,11 @@ final class RatingsViewModel: NSObject {
     var celScore: Double {
         get {
             var totalRatings: Double = 0
-            for ratingKey in ratings { totalRatings += ratings[ratingKey] as! Double }
+            for rating in ratings { totalRatings += rating.value }
             if userRatings.totalVotes == 0 { return totalRatings / 10 }
             else {
                 totalRatings *= Double(ratings.totalVotes)
-                for ratingKey in userRatings { totalRatings += userRatings[ratingKey] as! Double }
+                for rating in userRatings { totalRatings += rating.value }
                 return totalRatings / Double(ratings.totalVotes + 1)
             }
         }
@@ -78,7 +78,7 @@ final class RatingsViewModel: NSObject {
             realm.beginWrite()
             
             let rating: RatingsIndex = RatingsIndex(rawValue: ratingIndex)!
-            object.setValue(newRating, forKey: rating.key)
+            object[rating.key] = newRating
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()
