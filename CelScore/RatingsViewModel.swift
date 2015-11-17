@@ -49,9 +49,7 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             realm.beginWrite()
             let key = self.userRatings[ratingIndex]
-            print("lord flacko was \(self.userRatings.description)")
             self.userRatings[key] = newRating
-            print("lord flacko will be \(self.userRatings.description)")
             self.userRatings.isSynced = true
             try! realm.commitWrite()
             
