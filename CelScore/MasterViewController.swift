@@ -158,7 +158,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) {
-        
+        //TODO
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
