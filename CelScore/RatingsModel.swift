@@ -48,10 +48,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         self.isSynced = true
     }
     
-    public convenience init(id: String) {
-        self.init()
-        self.id = id
-    }
+    public convenience init(id: String) { self.init(); self.id = id }
     
     
     //MARK: Indexable Method

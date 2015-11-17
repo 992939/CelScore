@@ -19,9 +19,7 @@ public struct CelebrityProfile {
 
 extension CelebrityProfile: Equatable {}
 
-public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool {
-    return lhs.nickname == rhs.nickname && lhs.id == rhs.id
-}
+public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
 
 
 public final class CelebrityModel: Object, NSCopying {
