@@ -12,11 +12,10 @@ import AsyncDisplayKit
 final class DetailViewController: UIViewController {
     
     //MARK: Properties
-    var nickNameNode: ASTextNode?
-    var celscoreNode: ASTextNode?
-    var marginErrorNode: ASTextNode?
-    var imageNode: ASImageNode?
-    
+    let nickNameNode: ASTextNode
+    let celscoreNode: ASTextNode
+    let marginErrorNode: ASTextNode
+    let imageNode: ASImageNode
     let celebrityProfile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
@@ -30,7 +29,14 @@ final class DetailViewController: UIViewController {
         self.celebrityProfile = profile
         self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
         self.ratingsVM = RatingsViewModel(celebrityId: profile.id)
+        self.nickNameNode = ASTextNode()
+        self.celscoreNode = ASTextNode()
+        self.marginErrorNode = ASTextNode()
+        self.imageNode = ASImageNode()
+        
         super.init(nibName: nil, bundle: nil)
+        
+        self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
     }
     
     

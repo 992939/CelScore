@@ -15,7 +15,6 @@ import ReactiveCocoa
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
-    var defaultListId: String = "0001"
     let defaultTodayExtensionNumRows = 3
     let maxTodayExtensionNumberOfRows = 10
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs }

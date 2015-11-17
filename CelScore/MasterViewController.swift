@@ -18,17 +18,14 @@ import TwitterKit
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
-    var loadingIndicator: UIActivityIndicatorView!
-    var signInButton: UIButton!
-    var searchTextField: UITextField!
-    var celebrityTableView: ASTableView!
-    var loginButton: FBSDKLoginButton!
-    
+    let searchTextField: UITextField!
+    let celebrityTableView: ASTableView!
     let celscoreVM: CelScoreViewModel
     let userVM: UserViewModel
     let settingsVM: SettingsViewModel
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
+    var loginButton: FBSDKLoginButton!
 
     
     //MARK: Initializers

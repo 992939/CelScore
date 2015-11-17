@@ -13,7 +13,7 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Properties
     let profile: CelebrityProfile
-    var nickName: ASTextNode
+    let nickName: ASTextNode
 
     
     //MARK: Initializers

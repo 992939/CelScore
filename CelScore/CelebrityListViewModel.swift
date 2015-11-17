@@ -14,7 +14,7 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
     final let title = MutableProperty("")
-    final lazy var celebrityList: ListsModel = ListsModel()
+    final var celebrityList: ListsModel = ListsModel()
     final var count: Int { get { return self.celebrityList.count }}
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
