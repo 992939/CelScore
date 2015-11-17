@@ -208,8 +208,7 @@ final class UserViewModel: NSObject {
                 realm.beginWrite()
                 
                 switch dataSetType {
-                case .UserInfo:
-                    fatalError("there is no use to store user information from Facebook/Twitter locally")
+                case .UserInfo: fatalError("Not storing user information locally")
                     
                 case .UserRatings:
                     dataset.getAll().forEach({ dico in
