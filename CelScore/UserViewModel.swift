@@ -45,7 +45,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Login Methods
-    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
+    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
@@ -65,17 +65,13 @@ final class UserViewModel: NSObject {
                         let value = session!.authToken + ";" + session!.authTokenSecret
                         // Note: This overrides any existing logins
                         credentialsProvider.logins = ["api.twitter.com": value]
-                    } else {
-                        print("error: \(error!.localizedDescription)")
-                    }
+                    } else { print("error: \(error!.localizedDescription)") }
                 }
             }
 
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    sendError(sink, task.error)
-                    return task
-                }
+                guard task.error == nil else { sendError(sink, task.error); return task }
+                
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task
@@ -175,7 +171,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary!, NSError> {
+    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
