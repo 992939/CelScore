@@ -83,7 +83,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func logoutSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
+    func logoutSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             //TODO: implementation
             switch loginType {
@@ -99,10 +99,8 @@ final class UserViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else {
-                    sendError(sink, error)
-                    return
-                }
+                guard error == nil else { sendError(sink, error); return }
+                
                 sendNext(sink, object)
                 sendCompleted(sink)
             }
@@ -111,7 +109,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Cognito Methods
-    func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject!, NSError> {
+    func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()

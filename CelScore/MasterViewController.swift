@@ -118,34 +118,23 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard result.isCancelled == false else { return }
         
         userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("userVM.loginCognitoSignal Next: \(value)")
-                    
-                    let realm = try! Realm()
-                    let userRatingsArray = realm.objects(UserRatingsModel)
-                    if userRatingsArray.count == 0
-                    {
-                        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
-                    } else
-                    {
-                        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-                        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
-                        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-                        //self.celscoreVM.timeNotifier.producer.start()
-                        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
-                        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
-                    }
-                case let .Error(error):
-                    print("userVM.loginCognitoSignal Error: \(error)")
-                case .Completed:
-                    print("userVM.loginCognitoSignal Completed")
-                case .Interrupted:
-                    print("userVM.loginCognitoSignal Interrupted")
+            .on(next: { value in
+                let realm = try! Realm()
+                let userRatingsArray = realm.objects(UserRatingsModel)
+                if userRatingsArray.count == 0 {
+                    self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
+                } else {
+                    //self.celscoreVM.timeNotifier.producer.start()
+                    self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+                    self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
+                    self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+                    //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
+                    //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
                 }
-        }
+            })
+            .start()
     }
+    
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
 }
 
