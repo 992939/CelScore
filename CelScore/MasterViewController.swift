@@ -96,19 +96,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         var node = ASCellNode()
         self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("getCelebrityProfileSignal Value: \(value)")
-                    node = CelebrityTableViewCell(profile: value)
-                case let .Error(error):
-                    print("getCelebrityProfileSignal Error: \(error)")
-                case .Completed:
-                    print("getCelebrityProfileSignal Completed")
-                case .Interrupted:
-                    print("getCelebrityProfileSignal Interrupted")
-                }
-        }
+            .on(next: { value in
+                node = CelebrityTableViewCell(profile: value)
+            })
+            .start()
         return node
     }
     
