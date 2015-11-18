@@ -76,22 +76,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         else { print("fb error") }*/
         
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("initializeListSignal Value: \(value)")
-                    self.celebrityTableView.beginUpdates()
-                    self.celebrityTableView.reloadData()
-                    self.celebrityTableView.endUpdates()
-                case let .Error(error):
-                    print("initializeListSignal Error: \(error)")
-                case .Completed:
-                    print("initializeListSignal Completed")
-                case .Interrupted:
-                    print("initializeListSignal Interrupted")
-                }
-        }
-        
+            .on(next: { value in
+                self.celebrityTableView.beginUpdates()
+                self.celebrityTableView.reloadData()
+                self.celebrityTableView.endUpdates()
+            })
+            .start()
+    
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkConnectivitySignal().start()
         //self.settingsVM.getFollowedCelebritiesSignal().start()
