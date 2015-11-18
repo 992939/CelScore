@@ -38,18 +38,7 @@ final class CelScoreViewModel: NSObject {
                 return self.getFromAWSSignal(dataType: .Celebrity)
             }
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("timeNotifier Value: \(value)")
-                case let .Error(error):
-                    print("timeNotifier Error: \(error)")
-                case .Completed:
-                    print("timeNotifier Completed")
-                case .Interrupted:
-                    print("timeNotifier Interrupted")
-                }
-        }
+            .start()
     }
     
     

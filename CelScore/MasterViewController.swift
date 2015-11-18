@@ -70,33 +70,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton.delegate = self
         self.view.addSubview(loginButton)
         
-        //Check Logged In
-        //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        //        print(FBSDKAccessToken.currentAccessToken())
-        //        if let accessToken = FBSDKAccessToken.currentAccessToken()
-        //        {
-        //            print("fb token \(accessToken)")
-        //        } else
-        //        {
-        //            print("fb error")
-        //        }
+        /*FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        print(FBSDKAccessToken.currentAccessToken())
+        if let accessToken = FBSDKAccessToken.currentAccessToken() { print("fb token \(accessToken)") }
+        else { print("fb error") }*/
         
-        //Today's Extension
-//        self.settingsVM.getFollowedCelebritiesSignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("getFollowedCelebritiesSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("getFollowedCelebritiesSignal Error: \(error)")
-//                case .Completed:
-//                    print("getFollowedCelebritiesSignal Completed")
-//                case .Interrupted:
-//                    print("getFollowedCelebritiesSignalInterrupted")
-//                }
-//        }
-        
-        //DISPLAY
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
             .start { event in
                 switch(event) {
@@ -114,30 +92,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 }
         }
         
-        //SEARCH
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
-        
-        //REACHABILITY
-        self.celscoreVM.checkNetworkConnectivitySignal()
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("checkNetworkConnectivitySignal Value: \(value)")
-                case let .Error(error):
-                    print("checkNetworkConnectivitySignal Error: \(error)")
-                case .Completed:
-                    print("checkNetworkConnectivitySignal Completed")
-                case .Interrupted:
-                    print("checkNetworkConnectivitySignal Interrupted")
-                }
-        }
+        self.celscoreVM.checkNetworkConnectivitySignal().start()
+        //self.settingsVM.getFollowedCelebritiesSignal().start()
     }
     
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
-    
+    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) { /*TODO: Implement*/ }
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         var node = ASCellNode()
         self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
@@ -157,10 +121,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) {
-        //TODO
-    }
-    
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.presentViewController(DetailViewController(profile: node.profile), animated: false, completion: nil)
@@ -170,13 +130,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     // MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
-    
     func textFieldDidBeginEditing(textField: UITextField) {}
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
     
     
     //MARK: FBSDKLoginButtonDelegate Methods.
@@ -194,105 +149,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     let userRatingsArray = realm.objects(UserRatingsModel)
                     if userRatingsArray.count == 0
                     {
-                        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings)
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("userVM.loginCognitoSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("userVM.loginCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("userVM.loginCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("userVM.loginCognitoSignal Interrupted")
-                                }
-                        }
+                        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
                     } else
                     {
-
-// **** DO NOT DELETE *****
-//                        self.celscoreVM.timeNotifier.producer
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("celscoreVM.timeNotifier.producer Value: \(value)")
-//                                case let .Error(error):
-//                                    print("celscoreVM.timeNotifier.producer Error: \(error)")
-//                                case .Completed:
-//                                    print("celscoreVM.timeNotifier.producer Completed")
-//                                case .Interrupted:
-//                                    print("celscoreVM.timeNotifier.producer Interrupted")
-//                                }
-//                        }
-                        
-//                        self.celscoreVM.getFromAWSSignal(dataType: .List)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//                        
-//                        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//                        self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromAWSSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromAWSSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromAWSSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromAWSSignal Interrupted")
-//                                }
-//                        }
-//
-//                        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
-//                            .start { event in
-//                                switch(event) {
-//                                case let .Next(value):
-//                                    print("getFromCognitoSignal Value: \(value)")
-//                                case let .Error(error):
-//                                    print("getFromCognitoSignal Error: \(error)")
-//                                case .Completed:
-//                                    print("getFromCognitoSignal Completed")
-//                                case .Interrupted:
-//                                    print("getFromCognitoSignal Interrupted")
-//                                }
-//                        }
-                        
-                        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings)
-                            .start { event in
-                                switch(event) {
-                                case let .Next(value):
-                                    print("updateCognitoSignal Value: \(value)")
-                                case let .Error(error):
-                                    print("updateCognitoSignal Error: \(error)")
-                                case .Completed:
-                                    print("updateCognitoSignal Completed")
-                                case .Interrupted:
-                                    print("updateCognitoSignal Interrupted")
-                                }
-                        }
+                        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+                        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
+                        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+                        //self.celscoreVM.timeNotifier.producer.start()
+                        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
+                        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
                     }
                 case let .Error(error):
                     print("userVM.loginCognitoSignal Error: \(error)")
@@ -303,9 +168,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 }
         }
     }
-    
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
 }
+
 
 //MARK: Extensions
 extension UITextField {

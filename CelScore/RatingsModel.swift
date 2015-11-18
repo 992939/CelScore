@@ -37,7 +37,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     
     //MARK: Initializers
     override public class func primaryKey() -> String { return "id" }
-    
+    public convenience init(id: String) { self.init(); self.id = id }
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         
@@ -47,8 +47,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         self.totalVotes = dictionary["totalVote"] as! Int
         self.isSynced = true
     }
-    
-    public convenience init(id: String) { self.init(); self.id = id }
     
     
     //MARK: Indexable Method
@@ -100,6 +98,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         return copy
     }
 }
+
 
 final class UserRatingsModel: RatingsModel {
     

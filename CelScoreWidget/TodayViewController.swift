@@ -21,10 +21,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     var items = [AnyObject]()
     var expanded: Bool {
         get { return userDefaults.boolForKey("expanded") }
-        set (newExpanded) {
-            self.userDefaults.setBool(newExpanded, forKey: "expanded")
-            self.userDefaults.synchronize()
-        }
+        set (newExpanded) { self.userDefaults.setBool(newExpanded, forKey: "expanded"); self.userDefaults.synchronize() }
     }
     
     
@@ -45,26 +42,20 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Methods
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         updateExpandButtonTitle()
         updatePreferredContentSize()
         
-        AIRTimer.every(5, userInfo: "FIRE!!") { timer in
-            print("move it fool")
-            self.userDefaults.synchronize()
-        }
+        AIRTimer.every(5, userInfo: "FIRE!!") { timer in self.userDefaults.synchronize() }
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
-
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -80,6 +71,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
 
     
     // MARK: Table view data source
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.items.count > 0 { return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows) }
         return 0
@@ -97,16 +89,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         print("celeb is \(items[indexPath.row].description)")
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
-    
     
     // MARK: expand
     func updateExpandButtonTitle() { expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal) }
-    
-    func toggleExpand() {
-        expanded = !expanded
-        updateExpandButtonTitle()
-        updatePreferredContentSize()
-        tableView.reloadData()
-    }
+    func toggleExpand() { expanded = !expanded; updateExpandButtonTitle(); updatePreferredContentSize(); tableView.reloadData() }
 }

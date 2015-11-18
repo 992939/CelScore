@@ -35,8 +35,6 @@ public final class ListsModel: Object, NSCopying {
     
     
     //MARK: Initializers
-    override public class func primaryKey() -> String { return "id" }
-    
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         
@@ -56,6 +54,8 @@ public final class ListsModel: Object, NSCopying {
     
     
     //MARK: Methods
+    override public class func primaryKey() -> String { return "id" }
+    
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = ListsModel()
         copy.id = self.id

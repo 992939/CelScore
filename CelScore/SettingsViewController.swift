@@ -24,50 +24,11 @@ final class SettingsViewController: UIViewController {
     override func viewWillLayoutSubviews() {}
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.settingsVM.getUserRatingsPercentageSignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("getUserRatingsPercentageSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("getUserRatingsPercentageSignal Error: \(error)")
-//                case .Completed:
-//                    print("getUserRatingsPercentageSignal Completed")
-//                case .Interrupted:
-//                    print("getUserRatingsPercentageSignal Interrupted")
-//                }
-//        }
-        
-//        self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("pdateSettingOnLocalStoreSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("pdateSettingOnLocalStoreSignal Error: \(error)")
-//                case .Completed:
-//                    print("pdateSettingOnLocalStoreSignal Completed")
-//                case .Interrupted:
-//                    print("pdateSettingOnLocalStoreSignal Interrupted")
-//                }
-//        }
-        
-//        self.settingsVM.getSettingsFromLocalStoreSignal()
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("getSettingsFromLocalStoreSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("getSettingsFromLocalStoreSignal Error: \(error)")
-//                case .Completed:
-//                    print("getSettingsFromLocalStoreSignal Completed")
-//                case .Interrupted:
-//                    print("getSettingsFromLocalStoreSignal Interrupted")
-//                }
-//        }
+        self.settingsVM.getUserRatingsPercentageSignal().start()
+        //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
+        //self.settingsVM.getSettingsFromLocalStoreSignal().start()
     }
 }

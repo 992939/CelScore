@@ -31,18 +31,7 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start { event in
-                            switch(event) {
-                            case let .Next(value):
-                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                            case let .Error(error):
-                                print("getUserInfoFromFacebookSignal() Error: \(error)")
-                            case .Completed:
-                                print("getUserInfoFromFacebookSignal() Completed")
-                            case .Interrupted:
-                                print("getUserInfoFromFacebookSignal() Interrupted")
-                            }
-                        }
+                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start()
                     case let .Error(error):
                         print("getUserInfoFromFacebookSignal() Error: \(error)")
                     case .Completed:

@@ -44,11 +44,8 @@ final class DetailViewController: UIViewController {
     override func viewWillLayoutSubviews() {}
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.screenShotMethod()
         
 //        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
 //            .start { event in
@@ -67,67 +64,16 @@ final class DetailViewController: UIViewController {
 //                }
 //        }
         
-//        self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("celebrityVM.getFromLocalStoreSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("celebrityVM.getFromLocalStoreSignal Error: \(error)")
-//                case .Completed:
-//                    print("celebrityVM.getFromLocalStoreSignal Completed")
-//                case .Interrupted:
-//                    print("celebrityVM.getFromLocalStoreSignal Interrupted")
-//                }
-//        }
-        
-//        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings)
-//            .start { event in
-//                switch(event) {
-//                case let .Next(value):
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Value: \(value)")
-//                case let .Error(error):
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Error: \(error)")
-//                case .Completed:
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Completed")
-//                case .Interrupted:
-//                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted")
-//                }
-//        }
-                
-// RETRIEVE AND UPDATE GO TOGETHER
-//
-        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Value2: \(value)")
-                case let .Error(error):
-                    print("ratingsVM.retrieveFromLocalStoreSignal Error2: \(error)")
-                case .Completed:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Completed2")
-                case .Interrupted:
-                    print("ratingsVM.retrieveFromLocalStoreSignal Interrupted2")
-                }
-        }
+        //self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id).start()
+        //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
+
+        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
         self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2)
             .start { event in
                 switch(event) {
                 case let .Next(value):
                     print("updateUserRatingsSignal Value: \(value)")
-                    self.ratingsVM.saveUserRatingsSignal()
-                        .start { event in
-                            switch(event) {
-                            case let .Next(value):
-                                print("saveUserRatingsSignal Value: \(value)")
-                            case let .Error(error):
-                                print("saveUserRatingsSignal Error: \(error)")
-                            case .Completed:
-                                print("saveUserRatingsSignal Completed")
-                            case .Interrupted:
-                                print("saveUserRatingsSignal Interrupted")
-                            }
-                    }
+                    self.ratingsVM.saveUserRatingsSignal().start()
                 case let .Error(error):
                     print("updateUserRatingsSignal Error: \(error)")
                 case .Completed:
