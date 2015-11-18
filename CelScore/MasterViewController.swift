@@ -23,9 +23,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     let celscoreVM: CelScoreViewModel
     let userVM: UserViewModel
     let settingsVM: SettingsViewModel
+    var loginButton: FBSDKLoginButton!
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
-    var loginButton: FBSDKLoginButton!
 
     
     //MARK: Initializers
@@ -35,17 +35,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celscoreVM = viewModel
         self.userVM = UserViewModel()
         self.settingsVM = SettingsViewModel()
-        
         self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
         super.init(nibName: nil, bundle: nil)
-        
         self.bindWithViewModels()
         
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"
-        
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
     }
