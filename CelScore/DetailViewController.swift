@@ -35,7 +35,6 @@ final class DetailViewController: UIViewController {
         self.celebPicNode = ASImageNode()
         
         super.init(nibName: nil, bundle: nil)
-        
         self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
     }
     
@@ -55,22 +54,9 @@ final class DetailViewController: UIViewController {
         
         //self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id).start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
-
-        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    print("updateUserRatingsSignal Value: \(value)")
-                    self.ratingsVM.saveUserRatingsSignal().start()
-                case let .Error(error):
-                    print("updateUserRatingsSignal Error: \(error)")
-                case .Completed:
-                    print("updateUserRatingsSignal Completed")
-                case .Interrupted:
-                    print("updateUserRatingsSignal Interrupted")
-                }
-        }
+        //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
+        //self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2).start()
+        //self.ratingsVM.saveUserRatingsSignal().start()
     }
     
     func screenShotMethod() {

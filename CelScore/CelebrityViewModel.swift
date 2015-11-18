@@ -29,20 +29,9 @@ final class CelebrityViewModel: NSObject {
         super.init()
         
         getFromLocalStoreSignal(id: celebrityId)
-            .take(2)
             .startOn(QueueScheduler.mainQueueScheduler)
-            .start { event in
-                switch(event) {
-                case let .Next(value):
-                    self.celebrity = value
-                case let .Error(error):
-                    print("getCelebrityWithIdFromLocalStoreSignal Error: \(error)")
-                case .Completed:
-                    print("getCelebrityWithIdFromLocalStoreSignal Completed")
-                case .Interrupted:
-                    print("getCelebrityWithIdFromLocalStoreSignal Interrupted")
-                }
-        }
+            .on(next: { celebrityModel in self.celebrity = celebrityModel })
+            .start()
     }
     
     

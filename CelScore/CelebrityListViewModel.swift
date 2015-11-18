@@ -55,7 +55,6 @@ class CelebrityListViewModel: NSObject {
     
     final func getListsFromLocalStoreSignal() -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let list = realm.objects(ListsModel)
             guard list.count > 0 else { sendError(sink, .NoLists); return }
