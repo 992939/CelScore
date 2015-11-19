@@ -39,7 +39,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
         super.init(nibName: nil, bundle: nil)
-        self.bindWithViewModels()
+        self.configuration()
         
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"
@@ -59,14 +59,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
-    
-    //MARK: ViewModel Binding
-    func bindWithViewModels()
+    func configuration()
     {
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
-        
-        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
