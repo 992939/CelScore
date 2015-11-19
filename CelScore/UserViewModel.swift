@@ -31,9 +31,9 @@ final class UserViewModel: NSObject {
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
                 return self.getUserInfoFromFacebookSignal()
             }
-            .on(next: {
-                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-            })
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+            }
             .observeOn(QueueScheduler.mainQueueScheduler)
             .start()
     }
