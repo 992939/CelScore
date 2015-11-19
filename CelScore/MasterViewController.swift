@@ -61,7 +61,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     
     //MARK: ViewModel Binding
-    func bindWithViewModels ()
+    func bindWithViewModels()
     {
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
