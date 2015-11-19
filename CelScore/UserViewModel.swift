@@ -41,11 +41,22 @@ final class UserViewModel: NSObject {
                     }
                 }
         }
+        
+        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
+            .promoteErrors(NSError.self)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+                return self.getUserInfoFromFacebookSignal()
+            }
+            .on(next: {
+                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+            })
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start()
     }
     
     
     //MARK: Login Methods
-    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
+    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
@@ -131,6 +142,9 @@ final class UserViewModel: NSObject {
                 let realm = try! Realm()
                 let predicate = NSPredicate(format: "isSynced = true") //TODO: Change to false
                 let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
+                guard userRatingsArray.count > 0 else {
+                    sendError(sink, NSError(domain: "com.CelScore.NoUserRatings", code: 1, userInfo: nil)); return
+                }
                 
                 realm.beginWrite()
                 for var index: Int = 0; index < userRatingsArray.count; index++
@@ -149,17 +163,13 @@ final class UserViewModel: NSObject {
                 let model: SettingsModel? = realm.objects(SettingsModel).first
                 
                 guard let settings = model else {
-                    sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil))
-                    return
+                    sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil)); return
                 }
                 
                 if settings.isSynced == false {
                     dataset.setString(settings.defaultListId, forKey: "defaultListId")
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
-                } else {
-                    sendCompleted(sink)
-                    return
-                }
+                } else { sendCompleted(sink); return }
             }
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
@@ -181,12 +191,7 @@ final class UserViewModel: NSObject {
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    //credentialsProvider.clearKeychain()
-                    sendError(sink, task.error)
-                    return task
-                }
-                
+                guard task.error == nil else { sendError(sink, task.error); return task } //credentialsProvider.clearKeychain()
                 let realm = try! Realm()
                 realm.beginWrite()
                 

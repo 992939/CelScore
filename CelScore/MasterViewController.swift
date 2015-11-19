@@ -67,11 +67,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         loginButton.delegate = self
         self.view.addSubview(loginButton)
         
-        /*FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        print(FBSDKAccessToken.currentAccessToken())
-        if let accessToken = FBSDKAccessToken.currentAccessToken() { print("fb token \(accessToken)") }
-        else { print("fb error") }*/
-        
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
@@ -117,19 +112,22 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
         
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        //if let accessToken = FBSDKAccessToken.currentAccessToken() { print("fb token \(accessToken)") }
+        //else { print("fb error") }
+        
         userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .on(next: { value in
                 let realm = try! Realm()
                 let userRatingsArray = realm.objects(UserRatingsModel)
                 if userRatingsArray.count == 0 {
-                    self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
+                    self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
                 } else {
                     //self.celscoreVM.timeNotifier.producer.start()
                     self.celscoreVM.getFromAWSSignal(dataType: .List).start()
                     self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
                     self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-                    //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
-                    //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).retry(2).start()
+                    self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
                 }
             })
             .start()
