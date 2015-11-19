@@ -112,14 +112,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
         
-        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
-        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
         //self.userVM.getUserInfoFromFacebookSignal().retry(2).start()
+        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
+        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
+        
         //self.celscoreVM.timeNotifier.producer.start()
         //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
