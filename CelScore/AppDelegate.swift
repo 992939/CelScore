@@ -23,10 +23,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     //MARK: Methods
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {
-        //AWSLogger.defaultLogger().logLevel = .Verbose
-        
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        AWSLogger.defaultLogger().logLevel = .Verbose
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
