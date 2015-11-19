@@ -25,44 +25,15 @@ final class UserViewModel: NSObject {
         super.init()
         
         NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-            .start { _ in
-                
-                return getUserInfoFromFacebookSignal().start { event in
-                    switch(event) {
-                    case let .Next(value):
-                        print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start { event in
-                            switch(event) {
-                            case let .Next(value):
-                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                            case let .Error(error):
-                                print("getUserInfoFromFacebookSignal() Error: \(error)")
-                            case .Completed:
-                                print("getUserInfoFromFacebookSignal() Completed")
-                            case .Interrupted:
-                                print("getUserInfoFromFacebookSignal() Interrupted")
-                            }
-                        }
-                    case let .Error(error):
-                        print("getUserInfoFromFacebookSignal() Error: \(error)")
-                    case .Completed:
-                        print("getUserInfoFromFacebookSignal() Completed")
-                    case .Interrupted:
-                        print("getUserInfoFromFacebookSignal() Interrupted")
-                    }
-                }
-        }
-        
-//        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-//            .promoteErrors(NSError.self)
-//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-//                return self.getUserInfoFromFacebookSignal()
-//            }
-//            .on(next: {
-//                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-//            })
-//            .observeOn(QueueScheduler.mainQueueScheduler)
-//            .start()
+            .promoteErrors(NSError.self)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+                return self.getUserInfoFromFacebookSignal()
+            }
+            .on(next: {
+                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+            })
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start()
     }
     
     
@@ -183,9 +154,10 @@ final class UserViewModel: NSObject {
                 } else { sendCompleted(sink); return }
             }
             
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else { sendError(sink, task.error); return task }
-                sendNext(sink, task.result)
+                
+                sendNext(sink, task.completed)
                 sendCompleted(sink)
                 return task
             })

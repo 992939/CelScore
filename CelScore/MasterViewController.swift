@@ -113,21 +113,24 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
         
-        userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
-            .on(next: { value in
-                let realm = try! Realm()
-                let userRatingsArray = realm.objects(UserRatingsModel)
-                if userRatingsArray.count == 0 {
-                    self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
-                } else {
-                    //self.celscoreVM.timeNotifier.producer.start()
-                    self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-                    self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
-                    self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-                    self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
-                }
-            })
-            .start()
+        self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
+        
+//        userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
+//            .on(next: { value in
+//                let realm = try! Realm()
+//                let userRatingsArray = realm.objects(UserRatingsModel)
+//                if userRatingsArray.count == 0 {
+//                    //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
+//                    //self.userVM.getUserInfoFromFacebookSignal().retry(2).start()
+//                } else {
+//                    //self.celscoreVM.timeNotifier.producer.start()
+//                    self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+//                    self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
+//                    self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+//                    self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
+//                }
+//            })
+//            .start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
