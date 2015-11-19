@@ -140,7 +140,6 @@ final class UserViewModel: NSObject {
                 
             case .UserSettings:
                 //TODO: Checked once a day and only called when user actually changed a setting
-                
                 let realm = try! Realm()
                 let model: SettingsModel? = realm.objects(SettingsModel).first
                 
