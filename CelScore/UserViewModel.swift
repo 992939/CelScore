@@ -31,7 +31,18 @@ final class UserViewModel: NSObject {
                     switch(event) {
                     case let .Next(value):
                         print("updateUserInfoOnCognitoSignal() Next: \(value)")
-                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start()
+                        self.updateCognitoSignal(object: value, dataSetType: .UserInfo).start { event in
+                            switch(event) {
+                            case let .Next(value):
+                                print("updateUserInfoOnCognitoSignal() Next: \(value)")
+                            case let .Error(error):
+                                print("getUserInfoFromFacebookSignal() Error: \(error)")
+                            case .Completed:
+                                print("getUserInfoFromFacebookSignal() Completed")
+                            case .Interrupted:
+                                print("getUserInfoFromFacebookSignal() Interrupted")
+                            }
+                        }
                     case let .Error(error):
                         print("getUserInfoFromFacebookSignal() Error: \(error)")
                     case .Completed:
@@ -42,16 +53,16 @@ final class UserViewModel: NSObject {
                 }
         }
         
-        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-            .promoteErrors(NSError.self)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-                return self.getUserInfoFromFacebookSignal()
-            }
-            .on(next: {
-                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-            })
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .start()
+//        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
+//            .promoteErrors(NSError.self)
+//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+//                return self.getUserInfoFromFacebookSignal()
+//            }
+//            .on(next: {
+//                value in self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+//            })
+//            .observeOn(QueueScheduler.mainQueueScheduler)
+//            .start()
     }
     
     

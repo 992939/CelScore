@@ -43,18 +43,12 @@ final class CelScoreViewModel: NSObject {
     
     
     //MARK: Methods
-    func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NSError> {
+    func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NoError> {
         return SignalProducer { sink, _ in
             
             let reachability = Monitor()
             reachability!.startMonitoring()
-
-            if reachability?.reachabilityStatus == .NotReachable {
-                sendError(sink, NSError(domain: "com.CelScore.Network", code: 1, userInfo: nil))
-            } else
-            {
-                sendNext(sink, (reachability?.reachabilityStatus)!)
-            }
+            sendNext(sink, (reachability?.reachabilityStatus)!)
         }
     }
     

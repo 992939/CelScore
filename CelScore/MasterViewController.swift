@@ -62,6 +62,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         
         //Login
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
@@ -111,10 +112,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
-        
-        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        //if let accessToken = FBSDKAccessToken.currentAccessToken() { print("fb token \(accessToken)") }
-        //else { print("fb error") }
         
         userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .on(next: { value in
