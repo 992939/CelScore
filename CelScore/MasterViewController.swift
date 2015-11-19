@@ -45,6 +45,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchTextField.placeholder = "look up a celebrity"
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
+        
+        self.loginButton = FBSDKLoginButton()
+        self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        self.loginButton.delegate = self
+        self.view.addSubview(loginButton)
     }
     
     
@@ -62,10 +67,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        loginButton.delegate = self
-        self.view.addSubview(loginButton)
         
         self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
