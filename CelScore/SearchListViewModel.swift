@@ -22,14 +22,13 @@ final class SearchListViewModel: CelebrityListViewModel {
         super.init()
         
         self.searchText.producer
-            .promoteErrors(ListError.self)
             .filter { $0.characters.count > 2 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
-            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, ListError> in
+            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NoError> in
                 return self.searchSignal(searchToken: token)
             }
-            .observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
+            .start(Event.sink(error: {
                 print("Error \($0)")
                 },
                 next: {
@@ -41,7 +40,7 @@ final class SearchListViewModel: CelebrityListViewModel {
     
     
     //MARK: Methods
-    func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, ListError> {
+    func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -50,10 +49,7 @@ final class SearchListViewModel: CelebrityListViewModel {
             
             predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             list = realm.objects(CelebrityModel).filter(predicate)
-            guard list.count > 0 else { sendError(sink, ListError.EmptyList); return }
-
             sendNext(sink, list)
-            sendCompleted(sink)
         }
     }
 }
