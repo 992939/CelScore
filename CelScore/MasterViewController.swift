@@ -109,15 +109,28 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
         
-        //self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook).retry(2).start()
-        //self.userVM.getUserInfoFromFacebookSignal().retry(2).start()
-        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
-        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
+        self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
+        .flatMapError { _ in SignalProducer<AnyObject!, NSError>.empty }
+        .retry(2)
+        .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject!, NSError> in
+                return self.celscoreVM.getFromAWSSignal(dataType: .List)
+        }
+        .start()
+//
+//        self.celscoreVM.timerSignal()
+//            .promoteErrors(NSError.self)
+//            .flatMap(.Concat) { (token: String) -> SignalProducer<AnyObject!, NSError> in
+//                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+//        }
+//        .observeOn(QueueScheduler.mainQueueScheduler)
+//        .start()
         
+        //self.userVM.getUserInfoFromFacebookSignal()
+        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
+        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo)
         //self.celscoreVM.timeNotifier.producer.start()
-        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
-        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
+        //self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}

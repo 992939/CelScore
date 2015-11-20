@@ -32,13 +32,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //Twitter().startWithConsumerKey(Twitter.sharedInstance().consumerKey, consumerSecret: Twitter.sharedInstance().consumerSecret)
         //Fabric.with([Twitter.self, AWSCognito.self])
         
-        //AWSLogger.defaultLogger().logLevel = .Verbose
-        //let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-        //let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-        //AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-        //let cognitoID = credentialsProvider.getIdentityId()
-        //credentialsProvider.clearKeychain()
-        
         window.makeKeyAndVisible()
         self.window = window
         return true

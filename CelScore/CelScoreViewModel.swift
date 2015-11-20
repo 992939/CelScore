@@ -28,18 +28,7 @@ final class CelScoreViewModel: NSObject {
     
     
     //MARK: Initializers
-    override init() {
-        super.init()
-        
-        //TODO: self.timeNotifier <~ self.timerSignal()
-        self.timeNotifier.producer
-            .promoteErrors(NSError.self)
-            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject!, NSError> in
-                return self.getFromAWSSignal(dataType: .Celebrity)
-            }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .start()
-    }
+    override init() { super.init() }
     
     
     //MARK: Methods
@@ -86,7 +75,6 @@ final class CelScoreViewModel: NSObject {
                     try! realm.commitWrite()
                 })
                 sendNext(sink, task.result)
-                sendCompleted(sink)
                 return task
             })
         }

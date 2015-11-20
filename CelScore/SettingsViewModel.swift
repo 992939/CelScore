@@ -32,11 +32,8 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
+            guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
             
-            guard celebrityCount > 1 else {
-                sendError(sink, .NoCelebrityModels)
-                return
-            }
             sendNext(sink, userRatingsCount/celebrityCount)
             sendCompleted(sink)
         }
@@ -47,11 +44,8 @@ final class SettingsViewModel: NSObject {
             
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
+            guard let settings = model else { sendError(sink, .NoSettingsModel); return }
             
-            guard let settings = model else {
-                sendError(sink, .NoSettingsModel)
-                return
-            }
             sendNext(sink, settings)
             sendCompleted(sink)
         }
@@ -68,10 +62,8 @@ final class SettingsViewModel: NSObject {
             let settings: SettingsModel = model!
             
             switch settingType {
-            case .DefaultListId:
-                settings.defaultListId = value as! String
-            case .LoginTypeIndex:
-                settings.loginTypeIndex = value as! Int
+            case .DefaultListId: settings.defaultListId = value as! String
+            case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
             }
             settings.isSynced = false
             realm.add(settings, update: true)

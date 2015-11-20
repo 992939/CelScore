@@ -43,6 +43,10 @@ final class UserViewModel: NSObject {
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
+            //AWSLogger.defaultLogger().logLevel = .Verbose
+            //let cognitoID = credentialsProvider.getIdentityId()
+            //credentialsProvider.clearKeychain()
+            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
