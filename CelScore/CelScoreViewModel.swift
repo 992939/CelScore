@@ -97,7 +97,7 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func timerSignal() -> SignalProducer<String, NoError> {
+    func timerSignal() -> SignalProducer<AnyObject!, NoError> {
         return SignalProducer { sink, _ in
             var count = 0
             AIRTimer.every(5, userInfo: "FIRE!!") { timer in
