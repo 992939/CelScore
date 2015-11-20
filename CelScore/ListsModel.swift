@@ -16,12 +16,9 @@ public final class CelebId: Object, NSCopying {
     
     
     //MARK: Methods
-    public func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = CelebId()
-        copy.id = self.id
-        return copy
-    }
+    public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
 }
+
 
 public final class ListsModel: Object, NSCopying {
     
