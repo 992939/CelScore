@@ -28,14 +28,11 @@ final class SearchListViewModel: CelebrityListViewModel {
             .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NoError> in
                 return self.searchSignal(searchToken: token)
             }
-            .start(Event.sink(error: {
-                print("Error \($0)")
-                },
-                next: {
-                    response in
-                    print("Search results: \(response)")
-                    self.isSearching.value = false
-            }))
+            .startWithNext {
+                response in
+                print("Search results: \(response)")
+                self.isSearching.value = false
+        }
     }
     
     
