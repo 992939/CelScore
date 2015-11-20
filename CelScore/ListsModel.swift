@@ -40,7 +40,6 @@ public final class ListsModel: Object, NSCopying {
         
         self.id = dictionary["listID"] as! String
         self.name = dictionary["name"] as! String
-        print(dictionary["list"])
         let items = dictionary["list"] as! NSArray
         
         for (index, _) in items.enumerate() {

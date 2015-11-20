@@ -24,7 +24,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        AWSLogger.defaultLogger().logLevel = .Verbose
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
@@ -33,11 +32,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //Twitter().startWithConsumerKey(Twitter.sharedInstance().consumerKey, consumerSecret: Twitter.sharedInstance().consumerSecret)
         //Fabric.with([Twitter.self, AWSCognito.self])
         
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
-        let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-        
+        //AWSLogger.defaultLogger().logLevel = .Verbose
+        //let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+        //let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+        //AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
         //let cognitoID = credentialsProvider.getIdentityId()
+        //credentialsProvider.clearKeychain()
         
         window.makeKeyAndVisible()
         self.window = window

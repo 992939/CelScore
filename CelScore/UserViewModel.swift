@@ -103,6 +103,10 @@ final class UserViewModel: NSObject {
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize()
@@ -175,7 +179,7 @@ final class UserViewModel: NSObject {
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error); return task } //credentialsProvider.clearKeychain()
+                guard task.error == nil else { sendError(sink, task.error); return task }
                 let realm = try! Realm()
                 realm.beginWrite()
                 

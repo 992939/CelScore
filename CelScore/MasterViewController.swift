@@ -109,6 +109,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
         
+        //self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook).retry(2).start()
         //self.userVM.getUserInfoFromFacebookSignal().retry(2).start()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).retry(2).start()
         //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo).retry(2).start()
