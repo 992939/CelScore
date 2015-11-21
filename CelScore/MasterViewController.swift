@@ -98,7 +98,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     
-    // MARK: UITextFieldDelegate methods
+    //MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
     func textFieldDidBeginEditing(textField: UITextField) {}
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }

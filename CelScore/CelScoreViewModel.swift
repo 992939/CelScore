@@ -41,7 +41,7 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
+    func getFromAWSSignal(dataType dataType: AWSDataType, interval: Int = 0) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
