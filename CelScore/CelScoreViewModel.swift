@@ -41,7 +41,7 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject!, NSError> {
+    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
@@ -97,11 +97,11 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func timerSignal() -> SignalProducer<AnyObject!, NoError> {
+    func timerSignal() -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
             var count = 0
             AIRTimer.every(5, userInfo: "FIRE!!") { timer in
-                sendNext(sink, "tick #\(count++)")
+                sendNext(sink, count++)
             }
         }
     }

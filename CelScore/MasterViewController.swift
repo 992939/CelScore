@@ -109,23 +109,31 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
 
-        self.celscoreVM.timerSignal()
-            .promoteErrors(NSError.self)
+//        self.celscoreVM.timerSignal()
+//            .promoteErrors(NSError.self)
+//            .observeOn(QueueScheduler.mainQueueScheduler)
+//            .flatMap(.Latest) { (value: Int) -> SignalProducer<AnyObject!, NSError> in
+//                return self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
+//            }
+//            .flatMapError { _ in SignalProducer<AnyObject!, NSError>.empty }
+//            .retry(2)
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject!, NSError> in
+//                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+//            }
+//            .start()
+        
+        self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject!, NSError> in
-                return self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
-            }
-            .flatMapError { _ in SignalProducer<AnyObject!, NSError>.empty }
-            .retry(2)
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject!, NSError> in
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
                 return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
             }
+            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
+            .retry(2)
             .start()
         
         //self.userVM.getUserInfoFromFacebookSignal()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
         //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo)
-        //self.celscoreVM.timeNotifier.producer.start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
     }
