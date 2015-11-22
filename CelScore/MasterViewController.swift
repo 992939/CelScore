@@ -112,6 +112,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                //TODO: enum every_day, every_minute, every_hour
                 return self.celscoreVM.getFromAWSSignal(dataType: .Ratings, timeInterval: 3)
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
