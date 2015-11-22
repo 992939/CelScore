@@ -15,8 +15,14 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     var celebrity: CelebrityModel?
-    var age: Int { get { return NSDate().year - (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.year)! }}
     var zodiac: String { get { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }}
+    var age: Int { get {
+        let birthdate = self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")
+        if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
+        { return NSDate().year - (birthdate!.year+1) }
+        else { return NSDate().year - birthdate!.year }
+        }
+    }
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
     enum Rank { case A_List, B_List, Other }
@@ -26,10 +32,7 @@ final class CelebrityViewModel: NSObject {
     
     
     //MARK: Initializers
-    init(celebrityId: String) {
-        super.init()
-        getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
-    }
+    init(celebrityId: String) { super.init(); getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }}
     
     
     //MARK: Methods
