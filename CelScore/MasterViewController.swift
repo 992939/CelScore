@@ -108,24 +108,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
-
-//        self.celscoreVM.timerSignal()
-//            .promoteErrors(NSError.self)
-//            .observeOn(QueueScheduler.mainQueueScheduler)
-//            .flatMap(.Latest) { (value: Int) -> SignalProducer<AnyObject!, NSError> in
-//                return self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
-//            }
-//            .flatMapError { _ in SignalProducer<AnyObject!, NSError>.empty }
-//            .retry(2)
-//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject!, NSError> in
-//                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
-//            }
-//            .start()
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings, timeInterval: 3)
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
