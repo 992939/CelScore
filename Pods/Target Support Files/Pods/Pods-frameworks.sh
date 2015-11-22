@@ -95,6 +95,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/RealmSwift.framework"
   install_framework "Pods/Result.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/Timepiece.framework"
   install_framework "Pods/WillowTreeReachability.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -109,5 +110,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/RealmSwift.framework"
   install_framework "Pods/Result.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/Timepiece.framework"
   install_framework "Pods/WillowTreeReachability.framework"
 fi

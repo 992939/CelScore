@@ -15,9 +15,16 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     var celebrity: CelebrityModel?
+    var zodiac: String {
+        get {
+            if let celeb = self.celebrity {
+                return celeb.birthdate
+            } else { return "" }
+        }
+    }
+    var age: String?
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
-    enum Horoscope: Int { case Aries = 1, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn , Aquarius, Pisces }
     enum Rank { case A_List, B_List, Other }
     enum PersonalStatus { case Single, Married, Divorced, Engaged }
     enum FollowStatus: Int { case NotFollowing = 0, Following }

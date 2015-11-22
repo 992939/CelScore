@@ -12,6 +12,7 @@ pod 'Fabric'
 pod 'TwitterKit'
 pod 'TwitterCore'
 pod 'AIRTimer'
+pod 'Timepiece', '~> 0.4'
 
 target 'CelScore' do
 

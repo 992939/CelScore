@@ -42,6 +42,7 @@ PODS:
     - Realm (= 0.96.0)
   - Result (0.6.0-beta.3)
   - SwiftyJSON (2.3.0)
+  - Timepiece (0.4.2)
   - TwitterCore (1.12.0)
   - TwitterKit (1.12.0)
   - WillowTreeReachability (1.0.0)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - ReactiveCocoa (= 4.0.2-alpha-1)
   - RealmSwift (~> 0.96)
   - SwiftyJSON (~> 2.3)
+  - Timepiece (~> 0.4)
   - TwitterCore
   - TwitterKit
   - WillowTreeReachability (~> 1.0)
@@ -72,6 +74,7 @@ SPEC CHECKSUMS:
   RealmSwift: 40246e6f57a4e863bfdfc1ca1d7b967f0df607e2
   Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+  Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
   TwitterKit: c27e7b997cd82d5c626fcfd8b1dead1e15dac7ca
   WillowTreeReachability: e16001f10483881c6f7ffe656ab67fa705d037ad
