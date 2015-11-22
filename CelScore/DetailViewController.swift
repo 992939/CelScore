@@ -52,7 +52,8 @@ final class DetailViewController: UIViewController {
             })
             .start()*/
         
-        //self.celebrityVM.getFromLocalStoreSignal(id: self.celebrityProfile.id).start()
+        print("age is \(self.celebrityVM.age) and zodiac is \(self.celebrityVM.zodiac)")
+
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
         //self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2).start()

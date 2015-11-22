@@ -9,20 +9,14 @@
 import Foundation
 import RealmSwift
 import ReactiveCocoa
-
+import Timepiece
 
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     var celebrity: CelebrityModel?
-    var zodiac: String {
-        get {
-            if let celeb = self.celebrity {
-                return celeb.birthdate
-            } else { return "" }
-        }
-    }
-    var age: String?
+    var age: Int { get { return NSDate().year - (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.year)! }}
+    var zodiac: String { get { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }}
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
     enum Rank { case A_List, B_List, Other }
@@ -34,11 +28,7 @@ final class CelebrityViewModel: NSObject {
     //MARK: Initializers
     init(celebrityId: String) {
         super.init()
-        
-        getFromLocalStoreSignal(id: celebrityId)
-            .startOn(QueueScheduler.mainQueueScheduler)
-            .on(next: { celebrityModel in self.celebrity = celebrityModel })
-            .start()
+        getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
     }
     
     
