@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7439FBE3FEA17FA832DDF872'
+               BlueprintIdentifier = '5698B7CCF8E6A7322223A514'
                BlueprintName = 'Pods-CelScore'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_CelScore.framework'>

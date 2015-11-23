@@ -30,7 +30,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
         
         //Twitter().startWithConsumerKey(Twitter.sharedInstance().consumerKey, consumerSecret: Twitter.sharedInstance().consumerSecret)
-        //Fabric.with([Twitter.self, AWSCognito.self])
+        Fabric.with([Twitter.self])
         
         window.makeKeyAndVisible()
         self.window = window

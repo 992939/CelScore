@@ -15,9 +15,14 @@
 
 #import "AWSService.h"
 
+#import <UIKit/UIKit.h>
 #import "AWSSynchronizedMutableDictionary.h"
 #import "AWSURLResponseSerialization.h"
 #import "AWSLogging.h"
+#import "AWSCategory.h"
+
+NSString *const AWSiOSSDKVersion = @"2.3.0";
+NSString *const AWSServiceConfigurationUnknown = @"Unknown";
 
 #pragma mark - AWSService
 
@@ -55,7 +60,7 @@
 - (void)setDefaultServiceConfiguration:(AWSServiceConfiguration *)defaultServiceConfiguration {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _defaultServiceConfiguration = defaultServiceConfiguration;
+        _defaultServiceConfiguration = [defaultServiceConfiguration copy];
     });
 }
 
@@ -80,6 +85,7 @@
 @property (nonatomic, assign) AWSRegionType regionType;
 @property (nonatomic, strong) id<AWSCredentialsProvider> credentialsProvider;
 @property (nonatomic, strong) AWSEndpoint *endpoint;
+@property (nonatomic, strong) NSArray *userAgentProductTokens;
 
 @end
 
@@ -108,14 +114,77 @@
     return configuration;
 }
 
++ (NSString *)baseUserAgent {
+    static NSString *_userAgent = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *systemName = [[[UIDevice currentDevice] systemName] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+        if (!systemName) {
+            systemName = AWSServiceConfigurationUnknown;
+        }
+        NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+        if (!systemVersion) {
+            systemVersion = AWSServiceConfigurationUnknown;
+        }
+        NSString *localeIdentifier = [[NSLocale currentLocale] localeIdentifier];
+        if (!localeIdentifier) {
+            localeIdentifier = AWSServiceConfigurationUnknown;
+        }
+        _userAgent = [NSString stringWithFormat:@"aws-sdk-iOS/%@ %@/%@ %@", AWSiOSSDKVersion, systemName, systemVersion, localeIdentifier];
+    });
+
+    NSMutableString *userAgent = [NSMutableString stringWithString:_userAgent];
+    for (NSString *prefix in _globalUserAgentPrefixes) {
+        [userAgent appendFormat:@" %@", prefix];
+    }
+
+    return [NSString stringWithString:userAgent];
+}
+
+static NSMutableArray *_globalUserAgentPrefixes = nil;
+
++ (void)addGlobalUserAgentProductToken:(NSString *)productToken {
+    if (productToken) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _globalUserAgentPrefixes = [NSMutableArray new];
+        });
+
+        if (![_globalUserAgentPrefixes containsObject:productToken]) {
+            [_globalUserAgentPrefixes addObject:productToken];
+        }
+    }
+}
+
+- (NSString *)userAgent {
+    NSMutableString *userAgent = [NSMutableString stringWithString:[AWSServiceConfiguration baseUserAgent]];
+    for (NSString *prefix in self.userAgentProductTokens) {
+        [userAgent appendFormat:@" %@", prefix];
+    }
+
+    return [NSString stringWithString:userAgent];
+}
+
+- (void)addUserAgentProductToken:(NSString *)productToken {
+    if (productToken) {
+        if (self.userAgentProductTokens) {
+            if (![self.userAgentProductTokens containsObject:productToken]) {
+                NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:self.userAgentProductTokens];
+                [mutableArray addObject:productToken];
+                self.userAgentProductTokens = [NSArray arrayWithArray:mutableArray];
+            }
+        } else {
+            self.userAgentProductTokens = @[productToken];
+        }
+    }
+}
+
 - (id)copyWithZone:(NSZone *)zone {
     AWSServiceConfiguration *configuration = [super copyWithZone:zone];
     configuration.regionType = self.regionType;
     configuration.credentialsProvider = self.credentialsProvider;
-    configuration.maxRetryCount = self.maxRetryCount;
-    configuration.timeoutIntervalForRequest = self.timeoutIntervalForRequest;
-    configuration.timeoutIntervalForResource = self.timeoutIntervalForResource;
-
+    configuration.userAgentProductTokens = self.userAgentProductTokens;
+    
     return configuration;
 }
 
@@ -133,6 +202,7 @@ NSString *const AWSRegionNameAPNortheast1 = @"ap-northeast-1";
 NSString *const AWSRegionNameAPSoutheast2 = @"ap-southeast-2";
 NSString *const AWSRegionNameSAEast1 = @"sa-east-1";
 NSString *const AWSRegionNameCNNorth1 = @"cn-north-1";
+NSString *const AWSRegionNameUSGovWest1 = @"us-gov-west-1";
 
 NSString *const AWSServiceNameAPIGateway = @"execute-api";
 NSString *const AWSServiceNameAutoScaling = @"autoscaling";
@@ -225,6 +295,8 @@ NSString *const AWSServiceNameSTS = @"sts";
             return AWSRegionNameSAEast1;
         case AWSRegionCNNorth1:
             return AWSRegionNameCNNorth1;
+        case AWSRegionUSGovWest1:
+            return AWSRegionNameUSGovWest1;
         default:
             return nil;
     }
@@ -289,7 +361,8 @@ NSString *const AWSServiceNameSTS = @"sts";
             || regionType == AWSRegionAPSoutheast1
             || regionType == AWSRegionAPNortheast1
             || regionType == AWSRegionAPSoutheast2
-            || regionType == AWSRegionSAEast1)) {
+            || regionType == AWSRegionSAEast1
+            || regionType == AWSRegionUSGovWest1)) {
             separator = @"-";
         }
 
