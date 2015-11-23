@@ -50,6 +50,17 @@
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>0POZdCaGiTcswpXknq1KsoalL</string>
+					<key>consumerSecret</key>
+					<string>4aurkPDZ0w6VgQJeA1pLvAqOY7wGInmefUYM7PlGIISxMjtiKZ</string>
+				</dict>
+				<key>KitName</key>
+				<string>AWSCognito</string>
+			</dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>

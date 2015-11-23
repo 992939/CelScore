@@ -20,7 +20,6 @@ final class CelScoreViewModel: NSObject {
     let okFacebook: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
     let okTwitter: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
     let okWeibo: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeSinaWeibo)
-    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     let timeNotifier = MutableProperty<String>("")
     enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum SocialNetwork: Int { case Twitter = 0, Facebook, Weibo }
@@ -44,7 +43,7 @@ final class CelScoreViewModel: NSObject {
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: self.cognitoIdentityPoolId)
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             let serviceClient = CSCelScoreAPIClient.defaultClient()
@@ -74,8 +73,8 @@ final class CelScoreViewModel: NSObject {
                         realm.beginWrite()
                         realm.add(awsObject, update: true)
                         try! realm.commitWrite()
+                        print(awsObject)
                     })
-                    print("c'est la vie")
                     sendNext(sink, task.result)
                     return task
                 })

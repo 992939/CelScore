@@ -19,7 +19,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Properties
     var window: UIWindow?
-    let cognitoIdentityPoolId: String = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     
     
     //MARK: Methods

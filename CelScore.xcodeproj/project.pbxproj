@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; settings = {ASSET_TAGS = (); }; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5A1C03A2F2000F533F /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A931BED89430009AD0E /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -78,6 +79,7 @@
 /* Begin PBXFileReference section */
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
+		0036DD5A1C03A2F2000F533F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00404A931BED89430009AD0E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 			);
@@ -579,6 +582,7 @@
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */,
+				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00B6F0331BC79C8F000DA1C6 /* CSEmpty.m in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
