@@ -82,6 +82,17 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
+    func indexCelebritiesOnSpotLightSignal() -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let list = realm.objects(CelebrityModel)
+            guard list.count > 0 else { return }
+            
+            
+        }
+    }
+    
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { sink, _ in
             

@@ -19,7 +19,7 @@ extension CelebrityProfile {
         let activity = NSUserActivity(activityType: CelebrityProfile.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
-        activity.keywords = [String(prevScore)]
+        activity.keywords = [nickname, "celebrity", "news", "scandal", "score", "height", "net worth", "age", "zodiac"]
         activity.contentAttributeSet = attributeSet
         activity.eligibleForSearch = true
         activity.eligibleForPublicIndexing = true
