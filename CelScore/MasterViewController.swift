@@ -93,7 +93,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        self.presentViewController(DetailViewController(profile: node.profile), animated: false, completion: nil)
+        self.presentViewController(DetailViewController(celebrityId: node.profile.id), animated: false, completion: nil)
         //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     

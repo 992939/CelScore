@@ -59,7 +59,7 @@ final class CelebrityViewModel: NSObject {
             
             if followStatus == .Following { object.isFollowed = true }
             else { object.isFollowed = false }
-            //TODO: Notification Center
+            //TODO: update Notification Center
             
             object.isSynced = false
             realm.add(object, update: true)

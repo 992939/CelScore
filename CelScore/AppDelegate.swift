@@ -40,6 +40,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        guard userActivity.activityType == CelebrityProfile.domainIdentifier, let objectId = userActivity.userInfo?["id"] as? String
+            else { return false }
+        
+        window!.rootViewController?.popoverPresentationController
+        window!.rootViewController?.presentViewController(DetailViewController(celebrityId: objectId), animated: false, completion: nil)
+        return true
+    }
+    
     func applicationWillResignActive(application: UIApplication) {}
     func applicationDidEnterBackground(application: UIApplication) {}
     func applicationWillEnterForeground(application: UIApplication) {}

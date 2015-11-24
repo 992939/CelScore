@@ -10,6 +10,7 @@
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; settings = {ASSET_TAGS = (); }; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5A1C03A2F2000F533F /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
+		0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A931BED89430009AD0E /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -80,6 +81,7 @@
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
 		0036DD5A1C03A2F2000F533F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearch.swift; sourceTree = "<group>"; };
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00404A931BED89430009AD0E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
+				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
 				00F6C9D71B35393C0078CA6E /* CelebrityListViewModel.swift in Sources */,
 				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
+				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,

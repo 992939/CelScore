@@ -16,7 +16,6 @@ final class DetailViewController: UIViewController {
     let celscoreNode: ASTextNode
     let marginErrorNode: ASTextNode
     let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
-    let celebrityProfile: CelebrityProfile
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
     enum PageType: Int { case CelScore = 0, Info, Ratings }
@@ -25,17 +24,16 @@ final class DetailViewController: UIViewController {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(profile: CelebrityProfile) {
-        self.celebrityProfile = profile
-        self.celebrityVM = CelebrityViewModel(celebrityId: profile.id)
-        self.ratingsVM = RatingsViewModel(celebrityId: profile.id)
+    init(celebrityId: String) {
+        self.celebrityVM = CelebrityViewModel(celebrityId: celebrityId)
+        self.ratingsVM = RatingsViewModel(celebrityId: celebrityId)
         self.nickNameNode = ASTextNode()
         self.celscoreNode = ASTextNode()
         self.marginErrorNode = ASTextNode()
         self.celebPicNode = ASImageNode()
         
         super.init(nibName: nil, bundle: nil)
-        self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
+        self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celebrityVM.celebrity?.nickName)")
     }
     
     
