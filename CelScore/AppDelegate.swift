@@ -44,7 +44,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         guard userActivity.activityType == CelebrityProfile.domainIdentifier, let objectId = userActivity.userInfo?["id"] as? String
             else { return false }
         
-        window!.rootViewController?.popoverPresentationController
         window!.rootViewController?.presentViewController(DetailViewController(celebrityId: objectId), animated: false, completion: nil)
         return true
     }

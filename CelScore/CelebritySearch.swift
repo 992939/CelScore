@@ -11,7 +11,7 @@ import CoreSpotlight
 import MobileCoreServices
 
 extension CelebrityProfile {
-    public static let domainIdentifier = "com.GreyEcology.CelebrityScore.CelebrityProfile"
+    public static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
     
     public var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id] }
     
@@ -19,7 +19,7 @@ extension CelebrityProfile {
         let activity = NSUserActivity(activityType: CelebrityProfile.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
-        activity.keywords = [nickname, "celebrity", "news", "scandal", "score", "height", "net worth", "age", "zodiac"]
+        activity.keywords = [nickname, "celebrity", "birthday", "birthplace", "score", "height", "net worth", "age", "zodiac"]
         activity.contentAttributeSet = attributeSet
         activity.eligibleForSearch = true
         activity.eligibleForPublicIndexing = true
