@@ -49,6 +49,24 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
+    func indexCelebritiesOnSpotLightSignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", id)
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
+            guard let celeb = celebrity else { sendError(sink, .NotFound); return }
+            
+            let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
+            let activity = profile.userActivity
+            activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
+            activity.becomeCurrent()
+            
+            sendNext(sink, celeb)
+            sendCompleted(sink)
+        }
+    }
+    
     func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
             

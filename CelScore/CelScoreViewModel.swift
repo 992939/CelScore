@@ -82,25 +82,6 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func indexCelebritiesOnSpotLightSignal() -> SignalProducer<AnyObject, NoError> {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let list = realm.objects(CelebrityModel)
-            guard list.count > 0 else { return }
-            
-            for celeb in list {
-                let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
-                let activity = profile.userActivity
-                activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
-                //activity.becomeCurrent()
-                
-                sendNext(sink, activity)
-            }
-            sendCompleted(sink)
-        }
-    }
-    
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { sink, _ in
             
