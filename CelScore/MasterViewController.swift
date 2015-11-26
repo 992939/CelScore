@@ -121,8 +121,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .retry(2)
             .start()
         
-        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
         
         //self.userVM.getUserInfoFromFacebookSignal()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
