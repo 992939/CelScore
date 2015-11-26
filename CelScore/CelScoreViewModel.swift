@@ -43,15 +43,9 @@ final class CelScoreViewModel: NSObject {
     
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            
-            AWSLogger.defaultLogger().logLevel = .Verbose
-//            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-//            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-//            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
 
             let serviceClient = CSCelScoreAPIClient.defaultClient()
-            serviceClient.APIKey = "eljwrWL80O2OOXa6ZTdYu6n5p0yJ5f5o2BzG6QNG"
-            
+            serviceClient.APIKey = "eljwrWL80O2OOXa6ZTdYu6n5p0yJ5f5o2BzG6QNG" //TODO: encrypt
         
             let awsCall : AWSTask
             switch dataType {
