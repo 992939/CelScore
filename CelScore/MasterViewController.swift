@@ -81,7 +81,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
-    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) { /*TODO: Implement*/ }
+    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) {
+        /*TODO: Implement*/
+    }
     
     func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
         var node = ASCellNode()

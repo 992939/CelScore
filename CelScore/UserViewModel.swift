@@ -23,7 +23,7 @@ final class UserViewModel: NSObject {
     override init() {
         super.init()
         
-        //TODO: case Facebook:
+        //TODO: case Facebook: and case Twitter:
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
             .promoteErrors(NSError.self)

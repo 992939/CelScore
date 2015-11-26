@@ -55,30 +55,31 @@ final class CelScoreViewModel: NSObject {
             case .Ratings: awsCall = serviceClient.celebratingservicePost()
             }
             
-            AIRTimer.every(timeInterval, userInfo: nil) { timer in
-                awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                    guard task.error == nil else { sendError(sink, task.error); return task }
-                    guard task.cancelled == false else { sendInterrupted(sink); return task }
-                    
-                    let myData = task.result as! String
-                    let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                    json["Items"].arrayValue.forEach({ data in
-                        let awsObject : Object
-                        switch dataType {
-                        case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
-                        case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
-                        case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
-                        }
-                        let realm = try! Realm()
-                        realm.beginWrite()
-                        realm.add(awsObject, update: true)
-                        try! realm.commitWrite()
-                        print(awsObject)
-                    })
-                    sendNext(sink, task.result)
-                    return task
+            let block = awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.cancelled == false else { sendInterrupted(sink); return task }
+                
+                let myData = task.result as! String
+                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                json["Items"].arrayValue.forEach({ data in
+                    let awsObject : Object
+                    switch dataType {
+                    case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
+                    case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
+                    case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
+                    }
+                    let realm = try! Realm()
+                    realm.beginWrite()
+                    realm.add(awsObject, update: true)
+                    try! realm.commitWrite()
+                    print(awsObject)
                 })
-            }
+                sendNext(sink, task.result)
+                return task
+            })
+            
+            AIRTimer.every(timeInterval, userInfo: nil) { timer in block }
+            block
         }
     }
     
