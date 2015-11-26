@@ -1,3 +1,4 @@
+
 //
 //  CelScoreViewModel.swift
 //  CelScore
@@ -46,7 +47,9 @@ final class CelScoreViewModel: NSObject {
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            CSCelScoreAPIClient.registerClientWithConfiguration(defaultServiceConfiguration, forKey: "Key")
+            //let serviceClient = CSCelScoreAPIClient.defaultClient()
+            let serviceClient = CSCelScoreAPIClient(forKey: "Key")
         
             let awsCall : AWSTask
             switch dataType {
@@ -59,21 +62,23 @@ final class CelScoreViewModel: NSObject {
                 guard task.error == nil else { sendError(sink, task.error); return task }
                 guard task.cancelled == false else { sendInterrupted(sink); return task }
                 
-                let myData = task.result as! String
-                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
-                json["Items"].arrayValue.forEach({ data in
-                    let awsObject : Object
-                    switch dataType {
-                    case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
-                    case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
-                    case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
-                    }
-                    let realm = try! Realm()
-                    realm.beginWrite()
-                    realm.add(awsObject, update: true)
-                    try! realm.commitWrite()
-                    print(awsObject)
-                })
+                let myData = task.result as! CSEmpty
+                let json = myData.dictionaryValue
+                print("myData \(myData.description) and json \(json)")
+                //let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+//                json["Items"].arrayValue.forEach({ data in
+//                    let awsObject : Object
+//                    switch dataType {
+//                    case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
+//                    case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
+//                    case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
+//                    }
+//                    let realm = try! Realm()
+//                    realm.beginWrite()
+//                    realm.add(awsObject, update: true)
+//                    try! realm.commitWrite()
+//                    print(awsObject)
+//                })
                 sendNext(sink, task.result)
                 return task
             })

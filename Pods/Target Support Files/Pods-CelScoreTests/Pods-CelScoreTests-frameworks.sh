@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScoreTests/AIRTimer.framework"
+  install_framework "Pods-CelScoreTests/AWSAPIGateway.framework"
   install_framework "Pods-CelScoreTests/AWSCognito.framework"
   install_framework "Pods-CelScoreTests/AWSCore.framework"
   install_framework "Pods-CelScoreTests/AsyncDisplayKit.framework"
@@ -100,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScoreTests/AIRTimer.framework"
+  install_framework "Pods-CelScoreTests/AWSAPIGateway.framework"
   install_framework "Pods-CelScoreTests/AWSCognito.framework"
   install_framework "Pods-CelScoreTests/AWSCore.framework"
   install_framework "Pods-CelScoreTests/AsyncDisplayKit.framework"
