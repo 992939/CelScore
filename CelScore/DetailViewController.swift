@@ -56,10 +56,7 @@ final class DetailViewController: UIViewController {
         //self.ratingsVM.saveUserRatingsSignal().start()
     }
     
-    override func updateUserActivityState(activity: NSUserActivity) {
-       // let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
-        //activity.addUserInfoEntriesFromDictionary(employee.userActivityUserInfo)
-    }
+    override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
     
     func screenShotMethod() {
         UIGraphicsBeginImageContext(view.frame.size)
