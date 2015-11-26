@@ -93,7 +93,10 @@ final class CelScoreViewModel: NSObject {
             let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
             activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
-            //activity.becomeCurrent()
+            activity.becomeCurrent()
+            
+            sendNext(sink, activity)
+            sendCompleted(sink)
         }
     }
     
