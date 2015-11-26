@@ -1,4 +1,3 @@
 # CelScore
-"No statues, just gratitude."
 
-"And the CelScore for being a great human being and an upstanding citizen goes to..."
+"Welcome to the original parasocial network. Welcome to that place in your mind called Hollywood."
