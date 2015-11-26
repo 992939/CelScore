@@ -34,6 +34,7 @@ final class DetailViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celebrityVM.celebrity?.nickName)")
+        self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
     }
     
     
@@ -49,13 +50,15 @@ final class DetailViewController: UIViewController {
                 UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()*/
-        
-        print("age is \(self.celebrityVM.age) and zodiac is \(self.celebrityVM.zodiac)")
-
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
         //self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2).start()
         //self.ratingsVM.saveUserRatingsSignal().start()
+    }
+    
+    override func updateUserActivityState(activity: NSUserActivity) {
+       // let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
+        //activity.addUserInfoEntriesFromDictionary(employee.userActivityUserInfo)
     }
     
     func screenShotMethod() {

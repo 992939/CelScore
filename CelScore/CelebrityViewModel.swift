@@ -49,7 +49,7 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
-    func indexCelebritiesOnSpotLightSignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
+    func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
@@ -62,7 +62,7 @@ final class CelebrityViewModel: NSObject {
             activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
             activity.becomeCurrent()
             
-            sendNext(sink, celeb)
+            sendNext(sink, activity)
             sendCompleted(sink)
         }
     }

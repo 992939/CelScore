@@ -74,7 +74,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkConnectivitySignal().start()
-        self.celscoreVM.indexCelebritiesOnSpotLightSignal().start()
         //self.settingsVM.getFollowedCelebritiesSignal().start()
     }
     

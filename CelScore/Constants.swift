@@ -8,6 +8,4 @@
 
 import Foundation
 
-struct Constants {
-    static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-}
+struct Constants { static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c" }
