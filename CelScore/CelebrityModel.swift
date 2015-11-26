@@ -13,6 +13,8 @@ public struct CelebrityProfile {
     let id: String
     let imageURL: String
     let nickname: String
+    let height: String
+    let netWorth: String
     let prevScore: Double
     let isFollowed: Bool
 }
@@ -31,6 +33,7 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var lastName: String = ""
     dynamic var middleName: String = ""
     dynamic var nickName: String = ""
+    dynamic var height: String = ""
     dynamic var netWorth: String = ""
     dynamic var status: String = ""
     dynamic var twitter: String = ""
@@ -52,6 +55,7 @@ public final class CelebrityModel: Object, NSCopying {
         self.lastName = dictionary["lastName"] as! String
         self.middleName = dictionary["middleName"] as! String
         self.nickName = dictionary["nickname"] as! String
+        self.height = dictionary["height"] as! String
         self.birthdate = dictionary["birthdate"] as! String
         self.netWorth = dictionary["netWorth"] as! String
         self.picture2x = dictionary["picture2x"] as! String
@@ -76,6 +80,7 @@ public final class CelebrityModel: Object, NSCopying {
         copy.lastName = self.lastName
         copy.middleName = self.middleName
         copy.nickName = self.nickName
+        copy.height = self.height
         copy.netWorth = self.netWorth
         copy.status = self.status
         copy.twitter = self.twitter

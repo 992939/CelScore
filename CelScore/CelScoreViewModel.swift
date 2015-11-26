@@ -89,13 +89,14 @@ final class CelScoreViewModel: NSObject {
             let list = realm.objects(CelebrityModel)
             guard list.count > 0 else { return }
             
-            let celeb = list.first!
-            let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
-            let activity = profile.userActivity
-            activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
-            activity.becomeCurrent()
-            
-            sendNext(sink, activity)
+            for celeb in list {
+                let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
+                let activity = profile.userActivity
+                activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
+                //activity.becomeCurrent()
+                
+                sendNext(sink, activity)
+            }
             sendCompleted(sink)
         }
     }
