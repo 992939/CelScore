@@ -1,3 +1,3 @@
 # CelScore
 
-"Welcome to the original parasocial network. Welcome to that place in your mind called Hollywood."
+"Welcome to the original parasocial network, a tool for public opinion."
