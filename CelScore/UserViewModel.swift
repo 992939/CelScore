@@ -42,14 +42,15 @@ final class UserViewModel: NSObject {
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            //AWSLogger.defaultLogger().logLevel = .Verbose
-            //let cognitoID = credentialsProvider.getIdentityId()
-            //credentialsProvider.clearKeychain()
-            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            AWSCognito.registerCognitoWithConfiguration(defaultServiceConfiguration, forKey: "loginUserKey")
+            //credentialsProvider.refresh()
+            let cognitoID = credentialsProvider.getIdentityId()
+            
+            print("cognitoID \(cognitoID)")
+            //credentialsProvider.clearKeychain()
+            //AWSCognito.registerCognitoWithConfiguration(configuration, forKey: "loginUserKey")
+            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
             
             let logins: NSDictionary
             switch loginType {
@@ -68,7 +69,7 @@ final class UserViewModel: NSObject {
             }
 
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.error == nil else { sendError(sink, task.error!); return task }
                 
                 sendNext(sink, task.result)
                 sendCompleted(sink)
@@ -106,10 +107,9 @@ final class UserViewModel: NSObject {
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize()
@@ -161,9 +161,9 @@ final class UserViewModel: NSObject {
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 } else { sendCompleted(sink); return }
             }
-            
+            syncClient.wipe()
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.error == nil else { sendError(sink, task.error!); return task }
                 
                 sendNext(sink, task.completed)
                 sendCompleted(sink)
@@ -179,10 +179,12 @@ final class UserViewModel: NSObject {
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
+            AWSLogger.defaultLogger().logLevel = .Verbose
+            
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.error == nil else { sendError(sink, task.error!); return task }
                 let realm = try! Realm()
                 realm.beginWrite()
                 

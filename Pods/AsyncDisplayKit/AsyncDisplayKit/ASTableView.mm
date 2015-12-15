@@ -10,17 +10,16 @@
 #import "ASTableViewInternal.h"
 
 #import "ASAssert.h"
+#import "ASBatchFetching.h"
 #import "ASChangeSetDataController.h"
 #import "ASCollectionViewLayoutController.h"
-#import "ASLayoutController.h"
-#import "ASRangeController.h"
-#import "ASDisplayNodeInternal.h"
-#import "ASBatchFetching.h"
+#import "ASDisplayNode+FrameworkPrivate.h"
 #import "ASInternalHelpers.h"
 #import "ASLayout.h"
+#import "ASLayoutController.h"
+#import "ASRangeController.h"
 
-// FIXME: Temporary nonsense import until method names are finalized and exposed
-#import "ASDisplayNode+Subclasses.h"
+static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 
 //#define LOG(...) NSLog(__VA_ARGS__)
 #define LOG(...)
@@ -136,13 +135,22 @@ static BOOL _isInterceptedSelector(SEL sel)
   [super didTransitionToState:state];
 }
 
-- (void)setSelected:(BOOL)selected
+- (void)setNode:(ASCellNode *)node
 {
+  _node = node;
+  node.selected = self.selected;
+  node.highlighted = self.highlighted;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+  [super setSelected:selected animated:animated];
   _node.selected = selected;
 }
 
-- (void)setHighlighted:(BOOL)highlighted
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
+  [super setHighlighted:highlighted animated:animated];
   _node.highlighted = highlighted;
 }
 
@@ -152,7 +160,7 @@ static BOOL _isInterceptedSelector(SEL sel)
 #pragma mark -
 #pragma mark ASTableView
 
-@interface ASTableView () <ASRangeControllerDelegate, ASDataControllerSource, _ASTableViewCellDelegate> {
+@interface ASTableView () <ASRangeControllerDataSource, ASRangeControllerDelegate, ASDataControllerSource, _ASTableViewCellDelegate, ASCellNodeLayoutDelegate> {
   _ASTableViewProxy *_proxyDataSource;
   _ASTableViewProxy *_proxyDelegate;
 
@@ -171,6 +179,7 @@ static BOOL _isInterceptedSelector(SEL sel)
 
   CGFloat _nodesConstrainedWidth;
   BOOL _ignoreNodesConstrainedWidthChange;
+  BOOL _queuedNodeHeightUpdate;
 }
 
 @property (atomic, assign) BOOL asyncDataSourceLocked;
@@ -194,6 +203,7 @@ static BOOL _isInterceptedSelector(SEL sel)
   
   _rangeController = [[ASRangeController alloc] init];
   _rangeController.layoutController = _layoutController;
+  _rangeController.dataSource = self;
   _rangeController.delegate = self;
   
   _dataController = [[dataControllerClass alloc] initWithAsyncDataFetching:asyncDataFetching];
@@ -214,6 +224,8 @@ static BOOL _isInterceptedSelector(SEL sel)
   // If the initial size is 0, expect a size change very soon which is part of the initial configuration
   // and should not trigger a relayout.
   _ignoreNodesConstrainedWidthChange = (_nodesConstrainedWidth == 0);
+
+  [self registerClass:_ASTableViewCell.class forCellReuseIdentifier:kCellReuseIdentifier];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
@@ -314,7 +326,7 @@ static BOOL _isInterceptedSelector(SEL sel)
 - (void)reloadDataWithCompletion:(void (^)())completion
 {
   ASDisplayNodeAssert(self.asyncDelegate, @"ASTableView's asyncDelegate property must be set.");
-  ASDisplayNodePerformBlockOnMainThread(^{
+  ASPerformBlockOnMainThread(^{
     [super reloadData];
   });
   [_dataController reloadDataWithAnimationOptions:UITableViewRowAnimationNone completion:completion];
@@ -367,11 +379,14 @@ static BOOL _isInterceptedSelector(SEL sel)
   NSArray *indexPaths = [self indexPathsForVisibleRows];
   NSMutableArray *visibleNodes = [[NSMutableArray alloc] init];
 
-  [indexPaths enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    ASCellNode *visibleNode = [self nodeForRowAtIndexPath:obj];
-    [visibleNodes addObject:visibleNode];
-  }];
-
+  for (NSIndexPath *indexPath in indexPaths) {
+    ASCellNode *node = [self nodeForRowAtIndexPath:indexPath];
+    if (node) {
+      // It is possible for UITableView to return indexPaths before the node is completed.
+      [visibleNodes addObject:node];
+    }
+  }
+  
   return visibleNodes;
 }
 
@@ -457,14 +472,6 @@ static BOOL _isInterceptedSelector(SEL sel)
   [_dataController reloadRowsAtIndexPaths:indexPaths withAnimationOptions:animation];
 }
 
-- (void)relayoutRowAtIndexPath:(NSIndexPath *)indexPath withRowAnimation:(UITableViewRowAnimation)animation
-{
-  ASDisplayNodeAssertMainThread();
-  ASCellNode *node = [self nodeForRowAtIndexPath:indexPath];
-  [node setNeedsLayout];
-  [super reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
-}
-
 - (void)moveRowAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath
 {
   ASDisplayNodeAssertMainThread();
@@ -527,13 +534,8 @@ static BOOL _isInterceptedSelector(SEL sel)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *reuseIdentifier = @"_ASTableViewCell";
-
-  _ASTableViewCell *cell = [self dequeueReusableCellWithIdentifier:reuseIdentifier];
-  if (!cell) {
-    cell = [[_ASTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    cell.delegate = self;
-  }
+  _ASTableViewCell *cell = [self dequeueReusableCellWithIdentifier:kCellReuseIdentifier forIndexPath:indexPath];
+  cell.delegate = self;
 
   ASCellNode *node = [_dataController nodeAtIndexPath:indexPath];
   [_rangeController configureContentView:cell.contentView forCellNode:node];
@@ -648,11 +650,72 @@ static BOOL _isInterceptedSelector(SEL sel)
   }
 }
 
+#pragma mark - ASRangeControllerDataSource
 
-#pragma mark -
-#pragma mark ASRangeControllerDelegate
+- (NSArray *)visibleNodeIndexPathsForRangeController:(ASRangeController *)rangeController
+{
+  ASDisplayNodeAssertMainThread();
+  
+  NSArray *visibleIndexPaths = self.indexPathsForVisibleRows;
+  
+  if (_pendingVisibleIndexPath) {
+    NSMutableSet *indexPaths = [NSMutableSet setWithArray:self.indexPathsForVisibleRows];
+    
+    BOOL (^isAfter)(NSIndexPath *, NSIndexPath *) = ^BOOL(NSIndexPath *indexPath, NSIndexPath *anchor) {
+      if (!anchor || !indexPath) {
+        return NO;
+      }
+      if (indexPath.section == anchor.section) {
+        return (indexPath.row == anchor.row+1); // assumes that indexes are valid
+        
+      } else if (indexPath.section > anchor.section && indexPath.row == 0) {
+        if (anchor.row != [_dataController numberOfRowsInSection:anchor.section] -1) {
+          return NO;  // anchor is not at the end of the section
+        }
+        
+        NSInteger nextSection = anchor.section+1;
+        while([_dataController numberOfRowsInSection:nextSection] == 0) {
+          ++nextSection;
+        }
+        
+        return indexPath.section == nextSection;
+      }
+      
+      return NO;
+    };
+    
+    BOOL (^isBefore)(NSIndexPath *, NSIndexPath *) = ^BOOL(NSIndexPath *indexPath, NSIndexPath *anchor) {
+      return isAfter(anchor, indexPath);
+    };
+    
+    if ([indexPaths containsObject:_pendingVisibleIndexPath]) {
+      _pendingVisibleIndexPath = nil; // once it has shown up in visibleIndexPaths, we can stop tracking it
+    } else if (!isBefore(_pendingVisibleIndexPath, visibleIndexPaths.firstObject) &&
+               !isAfter(_pendingVisibleIndexPath, visibleIndexPaths.lastObject)) {
+      _pendingVisibleIndexPath = nil; // not contiguous, ignore.
+    } else {
+      [indexPaths addObject:_pendingVisibleIndexPath];
+      visibleIndexPaths = [indexPaths.allObjects sortedArrayUsingSelector:@selector(compare:)];
+    }
+  }
+  
+  return visibleIndexPaths;
+}
 
-- (void)rangeControllerBeginUpdates:(ASRangeController *)rangeController
+- (NSArray *)rangeController:(ASRangeController *)rangeController nodesAtIndexPaths:(NSArray *)indexPaths
+{
+  return [_dataController nodesAtIndexPaths:indexPaths];
+}
+
+- (CGSize)viewportSizeForRangeController:(ASRangeController *)rangeController
+{
+  ASDisplayNodeAssertMainThread();
+  return self.bounds.size;
+}
+
+#pragma mark - ASRangeControllerDelegate
+
+- (void)didBeginUpdatesInRangeController:(ASRangeController *)rangeController
 {
   ASDisplayNodeAssertMainThread();
   LOG(@"--- UITableView beginUpdates");
@@ -668,7 +731,7 @@ static BOOL _isInterceptedSelector(SEL sel)
   }
 }
 
-- (void)rangeController:(ASRangeController *)rangeController endUpdatesAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
+- (void)rangeController:(ASRangeController *)rangeController didEndUpdatesAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
 {
   ASDisplayNodeAssertMainThread();
   LOG(@"--- UITableView endUpdates");
@@ -691,67 +754,6 @@ static BOOL _isInterceptedSelector(SEL sel)
   if (completion) {
     completion(YES);
   }
-}
-
-- (NSArray *)rangeControllerVisibleNodeIndexPaths:(ASRangeController *)rangeController
-{
-  ASDisplayNodeAssertMainThread();
-
-  NSArray *visibleIndexPaths = self.indexPathsForVisibleRows;
-
-  if ( _pendingVisibleIndexPath ) {
-    NSMutableSet *indexPaths = [NSMutableSet setWithArray:self.indexPathsForVisibleRows];
-
-    BOOL (^isAfter)(NSIndexPath *, NSIndexPath *) = ^BOOL(NSIndexPath *indexPath, NSIndexPath *anchor) {
-      if (!anchor || !indexPath) {
-        return NO;
-      }
-      if (indexPath.section == anchor.section) {
-        return (indexPath.row == anchor.row+1); // assumes that indexes are valid
-
-      } else if (indexPath.section > anchor.section && indexPath.row == 0) {
-        if (anchor.row != [_dataController numberOfRowsInSection:anchor.section] -1) {
-          return NO;  // anchor is not at the end of the section
-        }
-
-        NSInteger nextSection = anchor.section+1;
-        while([_dataController numberOfRowsInSection:nextSection] == 0) {
-          ++nextSection;
-        }
-
-        return indexPath.section == nextSection;
-      }
-
-      return NO;
-    };
-
-    BOOL (^isBefore)(NSIndexPath *, NSIndexPath *) = ^BOOL(NSIndexPath *indexPath, NSIndexPath *anchor) {
-      return isAfter(anchor, indexPath);
-    };
-
-    if ( [indexPaths containsObject:_pendingVisibleIndexPath]) {
-      _pendingVisibleIndexPath = nil; // once it has shown up in visibleIndexPaths, we can stop tracking it
-    } else if (!isBefore(_pendingVisibleIndexPath, visibleIndexPaths.firstObject) &&
-               !isAfter(_pendingVisibleIndexPath, visibleIndexPaths.lastObject)) {
-      _pendingVisibleIndexPath = nil; // not contiguous, ignore.
-    } else {
-      [indexPaths addObject:_pendingVisibleIndexPath];
-      visibleIndexPaths = [indexPaths.allObjects sortedArrayUsingSelector:@selector(compare:)];
-    }
-  }
-
-  return visibleIndexPaths;
-}
-
-- (NSArray *)rangeController:(ASRangeController *)rangeController nodesAtIndexPaths:(NSArray *)indexPaths
-{
-  return [_dataController nodesAtIndexPaths:indexPaths];
-}
-
-- (CGSize)rangeControllerViewportSize:(ASRangeController *)rangeController
-{
-  ASDisplayNodeAssertMainThread();
-  return self.bounds.size;
 }
 
 - (void)rangeController:(ASRangeController *)rangeController didInsertNodes:(NSArray *)nodes atIndexPaths:(NSArray *)indexPaths withAnimationOptions:(ASDataControllerAnimationOptions)animationOptions
@@ -828,7 +830,12 @@ static BOOL _isInterceptedSelector(SEL sel)
 - (ASCellNode *)dataController:(ASDataController *)dataController nodeAtIndexPath:(NSIndexPath *)indexPath
 {
   ASCellNode *node = [_asyncDataSource tableView:self nodeForRowAtIndexPath:indexPath];
+  [node enterHierarchyState:ASHierarchyStateRangeManaged];
+  
   ASDisplayNodeAssert([node isKindOfClass:ASCellNode.class], @"invalid node class, expected ASCellNode");
+  if (node.layoutDelegate == nil) {
+    node.layoutDelegate = self;
+  }
   return node;
 }
 
@@ -900,6 +907,52 @@ static BOOL _isInterceptedSelector(SEL sel)
     CGSize calculatedSize = [[node measureWithSizeRange:constrainedSize] size];
     node.frame = CGRectMake(0, 0, calculatedSize.width, calculatedSize.height);
     [self endUpdates];
+  }
+}
+
+#pragma mark - ASCellNodeLayoutDelegate
+
+- (void)nodeDidRelayout:(ASCellNode *)node sizeChanged:(BOOL)sizeChanged
+{
+  ASDisplayNodeAssertMainThread();
+
+  if (!sizeChanged || _queuedNodeHeightUpdate) {
+    return;
+  }
+
+  _queuedNodeHeightUpdate = YES;
+  [self performSelector:@selector(requeryNodeHeights)
+             withObject:nil
+             afterDelay:0
+                inModes:@[ NSRunLoopCommonModes ]];
+}
+
+// Cause UITableView to requery for the new height of this node
+- (void)requeryNodeHeights
+{
+  _queuedNodeHeightUpdate = NO;
+
+  [super beginUpdates];
+  [super endUpdates];
+}
+
+#pragma mark - Memory Management
+
+- (void)clearContents
+{
+  for (NSArray *section in [_dataController completedNodes]) {
+    for (ASDisplayNode *node in section) {
+      [node recursivelyClearContents];
+    }
+  }
+}
+
+- (void)clearFetchedData
+{
+  for (NSArray *section in [_dataController completedNodes]) {
+    for (ASDisplayNode *node in section) {
+      [node recursivelyClearFetchedData];
+    }
   }
 }
 

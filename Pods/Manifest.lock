@@ -1,20 +1,18 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9):
-    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9)
-  - AWSCognito (2.3.0):
-    - AWSCore (= 2.3.0)
-  - AWSCore (2.3.0)
+  - AsyncDisplayKit (1.9.3):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9.3)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.3)
+  - AWSCognito (2.3.2):
+    - AWSCore (= 2.3.2)
+  - AWSCore (2.3.2)
   - Bolts (1.4.0):
     - Bolts/AppLinks (= 1.4.0)
     - Bolts/Tasks (= 1.4.0)
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
-  - Fabric (1.5.5):
-    - Fabric/Base (= 1.5.5)
-  - Fabric/Base (1.5.5)
+  - Fabric (1.6.1)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.7.1)
@@ -35,48 +33,50 @@ PODS:
   - ReactiveCocoa/UI (4.0.2-alpha-1):
     - ReactiveCocoa/Core
     - Result (~> 0.6-beta.1)
-  - Realm (0.96.2):
-    - Realm/Headers (= 0.96.2)
-  - Realm/Headers (0.96.2)
-  - RealmSwift (0.96.2):
-    - Realm (= 0.96.2)
+  - Realm (0.96.3):
+    - Realm/Headers (= 0.96.3)
+  - Realm/Headers (0.96.3)
+  - RealmSwift (0.96.3):
+    - Realm (= 0.96.3)
   - Result (0.6.0-beta.3)
-  - SwiftyJSON (2.3.0)
+  - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
-  - TwitterCore (1.12.0)
-  - TwitterKit (1.12.0)
+  - TwitterCore (1.14.6):
+    - Fabric
+  - TwitterKit (1.14.6):
+    - TwitterCore (= 1.14.6)
   - WillowTreeReachability (1.0.0)
 
 DEPENDENCIES:
   - AIRTimer
-  - AsyncDisplayKit (~> 1.9)
-  - AWSCognito (~> 2.3)
-  - Fabric
+  - AsyncDisplayKit (~> 1.9.3)
+  - AWSCognito (~> 2.3.2)
+  - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - ReactiveCocoa (= 4.0.2-alpha-1)
-  - RealmSwift (~> 0.96)
-  - SwiftyJSON (~> 2.3)
+  - RealmSwift (~> 0.96.3)
+  - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
-  - TwitterCore
-  - TwitterKit
+  - TwitterCore (~> 1.14.6)
+  - TwitterKit (~> 1.14.6)
   - WillowTreeReachability (~> 1.0)
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 957560ccfd103fdc8f53605e11e4bc30b16aaf67
-  AWSCognito: 71454ddf2b631005292aa2cbbdcc6d079b1b65cb
-  AWSCore: dc200c885c9799f9f5d3ab9ec38a9c4b44d680f9
+  AsyncDisplayKit: 87d340329280dba0363da3587a43f9d1bbe62aac
+  AWSCognito: af9cd756ab300f0a86582a11fbe1777d7fa81696
+  AWSCore: c2f69975fd2caf38a10736961de28a0105cdb00c
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
-  Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
-  RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
+  Realm: 145d3cdf78a03aee71bde5381ad7e542bd541720
+  RealmSwift: aab84968aad662f61f36473d1aea019f63481505
   Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
-  SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
-  TwitterKit: c27e7b997cd82d5c626fcfd8b1dead1e15dac7ca
+  TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
+  TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
   WillowTreeReachability: e16001f10483881c6f7ffe656ab67fa705d037ad
 
 COCOAPODS: 0.39.0

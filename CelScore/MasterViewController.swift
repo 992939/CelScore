@@ -116,6 +116,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
                 //TODO: enum every_day, every_minute, every_hour
                 return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3)
+                
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
@@ -125,8 +126,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
         
         //self.userVM.getUserInfoFromFacebookSignal()
-        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
-        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserInfo)
+        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
+        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}

@@ -52,8 +52,8 @@ final class DetailViewController: UIViewController {
             .start()*/
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
-        //self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 2).start()
-        //self.ratingsVM.saveUserRatingsSignal().start()
+        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 1).start()
+        self.ratingsVM.saveUserRatingsSignal().start()
     }
     
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }

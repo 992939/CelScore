@@ -55,7 +55,7 @@ final class CelScoreViewModel: NSObject {
             }
             
             let block = awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error); return task }
+                guard task.error == nil else { sendError(sink, task.error!); return task }
                 guard task.cancelled == false else { sendInterrupted(sink); return task }
                 
                 let myData = task.result as! String
@@ -73,7 +73,7 @@ final class CelScoreViewModel: NSObject {
                     try! realm.commitWrite()
                     print(awsObject)
                 })
-                sendNext(sink, task.result)
+                sendNext(sink, task.result!)
                 return task
             })
             
