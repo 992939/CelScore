@@ -115,8 +115,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
                 //TODO: enum every_day, every_minute, every_hour
-                return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3)
-                
+                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings)
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
@@ -124,6 +123,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3).start()
         
         //self.userVM.getUserInfoFromFacebookSignal()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()

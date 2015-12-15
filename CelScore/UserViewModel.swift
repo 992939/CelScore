@@ -34,7 +34,7 @@ final class UserViewModel: NSObject {
                 return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
             }
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .start()
+            //.start()
     }
     
     
@@ -131,7 +131,7 @@ final class UserViewModel: NSObject {
                 
             case .UserRatings:
                 let realm = try! Realm()
-                let predicate = NSPredicate(format: "isSynced = true") //TODO: Change to false
+                let predicate = NSPredicate(format: "isSynced = false")
                 let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
                 guard userRatingsArray.count > 0 else {
                     sendError(sink, NSError(domain: "com.CelScore.NoUserRatings", code: 1, userInfo: nil)); return
@@ -161,7 +161,7 @@ final class UserViewModel: NSObject {
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 } else { sendCompleted(sink); return }
             }
-            syncClient.wipe()
+            //syncClient.wipe()
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else { sendError(sink, task.error!); return task }
                 
