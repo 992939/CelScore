@@ -109,7 +109,6 @@ final class UserRatingsModel: RatingsModel {
         self.id = id
         let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
         for (index, ratings) in self.generate().enumerate() { self[ratings] = ratingArray[index] }
-        self.totalVotes = Int(ratingArray[10])
         self.isSynced = true
     }
     
@@ -119,13 +118,12 @@ final class UserRatingsModel: RatingsModel {
         let copy = UserRatingsModel(id: self.id)
         for ratings in self.generate() { copy[ratings] = self[ratings] }
         copy.updatedAt = self.updatedAt
-        copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
         return copy
     }
     
     func interpolation() -> String {
         let allValues: [String] = self.generate().flatMap{ String(self[$0]!) }
-        return allValues.joinWithSeparator("/") + "/" + String(self.totalVotes)
+        return allValues.joinWithSeparator("/")
     }
 }
