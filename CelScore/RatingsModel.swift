@@ -24,6 +24,16 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     dynamic var rating8: Double = 0
     dynamic var rating9: Double = 0
     dynamic var rating10: Double = 0
+    dynamic var variance1: Double = 0
+    dynamic var variance2: Double = 0
+    dynamic var variance3: Double = 0
+    dynamic var variance4: Double = 0
+    dynamic var variance5: Double = 0
+    dynamic var variance6: Double = 0
+    dynamic var variance7: Double = 0
+    dynamic var variance8: Double = 0
+    dynamic var variance9: Double = 0
+    dynamic var variance10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = true
     
@@ -45,6 +55,16 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         for ratings in self.generate() { self[ratings] = dictionary[ratings] as! Double}
         self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
+        self.variance1 = dictionary["variance1"] as! Double
+        self.variance2 = dictionary["variance2"] as! Double
+        self.variance3 = dictionary["variance3"] as! Double
+        self.variance4 = dictionary["variance4"] as! Double
+        self.variance5 = dictionary["variance5"] as! Double
+        self.variance6 = dictionary["variance6"] as! Double
+        self.variance7 = dictionary["variance7"] as! Double
+        self.variance8 = dictionary["variance8"] as! Double
+        self.variance9 = dictionary["variance9"] as! Double
+        self.variance10 = dictionary["variance10"] as! Double
         self.isSynced = true
     }
     
@@ -95,6 +115,16 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         copy.updatedAt = self.updatedAt
         copy.totalVotes = self.totalVotes
         copy.isSynced = self.isSynced
+        copy.variance1 = self.variance1
+        copy.variance2 = self.variance2
+        copy.variance3 = self.variance3
+        copy.variance4 = self.variance4
+        copy.variance5 = self.variance5
+        copy.variance6 = self.variance6
+        copy.variance7 = self.variance7
+        copy.variance8 = self.variance8
+        copy.variance9 = self.variance9
+        copy.variance10 = self.variance10
         return copy
     }
 }

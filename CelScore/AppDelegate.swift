@@ -23,6 +23,44 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        //MARK: Realm Migration
+        let config = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                    migration.enumerate(RatingsModel.className()) { oldObject, newObject in
+                        newObject!["variance1"] = 0
+                        newObject!["variance2"] = 0
+                        newObject!["variance3"] = 0
+                        newObject!["variance4"] = 0
+                        newObject!["variance5"] = 0
+                        newObject!["variance6"] = 0
+                        newObject!["variance7"] = 0
+                        newObject!["variance8"] = 0
+                        newObject!["variance9"] = 0
+                        newObject!["variance10"] = 0
+                    }
+                    
+                    migration.enumerate(UserRatingsModel.className()) { oldObject, newObject in
+                        newObject!["variance1"] = 0
+                        newObject!["variance2"] = 0
+                        newObject!["variance3"] = 0
+                        newObject!["variance4"] = 0
+                        newObject!["variance5"] = 0
+                        newObject!["variance6"] = 0
+                        newObject!["variance7"] = 0
+                        newObject!["variance8"] = 0
+                        newObject!["variance9"] = 0
+                        newObject!["variance10"] = 0
+                    }
+                }
+                //if oldSchemaVersion < 2 {}
+        })
+        Realm.Configuration.defaultConfiguration = config
+        _ = try! Realm()
+        
+        //MARK: App Initialization
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()

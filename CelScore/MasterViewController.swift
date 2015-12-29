@@ -39,7 +39,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
         
         super.init(nibName: nil, bundle: nil)
-        self.configuration()
         
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"
@@ -54,7 +53,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     
     //MARK: Methods
-    override func viewDidLoad() { super.viewDidLoad() }
+    override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
     override func viewWillLayoutSubviews() { /*self.celebrityTableView.frame = self.view.bounds */ }
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }

@@ -51,6 +51,15 @@ final class SettingsViewModel: NSObject {
         }
     }
     
+    func calculateSocialConsensusSignal() -> SignalProducer<Int, SettingsError> {
+        return SignalProducer { sink, _ in
+            
+            
+            sendNext(sink, 1)
+            sendCompleted(sink)
+        }
+    }
+    
     func updateSettingOnLocalStoreSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
         return SignalProducer { sink, _ in
             
