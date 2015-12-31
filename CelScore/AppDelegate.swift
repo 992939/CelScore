@@ -23,8 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        //MARK: Realm Migration
+
         let config = Realm.Configuration(
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
@@ -47,7 +46,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
         
-        //MARK: App Initialization
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.backgroundColor = UIColor.whiteColor()
