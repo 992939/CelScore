@@ -24,17 +24,17 @@ final class UserViewModel: NSObject {
         super.init()
         
         //TODO: case Facebook: and case Twitter:
-        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-            .promoteErrors(NSError.self)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-                return self.getUserInfoFromFacebookSignal()
-            }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-            }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            //.start()
+//        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+//        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
+//            .promoteErrors(NSError.self)
+//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+//                return self.getUserInfoFromFacebookSignal()
+//            }
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+//                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+//            }
+//            .observeOn(QueueScheduler.mainQueueScheduler)
+//            //.start()
     }
     
     
@@ -43,12 +43,16 @@ final class UserViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            //credentialsProvider.refresh()
-            let cognitoID = credentialsProvider.getIdentityId()
             
-            print("cognitoID \(cognitoID)")
-            //credentialsProvider.clearKeychain()
-            //AWSCognito.registerCognitoWithConfiguration(configuration, forKey: "loginUserKey")
+            credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                if (task.error != nil) {
+                    print("Error: " + task.error!.localizedDescription)
+                    credentialsProvider.clearKeychain()
+                    //credentialsProvider.clearCredentials()
+                } else { let cognitoId = task.result; print("cognitoId :\(cognitoId)") }
+                return nil
+            }
+            
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
             
@@ -67,7 +71,6 @@ final class UserViewModel: NSObject {
                     } else { print("error: \(error!.localizedDescription)") }
                 }
             }
-
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { sendError(sink, task.error!); return task }
                 
@@ -161,9 +164,9 @@ final class UserViewModel: NSObject {
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 } else { sendCompleted(sink); return }
             }
-            //syncClient.wipe()
+            
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                guard task.error == nil else { sendError(sink, task.error!); return task }
+                guard task.error == nil else { syncClient.wipe(); sendError(sink, task.error!); return task }
                 
                 sendNext(sink, task.completed)
                 sendCompleted(sink)
@@ -184,7 +187,7 @@ final class UserViewModel: NSObject {
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error!); return task }
+                guard task.error == nil else { syncClient.wipe(); sendError(sink, task.error!); return task }
                 let realm = try! Realm()
                 realm.beginWrite()
                 
