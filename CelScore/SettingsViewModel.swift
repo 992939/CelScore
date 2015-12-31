@@ -16,7 +16,7 @@ final class SettingsViewModel: NSObject {
 
     //MARK: Properties
     var defaultListId: String { get { return SettingsModel().defaultListId }}
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs }
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs, NoRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
@@ -51,11 +51,22 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func calculateSocialConsensusSignal() -> SignalProducer<Int, SettingsError> {
+    func calculateSocialConsensusSignal() -> SignalProducer<Double, SettingsError> {
         return SignalProducer { sink, _ in
             
+            let realm = try! Realm()
+            let ratings = realm.objects(RatingsModel)
+            guard ratings.count > 0 else { sendError(sink, .NoRatingsModel); return }
+
+            let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in
+                return (ratingsModel.variance1 + ratingsModel.variance2 + ratingsModel.variance3 + ratingsModel.variance4 + ratingsModel.variance5
+                + ratingsModel.variance6 + ratingsModel.variance7 + ratingsModel.variance8 + ratingsModel.variance9 + ratingsModel.variance10) / 10
+            }
+            let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
+            guard averageVariance > 0 && averageVariance < 5  else { sendError(sink, .OutOfBoundsVariance); return }
+            let consensus: Double = 100 - ( 20 * averageVariance )
             
-            sendNext(sink, 1)
+            sendNext(sink, consensus)
             sendCompleted(sink)
         }
     }

@@ -120,6 +120,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .retry(2)
             .start()
         
+        self.settingsVM.calculateSocialConsensusSignal()
+            .on(next: { value in print("general consensus % : \(value)") })
+            .start()
+        
         //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3).start()

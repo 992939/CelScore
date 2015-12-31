@@ -52,19 +52,19 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         self.init()
         
         self.id = dictionary["ratingID"] as! String
-        for ratings in self.generate() { self[ratings] = dictionary[ratings] as! Double}
         self.updatedAt = dictionary["updatedAt"] as! String
         self.totalVotes = dictionary["totalVote"] as! Int
-        self.variance1 = dictionary["variance1"] as! Double
-        self.variance2 = dictionary["variance2"] as! Double
-        self.variance3 = dictionary["variance3"] as! Double
-        self.variance4 = dictionary["variance4"] as! Double
-        self.variance5 = dictionary["variance5"] as! Double
-        self.variance6 = dictionary["variance6"] as! Double
-        self.variance7 = dictionary["variance7"] as! Double
-        self.variance8 = dictionary["variance8"] as! Double
-        self.variance9 = dictionary["variance9"] as! Double
-        self.variance10 = dictionary["variance10"] as! Double
+        self.variance1 = (dictionary["variance1"] as! NSString).doubleValue
+        self.variance2 = (dictionary["variance2"] as! NSString).doubleValue
+        self.variance3 = (dictionary["variance3"] as! NSString).doubleValue
+        self.variance4 = (dictionary["variance4"] as! NSString).doubleValue
+        self.variance5 = (dictionary["variance5"] as! NSString).doubleValue
+        self.variance6 = (dictionary["variance6"] as! NSString).doubleValue
+        self.variance7 = (dictionary["variance7"] as! NSString).doubleValue
+        self.variance8 = (dictionary["variance8"] as! NSString).doubleValue
+        self.variance9 = (dictionary["variance9"] as! NSString).doubleValue
+        self.variance10 = (dictionary["variance10"] as! NSString).doubleValue
+        for ratings in self.generate() { self[ratings] = (dictionary[ratings] as! NSString).doubleValue}
         self.isSynced = true
     }
     

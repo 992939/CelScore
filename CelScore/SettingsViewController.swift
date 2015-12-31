@@ -27,7 +27,8 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.settingsVM.getUserRatingsPercentageSignal().start()
+        //self.settingsVM.getUserRatingsPercentageSignal().start()
+        //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
         //self.settingsVM.getSettingsFromLocalStoreSignal().start()
     }
