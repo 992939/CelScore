@@ -76,7 +76,6 @@ final class CelScoreViewModel: NSObject {
                 sendNext(sink, task.result!)
                 return task
             })
-            
             AIRTimer.every(timeInterval, userInfo: nil) { timer in block }
             block
         }
