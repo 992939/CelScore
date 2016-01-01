@@ -81,8 +81,6 @@ final class UserViewModel: NSObject {
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            print("active token is: \(FBSDKAccessToken.currentAccessToken())")
-            
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else { print("hey ya \(error)"); sendError(sink, error); return }
                 

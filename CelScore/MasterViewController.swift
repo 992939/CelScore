@@ -46,10 +46,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
     }
     
-    func onTokenUpdated(notification: NSNotification) {
+    func onTokenUpdate(notification: NSNotification) {
         print("master active token is: \(FBSDKAccessToken.currentAccessToken())")
         if ((FBSDKAccessToken.currentAccessToken()) == nil) {
             self.loginButton = FBSDKLoginButton()
@@ -123,23 +123,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+                return self.userVM.getUserInfoFromFacebookSignal()
+            }
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                //TODO: enum every_day, every_minute, every_hour
-                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings)
+                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings) //TODO: enum every_day, every_minute, every_hour
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
             .start()
         
-        self.settingsVM.calculateSocialConsensusSignal()
-            .on(next: { value in print("general consensus % : \(value)") })
-            .start()
-        
+        //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3).start()
-        
-        //self.userVM.getUserInfoFromFacebookSignal()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
         //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
     }
