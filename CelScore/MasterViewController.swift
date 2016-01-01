@@ -51,7 +51,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func onTokenUpdate(notification: NSNotification) {
         print("master active token is: \(FBSDKAccessToken.currentAccessToken())")
-        if ((FBSDKAccessToken.currentAccessToken()) == nil) {
+        if ((FBSDKAccessToken.currentAccessToken()) != nil) {
             self.loginButton = FBSDKLoginButton()
             self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
             self.loginButton.delegate = self

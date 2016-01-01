@@ -27,13 +27,10 @@ final class UserViewModel: NSObject {
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                if (task.error != nil) {
-                    print("Error: " + task.error!.localizedDescription)
-                    credentialsProvider.clearKeychain()
-                } else { let cognitoId = task.result; print("cognitoId :\(cognitoId)") }
+                guard task.error == nil else { print("Error:\(task.error)"); credentialsProvider.refresh(); return task }
                 return nil
             }
             
@@ -70,8 +67,7 @@ final class UserViewModel: NSObject {
             //TODO: implementation
             switch loginType {
             case .Facebook:
-                print("FB!")
-                //credentialsProvider.clearCredentials()
+                print("FB!") //credentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }
@@ -83,7 +79,6 @@ final class UserViewModel: NSObject {
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else { print("hey ya \(error)"); sendError(sink, error); return }
-                
                 sendNext(sink, object)
                 sendCompleted(sink)
             }
@@ -129,9 +124,9 @@ final class UserViewModel: NSObject {
                 for var index: Int = 0; index < userRatingsArray.count; index++
                 {
                     let ratings: UserRatingsModel = userRatingsArray[index]
-                    dataset.setString(ratings.interpolation(), forKey: ratings.id)
                     ratings.isSynced = true
                     realm.add(ratings, update: true)
+                    dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 }
                 try! realm.commitWrite()
                 
@@ -163,7 +158,7 @@ final class UserViewModel: NSObject {
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary, NSError> {
         return SignalProducer { sink, _ in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
@@ -178,13 +173,11 @@ final class UserViewModel: NSObject {
                 
                 switch dataSetType {
                 case .UserInfo: fatalError("Not storing user information locally")
-                    
                 case .UserRatings:
                     dataset.getAll().forEach({ dico in
                         let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
                         realm.add(userRatings, update: true)
                     })
-                    
                 case .UserSettings:
                     let dico = dataset.getAll()
                     var model = realm.objects(SettingsModel).first
