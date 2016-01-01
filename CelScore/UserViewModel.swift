@@ -20,21 +20,7 @@ final class UserViewModel: NSObject {
     
     
     //MARK: Initializers
-    override init() {
-        super.init()
-        
-        //TODO: case Facebook: and case Twitter:
-        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-            .promoteErrors(NSError.self)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-                return self.getUserInfoFromFacebookSignal()
-            }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-            }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .start()
-    }
+    override init() { super.init() }
     
     
     //MARK: Login Methods
@@ -95,8 +81,10 @@ final class UserViewModel: NSObject {
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
+            print("active token is: \(FBSDKAccessToken.currentAccessToken())")
+            
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else { sendError(sink, error); return }
+                guard error == nil else { print("hey ya \(error)"); sendError(sink, error); return }
                 
                 sendNext(sink, object)
                 sendCompleted(sink)
