@@ -24,17 +24,16 @@ final class UserViewModel: NSObject {
         super.init()
         
         //TODO: case Facebook: and case Twitter:
-//        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-//        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
-//            .promoteErrors(NSError.self)
-//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-//                return self.getUserInfoFromFacebookSignal()
-//            }
-//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-//                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
-//            }
-//            .observeOn(QueueScheduler.mainQueueScheduler)
-//            //.start()
+        NSNotificationCenter.defaultCenter().rac_notifications(FBSDKProfileDidChangeNotification, object:nil)
+            .promoteErrors(NSError.self)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+                return self.getUserInfoFromFacebookSignal()
+            }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.updateCognitoSignal(object: value, dataSetType: .UserInfo)
+            }
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start()
     }
     
     
@@ -48,7 +47,6 @@ final class UserViewModel: NSObject {
                 if (task.error != nil) {
                     print("Error: " + task.error!.localizedDescription)
                     credentialsProvider.clearKeychain()
-                    //credentialsProvider.clearCredentials()
                 } else { let cognitoId = task.result; print("cognitoId :\(cognitoId)") }
                 return nil
             }
@@ -87,6 +85,7 @@ final class UserViewModel: NSObject {
             switch loginType {
             case .Facebook:
                 print("FB!")
+                //credentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }

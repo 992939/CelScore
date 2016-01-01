@@ -45,10 +45,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
         
-        self.loginButton = FBSDKLoginButton()
-        self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        self.loginButton.delegate = self
-        self.view.addSubview(loginButton)
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+    }
+    
+    func onTokenUpdated(notification: NSNotification) {
+        if ((FBSDKAccessToken.currentAccessToken()) == nil) {
+            self.loginButton = FBSDKLoginButton()
+            self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+            self.loginButton.delegate = self
+            self.view.addSubview(loginButton)
+        }
     }
     
     
@@ -109,6 +116,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print(error); return }
         guard result.isCancelled == false else { return }
+        
+        print("expiration date: \(result.token.expirationDate)")
+        print("expiration date: \(result.token.tokenString)")
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
