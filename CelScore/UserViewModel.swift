@@ -47,7 +47,6 @@ final class UserViewModel: NSObject {
                     (session, error) -> Void in
                     if session != nil {
                         let value = session!.authToken + ";" + session!.authTokenSecret
-                        // Note: This overrides any existing logins
                         credentialsProvider.logins = ["api.twitter.com": value]
                     } else { print("error: \(error!.localizedDescription)") }
                 }
