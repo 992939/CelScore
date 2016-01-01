@@ -106,7 +106,6 @@ final class UserViewModel: NSObject {
                     dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                     dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                 }
-                
             case .UserRatings:
                 let realm = try! Realm()
                 let predicate = NSPredicate(format: "isSynced = false")
@@ -124,16 +123,12 @@ final class UserViewModel: NSObject {
                     dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 }
                 try! realm.commitWrite()
-                
             case .UserSettings:
                 //TODO: Checked once a day and only called when user actually changed a setting
                 let realm = try! Realm()
                 let model: SettingsModel? = realm.objects(SettingsModel).first
                 
-                guard let settings = model else {
-                    sendError(sink, NSError(domain: "com.CelScore.SettingsModelNotSet", code: 1, userInfo: nil)); return
-                }
-                
+                guard let settings = model else { sendError(sink, NSError(domain: "com.CelScore.NoSettings", code: 1, userInfo: nil)); return }
                 if settings.isSynced == false {
                     dataset.setString(settings.defaultListId, forKey: "defaultListId")
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
