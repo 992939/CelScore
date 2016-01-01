@@ -28,20 +28,16 @@ final class UserViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("Error:\(task.error)"); credentialsProvider.refresh(); return task }
+                guard task.error == nil else { print("getIdentityId :\(task.error)"); credentialsProvider.refresh(); return task }
                 return nil
             }
-            
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-            
-            let logins: NSDictionary
+
             switch loginType {
             case .Facebook:
-                logins = NSDictionary(dictionary: [AWSCognitoLoginProviderKey.Facebook.rawValue : token])
-                credentialsProvider.logins = logins as [NSObject: AnyObject]
+                credentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion {
                     (session, error) -> Void in
@@ -51,9 +47,9 @@ final class UserViewModel: NSObject {
                     } else { print("error: \(error!.localizedDescription)") }
                 }
             }
+            
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { sendError(sink, task.error!); return task }
-                
                 sendNext(sink, task.result)
                 sendCompleted(sink)
                 return task
@@ -77,7 +73,7 @@ final class UserViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else { print("hey ya \(error)"); sendError(sink, error); return }
+                guard error == nil else { sendError(sink, error); return }
                 sendNext(sink, object)
                 sendCompleted(sink)
             }
@@ -146,7 +142,6 @@ final class UserViewModel: NSObject {
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else { syncClient.wipe(); sendError(sink, task.error!); return task }
-                
                 sendNext(sink, task.completed)
                 sendCompleted(sink)
                 return task
