@@ -50,6 +50,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func onTokenUpdate(notification: NSNotification) {
+        print("expiration date: \(FBSDKAccessToken.currentAccessToken().expirationDate)")
         print("master active token is: \(FBSDKAccessToken.currentAccessToken())")
         if ((FBSDKAccessToken.currentAccessToken()) != nil) {
             self.loginButton = FBSDKLoginButton()
@@ -119,7 +120,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         guard result.isCancelled == false else { return }
         
         print("expiration date: \(result.token.expirationDate)")
-        print("expiration date: \(result.token.tokenString)")
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)

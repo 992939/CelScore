@@ -69,6 +69,18 @@ final class UserViewModel: NSObject {
         }
     }
     
+    func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
+        return SignalProducer { sink, _ in
+            
+            FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                guard error == nil else { sendError(sink, error); return }
+                sendNext(sink, object)
+                sendCompleted(sink)
+            }
+        }
+    }
+
+    
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
@@ -84,8 +96,7 @@ final class UserViewModel: NSObject {
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            
-            AWSLogger.defaultLogger().logLevel = .Verbose
+            //AWSLogger.defaultLogger().logLevel = .Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
