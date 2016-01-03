@@ -81,16 +81,19 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func getFortuneCookieSignal()-> SignalProducer<AnyObject, NSError> {
+    func getFortuneCookieSignal() -> SignalProducer<String, NSError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", "positiveCookie")
-            let cookieList = realm.objects(CookieModel).filter(predicate).first!.copy() as? CookieModel
+            let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
             if let list = cookieList {
-                
+                print("effin list: \(list)")
+            } else
+            {
+                print("no list: \(Constants.fortuneCookies.randomItem())")
             }
-            
+            sendNext(sink, "sush!")
             sendCompleted(sink)
         }
     }

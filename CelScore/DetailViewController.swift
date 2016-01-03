@@ -42,6 +42,7 @@ final class DetailViewController: UIViewController {
     override func viewWillLayoutSubviews() {}
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,13 +51,12 @@ final class DetailViewController: UIViewController {
                 UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()*/
+        CelScoreViewModel().getFortuneCookieSignal().start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         //self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 1).start()
-        self.ratingsVM.saveUserRatingsSignal().start()
+        //self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 1).start()
+        //self.ratingsVM.saveUserRatingsSignal().start()
     }
-    
-    override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
     
     func screenShotMethod() {
         UIGraphicsBeginImageContext(view.frame.size)

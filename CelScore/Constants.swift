@@ -10,13 +10,12 @@ import Foundation
 
 struct Constants {
     static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    static let forturneCookieSayings: [String] = [
+    static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "Without ethics, man has no future.",
         "In a closed mouth, flies do not enter.",
-        "Being a virtuous human being takes practice.",
         "A true man hates no one.",
-        "To err is human. To forgive, highly unlikely.",
+        "To err is human. To forgive, unlikely.",
         "To err is human. To forgive, divine.",
         "The well bred horse ignores the barking dog.",
         "What harms, often teaches.",
@@ -26,7 +25,7 @@ struct Constants {
         "Everything has beauty but not everyone sees it.",
         "Best to light a candle than curse the darkness.",
         "Expect a cow where there is grass.",
-        "Every fool is pleased with his own folly.", // 0 to 15 - Negative
+        "Every fool is pleased with his own folly.", // 0 to 14 - Negative
         "From caring comes courage.",
         "The greatest virtues are those useful to others.",
         "If you can't reward, make sure to thank.",
