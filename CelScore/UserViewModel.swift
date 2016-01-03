@@ -73,16 +73,15 @@ final class UserViewModel: NSObject {
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            print("refesh expiration date: \(FBSDKAccessToken.currentAccessToken().expirationDate)")
-            
-            
-            
-//            FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-//                guard error == nil else { sendError(sink, error); return }
-//                sendNext(sink, object)
-//                sendCompleted(sink)
-//            }
-            sendCompleted(sink)
+            let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
+            if expirationDate > 10.days.later { sendCompleted(sink) }
+            else {
+                FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                    guard error == nil else { sendError(sink, error); return }
+                    sendNext(sink, object)
+                    sendCompleted(sink)
+                }
+            }
         }
     }
 
