@@ -14,7 +14,7 @@ struct Constants {
         "Only dead fish go with the flow.",
         "Without ethics, man has no future.",
         "In a closed mouth, flies do not enter.",
-        "A true man hates no one.",
+        "The revolution will not be televised.",
         "To err is human. To forgive, unlikely.",
         "To err is human. To forgive, divine.",
         "The well bred horse ignores the barking dog.",

@@ -91,7 +91,8 @@ final class CelScoreViewModel: NSObject {
                 print("effin list: \(list)")
             } else
             {
-                print("no list: \(Constants.fortuneCookies.randomItem())")
+                let index = Int(arc4random_uniform(UInt32(Constants.fortuneCookies.count)))
+                let cookies = CookieModel(id: "positiveCookie", chip: Chip(index: index))
             }
             sendNext(sink, "sush!")
             sendCompleted(sink)

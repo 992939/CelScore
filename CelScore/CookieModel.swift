@@ -9,12 +9,32 @@
 import Foundation
 import RealmSwift
 
+public final class Chip: Object, NSCopying {
+    
+    //MARK: Properties
+    dynamic var index: Int = 0
+    
+    
+    //MARK: Initializers
+    public convenience init(index: Int) { self.init(); self.index = index }
+    
+    
+    //MARK: Methods
+    public func copyWithZone(zone: NSZone) -> AnyObject { let copy = Chip(); copy.index = self.index; return copy }
+}
+
+
 public final class CookieModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
+    var list = List<Chip>()
+    
+    
+    //MARK: Initializers
+    public convenience init(id: String, chip: Chip) { self.init(); self.id = id; self.list.append(chip) }
     
     
     //MARK: Methods
-    public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CookieModel(); copy.id = self.id; return copy }
+    public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CookieModel(); copy.id = self.id; copy.list = self.list; return copy }
 }

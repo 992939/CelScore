@@ -155,11 +155,4 @@ extension UITextField {
     }
 }
 
-extension Array {
-    func randomItem() -> Element {
-        let index = Int(rand()) % count
-        print("count is \(count) and index is \(index)")
-        return self[index]
-    }
-}
 
