@@ -81,6 +81,20 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
+    func getFortuneCookieSignal()-> SignalProducer<AnyObject, NSError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", "positiveCookie")
+            let cookieList = realm.objects(CookieModel).filter(predicate).first!.copy() as? CookieModel
+            if let list = cookieList {
+                
+            }
+            
+            sendCompleted(sink)
+        }
+    }
+    
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { sink, _ in
             
