@@ -77,7 +77,7 @@ final class UserViewModel: NSObject {
             if expirationDate > 10.days.later { sendCompleted(sink) }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { sendError(sink, error); return }
+                    guard error == nil else { print("refresh: \(error)"); sendError(sink, error); return }
                     sendNext(sink, object)
                     sendCompleted(sink)
                 }
