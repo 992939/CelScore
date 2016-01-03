@@ -15,6 +15,7 @@ import RealmSwift
 import TwitterKit
 
 
+
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
@@ -50,13 +51,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func onTokenUpdate(notification: NSNotification) {
-        print("expiration date: \(FBSDKAccessToken.currentAccessToken().expirationDate)")
-        print("master active token is: \(FBSDKAccessToken.currentAccessToken())")
-        if ((FBSDKAccessToken.currentAccessToken()) != nil) {
+        if FBSDKAccessToken.currentAccessToken() != nil {
             self.loginButton = FBSDKLoginButton()
             self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
             self.loginButton.delegate = self
             self.view.addSubview(loginButton)
+            
+            self.userVM.refreshFacebookTokenSignal().start()
         }
     }
     

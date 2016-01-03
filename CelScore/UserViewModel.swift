@@ -11,6 +11,7 @@ import AWSCognito
 import AWSLambda
 import RealmSwift
 import TwitterKit
+import Timepiece
 
 final class UserViewModel: NSObject {
     
@@ -72,11 +73,16 @@ final class UserViewModel: NSObject {
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
             
-            FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else { sendError(sink, error); return }
-                sendNext(sink, object)
-                sendCompleted(sink)
-            }
+            print("refesh expiration date: \(FBSDKAccessToken.currentAccessToken().expirationDate)")
+            
+            
+            
+//            FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+//                guard error == nil else { sendError(sink, error); return }
+//                sendNext(sink, object)
+//                sendCompleted(sink)
+//            }
+            sendCompleted(sink)
         }
     }
 
