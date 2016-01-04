@@ -14,7 +14,7 @@
 #import <AWSCognito/AWSCognito.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "CSCelScoreAPIClient.h"
+#import "GECelScoreAPIClient.h"
 
 
 #endif /* Header_h */

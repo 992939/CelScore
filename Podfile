@@ -3,7 +3,7 @@ use_frameworks!
 platform :ios, '8.0'
 pod 'ReactiveCocoa', '4.0.2-alpha-1'
 pod 'AsyncDisplayKit', '~> 1.9.3'
-pod 'RealmSwift', '~> 0.96.3'
+pod 'RealmSwift', '~> 0.97.0'
 pod 'AWSCognito', '~> 2.3.2'
 pod 'FBSDKCoreKit', '~> 4.7.1'
 pod 'SwiftyJSON', '~> 2.3.2'
@@ -23,7 +23,7 @@ target 'CelScoreTests' do
 end
 
 target 'CelScoreWidget', :exclusive => true do
-    pod 'RealmSwift', '~> 0.96.3'
+    pod 'RealmSwift', '~> 0.97.0'
     pod 'ReactiveCocoa', '4.0.2-alpha-1'
     pod 'AIRTimer'
 end

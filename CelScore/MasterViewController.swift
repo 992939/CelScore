@@ -46,18 +46,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
         
+        self.loginButton = FBSDKLoginButton()
+        self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        self.loginButton.delegate = self
+        self.view.addSubview(loginButton)
+        
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
     }
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            self.loginButton = FBSDKLoginButton()
-            self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-            self.loginButton.delegate = self
-            self.view.addSubview(loginButton)
-            
-            self.userVM.refreshFacebookTokenSignal().start()
+            //self.userVM.refreshFacebookTokenSignal().start()
         }
     }
     
@@ -124,20 +124,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-                return self.userVM.getUserInfoFromFacebookSignal()
-            }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings) //TODO: enum every_day, every_minute, every_hour
-            }
-            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
+//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+//                return self.userVM.getUserInfoFromFacebookSignal()
+//            }
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+//                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings) //TODO: enum every_day, every_minute, every_hour
+//            }
+//            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
             .start()
         
+        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
+        
         //self.settingsVM.calculateSocialConsensusSignal().start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity, timeInterval: 3).start()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
         //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
     }

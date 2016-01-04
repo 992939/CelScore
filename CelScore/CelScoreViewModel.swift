@@ -44,8 +44,10 @@ final class CelScoreViewModel: NSObject {
     
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
+            
+            AWSLogger.defaultLogger().logLevel = .Verbose
 
-            let serviceClient = CSCelScoreAPIClient.defaultClient()
+            let serviceClient = GECelScoreAPIClient.defaultClient()
             serviceClient.APIKey = "eljwrWL80O2OOXa6ZTdYu6n5p0yJ5f5o2BzG6QNG" //TODO: encrypt
         
             let awsCall : AWSTask
@@ -85,22 +87,31 @@ final class CelScoreViewModel: NSObject {
     func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NSError> {
         return SignalProducer { sink, _ in
             
+            var newCookies = Constants.fortuneCookies
+            
+            if case .Positive = cookieType {
+                newCookies = Array(newCookies[15..<newCookies.count])
+            } else
+            {
+                newCookies = Array(newCookies[0..<14])
+            }
+            print("newCookies : \(newCookies)")
+            
             let realm = try! Realm()
             realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
             let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
             
-            
             if let oldCookies = cookieList {
-                var newCookies = Constants.fortuneCookies
+                print("before newCookies count: \(newCookies.count)")
                 oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) })
+                print("after newCookies count: \(newCookies.count)")
                 let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 oldCookies.list.append(Chip(index: index))
                 realm.add(oldCookies, update: true)
-                
             } else
             {
-                let index = Int(arc4random_uniform(UInt32(Constants.fortuneCookies.count)))
+                let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 let newCookie = CookieModel(id: cookieType.rawValue, chip: Chip(index: index))
                 realm.add(newCookie, update: true)
             }

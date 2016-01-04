@@ -17,12 +17,12 @@
 #import <Foundation/Foundation.h>
 #import <AWSAPIGateway/AWSAPIGateway.h>
 
-#import "CSEmpty.h"
+#import "GEEmpty.h"
 
 /**
  The service client object.
  */
-@interface CSCelScoreAPIClient: AWSAPIGatewayClient
+@interface GECelScoreAPIClient: AWSAPIGatewayClient
 
 /**
  Returns the singleton service client. If the singleton object does not exist, the SDK instantiates the default service client with `defaultServiceConfiguration` from `[AWSServiceManager defaultServiceManager]`. The reference to this object is maintained by the SDK, and you do not need to retain it manually.
@@ -55,11 +55,11 @@
 
  *Swift*
 
-     let serviceClient = CSCelScoreAPIClient.defaultClient()
+     let serviceClient = GECelScoreAPIClient.defaultClient()
 
  *Objective-C*
 
-     CSCelScoreAPIClient *serviceClient = [CSCelScoreAPIClient defaultClient];
+     GECelScoreAPIClient *serviceClient = [GECelScoreAPIClient defaultClient];
 
  @return The default service client.
  */
@@ -75,7 +75,7 @@
      func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
          let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
          let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-         CSCelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2CSCelScoreAPIClient")
+         GECelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2GECelScoreAPIClient")
 
          return true
      }
@@ -88,7 +88,7 @@
          AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
                                                                               credentialsProvider:credentialsProvider];
 
-         [CSCelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2CSCelScoreAPIClient"];
+         [GECelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2GECelScoreAPIClient"];
 
          return YES;
      }
@@ -97,11 +97,11 @@
 
  *Swift*
 
-     let serviceClient = CSCelScoreAPIClient(forKey: "USWest2CSCelScoreAPIClient")
+     let serviceClient = GECelScoreAPIClient(forKey: "USWest2GECelScoreAPIClient")
 
  *Objective-C*
 
-     CSCelScoreAPIClient *serviceClient = [CSCelScoreAPIClient clientForKey:@"USWest2CSCelScoreAPIClient"];
+     GECelScoreAPIClient *serviceClient = [GECelScoreAPIClient clientForKey:@"USWest2GECelScoreAPIClient"];
 
  @warning After calling this method, do not modify the configuration object. It may cause unspecified behaviors.
 
@@ -120,7 +120,7 @@
      func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
          let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
          let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-         CSCelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2CSCelScoreAPIClient")
+         GECelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2GECelScoreAPIClient")
 
          return true
      }
@@ -133,7 +133,7 @@
          AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
                                                                               credentialsProvider:credentialsProvider];
 
-         [CSCelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2CSCelScoreAPIClient"];
+         [GECelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2GECelScoreAPIClient"];
 
          return YES;
      }
@@ -142,11 +142,11 @@
 
  *Swift*
 
-     let serviceClient = CSCelScoreAPIClient(forKey: "USWest2CSCelScoreAPIClient")
+     let serviceClient = GECelScoreAPIClient(forKey: "USWest2GECelScoreAPIClient")
 
  *Objective-C*
 
-     CSCelScoreAPIClient *serviceClient = [CSCelScoreAPIClient clientForKey:@"USWest2CSCelScoreAPIClient"];
+     GECelScoreAPIClient *serviceClient = [GECelScoreAPIClient clientForKey:@"USWest2GECelScoreAPIClient"];
 
  @param key A string to identify the service client.
 
@@ -167,7 +167,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celebinfoscanserviceGet;
 
@@ -175,7 +175,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celebinfoscanservicePost;
 
@@ -183,7 +183,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celeblistsserviceGet;
 
@@ -191,7 +191,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celeblistsservicePost;
 
@@ -199,7 +199,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celebratingserviceGet;
 
@@ -207,7 +207,7 @@
  
  
  
- return type: CSEmpty *
+ return type: GEEmpty *
  */
 - (AWSTask *)celebratingservicePost;
 

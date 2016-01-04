@@ -14,12 +14,12 @@
  */
  
 
-#import "CSCelScoreAPIClient.h"
+#import "GECelScoreAPIClient.h"
 #import <AWSCore/AWSCore.h>
 #import <AWSCore/AWSSignature.h>
 #import <AWSCore/AWSSynchronizedMutableDictionary.h>
 
-#import "CSEmpty.h"
+#import "GEEmpty.h"
 
 @interface AWSAPIGatewayClient()
 
@@ -43,7 +43,7 @@
 
 @end
 
-@interface CSCelScoreAPIClient()
+@interface GECelScoreAPIClient()
 
 @property (nonatomic, strong) AWSServiceConfiguration *configuration;
 
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation CSCelScoreAPIClient
+@implementation GECelScoreAPIClient
 
 @synthesize configuration = _configuration;
 
@@ -70,10 +70,10 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                                                            credentialsProvider:nil];
     }
 
-    static CSCelScoreAPIClient *_defaultClient = nil;
+    static GECelScoreAPIClient *_defaultClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _defaultClient = [[CSCelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
+        _defaultClient = [[GECelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
     });
 
     return _defaultClient;
@@ -84,7 +84,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     dispatch_once(&onceToken, ^{
         _serviceClients = [AWSSynchronizedMutableDictionary new];
     });
-    [_serviceClients setObject:[[CSCelScoreAPIClient alloc] initWithConfiguration:configuration]
+    [_serviceClients setObject:[[GECelScoreAPIClient alloc] initWithConfiguration:configuration]
                         forKey:key];
 }
 
@@ -144,7 +144,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 - (AWSTask *)celebinfoscanservicePost {
@@ -166,7 +166,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 - (AWSTask *)celeblistsserviceGet {
@@ -188,7 +188,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 - (AWSTask *)celeblistsservicePost {
@@ -210,7 +210,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 - (AWSTask *)celebratingserviceGet {
@@ -232,7 +232,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 - (AWSTask *)celebratingservicePost {
@@ -254,7 +254,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[CSEmpty class]];
+                     responseClass:[GEEmpty class]];
 }
 
 

@@ -32,7 +32,7 @@ struct Constants {
         "Silence is the sign of approval.",
         "Great people have great values and great ethics.",
         "There’s nothing more important than ethics.",
-        "When the judgement's weak, prejudice is strong.",
+        "Where the judgement's weak, prejudice is strong.",
         "Great acts are made up of small deeds.",
         "The future belongs to those who shape it today.",
         "The time is always right to do what is right.",

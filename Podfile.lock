@@ -33,11 +33,11 @@ PODS:
   - ReactiveCocoa/UI (4.0.2-alpha-1):
     - ReactiveCocoa/Core
     - Result (~> 0.6-beta.1)
-  - Realm (0.96.3):
-    - Realm/Headers (= 0.96.3)
-  - Realm/Headers (0.96.3)
-  - RealmSwift (0.96.3):
-    - Realm (= 0.96.3)
+  - Realm (0.97.0):
+    - Realm/Headers (= 0.97.0)
+  - Realm/Headers (0.97.0)
+  - RealmSwift (0.97.0):
+    - Realm (= 0.97.0)
   - Result (0.6.0-beta.3)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
@@ -54,7 +54,7 @@ DEPENDENCIES:
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - ReactiveCocoa (= 4.0.2-alpha-1)
-  - RealmSwift (~> 0.96.3)
+  - RealmSwift (~> 0.97.0)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
   - TwitterCore (~> 1.14.6)
@@ -70,8 +70,8 @@ SPEC CHECKSUMS:
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
-  Realm: 145d3cdf78a03aee71bde5381ad7e542bd541720
-  RealmSwift: aab84968aad662f61f36473d1aea019f63481505
+  Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
+  RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: b80bca7becdda9a2e44c4fd65b4b4a7b5db4cf9a
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd

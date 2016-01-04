@@ -25,23 +25,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         let config = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 2,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
-                    migration.enumerate(RatingsModel.className()) { oldObject, newObject in
-                        newObject!["variance1"] = 0
-                        newObject!["variance2"] = 0
-                        newObject!["variance3"] = 0
-                        newObject!["variance4"] = 0
-                        newObject!["variance5"] = 0
-                        newObject!["variance6"] = 0
-                        newObject!["variance7"] = 0
-                        newObject!["variance8"] = 0
-                        newObject!["variance9"] = 0
-                        newObject!["variance10"] = 0
+                if (oldSchemaVersion < 1) {}
+                if oldSchemaVersion < 2 {
+                    migration.enumerate(CookieModel.className()) { oldObject, newObject in
+                        newObject!["list"] = List<Chip>()
                     }
                 }
-                //if oldSchemaVersion < 2 {}
         })
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()

@@ -14,9 +14,9 @@
  */
  
 
-#import "CSEmpty.h"
+#import "GEEmpty.h"
 
-@implementation CSEmpty
+@implementation GEEmpty
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{

@@ -34,6 +34,9 @@ public final class CookieModel: Object, NSCopying {
     //MARK: Initializers
     public convenience init(id: String, chip: Chip) { self.init(); self.id = id; self.list.append(chip) }
     
+    //MARK: Methods
+    override public class func primaryKey() -> String { return "id" }
+    
     
     //MARK: Methods
     public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CookieModel(); copy.id = self.id; copy.list = self.list; return copy }
