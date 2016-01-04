@@ -25,6 +25,7 @@ final class CelScoreViewModel: NSObject {
     enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum SocialNetwork: Int { case Twitter = 0, Facebook, Weibo }
     enum AWSDataType { case Celebrity, List, Ratings }
+    enum CookieType: String { case Positive, Negative }
     
     
     //MARK: Initializers
@@ -81,19 +82,29 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func getFortuneCookieSignal() -> SignalProducer<String, NSError> {
+    func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NSError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", "positiveCookie")
+            realm.beginWrite()
+            let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
             let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
-            if let list = cookieList {
-                print("effin list: \(list)")
+            
+            
+            if let oldCookies = cookieList {
+                var newCookies = Constants.fortuneCookies
+                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) })
+                let index = Int(arc4random_uniform(UInt32(newCookies.count)))
+                oldCookies.list.append(Chip(index: index))
+                realm.add(oldCookies, update: true)
+                
             } else
             {
                 let index = Int(arc4random_uniform(UInt32(Constants.fortuneCookies.count)))
-                let cookies = CookieModel(id: "positiveCookie", chip: Chip(index: index))
+                let newCookie = CookieModel(id: cookieType.rawValue, chip: Chip(index: index))
+                realm.add(newCookie, update: true)
             }
+            try! realm.commitWrite()
             sendNext(sink, "sush!")
             sendCompleted(sink)
         }
