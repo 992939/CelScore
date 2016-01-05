@@ -86,13 +86,8 @@ final class CelScoreViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             var newCookies = Constants.fortuneCookies
-            
-            if case .Positive = cookieType {
-                newCookies = Array(newCookies[15..<newCookies.count])
-            } else
-            {
-                newCookies = Array(newCookies[0..<14])
-            }
+            if case .Positive = cookieType { newCookies = Array(newCookies[15..<newCookies.count]) }
+            else { newCookies = Array(newCookies[0..<14]) }
             print("newCookies : \(newCookies)")
             
             let realm = try! Realm()
