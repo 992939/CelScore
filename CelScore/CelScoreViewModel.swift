@@ -47,8 +47,8 @@ final class CelScoreViewModel: NSObject {
             
             AWSLogger.defaultLogger().logLevel = .Verbose
 
-            let serviceClient = GECelScoreAPIClient.defaultClient()
-            serviceClient.APIKey = "eljwrWL80O2OOXa6ZTdYu6n5p0yJ5f5o2BzG6QNG" //TODO: encrypt
+            let serviceClient = PROCelScoreAPIClient.defaultClient()
+            serviceClient.APIKey = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP" //TODO: encrypt
         
             let awsCall : AWSTask
             switch dataType {
