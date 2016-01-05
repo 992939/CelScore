@@ -44,8 +44,6 @@ final class CelScoreViewModel: NSObject {
     
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            
-            AWSLogger.defaultLogger().logLevel = .Verbose
 
             let serviceClient = PROCelScoreAPIClient.defaultClient()
             serviceClient.APIKey = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP" //TODO: encrypt
