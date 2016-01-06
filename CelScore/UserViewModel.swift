@@ -30,7 +30,7 @@ final class UserViewModel: NSObject {
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("getIdentityId :\(task.error)"); credentialsProvider.refresh(); return task }
+                guard task.error == nil else { print("getIdentityId error:\(task.error)"); credentialsProvider.refresh(); return task }
                 return nil
             }
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
@@ -104,6 +104,10 @@ final class UserViewModel: NSObject {
             //AWSLogger.defaultLogger().logLevel = .Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+            credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { print("getIdentityId error:\(task.error)"); credentialsProvider.refresh(); return task }
+                return nil
+            }
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -154,7 +158,7 @@ final class UserViewModel: NSObject {
             }
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                guard task.error == nil else { syncClient.wipe(); sendError(sink, task.error!); return task }
+                guard task.error == nil else { sendError(sink, task.error!); return task }
                 sendNext(sink, task.completed)
                 sendCompleted(sink)
                 return task

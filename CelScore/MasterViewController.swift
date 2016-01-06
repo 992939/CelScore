@@ -134,13 +134,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .retry(2)
             .start()
         
-        self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-        self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-        self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
+        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
         
         //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
-        //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
