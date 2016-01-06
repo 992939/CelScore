@@ -57,6 +57,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
+            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
             //self.userVM.refreshFacebookTokenSignal().start()
         }
     }
@@ -140,7 +141,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
-        self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}

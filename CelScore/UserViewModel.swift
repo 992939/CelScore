@@ -105,14 +105,21 @@ final class UserViewModel: NSObject {
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("getIdentityId error:\(task.error)"); credentialsProvider.refresh(); return task }
+                guard task.error == nil else { print("getIdentityId() error:\(task.error)");credentialsProvider.refresh(); return task }
                 return nil
             }
+            
+            credentialsProvider.refresh().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { print("refesh() error:\(task.error)")
+                    return task }
+                return nil
+            }
+
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
-            dataset.synchronize()
+            let realm = try! Realm()
             
             switch dataSetType {
             case .UserInfo:
@@ -129,13 +136,8 @@ final class UserViewModel: NSObject {
                     dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                 }
             case .UserRatings:
-                let realm = try! Realm()
                 let predicate = NSPredicate(format: "isSynced = false")
                 let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
-                guard userRatingsArray.count > 0 else {
-                    sendError(sink, NSError(domain: "com.CelScore.NoUserRatings", code: 1, userInfo: nil)); return
-                }
-                
                 realm.beginWrite()
                 for var index: Int = 0; index < userRatingsArray.count; index++
                 {
@@ -145,11 +147,10 @@ final class UserViewModel: NSObject {
                     dataset.setString(ratings.interpolation(), forKey: ratings.id)
                 }
                 try! realm.commitWrite()
+                guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return }
             case .UserSettings:
                 //TODO: Checked once a day and only called when user actually changed a setting
-                let realm = try! Realm()
                 let model: SettingsModel? = realm.objects(SettingsModel).first
-                
                 guard let settings = model else { sendError(sink, NSError(domain: "com.CelScore.NoSettings", code: 1, userInfo: nil)); return }
                 if settings.isSynced == false {
                     dataset.setString(settings.defaultListId, forKey: "defaultListId")
