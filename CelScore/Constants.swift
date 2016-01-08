@@ -30,7 +30,7 @@ struct Constants {
         "The greatest virtues are those useful to others.",
         "If you can't reward, make sure to thank.",
         "Silence is the sign of approval.",
-        "Great people have great values and great ethics.",
+        "A life lived for others is a life worth living.",
         "There’s nothing more important than ethics.",
         "Where the judgement's weak, prejudice is strong.",
         "Great acts are made up of small deeds.",

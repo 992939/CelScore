@@ -137,13 +137,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
         //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()
-        
+        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()        
         //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { self.userVM.logoutSignal(.Facebook).start() }
 }
 
 

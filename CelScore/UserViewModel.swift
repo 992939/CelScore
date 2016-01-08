@@ -30,7 +30,7 @@ final class UserViewModel: NSObject {
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("getIdentityId error:\(task.error)"); credentialsProvider.refresh(); return task }
+                guard task.error == nil else { print("error:\(task.error!)"); sendError(sink, task.error!); return task }
                 return nil
             }
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
@@ -58,12 +58,14 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func logoutSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
+    func logoutSignal(loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             //TODO: implementation
             switch loginType {
             case .Facebook:
-                print("FB!") //credentialsProvider.clearCredentials()
+                print("FB!")
+                let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+                credentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }
@@ -77,7 +79,7 @@ final class UserViewModel: NSObject {
             if expirationDate > 10.days.later { sendCompleted(sink) }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { print("refresh: \(error)"); sendError(sink, error); return }
+                    guard error == nil else { print("facebook refresh: \(error)"); sendError(sink, error); return }
                     sendNext(sink, object)
                     sendCompleted(sink)
                 }
@@ -101,69 +103,69 @@ final class UserViewModel: NSObject {
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            //AWSLogger.defaultLogger().logLevel = .Verbose
+            AWSLogger.defaultLogger().logLevel = .Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("getIdentityId() error:\(task.error)");credentialsProvider.refresh(); return task }
+                guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
+                print("getIdentityId : \(task.result!)")
+                
+                credentialsProvider.refresh().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                    guard task.error == nil else { print("refresh.error:\(task.error)"); return task }
+                    
+                    let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+                    AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+                    let syncClient: AWSCognito = AWSCognito.defaultCognito()
+                    let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
+                    let realm = try! Realm()
+                    
+                    switch dataSetType {
+                    case .UserInfo:
+                        if dataset.getAll().count == 0 {
+                            dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+                            dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+                            dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                            dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+                            let timezone = object.objectForKey("timezone") as! NSNumber
+                            dataset.setString(timezone.stringValue, forKey: "timezone")
+                            dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                            dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+                            dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+                            dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                        }
+                    case .UserRatings:
+                        let predicate = NSPredicate(format: "isSynced = false")
+                        let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
+                        guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); break }
+                        realm.beginWrite()
+                        for var index: Int = 0; index < userRatingsArray.count; index++
+                        {
+                            let ratings: UserRatingsModel = userRatingsArray[index]
+                            dataset.setString(ratings.interpolation(), forKey: ratings.id)
+                            ratings.isSynced = true
+                            realm.add(ratings, update: true)
+                        }
+                        try! realm.commitWrite()
+                    case .UserSettings:
+                        //TODO: Checked once a day and only called when user actually changed a setting
+                        let model: SettingsModel? = realm.objects(SettingsModel).first
+                        guard let settings = model else { sendError(sink, NSError(domain: "NoSettings", code: 1, userInfo: nil)); break }
+                        if settings.isSynced == false {
+                            dataset.setString(settings.defaultListId, forKey: "defaultListId")
+                            dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
+                        } else { sendCompleted(sink) }
+                    }
+                    
+                    dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
+                        guard task.error == nil else { sendError(sink, task.error!); return task }
+                        sendNext(sink, task.completed)
+                        sendCompleted(sink)
+                        return task
+                    })
+                    return nil
+                }
                 return nil
             }
-            
-            credentialsProvider.refresh().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("refesh() error:\(task.error)")
-                    return task }
-                return nil
-            }
-
-            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-            let syncClient: AWSCognito = AWSCognito.defaultCognito()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
-            let realm = try! Realm()
-            
-            switch dataSetType {
-            case .UserInfo:
-                if dataset.getAll().count == 0 {
-                    dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-                    dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-                    dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
-                    dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                    let timezone = object.objectForKey("timezone") as! NSNumber
-                    dataset.setString(timezone.stringValue, forKey: "timezone")
-                    dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                    dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-                    dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-                    dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                }
-            case .UserRatings:
-                let predicate = NSPredicate(format: "isSynced = false")
-                let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
-                realm.beginWrite()
-                for var index: Int = 0; index < userRatingsArray.count; index++
-                {
-                    let ratings: UserRatingsModel = userRatingsArray[index]
-                    ratings.isSynced = true
-                    realm.add(ratings, update: true)
-                    dataset.setString(ratings.interpolation(), forKey: ratings.id)
-                }
-                try! realm.commitWrite()
-                guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return }
-            case .UserSettings:
-                //TODO: Checked once a day and only called when user actually changed a setting
-                let model: SettingsModel? = realm.objects(SettingsModel).first
-                guard let settings = model else { sendError(sink, NSError(domain: "com.CelScore.NoSettings", code: 1, userInfo: nil)); return }
-                if settings.isSynced == false {
-                    dataset.setString(settings.defaultListId, forKey: "defaultListId")
-                    dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
-                } else { sendCompleted(sink); return }
-            }
-            
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                guard task.error == nil else { sendError(sink, task.error!); return task }
-                sendNext(sink, task.completed)
-                sendCompleted(sink)
-                return task
-            })
         }
     }
     
