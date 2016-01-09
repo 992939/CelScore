@@ -36,8 +36,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celscoreVM = viewModel
         self.userVM = UserViewModel()
         self.settingsVM = SettingsViewModel()
-        self.celebrityTableView = ASTableView(frame: CGRectMake(0 , 60, 300, 400), style: UITableViewStyle.Plain, asyncDataFetching: true)
-        self.searchTextField = UITextField(frame: CGRectMake(10 , 5, 300, 50))
+        self.celebrityTableView = ASTableView()
+        self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 0, 0))
         
         super.init(nibName: nil, bundle: nil)
         
@@ -65,7 +65,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: Methods
     override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
-    override func viewWillLayoutSubviews() { /*self.celebrityTableView.frame = self.view.bounds */ }
+    override func viewWillLayoutSubviews() { self.celebrityTableView.frame = self.view.bounds }
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
