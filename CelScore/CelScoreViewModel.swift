@@ -88,28 +88,34 @@ final class CelScoreViewModel: NSObject {
             var newCookies = Constants.fortuneCookies
             if case .Positive = cookieType { newCookies = Array(newCookies[15..<newCookies.count]) }
             else { newCookies = Array(newCookies[0..<14]) }
-            print("newCookies : \(newCookies)")
             
             let realm = try! Realm()
             realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
             let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
             
+            let fortuneCookieSays: String?
+            
             if let oldCookies = cookieList {
-                print("before newCookies count: \(newCookies.count)")
+                let eightyPercent = Int(0.8 * Double(newCookies.count))
                 oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) })
-                print("after newCookies count: \(newCookies.count)")
                 let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 oldCookies.list.append(Chip(index: index))
-                realm.add(oldCookies, update: true)
+
+                if oldCookies.list.count > eightyPercent {
+                    realm.add(CookieModel(id: cookieType.rawValue, chip: Chip(index: index)), update: true)
+                } else { realm.add(oldCookies, update: true) }
+                
+                fortuneCookieSays = newCookies[index]
             } else
             {
                 let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 let newCookie = CookieModel(id: cookieType.rawValue, chip: Chip(index: index))
                 realm.add(newCookie, update: true)
+                fortuneCookieSays = newCookies[index]
             }
             try! realm.commitWrite()
-            sendNext(sink, "sush!")
+            sendNext(sink, "\(fortuneCookieSays!) Thanks for voting.")
             sendCompleted(sink)
         }
     }
