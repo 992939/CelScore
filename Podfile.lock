@@ -45,7 +45,6 @@ PODS:
     - Fabric
   - TwitterKit (1.14.6):
     - TwitterCore (= 1.14.6)
-  - WillowTreeReachability (1.0.0)
 
 DEPENDENCIES:
   - AIRTimer
@@ -59,7 +58,6 @@ DEPENDENCIES:
   - Timepiece (~> 0.4)
   - TwitterCore (~> 1.14.6)
   - TwitterKit (~> 1.14.6)
-  - WillowTreeReachability (~> 1.0)
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
@@ -77,6 +75,5 @@ SPEC CHECKSUMS:
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
-  WillowTreeReachability: e16001f10483881c6f7ffe656ab67fa705d037ad
 
 COCOAPODS: 0.39.0

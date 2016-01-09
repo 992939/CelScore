@@ -96,7 +96,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScoreTests/Result.framework"
   install_framework "Pods-CelScoreTests/SwiftyJSON.framework"
   install_framework "Pods-CelScoreTests/Timepiece.framework"
-  install_framework "Pods-CelScoreTests/WillowTreeReachability.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScoreTests/AIRTimer.framework"
@@ -111,5 +110,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScoreTests/Result.framework"
   install_framework "Pods-CelScoreTests/SwiftyJSON.framework"
   install_framework "Pods-CelScoreTests/Timepiece.framework"
-  install_framework "Pods-CelScoreTests/WillowTreeReachability.framework"
 fi
