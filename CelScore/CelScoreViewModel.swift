@@ -85,6 +85,7 @@ final class CelScoreViewModel: NSObject {
     func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NSError> {
         return SignalProducer { sink, _ in
             
+            let fortuneCookieSays: String?
             var newCookies = Constants.fortuneCookies
             if case .Positive = cookieType { newCookies = Array(newCookies[15..<newCookies.count]) }
             else { newCookies = Array(newCookies[0..<14]) }
@@ -93,8 +94,6 @@ final class CelScoreViewModel: NSObject {
             realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
             let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
-            
-            let fortuneCookieSays: String?
             
             if let oldCookies = cookieList {
                 let eightyPercent = Int(0.8 * Double(newCookies.count))
@@ -105,7 +104,6 @@ final class CelScoreViewModel: NSObject {
                 if oldCookies.list.count > eightyPercent {
                     realm.add(CookieModel(id: cookieType.rawValue, chip: Chip(index: index)), update: true)
                 } else { realm.add(oldCookies, update: true) }
-                
                 fortuneCookieSays = newCookies[index]
             } else
             {
