@@ -11,7 +11,6 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 import ReactiveCocoa
-import WillowTreeReachability
 import AIRTimer
 import Social
 
@@ -33,12 +32,9 @@ final class CelScoreViewModel: NSObject {
     
     
     //MARK: Methods
-    func checkNetworkConnectivitySignal() -> SignalProducer<ReachabilityStatus, NoError> {
+    func checkNetworkConnectivitySignal() -> SignalProducer<Bool, NoError> {
         return SignalProducer { sink, _ in
-            
-            let reachability = Monitor()
-            reachability!.startMonitoring()
-            sendNext(sink, (reachability?.reachabilityStatus)!)
+            sendNext(sink, Reachability.isConnectedToNetwork())
         }
     }
     
