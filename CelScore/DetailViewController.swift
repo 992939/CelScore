@@ -18,6 +18,7 @@ final class DetailViewController: UIViewController {
     let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
+    //let pageNode: ASPagerNode
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     
@@ -31,6 +32,7 @@ final class DetailViewController: UIViewController {
         self.celscoreNode = ASTextNode()
         self.marginErrorNode = ASTextNode()
         self.celebPicNode = ASImageNode()
+        //self.pageNode = ASPagerNode()
         
         super.init(nibName: nil, bundle: nil)
         self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celebrityVM.celebrity?.nickName)")

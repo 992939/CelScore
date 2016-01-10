@@ -23,10 +23,10 @@ final class CelebrityTableViewCell: ASCellNode {
     init(profile: CelebrityProfile) {
         self.profile = profile
         self.nameNode = ASTextNode()
-        self.nameNode.layerBacked = true
         self.pictureNode = ASImageNode()
-        self.pictureNode.layerBacked = true
         self.ratingsNode = ASImageNode()
+        self.nameNode.layerBacked = true
+        self.pictureNode.layerBacked = true
         self.ratingsNode.layerBacked = true
         self.followSwitch = UISwitch()
         
