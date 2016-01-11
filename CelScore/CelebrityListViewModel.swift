@@ -18,10 +18,8 @@ class CelebrityListViewModel: NSObject {
     final var count: Int { get { return self.celebrityList.count }}
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
-    
     //MARK: Initializers
     override init() { super.init() }
-    
     
     //MARK: Methods
     final func initializeListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {

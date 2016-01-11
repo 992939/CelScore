@@ -16,7 +16,6 @@ final class SearchListViewModel: CelebrityListViewModel {
     let searchText = MutableProperty("")
     let isSearching = MutableProperty<Bool>(false)
     
-    
     //MARK: Initializers
     init(searchToken: String) {
         super.init()
@@ -34,7 +33,6 @@ final class SearchListViewModel: CelebrityListViewModel {
                 self.isSearching.value = false
         }
     }
-    
     
     //MARK: Methods
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {

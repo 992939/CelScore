@@ -27,7 +27,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     var loginButton: FBSDKLoginButton!
     lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
     lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
-
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -62,7 +61,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    
     //MARK: Methods
     override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
     override func viewWillLayoutSubviews() { self.celebrityTableView.frame = self.view.bounds }
@@ -87,15 +85,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //self.settingsVM.getFollowedCelebritiesSignal().start()
     }
     
-    
     //MARK: ASTableView methods
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int { return 1 }
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
-    func tableView(tableView: ASTableView!, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath!) {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
+    func tableView(tableView: ASTableView, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath) {
         /*TODO: Implement*/
     }
     
-    func tableView(tableView: ASTableView!, nodeForRowAtIndexPath indexPath: NSIndexPath!) -> ASCellNode! {
+    func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
         self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
             .on(next: { value in node = CelebrityTableViewCell(profile: value) })
@@ -103,18 +100,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.presentViewController(DetailViewController(celebrityId: node.profile.id), animated: false, completion: nil)
         //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
-    
     //MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
     func textFieldDidBeginEditing(textField: UITextField) {}
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
-    
     
     //MARK: FBSDKLoginButtonDelegate Methods.
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
@@ -143,7 +138,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { self.userVM.logoutSignal(.Facebook).start() }
 }
-
 
 //MARK: Extensions
 extension UITextField {

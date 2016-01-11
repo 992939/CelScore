@@ -45,7 +45,6 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
     
-    
     //MARK: Initializers
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
@@ -67,7 +66,6 @@ public final class CelebrityModel: Object, NSCopying {
         self.sex = dictionary["sex"] as! Bool
         self.isSynced = true
     }
-    
     
     //MARK: Methods
     override public class func primaryKey() -> String { return "id" }

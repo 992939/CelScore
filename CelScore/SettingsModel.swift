@@ -16,7 +16,6 @@ public class SettingsModel: Object, NSCopying {
     dynamic var defaultListId: String = "0001"
     dynamic var loginTypeIndex: Int = 1
     dynamic var isSynced: Bool = true
-
     
     //MARK: Initializers
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
@@ -26,7 +25,6 @@ public class SettingsModel: Object, NSCopying {
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.isSynced = true
     }
-    
     
     //MARK: Methods
     override public class func primaryKey() -> String { return "id" }

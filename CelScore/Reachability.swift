@@ -30,6 +30,5 @@ public class Reachability {
         let needsConnection = flags == .ConnectionRequired
         
         return isReachable && !needsConnection
-        
     }
 }

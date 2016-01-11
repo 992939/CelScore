@@ -18,9 +18,8 @@ final class DetailViewController: UIViewController {
     let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
-    //let pageNode: ASPagerNode
+    let pageNode: ASPagerNode
     enum PageType: Int { case CelScore = 0, Info, Ratings }
-    
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -32,13 +31,12 @@ final class DetailViewController: UIViewController {
         self.celscoreNode = ASTextNode()
         self.marginErrorNode = ASTextNode()
         self.celebPicNode = ASImageNode()
-        //self.pageNode = ASPagerNode()
+        self.pageNode = ASPagerNode()
         
         super.init(nibName: nil, bundle: nil)
         self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celebrityVM.celebrity?.nickName)")
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
     }
-    
     
     //MARK: Methods
     override func viewWillLayoutSubviews() {}

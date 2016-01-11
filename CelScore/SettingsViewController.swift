@@ -13,12 +13,10 @@ final class SettingsViewController: UIViewController {
     //MARK: Properties
     let settingsVM: SettingsViewModel
     
-    
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() { self.settingsVM = SettingsViewModel(); super.init(nibName: nil, bundle: nil) }
-    
     
     //MARK: Methods
     override func viewWillLayoutSubviews() {}

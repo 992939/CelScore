@@ -19,10 +19,8 @@ final class UserViewModel: NSObject {
     enum LoginType: Int { case Facebook = 0, Twitter }
     enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
     
-    
     //MARK: Initializers
     override init() { super.init() }
-    
     
     //MARK: Login Methods
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
@@ -86,7 +84,6 @@ final class UserViewModel: NSObject {
             }
         }
     }
-
     
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
@@ -98,7 +95,6 @@ final class UserViewModel: NSObject {
             }
         }
     }
-    
     
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {

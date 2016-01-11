@@ -20,7 +20,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Properties
     var window: UIWindow?
     
-    
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 

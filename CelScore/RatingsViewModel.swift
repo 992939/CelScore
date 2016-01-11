@@ -29,14 +29,12 @@ final class RatingsViewModel: NSObject {
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
     
-    
     //MARK: Initializers
     init(celebrityId: String) {
         super.init()
         self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel
         self.userRatings = UserRatingsModel(id: celebrityId).copy() as! UserRatingsModel
     }
-    
     
     //MARK: Methods
     func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {

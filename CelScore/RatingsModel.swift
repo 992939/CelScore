@@ -44,7 +44,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     public typealias KeyIndex = (key: String, value: Int)
     public typealias Generator = AnyGenerator<String>
     
-    
     //MARK: Initializers
     override public class func primaryKey() -> String { return "id" }
     public convenience init(id: String) { self.init(); self.id = id }
@@ -68,7 +67,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         self.isSynced = true
     }
     
-    
     //MARK: Indexable Method
     public subscript(i: Int) -> String {
         switch i {
@@ -85,7 +83,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         default: return ""
         }
     }
-    
     
     //MARK: SequenceType Method
     public func generate() -> Generator {
@@ -106,7 +103,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
             }
         }
     }
-    
     
     //MARK: NSCopying Method
     public func copyWithZone(zone: NSZone) -> AnyObject {

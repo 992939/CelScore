@@ -26,10 +26,8 @@ final class CelScoreViewModel: NSObject {
     enum AWSDataType { case Celebrity, List, Ratings }
     enum CookieType: String { case Positive, Negative }
     
-    
     //MARK: Initializers
     override init() { super.init() }
-    
     
     //MARK: Methods
     func checkNetworkConnectivitySignal() -> SignalProducer<Bool, NoError> {

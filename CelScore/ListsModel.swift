@@ -14,7 +14,6 @@ public final class CelebId: Object, NSCopying {
     //MARK: Properties
     dynamic var id: String = ""
     
-    
     //MARK: Methods
     public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
 }
@@ -29,7 +28,6 @@ public final class ListsModel: Object, NSCopying {
     dynamic var count: Int = 0
     dynamic var isSynced: Bool = true
     var celebList = List<CelebId>()
-    
     
     //MARK: Initializers
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
@@ -47,7 +45,6 @@ public final class ListsModel: Object, NSCopying {
         self.count = self.celebList.count
         self.isSynced = true
     }
-    
     
     //MARK: Methods
     override public class func primaryKey() -> String { return "id" }

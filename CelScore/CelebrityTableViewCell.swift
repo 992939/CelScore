@@ -17,7 +17,6 @@ final class CelebrityTableViewCell: ASCellNode {
     let pictureNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let ratingsNode: ASImageNode
     let followSwitch: UISwitch
-
     
     //MARK: Initializers
     init(profile: CelebrityProfile) {
@@ -38,9 +37,8 @@ final class CelebrityTableViewCell: ASCellNode {
         self.addSubnode(self.nameNode)
     }
     
-    
     //MARK: Methods
-    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec! {
+    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(
                 insets: UIEdgeInsetsMake(15, 15, 15, 15),

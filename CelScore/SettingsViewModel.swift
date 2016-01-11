@@ -20,10 +20,8 @@ final class SettingsViewModel: NSObject {
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
-    
     //MARK: Initializers
     override init() { super.init() }
-    
     
     //MARK: Methods
     func getUserRatingsPercentageSignal() -> SignalProducer<Int, SettingsError> {
