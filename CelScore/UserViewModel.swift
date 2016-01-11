@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AWSCore
 import AWSCognito
 import AWSLambda
 import RealmSwift
