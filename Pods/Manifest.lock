@@ -48,7 +48,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer
-  - AsyncDisplayKit (~> 1.9.2)
+  - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.2)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)

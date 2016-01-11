@@ -2,7 +2,7 @@
 use_frameworks!  
 platform :ios, '8.0'
 pod 'ReactiveCocoa', '4.0.2-alpha-1'
-pod 'AsyncDisplayKit', '~> 1.9.2'
+pod 'AsyncDisplayKit', '~> 1.9.4'
 pod 'RealmSwift', '~> 0.97.0'
 pod 'AWSCognito', '~> 2.3.2'
 pod 'FBSDKCoreKit', '~> 4.7.1'
