@@ -60,5 +60,7 @@ struct Constants {
         "We rise by lifting others.",
         "Individuality is freedom lived.",
         "We all boil at different degrees.",
-        "Don't ask for permission, ask for forgiveness."]
+        "The opposite of courage is conformity.",
+        "It's weird not to be weird.",
+        "A wise man's day is worth a fool's life."]
 }

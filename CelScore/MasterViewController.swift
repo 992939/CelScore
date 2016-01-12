@@ -56,8 +56,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            print("update token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
-            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+            //print("update token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
+            //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
             //self.userVM.refreshFacebookTokenSignal().start()
         }
     }
@@ -119,7 +119,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         print("expiration date: \(result.token.expirationDate)")
         print("login token: \(result.token.tokenString)")
         FBSDKAccessToken.setCurrentAccessToken(result.token)
-        print("token reset!")
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)

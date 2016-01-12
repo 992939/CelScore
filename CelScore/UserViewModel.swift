@@ -63,8 +63,8 @@ final class UserViewModel: NSObject {
             switch loginType {
             case .Facebook:
                 print("FB!")
-                //let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-                //credentialsProvider.clearCredentials()
+                let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+                credentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }
@@ -100,17 +100,15 @@ final class UserViewModel: NSObject {
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            //AWSLogger.defaultLogger().logLevel = .Verbose
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
-                print("getIdentityId : \(task.result!)")
-            
                 
                 let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
                 AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-                let syncClient: AWSCognito = AWSCognito.defaultCognito()
+                AWSCognito.registerCognitoWithConfiguration(configuration, forKey: "USEast1Cognito")
+                let syncClient: AWSCognito = AWSCognito(forKey: "USEast1Cognito")
                 let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
                 let realm = try! Realm()
                 
@@ -157,11 +155,6 @@ final class UserViewModel: NSObject {
                     sendCompleted(sink)
                     return task
                 })
-                
-//                credentialsProvider.refresh().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-//                    guard task.error == nil else { print("refresh.error:\(task.error)"); return task }
-//                    return nil
-//                }
                 return nil
             }
         }
