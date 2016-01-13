@@ -31,7 +31,6 @@ final class SettingsViewModel: NSObject {
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
-            
             sendNext(sink, userRatingsCount/celebrityCount)
             sendCompleted(sink)
         }
@@ -43,7 +42,6 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
             guard let settings = model else { sendError(sink, .NoSettingsModel); return }
-            
             sendNext(sink, settings)
             sendCompleted(sink)
         }

@@ -75,14 +75,12 @@ final class RatingsViewModel: NSObject {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()
-            
             switch ratingType {
             case .Ratings:
                 let predicate = NSPredicate(format: "id = %@", self.ratings.id)
                 self.ratings = realm.objects(RatingsModel).filter(predicate).first
                 guard let object = self.ratings else { sendError(sink, .RatingsNotFound); return }
                 sendNext(sink, object)
-                
             case .UserRatings:
                 let predicate = NSPredicate(format: "id = %@", self.userRatings.id)
                 self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
