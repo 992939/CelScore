@@ -57,7 +57,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
             //print("update token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
-            //self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
             //self.userVM.refreshFacebookTokenSignal().start()
         }
     }

@@ -129,7 +129,7 @@ final class UserViewModel: NSObject {
                 case .UserRatings:
                     let predicate = NSPredicate(format: "isSynced = false")
                     let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
-                    guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); break }
+                    guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
                     realm.beginWrite()
                     for var index: Int = 0; index < userRatingsArray.count; index++
                     {
@@ -142,7 +142,7 @@ final class UserViewModel: NSObject {
                 case .UserSettings:
                     //TODO: Checked once a day and only called when user actually changed a setting
                     let model: SettingsModel? = realm.objects(SettingsModel).first
-                    guard let settings = model else { sendError(sink, NSError(domain: "NoSettings", code: 1, userInfo: nil)); break }
+                    guard let settings = model else { sendError(sink, NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
                     if settings.isSynced == false {
                         dataset.setString(settings.defaultListId, forKey: "defaultListId")
                         dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
@@ -150,7 +150,11 @@ final class UserViewModel: NSObject {
                 }
                 
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                    guard task.error == nil else { sendError(sink, task.error!); return task }
+                    guard task.error == nil else {
+                        if task.error!.code == 10 { credentialsProvider.clearKeychain() }
+                        sendError(sink, task.error!)
+                        return task
+                    }
                     sendNext(sink, task.completed)
                     sendCompleted(sink)
                     return task
