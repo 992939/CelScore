@@ -164,7 +164,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<NSDictionary, NSError> {
+    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)

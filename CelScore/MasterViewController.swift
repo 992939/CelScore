@@ -15,7 +15,6 @@ import RealmSwift
 import TwitterKit
 
 
-
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
@@ -56,7 +55,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            //print("update token: \(FBSDKAccessToken.currentAccessToken().tokenString)")
             self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
             //self.userVM.refreshFacebookTokenSignal().start()
         }
@@ -116,27 +114,29 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print("FBSDKLogin error: \(error)"); return }
         guard result.isCancelled == false else { return }
-        print("expiration date: \(result.token.expirationDate)")
-        print("login token: \(result.token.tokenString)")
+        
         FBSDKAccessToken.setCurrentAccessToken(result.token)
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
-//            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
-//                return self.userVM.getUserInfoFromFacebookSignal()
-//            }
-//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-//                return self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings) //TODO: enum every_day, every_minute, every_hour
-//            }
-//            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+                return self.userVM.getUserInfoFromFacebookSignal()
+            }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
+            }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+            }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.celscoreVM.getFromAWSSignal(dataType: .List)
+            }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
+            }
+            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
             .start()
-        
-        //self.celscoreVM.getFromAWSSignal(dataType: .List).start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .Ratings).start()
-        //self.celscoreVM.getFromAWSSignal(dataType: .Celebrity).start()        
-        //self.settingsVM.calculateSocialConsensusSignal().start()
-        //self.userVM.getFromCognitoSignal(dataSetType: .UserRatings).start()
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { self.userVM.logoutSignal(.Facebook).start() }
