@@ -105,8 +105,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
-        self.displayedCelebrityListVM.getCelebrityProfileSignal(index: indexPath.row)
-            .on(next: { value in node = CelebrityTableViewCell(profile: value) })
+        self.displayedCelebrityListVM.getCelebrityStructSignal(index: indexPath.row)
+            .on(next: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
             .start()
         return node
     }

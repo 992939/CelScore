@@ -58,7 +58,7 @@ final class CelebrityViewModel: NSObject {
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let celeb = celebrity else { sendError(sink, .NotFound); return }
             
-            let profile = CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
+            let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
             activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
             activity.becomeCurrent()

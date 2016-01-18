@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public struct CelebrityProfile {
+public struct CelebrityStruct {
     let id: String
     let imageURL: String
     let nickname: String
@@ -19,9 +19,9 @@ public struct CelebrityProfile {
     let isFollowed: Bool
 }
 
-extension CelebrityProfile: Equatable {}
+extension CelebrityStruct: Equatable {}
 
-public func == (lhs: CelebrityProfile, rhs: CelebrityProfile) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
+public func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
 
 
 public final class CelebrityModel: Object, NSCopying {

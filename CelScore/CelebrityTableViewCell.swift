@@ -12,15 +12,15 @@ import AsyncDisplayKit
 final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Properties
-    let profile: CelebrityProfile
+    let celebST: CelebrityStruct
     let nameNode: ASTextNode
     let pictureNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let ratingsNode: ASImageNode
     let followSwitch: UISwitch
     
     //MARK: Initializers
-    init(profile: CelebrityProfile) {
-        self.profile = profile
+    init(celebrityStruct: CelebrityStruct) {
+        self.celebST = celebrityStruct
         self.nameNode = ASTextNode()
         self.pictureNode = ASImageNode()
         self.ratingsNode = ASImageNode()
@@ -32,7 +32,7 @@ final class CelebrityTableViewCell: ASCellNode {
         super.init()
         
         self.backgroundColor = UIColor.whiteColor()
-        self.nameNode.attributedString = NSMutableAttributedString(string:"\(profile.nickname)")
+        self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
         self.nameNode.placeholderEnabled = true;
         self.addSubnode(self.nameNode)
     }
@@ -46,5 +46,5 @@ final class CelebrityTableViewCell: ASCellNode {
             background: nil)
     }
     
-    func getId() -> String { return profile.id }
+    func getId() -> String { return celebST.id }
 }

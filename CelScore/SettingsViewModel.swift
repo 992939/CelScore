@@ -96,6 +96,8 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false") //TODO: true
             let celebList = realm.objects(CelebrityModel).filter(predicate)
+            let ratingList = realm.objects(RatingsModel) //TODO: remove
+            print("ratings are \(ratingList)")
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             for (index, celeb) in celebList.enumerate() {
                 let idPredicate = NSPredicate(format: "id = %@", celeb.id)

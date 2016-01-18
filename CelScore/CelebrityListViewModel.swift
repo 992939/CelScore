@@ -14,7 +14,7 @@ import RealmSwift
 class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    final private(set) var celebrityList: ListsModel!
+    final private(set) var celebrityList = ListsModel()
     final var name: String { return self.celebrityList.name }
     final var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
@@ -37,7 +37,7 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
-    final func getCelebrityProfileSignal(index index: Int) -> SignalProducer<CelebrityProfile, ListError> {
+    final func getCelebrityStructSignal(index index: Int) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { sink, _ in
             guard index < self.count else { sendError(sink, .IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
@@ -47,7 +47,7 @@ class CelebrityListViewModel: NSObject {
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             guard let celeb = celebrity else { sendError(sink, .EmptyList); return }
             
-            sendNext(sink,CelebrityProfile(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            sendNext(sink, CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
             sendCompleted(sink)
         }
     }

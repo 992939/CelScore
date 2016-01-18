@@ -12,13 +12,13 @@ import CoreSpotlight
 import MobileCoreServices
 
 
-extension CelebrityProfile {
+extension CelebrityStruct {
     public static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
     
     public var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id] }
     
     public var userActivity: NSUserActivity {
-        let activity = NSUserActivity(activityType: CelebrityProfile.domainIdentifier)
+        let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
         activity.keywords = [nickname, "celebrity", "birthday", "fortune", "score", "height", "net worth", "age", "zodiac"]
