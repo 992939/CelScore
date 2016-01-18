@@ -6,17 +6,16 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-
 import Foundation
 import CoreSpotlight
 import MobileCoreServices
 
 
 extension CelebrityStruct {
+    
+    //MARK: Properties
     public static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
-    
     public var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id] }
-    
     public var userActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
         activity.title = nickname
@@ -27,7 +26,6 @@ extension CelebrityStruct {
         activity.eligibleForPublicIndexing = true
         return activity
     }
-    
     public var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContact as String)
         attributeSet.title = nickname
