@@ -29,7 +29,7 @@ final class RatingsViewModel: NSObject {
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
     
-    //MARK: Initializers
+    //MARK: Initializer
     init(celebrityId: String) {
         super.init()
         self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel

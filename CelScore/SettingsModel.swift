@@ -17,7 +17,7 @@ public class SettingsModel: Object, NSCopying {
     dynamic var loginTypeIndex: Int = 1
     dynamic var isSynced: Bool = true
     
-    //MARK: Initializers
+    //MARK: Initializer
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         

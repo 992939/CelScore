@@ -18,7 +18,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let ratingsNode: ASImageNode
     let followSwitch: UISwitch
     
-    //MARK: Initializers
+    //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
         self.celebST = celebrityStruct
         self.nameNode = ASTextNode()

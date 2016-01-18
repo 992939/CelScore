@@ -11,7 +11,7 @@ import UIKit
 
 final class SettingsViewController: UIViewController {
     
-    //MARK: Properties
+    //MARK: Property
     let settingsVM: SettingsViewModel
     
     //MARK: Initializers

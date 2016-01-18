@@ -21,7 +21,7 @@ final class UserViewModel: NSObject {
     enum LoginType: Int { case Facebook = 0, Twitter }
     enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
     
-    //MARK: Initializers
+    //MARK: Initializer
     override init() { super.init() }
     
     //MARK: Login Methods

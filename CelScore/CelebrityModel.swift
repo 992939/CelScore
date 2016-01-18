@@ -45,7 +45,7 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
     
-    //MARK: Initializers
+    //MARK: Initializer
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         

@@ -26,7 +26,7 @@ final class CelScoreViewModel: NSObject {
     enum AWSDataType { case Celebrity, List, Ratings }
     enum CookieType: String { case Positive, Negative }
     
-    //MARK: Initializers
+    //MARK: Initializer
     override init() { super.init() }
     
     //MARK: Methods
@@ -66,7 +66,7 @@ final class CelScoreViewModel: NSObject {
                     realm.beginWrite()
                     realm.add(awsObject, update: true)
                     try! realm.commitWrite()
-                    //print(awsObject)
+                    print(awsObject)
                 })
                 sendNext(sink, task.result!)
                 return task

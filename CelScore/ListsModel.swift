@@ -29,7 +29,7 @@ public final class ListsModel: Object, NSCopying {
     dynamic var isSynced: Bool = true
     var celebList = List<CelebId>()
     
-    //MARK: Initializers
+    //MARK: Initializer
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
         

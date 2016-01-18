@@ -30,7 +30,7 @@ final class CelebrityViewModel: NSObject {
     enum FollowStatus: Int { case NotFollowing = 0, Following }
     enum CelebrityError: ErrorType { case NotFound }
     
-    //MARK: Initializers
+    //MARK: Initializer
     init(celebrityId: String) {
         super.init()
         getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }

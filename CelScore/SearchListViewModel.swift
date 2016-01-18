@@ -17,7 +17,7 @@ final class SearchListViewModel: CelebrityListViewModel {
     let searchText = MutableProperty("")
     let isSearching = MutableProperty<Bool>(false)
     
-    //MARK: Initializers
+    //MARK: Initializer
     init(searchToken: String) {
         super.init()
         
@@ -25,20 +25,13 @@ final class SearchListViewModel: CelebrityListViewModel {
             .filter { $0.characters.count > 2 }
             .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { _ in self.isSearching.value = true })
-            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NoError> in
-                return self.searchSignal(searchToken: token)
-            }
-            .startWithNext {
-                response in
-                print("Search results: \(response)")
-                self.isSearching.value = false
-        }
+            .flatMap(.Latest) { (token: String) -> SignalProducer<AnyObject, NoError> in return self.searchSignal(searchToken: token) }
+            .startWithNext { _ in self.isSearching.value = false }
     }
     
-    //MARK: Methods
+    //MARK: Method
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let predicate: NSPredicate
             let list: AnyObject

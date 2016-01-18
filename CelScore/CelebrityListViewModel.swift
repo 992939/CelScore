@@ -19,7 +19,7 @@ class CelebrityListViewModel: NSObject {
     final var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
-    //MARK: Initializers
+    //MARK: Initializer
     override init() { super.init() }
     
     //MARK: Methods

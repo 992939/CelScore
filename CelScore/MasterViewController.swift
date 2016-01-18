@@ -79,7 +79,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.settingsVM.updateTodayWidgetWithFollowedCelebritiesSignal().start()
     }
     
-    func changeList() {
+    func changeList() { //TODO: enums
         self.displayedCelebrityListVM.getListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
