@@ -14,15 +14,15 @@ import ReactiveCocoa
 import AIRTimer
 import Social
 
+
 final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
     let okFacebook: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
     let okTwitter: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-    let okWeibo: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeSinaWeibo)
     let timeNotifier = MutableProperty<String>("")
     enum periodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
-    enum SocialNetwork: Int { case Twitter = 0, Facebook, Weibo }
+    enum SocialNetwork: Int { case Twitter = 0, Facebook }
     enum AWSDataType { case Celebrity, List, Ratings }
     enum CookieType: String { case Positive, Negative }
     
@@ -119,7 +119,6 @@ final class CelScoreViewModel: NSObject {
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            case .Weibo: socialVC = SLComposeViewController(forServiceType: SLServiceTypeSinaWeibo)
             }
             socialVC.setInitialText("Sharing CelScore")
             //TODO: socialVC.addImage()

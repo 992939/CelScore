@@ -9,6 +9,7 @@
 import UIKit
 import AsyncDisplayKit
 
+
 final class DetailViewController: UIViewController {
     
     //MARK: Properties

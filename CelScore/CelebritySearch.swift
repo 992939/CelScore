@@ -6,9 +6,11 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
+
 import Foundation
 import CoreSpotlight
 import MobileCoreServices
+
 
 extension CelebrityProfile {
     public static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"

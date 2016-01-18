@@ -10,19 +10,20 @@ import Foundation
 import ReactiveCocoa
 import RealmSwift
 
+
 class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    final let title = MutableProperty("")
     final var celebrityList: ListsModel = ListsModel()
-    final var count: Int { get { return self.celebrityList.count }}
+    final var name: String { return self.celebrityList.name }
+    final var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
     //MARK: Initializers
     override init() { super.init() }
     
     //MARK: Methods
-    final func initializeListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
+    final func getListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
         return SignalProducer { sink, _ in
             
             let realm = try! Realm()

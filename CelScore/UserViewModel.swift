@@ -14,6 +14,7 @@ import RealmSwift
 import TwitterKit
 import Timepiece
 
+
 final class UserViewModel: NSObject {
     
     //MARK: Properties

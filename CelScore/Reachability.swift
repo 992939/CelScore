@@ -6,10 +6,12 @@
 //  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
+
 import Foundation
 import SystemConfiguration
 
-public class Reachability {
+
+final class Reachability {
     
     class func isConnectedToNetwork() -> Bool {
         

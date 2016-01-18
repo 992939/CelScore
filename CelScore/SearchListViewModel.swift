@@ -10,6 +10,7 @@ import Foundation
 import ReactiveCocoa
 import RealmSwift
 
+
 final class SearchListViewModel: CelebrityListViewModel {
     
     //MARK: Properties

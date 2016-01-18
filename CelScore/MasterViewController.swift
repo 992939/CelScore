@@ -23,9 +23,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     let celscoreVM: CelScoreViewModel
     let userVM: UserViewModel
     let settingsVM: SettingsViewModel
-    var loginButton: FBSDKLoginButton!
-    lazy var displayedCelebrityListVM: CelebrityListViewModel = CelebrityListViewModel()
-    lazy var searchedCelebrityListVM: SearchListViewModel = SearchListViewModel(searchToken: "")
+    let displayedCelebrityListVM: CelebrityListViewModel
+    let searchedCelebrityListVM: SearchListViewModel
+    let loginButton: FBSDKLoginButton!
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -34,8 +34,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celscoreVM = viewModel
         self.userVM = UserViewModel()
         self.settingsVM = SettingsViewModel()
+        self.displayedCelebrityListVM = CelebrityListViewModel()
+        self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
         self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 0, 0))
+        self.loginButton = FBSDKLoginButton()
         
         super.init(nibName: nil, bundle: nil)
         
@@ -44,20 +47,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
         
-        self.loginButton = FBSDKLoginButton()
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
         self.view.addSubview(loginButton)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
-    }
-    
-    func onTokenUpdate(notification: NSNotification) {
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //self.userVM.refreshFacebookTokenSignal().start()
-        }
     }
     
     //MARK: Methods
@@ -71,7 +66,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
-        self.displayedCelebrityListVM.initializeListSignal(listId: self.settingsVM.defaultListId)
+        self.displayedCelebrityListVM.getListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
@@ -82,6 +77,23 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkConnectivitySignal().start()
         self.settingsVM.getFollowedCelebritiesSignal().start()
+    }
+    
+    func changeList() {
+        self.displayedCelebrityListVM.getListSignal(listId: self.settingsVM.defaultListId)
+            .on(next: { value in
+                self.celebrityTableView.beginUpdates()
+                self.celebrityTableView.reloadData()
+                self.celebrityTableView.endUpdates()
+            })
+            .start()
+    }
+    
+    func onTokenUpdate(notification: NSNotification) {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+            //self.userVM.refreshFacebookTokenSignal().start()
+        }
     }
     
     //MARK: ASTableView methods

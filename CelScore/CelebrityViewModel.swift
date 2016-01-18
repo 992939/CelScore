@@ -11,17 +11,17 @@ import RealmSwift
 import ReactiveCocoa
 import Timepiece
 
+
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    var celebrity: CelebrityModel?
-    var zodiac: String { get { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }}
-    var age: Int { get {
+    private(set) var celebrity: CelebrityModel?
+    var zodiac: String { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }
+    var age: Int {
         let birthdate = self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")
         if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
         { return NSDate().year - (birthdate!.year+1) }
         else { return NSDate().year - birthdate!.year }
-        }
     }
     enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
@@ -31,7 +31,10 @@ final class CelebrityViewModel: NSObject {
     enum CelebrityError: ErrorType { case NotFound }
     
     //MARK: Initializers
-    init(celebrityId: String) { super.init(); getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }}
+    init(celebrityId: String) {
+        super.init()
+        getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
+    }
     
     //MARK: Methods
     func getFromLocalStoreSignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {

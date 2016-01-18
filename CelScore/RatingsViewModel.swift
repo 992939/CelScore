@@ -12,8 +12,8 @@ import RealmSwift
 final class RatingsViewModel: NSObject {
     
     //MARK: Properties
-    var ratings: RatingsModel!
-    var userRatings: UserRatingsModel!
+    private(set) var ratings: RatingsModel!
+    private(set) var userRatings: UserRatingsModel!
     var celScore: Double {
         get {
             var totalRatings: Double = 0

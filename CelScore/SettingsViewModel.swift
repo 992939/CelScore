@@ -6,7 +6,6 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-
 import Foundation
 import RealmSwift
 import ReactiveCocoa
@@ -15,7 +14,7 @@ import ReactiveCocoa
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
-    var defaultListId: String { get { return SettingsModel().defaultListId }}
+    var defaultListId: String { return SettingsModel().defaultListId }
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs, NoRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
