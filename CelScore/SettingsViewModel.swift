@@ -35,17 +35,6 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel, SettingsError> {
-        return SignalProducer { sink, _ in
-            
-            let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first
-            guard let settings = model else { sendError(sink, .NoSettingsModel); return }
-            sendNext(sink, settings)
-            sendCompleted(sink)
-        }
-    }
-    
     func calculateSocialConsensusSignal() -> SignalProducer<Double, SettingsError> {
         return SignalProducer { sink, _ in
             
@@ -62,6 +51,17 @@ final class SettingsViewModel: NSObject {
             let consensus: Double = 100 - ( 20 * averageVariance )
             
             sendNext(sink, consensus)
+            sendCompleted(sink)
+        }
+    }
+    
+    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel, SettingsError> {
+        return SignalProducer { sink, _ in
+            
+            let realm = try! Realm()
+            let model = realm.objects(SettingsModel).first
+            guard let settings = model else { sendError(sink, .NoSettingsModel); return }
+            sendNext(sink, settings)
             sendCompleted(sink)
         }
     }
@@ -91,7 +91,7 @@ final class SettingsViewModel: NSObject {
     
     //TODO: call in the background every 5 min
     //TODO: check for existing celebrities in Realm before calling it
-    func getFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
+    func updateTodayWidgetWithFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false") //TODO: true

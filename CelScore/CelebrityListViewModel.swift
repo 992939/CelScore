@@ -14,7 +14,7 @@ import RealmSwift
 class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    final var celebrityList: ListsModel = ListsModel()
+    final private(set) var celebrityList: ListsModel!
     final var name: String { return self.celebrityList.name }
     final var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }

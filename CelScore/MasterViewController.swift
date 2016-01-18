@@ -76,7 +76,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkConnectivitySignal().start()
-        self.settingsVM.getFollowedCelebritiesSignal().start()
+        self.settingsVM.updateTodayWidgetWithFollowedCelebritiesSignal().start()
     }
     
     func changeList() {
