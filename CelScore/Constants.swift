@@ -56,7 +56,7 @@ struct Constants {
         "The leopard does not change his spots.",
         "Be the change you wish to see in the world.",
         "Relativity applies to physics, not ethics.",
-        "Ethics are more important than laws.",
+        "The television will not be revolutionized.",
         "We rise by lifting others.",
         "Individuality is freedom lived.",
         "We all boil at different degrees.",
