@@ -18,14 +18,14 @@ import TwitterKit
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
-    let searchTextField: UITextField!
-    let celebrityTableView: ASTableView!
     let celscoreVM: CelScoreViewModel
     let userVM: UserViewModel
     let settingsVM: SettingsViewModel
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
-    let loginButton: FBSDKLoginButton!
+    let searchTextField: UITextField
+    let celebrityTableView: ASTableView
+    let loginButton: FBSDKLoginButton
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -113,7 +113,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        self.presentViewController(DetailViewController(celebrityId: node.profile.id), animated: false, completion: nil)
+        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
         //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     

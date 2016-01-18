@@ -45,4 +45,6 @@ final class CelebrityTableViewCell: ASCellNode {
                 child: self.nameNode),
             background: nil)
     }
+    
+    func getId() -> String { return profile.id }
 }
