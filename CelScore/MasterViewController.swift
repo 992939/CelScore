@@ -75,8 +75,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
-        self.celscoreVM.checkNetworkConnectivitySignal().start()
-        self.settingsVM.updateTodayWidgetWithFollowedCelebritiesSignal().start()
+        self.celscoreVM.checkNetworkStatusSignal().start()
+        self.settingsVM.updateTodayWidgetSignal().start()
     }
     
     func changeList() { //TODO: enums

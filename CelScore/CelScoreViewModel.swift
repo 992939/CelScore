@@ -29,7 +29,7 @@ final class CelScoreViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Methods
-    func checkNetworkConnectivitySignal() -> SignalProducer<Bool, NoError> {
+    func checkNetworkStatusSignal() -> SignalProducer<Bool, NoError> {
         return SignalProducer { sink, _ in
             sendNext(sink, Reachability.isConnectedToNetwork())
         }

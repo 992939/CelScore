@@ -92,7 +92,7 @@ final class SettingsViewModel: NSObject {
     
     //TODO: call in the background every 5 min
     //TODO: check for existing celebrities in Realm before calling it
-    func updateTodayWidgetWithFollowedCelebritiesSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
+    func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false") //TODO: true
