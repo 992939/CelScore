@@ -20,7 +20,6 @@ public class SettingsModel: Object, NSCopying {
     //MARK: Initializer
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
-        
         self.defaultListId = dictionary["defaultListId"] as! String
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.isSynced = true

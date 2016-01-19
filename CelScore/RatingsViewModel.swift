@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+
 final class RatingsViewModel: NSObject {
     
     //MARK: Properties

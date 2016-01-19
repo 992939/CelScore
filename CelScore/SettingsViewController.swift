@@ -17,7 +17,10 @@ final class SettingsViewController: UIViewController {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init() { self.settingsVM = SettingsViewModel(); super.init(nibName: nil, bundle: nil) }
+    init() {
+        self.settingsVM = SettingsViewModel()
+        super.init(nibName: nil, bundle: nil)
+    }
     
     //MARK: Methods
     override func viewWillLayoutSubviews() {}
@@ -29,6 +32,6 @@ final class SettingsViewController: UIViewController {
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
-        //self.settingsVM.getSettingsFromLocalStoreSignal().start()
+        self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
     }
 }

@@ -14,7 +14,8 @@ import ReactiveCocoa
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
-    var defaultListId: String { return SettingsModel().defaultListId }
+    private(set) var settings = SettingsModel()
+    var defaultListId: String { return self.settings.defaultListId }
     enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs, NoRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
@@ -23,21 +24,20 @@ final class SettingsViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Methods
-    func getUserRatingsPercentageSignal() -> SignalProducer<Int, SettingsError> {
+    func calculateUserRatingsPercentageSignal() -> SignalProducer<Double, SettingsError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
-            sendNext(sink, userRatingsCount/celebrityCount)
+            let percentage: Double = Double(userRatingsCount/celebrityCount) * 100
+            sendNext(sink, percentage)
             sendCompleted(sink)
         }
     }
     
     func calculateSocialConsensusSignal() -> SignalProducer<Double, SettingsError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
             guard ratings.count > 0 else { sendError(sink, .NoRatingsModel); return }
@@ -49,26 +49,27 @@ final class SettingsViewModel: NSObject {
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
             guard averageVariance > 0 && averageVariance < 5  else { sendError(sink, .OutOfBoundsVariance); return }
             let consensus: Double = 100 - ( 20 * averageVariance )
-            
             sendNext(sink, consensus)
             sendCompleted(sink)
         }
     }
     
-    func getSettingsFromLocalStoreSignal() -> SignalProducer<SettingsModel, SettingsError> {
+    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, SettingsError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
             guard let settings = model else { sendError(sink, .NoSettingsModel); return }
-            sendNext(sink, settings)
+            
+            switch settingType {
+            case .DefaultListId: sendNext(sink, settings.defaultListId)
+            case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
+            }
             sendCompleted(sink)
         }
     }
     
-    func updateSettingOnLocalStoreSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
+    func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             realm.beginWrite()
             
