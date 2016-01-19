@@ -16,13 +16,6 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
     let celebrityId: String
-//    var zodiac: String { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }
-//    var age: Int {
-//        let birthdate = self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")
-//        if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-//        { return NSDate().year - (birthdate!.year+1) }
-//        else { return NSDate().year - birthdate!.year }
-//    }
     enum Sex: Int { case Woman = 0, Man }
     enum Rank { case A_List, B_List, Other }
     enum PersonalStatus { case Single, Married, Divorced, Engaged }

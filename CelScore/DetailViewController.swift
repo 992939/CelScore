@@ -13,9 +13,10 @@ import AsyncDisplayKit
 final class DetailViewController: UIViewController {
     
     //MARK: Properties
-    let nickNameNode: ASTextNode
-    let celscoreNode: ASTextNode
-    let marginErrorNode: ASTextNode
+    let nickNameTextNode: ASTextNode
+    let zodiacTextNode: ASTextNode
+    let ageTextNode: ASTextNode
+    let celscoreTextNode: ASTextNode
     let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
@@ -28,9 +29,10 @@ final class DetailViewController: UIViewController {
     init(celebrityId: String) {
         self.celebrityVM = CelebrityViewModel(celebrityId: celebrityId)
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityId)
-        self.nickNameNode = ASTextNode()
-        self.celscoreNode = ASTextNode()
-        self.marginErrorNode = ASTextNode()
+        self.nickNameTextNode = ASTextNode()
+        self.celscoreTextNode = ASTextNode()
+        self.zodiacTextNode = ASTextNode()
+        self.ageTextNode = ASTextNode()
         self.celebPicNode = ASImageNode()
         self.pageNode = ASPagerNode()
         
@@ -38,7 +40,16 @@ final class DetailViewController: UIViewController {
         
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
-            .on(next: { celeb in self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)") })
+            .on(next: { celeb in
+                self.nickNameTextNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)")
+                let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                self.zodiacTextNode.attributedString = NSMutableAttributedString(string:"\(zodiac)")
+                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
+                var age = 0
+                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
+                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
+                self.ageTextNode.attributedString = NSMutableAttributedString(string: "\(age)")
+            })
             .start()
     }
     
