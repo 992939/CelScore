@@ -41,7 +41,7 @@ public enum Zodiac : Int {
         }
     }
 
-    public func compatableTypes()-> [Zodiac] {
+    public func compatableTypes() -> [Zodiac] {
         switch self {
         case .Aries: return [.Gemini, .Sagittarius, .Leo, .Aquarius]
         case .Taurus: return [.Capricorn, .Pisces, .Virgo, .Cancer]
@@ -58,7 +58,7 @@ public enum Zodiac : Int {
         }
     }
 
-    public func symbol()-> String {
+    public func symbol() -> String {
         switch self {
             case .Aries: return "♈"
             case .Taurus: return "♉"

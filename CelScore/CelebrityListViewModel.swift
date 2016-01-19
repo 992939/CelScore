@@ -15,7 +15,6 @@ class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
     final private(set) var celebrityList = ListsModel()
-    final var name: String { return self.celebrityList.name }
     final var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
@@ -53,6 +52,7 @@ class CelebrityListViewModel: NSObject {
             let realm = try! Realm()
             let list = realm.objects(ListsModel)
             guard list.count > 0 else { sendError(sink, .NoLists); return }
+            self.celebrityList = list.copy() as! ListsModel
             sendNext(sink, list)
             sendCompleted(sink)
         }
