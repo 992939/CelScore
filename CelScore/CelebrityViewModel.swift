@@ -49,7 +49,6 @@ final class CelebrityViewModel: NSObject {
     
     func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
@@ -65,7 +64,6 @@ final class CelebrityViewModel: NSObject {
     
     func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!

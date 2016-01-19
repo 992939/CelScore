@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+
 public class RatingsModel: Object, CollectionType, NSCopying {
     
     //MARK: Properties
