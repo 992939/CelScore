@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+
 public final class CelebId: Object, NSCopying {
     
     //MARK: Properties

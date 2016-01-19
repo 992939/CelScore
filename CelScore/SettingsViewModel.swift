@@ -14,9 +14,7 @@ import ReactiveCocoa
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
-    private(set) var settings = SettingsModel()
-    var defaultListId: String { return self.settings.defaultListId }
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoSettingsModel, NoFollowedCelebs, NoRatingsModel, OutOfBoundsVariance }
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
@@ -30,6 +28,7 @@ final class SettingsViewModel: NSObject {
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
+            
             let percentage: Double = Double(userRatingsCount/celebrityCount) * 100
             sendNext(sink, percentage)
             sendCompleted(sink)
@@ -57,12 +56,18 @@ final class SettingsViewModel: NSObject {
     func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, SettingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first
-            guard let settings = model else { sendError(sink, .NoSettingsModel); return }
-            
-            switch settingType {
-            case .DefaultListId: sendNext(sink, settings.defaultListId)
-            case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
+            let model: SettingsModel? = realm.objects(SettingsModel).first
+            if let settings = model {
+                switch settingType {
+                case .DefaultListId: sendNext(sink, settings.defaultListId)
+                case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
+                }
+            } else
+            {
+                switch settingType {
+                case .DefaultListId: sendNext(sink, SettingsModel().defaultListId)
+                case .LoginTypeIndex: sendNext(sink, SettingsModel().loginTypeIndex)
+                }
             }
             sendCompleted(sink)
         }

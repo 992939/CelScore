@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+
 public struct CelebrityStruct {
     let id: String
     let imageURL: String

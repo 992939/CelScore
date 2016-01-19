@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+
 public class SettingsModel: Object, NSCopying {
     
     //MARK: Properties
