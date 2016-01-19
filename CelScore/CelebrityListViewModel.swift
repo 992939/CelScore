@@ -25,11 +25,10 @@ class CelebrityListViewModel: NSObject {
     //MARK: Methods
     final func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //sendError(sink, .EmptyList);
+            guard let celebList = list else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
             sendCompleted(sink)

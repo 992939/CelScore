@@ -125,7 +125,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print("FBSDKLogin error: \(error)"); return }
         guard result.isCancelled == false else { return }
-        
         FBSDKAccessToken.setCurrentAccessToken(result.token)
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
