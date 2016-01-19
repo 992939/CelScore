@@ -23,7 +23,6 @@ final class CelebrityViewModel: NSObject {
         { return NSDate().year - (birthdate!.year+1) }
         else { return NSDate().year - birthdate!.year }
     }
-    enum PeriodSetting: NSTimeInterval { case Every_Minute = 60.0, Daily = 86400.0 }
     enum Sex: Int { case Woman = 0, Man }
     enum Rank { case A_List, B_List, Other }
     enum PersonalStatus { case Single, Married, Divorced, Engaged }

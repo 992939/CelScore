@@ -47,12 +47,6 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
-            .on(next: { socialVC in
-                UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
-            })
-            .start()*/
-        
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
@@ -76,5 +70,13 @@ final class DetailViewController: UIViewController {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+    
+    func shareVote() {
+        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
+            .on(next: { socialVC in
+                UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
+            })
+            .start()
     }
 }
