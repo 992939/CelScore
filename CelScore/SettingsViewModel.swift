@@ -53,7 +53,7 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, SettingsError> {
+    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let model: SettingsModel? = realm.objects(SettingsModel).first
@@ -62,8 +62,7 @@ final class SettingsViewModel: NSObject {
                 case .DefaultListId: sendNext(sink, settings.defaultListId)
                 case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
                 }
-            } else
-            {
+            } else {
                 switch settingType {
                 case .DefaultListId: sendNext(sink, SettingsModel().defaultListId)
                 case .LoginTypeIndex: sendNext(sink, SettingsModel().loginTypeIndex)

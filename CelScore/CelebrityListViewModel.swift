@@ -23,16 +23,17 @@ class CelebrityListViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Methods
-    final func getListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
+    final func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            
+            print("3")
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else { sendError(sink, .EmptyList); return }
+            guard let celebList = list else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //sendError(sink, .EmptyList);
             
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
+            print("4")
             sendCompleted(sink)
         }
     }
