@@ -35,8 +35,11 @@ final class DetailViewController: UIViewController {
         self.pageNode = ASPagerNode()
         
         super.init(nibName: nil, bundle: nil)
-        self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celebrityVM.celebrity?.nickName)")
+        
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
+        self.celebrityVM.getCelebritySignal(id: celebrityId)
+            .on(next: { celeb in self.nickNameNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)") })
+            .start()
     }
     
     //MARK: Methods
@@ -51,13 +54,13 @@ final class DetailViewController: UIViewController {
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
         self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
 
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 1).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 5).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 1).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 5).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 1).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 5).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 4).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 4).start()

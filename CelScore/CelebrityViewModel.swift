@@ -15,14 +15,14 @@ import Timepiece
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    private(set) var celebrity: CelebrityModel?
-    var zodiac: String { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }
-    var age: Int {
-        let birthdate = self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")
-        if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-        { return NSDate().year - (birthdate!.year+1) }
-        else { return NSDate().year - birthdate!.year }
-    }
+    let celebrityId: String
+//    var zodiac: String { return (self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())! }
+//    var age: Int {
+//        let birthdate = self.celebrity?.birthdate.dateFromFormat("MM/dd/yyyy")
+//        if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
+//        { return NSDate().year - (birthdate!.year+1) }
+//        else { return NSDate().year - birthdate!.year }
+//    }
     enum Sex: Int { case Woman = 0, Man }
     enum Rank { case A_List, B_List, Other }
     enum PersonalStatus { case Single, Married, Divorced, Engaged }
@@ -31,8 +31,8 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Initializer
     init(celebrityId: String) {
+        self.celebrityId = celebrityId
         super.init()
-        getCelebritySignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
     }
     
     //MARK: Methods
