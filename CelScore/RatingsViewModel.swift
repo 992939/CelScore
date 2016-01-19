@@ -13,53 +13,44 @@ import RealmSwift
 final class RatingsViewModel: NSObject {
     
     //MARK: Properties
-    private(set) var ratings: RatingsModel!
-    private(set) var userRatings: UserRatingsModel!
-    var celScore: Double {
-        get {
-            var totalRatings: Double = 0
-            for rating in ratings { totalRatings += ratings[rating] as! Double }
-            if userRatings.totalVotes == 0 { return totalRatings / 10 }
-            else {
-                totalRatings *= Double(ratings.totalVotes)
-                for rating in userRatings { totalRatings += ratings[rating] as! Double }
-                return totalRatings / Double(ratings.totalVotes + 1)
-            }
-        }
-    }
+    let ratingsId: String
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
     
     //MARK: Initializer
     init(celebrityId: String) {
+        self.ratingsId = celebrityId
         super.init()
-        self.ratings = RatingsModel(id: celebrityId).copy() as! RatingsModel
-        self.userRatings = UserRatingsModel(id: celebrityId).copy() as! UserRatingsModel
     }
     
     //MARK: Methods
-    func updateUserRatingsSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
+    func updateUserRatingSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
             guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
-            guard self.userRatings != nil else { sendError(sink, .UserRatingsNotFound); return }
             
             let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
+            
             realm.beginWrite()
-            let key = self.userRatings[ratingIndex]
-            self.userRatings[key] = newRating
-            self.userRatings.isSynced = true
+            let key = object[ratingIndex]
+            object[key] = newRating
+            object.isSynced = true
             try! realm.commitWrite()
-            sendNext(sink, self.userRatings)
+            sendNext(sink, object)
             sendCompleted(sink)
         }
     }
     
-    func saveUserRatingsSignal() -> SignalProducer<RatingsModel, RatingsError> {
+    func voteSignal() -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
-            guard let object = self.userRatings else { sendError(sink, .UserRatingsNotFound); return }
-            
             let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
+            
             realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
@@ -70,22 +61,44 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func retrieveFromLocalStoreSignal(ratingType ratingType: RatingsType) -> SignalProducer<RatingsModel!, RatingsError> {
+    func getRatingsSignal(ratingType ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             switch ratingType {
             case .Ratings:
-                let predicate = NSPredicate(format: "id = %@", self.ratings.id)
-                self.ratings = realm.objects(RatingsModel).filter(predicate).first
-                guard let object = self.ratings else { sendError(sink, .RatingsNotFound); return }
+                let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+                let ratings = realm.objects(RatingsModel).filter(predicate).first
+                guard let object = ratings else { sendError(sink, .RatingsNotFound); return }
                 sendNext(sink, object)
             case .UserRatings:
-                let predicate = NSPredicate(format: "id = %@", self.userRatings.id)
-                self.userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-                guard let object = self.userRatings else { sendError(sink, .UserRatingsNotFound); return }
+                let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+                let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+                guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
                 sendNext(sink, object)
             }
+            sendCompleted(sink)
+        }
+    }
+    
+    func getCelScoreSignal() -> SignalProducer<Double, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let ratings = realm.objects(RatingsModel).filter(predicate).first
+            let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            
+            var celScore: Double = 0
+            if let totalRatings = ratings {
+                for rating in totalRatings { celScore += totalRatings[rating] as! Double }
+                if let userRatings = newRatings where userRatings.totalVotes > 0 {
+                    celScore *= Double(totalRatings.totalVotes)
+                    for rating in userRatings { celScore += userRatings[rating] as! Double }
+                    celScore = celScore / Double(totalRatings.totalVotes + 1)
+                } else {
+                    celScore = celScore / 10
+                }
+            }
+            sendNext(sink, celScore)
             sendCompleted(sink)
         }
     }

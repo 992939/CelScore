@@ -48,20 +48,20 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
-        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
-        self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
+        self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
+        self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
 
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 0, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 1, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 2, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 3, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 4, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 5, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 6, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 7, newRating: 5).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 8, newRating: 4).start()
-        self.ratingsVM.updateUserRatingsSignal(ratingIndex: 9, newRating: 4).start()
-        self.ratingsVM.saveUserRatingsSignal().start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 5).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 4).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 4).start()
+        self.ratingsVM.voteSignal().start()
     }
     
     func screenShotMethod() {

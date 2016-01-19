@@ -112,8 +112,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        //self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
-        self.presentViewController(SettingsViewController(), animated: false, completion: nil)
+        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
+        //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods
