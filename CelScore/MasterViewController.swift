@@ -66,6 +66,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
+        self.settingsVM.getSettingSignal(settingType: .DefaultListId)
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return self.displayedCelebrityListVM.getListSignal(listId: value as! String)
+            }
+            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
+            .retry(2)
+            .start()
+        
+        
+        
         self.displayedCelebrityListVM.getListSignal(listId: self.settingsVM.defaultListId)
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
@@ -79,14 +90,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.settingsVM.updateTodayWidgetSignal().start()
     }
     
-    func changeList() { //TODO: enums
-        self.displayedCelebrityListVM.getListSignal(listId: self.settingsVM.defaultListId)
-            .on(next: { value in
-                self.celebrityTableView.beginUpdates()
-                self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates()
-            })
-            .start()
+    func changeList() {
+        //TODO: enums
     }
     
     func onTokenUpdate(notification: NSNotification) {
@@ -113,8 +118,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
-        //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
+        //self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
+        self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods
