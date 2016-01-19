@@ -52,7 +52,8 @@ final class DetailViewController: UIViewController {
                 UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()*/
-        //CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
+        
+        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .Ratings).start()
         self.ratingsVM.retrieveFromLocalStoreSignal(ratingType: .UserRatings).start()
 

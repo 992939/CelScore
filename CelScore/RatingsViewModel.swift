@@ -50,7 +50,6 @@ final class RatingsViewModel: NSObject {
             self.userRatings[key] = newRating
             self.userRatings.isSynced = true
             try! realm.commitWrite()
-            
             sendNext(sink, self.userRatings)
             sendCompleted(sink)
         }
@@ -66,7 +65,6 @@ final class RatingsViewModel: NSObject {
             object.totalVotes += 1
             realm.add(object, update: true)
             try! realm.commitWrite()
-            
             sendNext(sink, object)
             sendCompleted(sink)
         }

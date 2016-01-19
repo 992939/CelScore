@@ -33,18 +33,16 @@ final class CelebrityViewModel: NSObject {
     //MARK: Initializer
     init(celebrityId: String) {
         super.init()
-        getFromLocalStoreSignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
+        getCelebritySignal(id: celebrityId).startWithNext { celeb in self.celebrity = celeb }
     }
     
     //MARK: Methods
-    func getFromLocalStoreSignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
+    func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
-            
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!.copy() as? CelebrityModel
             guard let object = celebrity else { sendError(sink, .NotFound); return }
-            
             sendNext(sink, object)
             sendCompleted(sink)
         }
@@ -57,12 +55,10 @@ final class CelebrityViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let celeb = celebrity else { sendError(sink, .NotFound); return }
-            
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
             activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
             activity.becomeCurrent()
-            
             sendNext(sink, activity)
             sendCompleted(sink)
         }
@@ -75,15 +71,12 @@ final class CelebrityViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let object = celebrity else { sendError(sink, .NotFound); return }
-            
             if followStatus == .Following { object.isFollowed = true }
             else { object.isFollowed = false }
             //TODO: update Notification Center
-            
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()
-            
             sendNext(sink, object)
             sendCompleted(sink)
         }
