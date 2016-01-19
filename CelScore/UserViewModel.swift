@@ -31,6 +31,7 @@ final class UserViewModel: NSObject {
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); sendError(sink, task.error!); return task }
+                print("identity: \(task.result)")
                 return nil
             }
             let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)

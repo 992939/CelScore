@@ -71,14 +71,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
                 return self.displayedCelebrityListVM.getListSignal(listId: value as! String)
             }
-            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .on(next: { value in
-                print("5")
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
-            .retry(2)
+            .retry(1)
             .start()
     
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()

@@ -25,7 +25,7 @@ class CelebrityListViewModel: NSObject {
     //MARK: Methods
     final func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
-            print("3")
+
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
@@ -33,7 +33,6 @@ class CelebrityListViewModel: NSObject {
             
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
-            print("4")
             sendCompleted(sink)
         }
     }
