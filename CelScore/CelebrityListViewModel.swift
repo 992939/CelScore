@@ -30,7 +30,6 @@ class CelebrityListViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
             guard let celebList = list else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //sendError(sink, .EmptyList);
-            
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
             sendCompleted(sink)
@@ -41,12 +40,10 @@ class CelebrityListViewModel: NSObject {
         return SignalProducer { sink, _ in
             guard index < self.count else { sendError(sink, .IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
-            
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId.id)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
             guard let celeb = celebrity else { sendError(sink, .EmptyList); return }
-            
             sendNext(sink, CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
             sendCompleted(sink)
         }
@@ -57,7 +54,6 @@ class CelebrityListViewModel: NSObject {
             let realm = try! Realm()
             let list = realm.objects(ListsModel)
             guard list.count > 0 else { sendError(sink, .NoLists); return }
-            
             sendNext(sink, list)
             sendCompleted(sink)
         }
