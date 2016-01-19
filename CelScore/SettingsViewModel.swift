@@ -95,18 +95,15 @@ final class SettingsViewModel: NSObject {
     }
     
     //TODO: call in the background every 5 min
-    //TODO: check for existing celebrities in Realm before calling it
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = false") //TODO: true
             let celebList = realm.objects(CelebrityModel).filter(predicate)
-            let ratingList = realm.objects(RatingsModel) //TODO: remove
-            print("ratings are \(ratingList)")
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             for (index, celeb) in celebList.enumerate() {
                 let idPredicate = NSPredicate(format: "id = %@", celeb.id)
-                let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel
+                let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel //TODO: dangerous assumption?
                 let totalRatings: Double = ratings.map{ratings[$0] as! Double }.reduce(0, combine: { $0 + $1 })
                 let currentScore: Double = totalRatings/10
                 let today = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": currentScore]
