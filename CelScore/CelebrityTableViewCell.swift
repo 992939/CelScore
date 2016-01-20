@@ -14,7 +14,7 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Properties
     let celebST: CelebrityStruct
     let nameNode: ASTextNode
-    let pictureNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
+    let pictureNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode/ASLazyImageNode
     let ratingsNode: ASImageNode
     let followSwitch: UISwitch
     

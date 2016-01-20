@@ -16,7 +16,7 @@ final class DetailViewController: ASViewController {
     let zodiacTextNode: ASTextNode
     let ageTextNode: ASTextNode
     let celscoreTextNode: ASTextNode
-    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode
+    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode/ASLazyImageNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
     let pageNode: ASPagerNode
