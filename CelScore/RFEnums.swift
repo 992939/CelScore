@@ -9,6 +9,41 @@
 import Foundation
 
 
+public enum CelebList : Int {
+    case PublicOpinion
+    case Sports
+    case Music
+    case Hollywood
+    case TV
+    case Freshmen
+    case Ubuntu
+    
+    //MARK: Methods
+    public func name() -> String {
+        switch self {
+        case .PublicOpinion: return "#PublicOpinon"
+        case .Sports: return "#Sports"
+        case .Music: return "#Music"
+        case .Hollywood: return "#Hollywood"
+        case .TV: return "#TV"
+        case .Freshmen: return "#Freshmen"
+        case .Ubuntu: return "#Ubuntu"
+        }
+    }
+    
+    public func getId() -> String {
+        switch self {
+        case .PublicOpinion: return "0001"
+        case .Sports: return "0002"
+        case .Music: return "0003"
+        case .Hollywood: return "0004"
+        case .TV: return "0005"
+        case .Freshmen: return "0006"
+        case .Ubuntu: return "0007"
+        }
+    }
+}
+
 public enum Zodiac : Int {
     case Aries
     case Taurus

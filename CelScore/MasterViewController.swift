@@ -45,7 +45,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchTextField.placeholder = "look up a celebrity"
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
-        
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
         self.view.addSubview(loginButton)
@@ -83,8 +82,14 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.settingsVM.updateTodayWidgetSignal().start()
     }
     
-    func changeList() {
-        //TODO: enums
+    func changeList(celebList celebList: CelebList) {
+        self.displayedCelebrityListVM.getListSignal(listId: celebList.getId())
+            .on(next: { value in
+                self.celebrityTableView.beginUpdates()
+                self.celebrityTableView.reloadData()
+                self.celebrityTableView.endUpdates()
+            })
+            .start()
     }
     
     func onTokenUpdate(notification: NSNotification) {
