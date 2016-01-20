@@ -75,7 +75,6 @@ final class UserViewModel: NSObject {
     
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
-            
             let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
             if expirationDate > 10.days.later { sendCompleted(sink) }
             else {
@@ -90,7 +89,6 @@ final class UserViewModel: NSObject {
     
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
         return SignalProducer { sink, _ in
-            
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else { sendError(sink, error); return }
                 sendNext(sink, object)

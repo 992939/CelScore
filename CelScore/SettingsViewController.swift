@@ -6,10 +6,10 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import UIKit
+import AsyncDisplayKit
 
 
-final class SettingsViewController: UIViewController {
+final class SettingsViewController: ASViewController {
     
     //MARK: Property
     let settingsVM: SettingsViewModel
@@ -19,7 +19,7 @@ final class SettingsViewController: UIViewController {
     
     init() {
         self.settingsVM = SettingsViewModel()
-        super.init(nibName: nil, bundle: nil)
+        super.init(node: ASDisplayNode())
     }
     
     //MARK: Methods

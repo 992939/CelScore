@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import UIKit
 import AsyncDisplayKit
 import FBSDKLoginKit
 import FBSDKCoreKit
@@ -15,7 +14,7 @@ import RealmSwift
 import TwitterKit
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
     let celscoreVM: CelScoreViewModel
@@ -40,7 +39,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 0, 0))
         self.loginButton = FBSDKLoginButton()
         
-        super.init(nibName: nil, bundle: nil)
+        super.init(node: ASDisplayNode())
         
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"

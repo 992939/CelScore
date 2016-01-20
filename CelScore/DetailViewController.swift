@@ -6,11 +6,10 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import UIKit
 import AsyncDisplayKit
 
 
-final class DetailViewController: UIViewController {
+final class DetailViewController: ASViewController {
     
     //MARK: Properties
     let nickNameTextNode: ASTextNode
@@ -36,7 +35,7 @@ final class DetailViewController: UIViewController {
         self.celebPicNode = ASImageNode()
         self.pageNode = ASPagerNode()
         
-        super.init(nibName: nil, bundle: nil)
+        super.init(node: ASDisplayNode())
         
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
@@ -65,16 +64,16 @@ final class DetailViewController: UIViewController {
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
         self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
 
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 1).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 1).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 1).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 5).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 4).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 4).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 3).start()
         self.ratingsVM.voteSignal().start()
     }
     
