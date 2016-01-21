@@ -24,6 +24,8 @@ final class CelebrityTableViewCell: ASCellNode {
         
         self.nameNode = ASTextNode()
         self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
+        self.nameNode.maximumNumberOfLines = 1
+        self.nameNode.truncationMode = .ByTruncatingTail
         self.nameNode.placeholderEnabled = true;
         self.nameNode.layerBacked = true
         
@@ -51,11 +53,17 @@ final class CelebrityTableViewCell: ASCellNode {
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
         let horizontalStack = ASStackLayoutSpec(
-            direction: ASStackLayoutDirection.Horizontal,
+            direction: .Horizontal,
             spacing: Constants.cellPadding,
-            justifyContent: ASStackLayoutJustifyContent.Start,
-            alignItems: ASStackLayoutAlignItems.Center,
+            justifyContent: .Start,
+            alignItems: .Center,
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
+        
+        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 80.0)
+        //self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 20.0)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 50.0)
+        self.nameNode.backgroundColor = UIColor.redColor()
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 30.0)
         
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(
