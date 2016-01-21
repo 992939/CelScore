@@ -30,12 +30,14 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.layerBacked = true
         
         self.profilePicNode = ASImageNode()
+        self.profilePicNode.frame = CGRectMake(10.0, 10.0, 40.0, 40.0)
         self.profilePicNode.layerBacked = true
 //        self.profilePicNode.imageModificationBlock = {
 //            input in return input
 //        }
         
         self.ratingsNode = ASImageNode()
+        self.ratingsNode.frame = CGRectMake(10.0, 10.0, 60.0, 40.0)
         self.ratingsNode.layerBacked = true
         
         self.followSwitch = UISwitch()
@@ -51,19 +53,25 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
             spacing: Constants.cellPadding,
             justifyContent: .Start,
             alignItems: .Center,
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
+        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
         
-        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 80.0)
-        //self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 20.0)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 50.0)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.profilePicNode.backgroundColor = UIColor.greenColor()
+        //self.profilePicNode.flexShrink = false
+        
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.5)
         self.nameNode.backgroundColor = UIColor.redColor()
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 30.0)
+        //self.nameNode.flexShrink = false
+        
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.3)
+        self.ratingsNode.backgroundColor = UIColor.blueColor()
+        //self.ratingsNode.flexShrink = false
         
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(
