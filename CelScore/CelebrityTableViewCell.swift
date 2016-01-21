@@ -49,10 +49,18 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        
+        let horizontalStack = ASStackLayoutSpec(
+            direction: ASStackLayoutDirection.Horizontal,
+            spacing: Constants.cellPadding,
+            justifyContent: ASStackLayoutJustifyContent.Start,
+            alignItems: ASStackLayoutAlignItems.Center,
+            children: [self.profilePicNode, self.nameNode, self.ratingsNode])
+        
         return ASBackgroundLayoutSpec(
             child: ASInsetLayoutSpec(
                 insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
-                child: self.nameNode),
+                child: horizontalStack),
             background: nil)
     }
     
