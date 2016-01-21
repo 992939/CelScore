@@ -53,6 +53,15 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.profilePicNode.backgroundColor = UIColor.greenColor()
+        
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.5)
+        self.nameNode.backgroundColor = UIColor.redColor()
+        
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.3)
+        self.ratingsNode.backgroundColor = UIColor.blueColor()
+        
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
             spacing: Constants.cellPadding,
@@ -61,23 +70,9 @@ final class CelebrityTableViewCell: ASCellNode {
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
         horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
         
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.profilePicNode.backgroundColor = UIColor.greenColor()
-        //self.profilePicNode.flexShrink = false
-        
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.5)
-        self.nameNode.backgroundColor = UIColor.redColor()
-        //self.nameNode.flexShrink = false
-        
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.3)
-        self.ratingsNode.backgroundColor = UIColor.blueColor()
-        //self.ratingsNode.flexShrink = false
-        
-        return ASBackgroundLayoutSpec(
-            child: ASInsetLayoutSpec(
+        return ASInsetLayoutSpec(
                 insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
-                child: horizontalStack),
-            background: nil)
+                child: horizontalStack)
     }
     
     func getId() -> String { return celebST.id }
