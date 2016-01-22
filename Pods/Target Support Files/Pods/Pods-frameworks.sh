@@ -95,8 +95,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Realm.framework"
   install_framework "Pods/RealmSwift.framework"
   install_framework "Pods/Result.framework"
+  install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
+  install_framework "Pods/WebASDKImageManager.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AIRTimer.framework"
@@ -110,6 +112,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Realm.framework"
   install_framework "Pods/RealmSwift.framework"
   install_framework "Pods/Result.framework"
+  install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
+  install_framework "Pods/WebASDKImageManager.framework"
 fi

@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import WebASDKImageManager
 
 
 final class CelebrityTableViewCell: ASCellNode {
@@ -14,7 +15,7 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Properties
     let celebST: CelebrityStruct
     let nameNode: ASTextNode
-    let profilePicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode/ASLazyImageNode
+    let profilePicNode: ASNetworkImageNode //TODO: ASMultiplexImageNode//ASLazyImageNode
     let ratingsNode: ASImageNode
     let followSwitch: UISwitch
     
@@ -29,13 +30,24 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.placeholderEnabled = true;
         self.nameNode.layerBacked = true
         
-        self.profilePicNode = ASImageNode()
+        //self.profilePicNode = ASNetworkImageNode(
         self.profilePicNode.frame = CGRectMake(10.0, 10.0, 40.0, 40.0)
         //self.profilePicNode.image = UIImage(
         self.profilePicNode.layerBacked = true
-//        self.profilePicNode.imageModificationBlock = {
-//            input in return input
-//        }
+        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
+            if image == nil { return image }
+            
+            var modifiedImage: UIImage?
+            var rect = CGRect(origin: CGPointZero, size: image.size)
+            
+            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
+            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
+            maskPath.addClip()
+            image.drawInRect(rect)
+            modifiedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return modifiedImage
+        }
         
         self.ratingsNode = ASImageNode()
         self.ratingsNode.frame = CGRectMake(10.0, 10.0, 60.0, 40.0)

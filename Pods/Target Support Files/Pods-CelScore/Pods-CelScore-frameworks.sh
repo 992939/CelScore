@@ -95,8 +95,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/Realm.framework"
   install_framework "Pods-CelScore/RealmSwift.framework"
   install_framework "Pods-CelScore/Result.framework"
+  install_framework "Pods-CelScore/SDWebImage.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
+  install_framework "Pods-CelScore/WebASDKImageManager.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/AIRTimer.framework"
@@ -110,6 +112,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/Realm.framework"
   install_framework "Pods-CelScore/RealmSwift.framework"
   install_framework "Pods-CelScore/Result.framework"
+  install_framework "Pods-CelScore/SDWebImage.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
+  install_framework "Pods-CelScore/WebASDKImageManager.framework"
 fi

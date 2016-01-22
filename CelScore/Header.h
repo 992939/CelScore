@@ -15,6 +15,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "PROCelScoreAPIClient.h"
-
+#import <WebASDKImageManager/WebASDKImageManager.h>
 
 #endif /* Header_h */

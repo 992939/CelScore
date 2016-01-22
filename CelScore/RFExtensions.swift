@@ -44,6 +44,7 @@ public extension NSDate {
         return f.stringFromDate(self)
     }
 
+    //MARK: Private Methods
     private convenience init(date: NSDate) {
         let f = NSDateFormatter()
         f.dateFormat = "MM dd yyyy"
@@ -52,7 +53,6 @@ public extension NSDate {
         self.init(timeInterval: 0, sinceDate: d)
     }
 
-    //MARK: Private Methods
     private convenience init(anDate: NSDate) {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d"

@@ -13,6 +13,7 @@ pod 'TwitterKit', '~> 1.14.6'
 pod 'TwitterCore', '~> 1.14.6'
 pod 'AIRTimer'
 pod 'Timepiece', '~> 0.4'
+pod 'WebASDKImageManager'
 
 target 'CelScore' do
 
