@@ -12,12 +12,14 @@ import RealmSwift
 import Fabric
 import TwitterKit
 import AWSCognito
+import AWSS3
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Properties
     var window: UIWindow?
+    var backgroundDownloadSessionCompletionHandler: ()?
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -44,6 +46,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Twitter.self, AWSCognito.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
+        AWSS3TransferUtility.interceptApplication(application, handleEventsForBackgroundURLSession: identifier, completionHandler: completionHandler)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

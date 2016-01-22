@@ -83,14 +83,16 @@ final class CelScoreViewModel: NSObject {
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock = { (task, location, data, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), { if ((error) != nil){ NSLog("Error: %@",error!) }})
-                NSLog("Done!")
+                guard error == nil else { sendError(sink, error!); NSLog("Error: %@",error!); return }
+                sendNext(sink, task)
+                sendCompleted(sink)
             }
-
-            let expression = AWSS3TransferUtilityDownloadExpression()
-            let transferUtility = AWSS3TransferUtility.defaultS3TransferUtility()
             
-            transferUtility?.downloadToURL(nil, bucket: Constants.S3BucketName, key: Constants.S3DownloadKeyName, expression: expression, completionHander: completionHandler).continueWithBlock { (task) -> AnyObject! in
+            AWSS3TransferUtility.defaultS3TransferUtility()!.downloadToURL(nil,
+                bucket: Constants.S3BucketName,
+                key: Constants.S3DownloadKeyName,
+                expression: AWSS3TransferUtilityDownloadExpression(),
+                completionHander: completionHandler).continueWithBlock { (task) -> AnyObject! in
                 if let error = task.error { NSLog("Error: %@", error.localizedDescription) }
                 if let exception = task.exception { NSLog("Exception: %@",exception.description) }
                 if let _ = task.result { NSLog("Download Starting!") }
@@ -100,7 +102,7 @@ final class CelScoreViewModel: NSObject {
     }
 
     
-    func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NSError> {
+    func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NoError> {
         return SignalProducer { sink, _ in
             
             let fortuneCookieSays: String?
