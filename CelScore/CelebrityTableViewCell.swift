@@ -32,19 +32,16 @@ final class CelebrityTableViewCell: ASCellNode {
         
         //self.profilePicNode = ASNetworkImageNode(
         self.profilePicNode.frame = CGRectMake(10.0, 10.0, 40.0, 40.0)
-        //self.profilePicNode.image = UIImage(
         self.profilePicNode.layerBacked = true
         self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
             if image == nil { return image }
             
-            var modifiedImage: UIImage?
-            var rect = CGRect(origin: CGPointZero, size: image.size)
-            
+            let rect = CGRect(origin: CGPointZero, size: image.size)
             UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
             let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
             maskPath.addClip()
             image.drawInRect(rect)
-            modifiedImage = UIGraphicsGetImageFromCurrentImageContext()
+            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return modifiedImage
         }
