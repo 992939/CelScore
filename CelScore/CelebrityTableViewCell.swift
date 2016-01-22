@@ -31,6 +31,7 @@ final class CelebrityTableViewCell: ASCellNode {
         
         self.profilePicNode = ASImageNode()
         self.profilePicNode.frame = CGRectMake(10.0, 10.0, 40.0, 40.0)
+        //self.profilePicNode.image = UIImage(
         self.profilePicNode.layerBacked = true
 //        self.profilePicNode.imageModificationBlock = {
 //            input in return input

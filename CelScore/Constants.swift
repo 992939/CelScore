@@ -13,6 +13,8 @@ struct Constants {
     
     //MARK: Properties
     static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
+    static let S3BucketName: String = "celeb3x"
+    static let S3DownloadKeyName: String = "dmx@3x.jpg"
     static let cellPadding: CGFloat = 5.0
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
@@ -66,5 +68,6 @@ struct Constants {
         "We all boil at different degrees.",
         "The opposite of courage is conformity.",
         "It's weird not to be weird.",
+        "The map is not the territory.",
         "A wise man's day is worth a fool's life."]
 }

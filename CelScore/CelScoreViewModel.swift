@@ -12,6 +12,7 @@ import RealmSwift
 import ReactiveCocoa
 import AIRTimer
 import Social
+import AWSS3
 
 
 final class CelScoreViewModel: NSObject {
@@ -73,6 +74,31 @@ final class CelScoreViewModel: NSObject {
             block
         }
     }
+    
+    func getImagesFromS3Signal() -> SignalProducer<AnyObject, NSError> {
+        return SignalProducer { sink, _ in
+            
+            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+            
+            let completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock = { (task, location, data, error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), { if ((error) != nil){ NSLog("Error: %@",error!) }})
+                NSLog("Done!")
+            }
+
+            let expression = AWSS3TransferUtilityDownloadExpression()
+            let transferUtility = AWSS3TransferUtility.defaultS3TransferUtility()
+            
+            transferUtility?.downloadToURL(nil, bucket: Constants.S3BucketName, key: Constants.S3DownloadKeyName, expression: expression, completionHander: completionHandler).continueWithBlock { (task) -> AnyObject! in
+                if let error = task.error { NSLog("Error: %@", error.localizedDescription) }
+                if let exception = task.exception { NSLog("Exception: %@",exception.description) }
+                if let _ = task.result { NSLog("Download Starting!") }
+                return nil;
+            }
+        }
+    }
+
     
     func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NSError> {
         return SignalProducer { sink, _ in

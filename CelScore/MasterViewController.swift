@@ -80,6 +80,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkStatusSignal().start()
         self.settingsVM.updateTodayWidgetSignal().start()
+        self.celscoreVM.getImagesFromS3Signal().start()
     }
     
     func changeList(celebList celebList: CelebList) {

@@ -6,6 +6,8 @@ PODS:
   - AWSCognito (2.3.3):
     - AWSCore (= 2.3.3)
   - AWSCore (2.3.3)
+  - AWSS3 (2.3.3):
+    - AWSCore (= 2.3.3)
   - Bolts (1.4.0):
     - Bolts/AppLinks (= 1.4.0)
     - Bolts/Tasks (= 1.4.0)
@@ -50,6 +52,7 @@ DEPENDENCIES:
   - AIRTimer
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
+  - AWSS3 (~> 2.3.3)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - ReactiveCocoa (= 4.0.4-alpha-1)
@@ -64,6 +67,7 @@ SPEC CHECKSUMS:
   AsyncDisplayKit: 0932ff6f78364130a195039ab9a1c2ff63adc665
   AWSCognito: 3c1209a21a7661c079a59e04f5b5dab4f794561c
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
+  AWSS3: 675f59e0c338e61441117f03018187b9deb359c4
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
