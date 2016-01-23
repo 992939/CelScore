@@ -14,7 +14,7 @@ public enum CelebList : Int {
     case Sports
     case Music
     case Hollywood
-    case TV
+    case Television
     case Freshmen
     case Ubuntu
     
@@ -25,7 +25,7 @@ public enum CelebList : Int {
         case .Sports: return "#Sports"
         case .Music: return "#Music"
         case .Hollywood: return "#Hollywood"
-        case .TV: return "#TV"
+        case .Television: return "#Television"
         case .Freshmen: return "#Freshmen"
         case .Ubuntu: return "#Ubuntu"
         }
@@ -37,7 +37,7 @@ public enum CelebList : Int {
         case .Sports: return "0002"
         case .Music: return "0003"
         case .Hollywood: return "0004"
-        case .TV: return "0005"
+        case .Television: return "0005"
         case .Freshmen: return "0006"
         case .Ubuntu: return "0007"
         }

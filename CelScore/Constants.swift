@@ -35,7 +35,7 @@ struct Constants {
         "From caring comes courage.",
         "The greatest virtues are those useful to others.",
         "If you can't reward, make sure to thank.",
-        "Silence is the sign of approval.",
+        "First duty of a citizen is to question authority.",
         "A life lived for others is a life worth living.",
         "Social change first requires ethical change.",
         "Where the judgement's weak, prejudice is strong.",
@@ -69,5 +69,6 @@ struct Constants {
         "The opposite of courage is conformity.",
         "It's weird not to be weird.",
         "The map is not the territory.",
+        "Power only steps back when facing more power.",
         "A wise man's day is worth a fool's life."]
 }

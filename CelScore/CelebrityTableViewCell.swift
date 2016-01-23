@@ -27,28 +27,28 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
-        self.nameNode.placeholderEnabled = true;
-        self.nameNode.layerBacked = true
+        self.nameNode.placeholderEnabled = true
         
-        //self.profilePicNode = ASNetworkImageNode(
-        self.profilePicNode.frame = CGRectMake(10.0, 10.0, 40.0, 40.0)
-        self.profilePicNode.layerBacked = true
-        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
-            if image == nil { return image }
-            
-            let rect = CGRect(origin: CGPointZero, size: image.size)
-            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
-            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
-            maskPath.addClip()
-            image.drawInRect(rect)
-            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return modifiedImage
-        }
+        self.profilePicNode = ASNetworkImageNode()
+        self.profilePicNode.URL = NSURL(string: "https://s3.amazonaws.com/celeb3x/dmx@3x.jpg")
+        self.profilePicNode.placeholderEnabled = true
+        //self.profilePicNode.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
+//        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
+//            if image == nil { return image }
+//            
+//            let rect = CGRect(origin: CGPointZero, size: image.size)
+//            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
+//            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
+//            maskPath.addClip()
+//            image.drawInRect(rect)
+//            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//            return modifiedImage
+//        }
         
         self.ratingsNode = ASImageNode()
-        self.ratingsNode.frame = CGRectMake(10.0, 10.0, 60.0, 40.0)
-        self.ratingsNode.layerBacked = true
+        self.ratingsNode.placeholderEnabled = true
+        //self.ratingsNode.frame = CGRectMake(10.0, 10.0, 60.0, 40.0)
         
         self.followSwitch = UISwitch()
         
