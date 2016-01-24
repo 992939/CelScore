@@ -71,16 +71,14 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.profilePicNode.backgroundColor = UIColor.greenColor()
-        
         self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.4)
-        self.nameNode.backgroundColor = UIColor.redColor()
-        
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.ratingsNode.backgroundColor = UIColor.blueColor()
-        
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.switchNode.backgroundColor = UIColor.yellowColor()
+        
+        //self.profilePicNode.backgroundColor = UIColor.greenColor()
+        //self.nameNode.backgroundColor = UIColor.redColor()
+        //self.ratingsNode.backgroundColor = UIColor.blueColor()
+        //self.switchNode.backgroundColor = UIColor.yellowColor()
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
