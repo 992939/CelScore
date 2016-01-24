@@ -16,10 +16,10 @@ final class DetailViewController: ASViewController {
     let zodiacTextNode: ASTextNode
     let ageTextNode: ASTextNode
     let celscoreTextNode: ASTextNode
-    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNode/ASLazyImageNode
+    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNodes
+    let pageNode: ASPagerNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
-    let pageNode: ASPagerNode
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
