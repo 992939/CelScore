@@ -25,7 +25,7 @@ final class UserViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Login Methods
-    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject!, NSError> {
+    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
@@ -52,7 +52,7 @@ final class UserViewModel: NSObject {
             
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { sendError(sink, task.error!); return task }
-                sendNext(sink, task.result)
+                sendNext(sink, task.result!)
                 sendCompleted(sink)
                 return task
             })
@@ -87,7 +87,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject!, NSError> {
+    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else { sendError(sink, error); return }

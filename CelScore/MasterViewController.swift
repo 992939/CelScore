@@ -43,10 +43,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"
-        self.view.addSubview(self.searchTextField)
-        self.view.addSubview(self.celebrityTableView)
+
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
+        
+        self.view.addSubview(self.searchTextField)
+        self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(loginButton)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -130,7 +132,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.userVM.getUserInfoFromFacebookSignal()
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in

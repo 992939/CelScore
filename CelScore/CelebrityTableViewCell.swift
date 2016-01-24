@@ -85,8 +85,5 @@ final class CelebrityTableViewCell: ASCellNode {
             background: nil)
     }
     
-    override func didLoad() {
-    }
-    
     func getId() -> String { return celebST.id }
 }
