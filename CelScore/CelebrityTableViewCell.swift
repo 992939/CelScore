@@ -8,6 +8,7 @@
 
 import AsyncDisplayKit
 import WebASDKImageManager
+import JTMaterialSwitch
 
 
 final class CelebrityTableViewCell: ASCellNode {
@@ -54,14 +55,17 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
         
-        self.switchNode = ASDisplayNode()
+        let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
+        followSwitch.center = CGPointMake(380, 20)
+        self.switchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return followSwitch })
+        self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
         
         super.init()
         
-        self.backgroundColor = UIColor.whiteColor()
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
+        self.addSubnode(self.switchNode)
     }
     
     //MARK: Methods
