@@ -79,9 +79,10 @@ final class CelebrityTableViewCell: ASCellNode {
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
         horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
         
-        return ASInsetLayoutSpec(
-                insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
-                child: horizontalStack)
+        return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
+            insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
+            child: horizontalStack),
+            background: nil)
     }
     
     override func didLoad() {
