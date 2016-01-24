@@ -34,18 +34,16 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.placeholderEnabled = true
         self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
-//        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
-//            if image == nil { return image }
-//            
-//            let rect = CGRect(origin: CGPointZero, size: image.size)
-//            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
-//            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
-//            maskPath.addClip()
-//            image.drawInRect(rect)
-//            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext()
-//            return modifiedImage
-//        }
+        self.profilePicNode.imageModificationBlock = { image in
+            let rect = CGRect(origin: CGPointZero, size: image.size)
+            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
+            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
+            maskPath.addClip()
+            image.drawInRect(rect)
+            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return modifiedImage
+        }
         
         let cosmosView = CosmosView()
         cosmosView.settings.starSize = 10
@@ -54,7 +52,7 @@ final class CelebrityTableViewCell: ASCellNode {
         cosmosView.settings.colorFilled = UIColor.orangeColor()
         cosmosView.settings.borderColorEmpty = UIColor.orangeColor()
         self.ratingsNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cosmosView })
-        //self.ratingsNode.preferredFrameSize = CGSizeMake(100, 50)
+        self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
         
         self.followSwitch = UISwitch()
         
