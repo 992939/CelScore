@@ -14,6 +14,7 @@ pod 'TwitterCore', '~> 1.14.6'
 pod 'Timepiece', '~> 0.4'
 pod 'AIRTimer'
 pod 'WebASDKImageManager'
+pod 'JTMaterialSwitch'
 
 target 'CelScore' do
 

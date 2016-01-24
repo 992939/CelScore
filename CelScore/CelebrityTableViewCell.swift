@@ -15,9 +15,9 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Properties
     let celebST: CelebrityStruct
     let nameNode: ASTextNode
-    let profilePicNode: ASNetworkImageNode //TODO: ASMultiplexImageNode//ASLazyImageNode
+    let profilePicNode: ASNetworkImageNode
     let ratingsNode: ASDisplayNode
-    let followSwitch: UISwitch
+    let switchNode: ASDisplayNode
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -30,7 +30,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.placeholderEnabled = true
         
         self.profilePicNode = ASNetworkImageNode(webImage: ())
-        self.profilePicNode.URL = NSURL(string: "https://s3.amazonaws.com/celeb3x/dmx@3x.jpg")
+        self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.placeholderEnabled = true
         self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
@@ -54,7 +54,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
         
-        self.followSwitch = UISwitch()
+        self.switchNode = ASDisplayNode()
         
         super.init()
         
@@ -69,11 +69,14 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.profilePicNode.backgroundColor = UIColor.greenColor()
         
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.5)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.4)
         self.nameNode.backgroundColor = UIColor.redColor()
         
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.3)
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.ratingsNode.backgroundColor = UIColor.blueColor()
+        
+        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.switchNode.backgroundColor = UIColor.yellowColor()
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
