@@ -29,7 +29,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.truncationMode = .ByTruncatingTail
         self.nameNode.placeholderEnabled = true
         
-        self.profilePicNode = ASNetworkImageNode()
+        self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: "https://s3.amazonaws.com/celeb3x/dmx@3x.jpg")
         self.profilePicNode.placeholderEnabled = true
         //self.profilePicNode.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)

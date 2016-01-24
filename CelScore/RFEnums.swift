@@ -15,7 +15,7 @@ public enum CelebList : Int {
     case Music
     case Hollywood
     case Television
-    case Freshmen
+    case Candidates
     case Ubuntu
     
     //MARK: Methods
@@ -26,7 +26,7 @@ public enum CelebList : Int {
         case .Music: return "#Music"
         case .Hollywood: return "#Hollywood"
         case .Television: return "#Television"
-        case .Freshmen: return "#Freshmen"
+        case .Candidates: return "#Candidates"
         case .Ubuntu: return "#Ubuntu"
         }
     }
@@ -38,7 +38,7 @@ public enum CelebList : Int {
         case .Music: return "0003"
         case .Hollywood: return "0004"
         case .Television: return "0005"
-        case .Freshmen: return "0006"
+        case .Candidates: return "0006"
         case .Ubuntu: return "0007"
         }
     }
