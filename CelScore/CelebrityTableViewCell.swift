@@ -33,22 +33,13 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
-        
-        let modificationBlock = { (image: UIImage) -> UIImage? in
-            let rect = CGRect(origin: CGPointZero, size: image.size)
-            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
-            let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
-            maskPath.addClip()
-            image.drawInRect(rect)
-            let modifiedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return modifiedImage
+        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+            return ASImageNodeRoundBorderModificationBlock(9.0, UIColor.redColor())(originalImage)
         }
-        self.profilePicNode.imageModificationBlock = modificationBlock
         
         let cosmosView = CosmosView()
-        cosmosView.settings.starSize = 10
-        cosmosView.settings.starMargin = 2
+        cosmosView.settings.starSize = 15
+        cosmosView.settings.starMargin = 3
         cosmosView.settings.updateOnTouch = false
         cosmosView.settings.colorFilled = UIColor.orangeColor()
         cosmosView.settings.borderColorEmpty = UIColor.orangeColor()
@@ -70,8 +61,8 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.4)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.48)
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         
