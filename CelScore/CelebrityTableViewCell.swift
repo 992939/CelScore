@@ -33,7 +33,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.URL = NSURL(string: "https://s3.amazonaws.com/celeb3x/dmx@3x.jpg")
         self.profilePicNode.placeholderEnabled = true
         self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        //self.profilePicNode.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
+        self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
 //        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
 //            if image == nil { return image }
 //            
