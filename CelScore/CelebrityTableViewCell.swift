@@ -16,7 +16,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let celebST: CelebrityStruct
     let nameNode: ASTextNode
     let profilePicNode: ASNetworkImageNode //TODO: ASMultiplexImageNode//ASLazyImageNode
-    let ratingsNode: ASImageNode
+    let ratingsNode: ASDisplayNode
     let followSwitch: UISwitch
     
     //MARK: Initializer
@@ -32,6 +32,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: "https://s3.amazonaws.com/celeb3x/dmx@3x.jpg")
         self.profilePicNode.placeholderEnabled = true
+        self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         //self.profilePicNode.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
 //        self.profilePicNode.imageModificationBlock = { [weak profilePicNode] image in
 //            if image == nil { return image }
@@ -46,9 +47,14 @@ final class CelebrityTableViewCell: ASCellNode {
 //            return modifiedImage
 //        }
         
-        self.ratingsNode = ASImageNode()
-        self.ratingsNode.placeholderEnabled = true
-        //self.ratingsNode.frame = CGRectMake(10.0, 10.0, 60.0, 40.0)
+        let cosmosView = CosmosView()
+        cosmosView.settings.starSize = 10
+        cosmosView.settings.starMargin = 2
+        cosmosView.settings.updateOnTouch = false
+        cosmosView.settings.colorFilled = UIColor.orangeColor()
+        cosmosView.settings.borderColorEmpty = UIColor.orangeColor()
+        self.ratingsNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cosmosView })
+        //self.ratingsNode.preferredFrameSize = CGSizeMake(100, 50)
         
         self.followSwitch = UISwitch()
         
@@ -58,7 +64,6 @@ final class CelebrityTableViewCell: ASCellNode {
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
-        //self.view.addSubview(self.followSwitch)
     }
     
     //MARK: Methods

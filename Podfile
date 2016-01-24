@@ -11,8 +11,8 @@ pod 'SwiftyJSON', '~> 2.3.2'
 pod 'Fabric', '~> 1.6.1'
 pod 'TwitterKit', '~> 1.14.6'
 pod 'TwitterCore', '~> 1.14.6'
-pod 'AIRTimer'
 pod 'Timepiece', '~> 0.4'
+pod 'AIRTimer'
 pod 'WebASDKImageManager'
 
 target 'CelScore' do
