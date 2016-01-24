@@ -41,8 +41,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         super.init(node: ASDisplayNode())
         
-        self.searchTextField.delegate = self
         self.searchTextField.placeholder = "look up a celebrity"
+        self.searchTextField.delegate = self
 
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self

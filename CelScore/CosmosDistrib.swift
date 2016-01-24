@@ -120,7 +120,7 @@ struct CosmosDefaultSettings {
 import UIKit
 
 /// Helper class for creating CALayer objects.
-class CosmosLayerHelper {
+final class CosmosLayerHelper {
   /**
 
   Creates a text layer for the given text string and font.
@@ -163,7 +163,7 @@ import UIKit
 Colection of helper functions for creating star layers.
 
 */
-class CosmosLayers {
+final class CosmosLayers {
   /**
   
   Creates the layers for the stars.
@@ -479,7 +479,7 @@ import UIKit
 Helper class for calculating size for the cosmos view.
 
 */
-class CosmosSize {
+final class CosmosSize {
   /**
   
   Calculates the size of the cosmos view. It goes through all the star and text layers and makes size the view size is large enough to show all of them.
@@ -518,7 +518,7 @@ import UIKit
 Positions the text layer to the right of the stars.
 
 */
-class CosmosText {
+final class CosmosText {
   /**
   
   Positions the text layer to the right from the stars. Text is aligned to the center of the star superview vertically.

@@ -14,6 +14,7 @@ public extension NSDate {
     //MARK: Public Methods
     public func zodiacSign()-> Zodiac {
         let dates = ["March 20", "April 19", "May 20", "June 20", "July 22", "August 22", "September 23", "October 22", "November 21", "December 21", "January 19", "February 18"]
+        
         for i in 0...11 {
             let date = NSDate(aString: dates[i])
             let second = i < 11 ? dates[i + 1] : dates[0] as String
