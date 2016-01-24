@@ -14,6 +14,7 @@ PODS:
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
+  - CategorySliderView (1.0.2)
   - Fabric (1.6.1)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
   - AWSS3 (~> 2.3.3)
+  - CategorySliderView (~> 1.0.2)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - JTMaterialSwitch
@@ -76,6 +78,7 @@ SPEC CHECKSUMS:
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
   AWSS3: 675f59e0c338e61441117f03018187b9deb359c4
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
+  CategorySliderView: be640cfa918711e1db1183af69495003c7be2be2
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04

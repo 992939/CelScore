@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CategorySliderView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,22 +117,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05DCCEDD109189D00C21ECFB05FA447B</key>
+		<key>2608F0DFBC7557C32B9C73837CE10E81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1EF3A86B62C871CD9241A9F89EA4C826</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2C45886BF0E3ECADB9D186F3E36AF0E3</key>
+		<key>2612AA47A67F4774D9EE1A82D73A1166</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>2D333F48EDD1A4D314F58CDE240A2D3B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2DD301F01D65F40C0060B2BA5E15D3C6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,32 +147,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44DAFDA784775EA564B6916BE77820DB</key>
+		<key>3D3F912086A898E5C2BAE1E2E43143F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4BDB3B9DDC69DE303DD976C7FBCD59B0</key>
+		<key>420BBD21662BF75D49BEFB814D623B99</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>57000D521D97A13D35E3A180FFE72F45</key>
+		<key>5356B8C7AFC92398DDAA5C10CCB7339A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>57ADC05E440A960212657DE6DA1FEDD5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6270872614A899CADEB5FA9AA2A986C2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>65AA7033E324C300B72C6FF8AA3A00B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,32 +187,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EC7F2C9CF3915E5FE94FE3639833295</key>
+		<key>924F0282422F22CF7F760B4926120611</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A799730E0E63D761C2DEAF42488FECC5</key>
+		<key>951D79C6472262F400036B462FF7F901</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AEF70079724B14699FB26BFD784DC283</key>
+		<key>AC22324AEBB536964B814CC7320824F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B430A8C283E9525F8283DD66E3E30967</key>
+		<key>BA13B3CCCA2749FA341809DBDF481918</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B75E225B3572ACDA22EAE650F6FA6321</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BA1BAC9FEB89AC8E37904EFB896CC680</key>
+		<key>BC98F8E0D4434F94D7A977525B75878A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,37 +217,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C29D8A189BE8844B091E00BB4A693E62</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D3F2C12D88000F42ADB1165E67334278</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D5E33228B798C49D4BB6E18F6CCFF342</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D7474775F89A7A40CC34028D10625485</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E02A440317361526F1610D7558908876</key>
+		<key>F0A2D13795338DBDB42B7FF0703B7996</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FD7E4FB1A1720F2B8EE2FD148A936248</key>
 		<dict>
 			<key>primary</key>
 			<true/>
