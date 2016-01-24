@@ -134,16 +134,16 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject!, NSError> in
                 return self.userVM.getUserInfoFromFacebookSignal()
             }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
             }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
             }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.celscoreVM.getFromAWSSignal(dataType: .List)
             }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
