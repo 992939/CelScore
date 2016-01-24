@@ -55,21 +55,21 @@ PODS:
     - SDWebImage/Core (~> 3.7)
 
 DEPENDENCIES:
-  - AIRTimer
+  - AIRTimer (~> 1.0)
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
   - AWSS3 (~> 2.3.3)
   - CategorySliderView (~> 1.0.2)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
-  - JTMaterialSwitch
+  - JTMaterialSwitch (~> 1.1)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
   - TwitterCore (~> 1.14.6)
   - TwitterKit (~> 1.14.6)
-  - WebASDKImageManager
+  - WebASDKImageManager (~> 1.0)
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59

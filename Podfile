@@ -13,9 +13,9 @@ pod 'TwitterKit', '~> 1.14.6'
 pod 'TwitterCore', '~> 1.14.6'
 pod 'Timepiece', '~> 0.4'
 pod 'CategorySliderView', '~> 1.0.2'
-pod 'AIRTimer'
-pod 'WebASDKImageManager'
-pod 'JTMaterialSwitch'
+pod 'AIRTimer', '~> 1.0'
+pod 'WebASDKImageManager', '~> 1.0'
+pod 'JTMaterialSwitch', '~> 1.1'
 
 target 'CelScore' do
 
@@ -28,7 +28,7 @@ end
 target 'CelScoreWidget', :exclusive => true do
     pod 'RealmSwift', '~> 0.97.0'
     pod 'ReactiveCocoa', '4.0.4-alpha-1'
-    pod 'AIRTimer'
+    pod 'AIRTimer', '~> 1.0'
 end
 
 
