@@ -28,14 +28,13 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
-        self.nameNode.placeholderEnabled = true
         
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
-        self.profilePicNode.placeholderEnabled = true
         self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
-        self.profilePicNode.imageModificationBlock = { image in
+        
+        let modificationBlock = { (image: UIImage) -> UIImage? in
             let rect = CGRect(origin: CGPointZero, size: image.size)
             UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
             let maskPath = UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners, cornerRadii: CGSizeMake(10, 10))
@@ -45,6 +44,7 @@ final class CelebrityTableViewCell: ASCellNode {
             UIGraphicsEndImageContext()
             return modifiedImage
         }
+        self.profilePicNode.imageModificationBlock = modificationBlock
         
         let cosmosView = CosmosView()
         cosmosView.settings.starSize = 10
@@ -91,6 +91,9 @@ final class CelebrityTableViewCell: ASCellNode {
         return ASInsetLayoutSpec(
                 insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
                 child: horizontalStack)
+    }
+    
+    override func didLoad() {
     }
     
     func getId() -> String { return celebST.id }
