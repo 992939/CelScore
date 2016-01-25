@@ -56,12 +56,15 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: Methods
-    override func viewWillLayoutSubviews() { self.celebrityTableView.frame = self.view.bounds }
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.configuration()
+    override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
+    override func viewWillLayoutSubviews() {
+        self.celebrityTableView.frame = self.view.bounds
+        if let rect = self.navigationController?.navigationBar.frame {
+            let y = rect.size.height + rect.origin.y
+            self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
+        }
     }
     
     func configuration()
