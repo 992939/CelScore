@@ -40,6 +40,7 @@ final class DetailViewController: ASViewController {
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
             .on(next: { celeb in
+                self.navigationItem.title = celeb.nickName
                 self.nickNameTextNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)")
                 let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                 self.zodiacTextNode.attributedString = NSMutableAttributedString(string:"\(zodiac)")
