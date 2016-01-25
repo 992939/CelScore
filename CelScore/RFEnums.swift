@@ -19,6 +19,10 @@ public enum CelebList : Int {
     case Ubuntu
     
     //MARK: Methods
+    public static func getAll() -> [AnyObject] {
+        return [PublicOpinion.name(), Sports.name(), Music.name(), Hollywood.name(), Television.name(), Candidates.name(), Ubuntu.name()]
+    }
+    
     public func name() -> String {
         switch self {
         case .PublicOpinion: return "#PublicOpinon"

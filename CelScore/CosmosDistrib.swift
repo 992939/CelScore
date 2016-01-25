@@ -634,7 +634,7 @@ Shows: ★★★★☆ (132)
   }
   
   /// Stores calculated size of the view. It is used as intrinsic content size.
-  private var viewSize = CGSize()
+  public var viewContentSize = CGSize()
 
   /// Draws the stars when the view comes out of storyboard with default settings
   public override func awakeFromNib() {
@@ -742,13 +742,13 @@ Shows: ★★★★☆ (132)
 
   */
   private func updateSize(layers: [CALayer]) {
-    viewSize = CosmosSize.calculateSizeToFitLayers(layers)
+    viewContentSize = CosmosSize.calculateSizeToFitLayers(layers)
     invalidateIntrinsicContentSize()
   }
   
   /// Returns the content size to fit all the star and text layers.
   override public func intrinsicContentSize() -> CGSize {
-    return viewSize
+    return viewContentSize
   }
   
   // MARK: - Touch recognition

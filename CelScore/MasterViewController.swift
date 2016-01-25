@@ -12,6 +12,8 @@ import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
 import TwitterKit
+import CategorySliderView
+import LLSlideMenu
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -25,6 +27,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let searchTextField: UITextField
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
+    let settingsMenu: LLSlideMenu
+    //let listSlider: CategorySliderView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -36,8 +40,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
-        self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 0, 0))
+        self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 60, 0))
         self.loginButton = FBSDKLoginButton()
+        self.settingsMenu = LLSlideMenu()
         
         super.init(node: ASDisplayNode())
         
@@ -47,9 +52,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
         
-        self.view.addSubview(self.searchTextField)
-        self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(loginButton)
+        self.settingsMenu.ll_menuWidth = 250
+        self.settingsMenu.ll_springDamping = 20
+        self.settingsMenu.ll_springVelocity = 15
+        self.settingsMenu.ll_springFramesNum = 60
+        self.settingsMenu.ll_menuBackgroundColor = UIColor.whiteColor()
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
@@ -58,12 +65,43 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let hamburgerButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: Selector("openSetings"))
+        self.navigationItem.leftBarButtonItem = hamburgerButton
+        
+//        let listSlider = CategorySliderView(sliderHeight: 60.0,
+//            andCategoryViews: CelebList.getAll()) { (categoryView: UIView!, index: Int) -> Void in
+//                print("index: \(index)")
+//        }
+//                    let listSlider = CategorySliderView.init(frame: CGRectMake(0 , 0, 60, self.view.frame.width),
+//                    andCategoryViews: CelebList.getAll(),
+//                    sliderDirection: SliderDirection.Horizontal,
+//                    categorySelectionBlock: { (categoryView: UIView!, index: Int) -> Void in
+//                        print("index: \(index)")
+//                })
+//        self.view.addSubview(listSlider)
+        
+        self.view.addSubview(self.searchTextField)
+        self.view.addSubview(self.celebrityTableView)
+        self.view.addSubview(self.settingsMenu)
+        self.view.addSubview(loginButton)
+        self.configuration()
+    }
+    
     override func viewWillLayoutSubviews() {
-        self.celebrityTableView.frame = self.view.bounds
         let rect = self.navigationController!.navigationBar.frame
-        let y = rect.size.height + rect.origin.y
+        let y = rect.size.height + rect.origin.y + 60
+        self.celebrityTableView.frame = self.view.bounds
         self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
+    }
+    
+    func openSetings()
+    {
+        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
+        else { self.settingsMenu.ll_openSlideMenu() }
     }
     
     func configuration()
