@@ -56,13 +56,17 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: Methods
-    override func viewDidLoad() { super.viewDidLoad(); self.configuration() }
     override func viewWillLayoutSubviews() { self.celebrityTableView.frame = self.view.bounds }
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.configuration()
+    }
     
     func configuration()
     {
+        self.navigationItem.title = "CelScore"
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
