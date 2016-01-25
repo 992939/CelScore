@@ -98,8 +98,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
     }
     
-    func openSetings()
-    {
+    func openSetings() {
         if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
         else { self.settingsMenu.ll_openSlideMenu() }
     }
