@@ -150,6 +150,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
+        self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.navigationController!.pushViewController(DetailViewController(celebrityId: node.getId()), animated: false)
     }
     

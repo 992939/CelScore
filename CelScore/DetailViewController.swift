@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import DynamicButton
 
 
 final class DetailViewController: ASViewController {
@@ -20,6 +21,7 @@ final class DetailViewController: ASViewController {
     let pageNode: ASPagerNode
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
+    let backButton: DynamicButton
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
@@ -34,6 +36,7 @@ final class DetailViewController: ASViewController {
         self.ageTextNode = ASTextNode()
         self.celebPicNode = ASImageNode()
         self.pageNode = ASPagerNode()
+        self.backButton = DynamicButton(frame: CGRectMake(0, 0, 20.0, 20.0))
         
         super.init(node: ASDisplayNode())
         
@@ -61,6 +64,10 @@ final class DetailViewController: ASViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.backButton.setStyle(.CaretLeft, animated: true)
+        self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.backButton)
+        
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
         self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
@@ -77,6 +84,8 @@ final class DetailViewController: ASViewController {
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 3).start()
         self.ratingsVM.voteSignal().start()
     }
+    
+    func backAction() { self.navigationController?.popViewControllerAnimated(true) }
     
     func screenShotMethod() {
         UIGraphicsBeginImageContext(view.frame.size)
