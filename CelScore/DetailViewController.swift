@@ -8,6 +8,7 @@
 
 import AsyncDisplayKit
 import DynamicButton
+import Material
 
 
 final class DetailViewController: ASViewController {
@@ -22,6 +23,7 @@ final class DetailViewController: ASViewController {
     let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
     let backButton: DynamicButton
+    let navigationBarView: NavigationBarView
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
@@ -36,13 +38,21 @@ final class DetailViewController: ASViewController {
         self.ageTextNode = ASTextNode()
         self.celebPicNode = ASImageNode()
         self.pageNode = ASPagerNode()
-        self.backButton = DynamicButton(frame: CGRectMake(0, 0, 20.0, 20.0))
+        self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
+        self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
         
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
             .on(next: { celeb in
+                
+                let title = UILabel()
+                title.text = celeb.nickName
+                title.textAlignment = .Center
+                title.textColor = Constants.kBackgroundColor
+                self.navigationBarView.titleLabel = title
+                
                 self.nickNameTextNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)")
                 let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                 self.zodiacTextNode.attributedString = NSMutableAttributedString(string:"\(zodiac)")
@@ -62,9 +72,16 @@ final class DetailViewController: ASViewController {
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Constants.kBackgroundColor
         
         self.backButton.setStyle(.CaretLeft, animated: true)
-        self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
+        self.backButton.strokeColor = Constants.kBackgroundColor
+        
+        self.navigationBarView.leftButtons = [self.backButton]
+        self.navigationBarView.backgroundColor = MaterialColor.blueGrey.darken4
+        
+        self.view.addSubview(self.navigationBarView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
@@ -83,7 +100,7 @@ final class DetailViewController: ASViewController {
         self.ratingsVM.voteSignal().start()
     }
     
-    func backAction() { self.navigationController?.popViewControllerAnimated(true) }
+    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func screenShotMethod() {
         UIGraphicsBeginImageContext(view.frame.size)

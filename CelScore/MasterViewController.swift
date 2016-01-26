@@ -47,7 +47,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 60, 0))
         self.loginButton = FBSDKLoginButton()
         self.settingsMenu = LLSlideMenu()
-        self.settingsButton = DynamicButton(frame: CGRectMake(0, 0, 20.0, 20.0))
+        self.settingsButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
@@ -62,7 +62,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.settingsMenu.ll_springDamping = 20
         self.settingsMenu.ll_springVelocity = 15
         self.settingsMenu.ll_springFramesNum = 60
-        self.settingsMenu.ll_menuBackgroundColor = MaterialColor.white
+        self.settingsMenu.ll_menuBackgroundColor = Constants.kBackgroundColor
         self.settingsMenu.addSubview(SettingsView(frame: self.settingsMenu.frame))
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -75,38 +75,40 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = MaterialColor.grey.lighten4
-        
-        self.settingsButton.setStyle(.Hamburger, animated: true)
-        self.settingsButton.addTarget(self, action: Selector("openSetings"), forControlEvents: UIControlEvents.TouchUpInside)
-        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.settingsButton)
+        view.backgroundColor = Constants.kBackgroundColor
         
         let title = UILabel()
-        title.text = "CelScore!"
+        title.text = "CelScore"
         title.textAlignment = .Center
-        title.textColor = MaterialColor.white
-        title.font = RobotoFont.regularWithSize(20)
+        title.textColor = Constants.kBackgroundColor
+        
+        self.settingsButton.setStyle(.Hamburger, animated: true)
+        self.settingsButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
+        self.settingsButton.strokeColor = Constants.kBackgroundColor
+        
         self.navigationBarView.titleLabel = title
+        self.navigationBarView.leftButtons = [self.settingsButton]
         self.navigationBarView.backgroundColor = MaterialColor.blueGrey.darken4
         
         self.view.addSubview(self.navigationBarView)
         //self.view.addSubview(self.searchTextField)
-        //self.view.addSubview(self.celebrityTableView)
-        //self.view.addSubview(self.settingsMenu)
+        self.view.addSubview(self.celebrityTableView)
+        self.view.addSubview(self.settingsMenu)
         //self.view.addSubview(loginButton)
         self.configuration()
     }
     
     override func viewWillLayoutSubviews() {
-        let rect = self.navigationBarView.frame
-        let y = rect.size.height + rect.origin.y + Constants.kNavigationPadding
-        self.celebrityTableView.frame = self.view.bounds
-        self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
+        self.celebrityTableView.frame = CGRectMake(
+            Constants.kCellPadding,
+            Constants.kNavigationPadding,
+            self.view.frame.width - 2 * Constants.kCellPadding,
+            self.view.frame.height - 2 * Constants.kCellPadding)
     }
     
     func openSetings() {
-        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu(); self.settingsButton.setStyle(.Hamburger, animated: true) }
-        else { self.settingsMenu.ll_openSlideMenu(); self.settingsButton.setStyle(.Close, animated: true) }
+        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
+        else { self.settingsMenu.ll_openSlideMenu() }
     }
     
     func configuration()
@@ -163,7 +165,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //self.navigationController!.pushViewController(DetailViewController(celebrityId: node.getId()), animated: false)
+        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods
@@ -200,15 +202,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { self.userVM.logoutSignal(.Facebook).start() }
-}
-
-//MARK: Extensions
-extension UITextField {
-    func rac_textSignalProducer() -> SignalProducer<String, NoError> {
-        return self.rac_textSignal().toSignalProducer()
-            .map { $0 as! String }
-            .flatMapError { _ in SignalProducer<String, NoError>.empty }
-    }
 }
 
 

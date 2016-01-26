@@ -47,7 +47,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        followSwitch.center = CGPointMake(380, 20)
+        followSwitch.center = CGPointMake(360, 20)
         self.switchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
         
@@ -77,7 +77,7 @@ final class CelebrityTableViewCell: ASCellNode {
             justifyContent: .Start,
             alignItems: .Center,
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
-        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
+        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.9)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsetsMake(Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding),

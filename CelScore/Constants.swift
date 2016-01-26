@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Material
 
 
 struct Constants {
@@ -15,9 +16,10 @@ struct Constants {
     static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     static let S3BucketName: String = "celeb3x"
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
-    static let kNavigationPadding: CGFloat = 60.0
+    static let kNavigationPadding: CGFloat = 80.0
     static let kMenuWidth: CGFloat = 250.0
     static let kCellPadding: CGFloat = 9.0
+    static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "Without ethics, man has no future.",
