@@ -57,11 +57,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.settingsMenu.ll_springVelocity = 15
         self.settingsMenu.ll_springFramesNum = 60
         self.settingsMenu.ll_menuBackgroundColor = UIColor.whiteColor()
-        let settingsNode = SettingsNode()
-        settingsNode.view.frame = self.settingsMenu.frame
-        settingsNode.view.backgroundColor = UIColor.blueColor()
-        settingsNode.layoutSpecThatFits(ASSizeRange(min: CGSizeZero, max: CGSize(width: self.settingsMenu.frame.width, height: self.settingsMenu.frame.height)))
-        self.settingsMenu.addSubview(settingsNode.view)
+        self.settingsMenu.addSubview(SettingsView(frame: self.settingsMenu.frame))
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
@@ -76,18 +72,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let hamburgerButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: Selector("openSetings"))
         self.navigationItem.leftBarButtonItem = hamburgerButton
-        
-//        let listSlider = CategorySliderView(sliderHeight: 60.0,
-//            andCategoryViews: CelebList.getAll()) { (categoryView: UIView!, index: Int) -> Void in
-//                print("index: \(index)")
-//        }
-//                    let listSlider = CategorySliderView.init(frame: CGRectMake(0 , 0, 60, self.view.frame.width),
-//                    andCategoryViews: CelebList.getAll(),
-//                    sliderDirection: SliderDirection.Horizontal,
-//                    categorySelectionBlock: { (categoryView: UIView!, index: Int) -> Void in
-//                        print("index: \(index)")
-//                })
-//        self.view.addSubview(listSlider)
         
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)

@@ -26,6 +26,7 @@
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
 		00632D4A1C56F63D0063BA46 /* SettingsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00632D491C56F63D0063BA46 /* SettingsNode.swift */; };
+		0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063DC401C5720E800D2A242 /* SettingsView.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
 		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
@@ -107,6 +108,7 @@
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
 		00632D491C56F63D0063BA46 /* SettingsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNode.swift; sourceTree = "<group>"; };
+		0063DC401C5720E800D2A242 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
 		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
 				00404A931BED89430009AD0E /* SettingsViewController.swift */,
 				00632D491C56F63D0063BA46 /* SettingsNode.swift */,
+				0063DC401C5720E800D2A242 /* SettingsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				008EE4C41BE6E38600E831BE /* SearchListViewModel.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,
+				0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */,
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

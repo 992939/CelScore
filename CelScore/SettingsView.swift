@@ -1,15 +1,14 @@
 //
-//  SettingsNode.swift
+//  SettingsView.swift
 //  CelScore
 //
 //  Created by Gareth.K.Mensah on 1/25/16.
 //  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
-import AsyncDisplayKit
+import UIKit
 
-
-final class SettingsNode: ASDisplayNode {
+final class SettingsView: UIView {
     
     //MARK: Property
     let settingsVM: SettingsViewModel
@@ -27,7 +26,10 @@ final class SettingsNode: ASDisplayNode {
     let logStatusTextNode: ASTextNode
     let copyrightTextNode: ASTextNode
     
-    override init() {
+    //MARK: Initializers
+    required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
+
+    override init(frame: CGRect) {
         self.settingsVM = SettingsViewModel()
         self.logoPicNode = ASImageNode()
         self.publicOpionBarNode = ASDisplayNode()
@@ -38,8 +40,9 @@ final class SettingsNode: ASDisplayNode {
         
         self.logoTextNode = ASTextNode()
         self.logoTextNode.attributedString = NSMutableAttributedString(string:"The one!")
-        self.logoTextNode.maximumNumberOfLines = 10
-        self.logoTextNode.truncationMode = .ByTruncatingTail
+        self.logoTextNode.maximumNumberOfLines = 1
+        self.logoTextNode.frame = CGRectMake(Constants.cellPadding , 100, frame.width, 20)
+        print("logo \(self.logoTextNode.description)")
         
         self.publicOpionTextNode = ASTextNode()
         self.consensusTextNode = ASTextNode()
@@ -48,30 +51,9 @@ final class SettingsNode: ASDisplayNode {
         self.logStatusTextNode = ASTextNode()
         self.copyrightTextNode = ASTextNode()
         
-        super.init()
-        self.layerBacked = false
-        self.logoTextNode.layerBacked = false
-        
-        //self.addSubnode(self.logoPicNode)
-        //self.addSubnode(self.logoTextNode)
-        self.view.addSubview(self.logoTextNode.view)
-    }
-    
-    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.logoTextNode.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
-        self.logoTextNode.backgroundColor = UIColor.redColor()
-        
-        let verticalStack = ASStackLayoutSpec(
-            direction: .Vertical,
-            spacing: Constants.cellPadding,
-            justifyContent: .Start,
-            alignItems: .Center,
-            children: [self.logoTextNode])
-        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
-        
-        return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
-            insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
-            child: verticalStack),
-            background: nil)
+        super.init(frame: frame)
+        self.addSubnode(self.logoTextNode)
     }
 }
+
+
