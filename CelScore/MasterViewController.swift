@@ -52,7 +52,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
         
-        self.settingsMenu.ll_menuWidth = 250
+        self.settingsMenu.ll_menuWidth = Constants.kMenuWidth
         self.settingsMenu.ll_springDamping = 20
         self.settingsMenu.ll_springVelocity = 15
         self.settingsMenu.ll_springFramesNum = 60
@@ -82,7 +82,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         let rect = self.navigationController!.navigationBar.frame
-        let y = rect.size.height + rect.origin.y + Constants.navigationPadding
+        let y = rect.size.height + rect.origin.y + Constants.kNavigationPadding
         self.celebrityTableView.frame = self.view.bounds
         self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
     }

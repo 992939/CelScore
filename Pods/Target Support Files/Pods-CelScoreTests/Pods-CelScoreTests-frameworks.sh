@@ -101,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScoreTests/SwiftyJSON.framework"
   install_framework "Pods-CelScoreTests/Timepiece.framework"
   install_framework "Pods-CelScoreTests/WebASDKImageManager.framework"
+  install_framework "Pods-CelScoreTests/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScoreTests/AIRTimer.framework"
@@ -120,4 +121,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScoreTests/SwiftyJSON.framework"
   install_framework "Pods-CelScoreTests/Timepiece.framework"
   install_framework "Pods-CelScoreTests/WebASDKImageManager.framework"
+  install_framework "Pods-CelScoreTests/YLProgressBar.framework"
 fi

@@ -52,6 +52,7 @@ PODS:
   - WebASDKImageManager (1.0.1):
     - AsyncDisplayKit (~> 1.1)
     - SDWebImage/Core (~> 3.7)
+  - YLProgressBar (3.8.0)
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0)
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - TwitterCore (~> 1.14.6)
   - TwitterKit (~> 1.14.6)
   - WebASDKImageManager (~> 1.0)
+  - YLProgressBar (~> 3.8)
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
@@ -91,5 +93,6 @@ SPEC CHECKSUMS:
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
   WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
+  YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
 
 COCOAPODS: 0.39.0

@@ -15,6 +15,7 @@ pod 'AIRTimer', '~> 1.0'
 pod 'Timepiece', '~> 0.4'
 pod 'CategorySliderView', '~> 1.0.2'
 pod 'JTMaterialSwitch', '~> 1.1'
+pod 'YLProgressBar', '~> 3.8'
 pod 'LLSlideMenu'
 
 target 'CelScore' do

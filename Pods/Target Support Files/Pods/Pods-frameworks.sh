@@ -101,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
   install_framework "Pods/WebASDKImageManager.framework"
+  install_framework "Pods/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AIRTimer.framework"
@@ -120,4 +121,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
   install_framework "Pods/WebASDKImageManager.framework"
+  install_framework "Pods/YLProgressBar.framework"
 fi
