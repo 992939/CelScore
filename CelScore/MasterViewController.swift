@@ -82,7 +82,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         let rect = self.navigationController!.navigationBar.frame
-        let y = rect.size.height + rect.origin.y + 60
+        let y = rect.size.height + rect.origin.y + Constants.navigationPadding
         self.celebrityTableView.frame = self.view.bounds
         self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
     }

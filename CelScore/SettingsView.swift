@@ -41,8 +41,7 @@ final class SettingsView: UIView {
         self.logoTextNode = ASTextNode()
         self.logoTextNode.attributedString = NSMutableAttributedString(string:"The one!")
         self.logoTextNode.maximumNumberOfLines = 1
-        self.logoTextNode.frame = CGRectMake(Constants.cellPadding , 100, frame.width, 20)
-        print("logo \(self.logoTextNode.description)")
+        self.logoTextNode.frame = CGRectMake(Constants.cellPadding , Constants.navigationPadding, frame.width, 20)
         
         self.publicOpionTextNode = ASTextNode()
         self.consensusTextNode = ASTextNode()
