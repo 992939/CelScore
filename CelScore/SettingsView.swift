@@ -8,6 +8,7 @@
 
 import UIKit
 import YLProgressBar
+import JTMaterialSwitch
 
 final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -38,12 +39,12 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         self.logoPicNode = ASImageNode()
         self.logoPicNode.image = UIImage(named: "flask_logo")
-        self.logoPicNode.frame = CGRectMake(80, Constants.kNavigationPadding, 80, 120)
+        self.logoPicNode.frame = CGRectMake(80, Constants.kNavigationPadding, 70, 120)
         self.logoTextNode = ASTextNode()
         let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(6.0)]
         self.logoTextNode.attributedString = NSMutableAttributedString(string:"*Vote Responsibly.", attributes:attrs)
         var y = self.logoPicNode.frame.height + self.logoPicNode.frame.origin.y
-        self.logoTextNode.frame = CGRectMake(83, y, kMaxWidth, 20)
+        self.logoTextNode.frame = CGRectMake(85, y, kMaxWidth, 20)
         
         y += kSpacing
         self.publicOpinionTextNode = ASTextNode()
@@ -67,19 +68,22 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         y += kSpacing
         self.pickerTextNode = ASTextNode()
-        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Topic Of Interest:")
+        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Beat Reporting (topic of interest):")
         self.pickerTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
         y = self.pickerTextNode.frame.height + self.pickerTextNode.frame.origin.y
         let pickerView = UIPickerView(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 100))
         self.pickerViewNode = ASDisplayNode.init(viewBlock: { () -> UIView in return pickerView })
         
-        y += kSpacing
+        y += 2.5 * kSpacing
         self.publicServiceTextNode = ASTextNode()
         self.publicServiceTextNode.attributedString = NSMutableAttributedString(string:"Public Service Mode:")
         self.publicServiceTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
         y = self.publicServiceTextNode.frame.height + self.publicServiceTextNode.frame.origin.y
-        self.publicServiceSwitchNode = ASDisplayNode()
-        
+        let publicServiceSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
+        //publicServiceSwitch.thumbOnTintColor = UIColor.redColor()
+        //publicServiceSwitch.trackOnTintColor = UIColor(red: 212.0, green: 144.0, blue: 152.0, alpha: 1.0)
+        publicServiceSwitch.center = CGPointMake(210, y - 13)
+        self.publicServiceSwitchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicServiceSwitch })
         
         self.logStatusNode = ASDisplayNode()
         self.logStatusTextNode = ASTextNode()
@@ -98,6 +102,8 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         self.addSubnode(self.consensusBarNode)
         self.addSubnode(self.pickerTextNode)
         self.addSubnode(self.pickerViewNode)
+        self.addSubnode(self.publicServiceTextNode)
+        self.addSubnode(self.publicServiceSwitchNode)
         
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()
