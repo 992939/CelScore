@@ -43,7 +43,6 @@ final class DetailViewController: ASViewController {
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
             .on(next: { celeb in
-                self.navigationItem.title = celeb.nickName
                 self.nickNameTextNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)")
                 let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                 self.zodiacTextNode.attributedString = NSMutableAttributedString(string:"\(zodiac)")
@@ -66,7 +65,6 @@ final class DetailViewController: ASViewController {
         
         self.backButton.setStyle(.CaretLeft, animated: true)
         self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.backButton)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()

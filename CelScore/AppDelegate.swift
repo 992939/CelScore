@@ -37,11 +37,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         let celscoreVM = CelScoreViewModel()
-        let navController = UINavigationController()
-        navController.viewControllers = [MasterViewController(viewModel: celscoreVM)]
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.backgroundColor = UIColor.whiteColor()
-        window.rootViewController = navController
+        window.rootViewController = MasterViewController(viewModel: celscoreVM)
         window.makeKeyAndVisible()
         self.window = window
         

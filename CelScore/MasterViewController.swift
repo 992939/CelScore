@@ -15,6 +15,7 @@ import TwitterKit
 import CategorySliderView
 import LLSlideMenu
 import DynamicButton
+import Material
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -30,6 +31,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let loginButton: FBSDKLoginButton
     let settingsButton: DynamicButton
     let settingsMenu: LLSlideMenu
+    let navigationBarView: NavigationBarView
     //let listSlider: CategorySliderView
     
     //MARK: Initializers
@@ -46,6 +48,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.loginButton = FBSDKLoginButton()
         self.settingsMenu = LLSlideMenu()
         self.settingsButton = DynamicButton(frame: CGRectMake(0, 0, 20.0, 20.0))
+        self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
         
@@ -59,7 +62,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.settingsMenu.ll_springDamping = 20
         self.settingsMenu.ll_springVelocity = 15
         self.settingsMenu.ll_springFramesNum = 60
-        self.settingsMenu.ll_menuBackgroundColor = UIColor.whiteColor()
+        self.settingsMenu.ll_menuBackgroundColor = MaterialColor.white
         self.settingsMenu.addSubview(SettingsView(frame: self.settingsMenu.frame))
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -72,20 +75,30 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = MaterialColor.grey.lighten4
         
         self.settingsButton.setStyle(.Hamburger, animated: true)
         self.settingsButton.addTarget(self, action: Selector("openSetings"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.settingsButton)
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.settingsButton)
         
-        self.view.addSubview(self.searchTextField)
-        self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(self.settingsMenu)
-        self.view.addSubview(loginButton)
+        let title = UILabel()
+        title.text = "CelScore!"
+        title.textAlignment = .Center
+        title.textColor = MaterialColor.white
+        title.font = RobotoFont.regularWithSize(20)
+        self.navigationBarView.titleLabel = title
+        self.navigationBarView.backgroundColor = MaterialColor.blueGrey.darken4
+        
+        self.view.addSubview(self.navigationBarView)
+        //self.view.addSubview(self.searchTextField)
+        //self.view.addSubview(self.celebrityTableView)
+        //self.view.addSubview(self.settingsMenu)
+        //self.view.addSubview(loginButton)
         self.configuration()
     }
     
     override func viewWillLayoutSubviews() {
-        let rect = self.navigationController!.navigationBar.frame
+        let rect = self.navigationBarView.frame
         let y = rect.size.height + rect.origin.y + Constants.kNavigationPadding
         self.celebrityTableView.frame = self.view.bounds
         self.celebrityTableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
@@ -98,7 +111,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func configuration()
     {
-        self.navigationItem.title = "CelScore"
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
@@ -151,7 +163,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.navigationController!.pushViewController(DetailViewController(celebrityId: node.getId()), animated: false)
+        //self.navigationController!.pushViewController(DetailViewController(celebrityId: node.getId()), animated: false)
     }
     
     //MARK: UITextFieldDelegate methods
