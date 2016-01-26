@@ -19,8 +19,14 @@ public enum CelebList : Int {
     case Ubuntu
     
     //MARK: Methods
-    public static func getAll() -> [AnyObject] {
+    public static func getAll() -> [String] {
         return [PublicOpinion.name(), Sports.name(), Music.name(), Hollywood.name(), Television.name(), Candidates.name(), Ubuntu.name()]
+    }
+    
+    public static func getCount() -> Int {
+        var max: Int = 0
+        while let _ = CelebList(rawValue: max) { max += 1 }
+        return max
     }
     
     public func name() -> String {
