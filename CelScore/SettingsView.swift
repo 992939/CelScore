@@ -10,7 +10,7 @@ import UIKit
 
 final class SettingsView: UIView {
     
-    //MARK: Property
+    //MARK: Properties
     let settingsVM: SettingsViewModel
     let logoPicNode: ASImageNode
     let publicOpionBarNode: ASDisplayNode
@@ -53,6 +53,11 @@ final class SettingsView: UIView {
         
         super.init(frame: frame)
         self.addSubnode(self.logoTextNode)
+        
+        //self.settingsVM.getUserRatingsPercentageSignal().start()
+        //self.settingsVM.calculateSocialConsensusSignal().start()
+        //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
+        self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
     }
 }
 

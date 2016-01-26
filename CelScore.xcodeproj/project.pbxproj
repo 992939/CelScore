@@ -13,7 +13,6 @@
 		0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5A1C03A2F2000F533F /* Constants.swift */; };
 		0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */; };
 		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; };
-		00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A931BED89430009AD0E /* SettingsViewController.swift */; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
 		00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
 		00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
@@ -25,7 +24,6 @@
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
-		00632D4A1C56F63D0063BA46 /* SettingsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00632D491C56F63D0063BA46 /* SettingsNode.swift */; };
 		0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063DC401C5720E800D2A242 /* SettingsView.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
@@ -89,7 +87,6 @@
 		0036DD5A1C03A2F2000F533F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearch.swift; sourceTree = "<group>"; };
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		00404A931BED89430009AD0E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		00404A9D1BF093530009AD0E /* CelScoreWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CelScoreWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +104,6 @@
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
-		00632D491C56F63D0063BA46 /* SettingsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNode.swift; sourceTree = "<group>"; };
 		0063DC401C5720E800D2A242 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
@@ -291,8 +287,6 @@
 				00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */,
 				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
 				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
-				00404A931BED89430009AD0E /* SettingsViewController.swift */,
-				00632D491C56F63D0063BA46 /* SettingsNode.swift */,
 				0063DC401C5720E800D2A242 /* SettingsView.swift */,
 			);
 			name = Views;
@@ -601,7 +595,6 @@
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
-				00404A941BED89430009AD0E /* SettingsViewController.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
@@ -614,7 +607,6 @@
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
-				00632D4A1C56F63D0063BA46 /* SettingsNode.swift in Sources */,
 				00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
