@@ -17,6 +17,7 @@ pod 'CategorySliderView', '~> 1.0.2'
 pod 'JTMaterialSwitch', '~> 1.1'
 pod 'YLProgressBar', '~> 3.8'
 pod 'DynamicButton', '~> 1.2.0'
+pod 'Material', '~> 1.28'
 pod 'LLSlideMenu'
 
 target 'CelScore' do

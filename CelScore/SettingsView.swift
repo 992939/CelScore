@@ -68,7 +68,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         y += kSpacing
         self.pickerTextNode = ASTextNode()
-        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Beat Reporting (topic of interest):")
+        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Main Topic Of Interest:")
         self.pickerTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
         y = self.pickerTextNode.frame.height + self.pickerTextNode.frame.origin.y
         let pickerView = UIPickerView(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 100))
@@ -121,8 +121,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("GENERATION")
-        if(row == 0) { print("YO") }
+        print("row \(row)")
     }
 }
 

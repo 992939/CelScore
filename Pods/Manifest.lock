@@ -26,6 +26,7 @@ PODS:
     - FBSDKCoreKit/arc
   - JTMaterialSwitch (1.1)
   - LLSlideMenu (1.0.4)
+  - Material (1.28.1)
   - ReactiveCocoa (4.0.4-alpha-1):
     - ReactiveCocoa/UI (= 4.0.4-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.7.1)
   - JTMaterialSwitch (~> 1.1)
   - LLSlideMenu
+  - Material (~> 1.28)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SwiftyJSON (~> 2.3.2)
@@ -86,6 +88,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
   LLSlideMenu: e98f45dc04cdbbf19b4e6922b9078dc519292920
+  Material: 5ca840624a279ce4d02c4e1ef3059d1c0190b7f3
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
