@@ -14,6 +14,7 @@ import RealmSwift
 import TwitterKit
 import CategorySliderView
 import LLSlideMenu
+import DynamicButton
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -27,7 +28,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let searchTextField: UITextField
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
-    var settingsMenu: LLSlideMenu
+    let settingsButton: DynamicButton
+    let settingsMenu: LLSlideMenu
     //let listSlider: CategorySliderView
     
     //MARK: Initializers
@@ -43,6 +45,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 60, 0))
         self.loginButton = FBSDKLoginButton()
         self.settingsMenu = LLSlideMenu()
+        self.settingsButton = DynamicButton(frame: CGRectMake(0, 0, 20.0, 20.0))
         
         super.init(node: ASDisplayNode())
         
@@ -70,8 +73,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let hamburgerButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: Selector("openSetings"))
-        self.navigationItem.leftBarButtonItem = hamburgerButton
+        self.settingsButton.setStyle(.Hamburger, animated: true)
+        self.settingsButton.addTarget(self, action: Selector("openSetings"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.settingsButton)
         
         self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
@@ -88,8 +92,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func openSetings() {
-        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
-        else { self.settingsMenu.ll_openSlideMenu() }
+        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu(); self.settingsButton.setStyle(.Hamburger, animated: true) }
+        else { self.settingsMenu.ll_openSlideMenu(); self.settingsButton.setStyle(.Close, animated: true) }
     }
     
     func configuration()
