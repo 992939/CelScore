@@ -27,7 +27,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let searchTextField: UITextField
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
-    let settingsMenu: LLSlideMenu
+    var settingsMenu: LLSlideMenu
     //let listSlider: CategorySliderView
     
     //MARK: Initializers
@@ -57,6 +57,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.settingsMenu.ll_springVelocity = 15
         self.settingsMenu.ll_springFramesNum = 60
         self.settingsMenu.ll_menuBackgroundColor = UIColor.whiteColor()
+        let settingsNode = SettingsNode()
+        settingsNode.view.frame = self.settingsMenu.frame
+        settingsNode.view.backgroundColor = UIColor.blueColor()
+        settingsNode.layoutSpecThatFits(ASSizeRange(min: CGSizeZero, max: CGSize(width: self.settingsMenu.frame.width, height: self.settingsMenu.frame.height)))
+        self.settingsMenu.addSubview(settingsNode.view)
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
@@ -158,7 +163,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.navigationController!.pushViewController(DetailViewController(celebrityId: node.getId()), animated: false)
-        //self.presentViewController(SettingsViewController(), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods

@@ -50,35 +50,16 @@ final class SettingsViewController: ASViewController {
     }
     
     //MARK: Methods
-    override func viewWillLayoutSubviews() {}
+    override func viewWillLayoutSubviews() { print("YO") }
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.orangeColor()
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()
         //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
         self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
     }
-    
-//    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-//        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
-//        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.48)
-//        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-//        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-//        
-//        let horizontalStack = ASStackLayoutSpec(
-//            direction: .Horizontal,
-//            spacing: Constants.cellPadding,
-//            justifyContent: .Start,
-//            alignItems: .Center,
-//            children: [self.profilePicNode, self.nameNode, self.ratingsNode])
-//        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1.0)
-//        
-//        return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
-//            insets: UIEdgeInsetsMake(Constants.cellPadding, Constants.cellPadding, Constants.cellPadding, Constants.cellPadding),
-//            child: horizontalStack),
-//            background: nil)
-//    }
 }
