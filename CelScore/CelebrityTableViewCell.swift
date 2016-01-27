@@ -58,10 +58,9 @@ final class CelebrityTableViewCell: ASCellNode {
         
         let cardView: CardView = CardView()
         self.backgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cardView})
+        //self.backgroundNode.preferredFrameSize = CGSizeMake(396, 68)
         
         super.init()
-        
-        self.backgroundNode.frame = self.frame
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -76,6 +75,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.45)
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.23)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        
         
         //self.profilePicNode.backgroundColor = UIColor.greenColor()
         //self.nameNode.backgroundColor = UIColor.redColor()

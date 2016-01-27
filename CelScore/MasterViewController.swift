@@ -75,6 +75,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.celebrityTableView.asyncDataSource = self
+        self.celebrityTableView.asyncDelegate = self
         view.backgroundColor = Constants.kBackgroundColor
         
         let title = UILabel()
@@ -95,6 +97,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.settingsMenu)
         //self.view.addSubview(loginButton)
+
         self.configuration()
     }
     
@@ -111,11 +114,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         else { self.settingsMenu.ll_openSlideMenu() }
     }
     
-    func configuration()
-    {
-        self.celebrityTableView.asyncDataSource = self
-        self.celebrityTableView.asyncDelegate = self
-        
+    func configuration() {
         self.settingsVM.getSettingSignal(settingType: .DefaultListId)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
@@ -165,7 +164,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
+        //self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods
