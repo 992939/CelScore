@@ -127,14 +127,14 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         y += 1.6 * kSpacing
         self.logStatusTextNode = ASTextNode()
         self.logStatusTextNode.attributedString = NSMutableAttributedString(string:"Logged In As: ")
-        self.logStatusTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, 70, 20)
+        self.logStatusTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, 75, 20)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.Right
         let attributes = [NSForegroundColorAttributeName : MaterialColor.green.darken2, NSParagraphStyleAttributeName : paragraphStyle]
         self.logNameTextNode = ASTextNode()
         self.logNameTextNode.attributedString = NSMutableAttributedString(string:"@GreyEcologist", attributes: attributes)
-        self.logNameTextNode.frame = CGRectMake(80, y + Constants.kCellPadding, 150, 20)
+        self.logNameTextNode.frame = CGRectMake(85, y + Constants.kCellPadding, 145, 20)
         
         let logBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y , kMaxWidth, 80))
         logBackgroundView.depth = .Depth1
