@@ -29,7 +29,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let searchTextField: UITextField
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
-    let settingsButton: DynamicButton
     let settingsMenu: LLSlideMenu
     let navigationBarView: NavigationBarView
     //let listSlider: CategorySliderView
@@ -47,7 +46,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 60, 0))
         self.loginButton = FBSDKLoginButton()
         self.settingsMenu = LLSlideMenu()
-        self.settingsButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
@@ -77,19 +75,31 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
-        view.backgroundColor = Constants.kBackgroundColor
+        view.backgroundColor = MaterialColor.white
         
         let title = UILabel()
         title.text = "CelScore"
         title.textAlignment = .Center
         title.textColor = Constants.kBackgroundColor
         
-        self.settingsButton.setStyle(.Hamburger, animated: true)
-        self.settingsButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
-        self.settingsButton.strokeColor = Constants.kBackgroundColor
+        let menuButton: FlatButton = FlatButton()
+        menuButton.pulseColor = MaterialColor.white
+        menuButton.pulseFill = true
+        menuButton.pulseScale = false
+        menuButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
+        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
+        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
+
+        let searchButton: FlatButton = FlatButton()
+        searchButton.pulseColor = MaterialColor.white
+        searchButton.pulseFill = true
+        searchButton.pulseScale = false
+        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
+        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
         self.navigationBarView.titleLabel = title
-        self.navigationBarView.leftButtons = [self.settingsButton]
+        self.navigationBarView.leftButtons = [menuButton]
+        self.navigationBarView.rightButtons = [searchButton]
         self.navigationBarView.backgroundColor = MaterialColor.green.lighten1
         
         self.view.addSubview(self.navigationBarView)
@@ -164,7 +174,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
+        self.presentViewController(DetailViewController(celebrityId: node.getId()), animated: false, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods

@@ -29,14 +29,13 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let publicServiceTextNode: ASTextNode
     let logStatusTextNode: ASTextNode
     let copyrightTextNode: ASTextNode
+    let kMaxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
+    let kSpacing: CGFloat = 50.0
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
 
     override init(frame: CGRect) {
-        let kMaxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
-        let kSpacing: CGFloat = 50.0
-        
         self.settingsVM = SettingsViewModel()
         
         //MARK: Logo
@@ -181,7 +180,6 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()
-        //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
         self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
     }
     
@@ -196,6 +194,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("row \(row)")
+        //self.settingsVM.updateSettingOnLocalStoreSignal(value: 1, settingType: .DefaultListId).start()
     }
 }
 
