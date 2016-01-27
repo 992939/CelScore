@@ -9,6 +9,7 @@
 import UIKit
 import YLProgressBar
 import JTMaterialSwitch
+import Material
 
 final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -37,73 +38,129 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         self.settingsVM = SettingsViewModel()
         
+        //MARK: Logo
         self.logoPicNode = ASImageNode()
         self.logoPicNode.image = UIImage(named: "flask_logo")
-        self.logoPicNode.frame = CGRectMake(80, Constants.kNavigationPadding, 70, 120)
+        self.logoPicNode.frame = CGRectMake(85, 2*Constants.kCellPadding, 70, 120)
         self.logoTextNode = ASTextNode()
-        let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(6.0)]
+        let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(6.0), NSForegroundColorAttributeName : MaterialColor.black]
         self.logoTextNode.attributedString = NSMutableAttributedString(string:"*Vote Responsibly.", attributes:attrs)
         var y = self.logoPicNode.frame.height + self.logoPicNode.frame.origin.y
-        self.logoTextNode.frame = CGRectMake(85, y, kMaxWidth, 20)
+        self.logoTextNode.frame = CGRectMake(90, y, kMaxWidth, 20)
         
+        let logoBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kCellPadding, kMaxWidth, 160))
+        logoBackgroundView.depth = .Depth1
+        logoBackgroundView.backgroundColor = MaterialColor.white
+        let logoBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return logoBackgroundView })
+        
+        //MARK: PublicOpinion
         y += kSpacing
         self.publicOpinionTextNode = ASTextNode()
         self.publicOpinionTextNode.attributedString = NSMutableAttributedString(string:"#PublicOpinion Completion:")
-        self.publicOpinionTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
+        self.publicOpinionTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
+        
+        let publicBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 60))
+        publicBackgroundView.depth = .Depth1
+        publicBackgroundView.backgroundColor = MaterialColor.white
+        let publicBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicBackgroundView })
+        
         y = self.publicOpinionTextNode.frame.height + self.publicOpinionTextNode.frame.origin.y
-        let publicOpinionBar = YLProgressBar(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 15))
-        publicOpinionBar.progressTintColor = UIColor.redColor()
+        let publicOpinionBar = YLProgressBar(frame: CGRectMake(2 * Constants.kCellPadding, y, kMaxWidth - 20, 15))
+        publicOpinionBar.progressTintColor = MaterialColor.blueGrey.darken4
         publicOpinionBar.type = YLProgressBarType.Flat
         self.publicOpinionBarNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicOpinionBar })
         
+        //MARK: Consensus
         y += kSpacing
         self.consensusTextNode = ASTextNode()
         self.consensusTextNode.attributedString = NSMutableAttributedString(string:"Overall Social Consensus:")
-        self.consensusTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
+        self.consensusTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
+        
+        let consensusBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 60))
+        consensusBackgroundView.depth = .Depth1
+        consensusBackgroundView.backgroundColor = MaterialColor.white
+        let consensusBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return consensusBackgroundView })
+        
         y = self.consensusTextNode.frame.height + self.consensusTextNode.frame.origin.y
-        let consensusBar = YLProgressBar(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 15))
-        consensusBar.progressTintColor = UIColor.redColor()
+        let consensusBar = YLProgressBar(frame: CGRectMake(2 * Constants.kCellPadding, y, kMaxWidth - 20, 15))
+        consensusBar.progressTintColor = MaterialColor.blueGrey.darken4
         consensusBar.type = YLProgressBarType.Flat
         self.consensusBarNode = ASDisplayNode.init(viewBlock: { () -> UIView in return consensusBar })
         
+        //MARK: Picker
         y += kSpacing
         self.pickerTextNode = ASTextNode()
-        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Main Topic Of Interest:")
-        self.pickerTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
+        self.pickerTextNode.attributedString = NSMutableAttributedString(string:"Main Interest:")
+        self.pickerTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
+        
+        let pickerBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y , kMaxWidth, 160))
+        pickerBackgroundView.depth = .Depth1
+        pickerBackgroundView.backgroundColor = MaterialColor.white
+        let pickerBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return pickerBackgroundView })
+        
         y = self.pickerTextNode.frame.height + self.pickerTextNode.frame.origin.y
-        let pickerView = UIPickerView(frame: CGRectMake(Constants.kCellPadding, y, kMaxWidth, 100))
+        let pickerView = UIPickerView(frame: CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 100))
         self.pickerViewNode = ASDisplayNode.init(viewBlock: { () -> UIView in return pickerView })
         
-        y += 2.5 * kSpacing
+        //MARK: PublicService
+        y += 3 * kSpacing
         self.publicServiceTextNode = ASTextNode()
         self.publicServiceTextNode.attributedString = NSMutableAttributedString(string:"Public Service Mode:")
-        self.publicServiceTextNode.frame = CGRectMake(Constants.kCellPadding, y, kMaxWidth, 20)
-        y = self.publicServiceTextNode.frame.height + self.publicServiceTextNode.frame.origin.y
+        self.publicServiceTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + 3 * Constants.kCellPadding, kMaxWidth - 20, 20)
+        
+        let serviceBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y , kMaxWidth, 60))
+        serviceBackgroundView.depth = .Depth1
+        serviceBackgroundView.backgroundColor = MaterialColor.white
+        let serviceBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return serviceBackgroundView })
+        
         let publicServiceSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        //publicServiceSwitch.thumbOnTintColor = UIColor.redColor()
-        //publicServiceSwitch.trackOnTintColor = UIColor(red: 212.0, green: 144.0, blue: 152.0, alpha: 1.0)
-        publicServiceSwitch.center = CGPointMake(210, y - 13)
+        publicServiceSwitch.thumbOnTintColor = MaterialColor.red.base
+        publicServiceSwitch.trackOnTintColor = MaterialColor.red.lighten2
+        publicServiceSwitch.rippleFillColor = MaterialColor.red.lighten1
+        publicServiceSwitch.center = CGPointMake(205, y + 4 * Constants.kCellPadding)
         self.publicServiceSwitchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicServiceSwitch })
         
-        self.logStatusNode = ASDisplayNode()
+        //MARK: LogStatus
+        y += kSpacing
         self.logStatusTextNode = ASTextNode()
+        self.logStatusTextNode.attributedString = NSMutableAttributedString(string:"Main Interest:")
+        self.logStatusTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
         
+        let logBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y , kMaxWidth, 160))
+        logBackgroundView.depth = .Depth1
+        logBackgroundView.backgroundColor = MaterialColor.white
+        let logBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return logBackgroundView })
+        
+        self.logStatusNode = ASDisplayNode()
+        
+        //MARK: Copyright
+        y += kSpacing
         self.copyrightTextNode = ASTextNode()
+        self.copyrightTextNode.attributedString = NSMutableAttributedString(string:"CelScore 1.0. Copyrights @ Grey Ecology, LLC")
+        self.copyrightTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
         
         super.init(frame: frame)
         pickerView.dataSource = self
         pickerView.delegate = self
         
+        self.addSubnode(logoBackgroundNode)
         self.addSubnode(self.logoPicNode)
         self.addSubnode(self.logoTextNode)
+        self.addSubnode(publicBackgroundNode)
         self.addSubnode(self.publicOpinionTextNode)
         self.addSubnode(self.publicOpinionBarNode)
+        self.addSubnode(consensusBackgroundNode)
         self.addSubnode(self.consensusTextNode)
         self.addSubnode(self.consensusBarNode)
+        self.addSubnode(pickerBackgroundNode)
         self.addSubnode(self.pickerTextNode)
         self.addSubnode(self.pickerViewNode)
+        self.addSubnode(serviceBackgroundNode)
         self.addSubnode(self.publicServiceTextNode)
         self.addSubnode(self.publicServiceSwitchNode)
+        self.addSubnode(logBackgroundNode)
+        self.addSubnode(self.logStatusTextNode)
+        self.addSubnode(self.logStatusNode)
         
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()

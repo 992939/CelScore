@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import WebASDKImageManager
 import JTMaterialSwitch
+import Material
 
 
 final class CelebrityTableViewCell: ASCellNode {
@@ -19,6 +20,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let profilePicNode: ASNetworkImageNode
     let ratingsNode: ASDisplayNode
     let switchNode: ASDisplayNode
+    let backgroundNode: ASDisplayNode
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -51,8 +53,14 @@ final class CelebrityTableViewCell: ASCellNode {
         self.switchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
         
+        let cardView: CardView = CardView()
+        self.backgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cardView})
+        
         super.init()
         
+        self.backgroundNode.frame = self.frame
+        
+        self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
@@ -62,8 +70,8 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.48)
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.45)
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.23)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         
         //self.profilePicNode.backgroundColor = UIColor.greenColor()
@@ -82,7 +90,7 @@ final class CelebrityTableViewCell: ASCellNode {
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsetsMake(Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding),
             child: horizontalStack),
-            background: nil)
+            background: self.backgroundNode)
     }
     
     func getId() -> String { return celebST.id }
