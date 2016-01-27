@@ -79,7 +79,7 @@ final class DetailViewController: ASViewController {
         self.backButton.strokeColor = Constants.kBackgroundColor
         
         self.navigationBarView.leftButtons = [self.backButton]
-        self.navigationBarView.backgroundColor = MaterialColor.blueGrey.darken4
+        self.navigationBarView.backgroundColor = MaterialColor.green.lighten3
         
         self.view.addSubview(self.navigationBarView)
         

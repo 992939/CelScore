@@ -22,6 +22,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let publicServiceSwitchNode: ASDisplayNode
     let logStatusNode: ASDisplayNode
     let logoTextNode: ASTextNode
+    let logNameTextNode: ASTextNode
     let publicOpinionTextNode: ASTextNode
     let consensusTextNode: ASTextNode
     let pickerTextNode: ASTextNode
@@ -66,7 +67,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         y = self.publicOpinionTextNode.frame.height + self.publicOpinionTextNode.frame.origin.y
         let publicOpinionBar = YLProgressBar(frame: CGRectMake(2 * Constants.kCellPadding, y, kMaxWidth - 20, 15))
-        publicOpinionBar.progressTintColor = MaterialColor.blueGrey.darken4
+        publicOpinionBar.progressTintColor = MaterialColor.green.darken4
         publicOpinionBar.type = YLProgressBarType.Flat
         self.publicOpinionBarNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicOpinionBar })
         
@@ -83,7 +84,7 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         y = self.consensusTextNode.frame.height + self.consensusTextNode.frame.origin.y
         let consensusBar = YLProgressBar(frame: CGRectMake(2 * Constants.kCellPadding, y, kMaxWidth - 20, 15))
-        consensusBar.progressTintColor = MaterialColor.blueGrey.darken4
+        consensusBar.progressTintColor = MaterialColor.green.darken4
         consensusBar.type = YLProgressBarType.Flat
         self.consensusBarNode = ASDisplayNode.init(viewBlock: { () -> UIView in return consensusBar })
         
@@ -114,17 +115,21 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         let serviceBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return serviceBackgroundView })
         
         let publicServiceSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        publicServiceSwitch.thumbOnTintColor = MaterialColor.red.base
-        publicServiceSwitch.trackOnTintColor = MaterialColor.red.lighten2
-        publicServiceSwitch.rippleFillColor = MaterialColor.red.lighten1
+        publicServiceSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
+        publicServiceSwitch.trackOnTintColor = MaterialColor.purple.lighten4
+        publicServiceSwitch.rippleFillColor = MaterialColor.purple.lighten1
         publicServiceSwitch.center = CGPointMake(205, y + 4 * Constants.kCellPadding)
         self.publicServiceSwitchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return publicServiceSwitch })
         
         //MARK: LogStatus
         y += kSpacing
         self.logStatusTextNode = ASTextNode()
-        self.logStatusTextNode.attributedString = NSMutableAttributedString(string:"Main Interest:")
+        self.logStatusTextNode.attributedString = NSMutableAttributedString(string:"Logged As: ")
         self.logStatusTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
+        
+        self.logNameTextNode = ASTextNode()
+        self.logNameTextNode.attributedString = NSMutableAttributedString(string:"Logged As: ")
+        self.logNameTextNode.frame = CGRectMake(2 * Constants.kCellPadding, y + Constants.kCellPadding, kMaxWidth - 20, 20)
         
         let logBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, y , kMaxWidth, 160))
         logBackgroundView.depth = .Depth1

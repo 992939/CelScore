@@ -88,7 +88,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.navigationBarView.titleLabel = title
         self.navigationBarView.leftButtons = [self.settingsButton]
-        self.navigationBarView.backgroundColor = MaterialColor.blueGrey.darken4
+        self.navigationBarView.backgroundColor = MaterialColor.green.lighten1
         
         self.view.addSubview(self.navigationBarView)
         //self.view.addSubview(self.searchTextField)

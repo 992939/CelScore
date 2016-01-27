@@ -50,6 +50,9 @@ final class CelebrityTableViewCell: ASCellNode {
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
         followSwitch.center = CGPointMake(360, 20)
+        followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
+        followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
+        followSwitch.rippleFillColor = MaterialColor.purple.lighten1
         self.switchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
         
