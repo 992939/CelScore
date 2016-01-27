@@ -42,6 +42,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
         
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         Fabric.with([Twitter.self, AWSCognito.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
