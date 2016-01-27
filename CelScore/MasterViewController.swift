@@ -75,12 +75,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
-        view.backgroundColor = MaterialColor.white
+        view.backgroundColor = Constants.kBackgroundColor
         
         let title = UILabel()
         title.text = "CelScore"
         title.textAlignment = .Center
-        title.textColor = Constants.kBackgroundColor
+        title.textColor = MaterialColor.white
         
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white

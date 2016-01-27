@@ -11,7 +11,7 @@ import DynamicButton
 import Material
 
 
-final class DetailViewController: ASViewController {
+final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     
     //MARK: Properties
     let nickNameTextNode: ASTextNode
@@ -36,7 +36,15 @@ final class DetailViewController: ASViewController {
         self.celscoreTextNode = ASTextNode()
         self.zodiacTextNode = ASTextNode()
         self.ageTextNode = ASTextNode()
+        
+        //MARK: CelebPic
         self.celebPicNode = ASImageNode()
+        
+        let celebBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding, 395, 280))
+        celebBackgroundView.depth = .Depth1
+        celebBackgroundView.backgroundColor = MaterialColor.white
+        let logoBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return celebBackgroundView })
+        
         self.pageNode = ASPagerNode()
         self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
@@ -46,7 +54,6 @@ final class DetailViewController: ASViewController {
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
             .on(next: { celeb in
-                
                 let title = UILabel()
                 title.text = celeb.nickName
                 title.textAlignment = .Center
@@ -63,6 +70,8 @@ final class DetailViewController: ASViewController {
                 self.ageTextNode.attributedString = NSMutableAttributedString(string: "\(age)")
             })
             .start()
+        
+        self.node.addSubnode(logoBackgroundNode)
     }
     
     //MARK: Methods
@@ -116,5 +125,12 @@ final class DetailViewController: ASViewController {
                 UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()
+    }
+    
+    //MARK: ASPagerNodeDataSource
+    func numberOfPagesInPagerNode(pagerNode: ASPagerNode!) -> Int { return 3 }
+    
+    func pagerNode(pagerNode: ASPagerNode!, nodeAtIndex index: Int) -> ASCellNode! {
+        return ASCellNode()
     }
 }

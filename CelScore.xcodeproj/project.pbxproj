@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001622D21C58AC5F00EEB265 /* CelScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001622D11C58AC5F00EEB265 /* CelScoreNode.swift */; };
+		001622D41C58ACB000EEB265 /* InfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001622D31C58ACB000EEB265 /* InfoNode.swift */; };
+		001622D61C58ACDA00EEB265 /* RatingsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001622D51C58ACDA00EEB265 /* RatingsNode.swift */; };
 		0016DD231C547AC400021202 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosDistrib.swift */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -81,6 +84,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		001622D11C58AC5F00EEB265 /* CelScoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreNode.swift; sourceTree = "<group>"; };
+		001622D31C58ACB000EEB265 /* InfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoNode.swift; sourceTree = "<group>"; };
+		001622D51C58ACDA00EEB265 /* RatingsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsNode.swift; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -288,6 +294,9 @@
 				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
 				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
 				0063DC401C5720E800D2A242 /* SettingsView.swift */,
+				001622D11C58AC5F00EEB265 /* CelScoreNode.swift */,
+				001622D31C58ACB000EEB265 /* InfoNode.swift */,
+				001622D51C58ACDA00EEB265 /* RatingsNode.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -597,6 +606,7 @@
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
+				001622D61C58ACDA00EEB265 /* RatingsNode.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
 				0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
@@ -604,10 +614,12 @@
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,
 				0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */,
+				001622D41C58ACB000EEB265 /* InfoNode.swift in Sources */,
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
 				00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */,
+				001622D21C58AC5F00EEB265 /* CelScoreNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
