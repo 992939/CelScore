@@ -36,6 +36,7 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         self.celscoreTextNode = ASTextNode()
         self.zodiacTextNode = ASTextNode()
         self.ageTextNode = ASTextNode()
+        self.pageNode = ASPagerNode()
         
         //MARK: CelebPic
         self.celebPicNode = ASImageNode()
@@ -45,12 +46,12 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         celebBackgroundView.backgroundColor = MaterialColor.white
         let logoBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return celebBackgroundView })
         
-        self.pageNode = ASPagerNode()
         self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
         
+        self.pageNode.setDataSource(self)
         self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
         self.celebrityVM.getCelebritySignal(id: celebrityId)
             .on(next: { celeb in
@@ -131,6 +132,11 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     func numberOfPagesInPagerNode(pagerNode: ASPagerNode!) -> Int { return 3 }
     
     func pagerNode(pagerNode: ASPagerNode!, nodeAtIndex index: Int) -> ASCellNode! {
-        return ASCellNode()
+        switch index {
+        case 0: return ASCellNode()
+        case 1: return ASCellNode()
+        case 2: return ASCellNode()
+        default: return ASCellNode()
+        }
     }
 }

@@ -19,6 +19,7 @@ pod 'YLProgressBar', '~> 3.8'
 pod 'DynamicButton', '~> 1.2.0'
 pod 'Material', '~> 1.28'
 pod 'LLSlideMenu'
+pod 'LMGaugeView'
 
 target 'CelScore' do
 
