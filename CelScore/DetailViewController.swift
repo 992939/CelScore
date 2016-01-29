@@ -130,13 +130,12 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     
     //MARK: ASPagerNodeDataSource
     func numberOfPagesInPagerNode(pagerNode: ASPagerNode!) -> Int { return 3 }
-    
     func pagerNode(pagerNode: ASPagerNode!, nodeAtIndex index: Int) -> ASCellNode! {
         switch index {
-        case 0: return ASCellNode()
-        case 1: return ASCellNode()
-        case 2: return ASCellNode()
-        default: return ASCellNode()
+        case 0: return CelScoreNode()
+        case 1: return InfoNode()
+        case 2: return RatingsNode()
+        default: return CelScoreNode()
         }
     }
 }
