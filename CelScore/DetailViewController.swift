@@ -15,14 +15,8 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let nickNameTextNode: ASTextNode
-    let zodiacTextNode: ASTextNode
-    let ageTextNode: ASTextNode
-    let celscoreTextNode: ASTextNode
     let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNodes
     let pageNode: ASPagerNode
-    let celebrityVM: CelebrityViewModel
-    let ratingsVM: RatingsViewModel
     let backButton: DynamicButton
     let navigationBarView: NavigationBarView
     enum PageType: Int { case CelScore = 0, Info, Ratings }
@@ -32,21 +26,17 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        
-        self.celebrityVM = CelebrityViewModel(celebrityId: self.celebST.id)
-        self.ratingsVM = RatingsViewModel(celebrityId: self.celebST.id)
-        self.nickNameTextNode = ASTextNode()
-        self.celscoreTextNode = ASTextNode()
-        self.zodiacTextNode = ASTextNode()
-        self.ageTextNode = ASTextNode()
-        self.pageNode = ASPagerNode()
-        
-        //MARK: CelebPic
+
         self.celebPicNode = ASImageNode()
         let celebBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding, 395, 280))
         celebBackgroundView.depth = .Depth1
         celebBackgroundView.backgroundColor = MaterialColor.white
-        let logoBackgroundNode = ASDisplayNode.init(viewBlock: { () -> UIView in return celebBackgroundView })
+        let logoBackgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return celebBackgroundView })
+        
+        let pageBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding + Constants.kCellPadding + 280, 395, 320))
+        pageBackgroundView.depth = .Depth1
+        pageBackgroundView.backgroundColor = MaterialColor.white
+        self.pageNode = ASPagerNode(viewBlock: { () -> UIView in return pageBackgroundView })
         
         self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
@@ -54,8 +44,8 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         super.init(node: ASDisplayNode())
         
         self.pageNode.setDataSource(self)
-        self.celebrityVM.updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
         self.node.addSubnode(logoBackgroundNode)
+        self.node.addSubnode(self.pageNode)
     }
     
     //MARK: Methods
@@ -78,25 +68,12 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         self.backButton.strokeColor = Constants.kBackgroundColor
         
         self.navigationBarView.leftButtons = [self.backButton]
-        self.navigationBarView.backgroundColor = MaterialColor.green.lighten1
+        self.navigationBarView.backgroundColor = Constants.kMainGreenColor
         
         self.view.addSubview(self.navigationBarView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
-        self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
-        self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
-
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 3).start()
-        self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 3).start()
-        self.ratingsVM.voteSignal().start()
+        CelebrityViewModel(celebrityId: self.celebST.id).updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }

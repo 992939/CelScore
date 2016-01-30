@@ -100,7 +100,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.navigationBarView.titleLabel = title
         self.navigationBarView.leftButtons = [menuButton]
         self.navigationBarView.rightButtons = [searchButton]
-        self.navigationBarView.backgroundColor = MaterialColor.green.lighten1
+        self.navigationBarView.backgroundColor = Constants.kMainGreenColor
         
         self.view.addSubview(self.navigationBarView)
         //self.view.addSubview(self.searchTextField)

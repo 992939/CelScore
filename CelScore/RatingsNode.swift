@@ -11,9 +11,28 @@ import AsyncDisplayKit
 
 final class RatingsNode: ASCellNode {
     
+    //MARK: Properties
+    let ratingsVM: RatingsViewModel
+    
     //MARK: Initializer
     init(celebrityST: CelebrityStruct) {
+        self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
+        
         super.init()
+        
+        self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
+        self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 0, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 1, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 2, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 3, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 4, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 5, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 6, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 7, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 3).start()
+        self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 3).start()
+        self.ratingsVM.voteSignal().start()
     }
     
     //MARK: Method

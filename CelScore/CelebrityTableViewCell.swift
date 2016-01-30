@@ -45,7 +45,7 @@ final class CelebrityTableViewCell: ASCellNode {
         cosmosView.settings.updateOnTouch = false
         cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
         cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken1
-        self.ratingsNode = ASDisplayNode.init(viewBlock: { () -> UIView in return cosmosView })
+        self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
@@ -53,7 +53,7 @@ final class CelebrityTableViewCell: ASCellNode {
         followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         followSwitch.rippleFillColor = MaterialColor.purple.lighten1
-        self.switchNode = ASDisplayNode.init(viewBlock: { () -> UIView in return followSwitch })
+        self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
         
         let cardView: CardView = CardView()

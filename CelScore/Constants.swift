@@ -20,6 +20,8 @@ struct Constants {
     static let kMenuWidth: CGFloat = 250.0
     static let kCellPadding: CGFloat = 9.0
     static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
+    static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
+    static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "Without ethics, man has no future.",
