@@ -53,10 +53,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
-        guard userActivity.activityType == CelebrityStruct.domainIdentifier, let objectId = userActivity.userInfo?["id"] as? String
-            else { return false }
+        guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return false }
         
-        window!.rootViewController?.presentViewController(DetailViewController(celebrityId: objectId), animated: false, completion: nil)
+        let celebST = CelebrityStruct(
+            id: userActivity.userInfo!["id"] as! String,
+            imageURL:userActivity.userInfo!["imageURL"] as! String,
+            nickname:userActivity.userInfo!["nickname"] as! String,
+            height: userActivity.userInfo!["height"] as! String,
+            netWorth: userActivity.userInfo!["netWorth"] as! String,
+            prevScore: userActivity.userInfo!["prevScore"] as! Double,
+            isFollowed:userActivity.userInfo!["isFollowed"]as! Bool)
+        
+        window!.rootViewController?.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
     }
     

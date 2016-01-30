@@ -14,6 +14,7 @@ import Material
 final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     
     //MARK: Properties
+    let celebST: CelebrityStruct
     let nickNameTextNode: ASTextNode
     let zodiacTextNode: ASTextNode
     let ageTextNode: ASTextNode
@@ -29,9 +30,11 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityId: String) {
-        self.celebrityVM = CelebrityViewModel(celebrityId: celebrityId)
-        self.ratingsVM = RatingsViewModel(celebrityId: celebrityId)
+    init(celebrityST: CelebrityStruct) {
+        self.celebST = celebrityST
+        
+        self.celebrityVM = CelebrityViewModel(celebrityId: self.celebST.id)
+        self.ratingsVM = RatingsViewModel(celebrityId: self.celebST.id)
         self.nickNameTextNode = ASTextNode()
         self.celscoreTextNode = ASTextNode()
         self.zodiacTextNode = ASTextNode()
@@ -40,7 +43,6 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         
         //MARK: CelebPic
         self.celebPicNode = ASImageNode()
-        
         let celebBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding, 395, 280))
         celebBackgroundView.depth = .Depth1
         celebBackgroundView.backgroundColor = MaterialColor.white
@@ -52,26 +54,7 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
         super.init(node: ASDisplayNode())
         
         self.pageNode.setDataSource(self)
-        self.celebrityVM.updateUserActivitySignal(id: celebrityId).startWithNext { activity in self.userActivity = activity }
-        self.celebrityVM.getCelebritySignal(id: celebrityId)
-            .on(next: { celeb in
-                let title = UILabel()
-                title.text = celeb.nickName
-                title.textAlignment = .Center
-                title.textColor = Constants.kBackgroundColor
-                self.navigationBarView.titleLabel = title
-                
-                self.nickNameTextNode.attributedString = NSMutableAttributedString(string:"\(celeb.nickName)")
-                let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                self.zodiacTextNode.attributedString = NSMutableAttributedString(string:"\(zodiac)")
-                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                var age = 0
-                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
-                self.ageTextNode.attributedString = NSMutableAttributedString(string: "\(age)")
-            })
-            .start()
-        
+        self.celebrityVM.updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
         self.node.addSubnode(logoBackgroundNode)
     }
     
@@ -83,6 +66,12 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.kBackgroundColor
+        
+        let title = UILabel()
+        title.text = self.celebST.nickname
+        title.textAlignment = .Center
+        title.textColor = Constants.kBackgroundColor
+        self.navigationBarView.titleLabel = title
         
         self.backButton.setStyle(.CaretLeft, animated: true)
         self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
@@ -132,10 +121,10 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource {
     func numberOfPagesInPagerNode(pagerNode: ASPagerNode!) -> Int { return 3 }
     func pagerNode(pagerNode: ASPagerNode!, nodeAtIndex index: Int) -> ASCellNode! {
         switch index {
-        case 0: return CelScoreNode()
-        case 1: return InfoNode()
-        case 2: return RatingsNode()
-        default: return CelScoreNode()
+        case 0: return CelScoreNode(celebrityST: self.celebST)
+        case 1: return InfoNode(celebrityST: self.celebST)
+        case 2: return RatingsNode(celebrityST: self.celebST)
+        default: return CelScoreNode(celebrityST: self.celebST)
         }
     }
 }
