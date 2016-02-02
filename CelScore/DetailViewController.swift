@@ -34,10 +34,10 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: 420, height: 130))
         
         self.segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
-            separatorColour: UIColor.blueColor(), separatorWidth: 1,
+            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: UIColor.blackColor(),
-                keySegmentOffSelectionColour: UIColor.greenColor(),
+                keySegmentOnSelectionColour: Constants.kMainGreenColor,
+                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
                 keyContentVerticalMargin: 5])
         
         self.gaugeView = LMGaugeView()
@@ -83,6 +83,9 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
         self.segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
         self.segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
+        self.segmentView.layer.cornerRadius = 5.0
+        self.segmentView.layer.borderColor = MaterialColor.grey.lighten1.CGColor
+        self.segmentView.layer.borderWidth = 1.0
         self.segmentView.delegate = self
         
         let backButton: FlatButton = FlatButton()
@@ -136,9 +139,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {
-        print("oh shit")
-    }
+    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {}
 }
 
 
