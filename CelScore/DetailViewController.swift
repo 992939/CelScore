@@ -112,14 +112,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         CelebrityViewModel(celebrityId: self.celebST.id).updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
     }
     
-    func screenShotMethod() {
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-    }
-    
     func shareVote() {
         CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
             .on(next: { socialVC in
