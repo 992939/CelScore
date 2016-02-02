@@ -23,8 +23,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
     let backButton: DynamicButton
     let navigationBarView: NavigationBarView
     let gaugeView: LMGaugeView
-    var velocity: CGFloat = 0.0
-    var acceleration: CGFloat = 5.0
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
@@ -63,7 +61,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
         self.node.addSubnode(self.celebPicNode)
         self.node.addSubnode(self.nameNode)
         self.node.addSubnode(self.descriptionNode)
-        AIRTimer.every(0.5) { timer in self.updateGauge(self.gaugeView) }
+        AIRTimer.every(0.1) { timer in self.updateGauge(self.gaugeView) }
     }
     
     //MARK: Methods
@@ -115,16 +113,11 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
             .start()
     }
     
-    func updateGauge(gaugeView: LMGaugeView) {
-        velocity += 0.5 * acceleration
-        if (velocity > gaugeView.maxValue) { velocity = gaugeView.maxValue; acceleration = -5 }
-        if (velocity < gaugeView.minValue) { velocity = gaugeView.minValue; acceleration = 5 }
-        gaugeView.value = velocity;
-    }
+    func updateGauge(gaugeView: LMGaugeView) { if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 } }
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value >= gaugeView.limitValue { return Constants.kMainGreenColor }
+        if value > gaugeView.limitValue { return Constants.kMainGreenColor }
         else { return Constants.kMainVioletColor }
     }
 }
