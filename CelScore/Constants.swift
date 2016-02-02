@@ -28,6 +28,21 @@ struct Constants {
     static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
     static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
     
+    static let randomFacts: [[String: Int]] = [
+        ["#PaysWayTooMuchAttentionToCelebrityNews": 81],
+        ["#ThinksMediaShouldBeMoreFocusedOnCelebs": 1],
+        ["#WouldNotMournTheEndOfHollywood": 77],
+        ["#ThinksMostCitizensAreNotInformedVoters": 83],
+        ["#HasNegativeOpinionOfEntertainmentIndustry": 51],
+        ["#AmericansWhoBelieveSunRevolvesAroundEarth": 25],
+        ["#AdultsWhoHaventReadASingleBookInAYear": 28],
+        ["#HouseholdsThatDontWatchTelevision": 3],
+        ["#AmericansWhoBelieveInUFO": 36],
+        ["#AmericansWhoBelieveInGhosts": 42],
+        ["#AdultsWhoHaventGraduatedHighSchool": 17],
+        ["#WorldTotalPrisonPopulationInUSA": 25],
+        ["#TotalWealthOwnedByTopOnePercent": 50]]
+    
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "Without ethics, man has no future.",

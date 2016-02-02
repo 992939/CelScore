@@ -68,7 +68,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.node.addSubnode(self.celebPicNode)
         self.node.addSubnode(self.nameNode)
         self.node.addSubnode(self.descriptionNode)
-        AIRTimer.every(0.1) { timer in self.updateGauge(self.gaugeView) }
+        AIRTimer.every(0.1){ timer in self.updateGauge(self.gaugeView, timer: timer) }
     }
     
     //MARK: Methods
@@ -130,7 +130,10 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
-    func updateGauge(gaugeView: LMGaugeView) { if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 } }
+    func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
+        if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }
+        else { timer.invalidate() }
+    }
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {

@@ -12,6 +12,7 @@ import RealmSwift
 import Fabric
 import TwitterKit
 import AWSCognito
+import Material
 
 
 @UIApplicationMain
@@ -39,6 +40,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = MasterViewController(viewModel: celscoreVM)
+        ///window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(viewModel: celscoreVM), sideViewController: SettingsView())
         window.makeKeyAndVisible()
         self.window = window
         

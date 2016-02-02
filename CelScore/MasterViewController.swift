@@ -66,6 +66,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.sideNavigationViewController!.setSideViewWidth(view.bounds.width - 88, hidden: true, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
@@ -115,8 +120,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func openSetings() {
-        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
-        else { self.settingsMenu.ll_openSlideMenu() }
+        self.sideNavigationViewController!.open()
+//        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
+//        else { self.settingsMenu.ll_openSlideMenu() }
     }
     
     func configuration() {
