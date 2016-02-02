@@ -7,7 +7,6 @@
 //
 
 import AsyncDisplayKit
-import DynamicButton
 import Material
 import LMGaugeView
 import AIRTimer
@@ -20,7 +19,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
     let celebPicNode: ASNetworkImageNode
     let nameNode: ASTextNode
     let descriptionNode: ASTextNode
-    let backButton: DynamicButton
     let navigationBarView: NavigationBarView
     let gaugeView: LMGaugeView
     enum PageType: Int { case CelScore = 0, Info, Ratings }
@@ -53,7 +51,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
         self.descriptionNode.maximumNumberOfLines = 1
         self.descriptionNode.frame = CGRectMake(85, 240, 200, 20)
         
-        self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
@@ -73,19 +70,17 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = Constants.kBackgroundColor
         
-        let title = UILabel()
-        title.text = self.celebST.nickname
-        title.textAlignment = .Center
-        title.textColor = Constants.kBackgroundColor
-        self.navigationBarView.titleLabel = title
+        let backButton: FlatButton = FlatButton()
+        backButton.pulseColor = MaterialColor.white
+        backButton.pulseFill = true
+        backButton.pulseScale = false
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
+        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        self.backButton.setStyle(.CaretLeft, animated: true)
-        self.backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
-        self.backButton.strokeColor = Constants.kBackgroundColor
-        
-        self.navigationBarView.leftButtons = [self.backButton]
+        self.navigationBarView.leftButtons = [backButton]
         self.navigationBarView.backgroundColor = Constants.kMainGreenColor
-        
+        self.navigationBarView.depth = .None
         self.gaugeView.frame = CGRectMake(35, 300, 350, 350)
         
         self.view.addSubview(self.navigationBarView)
