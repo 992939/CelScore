@@ -29,16 +29,19 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         
+        self.navigationBarView = NavigationBarView(frame: CGRectMake(0, 0, 420, 130))
+        
         self.gaugeView = LMGaugeView()
-        self.gaugeView.minValue = 1.00
-        self.gaugeView.maxValue = 5.00
-        self.gaugeView.limitValue = 3.00
+        self.gaugeView.minValue = Constants.kMinimumVoteValue
+        self.gaugeView.maxValue = Constants.kMaximumVoteValue
+        self.gaugeView.limitValue = Constants.kMiddleVoteValue
 
         self.celebPicNode = ASNetworkImageNode(webImage: ())
+        self.celebPicNode.URL = NSURL(string: celebST.imageURL)
         self.celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        self.celebPicNode.frame = CGRectMake(85, 100, 50, 50)
+        self.celebPicNode.frame = CGRectMake(150, 100, 90, 90)
         self.celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(9.0, UIColor.redColor())(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
         
         self.nameNode = ASTextNode()
@@ -50,8 +53,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
         self.descriptionNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
         self.descriptionNode.maximumNumberOfLines = 1
         self.descriptionNode.frame = CGRectMake(85, 240, 200, 20)
-        
-        self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
         
@@ -68,7 +69,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Constants.kBackgroundColor
+        view.backgroundColor = MaterialColor.white
         
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
@@ -79,18 +80,19 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
         self.navigationBarView.leftButtons = [backButton]
-        self.navigationBarView.backgroundColor = Constants.kMainGreenColor
         self.navigationBarView.depth = .None
-        self.gaugeView.frame = CGRectMake(35, 300, 350, 350)
+        self.navigationBarView.image = UIImage(named: "demo-cover-photo-2")
+        self.navigationBarView.contentMode = .ScaleAspectFit
+        
+        self.gaugeView.frame = CGRectMake(35, 350, 300, 300)
         
         self.view.addSubview(self.navigationBarView)
+        self.view.sendSubviewToBack(self.navigationBarView)
         self.view.addSubview(self.gaugeView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         CelebrityViewModel(celebrityId: self.celebST.id).updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
     }
-    
-    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func screenShotMethod() {
         UIGraphicsBeginImageContext(view.frame.size)
@@ -107,6 +109,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate {
             })
             .start()
     }
+    
+    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func updateGauge(gaugeView: LMGaugeView) { if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 } }
     

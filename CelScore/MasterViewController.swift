@@ -26,7 +26,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let settingsVM: SettingsViewModel
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
-    let searchTextField: UITextField
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
     let settingsMenu: LLSlideMenu
@@ -43,15 +42,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
-        self.searchTextField = UITextField(frame: CGRectMake(0 , 0, 60, 0))
         self.loginButton = FBSDKLoginButton()
         self.settingsMenu = LLSlideMenu()
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
-        
-        self.searchTextField.placeholder = "look up a celebrity"
-        self.searchTextField.delegate = self
 
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
@@ -138,7 +133,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             .retry(1)
             .start()
     
-        self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
+        //self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkStatusSignal().start()
         self.settingsVM.updateTodayWidgetSignal().start()
     }

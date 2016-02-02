@@ -33,10 +33,10 @@ final class CelebrityTableViewCell: ASCellNode {
         
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
-        self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(9.0, UIColor.redColor())(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainVioletColor)(originalImage)
         }
         
         let cosmosView = CosmosView()
