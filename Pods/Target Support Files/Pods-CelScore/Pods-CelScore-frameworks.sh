@@ -90,7 +90,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/AsyncDisplayKit.framework"
   install_framework "Pods-CelScore/Bolts.framework"
   install_framework "Pods-CelScore/CategorySliderView.framework"
-  install_framework "Pods-CelScore/DBProfileViewController.framework"
   install_framework "Pods-CelScore/DynamicButton.framework"
   install_framework "Pods-CelScore/FBSDKCoreKit.framework"
   install_framework "Pods-CelScore/JTMaterialSwitch.framework"
@@ -105,7 +104,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/SMSegmentView.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
-  install_framework "Pods-CelScore/UIImageEffects.framework"
   install_framework "Pods-CelScore/WebASDKImageManager.framework"
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi
@@ -116,7 +114,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/AsyncDisplayKit.framework"
   install_framework "Pods-CelScore/Bolts.framework"
   install_framework "Pods-CelScore/CategorySliderView.framework"
-  install_framework "Pods-CelScore/DBProfileViewController.framework"
   install_framework "Pods-CelScore/DynamicButton.framework"
   install_framework "Pods-CelScore/FBSDKCoreKit.framework"
   install_framework "Pods-CelScore/JTMaterialSwitch.framework"
@@ -131,7 +128,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/SMSegmentView.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
-  install_framework "Pods-CelScore/UIImageEffects.framework"
   install_framework "Pods-CelScore/WebASDKImageManager.framework"
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi

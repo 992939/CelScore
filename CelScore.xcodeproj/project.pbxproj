@@ -37,6 +37,11 @@
 		00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A21C6016B000097089 /* RatingsViewController.swift */; };
 		00C347A71C6025DA00097089 /* InfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A61C6025DA00097089 /* InfoNode.swift */; };
 		00C347A91C6025E500097089 /* RatingsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A81C6025E500097089 /* RatingsNode.swift */; };
+		00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */; };
+		00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B11C605CB800097089 /* SMBasicSegment.swift */; };
+		00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B21C605CB800097089 /* SMBasicSegmentView.swift */; };
+		00C347B81C605CB800097089 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B31C605CB800097089 /* SMSegment.swift */; };
+		00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B41C605CB800097089 /* SMSegmentView.swift */; };
 		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
 		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
 		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
@@ -124,6 +129,11 @@
 		00C347A21C6016B000097089 /* RatingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
 		00C347A61C6025DA00097089 /* InfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoNode.swift; sourceTree = "<group>"; };
 		00C347A81C6025E500097089 /* RatingsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsNode.swift; sourceTree = "<group>"; };
+		00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMAlphaImageSegment.swift; path = SMSSegment/SMAlphaImageSegment.swift; sourceTree = "<group>"; };
+		00C347B11C605CB800097089 /* SMBasicSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMBasicSegment.swift; path = SMSSegment/SMBasicSegment.swift; sourceTree = "<group>"; };
+		00C347B21C605CB800097089 /* SMBasicSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMBasicSegmentView.swift; path = SMSSegment/SMBasicSegmentView.swift; sourceTree = "<group>"; };
+		00C347B31C605CB800097089 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSSegment/SMSegment.swift; sourceTree = "<group>"; };
+		00C347B41C605CB800097089 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSSegment/SMSegmentView.swift; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
@@ -255,6 +265,11 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */,
+				00C347B11C605CB800097089 /* SMBasicSegment.swift */,
+				00C347B21C605CB800097089 /* SMBasicSegmentView.swift */,
+				00C347B31C605CB800097089 /* SMSegment.swift */,
+				00C347B41C605CB800097089 /* SMSegmentView.swift */,
 				0016DD221C547AC400021202 /* CosmosDistrib.swift */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
@@ -602,6 +617,7 @@
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
+				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,
 				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
 				0016DD231C547AC400021202 /* CosmosDistrib.swift in Sources */,
 				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
@@ -611,15 +627,19 @@
 				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
+				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
+				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
 				0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */,
+				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347A91C6025E500097089 /* RatingsNode.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347A71C6025DA00097089 /* InfoNode.swift in Sources */,
+				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				008EE4C41BE6E38600E831BE /* SearchListViewModel.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,

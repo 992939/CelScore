@@ -34,7 +34,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFit
-        self.profilePicNode.preferredFrameSize = CGSizeMake(50, 50)
+        self.profilePicNode.preferredFrameSize = CGSize(width: 50, height: 50)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainVioletColor)(originalImage)
         }
@@ -46,15 +46,15 @@ final class CelebrityTableViewCell: ASCellNode {
         cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
         cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken1
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
-        self.ratingsNode.preferredFrameSize = CGSizeMake(10, 20)
+        self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        followSwitch.center = CGPointMake(360, 20)
+        followSwitch.center = CGPoint(x: 360, y: 20)
         followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         followSwitch.rippleFillColor = MaterialColor.purple.lighten1
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
-        self.switchNode.preferredFrameSize = CGSizeMake(20, 20)
+        self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
         let cardView: CardView = CardView()
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })

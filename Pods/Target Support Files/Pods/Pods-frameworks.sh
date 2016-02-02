@@ -90,7 +90,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/AsyncDisplayKit.framework"
   install_framework "Pods/Bolts.framework"
   install_framework "Pods/CategorySliderView.framework"
-  install_framework "Pods/DBProfileViewController.framework"
   install_framework "Pods/DynamicButton.framework"
   install_framework "Pods/FBSDKCoreKit.framework"
   install_framework "Pods/JTMaterialSwitch.framework"
@@ -105,7 +104,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/SMSegmentView.framework"
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
-  install_framework "Pods/UIImageEffects.framework"
   install_framework "Pods/WebASDKImageManager.framework"
   install_framework "Pods/YLProgressBar.framework"
 fi
@@ -116,7 +114,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AsyncDisplayKit.framework"
   install_framework "Pods/Bolts.framework"
   install_framework "Pods/CategorySliderView.framework"
-  install_framework "Pods/DBProfileViewController.framework"
   install_framework "Pods/DynamicButton.framework"
   install_framework "Pods/FBSDKCoreKit.framework"
   install_framework "Pods/JTMaterialSwitch.framework"
@@ -131,7 +128,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/SMSegmentView.framework"
   install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/Timepiece.framework"
-  install_framework "Pods/UIImageEffects.framework"
   install_framework "Pods/WebASDKImageManager.framework"
   install_framework "Pods/YLProgressBar.framework"
 fi
