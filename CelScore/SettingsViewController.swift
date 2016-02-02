@@ -17,6 +17,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     let logoPicNode: ASImageNode
     let publicOpinionBarNode: ASDisplayNode
     let consensusBarNode: ASDisplayNode
+    let factsBarNode: ASDisplayNode
     let pickerViewNode: ASDisplayNode
     let publicServiceSwitchNode: ASDisplayNode
     let logStatusNode: ASDisplayNode
@@ -24,12 +25,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     let logNameTextNode: ASTextNode
     let publicOpinionTextNode: ASTextNode
     let consensusTextNode: ASTextNode
+    let factsTextNode: ASTextNode
     let pickerTextNode: ASTextNode
     let publicServiceTextNode: ASTextNode
     let logStatusTextNode: ASTextNode
     let copyrightTextNode: ASTextNode
     let kMaxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
-    let kSpacing: CGFloat = 50.0
+    let kSpacing: CGFloat = 40.0
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -40,14 +42,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Logo
         self.logoPicNode = ASImageNode()
         self.logoPicNode.image = UIImage(named: "flask_logo")
-        self.logoPicNode.frame = CGRect(x: 85, y: 2 * Constants.kCellPadding, width: 70, height: 120)
+        self.logoPicNode.frame = CGRect(x: 85, y: 50, width: 70, height: 120)
         self.logoTextNode = ASTextNode()
         let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.black]
         self.logoTextNode.attributedString = NSMutableAttributedString(string:"*Vote Responsibly.", attributes:attrs)
         var y = self.logoPicNode.frame.height + self.logoPicNode.frame.origin.y
         self.logoTextNode.frame = CGRect(x: 86, y: y, width: kMaxWidth, height: 20)
         
-        let logoBackgroundView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: kMaxWidth, height: 160))
+        let logoBackgroundView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth, height: 160))
         logoBackgroundView.depth = .Depth1
         logoBackgroundView.backgroundColor = MaterialColor.white
         let logoBackgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return logoBackgroundView })
@@ -87,6 +89,24 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         self.consensusBarNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusBar })
+        
+        //MARK: Random Facts
+        y += kSpacing
+        self.factsTextNode = ASTextNode()
+        self.factsTextNode.attributedString = NSMutableAttributedString(string:"#CitizensThatDontWatchTelevision:")
+        self.factsTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
+        
+        let factsBackgroundView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: y, width: kMaxWidth, height: 60))
+        factsBackgroundView.depth = .Depth1
+        factsBackgroundView.backgroundColor = MaterialColor.white
+        let factsBackgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return factsBackgroundView })
+        
+        y = self.factsTextNode.frame.height + self.factsTextNode.frame.origin.y
+        let factsBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: y, width: kMaxWidth - 20, height: 15))
+        factsBar.progressTintColor = MaterialColor.green.darken4
+        factsBar.type = .Flat
+        factsBar.indicatorTextDisplayMode = .Progress
+        self.factsBarNode = ASDisplayNode(viewBlock: { () -> UIView in return factsBar })
         
         //MARK: Picker
         y += kSpacing
@@ -165,6 +185,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(consensusBackgroundNode)
         self.node.addSubnode(self.consensusTextNode)
         self.node.addSubnode(self.consensusBarNode)
+        self.node.addSubnode(factsBackgroundNode)
+        self.node.addSubnode(self.factsTextNode)
+        self.node.addSubnode(self.factsBarNode)
         self.node.addSubnode(pickerBackgroundNode)
         self.node.addSubnode(self.pickerTextNode)
         self.node.addSubnode(self.pickerViewNode)

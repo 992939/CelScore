@@ -58,7 +58,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 88, hidden: true, animated: false)
+        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 166, hidden: true, animated: false)
     }
     
     override func viewDidLoad() {

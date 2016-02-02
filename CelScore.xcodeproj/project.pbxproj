@@ -263,11 +263,7 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */,
-				00C347B11C605CB800097089 /* SMBasicSegment.swift */,
-				00C347B21C605CB800097089 /* SMBasicSegmentView.swift */,
-				00C347B31C605CB800097089 /* SMSegment.swift */,
-				00C347B41C605CB800097089 /* SMSegmentView.swift */,
+				00C347BC1C6097AA00097089 /* SMSegment */,
 				0016DD221C547AC400021202 /* CosmosDistrib.swift */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
@@ -317,6 +313,18 @@
 				00C347A21C6016B000097089 /* RatingsViewController.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		00C347BC1C6097AA00097089 /* SMSegment */ = {
+			isa = PBXGroup;
+			children = (
+				00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */,
+				00C347B11C605CB800097089 /* SMBasicSegment.swift */,
+				00C347B21C605CB800097089 /* SMBasicSegmentView.swift */,
+				00C347B31C605CB800097089 /* SMSegment.swift */,
+				00C347B41C605CB800097089 /* SMSegmentView.swift */,
+			);
+			name = SMSegment;
 			sourceTree = "<group>";
 		};
 		272C664E3752319CD2080EBE /* Frameworks */ = {
