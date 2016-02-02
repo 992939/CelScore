@@ -102,6 +102,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.navigationBarView.contentMode = .ScaleAspectFit
         
         self.gaugeView.frame = CGRect(x: 35, y: 350, width: 300, height: 300)
+        self.gaugeView.delegate = self
         
         self.view.addSubview(self.navigationBarView)
         self.view.sendSubviewToBack(self.navigationBarView)
