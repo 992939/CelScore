@@ -34,11 +34,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>DynamicButton.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -50,11 +45,6 @@
 			<false/>
 		</dict>
 		<key>JTMaterialSwitch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>LLSlideMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -142,12 +132,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D0581B4597244CB4C2859775876E83E</key>
+		<key>235D5A75637474B388A97CB36738B1CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>13138B8F122ED0FD699609E191CCDC24</key>
+		<key>27DD847A1F7EB324EB1C84BC8E259DBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,12 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35B617F8B0851DCDF666A4909092E791</key>
+		<key>2FC3A07596B1B227235401964F57A873</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36E8E1D93F1F67E06A0A41CD3074916D</key>
+		<key>30B26A29BDE50628746B6D645943A2CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>35B617F8B0851DCDF666A4909092E791</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,17 +172,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4C0D54BC2EA848C7B20395ECFF54CB64</key>
+		<key>403504EBBA1CCD59990FDABB83DA34C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>550EF41FA8F8CAF227674CAF4FDD0F7B</key>
+		<key>4A8B6F5D51E8ABCB5C4731376AAAE187</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>57ADC05E440A960212657DE6DA1FEDD5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>67E3E46065943550E7FD274D5968B752</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,7 +202,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D28DA8D441ECDD8DF84E2C3A3C093B3</key>
+		<key>8337C0FF5022853A6F6CFD2E0E9C5649</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,7 +212,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>898B99992D75F7DFC23CB80FD28A209A</key>
+		<key>8E8425814499F3529A625A926AA487C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,32 +227,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A082C01E7CD5891C80A3319C1D6628CB</key>
+		<key>9EE52D7B870D37B6DA107016D5EE23A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A872CF85CCD2DFD5E979ADCA5DED63DA</key>
+		<key>A111DAEE192803F94CB103728AC3DB14</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AD32D897FBCE104F808E56A1FE724B1A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B5EBF5F95F8DEA13910D65A123ADE0DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B6F5B9C695EE8DC7A4F4C328B7311DB2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BE7FBB232B3F322B00AF69499664E7E8</key>
+		<key>A5E8AD3B371E2B13DC6F8C9F4B79CF11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -262,12 +247,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C93AC387DE2FC90EE27A30D77E3FF8A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CA999E1784032AFBEDA0FDF718375C9B</key>
+		<key>D55C1CFA336582580600DC724F1C882D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

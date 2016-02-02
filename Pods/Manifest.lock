@@ -13,7 +13,6 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
   - CategorySliderView (1.0.2)
-  - DynamicButton (1.2.0)
   - Fabric (1.6.1)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
@@ -25,7 +24,6 @@ PODS:
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
   - JTMaterialSwitch (1.1)
-  - LLSlideMenu (1.0.4)
   - LMGaugeView (1.0.1)
   - Material (1.28.1)
   - ReactiveCocoa (4.0.4-alpha-1):
@@ -63,11 +61,9 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
   - CategorySliderView (~> 1.0.2)
-  - DynamicButton (~> 1.2.0)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - JTMaterialSwitch (~> 1.1)
-  - LLSlideMenu
   - LMGaugeView
   - Material (~> 1.28)
   - ReactiveCocoa (= 4.0.4-alpha-1)
@@ -87,11 +83,9 @@ SPEC CHECKSUMS:
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   CategorySliderView: be640cfa918711e1db1183af69495003c7be2be2
-  DynamicButton: 815e989e2bb77c30b362a653f18bfa1e2dee5654
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
-  LLSlideMenu: e98f45dc04cdbbf19b4e6922b9078dc519292920
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
   Material: 5ca840624a279ce4d02c4e1ef3059d1c0190b7f3
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d

@@ -24,7 +24,6 @@
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
-		0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063DC401C5720E800D2A242 /* SettingsView.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
 		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
@@ -41,6 +40,7 @@
 		00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B21C605CB800097089 /* SMBasicSegmentView.swift */; };
 		00C347B81C605CB800097089 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B31C605CB800097089 /* SMSegment.swift */; };
 		00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B41C605CB800097089 /* SMSegmentView.swift */; };
+		00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347BA1C60902E00097089 /* SettingsViewController.swift */; };
 		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
 		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
 		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
@@ -113,7 +113,6 @@
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
-		0063DC401C5720E800D2A242 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
 		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		00C347B21C605CB800097089 /* SMBasicSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMBasicSegmentView.swift; path = SMSSegment/SMBasicSegmentView.swift; sourceTree = "<group>"; };
 		00C347B31C605CB800097089 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSSegment/SMSegment.swift; sourceTree = "<group>"; };
 		00C347B41C605CB800097089 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSSegment/SMSegmentView.swift; sourceTree = "<group>"; };
+		00C347BA1C60902E00097089 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 				00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */,
 				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
 				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
-				0063DC401C5720E800D2A242 /* SettingsView.swift */,
+				00C347BA1C60902E00097089 /* SettingsViewController.swift */,
 				00C347A61C6025DA00097089 /* InfoNode.swift */,
 				00C347A81C6025E500097089 /* RatingsNode.swift */,
 				00C347A01C6016A000097089 /* InfoViewController.swift */,
@@ -633,13 +633,13 @@
 				0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347A91C6025E500097089 /* RatingsNode.swift in Sources */,
+				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347A71C6025DA00097089 /* InfoNode.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				008EE4C41BE6E38600E831BE /* SearchListViewModel.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,
-				0063DC411C5720E800D2A242 /* SettingsView.swift in Sources */,
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

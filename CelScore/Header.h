@@ -15,7 +15,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <WebASDKImageManager/WebASDKImageManager.h>
-#import <LLSlideMenu/LLSlideMenu.h>
 #import <YLProgressBar/YLProgressBar.h>
 #import "PROCelScoreAPIClient.h"
 

@@ -39,8 +39,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = MasterViewController(viewModel: celscoreVM)
-        ///window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(viewModel: celscoreVM), sideViewController: SettingsView())
+        //window.rootViewController = MasterViewController(viewModel: celscoreVM)
+        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(viewModel: celscoreVM), sideViewController: SettingsViewController())
         window.makeKeyAndVisible()
         self.window = window
         

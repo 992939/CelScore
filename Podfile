@@ -16,10 +16,8 @@ pod 'Timepiece', '~> 0.4'
 pod 'CategorySliderView', '~> 1.0.2'
 pod 'JTMaterialSwitch', '~> 1.1'
 pod 'YLProgressBar', '~> 3.8'
-pod 'DynamicButton', '~> 1.2.0'
 pod 'Material', '~> 1.28'
 pod 'SMSegmentView', '~> 1.1'
-pod 'LLSlideMenu'
 pod 'LMGaugeView'
 
 target 'CelScore' do

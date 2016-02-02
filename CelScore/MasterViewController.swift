@@ -13,7 +13,6 @@ import ReactiveCocoa
 import RealmSwift
 import TwitterKit
 import CategorySliderView
-import LLSlideMenu
 import DynamicButton
 import Material
 
@@ -28,7 +27,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
     let loginButton: FBSDKLoginButton
-    let settingsMenu: LLSlideMenu
     let navigationBarView: NavigationBarView
     //let listSlider: CategorySliderView
     
@@ -43,20 +41,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
         self.loginButton = FBSDKLoginButton()
-        self.settingsMenu = LLSlideMenu()
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
 
         self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         self.loginButton.delegate = self
-        
-        self.settingsMenu.ll_menuWidth = Constants.kMenuWidth
-        self.settingsMenu.ll_springDamping = 20
-        self.settingsMenu.ll_springVelocity = 15
-        self.settingsMenu.ll_springFramesNum = 60
-        self.settingsMenu.ll_menuBackgroundColor = Constants.kBackgroundColor
-        self.settingsMenu.addSubview(SettingsView(frame: self.settingsMenu.frame))
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
@@ -68,7 +58,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //self.sideNavigationViewController!.setSideViewWidth(view.bounds.width - 88, hidden: true, animated: true)
+        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 88, hidden: true, animated: false)
     }
     
     override func viewDidLoad() {
@@ -105,7 +95,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.navigationBarView)
         //self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(self.settingsMenu)
         //self.view.addSubview(loginButton)
 
         self.configuration()

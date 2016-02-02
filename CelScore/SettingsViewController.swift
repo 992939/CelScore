@@ -1,18 +1,17 @@
 //
-//  SettingsView.swift
+//  SettingsViewController.swift
 //  CelScore
 //
-//  Created by Gareth.K.Mensah on 1/25/16.
+//  Created by Gareth.K.Mensah on 2/1/16.
 //  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
-import UIKit
 import YLProgressBar
 import JTMaterialSwitch
 import Material
 
-final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
+final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     //MARK: Properties
     let settingsVM: SettingsViewModel
     let logoPicNode: ASImageNode
@@ -34,8 +33,8 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
-
-    override init(frame: CGRect) {
+    
+    init() {
         self.settingsVM = SettingsViewModel()
         
         //MARK: Logo
@@ -153,34 +152,42 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             string:"CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
         self.copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
         
-        super.init(frame: frame)
+        super.init(node: ASDisplayNode())
         pickerView.dataSource = self
         pickerView.delegate = self
         
-        self.addSubnode(logoBackgroundNode)
-        self.addSubnode(self.logoPicNode)
-        self.addSubnode(self.logoTextNode)
-        self.addSubnode(publicBackgroundNode)
-        self.addSubnode(self.publicOpinionTextNode)
-        self.addSubnode(self.publicOpinionBarNode)
-        self.addSubnode(consensusBackgroundNode)
-        self.addSubnode(self.consensusTextNode)
-        self.addSubnode(self.consensusBarNode)
-        self.addSubnode(pickerBackgroundNode)
-        self.addSubnode(self.pickerTextNode)
-        self.addSubnode(self.pickerViewNode)
-        self.addSubnode(serviceBackgroundNode)
-        self.addSubnode(self.publicServiceTextNode)
-        self.addSubnode(self.publicServiceSwitchNode)
-        self.addSubnode(logBackgroundNode)
-        self.addSubnode(self.logStatusTextNode)
-        self.addSubnode(self.logNameTextNode)
-        self.addSubnode(self.logStatusNode)
-        self.addSubnode(self.copyrightTextNode)
+        self.node.addSubnode(logoBackgroundNode)
+        self.node.addSubnode(self.logoPicNode)
+        self.node.addSubnode(self.logoTextNode)
+        self.node.addSubnode(publicBackgroundNode)
+        self.node.addSubnode(self.publicOpinionTextNode)
+        self.node.addSubnode(self.publicOpinionBarNode)
+        self.node.addSubnode(consensusBackgroundNode)
+        self.node.addSubnode(self.consensusTextNode)
+        self.node.addSubnode(self.consensusBarNode)
+        self.node.addSubnode(pickerBackgroundNode)
+        self.node.addSubnode(self.pickerTextNode)
+        self.node.addSubnode(self.pickerViewNode)
+        self.node.addSubnode(serviceBackgroundNode)
+        self.node.addSubnode(self.publicServiceTextNode)
+        self.node.addSubnode(self.publicServiceSwitchNode)
+        self.node.addSubnode(logBackgroundNode)
+        self.node.addSubnode(self.logStatusTextNode)
+        self.node.addSubnode(self.logNameTextNode)
+        self.node.addSubnode(self.logStatusNode)
+        self.node.addSubnode(self.copyrightTextNode)
         
         //self.settingsVM.getUserRatingsPercentageSignal().start()
         //self.settingsVM.calculateSocialConsensusSignal().start()
         self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
+    }
+    
+    //MARK: Method
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.backgroundColor = Constants.kBackgroundColor
+        self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
+        self.sideNavigationViewController!.depth = .Depth1
     }
     
     //MARK: UIPickerViewDelegate
@@ -195,6 +202,5 @@ final class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
     }
+
 }
-
-
