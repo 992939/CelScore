@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DBProfileViewController-DBProfileViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DBProfileViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DynamicButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -114,12 +124,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SMSegmentView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Timepiece.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UIImageEffects.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -137,6 +157,26 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>068DE819E1656A33956C2B534629CE30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1A42753F30B6ADB1EA2C672C61DE8547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>24FCE7641A8EA5844719F78DEBE589CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29B9BC525F85E2EC9E2C3EB0DD6376D6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D333F48EDD1A4D314F58CDE240A2D3B</key>
 		<dict>
 			<key>primary</key>
@@ -147,7 +187,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>341E53EEA23707866CBBE53AF57DB931</key>
+		<key>35209F101064ABC50F7EF349313BC202</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,12 +202,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>473114C119F2E12A6C103088A6627E30</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>476DBEC36348D7D357F0DEDD18745E81</key>
+		<key>426919CBD3B732BE6140B85B30F52EB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,17 +222,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5FE7B3BB521CD3F23D815D4512E276F6</key>
+		<key>740625BF02727DA15343702390109225</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>787ADFDC43AC596B7714B24B851BD6D0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>79A2CB7B6CA1D633D23DA546C6A878DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,11 +242,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>90557AEF37D5B92B71AD07ECBA764A8D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9074BB5F7A99AE760EF72445FDEE7865</key>
 		<dict>
 			<key>primary</key>
@@ -227,22 +252,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9846B9F3CD12027B4BD8F1A189C11BFA</key>
+		<key>929C334A015786412534858D70DCF4AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E1FBC32105D3FD49DCFC5DBA3111B8B</key>
+		<key>A0120ABC1E966FF1C7B021647BFD495C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AB0DF1ACC884B34C93E5977FF6C63FE7</key>
+		<key>A04C2899FD20C3CD6CE691D09464A11B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B02F52FB34F2FBB363345A9EDA2055FD</key>
+		<key>B9D235A073E720A3C0065165B8687833</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C0D02C6D4AEB393EE51289F24ECDBFEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -252,7 +282,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE388FB0F559495B250439515EB649F7</key>
+		<key>CE956FC523289FC8BE77280DF10ECF4B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D082C7ECCA12FF060FC376BBB304B127</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D86835C9B330430A77E17EEB0FDACB22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -262,7 +302,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC25B945133DD32B8F5EA6F2E6F3DE0D</key>
+		<key>F5F26A461C6569509D640D1A33F2C7EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

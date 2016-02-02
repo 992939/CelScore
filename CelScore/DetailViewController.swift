@@ -9,17 +9,22 @@
 import AsyncDisplayKit
 import DynamicButton
 import Material
+import LMGaugeView
+import AIRTimer
 
 
-final class DetailViewController: ASViewController, ASPagerNodeDataSource, ASCollectionDelegate, UIScrollViewDelegate {
+final class DetailViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let celebPicNode: ASImageNode //TODO: ASMultiplexImageNode/ASNetworkImageNodes
-    let pageNode: ASPagerNode
+    let celebPicNode: ASNetworkImageNode
+    let nameNode: ASTextNode
+    let descriptionNode: ASTextNode
     let backButton: DynamicButton
     let navigationBarView: NavigationBarView
-    let pageControl: UIPageControl
+    let gaugeView: LMGaugeView
+    var velocity: CGFloat = 0.0
+    var acceleration: CGFloat = 5.0
     enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
@@ -27,36 +32,38 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource, ASCol
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
+        
+        self.gaugeView = LMGaugeView()
+        self.gaugeView.minValue = 1.00
+        self.gaugeView.maxValue = 5.00
+        self.gaugeView.limitValue = 3.00
 
-        let celebBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding, 395, 280))
-        celebBackgroundView.depth = .Depth1
-        celebBackgroundView.backgroundColor = MaterialColor.white
-        let logoBackgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return celebBackgroundView })
+        self.celebPicNode = ASNetworkImageNode(webImage: ())
+        self.celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        self.celebPicNode.frame = CGRectMake(85, 100, 50, 50)
+        self.celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+            return ASImageNodeRoundBorderModificationBlock(9.0, UIColor.redColor())(originalImage)
+        }
         
-        let pageBackgroundView: MaterialView = MaterialView(frame: CGRectMake(Constants.kCellPadding, Constants.kNavigationPadding + 285, 395, 320))
-        pageBackgroundView.depth = .Depth1
-        pageBackgroundView.backgroundColor = MaterialColor.white
-        let pageBackgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return pageBackgroundView })
+        self.nameNode = ASTextNode()
+        self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
+        self.nameNode.maximumNumberOfLines = 1
+        self.nameNode.frame = CGRectMake(85, 200, 200, 20)
         
-        self.celebPicNode = ASImageNode()
-        self.pageNode = ASPagerNode()
-        
-        self.pageControl = UIPageControl(frame: CGRectMake(-90, 690, 200, 40))
-        self.pageControl.numberOfPages = 3
-        self.pageControl.currentPage = 0
-        self.pageControl.pageIndicatorTintColor = MaterialColor.grey.darken3
-        self.pageControl.currentPageIndicatorTintColor = Constants.kMainGreenColor
+        self.descriptionNode = ASTextNode()
+        self.descriptionNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
+        self.descriptionNode.maximumNumberOfLines = 1
+        self.descriptionNode.frame = CGRectMake(85, 240, 200, 20)
         
         self.backButton = DynamicButton(frame: CGRectMake(0, 0, 15.0, 15.0))
         self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
         
-        self.pageNode.setDataSource(self)
-        self.pageNode.delegate = self
-        
-        self.node.addSubnode(logoBackgroundNode)
-        self.node.addSubnode(pageBackgroundNode)
+        self.node.addSubnode(self.celebPicNode)
+        self.node.addSubnode(self.nameNode)
+        self.node.addSubnode(self.descriptionNode)
+        AIRTimer.every(0.5) { timer in self.updateGauge(self.gaugeView) }
     }
     
     //MARK: Methods
@@ -81,8 +88,10 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource, ASCol
         self.navigationBarView.leftButtons = [self.backButton]
         self.navigationBarView.backgroundColor = Constants.kMainGreenColor
         
+        self.gaugeView.frame = CGRectMake(35, 300, 350, 350)
+        
         self.view.addSubview(self.navigationBarView)
-        self.view.addSubview(self.pageControl)
+        self.view.addSubview(self.gaugeView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
         CelebrityViewModel(celebrityId: self.celebST.id).updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
@@ -106,14 +115,16 @@ final class DetailViewController: ASViewController, ASPagerNodeDataSource, ASCol
             .start()
     }
     
-    //MARK: ASPagerNodeDataSource
-    func numberOfPagesInPagerNode(pagerNode: ASPagerNode!) -> Int { return 3 }
-    func pagerNode(pagerNode: ASPagerNode!, nodeAtIndex index: Int) -> ASCellNode! {
-        switch index {
-        case 0: return CelScoreNode(celebrityST: self.celebST)
-        case 1: return InfoNode(celebrityST: self.celebST)
-        case 2: return RatingsNode(celebrityST: self.celebST)
-        default: return CelScoreNode(celebrityST: self.celebST)
-        }
+    func updateGauge(gaugeView: LMGaugeView) {
+        velocity += 0.5 * acceleration
+        if (velocity > gaugeView.maxValue) { velocity = gaugeView.maxValue; acceleration = -5 }
+        if (velocity < gaugeView.minValue) { velocity = gaugeView.minValue; acceleration = 5 }
+        gaugeView.value = velocity;
+    }
+    
+    //MARK: LMGaugeViewDelegate
+    func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
+        if value >= gaugeView.limitValue { return Constants.kMainGreenColor }
+        else { return Constants.kMainVioletColor }
     }
 }

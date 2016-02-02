@@ -13,6 +13,8 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
   - CategorySliderView (1.0.2)
+  - DBProfileViewController (1.0.0):
+    - UIImageEffects (~> 0.0.1)
   - DynamicButton (1.2.0)
   - Fabric (1.6.1)
   - FBSDKCoreKit (4.7.1):
@@ -46,12 +48,14 @@ PODS:
     - Realm (= 0.97.0)
   - Result (0.6.0-beta.6)
   - SDWebImage/Core (3.7.5)
+  - SMSegmentView (1.1)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
   - TwitterCore (1.14.6):
     - Fabric
   - TwitterKit (1.14.6):
     - TwitterCore (= 1.14.6)
+  - UIImageEffects (0.0.1)
   - WebASDKImageManager (1.0.1):
     - AsyncDisplayKit (~> 1.1)
     - SDWebImage/Core (~> 3.7)
@@ -62,6 +66,7 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
   - CategorySliderView (~> 1.0.2)
+  - DBProfileViewController
   - DynamicButton (~> 1.2.0)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
@@ -71,6 +76,7 @@ DEPENDENCIES:
   - Material (~> 1.28)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
+  - SMSegmentView (~> 1.1)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
   - TwitterCore (~> 1.14.6)
@@ -85,6 +91,7 @@ SPEC CHECKSUMS:
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   CategorySliderView: be640cfa918711e1db1183af69495003c7be2be2
+  DBProfileViewController: cd3fa10537151bce08257681e1d3c8402ec00339
   DynamicButton: 815e989e2bb77c30b362a653f18bfa1e2dee5654
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
@@ -97,10 +104,12 @@ SPEC CHECKSUMS:
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
+  UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
   YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
 

@@ -48,7 +48,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         updateExpandButtonTitle()
         updatePreferredContentSize()
         
-        AIRTimer.every(5, userInfo: "FIRE!!") { timer in self.userDefaults.synchronize() }
+        AIRTimer.every(5) { timer in self.userDefaults.synchronize() }
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
