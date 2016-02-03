@@ -28,6 +28,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.depth = .Depth1
         let logoLabel = UILabel()
         logoLabel.text = "*Vote Responsibly."
+        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
         logoImageView.detailLabel = logoLabel
         logoImageView.backgroundColor = MaterialColor.white
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
@@ -39,13 +40,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         opinionLabel.text = "#PublicOpinion Completion:"
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.backgroundColor = MaterialColor.white
-        
         let publicOpinionBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         publicOpinionBar.progressTintColor = MaterialColor.green.darken4
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
         publicOpinionView.addSubview(publicOpinionBar)
-        
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
         //MARK: Consensus
@@ -55,13 +54,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusLabel.text = "Overall Social Consensus:"
         consensusView.titleLabel = consensusLabel
         consensusView.backgroundColor = MaterialColor.white
-        
         let consensusBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         consensusBar.progressTintColor = MaterialColor.green.darken4
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         consensusView.addSubview(consensusBar)
-        
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
         //MARK: Random Facts
@@ -71,13 +68,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsLabel.text = "#CitizensThatDontWatchTelevision:"
         factsView.titleLabel = factsLabel
         factsView.backgroundColor = MaterialColor.white
-        
         let factsBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         factsBar.progressTintColor = MaterialColor.green.darken4
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
-        
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
@@ -89,7 +84,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.backgroundColor = MaterialColor.white
         let picker = UIPickerView(frame: CGRect(x: 2 * Constants.kCellPadding, y: factsView.bottom  + Constants.kCellPadding, width: kMaxWidth - 20, height: 100))
         pickerView.addSubview(picker)
-        
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
@@ -99,40 +93,35 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceLabel.text = "Public Service Mode:"
         publicServiceView.titleLabel = publicServiceLabel
         publicServiceView.backgroundColor = MaterialColor.white
-        
         let publicServiceSwitch = JTMaterialSwitch(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
         publicServiceSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         publicServiceSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         publicServiceSwitch.rippleFillColor = MaterialColor.purple.lighten1
         publicServiceSwitch.center = CGPoint(x: 205, y: pickerView.bottom + Constants.kCellPadding)
         publicServiceView.addSubview(publicServiceSwitch)
-        
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: LogStatus
         let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom, width: kMaxWidth, height: 80))
         loginView.depth = .Depth1
+        loginView.backgroundColor = MaterialColor.white
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As: "
         let userLabel = UILabel()
         userLabel.text = "@GreyEcologist"
         userLabel.textColor = MaterialColor.green.darken2
-        loginView.addSubview(loginLabel)
-        loginView.addSubview(userLabel)
-        loginView.backgroundColor = MaterialColor.white
-        
         let logoutButton = FlatButton(frame: CGRect(x: 70, y: publicServiceView.bottom + 45, width: 120, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
+        loginView.addSubview(loginLabel)
+        loginView.addSubview(userLabel)
         loginView.addSubview(logoutButton)
-        
         let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
         
         //MARK: Copyright
         let copyrightTextNode = ASTextNode()
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(9.0), NSForegroundColorAttributeName : MaterialColor.grey.darken3]
-        copyrightTextNode.attributedString = NSMutableAttributedString(
-            string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
+        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
         
         super.init(node: ASDisplayNode())
