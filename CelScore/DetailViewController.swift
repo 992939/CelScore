@@ -17,9 +17,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let celebPicNode: ASNetworkImageNode
-    let nameNode: ASTextNode
-    let descriptionNode: ASTextNode
     let navigationBarView: NavigationBarView
     let gaugeView: LMGaugeView
     let segmentView: SMSegmentView
@@ -45,29 +42,17 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.gaugeView.maxValue = Constants.kMaximumVoteValue
         self.gaugeView.limitValue = Constants.kMiddleVoteValue
 
-        self.celebPicNode = ASNetworkImageNode(webImage: ())
-        self.celebPicNode.URL = NSURL(string: celebST.imageURL)
-        self.celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        self.celebPicNode.frame = CGRect(x: 150, y: 100, width: 90, height: 90)
-        self.celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+        let celebPicNode = ASNetworkImageNode(webImage: ())
+        celebPicNode.URL = NSURL(string: celebST.imageURL)
+        celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        celebPicNode.frame = CGRect(x: 150, y: 100, width: 90, height: 90)
+        celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
         
-        self.nameNode = ASTextNode()
-        self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
-        self.nameNode.maximumNumberOfLines = 1
-        self.nameNode.frame = CGRect(x: 85, y: 200, width: 200, height: 20)
-        
-        self.descriptionNode = ASTextNode()
-        self.descriptionNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
-        self.descriptionNode.maximumNumberOfLines = 1
-        self.descriptionNode.frame = CGRect(x: 85, y: 240, width: 200, height: 20)
-        
         super.init(node: ASDisplayNode())
         
-        self.node.addSubnode(self.celebPicNode)
-        self.node.addSubnode(self.nameNode)
-        self.node.addSubnode(self.descriptionNode)
+        self.node.addSubnode(celebPicNode)
         AIRTimer.every(0.1){ timer in self.updateGauge(self.gaugeView, timer: timer) }
     }
     
