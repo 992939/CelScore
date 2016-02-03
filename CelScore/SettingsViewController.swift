@@ -44,7 +44,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         publicOpinionView.backgroundColor = MaterialColor.white
-        let publicOpinionBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: logoImageView.bottom, width: kMaxWidth - 20, height: 15))
+        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
         publicOpinionBar.progressTintColor = MaterialColor.green.darken4
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
@@ -61,7 +61,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         consensusView.backgroundColor = MaterialColor.white
-        let consensusBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: publicOpinionView.bottom, width: kMaxWidth - 20, height: 15))
+        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
         consensusBar.progressTintColor = MaterialColor.green.darken4
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
@@ -78,7 +78,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         factsView.backgroundColor = MaterialColor.white
-        let factsBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: consensusView.bottom, width: kMaxWidth - 20, height: 15))
+        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
         factsBar.progressTintColor = MaterialColor.green.darken4
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
@@ -95,7 +95,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.titleLabel = pickerLabel
         pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
         pickerView.backgroundColor = MaterialColor.white
-        let picker = UIPickerView(frame: CGRect(x: 2 * Constants.kCellPadding, y: factsView.bottom, width: kMaxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
@@ -107,13 +107,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceLabel.text = "Public Service Mode:"
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicServiceView.titleLabel = publicServiceLabel
-        publicServiceView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        publicServiceView.titleLabelInset = UIEdgeInsets(top: 10, left: 0, bottom: 25, right: 0)
         publicServiceView.backgroundColor = MaterialColor.white
         let publicServiceSwitch = JTMaterialSwitch(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
         publicServiceSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         publicServiceSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         publicServiceSwitch.rippleFillColor = MaterialColor.purple.lighten1
-        publicServiceSwitch.center = CGPoint(x: 205, y: pickerView.bottom + Constants.kCellPadding)
+        publicServiceSwitch.center = CGPoint(x: 200, y: 25)
         publicServiceView.addSubview(publicServiceSwitch)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
@@ -125,11 +125,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As: "
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        loginLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 100, height: 30)
         let userLabel = UILabel()
         userLabel.text = "@GreyEcologist"
         userLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        userLabel.frame = CGRect(x: 100, y: 0, width: 120, height: 30)
+        userLabel.textAlignment = .Right
         userLabel.textColor = MaterialColor.green.darken2
-        let logoutButton = FlatButton(frame: CGRect(x: 70, y: publicServiceView.bottom + 45, width: 120, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 65, y: 45, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
         loginView.addSubview(loginLabel)
