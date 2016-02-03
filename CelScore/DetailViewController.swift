@@ -17,18 +17,14 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let navigationBarView: NavigationBarView
     let gaugeView: LMGaugeView
     let segmentView: SMSegmentView
-    enum PageType: Int { case CelScore = 0, Info, Ratings }
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        
-        self.navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: 420, height: 130))
         
         self.segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
@@ -81,16 +77,17 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        self.navigationBarView.leftButtons = [backButton]
-        self.navigationBarView.depth = .None
-        self.navigationBarView.image = UIImage(named: "demo-cover-photo-2")
-        self.navigationBarView.contentMode = .ScaleAspectFit
+        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: 420, height: 130))
+        navigationBarView.leftButtons = [backButton]
+        navigationBarView.depth = .None
+        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
+        navigationBarView.contentMode = .ScaleAspectFit
         
         self.gaugeView.frame = CGRect(x: 35, y: 350, width: 300, height: 300)
         self.gaugeView.delegate = self
         
-        self.view.addSubview(self.navigationBarView)
-        self.view.sendSubviewToBack(self.navigationBarView)
+        self.view.addSubview(navigationBarView)
+        self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(self.segmentView)
         self.view.addSubview(self.gaugeView)
         
