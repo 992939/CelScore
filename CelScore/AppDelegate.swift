@@ -18,7 +18,7 @@ import Material
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    //MARK: Properties
+    //MARK: Property
     var window: UIWindow?
     
     //MARK: Methods
@@ -37,13 +37,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
         
-        let celscoreVM = CelScoreViewModel()
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        //window.rootViewController = MasterViewController(viewModel: celscoreVM)
-        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(viewModel: celscoreVM), sideViewController: SettingsViewController())
+        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), sideViewController: SettingsViewController())
         window.makeKeyAndVisible()
         self.window = window
-        
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         Fabric.with([Twitter.self, AWSCognito.self])
@@ -66,7 +63,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
             isFollowed:userActivity.userInfo!["isFollowed"]as! Bool)
         
-        window!.rootViewController?.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+        self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
     }
     

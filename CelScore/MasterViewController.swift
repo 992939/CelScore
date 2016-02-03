@@ -20,7 +20,6 @@ import Material
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
-    let celscoreVM: CelScoreViewModel
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
@@ -31,8 +30,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(viewModel:CelScoreViewModel) {
-        self.celscoreVM = viewModel
+    init() {
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
@@ -51,11 +49,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 166, hidden: true, animated: false)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +90,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     override func viewWillLayoutSubviews() {
+        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 166, hidden: true, animated: false)
+        
         self.celebrityTableView.frame = CGRectMake(
             Constants.kCellPadding,
             Constants.kNavigationPadding,
@@ -121,7 +116,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             .start()
     
         //self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
-        self.celscoreVM.checkNetworkStatusSignal().start()
+        CelScoreViewModel().checkNetworkStatusSignal().start()
         SettingsViewModel().updateTodayWidgetSignal().start()
     }
     
@@ -176,13 +171,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 return UserViewModel().getUserInfoFromFacebookSignal()
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return self.celscoreVM.getFromAWSSignal(dataType: .Ratings)
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return self.celscoreVM.getFromAWSSignal(dataType: .List)
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List)
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
