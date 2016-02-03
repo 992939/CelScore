@@ -41,6 +41,7 @@
 		00C347B81C605CB800097089 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B31C605CB800097089 /* SMSegment.swift */; };
 		00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B41C605CB800097089 /* SMSegmentView.swift */; };
 		00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347BA1C60902E00097089 /* SettingsViewController.swift */; };
+		00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */; };
 		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
 		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
 		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
@@ -132,6 +133,7 @@
 		00C347B31C605CB800097089 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSSegment/SMSegment.swift; sourceTree = "<group>"; };
 		00C347B41C605CB800097089 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSSegment/SMSegmentView.swift; sourceTree = "<group>"; };
 		00C347BA1C60902E00097089 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Geometry.swift"; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
+				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
 				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
 				0082B14E1C40F8A900E2A9BC /* Reachability.swift */,
 			);
@@ -646,6 +649,7 @@
 				00C347A71C6025DA00097089 /* InfoNode.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				008EE4C41BE6E38600E831BE /* SearchListViewModel.swift in Sources */,
+				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
