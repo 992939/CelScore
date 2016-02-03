@@ -33,15 +33,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
-        var y = logoImageView.bottom + Constants.kCellPadding
-        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: y, width: kMaxWidth, height: 60))
+        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom, width: kMaxWidth, height: 60))
         publicOpinionView.depth = .Depth1
         let opinionLabel = UILabel()
         opinionLabel.text = "#PublicOpinion Completion:"
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.backgroundColor = MaterialColor.white
         
-        let publicOpinionBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
+        let publicOpinionBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         publicOpinionBar.progressTintColor = MaterialColor.green.darken4
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
@@ -50,15 +49,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
         //MARK: Consensus
-        y = publicOpinionView.bottom + Constants.kCellPadding
-        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: y, width: kMaxWidth, height: 60))
+        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom, width: kMaxWidth, height: 60))
         consensusView.depth = .Depth1
         let consensusLabel = UILabel()
         consensusLabel.text = "Overall Social Consensus:"
         consensusView.titleLabel = consensusLabel
         consensusView.backgroundColor = MaterialColor.white
         
-        let consensusBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
+        let consensusBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         consensusBar.progressTintColor = MaterialColor.green.darken4
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
@@ -67,15 +65,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
         //MARK: Random Facts
-        y = consensusView.bottom + Constants.kCellPadding
-        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: y, width: kMaxWidth, height: 60))
+        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom, width: kMaxWidth, height: 60))
         factsView.depth = .Depth1
         let factsLabel = UILabel()
         factsLabel.text = "#CitizensThatDontWatchTelevision:"
         factsView.titleLabel = factsLabel
         factsView.backgroundColor = MaterialColor.white
         
-        let factsBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
+        let factsBar = YLProgressBar(frame: CGRect(x: 2 * Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 15))
         factsBar.progressTintColor = MaterialColor.green.darken4
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
@@ -84,21 +81,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
-        y = factsView.bottom + Constants.kCellPadding
-        let pickerView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: y, width: kMaxWidth, height: 160))
+        let pickerView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom, width: kMaxWidth, height: 160))
         pickerView.depth = .Depth1
         let pickerLabel = UILabel()
         pickerLabel.text = "Main Topic Of Interest:"
         pickerView.addSubview(pickerLabel)
         pickerView.backgroundColor = MaterialColor.white
-        let picker = UIPickerView(frame: CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: 2 * Constants.kCellPadding, y: factsView.bottom  + Constants.kCellPadding, width: kMaxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
-        y = pickerView.bottom + Constants.kCellPadding
-        let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: y , width: kMaxWidth, height: 60))
+        let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom, width: kMaxWidth, height: 60))
         publicServiceView.depth = .Depth1
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode:"
@@ -109,14 +104,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         publicServiceSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         publicServiceSwitch.rippleFillColor = MaterialColor.purple.lighten1
-        publicServiceSwitch.center = CGPoint(x: 205, y: y + 3.5 * Constants.kCellPadding)
+        publicServiceSwitch.center = CGPoint(x: 205, y: pickerView.bottom + Constants.kCellPadding)
         publicServiceView.addSubview(publicServiceSwitch)
         
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: LogStatus
-        y = publicServiceView.bottom + Constants.kCellPadding
-        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: y , width: kMaxWidth, height: 80))
+        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom, width: kMaxWidth, height: 80))
         loginView.depth = .Depth1
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As: "
@@ -127,7 +121,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         loginView.addSubview(userLabel)
         loginView.backgroundColor = MaterialColor.white
         
-        let logoutButton = FlatButton(frame: CGRect(x: 70, y: y + 45, width: 120, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 70, y: publicServiceView.bottom + 45, width: 120, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
         loginView.addSubview(logoutButton)
@@ -135,12 +129,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
         
         //MARK: Copyright
-        y = loginView.bottom + Constants.kCellPadding
         let copyrightTextNode = ASTextNode()
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(9.0), NSForegroundColorAttributeName : MaterialColor.grey.darken3]
         copyrightTextNode.attributedString = NSMutableAttributedString(
             string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: y + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
+        copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
         
         super.init(node: ASDisplayNode())
         picker.dataSource = self
