@@ -15,18 +15,11 @@ import Timepiece
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    let celebrityId: String
-    enum Sex: Int { case Woman = 0, Man }
-    enum Rank { case A_List, B_List, Other }
-    enum PersonalStatus { case Single, Married, Divorced, Engaged }
     enum FollowStatus: Int { case NotFollowing = 0, Following }
     enum CelebrityError: ErrorType { case NotFound }
     
     //MARK: Initializer
-    init(celebrityId: String) {
-        self.celebrityId = celebrityId
-        super.init()
-    }
+    override init() { super.init() }
     
     //MARK: Methods
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {

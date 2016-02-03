@@ -12,12 +12,10 @@ import AsyncDisplayKit
 final class InfoNode: ASCellNode {
     
     //MARK: Properties
-    let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
     
     //MARK: Initializer
     init(celebrityST: CelebrityStruct) {
-        self.celebrityVM = CelebrityViewModel(celebrityId: celebrityST.id)
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         
         super.init()

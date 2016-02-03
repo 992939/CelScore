@@ -12,14 +12,12 @@ import AsyncDisplayKit
 final class InfoViewController: ASViewController {
     
     //MARK: Properties
-    let celebrityVM: CelebrityViewModel
     let ratingsVM: RatingsViewModel
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
-        self.celebrityVM = CelebrityViewModel(celebrityId: celebrityST.id)
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         
         super.init(node: ASDisplayNode())

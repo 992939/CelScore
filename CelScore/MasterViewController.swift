@@ -21,13 +21,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: Properties
     let celscoreVM: CelScoreViewModel
-    let userVM: UserViewModel
-    let settingsVM: SettingsViewModel
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
-    let loginButton: FBSDKLoginButton
     let navigationBarView: NavigationBarView
+    let loginButton: FBSDKLoginButton
     //let listSlider: CategorySliderView
     
     //MARK: Initializers
@@ -35,8 +33,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     init(viewModel:CelScoreViewModel) {
         self.celscoreVM = viewModel
-        self.userVM = UserViewModel()
-        self.settingsVM = SettingsViewModel()
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
@@ -93,8 +89,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.navigationBarView.backgroundColor = Constants.kMainGreenColor
         
         self.view.addSubview(self.navigationBarView)
-        //self.view.addSubview(self.searchTextField)
         self.view.addSubview(self.celebrityTableView)
+        //self.view.addSubview(self.searchTextField)
         //self.view.addSubview(loginButton)
 
         self.configuration()
@@ -108,14 +104,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             self.view.frame.height - 2 * Constants.kCellPadding)
     }
     
-    func openSetings() {
-        self.sideNavigationViewController!.open()
-//        if self.settingsMenu.ll_isOpen { self.settingsMenu.ll_closeSlideMenu() }
-//        else { self.settingsMenu.ll_openSlideMenu() }
-    }
+    func openSetings() { self.sideNavigationViewController!.open() }
     
     func configuration() {
-        self.settingsVM.getSettingSignal(settingType: .DefaultListId)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListId)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
                 return self.displayedCelebrityListVM.getListSignal(listId: value as! String)
@@ -130,7 +122,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
         //self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         self.celscoreVM.checkNetworkStatusSignal().start()
-        self.settingsVM.updateTodayWidgetSignal().start()
+        SettingsViewModel().updateTodayWidgetSignal().start()
     }
     
     func changeList(celebList celebList: CelebList) {
@@ -145,8 +137,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            self.userVM.updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //self.userVM.refreshFacebookTokenSignal().start()
+            UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+            //UserViewModel().refreshFacebookTokenSignal().start()
         }
     }
     
@@ -178,10 +170,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         guard result.isCancelled == false else { return }
         FBSDKAccessToken.setCurrentAccessToken(result.token)
         
-        self.userVM.loginSignal(token: result.token.tokenString, loginType: .Facebook)
+        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return self.userVM.getUserInfoFromFacebookSignal()
+                return UserViewModel().getUserInfoFromFacebookSignal()
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return self.celscoreVM.getFromAWSSignal(dataType: .Celebrity)
@@ -193,14 +185,14 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 return self.celscoreVM.getFromAWSSignal(dataType: .List)
             }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return self.userVM.getFromCognitoSignal(dataSetType: .UserRatings)
+                return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
             }
             .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
             .retry(2)
             .start()
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { self.userVM.logoutSignal(.Facebook).start() }
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
 }
 
 

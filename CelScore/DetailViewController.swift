@@ -110,7 +110,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.view.addSubview(self.gaugeView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
-        CelebrityViewModel(celebrityId: self.celebST.id).updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
+        CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
     }
     
     func shareVote() {

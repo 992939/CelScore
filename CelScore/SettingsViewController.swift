@@ -12,16 +12,14 @@ import Material
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     //MARK: Properties
-    let settingsVM: SettingsViewModel
     let kMaxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.settingsVM = SettingsViewModel()
-        
         //MARK: Logo
         let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth, height: 160))
         logoImageView.image = UIImage(named: "flask_logo")
@@ -137,9 +135,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         
-        //self.settingsVM.getUserRatingsPercentageSignal().start()
-        //self.settingsVM.calculateSocialConsensusSignal().start()
-        self.settingsVM.getSettingSignal(settingType: .DefaultListId).start()
+        //SettingsViewModel().getUserRatingsPercentageSignal().start()
+        //SettingsViewModel().calculateSocialConsensusSignal().start()
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
     }
     
     //MARK: Method
