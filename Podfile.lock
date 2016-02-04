@@ -12,7 +12,6 @@ PODS:
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
-  - CategorySliderView (1.0.2)
   - Fabric (1.6.1)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
@@ -25,7 +24,7 @@ PODS:
     - FBSDKCoreKit/arc
   - JTMaterialSwitch (1.1)
   - LMGaugeView (1.0.1)
-  - Material (1.28.1)
+  - Material (1.30.0)
   - ReactiveCocoa (4.0.4-alpha-1):
     - ReactiveCocoa/UI (= 4.0.4-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -60,12 +59,11 @@ DEPENDENCIES:
   - AIRTimer (~> 1.0)
   - AsyncDisplayKit (~> 1.9.4)
   - AWSCognito (~> 2.3.3)
-  - CategorySliderView (~> 1.0.2)
   - Fabric (~> 1.6.1)
   - FBSDKCoreKit (~> 4.7.1)
   - JTMaterialSwitch (~> 1.1)
   - LMGaugeView
-  - Material (~> 1.28)
+  - Material (~> 1.30)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SMSegmentView (~> 1.1)
@@ -82,12 +80,11 @@ SPEC CHECKSUMS:
   AWSCognito: 3c1209a21a7661c079a59e04f5b5dab4f794561c
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  CategorySliderView: be640cfa918711e1db1183af69495003c7be2be2
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
-  Material: 5ca840624a279ce4d02c4e1ef3059d1c0190b7f3
+  Material: ea3e036eeda98e75e760709a31f1f07aa69c847e
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c

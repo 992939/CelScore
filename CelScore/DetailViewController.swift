@@ -50,7 +50,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
-        backButton.pulseFill = true
         backButton.pulseScale = false
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)

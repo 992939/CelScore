@@ -12,7 +12,6 @@ import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
 import TwitterKit
-import CategorySliderView
 import Material
 
 
@@ -22,7 +21,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
-    //let listSlider: CategorySliderView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -55,7 +53,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
-        menuButton.pulseFill = true
         menuButton.pulseScale = false
         menuButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
@@ -63,7 +60,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
 
         let searchButton: FlatButton = FlatButton()
         searchButton.pulseColor = MaterialColor.white
-        searchButton.pulseFill = true
         searchButton.pulseScale = false
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
@@ -104,7 +100,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     override func viewWillLayoutSubviews() {
-        self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 166, hidden: true, animated: false)
+        self.sideNavigationViewController?.setLeftViewWidth(view.bounds.width - 166, hidden: true, animated: false)
         
         self.celebrityTableView.frame = CGRect(
             x: Constants.kCellPadding,
@@ -113,7 +109,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             height: self.view.frame.height - 2 * Constants.kCellPadding)
     }
     
-    func openSetings() { self.sideNavigationViewController!.open() }
+    func openSetings() { self.sideNavigationViewController!.openLeftView() }
     
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId)

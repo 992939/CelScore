@@ -20,7 +20,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
         
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: 20, width: maxWidth, height: 160))
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: Constants.kMenuWidth, height: 160))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.image = UIImage(named: "flask_logo")
@@ -30,7 +30,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 8)
         logoImageView.detailLabel = logoLabel
         logoImageView.detailLabelInset = UIEdgeInsets(top: 30, left: 70, bottom: Constants.kCellPadding, right: 40)
-        logoImageView.backgroundColor = MaterialColor.white
+        logoImageView.backgroundColor = MaterialColor.purple.lighten4
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
@@ -44,7 +44,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         publicOpinionView.backgroundColor = MaterialColor.white
         let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
-        publicOpinionBar.progressTintColor = MaterialColor.green.darken4
+        publicOpinionBar.progressTintColor = MaterialColor.green.darken1
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
         publicOpinionView.addSubview(publicOpinionBar)
@@ -61,7 +61,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         consensusView.backgroundColor = MaterialColor.white
         let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
-        consensusBar.progressTintColor = MaterialColor.green.darken4
+        consensusBar.progressTintColor = MaterialColor.green.darken1
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         consensusView.addSubview(consensusBar)
@@ -78,7 +78,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         factsView.backgroundColor = MaterialColor.white
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
-        factsBar.progressTintColor = MaterialColor.green.darken4
+        factsBar.progressTintColor = MaterialColor.green.darken1
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
@@ -166,7 +166,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.backgroundColor = MaterialColor.grey.lighten1
+        self.view.backgroundColor = MaterialColor.grey.lighten3
         self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
         self.sideNavigationViewController!.depth = .Depth1
     }

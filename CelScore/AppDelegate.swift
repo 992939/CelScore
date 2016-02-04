@@ -39,7 +39,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), sideViewController: SettingsViewController())
+        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
         window.makeKeyAndVisible()
         self.window = window
         

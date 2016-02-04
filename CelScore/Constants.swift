@@ -28,17 +28,9 @@ struct Constants {
     static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
     static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
     
-    static let randomFacts: [[String: Int]] = [
-        ["#WouldNotMournTheEndOfHollywood": 77],
-        ["#CitizensWhoDontReadBooks": 28],
-        ["#CitizensThatDontWatchTelevision": 3],
-        ["#CitizensWhoBelieveInUFO": 36],
-        ["#CitizensWhoBelieveInGhosts": 42],
-        ["#TotalWealthOwnedByTopOnePercent": 50]]
-    
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
-        "Without ethics, man has no future.",
+        "It's all in a state of mind.",
         "In a closed mouth, flies do not enter.",
         "The revolution will not be televised.",
         "To err is human. To forgive, unlikely.",
@@ -63,7 +55,7 @@ struct Constants {
         "The future belongs to those who shape it today.",
         "The time is always right to do what is right.",
         "Culture resides in the hearts of the people.",
-        "The wisest is the one who can forgive.",
+        "Voting is breathing life into values.",
         "Only fools lend light to the sun.",
         "Thank who gives you and give who thanks you.",
         "Outward judgment often fails, inward never.",
@@ -89,6 +81,6 @@ struct Constants {
         "The opposite of courage is conformity.",
         "It's weird not to be weird.",
         "The map is not the territory.",
-        "Power only steps back when facing more power.",
-        "A wise man's day is worth a fool's life."]
+        "Power only steps back facing more power.",
+        "As above so below, as below so above."]
 }
