@@ -47,7 +47,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
-        view.backgroundColor = Constants.kBackgroundColor
         
         let title = UILabel()
         title.text = "CelScore"
@@ -79,6 +78,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         
+        self.view.backgroundColor = Constants.kBackgroundColor
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)

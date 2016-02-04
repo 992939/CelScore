@@ -165,8 +165,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: Method
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         self.view.backgroundColor = Constants.kBackgroundColor
         self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
         self.sideNavigationViewController!.depth = .Depth1

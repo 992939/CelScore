@@ -19,7 +19,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
-
         let celebPicNode = ASNetworkImageNode(webImage: ())
         celebPicNode.URL = NSURL(string: celebrityST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
@@ -29,6 +28,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         }
         
         super.init(node: ASDisplayNode())
+        
         self.node.addSubnode(celebPicNode)
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -38,9 +38,9 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = MaterialColor.white
         
         let segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
@@ -78,6 +78,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
         
+        self.view.backgroundColor = MaterialColor.white
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(segmentView)
