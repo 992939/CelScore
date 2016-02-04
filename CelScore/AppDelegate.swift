@@ -23,6 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
             schemaVersion: 2,
@@ -41,7 +42,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), sideViewController: SettingsViewController())
         window.makeKeyAndVisible()
         self.window = window
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         Fabric.with([Twitter.self, AWSCognito.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

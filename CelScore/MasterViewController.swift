@@ -13,7 +13,6 @@ import ReactiveCocoa
 import RealmSwift
 import TwitterKit
 import CategorySliderView
-import DynamicButton
 import Material
 
 
@@ -45,6 +44,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let maxWidth = UIScreen.mainScreen().bounds.width - 2 * Constants.kCellPadding
+        
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
@@ -74,12 +76,20 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.rightButtons = [searchButton]
         navigationBarView.backgroundColor = Constants.kMainGreenColor
         
+        let publicLabel = UILabel(frame:  CGRect(x: 0, y: 0, width: 90, height: 40))
+        publicLabel.text = "#PublicOpinion"
+        let sliderView: CategorySliderView = CategorySliderView(frame: CGRect(x: 0, y: navigationBarView.bottom, width: UIScreen.mainScreen().bounds.width, height: 50),
+            andCategoryViews: [publicLabel, publicLabel, publicLabel, publicLabel],
+            sliderDirection: .Horizontal) { (view, index) -> Void in print("something!") }
+        sliderView.backgroundColor = MaterialColor.green.lighten3
+        
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         loginButton.delegate = self
         
         self.view.backgroundColor = Constants.kBackgroundColor
         self.view.addSubview(navigationBarView)
+        self.view.addSubview(sliderView)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
         //self.view.addSubview(loginButton)
@@ -90,11 +100,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     override func viewWillLayoutSubviews() {
         self.sideNavigationViewController?.setSideViewWidth(view.bounds.width - 166, hidden: true, animated: false)
         
-        self.celebrityTableView.frame = CGRectMake(
-            Constants.kCellPadding,
-            Constants.kNavigationPadding,
-            self.view.frame.width - 2 * Constants.kCellPadding,
-            self.view.frame.height - 2 * Constants.kCellPadding)
+        self.celebrityTableView.frame = CGRect(
+            x: Constants.kCellPadding,
+            y: Constants.kNavigationPadding + 50,
+            width: self.view.frame.width - 2 * Constants.kCellPadding,
+            height: self.view.frame.height - 2 * Constants.kCellPadding)
     }
     
     func openSetings() { self.sideNavigationViewController!.open() }
