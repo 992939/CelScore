@@ -75,16 +75,19 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.backgroundColor = Constants.kMainGreenColor
         
         let segmentedControl: SDSegmentedControl = SDSegmentedControl(items: CelebList.getAll())
+        segmentedControl.frame.origin = CGPoint(x: 0, y: navigationBarView.bottom)
         segmentedControl.backgroundColor = MaterialColor.green.lighten3
         segmentedControl.arrowPosition = SDSegmentedArrowPositionBottom
         segmentedControl.arrowSize = 8
-        segmentedControl.frame.origin = CGPoint(x: 0, y: navigationBarView.bottom)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.clipsToBounds = false
         segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 3)
         segmentedControl.layer.shadowOpacity = 0.3
         segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
+        
+        let stainAppearance = SDStainView.appearance()
+        stainAppearance.backgroundColor = MaterialColor.green.lighten4
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]

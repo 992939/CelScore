@@ -11,16 +11,16 @@ import Foundation
 
 public enum CelebList : Int {
     case PublicOpinion
+    case Ubuntu
+    case Hollywood
     case Sports
     case Music
-    case Hollywood
     case Television
     case Candidates
-    case Ubuntu
     
     //MARK: Methods
     public static func getAll() -> [String] {
-        return [PublicOpinion.name(), Sports.name(), Music.name(), Hollywood.name(), Television.name(), Candidates.name(), Ubuntu.name()]
+        return [PublicOpinion.name(), Ubuntu.name(), Hollywood.name(), Sports.name(), Music.name(), Television.name(), Candidates.name()]
     }
     
     public static func getCount() -> Int {
@@ -32,24 +32,24 @@ public enum CelebList : Int {
     public func name() -> String {
         switch self {
         case .PublicOpinion: return "#PublicOpinon"
+        case .Ubuntu: return "#Ubuntu"
+        case .Hollywood: return "#Hollywood"
         case .Sports: return "#Sports"
         case .Music: return "#Music"
-        case .Hollywood: return "#Hollywood"
         case .Television: return "#Television"
         case .Candidates: return "#Candidates"
-        case .Ubuntu: return "#Ubuntu"
         }
     }
     
     public func getId() -> String {
         switch self {
         case .PublicOpinion: return "0001"
+        case .Ubuntu: return "0007"
+        case .Hollywood: return "0004"
         case .Sports: return "0002"
         case .Music: return "0003"
-        case .Hollywood: return "0004"
         case .Television: return "0005"
         case .Candidates: return "0006"
-        case .Ubuntu: return "0007"
         }
     }
 }
