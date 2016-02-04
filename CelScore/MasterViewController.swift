@@ -82,6 +82,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             andCategoryViews: [publicLabel, publicLabel, publicLabel, publicLabel],
             sliderDirection: .Horizontal) { (view, index) -> Void in print("something!") }
         sliderView.backgroundColor = MaterialColor.green.lighten3
+        sliderView.clipsToBounds = false
+        sliderView.layer.shadowColor = MaterialColor.black.CGColor
+        sliderView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        sliderView.layer.shadowOpacity = 0.3
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
