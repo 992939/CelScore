@@ -15,31 +15,13 @@ import SMSegmentView
 
 final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
     
-    //MARK: Properties
-    let celebST: CelebrityStruct
-    let gaugeView: LMGaugeView
-    let segmentView: SMSegmentView
-    
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
-        self.celebST = celebrityST
-        
-        self.segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
-            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
-            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: Constants.kMainGreenColor,
-                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
-                keyContentVerticalMargin: 5])
-        
-        self.gaugeView = LMGaugeView()
-        self.gaugeView.minValue = Constants.kMinimumVoteValue
-        self.gaugeView.maxValue = Constants.kMaximumVoteValue
-        self.gaugeView.limitValue = Constants.kMiddleVoteValue
 
         let celebPicNode = ASNetworkImageNode(webImage: ())
-        celebPicNode.URL = NSURL(string: celebST.imageURL)
+        celebPicNode.URL = NSURL(string: celebrityST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
         celebPicNode.frame = CGRect(x: 150, y: 100, width: 90, height: 90)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
@@ -47,9 +29,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         }
         
         super.init(node: ASDisplayNode())
-        
         self.node.addSubnode(celebPicNode)
-        AIRTimer.every(0.1){ timer in self.updateGauge(self.gaugeView, timer: timer) }
+        CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
     
     //MARK: Methods
@@ -61,13 +42,19 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         super.viewDidLoad()
         self.view.backgroundColor = MaterialColor.white
         
-        self.segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
-        self.segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
-        self.segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
-        self.segmentView.layer.cornerRadius = 5.0
-        self.segmentView.layer.borderColor = MaterialColor.grey.lighten1.CGColor
-        self.segmentView.layer.borderWidth = 1.0
-        self.segmentView.delegate = self
+        let segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
+            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
+            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
+                keySegmentOnSelectionColour: Constants.kMainGreenColor,
+                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
+                keyContentVerticalMargin: 5])
+        segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
+        segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
+        segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
+        segmentView.layer.cornerRadius = 5.0
+        segmentView.layer.borderColor = MaterialColor.grey.lighten1.CGColor
+        segmentView.layer.borderWidth = 1.0
+        segmentView.delegate = self
         
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
@@ -83,16 +70,20 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
         
-        self.gaugeView.frame = CGRect(x: 35, y: 350, width: 300, height: 300)
-        self.gaugeView.delegate = self
+        let gaugeView = LMGaugeView()
+        gaugeView.minValue = Constants.kMinimumVoteValue
+        gaugeView.maxValue = Constants.kMaximumVoteValue
+        gaugeView.limitValue = Constants.kMiddleVoteValue
+        gaugeView.frame = CGRect(x: 35, y: 350, width: 300, height: 300)
+        gaugeView.delegate = self
+        AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
         
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
-        self.view.addSubview(self.segmentView)
-        self.view.addSubview(self.gaugeView)
+        self.view.addSubview(segmentView)
+        self.view.addSubview(gaugeView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
-        CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id).startWithNext { activity in self.userActivity = activity }
     }
     
     func shareVote() {
