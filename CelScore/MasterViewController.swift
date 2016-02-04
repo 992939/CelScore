@@ -45,8 +45,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let maxWidth = UIScreen.mainScreen().bounds.width - 2 * Constants.kCellPadding
-        
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
@@ -76,16 +74,17 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.rightButtons = [searchButton]
         navigationBarView.backgroundColor = Constants.kMainGreenColor
         
-        let publicLabel = UILabel(frame:  CGRect(x: 0, y: 0, width: 90, height: 40))
-        publicLabel.text = "#PublicOpinion"
-        let sliderView: CategorySliderView = CategorySliderView(frame: CGRect(x: 0, y: navigationBarView.bottom, width: UIScreen.mainScreen().bounds.width, height: 50),
-            andCategoryViews: [publicLabel, publicLabel, publicLabel, publicLabel],
-            sliderDirection: .Horizontal) { (view, index) -> Void in print("something!") }
-        sliderView.backgroundColor = MaterialColor.green.lighten3
-        sliderView.clipsToBounds = false
-        sliderView.layer.shadowColor = MaterialColor.black.CGColor
-        sliderView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        sliderView.layer.shadowOpacity = 0.3
+        let segmentedControl: SDSegmentedControl = SDSegmentedControl(items: CelebList.getAll())
+        segmentedControl.backgroundColor = MaterialColor.green.lighten3
+        segmentedControl.arrowPosition = SDSegmentedArrowPositionBottom
+        segmentedControl.arrowSize = 8
+        segmentedControl.frame.origin = CGPoint(x: 0, y: navigationBarView.bottom)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.clipsToBounds = false
+        segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
+        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 3)
+        segmentedControl.layer.shadowOpacity = 0.3
+        segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -93,7 +92,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.view.backgroundColor = Constants.kBackgroundColor
         self.view.addSubview(navigationBarView)
-        self.view.addSubview(sliderView)
+        self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
         //self.view.addSubview(loginButton)
@@ -132,8 +131,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().updateTodayWidgetSignal().start()
     }
     
-    func changeList(celebList celebList: CelebList) {
-        self.displayedCelebrityListVM.getListSignal(listId: celebList.getId())
+    func changeList(segmentControl: UISegmentedControl) {
+        let list: CelebList = CelebList(rawValue: segmentControl.selectedSegmentIndex)!
+        self.displayedCelebrityListVM.getListSignal(listId: list.getId())
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()

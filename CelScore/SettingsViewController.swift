@@ -24,7 +24,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.image = UIImage(named: "flask_logo")
-        logoImageView.depth = .Depth1
+        logoImageView.depth = .None
         let logoLabel = UILabel()
         logoLabel.text = "*Vote Responsibly."
         logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 8)
@@ -36,7 +36,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: PublicOpinion
         let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         publicOpinionView.divider = false
-        publicOpinionView.depth = .Depth1
+        publicOpinionView.depth = .None
         let opinionLabel = UILabel()
         opinionLabel.text = "#PublicOpinion Completion:"
         opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
@@ -53,7 +53,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Consensus
         let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         consensusView.divider = false
-        consensusView.depth = .Depth1
+        consensusView.depth = .None
         let consensusLabel = UILabel()
         consensusLabel.text = "Overall Social Consensus:"
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
@@ -70,7 +70,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Random Facts
         let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         factsView.divider = false
-        factsView.depth = .Depth1
+        factsView.depth = .None
         let factsLabel = UILabel()
         factsLabel.text = "#CitizensThatDontWatchTelevision:"
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
@@ -87,7 +87,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Picker
         let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: 160))
         pickerView.divider = false
-        pickerView.depth = .Depth1
+        pickerView.depth = .None
         let pickerLabel = UILabel()
         pickerLabel.text = "Main Topic Of Interest:"
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
@@ -101,7 +101,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: PublicService
         let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         publicServiceView.divider = false
-        publicServiceView.depth = .Depth1
+        publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode:"
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
@@ -119,7 +119,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: LogStatus
         let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 80))
         loginView.divider = false
-        loginView.depth = .Depth1
+        loginView.depth = .None
         loginView.backgroundColor = MaterialColor.white
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As: "
@@ -166,7 +166,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.backgroundColor = Constants.kBackgroundColor
+        self.view.backgroundColor = MaterialColor.grey.lighten1
         self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
         self.sideNavigationViewController!.depth = .Depth1
     }
