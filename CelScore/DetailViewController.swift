@@ -64,17 +64,17 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
-        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 14)
+        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 16)
         nameLabel.frame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 60, width: maxWidth, height: 30)
         nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.black
+        nameLabel.textColor = MaterialColor.grey.darken4
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor"
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 12)
         roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: maxWidth, height: 30)
         roleLabel.textAlignment = .Center
-        roleLabel.textColor = MaterialColor.grey.darken1
+        roleLabel.textColor = MaterialColor.grey.base
         
         let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: 270, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
@@ -85,6 +85,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
         segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
         segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
+        segmentView.selectSegmentAtIndex(0)
         segmentView.layer.cornerRadius = 5.0
         segmentView.layer.borderColor = MaterialColor.grey.lighten1.CGColor
         segmentView.layer.borderWidth = 1.0
@@ -94,7 +95,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
-        gaugeView.frame = CGRect(x: 35, y: 350, width: 300, height: 300)
+        let gaugeWidth: CGFloat = 300
+        gaugeView.frame = CGRect(x: (maxWidth - gaugeWidth)/2, y: segmentView.bottom + 40, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
         
