@@ -15,6 +15,9 @@ import SMSegmentView
 
 final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
     
+    //MARK: Property
+    let celebST: CelebrityStruct
+    
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
@@ -22,13 +25,14 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         let celebPicNode = ASNetworkImageNode(webImage: ())
         celebPicNode.URL = NSURL(string: celebrityST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        celebPicNode.frame = CGRect(x: 150, y: 100, width: 90, height: 90)
+        let picWidth: CGFloat = 90.0
+        celebPicNode.frame = CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: 100, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
+        self.celebST = celebrityST
         
         super.init(node: ASDisplayNode())
-        
         self.node.addSubnode(celebPicNode)
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -42,7 +46,37 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let segmentView = SMSegmentView(frame: CGRect(x: 30, y: 270, width: 300, height: 40),
+        let maxWidth = UIScreen.mainScreen().bounds.width - 2 * Constants.kCellPadding
+        
+        let backButton: FlatButton = FlatButton()
+        backButton.pulseColor = MaterialColor.white
+        backButton.pulseFill = true
+        backButton.pulseScale = false
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
+        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
+        
+        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 130))
+        navigationBarView.leftButtons = [backButton]
+        navigationBarView.depth = .None
+        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
+        navigationBarView.contentMode = .ScaleAspectFit
+        
+        let nameLabel = UILabel()
+        nameLabel.text = self.celebST.nickname
+        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 14)
+        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 60, width: maxWidth, height: 30)
+        nameLabel.textAlignment = .Center
+        nameLabel.textColor = MaterialColor.black
+        
+        let roleLabel = UILabel()
+        roleLabel.text = "Actor"
+        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 12)
+        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: maxWidth, height: 30)
+        roleLabel.textAlignment = .Center
+        roleLabel.textColor = MaterialColor.grey.darken1
+        
+        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: 270, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
                 keySegmentOnSelectionColour: Constants.kMainGreenColor,
@@ -56,20 +90,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
-        let backButton: FlatButton = FlatButton()
-        backButton.pulseColor = MaterialColor.white
-        backButton.pulseFill = true
-        backButton.pulseScale = false
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
-        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
-        
-        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: 420, height: 130))
-        navigationBarView.leftButtons = [backButton]
-        navigationBarView.depth = .None
-        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
-        navigationBarView.contentMode = .ScaleAspectFit
-        
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
@@ -81,11 +101,15 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.view.backgroundColor = MaterialColor.white
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
+        self.view.addSubview(nameLabel)
+        self.view.addSubview(roleLabel)
         self.view.addSubview(segmentView)
         self.view.addSubview(gaugeView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
+    
+    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func shareVote() {
         CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
@@ -94,8 +118,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
             })
             .start()
     }
-    
-    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
         if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }

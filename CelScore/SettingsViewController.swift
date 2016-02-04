@@ -12,16 +12,15 @@ import Material
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    //MARK: Properties
-    let kMaxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
-    
+
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
+        let maxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
+        
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: 20, width: kMaxWidth, height: 160))
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: 20, width: maxWidth, height: 160))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.image = UIImage(named: "flask_logo")
@@ -35,7 +34,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
-        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 60))
+        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         publicOpinionView.divider = false
         publicOpinionView.depth = .Depth1
         let opinionLabel = UILabel()
@@ -44,7 +43,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         publicOpinionView.backgroundColor = MaterialColor.white
-        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
+        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
         publicOpinionBar.progressTintColor = MaterialColor.green.darken4
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
@@ -52,7 +51,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
         //MARK: Consensus
-        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 60))
+        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         consensusView.divider = false
         consensusView.depth = .Depth1
         let consensusLabel = UILabel()
@@ -61,7 +60,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         consensusView.backgroundColor = MaterialColor.white
-        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
+        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
         consensusBar.progressTintColor = MaterialColor.green.darken4
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
@@ -69,7 +68,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
         //MARK: Random Facts
-        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 60))
+        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         factsView.divider = false
         factsView.depth = .Depth1
         let factsLabel = UILabel()
@@ -78,7 +77,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         factsView.backgroundColor = MaterialColor.white
-        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 15))
+        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
         factsBar.progressTintColor = MaterialColor.green.darken4
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
@@ -86,7 +85,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
-        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 160))
+        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: 160))
         pickerView.divider = false
         pickerView.depth = .Depth1
         let pickerLabel = UILabel()
@@ -95,12 +94,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.titleLabel = pickerLabel
         pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
         pickerView.backgroundColor = MaterialColor.white
-        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: kMaxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
-        let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 60))
+        let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         publicServiceView.divider = false
         publicServiceView.depth = .Depth1
         let publicServiceLabel = UILabel()
@@ -118,7 +117,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: LogStatus
-        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: kMaxWidth, height: 80))
+        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 80))
         loginView.divider = false
         loginView.depth = .Depth1
         loginView.backgroundColor = MaterialColor.white
@@ -144,7 +143,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let copyrightTextNode = ASTextNode()
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken3]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: kMaxWidth - 20, height: 20)
+        copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: maxWidth - 20, height: 20)
         
         super.init(node: ASDisplayNode())
         picker.dataSource = self
