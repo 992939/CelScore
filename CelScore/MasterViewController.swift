@@ -23,8 +23,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
-    let navigationBarView: NavigationBarView
-    let loginButton: FBSDKLoginButton
     //let listSlider: CategorySliderView
     
     //MARK: Initializers
@@ -34,14 +32,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
-        self.loginButton = FBSDKLoginButton()
-        self.navigationBarView = NavigationBarView()
         
         super.init(node: ASDisplayNode())
 
-        self.loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        self.loginButton.delegate = self
-        
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
     }
@@ -76,12 +69,17 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
-        self.navigationBarView.titleLabel = title
-        self.navigationBarView.leftButtons = [menuButton]
-        self.navigationBarView.rightButtons = [searchButton]
-        self.navigationBarView.backgroundColor = Constants.kMainGreenColor
+        let navigationBarView: NavigationBarView = NavigationBarView()
+        navigationBarView.titleLabel = title
+        navigationBarView.leftButtons = [menuButton]
+        navigationBarView.rightButtons = [searchButton]
+        navigationBarView.backgroundColor = Constants.kMainGreenColor
         
-        self.view.addSubview(self.navigationBarView)
+        let loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        loginButton.delegate = self
+        
+        self.view.addSubview(navigationBarView)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
         //self.view.addSubview(loginButton)
