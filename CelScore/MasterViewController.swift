@@ -82,7 +82,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.clipsToBounds = false
         segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
-        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 3)
+        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         segmentedControl.layer.shadowOpacity = 0.3
         segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
         
@@ -105,7 +105,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.celebrityTableView.frame = CGRect(
             x: Constants.kCellPadding,
-            y: Constants.kNavigationPadding + 50,
+            y: Constants.kNavigationPadding + 40,
             width: self.view.frame.width - 2 * Constants.kCellPadding,
             height: self.view.frame.height - 2 * Constants.kCellPadding)
     }

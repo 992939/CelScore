@@ -22,18 +22,10 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
-        let celebPicNode = ASNetworkImageNode(webImage: ())
-        celebPicNode.URL = NSURL(string: celebrityST.imageURL)
-        celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        let picWidth: CGFloat = 90.0
-        celebPicNode.frame = CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: 100, width: picWidth, height: picWidth)
-        celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
-        }
         self.celebST = celebrityST
         
         super.init(node: ASDisplayNode())
-        self.node.addSubnode(celebPicNode)
+        
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
     
@@ -55,16 +47,32 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 130))
+        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 110))
         navigationBarView.leftButtons = [backButton]
-        navigationBarView.depth = .None
+        navigationBarView.depth = .Depth2
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
+        
+//        let picWidth: CGFloat = 90.0
+//        let celebPic: MaterialView = MaterialView(frame: CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: navigationBarView.bottom, width: picWidth, height: picWidth))
+//        celebPic.image
+//            //= UIImage(data: NSData(contentsOfURL: NSURL(string: self.celebST.imageURL)!)!)
+//        celebPic.shape = .Circle
+//        celebPic.depth = .Depth1
+        
+        let celebPicNode = ASNetworkImageNode(webImage: ())
+        celebPicNode.URL = NSURL(string: self.celebST.imageURL)
+        celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        let picWidth: CGFloat = 90.0
+        celebPicNode.frame = CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: 100, width: picWidth, height: picWidth)
+        celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
+        }
         
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
         nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 16)
-        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 60, width: maxWidth, height: 30)
+        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + 60, width: maxWidth, height: 30)
         nameLabel.textAlignment = .Center
         nameLabel.textColor = MaterialColor.grey.darken4
         
@@ -74,6 +82,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: maxWidth, height: 30)
         roleLabel.textAlignment = .Center
         roleLabel.textColor = MaterialColor.grey.base
+        
         
         let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: 270, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
@@ -102,6 +111,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.view.backgroundColor = MaterialColor.white
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
+        self.view.addSubview(celebPicNode.view)
         self.view.addSubview(nameLabel)
         self.view.addSubview(roleLabel)
         self.view.addSubview(segmentView)
