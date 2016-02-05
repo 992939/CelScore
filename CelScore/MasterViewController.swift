@@ -13,6 +13,7 @@ import ReactiveCocoa
 import RealmSwift
 import TwitterKit
 import Material
+import HMSegmentedControl
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
@@ -70,20 +71,20 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.rightButtons = [searchButton]
         navigationBarView.backgroundColor = Constants.kMainGreenColor
         
-        let segmentedControl: SDSegmentedControl = SDSegmentedControl(items: CelebList.getAll())
-        segmentedControl.frame.origin = CGPoint(x: 0, y: navigationBarView.bottom)
+        let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
+        segmentedControl.frame = CGRect(x: 0, y: navigationBarView.bottom, width: UIScreen.mainScreen().bounds.width, height: 44)
         segmentedControl.backgroundColor = MaterialColor.green.lighten3
-        segmentedControl.arrowPosition = SDSegmentedArrowPositionBottom
-        segmentedControl.arrowSize = 8
+        segmentedControl.selectionIndicatorColor = MaterialColor.green.base
+        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
+            NSFontAttributeName: UIFont.systemFontOfSize(16)]
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.clipsToBounds = false
         segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 3)
         segmentedControl.layer.shadowOpacity = 0.3
         segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
-        
-        let stainAppearance = SDStainView.appearance()
-        stainAppearance.backgroundColor = MaterialColor.green.lighten4
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]

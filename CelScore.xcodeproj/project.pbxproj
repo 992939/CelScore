@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0016DD231C547AC400021202 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosDistrib.swift */; };
-		003387A01C631BA5008AB0D8 /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0033879F1C631BA5008AB0D8 /* SDSegmentedControl.m */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -95,8 +94,6 @@
 
 /* Begin PBXFileReference section */
 		0016DD221C547AC400021202 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
-		0033879E1C631BA5008AB0D8 /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
-		0033879F1C631BA5008AB0D8 /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -209,8 +206,6 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0033879E1C631BA5008AB0D8 /* SDSegmentedControl.h */,
-				0033879F1C631BA5008AB0D8 /* SDSegmentedControl.m */,
 				0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */,
 				0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */,
 				0082B14A1C3B6FFD00E2A9BC /* PROEmpty.h */,
@@ -695,7 +690,6 @@
 				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
 				0016DD231C547AC400021202 /* CosmosDistrib.swift in Sources */,
 				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
-				003387A01C631BA5008AB0D8 /* SDSegmentedControl.m in Sources */,
 				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
 				00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */,
 				00F6C9D71B35393C0078CA6E /* CelebrityListViewModel.swift in Sources */,

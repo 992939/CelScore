@@ -16,7 +16,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <WebASDKImageManager/WebASDKImageManager.h>
 #import <YLProgressBar/YLProgressBar.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
 #import "PROCelScoreAPIClient.h"
-#import "SDSegmentedControl.h"
 
 #endif /* Header_h */

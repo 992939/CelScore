@@ -20,6 +20,7 @@ target 'CelScore' do
     pod 'Material', '~> 1.30'
     pod 'SMSegmentView', '~> 1.1'
     pod 'LMGaugeView'
+    pod 'HMSegmentedControl'
 end
 
 target 'CelScoreTests' do
