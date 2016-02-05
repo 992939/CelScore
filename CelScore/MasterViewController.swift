@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import FBSDKLoginKit
-import FBSDKCoreKit
 import ReactiveCocoa
 import RealmSwift
 import TwitterKit
@@ -88,6 +87,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        loginButton.frame = CGRect(x: 0, y: navigationBarView.bottom, width: 80, height: 44)
         loginButton.delegate = self
         
         self.view.backgroundColor = Constants.kBackgroundColor
@@ -95,13 +95,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
-        //self.view.addSubview(loginButton)
+        self.view.addSubview(loginButton)
 
         self.configuration()
     }
     
     override func viewWillLayoutSubviews() {
-        self.sideNavigationViewController?.setLeftViewWidth(view.bounds.width - 166, hidden: true, animated: false)
+        self.sideNavigationViewController!.setLeftViewWidth(250, hidden: true, animated: false)
         
         self.celebrityTableView.frame = CGRect(
             x: Constants.kCellPadding,

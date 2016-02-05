@@ -27,9 +27,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.depth = .None
         let logoLabel = UILabel()
         logoLabel.text = "*Vote Responsibly."
-        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 8)
+        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 7)
         logoImageView.detailLabel = logoLabel
-        logoImageView.detailLabelInset = UIEdgeInsets(top: 30, left: 70, bottom: Constants.kCellPadding, right: 40)
+        logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kCellPadding, right: 30)
         logoImageView.backgroundColor = MaterialColor.purple.lighten4
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         

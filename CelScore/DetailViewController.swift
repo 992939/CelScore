@@ -11,18 +11,23 @@ import Material
 import LMGaugeView
 import AIRTimer
 import SMSegmentView
+import ImagePalette
 
 
 final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
+    var strongColor: UIColor
+    var weakColor: UIColor
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
+        self.strongColor = MaterialColor.black
+        self.weakColor = MaterialColor.grey.base
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -55,10 +60,10 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         //topView
         let topView: MaterialPulseView = MaterialPulseView(frame: CGRect(
             x: Constants.kCellPadding,
-            y: navigationBarView.bottom + 15,
+            y: navigationBarView.bottom + 10,
             width: maxWidth,
             height: 170))
-        topView.depth = .Depth1
+        topView.depth = .Depth2
         
         let viewMaxWidth = topView.width - 2 * Constants.kCellPadding
         
@@ -73,17 +78,17 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
-        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 20)
-        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom, width: viewMaxWidth, height: 30)
+        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
+        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + Constants.kCellPadding, width: viewMaxWidth, height: 30)
         nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.black
+        nameLabel.textColor = MaterialColor.white
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor"
-        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 12)
+        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
         roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: viewMaxWidth, height: 30)
         roleLabel.textAlignment = .Center
-        roleLabel.textColor = MaterialColor.grey.darken3
+        roleLabel.textColor = MaterialColor.white
         
         topView.addSubview(celebPicNode.view)
         topView.addSubview(nameLabel)
@@ -111,7 +116,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
             height: 370))
-        bottomView.depth = .Depth1
+        bottomView.depth = .Depth2
+        bottomView.backgroundColor = MaterialColor.white
         
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
@@ -129,10 +135,24 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         consensusLabel.textAlignment = .Center
         consensusLabel.textColor = MaterialColor.black
         
+        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
+            if let color = $0.darkMutedSwatch?.color {
+                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
+                topView.backgroundColor = color
+                segmentView.segmentOnSelectionColour = color
+                self.strongColor = color
+                self.weakColor = MaterialColor.blueGrey.lighten3
+            }
+            if let color = $0.lightVibrantSwatch?.color {
+                topView.backgroundColor = color
+                print("2. color is \(color.debugDescription)")
+            }
+        }
+        
         bottomView.addSubview(gaugeView)
         bottomView.addSubview(consensusLabel)
         
-        self.view.backgroundColor = MaterialColor.grey.lighten5
+        self.view.backgroundColor = MaterialColor.blueGrey.lighten5  //MaterialColor.grey.lighten5
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
@@ -159,8 +179,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value > gaugeView.limitValue { return Constants.kMainGreenColor }
-        else { return Constants.kMainVioletColor }
+        if value > gaugeView.limitValue { return self.strongColor }
+        else { return self.weakColor }
     }
     
     //MARK: SMSegmentViewDelegate

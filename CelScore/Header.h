@@ -12,8 +12,8 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <AWSCognito/AWSCognito.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <WebASDKImageManager/WebASDKImageManager.h>
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
