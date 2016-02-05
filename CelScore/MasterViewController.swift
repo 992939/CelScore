@@ -74,7 +74,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         segmentedControl.frame = CGRect(x: 0, y: navigationBarView.bottom, width: UIScreen.mainScreen().bounds.width, height: 44)
         segmentedControl.backgroundColor = MaterialColor.green.lighten3
-        segmentedControl.selectionIndicatorColor = MaterialColor.green.base
+        segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
             NSFontAttributeName: UIFont.systemFontOfSize(16)]

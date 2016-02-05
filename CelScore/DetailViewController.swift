@@ -23,9 +23,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        
         super.init(node: ASDisplayNode())
-        
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
     
@@ -40,6 +38,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         let maxWidth = UIScreen.mainScreen().bounds.width - 2 * Constants.kCellPadding
         
+        //navigationBarView
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
         backButton.pulseScale = false
@@ -49,35 +48,49 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 110))
         navigationBarView.leftButtons = [backButton]
-        navigationBarView.depth = .Depth2
+        navigationBarView.depth = .Depth3
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
+        
+        //topView
+        let topView: MaterialPulseView = MaterialPulseView(frame: CGRect(
+            x: Constants.kCellPadding,
+            y: navigationBarView.bottom + 15,
+            width: maxWidth,
+            height: 170))
+        topView.depth = .Depth1
+        
+        let viewMaxWidth = topView.width - 2 * Constants.kCellPadding
         
         let celebPicNode = ASNetworkImageNode(webImage: ())
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
         let picWidth: CGFloat = 90.0
-        celebPicNode.frame = CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: 100, width: picWidth, height: picWidth)
+        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kCellPadding, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
         
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
-        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 16)
-        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + 60, width: maxWidth, height: 30)
+        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 20)
+        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom, width: viewMaxWidth, height: 30)
         nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.grey.darken4
+        nameLabel.textColor = MaterialColor.black
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor"
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 12)
-        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: maxWidth, height: 30)
+        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: viewMaxWidth, height: 30)
         roleLabel.textAlignment = .Center
-        roleLabel.textColor = MaterialColor.grey.base
+        roleLabel.textColor = MaterialColor.grey.darken3
         
+        topView.addSubview(celebPicNode.view)
+        topView.addSubview(nameLabel)
+        topView.addSubview(roleLabel)
         
-        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: 270, width: maxWidth, height: 40),
+        //segmentView
+        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + Constants.kCellPadding, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
                 keySegmentOnSelectionColour: Constants.kMainGreenColor,
@@ -92,23 +105,39 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
+        //bottomView
+        let bottomView: MaterialPulseView = MaterialPulseView(frame: CGRect(
+            x: Constants.kCellPadding,
+            y: segmentView.bottom + Constants.kCellPadding,
+            width: maxWidth,
+            height: 370))
+        bottomView.depth = .Depth1
+        
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = 300
-        gaugeView.frame = CGRect(x: (maxWidth - gaugeWidth)/2, y: segmentView.bottom + 40, width: gaugeWidth, height: gaugeWidth)
+        gaugeView.frame = CGRect(x: (viewMaxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
         
-        self.view.backgroundColor = MaterialColor.white
+        let consensusLabel = UILabel()
+        consensusLabel.text = "Social Consensus: 80%"
+        consensusLabel.font = UIFont(name: roleLabel.font.fontName, size: 15)
+        consensusLabel.frame = CGRect(x: Constants.kCellPadding, y: gaugeView.bottom + 20, width: viewMaxWidth, height: 30)
+        consensusLabel.textAlignment = .Center
+        consensusLabel.textColor = MaterialColor.black
+        
+        bottomView.addSubview(gaugeView)
+        bottomView.addSubview(consensusLabel)
+        
+        self.view.backgroundColor = MaterialColor.grey.lighten5
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
-        self.view.addSubview(celebPicNode.view)
-        self.view.addSubview(nameLabel)
-        self.view.addSubview(roleLabel)
+        self.view.addSubview(topView)
         self.view.addSubview(segmentView)
-        self.view.addSubview(gaugeView)
+        self.view.addSubview(bottomView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
