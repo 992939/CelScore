@@ -53,13 +53,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
         
-//        let picWidth: CGFloat = 90.0
-//        let celebPic: MaterialView = MaterialView(frame: CGRect(x: UIScreen.mainScreen().bounds.centerX - picWidth/2, y: navigationBarView.bottom, width: picWidth, height: picWidth))
-//        celebPic.image
-//            //= UIImage(data: NSData(contentsOfURL: NSURL(string: self.celebST.imageURL)!)!)
-//        celebPic.shape = .Circle
-//        celebPic.depth = .Depth1
-        
         let celebPicNode = ASNetworkImageNode(webImage: ())
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
