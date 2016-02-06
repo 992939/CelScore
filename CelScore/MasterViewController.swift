@@ -71,12 +71,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.backgroundColor = Constants.kMainGreenColor
         
         let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
-        segmentedControl.frame = CGRect(x: 0, y: navigationBarView.bottom, width: UIScreen.mainScreen().bounds.width, height: 44)
+        segmentedControl.frame = CGRect(x: 0, y: navigationBarView.bottom, width: Constants.kScreenWidth, height: 48)
         segmentedControl.backgroundColor = MaterialColor.green.lighten3
         segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
-            NSFontAttributeName: UIFont.systemFontOfSize(16)]
+            NSFontAttributeName: UIFont.systemFontOfSize(18)]
         segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.clipsToBounds = false
@@ -95,7 +95,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
-        self.view.addSubview(loginButton)
+        //self.view.addSubview(loginButton)
 
         self.configuration()
     }
@@ -107,9 +107,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.celebrityTableView.frame = CGRect(
             x: Constants.kCellPadding,
-            y: Constants.kNavigationPadding + 40,
-            width: self.view.frame.width - 2 * Constants.kCellPadding,
-            height: self.view.frame.height - 2 * Constants.kCellPadding)
+            y: Constants.kNavigationPadding + 44,
+            width: Constants.kScreenWidth - 2 * Constants.kCellPadding,
+            height: Constants.kScreenHeight - 2 * Constants.kCellPadding)
     }
     
     func openSetings() { self.sideNavigationViewController!.openLeftView() }
