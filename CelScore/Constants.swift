@@ -18,7 +18,6 @@ struct Constants {
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     
     static let kNavigationPadding: CGFloat = 80.0
-    static let kMenuWidth: CGFloat = 250.0
     static let kCellPadding: CGFloat = 9.0
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0

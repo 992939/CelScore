@@ -25,14 +25,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = self.view.width - 2 * Constants.kCellPadding
         
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: Constants.kMenuWidth, height: 160))
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 160))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.image = UIImage(named: "flask_logo")
-        logoImageView.depth = .None
+        logoImageView.depth = .Depth2
         let logoLabel = UILabel()
         logoLabel.text = "*Vote Responsibly."
-        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 7)
+        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
         logoImageView.detailLabel = logoLabel
         logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kCellPadding, right: 30)
         logoImageView.backgroundColor = MaterialColor.purple.lighten4
