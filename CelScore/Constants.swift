@@ -33,8 +33,8 @@ struct Constants {
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "It's all in a state of mind.",
+        "Life is a tale told by an idiot.",
         "In a closed mouth, flies do not enter.",
-        "The revolution will not be televised.",
         "To err is human. To forgive, unlikely.",
         "To err is human. To forgive, divine.",
         "The well bred horse ignores the barking dog.",
@@ -46,6 +46,7 @@ struct Constants {
         "Best to light a candle than curse the darkness.",
         "Expect a cow where there is grass.",
         "Every fool is pleased with his own folly.", // 0 to 14 - Negative
+        "The revolution will not be televised.",
         "From caring comes courage.",
         "The greatest virtues are those useful to others.",
         "If you can't reward, make sure to thank.",
@@ -84,5 +85,6 @@ struct Constants {
         "It's weird not to be weird.",
         "The map is not the territory.",
         "Power only steps back facing more power.",
-        "As above so below, as below so above."]
+        "As above so below, as below so above.",
+        "Knowledge is power."]
 }

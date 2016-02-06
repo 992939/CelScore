@@ -49,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        followSwitch.center = CGPoint(x: 360, y: 20)
+        followSwitch.center = CGPoint(x: 330, y: 20)
         followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         followSwitch.rippleFillColor = MaterialColor.purple.lighten1
@@ -72,10 +72,10 @@ final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.45)
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.23)
-        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 50)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.40)
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
+        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.15)
         
         self.profilePicNode.backgroundColor = UIColor.greenColor()
         self.nameNode.backgroundColor = UIColor.redColor()

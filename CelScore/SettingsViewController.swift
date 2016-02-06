@@ -25,21 +25,26 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = self.view.width - 2 * Constants.kCellPadding
         
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 0.2 * self.view.height))
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 0.16 * self.view.height))
+        let testLabel = UILabel()
+        testLabel.text = "logoImageView"
+        logoImageView.titleLabel = testLabel
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
-        logoImageView.image = UIImage(named: "flask_logo")
         logoImageView.depth = .Depth2
         let logoLabel = UILabel()
-        logoLabel.text = "*Vote Responsibly."
-        logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
-        logoImageView.detailLabel = logoLabel
-        logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kCellPadding, right: 30)
-        logoImageView.backgroundColor = MaterialColor.purple.lighten4
+        //logoImageView.image = UIImage(named: "flask_logo")
+        //logoLabel.text = "*Vote Responsibly."
+        //logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
+        //logoImageView.detailLabel = logoLabel
+        //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kCellPadding, right: 30)
+        logoImageView.backgroundColor = MaterialColor.green.lighten2
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
         let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        testLabel.text = "publicOpinionView"
+        publicOpinionView.titleLabel = testLabel
         publicOpinionView.divider = false
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
@@ -57,6 +62,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Consensus
         let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        testLabel.text = "consensusView"
+        consensusView.titleLabel = testLabel
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
@@ -74,6 +81,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Random Facts
         let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        testLabel.text = "factsView"
+        factsView.titleLabel = testLabel
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
@@ -91,6 +100,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Picker
         let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: 160))
+        testLabel.text = "pickerView"
+        pickerView.titleLabel = testLabel
         pickerView.divider = false
         pickerView.depth = .None
         let pickerLabel = UILabel()
@@ -105,6 +116,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: PublicService
         let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        testLabel.text = "publicServiceView"
+        publicServiceView.titleLabel = testLabel
         publicServiceView.divider = false
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
@@ -123,6 +136,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: LogStatus
         let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 80))
+        testLabel.text = "loginView"
+        loginView.titleLabel = testLabel
         loginView.divider = false
         loginView.depth = .None
         loginView.backgroundColor = MaterialColor.white
