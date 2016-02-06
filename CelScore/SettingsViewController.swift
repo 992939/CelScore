@@ -25,7 +25,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = self.view.width - 2 * Constants.kCellPadding
         
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 160))
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 0.2 * self.view.height))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.image = UIImage(named: "flask_logo")

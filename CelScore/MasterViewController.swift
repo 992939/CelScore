@@ -101,7 +101,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     override func viewWillLayoutSubviews() {
-        self.sideNavigationViewController!.setLeftViewWidth(0.625 * self.view.width, hidden: true, animated: false)
+        super.viewWillLayoutSubviews()
+        
+        self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         
         self.celebrityTableView.frame = CGRect(
             x: Constants.kCellPadding,

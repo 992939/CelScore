@@ -33,7 +33,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     }
     
     //MARK: Methods
-    override func viewWillLayoutSubviews() {}
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
@@ -41,7 +40,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let maxWidth = UIScreen.mainScreen().bounds.width - 2 * Constants.kCellPadding
+        let maxWidth = Constants.kScreenWidth - 2 * Constants.kCellPadding
         
         //navigationBarView
         let backButton: FlatButton = FlatButton()
@@ -51,7 +50,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 110))
+        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 110))
         navigationBarView.leftButtons = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
@@ -110,12 +109,14 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
+        print("screen.height: \(Constants.kScreenHeight) segmentView.bottom: \(segmentView.bottom) bottomView.height: \(Constants.kScreenHeight - (segmentView.bottom + Constants.kCellPadding))")
+        
         //bottomView
         let bottomView: MaterialPulseView = MaterialPulseView(frame: CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
-            height: 370))
+            height: Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding)))
         bottomView.depth = .Depth2
         bottomView.backgroundColor = MaterialColor.white
         
@@ -123,7 +124,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 300
+        let gaugeWidth: CGFloat = 250
         gaugeView.frame = CGRect(x: (viewMaxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
@@ -152,7 +153,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         bottomView.addSubview(gaugeView)
         bottomView.addSubview(consensusLabel)
         
-        self.view.backgroundColor = MaterialColor.blueGrey.lighten5  //MaterialColor.grey.lighten5
+        self.view.backgroundColor = MaterialColor.blueGrey.lighten5
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)

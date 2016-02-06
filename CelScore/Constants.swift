@@ -17,6 +17,9 @@ struct Constants {
     static let S3BucketName: String = "celeb3x"
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     
+    static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+    static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+    static let kSettingsViewWidth: CGFloat = 0.625 * UIScreen.mainScreen().bounds.width
     static let kNavigationPadding: CGFloat = 80.0
     static let kCellPadding: CGFloat = 9.0
     static let kMinimumVoteValue: CGFloat = 1.0
