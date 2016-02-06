@@ -22,6 +22,7 @@ target 'CelScore' do
     pod 'Material', '~> 1.30'
     pod 'SMSegmentView', '~> 1.1'
     pod 'ImagePalette', '~> 0.0'
+    pod 'Device', '~> 0.0.6'
     pod 'LMGaugeView'
     pod 'HMSegmentedControl'
 end

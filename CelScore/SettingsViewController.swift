@@ -16,8 +16,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init() {
-        let maxWidth = Constants.kMenuWidth - 2 * Constants.kCellPadding
+    init() { super.init(node: ASDisplayNode()) }
+    
+    //MARK: Method
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let maxWidth = self.view.width - 2 * Constants.kCellPadding
         
         //MARK: Logo
         let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: Constants.kMenuWidth, height: 160))
@@ -145,7 +150,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: maxWidth - 20, height: 20)
         
-        super.init(node: ASDisplayNode())
         picker.dataSource = self
         picker.delegate = self
         
@@ -161,11 +165,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //SettingsViewModel().getUserRatingsPercentageSignal().start()
         //SettingsViewModel().calculateSocialConsensusSignal().start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
-    }
-    
-    //MARK: Method
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        
         self.view.backgroundColor = MaterialColor.grey.lighten3
         self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
         self.sideNavigationViewController!.depth = .Depth1
