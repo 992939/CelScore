@@ -19,7 +19,8 @@ struct Constants {
     
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
-    static let kSettingsViewWidth: CGFloat = 0.625 * UIScreen.mainScreen().bounds.width
+    static let kSettingsViewWidth: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? (0.625 * UIScreen.mainScreen().bounds.width) : 250
+    static let kPickerViewHeight: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 160 : 100
     static let kNavigationPadding: CGFloat = 80.0
     static let kCellPadding: CGFloat = 9.0
     static let kMinimumVoteValue: CGFloat = 1.0

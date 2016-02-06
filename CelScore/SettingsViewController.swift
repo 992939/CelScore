@@ -90,16 +90,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
-        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: 160))
+        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: Constants.kPickerViewHeight))
         pickerView.divider = false
         pickerView.depth = .None
         let pickerLabel = UILabel()
         pickerLabel.text = "Main Topic Of Interest:"
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         pickerView.titleLabel = pickerLabel
-        pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
+        pickerView.titleLabelInset = UIEdgeInsets(top: Constants.kCellPadding, left: 0, bottom: 0, right: 0)
         pickerView.backgroundColor = MaterialColor.white
-        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 2 * Constants.kCellPadding, width: maxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
@@ -122,7 +122,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: LogStatus
-        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 80))
+        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         loginView.divider = false
         loginView.depth = .None
         loginView.backgroundColor = MaterialColor.white
@@ -137,7 +137,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
         userLabel.textColor = MaterialColor.green.darken2
-        let logoutButton = FlatButton(frame: CGRect(x: 65, y: 45, width: 100, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
         loginView.addSubview(loginLabel)
@@ -147,9 +147,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Copyright
         let copyrightTextNode = ASTextNode()
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken3]
+        let paraStyle = NSMutableParagraphStyle()
+        paraStyle.alignment = .Center
+        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken1, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: 2 * Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: maxWidth - 20, height: 20)
+        copyrightTextNode.frame = CGRect(x: Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: maxWidth, height: 20)
+        copyrightTextNode.alignSelf = .Center
         
         picker.dataSource = self
         picker.delegate = self
