@@ -25,10 +25,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = self.view.width - 2 * Constants.kCellPadding
         
         //MARK: Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 0.16 * self.view.height))
-        let testLabel = UILabel()
-        testLabel.text = "logoImageView"
-        logoImageView.titleLabel = testLabel
+        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.depth = .Depth2
@@ -43,8 +40,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: PublicOpinion
         let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
-        testLabel.text = "publicOpinionView"
-        publicOpinionView.titleLabel = testLabel
         publicOpinionView.divider = false
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
@@ -62,8 +57,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Consensus
         let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
-        testLabel.text = "consensusView"
-        consensusView.titleLabel = testLabel
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
@@ -81,8 +74,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Random Facts
         let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
-        testLabel.text = "factsView"
-        factsView.titleLabel = testLabel
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
@@ -100,8 +91,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: Picker
         let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: 160))
-        testLabel.text = "pickerView"
-        pickerView.titleLabel = testLabel
         pickerView.divider = false
         pickerView.depth = .None
         let pickerLabel = UILabel()
@@ -116,8 +105,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: PublicService
         let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
-        testLabel.text = "publicServiceView"
-        publicServiceView.titleLabel = testLabel
         publicServiceView.divider = false
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
@@ -136,19 +123,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: LogStatus
         let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 80))
-        testLabel.text = "loginView"
-        loginView.titleLabel = testLabel
         loginView.divider = false
         loginView.depth = .None
         loginView.backgroundColor = MaterialColor.white
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As: "
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        loginLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 100, height: 30)
+        loginLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 90, height: 30)
         let userLabel = UILabel()
         userLabel.text = "@GreyEcologist"
         userLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        userLabel.frame = CGRect(x: 100, y: 0, width: 120, height: 30)
+        let userLabelWidth = maxWidth - (loginLabel.width + Constants.kCellPadding)
+        userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
         userLabel.textColor = MaterialColor.green.darken2
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 45, width: 100, height: 30))
