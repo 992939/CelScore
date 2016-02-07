@@ -40,8 +40,8 @@ final class CelebrityTableViewCell: ASCellNode {
         }
         
         let cosmosView = CosmosView()
-        cosmosView.settings.starSize = 15
-        cosmosView.settings.starMargin = 3
+        cosmosView.settings.starSize = Constants.kStarSize
+        cosmosView.settings.starMargin = Constants.kStarMargin
         cosmosView.settings.updateOnTouch = false
         cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
         cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken1
@@ -49,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        followSwitch.center = CGPoint(x: 330, y: 20)
+        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 45, y: 20)
         followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
         followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
         followSwitch.rippleFillColor = MaterialColor.purple.lighten1
@@ -73,14 +73,9 @@ final class CelebrityTableViewCell: ASCellNode {
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 50)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.40)
+        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.42)
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.15)
-        
-        //self.profilePicNode.backgroundColor = UIColor.greenColor()
-        //self.nameNode.backgroundColor = UIColor.redColor()
-        //self.ratingsNode.backgroundColor = UIColor.blueColor()
-        //self.switchNode.backgroundColor = UIColor.yellowColor()
+        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,

@@ -95,7 +95,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(self.searchTextField)
-        self.view.addSubview(loginButton)
+        //self.view.addSubview(loginButton)
 
         self.configuration()
     }
