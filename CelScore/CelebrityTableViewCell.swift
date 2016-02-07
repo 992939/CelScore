@@ -77,10 +77,10 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.15)
         
-        self.profilePicNode.backgroundColor = UIColor.greenColor()
-        self.nameNode.backgroundColor = UIColor.redColor()
-        self.ratingsNode.backgroundColor = UIColor.blueColor()
-        self.switchNode.backgroundColor = UIColor.yellowColor()
+        //self.profilePicNode.backgroundColor = UIColor.greenColor()
+        //self.nameNode.backgroundColor = UIColor.redColor()
+        //self.ratingsNode.backgroundColor = UIColor.blueColor()
+        //self.switchNode.backgroundColor = UIColor.yellowColor()
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,

@@ -109,14 +109,13 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
-        print("screen.height: \(Constants.kScreenHeight) segmentView.bottom: \(segmentView.bottom) bottomView.height: \(Constants.kScreenHeight - (segmentView.bottom + Constants.kCellPadding))")
-        
         //bottomView
+        let bottomViewHeight = Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding)
         let bottomView: MaterialPulseView = MaterialPulseView(frame: CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
-            height: Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding)))
+            height: bottomViewHeight))
         bottomView.depth = .Depth2
         bottomView.backgroundColor = MaterialColor.white
         
@@ -124,7 +123,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 250
+        let gaugeWidth: CGFloat = 0.8 * bottomViewHeight
         gaugeView.frame = CGRect(x: (viewMaxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
@@ -132,23 +131,23 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus: 80%"
         consensusLabel.font = UIFont(name: roleLabel.font.fontName, size: 15)
-        consensusLabel.frame = CGRect(x: Constants.kCellPadding, y: gaugeView.bottom + 20, width: viewMaxWidth, height: 30)
+        consensusLabel.frame = CGRect(x: Constants.kCellPadding, y: bottomViewHeight - 30, width: viewMaxWidth, height: 30)
         consensusLabel.textAlignment = .Center
         consensusLabel.textColor = MaterialColor.black
         
-        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
-            if let color = $0.darkMutedSwatch?.color {
-                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
-                topView.backgroundColor = color
-                segmentView.segmentOnSelectionColour = color
-                self.strongColor = color
-                self.weakColor = MaterialColor.blueGrey.lighten3
-            }
-            if let color = $0.lightVibrantSwatch?.color {
-                topView.backgroundColor = color
-                print("2. color is \(color.debugDescription)")
-            }
-        }
+//        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
+//            if let color = $0.darkMutedSwatch?.color {
+//                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
+//                topView.backgroundColor = color
+//                segmentView.segmentOnSelectionColour = color
+//                self.strongColor = color
+//                self.weakColor = MaterialColor.blueGrey.lighten3
+//            }
+//            if let color = $0.lightVibrantSwatch?.color {
+//                topView.backgroundColor = color
+//                print("2. color is \(color.debugDescription)")
+//            }
+//        }
         
         bottomView.addSubview(gaugeView)
         bottomView.addSubview(consensusLabel)
