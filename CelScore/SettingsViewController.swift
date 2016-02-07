@@ -9,6 +9,7 @@
 import YLProgressBar
 import JTMaterialSwitch
 import Material
+import BEMCheckBox
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -97,9 +98,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerLabel.text = "Main Topic Of Interest:"
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         pickerView.titleLabel = pickerLabel
-        pickerView.titleLabelInset = UIEdgeInsets(top: Constants.kCellPadding, left: 0, bottom: 0, right: 0)
+        pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.kPickerViewHeight - 30, right: 0)
         pickerView.backgroundColor = MaterialColor.white
-        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: 2 * Constants.kCellPadding, width: maxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: maxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
@@ -151,7 +152,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         paraStyle.alignment = .Center
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken1, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: Constants.kCellPadding, y: loginView.bottom + Constants.kCellPadding, width: maxWidth, height: 20)
+        copyrightTextNode.frame = CGRect(x: Constants.kCellPadding, y: self.view.bottom - 2 * Constants.kCellPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
         picker.dataSource = self
