@@ -44,7 +44,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.divider = false
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
-        opinionLabel.text = "#PublicOpinion Completion:"
+        opinionLabel.text = "#PublicOpinion Completion"
         opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -61,7 +61,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
-        consensusLabel.text = "Overall Social Consensus:"
+        consensusLabel.text = "Overall Social Consensus"
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -78,7 +78,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
-        factsLabel.text = "#CitizensThatDontWatchTelevision:"
+        factsLabel.text = "#CitizensThatDontWatchTelevision"
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -95,7 +95,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.divider = false
         pickerView.depth = .None
         let pickerLabel = UILabel()
-        pickerLabel.text = "Main Topic Of Interest:"
+        pickerLabel.text = "Main Topic Of Interest"
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         pickerView.titleLabel = pickerLabel
         pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.kPickerViewHeight - 30, right: 0)
@@ -108,33 +108,38 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 40))
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
-        publicServiceLabel.text = "Public Service Mode:"
+        publicServiceLabel.text = "Public Service Mode"
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        publicServiceLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 120, height: 30)
-        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 2 * Constants.kCellPadding, y: 0, width: 18, height: 18))
+        publicServiceLabel.frame = CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: 120, height: 30)
+        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: Constants.kCellPadding, width: 20, height: 20))
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
-        let notificationLabel = UILabel()
-        notificationLabel.text = "In-App Notification:"
-        notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        notificationLabel.frame = CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: 120, height: 30)
-        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 2 * Constants.kCellPadding, y: Constants.kCellPadding, width: 18, height: 18))
-        notificationBox.onAnimationType = .Bounce
-        notificationBox.offAnimationType = .Bounce
         publicServiceView.backgroundColor = MaterialColor.white
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
-        publicOpinionView.addSubview(notificationLabel)
-        publicOpinionView.addSubview(notificationBox)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
+        //MARK: In-App Notification
+        let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 40))
+        notificationView.depth = .None
+        let notificationLabel = UILabel()
+        notificationLabel.text = "In-App Notification"
+        notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        notificationLabel.frame = CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: 120, height: 30)
+        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: Constants.kCellPadding, width: 20, height: 20))
+        notificationBox.onAnimationType = .Bounce
+        notificationBox.offAnimationType = .Bounce
+        notificationView.addSubview(notificationLabel)
+        notificationView.addSubview(notificationBox)
+        let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
+        
         //MARK: LogStatus
-        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        let loginView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: notificationView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
         loginView.divider = false
         loginView.depth = .None
         loginView.backgroundColor = MaterialColor.white
         let loginLabel = UILabel()
-        loginLabel.text = "Logged In As: "
+        loginLabel.text = "Logged In As"
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         loginLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 90, height: 30)
         let userLabel = UILabel()
@@ -170,6 +175,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(factsNode)
         self.node.addSubnode(pickerNode)
         self.node.addSubnode(publicServiceNode)
+        self.node.addSubnode(notificationNode)
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         
