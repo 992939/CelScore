@@ -105,21 +105,27 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
-        let publicServiceView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
-        publicServiceView.divider = false
+        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 40))
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode:"
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        publicServiceView.titleLabel = publicServiceLabel
-        publicServiceView.titleLabelInset = UIEdgeInsets(top: 10, left: 0, bottom: 25, right: 0)
+        publicServiceLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 120, height: 30)
+        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 2 * Constants.kCellPadding, y: 0, width: 18, height: 18))
+        publicServiceBox.onAnimationType = .Bounce
+        publicServiceBox.offAnimationType = .Bounce
+        let notificationLabel = UILabel()
+        notificationLabel.text = "In-App Notification:"
+        notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        notificationLabel.frame = CGRect(x: Constants.kCellPadding, y: Constants.kCellPadding, width: 120, height: 30)
+        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 2 * Constants.kCellPadding, y: Constants.kCellPadding, width: 18, height: 18))
+        notificationBox.onAnimationType = .Bounce
+        notificationBox.offAnimationType = .Bounce
         publicServiceView.backgroundColor = MaterialColor.white
-        let publicServiceSwitch = JTMaterialSwitch(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        publicServiceSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
-        publicServiceSwitch.trackOnTintColor = MaterialColor.purple.lighten4
-        publicServiceSwitch.rippleFillColor = MaterialColor.purple.lighten1
-        publicServiceSwitch.center = CGPoint(x: 200, y: 25)
-        publicServiceView.addSubview(publicServiceSwitch)
+        publicServiceView.addSubview(publicServiceLabel)
+        publicServiceView.addSubview(publicServiceBox)
+        publicOpinionView.addSubview(notificationLabel)
+        publicOpinionView.addSubview(notificationBox)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: LogStatus
