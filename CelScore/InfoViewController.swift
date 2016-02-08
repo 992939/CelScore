@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import Material
 
 
 final class InfoViewController: ASViewController {
@@ -36,5 +37,11 @@ final class InfoViewController: ASViewController {
         //                self.ageTextNode.attributedString = NSMutableAttributedString(string: "\(age)")
         //            })
         //            .start()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = MaterialColor.green.base
+        print("Say waaaaah \(self.view.frame)")
     }
 }

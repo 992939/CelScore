@@ -12,14 +12,17 @@ import LMGaugeView
 import AIRTimer
 import SMSegmentView
 import ImagePalette
+import EatFitViewController
 
 
 final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
-    var strongColor: UIColor
-    var weakColor: UIColor
+    let bottomView: MaterialPulseView
+    let eatFitController: EatFitViewController = EatFitViewController.controller()
+    private var strongColor: UIColor
+    private var weakColor: UIColor
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -28,6 +31,8 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.celebST = celebrityST
         self.strongColor = MaterialColor.black
         self.weakColor = MaterialColor.grey.base
+        self.bottomView = MaterialPulseView()
+        
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -111,13 +116,13 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         
         //bottomView
         let bottomViewHeight = Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding)
-        let bottomView: MaterialPulseView = MaterialPulseView(frame: CGRect(
+        self.bottomView.frame = CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
-            height: bottomViewHeight))
-        bottomView.depth = .Depth2
-        bottomView.backgroundColor = MaterialColor.white
+            height: bottomViewHeight)
+        self.bottomView.depth = .Depth2
+        self.bottomView.backgroundColor = MaterialColor.white
         
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
@@ -157,7 +162,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
-        self.view.addSubview(bottomView)
+        self.view.addSubview(self.bottomView)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
@@ -184,7 +189,9 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {}
+    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {
+
+    }
 }
 
 
