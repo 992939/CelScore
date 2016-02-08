@@ -17,7 +17,7 @@ public extension UIView {
         let slideRightTransition = CATransition()
         if let delegate: AnyObject = completionDelegate { slideRightTransition.delegate = delegate }
         slideRightTransition.type = kCATransitionPush
-        slideRightTransition.subtype = kCATransitionFromLeft
+        slideRightTransition.subtype = kCATransitionFromRight
         slideRightTransition.duration = duration
         slideRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         slideRightTransition.fillMode = kCAFillModeRemoved

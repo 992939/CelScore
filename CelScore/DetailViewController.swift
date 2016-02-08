@@ -88,7 +88,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         topView.addSubview(nameLabel)
         topView.addSubview(roleLabel)
         
-        //segmentView
         let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + Constants.kCellPadding, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
@@ -104,7 +103,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
-        //bottomView
         self.bottomViewFrame = CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
@@ -134,12 +132,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        print("current index: \(segmentView.indexOfSelectedSegment) and next index: \(index)")
-        let infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
+        
+        let infoView: UIView
+        switch index {
+        case 1: infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
+        case 2: infoView = RatingsViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
+        default: infoView = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
+        }
+        
         self.view.addSubview(infoView)
-        if index == 0 { infoView.slideLeft() }
-        else if index == 1 { infoView.slideRight() }
-        else { }
+        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
+        else { infoView.slideRight() }
     }
 }
 
