@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import Material
 
 
 final class RatingsViewController: ASViewController {
@@ -36,5 +37,10 @@ final class RatingsViewController: ASViewController {
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 8, newRating: 3).start()
         self.ratingsVM.updateUserRatingSignal(ratingIndex: 9, newRating: 3).start()
         self.ratingsVM.voteSignal().start()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = MaterialColor.blue.base
     }
 }

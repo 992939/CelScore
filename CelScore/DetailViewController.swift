@@ -8,28 +8,20 @@
 
 import AsyncDisplayKit
 import Material
-import LMGaugeView
-import AIRTimer
 import SMSegmentView
-import ImagePalette
 
 
-final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
-    let bottomView: MaterialPulseView
-    private var strongColor: UIColor
-    private var weakColor: UIColor
+    var bottomViewFrame: CGRect?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.strongColor = MaterialColor.black
-        self.weakColor = MaterialColor.grey.base
-        self.bottomView = MaterialPulseView()
         
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
@@ -113,54 +105,19 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.delegate = self
         
         //bottomView
-        let bottomViewHeight = Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding)
-        self.bottomView.frame = CGRect(
+        self.bottomViewFrame = CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
-            height: bottomViewHeight)
-        self.bottomView.depth = .Depth2
-        self.bottomView.backgroundColor = MaterialColor.white
-        
-        let gaugeView = LMGaugeView()
-        gaugeView.minValue = Constants.kMinimumVoteValue
-        gaugeView.maxValue = Constants.kMaximumVoteValue
-        gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.8 * bottomViewHeight
-        gaugeView.frame = CGRect(x: (viewMaxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
-        gaugeView.delegate = self
-        AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
-        
-        let consensusLabel = UILabel()
-        consensusLabel.text = "Social Consensus: 80%"
-        consensusLabel.font = UIFont(name: roleLabel.font.fontName, size: 15)
-        consensusLabel.frame = CGRect(x: Constants.kCellPadding, y: bottomViewHeight - 30, width: viewMaxWidth, height: 30)
-        consensusLabel.textAlignment = .Center
-        consensusLabel.textColor = MaterialColor.black
-        
-        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
-            if let color = $0.darkMutedSwatch?.color {
-                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
-                topView.backgroundColor = color
-                segmentView.segmentOnSelectionColour = color
-                self.strongColor = color
-                self.weakColor = MaterialColor.blueGrey.lighten3
-            }
-            if let color = $0.lightVibrantSwatch?.color {
-                topView.backgroundColor = color
-                print("2. color is \(color.debugDescription)")
-            }
-        }
-        
-        bottomView.addSubview(gaugeView)
-        bottomView.addSubview(consensusLabel)
+            height: Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding))
+        let bottomVC = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!)
         
         self.view.backgroundColor = MaterialColor.blueGrey.darken4
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
-        self.view.addSubview(self.bottomView)
+        self.view.addSubview(bottomVC.view)
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
@@ -175,23 +132,14 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
             .start()
     }
     
-    func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
-        if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }
-        else { timer.invalidate() }
-    }
-    
-    //MARK: LMGaugeViewDelegate
-    func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value > gaugeView.limitValue { return self.strongColor }
-        else { return self.weakColor }
-    }
-    
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         print("current index: \(segmentView.indexOfSelectedSegment) and next index: \(index)")
-        let infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomView.frame).view
+        let infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
         self.view.addSubview(infoView)
-        infoView.slideLeft()
+        if index == 0 { infoView.slideLeft() }
+        else if index == 1 { infoView.slideRight() }
+        else { }
     }
 }
 

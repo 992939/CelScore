@@ -43,6 +43,5 @@ final class InfoViewController: ASViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = MaterialColor.green.base
-        print("Say waaaaah \(self.view.frame)")
     }
 }
