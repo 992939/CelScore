@@ -105,7 +105,7 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
         segmentView.selectSegmentAtIndex(0)
         segmentView.layer.cornerRadius = 5.0
-        segmentView.layer.borderColor = MaterialColor.grey.lighten1.CGColor
+        segmentView.layer.borderColor = MaterialColor.blueGrey.darken4.CGColor
         segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
         
@@ -135,24 +135,24 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
         consensusLabel.textAlignment = .Center
         consensusLabel.textColor = MaterialColor.black
         
-//        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
-//            if let color = $0.darkMutedSwatch?.color {
-//                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
-//                topView.backgroundColor = color
-//                segmentView.segmentOnSelectionColour = color
-//                self.strongColor = color
-//                self.weakColor = MaterialColor.blueGrey.lighten3
-//            }
-//            if let color = $0.lightVibrantSwatch?.color {
-//                topView.backgroundColor = color
-//                print("2. color is \(color.debugDescription)")
-//            }
-//        }
+        Palette.generateWithConfiguration(PaletteConfiguration(image: UIImage(named: "demo-cover-photo-2")!)) {
+            if let color = $0.darkMutedSwatch?.color {
+                print("1. color is \($0.darkMutedSwatch?.debugDescription)")
+                topView.backgroundColor = color
+                segmentView.segmentOnSelectionColour = color
+                self.strongColor = color
+                self.weakColor = MaterialColor.blueGrey.lighten3
+            }
+            if let color = $0.lightVibrantSwatch?.color {
+                topView.backgroundColor = color
+                print("2. color is \(color.debugDescription)")
+            }
+        }
         
         bottomView.addSubview(gaugeView)
         bottomView.addSubview(consensusLabel)
         
-        self.view.backgroundColor = MaterialColor.blueGrey.lighten5
+        self.view.backgroundColor = MaterialColor.blueGrey.darken4
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)

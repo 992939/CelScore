@@ -25,7 +25,7 @@ struct Constants {
     static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
     static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
     static let kNavigationPadding: CGFloat = 80.0
-    static let kCellPadding: CGFloat = 9.0
+    static let kCellPadding: CGFloat = 10.0
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0
     static let kMiddleVoteValue: CGFloat = 3.0
