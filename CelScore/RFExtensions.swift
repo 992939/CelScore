@@ -12,17 +12,30 @@ import Foundation
 public extension UIView {
 
     //MARK: Public Method
-    public func slideLeftToRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+    public func slideRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         
-        let slideLeftToRightTransition = CATransition()
-        if let delegate: AnyObject = completionDelegate { slideLeftToRightTransition.delegate = delegate }
-        slideLeftToRightTransition.type = kCATransitionPush
-        slideLeftToRightTransition.subtype = kCATransitionFromLeft
-        slideLeftToRightTransition.duration = duration
-        slideLeftToRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideLeftToRightTransition.fillMode = kCAFillModeRemoved
+        let slideRightTransition = CATransition()
+        if let delegate: AnyObject = completionDelegate { slideRightTransition.delegate = delegate }
+        slideRightTransition.type = kCATransitionPush
+        slideRightTransition.subtype = kCATransitionFromLeft
+        slideRightTransition.duration = duration
+        slideRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideRightTransition.fillMode = kCAFillModeRemoved
         
-        self.layer.addAnimation(slideLeftToRightTransition, forKey: "slideLeftToRightTransition")
+        self.layer.addAnimation(slideRightTransition, forKey: "slideRightTransition")
+    }
+    
+    public func slideLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        
+        let slideLeftTransition = CATransition()
+        if let delegate: AnyObject = completionDelegate { slideLeftTransition.delegate = delegate }
+        slideLeftTransition.type = kCATransitionPush
+        slideLeftTransition.subtype = kCATransitionFromLeft
+        slideLeftTransition.duration = duration
+        slideLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideLeftTransition.fillMode = kCAFillModeRemoved
+        
+        self.layer.addAnimation(slideLeftTransition, forKey: "slideLeftTransition")
     }
 }
 
