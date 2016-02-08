@@ -11,7 +11,7 @@ import Foundation
 
 public extension UIView {
 
-    //MARK: Public Method
+    //MARK: Methods
     public func slideRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         
         let slideRightTransition = CATransition()

@@ -188,7 +188,10 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {
-
+        let infoView = InfoViewController(celebrityST: self.celebST).view
+        infoView.frame = self.bottomView.frame
+        self.view.addSubview(infoView)
+        infoView.slideLeft()
     }
 }
 
