@@ -16,7 +16,7 @@ public enum SegmentOrganiseMode: Int {
 
 
 public protocol SMSegmentViewDelegate: class {
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int)
+    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int)
 }
 
 public class SMBasicSegmentView: UIView {
@@ -152,10 +152,10 @@ public class SMBasicSegmentView: UIView {
             let previousSelectedSegment = self.segments[self.indexOfSelectedSegment]
             previousSelectedSegment.setSelected(false, inView: self)
         }
+        self.delegate?.segmentView(self, didSelectSegmentAtIndex: index, previousIndex: self.indexOfSelectedSegment)
         self.indexOfSelectedSegment = index
         let segment = self.segments[index]
         segment.setSelected(true, inView: self)
-        self.delegate?.segmentView(self, didSelectSegmentAtIndex: index)
     }
     
     public func deselectSegment() {

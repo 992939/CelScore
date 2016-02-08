@@ -17,10 +17,11 @@ final class RatingsViewController: ASViewController {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct) {
+    init(celebrityST: CelebrityStruct, frame: CGRect) {
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         
         super.init(node: ASDisplayNode())
+        self.view.frame = frame
         
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
         self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()

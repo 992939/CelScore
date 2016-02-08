@@ -187,9 +187,9 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int) {
-        let infoView = InfoViewController(celebrityST: self.celebST).view
-        infoView.frame = self.bottomView.frame
+    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
+        print("current index: \(segmentView.indexOfSelectedSegment) and next index: \(index)")
+        let infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomView.frame).view
         self.view.addSubview(infoView)
         infoView.slideLeft()
     }
