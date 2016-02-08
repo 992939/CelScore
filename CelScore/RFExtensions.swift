@@ -9,6 +9,23 @@
 import Foundation
 
 
+public extension UIView {
+
+    //MARK: Public Method
+    public func slideLeftToRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        
+        let slideLeftToRightTransition = CATransition()
+        if let delegate: AnyObject = completionDelegate { slideLeftToRightTransition.delegate = delegate }
+        slideLeftToRightTransition.type = kCATransitionPush
+        slideLeftToRightTransition.subtype = kCATransitionFromLeft
+        slideLeftToRightTransition.duration = duration
+        slideLeftToRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideLeftToRightTransition.fillMode = kCAFillModeRemoved
+        
+        self.layer.addAnimation(slideLeftToRightTransition, forKey: "slideLeftToRightTransition")
+    }
+}
+
 public extension UITextField {
     
     //MARK: Public Method

@@ -25,7 +25,6 @@
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
-		0064317E1C6839A30062BBDB /* EatFit in Resources */ = {isa = PBXBuildFile; fileRef = 0064317D1C6839A30062BBDB /* EatFit */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
 		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
@@ -116,7 +115,6 @@
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
-		0064317D1C6839A30062BBDB /* EatFit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EatFit; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
 		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0064317D1C6839A30062BBDB /* EatFit */,
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0016DD221C547AC400021202 /* CosmosDistrib.swift */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
@@ -498,7 +495,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
-				0064317E1C6839A30062BBDB /* EatFit in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

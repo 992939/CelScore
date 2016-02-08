@@ -12,7 +12,6 @@ import LMGaugeView
 import AIRTimer
 import SMSegmentView
 import ImagePalette
-import EatFitViewController
 
 
 final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegmentViewDelegate {
@@ -20,7 +19,6 @@ final class DetailViewController: ASViewController, LMGaugeViewDelegate, SMSegme
     //MARK: Property
     let celebST: CelebrityStruct
     let bottomView: MaterialPulseView
-    let eatFitController: EatFitViewController = EatFitViewController.controller()
     private var strongColor: UIColor
     private var weakColor: UIColor
     
