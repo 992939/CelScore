@@ -132,7 +132,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        
         let infoView: UIView
         switch index {
         case 1: infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
@@ -140,7 +139,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         default: infoView = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
         }
         
+        //TODO: animate removingView out of the screen.
+        let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
+        removingView?.removeFromSuperview()
         self.view.addSubview(infoView)
+
         if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
         else { infoView.slideRight() }
     }

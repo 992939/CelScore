@@ -23,6 +23,7 @@ final class InfoViewController: ASViewController {
         
         super.init(node: ASDisplayNode())
         self.view.frame = frame
+        self.view.tag = Constants.kDetailViewTag
         
         
         //        self.celebrityVM.getCelebritySignal(id: self.celebST.id)

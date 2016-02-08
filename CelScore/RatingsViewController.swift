@@ -23,6 +23,7 @@ final class RatingsViewController: ASViewController {
         
         super.init(node: ASDisplayNode())
         self.view.frame = frame
+        self.view.tag = Constants.kDetailViewTag
         
         self.ratingsVM.getRatingsSignal(ratingType: .Ratings).start()
         self.ratingsVM.getRatingsSignal(ratingType: .UserRatings).start()

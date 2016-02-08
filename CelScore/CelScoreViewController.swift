@@ -25,6 +25,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         self.pulseView = MaterialPulseView(frame: frame)
         super.init(node: ASDisplayNode())
+        self.view.tag = Constants.kDetailViewTag
     }
     
     //MARK: Methods
