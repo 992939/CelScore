@@ -9,11 +9,11 @@
 import UIKit
 
 
-@IBDesignable public class CosmosView: UIView {
+public class CosmosView: UIView {
     
     //MARK: Properties
-    @IBInspectable public var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
-    @IBInspectable public var text: String? { didSet { if oldValue != text { update() } } }
+    public var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
+    public var text: String? { didSet { if oldValue != text { update() } } }
     public var settings = CosmosSettings() { didSet { update() } }
     public var viewContentSize = CGSize()
     
@@ -41,24 +41,14 @@ import UIKit
     public func update() {
         var layers = CosmosLayers.createStarLayers(rating, settings: settings)
         layer.sublayers = layers
-
         if let text = text {
             let textLayer = createTextLayer(text, layers: layers)
             layers.append(textLayer)
         }
+        
         updateSize(layers)
     }
     
-    /**
-     
-     Creates the text layer for the given text string.
-     
-     - parameter text: Text string for the text layer.
-     - parameter layers: Arrays of layers containing the stars.
-     
-     - returns: The newly created text layer.
-     
-     */
     private func createTextLayer(text: String, layers: [CALayer]) -> CALayer {
         let textLayer = CosmosLayerHelper.createTextLayer(text,
             font: settings.textFont, color: settings.textColor)
@@ -72,24 +62,15 @@ import UIKit
         return textLayer
     }
     
-    /**
-     
-     Updates the size to fit all the layers containing stars and text.
-     
-     - parameter layers: Array of layers containing stars and the text.
-     
-     */
     private func updateSize(layers: [CALayer]) {
         viewContentSize = CosmosSize.calculateSizeToFitLayers(layers)
         invalidateIntrinsicContentSize()
     }
     
     /// Returns the content size to fit all the star and text layers.
-    override public func intrinsicContentSize() -> CGSize {
-        return viewContentSize
-    }
+    override public func intrinsicContentSize() -> CGSize { return viewContentSize }
     
-    // MARK: - Touch recognition
+    //MARK: Touch recognition
     
     /// Closure will be called when user touches the cosmos view. The touch rating argument is passed to the closure.
     public var didTouchCosmos: ((Double)->())?
@@ -97,7 +78,7 @@ import UIKit
     /// Closure will be called when the user lifts finger from the cosmos view. The touch rating argument is passed to the closure.
     public var didFinishTouchingCosmos: ((Double)->())?
     
-    /// Overriding the function to detect the first touch gesture.
+    
     public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
@@ -107,7 +88,6 @@ import UIKit
         }
     }
     
-    /// Overriding the function to detect touch move.
     public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesMoved(touches, withEvent: event)
         
@@ -117,22 +97,11 @@ import UIKit
         }
     }
     
-    /// Detecting event when the user lifts their finger.
     public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
-        
         didFinishTouchingCosmos?(rating)
     }
     
-    /**
-     
-     Called when the view is touched.
-     
-     - parameter locationX: The horizontal location of the touch relative to the width of the stars.
-     
-     - parameter starsWidth: The width of the stars excluding the text.
-     
-     */
     func onDidTouch(locationX: CGFloat, starsWidth: CGFloat) {
         let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth,
             settings: settings)
