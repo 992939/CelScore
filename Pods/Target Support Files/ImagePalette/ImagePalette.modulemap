@@ -1,0 +1,6 @@
+framework module ImagePalette {
+  umbrella header "ImagePalette-umbrella.h"
+
+  export *
+  module * { export * }
+}
