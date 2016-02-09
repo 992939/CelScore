@@ -43,7 +43,7 @@ public enum Info: Int {
         case .MiddleName: return "MiddleName"
         case .LastName: return "LastName"
         case .From: return "From"
-        case .Birthdate: return "Birthdate"
+        case .Birthdate: return "Date of Birth"
         case .Height: return "Height"
         case .Zodiac: return "Zodiac"
         case .Status: return "Status"

@@ -36,13 +36,34 @@ final class InfoViewController: ASViewController {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
                 
+                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
+                var age = 0
+                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
+                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
+                let formatter = NSDateFormatter()
+                formatter.dateStyle = NSDateFormatterStyle.LongStyle
+                
                 for (index, quality) in Info.getAll().enumerate() {
                     let qualityView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
                     let qualityLabel = ShuffleTextLabel()
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
                     let infoLabel = ShuffleTextLabel()
-                    infoLabel.text = "@GreyEcologist"
+                    
+                    switch quality {
+                    case "FirstName": infoLabel.text = celeb.firstName
+                    case "MiddleName": infoLabel.text = celeb.middleName
+                    case "LastName": infoLabel.text = celeb.lastName
+                    case "From": infoLabel.text = celeb.from
+                    case "Date of Birth": infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                    case "Height": infoLabel.text = celeb.height
+                    case "Zodiac": infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                    case "Status": infoLabel.text = celeb.status
+                    case "C-Score": infoLabel.text = String(format: "%.2f", celeb.prevScore)
+                    case "Networth": infoLabel.text = celeb.netWorth
+                    default: infoLabel.text = "n/a"
+                    }
+                    
                     infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: maxWidth - (qualityLabel.width + Constants.kCellPadding), height: 25)
                     infoLabel.textAlignment = .Right
                     qualityView.depth = .Depth1
@@ -51,13 +72,8 @@ final class InfoViewController: ASViewController {
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)
                 }
-                
-                let zodiac = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                var age = 0
-                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
             })
+            .delay(400, onScheduler: QueueScheduler.mainQueueScheduler)
             .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
