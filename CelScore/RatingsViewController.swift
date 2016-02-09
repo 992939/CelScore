@@ -36,7 +36,7 @@ final class RatingsViewController: ASViewController {
         ratingsVM.getRatingsSignal(ratingType: .Ratings)
         .on(next: { ratings in
             for (index, quality) in Qualities.getAll().enumerate() {
-                let qualityView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
+                let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
                 let qualityLabel = UILabel()
                 qualityLabel.text = quality
                 qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)

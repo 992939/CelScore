@@ -14,14 +14,14 @@ final class InfoViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let pulseView: MaterialPulseView
+    let pulseView: MaterialView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
         self.celebST = celebrityST
-        self.pulseView = MaterialPulseView(frame: frame)
+        self.pulseView = MaterialView(frame: frame)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
@@ -42,7 +42,7 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
                 for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
