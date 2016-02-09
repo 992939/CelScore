@@ -32,10 +32,10 @@ final class InfoViewController: ASViewController {
         let maxHeight = self.pulseView.frame.height - 2 * Constants.kCellPadding
         let maxWidth = self.pulseView.frame.width - 2 * Constants.kCellPadding
         
-        for (index, quality) in Qualities.getAll().enumerate() {
+        for (index, quality) in Info.getAll().enumerate() {
             let qualityLabel = ShuffleTextLabel()
             qualityLabel.text = quality
-            qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30)
+            qualityLabel.frame = CGRect(x: 2 * Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30)
             self.pulseView.addSubview(qualityLabel)
         }
         

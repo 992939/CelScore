@@ -26,12 +26,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {}
-                if oldSchemaVersion < 2 {
-                    migration.enumerate(CookieModel.className()) { oldObject, newObject in
-                        newObject!["list"] = List<Chip>()
+                if (oldSchemaVersion < 2) {}
+                if oldSchemaVersion < 3 {
+                    migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["from"] = ""
+                        newObject!["backgroundPic"] = ""
+                        newObject!["backgroundColor"] = ""
                     }
                 }
         })

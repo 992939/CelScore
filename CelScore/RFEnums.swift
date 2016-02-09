@@ -18,8 +18,39 @@ public enum Info: Int {
     case Height
     case Zodiac
     case Status
-    case Rank
+    case CelScore
     case Networth
+    
+    //MARK: Methods
+    public static func getAll() -> [String] {
+        return [
+            FirstName.name(),
+            MiddleName.name(),
+            LastName.name(),
+            From.name(),
+            Birthdate.name(),
+            Height.name(),
+            Zodiac.name(),
+            Status.name(),
+            CelScore.name(),
+            Networth.name()
+        ]
+    }
+    
+    public func name() -> String {
+        switch self {
+        case .FirstName: return "FirstName:"
+        case .MiddleName: return "MiddleName:"
+        case .LastName: return "LastName:"
+        case .From: return "From:"
+        case .Birthdate: return "Birthdate:"
+        case .Height: return "Height:"
+        case .Zodiac: return "Zodiac:"
+        case .Status: return "Status:"
+        case .CelScore: return "C-Score:"
+        case .Networth: return "Networth:"
+        }
+    }
 }
 
 public enum Qualities: Int {
