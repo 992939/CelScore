@@ -41,7 +41,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.8 * maxHeight
+        let gaugeWidth: CGFloat = 0.7 * maxHeight
         gaugeView.frame = CGRect(x: (maxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }

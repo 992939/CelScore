@@ -14,7 +14,6 @@ final class InfoViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let ratingsVM: RatingsViewModel
     let pulseView: MaterialPulseView
     
     //MARK: Initializers
@@ -22,7 +21,6 @@ final class InfoViewController: ASViewController {
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
         self.celebST = celebrityST
-        self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         self.pulseView = MaterialPulseView(frame: frame)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
@@ -45,7 +43,7 @@ final class InfoViewController: ASViewController {
                 
                 for (index, quality) in Info.getAll().enumerate() {
                     let qualityView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
-                    let qualityLabel = ShuffleTextLabel()
+                    let qualityLabel = UILabel()
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
                     let infoLabel = ShuffleTextLabel()
@@ -73,7 +71,6 @@ final class InfoViewController: ASViewController {
                     self.pulseView.addSubview(qualityView)
                 }
             })
-            .delay(400, onScheduler: QueueScheduler.mainQueueScheduler)
             .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
