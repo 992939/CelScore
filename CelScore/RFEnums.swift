@@ -9,6 +9,7 @@
 import Foundation
 
 
+//MARK: Info
 public enum Info: Int {
     case FirstName
     case MiddleName
@@ -21,7 +22,6 @@ public enum Info: Int {
     case CelScore
     case Networth
     
-    //MARK: Methods
     public static func getAll() -> [String] {
         return [
             FirstName.name(),
@@ -53,6 +53,7 @@ public enum Info: Int {
     }
 }
 
+//MARK: Qualities
 public enum Qualities: Int {
     case Talent
     case Originality
@@ -65,7 +66,6 @@ public enum Qualities: Int {
     case Charisma
     case SexAppeal
     
-    //MARK: Methods
     public static func getAll() -> [String] {
         return [
             Talent.name(),
@@ -97,6 +97,7 @@ public enum Qualities: Int {
     }
 }
 
+//MARK: CelebList
 public enum CelebList : Int {
     case PublicOpinion
     case Ubuntu
@@ -106,7 +107,6 @@ public enum CelebList : Int {
     case Television
     case Candidates
     
-    //MARK: Methods
     public static func getAll() -> [String] {
         return [
             PublicOpinion.name(),
@@ -150,6 +150,7 @@ public enum CelebList : Int {
     }
 }
 
+//MARK: Zodiac
 public enum Zodiac : Int {
     case Aries
     case Taurus
@@ -164,7 +165,6 @@ public enum Zodiac : Int {
     case Aquarius
     case Pisces
 
-    //MARK: Methods
     public func name() -> String {
         switch self {
         case .Aries: return "Aries"
@@ -215,4 +215,11 @@ public enum Zodiac : Int {
             case .Pisces: return "♓"
         }
     }
+}
+
+//MARK: StarFillMode
+public enum StarFillMode: Int {
+    case Full = 0
+    case Half = 1
+    case Precise = 2
 }
