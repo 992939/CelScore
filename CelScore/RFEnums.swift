@@ -88,11 +88,11 @@ public enum Qualities: Int {
         case .Authenticity: return "Authenticity"
         case .Generosity: return "Generosity"
         case .RoleModel: return "Role Model"
-        case .HardWork: return "Hard Work"
+        case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
         case .Elegance: return "Elegance"
         case .Charisma: return "Charisma"
-        case .SexAppeal: return "SexAppeal"
+        case .SexAppeal: return "Sex Appeal"
         }
     }
 }

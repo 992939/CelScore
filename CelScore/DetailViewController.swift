@@ -51,7 +51,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let maxWidth = Constants.kScreenWidth - 2 * Constants.kCellPadding
         
         let topViewFrame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 10, width: maxWidth, height: 170)
-        let topView: MaterialPulseView = getTopView(topViewFrame)
+        let topView: MaterialView = getTopView(topViewFrame)
         
         let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + Constants.kCellPadding, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
@@ -95,8 +95,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
             .start()
     }
     
-    func getTopView(frame: CGRect) -> MaterialPulseView {
-        let topView = MaterialPulseView(frame: frame)
+    func getTopView(frame: CGRect) -> MaterialView {
+        let topView = MaterialView(frame: frame)
         let viewMaxWidth = topView.width - 2 * Constants.kCellPadding
         
         let celebPicNode = ASNetworkImageNode(webImage: ())

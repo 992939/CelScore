@@ -14,14 +14,14 @@ final class RatingsViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let pulseView: MaterialPulseView
+    let pulseView: MaterialView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
         self.celebST = celebrityST
-        self.pulseView = MaterialPulseView(frame: frame)
+        self.pulseView = MaterialView(frame: frame)
         super.init(node: ASDisplayNode())
         self.view.frame = frame
         self.view.tag = Constants.kDetailViewTag
@@ -42,7 +42,16 @@ final class RatingsViewController: ASViewController {
                 qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
                 qualityView.depth = .Depth1
                 qualityView.backgroundColor = MaterialColor.white
+                
+                let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
+                cosmosView.settings.starSize = 22
+                cosmosView.settings.starMargin = 5
+                cosmosView.settings.updateOnTouch = true
+                cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
+                cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                
                 qualityView.addSubview(qualityLabel)
+                qualityView.addSubview(cosmosView)
                 self.pulseView.addSubview(qualityView)
             }
         })
