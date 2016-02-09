@@ -27,7 +27,6 @@
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
 		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
 		006431851C69781D0062BBDB /* ShuffleTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431841C69781D0062BBDB /* ShuffleTextLabel.swift */; };
-		006431881C6A63C40062BBDB /* CosmosDefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431871C6A63C40062BBDB /* CosmosDefaultSettings.swift */; };
 		0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431891C6A64480062BBDB /* CosmosLayers.swift */; };
 		0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318B1C6A64DB0062BBDB /* CosmosRating.swift */; };
 		0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318D1C6A65940062BBDB /* CosmosSettings.swift */; };
@@ -125,7 +124,6 @@
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
 		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
 		006431841C69781D0062BBDB /* ShuffleTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleTextLabel.swift; sourceTree = "<group>"; };
-		006431871C6A63C40062BBDB /* CosmosDefaultSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDefaultSettings.swift; sourceTree = "<group>"; };
 		006431891C6A64480062BBDB /* CosmosLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosLayers.swift; sourceTree = "<group>"; };
 		0064318B1C6A64DB0062BBDB /* CosmosRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosRating.swift; sourceTree = "<group>"; };
 		0064318D1C6A65940062BBDB /* CosmosSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosSettings.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 				0064318B1C6A64DB0062BBDB /* CosmosRating.swift */,
 				0016DD221C547AC400021202 /* CosmosTouch.swift */,
 				0064318D1C6A65940062BBDB /* CosmosSettings.swift */,
-				006431871C6A63C40062BBDB /* CosmosDefaultSettings.swift */,
 				006431911C6A67430062BBDB /* StarLayer.swift */,
 			);
 			name = CosmosStars;
@@ -741,7 +738,6 @@
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
-				006431881C6A63C40062BBDB /* CosmosDefaultSettings.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
 				0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
