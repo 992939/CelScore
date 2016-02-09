@@ -39,16 +39,16 @@ public enum Info: Int {
     
     public func name() -> String {
         switch self {
-        case .FirstName: return "FirstName:"
-        case .MiddleName: return "MiddleName:"
-        case .LastName: return "LastName:"
-        case .From: return "From:"
-        case .Birthdate: return "Birthdate:"
-        case .Height: return "Height:"
-        case .Zodiac: return "Zodiac:"
-        case .Status: return "Status:"
-        case .CelScore: return "C-Score:"
-        case .Networth: return "Networth:"
+        case .FirstName: return "FirstName"
+        case .MiddleName: return "MiddleName"
+        case .LastName: return "LastName"
+        case .From: return "From"
+        case .Birthdate: return "Birthdate"
+        case .Height: return "Height"
+        case .Zodiac: return "Zodiac"
+        case .Status: return "Status"
+        case .CelScore: return "C-Score"
+        case .Networth: return "Networth"
         }
     }
 }

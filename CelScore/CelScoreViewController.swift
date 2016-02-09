@@ -15,6 +15,7 @@ import AIRTimer
 final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: Properties
+    let celebST: CelebrityStruct
     let ratingsVM: RatingsViewModel
     let pulseView: MaterialPulseView
     
@@ -22,6 +23,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
+        self.celebST = celebrityST
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         self.pulseView = MaterialPulseView(frame: frame)
         super.init(node: ASDisplayNode())
@@ -32,8 +34,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let maxHeight = self.pulseView.frame.height - 2 * Constants.kCellPadding
-        let maxWidth = self.pulseView.frame.width - 2 * Constants.kCellPadding
+        let maxHeight = self.pulseView.height - 2 * Constants.kCellPadding
+        let maxWidth = self.pulseView.width - 2 * Constants.kCellPadding
         
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue

@@ -13,12 +13,14 @@ import Material
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
+    let celebST: CelebrityStruct
     let ratingsVM: RatingsViewModel
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
+        self.celebST = celebrityST
         self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         
         super.init(node: ASDisplayNode())
