@@ -91,5 +91,5 @@ struct Constants {
         "The map is not the territory.",
         "Power only steps back facing more power.",
         "As above so below, as below so above.",
-        "Knowledge is power."]
+        "Life is a spiritual journey."]
 }

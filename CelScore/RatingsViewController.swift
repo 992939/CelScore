@@ -44,6 +44,7 @@ final class RatingsViewController: ASViewController {
                 qualityView.backgroundColor = MaterialColor.white
                 
                 let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
+                cosmosView.tag = index
                 switch quality {
                 case Qualities.Talent.name(): cosmosView.rating = ratings.rating1
                 case Qualities.Originality.name(): cosmosView.rating = ratings.rating2
@@ -61,6 +62,10 @@ final class RatingsViewController: ASViewController {
                 cosmosView.settings.updateOnTouch = true
                 cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
                 cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                cosmosView.didFinishTouchingCosmos = { rating in
+                    print("a ouais: \(rating) et tag: \(cosmosView.tag)")
+                    
+                }
                 
                 qualityView.addSubview(qualityLabel)
                 qualityView.addSubview(cosmosView)
