@@ -44,6 +44,18 @@ final class RatingsViewController: ASViewController {
                 qualityView.backgroundColor = MaterialColor.white
                 
                 let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
+                switch quality {
+                case Qualities.Talent.name(): cosmosView.rating = ratings.rating1
+                case Qualities.Originality.name(): cosmosView.rating = ratings.rating2
+                case Qualities.Authenticity.name(): cosmosView.rating = ratings.rating3
+                case Qualities.Generosity.name(): cosmosView.rating = ratings.rating4
+                case Qualities.RoleModel.name(): cosmosView.rating = ratings.rating5
+                case Qualities.HardWork.name(): cosmosView.rating = ratings.rating6
+                case Qualities.Smarts.name(): cosmosView.rating = ratings.rating7
+                case Qualities.Elegance.name(): cosmosView.rating = ratings.rating8
+                case Qualities.Charisma.name(): cosmosView.rating = ratings.rating9
+                case Qualities.SexAppeal.name(): cosmosView.rating = ratings.rating10
+                default: cosmosView.rating = 3 }
                 cosmosView.settings.starSize = 22
                 cosmosView.settings.starMargin = 5
                 cosmosView.settings.updateOnTouch = true

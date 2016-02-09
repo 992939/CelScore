@@ -49,16 +49,16 @@ final class InfoViewController: ASViewController {
                     let infoLabel = ShuffleTextLabel()
                     
                     switch quality {
-                    case "FirstName": infoLabel.text = celeb.firstName
-                    case "MiddleName": infoLabel.text = celeb.middleName
-                    case "LastName": infoLabel.text = celeb.lastName
-                    case "From": infoLabel.text = celeb.from
-                    case "Date of Birth": infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
-                    case "Height": infoLabel.text = celeb.height
-                    case "Zodiac": infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                    case "Status": infoLabel.text = celeb.status
-                    case "C-Score": infoLabel.text = String(format: "%.2f", celeb.prevScore)
-                    case "Networth": infoLabel.text = celeb.netWorth
+                    case Info.FirstName.name(): infoLabel.text = celeb.firstName
+                    case Info.MiddleName.name(): infoLabel.text = celeb.middleName
+                    case Info.LastName.name(): infoLabel.text = celeb.lastName
+                    case Info.From.name(): infoLabel.text = celeb.from
+                    case Info.Birthdate.name(): infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                    case Info.Height.name(): infoLabel.text = celeb.height
+                    case Info.Zodiac.name(): infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                    case Info.Status.name(): infoLabel.text = celeb.status
+                    case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", celeb.prevScore)
+                    case Info.Networth.name(): infoLabel.text = celeb.netWorth
                     default: infoLabel.text = "n/a"
                     }
                     
