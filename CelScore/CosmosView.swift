@@ -11,62 +11,15 @@ import UIKit
 
 @IBDesignable public class CosmosView: UIView {
     
-    /**
-     
-     The currently shown number of stars, usually between 1 and 5. If the value is decimal the stars will be shown according to the Fill Mode setting.
-     
-     */
-    @IBInspectable public var rating: Double = CosmosDefaultSettings.rating {
-        didSet {
-            if oldValue != rating {
-                update()
-            }
-        }
-    }
-    
-    /// Currently shown text. Set it to nil to display just the stars without text.
-    @IBInspectable public var text: String? {
-        didSet {
-            if oldValue != text {
-                update()
-            }
-        }
-    }
-    
-    /// Star rating settings.
-    public var settings = CosmosSettings() {
-        didSet {
-            update()
-        }
-    }
-    
-    /// Stores calculated size of the view. It is used as intrinsic content size.
+    //MARK: Properties
+    @IBInspectable public var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
+    @IBInspectable public var text: String? { didSet { if oldValue != text { update() } } }
+    public var settings = CosmosSettings() { didSet { update() } }
     public var viewContentSize = CGSize()
     
-    /// Draws the stars when the view comes out of storyboard with default settings
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        update()
-    }
-    
-    
-    /**
-     
-     Initializes and returns a newly allocated cosmos view object.
-     
-     */
-    convenience public init() {
-        self.init(frame: CGRect())
-    }
-    
-    /**
-     
-     Initializes and returns a newly allocated cosmos view object with the specified frame rectangle.
-     
-     - parameter frame: The frame rectangle for the view.
-     
-     */
+    //MARK: Initializers
+    convenience public init() { self.init(frame: CGRect()) }
+    required public init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder); improvePerformance() }
     override public init(frame: CGRect) {
         super.init(frame: frame)
         update()
@@ -75,46 +28,24 @@ import UIKit
         improvePerformance()
     }
     
-    /// Initializes and returns a newly allocated cosmos view object.
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        improvePerformance()
-    }
+    //MARK: Methods
+    public override func awakeFromNib() { super.awakeFromNib(); update() }
     
-    /// Change view settings for faster drawing
     private func improvePerformance() {
         /// Cache the view into a bitmap instead of redrawing the stars each time
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.mainScreen().scale
-        
         opaque = true
     }
-    
-    /**
-     
-     Updates the stars and optional text based on current values of `rating` and `text` properties.
-     
-     */
+
     public func update() {
-        
-        // Create star layers
-        // ------------
-        
         var layers = CosmosLayers.createStarLayers(rating, settings: settings)
         layer.sublayers = layers
-        
-        // Create text layer
-        // ------------
-        
+
         if let text = text {
             let textLayer = createTextLayer(text, layers: layers)
             layers.append(textLayer)
         }
-        
-        // Update size
-        // ------------
-        
         updateSize(layers)
     }
     
