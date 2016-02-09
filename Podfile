@@ -21,7 +21,6 @@ target 'CelScore' do
     pod 'YLProgressBar', '~> 3.8'
     pod 'Material', '~> 1.30'
     pod 'SMSegmentView', '~> 1.1'
-    pod 'ImagePalette', '~> 0.0'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'LMGaugeView'
     pod 'HMSegmentedControl'

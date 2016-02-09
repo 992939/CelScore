@@ -26,6 +26,7 @@
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
 		004B56F51B35332B008A75EB /* CelScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56F41B35332B008A75EB /* CelScoreTests.swift */; };
 		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
+		006431851C69781D0062BBDB /* ShuffleTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431841C69781D0062BBDB /* ShuffleTextLabel.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
 		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
@@ -117,6 +118,7 @@
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56F41B35332B008A75EB /* CelScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelScoreTests.swift; sourceTree = "<group>"; };
 		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
+		006431841C69781D0062BBDB /* ShuffleTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleTextLabel.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
 		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0016DD221C547AC400021202 /* CosmosDistrib.swift */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				006431841C69781D0062BBDB /* ShuffleTextLabel.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
@@ -702,6 +705,7 @@
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
 				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
+				006431851C69781D0062BBDB /* ShuffleTextLabel.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,

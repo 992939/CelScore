@@ -9,6 +9,63 @@
 import Foundation
 
 
+public enum Info: Int {
+    case FirstName
+    case MiddleName
+    case LastName
+    case From
+    case Birthdate
+    case Height
+    case Zodiac
+    case Status
+    case Rank
+    case Networth
+}
+
+public enum Qualities: Int {
+    case Talent
+    case Originality
+    case Authenticity
+    case Generosity
+    case RoleModel
+    case HardWork
+    case Smarts
+    case Elegance
+    case Charisma
+    case SexAppeal
+    
+    //MARK: Methods
+    public static func getAll() -> [String] {
+        return [
+            Talent.name(),
+            Originality.name(),
+            Authenticity.name(),
+            Generosity.name(),
+            RoleModel.name(),
+            HardWork.name(),
+            Smarts.name(),
+            Elegance.name(),
+            Charisma.name(),
+            SexAppeal.name()
+        ]
+    }
+
+    public func name() -> String {
+        switch self {
+        case .Talent: return "Talent"
+        case .Originality: return "Originality"
+        case .Authenticity: return "Authenticity"
+        case .Generosity: return "Generosity"
+        case .RoleModel: return "Role Model"
+        case .HardWork: return "Hard Work"
+        case .Smarts: return "Smarts"
+        case .Elegance: return "Elegance"
+        case .Charisma: return "Charisma"
+        case .SexAppeal: return "SexAppeal"
+        }
+    }
+}
+
 public enum CelebList : Int {
     case PublicOpinion
     case Ubuntu
@@ -20,7 +77,15 @@ public enum CelebList : Int {
     
     //MARK: Methods
     public static func getAll() -> [String] {
-        return [PublicOpinion.name(), Ubuntu.name(), Hollywood.name(), Sports.name(), Music.name(), Television.name(), Candidates.name()]
+        return [
+            PublicOpinion.name(),
+            Ubuntu.name(),
+            Hollywood.name(),
+            Sports.name(),
+            Music.name(),
+            Television.name(),
+            Candidates.name()
+        ]
     }
     
     public static func getCount() -> Int {

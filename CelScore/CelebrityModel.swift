@@ -41,6 +41,7 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var rank: String = ""
     dynamic var picture2x: String = ""
     dynamic var picture3x: String = ""
+    dynamic var from: String = ""
     dynamic var prevScore: Double = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
@@ -60,6 +61,7 @@ public final class CelebrityModel: Object, NSCopying {
         self.netWorth = dictionary["netWorth"] as! String
         self.picture2x = dictionary["picture2x"] as! String
         self.picture3x = dictionary["picture3x"] as! String
+        self.from = dictionary["from"] as! String
         self.rank = dictionary["rank"] as! String
         self.status = dictionary["status"] as! String
         self.twitter = dictionary["twitter"] as! String
@@ -86,6 +88,7 @@ public final class CelebrityModel: Object, NSCopying {
         copy.rank = self.rank
         copy.picture2x = self.picture2x
         copy.picture3x = self.picture3x
+        copy.from = self.from
         copy.prevScore = self.prevScore
         copy.sex = self.sex
         copy.isFollowed = self.isFollowed
