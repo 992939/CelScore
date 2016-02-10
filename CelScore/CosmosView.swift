@@ -12,15 +12,15 @@ import UIKit
 final class CosmosView: UIView {
     
     //MARK: Properties
-    public var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
-    public var text: String? { didSet { if oldValue != text { update() } } }
-    public var settings = CosmosSettings() { didSet { update() } }
-    public var viewContentSize = CGSize()
+    var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
+    var text: String? { didSet { if oldValue != text { update() } } }
+    var settings = CosmosSettings() { didSet { update() } }
+    var viewContentSize = CGSize()
     
     //MARK: Initializers
-    convenience public init() { self.init(frame: CGRect()) }
-    required public init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder); improvePerformance() }
-    override public init(frame: CGRect) {
+    convenience init() { self.init(frame: CGRect()) }
+    required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder); improvePerformance() }
+    override init(frame: CGRect) {
         super.init(frame: frame)
         update()
         self.frame.size = intrinsicContentSize()
@@ -28,7 +28,7 @@ final class CosmosView: UIView {
     }
     
     //MARK: Methods
-    public override func awakeFromNib() { super.awakeFromNib(); update() }
+    override func awakeFromNib() { super.awakeFromNib(); update() }
     
     private func improvePerformance() {
         /// Cache the view into a bitmap instead of redrawing the stars each time
@@ -37,7 +37,7 @@ final class CosmosView: UIView {
         opaque = true
     }
 
-    public func update() {
+    func update() {
         var layers = CosmosLayers.createStarLayers(rating, settings: settings)
         layer.sublayers = layers
         if let text = text {
@@ -67,18 +67,18 @@ final class CosmosView: UIView {
     }
     
     /// Returns the content size to fit all the star and text layers.
-    override public func intrinsicContentSize() -> CGSize { return viewContentSize }
+    override func intrinsicContentSize() -> CGSize { return viewContentSize }
     
     //MARK: Touch recognition
     
     /// Closure will be called when user touches the cosmos view. The touch rating argument is passed to the closure.
-    public var didTouchCosmos: ((Double)->())?
+    var didTouchCosmos: ((Double)->())?
     
     /// Closure will be called when the user lifts finger from the cosmos view. The touch rating argument is passed to the closure.
-    public var didFinishTouchingCosmos: ((Double)->())?
+    var didFinishTouchingCosmos: ((Double)->())?
     
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
         if let touch = touches.first {
@@ -87,7 +87,7 @@ final class CosmosView: UIView {
         }
     }
     
-    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesMoved(touches, withEvent: event)
         
         if let touch = touches.first {
@@ -96,7 +96,7 @@ final class CosmosView: UIView {
         }
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         didFinishTouchingCosmos?(rating)
     }
@@ -132,7 +132,7 @@ final class CosmosView: UIView {
     }
     
     /// Increase the hitsize of the view if it's less than 44px for easier touching.
-    override public func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
         let oprimizedBounds = CosmosTouchTarget.optimize(bounds)
         return oprimizedBounds.contains(point)
     }
