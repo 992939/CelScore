@@ -64,13 +64,8 @@ final class RatingsViewController: ASViewController {
                 cosmosView.settings.updateOnTouch = true
                 cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
                 cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
-                cosmosView.didTouchCosmos = { rating in
-                    cosmosView.settings.userRatingMode = true
-                    cosmosView.settings.currentRating = Int(cosmosView.rating)
-                }
-                cosmosView.didFinishTouchingCosmos = { rating in
-                    print("a ouais: \(rating) et tag: \(cosmosView.tag)")
-                }
+                cosmosView.didTouchCosmos = { rating in cosmosView.settings.userRatingMode = true }
+                cosmosView.didFinishTouchingCosmos = { rating in print("a ouais: \(rating) et tag: \(cosmosView.tag)") }
                 
                 qualityView.addSubview(qualityLabel)
                 qualityView.addSubview(cosmosView)

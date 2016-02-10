@@ -16,7 +16,6 @@ public struct CosmosSettings {
     public var colorFilled = CosmosDefaultSettings.colorFilled
     public var fillMode = CosmosDefaultSettings.fillMode
     public var userRatingMode = CosmosDefaultSettings.userRatingMode
-    public var currentRating = CosmosDefaultSettings.currentRating
     public var previousRating = CosmosDefaultSettings.previousRating
     
     public var starMargin: Double = CosmosDefaultSettings.starMargin
@@ -40,7 +39,6 @@ struct CosmosDefaultSettings {
     static let colorFilled = defaultColor
     static let fillMode = StarFillMode.Full
     static let userRatingMode = false
-    static let currentRating = 3
     static let previousRating = 3
     static let rating: Double = 2.718281828
     static let starMargin: Double = 5
