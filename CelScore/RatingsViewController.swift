@@ -65,12 +65,7 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
                     cosmosView.didTouchCosmos = { rating in
                         cosmosView.settings.userRatingMode = true
-                        RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
-                            .on(next: { ratings in
-                                let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                                if unrated.count == 0 { RatingsViewModel().voteSignal(ratingsId: self.celebST.id).start() }
-                            })
-                            .start()
+                        RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating)).start()
                     }
                     
                     qualityView.addSubview(qualityLabel)

@@ -69,6 +69,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         celScoreButton.shape = .Circle
         celScoreButton.depth = .Depth2
         celScoreButton.backgroundColor = MaterialColor.grey.lighten5
+        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
         
         self.bottomViewFrame = CGRect(
             x: Constants.kCellPadding,
@@ -89,6 +90,23 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
+    
+    func voteAction() {
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+            .on(next: { ratings in
+                let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
+                if unrated.count == 0 {
+                    RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
+                        .on(next: { ratings in self.voteAnimation() })
+                        .start()
+                }
+            })
+            .start()
+    }
+    
+    func voteAnimation() {
+        print("murder!!!!")
+    }
     
     func shareVote() {
         CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)

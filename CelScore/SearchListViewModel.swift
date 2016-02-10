@@ -39,6 +39,7 @@ final class SearchListViewModel: CelebrityListViewModel {
             predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             list = realm.objects(CelebrityModel).filter(predicate)
             sendNext(sink, list)
+            sendCompleted(sink)
         }
     }
 }

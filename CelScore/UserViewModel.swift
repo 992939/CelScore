@@ -58,7 +58,7 @@ final class UserViewModel: NSObject {
         }
     }
     
-    func logoutSignal(loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
+    func logoutSignal(loginType: LoginType) -> SignalProducer<LoginType, NoError> {
         return SignalProducer { sink, _ in
             //TODO: implementation
             switch loginType {
@@ -69,6 +69,7 @@ final class UserViewModel: NSObject {
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }
+            sendCompleted(sink)
         }
     }
     
