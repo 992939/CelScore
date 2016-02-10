@@ -59,14 +59,16 @@ final class CosmosLayers {
     }
     
     //MARK: Private Method
-    private class func createStarLayer(isFilled: Bool, var settings: CosmosSettings, index: Int) -> CALayer {
+    private class func createStarLayer(isFilled: Bool, settings: CosmosSettings, index: Int) -> CALayer {
+        var colorFilled = settings.colorFilled
+        
         if (settings.userRatingMode) {
-            if (index + 1) > settings.previousRating { settings.colorFilled = UIColor.greenColor() }
-            else { settings.colorFilled = UIColor.redColor() }
+            if (index + 1) > settings.previousRating { colorFilled = UIColor.greenColor() }
+            else { colorFilled = UIColor.redColor() }
         }
 
-        let fillColor = isFilled ? settings.colorFilled : settings.colorEmpty
-        let strokeColor = isFilled ? settings.colorFilled : settings.borderColorEmpty
+        let fillColor = isFilled ? colorFilled : settings.colorEmpty
+        let strokeColor = isFilled ? colorFilled : settings.borderColorEmpty
         
         return StarLayer.create(settings.starPoints,
             size: settings.starSize,
