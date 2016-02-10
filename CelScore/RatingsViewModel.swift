@@ -27,15 +27,17 @@ final class RatingsViewModel: NSObject {
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
-            let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-            guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
+            var userRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            print("userRatings \(userRatings)")
+            if  userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
             
             realm.beginWrite()
-            let key = object[ratingIndex]
-            object[key] = newRating
-            object.isSynced = true
+            let key = userRatings![ratingIndex]
+            userRatings![key] = newRating
+            userRatings!.isSynced = true
+            realm.add(userRatings!, update: true)
             try! realm.commitWrite()
-            sendNext(sink, object)
+            sendNext(sink, userRatings!)
             sendCompleted(sink)
         }
     }
