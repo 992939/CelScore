@@ -46,7 +46,7 @@ final class InfoViewController: ASViewController {
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
-                    let infoLabel = ShuffleTextLabel()
+                    let infoLabel = UILabel()
                     
                     switch quality {
                     case Info.FirstName.name(): infoLabel.text = celeb.firstName
