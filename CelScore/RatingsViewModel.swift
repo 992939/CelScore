@@ -28,7 +28,6 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             var userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-            print("userRatings \(userRatings)")
             if  userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
             
             realm.beginWrite()
