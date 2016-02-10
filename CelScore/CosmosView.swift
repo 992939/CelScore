@@ -24,7 +24,6 @@ public class CosmosView: UIView {
         super.init(frame: frame)
         update()
         self.frame.size = intrinsicContentSize()
-        
         improvePerformance()
     }
     

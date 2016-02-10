@@ -15,6 +15,9 @@ public struct CosmosSettings {
     public var colorEmpty = CosmosDefaultSettings.colorEmpty
     public var colorFilled = CosmosDefaultSettings.colorFilled
     public var fillMode = CosmosDefaultSettings.fillMode
+    public var userRatingMode = CosmosDefaultSettings.userRatingMode
+    public var currentRating = CosmosDefaultSettings.currentRating
+    public var previousRating = CosmosDefaultSettings.previousRating
     
     public var starMargin: Double = CosmosDefaultSettings.starMargin
     public var starPoints: [CGPoint] = CosmosDefaultSettings.starPoints
@@ -36,6 +39,9 @@ struct CosmosDefaultSettings {
     static let colorEmpty = UIColor.clearColor()
     static let colorFilled = defaultColor
     static let fillMode = StarFillMode.Full
+    static let userRatingMode = false
+    static let currentRating = 3
+    static let previousRating = 3
     static let rating: Double = 2.718281828
     static let starMargin: Double = 5
     static let starPoints: [CGPoint] = [
@@ -51,6 +57,7 @@ struct CosmosDefaultSettings {
         CGPoint(x: 38.5,  y: 35.0)
     ]
     static var starSize: Double = 20
+    
     static let totalStars = 5
     
     static let textColor = UIColor(red: 127/255, green: 127/255, blue: 127/255, alpha: 1)

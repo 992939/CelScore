@@ -42,6 +42,7 @@ final class RatingsViewController: ASViewController {
                 qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
                 qualityView.depth = .Depth1
                 qualityView.backgroundColor = MaterialColor.white
+                qualityView.pulseScale = false
                 
                 let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
                 cosmosView.tag = index
@@ -59,12 +60,16 @@ final class RatingsViewController: ASViewController {
                 default: cosmosView.rating = 3 }
                 cosmosView.settings.starSize = 22
                 cosmosView.settings.starMargin = 5
+                cosmosView.settings.previousRating = Int(cosmosView.rating)
                 cosmosView.settings.updateOnTouch = true
                 cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
                 cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                cosmosView.didTouchCosmos = { rating in
+                    cosmosView.settings.userRatingMode = true
+                    cosmosView.settings.currentRating = Int(cosmosView.rating)
+                }
                 cosmosView.didFinishTouchingCosmos = { rating in
                     print("a ouais: \(rating) et tag: \(cosmosView.tag)")
-                    
                 }
                 
                 qualityView.addSubview(qualityLabel)
