@@ -53,7 +53,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let topViewFrame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 10, width: maxWidth, height: 170)
         let topView: MaterialView = getTopView(topViewFrame)
         
-        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + Constants.kCellPadding, width: maxWidth, height: 40),
+        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + 1, width: maxWidth, height: 40),
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
                 keySegmentOnSelectionColour: Constants.kMainGreenColor,
@@ -63,22 +63,25 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
         segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
         segmentView.selectSegmentAtIndex(0)
-        segmentView.layer.cornerRadius = 5.0
-        segmentView.layer.borderColor = MaterialColor.blueGrey.darken4.CGColor
-        segmentView.layer.borderWidth = 1.0
         segmentView.delegate = self
+        
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: maxWidth - 35, y: topView.bottom - 20, width: 40, height: 40))
+        celScoreButton.shape = .Circle
+        celScoreButton.depth = .Depth2
+        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
         
         self.bottomViewFrame = CGRect(
             x: Constants.kCellPadding,
             y: segmentView.bottom + Constants.kCellPadding,
             width: maxWidth,
-            height: Constants.kScreenHeight - (segmentView.bottom + 2 * Constants.kCellPadding))
+            height: Constants.kScreenHeight - (segmentView.bottom + Constants.kCellPadding))
         let bottomVC = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!)
         
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
+        self.view.addSubview(celScoreButton)
         self.view.addSubview(bottomVC.view)
         self.view.backgroundColor = MaterialColor.blueGrey.darken4
         
