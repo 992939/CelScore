@@ -12,111 +12,62 @@ import UIKit
 
 extension CGRect: StringLiteralConvertible {
     
-    /// The top coordinate of the rect.
+    //MARK: Properties
     public var top: CGFloat {
-        get {
-            return origin.y
-        }
-        set(value) {
-            origin.y = value
-        }
+        get { return origin.y }
+        set(value) { origin.y = value }
     }
     
-    // The left-side coordinate of the rect.
     public var left: CGFloat {
-        get {
-            return origin.x
-        }
-        set(value) {
-            origin.x = value
-        }
+        get { return origin.x }
+        set(value) { origin.x = value }
     }
     
-    // The bottom coordinate of the rect. Setting this will change origin.y of the rect according to
-    // the height of the rect.
     public var bottom: CGFloat {
-        get {
-            return origin.y + size.height
-        }
-        set(value) {
-            origin.y = value - size.height
-        }
+        get { return origin.y + size.height }
+        set(value) { origin.y = value - size.height }
     }
     
-    // The right-side coordinate of the rect. Setting this will change origin.x of the rect according to
-    // the width of the rect.
     public var right: CGFloat {
-        get {
-            return origin.x + size.width
-        }
-        set(value) {
-            origin.x = value - size.width
-        }
+        get { return origin.x + size.width }
+        set(value) { origin.x = value - size.width }
     }
     
-    // The width of the rect.
     public var width: CGFloat {
-        get {
-            return size.width
-        }
-        set(value) {
-            size.width = value
-        }
+        get { return size.width }
+        set(value) { size.width = value }
     }
     
-    // The height of the rect.
     public var height: CGFloat {
-        get {
-            return size.height
-        }
-        set(value) {
-            size.height = value
-        }
+        get { return size.height }
+        set(value) { size.height = value }
     }
     
-    // The center x coordinate of the rect.
     public var centerX: CGFloat {
-        get {
-            return origin.x + size.width / 2
-        }
-        set (value) {
-            origin.x = value - size.width / 2
-        }
+        get { return origin.x + size.width / 2 }
+        set (value) { origin.x = value - size.width / 2 }
     }
     
-    // The center y coordinate of the rect.
     public var centerY: CGFloat {
-        get {
-            return origin.y + size.height / 2
-        }
-        set (value) {
-            origin.y = value - size.height / 2
-        }
+        get { return origin.y + size.height / 2 }
+        set (value) { origin.y = value - size.height / 2 }
     }
     
-    // The center of the rect.
     public var center: CGPoint {
-        get {
-            return CGPoint(x: centerX, y: centerY)
-        }
-        set (value) {
-            centerX = value.x
-            centerY = value.y
-        }
+        get { return CGPoint(x: centerX, y: centerY) }
+        set (value) { centerX = value.x; centerY = value.y }
     }
     
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
 
+    //MARK: Initializers
     public init(stringLiteral value: StringLiteralType) {
         self.init()
         let rect: CGRect
         if value[value.startIndex] != "{" {
             let comp = value.componentsSeparatedByString(",")
-            if comp.count == 4 {
-                rect = CGRectFromString("{{\(comp[0]),\(comp[1])}, {\(comp[2]), \(comp[3])}}")
-            } else {
-                rect = CGRectZero
-            }
+            if comp.count == 4 { rect = CGRectFromString("{{\(comp[0]),\(comp[1])}, {\(comp[2]), \(comp[3])}}") }
+            else { rect = CGRectZero }
         } else {
             rect = CGRectFromString(value)
         }
@@ -165,11 +116,9 @@ extension CGPoint: StringLiteralConvertible {
 
 extension UIView {
     
-    /// The top coordinate of the UIView.
+    //MARK: Properties
     public var top: CGFloat {
-        get {
-            return frame.top
-        }
+        get { return frame.top }
         set(value) {
             var frame = self.frame
             frame.top = value
@@ -177,11 +126,8 @@ extension UIView {
         }
     }
     
-    /// The left coordinate of the UIView.
     public var left: CGFloat {
-        get {
-            return frame.left
-        }
+        get { return frame.left }
         set(value) {
             var frame = self.frame
             frame.left = value
@@ -189,11 +135,8 @@ extension UIView {
         }
     }
     
-    /// The bottom coordinate of the UIView.
     public var bottom: CGFloat {
-        get {
-            return frame.bottom
-        }
+        get { return frame.bottom }
         set(value) {
             var frame = self.frame
             frame.bottom = value
@@ -201,11 +144,8 @@ extension UIView {
         }
     }
     
-    /// The right coordinate of the UIView.
     public var right: CGFloat {
-        get {
-            return frame.right
-        }
+        get { return frame.right }
         set(value) {
             var frame = self.frame
             frame.right = value
@@ -213,11 +153,8 @@ extension UIView {
         }
     }
     
-    // The width of the UIView.
     public var width: CGFloat {
-        get {
-            return frame.width
-        }
+        get { return frame.width }
         set(value) {
             var frame = self.frame
             frame.width = value
@@ -225,11 +162,8 @@ extension UIView {
         }
     }
     
-    // The height of the UIView.
     public var height: CGFloat {
-        get {
-            return frame.height
-        }
+        get { return frame.height }
         set(value) {
             var frame = self.frame
             frame.height = value
@@ -237,11 +171,8 @@ extension UIView {
         }
     }
     
-    /// The horizontal center coordinate of the UIView.
     public var centerX: CGFloat {
-        get {
-            return frame.centerX
-        }
+        get { return frame.centerX }
         set(value) {
             var frame = self.frame
             frame.centerX = value
@@ -249,11 +180,8 @@ extension UIView {
         }
     }
     
-    /// The vertical center coordinate of the UIView.
     public var centerY: CGFloat {
-        get {
-            return frame.centerY
-        }
+        get { return frame.centerY }
         set(value) {
             var frame = self.frame
             frame.centerY = value

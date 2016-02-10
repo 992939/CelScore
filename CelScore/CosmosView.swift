@@ -9,7 +9,7 @@
 import UIKit
 
 
-public class CosmosView: UIView {
+final class CosmosView: UIView {
     
     //MARK: Properties
     public var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
