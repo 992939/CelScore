@@ -32,8 +32,7 @@ final class RatingsViewController: ASViewController {
         let maxHeight = self.pulseView.height - 2 * Constants.kCellPadding
         let maxWidth = self.pulseView.width - 2 * Constants.kCellPadding
         
-        let ratingsVM = RatingsViewModel(celebrityId: self.celebST.id)
-        ratingsVM.getRatingsSignal(ratingType: .Ratings)
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
         .on(next: { ratings in
             for (index, quality) in Qualities.getAll().enumerate() {
                 let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))

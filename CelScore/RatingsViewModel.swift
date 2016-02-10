@@ -13,24 +13,20 @@ import RealmSwift
 final class RatingsViewModel: NSObject {
     
     //MARK: Properties
-    let ratingsId: String
     enum RatingsType { case Ratings, UserRatings }
     enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
     
     //MARK: Initializer
-    init(celebrityId: String) {
-        self.ratingsId = celebrityId
-        super.init()
-    }
+    override init() { super.init() }
     
     //MARK: Methods
-    func updateUserRatingSignal(ratingIndex ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
+    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
             guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
             
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let predicate = NSPredicate(format: "id = %@", ratingsId)
             let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
             guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
             
@@ -44,10 +40,10 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func voteSignal() -> SignalProducer<RatingsModel, RatingsError> {
+    func voteSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let predicate = NSPredicate(format: "id = %@", ratingsId)
             let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
             guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
             
@@ -61,17 +57,17 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func getRatingsSignal(ratingType ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
+    func getRatingsSignal(ratingsId ratingsId: String, ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             switch ratingType {
             case .Ratings:
-                let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+                let predicate = NSPredicate(format: "id = %@", ratingsId)
                 let ratings = realm.objects(RatingsModel).filter(predicate).first
                 guard let object = ratings else { sendError(sink, .RatingsNotFound); return }
                 sendNext(sink, object)
             case .UserRatings:
-                let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+                let predicate = NSPredicate(format: "id = %@", ratingsId)
                 let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
                 guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
                 sendNext(sink, object)
@@ -80,10 +76,10 @@ final class RatingsViewModel: NSObject {
         }
     }
     
-    func getCelScoreSignal() -> SignalProducer<Double, NoError> {
+    func getCelScoreSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", self.ratingsId)
+            let predicate = NSPredicate(format: "id = %@", ratingsId)
             let ratings = realm.objects(RatingsModel).filter(predicate).first
             let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
             

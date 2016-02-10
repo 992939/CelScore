@@ -16,7 +16,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let ratingsVM: RatingsViewModel
     let pulseView: MaterialPulseView
     
     //MARK: Initializers
@@ -24,7 +23,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     init(celebrityST: CelebrityStruct, frame: CGRect) {
         self.celebST = celebrityST
-        self.ratingsVM = RatingsViewModel(celebrityId: celebrityST.id)
         self.pulseView = MaterialPulseView(frame: frame)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
