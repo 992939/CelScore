@@ -86,7 +86,9 @@ final class RatingsViewController: ASViewController {
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         viewArray.forEach { (subview: UIView) in
             let stars = subview.subviews.filter({ $0 is CosmosView })
-            print("stars: \(stars)")
+            let x: CosmosView = stars.first as! CosmosView
+            x.settings.userRatingMode = false
+            x.update()
         }
     }
 }
