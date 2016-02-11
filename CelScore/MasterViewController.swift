@@ -42,53 +42,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         
-        let title = UILabel()
-        title.text = "CelScore"
-        title.textAlignment = .Center
-        title.textColor = MaterialColor.white
-        
-        let menuButton: FlatButton = FlatButton()
-        menuButton.pulseColor = MaterialColor.white
-        menuButton.pulseScale = false
-        menuButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
-        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
-        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
-
-        let searchButton: FlatButton = FlatButton()
-        searchButton.pulseColor = MaterialColor.white
-        searchButton.pulseScale = false
-        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
-        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
-        
-        let navigationBarView: NavigationBarView = NavigationBarView()
-        navigationBarView.titleLabel = title
-        navigationBarView.leftButtons = [menuButton]
-        navigationBarView.rightButtons = [searchButton]
-        navigationBarView.backgroundColor = Constants.kMainGreenColor
-        
-        let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
-        segmentedControl.frame = CGRect(x: 0, y: navigationBarView.bottom, width: Constants.kScreenWidth, height: 48)
-        segmentedControl.backgroundColor = MaterialColor.green.lighten3
-        segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
-        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
-            NSFontAttributeName: UIFont.systemFontOfSize(18)]
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.clipsToBounds = false
-        segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
-        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
-        segmentedControl.layer.shadowOpacity = 0.3
-        segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
-        
-        let loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        loginButton.frame = CGRect(x: 0, y: navigationBarView.bottom, width: 80, height: 44)
-        loginButton.delegate = self
+        let navigationBarView: NavigationBarView = getNavigationView()
+        let segmentedControl: HMSegmentedControl = getSegmentedControl()
+        let loginButton: FBSDKLoginButton = getLoginButton()
         
         self.view.backgroundColor = Constants.kBackgroundColor
         self.view.addSubview(navigationBarView)
@@ -143,6 +102,60 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
             //UserViewModel().refreshFacebookTokenSignal().start()
         }
+    }
+    
+    //MARK: ViewDidLoad Helpers
+    func getNavigationView() -> NavigationBarView {
+        let title = UILabel()
+        title.text = "CelScore"
+        title.textAlignment = .Center
+        title.textColor = MaterialColor.white
+        
+        let menuButton: FlatButton = FlatButton()
+        menuButton.pulseColor = MaterialColor.white
+        menuButton.pulseScale = false
+        menuButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
+        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
+        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
+        
+        let searchButton: FlatButton = FlatButton()
+        searchButton.pulseColor = MaterialColor.white
+        searchButton.pulseScale = false
+        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
+        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
+        
+        let navigationBarView: NavigationBarView = NavigationBarView()
+        navigationBarView.titleLabel = title
+        navigationBarView.leftButtons = [menuButton]
+        navigationBarView.rightButtons = [searchButton]
+        navigationBarView.backgroundColor = Constants.kMainGreenColor
+        return navigationBarView
+    }
+    
+    func getSegmentedControl() -> HMSegmentedControl {
+        let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
+        segmentedControl.frame = CGRect(x: 0, y: 70, width: Constants.kScreenWidth, height: 48)
+        segmentedControl.backgroundColor = MaterialColor.green.lighten3
+        segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
+        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
+            NSFontAttributeName: UIFont.systemFontOfSize(18)]
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.clipsToBounds = false
+        segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
+        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
+        segmentedControl.layer.shadowOpacity = 0.3
+        segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
+        return segmentedControl
+    }
+    
+    func getLoginButton() -> FBSDKLoginButton {
+        let loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        loginButton.frame = CGRect(x: 0, y: 70, width: 80, height: 44)
+        loginButton.delegate = self
+        return loginButton
     }
     
     //MARK: ASTableView methods
