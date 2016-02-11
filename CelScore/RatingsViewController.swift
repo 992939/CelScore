@@ -83,12 +83,17 @@ final class RatingsViewController: ASViewController {
     }
     
     func animateStarsToGold() {
-        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
-        viewArray.forEach { (subview: UIView) in
-            let stars = subview.subviews.filter({ $0 is CosmosView })
-            let cosmos: CosmosView = stars.first as! CosmosView
-            cosmos.settings.userRatingMode = false
-            cosmos.update()
-        }
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
+            .on(next: { ratings in
+                let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
+                for (index, subview) in viewArray.enumerate() {
+                    let stars = subview.subviews.filter({ $0 is CosmosView })
+                    let cosmos: CosmosView = stars.first as! CosmosView
+                    cosmos.settings.userRatingMode = false
+                    cosmos.rating = ratings[ratings[index]] as! Double
+                    cosmos.update()
+                }
+            })
+            .start()
     }
 }
