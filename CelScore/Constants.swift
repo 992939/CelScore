@@ -12,7 +12,7 @@ import Material
 
 struct Constants {
     
-    //MARK: Properties
+    //Universal
     static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     static let S3BucketName: String = "celeb3x"
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
@@ -23,30 +23,31 @@ struct Constants {
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     
+    static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
+    static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
+    static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
+    
+    //MasterVC
+    static let celebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 2 * kPadding)
+    
+    //SettingsVC
+    static let kSettingsViewWidth: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? (0.625 * UIScreen.mainScreen().bounds.width) : 250
+    static let kPickerViewHeight: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 160 : 100
+    static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
+    
+    //CelebrityTableViewCell
+    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 3.0 : 0.8
+    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
+    
     //DetailVC
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 110)
     static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kNavigationBarRect.bottom + 10, width: kMaxWidth, height: 170)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
     static let bottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
-    
-    //MasterVC
-    static let celebrityTableViewRect: CGRect = CGRect(x: kPadding, y: kNavigationPadding + 44, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 2 * kPadding)
-    
-    static let kSettingsViewWidth: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? (0.625 * UIScreen.mainScreen().bounds.width) : 250
-    static let kPickerViewHeight: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 160 : 100
-    static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
-    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 3.0 : 0.8
-    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
-    static let kDetailViewTag: Int = 10
-    static let kNavigationPadding: CGFloat = 80.0
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0
     static let kMiddleVoteValue: CGFloat = 3.0
-    
-    static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
-    static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
-    static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
-    
+    static let kDetailViewTag: Int = 10
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "It's all in a state of mind.",
