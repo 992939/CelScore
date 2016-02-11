@@ -24,8 +24,9 @@ struct Constants {
     static let kPadding: CGFloat = 10.0
     
     static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
-    static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
-    static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
+    static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
+    static let kMainShade: UIColor = MaterialColor.blueGrey.base
+    static let kLightShade: UIColor = MaterialColor.blueGrey.lighten3
     
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
     

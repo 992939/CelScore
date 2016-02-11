@@ -48,7 +48,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
         let loginButton: FBSDKLoginButton = getLoginButton()
         
+        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
+        statusView.backgroundColor = Constants.kDarkShade
+        
         self.view.backgroundColor = Constants.kBackgroundColor
+        self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
@@ -126,19 +130,19 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         navigationBarView.titleLabel = title
         navigationBarView.leftButtons = [menuButton]
         navigationBarView.rightButtons = [searchButton]
-        navigationBarView.backgroundColor = Constants.kMainGreenColor
+        navigationBarView.backgroundColor = Constants.kMainShade
         return navigationBarView
     }
     
     func getSegmentedControl() -> HMSegmentedControl {
         let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         segmentedControl.frame = CGRect(x: 0, y: Constants.kNavigationBarRect.height, width: Constants.kScreenWidth, height: 48)
-        segmentedControl.backgroundColor = MaterialColor.green.lighten3
-        segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
+        segmentedControl.backgroundColor = Constants.kDarkShade
+        segmentedControl.selectionIndicatorColor = Constants.kMainShade
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
             NSFontAttributeName: UIFont.systemFontOfSize(18)]
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.clipsToBounds = false
         segmentedControl.layer.shadowColor = MaterialColor.black.CGColor

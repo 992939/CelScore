@@ -44,7 +44,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let voteButton: MaterialButton = getVoteButton()
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
-        statusView.backgroundColor = ThemeColor.BlueGrey.darkShade()
+        statusView.backgroundColor = Constants.kDarkShade
         
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
@@ -53,7 +53,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         self.view.addSubview(segmentView)
         self.view.addSubview(voteButton)
         self.view.addSubview(self.celscoreVC.view)
-        self.view.backgroundColor = ThemeColor.BlueGrey.darkShade()
+        self.view.backgroundColor = Constants.kDarkShade
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
@@ -102,7 +102,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         navigationBarView.leftButtons = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.titleLabel = nameLabel
-        navigationBarView.backgroundColor = ThemeColor.BlueGrey.mainShade()
+        navigationBarView.backgroundColor = Constants.kMainShade
         navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
     }
@@ -128,7 +128,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         topView.addSubview(celebPicNode.view)
         topView.addSubview(roleLabel)
         topView.depth = .Depth2
-        topView.backgroundColor = ThemeColor.BlueGrey.darkShade()
+        topView.backgroundColor = Constants.kDarkShade
         return topView
     }
     
@@ -136,7 +136,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: ThemeColor.BlueGrey.darkShade(),
+                keySegmentOnSelectionColour: Constants.kDarkShade,
                 keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
                 keyContentVerticalMargin: 5])
         segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))

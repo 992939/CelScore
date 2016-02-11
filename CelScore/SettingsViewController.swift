@@ -36,7 +36,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
         //logoImageView.detailLabel = logoLabel
         //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kPadding, right: 30)
-        logoImageView.backgroundColor = MaterialColor.green.lighten2
+        logoImageView.backgroundColor = Constants.kDarkShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
@@ -111,8 +111,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white
-        publicServiceBox.onFillColor = Constants.kMainVioletColor
-        publicServiceBox.onTintColor = Constants.kMainVioletColor
+        publicServiceBox.onFillColor = Constants.kMainShade
+        publicServiceBox.onTintColor = Constants.kMainShade
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
@@ -128,8 +128,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationBox.onAnimationType = .Bounce
         notificationBox.offAnimationType = .Bounce
         notificationBox.onCheckColor = MaterialColor.white
-        notificationBox.onFillColor = Constants.kMainVioletColor
-        notificationBox.onTintColor = Constants.kMainVioletColor
+        notificationBox.onFillColor = Constants.kMainShade
+        notificationBox.onTintColor = Constants.kMainShade
         notificationView.addSubview(notificationLabel)
         notificationView.addSubview(notificationBox)
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
