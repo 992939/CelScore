@@ -36,12 +36,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.minValue = Constants.kMinimumVoteValue
         gauge.maxValue = Constants.kMaximumVoteValue
         gauge.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.80 * Constants.kBottomWidth
-        gauge.frame = CGRect(x: (Constants.kBottomWidth - gaugeWidth)/2, y: 1.5 * Constants.kPadding, width: gaugeWidth, height: gaugeWidth)
+        let gaugeWidth: CGFloat = 0.80 * Constants.kDetailWidth
+        gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: 1.5 * Constants.kPadding, width: gaugeWidth, height: gaugeWidth)
         gauge.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
         
-        let gaugeView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: Constants.kPadding, width: Constants.kBottomWidth, height: gaugeWidth + 3 * Constants.kPadding))
+        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: gaugeWidth + 3 * Constants.kPadding))
         gaugeView.depth = .Depth1
         gaugeView.backgroundColor = MaterialColor.white
         gaugeView.pulseScale = false
@@ -53,10 +53,10 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         
         let infoLabel = UILabel()
         infoLabel.text = "80%"
-        infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kBottomWidth - (consensusLabel.width + Constants.kPadding), height: 25)
+        infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
         
-        let consensusView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: gaugeView.bottom + Constants.kPadding, width: Constants.kBottomWidth, height: 30))
+        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: gaugeView.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
         consensusView.depth = .Depth1
         consensusView.backgroundColor = MaterialColor.white
         consensusView.pulseScale = false

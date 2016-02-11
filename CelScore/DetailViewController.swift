@@ -145,7 +145,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     }
     
     func getVoteButton() -> MaterialButton {
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kDetailWidth - 25, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
         celScoreButton.shape = .Circle
         celScoreButton.depth = .Depth2
         celScoreButton.backgroundColor = MaterialColor.grey.lighten5

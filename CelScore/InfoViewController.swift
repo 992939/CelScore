@@ -40,7 +40,7 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
                 for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kBottomWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
@@ -60,7 +60,7 @@ final class InfoViewController: ASViewController {
                     default: infoLabel.text = "n/a"
                     }
                     
-                    infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kBottomWidth - (qualityLabel.width + Constants.kPadding), height: 25)
+                    infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25)
                     infoLabel.textAlignment = .Right
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = MaterialColor.white

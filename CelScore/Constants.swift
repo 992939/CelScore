@@ -41,11 +41,11 @@ struct Constants {
     
     //DetailVC
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 110)
-    static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kNavigationBarRect.bottom + 10, width: kMaxWidth, height: 170)
-    static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
-    static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
+    static let kDetailWidth = kMaxWidth - 2 * kPadding
+    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom + 10, width: kDetailWidth, height: 170)
+    static let kSegmentViewRect: CGRect = CGRect(x: 2 * kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
+    static let kBottomViewRect = CGRect(x: 2 * kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
     static let kBottomHeight = kBottomViewRect.height - 2 * kPadding
-    static let kBottomWidth = kBottomViewRect.width - 2 * kPadding
     
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0
