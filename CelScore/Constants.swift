@@ -27,6 +27,8 @@ struct Constants {
     static let kMainGreenColor: UIColor = MaterialColor.green.lighten1
     static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
     
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
+    
     //MasterVC
     static let celebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     
@@ -40,9 +42,8 @@ struct Constants {
     static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
     
     //DetailVC
-    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 110)
     static let kDetailWidth = kMaxWidth - 2 * kPadding
-    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom + 10, width: kDetailWidth, height: 170)
+    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom + 10, width: kDetailWidth, height: 220)
     static let kSegmentViewRect: CGRect = CGRect(x: 2 * kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
     static let kBottomViewRect = CGRect(x: 2 * kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
     static let kBottomHeight = kBottomViewRect.height - 2 * kPadding

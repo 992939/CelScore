@@ -93,10 +93,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
+        let nameLabel = UILabel()
+        nameLabel.text = self.celebST.nickname
+        nameLabel.textAlignment = .Center
+        nameLabel.textColor = MaterialColor.white
+        
         let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
         navigationBarView.leftButtons = [backButton]
         navigationBarView.depth = .Depth3
-        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
+        navigationBarView.titleLabel = nameLabel
+        navigationBarView.backgroundColor = ThemeColor.BlueGrey.mainShade()
         navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
     }
@@ -106,28 +112,20 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let celebPicNode = ASNetworkImageNode(webImage: ())
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        let picWidth: CGFloat = 90.0
+        let picWidth: CGFloat = 180.0
         celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
         
-        let nameLabel = UILabel()
-        nameLabel.text = self.celebST.nickname
-        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
-        nameLabel.frame = CGRect(x: Constants.kPadding, y: celebPicNode.view.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30)
-        nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.white
-        
         let roleLabel = UILabel()
         roleLabel.text = "Actor" //TODO: replace by celebST.role
-        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
-        roleLabel.frame = CGRect(x: Constants.kPadding, y: nameLabel.bottom, width: Constants.kDetailWidth, height: 30)
+        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 15)
+        roleLabel.frame = CGRect(x: 0, y: celebPicNode.view.bottom, width: Constants.kDetailWidth, height: 30)
         roleLabel.textAlignment = .Center
         roleLabel.textColor = MaterialColor.white
         
         topView.addSubview(celebPicNode.view)
-        topView.addSubview(nameLabel)
         topView.addSubview(roleLabel)
         topView.depth = .Depth2
         topView.backgroundColor = ThemeColor.BlueGrey.darkShade()
@@ -154,7 +152,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     }
     
     func getVoteButton() -> MaterialButton {
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kDetailWidth - 25, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43))
         celScoreButton.shape = .Circle
         celScoreButton.depth = .Depth2
         celScoreButton.backgroundColor = MaterialColor.grey.lighten5

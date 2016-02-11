@@ -132,7 +132,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func getSegmentedControl() -> HMSegmentedControl {
         let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
-        segmentedControl.frame = CGRect(x: 0, y: 70, width: Constants.kScreenWidth, height: 48)
+        segmentedControl.frame = CGRect(x: 0, y: Constants.kNavigationBarRect.height, width: Constants.kScreenWidth, height: 48)
         segmentedControl.backgroundColor = MaterialColor.green.lighten3
         segmentedControl.selectionIndicatorColor = MaterialColor.green.lighten2
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
