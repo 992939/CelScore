@@ -28,7 +28,7 @@ struct Constants {
     static let kMainVioletColor: UIColor = MaterialColor.purple.lighten2
     
     //MasterVC
-    static let celebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 2 * kPadding)
+    static let celebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     
     //SettingsVC
     static let kSettingsViewWidth: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? (0.625 * UIScreen.mainScreen().bounds.width) : 250

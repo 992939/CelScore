@@ -16,14 +16,14 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let pulseView: MaterialPulseView
+    let pulseView: MaterialView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialPulseView(frame: Constants.kBottomViewRect)
+        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
@@ -32,26 +32,41 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gaugeView = LMGaugeView()
-        gaugeView.minValue = Constants.kMinimumVoteValue
-        gaugeView.maxValue = Constants.kMaximumVoteValue
-        gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.75 * Constants.kBottomHeight
-        gaugeView.frame = CGRect(x: (Constants.kBottomWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
-        gaugeView.delegate = self
-        AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
+        let gauge = LMGaugeView()
+        gauge.minValue = Constants.kMinimumVoteValue
+        gauge.maxValue = Constants.kMaximumVoteValue
+        gauge.limitValue = Constants.kMiddleVoteValue
+        let gaugeWidth: CGFloat = 0.80 * Constants.kBottomWidth
+        gauge.frame = CGRect(x: (Constants.kBottomWidth - gaugeWidth)/2, y: 1.5 * Constants.kPadding, width: gaugeWidth, height: gaugeWidth)
+        gauge.delegate = self
+        AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
+        
+        let gaugeView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: Constants.kPadding, width: Constants.kBottomWidth, height: gaugeWidth + 3 * Constants.kPadding))
+        gaugeView.depth = .Depth1
+        gaugeView.backgroundColor = MaterialColor.white
+        gaugeView.pulseScale = false
+        gaugeView.addSubview(gauge)
         
         let consensusLabel = UILabel()
-        consensusLabel.text = "Social Consensus: 80%"
-        consensusLabel.font = UIFont(name: consensusLabel.font.fontName, size: 15)
-        consensusLabel.frame = CGRect(x: Constants.kPadding, y: Constants.kBottomHeight - 30, width: Constants.kBottomWidth, height: 30)
-        consensusLabel.textAlignment = .Center
-        consensusLabel.textColor = MaterialColor.black
+        consensusLabel.text = "Social Consensus"
+        consensusLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25)
         
-        self.pulseView.depth = .Depth2
-        self.pulseView.backgroundColor = MaterialColor.white
+        let infoLabel = UILabel()
+        infoLabel.text = "80%"
+        infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kBottomWidth - (consensusLabel.width + Constants.kPadding), height: 25)
+        infoLabel.textAlignment = .Right
+        
+        let consensusView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: gaugeView.bottom + Constants.kPadding, width: Constants.kBottomWidth, height: 30))
+        consensusView.depth = .Depth1
+        consensusView.backgroundColor = MaterialColor.white
+        consensusView.pulseScale = false
+        consensusView.addSubview(consensusLabel)
+        consensusView.addSubview(infoLabel)
+        
+        self.pulseView.depth = .Depth1
+        self.pulseView.backgroundColor = MaterialColor.clear
         self.pulseView.addSubview(gaugeView)
-        self.pulseView.addSubview(consensusLabel)
+        self.pulseView.addSubview(consensusView)
         self.view = self.pulseView
     }
     
