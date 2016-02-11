@@ -15,13 +15,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
-    var bottomViewFrame: CGRect?
+    let infoVC: InfoViewController
+    let ratingsVC: RatingsViewController
+    let celscoreVC: CelScoreViewController
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
+        self.infoVC = InfoViewController(celebrityST: self.celebST)
+        self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
+        self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
@@ -42,18 +47,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        let navigationBarView = NavigationBarView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 110))
+        let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
         navigationBarView.leftButtons = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
         
-        let maxWidth = Constants.kScreenWidth - 2 * Constants.kCellPadding
+        let topView: MaterialView = getTopView()
         
-        let topViewFrame = CGRect(x: Constants.kCellPadding, y: navigationBarView.bottom + 10, width: maxWidth, height: 170)
-        let topView: MaterialView = getTopView(topViewFrame)
-        
-        let segmentView = SMSegmentView(frame: CGRect(x: Constants.kCellPadding, y: topView.bottom + 1, width: maxWidth, height: 40),
+        let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
                 keySegmentOnSelectionColour: Constants.kMainGreenColor,
@@ -65,25 +67,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         segmentView.selectSegmentAtIndex(0)
         segmentView.delegate = self
         
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: maxWidth - 35, y: topView.bottom - 20, width: 40, height: 40))
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: topView.bottom - 20, width: 40, height: 40))
         celScoreButton.shape = .Circle
         celScoreButton.depth = .Depth2
         celScoreButton.backgroundColor = MaterialColor.grey.lighten5
         celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        
-        self.bottomViewFrame = CGRect(
-            x: Constants.kCellPadding,
-            y: segmentView.bottom + Constants.kCellPadding,
-            width: maxWidth,
-            height: Constants.kScreenHeight - (segmentView.bottom + Constants.kCellPadding))
-        let bottomVC = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!)
         
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(celScoreButton)
-        self.view.addSubview(bottomVC.view)
+        self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = MaterialColor.blueGrey.darken4
         
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
@@ -116,8 +111,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
             .start()
     }
     
-    func getTopView(frame: CGRect) -> MaterialView {
-        let topView = MaterialView(frame: frame)
+    func getTopView() -> MaterialView {
+        let topView = MaterialView(frame: Constants.kTopViewRect)
         let viewMaxWidth = topView.width - 2 * Constants.kCellPadding
         
         let celebPicNode = ASNetworkImageNode(webImage: ())
@@ -154,9 +149,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         let infoView: UIView
         switch index {
-        case 1: infoView = InfoViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
-        case 2: infoView = RatingsViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
-        default: infoView = CelScoreViewController(celebrityST: self.celebST, frame: self.bottomViewFrame!).view
+        case 1: infoView = self.infoVC.view
+        case 2: infoView = self.ratingsVC.view
+        default: infoView = self.celscoreVC.view
         }
         
         //TODO: animate removingView out of the screen.

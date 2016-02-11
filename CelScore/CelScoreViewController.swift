@@ -21,9 +21,9 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct, frame: CGRect) {
+    init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialPulseView(frame: frame)
+        self.pulseView = MaterialPulseView(frame: Constants.bottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }

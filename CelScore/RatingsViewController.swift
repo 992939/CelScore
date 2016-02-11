@@ -19,11 +19,10 @@ final class RatingsViewController: ASViewController {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct, frame: CGRect) {
+    init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: frame)
+        self.pulseView = MaterialView(frame: Constants.bottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.frame = frame
         self.view.tag = Constants.kDetailViewTag
     }
     

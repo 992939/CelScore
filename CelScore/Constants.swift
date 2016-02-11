@@ -19,11 +19,20 @@ struct Constants {
     
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+    
+    static let kMaxWidth = kScreenWidth - 2 * kCellPadding
+    static let kMaxHeight = kScreenHeight - 2 * kCellPadding
+    
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 110)
+    static let kTopViewRect: CGRect = CGRect(x: kCellPadding, y: kNavigationBarRect.bottom + 10, width: kMaxWidth, height: 170)
+    static let kSegmentViewRect: CGRect = CGRect(x: kCellPadding, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
+    static let bottomViewRect = CGRect(x: kCellPadding, y: kSegmentViewRect.bottom + kCellPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kCellPadding))
+    
     static let kSettingsViewWidth: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? (0.625 * UIScreen.mainScreen().bounds.width) : 250
     static let kPickerViewHeight: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 160 : 100
+    static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
     static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 3.0 : 0.8
     static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
-    static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
     static let kDetailViewTag: Int = 10
     static let kNavigationPadding: CGFloat = 80.0
     static let kCellPadding: CGFloat = 10.0
