@@ -48,11 +48,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
         let loginButton: FBSDKLoginButton = getLoginButton()
         
-        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
-        statusView.backgroundColor = Constants.kDarkShade
-        
         self.view.backgroundColor = Constants.kBackgroundColor
-        self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)

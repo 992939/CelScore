@@ -42,6 +42,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
+        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
+        statusView.backgroundColor = Constants.kDarkShade
+        window.rootViewController!.view.addSubview(statusView)
         window.makeKeyAndVisible()
         self.window = window
         
