@@ -36,56 +36,24 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let backButton: FlatButton = FlatButton()
-        backButton.pulseColor = MaterialColor.white
-        backButton.pulseScale = false
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
-        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
-        
-        let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
-        navigationBarView.leftButtons = [backButton]
-        navigationBarView.depth = .Depth3
-        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
-        navigationBarView.contentMode = .ScaleAspectFit
-        
+        let navigationBarView: NavigationBarView = getNavigationView()
         let topView: MaterialView = getTopView()
-        
-        let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
-            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: Constants.kMainGreenColor,
-                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
-                keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
-        segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
-        segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
-        segmentView.selectSegmentAtIndex(0)
-        segmentView.delegate = self
-        
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: topView.bottom - 20, width: 40, height: 40))
-        celScoreButton.shape = .Circle
-        celScoreButton.depth = .Depth2
-        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
-        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        let segmentView: SMSegmentView = getSegmentView()
+        let voteButton: MaterialButton = getVoteButton()
         
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
-        self.view.addSubview(celScoreButton)
+        self.view.addSubview(voteButton)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = MaterialColor.blueGrey.darken4
-        
-        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
-    
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .on(next: { ratings in
@@ -101,6 +69,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     func voteAnimation() {
         print("murder!!!!")
+        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
     
     func shareVote() {
@@ -109,6 +78,47 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
                 UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()
+    }
+    
+    //MARK: View Helpers
+    func getVoteButton() -> MaterialButton {
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
+        celScoreButton.shape = .Circle
+        celScoreButton.depth = .Depth2
+        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
+        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        return celScoreButton
+    }
+    
+    func getNavigationView() -> NavigationBarView {
+        let backButton: FlatButton = FlatButton()
+        backButton.pulseColor = MaterialColor.white
+        backButton.pulseScale = false
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
+        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
+        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
+        
+        let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
+        navigationBarView.leftButtons = [backButton]
+        navigationBarView.depth = .Depth3
+        navigationBarView.image = UIImage(named: "demo-cover-photo-2")
+        navigationBarView.contentMode = .ScaleAspectFit
+        return navigationBarView
+    }
+    
+    func getSegmentView() -> SMSegmentView {
+        let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
+            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
+            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
+                keySegmentOnSelectionColour: Constants.kMainGreenColor,
+                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
+                keyContentVerticalMargin: 5])
+        segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
+        segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
+        segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
+        segmentView.selectSegmentAtIndex(0)
+        segmentView.delegate = self
+        return segmentView
     }
     
     func getTopView() -> MaterialView {
