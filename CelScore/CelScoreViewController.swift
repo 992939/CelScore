@@ -32,8 +32,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let maxHeight = self.pulseView.height - 2 * Constants.kCellPadding
-        let maxWidth = self.pulseView.width - 2 * Constants.kCellPadding
+        let maxHeight = self.pulseView.height - 2 * Constants.kPadding
+        let maxWidth = self.pulseView.width - 2 * Constants.kPadding
         
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
@@ -47,7 +47,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus: 80%"
         consensusLabel.font = UIFont(name: consensusLabel.font.fontName, size: 15)
-        consensusLabel.frame = CGRect(x: Constants.kCellPadding, y: maxHeight - 30, width: maxWidth, height: 30)
+        consensusLabel.frame = CGRect(x: Constants.kPadding, y: maxHeight - 30, width: maxWidth, height: 30)
         consensusLabel.textAlignment = .Center
         consensusLabel.textColor = MaterialColor.black
         

@@ -23,7 +23,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let maxWidth = self.view.width - 2 * Constants.kCellPadding
+        let maxWidth = self.view.width - 2 * Constants.kPadding
         
         //MARK: Logo
         let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
@@ -35,12 +35,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //logoLabel.text = "*Vote Responsibly."
         //logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
         //logoImageView.detailLabel = logoLabel
-        //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kCellPadding, right: 30)
+        //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kPadding, right: 30)
         logoImageView.backgroundColor = MaterialColor.green.lighten2
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         
         //MARK: PublicOpinion
-        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: logoImageView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: logoImageView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         publicOpinionView.divider = false
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
@@ -48,7 +48,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
+        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
         publicOpinionBar.progressTintColor = MaterialColor.green.darken1
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
@@ -56,7 +56,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
         //MARK: Consensus
-        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: publicOpinionView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: publicOpinionView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
@@ -64,7 +64,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
+        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
         consensusBar.progressTintColor = MaterialColor.green.darken1
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
@@ -72,7 +72,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
         //MARK: Random Facts
-        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: consensusView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: consensusView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
@@ -80,7 +80,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kCellPadding, y: 35, width: maxWidth - 20, height: 15))
+        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
         factsBar.progressTintColor = MaterialColor.green.darken1
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
@@ -88,7 +88,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
-        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kCellPadding, y: factsView.bottom + Constants.kCellPadding, width: maxWidth, height: Constants.kPickerViewHeight))
+        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: factsView.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
         pickerView.divider = false
         pickerView.depth = .None
         let pickerLabel = UILabel()
@@ -96,18 +96,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         pickerView.titleLabel = pickerLabel
         pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.kPickerViewHeight - 30, right: 0)
-        let picker = UIPickerView(frame: CGRect(x: Constants.kCellPadding, y: Constants.kPickerY, width: maxWidth - 20, height: 100))
+        let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 20, height: 100))
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
-        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: pickerView.bottom + Constants.kCellPadding, width: maxWidth, height: 30))
+        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: pickerView.bottom + Constants.kPadding, width: maxWidth, height: 30))
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode"
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        publicServiceLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 120, height: 30)
-        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kCellPadding, width: 15, height: 15))
+        publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
+        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white
@@ -118,13 +118,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: In-App Notification
-        let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: publicServiceView.bottom + Constants.kCellPadding, width: maxWidth, height: 30))
+        let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: publicServiceView.bottom + Constants.kPadding, width: maxWidth, height: 30))
         notificationView.depth = .None
         let notificationLabel = UILabel()
         notificationLabel.text = "In-App Notification"
         notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        notificationLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 120, height: 30)
-        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kCellPadding, width: 15, height: 15))
+        notificationLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
+        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
         notificationBox.onAnimationType = .Bounce
         notificationBox.offAnimationType = .Bounce
         notificationBox.onCheckColor = MaterialColor.white
@@ -135,16 +135,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
         
         //MARK: LogStatus
-        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kCellPadding, y: notificationView.bottom + Constants.kCellPadding, width: maxWidth, height: 60))
+        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: notificationView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         loginView.depth = .None
         let loginLabel = UILabel()
         loginLabel.text = "Logged In As"
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        loginLabel.frame = CGRect(x: Constants.kCellPadding, y: 0, width: 90, height: 30)
+        loginLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30)
         let userLabel = UILabel()
         userLabel.text = "@GreyEcologist"
         userLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        let userLabelWidth = maxWidth - (loginLabel.width + Constants.kCellPadding)
+        let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
         userLabel.textColor = MaterialColor.green.darken2
@@ -162,7 +162,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         paraStyle.alignment = .Center
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken1, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: Constants.kCellPadding, y: self.view.bottom - 2 * Constants.kCellPadding, width: maxWidth, height: 20)
+        copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
         picker.dataSource = self

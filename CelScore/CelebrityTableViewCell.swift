@@ -79,14 +79,14 @@ final class CelebrityTableViewCell: ASCellNode {
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
-            spacing: Constants.kCellPadding,
+            spacing: Constants.kPadding,
             justifyContent: .Start,
             alignItems: .Center,
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
         horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.9)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
-            insets: UIEdgeInsetsMake(Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding, Constants.kCellPadding),
+            insets: UIEdgeInsetsMake(Constants.kPadding, Constants.kPadding, Constants.kPadding, Constants.kPadding),
             child: horizontalStack),
             background: self.backgroundNode)
     }

@@ -28,16 +28,16 @@ final class RatingsViewController: ASViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let maxHeight = self.pulseView.height - 2 * Constants.kCellPadding
-        let maxWidth = self.pulseView.width - 2 * Constants.kCellPadding
+        let maxHeight = self.pulseView.height - 2 * Constants.kPadding
+        let maxWidth = self.pulseView.width - 2 * Constants.kPadding
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 for (index, quality) in Qualities.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kCellPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kCellPadding, width: maxWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kPadding, width: maxWidth, height: 30))
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
-                    qualityLabel.frame = CGRect(x: Constants.kCellPadding, y: 3, width: 120, height: 25)
+                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = MaterialColor.white
                     qualityView.pulseScale = false
@@ -76,5 +76,9 @@ final class RatingsViewController: ASViewController {
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
+    }
+    
+    func animateStarsToGold() {
+        print("cuz you're a good girl")
     }
 }

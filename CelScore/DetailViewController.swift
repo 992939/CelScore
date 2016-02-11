@@ -27,7 +27,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
-        
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -61,16 +60,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
                 if unrated.count == 0 {
                     RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
-                        .on(next: { ratings in self.voteAnimation() })
+                        .on(next: { ratings in self.animateVoting() })
                         .start()
                 }
             })
             .start()
     }
     
-    func voteAnimation() {
-        print("murder!!!!")
-        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
+    func animateVoting() {
+        self.ratingsVC.animateStarsToGold()
+        //CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
     
     func shareVote() {
@@ -104,7 +103,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
         let picWidth: CGFloat = 90.0
-        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kCellPadding, width: picWidth, height: picWidth)
+        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
         }
@@ -112,14 +111,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
         nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
-        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + Constants.kCellPadding, width: Constants.kMaxWidth, height: 30)
+        nameLabel.frame = CGRect(x: Constants.kPadding, y: celebPicNode.view.bottom + Constants.kPadding, width: Constants.kMaxWidth, height: 30)
         nameLabel.textAlignment = .Center
         nameLabel.textColor = MaterialColor.white
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor" //TODO: replace by celebST.role
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
-        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: Constants.kMaxWidth, height: 30)
+        roleLabel.frame = CGRect(x: Constants.kPadding, y: nameLabel.bottom, width: Constants.kMaxWidth, height: 30)
         roleLabel.textAlignment = .Center
         roleLabel.textColor = MaterialColor.white
         
