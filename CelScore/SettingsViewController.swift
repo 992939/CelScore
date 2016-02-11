@@ -49,7 +49,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        publicOpinionBar.progressTintColor = MaterialColor.green.darken1
+        publicOpinionBar.progressTintColor = Constants.kMainShade
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
         publicOpinionView.addSubview(publicOpinionBar)
@@ -65,7 +65,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        consensusBar.progressTintColor = MaterialColor.green.darken1
+        consensusBar.progressTintColor = Constants.kMainShade
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         consensusView.addSubview(consensusBar)
@@ -81,7 +81,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        factsBar.progressTintColor = MaterialColor.green.darken1
+        factsBar.progressTintColor = Constants.kMainShade
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
@@ -111,8 +111,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white
-        publicServiceBox.onFillColor = Constants.kMainShade
-        publicServiceBox.onTintColor = Constants.kMainShade
+        publicServiceBox.onFillColor = Constants.kDarkShade
+        publicServiceBox.onTintColor = Constants.kDarkShade
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
@@ -128,8 +128,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationBox.onAnimationType = .Bounce
         notificationBox.offAnimationType = .Bounce
         notificationBox.onCheckColor = MaterialColor.white
-        notificationBox.onFillColor = Constants.kMainShade
-        notificationBox.onTintColor = Constants.kMainShade
+        notificationBox.onFillColor = Constants.kDarkShade
+        notificationBox.onTintColor = Constants.kDarkShade
         notificationView.addSubview(notificationLabel)
         notificationView.addSubview(notificationBox)
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
@@ -147,7 +147,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
-        userLabel.textColor = MaterialColor.green.darken2
+        userLabel.textColor = Constants.kDarkShade
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
