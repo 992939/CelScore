@@ -26,6 +26,7 @@ final class RatingsViewController: ASViewController {
         self.view.tag = Constants.kDetailViewTag
     }
     
+    //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         let maxHeight = self.pulseView.height - 2 * Constants.kPadding
@@ -34,13 +35,16 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 for (index, quality) in Qualities.getAll().enumerate() {
+                    
                     let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kPadding, width: maxWidth, height: 30))
-                    let qualityLabel = UILabel()
-                    qualityLabel.text = quality
-                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
+                    qualityView.tag = index+1
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = MaterialColor.white
                     qualityView.pulseScale = false
+                    
+                    let qualityLabel = UILabel()
+                    qualityLabel.text = quality
+                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
                     
                     let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
                     cosmosView.tag = index
@@ -79,6 +83,10 @@ final class RatingsViewController: ASViewController {
     }
     
     func animateStarsToGold() {
-        print("cuz you're a good girl")
+        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
+        viewArray.forEach { (subview: UIView) in
+            let stars = subview.subviews.filter({ $0 is CosmosView })
+            print("stars: \(stars)")
+        }
     }
 }
