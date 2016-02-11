@@ -43,11 +43,15 @@ struct Constants {
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 110)
     static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kNavigationBarRect.bottom + 10, width: kMaxWidth, height: 170)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
-    static let bottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
+    static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
+    static let kBottomHeight = kBottomViewRect.height - 2 * kPadding
+    static let kBottomWidth = kBottomViewRect.width - 2 * kPadding
+    
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0
     static let kMiddleVoteValue: CGFloat = 3.0
     static let kDetailViewTag: Int = 10
+    
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "It's all in a state of mind.",

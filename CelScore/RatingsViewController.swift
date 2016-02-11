@@ -21,7 +21,7 @@ final class RatingsViewController: ASViewController {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: Constants.bottomViewRect)
+        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
@@ -29,14 +29,12 @@ final class RatingsViewController: ASViewController {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let maxHeight = self.pulseView.height - 2 * Constants.kPadding
-        let maxWidth = self.pulseView.width - 2 * Constants.kPadding
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 for (index, quality) in Qualities.getAll().enumerate() {
                     
-                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: CGFloat(index) * (maxHeight / 10) + Constants.kPadding, width: maxWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: Constants.kPadding, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kBottomWidth, height: 30))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = MaterialColor.white
@@ -46,7 +44,7 @@ final class RatingsViewController: ASViewController {
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
                     
-                    let cosmosView = CosmosView(frame: CGRect(x: maxWidth - 140, y: 3, width: 140, height: 25))
+                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kBottomWidth - 140, y: 3, width: 140, height: 25))
                     cosmosView.tag = index
                     switch quality {
                     case Qualities.Talent.name(): cosmosView.rating = ratings.rating1
@@ -85,8 +83,10 @@ final class RatingsViewController: ASViewController {
     func animateStarsToGold() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
-                let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
+                let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
+                    subview.pulseScale = true
+                    subview.pulse()
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.userRatingMode = false

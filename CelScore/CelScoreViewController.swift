@@ -23,7 +23,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialPulseView(frame: Constants.bottomViewRect)
+        self.pulseView = MaterialPulseView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
@@ -32,22 +32,19 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let maxHeight = self.pulseView.height - 2 * Constants.kPadding
-        let maxWidth = self.pulseView.width - 2 * Constants.kPadding
-        
         let gaugeView = LMGaugeView()
         gaugeView.minValue = Constants.kMinimumVoteValue
         gaugeView.maxValue = Constants.kMaximumVoteValue
         gaugeView.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.75 * maxHeight
-        gaugeView.frame = CGRect(x: (maxWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
+        let gaugeWidth: CGFloat = 0.75 * Constants.kBottomHeight
+        gaugeView.frame = CGRect(x: (Constants.kBottomWidth - gaugeWidth)/2, y: 20, width: gaugeWidth, height: gaugeWidth)
         gaugeView.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gaugeView, timer: timer) }
         
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus: 80%"
         consensusLabel.font = UIFont(name: consensusLabel.font.fontName, size: 15)
-        consensusLabel.frame = CGRect(x: Constants.kPadding, y: maxHeight - 30, width: maxWidth, height: 30)
+        consensusLabel.frame = CGRect(x: Constants.kPadding, y: Constants.kBottomHeight - 30, width: Constants.kBottomWidth, height: 30)
         consensusLabel.textAlignment = .Center
         consensusLabel.textColor = MaterialColor.black
         
