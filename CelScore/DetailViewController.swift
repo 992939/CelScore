@@ -120,7 +120,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor" //TODO: replace by celebST.role
-        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 15)
+        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 18)
         roleLabel.frame = CGRect(x: 0, y: celebPicNode.view.bottom, width: Constants.kDetailWidth, height: 30)
         roleLabel.textAlignment = .Center
         roleLabel.textColor = MaterialColor.white
