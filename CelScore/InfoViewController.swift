@@ -42,6 +42,7 @@ final class InfoViewController: ASViewController {
                 for (index, quality) in Info.getAll().enumerate() {
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     let qualityLabel = UILabel()
+                    qualityLabel.textColor = MaterialColor.white
                     qualityLabel.text = quality
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
                     let infoLabel = UILabel()
@@ -61,9 +62,10 @@ final class InfoViewController: ASViewController {
                     }
                     
                     infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25)
+                    infoLabel.textColor = MaterialColor.white
                     infoLabel.textAlignment = .Right
                     qualityView.depth = .Depth1
-                    qualityView.backgroundColor = MaterialColor.white
+                    qualityView.backgroundColor = Constants.kMainShade
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)

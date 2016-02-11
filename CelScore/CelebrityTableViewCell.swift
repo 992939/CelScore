@@ -27,10 +27,11 @@ final class CelebrityTableViewCell: ASCellNode {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        self.nameNode.attributedString = NSMutableAttributedString(string:"\(celebST.nickname)")
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17.0), NSForegroundColorAttributeName : MaterialColor.white]
+        self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
-        
+    
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFit
@@ -50,16 +51,17 @@ final class CelebrityTableViewCell: ASCellNode {
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 45, y: 20)
-        followSwitch.thumbOnTintColor = MaterialColor.purple.lighten2
-        followSwitch.trackOnTintColor = MaterialColor.purple.lighten4
-        followSwitch.rippleFillColor = MaterialColor.purple.lighten1
+        followSwitch.thumbOnTintColor = Constants.kDarkShade
+        followSwitch.trackOnTintColor = Constants.kLightShade
+        followSwitch.rippleFillColor = Constants.kMainShade
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
         let cardView: MaterialView = MaterialView()
         cardView.borderWidth = .Border2
-        cardView.borderColor = Constants.kBackgroundColor
+        cardView.borderColor = Constants.kDarkShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
+        self.backgroundNode.backgroundColor = Constants.kMainShade
         
         super.init()
         

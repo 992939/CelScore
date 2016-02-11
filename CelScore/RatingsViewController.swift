@@ -38,11 +38,12 @@ final class RatingsViewController: ASViewController {
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
-                    qualityView.backgroundColor = MaterialColor.white
+                    qualityView.backgroundColor = Constants.kMainShade
                     qualityView.pulseScale = false
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
+                    qualityLabel.textColor = MaterialColor.white
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
                     
                     let cosmosView = CosmosView(frame: CGRect(x: Constants.kDetailWidth - 140, y: 3, width: 140, height: 25))

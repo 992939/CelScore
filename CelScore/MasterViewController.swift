@@ -43,12 +43,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
+        self.celebrityTableView.backgroundColor = MaterialColor.clear
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
         let loginButton: FBSDKLoginButton = getLoginButton()
         
-        self.view.backgroundColor = Constants.kBackgroundColor
+        self.view.backgroundColor = Constants.kDarkShade //Constants.kBackgroundColor
         self.view.addSubview(navigationBarView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)

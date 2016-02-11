@@ -115,7 +115,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let picWidth: CGFloat = 180.0
         celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
         }
         
         let roleLabel = UILabel()
@@ -123,7 +123,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 18)
         roleLabel.frame = CGRect(x: 0, y: celebPicNode.view.bottom, width: Constants.kDetailWidth, height: 30)
         roleLabel.textAlignment = .Center
-        roleLabel.textColor = MaterialColor.white
+        roleLabel.textColor = Constants.kLightShade
         
         topView.addSubview(celebPicNode.view)
         topView.addSubview(roleLabel)
@@ -134,10 +134,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     
     func getSegmentView() -> SMSegmentView {
         let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-            separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
+            separatorColour: MaterialColor.black, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: Constants.kDarkShade,
-                keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
+                keySegmentOnSelectionColour: Constants.kMainShade,
+                keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
         segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
         segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))

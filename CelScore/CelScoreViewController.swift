@@ -43,23 +43,25 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: Constants.kBottomHeight - 40))
         gaugeView.depth = .Depth1
-        gaugeView.backgroundColor = MaterialColor.white
+        gaugeView.backgroundColor = Constants.kMainShade
         gaugeView.pulseScale = false
         gaugeView.addSubview(gauge)
         
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus"
+        consensusLabel.textColor = MaterialColor.white
         consensusLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25)
         
         let infoLabel = UILabel()
         infoLabel.text = "80%"
+        infoLabel.textColor = MaterialColor.white
         infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
         
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: gaugeView.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
         consensusView.depth = .Depth1
-        consensusView.backgroundColor = MaterialColor.white
-        consensusView.pulseScale = false
+        consensusView.backgroundColor = Constants.kMainShade
+        consensusView.pulseScale = true
         consensusView.addSubview(consensusLabel)
         consensusView.addSubview(infoLabel)
         
@@ -77,7 +79,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value > gaugeView.limitValue { return Constants.kMainShade }
+        if value > gaugeView.limitValue { return Constants.kDarkShade }
         else { return Constants.kWineShade }
     }
 }
