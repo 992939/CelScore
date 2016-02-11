@@ -29,7 +29,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
-        
         super.init(node: ASDisplayNode())
 
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)

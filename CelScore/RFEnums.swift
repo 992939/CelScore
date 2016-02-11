@@ -7,7 +7,67 @@
 //
 
 import Foundation
+import Material
 
+
+//MARK: ThemeColor
+public enum ThemeColor: Int {
+    case Blue
+    case Red
+    case Green
+    case Purple
+    case Pink
+    case Brown
+    case Grey
+    case BlueGrey
+    case Black
+    case White
+    
+    public func mainShade() -> UIColor {
+        switch self {
+        case .Blue: return MaterialColor.blue.base
+        case .Red: return MaterialColor.red.base
+        case .Green: return MaterialColor.green.base
+        case .Purple: return MaterialColor.purple.base
+        case .Pink: return MaterialColor.pink.base
+        case .Brown: return MaterialColor.brown.base
+        case .Grey: return MaterialColor.grey.base
+        case .BlueGrey: return MaterialColor.blueGrey.base
+        case .Black: return MaterialColor.black
+        case .White: return MaterialColor.white
+        }
+    }
+    
+    public func darkShade() -> UIColor {
+        switch self {
+        case .Blue: return MaterialColor.blue.darken4
+        case .Red: return MaterialColor.red.darken4
+        case .Green: return MaterialColor.green.darken4
+        case .Purple: return MaterialColor.purple.darken4
+        case .Pink: return MaterialColor.pink.darken4
+        case .Brown: return MaterialColor.brown.darken4
+        case .Grey: return MaterialColor.grey.darken4
+        case .BlueGrey: return MaterialColor.blueGrey.darken4
+        case .Black: return MaterialColor.black
+        case .White: return MaterialColor.white
+        }
+    }
+    
+    public func lightShade() -> UIColor {
+        switch self {
+        case .Blue: return MaterialColor.blue.lighten3
+        case .Red: return MaterialColor.red.lighten3
+        case .Green: return MaterialColor.green.lighten3
+        case .Purple: return MaterialColor.purple.lighten3
+        case .Pink: return MaterialColor.pink.lighten3
+        case .Brown: return MaterialColor.brown.lighten3
+        case .Grey: return MaterialColor.grey.lighten3
+        case .BlueGrey: return MaterialColor.blueGrey.lighten3
+        case .Black: return MaterialColor.black
+        case .White: return MaterialColor.white
+        }
+    }
+}
 
 //MARK: Info
 public enum Info: Int {

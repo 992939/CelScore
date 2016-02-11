@@ -77,7 +77,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value > gaugeView.limitValue { return MaterialColor.green.darken3 }
-        else { return MaterialColor.green.lighten1 }
+        if value > gaugeView.limitValue { return ThemeColor.BlueGrey.darkShade() }
+        else { return ThemeColor.BlueGrey.lightShade() }
     }
 }

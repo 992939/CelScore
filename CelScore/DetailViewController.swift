@@ -43,13 +43,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let segmentView: SMSegmentView = getSegmentView()
         let voteButton: MaterialButton = getVoteButton()
         
+        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
+        statusView.backgroundColor = ThemeColor.BlueGrey.darkShade()
+        
+        self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(voteButton)
         self.view.addSubview(self.celscoreVC.view)
-        self.view.backgroundColor = MaterialColor.blueGrey.darken4
+        self.view.backgroundColor = ThemeColor.BlueGrey.darkShade()
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
@@ -111,14 +115,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname
         nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
-        nameLabel.frame = CGRect(x: Constants.kPadding, y: celebPicNode.view.bottom + Constants.kPadding, width: Constants.kMaxWidth, height: 30)
+        nameLabel.frame = CGRect(x: Constants.kPadding, y: celebPicNode.view.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30)
         nameLabel.textAlignment = .Center
         nameLabel.textColor = MaterialColor.white
         
         let roleLabel = UILabel()
         roleLabel.text = "Actor" //TODO: replace by celebST.role
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
-        roleLabel.frame = CGRect(x: Constants.kPadding, y: nameLabel.bottom, width: Constants.kMaxWidth, height: 30)
+        roleLabel.frame = CGRect(x: Constants.kPadding, y: nameLabel.bottom, width: Constants.kDetailWidth, height: 30)
         roleLabel.textAlignment = .Center
         roleLabel.textColor = MaterialColor.white
         
@@ -126,6 +130,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         topView.addSubview(nameLabel)
         topView.addSubview(roleLabel)
         topView.depth = .Depth2
+        topView.backgroundColor = ThemeColor.BlueGrey.darkShade()
         return topView
     }
     
@@ -133,13 +138,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.grey.lighten3, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
-                keySegmentOnSelectionColour: Constants.kMainGreenColor,
+                keySegmentOnSelectionColour: ThemeColor.BlueGrey.darkShade(),
                 keySegmentOffSelectionColour: MaterialColor.grey.lighten5,
                 keyContentVerticalMargin: 5])
         segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
         segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
         segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
         segmentView.selectSegmentAtIndex(0)
+        segmentView.clipsToBounds = false
+        segmentView.layer.shadowColor = MaterialColor.black.CGColor
+        segmentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        segmentView.layer.shadowOpacity = 0.3
         segmentView.delegate = self
         return segmentView
     }
