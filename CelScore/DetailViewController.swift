@@ -54,6 +54,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
     }
     
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
+    
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .on(next: { ratings in
@@ -80,16 +81,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
             .start()
     }
     
-    //MARK: View Helpers
-    func getVoteButton() -> MaterialButton {
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
-        celScoreButton.shape = .Circle
-        celScoreButton.depth = .Depth2
-        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
-        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        return celScoreButton
-    }
-    
+    //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
@@ -104,6 +96,38 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         navigationBarView.image = UIImage(named: "demo-cover-photo-2")
         navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
+    }
+    
+    func getTopView() -> MaterialView {
+        let topView = MaterialView(frame: Constants.kTopViewRect)
+        let celebPicNode = ASNetworkImageNode(webImage: ())
+        celebPicNode.URL = NSURL(string: self.celebST.imageURL)
+        celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        let picWidth: CGFloat = 90.0
+        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kCellPadding, width: picWidth, height: picWidth)
+        celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
+        }
+        
+        let nameLabel = UILabel()
+        nameLabel.text = self.celebST.nickname
+        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
+        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + Constants.kCellPadding, width: Constants.kMaxWidth, height: 30)
+        nameLabel.textAlignment = .Center
+        nameLabel.textColor = MaterialColor.white
+        
+        let roleLabel = UILabel()
+        roleLabel.text = "Actor" //TODO: replace by celebST.role
+        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
+        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: Constants.kMaxWidth, height: 30)
+        roleLabel.textAlignment = .Center
+        roleLabel.textColor = MaterialColor.white
+        
+        topView.addSubview(celebPicNode.view)
+        topView.addSubview(nameLabel)
+        topView.addSubview(roleLabel)
+        topView.depth = .Depth2
+        return topView
     }
     
     func getSegmentView() -> SMSegmentView {
@@ -121,38 +145,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         return segmentView
     }
     
-    func getTopView() -> MaterialView {
-        let topView = MaterialView(frame: Constants.kTopViewRect)
-        let viewMaxWidth = topView.width - 2 * Constants.kCellPadding
-        
-        let celebPicNode = ASNetworkImageNode(webImage: ())
-        celebPicNode.URL = NSURL(string: self.celebST.imageURL)
-        celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        let picWidth: CGFloat = 90.0
-        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kCellPadding, width: picWidth, height: picWidth)
-        celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
-        }
-        
-        let nameLabel = UILabel()
-        nameLabel.text = self.celebST.nickname
-        nameLabel.font = UIFont(name: nameLabel.font.fontName, size: 25)
-        nameLabel.frame = CGRect(x: Constants.kCellPadding, y: celebPicNode.view.bottom + Constants.kCellPadding, width: viewMaxWidth, height: 30)
-        nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.white
-        
-        let roleLabel = UILabel()
-        roleLabel.text = "Actor"
-        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 14)
-        roleLabel.frame = CGRect(x: Constants.kCellPadding, y: nameLabel.bottom, width: viewMaxWidth, height: 30)
-        roleLabel.textAlignment = .Center
-        roleLabel.textColor = MaterialColor.white
-        
-        topView.addSubview(celebPicNode.view)
-        topView.addSubview(nameLabel)
-        topView.addSubview(roleLabel)
-        topView.depth = .Depth2
-        return topView
+    func getVoteButton() -> MaterialButton {
+        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kMaxWidth - 35, y: Constants.kTopViewRect.bottom - 20, width: 40, height: 40))
+        celScoreButton.shape = .Circle
+        celScoreButton.depth = .Depth2
+        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
+        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        return celScoreButton
     }
     
     //MARK: SMSegmentViewDelegate
