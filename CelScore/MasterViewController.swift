@@ -48,10 +48,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
         self.searchBar.delegate = self
-        self.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        self.searchBar.searchBarStyle = .Minimal
+        let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
+        
         let loginButton: FBSDKLoginButton = getLoginButton()
         
         self.view.backgroundColor = Constants.kDarkShade //Constants.kBackgroundColor
@@ -217,19 +220,18 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.searchBar)
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1
+            self.searchBar.showsCancelButton = true
+            self.searchBar.tintColor = Constants.kBrightShade
             self.searchBar.backgroundColor = Constants.kDarkShade
+            self.searchBar.barTintColor = MaterialColor.white
             self.searchBar.frame = Constants.kSegmentedControlRect
-            }, completion: { finished in
-                self.searchBar.becomeFirstResponder()
-        })
+            }, completion: { finished in self.searchBar.becomeFirstResponder() })
     }
     
     func hideSearchBar() {
         UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 0
-            }, completion: { finished in
-                self.searchBar.removeFromSuperview()
-        })
+            self.searchBar.alpha = 0 },
+            completion: { finished in self.searchBar.removeFromSuperview() })
     }
     
     //MARK: UISearchBarDelegate
