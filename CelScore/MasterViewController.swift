@@ -21,8 +21,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
-    var searchBar = UISearchBar()
-    var searchBarButtonItem: UIBarButtonItem?
+    let searchBar: UISearchBar
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -31,6 +30,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
         self.celebrityTableView = ASTableView()
+        self.searchBar = UISearchBar()
         super.init(node: ASDisplayNode())
 
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -47,9 +47,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
-        searchBar.delegate = self
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
-        searchBarButtonItem = navigationItem.rightBarButtonItem
+        self.searchBar.delegate = self
+        self.searchBar.searchBarStyle = UISearchBarStyle.Minimal
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
@@ -67,7 +66,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
-        self.celebrityTableView.frame = Constants.celebrityTableViewRect
+        self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
     func openSetings() { self.sideNavigationViewController!.openLeftView() }
@@ -137,7 +136,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func getSegmentedControl() -> HMSegmentedControl {
         let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
-        segmentedControl.frame = CGRect(x: 0, y: Constants.kNavigationBarRect.height, width: Constants.kScreenWidth, height: 48)
+        segmentedControl.frame = Constants.kSegmentedControlRect
         segmentedControl.backgroundColor = Constants.kDarkShade
         segmentedControl.selectionIndicatorColor = Constants.kMainShade
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
@@ -214,31 +213,27 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
     
     func showSearchBar() {
-        searchBar.alpha = 0
-        navigationItem.titleView = searchBar
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        self.searchBar.alpha = 0
+        self.view.addSubview(self.searchBar)
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1
+            self.searchBar.backgroundColor = Constants.kDarkShade
+            self.searchBar.frame = Constants.kSegmentedControlRect
             }, completion: { finished in
                 self.searchBar.becomeFirstResponder()
         })
     }
     
     func hideSearchBar() {
-        navigationItem.setLeftBarButtonItem(searchBarButtonItem, animated: true)
-        //logoImageView.alpha = 0
         UIView.animateWithDuration(0.3, animations: {
-            //self.navigationItem.titleView = self.logoImageView
-            //self.logoImageView.alpha = 1
+            self.searchBar.alpha = 0
             }, completion: { finished in
-                
+                self.searchBar.removeFromSuperview()
         })
     }
     
     //MARK: UISearchBarDelegate
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        hideSearchBar()
-    }
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) { hideSearchBar() }
 }
 
 
