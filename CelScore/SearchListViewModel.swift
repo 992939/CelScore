@@ -16,14 +16,12 @@ final class SearchListViewModel: CelebrityListViewModel {
     //MARK: Initializer
     override init() { super.init() }
     
-    //MARK: Methods
+    //MARK: Method
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let list: AnyObject
-            
             let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
-            list = realm.objects(CelebrityModel).filter(predicate)
+            let list: AnyObject = realm.objects(CelebrityModel).filter(predicate)
             sendNext(sink, list)
             sendCompleted(sink)
         }
