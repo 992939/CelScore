@@ -111,8 +111,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white
-        publicServiceBox.onFillColor = Constants.kDarkShade
-        publicServiceBox.onTintColor = Constants.kDarkShade
+        publicServiceBox.onFillColor = Constants.kBrightShade
+        publicServiceBox.onTintColor = Constants.kBrightShade
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
@@ -128,8 +128,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationBox.onAnimationType = .Bounce
         notificationBox.offAnimationType = .Bounce
         notificationBox.onCheckColor = MaterialColor.white
-        notificationBox.onFillColor = Constants.kDarkShade
-        notificationBox.onTintColor = Constants.kDarkShade
+        notificationBox.onFillColor = Constants.kBrightShade
+        notificationBox.onTintColor = Constants.kBrightShade
         notificationView.addSubview(notificationLabel)
         notificationView.addSubview(notificationBox)
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })

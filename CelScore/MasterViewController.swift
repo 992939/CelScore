@@ -105,11 +105,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {
-        let title = UILabel()
-        title.text = "CelScore"
-        title.textAlignment = .Center
-        title.textColor = MaterialColor.white
-        
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
         menuButton.pulseScale = false
@@ -124,10 +119,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
         let navigationBarView: NavigationBarView = NavigationBarView()
-        navigationBarView.titleLabel = title
         navigationBarView.leftButtons = [menuButton]
         navigationBarView.rightButtons = [searchButton]
         navigationBarView.backgroundColor = Constants.kMainShade
+        let celscoreImageView = UIImageView(image: UIImage(named: "celscore_white"))
+        celscoreImageView.frame = CGRect(x: navigationBarView.width/2, y: navigationBarView.centerY - 5, width: 25, height: 25)
+        navigationBarView.addSubview(celscoreImageView)
         return navigationBarView
     }
     
