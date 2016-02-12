@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveCocoa
 
 
 public extension UIView {
@@ -36,16 +37,6 @@ public extension UIView {
         slideLeftTransition.fillMode = kCAFillModeRemoved
         
         self.layer.addAnimation(slideLeftTransition, forKey: "slideLeftTransition")
-    }
-}
-
-public extension UITextField {
-    
-    //MARK: Public Method
-    public func rac_textSignalProducer() -> SignalProducer<String, NoError> {
-        return self.rac_textSignal().toSignalProducer()
-            .map { $0 as! String }
-            .flatMapError { _ in SignalProducer<String, NoError>.empty }
     }
 }
 

@@ -28,7 +28,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     init() {
         self.displayedCelebrityListVM = CelebrityListViewModel()
-        self.searchedCelebrityListVM = SearchListViewModel(searchToken: "")
+        self.searchedCelebrityListVM = SearchListViewModel()
         self.celebrityTableView = ASTableView()
         self.searchBar = UISearchBar()
         super.init(node: ASDisplayNode())
@@ -57,11 +57,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let loginButton: FBSDKLoginButton = getLoginButton()
         
-        self.view.backgroundColor = Constants.kDarkShade //Constants.kBackgroundColor
+        self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(self.celebrityTableView)
-        //self.view.addSubview(self.searchTextField)
         //self.view.addSubview(loginButton)
         self.configuration()
     }
@@ -88,7 +87,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             .retry(1)
             .start()
     
-        //self.searchedCelebrityListVM.searchText <~ self.searchTextField.rac_textSignalProducer()
         CelScoreViewModel().checkNetworkStatusSignal().start()
         SettingsViewModel().updateTodayWidgetSignal().start()
     }
@@ -236,6 +234,14 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) { hideSearchBar() }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 2 {
+            SearchListViewModel().searchSignal(searchToken: searchText)
+                .on(next: { value in print("value: \(value)") })
+                .start()
+        }
+    }
 }
 
 
