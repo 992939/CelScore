@@ -60,7 +60,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
-        consensusLabel.text = "Positive Votes Percentage" 
+        consensusLabel.text = "Positive Votes Percentage"
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -160,7 +160,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let copyrightTextNode = ASTextNode()
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : MaterialColor.grey.darken1, NSParagraphStyleAttributeName: paraStyle]
+        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : Constants.kBrightShade, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
