@@ -19,6 +19,8 @@ import RAMReel
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
+    var dataSource: SimplePrefixQueryDataSource!
+    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
@@ -45,6 +47,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
+        
+        //self.dataSource = SimplePrefixQueryDataSource(data)
+        self.searchedCelebrityListVM.getAllCelebsSignal().start()
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()

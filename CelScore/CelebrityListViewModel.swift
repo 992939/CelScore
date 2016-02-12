@@ -27,7 +27,7 @@ class CelebrityListViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
+            guard let celebList = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
             self.celebrityList = celebList.copy() as! ListsModel
             sendNext(sink, celebList)
             sendCompleted(sink)

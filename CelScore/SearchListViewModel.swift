@@ -29,16 +29,25 @@ final class SearchListViewModel: CelebrityListViewModel {
             .startWithNext { _ in self.isSearching.value = false }
     }
     
-    //MARK: Method
+    //MARK: Methods
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate: NSPredicate
             let list: AnyObject
             
-            predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
+            let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             list = realm.objects(CelebrityModel).filter(predicate)
             sendNext(sink, list)
+            sendCompleted(sink)
+        }
+    }
+    
+    func getAllCelebsSignal() -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let list = realm.objects(CelebrityModel)
+            let nickNameList = list.map { celeb in return celeb.nickName }
+            sendNext(sink, nickNameList)
             sendCompleted(sink)
         }
     }
