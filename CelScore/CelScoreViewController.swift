@@ -38,6 +38,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = 0.7 * Constants.kDetailWidth
         gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: 35, width: gaugeWidth, height: gaugeWidth)
+        gauge.subDivisionsColor = Constants.kDarkShade
+        gauge.divisionsColor = Constants.kLightShade
+        gauge.limitDotColor = Constants.kBrightShade
+        gauge.valueTextColor = MaterialColor.white
+        gauge.unitOfMeasurementTextColor = MaterialColor.white
+        gauge.ringBackgroundColor = Constants.kLightShade
         gauge.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
         
