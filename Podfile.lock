@@ -21,11 +21,10 @@ PODS:
   - FBSDKLoginKit (4.9.1):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
-  - ImagePalette (0.0.3):
-    - SwiftPriorityQueue (~> 1.0)
   - JTMaterialSwitch (1.1)
   - LMGaugeView (1.0.1)
   - Material (1.30.0)
+  - RAMReel (1.0.5)
   - ReactiveCocoa (4.0.4-alpha-1):
     - ReactiveCocoa/UI (= 4.0.4-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -45,7 +44,6 @@ PODS:
   - Result (0.6.0-beta.6)
   - SDWebImage/Core (3.7.5)
   - SMSegmentView (1.1)
-  - SwiftPriorityQueue (1.0.2)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
   - TwitterCore (1.14.6):
@@ -67,10 +65,10 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.9)
   - FBSDKLoginKit (~> 4.9)
   - HMSegmentedControl
-  - ImagePalette (~> 0.0)
   - JTMaterialSwitch (~> 1.1)
   - LMGaugeView
   - Material (~> 1.30)
+  - RAMReel
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SMSegmentView (~> 1.1)
@@ -93,17 +91,16 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
   FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  ImagePalette: ddd32d4e936d99c32ce37226a981731305e21478
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
   Material: ea3e036eeda98e75e760709a31f1f07aa69c847e
+  RAMReel: 31ca6e9bcc80427292f5d6f3a761aeea72a79736
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
-  SwiftPriorityQueue: d9f4deeb2160cb521bd2143d529a2fcdb5be2ca5
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
