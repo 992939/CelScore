@@ -50,7 +50,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
-        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 45, y: 20)
+        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
         followSwitch.thumbOnTintColor = Constants.kDarkShade
         followSwitch.trackOnTintColor = Constants.kLightShade
         followSwitch.rippleFillColor = Constants.kMainShade
