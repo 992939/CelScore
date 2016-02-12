@@ -13,17 +13,16 @@ import RealmSwift
 import TwitterKit
 import Material
 import HMSegmentedControl
-import RAMReel
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate {
     
     //MARK: Properties
-    var dataSource: SimplePrefixQueryDataSource!
-    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
+    var searchBar = UISearchBar()
+    var searchBarButtonItem: UIBarButtonItem?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -48,9 +47,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
-        self.searchedCelebrityListVM.getAllCelebsSignal()
-            .on(next: { list in self.dataSource = SimplePrefixQueryDataSource(list as! [String]) })
-            .start()
+        searchBar.delegate = self
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBarButtonItem = navigationItem.rightBarButtonItem
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
@@ -124,6 +123,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         searchButton.pulseScale = false
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
+        searchButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
         
         let navigationBarView: NavigationBarView = NavigationBarView()
         navigationBarView.leftButtons = [menuButton]
@@ -212,6 +212,33 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
+    
+    func showSearchBar() {
+        searchBar.alpha = 0
+        navigationItem.titleView = searchBar
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        navigationItem.setLeftBarButtonItem(searchBarButtonItem, animated: true)
+        //logoImageView.alpha = 0
+        UIView.animateWithDuration(0.3, animations: {
+            //self.navigationItem.titleView = self.logoImageView
+            //self.logoImageView.alpha = 1
+            }, completion: { finished in
+                
+        })
+    }
+    
+    //MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        hideSearchBar()
+    }
 }
 
 
