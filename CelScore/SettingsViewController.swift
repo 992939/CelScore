@@ -49,7 +49,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        publicOpinionBar.progressTintColor = Constants.kMainShade
+        publicOpinionBar.progressTintColor = Constants.kBrightShade
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
         publicOpinionView.addSubview(publicOpinionBar)
@@ -60,12 +60,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
-        consensusLabel.text = "Overall Social Consensus"
+        consensusLabel.text = "Positive Votes Percentage" 
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        consensusBar.progressTintColor = Constants.kMainShade
+        consensusBar.progressTintColor = Constants.kBrightShade
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         consensusView.addSubview(consensusBar)
@@ -76,12 +76,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
-        factsLabel.text = "#CitizensThatDontWatchTelevision"
+        factsLabel.text = "Overall Social Consensus"
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        factsBar.progressTintColor = Constants.kMainShade
+        factsBar.progressTintColor = Constants.kBrightShade
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
@@ -142,12 +142,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         loginLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30)
         let userLabel = UILabel()
-        userLabel.text = "@GreyEcologist"
+        userLabel.text = "@GreyEcologist" //TODO
         userLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
-        userLabel.textColor = Constants.kDarkShade
+        userLabel.textColor = Constants.kBrightShade
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
