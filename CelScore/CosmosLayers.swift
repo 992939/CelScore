@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 
 final class CosmosLayers {
@@ -63,8 +64,8 @@ final class CosmosLayers {
         var colorFilled = settings.colorFilled
         
         if (settings.userRatingMode) {
-            if (index + 1) > settings.previousRating { colorFilled = Constants.kDarkShade }
-            else { colorFilled = Constants.kWineShade }
+            if (index + 1) > settings.previousRating { colorFilled = Constants.kBrightShade }
+            else { colorFilled =  Constants.kWineShade }
         }
 
         let fillColor = isFilled ? colorFilled : settings.colorEmpty
