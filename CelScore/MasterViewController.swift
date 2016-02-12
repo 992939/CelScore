@@ -48,8 +48,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
-        //self.dataSource = SimplePrefixQueryDataSource(data)
-        self.searchedCelebrityListVM.getAllCelebsSignal().start()
+        self.searchedCelebrityListVM.getAllCelebsSignal()
+            .on(next: { list in self.dataSource = SimplePrefixQueryDataSource(list as! [String]) })
+            .start()
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let segmentedControl: HMSegmentedControl = getSegmentedControl()
