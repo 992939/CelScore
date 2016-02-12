@@ -21,6 +21,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let displayedCelebrityListVM: CelebrityListViewModel
     let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
+    let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
     
     //MARK: Initializers
@@ -30,6 +31,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.displayedCelebrityListVM = CelebrityListViewModel()
         self.searchedCelebrityListVM = SearchListViewModel()
         self.celebrityTableView = ASTableView()
+        self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         self.searchBar = UISearchBar()
         super.init(node: ASDisplayNode())
 
@@ -53,8 +55,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         
         let navigationBarView: NavigationBarView = getNavigationView()
-        let segmentedControl: HMSegmentedControl = getSegmentedControl()
-        
+        self.setupSegmentedControl()
         let loginButton: FBSDKLoginButton = getLoginButton()
         
         self.view.backgroundColor = Constants.kDarkShade
@@ -91,8 +92,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().updateTodayWidgetSignal().start()
     }
     
-    func changeList(segmentControl: UISegmentedControl) {
-        let list: CelebList = CelebList(rawValue: segmentControl.selectedSegmentIndex)!
+    func changeList() {
+        let list: CelebList = CelebList(rawValue: self.segmentedControl.selectedSegmentIndex)!
         self.displayedCelebrityListVM.getListSignal(listId: list.getId())
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
@@ -135,22 +136,20 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         return navigationBarView
     }
     
-    func getSegmentedControl() -> HMSegmentedControl {
-        let segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
-        segmentedControl.frame = Constants.kSegmentedControlRect
-        segmentedControl.backgroundColor = Constants.kDarkShade
-        segmentedControl.selectionIndicatorColor = Constants.kMainShade
-        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
+    func setupSegmentedControl() {
+        self.segmentedControl.frame = Constants.kSegmentedControlRect
+        self.segmentedControl.backgroundColor = Constants.kDarkShade
+        self.segmentedControl.selectionIndicatorColor = Constants.kMainShade
+        self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
             NSFontAttributeName: UIFont.systemFontOfSize(18)]
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.clipsToBounds = false
-        segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
-        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
-        segmentedControl.layer.shadowOpacity = 0.3
-        segmentedControl.addTarget(self, action: "changeList:", forControlEvents: .ValueChanged)
-        return segmentedControl
+        self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
+        self.segmentedControl.selectedSegmentIndex = 0
+        self.segmentedControl.clipsToBounds = false
+        self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
+        self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.segmentedControl.layer.shadowOpacity = 0.3
+        self.segmentedControl.addTarget(self, action: "changeList", forControlEvents: .ValueChanged)
     }
     
     func getLoginButton() -> FBSDKLoginButton {
@@ -229,7 +228,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func hideSearchBar() {
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 0 },
-            completion: { finished in self.searchBar.removeFromSuperview() })
+            completion: { _ in
+                self.searchBar.removeFromSuperview()
+                self.changeList()
+        })
     }
     
     //MARK: UISearchBarDelegate
