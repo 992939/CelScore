@@ -113,7 +113,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
         let picWidth: CGFloat = 180.0
-        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding, width: picWidth, height: picWidth)
+        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding/2, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
         }
@@ -139,9 +139,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle("CelScore", onSelectionImage: UIImage(named: "target_light"), offSelectionImage: UIImage(named: "target"))
-        segmentView.addSegmentWithTitle("Info", onSelectionImage: UIImage(named: "handbag_light"), offSelectionImage: UIImage(named: "handbag"))
-        segmentView.addSegmentWithTitle("Votes", onSelectionImage: UIImage(named: "globe_light"), offSelectionImage: UIImage(named: "globe"))
+        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_black"))
+        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_black"))
+        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_black"))
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor

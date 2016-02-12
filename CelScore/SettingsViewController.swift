@@ -182,7 +182,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //SettingsViewModel().calculateSocialConsensusSignal().start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
         
-        self.view.backgroundColor = MaterialColor.grey.lighten3
+        self.view.backgroundColor = Constants.kMainShade //MaterialColor.grey.lighten3
         self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
         self.sideNavigationViewController!.depth = .Depth1
     }
