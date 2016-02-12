@@ -11,18 +11,18 @@ import ReactiveCocoa
 import RealmSwift
 
 
-class CelebrityListViewModel: NSObject {
+final class CelebrityListViewModel: NSObject {
     
     //MARK: Properties
-    final private(set) var celebrityList = ListsModel()
-    final var count: Int { return self.celebrityList.count }
+    private(set) var celebrityList = ListsModel()
+    var count: Int { return self.celebrityList.count }
     enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
     //MARK: Initializer
     override init() { super.init() }
     
     //MARK: Methods
-    final func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
+    func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
@@ -34,7 +34,7 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
-    final func getCelebrityStructSignal(index index: Int) -> SignalProducer<CelebrityStruct, ListError> {
+    func getCelebrityStructSignal(index index: Int) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { sink, _ in
             guard index < self.count else { sendError(sink, .IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
@@ -47,13 +47,38 @@ class CelebrityListViewModel: NSObject {
         }
     }
     
-    final func getListsFromLocalStoreSignal() -> SignalProducer<AnyObject, ListError> {
+    func getListsFromLocalStoreSignal() -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let list = realm.objects(ListsModel)
             guard list.count > 0 else { sendError(sink, .NoLists); return }
             self.celebrityList = list.copy() as! ListsModel
             sendNext(sink, list)
+            sendCompleted(sink)
+        }
+    }
+    
+    func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
+            let list = realm.objects(CelebrityModel).filter(predicate)
+            guard list.count > 0 else { self.celebrityList = ListsModel(); return }
+            
+            let listModel =  ListsModel()
+            listModel.id = "0099"
+            listModel.name = "SearchList"
+            for (_, celeb) in list.enumerate() {
+                print("indeed!")
+                let celebId = CelebId()
+                celebId.id = celeb.id
+                listModel.celebList.append(celebId)
+            }
+            listModel.count = list.count
+            
+            self.celebrityList = listModel.copy() as! ListsModel
+            print("in time: \(self.celebrityList.description)")
+            sendNext(sink, listModel)
             sendCompleted(sink)
         }
     }

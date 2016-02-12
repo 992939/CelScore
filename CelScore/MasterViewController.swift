@@ -19,7 +19,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: Properties
     let displayedCelebrityListVM: CelebrityListViewModel
-    let searchedCelebrityListVM: SearchListViewModel
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
@@ -29,7 +28,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     init() {
         self.displayedCelebrityListVM = CelebrityListViewModel()
-        self.searchedCelebrityListVM = SearchListViewModel()
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         self.searchBar = UISearchBar()
@@ -95,7 +93,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func changeList() {
         let list: CelebList = CelebList(rawValue: self.segmentedControl.selectedSegmentIndex)!
         self.displayedCelebrityListVM.getListSignal(listId: list.getId())
-            .on(next: { value in
+            .on(next: { _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
@@ -239,8 +237,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
-            SearchListViewModel().searchSignal(searchToken: searchText)
-                .on(next: { value in print("value: \(value)") })
+            self.displayedCelebrityListVM.searchSignal(searchToken: searchText)
+                .on(next: { _ in
+                    self.celebrityTableView.beginUpdates()
+                    self.celebrityTableView.reloadData()
+                    self.celebrityTableView.endUpdates()
+                })
                 .start()
         }
     }
