@@ -13,6 +13,7 @@ import RealmSwift
 import TwitterKit
 import Material
 import HMSegmentedControl
+import RAMReel
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate {
