@@ -11,7 +11,7 @@ import Material
 import SMSegmentView
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
@@ -19,6 +19,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     let ratingsVC: RatingsViewController
     let celscoreVC: CelScoreViewController
     let voteButton: MaterialButton
+    let notification: AFDropdownNotification
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -29,6 +30,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = MaterialButton()
+        self.notification = AFDropdownNotification()
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -41,6 +43,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ratingsVC.delegate = self
+        self.notification.notificationDelegate = self
         
         let navigationBarView: NavigationBarView = getNavigationView()
         let topView: MaterialView = getTopView()
@@ -82,7 +85,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     func animateVoting(positive positive: Bool) {
         self.ratingsVC.animateStarsToGold(positive: positive)
-        //CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
     
     func shareVote() {
@@ -195,6 +197,27 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                 self.voteButton.pulseScale = true
                 self.voteButton.pulse() }
         })
+    }
+    
+    func sendFortuneCookie() {
+        print("boom")
+        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
+            .on(next: { text in
+                self.notification.titleText = "Bad Fortune Cookie"
+                self.notification.subtitleText = text
+                self.notification.dismissOnTap = true
+                self.notification.presentInView(self.view, withGravityAnimation: true)
+            })
+            .start()
+    }
+    
+    //MARK: AFDropdownNotificationDelegate
+    func dropdownNotificationBottomButtonTapped() {
+        print("bottom")
+    }
+    
+    func dropdownNotificationTopButtonTapped() {
+        print("top")
     }
 }
 

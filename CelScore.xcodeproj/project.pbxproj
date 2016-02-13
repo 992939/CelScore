@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
+		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -97,6 +98,8 @@
 
 /* Begin PBXFileReference section */
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
+		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
+		002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDropdownNotification.m; sourceTree = "<group>"; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */,
+				002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */,
 				0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */,
 				0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */,
 				0082B14A1C3B6FFD00E2A9BC /* PROEmpty.h */,
@@ -727,6 +732,7 @@
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
+				002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,

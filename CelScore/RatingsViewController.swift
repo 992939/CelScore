@@ -12,6 +12,7 @@ import AIRTimer
 
 public protocol RatingsViewDelegate {
     func enableVoteButton(positive: Bool)
+    func sendFortuneCookie()
 }
 
 
@@ -111,6 +112,7 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }
+                AIRTimer.after(1.0){ timer in self.delegate.sendFortuneCookie() }
             })
             .start()
     }

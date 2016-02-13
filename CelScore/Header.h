@@ -18,5 +18,6 @@
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
 #import "PROCelScoreAPIClient.h"
+#import "AFDropdownNotification.h"
 
 #endif /* Header_h */
