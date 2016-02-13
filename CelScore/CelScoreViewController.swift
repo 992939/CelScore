@@ -31,7 +31,17 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        let gaugeView = getGaugeView()
+        let consensusView = getConsensusView(gaugeView.bottom)
         
+        self.pulseView.depth = .Depth1
+        self.pulseView.backgroundColor = MaterialColor.clear
+        self.pulseView.addSubview(gaugeView)
+        self.pulseView.addSubview(consensusView)
+        self.view = self.pulseView
+    }
+    
+    func getGaugeView() -> MaterialPulseView {
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: Constants.kBottomHeight - 40))
         gaugeView.depth = .Depth1
         gaugeView.backgroundColor = Constants.kMainShade
@@ -51,7 +61,10 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
         gaugeView.addSubview(gauge)
-        
+        return gaugeView
+    }
+    
+    func getConsensusView(positionY: CGFloat) -> MaterialPulseView {
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus"
         consensusLabel.textColor = MaterialColor.white
@@ -61,18 +74,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         infoLabel.textColor = MaterialColor.white
         infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
-        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: gaugeView.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
         consensusView.depth = .Depth1
         consensusView.backgroundColor = Constants.kMainShade
         consensusView.pulseScale = true
         consensusView.addSubview(consensusLabel)
         consensusView.addSubview(infoLabel)
-        
-        self.pulseView.depth = .Depth1
-        self.pulseView.backgroundColor = MaterialColor.clear
-        self.pulseView.addSubview(gaugeView)
-        self.pulseView.addSubview(consensusView)
-        self.view = self.pulseView
+        return consensusView
     }
     
     func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
