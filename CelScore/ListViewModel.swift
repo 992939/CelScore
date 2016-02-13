@@ -1,5 +1,5 @@
 //
-//  CelebrityListViewModel.swift
+//  ListViewModel.swift
 //  CelScore
 //
 //  Created by Gareth.K.Mensah on 4/20/15.
@@ -11,7 +11,7 @@ import ReactiveCocoa
 import RealmSwift
 
 
-final class CelebrityListViewModel: NSObject {
+final class ListViewModel: NSObject {
     
     //MARK: Properties
     private(set) var celebrityList = ListsModel()

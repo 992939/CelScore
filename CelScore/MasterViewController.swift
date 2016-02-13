@@ -18,7 +18,7 @@ import HMSegmentedControl
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate {
     
     //MARK: Properties
-    let celebrityListVM: CelebrityListViewModel
+    let celebrityListVM: ListViewModel
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
@@ -27,7 +27,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.celebrityListVM = CelebrityListViewModel()
+        self.celebrityListVM = ListViewModel()
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         self.searchBar = UISearchBar()
