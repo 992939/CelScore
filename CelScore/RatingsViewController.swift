@@ -10,12 +10,17 @@ import AsyncDisplayKit
 import Material
 import AIRTimer
 
+public protocol RatingsViewDelegate {
+    func enableVoteButton(positive: Bool)
+}
+
 
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
+    var delegate: RatingsViewDelegate!
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -69,7 +74,12 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
                     cosmosView.didTouchCosmos = { rating in
                         cosmosView.settings.userRatingMode = true
-                        RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating)).start()
+                        RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
+                            .on(next: { ratings in
+                                let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
+                                if unrated.count == 0 { print("ZOO!"); self.delegate.enableVoteButton(true) }
+                            })
+                            .start()
                     }
                     
                     qualityView.addSubview(qualityLabel)

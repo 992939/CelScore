@@ -11,7 +11,7 @@ import Material
 import SMSegmentView
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate {
     
     //MARK: Property
     let celebST: CelebrityStruct
@@ -45,6 +45,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
+        
+        self.ratingsVC.delegate = self
         
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
@@ -117,7 +119,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
         }
-        
+    
         let roleLabel = UILabel()
         roleLabel.text = "Actor" //TODO: replace by celebST.role
         roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 18)
@@ -177,6 +179,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
 
         if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
         else { infoView.slideRight() }
+    }
+    
+    //MARK: RatingsViewDelegate
+    func enableVoteButton(positive: Bool) {
+        print("positive: \(positive)")
     }
 }
 

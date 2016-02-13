@@ -44,7 +44,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.divider = false
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
-        opinionLabel.text = "#PublicOpinion Completion"
+        opinionLabel.text = "Your #PublicOpinion Completion"
         opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -60,7 +60,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.divider = false
         consensusView.depth = .None
         let consensusLabel = UILabel()
-        consensusLabel.text = "Positive Votes Percentage"
+        consensusLabel.text = "Your Positive Votes Ratio"
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -76,7 +76,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
-        factsLabel.text = "Overall Social Consensus"
+        factsLabel.text = "The Average Social Consensus"
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
