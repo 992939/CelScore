@@ -77,7 +77,10 @@ final class RatingsViewController: ASViewController {
                         RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
                             .on(next: { ratings in
                                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                                if unrated.count == 0 { self.delegate.enableVoteButton(false) }
+                                var celScore: Double = 0
+                                for rating in ratings { celScore += ratings[rating] as! Double }
+                                let isPositive = celScore < 30 ? false : true
+                                if unrated.count == 0 { self.delegate.enableVoteButton(isPositive) }
                             })
                             .start()
                     }
