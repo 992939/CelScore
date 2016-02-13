@@ -96,13 +96,13 @@ final class RatingsViewController: ASViewController {
         self.view = self.pulseView
     }
     
-    func animateStarsToGold() {
+    func animateStarsToGold(positive positive: Bool) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
                     subview.pulseScale = true
-                    subview.pulseColor = Constants.kBrightShade
+                    subview.pulseColor = positive == true ? Constants.kBrightShade : Constants.kWineShade
                     AIRTimer.after(0.1 * Double(index)){ timer in  subview.pulse()
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView

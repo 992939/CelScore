@@ -68,15 +68,20 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
                 if unrated.count == 0 {
                     RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
-                        .on(next: { ratings in self.animateVoting() })
+                        .on(next: { userRatings in
+                            var celScore: Double = 0
+                            for rating in ratings { celScore += ratings[rating] as! Double }
+                            let isPositive = celScore < 30 ? false : true
+                            self.animateVoting(positive: isPositive)
+                        })
                         .start()
                 }
             })
             .start()
     }
     
-    func animateVoting() {
-        self.ratingsVC.animateStarsToGold()
+    func animateVoting(positive positive: Bool) {
+        self.ratingsVC.animateStarsToGold(positive: positive)
         //CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive).start()
     }
     

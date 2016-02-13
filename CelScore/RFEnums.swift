@@ -91,7 +91,7 @@ public enum Qualities: Int {
         case .RoleModel: return "Role Model"
         case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
-        case .Elegance: return "Fashion"
+        case .Elegance: return "Elegance"
         case .Charisma: return "Charisma"
         case .SexAppeal: return "Good Looks"
         }
