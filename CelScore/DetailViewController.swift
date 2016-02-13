@@ -18,6 +18,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     let infoVC: InfoViewController
     let ratingsVC: RatingsViewController
     let celscoreVC: CelScoreViewController
+    let voteButton: MaterialButton
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -27,6 +28,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
+        self.voteButton = MaterialButton()
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -38,22 +40,22 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ratingsVC.delegate = self
+        
         let navigationBarView: NavigationBarView = getNavigationView()
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
-        let voteButton: MaterialButton = getVoteButton()
+        self.setUpVoteButton()
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
-        
-        self.ratingsVC.delegate = self
         
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
-        self.view.addSubview(voteButton)
+        self.view.addSubview(self.voteButton)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kDarkShade
     }
@@ -153,14 +155,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         return segmentView
     }
     
-    func getVoteButton() -> MaterialButton {
-        let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43))
-        celScoreButton.shape = .Circle
-        celScoreButton.depth = .Depth2
-        celScoreButton.pulseScale = false
-        celScoreButton.backgroundColor = Constants.kDarkShade
-        celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        return celScoreButton
+    func setUpVoteButton() {
+        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43)
+        self.voteButton.shape = .Circle
+        self.voteButton.depth = .Depth2
+        self.voteButton.pulseScale = false
+        self.voteButton.backgroundColor = Constants.kDarkShade
+        self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
     }
     
     //MARK: SMSegmentViewDelegate
@@ -183,7 +184,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     //MARK: RatingsViewDelegate
     func enableVoteButton(positive: Bool) {
-        print("positive: \(positive)")
+        UIView.animateWithDuration(0.3, animations: {
+            self.voteButton.backgroundColor = positive == true ? Constants.kBrightShade : Constants.kWineShade },
+            completion: { _ in MaterialAnimation.delay(2) {
+                self.voteButton.pulseScale = true
+                self.voteButton.pulse() }
+        })
     }
 }
 

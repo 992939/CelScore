@@ -55,7 +55,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.addSubview(publicOpinionBar)
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
-        //MARK: Consensus
+        //MARK: Positive Votes Ratio
         let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: publicOpinionView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         consensusView.divider = false
         consensusView.depth = .None
@@ -71,12 +71,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.addSubview(consensusBar)
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
-        //MARK: Random Facts
+        //MARK: Consensus
         let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: consensusView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         factsView.divider = false
         factsView.depth = .None
         let factsLabel = UILabel()
-        factsLabel.text = "The Average Social Consensus"
+        factsLabel.text = "The Overall Social Consensus"
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)

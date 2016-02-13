@@ -77,7 +77,7 @@ final class RatingsViewController: ASViewController {
                         RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
                             .on(next: { ratings in
                                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                                if unrated.count == 0 { print("ZOO!"); self.delegate.enableVoteButton(true) }
+                                if unrated.count == 0 { self.delegate.enableVoteButton(false) }
                             })
                             .start()
                     }
