@@ -155,7 +155,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate {
         let celScoreButton: MaterialButton = MaterialButton(frame: CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43))
         celScoreButton.shape = .Circle
         celScoreButton.depth = .Depth2
-        celScoreButton.backgroundColor = MaterialColor.grey.lighten5
+        celScoreButton.pulseScale = false
+        celScoreButton.backgroundColor = Constants.kDarkShade
         celScoreButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
         return celScoreButton
     }

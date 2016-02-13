@@ -18,7 +18,7 @@ import HMSegmentedControl
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate {
     
     //MARK: Properties
-    let displayedCelebrityListVM: CelebrityListViewModel
+    let celebrityListVM: CelebrityListViewModel
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
@@ -27,7 +27,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.displayedCelebrityListVM = CelebrityListViewModel()
+        self.celebrityListVM = CelebrityListViewModel()
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         self.searchBar = UISearchBar()
@@ -76,7 +76,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.displayedCelebrityListVM.getListSignal(listId: value as! String)
+                return self.celebrityListVM.getListSignal(listId: value as! String)
             }
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
@@ -92,7 +92,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func changeList() {
         let list: CelebList = CelebList(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        self.displayedCelebrityListVM.getListSignal(listId: list.getId())
+        self.celebrityListVM.getListSignal(listId: list.getId())
             .on(next: { _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
@@ -160,10 +160,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.displayedCelebrityListVM.count }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.celebrityListVM.count }
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
-        self.displayedCelebrityListVM.getCelebrityStructSignal(index: indexPath.row)
+        self.celebrityListVM.getCelebrityStructSignal(index: indexPath.row)
             .on(next: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
             .start()
         return node
@@ -237,7 +237,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
-            self.displayedCelebrityListVM.searchSignal(searchToken: searchText)
+            self.celebrityListVM.searchSignal(searchToken: searchText)
                 .on(next: { _ in
                     self.celebrityTableView.beginUpdates()
                     self.celebrityTableView.reloadData()

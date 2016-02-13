@@ -32,12 +32,16 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: Constants.kBottomHeight - 40))
+        gaugeView.depth = .Depth1
+        gaugeView.backgroundColor = Constants.kMainShade
+        gaugeView.pulseScale = false
         let gauge = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
         gauge.maxValue = Constants.kMaximumVoteValue
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = 0.7 * Constants.kDetailWidth
-        gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: 35, width: gaugeWidth, height: gaugeWidth)
+        gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
         gauge.limitDotColor = Constants.kBrightShade
@@ -46,24 +50,17 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.ringBackgroundColor = Constants.kLightShade
         gauge.delegate = self
         AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
-        
-        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: Constants.kBottomHeight - 40))
-        gaugeView.depth = .Depth1
-        gaugeView.backgroundColor = Constants.kMainShade
-        gaugeView.pulseScale = false
         gaugeView.addSubview(gauge)
         
         let consensusLabel = UILabel()
         consensusLabel.text = "Social Consensus"
         consensusLabel.textColor = MaterialColor.white
         consensusLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25)
-        
         let infoLabel = UILabel()
         infoLabel.text = "80%"
         infoLabel.textColor = MaterialColor.white
         infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
-        
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: gaugeView.bottom + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
         consensusView.depth = .Depth1
         consensusView.backgroundColor = Constants.kMainShade
