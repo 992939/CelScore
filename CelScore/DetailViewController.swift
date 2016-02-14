@@ -76,16 +76,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                             var celScore: Double = 0
                             for rating in ratings { celScore += ratings[rating] as! Double }
                             let isPositive = celScore < 30 ? false : true
-                            self.animateVoting(positive: isPositive)
+                            self.ratingsVC.animateStarsToGold(positive: isPositive)
                         })
                         .start()
                 }
             })
             .start()
-    }
-    
-    func animateVoting(positive positive: Bool) {
-        self.ratingsVC.animateStarsToGold(positive: positive)
     }
     
     func shareVote() {
@@ -201,7 +197,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     }
     
     func sendFortuneCookie() {
-        print("boom")
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
             .on(next: { text in
                 self.notification.titleText = "Bad Fortune Cookie"
