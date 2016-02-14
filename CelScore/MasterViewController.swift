@@ -180,7 +180,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func textFieldDidBeginEditing(textField: UITextField) {}
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
     
-    //MARK: FBSDKLoginButtonDelegate Methods.
+    //MARK: FBSDKLoginButtonDelegate Methods
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         guard error == nil else { print("FBSDKLogin error: \(error)"); return }
         guard result.isCancelled == false else { return }

@@ -113,5 +113,6 @@ struct Constants {
         "The map is not the territory.",
         "Power steps back in the face of more power.",
         "As above so below, as below so above.",
-        "The same shoe does not fit every foot."]
+        "The same shoe does not fit every foot.",
+        "Hell is other people."]
 }
