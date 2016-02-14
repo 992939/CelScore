@@ -179,7 +179,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.modalPresentationStyle = UIModalPresentationStyle.Custom
         detailVC.transitioningDelegate = self
-        self.transition.startFrame = CGRect(x: 10, y: 20, width: 50, height: 50)
+        var cellRect: CGRect = self.celebrityTableView.rectForRowAtIndexPath(indexPath)
+        cellRect = CGRectOffset(cellRect, -tableView.contentOffset.x, -tableView.contentOffset.y)
+        self.transition.startFrame = CGRect(x: 30, y: cellRect.bottom + Constants.kNavigationBarRect.height, width: 30, height: 30)
         self.presentViewController(detailVC, animated: true, completion: nil)
     }
     

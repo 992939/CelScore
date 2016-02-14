@@ -43,7 +43,7 @@ struct Constants {
     
     //CelebrityTableViewCell
     static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 3.0 : 0.8
-    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 10.0
+    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 20.0 : 15.0
     
     //DetailVC
     static let kDetailWidth = kMaxWidth - 2 * kPadding
