@@ -46,14 +46,12 @@ final class CelebrityTableViewCell: ASCellNode {
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
-        
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(next: { (hasRatings:Bool) in
                 cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
                 cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             })
             .start()
-        
         let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
         followSwitch.thumbOnTintColor = Constants.kDarkShade
