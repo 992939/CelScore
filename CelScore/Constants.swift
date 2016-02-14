@@ -83,7 +83,7 @@ struct Constants {
         "Where the judgement's weak, prejudice is strong.",
         "Hell hath no fury like a mind unshackled.",
         "The devil is in the details.",
-        "The time is always right to do what is right.",
+        "The time is always right to do what is right. Right?",
         "One must walk in darkness so others may see the light.",
         "Hell hath no fury like a citizen scorned.",
         "Only fools lend light to the sun.",
