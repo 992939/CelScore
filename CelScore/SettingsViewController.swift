@@ -121,7 +121,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: publicServiceView.bottom + Constants.kPadding, width: maxWidth, height: 30))
         notificationView.depth = .None
         let notificationLabel = UILabel()
-        notificationLabel.text = "In-App Notification"
+        notificationLabel.text = "Bad Fortune Cookies"
         notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         notificationLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
         let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))

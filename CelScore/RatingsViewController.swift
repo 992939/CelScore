@@ -112,7 +112,7 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }
-                AIRTimer.after(1.0){ timer in self.delegate.sendFortuneCookie() }
+                AIRTimer.after(2.0){ timer in self.delegate.sendFortuneCookie() }
             })
             .start()
     }

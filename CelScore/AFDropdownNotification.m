@@ -8,11 +8,11 @@
 
 #import "AFDropdownNotification.h"
 
-#define kDropdownImageSize 40
+#define kDropdownImageSize 60
 #define kDropdownPadding 10
 #define kDropdownTitleFontSize 19
 #define kDropdownSubtitleFontSize 14
-#define kDropdownButtonWidth 75
+#define kDropdownButtonWidth 0
 #define kDropdownButtonHeight 30
 
 @interface AFDropdownNotification ()

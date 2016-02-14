@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import Material
 import SMSegmentView
+import AIRTimer
 
 
 final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate {
@@ -205,20 +206,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
             .on(next: { text in
                 self.notification.titleText = "Bad Fortune Cookie"
                 self.notification.subtitleText = text
+                self.notification.image = UIImage(named: "cookie")
                 self.notification.dismissOnTap = true
                 self.notification.presentInView(self.view, withGravityAnimation: true)
+                AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
             })
             .start()
     }
     
     //MARK: AFDropdownNotificationDelegate
-    func dropdownNotificationBottomButtonTapped() {
-        print("bottom")
-    }
-    
-    func dropdownNotificationTopButtonTapped() {
-        print("top")
-    }
+    func dropdownNotificationBottomButtonTapped() {}
+    func dropdownNotificationTopButtonTapped() {}
 }
 
 
