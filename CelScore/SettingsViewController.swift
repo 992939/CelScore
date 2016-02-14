@@ -41,7 +41,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: PublicOpinion
         let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: logoImageView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         publicOpinionView.divider = false
-        publicOpinionView.depth = .None
+        publicOpinionView.depth = .Depth1
         let opinionLabel = UILabel()
         opinionLabel.text = "Your #PublicOpinion Completion"
         opinionLabel.textColor = MaterialColor.white
@@ -59,7 +59,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Positive Votes Ratio
         let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: publicOpinionView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         consensusView.divider = false
-        consensusView.depth = .None
+        consensusView.depth = .Depth1
         let consensusLabel = UILabel()
         consensusLabel.text = "Your Positive Votes Ratio"
         consensusLabel.textColor = MaterialColor.white
@@ -77,7 +77,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Consensus
         let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: consensusView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         factsView.divider = false
-        factsView.depth = .None
+        factsView.depth = .Depth1
         let factsLabel = UILabel()
         factsLabel.text = "The Overall Social Consensus"
         factsLabel.textColor = MaterialColor.white
@@ -95,7 +95,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //MARK: Picker
         let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: factsView.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
         pickerView.divider = false
-        pickerView.depth = .None
+        pickerView.depth = .Depth1
         let pickerLabel = UILabel()
         pickerLabel.text = "Main Topic Of Interest"
         pickerLabel.textColor = MaterialColor.white
@@ -109,7 +109,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: PublicService
         let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: pickerView.bottom + Constants.kPadding, width: maxWidth, height: 30))
-        publicServiceView.depth = .None
+        publicServiceView.depth = .Depth1
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode"
         publicServiceLabel.textColor = MaterialColor.white
@@ -128,7 +128,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: In-App Notification
         let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: publicServiceView.bottom + Constants.kPadding, width: maxWidth, height: 30))
-        notificationView.depth = .None
+        notificationView.depth = .Depth1
         let notificationLabel = UILabel()
         notificationLabel.text = "Bad Fortune Cookies"
         notificationLabel.textColor = MaterialColor.white
@@ -147,7 +147,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //MARK: LogStatus
         let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: notificationView.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        loginView.depth = .None
+        loginView.depth = .Depth1
         let loginLabel = UILabel()
         loginLabel.textColor = MaterialColor.white
         loginLabel.text = "Logged In As"
@@ -159,7 +159,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
-        userLabel.textColor = Constants.kBrightShade
+        userLabel.textColor = MaterialColor.white
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
