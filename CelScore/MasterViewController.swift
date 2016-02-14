@@ -172,7 +172,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.presentViewController(DetailViewController(celebrityST: node.celebST), animated: false, completion: nil)
+        let detailVC = DetailViewController(celebrityST: node.celebST)
+        detailVC.modalTransitionStyle = .CrossDissolve
+        self.presentViewController(detailVC, animated: true, completion: nil)
     }
     
     //MARK: UITextFieldDelegate methods
@@ -246,6 +248,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 .start()
         }
     }
+    
+    //MARK: ModalTransitionDelegate
+    func modalViewControllerDismiss(callbackData data: AnyObject?) {}
+    func modalViewControllerDismiss(interactive interactive: Bool, callbackData data: AnyObject?) {}
 }
 
 

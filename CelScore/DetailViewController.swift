@@ -13,10 +13,9 @@ import AIRTimer
 import TransitionTreasury
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate, NavgationTransitionable {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate {
     
     //MARK: Properties
-    var tr_pushTransition: TRNavgationTransitionDelegate?
     let celebST: CelebrityStruct
     let infoVC: InfoViewController
     let ratingsVC: RatingsViewController
@@ -66,10 +65,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.view.backgroundColor = Constants.kDarkShade
     }
     
-    func backAction() {
-        navigationController?.tr_popViewController({ () -> Void in print("Pop finished.") })
-        //self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)

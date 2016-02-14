@@ -217,12 +217,11 @@ public class MaterialButton : UIButton {
 	}
 	
 	/**
-	A property that accesses the layer.borderWith using a MaterialBorder
-	enum preset.
+	A property that accesses the layer.borderWith.
 	*/
-	public var borderWidth: MaterialBorder {
+	public var borderWidth: CGFloat = 0 {
 		didSet {
-			layer.borderWidth = MaterialBorderToValue(borderWidth)
+			layer.borderWidth = borderWidth
 		}
 	}
 	
@@ -268,7 +267,6 @@ public class MaterialButton : UIButton {
 	- Parameter aDecoder: A NSCoder instance.
 	*/
 	public required init?(coder aDecoder: NSCoder) {
-		borderWidth = .None
 		depth = .None
 		shape = .None
 		cornerRadius = .None
@@ -284,7 +282,6 @@ public class MaterialButton : UIButton {
 	- Parameter frame: A CGRect instance.
 	*/
 	public override init(frame: CGRect) {
-		borderWidth = .None
 		depth = .None
 		shape = .None
 		cornerRadius = .None
@@ -457,10 +454,9 @@ public class MaterialButton : UIButton {
 			let v: CGFloat = r / f
 			let d: CGFloat = 2 * f
 			let s: CGFloat = 1.05
+			
 			var t: CFTimeInterval = CFTimeInterval(1.5 * width / UIScreen.mainScreen().bounds.width)
-			if 0.55 < t {
-				t = 0.55
-			} else if 0.25 > t {
+			if 0.55 < t || 0.25 > t {
 				t = 0.55
 			}
 			t /= 1.3
@@ -484,7 +480,7 @@ public class MaterialButton : UIButton {
 					if nil != self.pulseColor && 0 < self.pulseColorOpacity {
 						MaterialAnimation.animateWithDuration(t, animations: {
 							pulseLayer.hidden = true
-							}) {
+						}) {
 								pulseLayer.removeFromSuperlayer()
 						}
 					}
@@ -503,9 +499,7 @@ public class MaterialButton : UIButton {
 	internal func shrinkAnimation() {
 		if pulseScale {
 			var t: CFTimeInterval = CFTimeInterval(1.5 * width / UIScreen.mainScreen().bounds.width)
-			if 0.55 < t {
-				t = 0.55
-			} else if 0.25 > t {
+			if 0.55 < t || 0.25 > t {
 				t = 0.55
 			}
 			t /= 1.3

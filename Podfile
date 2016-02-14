@@ -19,10 +19,9 @@ target 'CelScore' do
     pod 'Timepiece', '~> 0.4'
     pod 'JTMaterialSwitch', '~> 1.1'
     pod 'YLProgressBar', '~> 3.8'
-    pod 'Material', '~> 1.30'
+    pod 'Material', '~> 1.32'
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
-    pod 'TransitionTreasury', '~> 3.0.1'
     pod 'LMGaugeView'
     pod 'HMSegmentedControl'
 end

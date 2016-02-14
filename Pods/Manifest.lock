@@ -23,7 +23,7 @@ PODS:
   - HMSegmentedControl (1.5.2)
   - JTMaterialSwitch (1.1)
   - LMGaugeView (1.0.1)
-  - Material (1.30.0)
+  - Material (1.32.2)
   - ReactiveCocoa (4.0.4-alpha-1):
     - ReactiveCocoa/UI (= 4.0.4-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -69,7 +69,7 @@ DEPENDENCIES:
   - HMSegmentedControl
   - JTMaterialSwitch (~> 1.1)
   - LMGaugeView
-  - Material (~> 1.30)
+  - Material (~> 1.32)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SMSegmentView (~> 1.1)
@@ -95,7 +95,7 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
-  Material: ea3e036eeda98e75e760709a31f1f07aa69c847e
+  Material: c2752a84929229e904dc4b131f3564722ed22498
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
