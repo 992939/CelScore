@@ -71,8 +71,8 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.starMargin = 5
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = true
-                    cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
-                    cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                    cosmosView.settings.colorFilled = Constants.kStarRatingShade
+                    cosmosView.settings.borderColorEmpty = Constants.kStarRatingShade //MaterialColor.yellow.darken3
                     cosmosView.didTouchCosmos = { rating in
                         cosmosView.settings.userRatingMode = true
                         RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))

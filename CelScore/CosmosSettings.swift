@@ -32,7 +32,7 @@ public struct CosmosSettings {
 }
 
 struct CosmosDefaultSettings {
-    static let defaultColor = UIColor(red: 1, green: 149/255, blue: 0, alpha: 1)
+    static let defaultColor = UIColor.whiteColor()
     static let borderColorEmpty = defaultColor
     static let borderWidthEmpty: Double = 1 / Double(UIScreen.mainScreen().scale)
     static let colorEmpty = UIColor.clearColor()
@@ -58,7 +58,7 @@ struct CosmosDefaultSettings {
     
     static let totalStars = 5
     
-    static let textColor = UIColor(red: 127/255, green: 127/255, blue: 127/255, alpha: 1)
+    static let textColor = UIColor.whiteColor()
     static let textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
     static let textMargin: Double = 5
     static var textSize: Double { get { return Double(textFont.pointSize) } }

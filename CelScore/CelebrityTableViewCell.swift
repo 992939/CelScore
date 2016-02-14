@@ -44,8 +44,8 @@ final class CelebrityTableViewCell: ASCellNode {
         cosmosView.settings.starSize = Constants.kStarSize
         cosmosView.settings.starMargin = Constants.kStarMargin
         cosmosView.settings.updateOnTouch = false
-        cosmosView.settings.colorFilled = MaterialColor.yellow.darken1
-        cosmosView.settings.borderColorEmpty = MaterialColor.yellow.darken1
+        cosmosView.settings.colorFilled = Constants.kStarRatingShade
+        cosmosView.settings.borderColorEmpty = Constants.kStarRatingShade
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         

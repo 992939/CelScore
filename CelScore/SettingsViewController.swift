@@ -22,7 +22,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         let maxWidth = self.view.width - 2 * Constants.kPadding
         
         //MARK: Logo
@@ -45,6 +44,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionView.depth = .None
         let opinionLabel = UILabel()
         opinionLabel.text = "Your #PublicOpinion Completion"
+        opinionLabel.textColor = MaterialColor.white
         opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicOpinionView.titleLabel = opinionLabel
         publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -53,6 +53,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicOpinionBar.type = .Flat
         publicOpinionBar.indicatorTextDisplayMode = .Progress
         publicOpinionView.addSubview(publicOpinionBar)
+        publicOpinionView.backgroundColor = Constants.kMainShade
         let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
         
         //MARK: Positive Votes Ratio
@@ -61,6 +62,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusView.depth = .None
         let consensusLabel = UILabel()
         consensusLabel.text = "Your Positive Votes Ratio"
+        consensusLabel.textColor = MaterialColor.white
         consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         consensusView.titleLabel = consensusLabel
         consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -69,6 +71,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         consensusBar.type = .Flat
         consensusBar.indicatorTextDisplayMode = .Progress
         consensusView.addSubview(consensusBar)
+        consensusView.backgroundColor = Constants.kMainShade
         let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
         
         //MARK: Consensus
@@ -77,6 +80,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsView.depth = .None
         let factsLabel = UILabel()
         factsLabel.text = "The Overall Social Consensus"
+        factsLabel.textColor = MaterialColor.white
         factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         factsView.titleLabel = factsLabel
         factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -85,6 +89,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
+        factsView.backgroundColor = Constants.kMainShade
         let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
         
         //MARK: Picker
@@ -93,11 +98,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.depth = .None
         let pickerLabel = UILabel()
         pickerLabel.text = "Main Topic Of Interest"
+        pickerLabel.textColor = MaterialColor.white
         pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         pickerView.titleLabel = pickerLabel
         pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.kPickerViewHeight - 30, right: 0)
         let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 20, height: 100))
         pickerView.addSubview(picker)
+        pickerView.backgroundColor = Constants.kMainShade
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //MARK: PublicService
@@ -105,6 +112,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceView.depth = .None
         let publicServiceLabel = UILabel()
         publicServiceLabel.text = "Public Service Mode"
+        publicServiceLabel.textColor = MaterialColor.white
         publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
         let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
@@ -115,6 +123,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceBox.onTintColor = Constants.kBrightShade
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
+        publicServiceView.backgroundColor = Constants.kMainShade
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
         //MARK: In-App Notification
@@ -122,6 +131,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationView.depth = .None
         let notificationLabel = UILabel()
         notificationLabel.text = "Bad Fortune Cookies"
+        notificationLabel.textColor = MaterialColor.white
         notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         notificationLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
         let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
@@ -132,12 +142,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationBox.onTintColor = Constants.kBrightShade
         notificationView.addSubview(notificationLabel)
         notificationView.addSubview(notificationBox)
+        notificationView.backgroundColor = Constants.kMainShade
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
         
         //MARK: LogStatus
         let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: notificationView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         loginView.depth = .None
         let loginLabel = UILabel()
+        loginLabel.textColor = MaterialColor.white
         loginLabel.text = "Logged In As"
         loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
         loginLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30)
@@ -154,6 +166,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
         loginView.addSubview(logoutButton)
+        loginView.backgroundColor = Constants.kMainShade
         let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
         
         //MARK: Copyright
@@ -182,8 +195,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //SettingsViewModel().calculateSocialConsensusSignal().start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
         
-        self.view.backgroundColor = Constants.kMainShade //MaterialColor.grey.lighten3
-        self.sideNavigationViewController!.backdropColor = MaterialColor.grey.darken3
+        self.view.backgroundColor = Constants.kDarkShade
+        self.sideNavigationViewController!.backdropColor = Constants.kDarkShade
         self.sideNavigationViewController!.depth = .Depth1
     }
     
@@ -192,8 +205,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return CelebList.getCount() }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return CelebList(rawValue: row)?.name()
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return CelebList(rawValue: row)?.name()
+//    }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: CelebList(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
