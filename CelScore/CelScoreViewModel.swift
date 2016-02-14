@@ -104,22 +104,19 @@ final class CelScoreViewModel: NSObject {
                 fortuneCookieSays = newCookies[index]
             }
             try! realm.commitWrite()
-            sendNext(sink, "\(fortuneCookieSays!) Thanks for voting.")
+            sendNext(sink, "\(fortuneCookieSays!) Thank you for voting.")
             sendCompleted(sink)
         }
     }
     
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { sink, _ in
-            
             var socialVC: SLComposeViewController
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
             socialVC.setInitialText("PSA")
-            //TODO: socialVC.addImage()??
-            
             sendNext(sink, socialVC)
             sendCompleted(sink)
         }
