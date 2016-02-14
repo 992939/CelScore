@@ -230,6 +230,7 @@
     
     if (animation) {
         
+        [_animator removeAllBehaviors];
         UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[_notificationView]];
         gravity.gravityDirection = CGVectorMake(0, -1.5);
         [_animator addBehavior:gravity];
