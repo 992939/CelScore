@@ -77,6 +77,18 @@ final class RatingsViewModel: NSObject {
         }
     }
     
+    func hasUserRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<Bool, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", ratingsId)
+            let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            var hasRatings: Bool = false
+            if let userRatings = newRatings where userRatings.totalVotes > 0 { hasRatings = true }
+            sendNext(sink, hasRatings)
+            sendCompleted(sink)
+        }
+    }
+    
     func getCelScoreSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
