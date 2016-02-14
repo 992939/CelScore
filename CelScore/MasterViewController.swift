@@ -13,15 +13,17 @@ import RealmSwift
 import TwitterKit
 import Material
 import HMSegmentedControl
+import JTMaterialTransition
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
     let celebrityListVM: ListViewModel
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
+    let transition: JTMaterialTransition
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -31,6 +33,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
         self.searchBar = UISearchBar()
+        self.transition = JTMaterialTransition()
+        self.transition.startBackgroundColor = Constants.kDarkShade
         super.init(node: ASDisplayNode())
 
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -173,7 +177,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
         let detailVC = DetailViewController(celebrityST: node.celebST)
-        detailVC.modalTransitionStyle = .CrossDissolve
+        detailVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        detailVC.transitioningDelegate = self
+        self.transition.startFrame = CGRect(x: 10, y: 20, width: 50, height: 50)
         self.presentViewController(detailVC, animated: true, completion: nil)
     }
     
@@ -252,6 +258,17 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: ModalTransitionDelegate
     func modalViewControllerDismiss(callbackData data: AnyObject?) {}
     func modalViewControllerDismiss(interactive interactive: Bool, callbackData data: AnyObject?) {}
+    
+    //MARK: UIViewControllerTransitioningDelegate
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.transition.reverse = false
+        return self.transition
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.transition.reverse = true
+        return self.transition
+    }
 }
 
 

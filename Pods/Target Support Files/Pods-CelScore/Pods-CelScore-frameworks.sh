@@ -95,6 +95,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/FBSDKLoginKit.framework"
   install_framework "Pods-CelScore/HMSegmentedControl.framework"
   install_framework "Pods-CelScore/JTMaterialSwitch.framework"
+  install_framework "Pods-CelScore/JTMaterialTransition.framework"
   install_framework "Pods-CelScore/LMGaugeView.framework"
   install_framework "Pods-CelScore/Material.framework"
   install_framework "Pods-CelScore/ReactiveCocoa.framework"
@@ -105,7 +106,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/SMSegmentView.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
-  install_framework "Pods-CelScore/TransitionTreasury.framework"
   install_framework "Pods-CelScore/WebASDKImageManager.framework"
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi
@@ -121,6 +121,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/FBSDKLoginKit.framework"
   install_framework "Pods-CelScore/HMSegmentedControl.framework"
   install_framework "Pods-CelScore/JTMaterialSwitch.framework"
+  install_framework "Pods-CelScore/JTMaterialTransition.framework"
   install_framework "Pods-CelScore/LMGaugeView.framework"
   install_framework "Pods-CelScore/Material.framework"
   install_framework "Pods-CelScore/ReactiveCocoa.framework"
@@ -131,7 +132,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/SMSegmentView.framework"
   install_framework "Pods-CelScore/SwiftyJSON.framework"
   install_framework "Pods-CelScore/Timepiece.framework"
-  install_framework "Pods-CelScore/TransitionTreasury.framework"
   install_framework "Pods-CelScore/WebASDKImageManager.framework"
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi

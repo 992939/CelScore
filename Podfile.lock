@@ -22,6 +22,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - JTMaterialSwitch (1.1)
+  - JTMaterialTransition (1.0.5)
   - LMGaugeView (1.0.1)
   - Material (1.32.2)
   - ReactiveCocoa (4.0.4-alpha-1):
@@ -45,9 +46,6 @@ PODS:
   - SMSegmentView (1.1)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
-  - TransitionTreasury (3.0.1):
-    - TransitionTreasury/Core (= 3.0.1)
-  - TransitionTreasury/Core (3.0.1)
   - TwitterCore (1.14.6):
     - Fabric
   - TwitterKit (1.14.6):
@@ -68,6 +66,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.9)
   - HMSegmentedControl
   - JTMaterialSwitch (~> 1.1)
+  - JTMaterialTransition (~> 1.0)
   - LMGaugeView
   - Material (~> 1.32)
   - ReactiveCocoa (= 4.0.4-alpha-1)
@@ -75,7 +74,6 @@ DEPENDENCIES:
   - SMSegmentView (~> 1.1)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
-  - TransitionTreasury (~> 3.0.1)
   - TwitterCore (~> 1.14.6)
   - TwitterKit (~> 1.14.6)
   - WebASDKImageManager (~> 1.0)
@@ -94,6 +92,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   JTMaterialSwitch: cad8093c3773ff9f6c60005c98d269eb869b5e04
+  JTMaterialTransition: 7b2a19927baa47e42312df941cbc5132dc4484ca
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
   Material: c2752a84929229e904dc4b131f3564722ed22498
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
@@ -104,7 +103,6 @@ SPEC CHECKSUMS:
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  TransitionTreasury: 7d62f836858d965f29e5c001db9b8482cc89f566
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
   WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
