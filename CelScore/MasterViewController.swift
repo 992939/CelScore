@@ -70,7 +70,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
-    func openSetings() { self.sideNavigationViewController!.openLeftView() }
+    func openSettings() { self.sideNavigationViewController!.openLeftView() }
     
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId)
@@ -113,7 +113,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
         menuButton.pulseScale = false
-        menuButton.addTarget(self, action: Selector("openSetings"), forControlEvents: .TouchUpInside)
+        menuButton.addTarget(self, action: Selector("openSettings"), forControlEvents: .TouchUpInside)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
         

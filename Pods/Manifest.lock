@@ -45,6 +45,9 @@ PODS:
   - SMSegmentView (1.1)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
+  - TransitionTreasury (3.0.1):
+    - TransitionTreasury/Core (= 3.0.1)
+  - TransitionTreasury/Core (3.0.1)
   - TwitterCore (1.14.6):
     - Fabric
   - TwitterKit (1.14.6):
@@ -72,6 +75,7 @@ DEPENDENCIES:
   - SMSegmentView (~> 1.1)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
+  - TransitionTreasury (~> 3.0.1)
   - TwitterCore (~> 1.14.6)
   - TwitterKit (~> 1.14.6)
   - WebASDKImageManager (~> 1.0)
@@ -100,6 +104,7 @@ SPEC CHECKSUMS:
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
+  TransitionTreasury: 7d62f836858d965f29e5c001db9b8482cc89f566
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   TwitterKit: f67360ee0a5f935f053bf37015652ac157e4eb92
   WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
