@@ -111,6 +111,8 @@ final class RatingsViewController: ASViewController {
                     AIRTimer.after(0.1 * Double(index)){ timer in  subview.pulse()
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
+                        cosmos.settings.colorFilled = Constants.kStarRatingShade
+                        cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
                         cosmos.settings.userRatingMode = false
                         cosmos.rating = ratings[ratings[index]] as! Double
                         cosmos.update()
