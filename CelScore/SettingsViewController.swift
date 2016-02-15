@@ -139,19 +139,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
-        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 60))
-        factsView.divider = false
+        let factsView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         factsView.depth = .Depth1
         let factsLabel = UILabel()
         factsLabel.text = title
         factsLabel.textColor = MaterialColor.white
+        factsLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25)
         factsLabel.font = UIFont(name: factsLabel.font.fontName, size: 12)
-        factsView.titleLabel = factsLabel
-        factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
+        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
         factsBar.progressTintColor = Constants.kWineShade
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
+        factsView.addSubview(factsLabel)
         factsView.addSubview(factsBar)
         factsView.backgroundColor = Constants.kMainShade
         return ASDisplayNode(viewBlock: { () -> UIView in return factsView })
