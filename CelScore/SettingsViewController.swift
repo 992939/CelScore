@@ -30,12 +30,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
         logoImageView.depth = .Depth2
-        let logoLabel = UILabel()
-        //TODO: logoImageView.image = UIImage(named: "flask_logo")
-        //logoLabel.text = "*Vote Responsibly."
-        //logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
-        //logoImageView.detailLabel = logoLabel
-        //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kPadding, right: 30)
+        //TODO: logoImageView + "Vote Responsibly."
         logoImageView.backgroundColor = Constants.kDarkShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
 
@@ -45,18 +40,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let factsBarNode = self.setupProgressBarNode("The Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
         //Picker
-        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
-        pickerView.divider = false
+        let pickerView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
         pickerView.depth = .Depth1
-        let pickerLabel = UILabel()
-        pickerLabel.text = "Main Topic Of Interest"
-        pickerLabel.textColor = MaterialColor.white
-        pickerLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        pickerView.titleLabel = pickerLabel
-        pickerView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.kPickerViewHeight - 30, right: 0)
-        let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 20, height: 100))
-        pickerView.addSubview(picker)
         pickerView.backgroundColor = Constants.kMainShade
+        let pickerLabel = setupLabel("Main Topic Of Interest")
+        pickerLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25)
+        let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
+        pickerView.addSubview(pickerLabel)
+        pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
         //Check Boxes
@@ -66,25 +57,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //LogStatus
         let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
         loginView.depth = .Depth1
-        let loginLabel = UILabel()
-        loginLabel.textColor = MaterialColor.white
-        loginLabel.text = "Logged In As"
-        loginLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        loginView.backgroundColor = Constants.kMainShade
+        let loginLabel = setupLabel("Logged In As")
         loginLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30)
-        let userLabel = UILabel()
-        userLabel.text = "@GreyEcologist" //TODO
-        userLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
+        let userLabel = setupLabel("@GreyEcologist") //TODO
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
         userLabel.textAlignment = .Right
-        userLabel.textColor = MaterialColor.white
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.titleLabel!.font = RobotoFont.mediumWithSize(12)
+        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 12)
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
         loginView.addSubview(logoutButton)
-        loginView.backgroundColor = Constants.kMainShade
         let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
         
         //Copyright
@@ -118,13 +103,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.sideNavigationViewController!.depth = .Depth1
     }
     
+    func setupLabel(title: String) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.textColor = MaterialColor.white
+        label.font = UIFont(name: label.font.fontName, size: 12)
+        return label
+    }
+    
     func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
         let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
         publicServiceView.depth = .Depth1
-        let publicServiceLabel = UILabel()
-        publicServiceLabel.text = title
-        publicServiceLabel.textColor = MaterialColor.white
-        publicServiceLabel.font = UIFont(name: publicServiceLabel.font.fontName, size: 12)
+        publicServiceView.backgroundColor = Constants.kMainShade
+        let publicServiceLabel = setupLabel(title)
         publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
         let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
         publicServiceBox.onAnimationType = .Bounce
@@ -134,25 +125,21 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceBox.onTintColor = Constants.kBrightShade
         publicServiceView.addSubview(publicServiceLabel)
         publicServiceView.addSubview(publicServiceBox)
-        publicServiceView.backgroundColor = Constants.kMainShade
         return ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
     }
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
         let factsView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         factsView.depth = .Depth1
-        let factsLabel = UILabel()
-        factsLabel.text = title
-        factsLabel.textColor = MaterialColor.white
+        factsView.backgroundColor = Constants.kMainShade
+        let factsLabel = setupLabel(title)
         factsLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25)
-        factsLabel.font = UIFont(name: factsLabel.font.fontName, size: 12)
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
         factsBar.progressTintColor = Constants.kWineShade
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsLabel)
         factsView.addSubview(factsBar)
-        factsView.backgroundColor = Constants.kMainShade
         return ASDisplayNode(viewBlock: { () -> UIView in return factsView })
     }
     
