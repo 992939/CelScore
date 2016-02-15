@@ -22,9 +22,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         let maxWidth = self.view.width - 2 * Constants.kPadding
         
-        //MARK: Logo
+        //Logo
         let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
         logoImageView.contentsGravity = .ResizeAspect
         logoImageView.divider = false
@@ -37,63 +38,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //logoImageView.detailLabelInset = UIEdgeInsets(top: 10, left: 30, bottom: Constants.kPadding, right: 30)
         logoImageView.backgroundColor = Constants.kDarkShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
+
+        //Progress Bars
+        let publicOpinionBarNode = self.setupProgressBarNode("Your #PublicOpinion Completion", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
+        let consensusBarNode  = self.setupProgressBarNode("Your Positive Votes Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
+        let factsBarNode = self.setupProgressBarNode("The Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
-        //MARK: PublicOpinion
-        let publicOpinionView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: logoImageView.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        publicOpinionView.divider = false
-        publicOpinionView.depth = .Depth1
-        let opinionLabel = UILabel()
-        opinionLabel.text = "Your #PublicOpinion Completion"
-        opinionLabel.textColor = MaterialColor.white
-        opinionLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        publicOpinionView.titleLabel = opinionLabel
-        publicOpinionView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let publicOpinionBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        publicOpinionBar.progressTintColor = Constants.kWineShade
-        publicOpinionBar.type = .Flat
-        publicOpinionBar.indicatorTextDisplayMode = .Progress
-        publicOpinionView.addSubview(publicOpinionBar)
-        publicOpinionView.backgroundColor = Constants.kMainShade
-        let publicOpinionNode = ASDisplayNode(viewBlock: { () -> UIView in return publicOpinionView })
-        
-        //MARK: Positive Votes Ratio
-        let consensusView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: publicOpinionView.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        consensusView.divider = false
-        consensusView.depth = .Depth1
-        let consensusLabel = UILabel()
-        consensusLabel.text = "Your Positive Votes Ratio"
-        consensusLabel.textColor = MaterialColor.white
-        consensusLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        consensusView.titleLabel = consensusLabel
-        consensusView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let consensusBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        consensusBar.progressTintColor = Constants.kWineShade
-        consensusBar.type = .Flat
-        consensusBar.indicatorTextDisplayMode = .Progress
-        consensusView.addSubview(consensusBar)
-        consensusView.backgroundColor = Constants.kMainShade
-        let consensusNode = ASDisplayNode(viewBlock: { () -> UIView in return consensusView })
-        
-        //MARK: Consensus
-        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: consensusView.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        factsView.divider = false
-        factsView.depth = .Depth1
-        let factsLabel = UILabel()
-        factsLabel.text = "The Overall Social Consensus"
-        factsLabel.textColor = MaterialColor.white
-        factsLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        factsView.titleLabel = factsLabel
-        factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
-        factsBar.progressTintColor = Constants.kWineShade
-        factsBar.type = .Flat
-        factsBar.indicatorTextDisplayMode = .Progress
-        factsView.addSubview(factsBar)
-        factsView.backgroundColor = Constants.kMainShade
-        let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
-        
-        //MARK: Picker
-        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: factsView.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
+        //Picker
+        let pickerView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
         pickerView.divider = false
         pickerView.depth = .Depth1
         let pickerLabel = UILabel()
@@ -107,7 +59,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.backgroundColor = Constants.kMainShade
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
-        //MARK: PublicService
+        //PublicService
         let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: pickerView.bottom + Constants.kPadding, width: maxWidth, height: 30))
         publicServiceView.depth = .Depth1
         let publicServiceLabel = UILabel()
@@ -126,7 +78,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         publicServiceView.backgroundColor = Constants.kMainShade
         let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
         
-        //MARK: In-App Notification
+        //Fortune Cookies
         let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: publicServiceView.bottom + Constants.kPadding, width: maxWidth, height: 30))
         notificationView.depth = .Depth1
         let notificationLabel = UILabel()
@@ -145,7 +97,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         notificationView.backgroundColor = Constants.kMainShade
         let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
         
-        //MARK: LogStatus
+        //LogStatus
         let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: notificationView.bottom + Constants.kPadding, width: maxWidth, height: 60))
         loginView.depth = .Depth1
         let loginLabel = UILabel()
@@ -169,7 +121,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         loginView.backgroundColor = Constants.kMainShade
         let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
         
-        //MARK: Copyright
+        //Copyright
         let copyrightTextNode = ASTextNode()
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
@@ -182,9 +134,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         picker.delegate = self
         
         self.node.addSubnode(logoNode)
-        self.node.addSubnode(publicOpinionNode)
-        self.node.addSubnode(consensusNode)
-        self.node.addSubnode(factsNode)
+        self.node.addSubnode(publicOpinionBarNode)
+        self.node.addSubnode(consensusBarNode)
+        self.node.addSubnode(factsBarNode)
         self.node.addSubnode(pickerNode)
         self.node.addSubnode(publicServiceNode)
         self.node.addSubnode(notificationNode)
@@ -200,14 +152,29 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.sideNavigationViewController!.depth = .Depth1
     }
     
+    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
+        let factsView: ImageCardView = ImageCardView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 60))
+        factsView.divider = false
+        factsView.depth = .Depth1
+        let factsLabel = UILabel()
+        factsLabel.text = title
+        factsLabel.textColor = MaterialColor.white
+        factsLabel.font = UIFont(name: factsLabel.font.fontName, size: 12)
+        factsView.titleLabel = factsLabel
+        factsView.titleLabelInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: 35, width: maxWidth - 20, height: 15))
+        factsBar.progressTintColor = Constants.kWineShade
+        factsBar.type = .Flat
+        factsBar.indicatorTextDisplayMode = .Progress
+        factsView.addSubview(factsBar)
+        factsView.backgroundColor = Constants.kMainShade
+        let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
+        return factsNode
+    }
+    
     //MARK: UIPickerViewDelegate
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
-    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
-    
-//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return CelebList(rawValue: row)?.name()
-//    }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
