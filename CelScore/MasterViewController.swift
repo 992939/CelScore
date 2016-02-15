@@ -31,7 +31,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     init() {
         self.celebrityListVM = ListViewModel()
         self.celebrityTableView = ASTableView()
-        self.segmentedControl = HMSegmentedControl(sectionTitles: CelebList.getAll())
+        self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
         self.searchBar = UISearchBar()
         self.transition = JTMaterialTransition()
         self.transition.startBackgroundColor = Constants.kDarkShade
@@ -95,7 +95,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func changeList() {
-        let list: CelebList = CelebList(rawValue: self.segmentedControl.selectedSegmentIndex)!
+        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         self.celebrityListVM.getListSignal(listId: list.getId())
             .on(next: { _ in
                 self.celebrityTableView.beginUpdates()
@@ -164,7 +164,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.celebrityListVM.count }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.celebrityListVM.getCount() }
+    
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
         self.celebrityListVM.getCelebrityStructSignal(index: indexPath.row)

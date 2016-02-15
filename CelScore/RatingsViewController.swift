@@ -21,7 +21,7 @@ final class RatingsViewController: ASViewController {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    var delegate: RatingsViewDelegate!
+    var delegate: RatingsViewDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -85,7 +85,7 @@ final class RatingsViewController: ASViewController {
                                 var celScore: Double = 0
                                 for rating in ratings { celScore += ratings[rating] as! Double }
                                 let isPositive = celScore < 30 ? false : true
-                                if unrated.count == 0 { self.delegate.enableVoteButton(isPositive) }
+                                if unrated.count == 0 { self.delegate!.enableVoteButton(isPositive) }
                             })
                             .start()
                     }
@@ -118,7 +118,7 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }
-                AIRTimer.after(2.0){ timer in self.delegate.sendFortuneCookie() }
+                AIRTimer.after(2.0){ timer in self.delegate!.sendFortuneCookie() }
             })
             .start()
     }

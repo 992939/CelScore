@@ -98,8 +98,8 @@ public enum Qualities: Int {
     }
 }
 
-//MARK: CelebList
-public enum CelebList : Int {
+//MARK: ListInfo
+public enum ListInfo : Int {
     case PublicOpinion
     case Ubuntu
     case Hollywood
@@ -122,7 +122,7 @@ public enum CelebList : Int {
     
     public static func getCount() -> Int {
         var max: Int = 0
-        while let _ = CelebList(rawValue: max) { max += 1 }
+        while let _ = ListInfo(rawValue: max) { max += 1 }
         return max
     }
     

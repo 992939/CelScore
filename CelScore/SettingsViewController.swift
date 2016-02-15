@@ -203,14 +203,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: UIPickerViewDelegate
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return CelebList.getCount() }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
     
 //    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 //        return CelebList(rawValue: row)?.name()
 //    }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: CelebList(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
+        return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
