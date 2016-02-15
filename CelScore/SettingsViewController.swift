@@ -31,7 +31,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.divider = false
         logoImageView.depth = .Depth2
         let logoLabel = UILabel()
-        //logoImageView.image = UIImage(named: "flask_logo")
+        //TODO: logoImageView.image = UIImage(named: "flask_logo")
         //logoLabel.text = "*Vote Responsibly."
         //logoLabel.font = UIFont(name: logoLabel.font.fontName, size: 10)
         //logoImageView.detailLabel = logoLabel
@@ -59,46 +59,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.backgroundColor = Constants.kMainShade
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         
-        //PublicService
-        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: pickerView.bottom + Constants.kPadding, width: maxWidth, height: 30))
-        publicServiceView.depth = .Depth1
-        let publicServiceLabel = UILabel()
-        publicServiceLabel.text = "Public Service Mode"
-        publicServiceLabel.textColor = MaterialColor.white
-        publicServiceLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
-        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
-        publicServiceBox.onAnimationType = .Bounce
-        publicServiceBox.offAnimationType = .Bounce
-        publicServiceBox.onCheckColor = MaterialColor.white
-        publicServiceBox.onFillColor = Constants.kBrightShade
-        publicServiceBox.onTintColor = Constants.kBrightShade
-        publicServiceView.addSubview(publicServiceLabel)
-        publicServiceView.addSubview(publicServiceBox)
-        publicServiceView.backgroundColor = Constants.kMainShade
-        let publicServiceNode = ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
-        
-        //Fortune Cookies
-        let notificationView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: publicServiceView.bottom + Constants.kPadding, width: maxWidth, height: 30))
-        notificationView.depth = .Depth1
-        let notificationLabel = UILabel()
-        notificationLabel.text = "Bad Fortune Cookies"
-        notificationLabel.textColor = MaterialColor.white
-        notificationLabel.font = UIFont(name: logoLabel.font.fontName, size: 12)
-        notificationLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
-        let notificationBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: Constants.kPadding, width: 15, height: 15))
-        notificationBox.onAnimationType = .Bounce
-        notificationBox.offAnimationType = .Bounce
-        notificationBox.onCheckColor = MaterialColor.white
-        notificationBox.onFillColor = Constants.kBrightShade
-        notificationBox.onTintColor = Constants.kBrightShade
-        notificationView.addSubview(notificationLabel)
-        notificationView.addSubview(notificationBox)
-        notificationView.backgroundColor = Constants.kMainShade
-        let notificationNode = ASDisplayNode(viewBlock: { () -> UIView in return notificationView })
+        //Check Boxes
+        let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: pickerView.bottom + Constants.kPadding)
+        let fortuneCookieNode = setupCheckBoxNode("Bad Fortune Cookies", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
         
         //LogStatus
-        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: notificationView.bottom + Constants.kPadding, width: maxWidth, height: 60))
+        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
         loginView.depth = .Depth1
         let loginLabel = UILabel()
         loginLabel.textColor = MaterialColor.white
@@ -139,17 +105,37 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(factsBarNode)
         self.node.addSubnode(pickerNode)
         self.node.addSubnode(publicServiceNode)
-        self.node.addSubnode(notificationNode)
+        self.node.addSubnode(fortuneCookieNode)
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         
-        //SettingsViewModel().getUserRatingsPercentageSignal().start()
-        //SettingsViewModel().calculateSocialConsensusSignal().start()
+        //TODO: SettingsViewModel().getUserRatingsPercentageSignal().start()
+        //TODO: SettingsViewModel().calculateSocialConsensusSignal().start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
         
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationViewController!.backdropColor = Constants.kDarkShade
         self.sideNavigationViewController!.depth = .Depth1
+    }
+    
+    func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
+        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
+        publicServiceView.depth = .Depth1
+        let publicServiceLabel = UILabel()
+        publicServiceLabel.text = title
+        publicServiceLabel.textColor = MaterialColor.white
+        publicServiceLabel.font = UIFont(name: publicServiceLabel.font.fontName, size: 12)
+        publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
+        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
+        publicServiceBox.onAnimationType = .Bounce
+        publicServiceBox.offAnimationType = .Bounce
+        publicServiceBox.onCheckColor = MaterialColor.white
+        publicServiceBox.onFillColor = Constants.kBrightShade
+        publicServiceBox.onTintColor = Constants.kBrightShade
+        publicServiceView.addSubview(publicServiceLabel)
+        publicServiceView.addSubview(publicServiceBox)
+        publicServiceView.backgroundColor = Constants.kMainShade
+        return ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
     }
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
@@ -168,8 +154,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         factsBar.indicatorTextDisplayMode = .Progress
         factsView.addSubview(factsBar)
         factsView.backgroundColor = Constants.kMainShade
-        let factsNode = ASDisplayNode(viewBlock: { () -> UIView in return factsView })
-        return factsNode
+        return ASDisplayNode(viewBlock: { () -> UIView in return factsView })
     }
     
     //MARK: UIPickerViewDelegate
@@ -181,6 +166,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
+        //TODO: self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
     }
 }
