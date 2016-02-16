@@ -34,18 +34,14 @@ final class InfoViewController: ASViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         for (index, subview) in viewArray.enumerate() {
-            AIRTimer.after(0.085 * Double(index)){ _ in
-                self.slideIt.addSlide(subview)
-            }
+            AIRTimer.after(0.085 * Double(index)){ _ in self.slideIt.addSlide(subview) }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view = self.pulseView
         self.animator.addBehavior(slideIt)
 
