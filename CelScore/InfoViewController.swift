@@ -42,12 +42,14 @@ final class InfoViewController: ASViewController {
         super.viewDidLoad()
         
         self.view = self.pulseView
-        addBox(CGRectMake(100, 50, 30, 30))
+        addBox(CGRect(x: -100, y: 50, width: 30, height: 30))
         animator = UIDynamicAnimator(referenceView: self.pulseView)
         gravity.gravityDirection = CGVector(dx: 0.1, dy: 0.0)
         gravity.addItem(box!)
         collider.addItem(box!)
-        collider.translatesReferenceBoundsIntoBoundary = true
+        collider.addBoundaryWithIdentifier("barrier",
+            fromPoint: CGPoint(x: Constants.kDetailWidth, y: 0),
+            toPoint: CGPoint(x: Constants.kDetailWidth, y: 700))
         animator!.addBehavior(gravity)
         animator!.addBehavior(collider)
 
