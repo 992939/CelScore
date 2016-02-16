@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import UIKit
 import Material
+import AIRTimer
 
 
 final class InfoViewController: ASViewController {
@@ -19,7 +20,6 @@ final class InfoViewController: ASViewController {
     var animator:UIDynamicAnimator? = nil
     let gravity = UIGravityBehavior()
     let collider = UICollisionBehavior()
-    var box : UIView?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -31,27 +31,17 @@ final class InfoViewController: ASViewController {
         self.view.tag = Constants.kDetailViewTag
     }
     
-    func addBox(location: CGRect) {
-        let newBox = UIView(frame: location)
-        newBox.backgroundColor = UIColor.redColor()
-        self.pulseView.insertSubview(newBox, atIndex: 0)
-        box = newBox
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view = self.pulseView
-        addBox(CGRect(x: -100, y: 50, width: 30, height: 30))
-        animator = UIDynamicAnimator(referenceView: self.pulseView)
-        gravity.gravityDirection = CGVector(dx: 0.1, dy: 0.0)
-        gravity.addItem(box!)
-        collider.addItem(box!)
-        collider.addBoundaryWithIdentifier("barrier",
+        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
+        self.gravity.gravityDirection = CGVector(dx: 0.4, dy: 0.0)
+        self.collider.addBoundaryWithIdentifier("barrier",
             fromPoint: CGPoint(x: Constants.kDetailWidth, y: 0),
-            toPoint: CGPoint(x: Constants.kDetailWidth, y: 700))
-        animator!.addBehavior(gravity)
-        animator!.addBehavior(collider)
+            toPoint: CGPoint(x: Constants.kDetailWidth, y: Constants.kScreenHeight))
+        self.animator!.addBehavior(gravity)
+        self.animator!.addBehavior(collider)
 
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
@@ -64,7 +54,8 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
                 for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: -500, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                    qualityView.tag = index+1
                     let qualityLabel = UILabel()
                     qualityLabel.textColor = MaterialColor.white
                     qualityLabel.text = quality
@@ -94,8 +85,10 @@ final class InfoViewController: ASViewController {
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)
                     
-                    //self.gravity.addItem(qualityView)
-                    //self.collider.addItem(qualityView)
+                    AIRTimer.after(0.1 * Double(index)){ timer in
+                        self.gravity.addItem(qualityView)
+                        self.collider.addItem(qualityView)
+                    }
                 }
             })
             .start()
