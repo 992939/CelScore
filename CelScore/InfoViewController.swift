@@ -27,7 +27,7 @@ final class InfoViewController: ASViewController {
         self.celebST = celebrityST
         self.pulseView = UIView(frame: Constants.kBottomViewRect)
         self.animator = UIDynamicAnimator(referenceView: self.pulseView)
-        self.slideIt = SlideItBehavior()
+        self.slideIt = SlideItBehavior(rightDirection: true)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
