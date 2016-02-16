@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000A3EE91C731F6300B823A2 /* SlideItBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EE81C731F6300B823A2 /* SlideItBehavior.swift */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
@@ -97,6 +98,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000A3EE81C731F6300B823A2 /* SlideItBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideItBehavior.swift; path = ../SlideItBehavior.swift; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
 		002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDropdownNotification.m; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				000A3EE81C731F6300B823A2 /* SlideItBehavior.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
@@ -743,6 +746,7 @@
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
+				000A3EE91C731F6300B823A2 /* SlideItBehavior.swift in Sources */,
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,

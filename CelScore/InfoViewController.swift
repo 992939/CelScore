@@ -18,8 +18,7 @@ final class InfoViewController: ASViewController {
     let celebST: CelebrityStruct
     let pulseView: UIView
     var animator:UIDynamicAnimator? = nil
-    let gravity = UIGravityBehavior()
-    let collider = UICollisionBehavior()
+    let slideIt = SlideItBehavior()
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -37,8 +36,7 @@ final class InfoViewController: ASViewController {
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         for (index, subview) in viewArray.enumerate() {
             AIRTimer.after(0.085 * Double(index)){ _ in
-                self.gravity.addItem(subview)
-                self.collider.addItem(subview)
+                self.slideIt.addSlide(subview)
             }
         }
     }
@@ -48,12 +46,7 @@ final class InfoViewController: ASViewController {
         
         self.view = self.pulseView
         self.animator = UIDynamicAnimator(referenceView: self.pulseView)
-        self.gravity.gravityDirection = CGVector(dx: 0.7, dy: 0.0)
-        self.collider.addBoundaryWithIdentifier("barrier",
-            fromPoint: CGPoint(x: Constants.kDetailWidth, y: 0),
-            toPoint: CGPoint(x: Constants.kDetailWidth, y: Constants.kScreenHeight))
-        self.animator!.addBehavior(gravity)
-        self.animator!.addBehavior(collider)
+        self.animator!.addBehavior(slideIt)
 
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
