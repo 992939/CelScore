@@ -17,6 +17,7 @@ class SlideItBehavior: UIDynamicBehavior {
     override init() {
         super.init()
         self.gravity.gravityDirection = CGVector(dx: 0.7, dy: 0.0)
+        self.gravity.magnitude = 2.5
         self.collider.addBoundaryWithIdentifier("barrier",
             fromPoint: CGPoint(x: Constants.kDetailWidth, y: 0),
             toPoint: CGPoint(x: Constants.kDetailWidth, y: Constants.kScreenHeight))

@@ -36,7 +36,7 @@ final class InfoViewController: ASViewController {
         super.viewWillAppear(animated)
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         for (index, subview) in viewArray.enumerate() {
-            AIRTimer.after(0.085 * Double(index)){ _ in self.slideIt.addSlide(subview) }
+            AIRTimer.after(0.08 * Double(index)){ _ in self.slideIt.addSlide(subview) }
         }
     }
     

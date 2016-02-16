@@ -181,8 +181,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
         removingView?.removeFromSuperview()
         self.view.addSubview(infoView)
-        //if index == 0 || (index == 1 && previousIndex == 2 ){ self.view.a }
-        //else { infoView.slideRight() }
+//        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
+//        else { infoView.slideRight() }
     }
     
     //MARK: RatingsViewDelegate
