@@ -31,12 +31,24 @@ final class InfoViewController: ASViewController {
         self.view.tag = Constants.kDetailViewTag
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
+        for (index, subview) in viewArray.enumerate() {
+            AIRTimer.after(0.085 * Double(index)){ _ in
+                self.gravity.addItem(subview)
+                self.collider.addItem(subview)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view = self.pulseView
         self.animator = UIDynamicAnimator(referenceView: self.pulseView)
-        self.gravity.gravityDirection = CGVector(dx: 0.4, dy: 0.0)
+        self.gravity.gravityDirection = CGVector(dx: 0.7, dy: 0.0)
         self.collider.addBoundaryWithIdentifier("barrier",
             fromPoint: CGPoint(x: Constants.kDetailWidth, y: 0),
             toPoint: CGPoint(x: Constants.kDetailWidth, y: Constants.kScreenHeight))
@@ -54,7 +66,7 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
                 for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: -500, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: -Constants.kScreenWidth, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     qualityView.tag = index+1
                     let qualityLabel = UILabel()
                     qualityLabel.textColor = MaterialColor.white
@@ -84,11 +96,6 @@ final class InfoViewController: ASViewController {
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)
-                    
-                    AIRTimer.after(0.1 * Double(index)){ timer in
-                        self.gravity.addItem(qualityView)
-                        self.collider.addItem(qualityView)
-                    }
                 }
             })
             .start()
