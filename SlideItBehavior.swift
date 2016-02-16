@@ -14,6 +14,7 @@ class SlideItBehavior: UIDynamicBehavior {
     let gravity = UIGravityBehavior()
     let collider = UICollisionBehavior()
     
+    //MARK: Initializer
     init(rightDirection: Bool) {
         super.init()
         self.gravity.gravityDirection = CGVector(dx: rightDirection ? 0.7 : -0.7, dy: 0.0)
@@ -25,6 +26,7 @@ class SlideItBehavior: UIDynamicBehavior {
         addChildBehavior(collider)
     }
     
+    //MARK: Methods
     func addSlide(slide: UIView) {
         dynamicAnimator?.referenceView?.addSubview(slide)
         gravity.addItem(slide)
