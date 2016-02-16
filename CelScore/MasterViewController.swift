@@ -87,7 +87,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
-            .retry(1)
             .start()
     
         CelScoreViewModel().checkNetworkStatusSignal().start()
