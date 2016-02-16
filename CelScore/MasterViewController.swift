@@ -259,10 +259,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    //MARK: ModalTransitionDelegate
-    func modalViewControllerDismiss(callbackData data: AnyObject?) {}
-    func modalViewControllerDismiss(interactive interactive: Bool, callbackData data: AnyObject?) {}
-    
     //MARK: UIViewControllerTransitioningDelegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.transition.reverse = false
