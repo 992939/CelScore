@@ -17,8 +17,8 @@ final class InfoViewController: ASViewController {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: UIView
-    var animator:UIDynamicAnimator? = nil
-    let slideIt = SlideItBehavior()
+    let animator: UIDynamicAnimator
+    let slideIt: SlideItBehavior
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -26,6 +26,8 @@ final class InfoViewController: ASViewController {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         self.pulseView = UIView(frame: Constants.kBottomViewRect)
+        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
+        self.slideIt = SlideItBehavior()
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
@@ -45,8 +47,7 @@ final class InfoViewController: ASViewController {
         super.viewDidLoad()
         
         self.view = self.pulseView
-        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
-        self.animator!.addBehavior(slideIt)
+        self.animator.addBehavior(slideIt)
 
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
