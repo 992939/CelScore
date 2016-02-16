@@ -148,9 +148,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_black"))
-        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_black"))
-        segmentView.addSegmentWithTitle("", onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_black"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_black"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_black"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_black"))
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor

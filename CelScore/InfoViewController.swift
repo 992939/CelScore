@@ -32,6 +32,13 @@ final class InfoViewController: ASViewController {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
                 
+                let animator = UIDynamicAnimator(referenceView: self.pulseView)
+                let gravity = UIGravityBehavior()
+                let collider = UICollisionBehavior()
+                collider.translatesReferenceBoundsIntoBoundary = true
+                animator.addBehavior(gravity)
+                animator.addBehavior(collider)
+                
                 let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
                 var age = 0
                 if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
@@ -69,6 +76,8 @@ final class InfoViewController: ASViewController {
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)
+                    gravity.addItem(qualityView)
+                    collider.addItem(qualityView)
                 }
             })
             .start()
