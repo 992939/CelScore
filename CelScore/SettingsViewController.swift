@@ -25,12 +25,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         let maxWidth = self.view.width - 2 * Constants.kPadding
         
-        //Logo
-        let logoImageView: ImageCardView = ImageCardView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
-        logoImageView.contentsGravity = .ResizeAspect
-        logoImageView.divider = false
+        //Logo TODO: logoImageView + "Vote Responsibly."
+        let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
         logoImageView.depth = .Depth2
-        //TODO: logoImageView + "Vote Responsibly."
         logoImageView.backgroundColor = Constants.kDarkShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
 
@@ -39,30 +36,25 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let consensusBarNode  = self.setupProgressBarNode("Your Positive Votes Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
         let factsBarNode = self.setupProgressBarNode("The Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
-        //Picker
-        let pickerView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
-        pickerView.depth = .Depth1
-        pickerView.backgroundColor = Constants.kMainShade
-        let pickerLabel = setupLabel("Main Topic Of Interest")
-        pickerLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25)
+        //PickerView
+        let pickerView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
+        let pickerLabel = setupLabel(title: "Main Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
         pickerView.addSubview(pickerLabel)
         pickerView.addSubview(picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
+        picker.dataSource = self
+        picker.delegate = self
         
         //Check Boxes
         let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: pickerView.bottom + Constants.kPadding)
         let fortuneCookieNode = setupCheckBoxNode("Bad Fortune Cookies", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
         
-        //LogStatus
-        let loginView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        loginView.depth = .Depth1
-        loginView.backgroundColor = Constants.kMainShade
-        let loginLabel = setupLabel("Logged In As")
-        loginLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30)
-        let userLabel = setupLabel("@GreyEcologist") //TODO
+        //Login Status
+        let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
+        let loginLabel = setupLabel(title: "Logged In As", frame: CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
-        userLabel.frame = CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)
+        let userLabel = setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
@@ -80,9 +72,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
-        
-        picker.dataSource = self
-        picker.delegate = self
         
         self.node.addSubnode(logoNode)
         self.node.addSubnode(publicOpinionBarNode)
@@ -103,8 +92,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.sideNavigationViewController!.depth = .Depth1
     }
     
-    func setupLabel(title: String) -> UILabel {
-        let label = UILabel()
+    //MARK: DidLayoutSubviews Helpers
+    func setupMaterialView(frame frame: CGRect) -> MaterialView {
+        let materialView = MaterialView(frame: frame)
+        materialView.depth = .Depth1
+        materialView.backgroundColor = Constants.kMainShade
+        return materialView
+    }
+    
+    func setupLabel(title title: String, frame: CGRect) -> UILabel {
+        let label = UILabel(frame: frame)
         label.text = title
         label.textColor = MaterialColor.white
         label.font = UIFont(name: label.font.fontName, size: 12)
@@ -112,35 +109,29 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
-        let publicServiceView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
-        publicServiceView.depth = .Depth1
-        publicServiceView.backgroundColor = Constants.kMainShade
-        let publicServiceLabel = setupLabel(title)
-        publicServiceLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30)
+        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
+        let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30))
         let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white
         publicServiceBox.onFillColor = Constants.kBrightShade
         publicServiceBox.onTintColor = Constants.kBrightShade
-        publicServiceView.addSubview(publicServiceLabel)
-        publicServiceView.addSubview(publicServiceBox)
-        return ASDisplayNode(viewBlock: { () -> UIView in return publicServiceView })
+        materialView.addSubview(publicServiceLabel)
+        materialView.addSubview(publicServiceBox)
+        return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
-        let factsView: MaterialView = MaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
-        factsView.depth = .Depth1
-        factsView.backgroundColor = Constants.kMainShade
-        let factsLabel = setupLabel(title)
-        factsLabel.frame = CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25)
+        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
+        let factsLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
         factsBar.progressTintColor = Constants.kWineShade
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
-        factsView.addSubview(factsLabel)
-        factsView.addSubview(factsBar)
-        return ASDisplayNode(viewBlock: { () -> UIView in return factsView })
+        materialView.addSubview(factsLabel)
+        materialView.addSubview(factsBar)
+        return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
     //MARK: UIPickerViewDelegate
