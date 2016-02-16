@@ -114,7 +114,6 @@ struct Constants {
         "Power steps back in the face of more power.",
         "As above so below, as below so above.",
         "The same shoe does not fit every foot.",
-        "The truth might set you free, or piss you off.",
         "Wherever you go, there you are.",
         "Hell is other people."]
 }

@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import UIKit
 import Material
 
 
@@ -14,30 +15,44 @@ final class InfoViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let pulseView: MaterialView
+    let pulseView: UIView
+    var animator:UIDynamicAnimator? = nil
+    let gravity = UIGravityBehavior()
+    let collider = UICollisionBehavior()
+    var box : UIView?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
+        self.pulseView = UIView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
+    }
+    
+    func addBox(location: CGRect) {
+        let newBox = UIView(frame: location)
+        newBox.backgroundColor = UIColor.redColor()
+        self.pulseView.insertSubview(newBox, atIndex: 0)
+        box = newBox
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view = self.pulseView
+        addBox(CGRectMake(100, 50, 30, 30))
+        animator = UIDynamicAnimator(referenceView: self.pulseView)
+        gravity.gravityDirection = CGVector(dx: 0.1, dy: 0.0)
+        gravity.addItem(box!)
+        collider.addItem(box!)
+        collider.translatesReferenceBoundsIntoBoundary = true
+        animator!.addBehavior(gravity)
+        animator!.addBehavior(collider)
+
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
-                
-                let animator = UIDynamicAnimator(referenceView: self.pulseView)
-                let gravity = UIGravityBehavior()
-                let collider = UICollisionBehavior()
-                collider.translatesReferenceBoundsIntoBoundary = true
-                animator.addBehavior(gravity)
-                animator.addBehavior(collider)
                 
                 let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
                 var age = 0
@@ -76,13 +91,13 @@ final class InfoViewController: ASViewController {
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(infoLabel)
                     self.pulseView.addSubview(qualityView)
-                    gravity.addItem(qualityView)
-                    collider.addItem(qualityView)
+                    
+                    //self.gravity.addItem(qualityView)
+                    //self.collider.addItem(qualityView)
                 }
             })
             .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
-        self.view = self.pulseView
     }
 }

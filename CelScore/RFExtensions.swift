@@ -10,31 +10,31 @@ import Foundation
 import ReactiveCocoa
 
 
-public extension UIView {
-
-    //MARK: Methods
-    public func slideRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
-        let slideRightTransition = CATransition()
-        if let delegate: AnyObject = completionDelegate { slideRightTransition.delegate = delegate }
-        slideRightTransition.type = kCATransitionPush
-        slideRightTransition.subtype = kCATransitionFromRight
-        slideRightTransition.duration = duration
-        slideRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideRightTransition.fillMode = kCAFillModeBoth
-        self.layer.addAnimation(slideRightTransition, forKey: "slideRightTransition")
-    }
-    
-    public func slideLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
-        let slideLeftTransition = CATransition()
-        if let delegate: AnyObject = completionDelegate { slideLeftTransition.delegate = delegate }
-        slideLeftTransition.type = kCATransitionPush
-        slideLeftTransition.subtype = kCATransitionFromLeft
-        slideLeftTransition.duration = duration
-        slideLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideLeftTransition.fillMode = kCAFillModeBoth
-        self.layer.addAnimation(slideLeftTransition, forKey: "slideLeftTransition")
-    }
-}
+//public extension UIView {
+//
+//    //MARK: Methods
+//    public func slideRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+//        let slideRightTransition = CATransition()
+//        if let delegate: AnyObject = completionDelegate { slideRightTransition.delegate = delegate }
+//        slideRightTransition.type = kCATransitionPush
+//        slideRightTransition.subtype = kCATransitionFromRight
+//        slideRightTransition.duration = duration
+//        slideRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        slideRightTransition.fillMode = kCAFillModeBoth
+//        self.layer.addAnimation(slideRightTransition, forKey: "slideRightTransition")
+//    }
+//    
+//    public func slideLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+//        let slideLeftTransition = CATransition()
+//        if let delegate: AnyObject = completionDelegate { slideLeftTransition.delegate = delegate }
+//        slideLeftTransition.type = kCATransitionPush
+//        slideLeftTransition.subtype = kCATransitionFromLeft
+//        slideLeftTransition.duration = duration
+//        slideLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        slideLeftTransition.fillMode = kCAFillModeBoth
+//        self.layer.addAnimation(slideLeftTransition, forKey: "slideLeftTransition")
+//    }
+//}
 
 public extension NSDate {
 
