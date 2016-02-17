@@ -189,13 +189,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                 removingView?.left = self.view.width
                 }, completion: { completed -> Void in
                     removingView?.removeFromSuperview()
-                    
+                    removingView?.left = 2 * Constants.kPadding
             })
         } else {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 removingView?.left = -self.view.width
                 }, completion: { completed -> Void in
                     removingView?.removeFromSuperview()
+                    removingView?.left = 2 * Constants.kPadding
             })
         }
     }
