@@ -185,14 +185,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
         self.view.addSubview(infoView)
         if rightHanded {
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(0.7, animations: { () -> Void in
                 removingView?.left = self.view.width
                 }, completion: { completed -> Void in
                     removingView?.removeFromSuperview()
                     removingView?.left = 2 * Constants.kPadding
             })
         } else {
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(0.7, animations: { () -> Void in
                 removingView?.left = -self.view.width
                 }, completion: { completed -> Void in
                     removingView?.removeFromSuperview()
