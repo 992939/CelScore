@@ -30,7 +30,7 @@ final class RatingsViewController: ASViewController {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.tag = Constants.kDetailViewTag
+        self.view.tag = 12
     }
     
     //MARK: Methods

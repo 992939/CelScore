@@ -16,21 +16,20 @@ final class InfoViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
-    let pulseView: UIView
+    let pulseView: MaterialView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = UIView(frame: Constants.kBottomViewRect)
+        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.tag = Constants.kDetailViewTag
+        self.view.tag = 11
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = self.pulseView
 
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
@@ -43,7 +42,7 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
                 for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: -Constants.kScreenWidth, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     qualityView.tag = index+1
                     let qualityLabel = UILabel()
                     qualityLabel.textColor = MaterialColor.white
@@ -78,5 +77,6 @@ final class InfoViewController: ASViewController {
             .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
+        self.view = self.pulseView
     }
 }

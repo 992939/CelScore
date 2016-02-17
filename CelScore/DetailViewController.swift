@@ -171,7 +171,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        
         let infoView: UIView
         switch index {
         case 1: infoView = self.infoVC.view
@@ -179,11 +178,23 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         default: infoView = self.celscoreVC.view
         }
 
-        let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
-        removingView?.removeFromSuperview()
-        self.view.addSubview(infoView)
-        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
-        else { infoView.slideRight() }
+        let removingView = self.view.viewWithTag(previousIndex+10)
+        print("removingView: \(removingView?.description) and index: \(previousIndex)")
+        if index == 0 || (index == 1 && previousIndex == 2 ){
+            UIView.animateWithDuration(1.0, animations: { () -> Void in removingView?.left = 20
+                }, completion: { completed -> Void in
+                    self.view.addSubview(infoView)
+                    print("infoView: \(infoView.description)")
+                    infoView.slideLeft()
+                    removingView?.removeFromSuperview() })
+        } else {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in removingView?.left = 20
+                }, completion: { completed -> Void in
+                    self.view.addSubview(infoView)
+                    print("infoView: \(infoView.description)")
+                    infoView.slideRight()
+                    removingView?.removeFromSuperview() })
+        }
     }
     
     //MARK: RatingsViewDelegate
