@@ -39,7 +39,7 @@ final class InfoViewController: ASViewController {
         
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         for (index, subview) in viewArray.enumerate() {
-            subview.left = rightHanded ? -self.pulseView.width : self.pulseView.width
+            subview.left = self.rightHanded ? -self.pulseView.width : self.pulseView.width
             AIRTimer.after(0.08 * Double(index)){ _ in slideIt.addSlide(subview) }
         }
     }

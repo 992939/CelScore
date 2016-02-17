@@ -181,10 +181,23 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         case 2: infoView = self.ratingsVC.view
         default: infoView = self.celscoreVC.view
         }
-        //TODO: animate removingView out of the screen.
+
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
-        removingView?.removeFromSuperview()
         self.view.addSubview(infoView)
+        if rightHanded {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView?.left = self.view.width
+                }, completion: { completed -> Void in
+                    removingView?.removeFromSuperview()
+                    
+            })
+        } else {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView?.left = -self.view.width
+                }, completion: { completed -> Void in
+                    removingView?.removeFromSuperview()
+            })
+        }
     }
     
     //MARK: RatingsViewDelegate
