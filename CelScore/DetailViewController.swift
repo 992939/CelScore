@@ -180,9 +180,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         //TODO: animate removingView out of the screen.
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
         removingView?.removeFromSuperview()
+        
+        infoView.left = 1
+//        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.left = -self.view.width }
+//        else { infoView.left = self.view.width }
         self.view.addSubview(infoView)
-//        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
-//        else { infoView.slideRight() }
     }
     
     //MARK: RatingsViewDelegate

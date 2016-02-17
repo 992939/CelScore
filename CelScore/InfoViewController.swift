@@ -18,7 +18,6 @@ final class InfoViewController: ASViewController {
     let celebST: CelebrityStruct
     let pulseView: UIView
     let animator: UIDynamicAnimator
-    let slideIt: SlideItBehavior
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -27,23 +26,29 @@ final class InfoViewController: ASViewController {
         self.celebST = celebrityST
         self.pulseView = UIView(frame: Constants.kBottomViewRect)
         self.animator = UIDynamicAnimator(referenceView: self.pulseView)
-        self.slideIt = SlideItBehavior(rightDirection: true)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let isRight: Bool = self.pulseView.left > 0 ? false : true
+        print("left: \(self.pulseView.left) isRight: \(isRight)")
+        let slideIt = SlideItBehavior(rightDirection: isRight)
+        self.animator.removeAllBehaviors()
+        self.animator.addBehavior(slideIt)
+        
         let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
         for (index, subview) in viewArray.enumerate() {
-            AIRTimer.after(0.08 * Double(index)){ _ in self.slideIt.addSlide(subview) }
+            subview.left = self.pulseView.left > 0 ? self.pulseView.width : -self.pulseView.width
+            AIRTimer.after(0.08 * Double(index)){ _ in slideIt.addSlide(subview) }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = self.pulseView
-        self.animator.addBehavior(slideIt)
 
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
