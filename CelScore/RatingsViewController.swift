@@ -21,7 +21,6 @@ final class RatingsViewController: ASViewController {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    let animator: UIDynamicAnimator
     var delegate: RatingsViewDelegate?
     
     //MARK: Initializers
@@ -30,25 +29,11 @@ final class RatingsViewController: ASViewController {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
-        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
     
     //MARK: Methods
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        let slideIt = SlideItBehavior(rightDirection: false)
-        self.animator.removeAllBehaviors()
-        self.animator.addBehavior(slideIt)
-        
-        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
-        for (index, subview) in viewArray.enumerate() {
-            subview.left = self.pulseView.width
-            AIRTimer.after(0.08 * Double(index)){ _ in slideIt.addSlide(subview) }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

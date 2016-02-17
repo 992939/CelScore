@@ -17,8 +17,6 @@ final class InfoViewController: ASViewController {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: UIView
-    let animator: UIDynamicAnimator
-    var rightHanded = false
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -26,22 +24,8 @@ final class InfoViewController: ASViewController {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         self.pulseView = UIView(frame: Constants.kBottomViewRect)
-        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        let slideIt = SlideItBehavior(rightDirection: rightHanded)
-        self.animator.removeAllBehaviors()
-        self.animator.addBehavior(slideIt)
-        
-        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
-        for (index, subview) in viewArray.enumerate() {
-            subview.left = self.rightHanded ? -self.pulseView.width : self.pulseView.width
-            AIRTimer.after(0.08 * Double(index)){ _ in slideIt.addSlide(subview) }
-        }
     }
     
     override func viewDidLoad() {

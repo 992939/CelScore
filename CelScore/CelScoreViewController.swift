@@ -17,7 +17,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    let animator: UIDynamicAnimator
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -25,25 +24,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
-        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
     
     //MARK: Methods
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        let slideIt = SlideItBehavior(rightDirection: true)
-        self.animator.removeAllBehaviors()
-        self.animator.addBehavior(slideIt)
-        
-        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
-        viewArray[0].left = -(self.pulseView.width + Constants.kPadding)
-        viewArray[1].left = -(self.pulseView.width + Constants.kPadding)
-        AIRTimer.after(0.1){ _ in slideIt.addSlide(viewArray[0]) }
-        AIRTimer.after(0.2){ _ in slideIt.addSlide(viewArray[1]) }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let gaugeView = getGaugeView()

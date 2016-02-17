@@ -172,33 +172,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         
-        var rightHanded = false
-        if index == 0 || (index == 1 && previousIndex == 2 ){ rightHanded = true }
-        
         let infoView: UIView
         switch index {
-        case 1: infoView = self.infoVC.view; self.infoVC.rightHanded = rightHanded
+        case 1: infoView = self.infoVC.view
         case 2: infoView = self.ratingsVC.view
         default: infoView = self.celscoreVC.view
         }
 
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
+        removingView?.removeFromSuperview()
         self.view.addSubview(infoView)
-        if rightHanded {
-            UIView.animateWithDuration(0.7, animations: { () -> Void in
-                removingView?.left = self.view.width
-                }, completion: { completed -> Void in
-                    removingView?.removeFromSuperview()
-                    removingView?.left = 2 * Constants.kPadding
-            })
-        } else {
-            UIView.animateWithDuration(0.7, animations: { () -> Void in
-                removingView?.left = -self.view.width
-                }, completion: { completed -> Void in
-                    removingView?.removeFromSuperview()
-                    removingView?.left = 2 * Constants.kPadding
-            })
-        }
+        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.slideLeft() }
+        else { infoView.slideRight() }
     }
     
     //MARK: RatingsViewDelegate
