@@ -17,6 +17,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
+    let animator: UIDynamicAnimator
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -24,11 +25,25 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
+        self.animator = UIDynamicAnimator(referenceView: self.pulseView)
         super.init(node: ASDisplayNode())
         self.view.tag = Constants.kDetailViewTag
     }
     
     //MARK: Methods
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let slideIt = SlideItBehavior(rightDirection: true)
+        self.animator.removeAllBehaviors()
+        self.animator.addBehavior(slideIt)
+        
+        let viewArray = self.view.subviews.sort({ $0.tag < $1.tag })
+        viewArray[0].left = -(self.pulseView.width + Constants.kPadding)
+        viewArray[1].left = -(self.pulseView.width + Constants.kPadding)
+        AIRTimer.after(0.1){ _ in slideIt.addSlide(viewArray[0]) }
+        AIRTimer.after(0.2){ _ in slideIt.addSlide(viewArray[1]) }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let gaugeView = getGaugeView()
@@ -44,6 +59,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     func getGaugeView() -> MaterialPulseView {
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: Constants.kBottomHeight - 40))
         gaugeView.depth = .Depth1
+        gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kMainShade
         gaugeView.pulseScale = false
         let gauge = LMGaugeView()
@@ -75,6 +91,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+        consensusView.tag = 2
         consensusView.depth = .Depth1
         consensusView.backgroundColor = Constants.kMainShade
         consensusView.pulseScale = true

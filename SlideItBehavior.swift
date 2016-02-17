@@ -20,8 +20,8 @@ class SlideItBehavior: UIDynamicBehavior {
         self.gravity.gravityDirection = CGVector(dx: rightDirection ? 0.7 : -0.7, dy: 0.0)
         self.gravity.magnitude = 2.5
         self.collider.addBoundaryWithIdentifier("barrier",
-            fromPoint: CGPoint(x: rightDirection ? Constants.kDetailWidth : 2 * Constants.kPadding, y: 0),
-            toPoint: CGPoint(x: rightDirection ? Constants.kDetailWidth : 2 * Constants.kPadding, y: Constants.kScreenHeight))
+            fromPoint: CGPoint(x: rightDirection ? Constants.kDetailWidth : 0, y: 0),
+            toPoint: CGPoint(x: rightDirection ? Constants.kDetailWidth : 0, y: Constants.kScreenHeight))
         addChildBehavior(gravity)
         addChildBehavior(collider)
     }
