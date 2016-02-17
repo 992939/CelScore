@@ -171,19 +171,19 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
+        
+        var rightHanded = false
+        if index == 0 || (index == 1 && previousIndex == 2 ){ rightHanded = true }
+        
         let infoView: UIView
         switch index {
-        case 1: infoView = self.infoVC.view
+        case 1: infoView = self.infoVC.view; self.infoVC.rightHanded = rightHanded
         case 2: infoView = self.ratingsVC.view
         default: infoView = self.celscoreVC.view
         }
         //TODO: animate removingView out of the screen.
         let removingView = self.view.viewWithTag(Constants.kDetailViewTag)
         removingView?.removeFromSuperview()
-        
-        infoView.left = 1
-//        if index == 0 || (index == 1 && previousIndex == 2 ){ infoView.left = -self.view.width }
-//        else { infoView.left = self.view.width }
         self.view.addSubview(infoView)
     }
     
