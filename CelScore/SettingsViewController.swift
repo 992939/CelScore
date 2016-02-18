@@ -27,7 +27,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Logo
         let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
-        logoImageView.depth = .Depth2
+        logoImageView.depth = .None
         logoImageView.image = UIImage(named: "ballot_box")
         logoImageView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
