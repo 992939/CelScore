@@ -31,6 +31,7 @@ final class RatingsViewController: ASViewController {
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = 12
+        self.view.hidden = true
     }
     
     //MARK: Methods

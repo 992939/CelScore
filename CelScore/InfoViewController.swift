@@ -26,11 +26,12 @@ final class InfoViewController: ASViewController {
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.tag = 11
+        self.view.hidden = true
     }
     
+    //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
                 

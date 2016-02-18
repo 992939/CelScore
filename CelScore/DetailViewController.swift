@@ -61,6 +61,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.voteButton)
+        self.view.addSubview(self.infoVC.view)
+        self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kDarkShade
     }
@@ -177,23 +179,32 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         case 2: infoView = self.ratingsVC.view
         default: infoView = self.celscoreVC.view
         }
-
-        let removingView = self.view.viewWithTag(previousIndex+10)
-        print("removingView: \(removingView?.description) and index: \(previousIndex)")
+        
+        infoView.hidden = false
+        infoView.frame = Constants.kBottomViewRect
+        
+        let removingView: UIView
+        switch previousIndex {
+        case 1: removingView = self.infoVC.view
+        case 2: removingView = self.ratingsVC.view
+        default: removingView = self.celscoreVC.view
+        }
+        print("index:\(index) previousIndex:\(previousIndex)")
+        print("infoView: \(infoView.description)")
+        print("removingView: \(removingView.description)")
+    
         if index == 0 || (index == 1 && previousIndex == 2 ){
-            UIView.animateWithDuration(1.0, animations: { () -> Void in removingView?.left = 20
-                }, completion: { completed -> Void in
-                    self.view.addSubview(infoView)
-                    print("infoView: \(infoView.description)")
-                    infoView.slideLeft()
-                    removingView?.removeFromSuperview() })
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView.left = infoView.width + 35
+                infoView.slideLeft()
+                }, completion: { completed -> Void in removingView.hidden = true
+            })
         } else {
-            UIView.animateWithDuration(1.0, animations: { () -> Void in removingView?.left = 20
-                }, completion: { completed -> Void in
-                    self.view.addSubview(infoView)
-                    print("infoView: \(infoView.description)")
-                    infoView.slideRight()
-                    removingView?.removeFromSuperview() })
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView.left = -infoView.width
+                infoView.slideRight()
+                }, completion: { completed -> Void in removingView.hidden = true
+            })
         }
     }
     
