@@ -22,7 +22,6 @@ target 'CelScore' do
     pod 'Material', '~> 1.32'
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
-    pod 'JTMaterialTransition', '~> 1.0'
     pod 'LMGaugeView'
     pod 'HMSegmentedControl'
 end

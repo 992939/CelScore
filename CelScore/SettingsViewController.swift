@@ -25,16 +25,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         let maxWidth = self.view.width - 2 * Constants.kPadding
         
-        //Logo TODO: logoImageView + "Vote Responsibly."
-        let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 80))
+        //Logo
+        let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoImageView.depth = .Depth2
-        logoImageView.backgroundColor = Constants.kDarkShade
+        logoImageView.image = UIImage(named: "ballot_box")
+        logoImageView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
 
         //Progress Bars
-        let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Expression", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
-        let consensusBarNode  = self.setupProgressBarNode("Your Positive Voting Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
-        let factsBarNode = self.setupProgressBarNode("The Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
+        let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Contribution", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
+        let consensusBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
+        let factsBarNode = self.setupProgressBarNode("Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
         //PickerView
         let pickerView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))

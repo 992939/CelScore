@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import WebASDKImageManager
 import JTMaterialSwitch
 import Material
+import AIRTimer
 
 
 final class CelebrityTableViewCell: ASCellNode {
@@ -21,6 +22,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let ratingsNode: ASDisplayNode
     let switchNode: ASDisplayNode
     let backgroundNode: ASDisplayNode
+    let circleLayer = CAShapeLayer()
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -73,6 +75,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
+        AIRTimer.every(10.0){ _ in self.animateProfile() }
     }
     
     //MARK: Methods
@@ -96,5 +99,32 @@ final class CelebrityTableViewCell: ASCellNode {
             background: self.backgroundNode)
     }
     
+    func setupCircleLayer() {
+        let lineWidth: CGFloat = 20.0
+        let arcCenter: CGPoint = CGPointMake(CGRectGetMidX(profilePicNode.bounds), CGRectGetMidY(profilePicNode.bounds))
+        let radius: CGFloat = fmin(CGRectGetMidX(profilePicNode.bounds), CGRectGetMidY(profilePicNode.bounds)) - lineWidth / 2.0
+        let circlePath = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
+
+        profilePicNode.layer.addSublayer(circleLayer)
+        circleLayer.path = circlePath.CGPath
+        circleLayer.fillColor = UIColor.clearColor().CGColor
+        circleLayer.lineWidth = lineWidth
+        circleLayer.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.5).CGColor
+        circleLayer.strokeStart = 0.0
+        circleLayer.strokeEnd = 1.0
+    }
+    
+    func animateProfile() {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.delegate = self
+        animation.duration = 2.0
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        print("layer \(self.profilePicNode.layer.description)")
+        self.profilePicNode.layer.addAnimation(animation, forKey: nil)//"strokeEndAnimation")
+    }
+    
     func getId() -> String { return celebST.id }
+    
+    func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
 }
