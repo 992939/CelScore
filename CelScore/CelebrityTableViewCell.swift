@@ -101,7 +101,7 @@ final class CelebrityTableViewCell: ASCellNode {
     override func layoutDidFinish() {
         super.layoutDidFinish()
         self.setupCircleLayer()
-        AIRTimer.every(7.0){ _ in self.animateProfile() }
+        AIRTimer.every(10.0){ _ in self.animateProfile() }
     }
     
     func animateProfile() {
@@ -115,7 +115,7 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func setupCircleLayer() {
-            let lineWidth: CGFloat = 2.2
+            let lineWidth: CGFloat = 2.5
             let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
             let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
             let centerY: CGFloat = self.profilePicNode.frame.centerY - 10

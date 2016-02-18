@@ -59,7 +59,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 12)
+        logoutButton.setTitleColor(Constants.kBrightShade, forState: .Normal)
+        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 14)
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
         loginView.addSubview(logoutButton)
