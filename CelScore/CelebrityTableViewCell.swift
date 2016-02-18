@@ -22,7 +22,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let ratingsNode: ASDisplayNode
     let switchNode: ASDisplayNode
     let backgroundNode: ASDisplayNode
-    //let circleLayer = CAShapeLayer()
+    var circleLayer: CAShapeLayer!
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -98,58 +98,42 @@ final class CelebrityTableViewCell: ASCellNode {
             background: self.backgroundNode)
     }
     
-    override func didLoad() {
-        super.didLoad()
-    }
-    
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        AIRTimer.every(10.0){ _ in self.animateProfile() }
+        AIRTimer.every(5.0){ _ in self.animateProfile() }
     }
     
     func setupCircleLayer() {
-        let lineWidth: CGFloat = 2.0
-        let radius: CGFloat = self.profilePicNode.frame.width / 2
-        let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
-        let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: 0, endAngle:CGFloat(2 * M_PI), clockwise: true)
-
-        let circleLayer = CAShapeLayer()
-        self.profilePicNode.layer.addSublayer(circleLayer)
-        circleLayer.path = circlePath.CGPath
-        circleLayer.fillColor = UIColor.clearColor().CGColor
-        circleLayer.lineWidth = lineWidth
-        circleLayer.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.5).CGColor
-        circleLayer.strokeStart = 0.0
-        circleLayer.strokeEnd = 0.6
+        if circleLayer == nil {
+            let lineWidth: CGFloat = 2.0
+            let radius: CGFloat = self.profilePicNode.frame.width / 2
+            let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
+            let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
+            
+            circleLayer = CAShapeLayer()
+            self.profilePicNode.layer.addSublayer(circleLayer)
+            circleLayer.path = circlePath.CGPath
+            circleLayer.fillColor = UIColor.clearColor().CGColor
+            circleLayer.lineWidth = lineWidth
+            circleLayer.strokeColor = Constants.kBrightShade.CGColor
+            circleLayer.strokeStart = 0.0
+            circleLayer.strokeEnd = 1.0
+        }
     }
     
     func animateProfile() {
-        print("YO")
         self.setupCircleLayer()
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 2.0
+        animation.duration = 0.7
         animation.fromValue = 0.0
         animation.toValue = 1.0
-        animation.autoreverses = false
-        animation.repeatCount = 0.0
-        animation.removedOnCompletion = true
-        
-        animation.start = {
-            print("Woo, the animation starts!")
-        }
-        
-        animation.animating = { progress in
-            print("progress: \(progress)")
-        }
-        
-        animation.completion = { finished in
-        }
-        
-        self.profilePicNode.layer.addAnimation(animation, forKey: "strokeEndAnimation")
+//        animation.start = { }
+//        animation.animating = { progress in }
+//        animation.completion = { finished in }
+        circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
     }
     
     func getId() -> String { return celebST.id }
-    
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
 }
