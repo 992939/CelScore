@@ -33,7 +33,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
 
         //Progress Bars
-        let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Contribution", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
+        let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
         let consensusBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
         let factsBarNode = self.setupProgressBarNode("Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
