@@ -13,7 +13,6 @@ import RealmSwift
 import TwitterKit
 import Material
 import HMSegmentedControl
-import JTMaterialTransition
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
@@ -23,7 +22,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
     let searchBar: UISearchBar
-    let transition: JTMaterialTransition
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -33,8 +31,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
         self.searchBar = UISearchBar()
-        self.transition = JTMaterialTransition()
-        self.transition.startBackgroundColor = Constants.kDarkShade
         super.init(node: ASDisplayNode())
 
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -178,11 +174,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
         let detailVC = DetailViewController(celebrityST: node.celebST)
-        detailVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-        detailVC.transitioningDelegate = self
-        var cellRect: CGRect = self.celebrityTableView.rectForRowAtIndexPath(indexPath)
-        cellRect = CGRectOffset(cellRect, -tableView.contentOffset.x, -tableView.contentOffset.y)
-        self.transition.startFrame = CGRect(x: 30, y: cellRect.bottom + Constants.kNavigationBarRect.height, width: 30, height: 30)
+        detailVC.modalTransitionStyle = .CrossDissolve
         self.presentViewController(detailVC, animated: true, completion: nil)
     }
     
@@ -256,17 +248,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 })
                 .start()
         }
-    }
-    
-    //MARK: UIViewControllerTransitioningDelegate
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self.transition.reverse = false
-        return self.transition
-    }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self.transition.reverse = true
-        return self.transition
     }
 }
 
