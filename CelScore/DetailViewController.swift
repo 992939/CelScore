@@ -189,9 +189,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         case 2: removingView = self.ratingsVC.view
         default: removingView = self.celscoreVC.view
         }
-        print("index:\(index) previousIndex:\(previousIndex)")
-        print("infoView: \(infoView.description)")
-        print("removingView: \(removingView.description)")
     
         if index == 0 || (index == 1 && previousIndex == 2 ){
             UIView.animateWithDuration(1.0, animations: { () -> Void in
