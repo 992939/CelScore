@@ -22,7 +22,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let ratingsNode: ASDisplayNode
     let switchNode: ASDisplayNode
     let backgroundNode: ASDisplayNode
-    var circleLayer: CAShapeLayer!
+    let circleLayer = CAShapeLayer()
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -100,11 +100,11 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
+        self.setupCircleLayer()
         AIRTimer.every(7.0){ _ in self.animateProfile() }
     }
     
     func animateProfile() {
-        self.setupCircleLayer()
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.7
         animation.fromValue = 0.0
@@ -115,14 +115,12 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func setupCircleLayer() {
-        if circleLayer == nil {
             let lineWidth: CGFloat = 2.2
             let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
             let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
             let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
             
-            circleLayer = CAShapeLayer()
             circleLayer.path = circlePath.CGPath
             circleLayer.fillColor = UIColor.clearColor().CGColor
             circleLayer.lineWidth = lineWidth
@@ -130,7 +128,6 @@ final class CelebrityTableViewCell: ASCellNode {
             circleLayer.strokeStart = 0.0
             circleLayer.strokeEnd = 1.0
             self.profilePicNode.layer.addSublayer(circleLayer)
-        }
     }
     
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
