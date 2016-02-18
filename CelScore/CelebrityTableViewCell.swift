@@ -100,26 +100,7 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        AIRTimer.every(5.0){ _ in self.animateProfile() }
-    }
-    
-    func setupCircleLayer() {
-        if circleLayer == nil {
-            let lineWidth: CGFloat = 2.0
-            let radius: CGFloat = self.profilePicNode.frame.width / 2
-            let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
-            let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
-            
-            circleLayer = CAShapeLayer()
-            self.profilePicNode.layer.addSublayer(circleLayer)
-            circleLayer.path = circlePath.CGPath
-            circleLayer.fillColor = UIColor.clearColor().CGColor
-            circleLayer.lineWidth = lineWidth
-            circleLayer.strokeColor = Constants.kBrightShade.CGColor
-            circleLayer.strokeStart = 0.0
-            circleLayer.strokeEnd = 1.0
-        }
+        AIRTimer.every(7.0){ _ in self.animateProfile() }
     }
     
     func animateProfile() {
@@ -128,12 +109,30 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.duration = 0.7
         animation.fromValue = 0.0
         animation.toValue = 1.0
-//        animation.start = { }
-//        animation.animating = { progress in }
-//        animation.completion = { finished in }
+        //animation.animating = { progress in }
+        //animation.completion = { finished in }
         circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
     }
     
-    func getId() -> String { return celebST.id }
+    func setupCircleLayer() {
+        if circleLayer == nil {
+            let lineWidth: CGFloat = 2.2
+            let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
+            let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
+            let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
+            
+            circleLayer = CAShapeLayer()
+            circleLayer.path = circlePath.CGPath
+            circleLayer.fillColor = UIColor.clearColor().CGColor
+            circleLayer.lineWidth = lineWidth
+            circleLayer.strokeColor = Constants.kBrightShade.CGColor
+            circleLayer.strokeStart = 0.0
+            circleLayer.strokeEnd = 1.0
+            self.profilePicNode.layer.addSublayer(circleLayer)
+        }
+    }
+    
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
+    func getId() -> String { return celebST.id }
 }
