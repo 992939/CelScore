@@ -125,7 +125,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         let picWidth: CGFloat = 180.0
         celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding/2, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
         }
     
         let roleLabel = UILabel()

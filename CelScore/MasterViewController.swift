@@ -136,7 +136,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func setupSegmentedControl() {
         self.segmentedControl.frame = Constants.kSegmentedControlRect
         self.segmentedControl.backgroundColor = Constants.kDarkShade
-        self.segmentedControl.selectionIndicatorColor = Constants.kMainShade
+        self.segmentedControl.selectionIndicatorColor = Constants.kBrightShade
         self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
             NSFontAttributeName: UIFont.systemFontOfSize(18)]

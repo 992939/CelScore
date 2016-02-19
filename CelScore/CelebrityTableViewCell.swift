@@ -38,7 +38,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSize(width: 50, height: 50)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, MaterialColor.white)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
         }
         
         let cosmosView = CosmosView()
@@ -55,7 +55,7 @@ final class CelebrityTableViewCell: ASCellNode {
             .start()
         let followSwitch = MaterialSwitch(size: .Small, state: .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        followSwitch.buttonOnColor = Constants.kDarkShade
+        followSwitch.buttonOnColor = Constants.kBrightShade
         followSwitch.trackOnColor = Constants.kLightShade
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
@@ -104,7 +104,7 @@ final class CelebrityTableViewCell: ASCellNode {
     
     func animateProfile() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 0.7
+        animation.duration = 2.5
         animation.fromValue = 0.0
         animation.toValue = 1.0
         //animation.animating = { progress in }
