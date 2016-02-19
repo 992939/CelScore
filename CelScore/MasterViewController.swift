@@ -124,8 +124,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         searchButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
         
         let navigationBarView: NavigationBarView = NavigationBarView()
-        navigationBarView.leftButtons = [menuButton]
-        navigationBarView.rightButtons = [searchButton]
+        navigationBarView.leftControls = [menuButton]
+        navigationBarView.rightControls = [searchButton]
         navigationBarView.backgroundColor = Constants.kMainShade
         let celscoreImageView = UIImageView(image: UIImage(named: "celscore_white"))
         celscoreImageView.frame = CGRect(x: navigationBarView.width/2, y: navigationBarView.centerY - 5, width: 25, height: 25)

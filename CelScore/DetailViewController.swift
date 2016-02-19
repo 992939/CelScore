@@ -10,7 +10,6 @@ import AsyncDisplayKit
 import Material
 import SMSegmentView
 import AIRTimer
-import TransitionTreasury
 
 
 final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate {
@@ -110,7 +109,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         nameLabel.textColor = MaterialColor.white
         
         let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
-        navigationBarView.leftButtons = [backButton]
+        navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.titleLabel = nameLabel
         navigationBarView.backgroundColor = Constants.kMainShade

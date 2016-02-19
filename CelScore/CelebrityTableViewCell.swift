@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import WebASDKImageManager
-import JTMaterialSwitch
 import Material
 import AIRTimer
 
@@ -54,11 +53,10 @@ final class CelebrityTableViewCell: ASCellNode {
                 cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             })
             .start()
-        let followSwitch = JTMaterialSwitch.init(size: JTMaterialSwitchSizeSmall, state: JTMaterialSwitchStateOff)
+        let followSwitch = MaterialSwitch(size: .Small, state: .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        followSwitch.thumbOnTintColor = Constants.kDarkShade
-        followSwitch.trackOnTintColor = Constants.kLightShade
-        followSwitch.rippleFillColor = Constants.kMainShade
+        followSwitch.buttonOnColor = Constants.kDarkShade
+        followSwitch.trackOnColor = Constants.kLightShade
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
@@ -110,7 +108,7 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.fromValue = 0.0
         animation.toValue = 1.0
         //animation.animating = { progress in }
-        //animation.completion = { finished in }
+        //animation.completion = { finished in self.profilePicNode }
         circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
     }
     

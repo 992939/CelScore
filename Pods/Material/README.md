@@ -4,6 +4,8 @@
 
 Express your creativity with Material, an animation and graphics framework for Google's Material Design and Apple's Flat UI in Swift.
 
+![MaterialApp](http://www.cosmicmind.io/MK/MaterialApp.gif)
+
 ## Features
 
 - [x] Fully Configurable UI Components
@@ -11,14 +13,17 @@ Express your creativity with Material, an animation and graphics framework for G
 - [x] Layout Library To Simplify AutoLayout
 - [x] Base Material Layers & Material Views To Create New UI Components
 - [x] Side Navigation View Controller
-- [x] Navigation Bar View
+- [x] Navigation Bar View & Controller
+- [x] Search Bar View
 - [x] Material Buttons
+- [x] Material Switch
 - [x] Material Card Views
 - [x] Menu Toolset To Create Animated Menus
 - [x] Camera / Video Extension With Extensive Functionality
 - [x] Animation Extension To Create Intricate Animations
 - [x] Complete Material Color Library
 - [x] Example Projects
+- [x] And More...
 
 ## Requirements
 
@@ -59,9 +64,13 @@ Material is a growing project and will encounter changes throughout its developm
 * [FlatButton](#flatbutton)
 * [RaisedButton](#raisedbutton)
 * [FabButton](#fabbutton)
+* [MaterialSwitch](#materialswitch) (New)
 * [Menu](#menu) (New)
 * [Grid](#grid) (New)
-* [NavigationBarView](#navigationbarview)
+* [MaterialTableViewCell](#materialtableviewcell) (New)
+* [NavigationBarView](#navigationbarview) (New)
+* NavigationViewController (New)
+* [SearchBarView](#searchbarview) (New)
 * [SideNavigationViewController](#sidenavigationviewcontroller)
 * [CardView](#cardview) (New)
 * [ImageCardView](#imagecardview)
@@ -69,17 +78,12 @@ Material is a growing project and will encounter changes throughout its developm
 
 ## Upcoming
 
-* SearchBarView
 * SearchBarViewController
 * TabView
 * TabViewController
 * Scrolling Techniques
-* Dialogs
 * Snackbar
-* ProgressBar (circular and horizontal)
-* DatePicker
-* TimePicker
-* Switch Control
+* Advanced Camera / Audio Toolset & Views
 * More Examples
 
 <a name="materialcolor"></a>
@@ -164,6 +168,17 @@ A FabButton is essential to Material Design's overall look. Below showcases its 
 
 ![MaterialFabButton](http://www.cosmicmind.io/MK/MaterialFabButton.gif)
 
+[Learn More About FabButton](https://github.com/CosmicMind/Material/wiki/FabButton)
+
+<a name="materialswitch"></a>
+## MaterialSwitch
+
+MaterialSwitch is a fully customizable UIControl. It has auto centre alignment when using AutoLayout, and makes for a great addition to the UIControl family of components.
+
+![MaterialMaterialSwitch](http://www.cosmicmind.io/MK/MaterialMaterialSwitch.gif)
+
+[Learn More About MaterialSwitch](https://github.com/CosmicMind/Material/wiki/MaterialSwitch)
+
 <a name="menu"></a>
 ## Menu
 
@@ -202,14 +217,32 @@ Below is an example of a large CardView using Grid.
 
 [Learn More About Grid](https://github.com/CosmicMind/Material/wiki/Grid)
 
+<a name="materialtableviewcell"></a>
+## MaterialTableViewCell
+
+UITableViewCell is a popular and widely used view in iOS. Now the pulse animation and core Material features have been made available for the UITableViewCell.
+
+![MaterialMaterialTableViewCell](http://www.cosmicmind.io/MK/MaterialMaterialTableViewCell.gif)
+
+[Learn More About MaterialTableViewCell](https://github.com/CosmicMind/Material/wiki/MaterialTableViewCell)
+
 <a name="navigationbarview"></a>
 ## NavigationBarView
 
-A NavigationBarView is a fully featured navigation bar that supports orientation changes, background images, title and detail labels, both left and right button sets, and status bar settings.
+A NavigationBarView is a fully featured navigation bar that supports orientation changes, background images, title and detail labels, both left and right UIControl sets, and status bar settings.
 
 ![MaterialNavigationBarView](http://www.cosmicmind.io/MK/MaterialNavigationBarView.gif)
 
 [Learn More About NavigationBarView](https://github.com/CosmicMind/Material/wiki/NavigationBarView)
+
+<a name="searchbarview"></a>
+## SearchBarView
+
+A SearchBarView is a fully featured search bar that supports orientation changes, background images, title and detail labels, both left and right UIControl sets, and status bar settings.
+
+![MaterialSearchBarView](http://www.cosmicmind.io/MK/MaterialSearchBarView.gif)
+
+[Learn More About SearchBarView](https://github.com/CosmicMind/Material/wiki/SearchBarView)
 
 <a name="sidenavigationviewcontroller"></a>
 ## SideNavigationViewController
@@ -231,7 +264,7 @@ Easily remove the pulse animation and add a background image for an entirely new
 
 ![MaterialCardViewFavorite](http://www.cosmicmind.io/MK/MaterialCardViewFavorite.gif)
 
-Add any view as the detail to a CardView. For example, a UITableView.
+Add any UIView as the detail to a CardView. For example, a UITableView.
 
 ![MaterialTableCardView](http://www.cosmicmind.io/MK/MaterialTableCardView.gif)
 
