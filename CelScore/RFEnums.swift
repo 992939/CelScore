@@ -101,7 +101,7 @@ public enum Qualities: Int {
 //MARK: ListInfo
 public enum ListInfo : Int {
     case PublicOpinion
-    case Ubuntu
+    case Iconoclasts
     case Hollywood
     case Sports
     case Music
@@ -111,7 +111,7 @@ public enum ListInfo : Int {
     public static func getAll() -> [String] {
         return [
             PublicOpinion.name(),
-            Ubuntu.name(),
+            Iconoclasts.name(),
             Hollywood.name(),
             Sports.name(),
             Music.name(),
@@ -129,7 +129,7 @@ public enum ListInfo : Int {
     public func name() -> String {
         switch self {
         case .PublicOpinion: return "#PublicOpinon"
-        case .Ubuntu: return "#Ubuntu"
+        case .Iconoclasts: return "#Iconoclasts"
         case .Hollywood: return "#Hollywood"
         case .Sports: return "#Sports"
         case .Music: return "#Music"
@@ -141,7 +141,7 @@ public enum ListInfo : Int {
     public func getId() -> String {
         switch self {
         case .PublicOpinion: return "0001"
-        case .Ubuntu: return "0007"
+        case .Iconoclasts: return "0007"
         case .Hollywood: return "0004"
         case .Sports: return "0002"
         case .Music: return "0003"

@@ -28,7 +28,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17.0), NSForegroundColorAttributeName : MaterialColor.white]
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(20.0), NSForegroundColorAttributeName : MaterialColor.white]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail

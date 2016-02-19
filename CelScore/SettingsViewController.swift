@@ -35,11 +35,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
         let consensusBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
-        let factsBarNode = self.setupProgressBarNode("Overall Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
+        let factsBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
         //PickerView
         let pickerView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel = setupLabel(title: "Main Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let pickerLabel = setupLabel(title: "Default Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
         pickerView.addSubview(pickerLabel)
         pickerView.addSubview(picker)
@@ -49,18 +49,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Check Boxes
         let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: pickerView.bottom + Constants.kPadding)
-        let fortuneCookieNode = setupCheckBoxNode("Bad Fortune Cookies", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
+        let fortuneCookieNode = setupCheckBoxNode("Fortune Cookie Mode", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = setupLabel(title: "Logged In As", frame: CGRect(x: Constants.kPadding, y: 0, width: 90, height: 30))
+        let loginLabel = setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 100, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         let userLabel = setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.setTitleColor(Constants.kBrightShade, forState: .Normal)
-        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 14)
+        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
         loginView.addSubview(logoutButton)
@@ -70,8 +70,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let copyrightTextNode = ASTextNode()
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8.0), NSForegroundColorAttributeName : Constants.kBrightShade, NSParagraphStyleAttributeName: paraStyle]
-        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0.0 Copyrights. Grey Ecology, 2016.", attributes: attr)
+        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kBrightShade, NSParagraphStyleAttributeName: paraStyle]
+        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0. Grey Ecology, 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
@@ -106,13 +106,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let label = UILabel(frame: frame)
         label.text = title
         label.textColor = MaterialColor.white
-        label.font = UIFont(name: label.font.fontName, size: 12)
+        label.font = UIFont(name: label.font.fontName, size: 16)
         return label
     }
     
     func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
-        let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 120, height: 30))
+        let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
         let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce

@@ -43,8 +43,8 @@ struct Constants {
     static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
     
     //CelebrityTableViewCell
-    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 2.0 : 0.8
-    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 18.0 : 15.0
+    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 1.2 : 0.7
+    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 16.0 : 14.0
     
     //DetailVC
     static let kDetailWidth = kMaxWidth - 2 * kPadding

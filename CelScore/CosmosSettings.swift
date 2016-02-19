@@ -41,7 +41,7 @@ struct CosmosDefaultSettings {
     static let userRatingMode = false
     static let previousRating = 3
     static let rating: Double = 2.718281828
-    static let starMargin: Double = 5
+    static let starMargin: Double = 2
     static let starPoints: [CGPoint] = [
         CGPoint(x: 49.5,  y: 0.0),
         CGPoint(x: 60.5,  y: 35.0),
