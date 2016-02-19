@@ -35,7 +35,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
         let consensusBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: publicOpinionBarNode.view.bottom + Constants.kPadding)
-        let factsBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
+        let factsBarNode = self.setupProgressBarNode("General Vote Consensus", maxWidth: maxWidth, yPosition: consensusBarNode.view.bottom + Constants.kPadding)
         
         //PickerView
         let pickerView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: factsBarNode.view.bottom + Constants.kPadding, width: maxWidth, height: Constants.kPickerViewHeight))
