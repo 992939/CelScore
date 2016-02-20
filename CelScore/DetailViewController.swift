@@ -63,8 +63,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton)
-        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
-        MaterialLayout.size(view, child: self.socialButton, width: 48, height: 48)
+        MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.view.addSubview(self.voteButton)
         self.view.addSubview(self.infoVC.view)
         self.view.addSubview(self.ratingsVC.view)
@@ -172,38 +171,35 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         btn1.depth = .Depth2
         btn1.backgroundColor = Constants.kDarkShade
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
-        socialButton.addSubview(btn1)
+        self.socialButton.addSubview(btn1)
         
         var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
         let btn2: FabButton = FabButton()
         btn2.depth = .Depth1
-        btn2.tintColor = MaterialColor.blue.accent3
         btn2.pulseColor = MaterialColor.blue.accent3
-        btn2.borderColor = MaterialColor.blue.accent3
         btn2.backgroundColor = MaterialColor.white
         btn2.borderWidth = 1
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
         btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        socialButton.addSubview(btn2)
+        self.socialButton.addSubview(btn2)
         
         image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
         let btn3: FabButton = FabButton()
         btn3.depth = .Depth1
-        btn3.tintColor = MaterialColor.blue.accent3
         btn3.pulseColor = MaterialColor.blue.accent3
-        btn3.borderColor = MaterialColor.blue.accent3
         btn3.backgroundColor = MaterialColor.white
         btn3.borderWidth = 1
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
         btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        socialButton.addSubview(btn3)
+        self.socialButton.addSubview(btn3)
         
-        socialButton.menu.origin = CGPoint(x: 30, y: Constants.kTopViewRect.bottom - 22)
-        socialButton.menu.baseViewSize = CGSize(width: 43, height: 43)
-        socialButton.menu.direction = .Up
-        socialButton.menu.views = [btn1, btn2, btn3]
+        self.socialButton.menu.origin = CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22)
+        self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        self.socialButton.menu.direction = .Up
+        self.socialButton.menu.views = [btn1, btn2, btn3]
+        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func handleMenu() {
@@ -225,7 +221,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     internal func handleButton(button: UIButton) { print("Hit Button \(button)") }
     
     func setUpVoteButton() {
-        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43)
+        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
