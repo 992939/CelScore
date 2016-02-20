@@ -96,9 +96,8 @@
         NSInteger subtitleHeight = [_subtitleLabel.text boundingRectWithSize:CGSizeMake(textWidth, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:kDropdownSubtitleFontSize]} context:nil].size.height;
         NSInteger notificationHeight = (20 + kDropdownPadding + titleHeight + (kDropdownPadding / 2) + subtitleHeight + kDropdownPadding);
         
-        if (notificationHeight < 100) {
-            
-            notificationHeight = 100;
+        if (notificationHeight < 90) {
+            notificationHeight = 90;
         }
         
         _notificationView.frame = CGRectMake(0, -notificationHeight, [[UIScreen mainScreen] bounds].size.width, notificationHeight);
@@ -174,7 +173,7 @@
             [_animator addBehavior:collision];
             
             UIDynamicItemBehavior *elasticityBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[_notificationView]];
-            elasticityBehavior.elasticity = 0.3f;
+            elasticityBehavior.elasticity = 0.2f;
             [_animator addBehavior:elasticityBehavior];
         } else {
             
