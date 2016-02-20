@@ -99,12 +99,12 @@ final class CelebrityTableViewCell: ASCellNode {
     override func layoutDidFinish() {
         super.layoutDidFinish()
         self.setupCircleLayer()
-        AIRTimer.every(10.0){ _ in self.animateProfile() }
+        AIRTimer.every(Constants.kAnimationInterval){ _ in self.animateProfile() }
     }
     
     func animateProfile() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 2.5
+        animation.duration = Constants.kAnimationInterval
         animation.fromValue = 0.0
         animation.toValue = 1.0
         //animation.animating = { progress in }
