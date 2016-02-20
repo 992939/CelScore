@@ -38,7 +38,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSize(width: 50, height: 50)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kWineShade)(originalImage)
         }
         
         let cosmosView = CosmosView()
@@ -55,8 +55,8 @@ final class CelebrityTableViewCell: ASCellNode {
             .start()
         let followSwitch = MaterialSwitch(size: .Small, state: .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        followSwitch.buttonOnColor = Constants.kBrightShade
-        followSwitch.trackOnColor = Constants.kLightShade
+        followSwitch.buttonOnColor = Constants.kWineShade
+        followSwitch.trackOnColor = followSwitch.trackOffColor
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
@@ -122,7 +122,7 @@ final class CelebrityTableViewCell: ASCellNode {
             circleLayer.path = circlePath.CGPath
             circleLayer.fillColor = UIColor.clearColor().CGColor
             circleLayer.lineWidth = lineWidth
-            circleLayer.strokeColor = Constants.kBrightShade.CGColor
+            circleLayer.strokeColor = Constants.kWineShade.CGColor
             circleLayer.strokeStart = 0.0
             circleLayer.strokeEnd = 1.0
             self.profilePicNode.layer.addSublayer(circleLayer)
