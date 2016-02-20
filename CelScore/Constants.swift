@@ -75,6 +75,7 @@ struct Constants {
         "Expect a cow where there is grass.",
         "Slander by the stream will be heard by the frogs.", // 0 to 14 - Negative
         "The revolution will not be televised.",
+        "What do we want? Justice. When do we want it? Now.",
         "In Heaven, all the interesting people are missing.",
         "Neutral men are the Devil's allies.",
         "If you can't reward, make sure to thank.",
@@ -86,7 +87,7 @@ struct Constants {
         "The devil is in the details.",
         "The time is always right to do what is right. Right?",
         "One must walk in darkness so others may see the light.",
-        "Good artists copy, great artists steal.",
+        "You're looking for justice, what you'll find is just us.",
         "Only fools lend light to the sun.",
         "Thank who gives you and give who thanks you.",
         "Outward judgment often fails, inward never.",

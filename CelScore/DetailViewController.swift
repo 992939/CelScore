@@ -19,6 +19,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     let infoVC: InfoViewController
     let ratingsVC: RatingsViewController
     let celscoreVC: CelScoreViewController
+    var socialButton: MenuView
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
     
@@ -30,6 +31,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
+        self.socialButton = MenuView()
         self.voteButton = MaterialButton()
         self.notification = AFDropdownNotification()
         super.init(node: ASDisplayNode())
@@ -49,16 +51,20 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         let navigationBarView: NavigationBarView = getNavigationView()
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
+        self.setUpSocialButton()
         self.setUpVoteButton()
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
-        
+
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
+        self.view.addSubview(self.socialButton)
+        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
+        MaterialLayout.size(view, child: self.socialButton, width: 48, height: 48)
         self.view.addSubview(self.voteButton)
         self.view.addSubview(self.infoVC.view)
         self.view.addSubview(self.ratingsVC.view)
@@ -160,6 +166,63 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         segmentView.delegate = self
         return segmentView
     }
+    
+    func setUpSocialButton() {
+        let btn1: FabButton = FabButton()
+        btn1.depth = .Depth2
+        btn1.backgroundColor = Constants.kDarkShade
+        btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
+        socialButton.addSubview(btn1)
+        
+        var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        let btn2: FabButton = FabButton()
+        btn2.depth = .Depth1
+        btn2.tintColor = MaterialColor.blue.accent3
+        btn2.pulseColor = MaterialColor.blue.accent3
+        btn2.borderColor = MaterialColor.blue.accent3
+        btn2.backgroundColor = MaterialColor.white
+        btn2.borderWidth = 1
+        btn2.setImage(image, forState: .Normal)
+        btn2.setImage(image, forState: .Highlighted)
+        btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
+        socialButton.addSubview(btn2)
+        
+        image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        let btn3: FabButton = FabButton()
+        btn3.depth = .Depth1
+        btn3.tintColor = MaterialColor.blue.accent3
+        btn3.pulseColor = MaterialColor.blue.accent3
+        btn3.borderColor = MaterialColor.blue.accent3
+        btn3.backgroundColor = MaterialColor.white
+        btn3.borderWidth = 1
+        btn3.setImage(image, forState: .Normal)
+        btn3.setImage(image, forState: .Highlighted)
+        btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
+        socialButton.addSubview(btn3)
+        
+        socialButton.menu.origin = CGPoint(x: 30, y: Constants.kTopViewRect.bottom - 22)
+        socialButton.menu.baseViewSize = CGSize(width: 43, height: 43)
+        socialButton.menu.direction = .Up
+        socialButton.menu.views = [btn1, btn2, btn3]
+    }
+    
+    func handleMenu() {
+        let image: UIImage?
+        if self.socialButton.menu.opened {
+            self.socialButton.menu.close()
+            image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
+        } else {
+            self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
+            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.animate(MaterialAnimation.rotate(1))
+        first?.setImage(image, forState: .Normal)
+        first?.setImage(image, forState: .Highlighted)
+    }
+    
+    internal func handleButton(button: UIButton) { print("Hit Button \(button)") }
     
     func setUpVoteButton() {
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: 43, height: 43)

@@ -67,7 +67,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     func getConsensusView(positionY: CGFloat) -> MaterialPulseView {
         let consensusLabel = UILabel()
-        consensusLabel.text = "Vote Consensus"
+        consensusLabel.text = "Social Consensus"
         consensusLabel.textColor = MaterialColor.white
         consensusLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25)
         let infoLabel = UILabel()
