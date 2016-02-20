@@ -48,6 +48,7 @@ final class RatingsViewController: ASViewController {
                     qualityView.backgroundColor = Constants.kMainShade
                     qualityView.pulseScale = false
                     qualityView.pulseColor = MaterialColor.clear
+                    qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
@@ -100,6 +101,10 @@ final class RatingsViewController: ASViewController {
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
+    }
+    
+    func longPress(gesture: UIGestureRecognizer) {
+        print("press \(gesture.view?.tag)")
     }
     
     func animateStarsToGold(positive positive: Bool) {
