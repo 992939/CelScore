@@ -98,8 +98,10 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        self.setupCircleLayer()
-        AIRTimer.every(Constants.kAnimationInterval){ _ in self.animateProfile() }
+        //self.setupCircleLayer()
+        AIRTimer.every(Constants.kAnimationInterval){ _ in self.setupCircleLayer()
+            //self.animateProfile() 
+        }
     }
     
     func animateProfile() {
@@ -107,25 +109,49 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.duration = Constants.kAnimationInterval
         animation.fromValue = 0.0
         animation.toValue = 1.0
-        //animation.animating = { progress in }
+        animation.animating = { progress in
+            self.circleLayer.strokeStart = self.floorToPlaces(progress, places: 2)
+            self.circleLayer.strokeEnd = self.floorToPlaces(progress + 0.0002, places: 2)
+        }
         //animation.completion = { finished in self.profilePicNode }
         circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
     }
     
     func setupCircleLayer() {
-            let lineWidth: CGFloat = 2.5
-            let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
-            let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
-            let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
-            
-            circleLayer.path = circlePath.CGPath
-            circleLayer.fillColor = UIColor.clearColor().CGColor
-            circleLayer.lineWidth = lineWidth
-            circleLayer.strokeColor = Constants.kWineShade.CGColor
-            circleLayer.strokeStart = 0.0
-            circleLayer.strokeEnd = 1.0
-            self.profilePicNode.layer.addSublayer(circleLayer)
+        let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
+        let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
+        let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
+        
+        let rectShape1 = CAShapeLayer()
+        rectShape1.bounds = CGRect(x: 0, y: 0, width: 8, height: 8)
+        rectShape1.path = UIBezierPath(roundedRect: rectShape1.bounds, cornerRadius: 4).CGPath
+        rectShape1.fillColor = UIColor.greenColor().CGColor
+        
+        let animation = CAKeyframeAnimation()
+        animation.keyPath = "position"
+        animation.path = circlePath.CGPath
+        animation.additive = true
+        animation.duration = 10
+        
+        rectShape1.addAnimation(animation, forKey: "strokeEndAnimation")
+        
+//        circleLayer.lineWidth =  4.0
+//        circleLayer.lineCap = "round"
+//        circleLayer.path = circlePath.CGPath
+//        circleLayer.fillColor = UIColor.clearColor().CGColor
+//        circleLayer.strokeColor = Constants.kWineShade.CGColor
+        self.profilePicNode.layer.addSublayer(rectShape1)
+    }
+    
+    func ceilToPlaces(value:CGFloat, places:Int) -> CGFloat {
+        let divisor = pow(10.0, CGFloat(places))
+        return ceil(value * divisor) / divisor
+    }
+    
+    func floorToPlaces(value:CGFloat, places:Int) -> CGFloat {
+        let divisor = pow(10.0, CGFloat(places))
+        return round(value * divisor) / divisor
     }
     
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
