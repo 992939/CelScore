@@ -119,8 +119,8 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func setupCircleLayer() {
-        self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 8, height: 8)
-        self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 4).CGPath
+        self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
+        self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
         self.circleLayer.fillColor = UIColor.greenColor().CGColor
         self.profilePicNode.layer.addSublayer(self.circleLayer)
     }
