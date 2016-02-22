@@ -119,9 +119,9 @@ final class CelebrityTableViewCell: ASCellNode {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = circlePath.CGPath
-        animation.duration = 1//Constants.kAnimationInterval
+        animation.duration = 3//Constants.kAnimationInterval
         self.circleLayer.hidden = false
-        animation.animating = { progress in if progress > 0.8 { self.circleLayer.hidden = true }}
+        animation.animating = { progress in if progress > 0.92 { self.circleLayer.hidden = true }}
         
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
@@ -136,7 +136,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.pathLayer.strokeEnd = 1.0
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = 1//Constants.kAnimationInterval
+        pathAnimation.duration = 3//Constants.kAnimationInterval
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
