@@ -22,6 +22,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let switchNode: ASDisplayNode
     let backgroundNode: ASDisplayNode
     let circleLayer = CAShapeLayer()
+    let pathLayer = CAShapeLayer()
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -38,7 +39,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSize(width: 50, height: 50)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kWineShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kDarkShade)(originalImage)
         }
         
         let cosmosView = CosmosView()
@@ -122,7 +123,22 @@ final class CelebrityTableViewCell: ASCellNode {
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
         self.circleLayer.fillColor = Constants.kWineShade.CGColor
         self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
+        
+        self.pathLayer.path = circlePath.CGPath
+        self.pathLayer.fillColor = UIColor.clearColor().CGColor
+        self.pathLayer.lineWidth = 2.5
+        self.pathLayer.strokeColor = Constants.kWineShade.CGColor
+        self.pathLayer.strokeStart = 0.0
+        self.pathLayer.strokeEnd = 1.0
+        
+        let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        pathAnimation.duration = Constants.kAnimationInterval
+        pathAnimation.fromValue = 0.0
+        pathAnimation.toValue = 1.0
+        pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
+        
         self.profilePicNode.layer.addSublayer(self.circleLayer)
+        self.profilePicNode.layer.addSublayer(self.pathLayer)
     }
     
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
