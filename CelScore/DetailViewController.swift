@@ -128,20 +128,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         celebPicNode.URL = NSURL(string: self.celebST.imageURL)
         celebPicNode.contentMode = UIViewContentMode.ScaleAspectFit
         let picWidth: CGFloat = 180.0
-        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: Constants.kPadding/2, width: picWidth, height: picWidth)
+        celebPicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         celebPicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
         }
-    
-        let roleLabel = UILabel()
-        roleLabel.text = "Actor" //TODO: replace by celebST.role
-        roleLabel.font = UIFont(name: roleLabel.font.fontName, size: 18)
-        roleLabel.frame = CGRect(x: 0, y: celebPicNode.view.bottom, width: Constants.kDetailWidth, height: 30)
-        roleLabel.textAlignment = .Center
-        roleLabel.textColor = Constants.kLightShade
         
         topView.addSubview(celebPicNode.view)
-        topView.addSubview(roleLabel)
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
         return topView
