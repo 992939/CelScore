@@ -114,7 +114,7 @@ final class CelebrityTableViewCell: ASCellNode {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
         let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
         let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: degreeToRadian(-90.0), endAngle: degreeToRadian(-90 + 360.0), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
         
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
@@ -145,6 +145,5 @@ final class CelebrityTableViewCell: ASCellNode {
         self.profilePicNode.layer.addSublayer(self.pathLayer)
     }
     
-    func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
     func getId() -> String { return celebST.id }
 }
