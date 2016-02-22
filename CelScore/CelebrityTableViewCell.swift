@@ -104,9 +104,9 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func restartClock() {
-        self.circleLayer.removeFromSuperlayer()
+        self.circleLayer.hidden = true 
         self.timer?.invalidate()
-        self.setupCircleLayer()
+        AIRTimer.after(1) { _ in self.setupCircleLayer() }
         self.timer?.restart()
     }
     
@@ -120,6 +120,8 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.keyPath = "position"
         animation.path = circlePath.CGPath
         animation.duration = 1//Constants.kAnimationInterval
+        self.circleLayer.hidden = false
+        animation.animating = { progress in if progress > 0.8 { self.circleLayer.hidden = true }}
         
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath

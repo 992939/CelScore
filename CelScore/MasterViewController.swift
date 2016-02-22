@@ -173,10 +173,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: ASTableView, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell? = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as? CelebrityTableViewCell
-        AIRTimer.after(1) { _ in
-            node?.restartClock()
-            node?.setupCircleLayer()
-        }
+        node?.restartClock()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
