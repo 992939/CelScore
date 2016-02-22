@@ -23,6 +23,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let backgroundNode: ASDisplayNode
     let circleLayer = CAShapeLayer()
     let pathLayer = CAShapeLayer()
+    let timer: AIRTimer
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -99,10 +100,8 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        AIRTimer.every(Constants.kAnimationInterval){ _ in
-            self.circleLayer.hidden = true
-            self.setupCircleLayer()
-        }
+        AIRTimer.restart(timer)
+        timer.every(Constants.kAnimationInterval){ _ in self.setupCircleLayer() }
     }
     
     func setupCircleLayer() {
@@ -114,11 +113,8 @@ final class CelebrityTableViewCell: ASCellNode {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = circlePath.CGPath
-        animation.additive = true
-        animation.repeatCount = Float.infinity
         animation.duration = Constants.kAnimationInterval
         
-        self.circleLayer.hidden = false
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
         self.circleLayer.fillColor = Constants.kWineShade.CGColor

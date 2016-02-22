@@ -9,7 +9,6 @@
 import AsyncDisplayKit
 import UIKit
 import Material
-import AIRTimer
 
 
 final class InfoViewController: ASViewController {

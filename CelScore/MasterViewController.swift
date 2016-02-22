@@ -170,6 +170,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         return node
     }
     
+    func tableView(tableView: ASTableView, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath) {
+        let node: CelebrityTableViewCell? = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as? CelebrityTableViewCell
+        node?.setupCircleLayer()
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
