@@ -98,11 +98,10 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        self.setupCircleLayer()
-        AIRTimer.every(Constants.kAnimationInterval){ _ in self.animateProfile() }
+        AIRTimer.after(1.0){ _ in self.setupCircleLayer() }
     }
     
-    func animateProfile() {
+    func setupCircleLayer() {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
         let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
         let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
@@ -112,16 +111,13 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.keyPath = "position"
         animation.path = circlePath.CGPath
         animation.additive = true
+        animation.repeatCount = Float.infinity
         animation.duration = 10
         
-        self.circleLayer.removeAllAnimations()
-        self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
-    }
-    
-    func setupCircleLayer() {
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
         self.circleLayer.fillColor = UIColor.greenColor().CGColor
+        self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
         self.profilePicNode.layer.addSublayer(self.circleLayer)
     }
     
