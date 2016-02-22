@@ -98,7 +98,10 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        AIRTimer.after(1.0){ _ in self.setupCircleLayer() }
+        AIRTimer.every(Constants.kAnimationInterval){ _ in
+            self.circleLayer.hidden = true
+            self.setupCircleLayer()
+        }
     }
     
     func setupCircleLayer() {
@@ -112,23 +115,14 @@ final class CelebrityTableViewCell: ASCellNode {
         animation.path = circlePath.CGPath
         animation.additive = true
         animation.repeatCount = Float.infinity
-        animation.duration = 10
+        animation.duration = Constants.kAnimationInterval
         
+        self.circleLayer.hidden = false
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
-        self.circleLayer.fillColor = UIColor.greenColor().CGColor
+        self.circleLayer.fillColor = Constants.kWineShade.CGColor
         self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
         self.profilePicNode.layer.addSublayer(self.circleLayer)
-    }
-    
-    func ceilToPlaces(value:CGFloat, places:Int) -> CGFloat {
-        let divisor = pow(10.0, CGFloat(places))
-        return ceil(value * divisor) / divisor
-    }
-    
-    func floorToPlaces(value:CGFloat, places:Int) -> CGFloat {
-        let divisor = pow(10.0, CGFloat(places))
-        return round(value * divisor) / divisor
     }
     
     func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
