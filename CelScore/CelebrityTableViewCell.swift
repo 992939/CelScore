@@ -23,7 +23,7 @@ final class CelebrityTableViewCell: ASCellNode {
     let backgroundNode: ASDisplayNode
     let circleLayer = CAShapeLayer()
     let pathLayer = CAShapeLayer()
-    let timer: AIRTimer
+    var timer: AIRTimer?
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -100,8 +100,14 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        AIRTimer.restart(timer)
-        timer.every(Constants.kAnimationInterval){ _ in self.setupCircleLayer() }
+        timer = AIRTimer.every(Constants.kAnimationInterval){ _ in self.setupCircleLayer() }
+    }
+    
+    func restartClock() {
+        self.circleLayer.removeFromSuperlayer()
+        self.timer?.invalidate()
+        self.setupCircleLayer()
+        self.timer?.restart()
     }
     
     func setupCircleLayer() {
@@ -113,7 +119,7 @@ final class CelebrityTableViewCell: ASCellNode {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = circlePath.CGPath
-        animation.duration = Constants.kAnimationInterval
+        animation.duration = 1//Constants.kAnimationInterval
         
         self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
         self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
@@ -128,7 +134,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.pathLayer.strokeEnd = 1.0
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = Constants.kAnimationInterval
+        pathAnimation.duration = 1//Constants.kAnimationInterval
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")

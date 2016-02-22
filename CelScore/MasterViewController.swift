@@ -13,6 +13,7 @@ import RealmSwift
 import TwitterKit
 import Material
 import HMSegmentedControl
+import AIRTimer
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
@@ -172,7 +173,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: ASTableView, willDisplayNodeForRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell? = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as? CelebrityTableViewCell
-        node?.setupCircleLayer()
+        AIRTimer.after(1) { _ in
+            node?.restartClock()
+            node?.setupCircleLayer()
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
