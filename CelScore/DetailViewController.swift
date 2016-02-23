@@ -22,9 +22,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     var socialButton: MenuView
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
-    let profilePicNode: ASNetworkImageNode
-    let circleLayer = CAShapeLayer()
-    let pathLayer = CAShapeLayer()
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -37,7 +34,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.socialButton = MenuView()
         self.voteButton = MaterialButton()
         self.notification = AFDropdownNotification()
-        self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -75,12 +71,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         self.view.backgroundColor = Constants.kDarkShade
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        AIRTimer.every(Constants.kAnimationInterval) { _ in self.setupCircleLayer() }
-        AIRTimer.after(15){ _ in self.circleLayer.fillColor = Constants.kBrightShade.CGColor }
-    }
-    
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func voteAction() {
@@ -109,41 +99,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
             .start()
     }
     
-    func setupCircleLayer() {
-        let radius: CGFloat = (self.profilePicNode.frame.width - 7) / 2
-        let centerX: CGFloat = self.profilePicNode.frame.left - 7
-        let centerY: CGFloat = self.profilePicNode.frame.centerY - 20
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
-        
-        let animation = CAKeyframeAnimation()
-        animation.keyPath = "position"
-        animation.path = circlePath.CGPath
-        animation.duration = Constants.kAnimationInterval
-        self.circleLayer.hidden = false
-        //animation.animating = { progress in if progress > 0.95 { self.circleLayer.hidden = true }}
-        
-        self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 12, height: 12)
-        self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 6).CGPath
-        self.circleLayer.fillColor = Constants.kWineShade.CGColor
-        self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
-        
-        self.pathLayer.path = circlePath.CGPath
-        self.pathLayer.fillColor = UIColor.clearColor().CGColor
-        self.pathLayer.lineWidth = 7.0
-        self.pathLayer.strokeColor = Constants.kWineShade.CGColor
-        self.pathLayer.strokeStart = 0.0
-        self.pathLayer.strokeEnd = 1.0
-        
-        let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = Constants.kAnimationInterval
-        pathAnimation.fromValue = 0.0
-        pathAnimation.toValue = 1.0
-        pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
-        
-        self.profilePicNode.layer.addSublayer(self.pathLayer)
-        self.profilePicNode.layer.addSublayer(self.circleLayer)
-    }
-    
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {
         let backButton: FlatButton = FlatButton()
@@ -169,14 +124,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     func getTopView() -> MaterialView {
         let topView = MaterialView(frame: Constants.kTopViewRect)
-        self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
-        self.profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
+        let profilePicNode = ASNetworkImageNode(webImage: ())
+        profilePicNode.URL = NSURL(string: self.celebST.imageURL)
+        profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
         let picWidth: CGFloat = 180.0
-        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
-        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+        profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
+        profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
         }
-        topView.addSubview(self.profilePicNode.view)
+        topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
         return topView

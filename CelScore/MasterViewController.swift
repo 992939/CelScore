@@ -41,7 +41,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
