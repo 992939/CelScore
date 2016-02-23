@@ -21,9 +21,6 @@ final class CelebrityTableViewCell: ASCellNode {
     let ratingsNode: ASDisplayNode
     let switchNode: ASDisplayNode
     let backgroundNode: ASDisplayNode
-    let circleLayer = CAShapeLayer()
-    let pathLayer = CAShapeLayer()
-    var timer: AIRTimer?
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {
@@ -100,49 +97,29 @@ final class CelebrityTableViewCell: ASCellNode {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        timer = AIRTimer.every(Constants.kAnimationInterval){ _ in self.setupCircleLayer() }
+        self.setupCircleLayer()
     }
-    
-    func restartClock() {
-        self.circleLayer.hidden = true 
-        self.timer?.invalidate()
-        AIRTimer.after(1) { _ in self.setupCircleLayer() }
-        self.timer?.restart()
-    }
-    
+
     func setupCircleLayer() {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
         let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
         let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
         
-        let animation = CAKeyframeAnimation()
-        animation.keyPath = "position"
-        animation.path = circlePath.CGPath
-        animation.duration = 3//Constants.kAnimationInterval
-        self.circleLayer.hidden = false
-        animation.animating = { progress in if progress > 0.92 { self.circleLayer.hidden = true }}
-        
-        self.circleLayer.bounds = CGRect(x: 0, y: 0, width: 7, height: 7)
-        self.circleLayer.path = UIBezierPath(roundedRect: self.circleLayer.bounds, cornerRadius: 3.5).CGPath
-        self.circleLayer.fillColor = Constants.kWineShade.CGColor
-        self.circleLayer.addAnimation(animation, forKey: "strokeEndAnimation")
-        
-        self.pathLayer.path = circlePath.CGPath
-        self.pathLayer.fillColor = UIColor.clearColor().CGColor
-        self.pathLayer.lineWidth = 2.5
-        self.pathLayer.strokeColor = Constants.kWineShade.CGColor
-        self.pathLayer.strokeStart = 0.0
-        self.pathLayer.strokeEnd = 1.0
+        let pathLayer = CAShapeLayer()
+        pathLayer.path = circlePath.CGPath
+        pathLayer.fillColor = UIColor.clearColor().CGColor
+        pathLayer.lineWidth = 2.5
+        pathLayer.strokeColor = Constants.kWineShade.CGColor
+        pathLayer.strokeStart = 0.0
+        pathLayer.strokeEnd = 1.0
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
         pathAnimation.duration = 3//Constants.kAnimationInterval
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
-        
-        self.profilePicNode.layer.addSublayer(self.circleLayer)
-        self.profilePicNode.layer.addSublayer(self.pathLayer)
+        self.profilePicNode.layer.addSublayer(pathLayer)
     }
     
     func getId() -> String { return celebST.id }
