@@ -51,7 +51,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.minValue = Constants.kMinimumVoteValue
         gauge.maxValue = Constants.kMaximumVoteValue
         gauge.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.7 * Constants.kDetailWidth
+        let gaugeWidth: CGFloat = 0.65 * Constants.kDetailWidth
         gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
