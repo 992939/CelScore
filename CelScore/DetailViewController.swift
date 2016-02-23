@@ -110,9 +110,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     }
     
     func setupCircleLayer() {
-        let radius: CGFloat = (self.profilePicNode.frame.width - 6) / 2
-        let centerX: CGFloat = self.profilePicNode.frame.left - 8
-        let centerY: CGFloat = self.profilePicNode.frame.centerY - 19
+        let radius: CGFloat = (self.profilePicNode.frame.width - 7) / 2
+        let centerX: CGFloat = self.profilePicNode.frame.left - 7
+        let centerY: CGFloat = self.profilePicNode.frame.centerY - 20
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
         
         let animation = CAKeyframeAnimation()
@@ -174,7 +174,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         let picWidth: CGFloat = 180.0
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
         }
         topView.addSubview(self.profilePicNode.view)
         topView.depth = .Depth2
