@@ -89,6 +89,19 @@ final class RatingsViewModel: NSObject {
         }
     }
     
+    func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
+        return SignalProducer { sink, _ in
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "id = %@", ratingsId)
+        let ratings: RatingsModel = realm.objects(RatingsModel).filter(predicate).first!
+        let variance = (ratings.variance1 + ratings.variance2 + ratings.variance3 + ratings.variance4 + ratings.variance5
+                    + ratings.variance6 + ratings.variance7 + ratings.variance8 + ratings.variance9 + ratings.variance10) / 10
+        let consensus = 100 - ( 20 * variance )
+        sendNext(sink, consensus)
+        sendCompleted(sink)
+        }
+    }
+    
     func getCelScoreSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()

@@ -43,6 +43,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: gaugeHeight))
+        gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kMainShade
@@ -76,6 +77,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kDetailWidth, height: 30))
+        consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
         consensusView.tag = tag
         consensusView.depth = .Depth1
         consensusView.backgroundColor = Constants.kMainShade
@@ -83,6 +85,26 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         consensusView.addSubview(consensusLabel)
         consensusView.addSubview(infoLabel)
         return consensusView
+    }
+    
+    func longPress(gesture: UIGestureRecognizer) {
+        switch gesture.view!.tag {
+        case 1:
+            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+                .on(next: { celscore in
+                    self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Info.CelScore.text()) \(celscore)")
+                })
+                .start()
+        case 2:
+            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
+                .on(next: { consensus in
+                    self.delegate!.socialSharing("\(self.celebST.nickname)'s social consensus is \(consensus)%")
+                })
+                .start()
+        case 3: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(self.celebST.prevScore)")
+        default: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(self.celebST.prevScore)")
+        }
+ 
     }
     
     func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
