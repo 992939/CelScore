@@ -13,7 +13,7 @@ import AIRTimer
 public protocol RatingsViewDelegate {
     func enableVoteButton(positive: Bool)
     func sendFortuneCookie()
-    func socialSharing(info : String)
+    func socialSharing(message : String)
 }
 
 

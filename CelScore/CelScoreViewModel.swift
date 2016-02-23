@@ -109,14 +109,14 @@ final class CelScoreViewModel: NSObject {
         }
     }
     
-    func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork) -> SignalProducer<SLComposeViewController, NoError> {
+    func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { sink, _ in
             var socialVC: SLComposeViewController
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
-            socialVC.setInitialText("PSA")
+            socialVC.setInitialText("\(message) #PSA #PLND")
             sendNext(sink, socialVC)
             sendCompleted(sink)
         }

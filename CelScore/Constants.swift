@@ -92,7 +92,7 @@ struct Constants {
         "The devil is in the details.",
         "The time is always right to do what is right. Right?",
         "One must walk in darkness so others may see the light.",
-        "You're looking for justice, what you'll find is just us.",
+        "PLND: People Lie Numbers Don't.",
         "Only fools lend light to the sun.",
         "Thank who gives you and give who thanks you.",
         "Outward judgment often fails, inward never.",

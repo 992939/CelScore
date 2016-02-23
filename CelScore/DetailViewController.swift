@@ -22,6 +22,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     let socialButton: MenuView
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
+    var socialMessage: String = ""
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -203,7 +204,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     
     internal func handleButton(button: UIButton) {
         print("Hit Button \(button)")
-        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
+        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook, message: self.socialMessage)
             .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
             .start()
     }
@@ -273,8 +274,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
             .start()
     }
     
-    func socialSharing(info: String) {
+    func socialSharing(message: String) {
         self.socialButton.menu.open()
+        self.socialMessage = message
     }
     
     //MARK: AFDropdownNotificationDelegate
