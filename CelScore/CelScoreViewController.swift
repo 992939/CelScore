@@ -17,6 +17,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
+    var delegate: DetailSubViewDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

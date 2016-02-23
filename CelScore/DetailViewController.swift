@@ -12,7 +12,7 @@ import SMSegmentView
 import AIRTimer
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, RatingsViewDelegate, AFDropdownNotificationDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -273,7 +273,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
             })
             .start()
     }
-    
+
     func socialSharing(message: String) {
         self.socialButton.menu.open()
         self.socialMessage = message
