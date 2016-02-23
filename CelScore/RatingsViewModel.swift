@@ -113,6 +113,7 @@ final class RatingsViewModel: NSObject {
             if let totalRatings = ratings {
                 for rating in totalRatings { celScore += totalRatings[rating] as! Double }
                 if let userRatings = newRatings where userRatings.totalVotes > 0 {
+                    celScore /= 10
                     celScore *= Double(totalRatings.totalVotes)
                     for rating in userRatings { celScore += userRatings[rating] as! Double }
                     celScore = celScore / Double(totalRatings.totalVotes + 1)

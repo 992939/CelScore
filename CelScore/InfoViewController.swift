@@ -65,7 +65,7 @@ final class InfoViewController: ASViewController {
                     case Info.Height.name(): infoLabel.text = celeb.height
                     case Info.Zodiac.name(): infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                     case Info.Status.name(): infoLabel.text = celeb.status
-                    case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", celeb.prevScore)
+                    case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", celeb.prevScore) //TODO
                     case Info.Networth.name(): infoLabel.text = celeb.netWorth
                     default: infoLabel.text = "n/a"
                     }
