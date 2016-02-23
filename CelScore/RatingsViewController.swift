@@ -10,18 +10,12 @@ import AsyncDisplayKit
 import Material
 import AIRTimer
 
-public protocol DetailSubViewDelegate {
-    func enableVoteButton(positive: Bool)
-    func sendFortuneCookie()
-    func socialSharing(message: String)
-}
-
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    var delegate: DetailSubViewDelegate?
+    var delegate: DetailSubViewDelegate!
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -107,7 +101,7 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
-                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.name()) is \(value)")
+                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")
             })
             .start()
     }

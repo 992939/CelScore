@@ -10,13 +10,19 @@ import AsyncDisplayKit
 import UIKit
 import Material
 
+public protocol DetailSubViewDelegate {
+    func enableVoteButton(positive: Bool)
+    func sendFortuneCookie()
+    func socialSharing(message: String)
+}
+
 
 final class InfoViewController: ASViewController {
     
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    var delegate: DetailSubViewDelegate?
+    var delegate: DetailSubViewDelegate!
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -71,6 +77,7 @@ final class InfoViewController: ASViewController {
                     qualityView.backgroundColor = Constants.kMainShade
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(infoLabel)
+                    qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
                     self.pulseView.addSubview(qualityView)
                 }
             })
@@ -78,5 +85,37 @@ final class InfoViewController: ASViewController {
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
+    }
+    
+    func longPress(gesture: UIGestureRecognizer) {
+        let celebIndex = gesture.view!.tag - 1
+        let quality = Info(rawValue: celebIndex)!.text()
+        
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
+            .on(next: { celeb in
+                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
+                var age = 0
+                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
+                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
+                let formatter = NSDateFormatter()
+                formatter.dateStyle = NSDateFormatterStyle.LongStyle
+                
+                let infoText: String
+                switch quality {
+                case Info.FirstName.text(): infoText = celeb.firstName
+                case Info.MiddleName.text(): infoText = celeb.middleName
+                case Info.LastName.text(): infoText = celeb.lastName
+                case Info.From.text(): infoText = celeb.from
+                case Info.Birthdate.text(): infoText = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                case Info.Height.text(): infoText = celeb.height
+                case Info.Zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                case Info.Status.text(): infoText = celeb.status
+                case Info.CelScore.text(): infoText = String(format: "%.2f", celeb.prevScore)
+                case Info.Networth.text(): infoText = celeb.netWorth
+                default: infoText = "n/a"
+                }
+                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(quality) \(infoText)")
+            })
+            .start()
     }
 }

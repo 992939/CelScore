@@ -52,6 +52,21 @@ public enum Info: Int {
         case .Networth: return "Networth"
         }
     }
+    
+    public func text() -> String {
+        switch self {
+        case .FirstName: return "first name is"
+        case .MiddleName: return "middle name is"
+        case .LastName: return "last name is"
+        case .From: return "is from"
+        case .Birthdate: return "was born"
+        case .Height: return "height is"
+        case .Zodiac: return "zodiac sign is"
+        case .Status: return "relationship status is"
+        case .CelScore: return "celscore is"
+        case .Networth: return "networth is"
+        }
+    }
 }
 
 //MARK: Qualities
@@ -93,9 +108,25 @@ public enum Qualities: Int {
         case .Smarts: return "Smarts"
         case .Elegance: return "Elegance"
         case .Charisma: return "Charisma"
-        case .SexAppeal: return "Good Looks"
+        case .SexAppeal: return "Handsome"
         }
     }
+    
+    public func text() -> String {
+        switch self {
+        case .Talent: return "talent is"
+        case .Originality: return "originality is"
+        case .Authenticity: return "authenticity is"
+        case .Generosity: return "generosity is"
+        case .RoleModel: return "as a role model is"
+        case .HardWork: return "work ethic is"
+        case .Smarts: return "smarts are"
+        case .Elegance: return "elegance is"
+        case .Charisma: return "charisma is"
+        case .SexAppeal: return "handsomeness is"
+        }
+    }
+
 }
 
 //MARK: ListInfo

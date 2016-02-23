@@ -47,6 +47,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ratingsVC.delegate = self
+        self.infoVC.delegate = self
+        self.celscoreVC.delegate = self
         self.notification.notificationDelegate = self
         
         let navigationBarView: NavigationBarView = getNavigationView()
