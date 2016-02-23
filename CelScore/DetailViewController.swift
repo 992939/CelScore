@@ -161,6 +161,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
         let btn2: FabButton = FabButton()
+        btn2.tag = 1
         btn2.depth = .Depth1
         btn2.pulseColor = MaterialColor.white
         btn2.backgroundColor = Constants.kMainShade
@@ -172,6 +173,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
         let btn3: FabButton = FabButton()
+        btn2.tag = 2
         btn3.depth = .Depth1
         btn3.pulseColor = MaterialColor.white
         btn3.backgroundColor = Constants.kMainShade
@@ -205,8 +207,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     internal func handleButton(button: UIButton) {
-        print("Hit Button \(button)")
-        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook, message: self.socialMessage)
+        CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
             .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
             .start()
     }
