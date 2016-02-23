@@ -116,7 +116,7 @@ final class CelScoreViewModel: NSObject {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
-            socialVC.setInitialText("\(message) #PSA #PLND")
+            socialVC.setInitialText("#PSA: \(message) #PLND")
             sendNext(sink, socialVC)
             sendCompleted(sink)
         }

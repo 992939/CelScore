@@ -104,8 +104,13 @@ final class RatingsViewController: ASViewController {
     }
     
     func longPress(gesture: UIGestureRecognizer) {
-        print("press \(gesture.view?.tag)")
-        self.delegate!.socialSharing("bra!!!!!!!")
+        let ratingIndex = gesture.view!.tag - 1
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
+            .on(next: { ratings in
+                let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
+                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.name()) is \(value)")
+            })
+            .start()
     }
     
     func animateStarsToGold(positive positive: Bool) {
