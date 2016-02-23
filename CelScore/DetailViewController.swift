@@ -19,7 +19,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
     let infoVC: InfoViewController
     let ratingsVC: RatingsViewController
     let celscoreVC: CelScoreViewController
-    var socialButton: MenuView
+    let socialButton: MenuView
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
     
@@ -87,14 +87,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                         })
                         .start()
                 }
-            })
-            .start()
-    }
-    
-    func shareVote() {
-        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
-            .on(next: { socialVC in
-                UIApplication.sharedApplication().keyWindow!.rootViewController!.presentViewController(socialVC, animated: true, completion: nil)
             })
             .start()
     }
@@ -209,7 +201,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
         first?.setImage(image, forState: .Highlighted)
     }
     
-    internal func handleButton(button: UIButton) { print("Hit Button \(button)") }
+    internal func handleButton(button: UIButton) {
+        print("Hit Button \(button)")
+        CelScoreViewModel().shareVoteOnSignal(socialNetwork: .Facebook)
+            .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
+            .start()
+    }
     
     func setUpVoteButton() {
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
@@ -274,6 +271,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Ratin
                 AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
             })
             .start()
+    }
+    
+    func socialSharing(info: String) {
+        self.socialButton.menu.open()
     }
     
     //MARK: AFDropdownNotificationDelegate

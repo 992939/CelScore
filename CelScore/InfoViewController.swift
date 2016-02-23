@@ -24,7 +24,6 @@ final class InfoViewController: ASViewController {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.tag = 11
         self.view.hidden = true
     }
     

@@ -25,7 +25,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.tag = 10
     }
     
     //MARK: Methods

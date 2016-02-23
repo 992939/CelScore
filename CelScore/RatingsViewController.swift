@@ -13,6 +13,7 @@ import AIRTimer
 public protocol RatingsViewDelegate {
     func enableVoteButton(positive: Bool)
     func sendFortuneCookie()
+    func socialSharing(info : String)
 }
 
 
@@ -30,7 +31,6 @@ final class RatingsViewController: ASViewController {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.tag = 12
         self.view.hidden = true
     }
     
@@ -105,6 +105,7 @@ final class RatingsViewController: ASViewController {
     
     func longPress(gesture: UIGestureRecognizer) {
         print("press \(gesture.view?.tag)")
+        self.delegate!.socialSharing("bra!!!!!!!")
     }
     
     func animateStarsToGold(positive positive: Bool) {
