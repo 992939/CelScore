@@ -59,7 +59,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
-        let cardView: MaterialView = MaterialView()
+        let cardView: MaterialPulseView = MaterialPulseView()
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kDarkShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
@@ -72,6 +72,7 @@ final class CelebrityTableViewCell: ASCellNode {
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
+        self.selectionStyle = .None
     }
     
     //MARK: Methods
