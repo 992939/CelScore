@@ -155,6 +155,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func setUpSocialButton() {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
+        btn1.pulseScale = false
         btn1.backgroundColor = Constants.kDarkShade
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn1)
@@ -183,6 +184,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn3)
         
+        self.socialButton.menu.enabled = false
         self.socialButton.menu.origin = CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22)
         self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.socialButton.menu.direction = .Up
@@ -191,19 +193,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func handleMenu() {
-        let image: UIImage?
-        if self.socialButton.menu.opened {
-            self.socialButton.menu.close()
-            image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
-        } else {
-            self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
-            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
-        }
-        
+        self.socialButton.menu.close()
+        self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.backgroundColor = Constants.kDarkShade
         first?.animate(MaterialAnimation.rotate(1))
-        first?.setImage(image, forState: .Normal)
-        first?.setImage(image, forState: .Highlighted)
     }
     
     internal func handleButton(button: UIButton) {
@@ -217,6 +211,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
+        self.voteButton.enabled = false
         self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
     }
@@ -238,6 +233,19 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         case 2: removingView = self.ratingsVC.view
         default: removingView = self.celscoreVC.view
         }
+        
+        self.voteButton.enabled = false
+        self.voteButton.backgroundColor = Constants.kDarkShade
+        if index == 2 {
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+                .on(next: { userRatings in
+                    var celScore: Double = 0
+                    for rating in userRatings { celScore += userRatings[rating] as! Double }
+                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kBrightShade : Constants.kWineShade
+                    self.voteButton.enabled = true
+                })
+                .start()
+        }
     
         if index == 0 || (index == 1 && previousIndex == 2 ){
             UIView.animateWithDuration(1.0, animations: { () -> Void in
@@ -257,6 +265,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     //MARK: RatingsViewDelegate
     func enableVoteButton(positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
+            self.voteButton.enabled = true
             self.voteButton.backgroundColor = positive == true ? Constants.kBrightShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseScale = true
@@ -278,6 +287,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
 
     func socialSharing(message: String) {
+        self.socialButton.menu.enabled = true
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.backgroundColor = Constants.kBrightShade
+        first?.pulseScale = true
+        first?.pulse()
         self.socialButton.menu.open()
         self.socialMessage = message
     }
