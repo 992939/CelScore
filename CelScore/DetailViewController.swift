@@ -234,6 +234,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         default: removingView = self.celscoreVC.view
         }
         
+        self.handleMenu()
         self.voteButton.enabled = false
         self.voteButton.backgroundColor = Constants.kDarkShade
         if index == 2 {
