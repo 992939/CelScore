@@ -41,6 +41,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    override func viewWillAppear(animated: Bool) {
+        if let index = self.celebrityTableView.indexPathForSelectedRow {
+            self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
@@ -172,7 +177,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
-        self.celebrityTableView.deselectRowAtIndexPath(indexPath, animated: true)
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.modalTransitionStyle = .CrossDissolve
         self.presentViewController(detailVC, animated: true, completion: nil)
