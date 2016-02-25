@@ -94,6 +94,105 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
+    func handleMenu() {
+        self.socialButton.menu.close()
+        self.socialButton.menu.enabled = false
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.backgroundColor = Constants.kDarkShade
+        first?.animate(MaterialAnimation.rotate(1))
+    }
+    
+    func handleButton(button: UIButton) {
+        CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
+            .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
+            .start()
+    }
+    
+    //MARK: SMSegmentViewDelegate
+    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
+        let infoView: UIView
+        switch index {
+        case 1: infoView = self.infoVC.view
+        case 2: infoView = self.ratingsVC.view
+        default: infoView = self.celscoreVC.view
+        }
+        infoView.hidden = false
+        infoView.frame = Constants.kBottomViewRect
+        
+        let removingView: UIView
+        switch previousIndex {
+        case 1: removingView = self.infoVC.view
+        case 2: removingView = self.ratingsVC.view
+        default: removingView = self.celscoreVC.view
+        }
+        
+        self.handleMenu()
+        self.voteButton.enabled = false
+        self.voteButton.backgroundColor = Constants.kDarkShade
+        if index == 2 {
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+                .on(next: { userRatings in
+                    var celScore: Double = 0
+                    for rating in userRatings { celScore += userRatings[rating] as! Double }
+                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kBrightShade : Constants.kWineShade
+                    self.voteButton.enabled = true
+                })
+                .start()
+        }
+    
+        if index == 0 || (index == 1 && previousIndex == 2 ){
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView.left = infoView.width + 35
+                infoView.slideLeft()
+                }, completion: { completed -> Void in removingView.hidden = true
+            })
+        } else {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                removingView.left = -infoView.width
+                infoView.slideRight()
+                }, completion: { completed -> Void in removingView.hidden = true
+            })
+        }
+    }
+    
+    //MARK: RatingsViewDelegate
+    func enableVoteButton(positive: Bool) {
+        UIView.animateWithDuration(0.3, animations: {
+            self.voteButton.enabled = true
+            self.voteButton.backgroundColor = positive == true ? Constants.kBrightShade : Constants.kWineShade },
+            completion: { _ in MaterialAnimation.delay(2) {
+                self.voteButton.pulseScale = true
+                self.voteButton.pulse() }
+        })
+    }
+    
+    func sendFortuneCookie() {
+        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
+            .on(next: { text in
+                self.notification.titleText = "Bad Fortune Cookie"
+                self.notification.subtitleText = text
+                self.notification.image = UIImage(named: "cookie")
+                self.notification.dismissOnTap = true
+                self.notification.presentInView(self.view, withGravityAnimation: true)
+                AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
+            })
+            .start()
+    }
+
+    func socialSharing(message: String) {
+        self.socialButton.menu.enabled = true
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.backgroundColor = Constants.kBrightShade
+        first?.pulseScale = true
+        first?.pulse()
+        self.socialButton.menu.open()
+        self.socialMessage = message
+    }
+    
+    //MARK: AFDropdownNotificationDelegate
+    func dropdownNotificationBottomButtonTapped() {}
+    func dropdownNotificationTopButtonTapped() {}
+    
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {
         let backButton: FlatButton = FlatButton()
@@ -193,20 +292,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.socialButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func handleMenu() {
-        self.socialButton.menu.close()
-        self.socialButton.menu.enabled = false
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.backgroundColor = Constants.kDarkShade
-        first?.animate(MaterialAnimation.rotate(1))
-    }
-    
-    internal func handleButton(button: UIButton) {
-        CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
-            .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
-            .start()
-    }
-    
     func setUpVoteButton() {
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
@@ -216,91 +301,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
     }
-    
-    //MARK: SMSegmentViewDelegate
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        let infoView: UIView
-        switch index {
-        case 1: infoView = self.infoVC.view
-        case 2: infoView = self.ratingsVC.view
-        default: infoView = self.celscoreVC.view
-        }
-        infoView.hidden = false
-        infoView.frame = Constants.kBottomViewRect
-        
-        let removingView: UIView
-        switch previousIndex {
-        case 1: removingView = self.infoVC.view
-        case 2: removingView = self.ratingsVC.view
-        default: removingView = self.celscoreVC.view
-        }
-        
-        self.handleMenu()
-        self.voteButton.enabled = false
-        self.voteButton.backgroundColor = Constants.kDarkShade
-        if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-                .on(next: { userRatings in
-                    var celScore: Double = 0
-                    for rating in userRatings { celScore += userRatings[rating] as! Double }
-                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kBrightShade : Constants.kWineShade
-                    self.voteButton.enabled = true
-                })
-                .start()
-        }
-    
-        if index == 0 || (index == 1 && previousIndex == 2 ){
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
-                removingView.left = infoView.width + 35
-                infoView.slideLeft()
-                }, completion: { completed -> Void in removingView.hidden = true
-            })
-        } else {
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
-                removingView.left = -infoView.width
-                infoView.slideRight()
-                }, completion: { completed -> Void in removingView.hidden = true
-            })
-        }
-    }
-    
-    //MARK: RatingsViewDelegate
-    func enableVoteButton(positive: Bool) {
-        UIView.animateWithDuration(0.3, animations: {
-            self.voteButton.enabled = true
-            self.voteButton.backgroundColor = positive == true ? Constants.kBrightShade : Constants.kWineShade },
-            completion: { _ in MaterialAnimation.delay(2) {
-                self.voteButton.pulseScale = true
-                self.voteButton.pulse() }
-        })
-    }
-    
-    func sendFortuneCookie() {
-        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
-            .on(next: { text in
-                self.notification.titleText = "Bad Fortune Cookie"
-                self.notification.subtitleText = text
-                self.notification.image = UIImage(named: "cookie")
-                self.notification.dismissOnTap = true
-                self.notification.presentInView(self.view, withGravityAnimation: true)
-                AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
-            })
-            .start()
-    }
-
-    func socialSharing(message: String) {
-        self.socialButton.menu.enabled = true
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.backgroundColor = Constants.kBrightShade
-        first?.pulseScale = true
-        first?.pulse()
-        self.socialButton.menu.open()
-        self.socialMessage = message
-    }
-    
-    //MARK: AFDropdownNotificationDelegate
-    func dropdownNotificationBottomButtonTapped() {}
-    func dropdownNotificationTopButtonTapped() {}
 }
 
 

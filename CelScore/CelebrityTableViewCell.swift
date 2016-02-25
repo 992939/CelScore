@@ -66,13 +66,14 @@ final class CelebrityTableViewCell: ASCellNode {
         self.backgroundNode.backgroundColor = Constants.kMainShade
         
         super.init()
+        self.selectionStyle = .None
+        followSwitch.addTarget(self, action: "flip:", forControlEvents: .ValueChanged)
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
-        self.selectionStyle = .None
     }
     
     //MARK: Methods
@@ -99,6 +100,11 @@ final class CelebrityTableViewCell: ASCellNode {
     override func layoutDidFinish() {
         super.layoutDidFinish()
         self.setupCircleLayer()
+    }
+    
+    func flip(sender: MaterialSwitch) {
+        let following = sender.switchState == .Off ? true : false
+        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
     }
 
     func setupCircleLayer() {

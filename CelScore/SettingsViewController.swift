@@ -94,6 +94,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.sideNavigationViewController!.depth = .Depth1
     }
     
+    //MARK: UIPickerViewDelegate
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //TODO: self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
+    }
+    
     //MARK: DidLayoutSubviews Helpers
     func setupMaterialView(frame frame: CGRect) -> MaterialView {
         let materialView = MaterialView(frame: frame)
@@ -134,17 +146,5 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         materialView.addSubview(factsLabel)
         materialView.addSubview(factsBar)
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
-    }
-    
-    //MARK: UIPickerViewDelegate
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
-    
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //TODO: self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
     }
 }

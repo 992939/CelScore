@@ -29,7 +29,6 @@ final class RatingsViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             var userRatings = realm.objects(UserRatingsModel).filter(predicate).first
             if  userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
-            
             realm.beginWrite()
             let key = userRatings![ratingIndex]
             userRatings![key] = newRating
@@ -47,7 +46,6 @@ final class RatingsViewModel: NSObject {
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
             guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
-            
             realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1

@@ -15,7 +15,6 @@ import Timepiece
 final class CelebrityViewModel: NSObject {
     
     //MARK: Properties
-    enum FollowStatus: Int { case NotFollowing = 0, Following }
     enum CelebrityError: ErrorType { case NotFound }
     
     //MARK: Initializer
@@ -48,15 +47,14 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
-    func followCebritySignal(id id: String, followStatus: FollowStatus) -> SignalProducer<CelebrityModel, CelebrityError> {
+    func followCebritySignal(id id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
+            realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let object = celebrity else { sendError(sink, .NotFound); return }
-            if followStatus == .Following { object.isFollowed = true }
-            else { object.isFollowed = false }
-            //TODO: update Notification Center
+            object.isFollowed = isFollowing //TODO: update Notification Center
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()
