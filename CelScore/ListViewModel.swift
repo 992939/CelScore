@@ -35,6 +35,28 @@ final class ListViewModel: NSObject {
         }
     }
     
+    func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            var predicate = NSPredicate(format: "id = %@", listId)
+            let list = realm.objects(ListsModel).filter(predicate).first
+            guard let celebList: ListsModel = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
+            
+            predicate = NSPredicate(format: "isFollowed = true")
+            let followed = realm.objects(CelebrityModel).filter(predicate)
+            if followed.count > 0 {
+                let following = celebList.celebList.enumerate().filter({ (index: Int, id: CelebId) -> Bool in
+                    let follower = followed.enumerate().filter({ (index: Int, celebrity: CelebrityModel) -> Bool in return celebrity.id == id })
+                    return follower.count > 0
+                })
+                print("following: \(following)")
+            }
+            
+            sendNext(sink, celebList)
+            sendCompleted(sink)
+        }
+    }
+    
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
