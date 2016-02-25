@@ -57,8 +57,21 @@ final class ListViewModel: NSObject {
             })
             
             print("following: \(following.count) and not \(notFollowing.count)")
-            self.celebrityList.celebList = following
-            sendNext(sink, celebList)
+            
+            let listModel =  ListsModel()
+            for (_, celeb) in following.enumerate() {
+                let celebId = CelebId()
+                celebId.id = celeb.element.id
+                listModel.celebList.append(celebId)
+            }
+            for (_, celeb) in notFollowing.enumerate() {
+                let celebId = CelebId()
+                celebId.id = celeb.element.id
+                listModel.celebList.append(celebId)
+            }
+            
+            self.celebrityList.celebList = listModel.celebList
+            sendNext(sink, self.celebrityList)
             sendCompleted(sink)
         }
     }
