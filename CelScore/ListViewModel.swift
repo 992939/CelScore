@@ -51,7 +51,7 @@ final class ListViewModel: NSObject {
             guard following.count > 0 else { return }
             let notFollowing = celebList.celebList.enumerate().filter({ (item: (index: Int, element: CelebId)) -> Bool in
                 let isFollowing = followed.enumerate().contains({ (index: Int, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.element.id })
-                if !isFollowing { following.append(item) }
+                //if !isFollowing { following.append(item) }
                 return !isFollowing
             })
             
