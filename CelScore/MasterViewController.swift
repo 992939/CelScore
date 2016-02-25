@@ -218,16 +218,19 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
     
     func showSearchBar() {
-        self.searchBar.alpha = 0
-        self.view.addSubview(self.searchBar)
-        UIView.animateWithDuration(0.5, animations: {
-            self.searchBar.alpha = 1
-            self.searchBar.showsCancelButton = true
-            self.searchBar.tintColor = Constants.kBrightShade
-            self.searchBar.backgroundColor = Constants.kDarkShade
-            self.searchBar.barTintColor = MaterialColor.white
-            self.searchBar.frame = Constants.kSegmentedControlRect
-            }, completion: { finished in self.searchBar.becomeFirstResponder() })
+        if self.view.subviews.contains(self.searchBar) { hideSearchBar() }
+        else {
+            self.searchBar.alpha = 0
+            self.view.addSubview(self.searchBar)
+            UIView.animateWithDuration(0.5, animations: {
+                self.searchBar.alpha = 1
+                self.searchBar.showsCancelButton = true
+                self.searchBar.tintColor = Constants.kBrightShade
+                self.searchBar.backgroundColor = Constants.kDarkShade
+                self.searchBar.barTintColor = MaterialColor.white
+                self.searchBar.frame = Constants.kSegmentedControlRect
+                }, completion: { finished in self.searchBar.becomeFirstResponder() })
+        }
     }
     
     func hideSearchBar() {

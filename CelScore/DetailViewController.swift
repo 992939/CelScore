@@ -102,7 +102,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
-        print("backbutton \(backButton.description)")
         
         let nameLabel = UILabel()
         nameLabel.text = self.celebST.nickname

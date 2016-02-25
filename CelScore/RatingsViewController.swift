@@ -15,7 +15,7 @@ final class RatingsViewController: ASViewController {
     //MARK: Properties
     let celebST: CelebrityStruct
     let pulseView: MaterialView
-    var delegate: DetailSubViewDelegate!
+    var delegate: DetailSubViewDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

@@ -125,6 +125,9 @@ final class UserViewModel: NSObject {
                         dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
                         dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
                         dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                        dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
+                        dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
+                        dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                     }
                 case .UserRatings:
                     let predicate = NSPredicate(format: "isSynced = false")
