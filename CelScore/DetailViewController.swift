@@ -107,11 +107,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         nameLabel.text = self.celebST.nickname
         nameLabel.textAlignment = .Center
         nameLabel.textColor = MaterialColor.white
+        nameLabel.frame = CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30)
+        self.view.addSubview(nameLabel)
         
         let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
         navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
-        navigationBarView.titleLabel = nameLabel
         navigationBarView.backgroundColor = Constants.kMainShade
         navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
