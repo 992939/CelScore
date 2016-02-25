@@ -41,13 +41,12 @@ final class ListViewModel: NSObject {
             var predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
             guard let celebList: ListsModel = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO
-            print("updateList count: \(celebList.count)")
             predicate = NSPredicate(format: "isFollowed = true")
             let followed = realm.objects(CelebrityModel).filter(predicate)
-            print("followed count: \(followed.count)")
+
             guard followed.count > 0 else { return }
-            var following = celebList.celebList.enumerate().filter({ (_, celebId: CelebId) -> Bool in
-                return followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == celebId.id })
+            var following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                return followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
             })
             guard following.count > 0 else { return }
             let notFollowing = celebList.celebList.enumerate().filter({ (item: (index: Int, element: CelebId)) -> Bool in
