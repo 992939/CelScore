@@ -45,9 +45,8 @@ final class ListViewModel: NSObject {
             predicate = NSPredicate(format: "isFollowed = true")
             let followed = realm.objects(CelebrityModel).filter(predicate)
             if followed.count > 0 {
-                let following = celebList.celebList.enumerate().filter({ (index: Int, id: CelebId) -> Bool in
-                    let follower = followed.enumerate().filter({ (index: Int, celebrity: CelebrityModel) -> Bool in return celebrity.id == id })
-                    return follower.count > 0
+                let following = celebList.celebList.enumerate().filter({ (_, id: CelebId) -> Bool in
+                    followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == id })
                 })
                 print("following: \(following)")
             }
