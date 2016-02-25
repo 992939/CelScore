@@ -45,16 +45,12 @@ final class ListViewModel: NSObject {
             let followed = realm.objects(CelebrityModel).filter(predicate)
 
             guard followed.count > 0 else { return }
-            var following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                return followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
+            var notFollowing: [(index: Int, celebId: CelebId)] = []
+            let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                let isFollowing = followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
+                if !isFollowing { notFollowing.append(item) }
+                return isFollowing
             })
-            guard following.count > 0 else { return }
-            let notFollowing = celebList.celebList.enumerate().filter({ (item: (index: Int, element: CelebId)) -> Bool in
-                let isFollowing = followed.enumerate().contains({ (index: Int, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.element.id })
-                //if !isFollowing { following.append(item) }
-                return !isFollowing
-            })
-            
             print("following: \(following.count) and not \(notFollowing.count)")
             
             let listModel = ListsModel()
@@ -65,7 +61,7 @@ final class ListViewModel: NSObject {
             }
             for (_, celeb) in notFollowing.enumerate() {
                 let celebId = CelebId()
-                celebId.id = celeb.element.id
+                celebId.id = celeb.celebId.id
                 listModel.celebList.append(celebId)
             }
             self.celebrityList.celebList = listModel.celebList
