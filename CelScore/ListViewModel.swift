@@ -40,21 +40,24 @@ final class ListViewModel: NSObject {
             let realm = try! Realm()
             var predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList: ListsModel = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
-            
+            guard let celebList: ListsModel = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO
             predicate = NSPredicate(format: "isFollowed = true")
             let followed = realm.objects(CelebrityModel).filter(predicate)
-            if followed.count > 0 {
-                let following = celebList.celebList.enumerate().filter({ (_, celebId: CelebId) -> Bool in
-                    return followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == celebId.id })
-                })
-                let notFollowing = celebList.celebList.enumerate().filter({ (_, celebId: CelebId) -> Bool in
-                    return !followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == celebId.id })
-                })
-                print("following: \(following.count) and not \(notFollowing.count)")
-                
-            }
             
+            guard followed.count > 0 else { return }
+            var following = celebList.celebList.enumerate().filter({ (_, celebId: CelebId) -> Bool in
+                return followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == celebId.id })
+            })
+            
+            guard following.count > 0 else { return }
+            let notFollowing = celebList.celebList.enumerate().filter({ (item: (index: Int, element: CelebId)) -> Bool in
+                let isFollowing = followed.enumerate().contains({ (index: Int, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.element.id })
+                if !isFollowing { following.append(item) }
+                return !isFollowing
+            })
+            
+            print("following: \(following.count) and not \(notFollowing.count)")
+            self.celebrityList.celebList = following
             sendNext(sink, celebList)
             sendCompleted(sink)
         }
