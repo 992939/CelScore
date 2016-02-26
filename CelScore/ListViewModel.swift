@@ -51,7 +51,6 @@ final class ListViewModel: NSObject {
                 if !isFollowing { notFollowing.append(item) }
                 return isFollowing
             })
-            print("following: \(following.count) and not \(notFollowing.count)")
             
             let listModel = ListsModel()
             for (_, celeb) in following.enumerate() {

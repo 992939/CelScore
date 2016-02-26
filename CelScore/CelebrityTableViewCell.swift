@@ -52,7 +52,7 @@ final class CelebrityTableViewCell: ASCellNode {
                 cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             })
             .start()
-        let followSwitch = MaterialSwitch(size: .Small, state: .Off)
+        let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
         followSwitch.buttonOnColor = Constants.kWineShade
         followSwitch.trackOnColor = followSwitch.trackOffColor
