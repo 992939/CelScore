@@ -66,7 +66,7 @@ struct Constants {
     static let fortuneCookies: [String] = [
         "Only dead fish go with the flow.",
         "It's all in a state of mind.",
-        "Life is a tale told by an idiot.",
+        "They do not know it but they are doing it.",
         "In a closed mouth, flies do not enter.",
         "To err is human. To forgive, unlikely.",
         "To err is human. To forgive, divine.",
@@ -92,7 +92,7 @@ struct Constants {
         "The devil is in the details.",
         "The time is always right to do what is right. Right?",
         "One must walk in darkness so others may see the light.",
-        "PLND: People Lie Numbers Don't.",
+        "People Lie Numbers Don't.",
         "Only fools lend light to the sun.",
         "Thank who gives you and give who thanks you.",
         "Outward judgment often fails, inward never.",

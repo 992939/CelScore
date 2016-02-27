@@ -17,7 +17,7 @@ public class SettingsModel: Object, NSCopying {
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 1
     dynamic var publicService: Bool = false
-    dynamic var fortuneMode: Bool = true
+    dynamic var fortuneMode: Bool = false
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer

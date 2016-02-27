@@ -81,7 +81,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.name())
+                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId())
             }
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()

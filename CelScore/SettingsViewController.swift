@@ -37,19 +37,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value)
+                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value, color: MaterialColor.yellow.base)
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
-                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
+                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value, color: MaterialColor.amber.darken3)
                 self.node.addSubnode(positiveBarNode)
             })
             .start()
         SettingsViewModel().calculateSocialConsensusSignal()
             .on(next: { value in
-                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
+                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, color: MaterialColor.red.lighten1)
                 self.node.addSubnode(consensusBarNode)
             })
             .start()
@@ -115,8 +115,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         
-        //TODO: SettingsViewModel().getSettingSignal(settingType: .DefaultListId).start()
-        
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationViewController!.backdropColor = Constants.kDarkShade
         self.sideNavigationViewController!.depth = .Depth1
@@ -165,11 +163,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
-    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
+    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, color: UIColor) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
-        factsBar.progressTintColor = Constants.kBrightShade
+        factsBar.progressTintColor = color
         factsBar.setProgress(value, animated: true)
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
