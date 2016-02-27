@@ -13,11 +13,17 @@ import BEMCheckBox
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    //MARK: Property
+    let picker: UIPickerView
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init() { super.init(node: ASDisplayNode()) }
+    init() {
+        self.picker = UIPickerView()
+        super.init(node: ASDisplayNode())
+    }
     
     //MARK: Method
     override func viewDidLayoutSubviews() {
@@ -55,22 +61,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             .start()
         
         //PickerView
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
-            .on(next: { index in
-                let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-                let pickerLabel = self.setupLabel(title: "Default Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
-                let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
-                picker.selectedRowInComponent(ListInfo(rawValue: (index as! Int))!.getIndex())
-                picker.dataSource = self
-                picker.delegate = self
-                pickerView.addSubview(pickerLabel)
-                pickerView.addSubview(picker)
-                let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
-                self.node.addSubnode(pickerNode)
-            })
-            .start()
+        let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
+        let pickerLabel = self.setupLabel(title: "Default Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
+        self.picker.dataSource = self
+        self.picker.delegate = self
+        pickerView.addSubview(pickerLabel)
+        pickerView.addSubview(self.picker)
+        let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
+        self.node.addSubnode(pickerNode)
         
-        //TODO: save 1)picker choice, 2)public checkbox, 3)fortune checkbox
+        //TODO: 2)public checkbox, 3)fortune checkbox
         
         //Check Boxes
         let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + Constants.kPadding + 3 * progressNodeHeight
@@ -120,16 +121,23 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.sideNavigationViewController!.depth = .Depth1
     }
     
+    //MARK: Methods
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+            .on(next: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+            .start()
+    }
+    
     //MARK: UIPickerViewDelegate
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
-    
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white])
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //TODO: self.settingsVM.updateSettingOnLocalStoreSignal(value: row, settingType: .DefaultListId).start()
+        SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
     }
     
     //MARK: DidLayoutSubviews Helpers
