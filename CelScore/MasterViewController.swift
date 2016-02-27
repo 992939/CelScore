@@ -63,7 +63,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
-        self.view.addSubview(segmentedControl)
+        self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         //self.view.addSubview(loginButton)
         self.configuration()
@@ -81,6 +81,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId())
             }
             .on(next: { value in
@@ -90,8 +91,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             })
             .start()
     
-        CelScoreViewModel().checkNetworkStatusSignal().start()
-        SettingsViewModel().updateTodayWidgetSignal().start()
+        CelScoreViewModel().checkNetworkStatusSignal().start() //TODO
+        SettingsViewModel().updateTodayWidgetSignal().start() //TODO
     }
     
     func changeList() {
@@ -103,13 +104,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.endUpdates()
             })
             .start()
-        //ListViewModel().updateListSignal(listId: "0001").start()
+        //ListViewModel().updateListSignal(listId: "0001").start() //TODO
     }
     
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
             UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //UserViewModel().refreshFacebookTokenSignal().start()
+            //UserViewModel().refreshFacebookTokenSignal().start() //TODO
         }
     }
     
