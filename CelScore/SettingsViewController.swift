@@ -12,7 +12,7 @@ import Material
 import BEMCheckBox
 
 
-final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate {
     
     //MARK: Property
     let picker: UIPickerView
@@ -71,20 +71,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         self.node.addSubnode(pickerNode)
         
-        //TODO: 2)public checkbox, 3)fortune checkbox
-        
         //Check Boxes
         let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + Constants.kPadding + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .on(next: { status in
-                let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
             .start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .on(next: { status in
-                let fortuneCookieNode = self.setupCheckBoxNode("Fortune Cookie Mode", maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let fortuneCookieNode = self.setupCheckBoxNode("Fortune Cookie Mode", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(fortuneCookieNode)
             })
             .start()
@@ -109,7 +107,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kBrightShade, NSParagraphStyleAttributeName: paraStyle]
-        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore 1.0. Grey Ecology, 2016.", attributes: attr)
+        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!). 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
@@ -140,6 +138,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
     }
     
+    //MARK: BEMCheckBoxDelegate 
+    func didTapCheckBox(checkBox: BEMCheckBox) {
+        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .FortuneMode)).start()
+    }
+    
     //MARK: DidLayoutSubviews Helpers
     func setupMaterialView(frame frame: CGRect) -> MaterialView {
         let materialView = MaterialView(frame: frame)
@@ -156,18 +159,20 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return label
     }
     
-    func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
+    func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
         let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
-        let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
-        publicServiceBox.setOn(status, animated: true)
-        publicServiceBox.onAnimationType = .Bounce
-        publicServiceBox.offAnimationType = .Bounce
-        publicServiceBox.onCheckColor = MaterialColor.white
-        publicServiceBox.onFillColor = Constants.kBrightShade
-        publicServiceBox.onTintColor = Constants.kBrightShade
+        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
+        box.delegate = self
+        box.tag = tag
+        box.onAnimationType = .Bounce
+        box.offAnimationType = .Bounce
+        box.onCheckColor = MaterialColor.white
+        box.onFillColor = Constants.kBrightShade
+        box.onTintColor = Constants.kBrightShade
+        box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
-        materialView.addSubview(publicServiceBox)
+        materialView.addSubview(box)
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
