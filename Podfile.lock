@@ -1,8 +1,11 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9.4):
-    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9.4)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.4)
+  - AsyncDisplayKit (1.9.7):
+    - AsyncDisplayKit/PINRemoteImage (= 1.9.7)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7)
+  - AsyncDisplayKit/PINRemoteImage (1.9.7):
+    - AsyncDisplayKit/ASDealloc2MainObject
+    - PINRemoteImage/iOS (>= 2)
   - AWSAPIGateway (2.3.3):
     - AWSCore (= 2.3.3)
   - AWSCognito (2.3.3):
@@ -22,7 +25,12 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - LMGaugeView (1.0.1)
-  - Material (1.33.2)
+  - Material (1.34.5)
+  - PINCache (2.2.1)
+  - PINRemoteImage/Core (2.0.1):
+    - PINCache (>= 2.1)
+  - PINRemoteImage/iOS (2.0.1):
+    - PINRemoteImage/Core
   - ReactiveCocoa (4.0.4-alpha-1):
     - ReactiveCocoa/UI (= 4.0.4-alpha-1)
     - Result (~> 0.6-beta.1)
@@ -55,7 +63,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0)
-  - AsyncDisplayKit (~> 1.9.4)
+  - AsyncDisplayKit (~> 1.9.6)
   - AWSAPIGateway (~> 2.3)
   - AWSCognito (~> 2.3.3)
   - BEMCheckBox (~> 1.2)
@@ -64,7 +72,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
   - LMGaugeView (~> 1.0)
-  - Material (~> 1.33.2)
+  - Material (~> 1.34.5)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SMSegmentView (~> 1.1)
@@ -77,7 +85,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 0932ff6f78364130a195039ab9a1c2ff63adc665
+  AsyncDisplayKit: eb762d3bfd3896b2901909ebc24b54c97f32d43c
   AWSAPIGateway: f4c589763a0c96e93de7f7fe1cf1a27473fe56e3
   AWSCognito: 3c1209a21a7661c079a59e04f5b5dab4f794561c
   AWSCore: b12704516e21ed34cfe7547e07ab945b079d1f56
@@ -88,7 +96,9 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
-  Material: 8b6a82a8aaca9255a18ef1fa6a83ce44f800b87c
+  Material: 245e030f23cbf645490e74c621ddc7104398b34c
+  PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
+  PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c

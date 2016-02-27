@@ -247,7 +247,9 @@ public class MaterialTableViewCell: UITableViewCell {
 	}
 	
 	/**
-	:name:	initWithStyle:
+	An initializer that initializes the object.
+	- Parameter style: A UITableViewCellStyle enum.
+	- Parameter reuseIdentifier: A String identifier.
 	*/
 	public override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)

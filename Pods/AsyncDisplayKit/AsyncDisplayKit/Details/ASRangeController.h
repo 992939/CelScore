@@ -12,6 +12,8 @@
 #import <AsyncDisplayKit/ASDataController.h>
 #import <AsyncDisplayKit/ASLayoutController.h>
 
+#define RangeControllerLoggingEnabled 0
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ASRangeControllerDataSource;
@@ -26,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  * This includes cancelling those asynchronous operations as cells fall outside of the working ranges.
  */
 @interface ASRangeController : ASDealloc2MainObject <ASDataControllerDelegate>
+{
+  id<ASLayoutController>                  _layoutController;
+  __weak id<ASRangeControllerDataSource>  _dataSource;
+  __weak id<ASRangeControllerDelegate>    _delegate;
+}
 
 /**
  * Notify the range controller that the visible range has been updated.
@@ -45,6 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cellNode The cell node to be added.
  */
 - (void)configureContentView:(UIView *)contentView forCellNode:(ASCellNode *)node;
+
+- (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
+
+- (ASRangeTuningParameters)tuningParametersForRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
 
 /**
  * An object that describes the layout behavior of the ranged component (table view, collection view, etc.)
@@ -89,13 +100,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)viewportSizeForRangeController:(ASRangeController *)rangeController;
 
 /**
- * Fetch nodes at specific index paths.
- *
  * @param rangeController Sender.
  *
- * @param indexPaths Index paths.
+ * @returns the ASInterfaceState of the node that this controller is powering.  This allows nested range controllers
+ * to collaborate with one another, as an outer controller may set bits in .interfaceState such as Visible.
+ * If this controller is an orthogonally scrolling element, it waits until it is visible to preload outside the viewport.
  */
+- (ASInterfaceState)interfaceStateForRangeController:(ASRangeController *)rangeController;
+
 - (NSArray *)rangeController:(ASRangeController *)rangeController nodesAtIndexPaths:(NSArray *)indexPaths;
+
+- (ASDisplayNode *)rangeController:(ASRangeController *)rangeController nodeAtIndexPath:(NSIndexPath *)indexPath;
+
+- (NSArray<NSArray <ASCellNode *> *> *)completedNodes;
 
 @end
 

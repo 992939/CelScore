@@ -47,39 +47,43 @@ final class InfoViewController: ASViewController {
                 let formatter = NSDateFormatter()
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
-                for (index, quality) in Info.getAll().enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
-                    qualityView.tag = index+1
-                    let qualityLabel = UILabel()
-                    qualityLabel.textColor = MaterialColor.white
-                    qualityLabel.text = quality
-                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
-                    let infoLabel = UILabel()
-                    
-                    switch quality {
-                    case Info.FirstName.name(): infoLabel.text = celeb.firstName
-                    case Info.MiddleName.name(): infoLabel.text = celeb.middleName
-                    case Info.LastName.name(): infoLabel.text = celeb.lastName
-                    case Info.From.name(): infoLabel.text = celeb.from
-                    case Info.Birthdate.name(): infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
-                    case Info.Height.name(): infoLabel.text = celeb.height
-                    case Info.Zodiac.name(): infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                    case Info.Status.name(): infoLabel.text = celeb.status
-                    case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", celeb.prevScore) //TODO
-                    case Info.Networth.name(): infoLabel.text = celeb.netWorth
-                    default: infoLabel.text = "n/a"
-                    }
-                    
-                    infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25)
-                    infoLabel.textColor = MaterialColor.white
-                    infoLabel.textAlignment = .Right
-                    qualityView.depth = .Depth1
-                    qualityView.backgroundColor = Constants.kMainShade
-                    qualityView.addSubview(qualityLabel)
-                    qualityView.addSubview(infoLabel)
-                    qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
-                    self.pulseView.addSubview(qualityView)
-                }
+                RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+                    .on(next: { score in
+                        for (index, quality) in Info.getAll().enumerate() {
+                            let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                            qualityView.tag = index+1
+                            let qualityLabel = UILabel()
+                            qualityLabel.textColor = MaterialColor.white
+                            qualityLabel.text = quality
+                            qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
+                            let infoLabel = UILabel()
+                            
+                            switch quality {
+                            case Info.FirstName.name(): infoLabel.text = celeb.firstName
+                            case Info.MiddleName.name(): infoLabel.text = celeb.middleName
+                            case Info.LastName.name(): infoLabel.text = celeb.lastName
+                            case Info.From.name(): infoLabel.text = celeb.from
+                            case Info.Birthdate.name(): infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                            case Info.Height.name(): infoLabel.text = celeb.height
+                            case Info.Zodiac.name(): infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                            case Info.Status.name(): infoLabel.text = celeb.status
+                            case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", score)
+                            case Info.Networth.name(): infoLabel.text = celeb.netWorth
+                            default: infoLabel.text = "n/a"
+                            }
+                            
+                            infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25)
+                            infoLabel.textColor = MaterialColor.white
+                            infoLabel.textAlignment = .Right
+                            qualityView.depth = .Depth1
+                            qualityView.backgroundColor = Constants.kMainShade
+                            qualityView.addSubview(qualityLabel)
+                            qualityView.addSubview(infoLabel)
+                            qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
+                            self.pulseView.addSubview(qualityView)
+                        }
+                    })
+                    .start()
             })
             .start()
         

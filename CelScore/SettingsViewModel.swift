@@ -14,7 +14,7 @@ import ReactiveCocoa
 final class SettingsViewModel: NSObject {
 
     //MARK: Properties
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, OutOfBoundsVariance }
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
@@ -49,6 +49,23 @@ final class SettingsViewModel: NSObject {
             guard averageVariance > 0 && averageVariance < 5  else { sendError(sink, .OutOfBoundsVariance); return }
             let consensus: Double = 100 - ( 20 * averageVariance )
             sendNext(sink, consensus)
+            sendCompleted(sink)
+        }
+    }
+    
+    func calculatePositiveVoteSignal() -> SignalProducer<Double, SettingsError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let ratings = realm.objects(UserRatingsModel)
+            guard ratings.count > 0 else { sendError(sink, .NoUserRatingsModel); return }
+            
+            let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
+                let celscore = (ratingsModel.rating1 + ratingsModel.rating2 + ratingsModel.rating3 + ratingsModel.rating4 + ratingsModel.rating5
+                + ratingsModel.rating6 + ratingsModel.rating7 + ratingsModel.rating8 + ratingsModel.rating9 + ratingsModel.rating10) / 10
+                return celscore >= 3 ? true : false
+            })
+            let positive: Double = Double(positiveRatings.count * 100 / ratings.count)
+            sendNext(sink, positive)
             sendCompleted(sink)
         }
     }

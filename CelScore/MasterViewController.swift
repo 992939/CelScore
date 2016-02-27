@@ -103,7 +103,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.endUpdates()
             })
             .start()
-        ListViewModel().updateListSignal(listId: "0001").start()
+        //ListViewModel().updateListSignal(listId: "0001").start()
     }
     
     func onTokenUpdate(notification: NSNotification) {

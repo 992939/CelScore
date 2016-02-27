@@ -9,6 +9,7 @@
 #import "ASFlowLayoutController.h"
 #import "ASTableViewInternal.h"
 #import "ASDisplayNode+Subclasses.h"
+#import "ASRangeController.h"
 
 @interface _ASTablePendingState : NSObject
 @property (weak, nonatomic) id <ASTableDelegate>   delegate;
@@ -30,8 +31,10 @@
 
 - (instancetype)_initWithTableView:(ASTableView *)tableView
 {
-  if (self = [super initWithViewBlock:^UIView *{ return tableView; }]) {
-    __unused ASTableView *tableView = [self view];
+  // Avoid a retain cycle.  In this case, the ASTableView is creating us, and strongly retains us.
+  ASTableView * __weak weakTableView = tableView;
+  if (self = [super initWithViewBlock:^UIView *{ return weakTableView; }]) {
+    __unused __weak ASTableView *view = [self view];
     return self;
   }
   return nil;
@@ -63,11 +66,12 @@
 {
   [super didLoad];
   
+  ASTableView *view = self.view;
+  view.tableNode    = self;
+  
   if (_pendingState) {
     _ASTablePendingState *pendingState = _pendingState;
-    self.pendingState = nil;
-    
-    ASTableView *view    = self.view;
+    self.pendingState    = nil;
     view.asyncDelegate   = pendingState.delegate;
     view.asyncDataSource = pendingState.dataSource;
   }
@@ -124,6 +128,14 @@
 {
   return (ASTableView *)[super view];
 }
+
+#if RangeControllerLoggingEnabled
+- (void)visibilityDidChange:(BOOL)isVisible
+{
+  [super visibilityDidChange:isVisible];
+  NSLog(@"%@ - visible: %d", self, isVisible);
+}
+#endif
 
 - (void)clearContents
 {

@@ -55,7 +55,6 @@ final class CelebrityViewModel: NSObject {
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let object = celebrity else { sendError(sink, .NotFound); return }
             object.isFollowed = isFollowing //TODO: update Notification Center
-            print("object isFollowed \(object.isFollowed)")
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()

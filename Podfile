@@ -4,7 +4,7 @@ platform :ios, '8.0'
 
 target 'CelScore' do
     pod 'ReactiveCocoa', '4.0.4-alpha-1'
-    pod 'AsyncDisplayKit', '~> 1.9.4'
+    pod 'AsyncDisplayKit', '~> 1.9.6'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'RealmSwift', '~> 0.97.0'
     pod 'AWSCognito', '~> 2.3.3'
@@ -18,7 +18,7 @@ target 'CelScore' do
     pod 'AIRTimer', '~> 1.0'
     pod 'Timepiece', '~> 0.4'
     pod 'YLProgressBar', '~> 3.8'
-    pod 'Material', '~> 1.33.2'
+    pod 'Material', '~> 1.34.5'
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'LMGaugeView', '~> 1.0'
