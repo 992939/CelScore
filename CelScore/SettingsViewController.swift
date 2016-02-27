@@ -31,44 +31,54 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoImageView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         self.node.addSubnode(logoNode)
-        
-        let progressNodeHeight: CGFloat = 60.0
 
         //Progress Bars
+        let progressNodeHeight: CGFloat = 60.0
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding)
+                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value)
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
         
         SettingsViewModel().calculatePositiveVoteSignal()
-        .on(next: { value in
-            let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight))
-            self.node.addSubnode(positiveBarNode)
-        })
-        .start()
+            .on(next: { value in
+                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
+                self.node.addSubnode(positiveBarNode)
+            })
+            .start()
         
         SettingsViewModel().calculateSocialConsensusSignal()
             .on(next: { value in
-                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight))
+                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
                 self.node.addSubnode(consensusBarNode)
             })
             .start()
         
         //PickerView
-        let pickerView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel = setupLabel(title: "Default Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
-        let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
-        pickerView.addSubview(pickerLabel)
-        pickerView.addSubview(picker)
-        let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
-        picker.dataSource = self
-        picker.delegate = self
-        self.node.addSubnode(pickerNode)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+            .on(next: { index in
+                let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
+                let pickerLabel = self.setupLabel(title: "Default Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+                let picker = UIPickerView(frame: CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100))
+                picker.selectedRowInComponent(ListInfo(rawValue: (index as! Int))!.getIndex())
+                picker.dataSource = self
+                picker.delegate = self
+                pickerView.addSubview(pickerLabel)
+                pickerView.addSubview(picker)
+                let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
+                self.node.addSubnode(pickerNode)
+            })
+            .start()
+        
+        //TODO: save picker choice
         
         //Check Boxes
-        let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: pickerView.bottom + Constants.kPadding)
+        let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + Constants.kPadding + 3 * progressNodeHeight
+        
+        
+        
+        let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: publicNodeHeight)
         let fortuneCookieNode = setupCheckBoxNode("Fortune Cookie Mode", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
         
         //Login Status

@@ -126,7 +126,6 @@ public enum Qualities: Int {
         case .SexAppeal: return "handsomeness is"
         }
     }
-
 }
 
 //MARK: ListInfo
@@ -178,6 +177,18 @@ public enum ListInfo : Int {
         case .Music: return "0003"
         case .Television: return "0005"
         case .Candidates: return "0006"
+        }
+    }
+    
+    public func getIndex() -> Int {
+        switch self {
+        case .PublicOpinion: return 0
+        case .HipHop: return 1
+        case .Hollywood: return 2
+        case .Sports: return 3
+        case .Music: return 4
+        case .Television: return 5
+        case .Candidates: return 6
         }
     }
 }

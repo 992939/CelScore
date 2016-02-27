@@ -15,27 +15,25 @@ final class SettingsViewModel: NSObject {
 
     //MARK: Properties
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListId = 0, LoginTypeIndex }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode}
     enum LoginType: Int { case None = 1, Facebook, Twitter }
     
     //MARK: Initializer
     override init() { super.init() }
     
     //MARK: Methods
-    func calculateUserRatingsPercentageSignal() -> SignalProducer<Double, SettingsError> {
+    func calculateUserRatingsPercentageSignal() -> SignalProducer<CGFloat, SettingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
-            
-            let percentage: Double = Double(userRatingsCount/celebrityCount) * 100
-            sendNext(sink, percentage)
+            sendNext(sink, CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
             sendCompleted(sink)
         }
     }
     
-    func calculateSocialConsensusSignal() -> SignalProducer<Double, SettingsError> {
+    func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, SettingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
@@ -47,13 +45,13 @@ final class SettingsViewModel: NSObject {
             }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
             guard averageVariance > 0 && averageVariance < 5  else { sendError(sink, .OutOfBoundsVariance); return }
-            let consensus: Double = 100 - ( 20 * averageVariance )
-            sendNext(sink, consensus)
+            let consensus: Double = 1 - Double(0.2 * averageVariance)
+            sendNext(sink, CGFloat(consensus))
             sendCompleted(sink)
         }
     }
     
-    func calculatePositiveVoteSignal() -> SignalProducer<Double, SettingsError> {
+    func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, SettingsError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
@@ -64,8 +62,7 @@ final class SettingsViewModel: NSObject {
                 + ratingsModel.rating6 + ratingsModel.rating7 + ratingsModel.rating8 + ratingsModel.rating9 + ratingsModel.rating10) / 10
                 return celscore >= 3 ? true : false
             })
-            let positive: Double = Double(positiveRatings.count * 100 / ratings.count)
-            sendNext(sink, positive)
+            sendNext(sink, CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             sendCompleted(sink)
         }
     }
@@ -76,13 +73,17 @@ final class SettingsViewModel: NSObject {
             let model: SettingsModel? = realm.objects(SettingsModel).first
             if let settings = model {
                 switch settingType {
-                case .DefaultListId: sendNext(sink, settings.defaultListId)
+                case .DefaultListIndex: sendNext(sink, settings.defaultListIndex)
                 case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
+                case .PublicService: sendNext(sink, settings.publicService)
+                case .FortuneMode: sendNext(sink, settings.fortuneMode)
                 }
             } else {
                 switch settingType {
-                case .DefaultListId: sendNext(sink, SettingsModel().defaultListId)
+                case .DefaultListIndex: sendNext(sink, SettingsModel().defaultListIndex)
                 case .LoginTypeIndex: sendNext(sink, SettingsModel().loginTypeIndex)
+                case .PublicService: sendNext(sink, SettingsModel().publicService)
+                case .FortuneMode: sendNext(sink, SettingsModel().fortuneMode)
                 }
             }
             sendCompleted(sink)
@@ -99,8 +100,10 @@ final class SettingsViewModel: NSObject {
             let settings: SettingsModel = model!
             
             switch settingType {
-            case .DefaultListId: settings.defaultListId = value as! String
+            case .DefaultListIndex: settings.defaultListIndex = value as! Int
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
+            case .PublicService: settings.publicService = value as! Bool
+            case .FortuneMode: settings.fortuneMode = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)
@@ -115,7 +118,7 @@ final class SettingsViewModel: NSObject {
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "isFollowed = false") //TODO: true
+            let predicate = NSPredicate(format: "isFollowed = true")
             let celebList = realm.objects(CelebrityModel).filter(predicate)
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             for (index, celeb) in celebList.enumerate() {
