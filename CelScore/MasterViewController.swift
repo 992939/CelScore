@@ -78,10 +78,10 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func openSettings() { self.sideNavigationViewController!.openLeftView() }
     
     func configuration() {
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListId)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return self.celebrityListVM.getListSignal(listId: value as! String)
+                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.name())
             }
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()

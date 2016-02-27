@@ -26,7 +26,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 4,
             migrationBlock: { migration, oldSchemaVersion in
                 if (oldSchemaVersion < 2) {}
                 if oldSchemaVersion < 3 {
@@ -34,6 +34,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["from"] = ""
                         newObject!["backgroundPic"] = ""
                         newObject!["backgroundColor"] = ""
+                    }
+                }
+                if oldSchemaVersion < 4 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["defaultListIndex"] = ""
+                        newObject!["fortuneMode"] = ""
+                        newObject!["publicService"] = ""
                     }
                 }
         })

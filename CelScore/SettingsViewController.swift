@@ -34,20 +34,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
 
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
+        
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
                 let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value)
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
-        
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
                 let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
             })
             .start()
-        
         SettingsViewModel().calculateSocialConsensusSignal()
             .on(next: { value in
                 let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
@@ -71,18 +70,26 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             })
             .start()
         
-        //TODO: save picker choice
+        //TODO: save 1)picker choice, 2)public checkbox, 3)fortune checkbox
         
         //Check Boxes
         let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + Constants.kPadding + 3 * progressNodeHeight
         
-        
-        
-        let publicServiceNode = setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: publicNodeHeight)
-        let fortuneCookieNode = setupCheckBoxNode("Fortune Cookie Mode", maxWidth: maxWidth, yPosition: publicServiceNode.view.bottom + Constants.kPadding)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+            .on(next: { status in
+                let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                self.node.addSubnode(publicServiceNode)
+            })
+            .start()
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+            .on(next: { status in
+                let fortuneCookieNode = self.setupCheckBoxNode("Fortune Cookie Mode", maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                self.node.addSubnode(fortuneCookieNode)
+            })
+            .start()
         
         //Login Status
-        let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: fortuneCookieNode.view.bottom + Constants.kPadding, width: maxWidth, height: 60))
+        let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 80 + Constants.kPadding, width: maxWidth, height: 60))
         let loginLabel = setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 100, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         let userLabel = setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
@@ -105,8 +112,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
-        self.node.addSubnode(publicServiceNode)
-        self.node.addSubnode(fortuneCookieNode)
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         
@@ -145,10 +150,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return label
     }
     
-    func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat) -> ASDisplayNode {
+    func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
         let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
         let publicServiceBox = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
+        publicServiceBox.setOn(status, animated: true)
         publicServiceBox.onAnimationType = .Bounce
         publicServiceBox.offAnimationType = .Bounce
         publicServiceBox.onCheckColor = MaterialColor.white

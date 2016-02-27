@@ -147,8 +147,10 @@ final class UserViewModel: NSObject {
                     let model: SettingsModel? = realm.objects(SettingsModel).first
                     guard let settings = model else { sendError(sink, NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
                     if settings.isSynced == false {
-                        dataset.setString(settings.defaultListId, forKey: "defaultListId")
+                        dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                         dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
+                        dataset.setString(String(settings.publicService), forKey: "publicService")
+                        dataset.setString(String(settings.fortuneMode), forKey: "fortuneMode")
                     } else { sendCompleted(sink) }
                 }
                 
@@ -193,9 +195,10 @@ final class UserViewModel: NSObject {
                     var model = realm.objects(SettingsModel).first
                     if model == nil { model = SettingsModel() }
                     let settings: SettingsModel = model!
-                    
-                    settings.defaultListId = dico["defaultListId"] as! String
+                    settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
+                    settings.publicService = (dico["publicService"] as! NSString).boolValue
+                    settings.fortuneMode = (dico["fortuneMode"] as! NSString).boolValue
                     settings.isSynced = true
                     realm.add(settings, update: true)
                 }
