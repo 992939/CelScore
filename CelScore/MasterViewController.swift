@@ -90,9 +90,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.endUpdates()
             })
             .start()
-    
         CelScoreViewModel().checkNetworkStatusSignal().start() //TODO
-        SettingsViewModel().updateTodayWidgetSignal().start() //TODO
     }
     
     func changeList() {
@@ -104,7 +102,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.endUpdates()
             })
             .start()
-        //ListViewModel().updateListSignal(listId: "0001").start() //TODO
+        //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
     func onTokenUpdate(notification: NSNotification) {

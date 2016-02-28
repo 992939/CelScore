@@ -114,20 +114,21 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    //TODO: call in the background every 5 min
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = true")
             let celebList = realm.objects(CelebrityModel).filter(predicate)
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
-            for (index, celeb) in celebList.enumerate() {
-                let idPredicate = NSPredicate(format: "id = %@", celeb.id)
-                let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel //TODO: dangerous assumption?
-                let totalRatings: Double = ratings.map{ratings[$0] as! Double }.reduce(0, combine: { $0 + $1 })
-                let currentScore: Double = totalRatings/10
-                let today = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": currentScore]
-                userDefaults!.setObject(today, forKey: String(index))
+            if celebList.count > 0 {
+                for (index, celeb) in celebList.enumerate() {
+                    let idPredicate = NSPredicate(format: "id = %@", celeb.id)
+                    let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel
+                    let totalRatings: Double = ratings.map{ratings[$0] as! Double }.reduce(0, combine: { $0 + $1 })
+                    let currentScore: Double = totalRatings/10
+                    let today = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": currentScore]
+                    userDefaults!.setObject(today, forKey: String(index))
+                }
             }
             userDefaults!.setInteger(celebList.count, forKey: "count")
             sendNext(sink, celebList)
