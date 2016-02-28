@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 RichApps. All rights reserved.
 //
 
-import Foundation
-import ReactiveCocoa
+import UIKit
 
 
 public extension UIView {
@@ -49,7 +48,7 @@ public extension UIButton {
 public extension NSDate {
 
     //MARK: Methods
-    public func zodiacSign()-> Zodiac {
+    public func zodiacSign() -> Zodiac {
         let dates = ["March 20", "April 19", "May 20", "June 20", "July 22", "August 22", "September 23", "October 22", "November 21", "December 21", "January 19", "February 18"]
         
         for i in 0...11 {
@@ -119,6 +118,13 @@ public extension NSDate {
         f.dateFormat = "MMM dd yyyy"
         let d = f.dateFromString(string)
         self.init(timeInterval: 0, sinceDate:d!)
+    }
+}
+
+public extension Double {
+    func roundToPlaces(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return round(self * divisor) / divisor
     }
 }
 

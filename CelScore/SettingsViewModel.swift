@@ -124,9 +124,7 @@ final class SettingsViewModel: NSObject {
                 for (index, celeb) in celebList.enumerate() {
                     let idPredicate = NSPredicate(format: "id = %@", celeb.id)
                     let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel
-                    let totalRatings: Double = ratings.map{ratings[$0] as! Double }.reduce(0, combine: { $0 + $1 })
-                    let currentScore: Double = totalRatings/10
-                    let today = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": currentScore]
+                    let today = ["nickName": celeb.nickName, "image": celeb.picture2x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
                     userDefaults!.setObject(today, forKey: String(index))
                 }
             }

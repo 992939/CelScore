@@ -91,3 +91,10 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     func updateExpandButtonTitle() { expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal) }
     func toggleExpand() { expanded = !expanded; updateExpandButtonTitle(); updatePreferredContentSize(); tableView.reloadData() }
 }
+
+public extension Double {
+    func roundToPlaces(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return round(self * divisor) / divisor
+    }
+}

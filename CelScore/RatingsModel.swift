@@ -68,7 +68,12 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         self.isSynced = true
     }
     
-    //MARK: Indexable Method
+    //MARK: Methods
+    public func getCelScore() -> Double {
+        let score: Double = self.map{ self[$0] as! Double }.reduce(0, combine: { $0 + $1 })
+        return (score/10).roundToPlaces(2)
+    }
+    
     public subscript(i: Int) -> String {
         switch i {
         case 0: return ("rating1")
@@ -85,7 +90,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         }
     }
     
-    //MARK: SequenceType Method
     public func generate() -> Generator {
         var i = 0
         return anyGenerator {
@@ -105,7 +109,6 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         }
     }
     
-    //MARK: NSCopying Method
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         for ratings in self.generate() { copy[ratings] = self[ratings] }

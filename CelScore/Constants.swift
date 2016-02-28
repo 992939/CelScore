@@ -9,7 +9,6 @@
 import Foundation
 import Material
 
-
 struct Constants {
     
     //Universal
