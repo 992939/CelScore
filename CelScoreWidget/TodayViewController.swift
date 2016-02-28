@@ -28,11 +28,12 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
         self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
-        let rowsNumber = self.userDefaults.integerForKey("count") - 1
+        let rowsNumber = self.userDefaults.integerForKey("count")
 
         super.init(coder: aDecoder)!
         
-        for index in 0...rowsNumber {
+        guard rowsNumber > 0 else { return }
+        for index in 0...(rowsNumber-1) {
             let x = self.userDefaults.objectForKey(String(index))!
             self.items.append(x)
         }
@@ -47,7 +48,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         updateExpandButtonTitle()
         updatePreferredContentSize()
-        
         AIRTimer.every(5) { timer in self.userDefaults.synchronize() }
     }
     
