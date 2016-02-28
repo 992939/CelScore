@@ -10,6 +10,8 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 import AIRTimer
+import SDWebImage
+
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
@@ -79,6 +81,13 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         let celebDictionary = items[indexPath.row]
         cell.nickNameLabel.text = celebDictionary["nickName"] as? String
         cell.celscoreLabel.text = String(celebDictionary["currentScore"]! as! Double)
+        let change: Double = (celebDictionary["currentScore"] as! Double) - (celebDictionary["prevScore"] as! Double)
+        cell.changeLabel.text = String(change)
+        cell.profileImage.sd_setImageWithURL(NSURL(string: (celebDictionary["image"] as! String)))
+        cell.profileImage.layer.cornerRadius = 20
+        cell.profileImage.layer.borderWidth = 2
+        cell.profileImage.layer.borderColor = UIColor.whiteColor().CGColor
+        cell.profileImage.clipsToBounds = true
         return cell
     }
     

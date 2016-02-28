@@ -817,6 +817,26 @@
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"AsyncDisplayKit\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"WebASDKImageManager\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -839,6 +859,26 @@
 				INFOPLIST_FILE = CelScoreWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"AsyncDisplayKit\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"WebASDKImageManager\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
