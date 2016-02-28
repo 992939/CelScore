@@ -24,7 +24,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         set (newExpanded) { self.userDefaults.setBool(newExpanded, forKey: "expanded"); self.userDefaults.synchronize() }
     }
     
-    
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
         self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
@@ -38,7 +37,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
             self.items.append(x)
         }
     }
-    
     
     //MARK: Methods
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
@@ -68,7 +66,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
-
     
     // MARK: Table view data source
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
@@ -81,7 +78,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         let cell = tableView.dequeueReusableCellWithIdentifier("CelebItem", forIndexPath: indexPath) as! TodayTableViewCell
         let celebDictionary = items[indexPath.row]
         cell.nickNameLabel.text = celebDictionary["nickName"] as? String
-        cell.celscoreLabel.text = "3.0"
+        cell.celscoreLabel.text = String(celebDictionary["currentScore"]! as! Double)
         return cell
     }
     
