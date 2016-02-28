@@ -43,19 +43,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value, colorIndex: 0)
+                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value)
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
-                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value, colorIndex: 1)
+                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
             })
             .start()
         SettingsViewModel().calculateSocialConsensusSignal()
             .on(next: { value in
-                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, colorIndex: 2)
+                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
                 self.node.addSubnode(consensusBarNode)
             })
             .start()
@@ -95,7 +95,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.setTitleColor(Constants.kBrightShade, forState: .Normal)
+        logoutButton.setTitleColor(MaterialColor.teal.lighten1, forState: .Normal)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
@@ -168,23 +168,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kBrightShade
-        box.onTintColor = Constants.kBrightShade
+        box.onFillColor = MaterialColor.teal.lighten1
+        box.onTintColor = MaterialColor.teal.lighten1
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
         materialView.addSubview(box)
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
-    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, colorIndex: Int) -> ASDisplayNode {
+    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
-        switch colorIndex {
-        case 0: factsBar.progressTintColors = [MaterialColor.lightGreen.lighten2, MaterialColor.teal.lighten1]
-        case 1: factsBar.progressTintColors = [MaterialColor.pink.lighten2, MaterialColor.purple.lighten2]
-        default: factsBar.progressTintColors = [MaterialColor.yellow.base, MaterialColor.amber.darken3]
-        }
+        factsBar.progressTintColors = [MaterialColor.lightGreen.lighten2, MaterialColor.teal.lighten1]
         factsBar.setProgress(value, animated: true)
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
