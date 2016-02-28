@@ -103,7 +103,7 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func flip(sender: MaterialSwitch) {
-        let following = sender.switchState == .Off ? true : false
+        let following = sender.switchState == .Off ? false : true
         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
     }
 
@@ -122,7 +122,7 @@ final class CelebrityTableViewCell: ASCellNode {
         pathLayer.strokeEnd = 1.0
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = 3//Constants.kAnimationInterval
+        pathAnimation.duration = 3
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
