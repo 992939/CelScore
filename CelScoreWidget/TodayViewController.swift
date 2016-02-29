@@ -56,6 +56,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+        print("completion: \(completionHandler)")
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -84,7 +85,12 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         var percent: Double = (celebDictionary["currentScore"] as! Double)/(celebDictionary["prevScore"] as! Double)
         percent = (percent * 100) - 100
         cell.changeLabel.text = (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "% "
-        cell.changeLabel.backgroundColor = percent < 0 ? UIColor.purpleColor() : UIColor.greenColor()
+        let changeBackView = UIView(frame:cell.changeLabel.frame)
+        changeBackView.backgroundColor = percent < 0 ? UIColor.redColor() : UIColor.greenColor()
+        changeBackView.frame.origin.x += 7
+        changeBackView.layer.cornerRadius = 4
+        cell.addSubview(changeBackView)
+        cell.sendSubviewToBack(changeBackView)
         cell.profileImage.sd_setImageWithURL(NSURL(string: (celebDictionary["image"] as! String)))
         cell.profileImage.layer.cornerRadius = 19
         cell.profileImage.layer.borderWidth = 2
