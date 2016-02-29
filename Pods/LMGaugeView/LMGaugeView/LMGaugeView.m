@@ -30,10 +30,10 @@
 #define kDefaultLimitDotRadius                  2
 #define kDefaultLimitDotColor                   [UIColor redColor]
 
-#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:100]
+#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:150]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
-#define kDefaultUnitOfMeasurement               @"c-score"
+#define kDefaultUnitOfMeasurement               @"km/h"
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:16]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
@@ -250,7 +250,7 @@
         self.valueLabel = [[UILabel alloc] init];
         self.valueLabel.backgroundColor = [UIColor clearColor];
         self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        self.valueLabel.text = [NSString stringWithFormat:@"%.02f", self.value];
+        self.valueLabel.text = [NSString stringWithFormat:@"%0.f", self.value];
         self.valueLabel.font = self.valueFont;
         self.valueLabel.adjustsFontSizeToFitWidth = YES;
         self.valueLabel.minimumScaleFactor = 10/self.valueLabel.font.pointSize;
@@ -315,7 +315,7 @@
     /*!
      *  Set text for value label
      */
-    self.valueLabel.text = [NSString stringWithFormat:@"%.02f", _value];
+    self.valueLabel.text = [NSString stringWithFormat:@"%0.f", _value];
 
     /*!
      *  Trigger the stoke animation of ring layer.

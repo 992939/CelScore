@@ -148,6 +148,19 @@ public class TextField : UITextField {
 		}
 	}
 	
+	/// A property that accesses the backing layer's shadowPath.
+	public var shadowPath: CGPath? {
+		get {
+			return layer.shadowPath
+		}
+		set(value) {
+			layer.shadowPath = value
+		}
+	}
+	
+	/// Enables automatic shadowPath sizing.
+	public var shadowPathAutoSizeEnabled: Bool = false
+	
 	/**
 	A property that sets the shadowOffset, shadowOpacity, and shadowRadius
 	for the backing layer. This is the preferred method of setting depth
@@ -159,6 +172,7 @@ public class TextField : UITextField {
 			shadowOffset = value.offset
 			shadowOpacity = value.opacity
 			shadowRadius = value.radius
+			layoutShadowPath()
 		}
 	}
 	
@@ -171,17 +185,21 @@ public class TextField : UITextField {
 		didSet {
 			if let v: MaterialRadius = cornerRadiusPreset {
 				cornerRadius = MaterialRadiusToValue(v)
-				if .Circle == shape {
-					shape = .None
-				}
 			}
 		}
 	}
 	
 	/// A property that accesses the layer.cornerRadius.
-	public var cornerRadius: CGFloat = 0 {
-		didSet {
-			layer.cornerRadius = cornerRadius
+	public var cornerRadius: CGFloat {
+		get {
+			return layer.cornerRadius
+		}
+		set(value) {
+			layer.cornerRadius = value
+			layoutShadowPath()
+			if .Circle == shape {
+				shape = .None
+			}
 		}
 	}
 	
@@ -198,6 +216,7 @@ public class TextField : UITextField {
 				} else {
 					frame.size.height = width
 				}
+				layoutShadowPath()
 			}
 		}
 	}
@@ -208,18 +227,24 @@ public class TextField : UITextField {
 			borderWidth = MaterialBorderToValue(borderWidthPreset)
 		}
 	}
-
+	
 	/// A property that accesses the layer.borderWith.
-	public var borderWidth: CGFloat = 0 {
-		didSet {
-			layer.borderWidth = borderWidth
+	public var borderWidth: CGFloat {
+		get {
+			return layer.borderWidth
+		}
+		set(value) {
+			layer.borderWidth = value
 		}
 	}
 	
 	/// A property that accesses the layer.borderColor property.
 	public var borderColor: UIColor? {
-		didSet {
-			layer.borderColor = borderColor?.CGColor
+		get {
+			return nil == layer.borderColor ? nil : UIColor(CGColor: layer.borderColor!)
+		}
+		set(value) {
+			layer.borderColor = value?.CGColor
 		}
 	}
 	
@@ -413,6 +438,7 @@ public class TextField : UITextField {
 		if self.layer == layer {
 			bottomBorderLayer.frame = CGRectMake(0, bounds.height + bottomBorderLayerDistance, bounds.width, 1)
 			layoutShape()
+			layoutShadowPath()
 		}
 	}
 	
@@ -490,7 +516,6 @@ public class TextField : UITextField {
 	/// Clears the textField text.
 	internal func handleClearButton() {
 		text = ""
-		sendActionsForControlEvents(.ValueChanged)
 	}
 	
 	/// Ahdnler when text value changed.
@@ -538,6 +563,19 @@ public class TextField : UITextField {
 	internal func layoutShape() {
 		if .Circle == shape {
 			layer.cornerRadius = width / 2
+		}
+	}
+	
+	/// Sets the shadow path.
+	internal func layoutShadowPath() {
+		if shadowPathAutoSizeEnabled {
+			if .None == self.depth {
+				layer.shadowPath = nil
+			} else if nil == layer.shadowPath {
+				layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
+			} else {
+				animate(MaterialAnimation.shadowPath(UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath, duration: 0))
+			}
 		}
 	}
 	

@@ -1,11 +1,12 @@
 # Uncomment this line to define a global platform for your project
-use_frameworks!  
+use_frameworks!
 platform :ios, '8.0'
 
 target 'CelScore' do
     pod 'ReactiveCocoa', '4.0.4-alpha-1'
     pod 'AsyncDisplayKit', '~> 1.9.6'
     pod 'WebASDKImageManager', '~> 1.0'
+    pod 'SDWebImage', '~>3.7'
     pod 'RealmSwift', '~> 0.97.0'
     pod 'AWSCognito', '~> 2.3.3'
     pod 'AWSAPIGateway', '~> 2.3'
@@ -26,15 +27,11 @@ target 'CelScore' do
 end
 
 target 'CelScoreTests' do
-
+    
 end
 
 target 'CelScoreWidget' do
     pod 'ReactiveCocoa', '4.0.4-alpha-1'
     pod 'RealmSwift', '~> 0.97.0'
     pod 'AIRTimer', '~> 1.0'
-    pod 'SDWebImage', '~>3.7'
 end
-
-
-

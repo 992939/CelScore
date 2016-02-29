@@ -10,7 +10,6 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 import AIRTimer
-import SDWebImage
 
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
@@ -91,7 +90,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         changeBackView.layer.cornerRadius = 4
         cell.addSubview(changeBackView)
         cell.sendSubviewToBack(changeBackView)
-        cell.profileImage.sd_setImageWithURL(NSURL(string: (celebDictionary["image"] as! String)))
+        cell.profileImage.image = NSURL(string: celebDictionary["image"] as! String).flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }
         cell.profileImage.layer.cornerRadius = 19
         cell.profileImage.layer.borderWidth = 2
         cell.profileImage.layer.borderColor = UIColor.whiteColor().CGColor
@@ -101,6 +100,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("celeb is \(items[indexPath.row].description)")
+        self.extensionContext?.openURL(NSURL(string: "CelScoreWidget://")!, completionHandler: nil)
     }
     
     // MARK: expand

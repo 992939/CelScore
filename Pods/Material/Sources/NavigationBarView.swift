@@ -70,9 +70,7 @@ public class NavigationBarView : StatusBarView {
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		
-		grid.axis.columns = Int(width / 48)
-		
+	
 		// TitleView alignment.
 		if let v: UILabel = titleLabel {
 			if let d: UILabel = detailLabel {
@@ -91,8 +89,14 @@ public class NavigationBarView : StatusBarView {
 				contentView.grid.contentInset.top = 0
 			}
 		}
-		
+			
 		reloadView()
+	}
+	
+	/// Prepares the contentView.
+	public override func prepareContentView() {
+		super.prepareContentView()
+		contentView.grid.axis.direction = .Vertical
 	}
 	
 	/// Reloads the view.
@@ -108,17 +112,9 @@ public class NavigationBarView : StatusBarView {
 		contentView.grid.reloadLayout()
 	}
 	
-	/**
-	Prepares the view instance when intialized. When subclassing,
-	it is recommended to override the prepareView method
-	to initialize property values and other setup operations.
-	The super.prepareView method should always be called immediately
-	when subclassing.
-	*/
-	public override func prepareView() {
-		super.prepareView()
-		contentView.grid.axis.inherited = false
-		contentView.grid.axis.direction = .Vertical
+	/// Called when the NavigationBarView changes size.
+	public override func statusBarViewDidChangeLayout() {
+		(delegate as? NavigationBarViewDelegate)?.navigationBarViewDidChangeLayout?(self)
 	}
 	
 	/**
@@ -132,9 +128,5 @@ public class NavigationBarView : StatusBarView {
 		prepareProperties(leftControls, rightControls: rightControls)
 		self.titleLabel = titleLabel
 		self.detailLabel = detailLabel
-	}
-	
-	internal override func statusBarViewDidChangeLayout() {
-		(delegate as? NavigationBarViewDelegate)?.navigationBarViewDidChangeLayout?(self)
 	}
 }

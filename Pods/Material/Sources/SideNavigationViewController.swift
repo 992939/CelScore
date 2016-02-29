@@ -650,7 +650,7 @@ public class SideNavigationViewController: UIViewController, UIGestureRecognizer
 					
 					toggleStatusBar(true)
 					showView(v)
-					hideDepth(v)
+					showDepth(v)
 					
 					delegate?.sideNavigationViewPanDidBegin?(self, point: point, position: .Right)
 				case .Changed:
@@ -685,7 +685,7 @@ public class SideNavigationViewController: UIViewController, UIGestureRecognizer
 					
 					toggleStatusBar(true)
 					showView(v)
-					hideDepth(v)
+					showDepth(v)
 					
 					delegate?.sideNavigationViewPanDidBegin?(self, point: point, position: .Left)
 				case .Changed:
@@ -775,11 +775,12 @@ public class SideNavigationViewController: UIViewController, UIGestureRecognizer
 			leftView = MaterialView()
 			leftView!.frame = CGRectMake(0, 0, leftViewWidth, view.frame.height)
 			leftView!.backgroundColor = MaterialColor.clear
+			leftView!.shadowPathAutoSizeEnabled = true
 			view.addSubview(leftView!)
 			
 			leftView!.hidden = true
 			leftView!.position.x = -leftViewWidth / 2
-			leftView!.zPosition = 1000
+			leftView!.zPosition = 2000
 		} else {
 			enabledLeftView = false
 		}
@@ -791,11 +792,12 @@ public class SideNavigationViewController: UIViewController, UIGestureRecognizer
 			rightView = MaterialView()
 			rightView!.frame = CGRectMake(0, 0, rightViewWidth, view.frame.height)
 			rightView!.backgroundColor = MaterialColor.clear
+			rightView!.shadowPathAutoSizeEnabled = true
 			view.addSubview(rightView!)
 			
 			rightView!.hidden = true
 			rightView!.position.x = view.bounds.width + rightViewWidth / 2
-			rightView!.zPosition = 1000
+			rightView!.zPosition = 2000
 		} else {
 			enabledRightView = false
 		}
@@ -804,7 +806,7 @@ public class SideNavigationViewController: UIViewController, UIGestureRecognizer
 	/// A method that prepares the backdropLayer.
 	private func prepareBackdropLayer() {
 		backdropColor = MaterialColor.black
-		backdropLayer.zPosition = 900
+		backdropLayer.zPosition = 1500
 		backdropLayer.hidden = true
 		view.layer.addSublayer(backdropLayer)
 	}

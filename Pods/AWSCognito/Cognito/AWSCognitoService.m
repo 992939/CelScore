@@ -289,20 +289,23 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         request.token = deviceToken;
         request.identityPoolId = self.cognitoCredentialsProvider.identityPoolId;
         request.identityId = self.cognitoCredentialsProvider.identityId;
-        return [self.cognitoService registerDevice:request];
-    }] continueWithBlock:^id(AWSTask *task) {
-        if(task.isCancelled){
-            return [AWSTask taskWithError:[NSError errorWithDomain:AWSCognitoErrorDomain code:AWSCognitoErrorTaskCanceled userInfo:nil]];
-        }else if(task.error){
-            AWSLogError(@"Unable to register device: %@", task.error);
-            return task;
-        }else {
+        return [[self.cognitoService registerDevice:request]continueWithSuccessBlock:^id _Nullable(AWSTask<AWSCognitoSyncRegisterDeviceResponse *> * _Nonnull task) {
             AWSCognitoSyncRegisterDeviceResponse* response = task.result;
             keychain[[AWSCognitoUtil deviceIdKey:_pushPlatform]] = response.deviceId;
             keychain[[AWSCognitoUtil deviceIdentityKey:_pushPlatform]] = self.cognitoCredentialsProvider.identityId;
             [self setDeviceId:response.deviceId];
             return [AWSTask taskWithResult:response.deviceId];
+        }];
+    }] continueWithBlock:^id(AWSTask *task) {
+        if(task.isCancelled){
+            return [AWSTask taskWithError:[NSError errorWithDomain:AWSCognitoErrorDomain code:AWSCognitoErrorTaskCanceled userInfo:nil]];
         }
+        
+        if(task.error){
+            AWSLogError(@"Unable to register device: %@", task.error);
+        }
+        
+        return task;
     }];
 }
 
@@ -323,7 +326,12 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 }
 
 -(AWSTask *)subscribeAll {
-    return [self subscribe:[self listDatasets]];
+    NSArray * datasets = [self listDatasets];
+    NSMutableArray * datasetNames = [NSMutableArray new];
+    for (AWSCognitoDatasetMetadata * dataset in datasets) {
+        [datasetNames addObject: dataset.name];
+    }
+    return [self subscribe:datasetNames];
 }
 
 -(AWSTask *)unsubscribe:(NSArray *) datasetNames {
@@ -335,7 +343,12 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 }
 
 -(AWSTask *)unsubscribeAll {
-    return [self unsubscribe:[self listDatasets]];
+    NSArray * datasets = [self listDatasets];
+    NSMutableArray * datasetNames = [NSMutableArray new];
+    for (AWSCognitoDatasetMetadata * dataset in datasets) {
+        [datasetNames addObject:dataset.name];
+    }
+    return [self unsubscribe:datasetNames];
 }
 
 + (AWSCognitoRecordConflictHandler) defaultConflictHandler {

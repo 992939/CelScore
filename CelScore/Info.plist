@@ -30,6 +30,14 @@
 				<string>fb197662803702116</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>CelScoreWidget</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.GreyEcology.CelebrityScore.CelScoreWidget</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

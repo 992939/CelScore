@@ -85,29 +85,6 @@ public class SearchBarView : StatusBarView {
 		self.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 64))
 	}
 	
-	public override func layoutSubviews() {
-		super.layoutSubviews()
-		
-		grid.axis.columns = Int(width / 48)
-		
-		reloadView()
-	}
-	
-	public override func didMoveToSuperview() {
-		super.didMoveToSuperview()
-		reloadView()
-	}
-	
-	/// Reloads the view.
-	public override func reloadView() {
-		super.reloadView()
-		
-		textField.grid.columns = contentView.grid.columns
-		textField.reloadView()
-		
-		grid.reloadLayout()
-	}
-	
 	/**
 	Prepares the view instance when intialized. When subclassing,
 	it is recommended to override the prepareView method
@@ -120,6 +97,11 @@ public class SearchBarView : StatusBarView {
 		prepareTextField()
 	}
 	
+	/// Called when the SearchBarView changes size.
+	public override func statusBarViewDidChangeLayout() {
+		(delegate as? SearchBarViewDelegate)?.searchBarViewDidChangeLayout?(self)
+	}
+	
 	/// Prepares the textField.
 	private func prepareTextField() {
 		textField.placeholder = "Search"
@@ -127,9 +109,5 @@ public class SearchBarView : StatusBarView {
 		textField.clearButtonMode = .WhileEditing
 		contentView.addSubview(textField)
 		contentView.grid.views = [textField]
-	}
-	
-	internal override func statusBarViewDidChangeLayout() {
-		(delegate as? SearchBarViewDelegate)?.searchBarViewDidChangeLayout?(self)
 	}
 }

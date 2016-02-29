@@ -162,6 +162,19 @@ public class MaterialTableViewCell: UITableViewCell {
 		}
 	}
 	
+	/// A property that accesses the backing layer's shadowPath.
+	public var shadowPath: CGPath? {
+		get {
+			return layer.shadowPath
+		}
+		set(value) {
+			layer.shadowPath = value
+		}
+	}
+	
+	/// Enables automatic shadowPath sizing.
+	public var shadowPathAutoSizeEnabled: Bool = false
+	
 	/**
 	A property that sets the shadowOffset, shadowOpacity, and shadowRadius
 	for the backing layer. This is the preferred method of setting depth
@@ -173,6 +186,7 @@ public class MaterialTableViewCell: UITableViewCell {
 			shadowOffset = value.offset
 			shadowOpacity = value.opacity
 			shadowRadius = value.radius
+			layoutShadowPath()
 		}
 	}
 	
@@ -190,9 +204,13 @@ public class MaterialTableViewCell: UITableViewCell {
 	}
 	
 	/// A property that accesses the layer.cornerRadius.
-	public var cornerRadius: CGFloat = 0 {
-		didSet {
-			layer.cornerRadius = cornerRadius
+	public var cornerRadius: CGFloat {
+		get {
+			return layer.cornerRadius
+		}
+		set(value) {
+			layer.cornerRadius = value
+			layoutShadowPath()
 		}
 	}
 	
@@ -204,16 +222,22 @@ public class MaterialTableViewCell: UITableViewCell {
 	}
 	
 	/// A property that accesses the layer.borderWith.
-	public var borderWidth: CGFloat = 0 {
-		didSet {
-			layer.borderWidth = borderWidth
+	public var borderWidth: CGFloat {
+		get {
+			return layer.borderWidth
+		}
+		set(value) {
+			layer.borderWidth = value
 		}
 	}
 	
 	/// A property that accesses the layer.borderColor property.
 	public var borderColor: UIColor? {
-		didSet {
-			layer.borderColor = borderColor?.CGColor
+		get {
+			return nil == layer.borderColor ? nil : UIColor(CGColor: layer.borderColor!)
+		}
+		set(value) {
+			layer.borderColor = value?.CGColor
 		}
 	}
 	
@@ -261,6 +285,7 @@ public class MaterialTableViewCell: UITableViewCell {
 		super.layoutSublayersOfLayer(layer)
 		if self.layer == layer {
 			layoutVisualLayer()
+			layoutShadowPath()
 		}
 	}
 	
@@ -390,6 +415,19 @@ public class MaterialTableViewCell: UITableViewCell {
 		visualLayer.frame = bounds
 		visualLayer.position = CGPointMake(width / 2, height / 2)
 		visualLayer.cornerRadius = layer.cornerRadius
+	}
+	
+	/// Sets the shadow path.
+	internal func layoutShadowPath() {
+		if shadowPathAutoSizeEnabled {
+			if .None == self.depth {
+				layer.shadowPath = nil
+			} else if nil == layer.shadowPath {
+				layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
+			} else {
+				animate(MaterialAnimation.shadowPath(UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath, duration: 0))
+			}
+		}
 	}
 	
 	/**
