@@ -12,7 +12,7 @@ import Material
 import AIRTimer
 
 
-final class CelebrityTableViewCell: ASCellNode {
+final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -67,6 +67,7 @@ final class CelebrityTableViewCell: ASCellNode {
         
         super.init()
         self.selectionStyle = .None
+        followSwitch.delegate = self
         followSwitch.addTarget(self, action: "flip:", forControlEvents: .ValueChanged)
         
         self.addSubnode(self.backgroundNode)
@@ -130,4 +131,9 @@ final class CelebrityTableViewCell: ASCellNode {
     }
     
     func getId() -> String { return celebST.id }
+    
+    //MARK: MaterialSwitchDelegate
+    func materialSwitchStateChanged(control: MaterialSwitch) {
+        print("control \(control)")
+    }
 }

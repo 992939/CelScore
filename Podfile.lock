@@ -25,7 +25,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - LMGaugeView (1.0.1)
-  - Material (1.34.10)
+  - Material (1.35.0)
   - PINCache (2.2.1)
   - PINRemoteImage/Core (2.0.1):
     - PINCache (>= 2.1)
@@ -74,7 +74,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
   - LMGaugeView (~> 1.0)
-  - Material (~> 1.34.5)
+  - Material (~> 1.35.0)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SDWebImage (~> 3.7)
@@ -99,7 +99,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
-  Material: 20006d45c0deb9ae78cad95c9e2b71309f67ec29
+  Material: 1f9fac43ff56f93700b7a160f61bb48bf18b825d
   PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
   PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
