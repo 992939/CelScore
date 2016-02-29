@@ -47,7 +47,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
         updateExpandButtonTitle()
         updatePreferredContentSize()
-        AIRTimer.every(5) { timer in self.userDefaults.synchronize() }
+        AIRTimer.every(5) { timer in self.userDefaults.synchronize() } //TEST: synchronization
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
@@ -55,7 +55,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        print("completion: \(completionHandler)")
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -99,7 +98,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("celeb is \(items[indexPath.row].description)")
         self.extensionContext?.openURL(NSURL(string: "CelScoreWidget://")!, completionHandler: nil)
     }
     
