@@ -68,7 +68,6 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         super.init()
         self.selectionStyle = .None
         followSwitch.delegate = self
-        followSwitch.addTarget(self, action: "flip:", forControlEvents: .ValueChanged)
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -102,11 +101,6 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         super.layoutDidFinish()
         self.setupCircleLayer()
     }
-    
-    func flip(sender: MaterialSwitch) {
-        let following = sender.switchState == .Off ? false : true
-        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
-    }
 
     func setupCircleLayer() {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
@@ -134,6 +128,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: MaterialSwitchDelegate
     func materialSwitchStateChanged(control: MaterialSwitch) {
-        print("control \(control)")
+        let following = control.switchState == .Off ? false : true
+        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
+        print("control \(control.switchState)")
     }
 }
