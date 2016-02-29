@@ -104,7 +104,7 @@ final class CelScoreViewModel: NSObject {
                 fortuneCookieSays = newCookies[index]
             }
             try! realm.commitWrite()
-            sendNext(sink, "\(fortuneCookieSays!) Thank you for voting.")
+            sendNext(sink, "\"\(fortuneCookieSays!) Thank you for voting.\"")
             sendCompleted(sink)
         }
     }

@@ -82,7 +82,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             .start()
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .on(next: { status in
-                let fortuneCookieNode = self.setupCheckBoxNode("Fortune Cookie Mode", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let fortuneCookieNode = self.setupCheckBoxNode("Revolutionary Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(fortuneCookieNode)
             })
             .start()

@@ -169,9 +169,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func sendFortuneCookie() {
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
             .on(next: { text in
-                self.notification.titleText = "Bad Fortune Cookie"
+                self.notification.titleText = "Revolutionary Road Sign"
                 self.notification.subtitleText = text
-                self.notification.image = UIImage(named: "cookie")
+                self.notification.image = UIImage(named: "road")
                 self.notification.dismissOnTap = true
                 self.notification.presentInView(self.view, withGravityAnimation: true)
                 AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
