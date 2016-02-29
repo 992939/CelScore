@@ -32,10 +32,10 @@
 		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>CelScoreWidget</string>
+			<string>com.GreyEcology.CelebrityScore</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.GreyEcology.CelebrityScore.CelScoreWidget</string>
+				<string>CelScoreWidget</string>
 			</array>
 		</dict>
 	</array>
