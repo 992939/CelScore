@@ -16,7 +16,7 @@ import HMSegmentedControl
 import AIRTimer
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
     let celebrityListVM: ListViewModel
@@ -59,13 +59,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: NavigationBarView = getNavigationView()
         self.setupSegmentedControl()
-        let loginButton: FBSDKLoginButton = getLoginButton()
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
-        //self.view.addSubview(loginButton)
         self.configuration()
     }
     
@@ -73,6 +71,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         super.viewWillLayoutSubviews()
         self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
+    }
+    
+    func onTokenUpdate(notification: NSNotification) {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
+            //TODO: UserViewModel().refreshFacebookTokenSignal().start() //TODO
+        }
     }
     
     func openSettings() { self.sideNavigationViewController!.openLeftView() }
@@ -105,13 +110,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
-    func onTokenUpdate(notification: NSNotification) {
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //UserViewModel().refreshFacebookTokenSignal().start() //TODO
-        }
-    }
-    
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     
@@ -136,36 +134,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
     func textFieldDidBeginEditing(textField: UITextField) {}
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
-    
-    //MARK: FBSDKLoginButtonDelegate Methods
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        guard error == nil else { print("FBSDKLogin error: \(error)"); return }
-        guard result.isCancelled == false else { return }
-        FBSDKAccessToken.setCurrentAccessToken(result.token)
-        
-        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getUserInfoFromFacebookSignal()
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
-            }
-            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
-            .retry(2)
-            .start()
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
     
     func showSearchBar() {
         if self.view.subviews.contains(self.searchBar) { hideSearchBar() }
@@ -247,14 +215,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
         self.segmentedControl.addTarget(self, action: "changeList", forControlEvents: .ValueChanged)
-    }
-    
-    func getLoginButton() -> FBSDKLoginButton {
-        let loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        loginButton.frame = CGRect(x: 0, y: 70, width: 80, height: 44)
-        loginButton.delegate = self
-        return loginButton
     }
 }
 

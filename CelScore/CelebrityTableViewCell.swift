@@ -12,7 +12,7 @@ import Material
 import AIRTimer
 
 
-final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
+final class CelebrityTableViewCell: ASCellNode {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -67,7 +67,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         
         super.init()
         self.selectionStyle = .None
-        followSwitch.delegate = self
+        followSwitch.addTarget(self, action: "flip:", forControlEvents: .ValueChanged)
+        //followSwitch.delegate = self
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -101,6 +102,12 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         super.layoutDidFinish()
         self.setupCircleLayer()
     }
+    
+    func flip(sender: MaterialSwitch) {
+        print("hey yo")
+        let following = sender.switchState == .Off ? false : true
+        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
+    }
 
     func setupCircleLayer() {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
@@ -126,10 +133,10 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     func getId() -> String { return celebST.id }
     
-    //MARK: MaterialSwitchDelegate
-    func materialSwitchStateChanged(control: MaterialSwitch) {
-        let following = control.switchState == .Off ? false : true
-        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
-        print("control \(control.switchState)")
-    }
+//    //MARK: MaterialSwitchDelegate
+//    func materialSwitchStateChanged(control: MaterialSwitch) {
+//        let following = control.switchState == .Off ? false : true
+//        print("control \(control.switchState)")
+//        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
+//    }
 }
