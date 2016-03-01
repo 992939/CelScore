@@ -69,6 +69,15 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        SettingsViewModel().isLoggedInSignal()
+            .on(next: { value in
+                if value == false {
+                    let loginVC = LoginViewController()
+                    //loginVC.modalTransitionStyle = .CrossDissolve
+                    //self.presentViewController(loginVC, animated: false, completion: nil)
+                }
+            })
+            .start()
         self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }

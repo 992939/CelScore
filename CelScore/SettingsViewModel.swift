@@ -90,6 +90,16 @@ final class SettingsViewModel: NSObject {
         }
     }
     
+    func isLoggedInSignal() -> SignalProducer<Bool, NoError> {
+        return SignalProducer { sink, _ in
+            let realm = try! Realm()
+            let model = realm.objects(SettingsModel).first
+            if model!.userName.isEmpty { sendNext(sink, false) }
+            else { sendNext(sink, true) }
+            sendCompleted(sink)
+        }
+    }
+    
     func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
         return SignalProducer { sink, _ in
             let realm = try! Realm()

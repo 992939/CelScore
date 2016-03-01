@@ -14,6 +14,7 @@ public class SettingsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = "1"
+    dynamic var userName: String = ""
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 1
     dynamic var publicService: Bool = false
@@ -23,6 +24,7 @@ public class SettingsModel: Object, NSCopying {
     //MARK: Initializer
     public convenience init(dictionary: Dictionary<String, AnyObject>) {
         self.init()
+        self.userName = dictionary["userName"] as! String
         self.defaultListIndex = dictionary["defaultListIndex"] as! Int
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.publicService = dictionary["publicService"] as! Bool
@@ -36,6 +38,7 @@ public class SettingsModel: Object, NSCopying {
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = SettingsModel()
         copy.id = self.id
+        copy.userName = self.userName
         copy.defaultListIndex = self.defaultListIndex
         copy.loginTypeIndex = self.loginTypeIndex
         copy.publicService = self.publicService

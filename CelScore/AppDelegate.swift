@@ -26,21 +26,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 4,
+            schemaVersion: 5,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 2) {}
-                if oldSchemaVersion < 3 {
-                    migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["from"] = ""
-                        newObject!["backgroundPic"] = ""
-                        newObject!["backgroundColor"] = ""
-                    }
-                }
                 if oldSchemaVersion < 4 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
                         newObject!["defaultListIndex"] = ""
                         newObject!["fortuneMode"] = ""
                         newObject!["publicService"] = ""
+                    }
+                }
+                if oldSchemaVersion < 5 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["userName"] = ""
                     }
                 }
         })

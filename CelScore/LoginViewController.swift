@@ -16,12 +16,14 @@ final class LoginViewController: ASViewController, FBSDKLoginButtonDelegate {
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init() { super.init(node: ASDisplayNode()) }
+    init() {
+        super.init(node: ASDisplayNode())
+    }
     
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Constants.kDarkShade
+        self.view.backgroundColor = Constants.kMainShade
         let loginButton: FBSDKLoginButton = getLoginButton()
         self.view.addSubview(loginButton)
     }
@@ -29,7 +31,7 @@ final class LoginViewController: ASViewController, FBSDKLoginButtonDelegate {
     func getLoginButton() -> FBSDKLoginButton {
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        loginButton.frame = CGRect(x: 0, y: 70, width: 80, height: 44)
+        loginButton.frame = CGRect(x: 0, y: 70, width: 120, height: 44)
         loginButton.delegate = self
         return loginButton
     }
