@@ -92,7 +92,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func onTokenUpdate(notification: NSNotification) {
         if FBSDKAccessToken.currentAccessToken() != nil {
             UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //TODO: UserViewModel().refreshFacebookTokenSignal().start() //TODO
+            //TODO: UserViewModel().refreshFacebookTokenSignal().start()
         }
     }
     
@@ -129,11 +129,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func handleMenu() {
         let image: UIImage?
         if self.socialButton.menu.opened {
-            print("close")
             self.socialButton.menu.close()
             image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         } else {
-            print("open")
             self.socialButton.menu.open() { (v: UIView) in
                 (v as? MaterialButton)?.pulse()
             }
