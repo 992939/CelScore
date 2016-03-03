@@ -22,6 +22,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     let celebrityListVM: ListViewModel
     let celebrityTableView: ASTableView
     let segmentedControl: HMSegmentedControl
+    let socialButton: MenuView
     let searchBar: UISearchBar
     
     //MARK: Initializers
@@ -31,6 +32,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.celebrityListVM = ListViewModel()
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
+        self.socialButton = MenuView()
         self.searchBar = UISearchBar()
         super.init(node: ASDisplayNode())
 
@@ -46,6 +48,18 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        SettingsViewModel().isLoggedInSignal()
+            .on(next: { value in
+                if value == false {
+                }
+            })
+            .start()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
@@ -59,25 +73,19 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: NavigationBarView = getNavigationView()
         self.setupSegmentedControl()
+        self.setUpSocialButton()
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
+        self.view.addSubview(self.socialButton)
+        MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.configuration()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        SettingsViewModel().isLoggedInSignal()
-            .on(next: { value in
-                if value == false {
-                    let loginVC = LoginViewController()
-                    //loginVC.modalTransitionStyle = .CrossDissolve
-                    //self.presentViewController(loginVC, animated: false, completion: nil)
-                }
-            })
-            .start()
         self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
@@ -224,6 +232,46 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
         self.segmentedControl.addTarget(self, action: "changeList", forControlEvents: .ValueChanged)
+    }
+    
+    func setUpSocialButton() {
+        let btn1: FabButton = FabButton()
+        btn1.depth = .Depth2
+        btn1.pulseScale = false
+        btn1.backgroundColor = Constants.kWineShade
+        btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
+        self.socialButton.addSubview(btn1)
+        
+        var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        let btn2: FabButton = FabButton()
+        btn2.tag = 1
+        btn2.depth = .Depth1
+        btn2.pulseColor = MaterialColor.white
+        btn2.backgroundColor = Constants.kMainShade
+        btn2.borderWidth = 1
+        btn2.setImage(image, forState: .Normal)
+        btn2.setImage(image, forState: .Highlighted)
+        btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
+        self.socialButton.addSubview(btn2)
+        
+        image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        let btn3: FabButton = FabButton()
+        btn2.tag = 2
+        btn3.depth = .Depth1
+        btn3.pulseColor = MaterialColor.white
+        btn3.backgroundColor = Constants.kMainShade
+        btn3.borderWidth = 1
+        btn3.setImage(image, forState: .Normal)
+        btn3.setImage(image, forState: .Highlighted)
+        btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
+        self.socialButton.addSubview(btn3)
+        
+        self.socialButton.menu.enabled = false
+        self.socialButton.menu.origin = CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70)
+        self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        self.socialButton.menu.direction = .Up
+        self.socialButton.menu.views = [btn1, btn2, btn3]
+        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 

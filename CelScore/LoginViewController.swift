@@ -23,7 +23,7 @@ final class LoginViewController: ASViewController, FBSDKLoginButtonDelegate {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Constants.kMainShade
+        self.view.backgroundColor = UIColor.clearColor()
         let loginButton: FBSDKLoginButton = getLoginButton()
         self.view.addSubview(loginButton)
     }

@@ -2,6 +2,7 @@
 use_frameworks!
 platform :ios, '8.0'
 
+
 target 'CelScore' do
     pod 'ReactiveCocoa', '4.0.4-alpha-1'
     pod 'AsyncDisplayKit', '~> 1.9.6'
@@ -19,11 +20,11 @@ target 'CelScore' do
     pod 'AIRTimer', '~> 1.0'
     pod 'Timepiece', '~> 0.4'
     pod 'YLProgressBar', '~> 3.8'
-    pod 'Material', '~> 1.35.0'
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'LMGaugeView', '~> 1.0'
     pod 'HMSegmentedControl', '~> 1.5'
+    pod 'Material', '~> 1.35.0'
 end
 
 target 'CelScoreTests' do

@@ -181,7 +181,8 @@ public class MaterialSwitch: UIControl {
 			return .On == internalSwitchState
 		}
 		set(value) {
-			setOn(value, animated: true)
+			//setOn(value, animated: true)
+            internalSwitchState = value == true ? .On : .Off
 		}
 	}
 	

@@ -12,7 +12,7 @@ import Material
 import AIRTimer
 
 
-final class CelebrityTableViewCell: ASCellNode {
+final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -52,6 +52,7 @@ final class CelebrityTableViewCell: ASCellNode {
                 cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             })
             .start()
+        
         let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
         followSwitch.buttonOnColor = Constants.kWineShade
@@ -67,8 +68,7 @@ final class CelebrityTableViewCell: ASCellNode {
         
         super.init()
         self.selectionStyle = .None
-        followSwitch.addTarget(self, action: "flip:", forControlEvents: .ValueChanged)
-        //followSwitch.delegate = self
+        followSwitch.delegate = self
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -102,11 +102,6 @@ final class CelebrityTableViewCell: ASCellNode {
         super.layoutDidFinish()
         self.setupCircleLayer()
     }
-    
-    func flip(sender: MaterialSwitch) {
-        let following = sender.switchState == .Off ? false : true
-        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
-    }
 
     func setupCircleLayer() {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
@@ -132,10 +127,9 @@ final class CelebrityTableViewCell: ASCellNode {
     
     func getId() -> String { return celebST.id }
     
-//    //MARK: MaterialSwitchDelegate
-//    func materialSwitchStateChanged(control: MaterialSwitch) {
-//        let following = control.switchState == .Off ? false : true
-//        print("control \(control.switchState)")
-//        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
-//    }
+    //MARK: MaterialSwitchDelegate
+    func materialSwitchStateChanged(control: MaterialSwitch) {
+        let following = control.switchState == .Off ? true : false
+        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
+    }
 }

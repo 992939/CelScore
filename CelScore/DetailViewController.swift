@@ -19,9 +19,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     let infoVC: InfoViewController
     let ratingsVC: RatingsViewController
     let celscoreVC: CelScoreViewController
-    let socialButton: MenuView
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
+    let socialButton: MenuView
     var socialMessage: String = ""
     
     //MARK: Initializers
@@ -32,8 +32,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
-        self.socialButton = MenuView()
         self.voteButton = MaterialButton()
+        self.socialButton = MenuView()
         self.notification = AFDropdownNotification()
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
@@ -54,8 +54,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let navigationBarView: NavigationBarView = getNavigationView()
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
-        self.setUpSocialButton()
         self.setUpVoteButton()
+        self.setUpSocialButton()
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
