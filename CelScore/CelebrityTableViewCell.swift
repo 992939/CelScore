@@ -55,8 +55,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         
         let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        followSwitch.buttonOnColor = Constants.kDarkGreenShade
-        followSwitch.trackOnColor = Constants.kLightGreenShade
+        followSwitch.buttonOnColor = MaterialColor.teal.accent2
+        followSwitch.trackOnColor = followSwitch.trackOffColor
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
