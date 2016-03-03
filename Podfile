@@ -24,7 +24,8 @@ target 'CelScore' do
     pod 'BEMCheckBox', '~> 1.2'
     pod 'LMGaugeView', '~> 1.0'
     pod 'HMSegmentedControl', '~> 1.5'
-    pod 'Material', '~> 1.35.0'
+    pod 'Material', '~> 1.35.1'
+
 end
 
 target 'CelScoreTests' do

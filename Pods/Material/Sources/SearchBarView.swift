@@ -82,25 +82,24 @@ public class SearchBarView : StatusBarView {
 	
 	/// A convenience initializer.
 	public convenience init() {
-		self.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 64))
+		self.init(frame: CGRectZero)
 	}
 	
-	/**
-	Prepares the view instance when intialized. When subclassing,
-	it is recommended to override the prepareView method
-	to initialize property values and other setup operations.
-	The super.prepareView method should always be called immediately
-	when subclassing.
-	*/
-	public override func prepareView() {
-		super.prepareView()
+	public override func layoutSubviews() {
+		super.layoutSubviews()
+		if willRenderView {
+			contentView.grid.views?.append(textField)
+			textField.font = textField.font?.fontWithSize(20)
+			textField.reloadView()
+		}
+	}
+	
+	/// Prepares the contentView.
+	public override func prepareContentView() {
+		super.prepareContentView()
 		prepareTextField()
 	}
 	
-	/// Called when the SearchBarView changes size.
-	public override func statusBarViewDidChangeLayout() {
-		(delegate as? SearchBarViewDelegate)?.searchBarViewDidChangeLayout?(self)
-	}
 	
 	/// Prepares the textField.
 	private func prepareTextField() {
@@ -108,6 +107,5 @@ public class SearchBarView : StatusBarView {
 		textField.backgroundColor = MaterialColor.clear
 		textField.clearButtonMode = .WhileEditing
 		contentView.addSubview(textField)
-		contentView.grid.views = [textField]
 	}
 }

@@ -272,7 +272,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn2.contentMode = .ScaleToFill
         btn2.depth = .Depth1
         btn2.pulseColor = MaterialColor.white
-        btn2.backgroundColor = Constants.kMainShade
+        btn2.backgroundColor = MaterialColor.indigo.darken1
         btn2.borderColor = MaterialColor.white
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)

@@ -42,7 +42,7 @@ public class NavigationBarView : StatusBarView {
 			if let v: UILabel = titleLabel {
 				contentView.addSubview(v)
 			}
-			reloadView()
+			layoutSubviews()
 		}
 	}
 	
@@ -52,8 +52,13 @@ public class NavigationBarView : StatusBarView {
 			if let v: UILabel = detailLabel {
 				contentView.addSubview(v)
 			}
-			reloadView()
+			layoutSubviews()
 		}
+	}
+	
+	/// A convenience initializer.
+	public convenience init() {
+		self.init(frame: CGRectZero)
 	}
 	
 	/**
@@ -64,57 +69,51 @@ public class NavigationBarView : StatusBarView {
 	- Parameter rightControls: An Array of UIControls that go on the right side.
 	*/
 	public convenience init?(titleLabel: UILabel? = nil, detailLabel: UILabel? = nil, leftControls: Array<UIControl>? = nil, rightControls: Array<UIControl>? = nil) {
-		self.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 64))
+		self.init(frame: CGRectZero)
 		prepareProperties(titleLabel, detailLabel: detailLabel, leftControls: leftControls, rightControls: rightControls)
 	}
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 	
-		// TitleView alignment.
-		if let v: UILabel = titleLabel {
-			if let d: UILabel = detailLabel {
-				v.grid.rows = 2
-				v.font = v.font.fontWithSize(17)
-				d.grid.rows = 2
-				d.font = d.font.fontWithSize(12)
-				contentView.grid.axis.rows = 3
-				contentView.grid.spacing = -8
-				contentView.grid.contentInset.top = -8
-			} else {
-				v.grid.rows = 1
-				v.font = v.font.fontWithSize(20)
-				contentView.grid.axis.rows = 1
-				contentView.grid.spacing = 0
-				contentView.grid.contentInset.top = 0
-			}
-		}
+		if willRenderView {
 			
-		reloadView()
+			// TitleView alignment.
+			if let v: UILabel = titleLabel {
+				if let d: UILabel = detailLabel {
+					v.grid.rows = 2
+					v.font = v.font.fontWithSize(17)
+					d.grid.rows = 2
+					d.font = d.font.fontWithSize(12)
+					contentView.grid.axis.rows = 3
+					contentView.grid.spacing = -8
+					contentView.grid.contentInset.top = -8
+				} else {
+					v.grid.rows = 1
+					v.font = v.font.fontWithSize(20)
+					contentView.grid.axis.rows = 1
+					contentView.grid.spacing = 0
+					contentView.grid.contentInset.top = 0
+				}
+			}
+			
+			contentView.grid.views = []
+			
+			if let v: UILabel = titleLabel {
+				contentView.grid.views?.append(v)
+			}
+			if let v: UILabel = detailLabel {
+				contentView.grid.views?.append(v)
+			}
+			
+			contentView.grid.reloadLayout()
+		}
 	}
 	
 	/// Prepares the contentView.
 	public override func prepareContentView() {
 		super.prepareContentView()
 		contentView.grid.axis.direction = .Vertical
-	}
-	
-	/// Reloads the view.
-	public override func reloadView() {
-		super.reloadView()
-		contentView.grid.views = []
-		if let v: UILabel = titleLabel {
-			contentView.grid.views?.append(v)
-		}
-		if let v: UILabel = detailLabel {
-			contentView.grid.views?.append(v)
-		}
-		contentView.grid.reloadLayout()
-	}
-	
-	/// Called when the NavigationBarView changes size.
-	public override func statusBarViewDidChangeLayout() {
-		(delegate as? NavigationBarViewDelegate)?.navigationBarViewDidChangeLayout?(self)
 	}
 	
 	/**
