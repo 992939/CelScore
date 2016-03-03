@@ -56,7 +56,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
-        gauge.limitDotColor = Constants.kBrightShade
+        gauge.limitDotColor = Constants.kDarkGreenShade
         gauge.valueTextColor = MaterialColor.white
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade
@@ -115,7 +115,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value > gaugeView.limitValue { return Constants.kBrightShade }
+        if value > gaugeView.limitValue { return Constants.kDarkGreenShade }
         else { return Constants.kWineShade }
     }
 }

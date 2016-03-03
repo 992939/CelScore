@@ -134,7 +134,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 .on(next: { userRatings in
                     var celScore: Double = 0
                     for rating in userRatings { celScore += userRatings[rating] as! Double }
-                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kBrightShade : Constants.kWineShade
+                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kDarkGreenShade : Constants.kWineShade
                     self.voteButton.enabled = true
                 })
                 .start()
@@ -159,7 +159,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func enableVoteButton(positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
-            self.voteButton.backgroundColor = positive == true ? Constants.kBrightShade : Constants.kWineShade },
+            self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseScale = true
                 self.voteButton.pulse() }
@@ -182,7 +182,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialSharing(message: String) {
         self.socialButton.menu.enabled = true
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.backgroundColor = Constants.kBrightShade
+        first?.backgroundColor = Constants.kDarkGreenShade
         first?.pulseScale = true
         first?.pulse()
         self.socialButton.menu.open()
@@ -225,7 +225,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let picWidth: CGFloat = 180.0
         profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kBrightShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
         }
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
@@ -253,32 +253,42 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpSocialButton() {
+        var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
         btn1.pulseScale = false
         btn1.backgroundColor = Constants.kDarkShade
+        btn1.tintColor = MaterialColor.white
+        btn1.setImage(image, forState: .Normal)
+        btn1.setImage(image, forState: .Highlighted)
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn1)
         
-        var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        image = UIImage(named: "facebooklogo")
         let btn2: FabButton = FabButton()
         btn2.tag = 1
+        btn2.clipsToBounds = true
+        btn2.contentMode = .ScaleToFill
         btn2.depth = .Depth1
         btn2.pulseColor = MaterialColor.white
-        btn2.backgroundColor = Constants.kMainShade
-        btn2.borderWidth = 1
+        btn2.backgroundColor = MaterialColor.indigo.darken1
+        btn2.borderColor = MaterialColor.white
+        btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
         btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn2)
         
-        image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        image = UIImage(named: "twitterlogo")
         let btn3: FabButton = FabButton()
-        btn2.tag = 2
+        btn3.tag = 2
+        btn3.contentMode = .ScaleToFill
+        btn3.clipsToBounds = true
         btn3.depth = .Depth1
+        btn3.backgroundColor = MaterialColor.lightBlue.base
         btn3.pulseColor = MaterialColor.white
-        btn3.backgroundColor = Constants.kMainShade
-        btn3.borderWidth = 1
+        btn3.borderColor = MaterialColor.white
+        btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
         btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)

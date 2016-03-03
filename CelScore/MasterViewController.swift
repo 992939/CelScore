@@ -96,7 +96,14 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    func openSettings() { self.sideNavigationViewController!.openLeftView() }
+    func openSettings() {
+        SettingsViewModel().isLoggedInSignal()
+            .on(next: { value in
+                if value == false { self.socialButton.menu.open() }
+                else { self.sideNavigationViewController!.openLeftView() }
+            })
+            .start()
+    }
     
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
@@ -229,9 +236,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         searchButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
         
-        let navigationBarView: NavigationBarView = NavigationBarView()
-        navigationBarView.leftControls = [menuButton]
-        navigationBarView.rightControls = [searchButton]
+        let navigationBarView: NavigationBarView = NavigationBarView(titleLabel: nil, detailLabel: nil, leftControls: [menuButton], rightControls: [searchButton])!
         navigationBarView.backgroundColor = Constants.kMainShade
         let celscoreImageView = UIImageView(image: UIImage(named: "celscore_white"))
         celscoreImageView.frame = CGRect(x: navigationBarView.width/2, y: navigationBarView.centerY - 5, width: 25, height: 25)
@@ -256,14 +261,18 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func setUpSocialButton() {
+        var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
         btn1.pulseScale = false
         btn1.backgroundColor = Constants.kDarkGreenShade
+        btn1.tintColor = MaterialColor.white
+        btn1.setImage(image, forState: .Normal)
+        btn1.setImage(image, forState: .Highlighted)
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn1)
         
-        var image = UIImage(named: "facebooklogo")
+        image = UIImage(named: "facebooklogo")
         let btn2: FabButton = FabButton()
         btn2.tag = 1
         btn2.clipsToBounds = true
