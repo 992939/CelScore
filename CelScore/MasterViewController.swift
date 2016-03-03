@@ -261,15 +261,15 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
         btn1.pulseScale = false
-        btn1.backgroundColor = Constants.kWineShade
+        btn1.backgroundColor = Constants.kDarkGreenShade
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn1)
         
-        var image = UIImage(named: "facebooklogo")//!.imageWithRenderingMode(.AlwaysTemplate)
+        var image = UIImage(named: "facebooklogo")
         let btn2: FabButton = FabButton()
         btn2.tag = 1
         btn2.clipsToBounds = true
-        btn2.contentMode = .ScaleAspectFit
+        btn2.contentMode = .ScaleToFill
         btn2.depth = .Depth1
         btn2.pulseColor = MaterialColor.white
         btn2.backgroundColor = Constants.kMainShade
@@ -280,14 +280,14 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn2)
         
-        image = UIImage(named: "twitterlogo")//!.imageWithRenderingMode(.AlwaysTemplate)
+        image = UIImage(named: "twitterlogo")
         let btn3: FabButton = FabButton()
         btn3.tag = 2
-        btn3.contentMode = .ScaleAspectFit
+        btn3.contentMode = .ScaleToFill
         btn3.clipsToBounds = true
         btn3.depth = .Depth1
+        btn3.backgroundColor = MaterialColor.lightBlue.base
         btn3.pulseColor = MaterialColor.white
-        btn3.backgroundColor = Constants.kMainShade
         btn3.borderColor = MaterialColor.white
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)

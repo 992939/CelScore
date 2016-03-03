@@ -95,7 +95,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.setTitleColor(MaterialColor.teal.lighten1, forState: .Normal)
+        logoutButton.setTitleColor(Constants.kDarkGreenShade, forState: .Normal)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
         loginView.addSubview(loginLabel)
         loginView.addSubview(userLabel)
@@ -106,7 +106,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let copyrightTextNode = ASTextNode()
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kBrightShade, NSParagraphStyleAttributeName: paraStyle]
+        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kDarkGreenShade, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!). 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
@@ -115,7 +115,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(copyrightTextNode)
         
         self.view.backgroundColor = Constants.kDarkShade
-        //self.sideNavigationViewController!.backdropColor = Constants.kDarkShade
         self.sideNavigationViewController!.depth = .Depth1
     }
     
@@ -168,8 +167,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = MaterialColor.teal.lighten1
-        box.onTintColor = MaterialColor.teal.lighten1
+        box.onFillColor = Constants.kDarkGreenShade
+        box.onTintColor = Constants.kDarkGreenShade
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
         materialView.addSubview(box)
@@ -180,7 +179,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
-        factsBar.progressTintColors = [MaterialColor.lightGreen.lighten2, MaterialColor.teal.lighten1]
+        factsBar.progressTintColors = [MaterialColor.lightGreen.lighten2, Constants.kDarkGreenShade]
         factsBar.setProgress(value, animated: true)
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
