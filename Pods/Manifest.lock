@@ -1,5 +1,6 @@
 PODS:
   - AIRTimer (1.0.2)
+  - AlertController (0.1.0)
   - AsyncDisplayKit (1.9.7):
     - AsyncDisplayKit/PINRemoteImage (= 1.9.7)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9.7)
@@ -65,6 +66,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0)
+  - AlertController (~> 0.1)
   - AsyncDisplayKit (~> 1.9.6)
   - AWSAPIGateway (~> 2.3)
   - AWSCognito (~> 2.3.3)
@@ -74,7 +76,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
   - LMGaugeView (~> 1.0)
-  - Material (~> 1.35.0)
+  - Material (~> 1.35.1)
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SDWebImage (~> 3.7)
@@ -88,6 +90,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
+  AlertController: 01915fd0af7742afb1d419ed67b757f1089968c6
   AsyncDisplayKit: eb762d3bfd3896b2901909ebc24b54c97f32d43c
   AWSAPIGateway: 3ebbf1a7cb26eeb8a18893bdef01d09c420d92ff
   AWSCognito: f12700b4781897b2913544b36d6283f04ae72a44

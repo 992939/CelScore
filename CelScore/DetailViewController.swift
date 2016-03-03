@@ -303,11 +303,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
+        let image: UIImage? = UIImage(named: "justice")?.imageWithRenderingMode(.AlwaysTemplate)
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
+        self.voteButton.tintColor = MaterialColor.white
         self.voteButton.enabled = false
+        self.voteButton.setImage(image, forState: .Normal)
+        self.voteButton.setImage(image, forState: .Highlighted)
         self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
     }

@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 use_frameworks!
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 
 target 'CelScore' do
@@ -25,7 +25,7 @@ target 'CelScore' do
     pod 'LMGaugeView', '~> 1.0'
     pod 'HMSegmentedControl', '~> 1.5'
     pod 'Material', '~> 1.35.1'
-
+    pod 'AlertController', '~> 0.1'
 end
 
 target 'CelScoreTests' do
