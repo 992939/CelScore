@@ -51,7 +51,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         SettingsViewModel().isLoggedInSignal()
             .on(next: { value in
                 if value == false {
@@ -125,6 +124,30 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             })
             .start()
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
+    }
+    
+    func handleMenu() {
+        let image: UIImage?
+        if self.socialButton.menu.opened {
+            print("close")
+            self.socialButton.menu.close()
+            image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
+        } else {
+            print("open")
+            self.socialButton.menu.open() { (v: UIView) in
+                (v as? MaterialButton)?.pulse()
+            }
+            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.animate(MaterialAnimation.rotate(1))
+        first?.setImage(image, forState: .Normal)
+        first?.setImage(image, forState: .Highlighted)
+    }
+    
+    func handleButton(button: UIButton) {
+       //TODO: LOGINS
     }
     
     //MARK: ASTableView methods
@@ -242,31 +265,36 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn1)
         
-        var image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        var image = UIImage(named: "facebooklogo")//!.imageWithRenderingMode(.AlwaysTemplate)
         let btn2: FabButton = FabButton()
         btn2.tag = 1
+        btn2.clipsToBounds = true
+        btn2.contentMode = .ScaleAspectFit
         btn2.depth = .Depth1
         btn2.pulseColor = MaterialColor.white
         btn2.backgroundColor = Constants.kMainShade
-        btn2.borderWidth = 1
+        btn2.borderColor = MaterialColor.white
+        btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
         btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn2)
         
-        image = UIImage(named: "score_white")!.imageWithRenderingMode(.AlwaysTemplate)
+        image = UIImage(named: "twitterlogo")//!.imageWithRenderingMode(.AlwaysTemplate)
         let btn3: FabButton = FabButton()
-        btn2.tag = 2
+        btn3.tag = 2
+        btn3.contentMode = .ScaleAspectFit
+        btn3.clipsToBounds = true
         btn3.depth = .Depth1
         btn3.pulseColor = MaterialColor.white
         btn3.backgroundColor = Constants.kMainShade
-        btn3.borderWidth = 1
+        btn3.borderColor = MaterialColor.white
+        btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
         btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
         self.socialButton.addSubview(btn3)
         
-        self.socialButton.menu.enabled = false
         self.socialButton.menu.origin = CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70)
         self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.socialButton.menu.direction = .Up
