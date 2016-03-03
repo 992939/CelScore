@@ -89,7 +89,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 100, height: 30))
+        let loginLabel = setupLabel(title: "Logged In As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         let userLabel = setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right

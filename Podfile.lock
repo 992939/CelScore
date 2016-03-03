@@ -1,6 +1,5 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AlertController (0.1.0)
   - AsyncDisplayKit (1.9.7):
     - AsyncDisplayKit/PINRemoteImage (= 1.9.7)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9.7)
@@ -27,6 +26,7 @@ PODS:
   - HMSegmentedControl (1.5.2)
   - LMGaugeView (1.0.1)
   - Material (1.35.1)
+  - OpinionzAlertView (0.3.1)
   - PINCache (2.2.1)
   - PINRemoteImage/Core (2.0.1):
     - PINCache (>= 2.1)
@@ -66,7 +66,6 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0)
-  - AlertController (~> 0.1)
   - AsyncDisplayKit (~> 1.9.6)
   - AWSAPIGateway (~> 2.3)
   - AWSCognito (~> 2.3.3)
@@ -77,6 +76,7 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5)
   - LMGaugeView (~> 1.0)
   - Material (~> 1.35.1)
+  - OpinionzAlertView
   - ReactiveCocoa (= 4.0.4-alpha-1)
   - RealmSwift (~> 0.97.0)
   - SDWebImage (~> 3.7)
@@ -90,7 +90,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AlertController: 01915fd0af7742afb1d419ed67b757f1089968c6
   AsyncDisplayKit: eb762d3bfd3896b2901909ebc24b54c97f32d43c
   AWSAPIGateway: 3ebbf1a7cb26eeb8a18893bdef01d09c420d92ff
   AWSCognito: f12700b4781897b2913544b36d6283f04ae72a44
@@ -103,6 +102,7 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
   Material: 1582f67e32a31c3ebe005683476a2b60ccc66208
+  OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
   PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d

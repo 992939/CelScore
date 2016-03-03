@@ -14,6 +14,7 @@ import TwitterKit
 import Material
 import HMSegmentedControl
 import AIRTimer
+import OpinionzAlertView
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
@@ -99,8 +100,11 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func openSettings() {
         SettingsViewModel().isLoggedInSignal()
             .on(next: { value in
-                if value == false { self.socialButton.menu.open() }
-                else { self.sideNavigationViewController!.openLeftView() }
+                if value == true { self.sideNavigationViewController!.openLeftView() }
+                else {
+                    self.sideNavigationViewController!.openLeftView()
+                    self.socialButton.menu.open()
+                }
             })
             .start()
     }
