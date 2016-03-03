@@ -37,6 +37,14 @@ struct Constants {
     
     static func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
     
+    static func setupLabel(title title: String, frame: CGRect) -> UILabel {
+        let label = UILabel(frame: frame)
+        label.text = title
+        label.textColor = MaterialColor.white
+        label.font = UIFont(name: label.font.fontName, size: 16)
+        return label
+    }
+    
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)

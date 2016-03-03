@@ -32,7 +32,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 80
-        
         self.pulseView.depth = .Depth1
         self.pulseView.backgroundColor = MaterialColor.clear
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
@@ -67,14 +66,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     }
     
     func getView(y positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let consensusLabel = UILabel()
-        consensusLabel.text = title
-        consensusLabel.textColor = MaterialColor.white
-        consensusLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25)
-        let infoLabel = UILabel()
-        infoLabel.text = value
-        infoLabel.textColor = MaterialColor.white
-        infoLabel.frame = CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25)
+        let consensusLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
+        let infoLabel = Constants.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kDetailWidth, height: 30))
         consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))

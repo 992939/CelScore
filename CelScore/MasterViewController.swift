@@ -100,7 +100,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func openSettings() {
         SettingsViewModel().isLoggedInSignal()
             .on(next: { value in
-                if value == true { self.sideNavigationViewController!.openLeftView() }
+                if value == false { self.sideNavigationViewController!.openLeftView() }
                 else {
                     let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                     alertView.iconType = OpinionzAlertIconInfo

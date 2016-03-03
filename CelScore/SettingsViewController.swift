@@ -62,7 +62,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //PickerView
         let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel = self.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let pickerLabel = Constants.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
@@ -89,9 +89,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = setupLabel(title: "Logged In As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
+        let loginLabel = Constants.setupLabel(title: "Logged In As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
-        let userLabel = setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
+        let userLabel = Constants.setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right
         let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
@@ -150,17 +150,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return materialView
     }
     
-    func setupLabel(title title: String, frame: CGRect) -> UILabel {
-        let label = UILabel(frame: frame)
-        label.text = title
-        label.textColor = MaterialColor.white
-        label.font = UIFont(name: label.font.fontName, size: 16)
-        return label
-    }
-    
     func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
-        let publicServiceLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
+        let publicServiceLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
         box.delegate = self
         box.tag = tag
@@ -177,7 +169,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
-        let factsLabel = setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let factsLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
         factsBar.progressTintColors = [Constants.kLightGreenShade, Constants.kDarkGreenShade]
         factsBar.setProgress(value, animated: true)

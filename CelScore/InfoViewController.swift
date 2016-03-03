@@ -52,12 +52,9 @@ final class InfoViewController: ASViewController {
                         for (index, quality) in Info.getAll().enumerate() {
                             let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                             qualityView.tag = index+1
-                            let qualityLabel = UILabel()
-                            qualityLabel.textColor = MaterialColor.white
-                            qualityLabel.text = quality
-                            qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
-                            let infoLabel = UILabel()
+                            let qualityLabel = Constants.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
                             
+                            let infoLabel = UILabel()
                             switch quality {
                             case Info.FirstName.name(): infoLabel.text = celeb.firstName
                             case Info.MiddleName.name(): infoLabel.text = celeb.middleName
