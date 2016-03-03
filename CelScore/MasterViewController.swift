@@ -102,7 +102,9 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             .on(next: { value in
                 if value == true { self.sideNavigationViewController!.openLeftView() }
                 else {
-                    self.sideNavigationViewController!.openLeftView()
+                    let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+                    alertView.iconType = OpinionzAlertIconInfo
+                    alertView.show()
                     self.socialButton.menu.open()
                 }
             })
