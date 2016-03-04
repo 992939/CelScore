@@ -12,6 +12,7 @@ import AWSCognito
 import RealmSwift
 import TwitterKit
 import Timepiece
+import Result
 
 
 final class UserViewModel: NSObject {
@@ -25,11 +26,11 @@ final class UserViewModel: NSObject {
     
     //MARK: Login Methods
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("error:\(task.error!)"); sendError(sink, task.error!); return task }
+                guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
                 print("identity: \(task.result)")
                 return nil
             }
@@ -50,16 +51,16 @@ final class UserViewModel: NSObject {
             }
             
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error!); return task }
-                sendNext(sink, task.result!)
-                sendCompleted(sink)
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                observer.sendNext(task.result!)
+                observer.sendCompleted()
                 return task
             })
         }
     }
     
     func logoutSignal(loginType: LoginType) -> SignalProducer<LoginType, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             //TODO: implementation
             switch loginType {
             case .Facebook:
@@ -69,37 +70,37 @@ final class UserViewModel: NSObject {
             case .Twitter:
                 print("Twitter.sharedInstance()")
             }
-            sendCompleted(sink)
+            observer.sendCompleted()
         }
     }
     
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
-            if expirationDate > 10.days.later { sendCompleted(sink) }
+            if expirationDate > 10.days.later { observer.sendCompleted() }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { print("facebook refresh: \(error)"); sendError(sink, error); return }
-                    sendNext(sink, object)
-                    sendCompleted(sink)
+                    guard error == nil else { print("facebook refresh: \(error)"); observer.sendFailed(error); return }
+                    observer.sendNext(object)
+                    observer.sendCompleted()
                 }
             }
         }
     }
     
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else { sendError(sink, error); return }
-                sendNext(sink, object)
-                sendCompleted(sink)
+                guard error == nil else { observer.sendFailed(error); return }
+                observer.sendNext(object)
+                observer.sendCompleted()
             }
         }
     }
     
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
@@ -132,7 +133,7 @@ final class UserViewModel: NSObject {
                 case .UserRatings:
                     let predicate = NSPredicate(format: "isSynced = false")
                     let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
-                    guard userRatingsArray.count > 0 else { sendError(sink, NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
+                    guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
                     realm.beginWrite()
                     for var index: Int = 0; index < userRatingsArray.count; index++
                     {
@@ -145,23 +146,23 @@ final class UserViewModel: NSObject {
                 case .UserSettings:
                     //TODO: Checked once a day and only called when user actually changed a setting
                     let model: SettingsModel? = realm.objects(SettingsModel).first
-                    guard let settings = model else { sendError(sink, NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
+                    guard let settings = model else { observer.sendFailed(NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
                     if settings.isSynced == false {
                         dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                         dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                         dataset.setString(String(settings.publicService), forKey: "publicService")
                         dataset.setString(String(settings.fortuneMode), forKey: "fortuneMode")
-                    } else { sendCompleted(sink) }
+                    } else { observer.sendCompleted() }
                 }
                 
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                     guard task.error == nil else {
                         if task.error!.code == 10 { credentialsProvider.clearKeychain() }
-                        sendError(sink, task.error!)
+                        observer.sendFailed(task.error!)
                         return task
                     }
-                    sendNext(sink, task.completed)
-                    sendCompleted(sink)
+                    observer.sendNext(task.completed)
+                    observer.sendCompleted()
                     return task
                 })
                 return nil
@@ -170,7 +171,7 @@ final class UserViewModel: NSObject {
     }
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
@@ -179,7 +180,7 @@ final class UserViewModel: NSObject {
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { syncClient.wipe(); sendError(sink, task.error!); return task }
+                guard task.error == nil else { syncClient.wipe(); observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
                 realm.beginWrite()
                 
@@ -203,8 +204,8 @@ final class UserViewModel: NSObject {
                     realm.add(settings, update: true)
                 }
                 try! realm.commitWrite()
-                sendNext(sink, dataset.getAll())
-                sendCompleted(sink)
+                observer.sendNext(dataset.getAll())
+                observer.sendCompleted()
                 return task
             })
         }

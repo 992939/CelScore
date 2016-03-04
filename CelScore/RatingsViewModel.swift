@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Result
 
 
 final class RatingsViewModel: NSObject {
@@ -21,9 +22,9 @@ final class RatingsViewModel: NSObject {
     
     //MARK: Methods
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
-        return SignalProducer { sink, _ in
-            guard newRating > 0 && newRating < 6 else { sendError(sink, .RatingValueOutOfBounds); return }
-            guard ratingIndex >= 0 && ratingIndex < 10 else { sendError(sink, .RatingIndexOutOfBounds); return }
+        return SignalProducer { observer, disposable in
+            guard newRating > 0 && newRating < 6 else { observer.sendFailed(.RatingValueOutOfBounds); return }
+            guard ratingIndex >= 0 && ratingIndex < 10 else { observer.sendFailed(.RatingIndexOutOfBounds); return }
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
@@ -35,73 +36,73 @@ final class RatingsViewModel: NSObject {
             userRatings!.isSynced = true
             realm.add(userRatings!, update: true)
             try! realm.commitWrite()
-            sendNext(sink, userRatings!)
-            sendCompleted(sink)
+            observer.sendNext(userRatings!)
+            observer.sendCompleted()
         }
     }
     
     func voteSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-            guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
+            guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
             realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
             realm.add(object, update: true)
             try! realm.commitWrite()
-            sendNext(sink, object)
-            sendCompleted(sink)
+            observer.sendNext(object)
+            observer.sendCompleted()
         }
     }
     
     func getRatingsSignal(ratingsId ratingsId: String, ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             switch ratingType {
             case .Ratings:
                 let predicate = NSPredicate(format: "id = %@", ratingsId)
                 let ratings = realm.objects(RatingsModel).filter(predicate).first
-                guard let object = ratings else { sendError(sink, .RatingsNotFound); return }
-                sendNext(sink, object)
+                guard let object = ratings else { observer.sendFailed(.RatingsNotFound); return }
+                observer.sendNext(object)
             case .UserRatings:
                 let predicate = NSPredicate(format: "id = %@", ratingsId)
                 let userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-                guard let object = userRatings else { sendError(sink, .UserRatingsNotFound); return }
-                sendNext(sink, object)
+                guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+                observer.sendNext(object)
             }
-            sendCompleted(sink)
+            observer.sendCompleted()
         }
     }
     
     func hasUserRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<Bool, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
             var hasRatings: Bool = false
             if let userRatings = newRatings where userRatings.totalVotes > 0 { hasRatings = true }
-            sendNext(sink, hasRatings)
-            sendCompleted(sink)
+            observer.sendNext(hasRatings)
+            observer.sendCompleted()
         }
     }
     
     func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
         let realm = try! Realm()
         let predicate = NSPredicate(format: "id = %@", ratingsId)
         let ratings: RatingsModel = realm.objects(RatingsModel).filter(predicate).first!
         let variance = (ratings.variance1 + ratings.variance2 + ratings.variance3 + ratings.variance4 + ratings.variance5
                     + ratings.variance6 + ratings.variance7 + ratings.variance8 + ratings.variance9 + ratings.variance10) / 10
         let consensus = 100 - ( 20 * variance )
-        sendNext(sink, consensus)
-        sendCompleted(sink)
+        observer.sendNext(consensus)
+        observer.sendCompleted()
         }
     }
     
     func getCelScoreSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let ratings = realm.objects(RatingsModel).filter(predicate).first
@@ -119,8 +120,8 @@ final class RatingsViewModel: NSObject {
                     celScore = celScore / 10
                 }
             }
-            sendNext(sink, celScore)
-            sendCompleted(sink)
+            observer.sendNext(celScore)
+            observer.sendCompleted()
         }
     }
 }

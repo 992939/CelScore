@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import ReactiveCocoa
 import Timepiece
+import Result
 
 
 final class CelebrityViewModel: NSObject {
@@ -22,44 +23,44 @@ final class CelebrityViewModel: NSObject {
     
     //MARK: Methods
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!.copy() as? CelebrityModel
-            guard let object = celebrity else { sendError(sink, .NotFound); return }
-            sendNext(sink, object)
-            sendCompleted(sink)
+            guard let object = celebrity else { observer.sendFailed(.NotFound); return }
+            observer.sendNext(object)
+            observer.sendCompleted()
         }
     }
     
     func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
-            guard let celeb = celebrity else { sendError(sink, .NotFound); return }
+            guard let celeb = celebrity else { observer.sendFailed(.NotFound); return }
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
             activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
             activity.becomeCurrent()
-            sendNext(sink, activity)
-            sendCompleted(sink)
+            observer.sendNext(activity)
+            observer.sendCompleted()
         }
     }
     
     func followCebritySignal(id id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", id)
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
-            guard let object = celebrity else { sendError(sink, .NotFound); return }
+            guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             object.isFollowed = isFollowing
             object.isSynced = false
             realm.add(object, update: true)
             try! realm.commitWrite()
-            sendNext(sink, object)
-            sendCompleted(sink)
+            observer.sendNext(object)
+            observer.sendCompleted()
         }
     }
 }

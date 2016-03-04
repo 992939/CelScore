@@ -12,6 +12,7 @@ import RealmSwift
 import ReactiveCocoa
 import AIRTimer
 import Social
+import Result
 
 
 final class CelScoreViewModel: NSObject {
@@ -28,13 +29,13 @@ final class CelScoreViewModel: NSObject {
     
     //MARK: Methods
     func checkNetworkStatusSignal() -> SignalProducer<Bool, NoError> {
-        return SignalProducer { sink, _ in
-            sendNext(sink, Reachability.isConnectedToNetwork())
+        return SignalProducer { observer, disposable in
+            observer.sendNext(Reachability.isConnectedToNetwork())
         }
     }
     
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
 
             let serviceClient = PROCelScoreAPIClient.defaultClient()
             serviceClient.APIKey = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP" //TODO: encrypt
@@ -47,8 +48,8 @@ final class CelScoreViewModel: NSObject {
             }
             
             let block = awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { sendError(sink, task.error!); return task }
-                guard task.cancelled == false else { sendInterrupted(sink); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                guard task.cancelled == false else { observer.sendInterrupted(); return task }
                 
                 let myData = task.result as! String
                 let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -65,7 +66,7 @@ final class CelScoreViewModel: NSObject {
                     try! realm.commitWrite()
                     print(awsObject)
                 })
-                sendNext(sink, task.result!)
+                observer.sendNext(task.result!)
                 return task
             })
             AIRTimer.every(timeInterval) { timer in block }
@@ -74,7 +75,7 @@ final class CelScoreViewModel: NSObject {
     }
     
     func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             
             let fortuneCookieSays: String?
             var newCookies = Constants.fortuneCookies
@@ -104,21 +105,21 @@ final class CelScoreViewModel: NSObject {
                 fortuneCookieSays = newCookies[index]
             }
             try! realm.commitWrite()
-            sendNext(sink, "\"\(fortuneCookieSays!) Thank you for voting.\"")
-            sendCompleted(sink)
+            observer.sendNext("\"\(fortuneCookieSays!) Thank you for voting.\"")
+            observer.sendCompleted()
         }
     }
     
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             var socialVC: SLComposeViewController
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
             socialVC.setInitialText("#PSA: \(message) #PLND")
-            sendNext(sink, socialVC)
-            sendCompleted(sink)
+            observer.sendNext(socialVC)
+            observer.sendCompleted()
         }
     }
 }

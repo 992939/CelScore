@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import RealmSwift
+import Result
 
 
 final class ListViewModel: NSObject {
@@ -24,23 +25,23 @@ final class ListViewModel: NSObject {
     func getCount() -> Int { return celebrityList.count }
     
     func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
+            guard let celebList = list else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
             self.celebrityList = celebList.copy() as! ListsModel
-            sendNext(sink, celebList)
-            sendCompleted(sink)
+            observer.sendNext(celebList)
+            observer.sendCompleted()
         }
     }
     
     func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             var predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList: ListsModel = list else { sendError(sink, NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO
+            guard let celebList: ListsModel = list else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO
             predicate = NSPredicate(format: "isFollowed = true")
             let followed = realm.objects(CelebrityModel).filter(predicate)
 
@@ -64,13 +65,13 @@ final class ListViewModel: NSObject {
                 listModel.celebList.append(celebId)
             }
             self.celebrityList.celebList = listModel.celebList
-            sendNext(sink, self.celebrityList)
-            sendCompleted(sink)
+            observer.sendNext(self.celebrityList)
+            observer.sendCompleted()
         }
     }
     
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
             let list = realm.objects(CelebrityModel).filter(predicate)
@@ -86,21 +87,21 @@ final class ListViewModel: NSObject {
             }
             listModel.count = list.count
             self.celebrityList = listModel.copy() as! ListsModel
-            sendNext(sink, listModel)
-            sendCompleted(sink)
+            observer.sendNext(listModel)
+            observer.sendCompleted()
         }
     }
     
     func getCelebrityStructSignal(index index: Int) -> SignalProducer<CelebrityStruct, ListError> {
-        return SignalProducer { sink, _ in
-            guard index < self.getCount() else { sendError(sink, .IndexOutOfBounds); return }
+        return SignalProducer { observer, disposable in
+            guard index < self.getCount() else { observer.sendFailed(.IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", celebId.id)
             let celebrity = realm.objects(CelebrityModel).filter(predicate).first
-            guard let celeb = celebrity else { sendError(sink, .EmptyList); return }
-            sendNext(sink, CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
-            sendCompleted(sink)
+            guard let celeb = celebrity else { observer.sendFailed(.EmptyList); return }
+            observer.sendNext(CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            observer.sendCompleted()
         }
     }
 }
