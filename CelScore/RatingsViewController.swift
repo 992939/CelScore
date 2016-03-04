@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import Material
 import AIRTimer
+import OpinionzAlertView
 
 final class RatingsViewController: ASViewController {
     
@@ -73,12 +74,24 @@ final class RatingsViewController: ASViewController {
                         })
                         .start()
                     cosmosView.didTouchCosmos = { rating in
+                        
+                        SettingsViewModel().isLoggedInSignal()
+                            .on(next: { value in
+                                if value == false {
+                                    let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+                                    alertView.iconType = OpinionzAlertIconInfo
+                                    alertView.show()
+                                    //self.socialButton.menu.open()
+                                }
+                            })
+                            .start()
+                        
                         cosmosView.settings.userRatingMode = true
                         RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
                             .on(next: { ratings in
                                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
                                 var celScore: Double = 0
-                                for rating in ratings { celScore += ratings[rating] as! Double }
+                                for userRating in ratings { celScore += ratings[userRating] as! Double }
                                 let isPositive = celScore < 30 ? false : true
                                 if unrated.count == 0 { self.delegate!.enableVoteButton(isPositive) }
                             })
