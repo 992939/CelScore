@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import ReactiveCocoa
+import Result
 
 
 final class SettingsViewModel: NSObject {
@@ -22,86 +23,86 @@ final class SettingsViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Methods
-    func calculateUserRatingsPercentageSignal() -> SignalProducer<CGFloat, SettingsError> {
-        return SignalProducer { sink, _ in
+    func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, SettingsError> {
+        return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             let celebrityCount: Int = realm.objects(CelebrityModel).count
-            guard celebrityCount > 1 else { sendError(sink, .NoCelebrityModels); return }
-            sendNext(sink, CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
-            sendCompleted(sink)
+            guard celebrityCount > 1 else { observer.sendFailed(.NoCelebrityModels); return }
+            observer.sendNext(CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
+            observer.sendCompleted()
         }
     }
     
     func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, SettingsError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
-            guard ratings.count > 0 else { sendError(sink, .NoRatingsModel); return }
+            guard ratings.count > 0 else { observer.sendFailed(.NoRatingsModel); return }
 
             let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in
                 return (ratingsModel.variance1 + ratingsModel.variance2 + ratingsModel.variance3 + ratingsModel.variance4 + ratingsModel.variance5
                 + ratingsModel.variance6 + ratingsModel.variance7 + ratingsModel.variance8 + ratingsModel.variance9 + ratingsModel.variance10) / 10
             }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
-            guard averageVariance > 0 && averageVariance < 5  else { sendError(sink, .OutOfBoundsVariance); return }
+            guard averageVariance > 0 && averageVariance < 5  else { observer.sendFailed(.OutOfBoundsVariance); return }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
-            sendNext(sink, CGFloat(consensus))
-            sendCompleted(sink)
+            observer.sendNext(CGFloat(consensus))
+            observer.sendCompleted()
         }
     }
     
     func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, SettingsError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 0 else { sendError(sink, .NoUserRatingsModel); return }
+            guard ratings.count > 0 else { observer.sendFailed(.NoUserRatingsModel); return }
             
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 let celscore = (ratingsModel.rating1 + ratingsModel.rating2 + ratingsModel.rating3 + ratingsModel.rating4 + ratingsModel.rating5
                 + ratingsModel.rating6 + ratingsModel.rating7 + ratingsModel.rating8 + ratingsModel.rating9 + ratingsModel.rating10) / 10
                 return celscore >= 3 ? true : false
             })
-            sendNext(sink, CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
-            sendCompleted(sink)
+            observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
+            observer.sendCompleted()
         }
     }
     
     func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model: SettingsModel? = realm.objects(SettingsModel).first
             if let settings = model {
                 switch settingType {
-                case .DefaultListIndex: sendNext(sink, settings.defaultListIndex)
-                case .LoginTypeIndex: sendNext(sink, settings.loginTypeIndex)
-                case .PublicService: sendNext(sink, settings.publicService)
-                case .FortuneMode: sendNext(sink, settings.fortuneMode)
+                case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)
+                case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
+                case .PublicService: observer.sendNext(settings.publicService)
+                case .FortuneMode: observer.sendNext(settings.fortuneMode)
                 }
             } else {
                 switch settingType {
-                case .DefaultListIndex: sendNext(sink, SettingsModel().defaultListIndex)
-                case .LoginTypeIndex: sendNext(sink, SettingsModel().loginTypeIndex)
-                case .PublicService: sendNext(sink, SettingsModel().publicService)
-                case .FortuneMode: sendNext(sink, SettingsModel().fortuneMode)
+                case .DefaultListIndex: observer.sendNext(SettingsModel().defaultListIndex)
+                case .LoginTypeIndex: observer.sendNext(SettingsModel().loginTypeIndex)
+                case .PublicService: observer.sendNext(SettingsModel().publicService)
+                case .FortuneMode: observer.sendNext(SettingsModel().fortuneMode)
                 }
             }
-            sendCompleted(sink)
+            observer.sendCompleted()
         }
     }
     
     func isLoggedInSignal() -> SignalProducer<Bool, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            if model!.userName.isEmpty { sendNext(sink, false) }
-            else { sendNext(sink, true) }
-            sendCompleted(sink)
+            if model!.userName.isEmpty { observer.sendNext(false) }
+            else { observer.sendNext(true) }
+            observer.sendCompleted()
         }
     }
     
     func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
             
@@ -119,13 +120,13 @@ final class SettingsViewModel: NSObject {
             realm.add(settings, update: true)
             try! realm.commitWrite()
             
-            sendNext(sink, settings)
-            sendCompleted(sink)
+            observer.sendNext(settings)
+            observer.sendCompleted()
         }
     }
     
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
-        return SignalProducer { sink, _ in
+        return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFollowed = true")
             let celebList = realm.objects(CelebrityModel).filter(predicate)
@@ -139,8 +140,8 @@ final class SettingsViewModel: NSObject {
                 }
             }
             userDefaults!.setInteger(celebList.count, forKey: "count")
-            sendNext(sink, celebList)
-            sendCompleted(sink)
+            observer.sendNext(celebList)
+            observer.sendCompleted()
         }
     }
 }

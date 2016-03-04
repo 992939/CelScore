@@ -32,23 +32,23 @@ PODS:
     - PINCache (>= 2.1)
   - PINRemoteImage/iOS (2.0.1):
     - PINRemoteImage/Core
-  - ReactiveCocoa (4.0.4-alpha-1):
-    - ReactiveCocoa/UI (= 4.0.4-alpha-1)
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/Core (4.0.4-alpha-1):
+  - ReactiveCocoa (4.0.1):
+    - ReactiveCocoa/UI (= 4.0.1)
+    - Result (~> 1.0.2)
+  - ReactiveCocoa/Core (4.0.1):
     - ReactiveCocoa/no-arc
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/no-arc (4.0.4-alpha-1):
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/UI (4.0.4-alpha-1):
+    - Result (~> 1.0.2)
+  - ReactiveCocoa/no-arc (4.0.1):
+    - Result (~> 1.0.2)
+  - ReactiveCocoa/UI (4.0.1):
     - ReactiveCocoa/Core
-    - Result (~> 0.6-beta.1)
+    - Result (~> 1.0.2)
   - Realm (0.97.1):
     - Realm/Headers (= 0.97.1)
   - Realm/Headers (0.97.1)
   - RealmSwift (0.97.1):
     - Realm (= 0.97.1)
-  - Result (0.6.0-beta.6)
+  - Result (1.0.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -77,7 +77,7 @@ DEPENDENCIES:
   - LMGaugeView (~> 1.0)
   - Material (~> 1.35.1)
   - OpinionzAlertView
-  - ReactiveCocoa (= 4.0.4-alpha-1)
+  - ReactiveCocoa (= 4.0.1)
   - RealmSwift (~> 0.97.0)
   - SDWebImage (~> 3.7)
   - SMSegmentView (~> 1.1)
@@ -105,10 +105,10 @@ SPEC CHECKSUMS:
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
   PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
-  ReactiveCocoa: 618a2fc13d4ed80e380aa6fa56547cef43c7341d
+  ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
   Realm: 6854f49cc788171573a0605fe5e55d3224bc39f9
   RealmSwift: 21aa38ae5210a8e7d3ca2fd02a0ce82476672101
-  Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
+  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

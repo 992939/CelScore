@@ -4,7 +4,7 @@ platform :ios, '9.0'
 
 
 target 'CelScore' do
-    pod 'ReactiveCocoa', '4.0.4-alpha-1'
+    pod 'ReactiveCocoa', '4.0.1'
     pod 'AsyncDisplayKit', '~> 1.9.6'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
@@ -33,7 +33,7 @@ target 'CelScoreTests' do
 end
 
 target 'CelScoreWidget' do
-    pod 'ReactiveCocoa', '4.0.4-alpha-1'
+    pod 'ReactiveCocoa', '4.0.1'
     pod 'RealmSwift', '~> 0.97.0'
     pod 'AIRTimer', '~> 1.0'
 end

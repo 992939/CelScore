@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import enum Result.NoError
 
 extension NSNotificationCenter {
 	/// Returns a producer of notifications posted that match the given criteria.
@@ -15,7 +16,7 @@ extension NSNotificationCenter {
 	public func rac_notifications(name: String? = nil, object: AnyObject? = nil) -> SignalProducer<NSNotification, NoError> {
 		return SignalProducer { observer, disposable in
 			let notificationObserver = self.addObserverForName(name, object: object, queue: nil) { notification in
-				sendNext(observer, notification)
+				observer.sendNext(notification)
 			}
 
 			disposable.addDisposable {
@@ -34,10 +35,10 @@ extension NSURLSession {
 		return SignalProducer { observer, disposable in
 			let task = self.dataTaskWithRequest(request) { data, response, error in
 				if let data = data, response = response {
-					sendNext(observer, (data, response))
-					sendCompleted(observer)
+					observer.sendNext((data, response))
+					observer.sendCompleted()
 				} else {
-					sendError(observer, error ?? defaultSessionError)
+					observer.sendFailed(error ?? defaultSessionError)
 				}
 			}
 
