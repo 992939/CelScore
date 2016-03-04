@@ -128,9 +128,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
                 .on(next: { userRatings in
-                    var celScore: Double = 0
-                    for rating in userRatings { celScore += userRatings[rating] as! Double }
-                    self.voteButton.backgroundColor = celScore < 30 ? Constants.kDarkGreenShade : Constants.kWineShade
+                    self.voteButton.backgroundColor = userRatings.getCelScore() < 3.0 ? Constants.kDarkGreenShade : Constants.kWineShade
                     self.voteButton.enabled = true
                 })
                 .start()
