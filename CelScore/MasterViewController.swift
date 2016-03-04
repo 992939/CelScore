@@ -194,7 +194,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             UIView.animateWithDuration(0.5, animations: {
                 self.searchBar.alpha = 1
                 self.searchBar.showsCancelButton = true
-                self.searchBar.tintColor = Constants.kBrightShade
+                self.searchBar.tintColor = Constants.kLightGreenShade
                 self.searchBar.backgroundColor = Constants.kDarkShade
                 self.searchBar.barTintColor = MaterialColor.white
                 self.searchBar.frame = Constants.kSegmentedControlRect

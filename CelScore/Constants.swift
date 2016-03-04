@@ -22,15 +22,12 @@ struct Constants {
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     
-    static let kBackgroundColor: UIColor = MaterialColor.grey.lighten3
     static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
     static let kMainShade: UIColor = MaterialColor.blueGrey.base
     static let kLightShade: UIColor = MaterialColor.grey.lighten3
     static let kLightGreenShade: UIColor = MaterialColor.lightGreen.lighten3
     static let kDarkGreenShade: UIColor = MaterialColor.teal.lighten1
     static let kWineShade: UIColor = MaterialColor.purple.lighten4
-    static let kBrightShade: UIColor = MaterialColor.lightBlue.lighten3
-    static let kYellowShade: UIColor = MaterialColor.yellow.accent3
     static let kStarRatingShade: UIColor = MaterialColor.yellow.accent3
     
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
