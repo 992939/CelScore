@@ -9,7 +9,6 @@
 import AsyncDisplayKit
 import Material
 import SMSegmentView
-import AIRTimer
 
 
 final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
@@ -182,8 +181,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 self.notification.image = UIImage(named: "road")
                 self.notification.dismissOnTap = true
                 self.notification.presentInView(self.view, withGravityAnimation: true)
-                AIRTimer.after(5.0){ _ in self.notification.dismissWithGravityAnimation(true) }
             })
+            .delay(5.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .on(completed: { self.notification.dismissWithGravityAnimation(true) })
             .start()
     }
 
