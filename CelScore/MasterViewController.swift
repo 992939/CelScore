@@ -73,7 +73,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: NavigationBarView = getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton()
+        self.setUpSocialButton(self.socialButton)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
@@ -266,7 +266,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.addTarget(self, action: "changeList", forControlEvents: .ValueChanged)
     }
     
-    func setUpSocialButton() {
+    func setUpSocialButton(menuView: MenuView) {
         var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
@@ -276,7 +276,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn1.setImage(image, forState: .Normal)
         btn1.setImage(image, forState: .Highlighted)
         btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn1)
+        menuView.addSubview(btn1)
         
         image = UIImage(named: "facebooklogo")
         let btn2: FabButton = FabButton()
@@ -291,7 +291,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
         btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn2)
+        menuView.addSubview(btn2)
         
         image = UIImage(named: "twitterlogo")
         let btn3: FabButton = FabButton()
@@ -306,13 +306,13 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
         btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn3)
+        menuView.addSubview(btn3)
         
-        self.socialButton.menu.origin = CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70)
-        self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        self.socialButton.menu.direction = .Up
-        self.socialButton.menu.views = [btn1, btn2, btn3]
-        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
+        menuView.menu.origin = CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70)
+        menuView.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.menu.direction = .Up
+        menuView.menu.views = [btn1, btn2, btn3]
+        menuView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
