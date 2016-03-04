@@ -135,8 +135,9 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }
-                AIRTimer.after(3.0){ timer in self.delegate!.sendFortuneCookie() }
             })
+            .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
     }
 }
