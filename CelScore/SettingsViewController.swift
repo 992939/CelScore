@@ -74,13 +74,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Check Boxes
         let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
         
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+        SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .on(next: { status in
                 let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
             .start()
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+        SettingsViewModel().getSettingSignal(settingType: .FortuneMode)
             .on(next: { status in
                 let fortuneCookieNode = self.setupCheckBoxNode("Revolutionary Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(fortuneCookieNode)
