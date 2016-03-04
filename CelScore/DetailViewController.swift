@@ -79,7 +79,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
-            .map({ ratings in return RatingsViewModel().voteSignal(ratingsId: self.celebST.id).start() })
+            .map({ _ in return RatingsViewModel().voteSignal(ratingsId: self.celebST.id).start() })
             .start()
     }
     
