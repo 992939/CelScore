@@ -54,24 +54,23 @@ final class InfoViewController: ASViewController {
                             qualityView.tag = index+1
                             let qualityLabel = Constants.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
                             
-                            let infoLabel = UILabel()
+                            let infoLabelText: String?
                             switch quality {
-                            case Info.FirstName.name(): infoLabel.text = celeb.firstName
-                            case Info.MiddleName.name(): infoLabel.text = celeb.middleName
-                            case Info.LastName.name(): infoLabel.text = celeb.lastName
-                            case Info.From.name(): infoLabel.text = celeb.from
-                            case Info.Birthdate.name(): infoLabel.text = formatter.stringFromDate(birthdate!) + String(" (\(age))")
-                            case Info.Height.name(): infoLabel.text = celeb.height
-                            case Info.Zodiac.name(): infoLabel.text = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                            case Info.Status.name(): infoLabel.text = celeb.status
-                            case Info.CelScore.name(): infoLabel.text = String(format: "%.2f", score)
-                            case Info.Networth.name(): infoLabel.text = celeb.netWorth
-                            default: infoLabel.text = "n/a"
+                            case Info.FirstName.name(): infoLabelText = celeb.firstName
+                            case Info.MiddleName.name(): infoLabelText = celeb.middleName
+                            case Info.LastName.name(): infoLabelText = celeb.lastName
+                            case Info.From.name(): infoLabelText = celeb.from
+                            case Info.Birthdate.name(): infoLabelText = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                            case Info.Height.name(): infoLabelText = celeb.height
+                            case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                            case Info.Status.name(): infoLabelText = celeb.status
+                            case Info.CelScore.name(): infoLabelText = String(format: "%.2f", score)
+                            case Info.Networth.name(): infoLabelText = celeb.netWorth
+                            default: infoLabelText = "n/a"
                             }
-                            
-                            infoLabel.frame = CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25)
-                            infoLabel.textColor = MaterialColor.white
+                            let infoLabel = Constants.setupLabel(title: infoLabelText!, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
                             infoLabel.textAlignment = .Right
+                            
                             qualityView.depth = .Depth1
                             qualityView.backgroundColor = Constants.kMainShade
                             qualityView.addSubview(qualityLabel)

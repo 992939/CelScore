@@ -85,7 +85,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         case 1:
             RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                 .on(next: { celscore in
-                    print("celscore is \(celscore)")
                     self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Info.CelScore.text()) \(String(format: "%.2f", celscore))")
                 })
                 .start()

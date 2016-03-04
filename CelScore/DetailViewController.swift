@@ -202,11 +202,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
         
-        let nameLabel = UILabel()
-        nameLabel.text = self.celebST.nickname
+        let nameLabel = Constants.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
         nameLabel.textAlignment = .Center
-        nameLabel.textColor = MaterialColor.white
-        nameLabel.frame = CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30)
         self.view.addSubview(nameLabel)
         
         let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
