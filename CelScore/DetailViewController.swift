@@ -55,7 +55,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton()
+        Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
+        self.socialButton.menu.enabled = false
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -247,56 +248,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         segmentView.layer.shadowOpacity = 0.3
         segmentView.delegate = self
         return segmentView
-    }
-    
-    func setUpSocialButton() {
-        var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
-        let btn1: FabButton = FabButton()
-        btn1.depth = .Depth2
-        btn1.pulseScale = false
-        btn1.backgroundColor = Constants.kDarkShade
-        btn1.tintColor = MaterialColor.white
-        btn1.setImage(image, forState: .Normal)
-        btn1.setImage(image, forState: .Highlighted)
-        btn1.addTarget(self, action: "handleMenu", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn1)
-        
-        image = UIImage(named: "facebooklogo")
-        let btn2: FabButton = FabButton()
-        btn2.tag = 1
-        btn2.clipsToBounds = true
-        btn2.contentMode = .ScaleToFill
-        btn2.depth = .Depth1
-        btn2.pulseColor = MaterialColor.white
-        btn2.backgroundColor = MaterialColor.indigo.darken1
-        btn2.borderColor = MaterialColor.white
-        btn2.borderWidth = 2
-        btn2.setImage(image, forState: .Normal)
-        btn2.setImage(image, forState: .Highlighted)
-        btn2.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn2)
-        
-        image = UIImage(named: "twitterlogo")
-        let btn3: FabButton = FabButton()
-        btn3.tag = 2
-        btn3.contentMode = .ScaleToFill
-        btn3.clipsToBounds = true
-        btn3.depth = .Depth1
-        btn3.backgroundColor = MaterialColor.lightBlue.base
-        btn3.pulseColor = MaterialColor.white
-        btn3.borderColor = MaterialColor.white
-        btn3.borderWidth = 2
-        btn3.setImage(image, forState: .Normal)
-        btn3.setImage(image, forState: .Highlighted)
-        btn3.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
-        self.socialButton.addSubview(btn3)
-        
-        self.socialButton.menu.enabled = false
-        self.socialButton.menu.origin = CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22)
-        self.socialButton.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        self.socialButton.menu.direction = .Up
-        self.socialButton.menu.views = [btn1, btn2, btn3]
-        self.socialButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setUpVoteButton() {

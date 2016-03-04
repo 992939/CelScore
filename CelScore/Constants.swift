@@ -42,6 +42,55 @@ struct Constants {
         return label
     }
     
+    static func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
+        var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
+        let btn1: FabButton = FabButton()
+        btn1.depth = .Depth2
+        btn1.pulseScale = false
+        btn1.backgroundColor = buttonColor
+        btn1.tintColor = MaterialColor.white
+        btn1.setImage(image, forState: .Normal)
+        btn1.setImage(image, forState: .Highlighted)
+        btn1.addTarget(controller, action: "handleMenu", forControlEvents: .TouchUpInside)
+        menuView.addSubview(btn1)
+        
+        image = UIImage(named: "facebooklogo")
+        let btn2: FabButton = FabButton()
+        btn2.tag = 1
+        btn2.clipsToBounds = true
+        btn2.contentMode = .ScaleToFill
+        btn2.depth = .Depth1
+        btn2.pulseColor = MaterialColor.white
+        btn2.backgroundColor = MaterialColor.indigo.darken1
+        btn2.borderColor = MaterialColor.white
+        btn2.borderWidth = 2
+        btn2.setImage(image, forState: .Normal)
+        btn2.setImage(image, forState: .Highlighted)
+        btn2.addTarget(controller, action: "handleButton:", forControlEvents: .TouchUpInside)
+        menuView.addSubview(btn2)
+        
+        image = UIImage(named: "twitterlogo")
+        let btn3: FabButton = FabButton()
+        btn3.tag = 2
+        btn3.contentMode = .ScaleToFill
+        btn3.clipsToBounds = true
+        btn3.depth = .Depth1
+        btn3.backgroundColor = MaterialColor.lightBlue.base
+        btn3.pulseColor = MaterialColor.white
+        btn3.borderColor = MaterialColor.white
+        btn3.borderWidth = 2
+        btn3.setImage(image, forState: .Normal)
+        btn3.setImage(image, forState: .Highlighted)
+        btn3.addTarget(controller, action: "handleButton:", forControlEvents: .TouchUpInside)
+        menuView.addSubview(btn3)
+        
+        menuView.menu.origin = origin
+        menuView.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.menu.direction = .Up
+        menuView.menu.views = [btn1, btn2, btn3]
+        menuView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)
