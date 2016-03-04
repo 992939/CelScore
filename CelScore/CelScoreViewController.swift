@@ -35,12 +35,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         self.pulseView.depth = .Depth1
         self.pulseView.backgroundColor = MaterialColor.clear
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
-        self.pulseView.addSubview(getView(y: gaugeHeight, title: "Social Consensus", value: "80%", tag: 2))
-        self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: "3.50", tag: 3))
+        self.pulseView.addSubview(getView(y: gaugeHeight, title: "Social Consensus", value: "80%", tag: 2)) //TODO
+        self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String(self.celebST.prevScore.roundToPlaces(2)), tag: 3))
         self.view = self.pulseView
     }
     
-    func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
+    func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView { //TODO: add actual CelScore value
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: gaugeHeight))
         gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
         gaugeView.depth = .Depth1

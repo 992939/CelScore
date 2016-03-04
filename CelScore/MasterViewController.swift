@@ -50,16 +50,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        SettingsViewModel().isLoggedInSignal()
-            .on(next: { value in
-                if value == false {
-                }
-            })
-            .start()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
@@ -124,6 +114,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.endUpdates()
             })
             .start()
+        
         CelScoreViewModel().checkNetworkStatusSignal().start() //TODO
     }
     
