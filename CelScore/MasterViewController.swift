@@ -137,9 +137,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             self.socialButton.menu.close()
             image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         } else {
-            self.socialButton.menu.open() { (v: UIView) in
-                (v as? MaterialButton)?.pulse()
-            }
+            self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
             image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         
