@@ -95,6 +95,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
+    //MARK: HandleMenu() and HandleButton() are "delegates" of the social button
     func handleMenu() {
         self.socialButton.menu.close()
         self.socialButton.menu.enabled = false
