@@ -75,7 +75,7 @@ final class RatingsViewController: ASViewController {
                         .start()
                     cosmosView.didTouchCosmos = { rating in
                         SettingsViewModel().isLoggedInSignal()
-                            .on(next: { value in if value == false {
+                            .on(next: { value in if value == true {
                                     self.delegate!.socialSharing("")
                                     let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                                     alertView.iconType = OpinionzAlertIconInfo

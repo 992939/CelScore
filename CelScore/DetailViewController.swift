@@ -78,19 +78,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-            .on(next: { ratings in
+            .filter({ (ratings: RatingsModel) -> Bool in
                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                if unrated.count == 0 {
-                    RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
-                        .on(next: { userRatings in
-                            var celScore: Double = 0
-                            for rating in ratings { celScore += ratings[rating] as! Double }
-                            let isPositive = celScore < 30 ? false : true
-                            self.ratingsVC.animateStarsToGold(positive: isPositive)
-                        })
-                        .start()
-                }
+                return unrated.count == 0
             })
+            .map({ ratings in return RatingsViewModel().voteSignal(ratingsId: self.celebST.id).start() })
             .start()
     }
     
