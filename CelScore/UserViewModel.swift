@@ -28,7 +28,6 @@ final class UserViewModel: NSObject {
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            print("C")
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
@@ -91,7 +90,6 @@ final class UserViewModel: NSObject {
     
     func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            print("A")
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                 guard error == nil else { observer.sendFailed(error); return }
                 observer.sendNext(object)
@@ -103,7 +101,6 @@ final class UserViewModel: NSObject {
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
@@ -174,7 +171,6 @@ final class UserViewModel: NSObject {
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            print("B")
             let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
