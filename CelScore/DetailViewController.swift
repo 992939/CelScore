@@ -99,7 +99,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
                     .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
                     .start()
-                })
+            })
             .on(failed: { _ in
                 if button.tag == 1 {
                     let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -111,6 +111,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                             .observeOn(QueueScheduler.mainQueueScheduler)
                             .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
+                            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings).start() })
                             .map({ _ in return self.handleMenu() })
                             .retry(Constants.kNetworkRetry)
                             .start()

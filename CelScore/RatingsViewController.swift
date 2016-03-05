@@ -35,7 +35,6 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .on(next: { ratings in
                 for (index, quality) in Qualities.getAll().enumerate() {
-                    
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
