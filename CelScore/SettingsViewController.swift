@@ -41,24 +41,24 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
+        SettingsViewModel().calculateSocialConsensusSignal()
+            .on(next: { value in
+                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding), value: value)
+                self.node.addSubnode(consensusBarNode)
+            })
+            .start()
+        
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding, value: value)
+                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding + progressNodeHeight, value: value)
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
         
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
-                let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
+                let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
-            })
-            .start()
-        
-        SettingsViewModel().calculateSocialConsensusSignal()
-            .on(next: { value in
-                let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
-                self.node.addSubnode(consensusBarNode)
             })
             .start()
         
@@ -96,7 +96,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         let userLabel = Constants.setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right
-        let logoutButton = FlatButton(frame: CGRect(x: 65, y: 30, width: 100, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.setTitleColor(Constants.kDarkGreenShade, forState: .Normal)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
