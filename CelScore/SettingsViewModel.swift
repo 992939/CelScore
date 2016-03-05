@@ -96,7 +96,6 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
             guard model!.userName.isEmpty == false else { print("Fail"); observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return }
-            print("Success")
             observer.sendNext(true)
             observer.sendCompleted()
         }
