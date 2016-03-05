@@ -15,9 +15,10 @@ import Material
 import HMSegmentedControl
 import AIRTimer
 import OpinionzAlertView
+import FBSDKLoginKit
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, FBSDKLoginButtonDelegate {
     
     //MARK: Properties
     let celebrityListVM: ListViewModel
@@ -108,7 +109,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId())
             }
-            .on(next: { value in
+            .on(next: { _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
@@ -147,7 +148,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         first?.setImage(image, forState: .Highlighted)
     }
     
-    func handleButton(button: UIButton) {
+    func socialButton(button: UIButton) {
        //TODO: LOGINS
         print("Hello!!!")
     }
@@ -208,6 +209,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
             self.celebrityListVM.searchSignal(searchToken: searchText)
+                .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
                 .on(next: { _ in
                     self.celebrityTableView.beginUpdates()
                     self.celebrityTableView.reloadData()
@@ -216,6 +218,44 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 .start()
         }
     }
+    
+//    func getLoginButton() -> FBSDKLoginButton {
+//        let loginButton = FBSDKLoginButton()
+//        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+//        loginButton.frame = CGRect(x: 0, y: 70, width: 120, height: 44)
+//        loginButton.delegate = self
+//        return loginButton
+//    }
+    
+    //MARK: FBSDKLoginButtonDelegate
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        guard error == nil else { print("FBSDKLogin error: \(error)"); return }
+        guard result.isCancelled == false else { return }
+        FBSDKAccessToken.setCurrentAccessToken(result.token)
+        
+        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getUserInfoFromFacebookSignal()
+            }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
+            }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+            }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List)
+            }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
+            }
+            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
+            .retry(2)
+            .start()
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
     
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {

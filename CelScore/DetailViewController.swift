@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import Material
 import SMSegmentView
+import FBSDKLoginKit
 
 
 final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
@@ -21,7 +22,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
     let socialButton: MenuView
-    var socialMessage: String = ""
+    private(set) var socialMessage: String = ""
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -92,13 +93,30 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         first?.animate(MaterialAnimation.rotate(1))
     }
     
-    func handleButton(button: UIButton) {
+    func socialButton(button: UIButton) {
         SettingsViewModel().isLoggedInSignal()
-            .on(next: { value in if value == false { print("fo show!") }
-            else {
+            .on(next: { _ in
                 CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
                     .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
                     .start()
+                })
+            .on(failed: { _ in
+                if button.tag == 1 {
+                    let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+                    FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+                        guard error == nil else { print("FBSDKLogin error: \(error)"); return }
+                        guard result.isCancelled == false else { return }
+                        FBSDKAccessToken.setCurrentAccessToken(result.token)
+                        
+                        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+                            .observeOn(QueueScheduler.mainQueueScheduler)
+                            .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal() })
+                            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) })
+                            .retry(2)
+                            .start()
+                    })
+                } else {
+                    //TWITTER
                 }
             })
             .start()

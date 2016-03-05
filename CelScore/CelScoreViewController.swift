@@ -97,7 +97,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         case 3: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         default: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         }
- 
     }
     
     func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {

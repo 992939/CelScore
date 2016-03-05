@@ -75,22 +75,22 @@ final class RatingsViewController: ASViewController {
                         .start()
                     cosmosView.didTouchCosmos = { rating in
                         SettingsViewModel().isLoggedInSignal()
-                            .on(next: { value in if value == true {
-                                    self.delegate!.socialSharing("")
-                                    let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
-                                    alertView.iconType = OpinionzAlertIconInfo
-                                    alertView.show()
-                                } else {
-                                    cosmosView.settings.updateOnTouch = true
-                                    cosmosView.settings.userRatingMode = true
-                                    RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
-                                        .on(next: { ratings in
-                                            let isPositive = ratings.getCelScore() < 3.0 ? false : true
-                                            let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                                            if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }
-                                        })
-                                        .start()
-                                }
+                            .on(failed: { _ in
+                                self.delegate!.socialSharing("")
+                                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+                                alertView.iconType = OpinionzAlertIconInfo
+                                alertView.show()
+                            })
+                            .on(next: { _ in
+                                cosmosView.settings.updateOnTouch = true
+                                cosmosView.settings.userRatingMode = true
+                                RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
+                                    .on(next: { ratings in
+                                        let isPositive = ratings.getCelScore() < 3.0 ? false : true
+                                        let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
+                                        if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }
+                                    })
+                                    .start()
                             })
                             .start()
                     }

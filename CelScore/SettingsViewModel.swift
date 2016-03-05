@@ -91,12 +91,13 @@ final class SettingsViewModel: NSObject {
         }
     }
     
-    func isLoggedInSignal() -> SignalProducer<Bool, NoError> {
+    func isLoggedInSignal() -> SignalProducer<Bool, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            if model!.userName.isEmpty { observer.sendNext(false) }
-            else { observer.sendNext(true) }
+            guard model!.userName.isEmpty == false else { print("Fail"); observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return }
+            print("Success")
+            observer.sendNext(true)
             observer.sendCompleted()
         }
     }

@@ -34,7 +34,6 @@
 		006431901C6A66030062BBDB /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318F1C6A66030062BBDB /* CosmosView.swift */; };
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
-		00792C581C85420F00E2CCA2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00792C571C85420F00E2CCA2 /* LoginViewController.swift */; };
 		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
 		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
 		0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14E1C40F8A900E2A9BC /* Reachability.swift */; };
@@ -132,7 +131,6 @@
 		0064318F1C6A66030062BBDB /* CosmosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
 		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
-		00792C571C85420F00E2CCA2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
 		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
 		0082B14A1C3B6FFD00E2A9BC /* PROEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROEmpty.h; sourceTree = "<group>"; };
@@ -330,7 +328,6 @@
 				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
 				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
 				00C347BA1C60902E00097089 /* SettingsViewController.swift */,
-				00792C571C85420F00E2CCA2 /* LoginViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -665,7 +662,6 @@
 			files = (
 				006431921C6A67430062BBDB /* StarLayer.swift in Sources */,
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
-				00792C581C85420F00E2CCA2 /* LoginViewController.swift in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
 				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,

@@ -66,7 +66,7 @@ struct Constants {
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
-        btn2.addTarget(controller, action: "handleButton:", forControlEvents: .TouchUpInside)
+        btn2.addTarget(controller, action: "socialButton:", forControlEvents: .TouchUpInside)
         menuView.addSubview(btn2)
         
         image = UIImage(named: "twitterlogo")
@@ -81,7 +81,7 @@ struct Constants {
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
-        btn3.addTarget(controller, action: "handleButton:", forControlEvents: .TouchUpInside)
+        btn3.addTarget(controller, action: "socialButton:", forControlEvents: .TouchUpInside)
         menuView.addSubview(btn3)
         
         menuView.menu.origin = origin
