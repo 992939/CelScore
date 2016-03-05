@@ -9,7 +9,6 @@
 import AsyncDisplayKit
 import WebASDKImageManager
 import Material
-import AIRTimer
 
 
 final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {

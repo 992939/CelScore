@@ -15,7 +15,6 @@ import Material
 import HMSegmentedControl
 import AIRTimer
 import OpinionzAlertView
-import FBSDKLoginKit
 
 
 final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
