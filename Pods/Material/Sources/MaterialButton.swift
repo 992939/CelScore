@@ -379,14 +379,21 @@ public class MaterialButton : UIButton {
 	if interrupted.
 	*/
 	public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-		if anim is CAPropertyAnimation {
+		if let a: CAPropertyAnimation = anim as? CAPropertyAnimation {
+			if let b: CABasicAnimation = a as? CABasicAnimation {
+				if let v: AnyObject = b.toValue {
+					if let k: String = b.keyPath {
+						layer.setValue(v, forKeyPath: k)
+						layer.removeAnimationForKey(k)
+					}
+				}
+			}
 			(delegate as? MaterialAnimationDelegate)?.materialAnimationDidStop?(anim, finished: flag)
 		} else if let a: CAAnimationGroup = anim as? CAAnimationGroup {
 			for x in a.animations! {
 				animationDidStop(x, finished: true)
 			}
 		}
-		layoutVisualLayer()
 	}
 	
 	/**
@@ -461,24 +468,26 @@ public class MaterialButton : UIButton {
 	/// Manages the layout for the visualLayer property.
 	internal func layoutVisualLayer() {
 		visualLayer.frame = bounds
-		visualLayer.position = CGPointMake(width / 2, height / 2)
-		visualLayer.cornerRadius = layer.cornerRadius
+		visualLayer.cornerRadius = cornerRadius
 	}
 	
 	/// Manages the layout for the shape of the view instance.
 	internal func layoutShape() {
 		if .Circle == shape {
-			layer.cornerRadius = width / 2
+			let w: CGFloat = (width / 2)
+			if w != cornerRadius {
+				cornerRadius = w
+			}
 		}
 	}
 	
 	/// Sets the shadow path.
 	internal func layoutShadowPath() {
 		if shadowPathAutoSizeEnabled {
-			if .None == self.depth {
-				layer.shadowPath = nil
-			} else if nil == layer.shadowPath {
-				layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
+			if .None == depth {
+				shadowPath = nil
+			} else if nil == shadowPath {
+				shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
 			} else {
 				animate(MaterialAnimation.shadowPath(UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath, duration: 0))
 			}
@@ -524,8 +533,8 @@ public class MaterialButton : UIButton {
 					if nil != self && nil != self!.pulseColor && 0 < self!.pulseColorOpacity {
 						MaterialAnimation.animateWithDuration(t, animations: {
 							pulseLayer.hidden = true
-						}) {
-							pulseLayer.removeFromSuperlayer()
+							}) {
+								pulseLayer.removeFromSuperlayer()
 						}
 					}
 				}

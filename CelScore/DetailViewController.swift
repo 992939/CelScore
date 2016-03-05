@@ -90,7 +90,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         first?.backgroundColor = Constants.kDarkShade
-        first?.animate(MaterialAnimation.rotate(1))
+        first?.animate(MaterialAnimation.rotate())
     }
     
     func socialButton(button: UIButton) {

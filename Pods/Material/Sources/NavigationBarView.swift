@@ -30,11 +30,6 @@
 
 import UIKit
 
-@objc(NavigationBarView)
-public protocol NavigationBarViewDelegate : MaterialDelegate {
-	optional func navigationBarViewDidChangeLayout(navigationBarView: NavigationBarView)
-}
-
 public class NavigationBarView : StatusBarView {
 	/// Title label.
 	public var titleLabel: UILabel? {
@@ -75,9 +70,7 @@ public class NavigationBarView : StatusBarView {
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-	
 		if willRenderView {
-			
 			// TitleView alignment.
 			if let v: UILabel = titleLabel {
 				if let d: UILabel = detailLabel {
@@ -90,7 +83,7 @@ public class NavigationBarView : StatusBarView {
 					contentView.grid.contentInset.top = -8
 				} else {
 					v.grid.rows = 1
-					v.font = v.font.fontWithSize(20)
+					v.font = v.font?.fontWithSize(20)
 					contentView.grid.axis.rows = 1
 					contentView.grid.spacing = 0
 					contentView.grid.contentInset.top = 0
@@ -106,6 +99,7 @@ public class NavigationBarView : StatusBarView {
 				contentView.grid.views?.append(v)
 			}
 			
+			grid.reloadLayout()
 			contentView.grid.reloadLayout()
 		}
 	}

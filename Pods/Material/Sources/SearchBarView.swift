@@ -30,11 +30,6 @@
 
 import UIKit
 
-@objc(SearchBarViewDelegate)
-public protocol SearchBarViewDelegate : MaterialDelegate {
-	optional func searchBarViewDidChangeLayout(searchBarView: SearchBarView)
-}
-
 public class SearchBarView : StatusBarView {
 	/// The UITextField for the searchBar.
 	public private(set) lazy var textField: TextField = TextField()
@@ -89,6 +84,7 @@ public class SearchBarView : StatusBarView {
 		super.layoutSubviews()
 		if willRenderView {
 			contentView.grid.views?.append(textField)
+			contentView.grid.reloadLayout()
 			textField.font = textField.font?.fontWithSize(20)
 			textField.reloadView()
 		}

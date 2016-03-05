@@ -17,7 +17,7 @@ import AIRTimer
 import OpinionzAlertView
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
     let celebrityListVM: ListViewModel
@@ -35,7 +35,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
-        super.init(node: ASDisplayNode())
+        super.init(nibName: nil, bundle: nil)
 
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
@@ -61,7 +61,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         
-        let navigationBarView: NavigationBarView = getNavigationView()
+        let navigationBarView: NavigationBarView = self.getNavigationView()
         self.setupSegmentedControl()
         Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
         
@@ -139,9 +139,8 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
             self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
             image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
         }
-        
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.animate(MaterialAnimation.rotate(1))
+        first?.animate(MaterialAnimation.rotate())
         first?.setImage(image, forState: .Normal)
         first?.setImage(image, forState: .Highlighted)
     }
@@ -241,19 +240,21 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
         
-        let searchButton: FlatButton = FlatButton()
-        searchButton.pulseColor = MaterialColor.white
-        searchButton.pulseScale = false
-        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
-        searchButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
-        searchButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
+        let rightButton: FlatButton = FlatButton()
+        rightButton.pulseColor = MaterialColor.white
+        rightButton.pulseScale = false
+        rightButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
+        rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
+        rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
-        let navigationBarView: NavigationBarView = NavigationBarView(titleLabel: nil, detailLabel: nil, leftControls: [menuButton], rightControls: [searchButton])!
-        navigationBarView.backgroundColor = Constants.kMainShade
+        let navBar: NavigationBarView = NavigationBarView()
+        navBar.leftControls = [menuButton]
+        navBar.rightControls = [rightButton]
+        navBar.backgroundColor = Constants.kMainShade
         let celscoreImageView = UIImageView(image: UIImage(named: "celscore_white"))
-        celscoreImageView.frame = CGRect(x: navigationBarView.width/2, y: navigationBarView.centerY - 5, width: 25, height: 25)
-        navigationBarView.addSubview(celscoreImageView)
-        return navigationBarView
+        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY - 5, width: 25, height: 25)
+        navBar.addSubview(celscoreImageView)
+        return navBar
     }
     
     func setupSegmentedControl() {

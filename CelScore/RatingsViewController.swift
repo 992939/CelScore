@@ -74,6 +74,7 @@ final class RatingsViewController: ASViewController {
                         .start()
                     cosmosView.didTouchCosmos = { rating in
                         SettingsViewModel().isLoggedInSignal()
+                            .observeOn(UIScheduler())
                             .on(failed: { _ in
                                 self.delegate!.socialSharing("")
                                 let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)

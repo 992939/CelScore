@@ -35,9 +35,7 @@ public protocol TextFieldDelegate : UITextFieldDelegate {}
 public class TextField : UITextField {
 	/**
 	This property is the same as clipsToBounds. It crops any of the view's
-	contents from bleeding past the view's frame. If an image is set using
-	the image property, then this value does not need to be set, since the
-	visualLayer's maskToBounds is set to true by default.
+	contents from bleeding past the view's frame.
 	*/
 	public var masksToBounds: Bool {
 		get {
@@ -487,7 +485,15 @@ public class TextField : UITextField {
 	if interrupted.
 	*/
 	public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-		if anim is CAPropertyAnimation {
+		if let a: CAPropertyAnimation = anim as? CAPropertyAnimation {
+			if let b: CABasicAnimation = a as? CABasicAnimation {
+				if let v: AnyObject = b.toValue {
+					if let k: String = b.keyPath {
+						layer.setValue(v, forKeyPath: k)
+						layer.removeAnimationForKey(k)
+					}
+				}
+			}
 			(delegate as? MaterialAnimationDelegate)?.materialAnimationDidStop?(anim, finished: flag)
 		} else if let a: CAAnimationGroup = anim as? CAAnimationGroup {
 			for x in a.animations! {
@@ -505,8 +511,6 @@ public class TextField : UITextField {
 	*/
 	public func prepareView() {
 		backgroundColor = MaterialColor.white
-		shadowColor = MaterialColor.black
-		borderColor = MaterialColor.black
 		masksToBounds = false
 		clearButtonMode = .WhileEditing
 		prepareBottomBorderLayer()
@@ -570,17 +574,20 @@ public class TextField : UITextField {
 	/// Manages the layout for the shape of the view instance.
 	internal func layoutShape() {
 		if .Circle == shape {
-			layer.cornerRadius = width / 2
+			let w: CGFloat = (width / 2)
+			if w != cornerRadius {
+				cornerRadius = w
+			}
 		}
 	}
 	
 	/// Sets the shadow path.
 	internal func layoutShadowPath() {
 		if shadowPathAutoSizeEnabled {
-			if .None == self.depth {
-				layer.shadowPath = nil
-			} else if nil == layer.shadowPath {
-				layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
+			if .None == depth {
+				shadowPath = nil
+			} else if nil == shadowPath {
+				shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
 			} else {
 				animate(MaterialAnimation.shadowPath(UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath, duration: 0))
 			}
