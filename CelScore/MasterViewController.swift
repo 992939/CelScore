@@ -90,14 +90,12 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     
     func openSettings() {
         SettingsViewModel().isLoggedInSignal()
-            .on(next: { value in
-                if value == true { self.sideNavigationViewController!.openLeftView() }
-                else {
-                    let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
-                    alertView.iconType = OpinionzAlertIconInfo
-                    alertView.show()
-                    self.socialButton.menu.open()
-                }
+            .on(next: { _ in self.sideNavigationViewController!.openLeftView() })
+            .on(failed: { _ in
+                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+                alertView.iconType = OpinionzAlertIconInfo
+                alertView.show()
+                self.socialButton.menu.open()
             })
             .start()
     }
@@ -132,7 +130,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
-    //MARK: social button delegates
+    //MARK: socialButton delegate
     func handleMenu() {
         let image: UIImage?
         if self.socialButton.menu.opened {

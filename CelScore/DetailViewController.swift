@@ -84,7 +84,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
-    //MARK: social button delegates
+    //MARK: socialButton delegate
     func handleMenu() {
         self.socialButton.menu.close()
         self.socialButton.menu.enabled = false
@@ -109,11 +109,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                         FBSDKAccessToken.setCurrentAccessToken(result.token)
                         UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                             .observeOn(QueueScheduler.mainQueueScheduler)
+                            .retry(Constants.kNetworkRetry)
                             .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings).start() })
                             .map({ _ in return self.handleMenu() })
-                            .retry(Constants.kNetworkRetry)
                             .start()
                     })
                 } else {
