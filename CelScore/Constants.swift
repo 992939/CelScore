@@ -16,6 +16,7 @@ struct Constants {
     static let S3BucketName: String = "celeb3x"
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     
+    static let kNetworkRetry: Int = 2
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
     static let kMaxWidth: CGFloat = kScreenWidth - 2 * kPadding

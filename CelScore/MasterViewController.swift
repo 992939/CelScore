@@ -131,7 +131,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
-    //MARK: HandleMenu() and HandleButton() are "delegates" of the social button
+    //MARK: social button delegates
     func handleMenu() {
         let image: UIImage?
         if self.socialButton.menu.opened {
