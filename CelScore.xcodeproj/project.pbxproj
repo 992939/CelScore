@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00004E491C8AB470004066B0 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00004E481C8AB470004066B0 /* LMGaugeView.m */; };
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
@@ -97,6 +98,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00004E471C8AB470004066B0 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
+		00004E481C8AB470004066B0 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00004E471C8AB470004066B0 /* LMGaugeView.h */,
+				00004E481C8AB470004066B0 /* LMGaugeView.m */,
 				002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */,
 				002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */,
 				0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */,
@@ -683,6 +688,7 @@
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
+				00004E491C8AB470004066B0 /* LMGaugeView.m in Sources */,
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,

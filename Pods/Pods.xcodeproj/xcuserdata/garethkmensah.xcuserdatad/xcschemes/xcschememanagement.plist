@@ -54,11 +54,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LMGaugeView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Material.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -147,17 +142,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0185926D4F3323DFCC25756E966182FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>0373A753A1184F934859AD89A5773468</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1505144B244D6DB6D18D4C1D0A846F6E</key>
+		<key>06404DE2FA5EBAA64A271C6C72228CB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1146FD74E5CC16DBE1C0A13E50D44160</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,7 +167,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>25231E61E778063B38B95E81D2BD04FF</key>
+		<key>25628D4B8089766DB91EC3357A0C156D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -183,11 +178,6 @@
 			<true/>
 		</dict>
 		<key>2D333F48EDD1A4D314F58CDE240A2D3B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3DEC4ABFF949003655C9AF207155DD3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,22 +202,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C04498A3BFEB3784BBF246DDE43DAE7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6CCCB18908EBDD1FA15CA10732606B3B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>6FDB5743EF60FD0B77ED403DE9682597</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7075CE3A99A101BC068C4556691A6D76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -237,7 +212,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BB11D21FFAEF96E71C20A1404B95255</key>
+		<key>7A65423536B45E035AC1764A7A934C06</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7DF76FA125E8DF09753A0CFAFA0D04F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8ABE99097A2C12D053BBF8B2D641F517</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -247,17 +232,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A32F271F2F98FB6984BA9D93E7A66814</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>AD869392E76EA365DB6AD3DC8BD5C9C5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ADFD066CEA8EB9F12C2D3A4BE2839897</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -267,22 +242,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AF1B4C85DD913F7E4F71B80DBEA601FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF5C15EBF6DD9D66F67BE3E791BB0345</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C814BB3D233379FE08646A4F611ACDD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E86809CE4576AA30F6AAE3B31751020C</key>
+		<key>D549D3740B0C3C9D3E3BC66072E4D36A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6FED92A3B80493B3976F3A0AEA82DD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB892F6F7244028B72F874E931F7EA38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F632B2BCE0BC593056D20F002CFF5995</key>
 		<dict>
 			<key>primary</key>
 			<true/>

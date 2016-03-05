@@ -24,7 +24,6 @@ PODS:
   - FBSDKLoginKit (4.10.0):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
-  - LMGaugeView (1.0.1)
   - Material (1.35.3)
   - OpinionzAlertView (0.3.1)
   - PINCache (2.2.1)
@@ -74,7 +73,6 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.10)
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
-  - LMGaugeView (~> 1.0)
   - Material (~> 1.35.3)
   - OpinionzAlertView
   - ReactiveCocoa (= 4.0.1)
@@ -100,7 +98,6 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  LMGaugeView: e422d0b00f0ffc4e081bddbb2708722ab373f24a
   Material: 2989ce92c519fbdc265525819c37df0851701c4c
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5

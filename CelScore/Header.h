@@ -20,5 +20,6 @@
 #import <OpinionzAlertView/OpinionzAlertView.h>
 #import "PROCelScoreAPIClient.h"
 #import "AFDropdownNotification.h"
+#import "LMGaugeView.h"
 
 #endif /* Header_h */
