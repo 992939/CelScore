@@ -130,7 +130,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: socialButton delegate
-    func handleMenu() {
+    func handleMenu(open: Bool = false) {
         let image: UIImage?
         if self.socialButton.menu.opened {
             self.socialButton.menu.close()
@@ -140,7 +140,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.animate(MaterialAnimation.rotate())
+        first?.animate(MaterialAnimation.rotate(rotation: 1))
         first?.setImage(image, forState: .Normal)
         first?.setImage(image, forState: .Highlighted)
     }

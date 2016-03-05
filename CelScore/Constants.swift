@@ -44,18 +44,18 @@ struct Constants {
     }
     
     static func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
-        var image: UIImage? = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
         btn1.pulseScale = false
         btn1.backgroundColor = buttonColor
         btn1.tintColor = MaterialColor.white
-        btn1.setImage(image, forState: .Normal)
-        btn1.setImage(image, forState: .Highlighted)
-        btn1.addTarget(controller, action: "handleMenu", forControlEvents: .TouchUpInside)
+        btn1.setImage(UIImage(named: "ic_add_black"), forState: .Disabled)
+        btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
+        btn1.addTarget(controller, action: "handleMenu:", forControlEvents: .TouchUpInside)
         menuView.addSubview(btn1)
         
-        image = UIImage(named: "facebooklogo")
+        var image = UIImage(named: "facebooklogo")
         let btn2: FabButton = FabButton()
         btn2.tag = 1
         btn2.clipsToBounds = true

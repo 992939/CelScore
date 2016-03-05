@@ -57,6 +57,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.setUpVoteButton()
         Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
         self.socialButton.menu.enabled = false
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first?.setImage(UIImage(named: "ic_add_black"), forState: .Normal)
+        first?.setImage(UIImage(named: "ic_add_black"), forState: .Highlighted)
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -85,12 +88,28 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: socialButton delegate
-    func handleMenu() {
-        self.socialButton.menu.close()
-        self.socialButton.menu.enabled = false
+    func handleMenu(open: Bool = false) {
+        let image: UIImage?
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.backgroundColor = Constants.kDarkShade
-        first?.animate(MaterialAnimation.rotate())
+        if open {
+            self.socialButton.menu.enabled = true
+            first?.animate(MaterialAnimation.rotate(rotation: 1))
+            first?.backgroundColor = Constants.kDarkGreenShade
+            first?.pulseScale = true
+            first?.pulse()
+            self.socialButton.menu.open()
+            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+            first?.setImage(image, forState: .Normal)
+            first?.setImage(image, forState: .Highlighted)
+        } else if self.socialButton.menu.opened {
+            first?.animate(MaterialAnimation.rotate(rotation: 1))
+            self.socialButton.menu.close()
+            self.socialButton.menu.enabled = false
+            first?.backgroundColor = Constants.kDarkShade
+            image = UIImage(named: "ic_add_black")
+            first?.setImage(image, forState: .Normal)
+            first?.setImage(image, forState: .Highlighted)
+        }
     }
     
     func socialButton(button: UIButton) {
@@ -113,7 +132,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                             .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings).start() })
-                            .map({ _ in return self.handleMenu() })
+                            .map({ _ in return self.handleMenu(true) })
                             .start()
                     })
                 } else {
@@ -142,6 +161,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         }
         
         self.handleMenu()
+        
         self.voteButton.enabled = false
         self.voteButton.backgroundColor = Constants.kDarkShade
         if index == 2 {
@@ -194,12 +214,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
 
     func socialSharing(message: String) {
-        self.socialButton.menu.enabled = true
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.backgroundColor = Constants.kDarkGreenShade
-        first?.pulseScale = true
-        first?.pulse()
-        self.socialButton.menu.open()
+        self.handleMenu(true)
         self.socialMessage = message
     }
     
