@@ -18,7 +18,7 @@ import OpinionzAlertView
 import FBSDKLoginKit
 
 
-final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, FBSDKLoginButtonDelegate {
+final class MasterViewController: ASViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
     let celebrityListVM: ListViewModel
@@ -72,7 +72,7 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        self.configuration()
+        self.configuration() //TODO: CelScoreViewModel().checkNetworkStatusSignal().start()
     }
     
     override func viewWillLayoutSubviews() {
@@ -109,14 +109,15 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId())
             }
+            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings).start() })
+            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .List).start() })
+            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity).start() })
             .on(next: { _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
             .start()
-        
-        CelScoreViewModel().checkNetworkStatusSignal().start() //TODO
     }
     
     func changeList() {
@@ -149,8 +150,23 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
     }
     
     func socialButton(button: UIButton) {
-       //TODO: LOGINS
-        print("Hello!!!")
+        if button.tag == 1 {
+            let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+            FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+                guard error == nil else { print("FBSDKLogin error: \(error)"); return }
+                guard result.isCancelled == false else { return }
+                FBSDKAccessToken.setCurrentAccessToken(result.token)
+                UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+                    .observeOn(QueueScheduler.mainQueueScheduler)
+                    .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
+                    .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
+                    .map({ _ in return self.handleMenu() })
+                    .retry(Constants.kNetworkRetry)
+                    .start()
+            })
+        } else {
+            //TWITTER
+        }
     }
     
     //MARK: ASTableView methods
@@ -218,44 +234,6 @@ final class MasterViewController: ASViewController, ASTableViewDataSource, ASTab
                 .start()
         }
     }
-    
-//    func getLoginButton() -> FBSDKLoginButton {
-//        let loginButton = FBSDKLoginButton()
-//        loginButton.readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-//        loginButton.frame = CGRect(x: 0, y: 70, width: 120, height: 44)
-//        loginButton.delegate = self
-//        return loginButton
-//    }
-    
-    //MARK: FBSDKLoginButtonDelegate
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        guard error == nil else { print("FBSDKLogin error: \(error)"); return }
-        guard result.isCancelled == false else { return }
-        FBSDKAccessToken.setCurrentAccessToken(result.token)
-        
-        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getUserInfoFromFacebookSignal()
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List)
-            }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
-            }
-            .flatMapError { _ in SignalProducer<AnyObject, NSError>.empty }
-            .retry(2)
-            .start()
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) { UserViewModel().logoutSignal(.Facebook).start() }
     
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> NavigationBarView {

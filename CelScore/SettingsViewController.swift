@@ -47,12 +47,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 self.node.addSubnode(publicOpinionBarNode)
             })
             .start()
+        
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
                 let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
             })
             .start()
+        
         SettingsViewModel().calculateSocialConsensusSignal()
             .on(next: { value in
                 let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
@@ -80,6 +82,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 self.node.addSubnode(publicServiceNode)
             })
             .start()
+        
         SettingsViewModel().getSettingSignal(settingType: .FortuneMode)
             .on(next: { status in
                 let fortuneCookieNode = self.setupCheckBoxNode("Revolutionary Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
