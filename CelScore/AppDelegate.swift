@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import RealmSwift
 import Fabric
 import TwitterKit
@@ -65,12 +64,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let celebST = CelebrityStruct(
             id: userActivity.userInfo!["id"] as! String,
-            imageURL:userActivity.userInfo!["imageURL"] as! String,
-            nickname:userActivity.userInfo!["nickname"] as! String,
+            imageURL: userActivity.userInfo!["imageURL"] as! String,
+            nickname: userActivity.userInfo!["nickname"] as! String,
             height: userActivity.userInfo!["height"] as! String,
             netWorth: userActivity.userInfo!["netWorth"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
-            isFollowed:userActivity.userInfo!["isFollowed"]as! Bool)
+            isFollowed: userActivity.userInfo!["isFollowed"]as! Bool)
         
         self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
