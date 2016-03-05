@@ -50,7 +50,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculatePositiveVoteSignal()
             .on(next: { value in
-                let positiveBarNode  = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
+                let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
             })
             .start()

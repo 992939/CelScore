@@ -41,11 +41,9 @@ final class InfoViewController: ASViewController {
             .on(next: { celeb in
                 
                 let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                var age = 0
-                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
+                let age = (NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day)) ? (NSDate().year - (birthdate!.year+1)) : (NSDate().year - birthdate!.year)
                 let formatter = NSDateFormatter()
-                formatter.dateStyle = NSDateFormatterStyle.LongStyle
+                formatter.dateStyle = .LongStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                     .on(next: { score in
