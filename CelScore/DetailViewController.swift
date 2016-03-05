@@ -89,16 +89,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     //MARK: socialButton delegate
     func handleMenu(open: Bool = false) {
-        let image: UIImage?
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
             self.socialButton.menu.enabled = true
-            first?.animate(MaterialAnimation.rotate(rotation: 1))
             first?.backgroundColor = Constants.kDarkGreenShade
             first?.pulseScale = true
             first?.pulse()
+            first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
-            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+            let image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
             first?.setImage(image, forState: .Normal)
             first?.setImage(image, forState: .Highlighted)
         } else if self.socialButton.menu.opened {
@@ -106,9 +105,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
             first?.backgroundColor = Constants.kDarkShade
-            image = UIImage(named: "ic_add_black")
-            first?.setImage(image, forState: .Normal)
-            first?.setImage(image, forState: .Highlighted)
+            first?.setImage(UIImage(named: "ic_add_black"), forState: .Normal)
+            first?.setImage(UIImage(named: "ic_add_black"), forState: .Highlighted)
         }
     }
     
@@ -163,12 +161,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.handleMenu()
         
         self.voteButton.enabled = false
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
         self.voteButton.backgroundColor = Constants.kDarkShade
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
                 .on(next: { userRatings in
                     self.voteButton.backgroundColor = userRatings.getCelScore() < 3.0 ? Constants.kDarkGreenShade : Constants.kWineShade
                     self.voteButton.enabled = true
+                    self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
+                    self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
                 })
                 .start()
         }
@@ -192,6 +194,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func enableVoteButton(positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
+            self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
+            self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseScale = true
@@ -279,15 +283,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-        let image: UIImage? = UIImage(named: "justice")?.imageWithRenderingMode(.AlwaysTemplate)
+
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
         self.voteButton.enabled = false
-        self.voteButton.setImage(image, forState: .Normal)
-        self.voteButton.setImage(image, forState: .Highlighted)
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
         self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
     }
