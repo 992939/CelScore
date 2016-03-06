@@ -46,7 +46,7 @@ final class InfoViewController: ASViewController {
                 formatter.dateStyle = .LongStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-                    .on(next: { score in
+                    .startWithNext({ score in
                         for (index, quality) in Info.getAll().enumerate() {
                             let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                             qualityView.tag = index+1
@@ -91,7 +91,6 @@ final class InfoViewController: ASViewController {
                             self.pulseView.addSubview(qualityView)
                         }
                     })
-                    .start()
             })
             .start()
         
@@ -104,7 +103,7 @@ final class InfoViewController: ASViewController {
         let quality = Info(rawValue: celebIndex)!.text()
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(next: { celeb in
+            .startWithNext({ celeb in
                 let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
                 let age = (NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day)) ? (NSDate().year - (birthdate!.year+1)) : (NSDate().year - birthdate!.year)
                 let formatter = NSDateFormatter()
@@ -126,6 +125,5 @@ final class InfoViewController: ASViewController {
                 }
                 self.delegate!.socialSharing("\(self.celebST.nickname)'s \(quality) \(infoText)")
             })
-            .start()
     }
 }

@@ -86,17 +86,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     func longPress(gesture: UIGestureRecognizer) {
         switch gesture.view!.tag {
         case 1:
-            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-                .on(next: { celscore in
+            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in
                     self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Info.CelScore.text()) \(String(format: "%.2f", celscore))")
                 })
-                .start()
         case 2:
-            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
-                .on(next: { consensus in
+            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
                     self.delegate!.socialSharing("\(self.celebST.nickname)'s social consensus is \(String(format: "%.2f", consensus))%")
                 })
-                .start()
         case 3: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         default: self.delegate!.socialSharing("\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         }

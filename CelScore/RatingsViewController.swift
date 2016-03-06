@@ -33,7 +33,7 @@ final class RatingsViewController: ASViewController {
         super.viewDidLoad()
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
-            .on(next: { ratings in
+            .startWithNext({ ratings in
                 for (index, quality) in Qualities.getAll().enumerate() {
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                     qualityView.tag = index+1
@@ -83,7 +83,7 @@ final class RatingsViewController: ASViewController {
                             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
                             }
-                            .on(next: { value in
+                            .startWithNext({ value in
                                 let ratings = value as! RatingsModel
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
@@ -91,14 +91,12 @@ final class RatingsViewController: ASViewController {
                                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
                                 if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }
                             })
-                            .start()
                     }
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(cosmosView)
                     self.pulseView.addSubview(qualityView)
                 }
             })
-            .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
@@ -107,11 +105,10 @@ final class RatingsViewController: ASViewController {
     func longPress(gesture: UIGestureRecognizer) {
         let ratingIndex = gesture.view!.tag - 1
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
-            .on(next: { ratings in
+            .startWithNext({ ratings in
                 let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
                 self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")
             })
-            .start()
     }
     
     func animateStarsToGold(positive positive: Bool) {

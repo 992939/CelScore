@@ -41,25 +41,22 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal()
-            .on(next: { value in
+            .startWithNext({ value in
                 let consensusBarNode = self.setupProgressBarNode("General Social Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding), value: value)
                 self.node.addSubnode(consensusBarNode)
             })
-            .start()
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
-            .on(next: { value in
+            .startWithNext({ value in
                 let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding + progressNodeHeight, value: value)
                 self.node.addSubnode(publicOpinionBarNode)
             })
-            .start()
         
         SettingsViewModel().calculatePositiveVoteSignal()
-            .on(next: { value in
+            .startWithNext({ value in
                 let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
                 self.node.addSubnode(positiveBarNode)
             })
-            .start()
         
         //PickerView
         let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
@@ -76,18 +73,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
-            .on(next: { status in
+            .startWithNext({ status in
                 let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
-            .start()
         
         SettingsViewModel().getSettingSignal(settingType: .FortuneMode)
-            .on(next: { status in
+            .startWithNext({ status in
                 let fortuneCookieNode = self.setupCheckBoxNode("Revolutionary Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(fortuneCookieNode)
             })
-            .start()
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
@@ -124,8 +119,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
-            .on(next: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
-            .start()
+            .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
     //MARK: UIPickerViewDelegate

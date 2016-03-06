@@ -109,23 +109,22 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings).start() })
             .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .List).start() })
             .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity).start() })
-            .on(next: { _ in
+            .startWithNext({ _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
-            .start()
     }
     
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         self.celebrityListVM.getListSignal(listId: list.getId())
-            .on(next: { _ in
+            .startWithNext({ _ in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
-            .start()
+        
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
@@ -173,8 +172,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
         self.celebrityListVM.getCelebrityStructSignal(index: indexPath.row)
-            .on(next: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
-            .start()
+            .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }
     
@@ -222,12 +220,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if searchText.characters.count > 2 {
             self.celebrityListVM.searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-                .on(next: { _ in
+                .startWithNext({ _ in
                     self.celebrityTableView.beginUpdates()
                     self.celebrityTableView.reloadData()
                     self.celebrityTableView.endUpdates()
                 })
-                .start()
         }
     }
     
