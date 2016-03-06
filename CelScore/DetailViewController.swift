@@ -82,7 +82,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-            .filter({ (ratings: RatingsModel) -> Bool in print("isEmpty: \(ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty)"); return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
+            .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)

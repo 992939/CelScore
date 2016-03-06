@@ -121,7 +121,6 @@ final class RatingsViewController: ASViewController {
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
                     subview.pulseScale = true
-                    //subview.pulseColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade
                     AIRTimer.after(0.1 * Double(index)){ timer in  subview.pulse()
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView

@@ -13,6 +13,10 @@ import Result
 
 
 final class SettingsViewModel: NSObject {
+    
+    //MARK: for widget
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode }
 
     //MARK: Initializer
     override init() { super.init() }
