@@ -87,10 +87,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
             }
-            .on(next: { (userRatings:RatingsModel) in
+            .startWithNext({ (userRatings:RatingsModel) in
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
-                self.ratingsVC.animateStarsToGold(positive: isPositive) })
-            .start()
+                self.ratingsVC.animateStarsToGold(positive: isPositive)
+            })
     }
     
     //MARK: socialButton delegate
@@ -174,7 +174,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
                 .filter({ hasUserRatings in return hasUserRatings })
                 .promoteErrors(RatingsError)
-                .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+                .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                     return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
                 }
                 .startWithNext({ userRatings in

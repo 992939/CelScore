@@ -77,17 +77,13 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
-            print("OKI")
             var hasRatings: Bool = false
             if let userRatings = newRatings where userRatings.totalVotes > 0 { hasRatings = true }
-            if let userRatings = newRatings where userRatings.totalVotes == 0 {
+            if let userRatings = newRatings where userRatings.totalVotes == 0 && userRatings.getCelScore() > 0 {
                 realm.beginWrite()
-                print("BEFORE userRating \(userRatings)")
                 userRatings.forEach({ rating in userRatings[rating] = 0 })
-                print("AFTER userRating \(userRatings)")
                 realm.add(userRatings, update: true)
                 try! realm.commitWrite()
-                hasRatings = false
             }
             observer.sendNext(hasRatings)
             observer.sendCompleted()
