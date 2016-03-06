@@ -74,6 +74,12 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         return (score/10).roundToPlaces(2)
     }
     
+    public func getAvgVariance() -> Double {
+        let avgVariance: Double = (self.variance1 + self.variance2 + self.variance3 + self.variance4 + self.variance5
+        + self.variance6 + self.variance7 + self.variance8 + self.variance9 + self.variance10)/10
+        return avgVariance.roundToPlaces(2)
+    }
+    
     public subscript(i: Int) -> String {
         switch i {
         case 0: return ("rating1")

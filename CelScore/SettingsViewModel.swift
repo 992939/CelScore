@@ -39,10 +39,7 @@ final class SettingsViewModel: NSObject {
             let ratings = realm.objects(RatingsModel)
             guard ratings.count > 0 else { observer.sendFailed(.NoRatingsModel); return }
 
-            let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in
-                return (ratingsModel.variance1 + ratingsModel.variance2 + ratingsModel.variance3 + ratingsModel.variance4 + ratingsModel.variance5
-                + ratingsModel.variance6 + ratingsModel.variance7 + ratingsModel.variance8 + ratingsModel.variance9 + ratingsModel.variance10) / 10
-            }
+            let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
             guard averageVariance > 0 && averageVariance < 5  else { observer.sendFailed(.OutOfBoundsVariance); return }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
@@ -56,7 +53,6 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
             guard ratings.count > 0 else { observer.sendFailed(.NoUserRatingsModel); return }
-            
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return (ratingsModel.getCelScore()/10) < 3 ? false : true
             })

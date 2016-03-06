@@ -25,7 +25,7 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             var userRatings = realm.objects(UserRatingsModel).filter(predicate).first
-            if  userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
+            if userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
             realm.beginWrite()
             let key = userRatings![ratingIndex]
             userRatings![key] = newRating
@@ -89,9 +89,7 @@ final class RatingsViewModel: NSObject {
         let realm = try! Realm()
         let predicate = NSPredicate(format: "id = %@", ratingsId)
         let ratings: RatingsModel = realm.objects(RatingsModel).filter(predicate).first!
-        let variance = (ratings.variance1 + ratings.variance2 + ratings.variance3 + ratings.variance4 + ratings.variance5
-                    + ratings.variance6 + ratings.variance7 + ratings.variance8 + ratings.variance9 + ratings.variance10) / 10
-        let consensus = 100 - ( 20 * variance )
+        let consensus = 100 - ( 20 * ratings.getAvgVariance())
         observer.sendNext(consensus)
         observer.sendCompleted()
         }
@@ -104,17 +102,10 @@ final class RatingsViewModel: NSObject {
             let ratings = realm.objects(RatingsModel).filter(predicate).first
             let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
             
-            var celScore: Double = 0
-            if let totalRatings = ratings {
-                for rating in totalRatings { celScore += totalRatings[rating] as! Double }
-                if let userRatings = newRatings where userRatings.totalVotes > 0 {
-                    celScore /= 10
-                    celScore *= Double(totalRatings.totalVotes)
-                    for rating in userRatings { celScore += userRatings[rating] as! Double }
-                    celScore = celScore / Double(totalRatings.totalVotes + 1)
-                } else {
-                    celScore = celScore / 10
-                }
+            var celScore: Double = ratings!.getCelScore()
+            if let userRatings = newRatings {
+                celScore *= Double(ratings!.totalVotes)
+                celScore = (celScore + userRatings.getCelScore()) / Double(ratings!.totalVotes + 1)
             }
             observer.sendNext(celScore)
             observer.sendCompleted()
