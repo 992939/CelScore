@@ -283,7 +283,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2

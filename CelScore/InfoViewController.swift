@@ -66,29 +66,27 @@ final class InfoViewController: ASViewController {
                             case Info.CelScore.name():
                                 let difference = score - self.celebST.prevScore
                                 let margin = difference > 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(-\(String(difference.roundToPlaces(2)))) "
-                                var attr = [NSFontAttributeName: UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
-                                attributedText = NSMutableAttributedString(string: margin, attributes: attr)
-                                attr = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
-                                let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr)
+                                let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+                                attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
+                                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
+                                let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
                                 attributedText.appendAttributedString(attrString)
                             case Info.Networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = "n/a"
                             }
                             
-                            var infoLabel: UILabel
+                            let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
                                 infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
-                                infoLabel.attributedText = attributedText
+                                infoLabel!.attributedText = attributedText
                             } else {
                                 infoLabel = Constants.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
                             }
-                            
-                            infoLabel.textAlignment = .Right
-                            
+                            infoLabel!.textAlignment = .Right
                             qualityView.depth = .Depth1
                             qualityView.backgroundColor = Constants.kMainShade
                             qualityView.addSubview(qualityLabel)
-                            qualityView.addSubview(infoLabel)
+                            qualityView.addSubview(infoLabel!)
                             qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
                             self.pulseView.addSubview(qualityView)
                         }
@@ -108,9 +106,7 @@ final class InfoViewController: ASViewController {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
                 let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                var age = 0
-                if NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day )
-                { age = NSDate().year - (birthdate!.year+1) } else { age = NSDate().year - birthdate!.year }
+                let age = (NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day)) ? (NSDate().year - (birthdate!.year+1)) : (NSDate().year - birthdate!.year)
                 let formatter = NSDateFormatter()
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
