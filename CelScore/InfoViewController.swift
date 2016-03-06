@@ -52,7 +52,8 @@ final class InfoViewController: ASViewController {
                             qualityView.tag = index+1
                             let qualityLabel = Constants.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
                             
-                            let infoLabelText: String?
+                            var infoLabelText = ""
+                            var attributedText = NSMutableAttributedString()
                             switch quality {
                             case Info.FirstName.name(): infoLabelText = celeb.firstName
                             case Info.MiddleName.name(): infoLabelText = celeb.middleName
@@ -62,11 +63,24 @@ final class InfoViewController: ASViewController {
                             case Info.Height.name(): infoLabelText = celeb.height
                             case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.Status.name(): infoLabelText = celeb.status
-                            case Info.CelScore.name(): infoLabelText = String(format: "%.2f", score)
+                            case Info.CelScore.name():
+                                var attr = [NSFontAttributeName: UIFont.systemFontOfSize(11.0), NSForegroundColorAttributeName : Constants.kWineShade]
+                                attributedText = NSMutableAttributedString(string: "(+0.19)", attributes: attr)
+                                attr = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
+                                let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr)
+                                attributedText.appendAttributedString(attrString)
                             case Info.Networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = "n/a"
                             }
-                            let infoLabel = Constants.setupLabel(title: infoLabelText!, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
+                            
+                            var infoLabel: UILabel
+                            if case Info.CelScore.name() = quality {
+                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
+                                infoLabel.attributedText = attributedText
+                            } else {
+                                infoLabel = Constants.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
+                            }
+                            
                             infoLabel.textAlignment = .Right
                             
                             qualityView.depth = .Depth1

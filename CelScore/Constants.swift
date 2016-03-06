@@ -17,6 +17,7 @@ struct Constants {
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     
     static let kNetworkRetry: Int = 2
+    static let kFontSize: CGFloat = 16.0
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
     static let kMaxWidth: CGFloat = kScreenWidth - 2 * kPadding
@@ -39,7 +40,7 @@ struct Constants {
         let label = UILabel(frame: frame)
         label.text = title
         label.textColor = MaterialColor.white
-        label.font = UIFont(name: label.font.fontName, size: 16)
+        label.font = UIFont(name: label.font.fontName, size: kFontSize)
         return label
     }
     
