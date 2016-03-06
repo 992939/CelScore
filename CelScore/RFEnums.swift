@@ -150,7 +150,7 @@ public enum ListInfo : Int {
     case Sports
     case Music
     case Television
-    case Candidates
+    case News
     
     public static func getAll() -> [String] {
         return [
@@ -160,7 +160,7 @@ public enum ListInfo : Int {
             Sports.name(),
             Music.name(),
             Television.name(),
-            Candidates.name()
+            News.name()
         ]
     }
     
@@ -178,7 +178,7 @@ public enum ListInfo : Int {
         case .Sports: return "#Sports"
         case .Music: return "#Music"
         case .Television: return "#Television"
-        case .Candidates: return "#Candidates"
+        case .News: return "#News"
         }
     }
     
@@ -190,7 +190,7 @@ public enum ListInfo : Int {
         case .Sports: return "0002"
         case .Music: return "0003"
         case .Television: return "0005"
-        case .Candidates: return "0006"
+        case .News: return "0006"
         }
     }
     
@@ -202,7 +202,7 @@ public enum ListInfo : Int {
         case .Sports: return 3
         case .Music: return 4
         case .Television: return 5
-        case .Candidates: return 6
+        case .News: return 6
         }
     }
 }
