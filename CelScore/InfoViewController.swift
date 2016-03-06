@@ -64,8 +64,10 @@ final class InfoViewController: ASViewController {
                             case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.Status.name(): infoLabelText = celeb.status
                             case Info.CelScore.name():
-                                var attr = [NSFontAttributeName: UIFont.systemFontOfSize(11.0), NSForegroundColorAttributeName : Constants.kWineShade]
-                                attributedText = NSMutableAttributedString(string: "(+0.19)", attributes: attr)
+                                let difference = score - self.celebST.prevScore
+                                let margin = difference > 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(-\(String(difference.roundToPlaces(2)))) "
+                                var attr = [NSFontAttributeName: UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+                                attributedText = NSMutableAttributedString(string: margin, attributes: attr)
                                 attr = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
                                 let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr)
                                 attributedText.appendAttributedString(attrString)
