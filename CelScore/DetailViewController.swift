@@ -257,12 +257,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let topView = MaterialView(frame: Constants.kTopViewRect)
         let profilePicNode = ASNetworkImageNode(webImage: ())
         profilePicNode.URL = NSURL(string: self.celebST.imageURL)
-        profilePicNode.contentMode = UIViewContentMode.ScaleAspectFit
-        let picWidth: CGFloat = 180.0
+        let picWidth: CGFloat = 200.0
         profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
-        profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kMainShade)(originalImage)
-        }
+        profilePicNode.contentMode = .ScaleAspectFit
+        profilePicNode.clipsToBounds = true
+        profilePicNode.borderWidth = 8
+        profilePicNode.borderColor = Constants.kMainShade.CGColor
+        profilePicNode.cornerRadius = picWidth/2
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
