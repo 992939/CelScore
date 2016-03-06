@@ -43,7 +43,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         self.view = self.pulseView
     }
     
-    func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView { //TODO: add actual CelScore value
+    func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
         let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: gaugeHeight))
         gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
         gaugeView.depth = .Depth1

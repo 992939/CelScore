@@ -61,7 +61,6 @@ final class UserViewModel: NSObject {
             //TODO: implementation
             switch loginType {
             case .Facebook:
-                print("FB!")
                 let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
                 credentialsProvider.clearCredentials()
             case .Twitter:

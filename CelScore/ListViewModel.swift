@@ -23,24 +23,24 @@ final class ListViewModel: NSObject {
     //MARK: Methods
     func getCount() -> Int { return celebrityList.count }
     
-    func getListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
+    func getListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList = list else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: sendError(sink, .EmptyList);
+            guard let celebList = list else { observer.sendFailed(.EmptyList); return }
             self.celebrityList = celebList.copy() as! ListsModel
             observer.sendNext(celebList)
             observer.sendCompleted()
         }
     }
     
-    func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, NSError> {
+    func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             var predicate = NSPredicate(format: "id = %@", listId)
             let list = realm.objects(ListsModel).filter(predicate).first
-            guard let celebList: ListsModel = list else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO
+            guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
             predicate = NSPredicate(format: "isFollowed = true")
             let followed = realm.objects(CelebrityModel).filter(predicate)
 

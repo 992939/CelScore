@@ -54,14 +54,14 @@ final class SettingsViewModel: NSObject {
             let ratings = realm.objects(UserRatingsModel)
             guard ratings.count > 0 else { observer.sendFailed(.NoUserRatingsModel); return }
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
-                return (ratingsModel.getCelScore()/10) < 3 ? false : true
+                return ratingsModel.getCelScore() < 3 ? false : true
             })
             observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             observer.sendCompleted()
         }
     }
     
-    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
+    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model: SettingsModel? = realm.objects(SettingsModel).first
