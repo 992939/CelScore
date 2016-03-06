@@ -58,9 +58,7 @@ final class SettingsViewModel: NSObject {
             guard ratings.count > 0 else { observer.sendFailed(.NoUserRatingsModel); return }
             
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
-                let celscore = (ratingsModel.rating1 + ratingsModel.rating2 + ratingsModel.rating3 + ratingsModel.rating4 + ratingsModel.rating5
-                + ratingsModel.rating6 + ratingsModel.rating7 + ratingsModel.rating8 + ratingsModel.rating9 + ratingsModel.rating10) / 10
-                return celscore >= 3 ? true : false
+                return (ratingsModel.getCelScore()/10) < 3 ? false : true
             })
             observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             observer.sendCompleted()
