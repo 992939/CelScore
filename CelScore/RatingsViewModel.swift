@@ -77,6 +77,7 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
             let newRatings = realm.objects(UserRatingsModel).filter(predicate).first
+            print("newRatings :\(newRatings)")
             var hasRatings: Bool = false
             if let userRatings = newRatings where userRatings.totalVotes > 0 { hasRatings = true }
             observer.sendNext(hasRatings)
