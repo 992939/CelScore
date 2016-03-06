@@ -71,7 +71,7 @@ final class RatingsViewController: ASViewController {
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
                             cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
                         })
-                    cosmosView.didTouchCosmos = { rating in
+                    cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().isLoggedInSignal()
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
@@ -80,11 +80,10 @@ final class RatingsViewController: ASViewController {
                                 alertView.iconType = OpinionzAlertIconInfo
                                 alertView.show()
                             })
-                            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                            .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
                             }
-                            .startWithNext({ value in
-                                let ratings = value as! RatingsModel
+                            .startWithNext({ ratings in
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
                                 let isPositive = ratings.getCelScore() < 3.0 ? false : true

@@ -17,10 +17,10 @@ final class RatingsViewModel: NSObject {
     override init() { super.init() }
     
     //MARK: Methods
-    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<AnyObject, NSError> { //<RatingsModel, RatingsError>
+    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
         return SignalProducer { observer, disposable in
-            guard newRating > 0 && newRating < 6 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //.RatingValueOutOfBounds
-            guard ratingIndex >= 0 && ratingIndex < 10 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return } //.RatingIndexOutOfBounds
+            guard newRating > 0 && newRating < 6 else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
+            guard ratingIndex >= 0 && ratingIndex < 10 else { observer.sendFailed(NSError(domain: "rating index out of bounds", code: 1, userInfo: nil)); return } 
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
