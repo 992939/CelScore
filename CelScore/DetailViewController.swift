@@ -171,14 +171,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
         self.voteButton.backgroundColor = Constants.kDarkShade
         if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-                .on(next: { userRatings in
+            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
+                .filter({ hasUserRatings in return hasUserRatings })
+                .promoteErrors(RatingsError)
+                .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+                    return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+                }
+                .startWithNext({ userRatings in
                     self.voteButton.backgroundColor = userRatings.getCelScore() < 3.0 ? Constants.kDarkGreenShade : Constants.kWineShade
                     self.voteButton.enabled = true
                     self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
                     self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
                 })
-                .start()
         }
     
         if index == 0 || (index == 1 && previousIndex == 2 ){

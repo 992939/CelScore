@@ -67,7 +67,7 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = false
                     SettingsViewModel().isLoggedInSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
-                    RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ (hasRatings:Bool) in
+                    RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
                             cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
                         })
