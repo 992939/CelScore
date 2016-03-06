@@ -94,23 +94,26 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                 alertView.iconType = OpinionzAlertIconInfo
                 alertView.show()
-                self.socialButton.menu.open()
-            })
+                self.socialButton.menu.open() })
             .start()
     }
     
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
+            .promoteErrors(NSError)
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+            .flatMapError { _ in SignalProducer.empty }
             .promoteErrors(ListError)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
-                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId())
-            }
-            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings).start() })
-            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .List).start() })
-            .map({ _ in return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity).start() })
-            .startWithNext({ _ in
+                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
+            .startWithNext({ value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
