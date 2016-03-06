@@ -34,7 +34,7 @@
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
 #define kDefaultUnitOfMeasurement               @"c-score"
-#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:16]
+#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
 @interface LMGaugeView ()
@@ -278,7 +278,7 @@
         self.unitOfMeasurementLabel.hidden = !self.showUnitOfMeasurement;
     }
     self.unitOfMeasurementLabel.frame = CGRectMake(self.valueLabel.frame.origin.x,
-                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 10,
+                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 15,
                                                    CGRectGetWidth(self.valueLabel.frame),
                                                    20);
 }
