@@ -35,10 +35,10 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         self.pulseView.backgroundColor = MaterialColor.clear
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
-            .startWithNext { consensus -> () in
+            .startWithNext({ consensus -> () in
                 let percentage = String(consensus.roundToPlaces(2)) + "%"
                 self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "Social Consensus", value: percentage, tag: 2))
-        }
+            })
         self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String(self.celebST.prevScore.roundToPlaces(2)), tag: 3))
         self.view = self.pulseView
     }
@@ -52,7 +52,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
         gaugeView.pulseScale = false
         let gauge = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
-        gauge.maxValue = Constants.kMaximumVoteValue
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = 0.65 * Constants.kDetailWidth
         gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)

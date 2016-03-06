@@ -65,7 +65,7 @@ final class InfoViewController: ASViewController {
                             case Info.Status.name(): infoLabelText = celeb.status
                             case Info.CelScore.name():
                                 let difference = score - self.celebST.prevScore
-                                let margin = difference > 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(-\(String(difference.roundToPlaces(2)))) "
+                                let margin = difference > 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
                                 let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
                                 attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
                                 let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
