@@ -10,6 +10,22 @@ import Foundation
 import Material
 
 
+
+//MARK: Error
+public enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
+public enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
+public enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
+public enum CelebrityError: ErrorType { case NotFound }
+
+//MARK: Misc.
+public enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode }
+public enum LoginType: Int { case None = 1, Facebook, Twitter }
+public enum SocialNetwork: Int { case Twitter = 0, Facebook }
+public enum RatingsType { case Ratings, UserRatings }
+public enum AWSDataType { case Celebrity, List, Ratings }
+public enum CookieType: String { case Positive, Negative }
+public enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
+
 //MARK: Info
 public enum Info: Int {
     case FirstName

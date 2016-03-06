@@ -16,11 +16,7 @@ import Result
 
 
 final class UserViewModel: NSObject {
-    
-    //MARK: Properties
-    enum LoginType: Int { case Facebook = 0, Twitter }
-    enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
-    
+
     //MARK: Initializer
     override init() { super.init() }
     
@@ -48,6 +44,7 @@ final class UserViewModel: NSObject {
                         credentialsProvider.logins = ["api.twitter.com": value]
                     } else { print("error: \(error!.localizedDescription)") }
                 }
+            default: break
             }
             
             credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
@@ -69,6 +66,7 @@ final class UserViewModel: NSObject {
                 credentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
+            default: break
             }
             observer.sendCompleted()
         }

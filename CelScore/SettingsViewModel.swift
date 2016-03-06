@@ -14,11 +14,6 @@ import Result
 
 final class SettingsViewModel: NSObject {
 
-    //MARK: Properties
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode}
-    enum LoginType: Int { case None = 1, Facebook, Twitter }
-    
     //MARK: Initializer
     override init() { super.init() }
     
@@ -95,7 +90,7 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return }
+            //guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return }
             observer.sendNext(true)
             observer.sendCompleted()
         }

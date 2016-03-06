@@ -14,9 +14,8 @@ import Result
 
 final class ListViewModel: NSObject {
     
-    //MARK: Properties
+    //MARK: Property
     private(set) var celebrityList = ListsModel()
-    enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
     
     //MARK: Initializer
     override init() { super.init() }

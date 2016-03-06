@@ -82,8 +82,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-            .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
-            .map({ _ in return RatingsViewModel().voteSignal(ratingsId: self.celebST.id).start() })
+            .filter({ (ratings: RatingsModel) -> Bool in print("isEmpty: \(ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty)"); return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+                return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
+            }
+            .on(next: { (userRatings:RatingsModel) in
+                let isPositive = userRatings.getCelScore() < 3 ? false : true
+                self.ratingsVC.animateStarsToGold(positive: isPositive) })
             .start()
     }
     

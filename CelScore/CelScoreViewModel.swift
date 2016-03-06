@@ -20,9 +20,6 @@ final class CelScoreViewModel: NSObject {
     //MARK: Properties
     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-    enum SocialNetwork: Int { case Twitter = 0, Facebook }
-    enum AWSDataType { case Celebrity, List, Ratings }
-    enum CookieType: String { case Positive, Negative }
     
     //MARK: Initializer
     override init() { super.init() }

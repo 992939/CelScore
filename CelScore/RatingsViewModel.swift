@@ -12,11 +12,7 @@ import Result
 
 
 final class RatingsViewModel: NSObject {
-    
-    //MARK: Properties
-    enum RatingsType { case Ratings, UserRatings }
-    enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-    
+
     //MARK: Initializer
     override init() { super.init() }
     

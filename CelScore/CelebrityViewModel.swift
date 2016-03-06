@@ -15,9 +15,6 @@ import Result
 
 final class CelebrityViewModel: NSObject {
     
-    //MARK: Properties
-    enum CelebrityError: ErrorType { case NotFound }
-    
     //MARK: Initializer
     override init() { super.init() }
     
