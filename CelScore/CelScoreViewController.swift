@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import Material
-import LMGaugeView
 import AIRTimer
 
 

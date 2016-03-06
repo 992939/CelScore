@@ -7,7 +7,6 @@
 //
 
 import YLProgressBar
-import JTMaterialSwitch
 import Material
 import BEMCheckBox
 
