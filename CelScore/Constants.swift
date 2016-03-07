@@ -180,5 +180,6 @@ struct Constants {
         "If we don't stand for something, we fall for everything.",
         "Get up, stand up. Stand up for your rights.",
         "Get up, stand up. Don't give up the fight.",
-        "The most important time in history is now, the present."]
+        "The most important time in history is now, the present.",
+        "The whole is greater than the sum of its parts."]
 }
