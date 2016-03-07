@@ -101,14 +101,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .promoteErrors(NSError)
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
-            .flatMapError { _ in SignalProducer.empty }
+//            .promoteErrors(NSError)
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+//                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+//                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+//            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
+//                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+//            .flatMapError { _ in SignalProducer.empty }
             .promoteErrors(ListError)
             .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
