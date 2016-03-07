@@ -103,7 +103,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let copyrightTextNode = ASTextNode()
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kDarkGreenShade, NSParagraphStyleAttributeName: paraStyle]
+        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kWineShade, NSParagraphStyleAttributeName: paraStyle]
         copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!). 2016.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center

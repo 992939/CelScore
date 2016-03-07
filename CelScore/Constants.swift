@@ -27,7 +27,7 @@ struct Constants {
     static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
     static let kMainShade: UIColor = MaterialColor.blueGrey.base
     static let kLightShade: UIColor = MaterialColor.grey.lighten3
-    static let kLightGreenShade: UIColor = MaterialColor.lightGreen.lighten3
+    static let kLightGreenShade: UIColor = MaterialColor.teal.accent2
     static let kDarkGreenShade: UIColor = MaterialColor.teal.lighten1
     static let kWineShade: UIColor = MaterialColor.purple.lighten4
     static let kStarRatingShade: UIColor = MaterialColor.yellow.darken1
