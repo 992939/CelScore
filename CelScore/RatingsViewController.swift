@@ -69,8 +69,7 @@ final class RatingsViewController: ASViewController {
                     SettingsViewModel().isLoggedInSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
                     RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
-                        })
+                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white })
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().isLoggedInSignal()
                             .observeOn(UIScheduler())
@@ -78,18 +77,15 @@ final class RatingsViewController: ASViewController {
                                 self.delegate!.socialSharing("")
                                 let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                                 alertView.iconType = OpinionzAlertIconInfo
-                                alertView.show()
-                            })
-                            .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
-                                return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))
-                            }
+                                alertView.show()})
+                            .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
+                                return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .startWithNext({ ratings in
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
                                 let isPositive = ratings.getCelScore() < 3.0 ? false : true
                                 let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
-                                if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }
-                            })
+                                if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }})
                     }
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(cosmosView)
@@ -106,8 +102,7 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
-                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")
-            })
+                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")})
     }
     
     func animateStarsToGold(positive positive: Bool) {
@@ -125,8 +120,7 @@ final class RatingsViewController: ASViewController {
                         cosmos.rating = ratings[ratings[index]] as! Double
                         cosmos.update()
                     }
-                }
-            })
+                }})
             .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
