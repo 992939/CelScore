@@ -314,13 +314,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
-        self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
-        self.voteButton.enabled = false
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-        self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasUserRatings in
+            self.voteButton.pulseScale = hasUserRatings ? true : false
+            self.voteButton.enabled = hasUserRatings ? true : false
+            self.voteButton.backgroundColor = hasUserRatings ? Constants.kStarRatingShade : Constants.kDarkShade
+        })
     }
 }
 
