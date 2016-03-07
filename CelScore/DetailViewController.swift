@@ -12,7 +12,7 @@ import SMSegmentView
 import FBSDKLoginKit
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate, MaterialAnimationDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -83,18 +83,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
-            .observeOn(QueueScheduler.mainQueueScheduler)
+            .observeOn(UIScheduler())
             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
             }
             .startWithNext({ (userRatings:RatingsModel) in
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
                 self.ratingsVC.animateStarsToGold(positive: isPositive)
-                //self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 MaterialAnimation.delay(2) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
                     self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
                     self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+                    self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }
                 
             })
@@ -237,6 +237,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialSharing(message: String) {
         self.handleMenu(true)
         self.socialMessage = message
+    }
+    
+    func materialAnimationDidStart(animation: CAAnimation) {
+        print("animation now!")
+    }
+    
+    func materialAnimationDidStop(animation: CAAnimation, finished flag: Bool) {
+        print("animation stopped!")
     }
     
     //MARK: AFDropdownNotificationDelegate

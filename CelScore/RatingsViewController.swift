@@ -107,6 +107,7 @@ final class RatingsViewController: ASViewController {
     
     func animateStarsToGold(positive positive: Bool) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
+            .observeOn(UIScheduler())
             .on(next: { ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
