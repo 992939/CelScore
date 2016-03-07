@@ -84,12 +84,19 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .flatMap(FlattenStrategy.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+            .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
             }
             .startWithNext({ (userRatings:RatingsModel) in
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
                 self.ratingsVC.animateStarsToGold(positive: isPositive)
+                //self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
+                MaterialAnimation.delay(2) {
+                    self.voteButton.backgroundColor = Constants.kStarRatingShade
+                    self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+                    self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+                }
+                
             })
     }
     
