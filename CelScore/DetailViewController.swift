@@ -266,7 +266,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         profilePicNode.contentMode = .ScaleAspectFit
         profilePicNode.clipsToBounds = true
         profilePicNode.borderWidth = 8
-        profilePicNode.borderColor = Constants.kMainShade.CGColor
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            profilePicNode.borderColor = hasRatings ? Constants.kStarRatingShade.CGColor : MaterialColor.white.CGColor
+        })
         profilePicNode.cornerRadius = picWidth/2
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
