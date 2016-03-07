@@ -22,6 +22,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     let voteButton: MaterialButton
     let notification: AFDropdownNotification
     let socialButton: MenuView
+    let profilePicNode: ASNetworkImageNode
     private(set) var socialMessage: String = ""
     
     //MARK: Initializers
@@ -35,6 +36,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton = MaterialButton()
         self.socialButton = MenuView()
         self.notification = AFDropdownNotification()
+        self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
     }
@@ -273,18 +275,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func getTopView() -> MaterialView {
-        let topView = MaterialView(frame: Constants.kTopViewRect)
-        let profilePicNode = ASNetworkImageNode(webImage: ())
-        profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         let picWidth: CGFloat = 200.0
-        profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
-        profilePicNode.contentMode = .ScaleAspectFit
-        profilePicNode.clipsToBounds = true
-        profilePicNode.borderWidth = 8
+        let topView = MaterialView(frame: Constants.kTopViewRect)
+        self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
+        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
+        self.profilePicNode.contentMode = .ScaleAspectFit
+        self.profilePicNode.clipsToBounds = true
+        self.profilePicNode.borderWidth = 8
+        self.profilePicNode.cornerRadius = picWidth/2
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            profilePicNode.borderColor = hasRatings ? Constants.kStarRatingShade.CGColor : MaterialColor.white.CGColor
+            self.profilePicNode.borderColor = hasRatings ? Constants.kStarRatingShade.CGColor : MaterialColor.white.CGColor
         })
-        profilePicNode.cornerRadius = picWidth/2
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
