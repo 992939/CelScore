@@ -167,7 +167,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
-        factsBar.progressTintColors = [Constants.kLightGreenShade, Constants.kDarkGreenShade]
+        factsBar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
         factsBar.setProgress(value, animated: true)
         factsBar.type = .Flat
         factsBar.indicatorTextDisplayMode = .Progress
