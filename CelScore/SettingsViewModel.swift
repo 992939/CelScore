@@ -41,7 +41,7 @@ final class SettingsViewModel: NSObject {
 
             let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
-            guard averageVariance > 0 && averageVariance < 5  else { observer.sendFailed(.OutOfBoundsVariance); return }
+            guard 0..<5 ~= averageVariance else { observer.sendFailed(.OutOfBoundsVariance); return }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
             observer.sendNext(CGFloat(consensus))
             observer.sendCompleted()

@@ -19,8 +19,8 @@ final class RatingsViewModel: NSObject {
     //MARK: Methods
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
         return SignalProducer { observer, disposable in
-            guard newRating > 0 && newRating < 6 else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
-            guard ratingIndex >= 0 && ratingIndex < 10 else { observer.sendFailed(NSError(domain: "rating index out of bounds", code: 1, userInfo: nil)); return } 
+            guard 1...5 ~= newRating else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
+            guard 0...9 ~= ratingIndex else { observer.sendFailed(NSError(domain: "rating index out of bounds", code: 1, userInfo: nil)); return }
             
             let realm = try! Realm()
             let predicate = NSPredicate(format: "id = %@", ratingsId)
