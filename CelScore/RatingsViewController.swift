@@ -119,7 +119,7 @@ final class RatingsViewController: ASViewController {
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
                     subview.pulseScale = true
-                    AIRTimer.after(0.1 * Double(index)){ timer in  subview.pulse()
+                    AIRTimer.after(0.1 * Double(index)){ timer in subview.pulse()
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarRatingShade
@@ -129,18 +129,23 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }})
-            .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .on(completed: { self.delegate!.sendFortuneCookie() })
+            //.delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            //.on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
     }
     
     func displayUserRatings(userRatings: RatingsModel) {
-        print("We in here!")
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
-                    
+                    let stars = subview.subviews.filter({ $0 is CosmosView })
+                    let cosmos: CosmosView = stars.first as! CosmosView
+                    cosmos.settings.updateOnTouch = true
+                    cosmos.settings.userRatingMode = true
+                    cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                    cosmos.rating = userRatings[userRatings[index]] as! Double
+                    cosmos.update()
                 }
         })
     }

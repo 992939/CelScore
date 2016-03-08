@@ -85,7 +85,7 @@ final class CelScoreViewModel: NSObject {
             
             if let oldCookies = cookieList {
                 let eightyPercent = Int(0.8 * Double(newCookies.count))
-                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) }) //TODO: bug
+                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) }) //TODO: out of bounds error
                 let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 oldCookies.list.append(Chip(index: index))
 
