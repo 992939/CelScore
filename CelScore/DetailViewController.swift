@@ -198,8 +198,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.handleMenu()
         
         if index == 2 {
-            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasUserRatings in
-                if hasUserRatings { self.enableUpdateButton() }})
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
+                print("userRatings \(userRatings.description)")
+                guard userRatings.getCelScore() > 0 else { print("word"); return }
+                print("Still?")
+                if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true) }
+                else { self.enableUpdateButton() }})
         } else {
             self.voteButton.enabled = false
             self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)

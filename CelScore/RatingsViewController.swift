@@ -134,6 +134,13 @@ final class RatingsViewController: ASViewController {
             .start()
     }
     
+    func isUserRatingMode() -> Bool {
+        let materialView: MaterialPulseView = self.view.subviews.first as! MaterialPulseView
+        let stars = materialView.subviews.filter({ $0 is CosmosView })
+        let cosmos: CosmosView = stars.first as! CosmosView
+        return cosmos.settings.userRatingMode
+    }
+    
     func displayUserRatings(userRatings: RatingsModel) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
