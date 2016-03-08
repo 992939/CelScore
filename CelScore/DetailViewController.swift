@@ -182,16 +182,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         }
         
         if index == 0 || (index == 1 && previousIndex == 2 ){
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(1.0, animations: { _ in
                 removingView.left = infoView.width + 35
                 infoView.slideLeft()
-                }, completion: { completed -> Void in removingView.hidden = true
+                }, completion: { _ in removingView.hidden = true
             })
         } else {
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(1.0, animations: { _ in
                 removingView.left = -infoView.width
                 infoView.slideRight()
-                }, completion: { completed -> Void in removingView.hidden = true
+                }, completion: { _ in removingView.hidden = true
             })
         }
         
