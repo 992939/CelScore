@@ -75,9 +75,8 @@ final class CelScoreViewModel: NSObject {
         return SignalProducer { observer, disposable in
             
             let fortuneCookieSays: String?
-            var newCookies = Constants.fortuneCookies
-            if case .Positive = cookieType { newCookies = Array(newCookies[15..<newCookies.count]) }
-            else { newCookies = Array(newCookies[0..<14]) }
+            let cookies = Constants.fortuneCookies
+            var newCookies = cookieType == .Positive ? Array(cookies[15..<cookies.count]) : Array(cookies[0..<14])
             
             let realm = try! Realm()
             realm.beginWrite()
@@ -86,7 +85,7 @@ final class CelScoreViewModel: NSObject {
             
             if let oldCookies = cookieList {
                 let eightyPercent = Int(0.8 * Double(newCookies.count))
-                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) })
+                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) }) //TODO: bug
                 let index = Int(arc4random_uniform(UInt32(newCookies.count)))
                 oldCookies.list.append(Chip(index: index))
 

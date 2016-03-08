@@ -86,7 +86,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = Constants.setupLabel(title: "Logged In As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
+        let loginLabel = Constants.setupLabel(title: "Logged In As", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         let userLabel = Constants.setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
         userLabel.textAlignment = .Right
@@ -104,7 +104,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .Center
         let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kWineShade, NSParagraphStyleAttributeName: paraStyle]
-        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!). 2016.", attributes: attr)
+        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!) by Grey Ecology, LLC.", attributes: attr)
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
