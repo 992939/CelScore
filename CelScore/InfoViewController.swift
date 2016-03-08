@@ -10,12 +10,6 @@ import AsyncDisplayKit
 import UIKit
 import Material
 
-public protocol DetailSubViewDelegate {
-    func enableVoteButton(positive: Bool)
-    func sendFortuneCookie()
-    func socialSharing(message: String)
-}
-
 
 final class InfoViewController: ASViewController {
     

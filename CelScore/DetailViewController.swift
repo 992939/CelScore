@@ -83,12 +83,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func voteAction() {
+        print("voteAction")
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-            .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .observeOn(UIScheduler())
+            .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
-                return RatingsViewModel().voteSignal(ratingsId: self.celebST.id)
-            }
+                return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
                 self.ratingsVC.animateStarsToGold(positive: isPositive)
@@ -98,8 +98,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                     self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }
-                
             })
+    }
+    
+    func updateAction() {
+        print("updateAction")
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+            .observeOn(UIScheduler())
+            .startWithNext({ (userRatings:RatingsModel) in self.ratingsVC.displayUserRatings(userRatings) })
     }
     
     //MARK: socialButton delegate
@@ -173,27 +179,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         default: removingView = self.celscoreVC.view
         }
         
-        self.handleMenu()
-        
-        self.voteButton.enabled = false
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-        self.voteButton.backgroundColor = Constants.kDarkShade
-        if index == 2 {
-            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-                .filter({ hasUserRatings in return hasUserRatings })
-                .promoteErrors(RatingsError)
-                .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
-                    return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-                }
-                .startWithNext({ userRatings in
-                    self.voteButton.backgroundColor = userRatings.getCelScore() < 3.0 ? Constants.kDarkGreenShade : Constants.kWineShade
-                    self.voteButton.enabled = true
-                    self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
-                    self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
-                })
-        }
-    
         if index == 0 || (index == 1 && previousIndex == 2 ){
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 removingView.left = infoView.width + 35
@@ -207,6 +192,29 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 }, completion: { completed -> Void in removingView.hidden = true
             })
         }
+        
+        self.handleMenu()
+        
+        if index == 2 {
+            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasUserRatings in
+                if hasUserRatings { self.enableUpdateButton() }
+            })
+        } else {
+            self.voteButton.enabled = false
+            self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+            self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+            self.voteButton.backgroundColor = Constants.kDarkShade
+        }
+    }
+    
+    func enableUpdateButton() {
+        print("YO MAMA!")
+        self.voteButton.enabled = true
+        self.voteButton.pulseScale = true
+        self.voteButton.backgroundColor = Constants.kStarRatingShade
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+        self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
     }
     
     //MARK: RatingsViewDelegate
@@ -215,6 +223,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.voteButton.enabled = true
             self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
             self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
+            self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseScale = true
@@ -318,12 +327,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.tintColor = MaterialColor.white
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-        self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasUserRatings in
-            self.voteButton.pulseScale = hasUserRatings ? true : false
-            self.voteButton.enabled = hasUserRatings ? true : false
-            self.voteButton.backgroundColor = hasUserRatings ? Constants.kStarRatingShade : Constants.kDarkShade
-        })
+        self.voteButton.backgroundColor = Constants.kDarkShade
+        self.voteButton.pulseScale = false
+        self.voteButton.enabled = false
     }
 }
 

@@ -11,6 +11,13 @@ import Material
 import AIRTimer
 import OpinionzAlertView
 
+public protocol DetailSubViewDelegate {
+    func enableVoteButton(positive: Bool)
+    func sendFortuneCookie()
+    func socialSharing(message: String)
+}
+
+
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
@@ -125,5 +132,16 @@ final class RatingsViewController: ASViewController {
             .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
+    }
+    
+    func displayUserRatings(userRatings: RatingsModel) {
+        print("We in here!")
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
+            .startWithNext({ ratings in
+                let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
+                for (index, subview) in viewArray.enumerate() {
+                    
+                }
+        })
     }
 }
