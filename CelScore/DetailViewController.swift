@@ -12,7 +12,7 @@ import SMSegmentView
 import FBSDKLoginKit
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate, MaterialAnimationDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
     
     //MARK: Properties
     let celebST: CelebrityStruct
@@ -83,13 +83,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
     
     func voteAction() {
-        print("voteAction")
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
+                self.enableUpdateButton()
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
                 self.ratingsVC.animateStarsToGold(positive: isPositive)
                 MaterialAnimation.delay(2) {
@@ -102,10 +102,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func updateAction() {
-        print("updateAction")
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
-            .startWithNext({ (userRatings:RatingsModel) in self.ratingsVC.displayUserRatings(userRatings) })
+            .startWithNext({ (userRatings:RatingsModel) in
+                self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true)
+                self.ratingsVC.displayUserRatings(userRatings)
+            })
     }
     
     //MARK: socialButton delegate
@@ -197,8 +199,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         if index == 2 {
             RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasUserRatings in
-                if hasUserRatings { self.enableUpdateButton() }
-            })
+                if hasUserRatings { self.enableUpdateButton() }})
         } else {
             self.voteButton.enabled = false
             self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
@@ -208,12 +209,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func enableUpdateButton() {
-        print("YO MAMA!")
         self.voteButton.enabled = true
         self.voteButton.pulseScale = true
         self.voteButton.backgroundColor = Constants.kStarRatingShade
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
         self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+        self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
     }
     
@@ -223,6 +224,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.voteButton.enabled = true
             self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
             self.voteButton.setImage(UIImage(named: "justice"), forState: .Highlighted)
+            self.voteButton.removeTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
@@ -248,14 +250,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialSharing(message: String) {
         self.handleMenu(true)
         self.socialMessage = message
-    }
-    
-    func materialAnimationDidStart(animation: CAAnimation) {
-        print("animation now!")
-    }
-    
-    func materialAnimationDidStop(animation: CAAnimation, finished flag: Bool) {
-        print("animation stopped!")
     }
     
     //MARK: AFDropdownNotificationDelegate
