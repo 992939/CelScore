@@ -185,23 +185,19 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             UIView.animateWithDuration(1.0, animations: { _ in
                 removingView.left = infoView.width + 35
                 infoView.slideLeft()
-                }, completion: { _ in removingView.hidden = true
-            })
+                }, completion: { _ in removingView.hidden = true })
         } else {
             UIView.animateWithDuration(1.0, animations: { _ in
                 removingView.left = -infoView.width
                 infoView.slideRight()
-                }, completion: { _ in removingView.hidden = true
-            })
+                }, completion: { _ in removingView.hidden = true })
         }
         
         self.handleMenu()
         
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
-                print("userRatings \(userRatings.description)")
-                guard userRatings.getCelScore() > 0 else { print("word"); return }
-                print("Still?")
+                guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }})
         } else {
