@@ -53,7 +53,6 @@ final class CelebrityViewModel: NSObject {
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             object.isFollowed = isFollowing
-            object.isSynced = false //TODO: needed?
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)

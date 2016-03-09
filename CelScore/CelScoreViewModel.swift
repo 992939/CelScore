@@ -35,7 +35,7 @@ final class CelScoreViewModel: NSObject {
         return SignalProducer { observer, disposable in
 
             let serviceClient = PROCelScoreAPIClient.defaultClient()
-            serviceClient.APIKey = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP" //TODO: encrypt
+            serviceClient.APIKey = Constants.kAPIKey
         
             let awsCall : AWSTask
             switch dataType {

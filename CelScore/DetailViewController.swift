@@ -86,7 +86,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
-            .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+            .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
+                if ratings.totalVotes == 0 {
+                    MaterialAnimation.animateWithDuration(4.0, animations: { _ in
+                        self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor })
+                }
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
