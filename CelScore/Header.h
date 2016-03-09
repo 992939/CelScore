@@ -21,5 +21,6 @@
 #import "PROCelScoreAPIClient.h"
 #import "AFDropdownNotification.h"
 #import "LMGaugeView.h"
+#import "UIView+DYARippleEffect.h"
 
 #endif /* Header_h */

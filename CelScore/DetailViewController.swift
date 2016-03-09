@@ -223,6 +223,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: RatingsViewDelegate
+    func rippleEffect(positive: Bool) {
+        self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade
+        self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
+        self.profilePicNode.view.dya_ripple()
+    }
+    
     func enableVoteButton(positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
@@ -287,11 +293,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         self.profilePicNode.contentMode = .ScaleAspectFit
-        self.profilePicNode.clipsToBounds = true
-        self.profilePicNode.borderWidth = 8
         self.profilePicNode.cornerRadius = picWidth/2
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            self.profilePicNode.borderColor = hasRatings ? Constants.kStarRatingShade.CGColor : MaterialColor.white.CGColor
+            self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+                return ASImageNodeRoundBorderModificationBlock(12.0, (hasRatings ? Constants.kStarRatingShade: MaterialColor.white))(originalImage)
+            }
         })
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2

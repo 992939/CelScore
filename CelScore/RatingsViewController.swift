@@ -15,6 +15,7 @@ public protocol DetailSubViewDelegate {
     func enableVoteButton(positive: Bool)
     func sendFortuneCookie()
     func socialSharing(message: String)
+    func rippleEffect(positive: Bool)
 }
 
 
@@ -87,11 +88,12 @@ final class RatingsViewController: ASViewController {
                                 alertView.show()})
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
-                            .startWithNext({ ratings in
+                            .startWithNext({ userRatings in
+                                self.delegate?.rippleEffect(rating < 3 ? false : true)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
-                                let isPositive = ratings.getCelScore() < 3.0 ? false : true
-                                let unrated = ratings.filter{ (ratings[$0] as! Int) == 0 }
+                                let isPositive = userRatings.getCelScore() < 3.0 ? false : true
+                                let unrated = userRatings.filter{ (userRatings[$0] as! Int) == 0 }
                                 if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }})
                     }
                     qualityView.addSubview(qualityLabel)
