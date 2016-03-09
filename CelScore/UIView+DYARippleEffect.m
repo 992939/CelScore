@@ -41,18 +41,17 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 
     CAShapeLayer *circleShape = [CAShapeLayer layer];
     circleShape.path = path.CGPath;
-    circleShape.position = shapePosition;
+    circleShape.position = centerPoint; //shapePosition;
     circleShape.fillColor = [self rippleTrailColor].CGColor;
     circleShape.opacity = 0;
     circleShape.strokeColor = [self rippleColor].CGColor;
     circleShape.lineWidth = 1;
-    circleShape.masksToBounds = false;
 
     [self.layer addSublayer:circleShape];
 
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-    scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1)];
+    scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.15, 1.15, 1)];
 
     CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     alphaAnimation.fromValue = @1;

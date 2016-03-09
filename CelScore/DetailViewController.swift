@@ -87,13 +87,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                if ratings.totalVotes == 0 {
-                    MaterialAnimation.animateWithDuration(4.0, animations: { _ in
-                        self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor })
-                }
+                if ratings.totalVotes == 0 { self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor }
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
+                self.rippleEffect(false, gold: true)
                 let isPositive = userRatings.getCelScore() < 3 ? false : true
                 self.ratingsVC.animateStarsToGold(positive: isPositive)
                 MaterialAnimation.delay(2) {
@@ -109,6 +107,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
             .startWithNext({ (userRatings:RatingsModel) in
+                self.rippleEffect(false, gold: true)
                 self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
             })
@@ -223,11 +222,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: RatingsViewDelegate
-    func rippleEffect(positive: Bool) {
-        self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade
+    func rippleEffect(positive: Bool, gold: Bool = false) {
+        if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
+        else { self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         let center = self.profilePicNode.view.center
-        self.profilePicNode.view.dya_ripple(CGPoint(x: center.x, y: center.y))
+        self.profilePicNode.view.dya_ripple(CGPoint(x: self.profilePicNode.view.left + 13, y: center.y - 10))
     }
     
     func enableVoteButton(positive: Bool) {
