@@ -17,6 +17,7 @@ struct Constants {
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     static let kAPIKey: String = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP"
     
+    static let kMaxFollowedCelebrities: Int = 10
     static let kNetworkRetry: Int = 2
     static let kFontSize: CGFloat = 16.0
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width

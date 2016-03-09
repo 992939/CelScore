@@ -59,6 +59,16 @@ final class CelebrityViewModel: NSObject {
             observer.sendCompleted()
         }
     }
+    
+    func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "isFollowed = true")
+            let celebList = realm.objects(CelebrityModel).filter(predicate)
+            observer.sendNext(celebList.count)
+            observer.sendCompleted()
+        }
+    }
 }
 
 

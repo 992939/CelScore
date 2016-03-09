@@ -9,6 +9,7 @@
 import AsyncDisplayKit
 import WebASDKImageManager
 import Material
+import OpinionzAlertView
 
 
 final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
@@ -126,7 +127,16 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: MaterialSwitchDelegate
     func materialSwitchStateChanged(control: MaterialSwitch) {
-        let following = control.switchState == .Off ? false : true
-        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
+        if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false).start() }
+        else {
+            CelebrityViewModel().countFollowedCelebritiesSignal()
+                .startWithNext { count in if count > 9 {
+                    control.setOn(false, animated: true)
+                    let alertView = OpinionzAlertView(title: "Followed Maximum", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+                    alertView.iconType = OpinionzAlertIconInfo
+                    alertView.show()
+                } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
+            }
+        }
     }
 }
