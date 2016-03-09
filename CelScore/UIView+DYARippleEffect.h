@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UIColor *rippleColor;
 @property (strong, nonatomic) UIColor *rippleTrailColor;
 
-- (void)dya_ripple;
+- (void)dya_ripple:(CGPoint)centerPoint;
 
 @end

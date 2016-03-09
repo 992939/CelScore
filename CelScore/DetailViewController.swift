@@ -226,7 +226,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func rippleEffect(positive: Bool) {
         self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
-        self.profilePicNode.view.dya_ripple()
+        let center = self.profilePicNode.view.center
+        self.profilePicNode.view.dya_ripple(CGPoint(x: center.x, y: center.y))
     }
     
     func enableVoteButton(positive: Bool) {

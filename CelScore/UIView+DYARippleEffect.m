@@ -34,7 +34,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
     objc_setAssociatedObject(self, kDYARippleTrailColor, rippleTrailColor, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (void)dya_ripple {
+- (void)dya_ripple:(CGPoint)centerPoint {
     CGRect pathFrame = CGRectMake(-CGRectGetMidX(self.bounds), -CGRectGetMidY(self.bounds), self.bounds.size.width, self.bounds.size.height);
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pathFrame cornerRadius:self.layer.cornerRadius];
     CGPoint shapePosition = [self convertPoint:self.center fromView:nil];
