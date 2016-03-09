@@ -126,7 +126,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: MaterialSwitchDelegate
     func materialSwitchStateChanged(control: MaterialSwitch) {
-        let following = control.switchState == .Off ? true : false
+        let following = control.switchState == .Off ? false : true
         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: following).start()
     }
 }

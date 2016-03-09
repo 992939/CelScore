@@ -136,8 +136,6 @@ struct Constants {
         "Expect a cow where there is grass.",
         "Slander by the stream will be heard by the frogs.", // 0 to 14 - Negative
         "The revolution will not be televised.",
-        "What do we want? Justice. When do we want it? Now.",
-        "In Heaven, all the interesting people are missing.",
         "Neutral men are the Devil's allies.",
         "If you can't reward, make sure to thank.",
         "Fire burns brighter in the darkness.",
@@ -170,6 +168,7 @@ struct Constants {
         "The same shoe does not fit every foot.",
         "Wherever you go, there you are.",
         "We are all made of stars.",
-        "The most important time in history is now, the present.",
+        "E Pluribus Unum: Out of many, one.",
+        "One for all, and all for one.",
         "The whole is greater than the sum of its parts."]
 }
