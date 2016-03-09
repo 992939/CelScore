@@ -171,5 +171,7 @@ struct Constants {
         "We are all made of stars.",
         "E Pluribus Unum: Out of many, one.",
         "One for all, and all for one.",
+        "The consensus is the eyes and ears of public opinion.",
+        "The consensus is the echo chamber of public opinion.",
         "The whole is greater than the sum of its parts."]
 }

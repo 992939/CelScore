@@ -131,8 +131,8 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }})
-            //.delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            //.on(completed: { self.delegate!.sendFortuneCookie() })
+            .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
     }
     

@@ -73,7 +73,6 @@ final class CelScoreViewModel: NSObject {
     
     func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NoError> {
         return SignalProducer { observer, disposable in
-            
             let fortuneCookieSays: String?
             let cookies = Constants.fortuneCookies
             var newCookies = cookieType == .Positive ? Array(cookies[15..<cookies.count]) : Array(cookies[0..<14])
@@ -82,23 +81,17 @@ final class CelScoreViewModel: NSObject {
             realm.beginWrite()
             let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
             let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
-            
-            if let oldCookies = cookieList {
-                let eightyPercent = Int(0.8 * Double(newCookies.count))
-                oldCookies.list.forEach({ (chip) -> () in newCookies.removeAtIndex(chip.index) }) //TODO: out of bounds error
-                let index = Int(arc4random_uniform(UInt32(newCookies.count)))
-                oldCookies.list.append(Chip(index: index))
-
-                if oldCookies.list.count > eightyPercent {
-                    realm.add(CookieModel(id: cookieType.rawValue, chip: Chip(index: index)), update: true)
-                } else { realm.add(oldCookies, update: true) }
-                fortuneCookieSays = newCookies[index]
-            } else
-            {
-                let index = Int(arc4random_uniform(UInt32(newCookies.count)))
-                let newCookie = CookieModel(id: cookieType.rawValue, chip: Chip(index: index))
-                realm.add(newCookie, update: true)
-                fortuneCookieSays = newCookies[index]
+            if cookieList?.list.count > 0 {
+                let randomPick = Int(arc4random_uniform(UInt32(cookieList!.list.count)))
+                let cookie: Chip = cookieList!.list.removeAtIndex(randomPick)
+                realm.add(cookieList!, update: true)
+                fortuneCookieSays = newCookies[cookie.index]
+            } else {
+                let randomPick = Int(arc4random_uniform(UInt32(newCookies.count)))
+                fortuneCookieSays = newCookies.removeAtIndex(randomPick)
+                let list = CookieModel()
+                for(index, _) in newCookies.enumerate() { list.list.append(Chip(index: index)) }
+                realm.add(list, update: true)
             }
             try! realm.commitWrite()
             observer.sendNext("\"\(fortuneCookieSays!) Thank you for voting.\"")
@@ -108,7 +101,6 @@ final class CelScoreViewModel: NSObject {
     
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
-            
             var socialVC: SLComposeViewController
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
