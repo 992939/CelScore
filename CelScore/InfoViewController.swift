@@ -45,7 +45,6 @@ final class InfoViewController: ASViewController {
                             let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
                             qualityView.tag = index+1
                             let qualityLabel = Constants.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
-                            
                             var infoLabelText = ""
                             var attributedText = NSMutableAttributedString()
                             switch quality {
@@ -87,7 +86,6 @@ final class InfoViewController: ASViewController {
                     })
             })
             .start()
-        
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
     }
