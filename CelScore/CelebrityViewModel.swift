@@ -62,13 +62,22 @@ final class CelebrityViewModel: NSObject {
     
     func drawStarsBackgroundSignal() -> SignalProducer<UIView, NoError> {
         return SignalProducer { observer, disposable in
-            var sky: Array<Array<Int>> = []
+            var sky: Array<Array<CGSize>> = []
             let numberOfStars = [1, 2, 3, 4].map { _ in Int(arc4random_uniform(UInt32(4))) + 3 }
             numberOfStars.forEach({ stars in
                 var quadrant: Array<Int> = []
                 for _ in 1...stars { quadrant.append(Int(arc4random_uniform(UInt32(3))) + 1) }
-                
-                sky.append(quadrant)
+                let rectangles: Array<CGSize> = quadrant.map({ size in
+                    let rect: CGSize?
+                    switch size {
+                    case 1: rect = CGSize(width: 10, height: 10)
+                    case 2: rect = CGSize(width: 30, height: 30)
+                    default: rect = CGSize(width: 60, height: 60)
+                    }
+                    
+                    return rect!
+                })
+                sky.append(rectangles)
             })
             print("sky \(sky)")
             observer.sendCompleted()
