@@ -130,8 +130,7 @@ final class UserViewModel: NSObject {
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
                     realm.beginWrite()
-                    for var index: Int = 0; index < userRatingsArray.count; index++
-                    {
+                    for index in 0...userRatingsArray.count { //TODO: test bounds
                         let ratings: UserRatingsModel = userRatingsArray[index]
                         dataset.setString(ratings.interpolation(), forKey: ratings.id)
                         ratings.isSynced = true
@@ -187,9 +186,8 @@ final class UserViewModel: NSObject {
                     })
                 case .UserSettings:
                     let dico = dataset.getAll()
-                    var model = realm.objects(SettingsModel).first
-                    if model == nil { model = SettingsModel() }
-                    let settings: SettingsModel = model!
+                    let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
+                    //TODO: check .isEmpty
                     settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue

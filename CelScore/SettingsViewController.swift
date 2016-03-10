@@ -110,7 +110,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
-        
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationViewController!.depth = .Depth1
     }
