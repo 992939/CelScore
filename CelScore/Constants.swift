@@ -95,6 +95,33 @@ struct Constants {
         menuView.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    //Star Wars
+    typealias Distance = Double
+    typealias Region = CGPoint -> Bool
+    
+    static func drawStarsBackground(diameter diameter: CGFloat) -> UIView {
+        var sky: Array<CGSize> = []
+        let numberOfStars: Int = Int(arc4random_uniform(UInt32(15))) + 15
+        for _ in 1...numberOfStars {
+            let size = Int(arc4random_uniform(UInt32(3))) + 1
+            let rect: CGSize?
+            switch size {
+            case 1: rect = CGSize(width: 10, height: 10)
+            case 2: rect = CGSize(width: 30, height: 30)
+            default: rect = CGSize(width: 60, height: 60)
+            }
+            sky.append(rect!)
+        }
+        let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
+        let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
+        print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
+        return UIView()
+    }
+    
+    static func circle(radius: Distance, center: CGPoint) -> Region {
+        return { point in Distance(point.minus(center).length) <= radius }
+    }
+    
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)

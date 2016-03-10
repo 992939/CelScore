@@ -121,6 +121,11 @@ public extension NSDate {
     }
 }
 
+public extension CGPoint {
+    func minus(p: CGPoint) -> CGPoint { return CGPoint(x: x - p.x, y: y - p.y) }
+    var length: CGFloat { return sqrt(x * x + y * y) }
+}
+
 public extension Double {
     func roundToPlaces(places:Int) -> Double {
         let divisor = pow(10.0, Double(places))

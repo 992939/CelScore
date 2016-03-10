@@ -289,10 +289,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func getTopView() -> MaterialView {
         let picWidth: CGFloat = 200.0
-        CelebrityViewModel().drawStarsBackgroundSignal(diameter: picWidth/2)
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .start()
-        
+        Constants.drawStarsBackground(diameter: picWidth/2)
         let topView = MaterialView(frame: Constants.kTopViewRect)
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)

@@ -57,28 +57,6 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
-    func drawStarsBackgroundSignal(diameter diameter:CGFloat) -> SignalProducer<UIView, NoError> {
-        return SignalProducer { observer, disposable in
-            var sky: Array<CGSize> = []
-            let numberOfStars: Int = Int(arc4random_uniform(UInt32(15))) + 15
-            for _ in 1...numberOfStars {
-                let size = Int(arc4random_uniform(UInt32(3))) + 1
-                let rect: CGSize?
-                switch size {
-                case 1: rect = CGSize(width: 10, height: 10)
-                case 2: rect = CGSize(width: 30, height: 30)
-                default: rect = CGSize(width: 60, height: 60)
-                }
-                
-                sky.append(rect!)
-            }
-            let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
-            let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
-            print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
-            observer.sendCompleted()
-        }
-    }
-    
     func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
