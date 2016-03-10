@@ -96,7 +96,7 @@ struct Constants {
     }
     
     //Star Wars
-    typealias Distance = Double
+    typealias Distance = CGFloat
     typealias Region = CGPoint -> Bool
     
     static func drawStarsBackground(diameter diameter: CGFloat) -> UIView {
@@ -118,9 +118,29 @@ struct Constants {
         return UIView()
     }
     
-    static func circle(radius: Distance, center: CGPoint) -> Region {
-        return { point in Distance(point.minus(center).length) <= radius }
+    static func circle(radius: Distance) -> Region {
+        return { point in point.length <= radius }
     }
+    
+    static func shift(region: Region, offset: CGPoint) -> Region {
+        return { point in region(point.minus(offset)) }
+    }
+    
+    static func invert(region: Region) -> Region {
+        return { point in !region(point) }
+    }
+   
+    static func intersection(region1: Region, region2: Region) -> Region {
+        return { point in region1(point) && region2(point) }
+    }
+    
+    static func difference(region: Region, minus: Region) -> Region {
+        return intersection(region, region2: invert(minus))
+    }
+    
+//    static func union(region1: Region, region2: Region) -> Region -> Region {
+//        return { point in region1(point) || region2(point) }
+//    }
     
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
