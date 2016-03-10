@@ -12,9 +12,9 @@ import AIRTimer
 import OpinionzAlertView
 
 public protocol DetailSubViewDelegate {
-    func enableVoteButton(positive positive: Bool)
     func sendFortuneCookie()
     func socialSharing(message message: String)
+    func enableVoteButton(positive positive: Bool)
     func rippleEffect(positive positive: Bool, gold: Bool)
 }
 

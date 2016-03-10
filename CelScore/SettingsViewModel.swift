@@ -98,11 +98,7 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            
-            var model = realm.objects(SettingsModel).first
-            if model == nil { model = SettingsModel() }
-            let settings: SettingsModel = model!
-            
+            let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first! //TODO: check .isEmpty
             switch settingType {
             case .DefaultListIndex: settings.defaultListIndex = value as! Int
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
