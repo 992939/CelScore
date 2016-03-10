@@ -79,8 +79,7 @@ final class CelScoreViewModel: NSObject {
             
             let realm = try! Realm()
             realm.beginWrite()
-            let predicate = NSPredicate(format: "id = %@", cookieType.rawValue)
-            let cookieList = realm.objects(CookieModel).filter(predicate).first as CookieModel?
+            let cookieList = realm.objects(CookieModel).filter("id = %@", cookieType.rawValue).first as CookieModel?
             if cookieList?.list.count > 0 {
                 let randomPick = Int(arc4random_uniform(UInt32(cookieList!.list.count)))
                 let cookie: Chip = cookieList!.list.removeAtIndex(randomPick)

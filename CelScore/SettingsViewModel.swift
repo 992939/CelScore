@@ -121,13 +121,11 @@ final class SettingsViewModel: NSObject {
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "isFollowed = true")
-            let celebList = realm.objects(CelebrityModel).filter(predicate)
+            let celebList = realm.objects(CelebrityModel).filter("isFollowed = true")
             let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerate() {
-                    let idPredicate = NSPredicate(format: "id = %@", celeb.id)
-                    let ratings: RatingsModel = realm.objects(RatingsModel).filter(idPredicate).first!.copy() as! RatingsModel
+                    let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", celeb.id).first!.copy() as! RatingsModel
                     let today = ["nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
                     userDefaults!.setObject(today, forKey: String(index))
                 }

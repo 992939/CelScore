@@ -22,8 +22,7 @@ final class CelebrityViewModel: NSObject {
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", id)
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!.copy() as? CelebrityModel
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!.copy() as? CelebrityModel
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             observer.sendNext(object)
             observer.sendCompleted()
@@ -33,8 +32,7 @@ final class CelebrityViewModel: NSObject {
     func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", id)
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
             guard let celeb = celebrity else { observer.sendFailed(.NotFound); return }
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
@@ -49,8 +47,7 @@ final class CelebrityViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let predicate = NSPredicate(format: "id = %@", id)
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter(predicate).first!
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             object.isFollowed = isFollowing
             realm.add(object, update: true)
@@ -63,7 +60,7 @@ final class CelebrityViewModel: NSObject {
     func drawStarsBackgroundSignal() -> SignalProducer<UIView, NoError> {
         return SignalProducer { observer, disposable in
             var sky: Array<CGSize> = []
-            let numberOfStars = Int(arc4random_uniform(UInt32(15))) + 15
+            let numberOfStars: Int = Int(arc4random_uniform(UInt32(15))) + 15
             for _ in 1...numberOfStars {
                 let size = Int(arc4random_uniform(UInt32(3))) + 1
                 let rect: CGSize?
@@ -74,7 +71,9 @@ final class CelebrityViewModel: NSObject {
                 }
                 sky.append(rect!)
             }
-            print("sky \(sky)")
+            let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
+            let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
+            print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
             observer.sendCompleted()
         }
     }
@@ -82,8 +81,7 @@ final class CelebrityViewModel: NSObject {
     func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "isFollowed = true")
-            let celebList = realm.objects(CelebrityModel).filter(predicate)
+            let celebList = realm.objects(CelebrityModel).filter("isFollowed = true")
             observer.sendNext(celebList.count)
             observer.sendCompleted()
         }

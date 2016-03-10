@@ -127,8 +127,7 @@ final class UserViewModel: NSObject {
                         dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                     }
                 case .UserRatings:
-                    let predicate = NSPredicate(format: "isSynced = false")
-                    let userRatingsArray = realm.objects(UserRatingsModel).filter(predicate)
+                    let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
                     realm.beginWrite()
                     for var index: Int = 0; index < userRatingsArray.count; index++

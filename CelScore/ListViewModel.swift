@@ -26,8 +26,7 @@ final class ListViewModel: NSObject {
     func getListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", listId)
-            let list = realm.objects(ListsModel).filter(predicate).first
+            let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList = list else { observer.sendFailed(.EmptyList); return }
             self.celebrityList = celebList.copy() as! ListsModel
             observer.sendNext(celebList)
@@ -38,11 +37,9 @@ final class ListViewModel: NSObject {
     func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            var predicate = NSPredicate(format: "id = %@", listId)
-            let list = realm.objects(ListsModel).filter(predicate).first
+            let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
-            predicate = NSPredicate(format: "isFollowed = true")
-            let followed = realm.objects(CelebrityModel).filter(predicate)
+            let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
 
             guard followed.count > 0 else { return }
             var notFollowing: [(index: Int, celebId: CelebId)] = []
@@ -72,8 +69,7 @@ final class ListViewModel: NSObject {
     func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "nickName contains[c] %@", searchToken)
-            let list = realm.objects(CelebrityModel).filter(predicate)
+            let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
             guard list.count > 0 else { return }
             
             let listModel =  ListsModel()
@@ -96,8 +92,7 @@ final class ListViewModel: NSObject {
             guard index < self.getCount() else { observer.sendFailed(.IndexOutOfBounds); return }
             let celebId: CelebId = self.celebrityList.celebList[index]
             let realm = try! Realm()
-            let predicate = NSPredicate(format: "id = %@", celebId.id)
-            let celebrity = realm.objects(CelebrityModel).filter(predicate).first
+            let celebrity = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
             guard let celeb = celebrity else { observer.sendFailed(.EmptyList); return }
             observer.sendNext(CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
             observer.sendCompleted()
