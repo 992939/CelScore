@@ -65,6 +65,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
+        
+        CelebrityViewModel().drawStarsBackgroundSignal().start()
 
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)

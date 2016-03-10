@@ -60,6 +60,21 @@ final class CelebrityViewModel: NSObject {
         }
     }
     
+    func drawStarsBackgroundSignal() -> SignalProducer<UIView, NoError> {
+        return SignalProducer { observer, disposable in
+            var sky: Array<Array<Int>> = []
+            let numberOfStars = [1, 2, 3, 4].map { _ in Int(arc4random_uniform(UInt32(4))) + 3 }
+            numberOfStars.forEach({ stars in
+                var quadrant: Array<Int> = []
+                for _ in 1...stars { quadrant.append(Int(arc4random_uniform(UInt32(3))) + 1) }
+                
+                sky.append(quadrant)
+            })
+            print("sky \(sky)")
+            observer.sendCompleted()
+        }
+    }
+    
     func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
