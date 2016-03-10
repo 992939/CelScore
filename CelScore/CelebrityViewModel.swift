@@ -69,6 +69,7 @@ final class CelebrityViewModel: NSObject {
                 case 2: rect = CGSize(width: 30, height: 30)
                 default: rect = CGSize(width: 60, height: 60)
                 }
+                
                 sky.append(rect!)
             }
             let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3

@@ -12,10 +12,10 @@ import AIRTimer
 import OpinionzAlertView
 
 public protocol DetailSubViewDelegate {
-    func enableVoteButton(positive: Bool)
+    func enableVoteButton(positive positive: Bool)
     func sendFortuneCookie()
-    func socialSharing(message: String)
-    func rippleEffect(positive: Bool, gold: Bool)
+    func socialSharing(message message: String)
+    func rippleEffect(positive positive: Bool, gold: Bool)
 }
 
 
@@ -82,19 +82,18 @@ final class RatingsViewController: ASViewController {
                         SettingsViewModel().isLoggedInSignal()
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
-                                self.delegate!.socialSharing("")
+                                self.delegate!.socialSharing(message: "")
                                 let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                                 alertView.iconType = OpinionzAlertIconInfo
                                 alertView.show()})
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .startWithNext({ userRatings in
-                                self.delegate?.rippleEffect(rating < 3 ? false : true, gold: false)
+                                self.delegate?.rippleEffect(positive: rating < 3 ? false : true, gold: false)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
-                                let isPositive = userRatings.getCelScore() < 3.0 ? false : true
                                 let unrated = userRatings.filter{ (userRatings[$0] as! Int) == 0 }
-                                if unrated.isEmpty { self.delegate!.enableVoteButton(isPositive) }})
+                                if unrated.isEmpty { self.delegate!.enableVoteButton(positive: userRatings.getCelScore() < 3 ? false : true) }})
                     }
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(cosmosView)
@@ -111,7 +110,7 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
-                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")})
+                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")})
     }
     
     func animateStarsToGold(positive positive: Bool) {

@@ -117,7 +117,7 @@ final class InfoViewController: ASViewController {
                 case Info.Networth.text(): infoText = celeb.netWorth
                 default: infoText = "n/a"
                 }
-                self.delegate!.socialSharing("\(self.celebST.nickname)'s \(quality) \(infoText)")
+                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s \(quality) \(infoText)")
             })
     }
 }

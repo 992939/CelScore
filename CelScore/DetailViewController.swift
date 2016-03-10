@@ -95,9 +95,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
-                self.rippleEffect(false, gold: true)
-                let isPositive = userRatings.getCelScore() < 3 ? false : true
-                self.ratingsVC.animateStarsToGold(positive: isPositive)
+                self.rippleEffect(positive: false, gold: true)
+                self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 MaterialAnimation.delay(2) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
                     self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
@@ -111,8 +110,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
             .startWithNext({ (userRatings:RatingsModel) in
-                self.rippleEffect(false, gold: true)
-                self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true)
+                self.rippleEffect(positive: false, gold: true)
+                self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
             })
     }
@@ -205,7 +204,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
-                if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(userRatings.getCelScore() < 3.0 ? false : true) }
+                if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }})
         } else {
             self.voteButton.enabled = false
@@ -226,7 +225,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: RatingsViewDelegate
-    func rippleEffect(positive: Bool, gold: Bool = false) {
+    func rippleEffect(positive positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
         else { self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
@@ -234,7 +233,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode.view.dya_ripple(CGPoint(x: self.profilePicNode.view.left + 13, y: center.y - 10))
     }
     
-    func enableVoteButton(positive: Bool) {
+    func enableVoteButton(positive positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
             self.voteButton.setImage(UIImage(named: "justice"), forState: .Normal)
@@ -262,7 +261,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
 
-    func socialSharing(message: String) {
+    func socialSharing(message message: String) {
         self.handleMenu(true)
         self.socialMessage = message
     }
