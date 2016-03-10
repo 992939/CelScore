@@ -58,6 +58,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
+        
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         first?.setImage(UIImage(named: "ic_add_black"), forState: .Normal)
@@ -165,35 +166,25 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
+    func enableUpdateButton() {
+        self.voteButton.enabled = true
+        self.voteButton.pulseScale = true
+        self.voteButton.backgroundColor = Constants.kStarRatingShade
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
+        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+        self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
+    }
+    
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        let infoView: UIView
-        switch index {
-        case 1: infoView = self.infoVC.view
-        case 2: infoView = self.ratingsVC.view
-        default: infoView = self.celscoreVC.view
-        }
+        let infoView = self.getSubView(atIndex: index)
         infoView.hidden = false
         infoView.frame = Constants.kBottomViewRect
+        let removingView = self.getSubView(atIndex: previousIndex)
         
-        let removingView: UIView
-        switch previousIndex {
-        case 1: removingView = self.infoVC.view
-        case 2: removingView = self.ratingsVC.view
-        default: removingView = self.celscoreVC.view
-        }
-        
-        if index == 0 || (index == 1 && previousIndex == 2 ){
-            UIView.animateWithDuration(1.0, animations: { _ in
-                removingView.left = infoView.width + 35
-                infoView.slideLeft()
-                }, completion: { _ in removingView.hidden = true })
-        } else {
-            UIView.animateWithDuration(1.0, animations: { _ in
-                removingView.left = -infoView.width
-                infoView.slideRight()
-                }, completion: { _ in removingView.hidden = true })
-        }
+        if index == 0 || (index == 1 && previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
+        else { self.slide(right: true, newView: infoView, oldView: removingView) }
         
         self.handleMenu()
         
@@ -210,14 +201,21 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         }
     }
     
-    func enableUpdateButton() {
-        self.voteButton.enabled = true
-        self.voteButton.pulseScale = true
-        self.voteButton.backgroundColor = Constants.kStarRatingShade
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-        self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
+    func getSubView(atIndex index: Int) -> UIView {
+        let subview: UIView
+        switch index {
+        case 1: subview = self.infoVC.view
+        case 2: subview = self.ratingsVC.view
+        default: subview = self.celscoreVC.view
+        }
+        return subview
+    }
+    
+    func slide(right right: Bool, newView: UIView, oldView: UIView) {
+        UIView.animateWithDuration(1.0, animations: { _ in
+            if right { oldView.left = -newView.width; newView.slideRight() }
+            else { oldView.left = newView.width + 35; newView.slideLeft() }
+            }, completion: { _ in oldView.hidden = true })
     }
     
     //MARK: RatingsViewDelegate

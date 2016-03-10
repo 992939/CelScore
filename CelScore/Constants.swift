@@ -138,9 +138,9 @@ struct Constants {
         return intersection(region, region2: invert(minus))
     }
     
-//    static func union(region1: Region, region2: Region) -> Region -> Region {
-//        return { point in region1(point) || region2(point) }
-//    }
+    static func union(region1: Region, region2: Region) -> Region {
+        return { point in region1(point) || region2(point) }
+    }
     
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)

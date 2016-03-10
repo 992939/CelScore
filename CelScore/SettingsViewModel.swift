@@ -38,7 +38,6 @@ final class SettingsViewModel: NSObject {
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
             guard ratings.count > 0 else { observer.sendFailed(.NoRatingsModel); return }
-
             let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
             guard 0..<5 ~= averageVariance else { observer.sendFailed(.OutOfBoundsVariance); return }
