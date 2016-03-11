@@ -45,7 +45,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
     circleShape.fillColor = [self rippleTrailColor].CGColor;
     circleShape.opacity = 0;
     circleShape.strokeColor = [self rippleColor].CGColor;
-    circleShape.lineWidth = 1;
+    circleShape.lineWidth = 1.3;
 
     [self.layer addSublayer:circleShape];
 
@@ -59,7 +59,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 
     CAAnimationGroup *animation = [CAAnimationGroup animation];
     animation.animations = @[ scaleAnimation, alphaAnimation ];
-    animation.duration = 1.0f;
+    animation.duration = 1.1f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     [circleShape addAnimation:animation forKey:nil];
 }
