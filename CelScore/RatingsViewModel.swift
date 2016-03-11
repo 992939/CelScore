@@ -25,10 +25,10 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             var userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             if userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
-            realm.beginWrite()
             let key = userRatings![ratingIndex]
             userRatings![key] = newRating
             userRatings!.isSynced = true
+            realm.beginWrite()
             realm.add(userRatings!, update: true)
             try! realm.commitWrite()
             observer.sendNext(userRatings!)
@@ -41,9 +41,9 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
-            realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
+            realm.beginWrite()
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)

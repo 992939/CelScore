@@ -176,6 +176,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
     }
     
+    func disableButton(button: MaterialButton) {
+        button.enabled = false
+        button.setImage(UIImage(named: "justice_black"), forState: .Normal)
+        button.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+        button.backgroundColor = Constants.kDarkShade
+    }
+    
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         let infoView = self.getSubView(atIndex: index)
@@ -192,13 +199,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
-                else { self.enableUpdateButton() }})
-        } else {
-            self.voteButton.enabled = false
-            self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
-            self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-            self.voteButton.backgroundColor = Constants.kDarkShade
-        }
+                else { self.enableUpdateButton() }
+            })
+        } else { self.disableButton(self.voteButton) }
     }
     
     func getSubView(atIndex index: Int) -> UIView {
@@ -327,12 +330,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
-        self.voteButton.tintColor = MaterialColor.white
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Normal)
-        self.voteButton.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
-        self.voteButton.backgroundColor = Constants.kDarkShade
         self.voteButton.pulseScale = false
-        self.voteButton.enabled = false
+        self.voteButton.tintColor = MaterialColor.white
+        self.disableButton(self.voteButton)
     }
 }
 

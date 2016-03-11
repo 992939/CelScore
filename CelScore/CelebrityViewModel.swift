@@ -46,10 +46,10 @@ final class CelebrityViewModel: NSObject {
     func followCebritySignal(id id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            realm.beginWrite()
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             object.isFollowed = isFollowing
+            realm.beginWrite()
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)

@@ -78,11 +78,11 @@ final class CelScoreViewModel: NSObject {
             var newCookies = cookieType == .Positive ? Array(cookies[15..<cookies.count]) : Array(cookies[0..<14])
             
             let realm = try! Realm()
-            realm.beginWrite()
             let cookieList = realm.objects(CookieModel).filter("id = %@", cookieType.rawValue).first as CookieModel?
             if cookieList?.list.count > 0 {
                 let randomPick = Int(arc4random_uniform(UInt32(cookieList!.list.count)))
                 let cookie: Chip = cookieList!.list.removeAtIndex(randomPick)
+                realm.beginWrite()
                 realm.add(cookieList!, update: true)
                 fortuneCookieSays = newCookies[cookie.index]
             } else {

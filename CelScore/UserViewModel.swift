@@ -176,7 +176,6 @@ final class UserViewModel: NSObject {
                 guard task.error == nil else { syncClient.wipe(); observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
                 realm.beginWrite()
-                
                 switch dataSetType {
                 case .UserInfo: fatalError("Not storing user information locally")
                 case .UserRatings:

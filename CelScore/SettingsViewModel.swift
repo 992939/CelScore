@@ -96,7 +96,6 @@ final class SettingsViewModel: NSObject {
     func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            realm.beginWrite()
             let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first! //TODO: check .isEmpty
             switch settingType {
             case .DefaultListIndex: settings.defaultListIndex = value as! Int
@@ -105,6 +104,7 @@ final class SettingsViewModel: NSObject {
             case .FortuneMode: settings.fortuneMode = value as! Bool
             }
             settings.isSynced = false
+            realm.beginWrite()
             realm.add(settings, update: true)
             try! realm.commitWrite()
             
