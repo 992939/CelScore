@@ -100,7 +100,7 @@ struct Constants {
     typealias Region = CGPoint -> Bool
     
     static func drawStarsBackground(diameter diameter: CGFloat) -> UIView {
-        var sky: Array<CGSize> = []
+        var sky: Array<CALayer> = []
         let numberOfStars: Int = Int(arc4random_uniform(UInt32(15))) + 15
         for _ in 1...numberOfStars {
             let size = Int(arc4random_uniform(UInt32(3))) + 1
@@ -110,11 +110,17 @@ struct Constants {
             case 2: rect = CGSize(width: 30, height: 30)
             default: rect = CGSize(width: 60, height: 60)
             }
-            sky.append(rect!)
+            let y = CGFloat(arc4random_uniform(UInt32(diameter)))
+            let x = CGFloat(arc4random_uniform(UInt32(diameter)))
+            let star: CALayer = CALayer()
+            star.frame = CGRect(x: x, y: y, width: rect!.width, height: rect!.height)
+            star.opacity = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
+            star.backgroundColor = Int(arc4random_uniform(UInt32(1))) == 0 ? MaterialColor.grey.base.CGColor : MaterialColor.white.CGColor
+            sky.append(star)
         }
-        let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
-        let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
-        print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
+        //let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
+        //let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
+        //print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
         return UIView()
     }
     
