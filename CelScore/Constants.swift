@@ -99,29 +99,27 @@ struct Constants {
     typealias Distance = CGFloat
     typealias Region = CGPoint -> Bool
     
-    static func drawStarsBackground(diameter diameter: CGFloat) -> UIView {
-        var sky: Array<CALayer> = []
-        let numberOfStars: Int = Int(arc4random_uniform(UInt32(15))) + 15
+    static func drawStarsBackground(frame frame: CGRect) -> UIView {
+        let skyLayer = UIView(frame: frame)
+        skyLayer.clipsToBounds = true
+        let numberOfStars: Int = Int(arc4random_uniform(UInt32(20))) + 40
         for _ in 1...numberOfStars {
             let size = Int(arc4random_uniform(UInt32(3))) + 1
             let rect: CGSize?
             switch size {
-            case 1: rect = CGSize(width: 10, height: 10)
-            case 2: rect = CGSize(width: 30, height: 30)
-            default: rect = CGSize(width: 60, height: 60)
+            case 1: rect = CGSize(width: 5, height: 5)
+            case 2: rect = CGSize(width: 10, height: 10)
+            default: rect = CGSize(width: 20, height: 20)
             }
-            let y = CGFloat(arc4random_uniform(UInt32(diameter)))
-            let x = CGFloat(arc4random_uniform(UInt32(diameter)))
-            let star: CALayer = CALayer()
-            star.frame = CGRect(x: x, y: y, width: rect!.width, height: rect!.height)
-            star.opacity = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
-            star.backgroundColor = Int(arc4random_uniform(UInt32(1))) == 0 ? MaterialColor.grey.base.CGColor : MaterialColor.white.CGColor
-            sky.append(star)
+            let circleLayer = CAShapeLayer()
+            let radius: CGFloat = rect!.width
+            circleLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius), cornerRadius: radius).CGPath
+            circleLayer.position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(frame.width))), y: CGFloat(arc4random_uniform(UInt32(frame.height))))
+            circleLayer.fillColor = Int(arc4random_uniform(UInt32(2))) == 1 ? kLightGreenShade.CGColor : kWineShade.CGColor
+            circleLayer.opacity = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
+            skyLayer.layer.addSublayer(circleLayer)
         }
-        //let numberOfFrontStars: Int = Int(arc4random_uniform(UInt32(7))) + 3
-        //let numberOfSecondStars: Int = (numberOfStars - numberOfFrontStars) / 2
-        //print("front: \(numberOfFrontStars) second: \(numberOfSecondStars) total: \(numberOfStars) sky: \(sky)")
-        return UIView()
+        return skyLayer
     }
     
     static func circle(radius: Distance) -> Region {
@@ -163,7 +161,7 @@ struct Constants {
     
     //DetailVC
     static let kDetailWidth = kMaxWidth - 2 * kPadding
-    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom + 10, width: kDetailWidth, height: 220)
+    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom, width: kDetailWidth, height: 220)
     static let kSegmentViewRect: CGRect = CGRect(x: 2 * kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
     static let kBottomViewRect = CGRect(x: 2 * kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
     static let kBottomHeight = kBottomViewRect.height - 2 * kPadding

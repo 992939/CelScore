@@ -290,7 +290,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func getTopView() -> MaterialView {
         let picWidth: CGFloat = 200.0
-        Constants.drawStarsBackground(diameter: picWidth/2)
         let topView = MaterialView(frame: Constants.kTopViewRect)
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
@@ -301,6 +300,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 return ASImageNodeRoundBorderModificationBlock(12.0, (hasRatings ? Constants.kStarRatingShade: MaterialColor.white))(originalImage)
             }
         })
+        topView.clipsToBounds = false
+        let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
+        topView.addSubview(starLayer)
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
