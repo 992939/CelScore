@@ -108,9 +108,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on( next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates()
-            })
-            .flatMapError { error in return SignalProducer(value: "Error") }
+                self.celebrityTableView.endUpdates() })
+            .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -118,9 +117,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
             .start()
-
-//            .promoteErrors(NSError)
-//            .flatMapError { _ in SignalProducer.empty }
     }
     
     func changeList() {
