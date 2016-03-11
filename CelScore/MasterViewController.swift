@@ -101,23 +101,26 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func configuration() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .promoteErrors(NSError)
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
-            .flatMapError { _ in SignalProducer.empty }
             .promoteErrors(ListError)
-            .flatMap(.Latest) { (value:AnyObject!) -> SignalProducer<AnyObject, ListError> in
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .startWithNext({ value in
+            .on( next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
+            .flatMapError { error in return SignalProducer(value: "Error") }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+            .start()
+
+//            .promoteErrors(NSError)
+//            .flatMapError { _ in SignalProducer.empty }
     }
     
     func changeList() {
