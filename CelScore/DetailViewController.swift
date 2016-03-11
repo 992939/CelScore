@@ -61,8 +61,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.setImage(UIImage(named: "ic_add_black"), forState: .Normal)
-        first?.setImage(UIImage(named: "ic_add_black"), forState: .Highlighted)
+        first?.setImage(UIImage(named: "ic_add_purple"), forState: .Normal)
+        first?.setImage(UIImage(named: "ic_add_purple"), forState: .Highlighted)
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -131,8 +131,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
             first?.backgroundColor = Constants.kDarkShade
-            first?.setImage(UIImage(named: "ic_add_black"), forState: .Normal)
-            first?.setImage(UIImage(named: "ic_add_black"), forState: .Highlighted)
+            first?.setImage(UIImage(named: "ic_add_purple"), forState: .Normal)
+            first?.setImage(UIImage(named: "ic_add_purple"), forState: .Highlighted)
         }
     }
     
@@ -178,8 +178,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func disableButton(button: MaterialButton) {
         button.enabled = false
-        button.setImage(UIImage(named: "justice_black"), forState: .Normal)
-        button.setImage(UIImage(named: "justice_black"), forState: .Highlighted)
+        button.setImage(UIImage(named: "justice_purple"), forState: .Normal)
+        button.setImage(UIImage(named: "justice_purple"), forState: .Highlighted)
         button.backgroundColor = Constants.kDarkShade
     }
     
@@ -316,9 +316,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_black"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_black"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_black"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_purple"))
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor
