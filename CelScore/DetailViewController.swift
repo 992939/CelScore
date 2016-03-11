@@ -88,7 +88,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                if ratings.totalVotes == 0 { self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor }
+                if ratings.totalVotes == 0 { self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor } //TODO
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
