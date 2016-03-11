@@ -247,7 +247,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func sendFortuneCookie() {
         CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
             .on(next: { text in
-                self.notification.titleText = "Revolutionary Road Sign"
+                self.notification.titleText = "Road Sign"
                 self.notification.subtitleText = text
                 self.notification.image = UIImage(named: "road")
                 self.notification.dismissOnTap = true

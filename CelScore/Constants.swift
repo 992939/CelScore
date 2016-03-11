@@ -191,6 +191,7 @@ struct Constants {
         "The revolution will not be televised.",
         "Neutral men are the Devil's allies.",
         "If you can't reward, make sure to thank.",
+        "Learning is the discovery that something is possible.",
         "Fire burns brighter in the darkness.",
         "Where the judgement is weak, prejudice is strong.",
         "The devil is in the details.",
@@ -223,7 +224,7 @@ struct Constants {
         "We are all made of stars.",
         "E Pluribus Unum: Out of many, one.",
         "One for all, and all for one.",
-        "The consensus is the eyes and ears of public opinion.",
-        "The consensus is the echo chamber of public opinion.",
+        "The consensus comes out of the eyes and ears of the public.",
+        "The consensus rises out of the echoes of public opinion.",
         "The whole is greater than the sum of its parts."]
 }
