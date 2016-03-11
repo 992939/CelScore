@@ -105,7 +105,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on( next: { value in
+            .on(next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates() })

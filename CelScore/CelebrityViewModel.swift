@@ -48,8 +48,8 @@ final class CelebrityViewModel: NSObject {
             let realm = try! Realm()
             let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
-            object.isFollowed = isFollowing
             realm.beginWrite()
+            object.isFollowed = isFollowing
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)

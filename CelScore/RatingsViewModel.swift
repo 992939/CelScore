@@ -23,12 +23,12 @@ final class RatingsViewModel: NSObject {
             guard 0...9 ~= ratingIndex else { observer.sendFailed(NSError(domain: "rating index out of bounds", code: 1, userInfo: nil)); return }
             
             let realm = try! Realm()
+            realm.beginWrite()
             var userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             if userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
             let key = userRatings![ratingIndex]
             userRatings![key] = newRating
             userRatings!.isSynced = true
-            realm.beginWrite()
             realm.add(userRatings!, update: true)
             try! realm.commitWrite()
             observer.sendNext(userRatings!)
@@ -39,11 +39,11 @@ final class RatingsViewModel: NSObject {
     func voteSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
+            realm.beginWrite()
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
             object.isSynced = false
             object.totalVotes += 1
-            realm.beginWrite()
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)
