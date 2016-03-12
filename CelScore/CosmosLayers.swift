@@ -63,6 +63,8 @@ final class CosmosLayers {
     private class func createStarLayer(isFilled: Bool, settings: CosmosSettings, index: Int) -> CALayer {
         var colorFilled = settings.colorFilled
         
+        print("insider userRatingMode \(settings.userRatingMode)")
+        
         if (settings.userRatingMode) {
             if (index + 1) > settings.previousRating { colorFilled = Constants.kDarkGreenShade }
             else { colorFilled =  Constants.kWineShade }

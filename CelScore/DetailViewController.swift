@@ -38,7 +38,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.notification = AFDropdownNotification()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
+        
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
     
     //MARK: Methods
@@ -81,7 +83,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.view.backgroundColor = Constants.kDarkShade
     }
     
-    func backAction() { self.dismissViewControllerAnimated(true, completion: nil) }
+    func backAction() {
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
@@ -197,8 +203,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
-                print("celscore \(userRatings.getCelScore())")
-                guard userRatings.getCelScore() > 0 else { print("userRatings \(userRatings.description)"); return }
+                guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })

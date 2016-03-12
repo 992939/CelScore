@@ -73,16 +73,24 @@ final class RatingsViewModel: NSObject {
             let realm = try! Realm()
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard newRatings?.isEmpty == false else { observer.sendNext(false); return }
-            
-            var hasRatings: Bool = false
-            if newRatings!.totalVotes > 0 && newRatings!.getCelScore() > 0 { hasRatings = true }
-            else if newRatings!.totalVotes == 0 && newRatings!.getCelScore() > 0 {
-                realm.beginWrite()
-                newRatings!.forEach({ rating in newRatings![rating] = 0 })
-                realm.add(newRatings!, update: true)
-                try! realm.commitWrite()
-            }
+            let hasRatings = newRatings!.totalVotes > 0 ? true : false
             observer.sendNext(hasRatings)
+            observer.sendCompleted()
+        }
+    }
+    
+    func cleanUpRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
+            guard newRatings?.isEmpty == false else { observer.sendNext(false); return }
+            
+            realm.beginWrite()
+            if newRatings!.getCelScore() == 0 { newRatings!.totalVotes = 0 }
+            else if newRatings!.totalVotes == 0 { newRatings!.forEach({ rating in newRatings![rating] = 0 }) }
+            realm.add(newRatings!, update: true)
+            try! realm.commitWrite()
+            observer.sendNext(newRatings!)
             observer.sendCompleted()
         }
     }
