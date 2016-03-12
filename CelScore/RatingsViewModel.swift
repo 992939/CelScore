@@ -72,12 +72,14 @@ final class RatingsViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
+            guard newRatings?.isEmpty == false else { observer.sendNext(false); return }
+            
             var hasRatings: Bool = false
-            if let userRatings = newRatings where userRatings.totalVotes > 0 { hasRatings = true }
-            if let userRatings = newRatings where userRatings.totalVotes == 0 && userRatings.getCelScore() > 0 {
+            if newRatings!.totalVotes > 0 && newRatings!.getCelScore() > 0 { hasRatings = true }
+            else if newRatings!.totalVotes == 0 && newRatings!.getCelScore() > 0 {
                 realm.beginWrite()
-                userRatings.forEach({ rating in userRatings[rating] = 0 })
-                realm.add(userRatings, update: true)
+                newRatings!.forEach({ rating in newRatings![rating] = 0 })
+                realm.add(newRatings!, update: true)
                 try! realm.commitWrite()
             }
             observer.sendNext(hasRatings)

@@ -88,7 +88,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                if ratings.totalVotes == 0 { self.updateProfileBorder() }
+                //if ratings.totalVotes == 0 { self.updateProfileBorder() }
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
@@ -197,7 +197,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
-                guard userRatings.getCelScore() > 0 else { return }
+                print("celscore \(userRatings.getCelScore())")
+                guard userRatings.getCelScore() > 0 else { print("userRatings \(userRatings.description)"); return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
@@ -291,7 +292,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func updateProfileBorder() {
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                print("what \(hasRatings)")
                 let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
                 return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.8))(originalImage)
             }
