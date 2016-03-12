@@ -204,6 +204,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         } else { self.disableButton(self.voteButton) }
     }
     
+    func slide(right right: Bool, newView: UIView, oldView: UIView) {
+        UIView.animateWithDuration(1.0, animations: { _ in
+            if right { oldView.left = -newView.width; newView.slide(right: true)}
+            else { oldView.left = newView.width + 35; newView.slide(right: false) }
+            }, completion: { _ in oldView.hidden = true })
+    }
+    
     func getSubView(atIndex index: Int) -> UIView {
         let subview: UIView
         switch index {
@@ -212,13 +219,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         default: subview = self.celscoreVC.view
         }
         return subview
-    }
-    
-    func slide(right right: Bool, newView: UIView, oldView: UIView) {
-        UIView.animateWithDuration(1.0, animations: { _ in
-            if right { oldView.left = -newView.width; newView.slideRight() }
-            else { oldView.left = newView.width + 35; newView.slideLeft() }
-            }, completion: { _ in oldView.hidden = true })
     }
     
     //MARK: RatingsViewDelegate
@@ -290,8 +290,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func updateProfileBorder() {
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-            //self.profilePicNode.imageModificationBlock()
             self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
                 print("what \(hasRatings)")
                 let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white

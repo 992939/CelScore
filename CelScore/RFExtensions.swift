@@ -12,26 +12,15 @@ import UIKit
 public extension UIView {
 
     //MARK: Methods
-    public func slideRight(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
-        let slideRightTransition = CATransition()
-        if let delegate: AnyObject = completionDelegate { slideRightTransition.delegate = delegate }
-        slideRightTransition.type = kCATransitionPush
-        slideRightTransition.subtype = kCATransitionFromRight
-        slideRightTransition.duration = duration
-        slideRightTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideRightTransition.fillMode = kCAFillModeBoth
-        self.layer.addAnimation(slideRightTransition, forKey: "slideRightTransition")
-    }
-    
-    public func slideLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
-        let slideLeftTransition = CATransition()
-        if let delegate: AnyObject = completionDelegate { slideLeftTransition.delegate = delegate }
-        slideLeftTransition.type = kCATransitionPush
-        slideLeftTransition.subtype = kCATransitionFromLeft
-        slideLeftTransition.duration = duration
-        slideLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideLeftTransition.fillMode = kCAFillModeBoth
-        self.layer.addAnimation(slideLeftTransition, forKey: "slideLeftTransition")
+    public func slide(right right: Bool, duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        let transition = CATransition()
+        if let delegate: AnyObject = completionDelegate { transition.delegate = delegate }
+        transition.type = kCATransitionPush
+        transition.subtype = right ? kCATransitionFromRight : kCATransitionFromLeft
+        transition.duration = duration
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.fillMode = kCAFillModeBoth
+        self.layer.addAnimation(transition, forKey: "slideTransition")
     }
 }
 
