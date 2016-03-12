@@ -22,5 +22,6 @@
 #import "AFDropdownNotification.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"
+#import "TAOverlay.h"
 
 #endif /* Header_h */

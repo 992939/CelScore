@@ -215,6 +215,7 @@ struct Constants {
         "Wherever you go, there you are.",
         "We are all made of stars.",
         "May the stars be with you.",
+        "Rome wasn't build in a day.",
         "The consensus comes out of the eyes and ears of the public.",
         "The consensus rises out of the echoes of public opinion.",
         "The whole is greater than the sum of its parts."]

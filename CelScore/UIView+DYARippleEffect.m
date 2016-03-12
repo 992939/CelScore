@@ -46,7 +46,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
     circleShape.opacity = 0;
     circleShape.masksToBounds = false;
     circleShape.strokeColor = [self rippleColor].CGColor;
-    circleShape.lineWidth = 1.3;
+    circleShape.lineWidth = 1.5;
 
     [self.layer addSublayer:circleShape];
 

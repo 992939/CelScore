@@ -15,13 +15,8 @@ public struct UserStruct {
     let socialMessage: String
     let isPositive: Bool
     
-    func updateSocialMessage(message: String) -> UserStruct {
-        return UserStruct(socialMessage: message, isPositive: isPositive)
-    }
-    
-    func updateIsPositive(positive: Bool) -> UserStruct {
-        return UserStruct(socialMessage: socialMessage, isPositive: positive)
-    }
+    func updateMessage(message: String) -> UserStruct { return UserStruct(socialMessage: message, isPositive: isPositive) }
+    func updatePositive(positive: Bool) -> UserStruct { return UserStruct(socialMessage: socialMessage, isPositive: positive) }
 }
 
 
@@ -52,7 +47,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         
-        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.userST = self.userST.updateIsPositive(value < 0.5 ? false : true) })
+        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.userST = self.userST.updatePositive(value < 0.5 ? false : true) })
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
@@ -279,7 +274,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
 
     func socialSharing(message message: String) {
         self.handleMenu(true)
-        self.userST = self.userST.updateSocialMessage(message)
+        self.userST = self.userST.updateMessage(message)
     }
     
     //MARK: AFDropdownNotificationDelegate

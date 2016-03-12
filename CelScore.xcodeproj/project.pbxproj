@@ -10,6 +10,7 @@
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
+		001703F21C94D03F0070B811 /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703F11C94D03F0070B811 /* TAOverlay.m */; };
 		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
@@ -103,6 +104,8 @@
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
+		001703F01C94D03F0070B811 /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
+		001703F11C94D03F0070B811 /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
 		002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDropdownNotification.m; sourceTree = "<group>"; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -218,6 +221,8 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				001703F01C94D03F0070B811 /* TAOverlay.h */,
+				001703F11C94D03F0070B811 /* TAOverlay.m */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
 				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
 				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
@@ -672,6 +677,7 @@
 			files = (
 				006431921C6A67430062BBDB /* StarLayer.swift in Sources */,
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
+				001703F21C94D03F0070B811 /* TAOverlay.m in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
 				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,

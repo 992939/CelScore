@@ -14,7 +14,6 @@ import TwitterKit
 import Material
 import HMSegmentedControl
 import AIRTimer
-import OpinionzAlertView
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
@@ -91,10 +90,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().isLoggedInSignal()
             .on(next: { _ in self.sideNavigationViewController!.openLeftView() })
             .on(failed: { _ in
-                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
-                alertView.iconType = OpinionzAlertIconInfo
-                alertView.show()
-                self.socialButton.menu.open() })
+                TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
+                    image: UIImage(named: "court_green"),
+                    options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() })
+            })
             .start()
     }
     
