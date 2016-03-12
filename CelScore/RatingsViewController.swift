@@ -74,10 +74,13 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.starMargin = 5
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = false
+                    cosmosView.settings.userRatingMode = false
                     SettingsViewModel().isLoggedInSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
                     RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white })
+                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
+                            cosmosView.settings.updateOnTouch = hasRatings ? false : true
+                            cosmosView.settings.userRatingMode = hasRatings ? false : true })
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().isLoggedInSignal()
                             .observeOn(UIScheduler())
@@ -86,6 +89,12 @@ final class RatingsViewController: ASViewController {
                                 let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
                                 alertView.iconType = OpinionzAlertIconInfo
                                 alertView.show()})
+                            .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
+                                return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
+                            .filter{ hasUserRatings in
+                                print("hasUserRatings \(hasUserRatings)")
+                                if hasUserRatings == false { cosmosView.settings.userRatingMode = true }
+                                return cosmosView.settings.userRatingMode == true }
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .startWithNext({ userRatings in
@@ -126,6 +135,7 @@ final class RatingsViewController: ASViewController {
                         cosmos.settings.colorFilled = Constants.kStarRatingShade
                         cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
                         cosmos.settings.userRatingMode = false
+                        cosmos.settings.updateOnTouch = false
                         cosmos.rating = ratings[ratings[index]] as! Double
                         cosmos.update()
                     }
