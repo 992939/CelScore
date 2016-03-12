@@ -102,7 +102,7 @@ struct Constants {
     static func drawStarsBackground(frame frame: CGRect) -> UIView {
         let skyLayer = UIView(frame: frame)
         skyLayer.clipsToBounds = true
-        let numberOfStars: Int = Int(arc4random_uniform(UInt32(20))) + 40
+        let numberOfStars: Int = Int(arc4random_uniform(UInt32(20))) + 60
         for _ in 1...numberOfStars {
             let size = Int(arc4random_uniform(UInt32(3))) + 1
             let rect: CGSize?
@@ -122,29 +122,22 @@ struct Constants {
         return skyLayer
     }
     
-    static func circle(radius: Distance) -> Region {
-        return { point in point.length <= radius }
-    }
-    
-    static func shift(region: Region, offset: CGPoint) -> Region {
-        return { point in region(point.minus(offset)) }
-    }
-    
-    static func invert(region: Region) -> Region {
-        return { point in !region(point) }
-    }
-   
-    static func intersection(region1: Region, region2: Region) -> Region {
-        return { point in region1(point) && region2(point) }
-    }
-    
-    static func difference(region: Region, minus: Region) -> Region {
-        return intersection(region, region2: invert(minus))
-    }
-    
-    static func union(region1: Region, region2: Region) -> Region {
-        return { point in region1(point) || region2(point) }
-    }
+//    static func setupCircleLayer(node: ASDisplayNode) {
+//        let radius: CGFloat = (node.frame.width - 2) / 2
+//        let centerX: CGFloat = node.frame.centerX - 10
+//        let centerY: CGFloat = node.frame.centerY - 10
+//        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
+//        
+//        let pathLayer = CAShapeLayer()
+//        pathLayer.path = circlePath.CGPath
+//        pathLayer.fillColor = UIColor.clearColor().CGColor
+//        pathLayer.lineWidth = 2.5
+//        pathLayer.strokeColor = Constants.kStarRatingShade.CGColor
+//        pathLayer.strokeStart = 0.0
+//        pathLayer.strokeEnd = 1.0
+//        pathLayer.shouldRasterize = true
+//        node.layer.addSublayer(pathLayer)
+//    }
     
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
@@ -207,7 +200,6 @@ struct Constants {
         "When you stare into the abyss, the abyss stares back.",
         "Sticks in a bundle are unbreakable.",
         "Many hands make light work.",
-        "True knowledge is knowing you know nothing.",
         "Speak the truth, but leave immediately after.",
         "A little axe can cut down a big tree.",
         "The leopard does not change his spots.",
@@ -218,12 +210,11 @@ struct Constants {
         "Better little thant too little.",
         "If you're going through Hell, keep going.",
         "The map is not the territory.",
-        "Power only steps back in the face of more power.",
+        "You can be the moon and still be jealous of the stars.",
         "The same shoe does not fit every foot.",
         "Wherever you go, there you are.",
         "We are all made of stars.",
-        "E Pluribus Unum: Out of many, one.",
-        "One for all, and all for one.",
+        "May the stars be with you.",
         "The consensus comes out of the eyes and ears of the public.",
         "The consensus rises out of the echoes of public opinion.",
         "The whole is greater than the sum of its parts."]

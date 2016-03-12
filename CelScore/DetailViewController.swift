@@ -88,7 +88,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                if ratings.totalVotes == 0 { self.profilePicNode.borderColor = Constants.kStarRatingShade.CGColor } //TODO
+                if ratings.totalVotes == 0 { self.updateProfileBorder() }
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
@@ -288,6 +288,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         return navigationBarView
     }
     
+    func updateProfileBorder() {
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            //self.profilePicNode.imageModificationBlock()
+            self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+                print("what \(hasRatings)")
+                let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+                return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.8))(originalImage)
+            }
+        })
+    }
+    
     func getTopView() -> MaterialView {
         let picWidth: CGFloat = 200.0
         let topView = MaterialView(frame: Constants.kTopViewRect)
@@ -295,11 +307,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.cornerRadius = picWidth/2
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                return ASImageNodeRoundBorderModificationBlock(12.0, (hasRatings ? Constants.kStarRatingShade: MaterialColor.white))(originalImage)
-            }
-        })
+        self.updateProfileBorder()
         topView.clipsToBounds = false
         let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
         topView.addSubview(starLayer)
