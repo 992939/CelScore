@@ -206,9 +206,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
         UIView.animateWithDuration(1.0, animations: { _ in
-            if right { oldView.left = -newView.width; newView.slide(right: true)}
-            else { oldView.left = newView.width + 35; newView.slide(right: false) }
-            }, completion: { _ in oldView.hidden = true })
+            if right { oldView.left = -newView.width; newView.slide(right: true, duration: 1.0, completionDelegate: self) }
+            else { oldView.left = newView.width + 45; newView.slide(right: false, duration: 1.0, completionDelegate: self) }
+            })
     }
     
     func getSubView(atIndex index: Int) -> UIView {
