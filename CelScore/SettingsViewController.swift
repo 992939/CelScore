@@ -40,23 +40,20 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
-        SettingsViewModel().calculateSocialConsensusSignal()
-            .startWithNext({ value in
-                let consensusBarNode = self.setupProgressBarNode("Global Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding), value: value)
-                self.node.addSubnode(consensusBarNode)
-            })
+        SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
+            let consensusBarNode = self.setupProgressBarNode("Global Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding), value: value)
+            self.node.addSubnode(consensusBarNode)
+        })
         
-        SettingsViewModel().calculateUserRatingsPercentageSignal()
-            .startWithNext({ value in
-                let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding + progressNodeHeight, value: value)
-                self.node.addSubnode(publicOpinionBarNode)
-            })
+        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
+            let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding + progressNodeHeight, value: value)
+            self.node.addSubnode(publicOpinionBarNode)
+        })
         
-        SettingsViewModel().calculatePositiveVoteSignal()
-            .startWithNext({ value in
-                let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
-                self.node.addSubnode(positiveBarNode)
-            })
+        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
+            let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
+            self.node.addSubnode(positiveBarNode)
+        })
         
         //PickerView
         let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))

@@ -23,7 +23,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     let notification: AFDropdownNotification
     let socialButton: MenuView
     let profilePicNode: ASNetworkImageNode
-    private(set) var socialMessage: String = ""
+    private(set) var isPositive = false
+    private(set) var socialMessage = ""
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -39,6 +40,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         
+        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.isPositive = value < 0.5 ? false : true })
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
@@ -63,8 +65,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.setImage(UIImage(named: "ic_add_purple"), forState: .Normal)
-        first?.setImage(UIImage(named: "ic_add_purple"), forState: .Highlighted)
+        first?.setImage(UIImage(named: self.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Normal)
+        first?.setImage(UIImage(named: self.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Highlighted)
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -137,8 +139,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
             first?.backgroundColor = Constants.kDarkShade
-            first?.setImage(UIImage(named: "ic_add_purple"), forState: .Normal)
-            first?.setImage(UIImage(named: "ic_add_purple"), forState: .Highlighted)
+            first?.setImage(UIImage(named: self.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Normal)
+            first?.setImage(UIImage(named: self.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Highlighted)
         }
     }
     
@@ -147,8 +149,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .on(next: { _ in
                 CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage)
                     .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
-                    .start()
-            })
+                    .start() })
             .on(failed: { _ in
                 if button.tag == 1 {
                     let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -182,11 +183,11 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
     }
     
-    func disableButton(button: MaterialButton) {
+    func disableButton(button button: MaterialButton, imageNamed: String) {
         button.enabled = false
-        button.setImage(UIImage(named: "justice_purple"), forState: .Normal)
-        button.setImage(UIImage(named: "justice_purple"), forState: .Highlighted)
         button.backgroundColor = Constants.kDarkShade
+        button.setImage(UIImage(named: imageNamed), forState: .Normal)
+        button.setImage(UIImage(named: imageNamed), forState: .Highlighted)
     }
     
     //MARK: SMSegmentViewDelegate
@@ -207,7 +208,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-        } else { self.disableButton(self.voteButton) }
+        } else { self.disableButton(button: self.voteButton, imageNamed: self.isPositive ? "justice_green" : "justice_purple") }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -327,9 +328,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"), offSelectionImage: UIImage(named: "celscore_purple"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"), offSelectionImage: UIImage(named: "info_purple"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"), offSelectionImage: UIImage(named: "star_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"),
+            offSelectionImage: UIImage(named: self.isPositive ? "celscore_green" : "celscore_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"),
+            offSelectionImage: UIImage(named: self.isPositive ? "info_green" : "info_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"),
+            offSelectionImage: UIImage(named:self.isPositive ? "star_green" :  "star_purple"))
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor
@@ -345,7 +349,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
-        self.disableButton(self.voteButton)
+        self.disableButton(button: self.voteButton, imageNamed: self.isPositive ? "justice_green" : "justice_purple")
     }
 }
 

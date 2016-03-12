@@ -77,11 +77,9 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().isLoggedInSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
                     RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-                        print("hasRatings: \(hasRatings)")
-                            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
-                            cosmosView.settings.updateOnTouch = hasRatings ? false : true
-                            //cosmosView.settings.userRatingMode = hasRatings ? false : true
+                        cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+                        cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
+                        cosmosView.settings.updateOnTouch = hasRatings ? false : true
                     })
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().isLoggedInSignal()
@@ -94,7 +92,6 @@ final class RatingsViewController: ASViewController {
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in
-                                print("hasUserRatings \(hasUserRatings)")
                                 if hasUserRatings == false { cosmosView.settings.userRatingMode = true }
                                 return cosmosView.settings.userRatingMode == true }
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
