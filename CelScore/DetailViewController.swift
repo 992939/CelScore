@@ -23,15 +23,15 @@ public struct UserStruct {
 final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
     
     //MARK: Properties
-    let infoVC: InfoViewController
-    let ratingsVC: RatingsViewController
-    let celscoreVC: CelScoreViewController
-    let voteButton: MaterialButton
-    let notification: AFDropdownNotification
-    let socialButton: MenuView
-    let profilePicNode: ASNetworkImageNode
-    let celebST: CelebrityStruct
-    var userST = UserStruct(socialMessage: "", isPositive: false)
+    private let infoVC: InfoViewController
+    private let ratingsVC: RatingsViewController
+    private let celscoreVC: CelScoreViewController
+    private let voteButton: MaterialButton
+    private let notification: AFDropdownNotification
+    private let socialButton: MenuView
+    private let profilePicNode: ASNetworkImageNode
+    private let celebST: CelebrityStruct
+    private var userST = UserStruct(socialMessage: "", isPositive: false)
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

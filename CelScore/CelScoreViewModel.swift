@@ -18,8 +18,8 @@ import Result
 final class CelScoreViewModel: NSObject {
     
     //MARK: Properties
-    let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO: remove?
-    let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+    private let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO: remove?
+    private let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
     
     //MARK: Initializer
     override init() { super.init() }

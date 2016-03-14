@@ -14,8 +14,8 @@ import Material
 final class InfoViewController: ASViewController {
     
     //MARK: Properties
-    let celebST: CelebrityStruct
-    let pulseView: MaterialView
+    private let celebST: CelebrityStruct
+    private let pulseView: MaterialView
     var delegate: DetailSubViewDelegate?
     
     //MARK: Initializers

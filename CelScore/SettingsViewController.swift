@@ -14,7 +14,7 @@ import BEMCheckBox
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate {
     
     //MARK: Property
-    let picker: UIPickerView
+    private let picker: UIPickerView
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

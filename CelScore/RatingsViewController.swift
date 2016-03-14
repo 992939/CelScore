@@ -22,8 +22,8 @@ public protocol DetailSubViewDelegate {
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
-    let celebST: CelebrityStruct
-    let pulseView: MaterialView
+    private let celebST: CelebrityStruct
+    private let pulseView: MaterialView
     var delegate: DetailSubViewDelegate?
     
     //MARK: Initializers

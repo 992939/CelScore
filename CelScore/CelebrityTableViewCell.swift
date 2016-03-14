@@ -14,12 +14,12 @@ import Material
 final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Properties
+    private let nameNode: ASTextNode
+    private let profilePicNode: ASNetworkImageNode
+    private let ratingsNode: ASDisplayNode
+    private let switchNode: ASDisplayNode
+    private let backgroundNode: ASDisplayNode
     let celebST: CelebrityStruct
-    let nameNode: ASTextNode
-    let profilePicNode: ASNetworkImageNode
-    let ratingsNode: ASDisplayNode
-    let switchNode: ASDisplayNode
-    let backgroundNode: ASDisplayNode
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {

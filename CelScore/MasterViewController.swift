@@ -19,11 +19,11 @@ import AIRTimer
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
-    let celebrityListVM: ListViewModel
-    let celebrityTableView: ASTableView
-    let segmentedControl: HMSegmentedControl
-    let socialButton: MenuView
-    let searchBar: UISearchBar
+    private let celebrityListVM: ListViewModel
+    private let celebrityTableView: ASTableView
+    private let segmentedControl: HMSegmentedControl
+    private let socialButton: MenuView
+    private let searchBar: UISearchBar
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
