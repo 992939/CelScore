@@ -13,7 +13,7 @@ import Result
 
 struct SettingsViewModel {
     
-    //MARK: for widget
+    //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
     

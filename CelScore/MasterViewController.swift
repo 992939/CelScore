@@ -19,17 +19,16 @@ import AIRTimer
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     //MARK: Properties
-    private let celebrityListVM: ListViewModel
     private let celebrityTableView: ASTableView
     private let segmentedControl: HMSegmentedControl
     private let socialButton: MenuView
     private let searchBar: UISearchBar
+    private var count: Int = 0
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.celebrityListVM = ListViewModel()
         self.celebrityTableView = ASTableView()
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
         self.socialButton = MenuView()
@@ -104,8 +103,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .promoteErrors(ListError)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
-                return self.celebrityListVM.getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { value in
+                return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
+            .on(next: { list in
+                self.count = list.count
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
@@ -136,8 +136,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        self.celebrityListVM.getListSignal(listId: list.getId())
-            .startWithNext({ _ in
+        ListViewModel().getListSignal(listId: list.getId())
+            .startWithNext({ list in
+                self.count = list.count
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
@@ -185,11 +186,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.celebrityListVM.getCount() }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.count }
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
-        self.celebrityListVM.getCelebrityStructSignal(index: indexPath.row)
+        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
+        ListViewModel().getCelebrityStructSignal(listId: list.getId(), index: indexPath.row)
             .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }
@@ -236,7 +238,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
-            self.celebrityListVM.searchSignal(searchToken: searchText)
+            ListViewModel().searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
                 .startWithNext({ _ in
                     self.celebrityTableView.beginUpdates()

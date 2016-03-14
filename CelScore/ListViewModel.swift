@@ -12,20 +12,14 @@ import RealmSwift
 import Result
 
 
-final class ListViewModel {
-    
-    //MARK: Property
-    private(set) var celebrityList = ListsModel()
+struct ListViewModel {
     
     //MARK: Methods
-    func getCount() -> Int { return celebrityList.count }
-    
     func getListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList = list else { observer.sendFailed(.EmptyList); return }
-            self.celebrityList = celebList.copy() as! ListsModel
             observer.sendNext(celebList)
             observer.sendCompleted()
         }
@@ -46,7 +40,6 @@ final class ListViewModel {
                 listModel.celebList.append(celebId)
             }
             listModel.count = list.count
-            self.celebrityList = listModel.copy() as! ListsModel
             observer.sendNext(listModel)
             observer.sendCompleted()
         }
@@ -78,17 +71,17 @@ final class ListViewModel {
                 celebId.id = celeb.celebId.id
                 listModel.celebList.append(celebId)
             }
-            self.celebrityList.celebList = listModel.celebList
-            observer.sendNext(self.celebrityList)
+            observer.sendNext(listModel.celebList)
             observer.sendCompleted()
         }
     }
     
-    func getCelebrityStructSignal(index index: Int) -> SignalProducer<CelebrityStruct, ListError> {
+    func getCelebrityStructSignal(listId listId: String, index: Int) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { observer, disposable in
-            guard index < self.getCount() else { observer.sendFailed(.IndexOutOfBounds); return }
-            let celebId: CelebId = self.celebrityList.celebList[index]
             let realm = try! Realm()
+            let list = realm.objects(ListsModel).filter("id = %@", listId).first
+            guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
+            let celebId: CelebId = celebList.celebList[index]
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
             guard let celeb = celebrity else { observer.sendFailed(.EmptyList); return }
             observer.sendNext(CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
