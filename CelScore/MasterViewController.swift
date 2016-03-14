@@ -266,8 +266,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
         navBar.backgroundColor = Constants.kMainShade
-        let celscoreImageView = UIImageView(image: UIImage(named: "score_logo"))
-        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY - 7, width: 35, height: 35)
+        let celscoreImageView = UIImageView(image: UIImage(named: "score_white"))
+        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY - 2, width: 25, height: 25)
         navBar.addSubview(celscoreImageView)
         return navBar
     }
