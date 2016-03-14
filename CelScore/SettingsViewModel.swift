@@ -16,7 +16,7 @@ final class SettingsViewModel: NSObject {
     
     //MARK: for widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
 
     //MARK: Initializer
     override init() { super.init() }
@@ -73,6 +73,7 @@ final class SettingsViewModel: NSObject {
                 case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
                 case .FirstRoad: observer.sendNext(settings.isFirstRoad)
                 case .FirstPublic: observer.sendNext(settings.isFirstPublic)
+                case .FirstFollow: observer.sendNext(settings.isFirstFollow)
                 }
             } else {
                 switch settingType {
@@ -83,6 +84,7 @@ final class SettingsViewModel: NSObject {
                 case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
                 case .FirstRoad: observer.sendNext(SettingsModel().isFirstRoad)
                 case .FirstPublic: observer.sendNext(SettingsModel().isFirstPublic)
+                case .FirstFollow: observer.sendNext(SettingsModel().isFirstFollow)
                 }
             }
             observer.sendCompleted()
@@ -112,6 +114,7 @@ final class SettingsViewModel: NSObject {
             case .FirstLaunch: settings.isFirstLaunch = value as! Bool
             case .FirstRoad: settings.isFirstRoad = value as! Bool
             case .FirstPublic: settings.isFirstPublic = value as! Bool
+            case .FirstFollow: settings.isFirstFollow = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)

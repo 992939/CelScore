@@ -132,6 +132,25 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: BEMCheckBoxDelegate 
     func didTapCheckBox(checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .FortuneMode)).start()
+        if checkBox.on {
+            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad).startWithNext({ first in
+                let firstTime = first as! Bool
+                if firstTime {
+                    if checkBox.tag == 0 {
+                        TAOverlay.showOverlayWithLabel("You’re now a long press away from building the consensus on social media. Let’s keep finding common grounds together.",
+                            image: UIImage(named: "megaphone_green"),
+                            options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                    } else {
+                        TAOverlay.showOverlayWithLabel("Welcome to the road less traveled. We’re not sure where it’s going, but wherever it takes you, the consensus will help you get there.",
+                            image: UIImage(named: "road_green"),
+                            options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                    }
+                    TAOverlay.setCompletionBlock({ _ in
+                        SettingsViewModel().updateSettingSignal(value: false, settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad)
+                    })
+                }
+            })
+        }
     }
     
     //MARK: DidLayoutSubviews Helpers

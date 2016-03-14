@@ -25,15 +25,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 7,
+            schemaVersion: 8,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 6 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in newObject!["isFirstLaunch"] = true }
-                }
                 if oldSchemaVersion < 7 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
                         newObject!["isFirstRoad"] = true
                         newObject!["isFirstPublic"] = true
+                    }
+                }
+                if oldSchemaVersion < 8 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["isFirstFollow"] = true
                     }
                 }
         })

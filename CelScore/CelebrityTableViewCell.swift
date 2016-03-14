@@ -129,9 +129,18 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false).start() }
         else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
-                .startWithNext { count in if count > 9 {
+                .startWithNext { count in
+                    if count == 0 { SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithNext({ first in
+                        let firstTime = first as! Bool
+                        if firstTime {
+                            TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
+                                image: UIImage(named: "telescope_green"),
+                                options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                        }
+                    }) }
+                    else if count > 9 {
                     TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
-                        image: UIImage(named: "court_green"),
+                        image: UIImage(named: "telescope_green"),
                         options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
                     TAOverlay.setCompletionBlock({ _ in control.setOn(false, animated: true) })
                 } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
