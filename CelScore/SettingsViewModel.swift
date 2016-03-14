@@ -16,7 +16,7 @@ final class SettingsViewModel: NSObject {
     
     //MARK: for widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch }
 
     //MARK: Initializer
     override init() { super.init() }
@@ -70,6 +70,7 @@ final class SettingsViewModel: NSObject {
                 case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
                 case .PublicService: observer.sendNext(settings.publicService)
                 case .FortuneMode: observer.sendNext(settings.fortuneMode)
+                case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
                 }
             } else {
                 switch settingType {
@@ -77,6 +78,7 @@ final class SettingsViewModel: NSObject {
                 case .LoginTypeIndex: observer.sendNext(SettingsModel().loginTypeIndex)
                 case .PublicService: observer.sendNext(SettingsModel().publicService)
                 case .FortuneMode: observer.sendNext(SettingsModel().fortuneMode)
+                case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
                 }
             }
             observer.sendCompleted()
@@ -87,7 +89,7 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return }
+            guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
             observer.sendNext(true)
             observer.sendCompleted()
         }
@@ -103,6 +105,7 @@ final class SettingsViewModel: NSObject {
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
             case .PublicService: settings.publicService = value as! Bool
             case .FortuneMode: settings.fortuneMode = value as! Bool
+            case .FirstLaunch: settings.isFirstLaunch = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)

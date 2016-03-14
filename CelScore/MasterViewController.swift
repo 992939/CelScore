@@ -70,7 +70,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        self.configuration() //TODO: CelScoreViewModel().checkNetworkStatusSignal().start()
+        self.setupData() //TODO: CelScoreViewModel().checkNetworkStatusSignal().start()
     }
     
     override func viewWillLayoutSubviews() {
@@ -98,7 +98,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func configuration() {
+    func setupData() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .promoteErrors(ListError)
@@ -108,7 +108,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(next: { value in
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates() })
+                self.celebrityTableView.endUpdates()
+                self.setupUser()})
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
@@ -117,6 +118,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
             .start()
+    }
+    
+    func setupUser() {
+        self.socialButton.hidden = true
+        SettingsViewModel().isLoggedInSignal().startWithFailed { _ in self.socialButton.hidden = false }
+        SettingsViewModel().getSettingSignal(settingType: .FirstLaunch).startWithNext { first in
+            let firstTime = first as! Bool
+            if firstTime {
+                TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
+                    image: UIImage(named: "court_green"),
+                    options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) })
+            }
+        }
     }
     
     func changeList() {
