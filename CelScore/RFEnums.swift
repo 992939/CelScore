@@ -33,24 +33,26 @@ public enum OverlayInfo: Int {
     case MaxFollow
     case FirstRoad
     case FirstPublic
-    case FirstVote
+    case VoteDisable
+    case SocialDisable
     case LogoutUser
     case LoginError
     case NetworkError
     
     public func message() -> String {
         switch self {
-        case .WelcomeUser: return ""
-        case .MenuAccess: return ""
-        case .LoginSuccess: return ""
-        case .FirstFollow: return ""
-        case .MaxFollow: return ""
-        case .FirstRoad: return ""
-        case .FirstPublic: return ""
-        case .FirstVote: return ""
-        case .LogoutUser: return ""
-        case .LoginError: return ""
-        case .NetworkError: return ""
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.'\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion.\""
+        case .MenuAccess: return "Welcome aboard the consensus. You will need to provide some form of identification to get started."
+        case .LoginSuccess: return "Welcome to the courthouse. Help us find common grounds by adding your voice to the consensus. Please vote responsibly."
+        case .FirstFollow: return "blah blah blah blah blah blah blah blah"
+        case .MaxFollow: return "blah blah blah blah blah blah blah blah"
+        case .FirstRoad: return "Welcome to the road less traveled. We’re not sure where it’s going, but wherever it takes you, the consensus will help you get there."
+        case .FirstPublic: return "You’re now a long press away from building the consensus on social media. Let’s keep finding common grounds together."
+        case .VoteDisable: return "blah blah blah blah blah blah blah blah"
+        case .SocialDisable: return "blah blah blah blah blah blah blah blah"
+        case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for co-creating the consensus. You’re welcome back anytime."
+        case .LoginError: return "blah blah blah blah blah blah blah blah"
+        case .NetworkError: return "blah blah blah blah blah blah blah blah"
         }
     }
     
@@ -63,7 +65,8 @@ public enum OverlayInfo: Int {
         case .MaxFollow: return "camera_green"
         case .FirstRoad: return "road_green"
         case .FirstPublic: return "megaphone_green"
-        case .FirstVote: return "vote_green"
+        case .VoteDisable: return "vote_green"
+        case .SocialDisable: return "megaphone_green"
         case .LogoutUser: return "astronaut_green"
         case .LoginError: return "error_green"
         case .NetworkError: return "error_green"
