@@ -240,7 +240,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-                .startWithNext({ _ in
+                .startWithNext({ list in
+                    self.count = list.count
                     self.celebrityTableView.beginUpdates()
                     self.celebrityTableView.reloadData()
                     self.celebrityTableView.endUpdates()
