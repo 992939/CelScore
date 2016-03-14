@@ -11,10 +11,7 @@ import RealmSwift
 import Result
 
 
-final class RatingsViewModel: NSObject {
-
-    //MARK: Initializer
-    override init() { super.init() }
+final class RatingsViewModel {
     
     //MARK: Methods
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {

@@ -12,13 +12,10 @@ import RealmSwift
 import Result
 
 
-final class ListViewModel: NSObject {
+final class ListViewModel {
     
     //MARK: Property
     private(set) var celebrityList = ListsModel()
-    
-    //MARK: Initializer
-    override init() { super.init() }
     
     //MARK: Methods
     func getCount() -> Int { return celebrityList.count }

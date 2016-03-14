@@ -15,10 +15,7 @@ import Timepiece
 import Result
 
 
-final class UserViewModel: NSObject {
-
-    //MARK: Initializer
-    override init() { super.init() }
+final class UserViewModel {
     
     //MARK: Login Methods
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {

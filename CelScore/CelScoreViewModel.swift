@@ -15,14 +15,11 @@ import Social
 import Result
 
 
-final class CelScoreViewModel: NSObject {
+final class CelScoreViewModel {
     
     //MARK: Properties
     private let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO: remove?
     private let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-    
-    //MARK: Initializer
-    override init() { super.init() }
     
     //MARK: Methods
     func checkNetworkStatusSignal() -> SignalProducer<Bool, NoError> {

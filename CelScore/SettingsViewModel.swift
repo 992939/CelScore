@@ -12,14 +12,11 @@ import ReactiveCocoa
 import Result
 
 
-final class SettingsViewModel: NSObject {
+final class SettingsViewModel {
     
     //MARK: for widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
     enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
-
-    //MARK: Initializer
-    override init() { super.init() }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, SettingsError> {

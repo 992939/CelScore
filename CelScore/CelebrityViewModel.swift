@@ -13,10 +13,7 @@ import Timepiece
 import Result
 
 
-final class CelebrityViewModel: NSObject {
-    
-    //MARK: Initializer
-    override init() { super.init() }
+final class CelebrityViewModel {
     
     //MARK: Methods
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
