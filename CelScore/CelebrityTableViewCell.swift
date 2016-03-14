@@ -115,7 +115,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         pathLayer.strokeEnd = 1.0
         
         let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = 1.2
+        pathAnimation.duration = 1.1
         pathAnimation.fromValue = 0.0
         pathAnimation.toValue = 1.0
         pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")

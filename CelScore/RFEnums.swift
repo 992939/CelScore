@@ -24,6 +24,53 @@ public enum AWSDataType { case Celebrity, List, Ratings }
 public enum CookieType: String { case Positive, Negative }
 public enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
 
+//MARK: OverlayInfo
+public enum OverlayInfo: Int {
+    case WelcomeUser
+    case MenuAccess
+    case LoginSuccess
+    case FirstFollow
+    case MaxFollow
+    case FirstRoad
+    case FirstPublic
+    case FirstVote
+    case LogoutUser
+    case LoginError
+    case NetworkError
+    
+    public func message() -> String {
+        switch self {
+        case .WelcomeUser: return ""
+        case .MenuAccess: return ""
+        case .LoginSuccess: return ""
+        case .FirstFollow: return ""
+        case .MaxFollow: return ""
+        case .FirstRoad: return ""
+        case .FirstPublic: return ""
+        case .FirstVote: return ""
+        case .LogoutUser: return ""
+        case .LoginError: return ""
+        case .NetworkError: return ""
+        }
+    }
+    
+    public func logo() -> String {
+        switch self {
+        case .WelcomeUser: return "court_green"
+        case .MenuAccess: return "passport_green"
+        case .LoginSuccess: return "court_green"
+        case .FirstFollow: return "telescope_green"
+        case .MaxFollow: return "camera_green"
+        case .FirstRoad: return "road_green"
+        case .FirstPublic: return "megaphone_green"
+        case .FirstVote: return "vote_green"
+        case .LogoutUser: return "astronaut_green"
+        case .LoginError: return "error_green"
+        case .NetworkError: return "error_green"
+        }
+    }
+}
+
 //MARK: Info
 public enum Info: Int {
     case FirstName

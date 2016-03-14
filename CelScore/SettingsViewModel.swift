@@ -95,7 +95,7 @@ final class SettingsViewModel: NSObject {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
+            //guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoList", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
             observer.sendNext(true)
             observer.sendCompleted()
         }

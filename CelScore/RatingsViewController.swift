@@ -9,7 +9,7 @@
 import AsyncDisplayKit
 import Material
 import AIRTimer
-import OpinionzAlertView
+
 
 public protocol DetailSubViewDelegate {
     func sendFortuneCookie()
@@ -86,9 +86,10 @@ final class RatingsViewController: ASViewController {
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
                                 self.delegate!.socialSharing(message: "")
-                                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
-                                alertView.iconType = OpinionzAlertIconInfo
-                                alertView.show()})
+//                                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
+//                                alertView.iconType = OpinionzAlertIconInfo
+//                                alertView.show()
+                            })
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in

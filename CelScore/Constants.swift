@@ -122,23 +122,6 @@ struct Constants {
         return skyLayer
     }
     
-//    static func setupCircleLayer(node: ASDisplayNode) {
-//        let radius: CGFloat = (node.frame.width - 2) / 2
-//        let centerX: CGFloat = node.frame.centerX - 10
-//        let centerY: CGFloat = node.frame.centerY - 10
-//        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
-//        
-//        let pathLayer = CAShapeLayer()
-//        pathLayer.path = circlePath.CGPath
-//        pathLayer.fillColor = UIColor.clearColor().CGColor
-//        pathLayer.lineWidth = 2.5
-//        pathLayer.strokeColor = Constants.kStarRatingShade.CGColor
-//        pathLayer.strokeStart = 0.0
-//        pathLayer.strokeEnd = 1.0
-//        pathLayer.shouldRasterize = true
-//        node.layer.addSublayer(pathLayer)
-//    }
-    
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)
