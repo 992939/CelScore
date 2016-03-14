@@ -20,6 +20,8 @@ public class SettingsModel: Object, NSCopying {
     dynamic var publicService: Bool = false
     dynamic var fortuneMode: Bool = false
     dynamic var isFirstLaunch: Bool = true
+    dynamic var isFirstRoad: Bool = true
+    dynamic var isFirstPublic: Bool = true
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer
@@ -30,7 +32,9 @@ public class SettingsModel: Object, NSCopying {
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.publicService = dictionary["publicService"] as! Bool
         self.fortuneMode = dictionary["fortuneMode"] as! Bool
-        self.isFirstLaunch = true
+        self.isFirstLaunch = dictionary["isFirstLaunch"] as! Bool
+        self.isFirstRoad = dictionary["isFirstRoad"] as! Bool
+        self.isFirstPublic = dictionary["isFirstPublic"] as! Bool
         self.isSynced = true
     }
     
@@ -46,6 +50,8 @@ public class SettingsModel: Object, NSCopying {
         copy.publicService = self.publicService
         copy.fortuneMode = self.fortuneMode
         copy.isFirstLaunch = self.isFirstLaunch
+        copy.isFirstRoad = self.isFirstRoad
+        copy.isFirstPublic = self.isFirstPublic
         copy.isSynced = self.isSynced
         return copy
     }

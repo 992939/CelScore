@@ -16,7 +16,7 @@ final class SettingsViewModel: NSObject {
     
     //MARK: for widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic }
 
     //MARK: Initializer
     override init() { super.init() }
@@ -71,6 +71,8 @@ final class SettingsViewModel: NSObject {
                 case .PublicService: observer.sendNext(settings.publicService)
                 case .FortuneMode: observer.sendNext(settings.fortuneMode)
                 case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
+                case .FirstRoad: observer.sendNext(settings.isFirstRoad)
+                case .FirstPublic: observer.sendNext(settings.isFirstPublic)
                 }
             } else {
                 switch settingType {
@@ -79,6 +81,8 @@ final class SettingsViewModel: NSObject {
                 case .PublicService: observer.sendNext(SettingsModel().publicService)
                 case .FortuneMode: observer.sendNext(SettingsModel().fortuneMode)
                 case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
+                case .FirstRoad: observer.sendNext(SettingsModel().isFirstRoad)
+                case .FirstPublic: observer.sendNext(SettingsModel().isFirstPublic)
                 }
             }
             observer.sendCompleted()
@@ -106,6 +110,8 @@ final class SettingsViewModel: NSObject {
             case .PublicService: settings.publicService = value as! Bool
             case .FortuneMode: settings.fortuneMode = value as! Bool
             case .FirstLaunch: settings.isFirstLaunch = value as! Bool
+            case .FirstRoad: settings.isFirstRoad = value as! Bool
+            case .FirstPublic: settings.isFirstPublic = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)
