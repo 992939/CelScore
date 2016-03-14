@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import SwiftyJSON
 import RealmSwift
 import ReactiveCocoa
@@ -15,7 +14,7 @@ import Social
 import Result
 
 
-final class CelScoreViewModel {
+struct CelScoreViewModel {
     
     //MARK: Properties
     private let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO: remove?

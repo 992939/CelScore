@@ -6,12 +6,11 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import Result
 
 
-final class RatingsViewModel {
+struct RatingsViewModel {
     
     //MARK: Methods
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {

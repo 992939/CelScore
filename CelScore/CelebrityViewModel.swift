@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import ReactiveCocoa
 import Timepiece
 import Result
 
 
-final class CelebrityViewModel {
+struct CelebrityViewModel {
     
     //MARK: Methods
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {

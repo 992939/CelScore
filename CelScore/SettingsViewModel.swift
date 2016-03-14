@@ -6,13 +6,12 @@
 //  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import ReactiveCocoa
 import Result
 
 
-final class SettingsViewModel {
+struct SettingsViewModel {
     
     //MARK: for widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }

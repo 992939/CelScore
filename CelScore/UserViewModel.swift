@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import AWSCore
 import AWSCognito
 import RealmSwift
@@ -15,7 +14,7 @@ import Timepiece
 import Result
 
 
-final class UserViewModel {
+struct UserViewModel {
     
     //MARK: Login Methods
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {

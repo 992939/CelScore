@@ -31,6 +31,27 @@ final class ListViewModel {
         }
     }
     
+    func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
+            guard list.count > 0 else { return }
+            
+            let listModel =  ListsModel()
+            listModel.id = "0099"
+            listModel.name = "SearchList"
+            for (_, celeb) in list.enumerate() {
+                let celebId = CelebId()
+                celebId.id = celeb.id
+                listModel.celebList.append(celebId)
+            }
+            listModel.count = list.count
+            self.celebrityList = listModel.copy() as! ListsModel
+            observer.sendNext(listModel)
+            observer.sendCompleted()
+        }
+    }
+    
     func updateListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
@@ -59,27 +80,6 @@ final class ListViewModel {
             }
             self.celebrityList.celebList = listModel.celebList
             observer.sendNext(self.celebrityList)
-            observer.sendCompleted()
-        }
-    }
-    
-    func searchSignal(searchToken searchToken: String) -> SignalProducer<AnyObject, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
-            guard list.count > 0 else { return }
-            
-            let listModel =  ListsModel()
-            listModel.id = "0099"
-            listModel.name = "SearchList"
-            for (_, celeb) in list.enumerate() {
-                let celebId = CelebId()
-                celebId.id = celeb.id
-                listModel.celebList.append(celebId)
-            }
-            listModel.count = list.count
-            self.celebrityList = listModel.copy() as! ListsModel
-            observer.sendNext(listModel)
             observer.sendCompleted()
         }
     }
