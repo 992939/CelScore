@@ -86,9 +86,9 @@ final class RatingsViewController: ASViewController {
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
                                 self.delegate!.socialSharing(message: "")
-//                                let alertView = OpinionzAlertView(title: "Identification Required", message: "blah blah blah blah blah blah blah blah", cancelButtonTitle: "Ok", otherButtonTitles: nil)
-//                                alertView.iconType = OpinionzAlertIconInfo
-//                                alertView.show()
+                                TAOverlay.showOverlayWithLabel(OverlayInfo.VoteDisable.message(),
+                                    image: UIImage(named: OverlayInfo.VoteDisable.logo()),
+                                    options: OverlayInfo.getOptions())
                             })
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }

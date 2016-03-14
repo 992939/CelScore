@@ -90,9 +90,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().isLoggedInSignal()
             .on(next: { _ in self.sideNavigationViewController!.openLeftView() })
             .on(failed: { _ in
-                TAOverlay.showOverlayWithLabel("Welcome aboard the consensus. You will need to provide some form of identification to get started.",
-                    image: UIImage(named: "passport_green"),
-                    options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(),
+                    image: UIImage(named: OverlayInfo.MenuAccess.logo()),
+                    options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() })
             })
             .start()
@@ -126,9 +126,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().getSettingSignal(settingType: .FirstLaunch).startWithNext { first in
             let firstTime = first as! Bool
             if firstTime {
-                TAOverlay.showOverlayWithLabel("'We’re all in the gutter, but some of us are looking at the stars.'\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion.",
-                    image: UIImage(named: "court_green"),
-                    options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(),
+                    image: UIImage(named: OverlayInfo.WelcomeUser.logo()),
+                    options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) })
             }
         }

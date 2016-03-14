@@ -131,19 +131,19 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .startWithNext { count in
                     if count == 0 { SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithNext({ first in
+                        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                         let firstTime = first as! Bool
                         if firstTime {
-                            TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
-                                image: UIImage(named: "telescope_green"),
-                                options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
-                        }
-                    }) }
+                            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(),
+                                image: UIImage(named: OverlayInfo.FirstFollow.logo()),
+                                options: OverlayInfo.getOptions())}})
+                    }
                     else if count > 9 {
-                    TAOverlay.showOverlayWithLabel("blah blah blah blah blah blah blah blah",
-                        image: UIImage(named: "telescope_green"),
-                        options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
-                    TAOverlay.setCompletionBlock({ _ in control.setOn(false, animated: true) })
-                } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.MaxFollow.message(),
+                            image: UIImage(named: OverlayInfo.MaxFollow.logo()),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in control.setOn(false, animated: true) })
+                    } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
             }
         }
     }

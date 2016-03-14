@@ -137,13 +137,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        TAOverlay.showOverlayWithLabel("You’re now a long press away from building the consensus on social media. Let’s keep finding common grounds together.",
-                            image: UIImage(named: "megaphone_green"),
-                            options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(),
+                            image: UIImage(named: OverlayInfo.FirstPublic.logo()),
+                            options: OverlayInfo.getOptions())
                     } else {
-                        TAOverlay.showOverlayWithLabel("Welcome to the road less traveled. We’re not sure where it’s going, but wherever it takes you, the consensus will help you get there.",
-                            image: UIImage(named: "road_green"),
-                            options: [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow])
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstRoad.message(),
+                            image: UIImage(named: OverlayInfo.FirstRoad.logo()),
+                            options: OverlayInfo.getOptions())
                     }
                     TAOverlay.setCompletionBlock({ _ in
                         SettingsViewModel().updateSettingSignal(value: false, settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad)

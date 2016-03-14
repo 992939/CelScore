@@ -41,7 +41,7 @@ public enum OverlayInfo: Int {
     
     public func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.'\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion.\""
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
         case .MenuAccess: return "Welcome aboard the consensus. You will need to provide some form of identification to get started."
         case .LoginSuccess: return "Welcome to the courthouse. Help us find common grounds by adding your voice to the consensus. Please vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
@@ -71,6 +71,10 @@ public enum OverlayInfo: Int {
         case .LoginError: return "error_green"
         case .NetworkError: return "error_green"
         }
+    }
+    
+    public static func getOptions() -> TAOverlayOptions {
+        return [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow]
     }
 }
 
