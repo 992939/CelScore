@@ -16,34 +16,32 @@ import Result
 
 struct UserViewModel {
     
-    //MARK: Login Methods
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+            print("facebook token \(token)")
+            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
                 print("identity: \(task.result)")
                 return nil
             }
-            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
 
             switch loginType {
             case .Facebook:
-                credentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
+                Constants.kCredentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion {
                     (session, error) -> Void in
                     if session != nil {
                         let value = session!.authToken + ";" + session!.authTokenSecret
-                        credentialsProvider.logins = ["api.twitter.com": value]
+                        Constants.kCredentialsProvider.logins = ["api.twitter.com": value]
                     } else { print("error: \(error!.localizedDescription)") }
                 }
             default: break
             }
             
-            credentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 observer.sendNext(task.result!)
                 observer.sendCompleted()
@@ -57,8 +55,7 @@ struct UserViewModel {
             //TODO: implementation
             switch loginType {
             case .Facebook:
-                let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-                credentialsProvider.clearCredentials()
+                Constants.kCredentialsProvider.clearCredentials()
             case .Twitter:
                 print("Twitter.sharedInstance()")
             default: break
@@ -94,13 +91,13 @@ struct UserViewModel {
     //MARK: Cognito Methods
     func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+            
+            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
-                
-                let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+                let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
                 AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
                 AWSCognito.registerCognitoWithConfiguration(configuration, forKey: "USEast1Cognito")
+                
                 let syncClient: AWSCognito = AWSCognito(forKey: "USEast1Cognito")
                 let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
                 let realm = try! Realm()
@@ -147,7 +144,7 @@ struct UserViewModel {
                 
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                     guard task.error == nil else {
-                        if task.error!.code == 10 { credentialsProvider.clearKeychain() }
+                        if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                         observer.sendFailed(task.error!)
                         return task
                     }
@@ -162,8 +159,7 @@ struct UserViewModel {
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: Constants.kCredentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()

@@ -14,7 +14,6 @@ import Result
 
 struct ListViewModel {
     
-    //MARK: Methods
     func getListSignal(listId listId: String) -> SignalProducer<AnyObject, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

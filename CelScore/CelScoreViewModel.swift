@@ -16,11 +16,6 @@ import Result
 
 struct CelScoreViewModel {
     
-    //MARK: Properties
-    private let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO: remove?
-    private let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-    
-    //MARK: Methods
     func checkNetworkStatusSignal() -> SignalProducer<Bool, NoError> {
         return SignalProducer { observer, disposable in
             observer.sendNext(Reachability.isConnectedToNetwork())
@@ -30,8 +25,7 @@ struct CelScoreViewModel {
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: Constants.kCredentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
 
             let serviceClient = PROCelScoreAPIClient.defaultClient()
@@ -100,6 +94,10 @@ struct CelScoreViewModel {
     
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
+            
+            let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO
+            let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+            
             let socialVC: SLComposeViewController?
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)

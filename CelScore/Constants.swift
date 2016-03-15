@@ -8,6 +8,7 @@
 
 import Foundation
 import Material
+import AWSCognito
 
 struct Constants {
     
@@ -16,6 +17,7 @@ struct Constants {
     static let S3BucketName: String = "celeb3x"
     static let S3DownloadKeyName: String = "dmx@3x.jpg"
     static let kAPIKey: String = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP"
+    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: cognitoIdentityPoolId)
     
     static let kMaxFollowedCelebrities: Int = 10
     static let kNetworkRetry: Int = 2

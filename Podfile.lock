@@ -25,7 +25,6 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Material (1.35.3)
-  - OpinionzAlertView (0.3.1)
   - PINCache (2.2.1)
   - PINRemoteImage/Core (2.0.1):
     - PINCache (>= 2.1)
@@ -65,7 +64,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0)
-  - AsyncDisplayKit (~> 1.9.6)
+  - AsyncDisplayKit (~> 1.9.7)
   - AWSAPIGateway (~> 2.3)
   - AWSCognito (~> 2.3.3)
   - BEMCheckBox (~> 1.2)
@@ -74,7 +73,6 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
   - Material (~> 1.35.3)
-  - OpinionzAlertView
   - ReactiveCocoa (= 4.0.1)
   - RealmSwift (~> 0.97.0)
   - SDWebImage (~> 3.7)
@@ -99,7 +97,6 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Material: 2989ce92c519fbdc265525819c37df0851701c4c
-  OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
   PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90

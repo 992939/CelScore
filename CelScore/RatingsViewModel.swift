@@ -12,7 +12,6 @@ import Result
 
 struct RatingsViewModel {
     
-    //MARK: Methods
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
         return SignalProducer { observer, disposable in //TODO: RatingsError
             guard 1...5 ~= newRating else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }

@@ -172,6 +172,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                     .observeOn(QueueScheduler.mainQueueScheduler)
+                    .on(next: { _ in
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
+                            image: UIImage(named: OverlayInfo.LoginSuccess.logo()),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true })
+                    })
                     .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.handleMenu() })

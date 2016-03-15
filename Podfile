@@ -5,7 +5,7 @@ platform :ios, '9.0'
 
 target 'CelScore' do
     pod 'ReactiveCocoa', '4.0.1'
-    pod 'AsyncDisplayKit', '~> 1.9.6'
+    pod 'AsyncDisplayKit', '~> 1.9.7'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
     pod 'RealmSwift', '~> 0.97.0'

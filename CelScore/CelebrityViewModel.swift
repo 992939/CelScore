@@ -14,7 +14,6 @@ import Result
 
 struct CelebrityViewModel {
     
-    //MARK: Methods
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
