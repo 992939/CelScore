@@ -80,9 +80,9 @@ struct RatingsViewModel {
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard newRatings?.isEmpty == false else { observer.sendNext(false); return }
             
-            realm.beginWrite()
             if newRatings!.getCelScore() == 0 { newRatings!.totalVotes = 0 }
             else if newRatings!.totalVotes == 0 { newRatings!.forEach({ rating in newRatings![rating] = 0 }) }
+            realm.beginWrite()
             realm.add(newRatings!, update: true)
             try! realm.commitWrite()
             observer.sendNext(newRatings!)

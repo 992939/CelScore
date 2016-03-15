@@ -71,13 +71,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
-                let publicServiceNode = self.setupCheckBoxNode("Public Service Mode", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode("The Path", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .FortuneMode)
             .startWithNext({ status in
-                let fortuneCookieNode = self.setupCheckBoxNode("Revolutionary Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let fortuneCookieNode = self.setupCheckBoxNode("The Consensus", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(fortuneCookieNode)
             })
         

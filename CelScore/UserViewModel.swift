@@ -167,14 +167,15 @@ struct UserViewModel {
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { syncClient.wipe(); observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
-                realm.beginWrite()
                 switch dataSetType {
                 case .UserInfo: fatalError("Not storing user information locally")
                 case .UserRatings:
+                    realm.beginWrite()
                     dataset.getAll().forEach({ dico in
                         let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
                         realm.add(userRatings, update: true)
                     })
+                    try! realm.commitWrite()
                 case .UserSettings:
                     let dico = dataset.getAll()
                     let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
@@ -184,9 +185,10 @@ struct UserViewModel {
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
                     settings.fortuneMode = (dico["fortuneMode"] as! NSString).boolValue
                     settings.isSynced = true
+                    realm.beginWrite()
                     realm.add(settings, update: true)
+                    try! realm.commitWrite()
                 }
-                try! realm.commitWrite()
                 observer.sendNext(dataset.getAll())
                 observer.sendCompleted()
                 return task

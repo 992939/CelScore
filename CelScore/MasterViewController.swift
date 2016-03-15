@@ -99,7 +99,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
-            .observeOn(QueueScheduler.mainQueueScheduler)
             .promoteErrors(ListError)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
