@@ -67,7 +67,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        self.setupData() //TODO: CelScoreViewModel().checkNetworkStatusSignal().start()
+        self.setupData()
     }
     
     override func viewWillLayoutSubviews() {

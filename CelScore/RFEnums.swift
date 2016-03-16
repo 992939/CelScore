@@ -42,7 +42,7 @@ public enum OverlayInfo: Int {
     public func message() -> String {
         switch self {
         case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
-        case .MenuAccess: return "Welcome aboard the consensus.\n\nNo pledge nor oath is needed. You will only need some form of identification to get started."
+        case .MenuAccess: return "Welcome aboard the consensus.\n\nNo pledge nor oath required. You will only need some form of identification to get started."
         case .LoginSuccess: return "Welcome to the courthouse.\n\nHere, we find common grounds. Here, we lend our voices to the consensus.\nPlease, vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"

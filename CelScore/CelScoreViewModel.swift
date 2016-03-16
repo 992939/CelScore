@@ -27,7 +27,6 @@ struct CelScoreViewModel {
             
             let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: Constants.kCredentialsProvider)
             AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
-
             let serviceClient = PROCelScoreAPIClient.defaultClient()
             serviceClient.APIKey = Constants.kAPIKey
         
