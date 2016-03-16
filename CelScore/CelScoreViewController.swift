@@ -39,7 +39,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
                 let percentage = String(consensus.roundToPlaces(2)) + "%"
                 self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "Social Consensus", value: percentage, tag: 2))
             })
-        self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String(self.celebST.prevScore.roundToPlaces(2)), tag: 3))
+        self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
         self.view = self.pulseView
     }
     

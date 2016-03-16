@@ -25,7 +25,7 @@ struct CelScoreViewModel {
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            let serviceClient = PROCelScoreAPIClient.defaultClient()
+            let serviceClient = PROCelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
         
             let awsCall : AWSTask

@@ -12,6 +12,7 @@
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
 		001703F21C94D03F0070B811 /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703F11C94D03F0070B811 /* TAOverlay.m */; };
 		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
+		00315C501C9926E500003B76 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00315C4F1C9926E500003B76 /* icomoon.ttf */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -108,6 +109,7 @@
 		001703F11C94D03F0070B811 /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
 		002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDropdownNotification.m; sourceTree = "<group>"; };
+		00315C4F1C9926E500003B76 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00315C4F1C9926E500003B76 /* icomoon.ttf */,
 				001703F01C94D03F0070B811 /* TAOverlay.h */,
 				001703F11C94D03F0070B811 /* TAOverlay.m */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
@@ -537,6 +540,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00315C501C9926E500003B76 /* icomoon.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);

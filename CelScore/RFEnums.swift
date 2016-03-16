@@ -33,6 +33,7 @@ public enum OverlayInfo: Int {
     case MaxFollow
     case FirstRoad
     case FirstPublic
+    case FirstStars
     case VoteDisable
     case SocialDisable
     case LogoutUser
@@ -48,6 +49,7 @@ public enum OverlayInfo: Int {
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
         case .FirstRoad: return "\"Always do the right thing.\"\n-Da Mayor\n\nWelcome to the road less traveled."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n-Richard Dyer\n\nHere we explore ten star qualities (not personality traits). What stars are made of and makes them shine."
         case .VoteDisable: return "Every vote is an opportunity for consensus building."
         case .SocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
         case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for raising the consensus. You’re welcome back anytime."
@@ -65,6 +67,7 @@ public enum OverlayInfo: Int {
         case .MaxFollow: return "camera_green"
         case .FirstRoad: return "road_green"
         case .FirstPublic: return "megaphone_green"
+        case .FirstStars: return "astronaut_green"
         case .VoteDisable: return "vote_green"
         case .SocialDisable: return "megaphone_green"
         case .LogoutUser: return "astronaut_green"
