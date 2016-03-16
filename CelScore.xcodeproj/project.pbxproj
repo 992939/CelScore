@@ -11,6 +11,8 @@
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
 		001703F21C94D03F0070B811 /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703F11C94D03F0070B811 /* TAOverlay.m */; };
+		001F908E1C9A074A001B6551 /* MACelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F908B1C9A074A001B6551 /* MACelScoreAPIClient.m */; };
+		001F908F1C9A074A001B6551 /* MAEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F908D1C9A074A001B6551 /* MAEmpty.m */; };
 		002C08401C6FF28C0001E5F2 /* AFDropdownNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */; };
 		00315C501C9926E500003B76 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00315C4F1C9926E500003B76 /* icomoon.ttf */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
@@ -37,8 +39,6 @@
 		006431901C6A66030062BBDB /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318F1C6A66030062BBDB /* CosmosView.swift */; };
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
-		0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */; };
-		0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */; };
 		0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14E1C40F8A900E2A9BC /* Reachability.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
@@ -107,6 +107,10 @@
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
 		001703F01C94D03F0070B811 /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		001703F11C94D03F0070B811 /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
+		001F908A1C9A074A001B6551 /* MACelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACelScoreAPIClient.h; sourceTree = "<group>"; };
+		001F908B1C9A074A001B6551 /* MACelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACelScoreAPIClient.m; sourceTree = "<group>"; };
+		001F908C1C9A074A001B6551 /* MAEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAEmpty.h; sourceTree = "<group>"; };
+		001F908D1C9A074A001B6551 /* MAEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAEmpty.m; sourceTree = "<group>"; };
 		002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDropdownNotification.h; sourceTree = "<group>"; };
 		002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDropdownNotification.m; sourceTree = "<group>"; };
 		00315C4F1C9926E500003B76 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
@@ -140,10 +144,6 @@
 		0064318F1C6A66030062BBDB /* CosmosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
 		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
-		0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROCelScoreAPIClient.h; sourceTree = "<group>"; };
-		0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROCelScoreAPIClient.m; sourceTree = "<group>"; };
-		0082B14A1C3B6FFD00E2A9BC /* PROEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROEmpty.h; sourceTree = "<group>"; };
-		0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PROEmpty.m; sourceTree = "<group>"; };
 		0082B14E1C40F8A900E2A9BC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
@@ -223,6 +223,10 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				001F908A1C9A074A001B6551 /* MACelScoreAPIClient.h */,
+				001F908B1C9A074A001B6551 /* MACelScoreAPIClient.m */,
+				001F908C1C9A074A001B6551 /* MAEmpty.h */,
+				001F908D1C9A074A001B6551 /* MAEmpty.m */,
 				00315C4F1C9926E500003B76 /* icomoon.ttf */,
 				001703F01C94D03F0070B811 /* TAOverlay.h */,
 				001703F11C94D03F0070B811 /* TAOverlay.m */,
@@ -232,10 +236,6 @@
 				00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */,
 				002C083E1C6FF28C0001E5F2 /* AFDropdownNotification.h */,
 				002C083F1C6FF28C0001E5F2 /* AFDropdownNotification.m */,
-				0082B1481C3B6FFD00E2A9BC /* PROCelScoreAPIClient.h */,
-				0082B1491C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m */,
-				0082B14A1C3B6FFD00E2A9BC /* PROEmpty.h */,
-				0082B14B1C3B6FFD00E2A9BC /* PROEmpty.m */,
 				004492171C3B272200FBCEFE /* Info.plist */,
 				004492191C3B273800FBCEFE /* Header.h */,
 			);
@@ -684,6 +684,7 @@
 				001703F21C94D03F0070B811 /* TAOverlay.m in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
+				001F908F1C9A074A001B6551 /* MAEmpty.m in Sources */,
 				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,
 				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
 				0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */,
@@ -708,16 +709,15 @@
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
-				0082B14D1C3B6FFD00E2A9BC /* PROEmpty.m in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
+				001F908E1C9A074A001B6551 /* MACelScoreAPIClient.m in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
-				0082B14C1C3B6FFD00E2A9BC /* PROCelScoreAPIClient.m in Sources */,
 				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

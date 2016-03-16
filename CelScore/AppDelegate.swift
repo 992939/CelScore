@@ -48,7 +48,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Anonymous Access
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
-        PROCelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
+        MACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())

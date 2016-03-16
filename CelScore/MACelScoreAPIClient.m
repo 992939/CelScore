@@ -1,5 +1,5 @@
 /*
- Copyright 2010-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ Copyright 2010-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License").
  You may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  */
  
 
-#import "PROCelScoreAPIClient.h"
+#import "MACelScoreAPIClient.h"
 #import <AWSCore/AWSCore.h>
 #import <AWSCore/AWSSignature.h>
 #import <AWSCore/AWSSynchronizedMutableDictionary.h>
 
-#import "PROEmpty.h"
+#import "MAEmpty.h"
 
 @interface AWSAPIGatewayClient()
 
@@ -43,7 +43,7 @@
 
 @end
 
-@interface PROCelScoreAPIClient()
+@interface MACelScoreAPIClient()
 
 @property (nonatomic, strong) AWSServiceConfiguration *configuration;
 
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation PROCelScoreAPIClient
+@implementation MACelScoreAPIClient
 
 @synthesize configuration = _configuration;
 
@@ -70,10 +70,10 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                                                            credentialsProvider:nil];
     }
 
-    static PROCelScoreAPIClient *_defaultClient = nil;
+    static MACelScoreAPIClient *_defaultClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _defaultClient = [[PROCelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
+        _defaultClient = [[MACelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
     });
 
     return _defaultClient;
@@ -84,7 +84,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     dispatch_once(&onceToken, ^{
         _serviceClients = [AWSSynchronizedMutableDictionary new];
     });
-    [_serviceClients setObject:[[PROCelScoreAPIClient alloc] initWithConfiguration:configuration]
+    [_serviceClients setObject:[[MACelScoreAPIClient alloc] initWithConfiguration:configuration]
                         forKey:key];
 }
 
@@ -144,7 +144,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[PROEmpty class]];
+                     responseClass:[MAEmpty class]];
 }
 
 - (AWSTask *)celeblistsservicePost {
@@ -166,7 +166,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[PROEmpty class]];
+                     responseClass:[MAEmpty class]];
 }
 
 - (AWSTask *)celebratingservicePost {
@@ -188,7 +188,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[PROEmpty class]];
+                     responseClass:[MAEmpty class]];
 }
 
 

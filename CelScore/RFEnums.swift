@@ -34,6 +34,8 @@ public enum OverlayInfo: Int {
     case FirstRoad
     case FirstPublic
     case FirstStars
+    case FistNegative
+    case AllStars
     case VoteDisable
     case SocialDisable
     case LogoutUser
@@ -48,8 +50,10 @@ public enum OverlayInfo: Int {
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
         case .FirstRoad: return "\"Always do the right thing.\"\n-Da Mayor\n\nWelcome to the road less traveled."
-        case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n-Richard Dyer\n\nHere we explore ten star qualities (not personality traits). What stars are made of and makes them shine."
+        case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n- Ubuntu\n\nSharing is now just a long press away."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nHere we explore star qualities, not personality traits, to find what stars are really made of."
+        case FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
+        case .AllStars: return "You've journeyed into all corners of the collective unconscious and brought the consensus everywhere you went. Thank you. As our world expands, there will soon be more to explore."
         case .VoteDisable: return "Every vote is an opportunity for consensus building."
         case .SocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
         case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for raising the consensus. You’re welcome back anytime."
@@ -68,6 +72,8 @@ public enum OverlayInfo: Int {
         case .FirstRoad: return "road_green"
         case .FirstPublic: return "megaphone_green"
         case .FirstStars: return "astronaut_green"
+        case .FistNegative: return "astronaut_purple"
+        case .AllStars: return "astronaut_green"
         case .VoteDisable: return "vote_green"
         case .SocialDisable: return "megaphone_green"
         case .LogoutUser: return "astronaut_green"

@@ -17,8 +17,7 @@
 #import <WebASDKImageManager/WebASDKImageManager.h>
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
-#import <OpinionzAlertView/OpinionzAlertView.h>
-#import "PROCelScoreAPIClient.h"
+#import "MACelScoreAPIClient.h"
 #import "AFDropdownNotification.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"

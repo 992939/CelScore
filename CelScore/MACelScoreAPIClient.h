@@ -1,5 +1,5 @@
 /*
- Copyright 2010-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ Copyright 2010-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License").
  You may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 #import <Foundation/Foundation.h>
 #import <AWSAPIGateway/AWSAPIGateway.h>
 
-#import "PROEmpty.h"
+#import "MAEmpty.h"
 
 /**
  The service client object.
  */
-@interface PROCelScoreAPIClient: AWSAPIGatewayClient
+@interface MACelScoreAPIClient: AWSAPIGatewayClient
 
 /**
  Returns the singleton service client. If the singleton object does not exist, the SDK instantiates the default service client with `defaultServiceConfiguration` from `[AWSServiceManager defaultServiceManager]`. The reference to this object is maintained by the SDK, and you do not need to retain it manually.
@@ -55,11 +55,11 @@
 
  *Swift*
 
-     let serviceClient = PROCelScoreAPIClient.defaultClient()
+     let serviceClient = MACelScoreAPIClient.defaultClient()
 
  *Objective-C*
 
-     PROCelScoreAPIClient *serviceClient = [PROCelScoreAPIClient defaultClient];
+     MACelScoreAPIClient *serviceClient = [MACelScoreAPIClient defaultClient];
 
  @return The default service client.
  */
@@ -75,7 +75,7 @@
      func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
          let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
          let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-         PROCelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2PROCelScoreAPIClient")
+         MACelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2MACelScoreAPIClient")
 
          return true
      }
@@ -88,7 +88,7 @@
          AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
                                                                               credentialsProvider:credentialsProvider];
 
-         [PROCelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2PROCelScoreAPIClient"];
+         [MACelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2MACelScoreAPIClient"];
 
          return YES;
      }
@@ -97,11 +97,11 @@
 
  *Swift*
 
-     let serviceClient = PROCelScoreAPIClient(forKey: "USWest2PROCelScoreAPIClient")
+     let serviceClient = MACelScoreAPIClient(forKey: "USWest2MACelScoreAPIClient")
 
  *Objective-C*
 
-     PROCelScoreAPIClient *serviceClient = [PROCelScoreAPIClient clientForKey:@"USWest2PROCelScoreAPIClient"];
+     MACelScoreAPIClient *serviceClient = [MACelScoreAPIClient clientForKey:@"USWest2MACelScoreAPIClient"];
 
  @warning After calling this method, do not modify the configuration object. It may cause unspecified behaviors.
 
@@ -120,7 +120,7 @@
      func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
          let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
          let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-         PROCelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2PROCelScoreAPIClient")
+         MACelScoreAPIClient.registerClientWithConfiguration(configuration, forKey: "USWest2MACelScoreAPIClient")
 
          return true
      }
@@ -133,7 +133,7 @@
          AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2
                                                                               credentialsProvider:credentialsProvider];
 
-         [PROCelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2PROCelScoreAPIClient"];
+         [MACelScoreAPIClient registerClientWithConfiguration:configuration forKey:@"USWest2MACelScoreAPIClient"];
 
          return YES;
      }
@@ -142,11 +142,11 @@
 
  *Swift*
 
-     let serviceClient = PROCelScoreAPIClient(forKey: "USWest2PROCelScoreAPIClient")
+     let serviceClient = MACelScoreAPIClient(forKey: "USWest2MACelScoreAPIClient")
 
  *Objective-C*
 
-     PROCelScoreAPIClient *serviceClient = [PROCelScoreAPIClient clientForKey:@"USWest2PROCelScoreAPIClient"];
+     MACelScoreAPIClient *serviceClient = [MACelScoreAPIClient clientForKey:@"USWest2MACelScoreAPIClient"];
 
  @param key A string to identify the service client.
 
@@ -167,7 +167,7 @@
  
  
  
- return type: PROEmpty *
+ return type: MAEmpty *
  */
 - (AWSTask *)celebinfoscanservicePost;
 
@@ -175,7 +175,7 @@
  
  
  
- return type: PROEmpty *
+ return type: MAEmpty *
  */
 - (AWSTask *)celeblistsservicePost;
 
@@ -183,7 +183,7 @@
  
  
  
- return type: PROEmpty *
+ return type: MAEmpty *
  */
 - (AWSTask *)celebratingservicePost;
 
