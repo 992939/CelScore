@@ -25,8 +25,6 @@ struct CelScoreViewModel {
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: Constants.kCredentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             let serviceClient = PROCelScoreAPIClient.defaultClient()
             serviceClient.APIKey = Constants.kAPIKey
         

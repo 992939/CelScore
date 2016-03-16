@@ -42,6 +42,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
         
+        // AWS Cognito Access for authenticated requests
+        let configurationAuth = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configurationAuth
+        
+        // Anonymous Access
+        let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
+        PROCelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
+        
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))

@@ -159,8 +159,6 @@ struct UserViewModel {
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: Constants.kCredentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
