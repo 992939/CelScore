@@ -78,6 +78,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func openSettings() {
         SettingsViewModel().isLoggedInSignal()
+            .observeOn(UIScheduler())
             .on(next: { _ in self.sideNavigationViewController!.openLeftView() })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(),
@@ -98,8 +99,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.count = list.count
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates()
-                self.setupUser()})
+                self.celebrityTableView.endUpdates() })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
@@ -107,13 +107,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+            .map({ _ in self.setupUser() })
             .start()
     }
     
     func setupUser() {
         self.socialButton.hidden = true
         SettingsViewModel().isLoggedInSignal().startWithFailed { _ in self.socialButton.hidden = false }
-        SettingsViewModel().getSettingSignal(settingType: .FirstLaunch).startWithNext { first in
+        SettingsViewModel().getSettingSignal(settingType: .FirstLaunch)
+            .observeOn(UIScheduler())
+            .startWithNext { first in
             let firstTime = first as! Bool
             if firstTime {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(),
@@ -161,7 +164,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 guard result.isCancelled == false else { return }
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
-                    .observeOn(QueueScheduler.mainQueueScheduler)
+                    .observeOn(UIScheduler())
                     .on(next: { _ in
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
                             image: UIImage(named: OverlayInfo.LoginSuccess.logo()),
