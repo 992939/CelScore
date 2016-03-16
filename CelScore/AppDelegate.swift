@@ -43,8 +43,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         // AWS Cognito Access for authenticated requests
-        let configurationAuth = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configurationAuth
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
         // Anonymous Access
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())

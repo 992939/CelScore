@@ -20,11 +20,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
-                print("identity: \(task.result)")
-                return nil
-            }
-            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
-            AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+                return nil }
 
             switch loginType {
             case .Facebook:
@@ -92,11 +88,8 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
-                let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
-                AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-                AWSCognito.registerCognitoWithConfiguration(configuration, forKey: "USEast1Cognito")
                 
-                let syncClient: AWSCognito = AWSCognito(forKey: "USEast1Cognito")
+                let syncClient: AWSCognito = AWSCognito.defaultCognito()
                 let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
                 let realm = try! Realm()
                 
