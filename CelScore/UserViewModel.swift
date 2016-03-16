@@ -122,14 +122,14 @@ struct UserViewModel {
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
-                    realm.beginWrite()
                     for index in 0...userRatingsArray.count { //TODO: test bounds
                         let ratings: UserRatingsModel = userRatingsArray[index]
                         dataset.setString(ratings.interpolation(), forKey: ratings.id)
+                        realm.beginWrite()
                         ratings.isSynced = true
                         realm.add(ratings, update: true)
+                        try! realm.commitWrite()
                     }
-                    try! realm.commitWrite()
                 case .UserSettings:
                     //TODO: Checked once a day and only called when user actually changed a setting
                     let model: SettingsModel? = realm.objects(SettingsModel).first

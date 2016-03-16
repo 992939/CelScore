@@ -48,9 +48,9 @@ public enum OverlayInfo: Int {
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
         case .FirstRoad: return "\"Always do the right thing.\"\n-Da Mayor\n\nWelcome to the road less traveled."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
-        case .VoteDisable: return "."
+        case .VoteDisable: return "Every vote is an opportunity for consensus building."
         case .SocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
-        case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for co-creating the consensus. You’re welcome back anytime."
+        case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for raising the consensus. You’re welcome back anytime."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
         case .NetworkError: return "blah blah blah blah blah blah blah blah"
         }
