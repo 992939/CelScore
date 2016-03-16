@@ -57,7 +57,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         
-        let navigationBarView: NavigationBarView = self.getNavigationView()
+        let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
         Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
         
@@ -72,14 +72,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
+        self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
     func openSettings() {
         SettingsViewModel().isLoggedInSignal()
             .observeOn(UIScheduler())
-            .on(next: { _ in self.sideNavigationViewController!.openLeftView() })
+            .on(next: { _ in self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(),
                     image: UIImage(named: OverlayInfo.MenuAccess.logo()),
@@ -162,6 +162,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 guard error == nil else { print("FBSDKLogin error: \(error)"); return }
                 guard result.isCancelled == false else { return }
+                
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                     .observeOn(UIScheduler())
@@ -169,9 +170,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
                             image: UIImage(named: OverlayInfo.LoginSuccess.logo()),
                             options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true })
-                    })
-                    .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
+                        TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().getUserInfoFromFacebookSignal() }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .UserInfo) }
+                    .on(next: { result in print("maestro \(result)") })
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.handleMenu() })
                     .retry(Constants.kNetworkRetry)
@@ -249,7 +253,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: ViewDidLoad Helpers
-    func getNavigationView() -> NavigationBarView {
+    func getNavigationView() -> Toolbar {
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
         menuButton.pulseScale = false
@@ -264,7 +268,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
         rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
-        let navBar: NavigationBarView = NavigationBarView()
+        let navBar: Toolbar = Toolbar()
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
         navBar.backgroundColor = Constants.kMainShade

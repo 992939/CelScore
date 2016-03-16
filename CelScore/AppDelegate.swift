@@ -51,7 +51,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         MACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = SideNavigationViewController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
+        window.rootViewController = SideNavigationController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
         window.rootViewController!.view.addSubview(statusView)

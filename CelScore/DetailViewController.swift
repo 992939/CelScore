@@ -11,6 +11,7 @@ import Material
 import SMSegmentView
 import FBSDKLoginKit
 
+
 public struct UserStruct {
     let socialMessage: String
     let isPositive: Bool
@@ -64,7 +65,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.celscoreVC.delegate = self
         self.notification.notificationDelegate = self
         
-        let navigationBarView: NavigationBarView = getNavigationView()
+        let navigationBarView: Toolbar = getNavigationView()
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
@@ -282,7 +283,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func dropdownNotificationTopButtonTapped() {}
     
     //MARK: ViewDidLoad Helpers
-    func getNavigationView() -> NavigationBarView {
+    func getNavigationView() -> Toolbar {
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
         backButton.pulseScale = false
@@ -294,7 +295,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         
-        let navigationBarView = NavigationBarView(frame: Constants.kNavigationBarRect)
+        let navigationBarView = Toolbar(frame: Constants.kNavigationBarRect)
         navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kMainShade

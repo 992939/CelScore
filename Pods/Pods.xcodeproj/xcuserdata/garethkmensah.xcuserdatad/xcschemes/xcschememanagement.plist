@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Material-io.cosmicmind.Material.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Material.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -162,6 +167,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3C355FC6D2C0D2C3CC6A32CA6EA54902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4BB566602371656E7C7DB4F57942EB2D</key>
 		<dict>
 			<key>primary</key>
@@ -227,12 +237,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF02B7DC5C7EC72EFD46AA7BF171A534</key>
+		<key>AFD9F01CAA245BFB0EE7152F863A6300</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFD9F01CAA245BFB0EE7152F863A6300</key>
+		<key>C260AC2EED72ED862D037E8DB8EE5A39</key>
 		<dict>
 			<key>primary</key>
 			<true/>

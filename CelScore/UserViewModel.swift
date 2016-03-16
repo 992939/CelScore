@@ -18,7 +18,6 @@ struct UserViewModel {
     
     func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            print("facebook token \(token)")
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
                 print("identity: \(task.result)")
@@ -40,7 +39,6 @@ struct UserViewModel {
                 }
             default: break
             }
-            
             Constants.kCredentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 observer.sendNext(task.result!)
