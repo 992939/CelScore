@@ -34,9 +34,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
-
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdate:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
     }
     
     //MARK: Methods
@@ -76,13 +74,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillLayoutSubviews()
         self.sideNavigationViewController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
-    }
-    
-    func onTokenUpdate(notification: NSNotification) {
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            UserViewModel().updateCognitoSignal(object: nil, dataSetType: .UserRatings).start()
-            //TODO: UserViewModel().refreshFacebookTokenSignal().start()
-        }
     }
     
     func openSettings() {
