@@ -83,18 +83,21 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Login Status
         let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = Constants.setupLabel(title: "Logged In As", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
+        let loginLabel = Constants.setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
-        let userLabel = Constants.setupLabel(title: "@GreyEcologist", frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30)) //TODO
-        userLabel.textAlignment = .Right
-        let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
-        logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
-        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
-        loginView.addSubview(loginLabel)
-        loginView.addSubview(userLabel)
-        loginView.addSubview(logoutButton)
-        let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
+        SettingsViewModel().loggedInAsSignal().startWithNext { username in
+            let userLabel = Constants.setupLabel(title: username, frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30))
+            userLabel.textAlignment = .Right
+            let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
+            logoutButton.setTitle("Logout", forState: .Normal)
+            logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+            logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
+            loginView.addSubview(loginLabel)
+            loginView.addSubview(userLabel)
+            loginView.addSubview(logoutButton)
+            let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
+            self.node.addSubnode(loginNode)
+        }
         
         //Copyright
         let copyrightTextNode = ASTextNode()
@@ -105,7 +108,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
         copyrightTextNode.alignSelf = .Center
         
-        self.node.addSubnode(loginNode)
         self.node.addSubnode(copyrightTextNode)
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationController!.depth = .Depth1
