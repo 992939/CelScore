@@ -13,11 +13,9 @@ import AWSCognito
 struct Constants {
     
     //Universal
-    static let cognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
-    static let S3BucketName: String = "celeb3x"
-    static let S3DownloadKeyName: String = "dmx@3x.jpg"
+    static let kCognitoIdentityPoolId = "us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c"
     static let kAPIKey: String = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP"
-    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.cognitoIdentityPoolId)
+    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
     
     static let kMaxFollowedCelebrities: Int = 10
     static let kNetworkRetry: Int = 2
@@ -38,6 +36,7 @@ struct Constants {
     
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
     
+    //functions
     static func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
     
     static func setupLabel(title title: String, frame: CGRect) -> UILabel {
