@@ -77,7 +77,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func openSettings() {
-        SettingsViewModel().isLoggedInSignal()
+        SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
             .on(next: { _ in self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
@@ -113,7 +113,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupUser() {
         self.socialButton.hidden = true
-        SettingsViewModel().isLoggedInSignal().startWithFailed { _ in self.socialButton.hidden = false }
+        SettingsViewModel().loggedInAsSignal().startWithFailed { _ in self.socialButton.hidden = false }
         SettingsViewModel().getSettingSignal(settingType: .FirstLaunch)
             .observeOn(UIScheduler())
             .startWithNext { first in

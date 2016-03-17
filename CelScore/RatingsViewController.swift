@@ -75,14 +75,14 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = false
                     cosmosView.settings.userRatingMode = false
-                    SettingsViewModel().isLoggedInSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
+                    SettingsViewModel().loggedInAsSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
                     RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
                         cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
                         cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
                         cosmosView.settings.updateOnTouch = hasRatings ? false : true
                     })
                     cosmosView.didTouchCosmos = { (rating:Double) in
-                        SettingsViewModel().isLoggedInSignal()
+                        SettingsViewModel().loggedInAsSignal()
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
                                 self.delegate!.socialSharing(message: "")

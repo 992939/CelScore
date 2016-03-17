@@ -153,7 +153,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func socialButton(button: UIButton) {
-        SettingsViewModel().isLoggedInSignal()
+        SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
                 CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage)
                     .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
