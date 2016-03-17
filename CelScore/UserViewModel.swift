@@ -46,11 +46,11 @@ struct UserViewModel {
     
     func logoutSignal(loginType: LoginType) -> SignalProducer<LoginType, NoError> {
         return SignalProducer { observer, disposable in
-            
             let realm = try! Realm()
             realm.beginWrite()
-            //ratings.isSynced = true
-            //realm.add(ratings, update: true)
+            var model: SettingsModel? = realm.objects(SettingsModel).first
+            model = SettingsModel()
+            realm.add(model!, update: true)
             try! realm.commitWrite()
             
             switch loginType {
