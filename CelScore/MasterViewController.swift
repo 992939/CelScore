@@ -175,7 +175,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return UserViewModel().getUserInfoFromFacebookSignal() }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: value, dataSetType: .UserInfo) }
-                    .on(next: { result in print("maestro \(result)") })
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                        return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.handleMenu() })
                     .retry(Constants.kNetworkRetry)
