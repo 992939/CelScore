@@ -139,7 +139,7 @@ struct UserViewModel {
                         observer.sendFailed(task.error!)
                         return task
                     }
-                    observer.sendNext(task.completed)
+                    observer.sendNext(object)
                     observer.sendCompleted()
                     return task
                 })
