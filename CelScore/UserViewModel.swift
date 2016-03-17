@@ -46,7 +46,13 @@ struct UserViewModel {
     
     func logoutSignal(loginType: LoginType) -> SignalProducer<LoginType, NoError> {
         return SignalProducer { observer, disposable in
-            //TODO: implementation
+            
+            let realm = try! Realm()
+            realm.beginWrite()
+            //ratings.isSynced = true
+            //realm.add(ratings, update: true)
+            try! realm.commitWrite()
+            
             switch loginType {
             case .Facebook:
                 Constants.kCredentialsProvider.clearCredentials()

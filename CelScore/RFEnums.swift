@@ -155,8 +155,8 @@ public enum Qualities: Int {
     case RoleModel
     case HardWork
     case Smarts
-    case Elegance
     case Charisma
+    case Elegance
     case SexAppeal
     
     public static func getAll() -> [String] {
@@ -168,8 +168,8 @@ public enum Qualities: Int {
             RoleModel.name(),
             HardWork.name(),
             Smarts.name(),
-            Elegance.name(),
             Charisma.name(),
+            Elegance.name(),
             SexAppeal.name()
         ]
     }
@@ -183,8 +183,8 @@ public enum Qualities: Int {
         case .RoleModel: return "Role Model"
         case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
-        case .Elegance: return "Elegance"
         case .Charisma: return "Charisma"
+        case .Elegance: return "Elegance"
         case .SexAppeal: return "Handsome"
         }
     }
@@ -198,8 +198,8 @@ public enum Qualities: Int {
         case .RoleModel: return "as a role model is"
         case .HardWork: return "work ethic is"
         case .Smarts: return "smarts are"
-        case .Elegance: return "elegance is"
         case .Charisma: return "charisma is"
+        case .Elegance: return "elegance is"
         case .SexAppeal: return "handsomeness is"
         }
     }
