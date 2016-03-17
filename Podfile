@@ -8,7 +8,7 @@ target 'CelScore' do
     pod 'AsyncDisplayKit', '~> 1.9.7'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
-    pod 'RealmSwift', '~> 0.98.0'
+    pod 'RealmSwift', '~> 0.98.5'
     pod 'AWSCognito', '~> 2.3.6'
     pod 'AWSAPIGateway', '~> 2.3.6'
     pod 'SwiftyJSON', '~> 2.3.2'
@@ -32,6 +32,6 @@ end
 
 target 'CelScoreWidget' do
     pod 'ReactiveCocoa', '4.0.1'
-    pod 'RealmSwift', '~> 0.98.0'
+    pod 'RealmSwift', '~> 0.98.5'
     pod 'AIRTimer', '~> 1.0.2'
 end

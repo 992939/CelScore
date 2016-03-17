@@ -74,7 +74,7 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5)
   - Material (~> 1.37.0)
   - ReactiveCocoa (= 4.0.1)
-  - RealmSwift (~> 0.98.0)
+  - RealmSwift (~> 0.98.5)
   - SDWebImage (~> 3.7)
   - SMSegmentView (~> 1.1)
   - SwiftyJSON (~> 2.3.2)
