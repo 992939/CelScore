@@ -46,8 +46,8 @@ public enum OverlayInfo: Int {
     public func message() -> String {
         switch self {
         case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n-Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
-        case .MenuAccess: return "Welcome to the courthouse,\na court where no pledge nor oath is required,\na court where you will however need some identification to get started."
-        case .LoginSuccess: return "Welcome inside the courthouse,\ninside we share opinions and values,\ninside we come together and build consensus.\n\nPlease, vote responsibly."
+        case .MenuAccess: return "Welcome to the courthouse,\na court where no pledge nor oath is required,\na court where you will however need some identification to enter."
+        case .LoginSuccess: return "Welcome inside the courthouse,\ninside we study the stars and share opinions,\ninside we come together and build consensus.\n\nPlease, vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
         case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n-The Little Prince\n\nWelcome to the road less traveled."
