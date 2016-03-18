@@ -35,6 +35,7 @@ public enum OverlayInfo: Int {
     case FirstPublic
     case FirstStars
     case FistNegative
+    case FirstInterest
     case AllStars
     case VoteDisable
     case SocialDisable
@@ -52,7 +53,8 @@ public enum OverlayInfo: Int {
         case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n-The Little Prince\n\nWelcome to the road less traveled."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n-Richard Dyer\n\nThis is a space where we explore star qualities, not personality traits,\na space where we find what stars are really made of."
-        case FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
+        case .FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
+        case .FirstInterest: return ""
         case .AllStars: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
         case .VoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n-Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
         case .SocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
@@ -68,11 +70,12 @@ public enum OverlayInfo: Int {
         case .MenuAccess: return "passport_green"
         case .LoginSuccess: return "court_green"
         case .FirstFollow: return "telescope_green"
-        case .MaxFollow: return "camera_green"
+        case .MaxFollow: return "telescope_green"
         case .FirstRoad: return "road_green"
         case .FirstPublic: return "consensus_green"
         case .FirstStars: return "astronaut_green"
         case .FistNegative: return "astronaut_purple"
+        case .FirstInterest: return ""
         case .AllStars: return "astronaut_green"
         case .VoteDisable: return "vote_green"
         case .SocialDisable: return "consensus_green"
