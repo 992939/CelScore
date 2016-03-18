@@ -197,6 +197,7 @@ struct Constants {
         "The same shoe does not fit every foot.",
         "Wherever you go, there you are.",
         "We are all made of stars.",
+        "Every blessing ignored becomes a curse.",
         "May the stars be with you.",
         "Rome wasn't build in a day.",
         "The consensus wispers to the ears of the public.",
