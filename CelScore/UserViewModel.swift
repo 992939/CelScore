@@ -156,6 +156,10 @@ struct UserViewModel {
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
+            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
+                return nil }
+            
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in

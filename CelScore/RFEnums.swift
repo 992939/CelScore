@@ -44,14 +44,14 @@ public enum OverlayInfo: Int {
     
     public func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
-        case .MenuAccess: return "Welcome aboard the consensus.\n\nNo pledge nor oath required. You will only need some form of identification to get started."
-        case .LoginSuccess: return "Welcome to the courthouse.\n\nHere, we find common grounds. Here, we lend our voices to the consensus.\nPlease, vote responsibly."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n-Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
+        case .MenuAccess: return "Welcome aboard the consensus.\n\nHere, no pledge nor oath is ever required. Here, you will only need some form of identification to get started."
+        case .LoginSuccess: return "Welcome to the courthouse.\n\nHere, we have no place for gossip, only for values.\nHere, we explore and seek common grounds.\nHere, we come together and lend our voices to the consensus.\n\nPlease, vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
-        case .FirstRoad: return "\"Always do the right thing.\"\n-Da Mayor\n\nWelcome to the road less traveled."
-        case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n- Ubuntu\n\nSharing is now just a long press away."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nHere we explore star qualities, not personality traits, to find what stars are really made of."
+        case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n-The Little Prince\n\nWelcome to the road less traveled."
+        case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n-Richard Dyer\n\nHere we explore star qualities, not personality traits. Here, we find what stars are really made of."
         case FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
         case .AllStars: return "You've journeyed into all corners of the collective unconscious and brought the consensus everywhere you went. Thank you. As our world expands, there will soon be more to explore."
         case .VoteDisable: return "Every vote is an opportunity for consensus building."
