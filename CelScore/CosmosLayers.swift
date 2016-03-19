@@ -64,7 +64,7 @@ final class CosmosLayers {
         var colorFilled = settings.colorFilled
         
         if (settings.userRatingMode) {
-            if (index + 1) > settings.previousRating { colorFilled = Constants.kDarkGreenShade }
+            if (index + 1) > settings.previousRating { colorFilled = Constants.kLightGreenShade }
             else { colorFilled =  Constants.kWineShade }
         }
 

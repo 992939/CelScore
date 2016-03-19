@@ -32,7 +32,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoView.depth = .None
-        let logoCircle: MaterialView = MaterialView(frame: CGRect(x: (Constants.kSettingsViewWidth - 70)/2 , y: 9, width: 70, height: 70))
+        let logoCircle: MaterialView = MaterialView(frame: CGRect(x: (Constants.kSettingsViewWidth - 70)/2 , y: 10, width: 70, height: 70))
         
         let courtLabel = UILabel(frame: CGRect(x: Constants.kPadding + 5, y: 25, width: 110, height: 40))
         let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 25, width: 110, height: 40))
