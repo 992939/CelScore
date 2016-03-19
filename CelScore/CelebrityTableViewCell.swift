@@ -97,10 +97,13 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        self.setupCircleLayer()
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ score in
+            self.setupCircleLayer(positive: score.getCelScore() < 3 ? false : true)
+        })
+        
     }
 
-    func setupCircleLayer() {
+    func setupCircleLayer(positive positive: Bool) {
         let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
         let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
         let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
@@ -110,7 +113,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         pathLayer.path = circlePath.CGPath
         pathLayer.fillColor = UIColor.clearColor().CGColor
         pathLayer.lineWidth = 2.5
-        pathLayer.strokeColor = Constants.kWineShade.CGColor
+        
+        pathLayer.strokeColor = positive ? Constants.kLightGreenShade.CGColor : Constants.kWineShade.CGColor ?? Constants.kLightGreenShade.CGColor
         pathLayer.strokeStart = 0.0
         pathLayer.strokeEnd = 1.0
         
