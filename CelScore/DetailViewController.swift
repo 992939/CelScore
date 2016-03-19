@@ -281,20 +281,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         return navigationBarView
     }
     
-    func updateProfileBorder() {
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                var color: UIColor = MaterialColor.white
-                if hasRatings {
-                    RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ score in
-                        color = score.getCelScore() < 3 ? Constants.kWineShade : Constants.kLightGreenShade
-                    })
-                }
-                return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.9))(originalImage)
-            }
-        })
-    }
-    
     func getTopView() -> MaterialView {
         let picWidth: CGFloat = 200.0
         let topView = MaterialView(frame: Constants.kTopViewRect)
@@ -302,7 +288,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.cornerRadius = picWidth/2
-        self.updateProfileBorder()
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+            .startWithNext({ score in
+                let color = score < self.celebST.prevScore ? Constants.kWineShade : Constants.kLightGreenShade
+                self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+                    return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.9))(originalImage)
+                }
+            })
         topView.clipsToBounds = false
         let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
         topView.addSubview(starLayer)

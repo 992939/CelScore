@@ -98,7 +98,6 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     override func layoutDidFinish() {
         super.layoutDidFinish()
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-            .observeOn(UIScheduler())
             .startWithNext({ score in self.setupCircleLayer(positive: score < self.celebST.prevScore ? false : true) })
     }
 
