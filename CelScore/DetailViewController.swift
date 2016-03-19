@@ -130,7 +130,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
             self.socialButton.menu.enabled = true
-            first?.backgroundColor = Constants.kDarkGreenShade
+            first?.backgroundColor = self.userST.isPositive ? Constants.kDarkGreenShade : Constants.kWineShade
             first?.pulseScale = true
             first?.pulse()
             first?.animate(MaterialAnimation.rotate(rotation: 1))
