@@ -12,7 +12,6 @@ import AIRTimer
 
 
 public protocol DetailSubViewDelegate {
-    func sendFortuneCookie()
     func socialSharing(message message: String)
     func enableVoteButton(positive positive: Bool)
     func rippleEffect(positive positive: Bool, gold: Bool)
@@ -140,8 +139,6 @@ final class RatingsViewController: ASViewController {
                         cosmos.update()
                     }
                 }})
-            .delay(3.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .on(completed: { self.delegate!.sendFortuneCookie() })
             .start()
     }
     

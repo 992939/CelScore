@@ -62,33 +62,6 @@ struct CelScoreViewModel {
         }
     }
     
-    func getFortuneCookieSignal(cookieType cookieType: CookieType) -> SignalProducer<String, NoError> {
-        return SignalProducer { observer, disposable in
-            let fortuneCookieSays: String?
-            let cookies = Constants.fortuneCookies
-            var newCookies = cookieType == .Positive ? Array(cookies[15..<cookies.count]) : Array(cookies[0..<14])
-            
-            let realm = try! Realm()
-            realm.beginWrite()
-            let cookieList = realm.objects(CookieModel).filter("id = %@", cookieType.rawValue).first as CookieModel?
-            if cookieList?.list.count > 0 {
-                let randomPick = Int(arc4random_uniform(UInt32(cookieList!.list.count)))
-                let cookie: Chip = cookieList!.list.removeAtIndex(randomPick)
-                realm.add(cookieList!, update: true)
-                fortuneCookieSays = newCookies[cookie.index]
-            } else {
-                let randomPick = Int(arc4random_uniform(UInt32(newCookies.count)))
-                fortuneCookieSays = newCookies.removeAtIndex(randomPick)
-                let list = CookieModel()
-                for(index, _) in newCookies.enumerate() { list.list.append(Chip(index: index)) }
-                realm.add(list, update: true)
-            }
-            try! realm.commitWrite()
-            observer.sendNext("\"\(fortuneCookieSays!) Thank you for voting.\"")
-            observer.sendCompleted()
-        }
-    }
-    
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
             

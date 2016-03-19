@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, FortuneMode, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, NotificationMode, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, SettingsError> {
@@ -65,7 +65,7 @@ struct SettingsViewModel {
                 case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)
                 case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
                 case .PublicService: observer.sendNext(settings.publicService)
-                case .FortuneMode: observer.sendNext(settings.fortuneMode)
+                case .NotificationMode: observer.sendNext(settings.notificationMode)
                 case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
                 case .FirstRoad: observer.sendNext(settings.isFirstRoad)
                 case .FirstPublic: observer.sendNext(settings.isFirstPublic)
@@ -76,7 +76,7 @@ struct SettingsViewModel {
                 case .DefaultListIndex: observer.sendNext(SettingsModel().defaultListIndex)
                 case .LoginTypeIndex: observer.sendNext(SettingsModel().loginTypeIndex)
                 case .PublicService: observer.sendNext(SettingsModel().publicService)
-                case .FortuneMode: observer.sendNext(SettingsModel().fortuneMode)
+                case .NotificationMode: observer.sendNext(SettingsModel().notificationMode)
                 case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
                 case .FirstRoad: observer.sendNext(SettingsModel().isFirstRoad)
                 case .FirstPublic: observer.sendNext(SettingsModel().isFirstPublic)
@@ -120,7 +120,7 @@ struct SettingsViewModel {
             case .DefaultListIndex: settings.defaultListIndex = value as! Int
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
             case .PublicService: settings.publicService = value as! Bool
-            case .FortuneMode: settings.fortuneMode = value as! Bool
+            case .NotificationMode: settings.notificationMode = value as! Bool
             case .FirstLaunch: settings.isFirstLaunch = value as! Bool
             case .FirstRoad: settings.isFirstRoad = value as! Bool
             case .FirstPublic: settings.isFirstPublic = value as! Bool

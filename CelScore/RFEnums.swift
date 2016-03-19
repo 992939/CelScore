@@ -21,7 +21,6 @@ public enum LoginType: Int { case None = 1, Facebook, Twitter }
 public enum SocialNetwork: Int { case Twitter = 0, Facebook }
 public enum RatingsType { case Ratings, UserRatings }
 public enum AWSDataType { case Celebrity, List, Ratings }
-public enum CookieType: String { case Positive, Negative }
 public enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
 
 //MARK: OverlayInfo

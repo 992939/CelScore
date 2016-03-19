@@ -75,10 +75,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 self.node.addSubnode(publicServiceNode)
             })
         
-        SettingsViewModel().getSettingSignal(settingType: .FortuneMode)
+        SettingsViewModel().getSettingSignal(settingType: .NotificationMode)
             .startWithNext({ status in
-                let fortuneCookieNode = self.setupCheckBoxNode("On The Road", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
-                self.node.addSubnode(fortuneCookieNode)
+                let notificationNode = self.setupCheckBoxNode("News Notification", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                self.node.addSubnode(notificationNode)
             })
         
         //Login Status
@@ -136,7 +136,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     //MARK: BEMCheckBoxDelegate 
     func didTapCheckBox(checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .FortuneMode)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .NotificationMode)).start()
         if checkBox.on {
             SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad).startWithNext({ first in
                 let firstTime = first as! Bool

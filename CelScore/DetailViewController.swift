@@ -258,20 +258,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 self.voteButton.pulse() }
         })
     }
-    
-    func sendFortuneCookie() {
-        CelScoreViewModel().getFortuneCookieSignal(cookieType: .Positive)
-            .on(next: { text in
-                self.notification.titleText = "The Road Less Traveled"
-                self.notification.subtitleText = text
-                self.notification.image = UIImage(named: "road")
-                self.notification.dismissOnTap = true
-                self.notification.presentInView(self.view, withGravityAnimation: true)
-            })
-            .delay(5.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .on(completed: { self.notification.dismissWithGravityAnimation(true) })
-            .start()
-    }
 
     func socialSharing(message message: String) {
         self.handleMenu(true)
@@ -306,7 +292,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func updateProfileBorder() {
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                let color: UIColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+                let color: UIColor = hasRatings ? Constants.kLightGreenShade : MaterialColor.white
                 return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.8))(originalImage)
             }
         })

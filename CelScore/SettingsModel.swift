@@ -18,7 +18,7 @@ public class SettingsModel: Object, NSCopying {
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 1
     dynamic var publicService: Bool = false
-    dynamic var fortuneMode: Bool = false
+    dynamic var notificationMode: Bool = false
     dynamic var isFirstLaunch: Bool = true
     dynamic var isFirstRoad: Bool = true
     dynamic var isFirstPublic: Bool = true
@@ -32,7 +32,7 @@ public class SettingsModel: Object, NSCopying {
         self.defaultListIndex = dictionary["defaultListIndex"] as! Int
         self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
         self.publicService = dictionary["publicService"] as! Bool
-        self.fortuneMode = dictionary["fortuneMode"] as! Bool
+        self.notificationMode = dictionary["notificationMode"] as! Bool
         self.isFirstLaunch = dictionary["isFirstLaunch"] as! Bool
         self.isFirstRoad = dictionary["isFirstRoad"] as! Bool
         self.isFirstPublic = dictionary["isFirstPublic"] as! Bool
@@ -50,7 +50,7 @@ public class SettingsModel: Object, NSCopying {
         copy.defaultListIndex = self.defaultListIndex
         copy.loginTypeIndex = self.loginTypeIndex
         copy.publicService = self.publicService
-        copy.fortuneMode = self.fortuneMode
+        copy.notificationMode = self.notificationMode
         copy.isFirstLaunch = self.isFirstLaunch
         copy.isFirstRoad = self.isFirstRoad
         copy.isFirstPublic = self.isFirstPublic

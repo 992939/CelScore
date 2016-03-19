@@ -27,7 +27,6 @@
 		00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404AA11BF093540009AD0E /* TodayViewController.swift */; };
 		00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00404AA31BF093540009AD0E /* MainInterface.storyboard */; };
 		00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0044920D1C38FB1000FBCEFE /* CookieModel.swift */; };
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
@@ -127,7 +126,6 @@
 		00404AA11BF093540009AD0E /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		00404AA41BF093540009AD0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		00404AA61BF093540009AD0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0044920D1C38FB1000FBCEFE /* CookieModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieModel.swift; sourceTree = "<group>"; };
 		004492171C3B272200FBCEFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004492191C3B273800FBCEFE /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		004B56D91B35332A008A75EB /* CelebrityScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelebrityScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,7 +318,6 @@
 				0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */,
 				008488351BCCA44000B11659 /* ListsModel.swift */,
 				00404A951BEE71300009AD0E /* SettingsModel.swift */,
-				0044920D1C38FB1000FBCEFE /* CookieModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -718,7 +715,6 @@
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
-				0044920E1C38FB1000FBCEFE /* CookieModel.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
 				00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */,
