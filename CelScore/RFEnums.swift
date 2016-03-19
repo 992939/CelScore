@@ -44,18 +44,18 @@ public enum OverlayInfo: Int {
     
     public func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n-Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
         case .MenuAccess: return "Welcome to the courthouse,\na court where no pledge nor oath is required,\na court where you will however need some identification to enter."
         case .LoginSuccess: return "Welcome inside the courthouse,\ninside we study the stars and share opinions,\ninside we come together and build consensus.\n\nPlease, vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
-        case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n-The Little Prince\n\nWelcome to the road less traveled."
+        case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n- The Little Prince\n\nWelcome to the road less traveled."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n-Richard Dyer\n\nWelcome aboard the consensus,\na space where we explore star qualities, not personality traits,\na space where we find what stars are really made of."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nWelcome aboard the consensus,\na space where we explore star qualities, not personality traits,\na space where we find what stars are really made of."
         case .FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
         case .FirstInterest: return ""
         case .AllStars: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
-        case .VoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n-Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
+        case .VoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
         case .SocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
         case .LogoutUser: return "The courthouse hates to see you go, but thanks you for your votes and for building consensus. You’re welcome back anytime."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
