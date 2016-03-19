@@ -21,14 +21,13 @@ public struct UserStruct {
 }
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate, AFDropdownNotificationDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate {
     
     //MARK: Properties
     private let infoVC: InfoViewController
     private let ratingsVC: RatingsViewController
     private let celscoreVC: CelScoreViewController
     private let voteButton: MaterialButton
-    private let notification: AFDropdownNotification
     private let socialButton: MenuView
     private let profilePicNode: ASNetworkImageNode
     private let celebST: CelebrityStruct
@@ -44,7 +43,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = MaterialButton()
         self.socialButton = MenuView()
-        self.notification = AFDropdownNotification()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         
@@ -63,7 +61,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
-        self.notification.notificationDelegate = self
         
         let navigationBarView: Toolbar = getNavigationView()
         let topView: MaterialView = getTopView()
@@ -264,10 +261,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.userST = self.userST.updateMessage(message)
     }
     
-    //MARK: AFDropdownNotificationDelegate
-    func dropdownNotificationBottomButtonTapped() {}
-    func dropdownNotificationTopButtonTapped() {}
-    
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> Toolbar {
         let backButton: FlatButton = FlatButton()
@@ -293,7 +286,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
                 let color: UIColor = hasRatings ? Constants.kLightGreenShade : MaterialColor.white
-                return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.8))(originalImage)
+                return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.9))(originalImage)
             }
         })
     }

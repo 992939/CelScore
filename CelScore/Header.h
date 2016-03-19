@@ -18,7 +18,6 @@
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
 #import "MACelScoreAPIClient.h"
-#import "AFDropdownNotification.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"
 #import "TAOverlay.h"
