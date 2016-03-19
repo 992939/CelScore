@@ -15,6 +15,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Property
     private let picker: UIPickerView
+    private let refreshButton: MaterialButton
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
