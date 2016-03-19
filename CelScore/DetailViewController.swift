@@ -109,8 +109,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 MaterialAnimation.delay(2) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
-                    self.voteButton.setImage(UIImage(named: "road"), forState: .Normal)
-                    self.voteButton.setImage(UIImage(named: "road"), forState: .Highlighted)
+                    self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
+                    self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }
             })
@@ -182,8 +182,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.enabled = true
         self.voteButton.pulseScale = true
         self.voteButton.backgroundColor = Constants.kStarRatingShade
-        self.voteButton.setImage(UIImage(named: "road"), forState: .Normal)
-        self.voteButton.setImage(UIImage(named: "road"), forState: .Highlighted)
+        self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
+        self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
         self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
     }
@@ -213,7 +213,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-        } else { self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "justice_purple") }
+        } else { self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "vote_purple") }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -336,7 +336,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
-        self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "justice_purple")
+        self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "vote_purple")
     }
 }
 
