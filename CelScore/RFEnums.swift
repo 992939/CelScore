@@ -30,7 +30,7 @@ public enum OverlayInfo: Int {
     case LoginSuccess
     case FirstFollow
     case MaxFollow
-    case FirstRoad
+    case FirstConsensus
     case FirstPublic
     case FirstStars
     case FistNegative
@@ -49,9 +49,9 @@ public enum OverlayInfo: Int {
         case .LoginSuccess: return "Welcome inside the courthouse,\ninside we study the stars and share opinions,\ninside we come together and build consensus.\n\nPlease, vote responsibly."
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
-        case .FirstRoad: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n- The Little Prince\n\nWelcome to the road less traveled."
+        case .FirstConsensus: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n- The Little Prince\n\nThe consensus will show up when you cast a vote."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nSharing is now just a long press away."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nWelcome aboard the consensus,\na space where we explore star qualities, not personality traits,\na space where we find what stars are really made of."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nThe court is a space to explore star qualities and find what they are really made of."
         case .FistNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
         case .FirstInterest: return ""
         case .AllStars: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
@@ -70,7 +70,7 @@ public enum OverlayInfo: Int {
         case .LoginSuccess: return "court_green"
         case .FirstFollow: return "telescope_green"
         case .MaxFollow: return "telescope_green"
-        case .FirstRoad: return "road_green"
+        case .FirstConsensus: return "worker_green"
         case .FirstPublic: return "consensus_green"
         case .FirstStars: return "astronaut_green"
         case .FistNegative: return "astronaut_purple"

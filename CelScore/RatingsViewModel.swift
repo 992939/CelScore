@@ -90,6 +90,22 @@ struct RatingsViewModel {
         }
     }
     
+    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
+            let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
+            var  differences: Array<Double> = []
+            for (index, rating) in ratings!.generate().enumerate() {
+                print("rating: \(ratings![rating]) and newRatings[index]: \(newRatings![newRatings![index]])")
+                differences[index] = (ratings![rating] as! Double) - (newRatings![newRatings![index]] as! Double)
+            }
+            observer.sendNext(10.0)
+            observer.sendCompleted()
+        }
+    }
+    
+    
     func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
         let realm = try! Realm()

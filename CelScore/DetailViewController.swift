@@ -49,6 +49,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.userST = self.userST.updatePositive(value < 0.5 ? false : true) })
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
+        RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id).start()
     }
     
     //MARK: Methods

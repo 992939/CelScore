@@ -22,6 +22,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     init() {
         self.picker = UIPickerView()
+        self.refreshButton = MaterialButton()
         super.init(node: ASDisplayNode())
     }
     
@@ -92,9 +93,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 self.node.addSubnode(publicServiceNode)
             })
         
-        SettingsViewModel().getSettingSignal(settingType: .NotificationMode)
+        SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode("News Notification", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode("Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(notificationNode)
             })
         
@@ -153,7 +154,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     //MARK: BEMCheckBoxDelegate 
     func didTapCheckBox(checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .NotificationMode)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .ConsensusBuilding)).start()
         if checkBox.on {
             SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad).startWithNext({ first in
                 let firstTime = first as! Bool
@@ -163,8 +164,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                             image: UIImage(named: OverlayInfo.FirstPublic.logo()),
                             options: OverlayInfo.getOptions())
                     } else {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstRoad.message(),
-                            image: UIImage(named: OverlayInfo.FirstRoad.logo()),
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(),
+                            image: UIImage(named: OverlayInfo.FirstConsensus.logo()),
                             options: OverlayInfo.getOptions())
                     }
                     TAOverlay.setCompletionBlock({ _ in

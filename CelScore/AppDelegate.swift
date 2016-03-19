@@ -25,7 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 9,
+            schemaVersion: 10,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 7 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
@@ -41,6 +41,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if oldSchemaVersion < 9 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
                         newObject!["notificationMode"] = true
+                    }
+                }
+                if oldSchemaVersion < 10 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["consensusBuilding"] = true
                     }
                 }
         })

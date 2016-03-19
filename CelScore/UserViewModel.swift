@@ -134,7 +134,7 @@ struct UserViewModel {
                         dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                         dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                         dataset.setString(String(settings.publicService), forKey: "publicService")
-                        dataset.setString(String(settings.notificationMode), forKey: "notificationMode")
+                        dataset.setString(String(settings.consensusBuilding), forKey: "consensusBuilding")
                     } else { observer.sendCompleted() }
                 }
                 
@@ -181,7 +181,7 @@ struct UserViewModel {
                     settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
-                    settings.notificationMode = (dico["notificationMode"] as! NSString).boolValue
+                    settings.consensusBuilding = (dico["consensusBuilding"] as! NSString).boolValue
                     settings.isSynced = true
                     realm.beginWrite()
                     realm.add(settings, update: true)
