@@ -30,39 +30,49 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth = self.view.width - 2 * Constants.kPadding
         
         //Logo
-        let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
-        logoImageView.depth = .None
+        let logoView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
+        logoView.depth = .None
         let logoCircle: MaterialView = MaterialView(frame: CGRect(x: (Constants.kSettingsViewWidth - 70)/2 , y: 9, width: 70, height: 70))
+        
+        let courtLabel = UILabel(frame: CGRect(x: Constants.kPadding + 5, y: 25, width: 110, height: 40))
+        let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 25, width: 110, height: 40))
+        let font = UIFont(name: "Cochin", size: 25.0) ?? UIFont.systemFontOfSize(25.0)
+        let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
+        courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
+        houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
+
         logoCircle.image = UIImage(named: "court_small_white")
         logoCircle.contentsGravity = "center"
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
         logoCircle.backgroundColor = Constants.kDarkGreenShade
-        logoImageView.addSubview(logoCircle)
-        logoImageView.backgroundColor = Constants.kMainShade
-        let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
+        logoView.addSubview(courtLabel)
+        logoView.addSubview(houseLabel)
+        logoView.addSubview(logoCircle)
+        logoView.backgroundColor = Constants.kMainShade
+        let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.node.addSubnode(logoNode)
 
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
-            let consensusBarNode = self.setupProgressBarNode("Global Consensus", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding), value: value)
+            let consensusBarNode = self.setupProgressBarNode("Global Consensus", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value)
             self.node.addSubnode(consensusBarNode)
         })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoImageView.bottom + Constants.kPadding + progressNodeHeight, value: value)
+            let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value)
             self.node.addSubnode(publicOpinionBarNode)
         })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoImageView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
+            let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
             self.node.addSubnode(positiveBarNode)
         })
         
         //PickerView
-        let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoImageView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
+        let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
         let pickerLabel = Constants.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
@@ -73,7 +83,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(pickerNode)
         
         //Check Boxes
-        let publicNodeHeight = logoImageView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
+        let publicNodeHeight = logoView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
