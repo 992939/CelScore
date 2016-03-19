@@ -32,7 +32,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoImageView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoImageView.depth = .None
-        //logoImageView.image = UIImage(named: "ballot")
+        let logoCircle: MaterialView = MaterialView(frame: CGRect(x: (Constants.kSettingsViewWidth - 70)/2 , y: 9, width: 70, height: 70))
+        logoCircle.image = UIImage(named: "court_small_white")
+        logoCircle.contentsGravity = "center"
+        logoCircle.shape = .Circle
+        logoCircle.depth = .Depth2
+        logoCircle.backgroundColor = Constants.kDarkGreenShade
+        logoImageView.addSubview(logoCircle)
         logoImageView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoImageView })
         self.node.addSubnode(logoNode)
