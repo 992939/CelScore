@@ -31,7 +31,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 80
-        self.pulseView.depth = .Depth1
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
             .startWithNext({ consensus -> () in
@@ -40,7 +39,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
             })
         self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
         self.pulseView.backgroundColor = MaterialColor.clear
-        self.view.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
     }
     
