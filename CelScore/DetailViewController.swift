@@ -101,7 +101,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                //if ratings.totalVotes == 0 { self.updateProfileBorder() }
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .startWithNext({ (userRatings:RatingsModel) in
                 self.enableUpdateButton()
@@ -285,7 +284,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func updateProfileBorder() {
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                let color: UIColor = hasRatings ? Constants.kLightGreenShade : MaterialColor.white
+                var color: UIColor = MaterialColor.white
+                if hasRatings {
+                    RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ score in
+                        color = score.getCelScore() < 3 ? Constants.kWineShade : Constants.kLightGreenShade
+                    })
+                }
                 return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.9))(originalImage)
             }
         })
