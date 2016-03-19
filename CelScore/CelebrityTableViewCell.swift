@@ -97,10 +97,9 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ score in
-            self.setupCircleLayer(positive: score.getCelScore() < 3 ? false : true)
-        })
-        
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+            .observeOn(UIScheduler())
+            .startWithNext({ score in self.setupCircleLayer(positive: score < self.celebST.prevScore ? false : true) })
     }
 
     func setupCircleLayer(positive positive: Bool) {
@@ -114,7 +113,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         pathLayer.fillColor = UIColor.clearColor().CGColor
         pathLayer.lineWidth = 2.5
         
-        pathLayer.strokeColor = positive ? Constants.kLightGreenShade.CGColor : Constants.kWineShade.CGColor ?? Constants.kLightGreenShade.CGColor
+        pathLayer.strokeColor = positive ? Constants.kLightGreenShade.CGColor : Constants.kWineShade.CGColor
         pathLayer.strokeStart = 0.0
         pathLayer.strokeEnd = 1.0
         
