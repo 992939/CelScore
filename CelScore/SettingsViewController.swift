@@ -15,12 +15,18 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Property
     private let picker: UIPickerView
+    private let fact1Bar: YLProgressBar
+    private let fact2Bar: YLProgressBar
+    private let fact3Bar: YLProgressBar
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
         self.picker = UIPickerView()
+        self.fact1Bar = YLProgressBar()
+        self.fact2Bar = YLProgressBar()
+        self.fact3Bar = YLProgressBar()
         super.init(node: ASDisplayNode())
     }
     
@@ -57,17 +63,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
-            let consensusBarNode = self.setupProgressBarNode("Global Consensus", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value)
+            let consensusBarNode = self.setupProgressBarNode(title: "Global Consensus", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value)
             self.node.addSubnode(consensusBarNode)
         })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode("Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value)
+            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value)
             self.node.addSubnode(publicOpinionBarNode)
         })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode("Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
+            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
             self.node.addSubnode(positiveBarNode)
         })
         
@@ -87,13 +93,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
-                let publicServiceNode = self.setupCheckBoxNode("Public Service", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode("Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
                 self.node.addSubnode(notificationNode)
             })
         
@@ -186,7 +192,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return materialView
     }
     
-    func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
+    func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
         let publicServiceLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
@@ -203,7 +209,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
-    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
+    func setupProgressBarNode(title title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
