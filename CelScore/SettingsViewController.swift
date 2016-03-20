@@ -10,6 +10,7 @@ import YLProgressBar
 import Material
 import BEMCheckBox
 import AIRTimer
+import OpinionzAlertView
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate {
@@ -144,7 +145,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
-    func logout() { UserViewModel().logoutSignal(.Facebook).start() }
+    func logout() {
+        let logoutAlert = OpinionzAlertView(title: nil, message: "blah blah blah", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
+            { (_, index: Int) -> Void in if index == 0 { UserViewModel().logoutSignal(.Facebook).start() }}
+        logoutAlert.iconType = OpinionzAlertIconWarning
+        logoutAlert.show()
+    }
     
     func refreshAction() {
         self.fact1Bar.setProgress(0, animated: true)
@@ -166,9 +172,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
+        SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithNext({ first in let firstTime = first as! Bool
+            if firstTime {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstInterest.message(),
+                    image: UIImage(named: OverlayInfo.FirstInterest.logo()),
+                    options: OverlayInfo.getOptions())
+                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstInterest).start() })
+            }
+        })
     }
     
-    //MARK: BEMCheckBoxDelegate 
+    //MARK: BEMCheckBoxDelegate
     func didTapCheckBox(checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .ConsensusBuilding)).start()
         if checkBox.on {
