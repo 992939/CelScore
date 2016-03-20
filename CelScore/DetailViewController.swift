@@ -112,11 +112,15 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                     self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }})
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
+            .filter({ (value: AnyObject) -> Bool in return value as! Bool })
             .delay(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
-                return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id) }
-            .on(next: { message in
-                TAOverlay.showOverlayWithLabel(message, image: UIImage(named: OverlayInfo.FirstConsensus.logo()), options: OverlayInfo.getOptions())})
+                return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
+            .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: UIImage(named: OverlayInfo.FirstConsensus.logo()), options: OverlayInfo.getOptions())})
             .start()
     }
     

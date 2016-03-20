@@ -88,6 +88,7 @@ final class RatingsViewController: ASViewController {
                                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(),
                                     image: UIImage(named: OverlayInfo.FirstVoteDisable.logo()),
                                     options: OverlayInfo.getOptions())
+                                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable) })
                             })
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
