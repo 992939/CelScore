@@ -113,12 +113,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }})
             .delay(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<(Int, Double), RatingsError> in
+            .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id) }
-            .on(next: { (tuple:(Int, Double)) in
-                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(),
-                    image: UIImage(named: OverlayInfo.FirstConsensus.logo()),
-                    options: OverlayInfo.getOptions())})
+            .on(next: { message in
+                TAOverlay.showOverlayWithLabel(message, image: UIImage(named: OverlayInfo.FirstConsensus.logo()), options: OverlayInfo.getOptions())})
             .start()
     }
     

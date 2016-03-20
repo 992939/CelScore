@@ -90,7 +90,7 @@ struct RatingsViewModel {
         }
     }
     
-    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<(Int, Double), RatingsError> {
+    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<String, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
@@ -103,9 +103,9 @@ struct RatingsViewModel {
                 differences[index] = abs((allRatings[rating] as! Double) - (allUserRatings[allUserRatings[index]] as! Double))
             }
             let sumDiff = differences.reduce(0, combine: +)
-            let consensus: Double = 100.0 - (sumDiff * 2)
-            let index = differences.indexOf(differences.maxElement()!)
-            observer.sendNext((index!, consensus))
+            let percent: Int = 100 - Int(sumDiff * 2)
+            let message = "\(percent)% of the consensus agrees with you.\n\nThank you for voting."
+            observer.sendNext(message)
             observer.sendCompleted()
         }
     }
