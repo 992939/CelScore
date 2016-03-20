@@ -123,7 +123,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(),
                     image: UIImage(named: OverlayInfo.WelcomeUser.logo()),
                     options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) })
+                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })
             }
         }
     }

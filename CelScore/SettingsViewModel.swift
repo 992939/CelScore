@@ -127,22 +127,22 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first! //TODO: check .isEmpty
+            let settings = realm.objects(SettingsModel).first ?? SettingsModel()
             switch settingType {
             case .DefaultListIndex: settings.defaultListIndex = value as! Int
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
             case .PublicService: settings.publicService = value as! Bool
             case .ConsensusBuilding: settings.consensusBuilding = value as! Bool
-            case .FirstLaunch: settings.isFirstLaunch = value as! Bool
-            case .FirstConsensus: settings.isFirstConsensus = value as! Bool
-            case .FirstPublic: settings.isFirstPublic = value as! Bool
-            case .FirstFollow: settings.isFirstFollow = value as! Bool
-            case .FirstStars: settings.isFirstStars = value as! Bool
-            case .FirstNegative: settings.isFirstNegative = value as! Bool
-            case .FirstInterest: settings.isFirstInterest = value as! Bool
-            case .FirstCompleted: settings.isFirstCompleted = value as! Bool
-            case .FirstVoteDisable: settings.isFirstVoteDisabled = value as! Bool
-            case .FirstSocialDisable: settings.isFirstSocialDisabled = value as! Bool
+            case .FirstLaunch: settings.isFirstLaunch = false
+            case .FirstConsensus: settings.isFirstConsensus = false
+            case .FirstPublic: settings.isFirstPublic = false
+            case .FirstFollow: settings.isFirstFollow = false
+            case .FirstStars: settings.isFirstStars = false
+            case .FirstNegative: settings.isFirstNegative = false
+            case .FirstInterest: settings.isFirstInterest = false
+            case .FirstCompleted: settings.isFirstCompleted = false
+            case .FirstVoteDisable: settings.isFirstVoteDisabled = false
+            case .FirstSocialDisable: settings.isFirstSocialDisabled = false
             }
             settings.isSynced = false
             realm.add(settings, update: true)

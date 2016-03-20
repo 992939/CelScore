@@ -179,14 +179,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(),
                             image: UIImage(named: OverlayInfo.FirstPublic.logo()),
                             options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start() })
                     } else {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(),
                             image: UIImage(named: OverlayInfo.FirstConsensus.logo()),
                             options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start() })
                     }
-                    TAOverlay.setCompletionBlock({ _ in
-                        SettingsViewModel().updateSettingSignal(value: false, settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus)
-                    })
                 }
             })
         }
