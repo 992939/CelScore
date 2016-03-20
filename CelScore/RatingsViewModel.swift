@@ -12,8 +12,6 @@ import Result
 
 struct RatingsViewModel {
     
-    typealias ConsensusTuple = (Int, Double)
-    
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
         return SignalProducer { observer, disposable in //TODO: RatingsError
             guard 1...5 ~= newRating else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
@@ -92,7 +90,7 @@ struct RatingsViewModel {
         }
     }
     
-    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<ConsensusTuple, RatingsError> {
+    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<(Int, Double), RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
@@ -106,7 +104,8 @@ struct RatingsViewModel {
             }
             let sumDiff = differences.reduce(0, combine: +)
             let consensus: Double = 100.0 - (sumDiff * 2)
-            observer.sendNext((0, consensus))
+            let index = differences.indexOf(differences.maxElement()!)
+            observer.sendNext((index!, consensus))
             observer.sendCompleted()
         }
     }
