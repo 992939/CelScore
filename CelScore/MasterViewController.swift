@@ -52,10 +52,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
-        self.searchBar.delegate = self
-        self.searchBar.searchBarStyle = .Minimal
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
+        
+        self.searchBar.delegate = self
+        self.searchBar.searchBarStyle = .Minimal
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
@@ -96,7 +97,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
             .on(next: { list in
-                self.count = list.count
+                self.count = list.count ?? 0
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates() })
@@ -210,7 +211,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: UITextFieldDelegate methods
     func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
-    func textFieldDidBeginEditing(textField: UITextField) {}
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
     
     func showSearchBar() {
@@ -225,7 +225,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.searchBar.backgroundColor = Constants.kDarkShade
                 self.searchBar.barTintColor = MaterialColor.white
                 self.searchBar.frame = Constants.kSegmentedControlRect
-                }, completion: { finished in self.searchBar.becomeFirstResponder() })
+                }, completion: { _ in self.searchBar.becomeFirstResponder() })
         }
     }
     
@@ -239,7 +239,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: UISearchBarDelegate
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) { hideSearchBar() }
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) { self.hideSearchBar() }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {

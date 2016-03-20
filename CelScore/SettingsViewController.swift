@@ -172,7 +172,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     func didTapCheckBox(checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .ConsensusBuilding)).start()
         if checkBox.on {
-            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad).startWithNext({ first in
+            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus).startWithNext({ first in
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
@@ -185,7 +185,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                             options: OverlayInfo.getOptions())
                     }
                     TAOverlay.setCompletionBlock({ _ in
-                        SettingsViewModel().updateSettingSignal(value: false, settingType: checkBox.tag == 0 ? .FirstPublic : .FirstRoad)
+                        SettingsViewModel().updateSettingSignal(value: false, settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus)
                     })
                 }
             })

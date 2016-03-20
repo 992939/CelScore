@@ -20,9 +20,15 @@ public class SettingsModel: Object, NSCopying {
     dynamic var publicService: Bool = false
     dynamic var consensusBuilding: Bool = false
     dynamic var isFirstLaunch: Bool = true
-    dynamic var isFirstRoad: Bool = true
+    dynamic var isFirstConsensus: Bool = true
     dynamic var isFirstPublic: Bool = true
     dynamic var isFirstFollow: Bool = true
+    dynamic var isFirstStars: Bool = true
+    dynamic var isFirstNegative: Bool = true
+    dynamic var isFirstCompleted: Bool = true
+    dynamic var isFirstInterest: Bool = true
+    dynamic var isFirstVoteDisabled: Bool = true
+    dynamic var isFirstSocialDisabled: Bool = true
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer
@@ -34,9 +40,15 @@ public class SettingsModel: Object, NSCopying {
         self.publicService = dictionary["publicService"] as! Bool
         self.consensusBuilding = dictionary["consensusBuilding"] as! Bool
         self.isFirstLaunch = dictionary["isFirstLaunch"] as! Bool
-        self.isFirstRoad = dictionary["isFirstRoad"] as! Bool
+        self.isFirstConsensus = dictionary["isFirstConsensus"] as! Bool
         self.isFirstPublic = dictionary["isFirstPublic"] as! Bool
         self.isFirstFollow = dictionary["isFirstFollow"] as! Bool
+        self.isFirstStars = dictionary["isFirstStars"] as! Bool
+        self.isFirstNegative = dictionary["isFirstNegative"] as! Bool
+        self.isFirstCompleted = dictionary["isFirstCompleted"] as! Bool
+        self.isFirstInterest = dictionary["isFirstInterest"] as! Bool
+        self.isFirstVoteDisabled = dictionary["isFirstVoteDisabled"] as! Bool
+        self.isFirstSocialDisabled = dictionary["isFirstSocialDisabled"] as! Bool
         self.isSynced = true
     }
     
@@ -52,9 +64,15 @@ public class SettingsModel: Object, NSCopying {
         copy.publicService = self.publicService
         copy.consensusBuilding = self.consensusBuilding
         copy.isFirstLaunch = self.isFirstLaunch
-        copy.isFirstRoad = self.isFirstRoad
+        copy.isFirstConsensus = self.isFirstConsensus
         copy.isFirstPublic = self.isFirstPublic
         copy.isFirstFollow = self.isFirstFollow
+        copy.isFirstStars = self.isFirstStars
+        copy.isFirstNegative = self.isFirstNegative
+        copy.isFirstCompleted = self.isFirstCompleted
+        copy.isFirstInterest = self.isFirstInterest
+        copy.isFirstVoteDisabled = self.isFirstVoteDisabled
+        copy.isFirstSocialDisabled = self.isFirstSocialDisabled
         copy.isSynced = self.isSynced
         return copy
     }

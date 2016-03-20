@@ -25,27 +25,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         let config = Realm.Configuration(
-            schemaVersion: 10,
+            schemaVersion: 11,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 7 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirstRoad"] = true
-                        newObject!["isFirstPublic"] = true
-                    }
-                }
-                if oldSchemaVersion < 8 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirstFollow"] = true
-                    }
-                }
-                if oldSchemaVersion < 9 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["notificationMode"] = true
-                    }
-                }
                 if oldSchemaVersion < 10 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
                         newObject!["consensusBuilding"] = true
+                    }
+                }
+                if oldSchemaVersion < 11 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["isFirstStars"] = true
+                        newObject!["isFirstNegative"] = true
+                        newObject!["isFirstInterest"] = true
+                        newObject!["isFirstCompleted"] = true
+                        newObject!["isFirstVoteDisabled"] = true
+                        newObject!["isFirstSocialDisabled"] = true
                     }
                 }
         })

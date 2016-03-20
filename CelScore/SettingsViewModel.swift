@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstRoad, FirstPublic, FirstFollow }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, SettingsError> {
@@ -67,9 +67,15 @@ struct SettingsViewModel {
                 case .PublicService: observer.sendNext(settings.publicService)
                 case .ConsensusBuilding: observer.sendNext(settings.consensusBuilding)
                 case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
-                case .FirstRoad: observer.sendNext(settings.isFirstRoad)
+                case .FirstConsensus: observer.sendNext(settings.isFirstConsensus)
                 case .FirstPublic: observer.sendNext(settings.isFirstPublic)
                 case .FirstFollow: observer.sendNext(settings.isFirstFollow)
+                case .FirstStars: observer.sendNext(settings.isFirstStars)
+                case .FirstNegative: observer.sendNext(settings.isFirstNegative)
+                case .FirstInterest: observer.sendNext(settings.isFirstInterest)
+                case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
+                case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
+                case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
                 }
             } else {
                 switch settingType {
@@ -78,9 +84,15 @@ struct SettingsViewModel {
                 case .PublicService: observer.sendNext(SettingsModel().publicService)
                 case .ConsensusBuilding: observer.sendNext(SettingsModel().consensusBuilding)
                 case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
-                case .FirstRoad: observer.sendNext(SettingsModel().isFirstRoad)
+                case .FirstConsensus: observer.sendNext(SettingsModel().isFirstConsensus)
                 case .FirstPublic: observer.sendNext(SettingsModel().isFirstPublic)
                 case .FirstFollow: observer.sendNext(SettingsModel().isFirstFollow)
+                case .FirstStars: observer.sendNext(SettingsModel().isFirstStars)
+                case .FirstNegative: observer.sendNext(SettingsModel().isFirstNegative)
+                case .FirstInterest: observer.sendNext(SettingsModel().isFirstInterest)
+                case .FirstCompleted: observer.sendNext(SettingsModel().isFirstCompleted)
+                case .FirstVoteDisable: observer.sendNext(SettingsModel().isFirstVoteDisabled)
+                case .FirstSocialDisable: observer.sendNext(SettingsModel().isFirstSocialDisabled)
                 }
             }
             observer.sendCompleted()
@@ -91,7 +103,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first
-            guard model!.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoUser", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
+            guard model?.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoUser", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
             observer.sendNext(model!.userName)
             observer.sendCompleted()
         }
@@ -101,12 +113,12 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let model: SettingsModel? = realm.objects(SettingsModel).first
-            model!.userName = username
-            realm.add(model!, update: true)
+            let model: SettingsModel = realm.objects(SettingsModel).first ?? SettingsModel()
+            model.userName = username
+            realm.add(model, update: true)
             try! realm.commitWrite()
             
-            observer.sendNext(model!)
+            observer.sendNext(model)
             observer.sendCompleted()
         }
     }
@@ -122,9 +134,15 @@ struct SettingsViewModel {
             case .PublicService: settings.publicService = value as! Bool
             case .ConsensusBuilding: settings.consensusBuilding = value as! Bool
             case .FirstLaunch: settings.isFirstLaunch = value as! Bool
-            case .FirstRoad: settings.isFirstRoad = value as! Bool
+            case .FirstConsensus: settings.isFirstConsensus = value as! Bool
             case .FirstPublic: settings.isFirstPublic = value as! Bool
             case .FirstFollow: settings.isFirstFollow = value as! Bool
+            case .FirstStars: settings.isFirstStars = value as! Bool
+            case .FirstNegative: settings.isFirstNegative = value as! Bool
+            case .FirstInterest: settings.isFirstInterest = value as! Bool
+            case .FirstCompleted: settings.isFirstCompleted = value as! Bool
+            case .FirstVoteDisable: settings.isFirstVoteDisabled = value as! Bool
+            case .FirstSocialDisable: settings.isFirstSocialDisabled = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)

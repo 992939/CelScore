@@ -85,8 +85,8 @@ final class RatingsViewController: ASViewController {
                             .observeOn(UIScheduler())
                             .on(failed: { _ in
                                 self.delegate!.socialSharing(message: "")
-                                TAOverlay.showOverlayWithLabel(OverlayInfo.VoteDisable.message(),
-                                    image: UIImage(named: OverlayInfo.VoteDisable.logo()),
+                                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(),
+                                    image: UIImage(named: OverlayInfo.FirstVoteDisable.logo()),
                                     options: OverlayInfo.getOptions())
                             })
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
