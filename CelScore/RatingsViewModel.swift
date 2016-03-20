@@ -12,6 +12,8 @@ import Result
 
 struct RatingsViewModel {
     
+    typealias ConsensusTuple = (Int, Double)
+    
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
         return SignalProducer { observer, disposable in //TODO: RatingsError
             guard 1...5 ~= newRating else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
@@ -90,17 +92,21 @@ struct RatingsViewModel {
         }
     }
     
-    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
+    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<ConsensusTuple, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
-            let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            var  differences: Array<Double> = []
-            for (index, rating) in ratings!.generate().enumerate() {
-                print("rating: \(ratings![rating]) and newRatings[index]: \(newRatings![newRatings![index]])")
-                differences[index] = (ratings![rating] as! Double) - (newRatings![newRatings![index]] as! Double)
+            let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
+            guard let allRatings = ratings else { observer.sendFailed(.UserRatingsNotFound); return }
+            guard let allUserRatings = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+            
+            var differences: [Double] = Array(count: 10, repeatedValue: 0)
+            for (index, rating) in allRatings.generate().enumerate() {
+                differences[index] = abs((allRatings[rating] as! Double) - (allUserRatings[allUserRatings[index]] as! Double))
             }
-            observer.sendNext(10.0)
+            let sumDiff = differences.reduce(0, combine: +)
+            let consensus: Double = 100.0 - (sumDiff * 2)
+            observer.sendNext((0, consensus))
             observer.sendCompleted()
         }
     }
