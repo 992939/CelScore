@@ -15,14 +15,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Property
     private let picker: UIPickerView
-    private let refreshButton: MaterialButton
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
         self.picker = UIPickerView()
-        self.refreshButton = MaterialButton()
         super.init(node: ASDisplayNode())
     }
     
@@ -34,20 +32,20 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoView.depth = .None
-        let logoCircle: MaterialView = MaterialView(frame: CGRect(x: (Constants.kSettingsViewWidth - 70)/2 , y: 10, width: 70, height: 70))
+        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - 60)/2 , y: 14, width: 60, height: 60))
+        logoCircle.setImage(UIImage(named: "court_white"), forState: .Normal)
+        logoCircle.setImage(UIImage(named: "court_white"), forState: .Highlighted)
+        logoCircle.shape = .Circle
+        logoCircle.depth = .Depth2
+        logoCircle.backgroundColor = Constants.kDarkGreenShade
+        logoCircle.addTarget(self, action: Selector("refreshAction"), forControlEvents: .TouchUpInside)
         
-        let courtLabel = UILabel(frame: CGRect(x: Constants.kPadding + 5, y: 25, width: 110, height: 40))
-        let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 25, width: 110, height: 40))
+        let courtLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 25, width: 110, height: 40))
+        let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 115, y: 25, width: 110, height: 40))
         let font = UIFont(name: "Cochin", size: 25.0) ?? UIFont.systemFontOfSize(25.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
-
-        logoCircle.image = UIImage(named: "court_small_white")
-        logoCircle.contentsGravity = "center"
-        logoCircle.shape = .Circle
-        logoCircle.depth = .Depth2
-        logoCircle.backgroundColor = Constants.kDarkGreenShade
         logoView.addSubview(courtLabel)
         logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
@@ -140,6 +138,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() { UserViewModel().logoutSignal(.Facebook).start() }
+    
+    func refreshAction() {
+        print("refresh")
+    }
     
     //MARK: UIPickerViewDelegate
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
