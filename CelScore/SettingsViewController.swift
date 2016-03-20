@@ -63,17 +63,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
-            let consensusBarNode = self.setupProgressBarNode(title: "Global Consensus", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value)
+            let consensusBarNode = self.setupProgressBarNode(title: "Global Consensus", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
             self.node.addSubnode(consensusBarNode)
         })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value)
+            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
             self.node.addSubnode(publicOpinionBarNode)
         })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value)
+            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
             self.node.addSubnode(positiveBarNode)
         })
         
@@ -209,16 +209,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
-    func setupProgressBarNode(title title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat) -> ASDisplayNode {
+    func setupProgressBarNode(title title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
-        let factsBar = YLProgressBar(frame: CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15))
-        factsBar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
-        factsBar.setProgress(value, animated: true)
-        factsBar.type = .Flat
-        factsBar.indicatorTextDisplayMode = .Progress
+        bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
+        bar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
+        bar.setProgress(value, animated: true)
+        bar.type = .Flat
+        bar.indicatorTextDisplayMode = .Progress
         materialView.addSubview(factsLabel)
-        materialView.addSubview(factsBar)
+        materialView.addSubview(bar)
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
 }
