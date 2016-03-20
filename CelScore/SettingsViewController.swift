@@ -9,6 +9,7 @@
 import YLProgressBar
 import Material
 import BEMCheckBox
+import AIRTimer
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate {
@@ -146,7 +147,14 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     func logout() { UserViewModel().logoutSignal(.Facebook).start() }
     
     func refreshAction() {
-        print("refresh")
+        self.fact1Bar.setProgress(0, animated: true)
+        self.fact2Bar.setProgress(0, animated: true)
+        self.fact3Bar.setProgress(0, animated: true)
+        AIRTimer.after(2.0){ _ in
+            SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in self.fact1Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in self.fact2Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.fact3Bar.setProgress(value, animated: true) })
+        }
     }
     
     //MARK: UIPickerViewDelegate
