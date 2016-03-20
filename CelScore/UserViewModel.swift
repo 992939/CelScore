@@ -44,7 +44,7 @@ struct UserViewModel {
         }
     }
     
-    func logoutSignal(loginType: LoginType) -> SignalProducer<LoginType, NoError> {
+    func logoutSignal() -> SignalProducer<LoginType, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
@@ -52,14 +52,7 @@ struct UserViewModel {
             model = SettingsModel()
             realm.add(model!, update: true)
             try! realm.commitWrite()
-            
-            switch loginType {
-            case .Facebook:
-                Constants.kCredentialsProvider.clearCredentials()
-            case .Twitter:
-                print("Twitter.sharedInstance()")
-            default: break
-            }
+            Constants.kCredentialsProvider.clearCredentials()
             observer.sendCompleted()
         }
     }
