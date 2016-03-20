@@ -44,7 +44,7 @@ struct UserViewModel {
         }
     }
     
-    func logoutSignal() -> SignalProducer<LoginType, NoError> {
+    func logoutSignal() -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
@@ -53,6 +53,7 @@ struct UserViewModel {
             realm.add(model!, update: true)
             try! realm.commitWrite()
             Constants.kCredentialsProvider.clearCredentials()
+            observer.sendNext(Constants.kCredentialsProvider)
             observer.sendCompleted()
         }
     }

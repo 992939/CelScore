@@ -102,9 +102,9 @@ struct SettingsViewModel {
     func loggedInAsSignal() -> SignalProducer<String, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first
-            guard model?.userName.isEmpty == false else { observer.sendFailed(NSError(domain: "NoUser", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
-            observer.sendNext(model!.userName)
+            let model = realm.objects(SettingsModel).first ?? SettingsModel()
+            guard model.userName.characters.count > 0 else { observer.sendFailed(NSError(domain: "NoUser", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
+            observer.sendNext(model.userName)
             observer.sendCompleted()
         }
     }

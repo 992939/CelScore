@@ -110,6 +110,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let loginLabel = Constants.setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         SettingsViewModel().loggedInAsSignal().startWithNext { username in
+            print("userName: \(username)")
             let userLabel = Constants.setupLabel(title: username, frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30))
             userLabel.textAlignment = .Right
             let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
@@ -147,7 +148,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func logout() {
         let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
-            { (_, index: Int) -> Void in if index == 0 { UserViewModel().logoutSignal().start() }}
+            { (_, index: Int) -> Void in if index == 0 {
+                UserViewModel().logoutSignal()
+                    .on(next: { _ in
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(),
+                            image: UIImage(named: OverlayInfo.LogoutUser.logo()),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
+                    })
+                    .start()
+                }}
         logoutAlert.iconType = OpinionzAlertIconWarning
         logoutAlert.show()
     }

@@ -158,7 +158,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func socialButton(button: UIButton) {
-        if button.tag == 0 {
+        if button.tag == 1 {
             let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
             FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 guard error == nil else { print("FBSDKLogin error: \(error)"); return }
