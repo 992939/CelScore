@@ -49,7 +49,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.userST = self.userST.updatePositive(value < 0.5 ? false : true) })
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
-        RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id).start()
     }
     
     //MARK: Methods
@@ -103,17 +102,24 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
-            .startWithNext({ (userRatings:RatingsModel) in
+            .on(next: { (userRatings:RatingsModel) in
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                MaterialAnimation.delay(2) {
+                MaterialAnimation.delay(2.0) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
                     self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
                     self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
-                }
-            })
+                }})
+            .delay(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<(Int, Double), RatingsError> in
+                return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id) }
+            .on(next: { (tuple:(Int, Double)) in
+                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(),
+                    image: UIImage(named: OverlayInfo.FirstConsensus.logo()),
+                    options: OverlayInfo.getOptions())})
+            .start()
     }
     
     func updateAction() {
