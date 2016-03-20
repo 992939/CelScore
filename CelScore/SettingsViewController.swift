@@ -146,7 +146,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let logoutAlert = OpinionzAlertView(title: nil, message: "blah blah blah", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
+        let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
             { (_, index: Int) -> Void in if index == 0 { UserViewModel().logoutSignal().start() }}
         logoutAlert.iconType = OpinionzAlertIconWarning
         logoutAlert.show()
