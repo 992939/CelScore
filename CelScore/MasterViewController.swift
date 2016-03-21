@@ -44,6 +44,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if let index = self.celebrityTableView.indexPathForSelectedRow {
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
         }
+        
+        self.socialButton.hidden = false
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
     }
     
     override func viewDidLoad() {
@@ -113,8 +116,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupUser() {
-        self.socialButton.hidden = true
-        SettingsViewModel().loggedInAsSignal().startWithFailed { _ in self.socialButton.hidden = false }
         SettingsViewModel().getSettingSignal(settingType: .FirstLaunch)
             .observeOn(UIScheduler())
             .startWithNext { first in

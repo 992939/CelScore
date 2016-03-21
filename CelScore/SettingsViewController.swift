@@ -32,6 +32,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         super.init(node: ASDisplayNode())
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Hello my loooove")
+    }
+    
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -110,7 +115,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let loginLabel = Constants.setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
         let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
         SettingsViewModel().loggedInAsSignal().startWithNext { username in
-            print("userName: \(username)")
             let userLabel = Constants.setupLabel(title: username, frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30))
             userLabel.textAlignment = .Right
             let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
