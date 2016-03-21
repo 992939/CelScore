@@ -205,10 +205,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func sideNavigationDidOpen(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
-        print("give a eff about a nice guy")
-    }
-    
     //MARK: DidLayoutSubviews Helpers
     func setupMaterialView(frame frame: CGRect) -> MaterialView {
         let materialView = MaterialView(frame: frame)

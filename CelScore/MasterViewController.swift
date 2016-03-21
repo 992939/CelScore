@@ -16,7 +16,7 @@ import HMSegmentedControl
 import AIRTimer
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
@@ -53,6 +53,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.backgroundColor = MaterialColor.clear
+        self.sideNavigationController!.delegate = self
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
@@ -238,6 +239,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.searchBar.removeFromSuperview()
                 self.changeList()
         })
+    }
+    
+    //MARK: SideNavigationControllerDelegate
+    func sideNavigationDidClose(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
+        self.socialButton.hidden = false
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
     }
     
     //MARK: UISearchBarDelegate
