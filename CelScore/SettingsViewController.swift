@@ -32,11 +32,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         super.init(node: ASDisplayNode())
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        print("Hello my loooove")
-    }
-    
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -121,6 +116,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             logoutButton.setTitle("Logout", forState: .Normal)
             logoutButton.addTarget(self, action: "logout", forControlEvents: .TouchUpInside)
             logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+            logoutButton.pulseColor = Constants.kWineShade
             logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
             loginView.addSubview(loginLabel)
             loginView.addSubview(userLabel)
@@ -146,6 +142,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Methods
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        print("DSDSDSD")
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
@@ -153,14 +150,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     func logout() {
         let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
             { (_, index: Int) -> Void in if index == 0 {
-                UserViewModel().logoutSignal()
-                    .on(next: { _ in
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(),
-                            image: UIImage(named: OverlayInfo.LogoutUser.logo()),
-                            options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
+                UserViewModel().logoutSignal().startWithNext({ _ in
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(),
+                        image: UIImage(named: OverlayInfo.LogoutUser.logo()),
+                        options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
                     })
-                    .start()
                 }}
         logoutAlert.iconType = OpinionzAlertIconWarning
         logoutAlert.show()

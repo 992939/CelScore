@@ -46,7 +46,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
         
         self.socialButton.hidden = false
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
+        self.socialButton.menu.enabled = true
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+            self.socialButton.hidden = true
+            self.socialButton.menu.enabled = false
+        }
     }
     
     override func viewDidLoad() {
@@ -81,6 +85,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func openSettings() {
+        self.sideNavigationController?.leftViewController!.viewWillAppear(true)
         SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
             .on(next: { _ in self.sideNavigationController!.openLeftView() })
@@ -181,6 +186,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.socialButton.hidden = true })
+                    .map({ _ in return self.socialButton.menu.enabled = false })
                     .retry(Constants.kNetworkRetry)
                     .start()
             })
