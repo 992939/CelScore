@@ -85,14 +85,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func openSettings() {
-        self.sideNavigationController?.leftViewController!.viewWillAppear(true)
         SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
             .on(next: { _ in self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
-                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(),
-                    image: UIImage(named: OverlayInfo.MenuAccess.logo()),
-                    options: OverlayInfo.getOptions())
+                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: UIImage(named: OverlayInfo.MenuAccess.logo()), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() })
             })
             .start()
