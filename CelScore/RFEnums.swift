@@ -45,7 +45,7 @@ public enum OverlayInfo: Int {
     public func message() -> String {
         switch self {
         case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
-        case .MenuAccess: return "Welcome to the courthouse,\na court where no pledge nor oath is required,\na court where you will however need some identification to enter."
+        case .MenuAccess: return "Welcome to the courthouse!\n\nA court where no pledge nor oath is required.\n\nA court where you only need to show your I.D to enter."
         case .LoginSuccess: return "Welcome into the courthouse,\nwhere we study the stars and share opinions\nwhere we come together and build consensus.\n\nPlease, vote responsibly."
         case .MaxFollow: return "blah blah blah blah blah blah blah blah"
         case .FirstFollow: return "blah blah blah blah blah blah blah blah"
@@ -57,7 +57,7 @@ public enum OverlayInfo: Int {
         case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
         case .FirstSocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
-        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building consensus. You’re welcome back anytime."
+        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building consensus.\n\nYou’re welcome back anytime."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
         case .NetworkError: return "blah blah blah blah blah blah blah blah"
         }
