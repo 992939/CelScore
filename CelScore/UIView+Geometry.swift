@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Tuomas Artman. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 

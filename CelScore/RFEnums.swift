@@ -10,7 +10,6 @@ import Foundation
 import Material
 
 
-
 //MARK: Error
 public enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
 public enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
