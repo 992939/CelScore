@@ -105,25 +105,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 self.node.addSubnode(notificationNode)
             })
         
-        //Login Status
-        let loginView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 60))
-        let loginLabel = Constants.setupLabel(title: "Logged As:", frame: CGRect(x: Constants.kPadding, y: 0, width: 110, height: 30))
-        let userLabelWidth = maxWidth - (loginLabel.width + Constants.kPadding)
-        SettingsViewModel().loggedInAsSignal().startWithNext { username in
-            let userLabel = Constants.setupLabel(title: username, frame: CGRect(x: loginLabel.width, y: 0, width: userLabelWidth, height: 30))
-            userLabel.textAlignment = .Right
-            let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: 30, width: 100, height: 30))
-            logoutButton.setTitle("Logout", forState: .Normal)
-            logoutButton.addTarget(self, action: "logout", forControlEvents: .TouchUpInside)
-            logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
-            logoutButton.pulseColor = Constants.kWineShade
-            logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
-            loginView.addSubview(loginLabel)
-            loginView.addSubview(userLabel)
-            loginView.addSubview(logoutButton)
-            let loginNode = ASDisplayNode(viewBlock: { () -> UIView in return loginView })
-            self.node.addSubnode(loginNode)
-        }
+        //Logout
+        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 40))
+        let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: Constants.kPadding/2, width: 100, height: 30))
+        logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.addTarget(self, action: "logout", forControlEvents: .TouchUpInside)
+        logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        logoutButton.pulseColor = Constants.kWineShade
+        logoutView.addSubview(logoutButton)
+        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
+        let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
+        self.node.addSubnode(logoutNode)
         
         //Copyright
         let copyrightTextNode = ASTextNode()
@@ -142,7 +134,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Methods
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("DSDSDSD")
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
@@ -212,6 +203,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 }
             })
         }
+    }
+    
+    func sideNavigationDidOpen(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
+        print("give a eff about a nice guy")
     }
     
     //MARK: DidLayoutSubviews Helpers

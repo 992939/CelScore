@@ -44,13 +44,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if let index = self.celebrityTableView.indexPathForSelectedRow {
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
         }
-        
         self.socialButton.hidden = false
-        self.socialButton.menu.enabled = true
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            self.socialButton.hidden = true
-            self.socialButton.menu.enabled = false
-        }
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
     }
     
     override func viewDidLoad() {
@@ -183,7 +178,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.socialButton.hidden = true })
-                    .map({ _ in return self.socialButton.menu.enabled = false })
                     .retry(Constants.kNetworkRetry)
                     .start()
             })
