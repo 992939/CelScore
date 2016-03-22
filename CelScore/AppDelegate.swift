@@ -54,13 +54,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         MACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = SideNavigationController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = SideNavigationController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
-        window.rootViewController!.view.addSubview(statusView)
-        window.makeKeyAndVisible()
-        self.window = window
+        window!.rootViewController!.view.addSubview(statusView)
+        self.window!.makeKeyAndVisible()
         
         Fabric.with([Twitter.self, AWSCognito.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

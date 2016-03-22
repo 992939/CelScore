@@ -217,8 +217,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
     
     func showSearchBar() {
+        print("responder:\(self.searchBar.nextResponder()) and is responder:\(self.searchBar.isFirstResponder())")
         if self.view.subviews.contains(self.searchBar) { hideSearchBar() }
         else {
+            self.searchBar.becomeFirstResponder()
             self.searchBar.alpha = 0
             self.view.addSubview(self.searchBar)
             UIView.animateWithDuration(0.5, animations: {
@@ -228,7 +230,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.searchBar.backgroundColor = Constants.kDarkShade
                 self.searchBar.barTintColor = MaterialColor.white
                 self.searchBar.frame = Constants.kSegmentedControlRect
-                }, completion: { _ in self.searchBar.becomeFirstResponder() })
+                })//, completion: { _ in self.searchBar.canBecomeFirstResponder() })
         }
     }
     

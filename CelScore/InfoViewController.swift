@@ -80,7 +80,7 @@ final class InfoViewController: ASViewController {
                             qualityView.backgroundColor = Constants.kMainShade
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel!)
-                            qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
+                            qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(InfoViewController.longPress(_:))))
                             self.pulseView.addSubview(qualityView)
                         }
                     })

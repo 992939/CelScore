@@ -52,7 +52,7 @@ public enum OverlayInfo: Int {
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nWelcome to the road less traveled of public service. You can pave the way for others to join the consensus by long pressing on a star quality."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nThe court is a public space to explore star qualities and find which values are stars made of."
         case .FirstNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
-        case .FirstInterest: return "blah blah blah blah blah blah blah blah"
+        case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
         case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
         case .FirstSocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."

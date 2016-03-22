@@ -44,7 +44,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.expandButton.addTarget(self, action: "toggleExpand", forControlEvents: .TouchUpInside)
+        self.expandButton.addTarget(self, action: #selector(TodayViewController.toggleExpand), forControlEvents: .TouchUpInside)
         updateExpandButtonTitle()
         updatePreferredContentSize()
         AIRTimer.every(5) { timer in self.userDefaults.synchronize() } //TEST: synchronization
