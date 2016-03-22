@@ -192,7 +192,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.backgroundColor = Constants.kStarRatingShade
         self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
         self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
-        self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+        self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
     }
     
@@ -256,7 +256,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Normal)
             self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
-            self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
+            self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseScale = true

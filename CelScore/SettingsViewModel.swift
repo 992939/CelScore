@@ -18,13 +18,26 @@ struct SettingsViewModel {
     enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable }
     
     //MARK: Methods
-    func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, SettingsError> {
+    func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
+            guard userRatingsCount > 5 else { observer.sendNext(0.0); return }
             let celebrityCount: Int = realm.objects(CelebrityModel).count
-            guard celebrityCount > 1 else { observer.sendFailed(.NoCelebrityModels); return }
             observer.sendNext(CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
+            observer.sendCompleted()
+        }
+    }
+    
+    func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let ratings = realm.objects(UserRatingsModel)
+            guard ratings.count > 5 else { observer.sendNext(0.0); return }
+            let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
+                return ratingsModel.getCelScore() < 3 ? false : true
+            })
+            observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             observer.sendCompleted()
         }
     }
@@ -39,19 +52,6 @@ struct SettingsViewModel {
             guard 0..<5 ~= averageVariance else { observer.sendFailed(.OutOfBoundsVariance); return }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
             observer.sendNext(CGFloat(consensus))
-            observer.sendCompleted()
-        }
-    }
-    
-    func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, SettingsError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 0 else { observer.sendFailed(.NoUserRatingsModel); return }
-            let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
-                return ratingsModel.getCelScore() < 3 ? false : true
-            })
-            observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             observer.sendCompleted()
         }
     }
