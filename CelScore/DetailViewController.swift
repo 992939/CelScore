@@ -21,7 +21,7 @@ public struct UserStruct {
 }
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewDelegate {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable {
     
     //MARK: Properties
     private let infoVC: InfoViewController

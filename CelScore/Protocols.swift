@@ -10,13 +10,13 @@ import Foundation
 import Material
 
 
-public protocol DetailSubViewDelegate {
+public protocol DetailSubViewable {
     func socialSharing(message message: String)
     func enableVoteButton(positive positive: Bool)
     func rippleEffect(positive positive: Bool, gold: Bool)
 }
 
-public protocol Socialized {
+public protocol Sociable {
     func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor)
     func handleMenu(open: Bool)
     func socialButton(button: UIButton)

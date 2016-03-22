@@ -16,7 +16,7 @@ final class InfoViewController: ASViewController {
     //MARK: Properties
     private let celebST: CelebrityStruct
     private let pulseView: MaterialView
-    var delegate: DetailSubViewDelegate?
+    var delegate: DetailSubViewable?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

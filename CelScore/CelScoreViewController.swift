@@ -16,7 +16,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     //MARK: Properties
     private let celebST: CelebrityStruct
     private let pulseView: MaterialView
-    var delegate: DetailSubViewDelegate?
+    var delegate: DetailSubViewable?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -104,7 +104,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        if value >= gaugeView.limitValue { return Constants.kDarkGreenShade }
+        if value >= gaugeView.limitValue { return Constants.kLightGreenShade }
         else { return Constants.kWineShade }
     }
 }
