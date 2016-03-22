@@ -21,7 +21,7 @@ public struct UserStruct {
 }
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable {
     
     //MARK: Properties
     private let infoVC: InfoViewController
@@ -288,7 +288,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
-        let nameLabel = Constants.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
+        let nameLabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         

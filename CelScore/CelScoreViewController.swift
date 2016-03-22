@@ -11,7 +11,7 @@ import Material
 import AIRTimer
 
 
-final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
+final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Labelable {
     
     //MARK: Properties
     private let celebST: CelebrityStruct
@@ -68,8 +68,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate {
     }
     
     func getView(y positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let consensusLabel = Constants.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
-        let infoLabel = Constants.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25))
+        let consensusLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
+        let infoLabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kDetailWidth, height: 30))
         consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:))))

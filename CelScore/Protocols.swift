@@ -16,6 +16,18 @@ public protocol DetailSubViewable {
     func rippleEffect(positive positive: Bool, gold: Bool)
 }
 
+public protocol Labelable{}
+
+public extension Labelable {
+    func setupLabel(title title: String, frame: CGRect) -> UILabel {
+        let label = UILabel(frame: frame)
+        label.text = title
+        label.textColor = MaterialColor.white
+        label.font = UIFont(name: label.font.fontName, size: Constants.kFontSize)
+        return label
+    }
+}
+
 public protocol Sociable {
     func handleMenu(open: Bool)
     func socialButton(button: UIButton)

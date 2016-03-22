@@ -35,16 +35,7 @@ struct Constants {
     
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
     
-    //functions
     static func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
-    
-    static func setupLabel(title title: String, frame: CGRect) -> UILabel {
-        let label = UILabel(frame: frame)
-        label.text = title
-        label.textColor = MaterialColor.white
-        label.font = UIFont(name: label.font.fontName, size: kFontSize)
-        return label
-    }
     
     //Star Wars
     typealias Distance = CGFloat
