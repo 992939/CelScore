@@ -98,7 +98,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     
     public func generate() -> Generator {
         var i = 0
-        return anyGenerator {
+        return AnyGenerator {
             switch i++ {
             case 0: return ("rating1")
             case 1: return ("rating2")

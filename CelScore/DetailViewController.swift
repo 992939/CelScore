@@ -193,7 +193,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
         self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
         self.voteButton.removeTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
-        self.voteButton.addTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
+        self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
     }
     
     func disableButton(button button: MaterialButton, imageNamed: String) {
@@ -255,7 +255,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.voteButton.enabled = true
             self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Normal)
             self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Highlighted)
-            self.voteButton.removeTarget(self, action: Selector("updateAction"), forControlEvents: .TouchUpInside)
+            self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: Selector("voteAction"), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
@@ -276,7 +276,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         backButton.pulseScale = false
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
         backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
-        backButton.addTarget(self, action: Selector("backAction"), forControlEvents: .TouchUpInside)
+        backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
         let nameLabel = Constants.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
         nameLabel.textAlignment = .Center

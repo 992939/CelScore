@@ -23,7 +23,7 @@ target 'CelScore' do
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
-    pod 'Material', '~> 1.37.0'
+    pod 'Material', '~> 1.37.3'
     pod 'OpinionzAlertView'
 end
 

@@ -46,7 +46,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
         logoCircle.backgroundColor = Constants.kDarkGreenShade
-        logoCircle.addTarget(self, action: Selector("refreshAction"), forControlEvents: .TouchUpInside)
+        logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let courtLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 25, width: 110, height: 40))
         let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 115, y: 25, width: 110, height: 40))
@@ -109,7 +109,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 40))
         let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: Constants.kPadding/2, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.addTarget(self, action: "logout", forControlEvents: .TouchUpInside)
+        logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
         logoutButton.pulseColor = Constants.kWineShade
         logoutView.addSubview(logoutButton)
@@ -117,16 +117,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
         self.node.addSubnode(logoutNode)
         
-        //Copyright
-        let copyrightTextNode = ASTextNode()
-        let paraStyle = NSMutableParagraphStyle()
-        paraStyle.alignment = .Center
-        let attr = [NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : Constants.kWineShade, NSParagraphStyleAttributeName: paraStyle]
-        copyrightTextNode.attributedString = NSMutableAttributedString(string: "CelScore \(NSBundle.mainBundle().releaseVersionNumber!) by Grey Ecology, LLC.", attributes: attr)
-        copyrightTextNode.frame = CGRect(x: Constants.kPadding, y: self.view.bottom - 2 * Constants.kPadding, width: maxWidth, height: 20)
-        copyrightTextNode.alignSelf = .Center
-        
-        self.node.addSubnode(copyrightTextNode)
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationController!.depth = .Depth1
     }

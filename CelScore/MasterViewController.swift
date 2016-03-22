@@ -16,7 +16,7 @@ import HMSegmentedControl
 import AIRTimer
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
@@ -76,14 +76,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
+        //self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
     func openSettings() {
         SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
-            .on(next: { _ in self.sideNavigationController!.openLeftView() })
+            .on(next: { _ in
+                self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
+                self.sideNavigationController!.openLeftView()
+            })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: UIImage(named: OverlayInfo.MenuAccess.logo()), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() })
@@ -92,7 +95,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() {
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+        CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+            .observeOn(UIScheduler())
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
@@ -101,15 +111,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.count = list.count ?? 0
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates() })
-            .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
-            .map({ _ in self.setupUser() })
+                self.celebrityTableView.endUpdates()
+                self.setupUser() })
             .start()
     }
     
@@ -212,25 +215,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.presentViewController(detailVC, animated: true, completion: nil)
     }
     
-    //MARK: UITextFieldDelegate methods
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool { return false }
-    func textFieldShouldReturn(textField: UITextField) -> Bool { textField.resignFirstResponder(); return true }
-    
     func showSearchBar() {
-        print("responder:\(self.searchBar.nextResponder()) and is responder:\(self.searchBar.isFirstResponder())")
         if self.view.subviews.contains(self.searchBar) { hideSearchBar() }
         else {
-            self.searchBar.becomeFirstResponder()
-            self.searchBar.alpha = 0
-            self.view.addSubview(self.searchBar)
+             self.searchBar.alpha = 0.0
             UIView.animateWithDuration(0.5, animations: {
-                self.searchBar.alpha = 1
+                self.searchBar.alpha = 1.0
                 self.searchBar.showsCancelButton = true
                 self.searchBar.tintColor = Constants.kDarkGreenShade
                 self.searchBar.backgroundColor = Constants.kDarkShade
                 self.searchBar.barTintColor = MaterialColor.white
                 self.searchBar.frame = Constants.kSegmentedControlRect
-                })//, completion: { _ in self.searchBar.canBecomeFirstResponder() })
+                self.view.addSubview(self.searchBar)
+                self.searchBar.endEditing(true)
+                }, completion: { _ in self.searchBar.becomeFirstResponder() })
         }
     }
     
@@ -252,6 +250,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) { self.hideSearchBar() }
     
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool { return true }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
@@ -270,14 +270,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
         menuButton.pulseScale = false
-        menuButton.addTarget(self, action: Selector("openSettings"), forControlEvents: .TouchUpInside)
+        menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), forControlEvents: .TouchUpInside)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
         menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
         
         let rightButton: FlatButton = FlatButton()
         rightButton.pulseColor = MaterialColor.white
         rightButton.pulseScale = false
-        rightButton.addTarget(self, action: "showSearchBar", forControlEvents: .TouchUpInside)
+        rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), forControlEvents: .TouchUpInside)
         rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
         rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
         
@@ -304,7 +304,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
-        self.segmentedControl.addTarget(self, action: "changeList", forControlEvents: .ValueChanged)
+        self.segmentedControl.addTarget(self, action: #selector(MasterViewController.changeList), forControlEvents: .ValueChanged)
     }
 }
 

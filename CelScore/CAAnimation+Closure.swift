@@ -28,7 +28,7 @@ class ZHCAAnimationDelegate: NSObject {
     var animating: ((CGFloat) -> Void)? {
         willSet {
             if animatingTimer == nil {
-                animatingTimer = NSTimer(timeInterval: 0, target: self, selector: "animationIsAnimating:", userInfo: nil, repeats: true)
+                animatingTimer = NSTimer(timeInterval: 0, target: self, selector: #selector(ZHCAAnimationDelegate.animationIsAnimating(_:)), userInfo: nil, repeats: true)
             }
         }
     }

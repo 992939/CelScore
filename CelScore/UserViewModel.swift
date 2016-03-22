@@ -48,9 +48,10 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            var model: SettingsModel? = realm.objects(SettingsModel).first
-            model = SettingsModel()
-            realm.add(model!, update: true)
+            let settings = realm.objects(SettingsModel)
+            realm.delete(settings)
+            let userRatings = realm.objects(UserRatingsModel)
+            realm.delete(userRatings)
             try! realm.commitWrite()
             Constants.kCredentialsProvider.clearCredentials()
             observer.sendNext(Constants.kCredentialsProvider)
