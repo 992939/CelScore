@@ -21,7 +21,7 @@ public struct UserStruct {
 }
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable {
+final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable {
     
     //MARK: Properties
     private let infoVC: InfoViewController
@@ -66,7 +66,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton

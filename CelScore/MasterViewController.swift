@@ -16,7 +16,7 @@ import HMSegmentedControl
 import AIRTimer
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate, Sociable {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
@@ -64,7 +64,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
         
-        Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
@@ -141,7 +141,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
-    //MARK: socialButton delegate
+    //MARK: Sociable
     func handleMenu(open: Bool = false) {
         let image: UIImage?
         if self.socialButton.menu.opened {
