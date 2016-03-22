@@ -55,7 +55,7 @@ struct Constants {
         btn1.setImage(UIImage(named: "ic_add_black"), forState: .Disabled)
         btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
-        btn1.addTarget(controller, action: "handleMenu:", forControlEvents: .TouchUpInside)
+        btn1.addTarget(controller, action: Selector("handleMenu:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn1)
         
         var image = UIImage(named: "facebooklogo")
@@ -70,7 +70,7 @@ struct Constants {
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
-        btn2.addTarget(controller, action: "socialButton:", forControlEvents: .TouchUpInside)
+        btn2.addTarget(controller, action: Selector("socialButton:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn2)
         
         image = UIImage(named: "twitterlogo")
@@ -85,7 +85,7 @@ struct Constants {
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
-        btn3.addTarget(controller, action: "socialButton:", forControlEvents: .TouchUpInside)
+        btn3.addTarget(controller, action: Selector("socialButton:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn3)
         
         menuView.menu.origin = origin

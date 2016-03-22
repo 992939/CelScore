@@ -139,6 +139,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
                             TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(),
                                 image: UIImage(named: OverlayInfo.FirstFollow.logo()),
                                 options: OverlayInfo.getOptions())}})
+                            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstFollow).start() })
                     }
                     else if count > 9 {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.MaxFollow.message(),

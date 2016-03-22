@@ -63,6 +63,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
+        
         Constants.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
         
         self.view.backgroundColor = Constants.kDarkShade
@@ -76,7 +77,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        //self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
@@ -85,12 +85,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .observeOn(UIScheduler())
             .on(next: { _ in
                 self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
-                self.sideNavigationController!.openLeftView()
-            })
+                self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: UIImage(named: OverlayInfo.MenuAccess.logo()), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() })
-            })
+                TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() }) })
             .start()
     }
     
