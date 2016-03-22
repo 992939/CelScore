@@ -221,6 +221,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
+            
+            SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext({ first in let firstTime = first as! Bool
+                if firstTime {
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
+                        image: UIImage(named: OverlayInfo.FirstStars.logo()),
+                        options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
+                }
+            })
+            
         } else { self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "vote_purple") }
     }
     
