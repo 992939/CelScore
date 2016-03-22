@@ -11,13 +11,6 @@ import Material
 import AIRTimer
 
 
-public protocol DetailSubViewDelegate {
-    func socialSharing(message message: String)
-    func enableVoteButton(positive positive: Bool)
-    func rippleEffect(positive positive: Bool, gold: Bool)
-}
-
-
 final class RatingsViewController: ASViewController {
     
     //MARK: Properties
