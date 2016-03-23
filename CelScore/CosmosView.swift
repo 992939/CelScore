@@ -42,12 +42,8 @@ final class CosmosView: UIView {
     
     //MARK: Methods
     func update() {
-        var layers = CosmosLayers.createStarLayers(rating, settings: settings)
+        let layers = CosmosLayers.createStarLayers(rating, settings: settings)
         layer.sublayers = layers
-        if let text = text {
-            let textLayer = createTextLayer(text, layers: layers)
-            layers.append(textLayer)
-        }
         updateSize(layers)
     }
     
@@ -55,14 +51,6 @@ final class CosmosView: UIView {
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.mainScreen().scale
         opaque = true
-    }
-    
-    private func createTextLayer(text: String, layers: [CALayer]) -> CALayer {
-        let textLayer = CosmosLayerHelper.createTextLayer(text, font: settings.textFont, color: settings.textColor)
-        let starsSize = CosmosSize.calculateSizeToFitLayers(layers)
-        CosmosText.position(textLayer, starsSize: starsSize, textMargin: settings.textMargin)
-        layer.addSublayer(textLayer)
-        return textLayer
     }
     
     private func updateSize(layers: [CALayer]) {
@@ -127,12 +115,4 @@ final class CosmosSize {
     }
 }
 
-//MARK: CosmosText
-final class CosmosText {
-    class func position(layer: CALayer, starsSize: CGSize, textMargin: Double) {
-        layer.position.x = starsSize.width + CGFloat(textMargin)
-        let yOffset = (starsSize.height - layer.bounds.height) / 2
-        layer.position.y = yOffset
-    }
-}
 
