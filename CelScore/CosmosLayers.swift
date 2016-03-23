@@ -21,7 +21,7 @@ final class CosmosLayers {
             let fillLevel = CosmosRating.starFillLevel(ratingRemainder: ratingRemander, fillMode: settings.fillMode)
             let starLayer = createCompositeStarLayer(fillLevel, settings: settings, index: index)
             starLayers.append(starLayer)
-            ratingRemander--
+            ratingRemander -= 1
         }
         positionStarLayers(starLayers, starMargin: settings.starMargin)
         return starLayers
@@ -44,7 +44,6 @@ final class CosmosLayers {
         parentLayer.addSublayer(emptyStar)
         parentLayer.addSublayer(filledStar)
         
-        // make filled layer width smaller according to the fill level.
         filledStar.bounds.size.width *= CGFloat(starFillLevel)
         return parentLayer
     }
