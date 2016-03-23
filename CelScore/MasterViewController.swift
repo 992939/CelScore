@@ -242,7 +242,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: SideNavigationControllerDelegate
     func sideNavigationDidClose(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
         self.socialButton.hidden = false
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
+        SettingsViewModel().loggedInAsSignal()
+            .on(next: { _ in self.socialButton.hidden = true })
+            .on(failed: { _ in self.changeList() })
+            .start()
     }
     
     //MARK: UISearchBarDelegate
