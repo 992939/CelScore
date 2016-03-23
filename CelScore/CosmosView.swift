@@ -13,13 +13,10 @@ final class CosmosView: UIView {
     
     //MARK: Properties
     var rating: Double = CosmosDefaultSettings.rating { didSet { if oldValue != rating { update() } } }
-    var text: String? { didSet { if oldValue != text { update() } } }
     var settings = CosmosSettings() { didSet { update() } }
     var viewContentSize = CGSize()
-    
     var didTouchCosmos: ((Double)->())?
     var didFinishTouchingCosmos: ((Double)->())?
-    
     var widthOfStars: CGFloat {
         if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
             let starLayers = Array(sublayers[0..<settings.totalStars])
@@ -27,7 +24,6 @@ final class CosmosView: UIView {
         }
         return 0
     }
-    
     private var previousRatingForDidTouchCallback: Double = -123.192
     
     //MARK: Initializers
