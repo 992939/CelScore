@@ -25,6 +25,7 @@ target 'CelScore' do
     pod 'HMSegmentedControl', '~> 1.5'
     pod 'Material', '~> 1.37.3'
     pod 'OpinionzAlertView'
+    pod 'R.swift'
 end
 
 target 'CelScoreTests' do

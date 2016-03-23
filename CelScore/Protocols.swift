@@ -40,13 +40,13 @@ public extension Sociable {
         btn1.pulseScale = false
         btn1.backgroundColor = buttonColor
         btn1.tintColor = MaterialColor.white
-        btn1.setImage(UIImage(named: "ic_add_black"), forState: .Disabled)
-        btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        btn1.setImage(UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
+        btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)
+        btn1.setImage(R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        btn1.setImage(R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
         btn1.addTarget(controller, action: Selector("handleMenu:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn1)
         
-        var image = UIImage(named: "facebooklogo")
+        var image = R.image.facebooklogo()!
         let btn2: FabButton = FabButton()
         btn2.tag = 1
         btn2.clipsToBounds = true
@@ -61,7 +61,7 @@ public extension Sociable {
         btn2.addTarget(controller, action: Selector("socialButton:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn2)
         
-        image = UIImage(named: "twitterlogo")
+        image = R.image.twitterlogo()!
         let btn3: FabButton = FabButton()
         btn3.tag = 2
         btn3.contentMode = .ScaleToFill

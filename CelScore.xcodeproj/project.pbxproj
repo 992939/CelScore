@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0002610C1CA3456D00296B87 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0002610B1CA3456D00296B87 /* R.generated.swift */; };
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
@@ -100,6 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0002610B1CA3456D00296B87 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				0002610B1CA3456D00296B87 /* R.generated.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
@@ -439,6 +442,7 @@
 				00404AAD1BF093540009AD0E /* Embed App Extensions */,
 				6E848F5BCE35B23A3DAF74F4 /* Embed Pods Frameworks */,
 				E76BBE9D88AC931EBFC6B4C0 /* Copy Pods Resources */,
+				0002610A1CA3445F00296B87 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -551,6 +555,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0002610A1CA3445F00296B87 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 		003FF5C51BD7879D00F7454E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,6 +729,7 @@
 				001F908E1C9A074A001B6551 /* MACelScoreAPIClient.m in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
+				0002610C1CA3456D00296B87 /* R.generated.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

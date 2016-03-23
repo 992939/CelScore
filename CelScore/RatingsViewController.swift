@@ -110,7 +110,7 @@ final class RatingsViewController: ASViewController {
         SettingsViewModel().getSettingSignal(settingType: .FirstVoteDisable).startWithNext({ first in let firstTime = first as! Bool
             if firstTime {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(),
-                    image: UIImage(named: OverlayInfo.FirstVoteDisable.logo()),
+                    image: OverlayInfo.FirstVoteDisable.logo(),
                     options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start() })
             }

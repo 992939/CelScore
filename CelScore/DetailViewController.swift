@@ -71,8 +71,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.setImage(UIImage(named: self.userST.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Normal)
-        first?.setImage(UIImage(named: self.userST.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Highlighted)
+        first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Normal)
+        first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Highlighted)
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -109,8 +109,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 MaterialAnimation.delay(2.0) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
-                    self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
-                    self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
+                    self.voteButton.setImage(R.image.vote_black()!, forState: .Normal)
+                    self.voteButton.setImage(R.image.vote_black()!, forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }})
             .flatMapError { _ in SignalProducer.empty }
@@ -121,7 +121,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
-            .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: UIImage(named: OverlayInfo.FirstConsensus.logo()), options: OverlayInfo.getOptions())})
+            .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions())})
             .start()
     }
     
@@ -145,7 +145,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             first?.pulse()
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
-            let image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+            let image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
             first?.setImage(image, forState: .Normal)
             first?.setImage(image, forState: .Highlighted)
         } else if self.socialButton.menu.opened {
@@ -153,8 +153,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
             first?.backgroundColor = Constants.kDarkShade
-            first?.setImage(UIImage(named: self.userST.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Normal)
-            first?.setImage(UIImage(named: self.userST.isPositive ? "ic_add_green" : "ic_add_purple"), forState: .Highlighted)
+            first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Normal)
+            first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Highlighted)
         }
     }
     
@@ -191,17 +191,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.enabled = true
         self.voteButton.pulseScale = true
         self.voteButton.backgroundColor = Constants.kStarRatingShade
-        self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Normal)
-        self.voteButton.setImage(UIImage(named: "vote_black"), forState: .Highlighted)
+        self.voteButton.setImage(R.image.vote_black()!, forState: .Normal)
+        self.voteButton.setImage(R.image.vote_black()!, forState: .Highlighted)
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
     }
     
-    func disableButton(button button: MaterialButton, imageNamed: String) {
+    func disableButton(button button: MaterialButton, image: UIImage) {
         button.enabled = false
         button.backgroundColor = Constants.kDarkShade
-        button.setImage(UIImage(named: imageNamed), forState: .Normal)
-        button.setImage(UIImage(named: imageNamed), forState: .Highlighted)
+        button.setImage(image, forState: .Normal)
+        button.setImage(image, forState: .Highlighted)
     }
     
     //MARK: SMSegmentViewDelegate
@@ -227,13 +227,13 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if firstTime {
                     AIRTimer.after(2.0, handler: { _ in
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
-                            image: UIImage(named: OverlayInfo.FirstStars.logo()),
+                            image: OverlayInfo.FirstStars.logo(),
                             options: OverlayInfo.getOptions()) })
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
                 }
             })
             
-        } else { self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "vote_purple") }
+        } else { self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.vote_green()! : R.image.vote_purple()!) }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -265,8 +265,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func enableVoteButton(positive positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
-            self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Normal)
-            self.voteButton.setImage(UIImage(named: "vote_white"), forState: .Highlighted)
+            self.voteButton.setImage(R.image.vote_white()!, forState: .Normal)
+            self.voteButton.setImage(R.image.vote_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
@@ -286,8 +286,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
         backButton.pulseScale = false
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Normal)
-        backButton.setImage(UIImage(named: "db-profile-chevron"), forState: .Highlighted)
+        backButton.setImage(R.image.dbProfileChevron()!, forState: .Normal)
+        backButton.setImage(R.image.dbProfileChevron()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
         let nameLabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
@@ -332,12 +332,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "celscore_white"),
-            offSelectionImage: UIImage(named: self.userST.isPositive ? "celscore_green" : "celscore_purple"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "info_white"),
-            offSelectionImage: UIImage(named: self.userST.isPositive ? "info_green" : "info_purple"))
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: UIImage(named: "star_icon"),
-            offSelectionImage: UIImage(named:self.userST.isPositive ? "star_green" :  "star_purple"))
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.celscore_white()!, offSelectionImage: self.userST.isPositive ? R.image.celscore_green()! : R.image.celscore_purple()!)
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: self.userST.isPositive ? R.image.info_green()! : R.image.info_purple()!)
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: self.userST.isPositive ? R.image.star_green()! : R.image.star_purple()!)
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor
@@ -353,7 +350,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
-        self.disableButton(button: self.voteButton, imageNamed: self.userST.isPositive ? "vote_green" : "vote_purple")
+        self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.vote_green()! : R.image.vote_purple()!)
     }
 }
 

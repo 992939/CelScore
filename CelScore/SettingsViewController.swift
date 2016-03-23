@@ -41,8 +41,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoView.depth = .None
         let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - 60)/2 , y: 14, width: 60, height: 60))
-        logoCircle.setImage(UIImage(named: "court_white"), forState: .Normal)
-        logoCircle.setImage(UIImage(named: "court_white"), forState: .Highlighted)
+        logoCircle.setImage(R.image.court_white()!, forState: .Normal)
+        logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
         logoCircle.backgroundColor = Constants.kDarkGreenShade
@@ -132,9 +132,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
             { (_, index: Int) -> Void in if index == 0 {
                 UserViewModel().logoutSignal().startWithNext({ _ in
-                    TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(),
-                        image: UIImage(named: OverlayInfo.LogoutUser.logo()),
-                        options: OverlayInfo.getOptions())
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
                     })
                 }}
@@ -165,7 +163,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithNext({ first in let firstTime = first as! Bool
             if firstTime {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstInterest.message(),
-                    image: UIImage(named: OverlayInfo.FirstInterest.logo()),
+                    image: OverlayInfo.FirstInterest.logo(),
                     options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstInterest).start() })
             }
@@ -180,14 +178,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(),
-                            image: UIImage(named: OverlayInfo.FirstPublic.logo()),
-                            options: OverlayInfo.getOptions())
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start() })
                     } else {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(),
-                            image: UIImage(named: OverlayInfo.FirstConsensus.logo()),
-                            options: OverlayInfo.getOptions())
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start() })
                     }
                 }

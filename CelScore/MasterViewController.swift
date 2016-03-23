@@ -87,7 +87,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
-                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: UIImage(named: OverlayInfo.MenuAccess.logo()), options: OverlayInfo.getOptions())
+                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: OverlayInfo.MenuAccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() }) })
             .start()
     }
@@ -120,9 +120,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .startWithNext { first in
             let firstTime = first as! Bool
             if firstTime {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(),
-                    image: UIImage(named: OverlayInfo.WelcomeUser.logo()),
-                    options: OverlayInfo.getOptions())
+                TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })
             }
         }
@@ -146,10 +144,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let image: UIImage?
         if self.socialButton.menu.opened {
             self.socialButton.menu.close()
-            image = UIImage(named: "ic_add_white")?.imageWithRenderingMode(.AlwaysTemplate)
+            image = R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate)
         } else {
             self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
-            image = UIImage(named: "ic_close_white")?.imageWithRenderingMode(.AlwaysTemplate)
+            image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
         }
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         first?.animate(MaterialAnimation.rotate(rotation: 1))
@@ -170,9 +168,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .observeOn(UIScheduler())
                     .on(next: { _ in
                         self.handleMenu()
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
-                            image: UIImage(named: OverlayInfo.LoginSuccess.logo()),
-                            options: OverlayInfo.getOptions())
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().getUserInfoFromFacebookSignal() }
@@ -272,21 +268,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         menuButton.pulseColor = MaterialColor.white
         menuButton.pulseScale = false
         menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), forControlEvents: .TouchUpInside)
-        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Normal)
-        menuButton.setImage(UIImage(named: "ic_menu_white"), forState: .Highlighted)
+        menuButton.setImage(R.image.ic_menu_white()!, forState: .Normal)
+        menuButton.setImage(R.image.ic_menu_white()!, forState: .Highlighted)
         
         let rightButton: FlatButton = FlatButton()
         rightButton.pulseColor = MaterialColor.white
         rightButton.pulseScale = false
         rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), forControlEvents: .TouchUpInside)
-        rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Normal)
-        rightButton.setImage(UIImage(named: "ic_search_white"), forState: .Highlighted)
+        rightButton.setImage(R.image.ic_search_white()!, forState: .Normal)
+        rightButton.setImage(R.image.ic_search_white()!, forState: .Highlighted)
         
         let navBar: Toolbar = Toolbar()
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
         navBar.backgroundColor = Constants.kMainShade
-        let celscoreImageView = UIImageView(image: UIImage(named: "score_white"))
+        let celscoreImageView = UIImageView(image: R.image.score_white()!)
         celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY - 2, width: 25, height: 25)
         navBar.addSubview(celscoreImageView)
         return navBar

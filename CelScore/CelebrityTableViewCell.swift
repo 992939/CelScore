@@ -140,13 +140,13 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
                         let firstTime = first as! Bool
                         if firstTime {
                             TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(),
-                                image: UIImage(named: OverlayInfo.FirstFollow.logo()),
+                                image: OverlayInfo.FirstFollow.logo(),
                                 options: OverlayInfo.getOptions())}})
                             TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstFollow).start() })
                     }
                     else if count > 9 {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.MaxFollow.message(),
-                            image: UIImage(named: OverlayInfo.MaxFollow.logo()),
+                            image: OverlayInfo.MaxFollow.logo(),
                             options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in control.setOn(false, animated: true) })
                     } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }

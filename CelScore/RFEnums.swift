@@ -51,7 +51,7 @@ public enum OverlayInfo: Int {
         case .FirstConsensus: return "\"And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.\"\n- The Little Prince\n\nThe consensus will show up when you cast a vote."
         case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n-Ubuntu\n\nWelcome to the road less traveled of public service. You can pave the way for others to join the consensus by long pressing on a star quality."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIn the courthouse stars are symbols, the consensus a journey to explore star qualities and reveal what makes them shine bright."
-        case .FirstNegative: return "\"As above so below, as within so without.\n- Principle of Correspondance\n\nWelcome to the other side."
+        case .FirstNegative: return "\"As above so below, as within so without.\n- Hermes Trismegistus\n\nWelcome to the other side."
         case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
         case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
@@ -62,24 +62,24 @@ public enum OverlayInfo: Int {
         }
     }
     
-    public func logo() -> String {
+    public func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return "court_green"
-        case .MenuAccess: return "passport_green"
-        case .LoginSuccess: return "court_green"
-        case .MaxFollow: return "telescope_green"
-        case .FirstFollow: return "telescope_green"
-        case .FirstConsensus: return "worker_green"
-        case .FirstPublic: return "road_green"
-        case .FirstStars: return "spaceship_green"
-        case .FirstNegative: return "astronaut_purple"
-        case .FirstInterest: return "telescope_green"
-        case .FirstCompleted: return "astronaut_green"
-        case .FirstVoteDisable: return "vote_green"
-        case .FirstSocialDisable: return "consensus_green"
-        case .LogoutUser: return "court_green"
-        case .LoginError: return "error_green"
-        case .NetworkError: return "error_green"
+        case .WelcomeUser: return R.image.court_green()!
+        case .MenuAccess: return R.image.passport_green()!
+        case .LoginSuccess: return R.image.court_green()!
+        case .MaxFollow: return R.image.telescope_green()!
+        case .FirstFollow: return R.image.telescope_green()!
+        case .FirstConsensus: return R.image.worker_green()!
+        case .FirstPublic: return R.image.road_green()!
+        case .FirstStars: return R.image.spaceship_green()!
+        case .FirstNegative: return R.image.astronaut_green()!
+        case .FirstInterest: return R.image.telescope_green()!
+        case .FirstCompleted: return R.image.astronaut_green()!
+        case .FirstVoteDisable: return R.image.vote_green()!
+        case .FirstSocialDisable: return R.image.consensus_green()!
+        case .LogoutUser: return R.image.court_green()!
+        case .LoginError: return R.image.error_green()!
+        case .NetworkError: return R.image.error_green()!
         }
     }
     
