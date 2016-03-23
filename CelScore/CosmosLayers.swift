@@ -47,7 +47,6 @@ final class CosmosLayers {
         
         // make filled layer width smaller according to the fill level.
         filledStar.bounds.size.width *= CGFloat(starFillLevel)
-        
         return parentLayer
     }
     
@@ -76,22 +75,5 @@ final class CosmosLayers {
             lineWidth: settings.borderWidthEmpty,
             fillColor: fillColor,
             strokeColor: strokeColor)
-    }
-}
-
-
-//MARK: CosmosLayerHelper
-final class CosmosLayerHelper {
-    class func createTextLayer(text: String, font: UIFont, color: UIColor) -> CATextLayer {
-        let size = NSString(string: text).sizeWithAttributes([NSFontAttributeName: font])
-        let layer = CATextLayer()
-        layer.bounds = CGRect(origin: CGPoint(), size: size)
-        layer.anchorPoint = CGPoint()
-        layer.string = text
-        layer.font = CGFontCreateWithFontName(font.fontName)
-        layer.fontSize = font.pointSize
-        layer.foregroundColor = color.CGColor
-        layer.contentsScale = UIScreen.mainScreen().scale
-        return layer
     }
 }
