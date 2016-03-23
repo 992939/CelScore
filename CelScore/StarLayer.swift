@@ -78,7 +78,6 @@ struct StarLayer {
         let path = UIBezierPath()
         path.moveToPoint(points[0])
         let remainingPoints = Array(points[1..<points.count])
-        
         for point in remainingPoints { path.addLineToPoint(point) }
         
         path.closePath()

@@ -342,5 +342,4 @@ public enum Zodiac : Int {
 public enum StarFillMode: Int {
     case Full = 0
     case Half = 1
-    case Precise = 2
 }

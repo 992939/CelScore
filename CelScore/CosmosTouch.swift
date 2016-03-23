@@ -22,9 +22,7 @@ struct CosmosTouch {
     let totalStars = Double(settings.totalStars)
     let actualRating = totalStars * Double(position)
     var correctedRating = actualRating
-    
-    if settings.fillMode != .Precise { correctedRating += 0.25 }
-    
+    correctedRating += 0.25
     correctedRating = CosmosRating.displayedRatingFromPreciseRating(correctedRating, fillMode: settings.fillMode, totalStars: settings.totalStars)
     correctedRating = max(settings.minTouchRating, correctedRating) // Can't be less than min rating
     return correctedRating
@@ -36,10 +34,8 @@ struct CosmosTouch {
 struct CosmosTouchTarget {
   static func optimize(bounds: CGRect) -> CGRect {
     let recommendedHitSize: CGFloat = 44
-    
     var hitWidthIncrease:CGFloat = recommendedHitSize - bounds.width
     var hitHeightIncrease:CGFloat = recommendedHitSize - bounds.height
-    
     if hitWidthIncrease < 0 { hitWidthIncrease = 0 }
     if hitHeightIncrease < 0 { hitHeightIncrease = 0 }
     

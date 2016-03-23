@@ -57,9 +57,7 @@ final class CosmosView: UIView {
     //MARK: Touch recognition
     func onDidTouch(locationX: CGFloat, starsWidth: CGFloat) {
         let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth, settings: settings)
-        
         if settings.updateOnTouch { rating = calculatedTouchRating }
-        
         if calculatedTouchRating == previousRatingForDidTouchCallback { return }
         
         didTouchCosmos?(calculatedTouchRating)
