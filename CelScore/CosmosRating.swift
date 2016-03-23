@@ -17,24 +17,20 @@ struct CosmosRating {
      - parameter fillMode: Describe how stars should be filled: full, half or precise.
      - returns: Decimal value between 0 and 1 describing the star fill level. 1 is a fully filled star. 0 is an empty star. 0.5 is a half-star.
      */
-    static func starFillLevel(ratingRemainder ratingRemainder: Double, fillMode: StarFillMode) -> Double {
+    static func starFillLevel(ratingRemainder ratingRemainder: Double) -> Double {
         var result = ratingRemainder
         if result > 1 { result = 1 }
         if result < 0 { result = 0 }
-        return roundFillLevel(result, fillMode: fillMode)
+        return roundFillLevel(result)
     }
     
     /**
      Rounds a single star's fill level according to the fill mode. "Full" mode returns 0 or 1 by using the standard decimal rounding. "Half" mode returns 0, 0.5 or 1 by rounding the decimal to closest of 3 values.
      - parameter starFillLevel: Decimal number between 0 and 1 describing the star fill level.
-     - parameter fillMode: Fill mode that is used to round the fill level value.
      - returns: The rounded fill level.
      */
-    static func roundFillLevel(starFillLevel: Double, fillMode: StarFillMode) -> Double {
-        switch fillMode {
-        case .Full: return Double(round(starFillLevel))
-        case .Half: return Double(round(starFillLevel * 2) / 2)
-        }
+    static func roundFillLevel(starFillLevel: Double) -> Double {
+        return Double(round(starFillLevel))
     }
     
     /**
@@ -45,10 +41,10 @@ struct CosmosRating {
      - parameter totalStars: Total number of stars.
      - returns: Returns rating that is displayed to the user taking into account the star fill mode.
      */
-    static func displayedRatingFromPreciseRating(preciseRating: Double, fillMode: StarFillMode, totalStars: Int) -> Double {
+    static func displayedRatingFromPreciseRating(preciseRating: Double, totalStars: Int) -> Double {
         let starFloorNumber = floor(preciseRating)
         let singleStarRemainder = preciseRating - starFloorNumber
-        var displayedRating = starFloorNumber + starFillLevel(ratingRemainder: singleStarRemainder, fillMode: fillMode)
+        var displayedRating = starFloorNumber + starFillLevel(ratingRemainder: singleStarRemainder)
         
         displayedRating = min(Double(totalStars), displayedRating) // Can't go bigger than number of stars
         displayedRating = max(0, displayedRating) // Can't be less than zero

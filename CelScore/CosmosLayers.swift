@@ -16,9 +16,9 @@ final class CosmosLayers {
     class func createStarLayers(rating: Double, settings: CosmosSettings) -> [CALayer] {
         var ratingRemander = CosmosRating.numberOfFilledStars(rating, totalNumberOfStars: settings.totalStars)
         var starLayers = [CALayer]()
-        
+
         for index in (0..<settings.totalStars) {
-            let fillLevel = CosmosRating.starFillLevel(ratingRemainder: ratingRemander, fillMode: settings.fillMode)
+            let fillLevel = CosmosRating.starFillLevel(ratingRemainder: ratingRemander)
             let starLayer = createCompositeStarLayer(fillLevel, settings: settings, index: index)
             starLayers.append(starLayer)
             ratingRemander -= 1

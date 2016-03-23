@@ -16,7 +16,7 @@ struct CosmosTouch {
         let actualRating = totalStars * Double(position)
         var correctedRating = actualRating
         correctedRating += 0.25
-        correctedRating = CosmosRating.displayedRatingFromPreciseRating(correctedRating, fillMode: settings.fillMode, totalStars: settings.totalStars)
+        correctedRating = CosmosRating.displayedRatingFromPreciseRating(correctedRating, totalStars: settings.totalStars)
         correctedRating = max(settings.minTouchRating, correctedRating)
         return correctedRating
     }

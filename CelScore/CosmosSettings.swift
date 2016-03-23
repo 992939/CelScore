@@ -14,7 +14,6 @@ public struct CosmosSettings {
     public var borderWidthEmpty: Double = CosmosDefaultSettings.borderWidthEmpty
     public var colorEmpty = CosmosDefaultSettings.colorEmpty
     public var colorFilled = CosmosDefaultSettings.colorFilled
-    public var fillMode = CosmosDefaultSettings.fillMode
     public var userRatingMode = CosmosDefaultSettings.userRatingMode
     public var previousRating = CosmosDefaultSettings.previousRating
     public var starMargin: Double = CosmosDefaultSettings.starMargin
@@ -31,7 +30,6 @@ struct CosmosDefaultSettings {
     static let borderWidthEmpty: Double = 1 / Double(UIScreen.mainScreen().scale)
     static let colorEmpty = UIColor.clearColor()
     static let colorFilled = defaultColor
-    static let fillMode = StarFillMode.Full
     static let userRatingMode = false
     static let previousRating = 3
     static let rating: Double = 2.718281828

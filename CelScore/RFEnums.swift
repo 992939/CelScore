@@ -337,9 +337,3 @@ public enum Zodiac : Int {
         }
     }
 }
-
-//MARK: StarFillMode
-public enum StarFillMode: Int {
-    case Full = 0
-    case Half = 1
-}
