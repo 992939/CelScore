@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import Material
 import SMSegmentView
 import FBSDKLoginKit
+import AIRTimer
 
 
 public struct UserStruct {
@@ -224,9 +225,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             
             SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext({ first in let firstTime = first as! Bool
                 if firstTime {
-                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
-                        image: UIImage(named: OverlayInfo.FirstStars.logo()),
-                        options: OverlayInfo.getOptions())
+                    AIRTimer.after(2.0, handler: { _ in
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
+                            image: UIImage(named: OverlayInfo.FirstStars.logo()),
+                            options: OverlayInfo.getOptions()) })
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
                 }
             })
