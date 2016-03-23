@@ -15,7 +15,6 @@ final class CosmosLayers {
     //MARK: Methods
     class func createStarLayers(rating: Double, settings: CosmosSettings) -> [CALayer] {
         var ratingRemander = CosmosRating.numberOfFilledStars(rating, totalNumberOfStars: settings.totalStars)
-        
         var starLayers = [CALayer]()
         
         for index in (0..<settings.totalStars) {
@@ -63,7 +62,7 @@ final class CosmosLayers {
         var colorFilled = settings.colorFilled
         
         if (settings.userRatingMode) {
-            if (index + 1) > settings.previousRating { colorFilled = Constants.kLightGreenShade }
+            if index >= settings.previousRating { colorFilled = Constants.kLightGreenShade }
             else { colorFilled =  Constants.kWineShade }
         }
 
