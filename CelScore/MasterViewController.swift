@@ -166,6 +166,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+                    .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
                     .on(next: { _ in
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
@@ -180,7 +181,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .map({ _ in return self.socialButton.hidden = true })
-                    .retry(Constants.kNetworkRetry)
                     .start()
             })
         } else {
