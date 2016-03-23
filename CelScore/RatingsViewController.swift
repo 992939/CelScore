@@ -76,13 +76,7 @@ final class RatingsViewController: ASViewController {
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observeOn(UIScheduler())
-                            .on(failed: { _ in
-                                self.delegate!.socialSharing(message: "")
-                                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(),
-                                    image: UIImage(named: OverlayInfo.FirstVoteDisable.logo()),
-                                    options: OverlayInfo.getOptions())
-                                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start() })
-                            })
+                            .on(failed: { _ in self.requestLogin() })
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in
@@ -105,6 +99,18 @@ final class RatingsViewController: ASViewController {
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
+    }
+    
+    func requestLogin() {
+        self.delegate!.socialSharing(message: "")
+        SettingsViewModel().getSettingSignal(settingType: .FirstVoteDisable).startWithNext({ first in let firstTime = first as! Bool
+            if firstTime {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(),
+                    image: UIImage(named: OverlayInfo.FirstVoteDisable.logo()),
+                    options: OverlayInfo.getOptions())
+                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start() })
+            }
+        })
     }
     
     func longPress(gesture: UIGestureRecognizer) {
