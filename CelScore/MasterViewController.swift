@@ -169,10 +169,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
                     .on(next: { _ in
+                        self.handleMenu()
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(),
                             image: UIImage(named: OverlayInfo.LoginSuccess.logo()),
                             options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.handleMenu() }) })
+                        TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().getUserInfoFromFacebookSignal() }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -180,7 +181,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
                         return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
-                    .map({ _ in return self.socialButton.hidden = true })
                     .start()
             })
         } else {
