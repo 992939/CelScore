@@ -17,14 +17,15 @@ final class CosmosView: UIView {
     var viewContentSize = CGSize()
     var didTouchCosmos: ((Double)->())?
     var didFinishTouchingCosmos: ((Double)->())?
-    var widthOfStars: CGFloat {
+    
+    private var previousRatingForDidTouchCallback: Double = -123.192
+    private var widthOfStars: CGFloat {
         if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
             let starLayers = Array(sublayers[0..<settings.totalStars])
             return calculateSizeToFitLayers(starLayers).width
         }
         return 0
     }
-    private var previousRatingForDidTouchCallback: Double = -123.192
     
     //MARK: Initializers
     required init?(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
