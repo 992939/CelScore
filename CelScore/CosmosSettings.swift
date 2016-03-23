@@ -17,16 +17,10 @@ public struct CosmosSettings {
     public var fillMode = CosmosDefaultSettings.fillMode
     public var userRatingMode = CosmosDefaultSettings.userRatingMode
     public var previousRating = CosmosDefaultSettings.previousRating
-    
     public var starMargin: Double = CosmosDefaultSettings.starMargin
     public var starPoints: [CGPoint] = CosmosDefaultSettings.starPoints
     public var starSize: Double = CosmosDefaultSettings.starSize
     public var totalStars = CosmosDefaultSettings.totalStars
-    
-    public var textColor = CosmosDefaultSettings.textColor
-    public var textFont = CosmosDefaultSettings.textFont
-    public var textMargin: Double = CosmosDefaultSettings.textMargin
-    
     public var minTouchRating: Double = CosmosDefaultSettings.minTouchRating
     public var updateOnTouch = CosmosDefaultSettings.updateOnTouch
 }
@@ -56,10 +50,6 @@ struct CosmosDefaultSettings {
     ]
     static var starSize: Double = 20
     static let totalStars = 5
-    static let textColor = UIColor.whiteColor()
-    static let textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-    static let textMargin: Double = 5
-    static var textSize: Double { get { return Double(textFont.pointSize) } }
     static let minTouchRating: Double = 1
     static let updateOnTouch = true
 }
