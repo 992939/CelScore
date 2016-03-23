@@ -35,4 +35,5 @@ target 'CelScoreWidget' do
     pod 'ReactiveCocoa', '4.0.1'
     pod 'RealmSwift', '~> 0.98.5'
     pod 'AIRTimer', '~> 1.0.2'
+    pod 'SwiftyJSON', '~> 2.3.2'
 end
