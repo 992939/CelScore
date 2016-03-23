@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 
 public class SettingsModel: Object, NSCopying {
@@ -32,23 +33,23 @@ public class SettingsModel: Object, NSCopying {
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer
-    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+    public convenience init(json: JSON) {
         self.init()
-        self.userName = dictionary["userName"] as! String
-        self.defaultListIndex = dictionary["defaultListIndex"] as! Int
-        self.loginTypeIndex = dictionary["loginTypeIndex"] as! Int
-        self.publicService = dictionary["publicService"] as! Bool
-        self.consensusBuilding = dictionary["consensusBuilding"] as! Bool
-        self.isFirstLaunch = dictionary["isFirstLaunch"] as! Bool
-        self.isFirstConsensus = dictionary["isFirstConsensus"] as! Bool
-        self.isFirstPublic = dictionary["isFirstPublic"] as! Bool
-        self.isFirstFollow = dictionary["isFirstFollow"] as! Bool
-        self.isFirstStars = dictionary["isFirstStars"] as! Bool
-        self.isFirstNegative = dictionary["isFirstNegative"] as! Bool
-        self.isFirstCompleted = dictionary["isFirstCompleted"] as! Bool
-        self.isFirstInterest = dictionary["isFirstInterest"] as! Bool
-        self.isFirstVoteDisabled = dictionary["isFirstVoteDisabled"] as! Bool
-        self.isFirstSocialDisabled = dictionary["isFirstSocialDisabled"] as! Bool
+        self.userName = json["userName"].string!
+        self.defaultListIndex = json["defaultListIndex"].int!
+        self.loginTypeIndex = json["loginTypeIndex"].int!
+        self.publicService = json["publicService"].bool!
+        self.consensusBuilding = json["consensusBuilding"].bool!
+        self.isFirstLaunch = json["isFirstLaunch"].bool!
+        self.isFirstConsensus = json["isFirstConsensus"].bool!
+        self.isFirstPublic = json["isFirstPublic"].bool!
+        self.isFirstFollow = json["isFirstFollow"].bool!
+        self.isFirstStars = json["isFirstStars"].bool!
+        self.isFirstNegative = json["isFirstNegative"].bool!
+        self.isFirstCompleted = json["isFirstCompleted"].bool!
+        self.isFirstInterest = json["isFirstInterest"].bool!
+        self.isFirstVoteDisabled = json["isFirstVoteDisabled"].bool!
+        self.isFirstSocialDisabled = json["isFirstSocialDisabled"].bool!
         self.isSynced = true
     }
     

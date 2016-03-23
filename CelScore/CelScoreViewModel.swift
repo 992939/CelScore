@@ -44,9 +44,9 @@ struct CelScoreViewModel {
                 json["Items"].arrayValue.forEach({ data in
                     let awsObject : Object
                     switch dataType {
-                    case .Celebrity: awsObject = CelebrityModel(dictionary: data.dictionaryObject!)
-                    case .List: awsObject = ListsModel(dictionary: data.dictionaryObject!)
-                    case .Ratings: awsObject = RatingsModel(dictionary: data.dictionaryObject!)
+                    case .Celebrity: awsObject = CelebrityModel(json: data)
+                    case .List: awsObject = ListsModel(json: data)
+                    case .Ratings: awsObject = RatingsModel(json: data)
                     }
                     let realm = try! Realm()
                     realm.beginWrite()

@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 
 public class RatingsModel: Object, CollectionType, NSCopying {
@@ -48,23 +49,23 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     //MARK: Initializers
     override public class func primaryKey() -> String { return "id" }
     public convenience init(id: String) { self.init(); self.id = id }
-    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+    public convenience init(json: JSON) {
         self.init()
         
-        self.id = dictionary["ratingID"] as! String
-        self.updatedAt = dictionary["updatedAt"] as! String
-        self.totalVotes = dictionary["totalVote"] as! Int
-        self.variance1 = dictionary["variance1"] as! Double
-        self.variance2 = dictionary["variance2"] as! Double
-        self.variance3 = dictionary["variance3"] as! Double
-        self.variance4 = dictionary["variance4"] as! Double
-        self.variance5 = dictionary["variance5"] as! Double
-        self.variance6 = dictionary["variance6"] as! Double
-        self.variance7 = dictionary["variance7"] as! Double
-        self.variance8 = dictionary["variance8"] as! Double
-        self.variance9 = dictionary["variance9"] as! Double
-        self.variance10 = dictionary["variance10"] as! Double
-        for ratings in self.generate() { self[ratings] = dictionary[ratings] as! Double }
+        self.id = json["ratingID"].string!
+        self.updatedAt = json["updatedAt"].string!
+        self.totalVotes = json["totalVote"].int!
+        self.variance1 = json["variance1"].double!
+        self.variance2 = json["variance2"].double!
+        self.variance3 = json["variance3"].double!
+        self.variance4 = json["variance4"].double!
+        self.variance5 = json["variance5"].double!
+        self.variance6 = json["variance6"].double!
+        self.variance7 = json["variance7"].double!
+        self.variance8 = json["variance8"].double!
+        self.variance9 = json["variance9"].double!
+        self.variance10 = json["variance10"].double!
+        for ratings in self.generate() { self[ratings] = json[ratings].double! }
         self.isSynced = true
     }
     

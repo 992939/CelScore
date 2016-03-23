@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 
 public final class CelebId: Object, NSCopying {
@@ -31,16 +32,16 @@ public final class ListsModel: Object, NSCopying {
     var celebList = List<CelebId>()
     
     //MARK: Initializer
-    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+    public convenience init(json: JSON) {
         self.init()
         
-        self.id = dictionary["listID"] as! String
-        self.name = dictionary["name"] as! String
-        let items = dictionary["list"] as! NSArray
+        self.id = json["listID"].string!
+        self.name = json["name"].string!
+        let items = json["list"].array!
         
         for (index, _) in items.enumerate() {
             let celebId = CelebId()
-            celebId.id = items[index] as! String
+            celebId.id = items[index].string!
             self.celebList.append(celebId)
         }
         self.count = self.celebList.count

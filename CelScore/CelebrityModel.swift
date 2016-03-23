@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 
 public struct CelebrityStruct {
@@ -50,27 +51,27 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var isFollowed: Bool = false
     
     //MARK: Initializer
-    public convenience init(dictionary: Dictionary<String, AnyObject>) {
+    public convenience init(json: JSON) {
         self.init()
         
-        self.id = dictionary["celebrityID"] as! String
-        self.firstName = dictionary["firstName"] as! String
-        self.lastName = dictionary["lastName"] as! String
-        self.middleName = dictionary["middleName"] as! String
-        self.nickName = dictionary["nickname"] as! String
-        self.height = dictionary["height"] as! String
-        self.birthdate = dictionary["birthdate"] as! String
-        self.netWorth = dictionary["netWorth"] as! String
-        self.picture2x = dictionary["picture2x"] as! String
-        self.picture3x = dictionary["picture3x"] as! String
-        self.from = dictionary["from"] as! String
-        self.backgroundPic = dictionary["backgroundPic"] as! String
-        self.backgroundColor = dictionary["backgroundColor"] as! String
-        self.rank = dictionary["rank"] as! String
-        self.status = dictionary["status"] as! String
-        self.twitter = dictionary["twitter"] as! String
-        self.prevScore = dictionary["prevScore"] as! Double
-        self.sex = dictionary["sex"] as! Bool
+        self.id = json["celebrityID"].string!
+        self.firstName = json["firstName"].string!
+        self.lastName = json["lastName"].string!
+        self.middleName = json["middleName"].string!
+        self.nickName = json["nickname"].string!
+        self.height = json["height"].string!
+        self.birthdate = json["birthdate"].string!
+        self.netWorth = json["netWorth"].string!
+        self.picture2x = json["picture2x"].string!
+        self.picture3x = json["picture3x"].string!
+        self.from = json["from"].string!
+        self.backgroundPic = json["backgroundPic"].string!
+        self.backgroundColor = json["backgroundColor"].string!
+        self.rank = json["rank"].string!
+        self.status = json["status"].string!
+        self.twitter = json["twitter"].string!
+        self.prevScore = json["prevScore"].double!
+        self.sex = json["sex"].bool!
         self.isSynced = true
     }
     
