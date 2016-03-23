@@ -67,12 +67,16 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = false
                     cosmosView.settings.userRatingMode = false
-                    SettingsViewModel().loggedInAsSignal().startWithNext({ _ in cosmosView.settings.updateOnTouch = true })
-                    RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-                        cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                        cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
-                        cosmosView.settings.updateOnTouch = hasRatings ? false : true
-                    })
+                    SettingsViewModel().loggedInAsSignal()
+                        .on(next: { _ in cosmosView.settings.updateOnTouch = true })
+                        .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
+                            return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
+                        .on(next: { hasRatings in
+                            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
+                            cosmosView.settings.updateOnTouch = hasRatings ? false : true })
+                        .start()
+                    
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observeOn(UIScheduler())
