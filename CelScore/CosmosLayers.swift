@@ -27,13 +27,14 @@ final class CosmosLayers {
         return starLayers
     }
     
-    class func createCompositeStarLayer(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
+    //MARK: Private Methods
+    private class func createCompositeStarLayer(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
         if starFillLevel >= 1 { return createStarLayer(true, settings: settings, index: index) }
         if starFillLevel == 0 { return createStarLayer(false, settings: settings, index: index) }
         return createPartialStar(starFillLevel, settings: settings, index: index)
     }
 
-    class func createPartialStar(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
+    private class func createPartialStar(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
         let filledStar = createStarLayer(true, settings: settings, index: index)
         let emptyStar = createStarLayer(false, settings: settings, index: index)
         
@@ -48,7 +49,7 @@ final class CosmosLayers {
         return parentLayer
     }
     
-    class func positionStarLayers(layers: [CALayer], starMargin: Double) {
+    private class func positionStarLayers(layers: [CALayer], starMargin: Double) {
         var positionX:CGFloat = 0
         for layer in layers {
             layer.position.x = positionX
@@ -56,7 +57,6 @@ final class CosmosLayers {
         }
     }
     
-    //MARK: Private Method
     private class func createStarLayer(isFilled: Bool, settings: CosmosSettings, index: Int) -> CALayer {
         var colorFilled = settings.colorFilled
         
