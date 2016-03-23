@@ -17,6 +17,19 @@ final class CosmosView: UIView {
     var settings = CosmosSettings() { didSet { update() } }
     var viewContentSize = CGSize()
     
+    var didTouchCosmos: ((Double)->())?
+    var didFinishTouchingCosmos: ((Double)->())?
+    
+    var widthOfStars: CGFloat {
+        if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
+            let starLayers = Array(sublayers[0..<settings.totalStars])
+            return CosmosSize.calculateSizeToFitLayers(starLayers).width
+        }
+        return 0
+    }
+    
+    private var previousRatingForDidTouchCallback: Double = -123.192
+    
     //MARK: Initializers
     convenience init() { self.init(frame: CGRect()) }
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder); improvePerformance() }
@@ -28,15 +41,6 @@ final class CosmosView: UIView {
     }
     
     //MARK: Methods
-    override func awakeFromNib() { super.awakeFromNib(); update() }
-    
-    private func improvePerformance() {
-        /// Cache the view into a bitmap instead of redrawing the stars each time
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.mainScreen().scale
-        opaque = true
-    }
-
     func update() {
         var layers = CosmosLayers.createStarLayers(rating, settings: settings)
         layer.sublayers = layers
@@ -44,20 +48,20 @@ final class CosmosView: UIView {
             let textLayer = createTextLayer(text, layers: layers)
             layers.append(textLayer)
         }
-        
         updateSize(layers)
     }
     
+    private func improvePerformance() {
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.mainScreen().scale
+        opaque = true
+    }
+    
     private func createTextLayer(text: String, layers: [CALayer]) -> CALayer {
-        let textLayer = CosmosLayerHelper.createTextLayer(text,
-            font: settings.textFont, color: settings.textColor)
-        
+        let textLayer = CosmosLayerHelper.createTextLayer(text, font: settings.textFont, color: settings.textColor)
         let starsSize = CosmosSize.calculateSizeToFitLayers(layers)
-        
         CosmosText.position(textLayer, starsSize: starsSize, textMargin: settings.textMargin)
-        
         layer.addSublayer(textLayer)
-        
         return textLayer
     }
     
@@ -66,17 +70,20 @@ final class CosmosView: UIView {
         invalidateIntrinsicContentSize()
     }
     
-    /// Returns the content size to fit all the star and text layers.
-    override func intrinsicContentSize() -> CGSize { return viewContentSize }
-    
     //MARK: Touch recognition
+    func onDidTouch(locationX: CGFloat, starsWidth: CGFloat) {
+        let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth, settings: settings)
+        
+        if settings.updateOnTouch { rating = calculatedTouchRating }
+        
+        if calculatedTouchRating == previousRatingForDidTouchCallback { return }
+        
+        didTouchCosmos?(calculatedTouchRating)
+        previousRatingForDidTouchCallback = calculatedTouchRating
+    }
     
-    /// Closure will be called when user touches the cosmos view. The touch rating argument is passed to the closure.
-    var didTouchCosmos: ((Double)->())?
-    
-    /// Closure will be called when the user lifts finger from the cosmos view. The touch rating argument is passed to the closure.
-    var didFinishTouchingCosmos: ((Double)->())?
-    
+    override func awakeFromNib() { super.awakeFromNib(); update() }
+    override func intrinsicContentSize() -> CGSize { return viewContentSize }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
@@ -101,37 +108,6 @@ final class CosmosView: UIView {
         didFinishTouchingCosmos?(rating)
     }
     
-    func onDidTouch(locationX: CGFloat, starsWidth: CGFloat) {
-        let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth,
-            settings: settings)
-        
-        if settings.updateOnTouch {
-            rating = calculatedTouchRating
-        }
-        
-        if calculatedTouchRating == previousRatingForDidTouchCallback {
-            // Do not call didTouchCosmos if rating has not changed
-            return
-        }
-        
-        didTouchCosmos?(calculatedTouchRating)
-        previousRatingForDidTouchCallback = calculatedTouchRating
-    }
-    
-    private var previousRatingForDidTouchCallback: Double = -123.192
-    
-    
-    /// Width of the stars (excluding the text). Used for calculating touch location.
-    var widthOfStars: CGFloat {
-        if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
-            let starLayers = Array(sublayers[0..<settings.totalStars])
-            return CosmosSize.calculateSizeToFitLayers(starLayers).width
-        }
-        
-        return 0
-    }
-    
-    /// Increase the hitsize of the view if it's less than 44px for easier touching.
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
         let oprimizedBounds = CosmosTouchTarget.optimize(bounds)
         return oprimizedBounds.contains(point)

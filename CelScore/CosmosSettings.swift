@@ -55,14 +55,11 @@ struct CosmosDefaultSettings {
         CGPoint(x: 38.5,  y: 35.0)
     ]
     static var starSize: Double = 20
-    
     static let totalStars = 5
-    
     static let textColor = UIColor.whiteColor()
     static let textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
     static let textMargin: Double = 5
     static var textSize: Double { get { return Double(textFont.pointSize) } }
-    
     static let minTouchRating: Double = 1
     static let updateOnTouch = true
 }

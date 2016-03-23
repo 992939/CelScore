@@ -10,13 +10,12 @@ import UIKit
 
 
 struct CosmosTouch {
+    
   /**
-  
   Calculates the rating based on the touch location.
   - parameter locationX: The horizontal location of the touch relative to the width of the stars.
   - parameter starsWidth: The width of the stars excluding the text.
   - returns: The rating representing the touch location.
-  
   */
   static func touchRating(locationX: CGFloat, starsWidth: CGFloat, settings: CosmosSettings) -> Double {
     let position = locationX / starsWidth
