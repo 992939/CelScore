@@ -73,7 +73,6 @@ final class CosmosView: UIView {
         previousRatingForDidTouchCallback = calculatedTouchRating
     }
     
-    override func awakeFromNib() { super.awakeFromNib(); update() }
     override func intrinsicContentSize() -> CGSize { return viewContentSize }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -98,7 +97,7 @@ final class CosmosView: UIView {
     }
     
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        let oprimizedBounds = CosmosTouchTarget.optimize(bounds)
+        let oprimizedBounds = CosmosTouch.optimize(bounds)
         return oprimizedBounds.contains(point)
     }
 }
