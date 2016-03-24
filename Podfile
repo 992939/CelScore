@@ -24,8 +24,9 @@ target 'CelScore' do
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
     pod 'Material', '~> 1.37.3'
-    pod 'OpinionzAlertView'
-    pod 'R.swift'
+    pod 'OpinionzAlertView', '~> 0.3.1'
+    pod 'R.swift', '~> 2.0.0'
+    pod 'SVProgressHUD', '~> 2.0'
 end
 
 target 'CelScoreTests' do

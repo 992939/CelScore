@@ -34,7 +34,7 @@ public enum OverlayInfo: Int {
     case FirstStars
     case FirstNegative
     case FirstInterest
-    case FirstCompleted //TODO
+    case FirstCompleted
     case FirstVoteDisable
     case LogoutUser
     case LoginError //TODO

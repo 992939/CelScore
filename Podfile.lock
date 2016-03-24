@@ -55,6 +55,7 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - SMSegmentView (1.1)
+  - SVProgressHUD (2.0)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
   - TwitterCore (1.15.3):
@@ -77,12 +78,13 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10)
   - HMSegmentedControl (~> 1.5)
   - Material (~> 1.37.3)
-  - OpinionzAlertView
-  - R.swift
+  - OpinionzAlertView (~> 0.3.1)
+  - R.swift (~> 2.0.0)
   - ReactiveCocoa (= 4.0.1)
   - RealmSwift (~> 0.98.5)
   - SDWebImage (~> 3.7)
   - SMSegmentView (~> 1.1)
+  - SVProgressHUD (~> 2.0)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
   - TwitterCore (~> 1.15.3)
@@ -114,6 +116,7 @@ SPEC CHECKSUMS:
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
+  SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
