@@ -140,7 +140,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoutAlert.show()
     }
     
-    func refreshAction() {
+    func refreshAction(button: MaterialButton) {
+        button.enabled = false
         self.fact1Bar.setProgress(0, animated: true)
         self.fact2Bar.setProgress(0, animated: true)
         self.fact3Bar.setProgress(0, animated: true)
@@ -148,6 +149,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in self.fact1Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in self.fact2Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.fact3Bar.setProgress(value, animated: true) })
+            button.enabled = true
         }
     }
     

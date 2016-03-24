@@ -222,7 +222,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-            
             SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext({ first in let firstTime = first as! Bool
                 if firstTime {
                     AIRTimer.after(1.3, handler: { _ in
