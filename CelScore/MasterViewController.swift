@@ -94,7 +94,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
-            .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -102,6 +101,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .flatMapError { _ in SignalProducer.empty }
+            .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
@@ -110,15 +110,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
-                self.setupUser() })
+            })
+            .map({ _ in self.setupUser() })
             .start()
     }
     
     func setupUser() {
         SettingsViewModel().getSettingSignal(settingType: .FirstLaunch)
             .observeOn(UIScheduler())
-            .startWithNext { first in
-            let firstTime = first as! Bool
+            .startWithNext { first in let firstTime = first as! Bool
             if firstTime {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })

@@ -32,7 +32,7 @@ public enum OverlayInfo: Int {
     case FirstConsensus
     case FirstPublic
     case FirstStars
-    case FirstNegative
+    case FirstNegative //TODO
     case FirstInterest
     case FirstCompleted
     case FirstVoteDisable
