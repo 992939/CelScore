@@ -47,12 +47,20 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         
-        SettingsViewModel().isPositiveVoteSignal().startWithNext({ value in
-            self.userST = self.userST.updatePositive(value)
-            if value == false {
+        SettingsViewModel().isPositiveVoteSignal()
+            .on(next: { value in self.userST = self.userST.updatePositive(value) })
+            .filter({ (value: Bool) -> Bool in value == false })
+            .promoteErrors(NSError)
+            .flatMap(.Latest) { (value: Bool) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .FirstNegative) }
+            .on(next: { first in let firstTime = first as! Bool
+                if firstTime {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNegative.message(), image: OverlayInfo.FirstNegative.logo(), options: OverlayInfo.getOptions())
-            }
-        })
+                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstNegative).start() })
+                }
+            })
+            .start()
+        
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
