@@ -13,7 +13,7 @@ import FBSDKLoginKit
 import AIRTimer
 
 
-public struct UserStruct {
+struct UserStruct {
     let socialMessage: String
     let isPositive: Bool
     
