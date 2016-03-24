@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-public class RatingsModel: Object, CollectionType, NSCopying {
+class RatingsModel: Object, CollectionType, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -39,17 +39,17 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = true
     
-    public var startIndex: Int { get { return 0 }}
-    public var endIndex: Int { get { return 10 }}
+    var startIndex: Int { get { return 0 }}
+    var endIndex: Int { get { return 10 }}
     
-    public typealias Index = Int
-    public typealias KeyIndex = (key: String, value: Int)
-    public typealias Generator = AnyGenerator<String>
+    typealias Index = Int
+    typealias KeyIndex = (key: String, value: Int)
+    typealias Generator = AnyGenerator<String>
     
     //MARK: Initializers
-    override public class func primaryKey() -> String { return "id" }
-    public convenience init(id: String) { self.init(); self.id = id }
-    public convenience init(json: JSON) {
+    override class func primaryKey() -> String { return "id" }
+    convenience init(id: String) { self.init(); self.id = id }
+    convenience init(json: JSON) {
         self.init()
         
         self.id = json["ratingID"].string!
@@ -70,18 +70,18 @@ public class RatingsModel: Object, CollectionType, NSCopying {
     }
     
     //MARK: Methods
-    public func getCelScore() -> Double {
+    func getCelScore() -> Double {
         let score: Double = self.map{ self[$0] as! Double }.reduce(0, combine: { $0 + $1 })
         return (score/10).roundToPlaces(2)
     }
     
-    public func getAvgVariance() -> Double {
+    func getAvgVariance() -> Double {
         let avgVariance: Double = (self.variance1 + self.variance2 + self.variance3 + self.variance4 + self.variance5
         + self.variance6 + self.variance7 + self.variance8 + self.variance9 + self.variance10)/10
         return avgVariance.roundToPlaces(2)
     }
     
-    public subscript(i: Int) -> String {
+    subscript(i: Int) -> String {
         switch i {
         case 0: return ("rating1")
         case 1: return ("rating2")
@@ -97,7 +97,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         }
     }
     
-    public func generate() -> Generator {
+    func generate() -> Generator {
         var i = 0
         return AnyGenerator {
             switch i++ {
@@ -116,7 +116,7 @@ public class RatingsModel: Object, CollectionType, NSCopying {
         }
     }
     
-    public func copyWithZone(zone: NSZone) -> AnyObject {
+    func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = RatingsModel(id: self.id)
         for ratings in self.generate() { copy[ratings] = self[ratings] }
         copy.updatedAt = self.updatedAt

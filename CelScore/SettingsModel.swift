@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-public class SettingsModel: Object, NSCopying {
+class SettingsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = "1"
@@ -33,7 +33,7 @@ public class SettingsModel: Object, NSCopying {
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer
-    public convenience init(json: JSON) {
+    convenience init(json: JSON) {
         self.init()
         self.userName = json["userName"].string!
         self.defaultListIndex = json["defaultListIndex"].int!
@@ -54,9 +54,9 @@ public class SettingsModel: Object, NSCopying {
     }
     
     //MARK: Methods
-    override public class func primaryKey() -> String { return "id" }
+    override class func primaryKey() -> String { return "id" }
     
-    public func copyWithZone(zone: NSZone) -> AnyObject {
+    func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = SettingsModel()
         copy.id = self.id
         copy.userName = self.userName

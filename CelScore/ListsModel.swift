@@ -11,17 +11,17 @@ import RealmSwift
 import SwiftyJSON
 
 
-public final class CelebId: Object, NSCopying {
+final class CelebId: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
     
     //MARK: Methods
-    public func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
+    func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
 }
 
 
-public final class ListsModel: Object, NSCopying {
+final class ListsModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -32,7 +32,7 @@ public final class ListsModel: Object, NSCopying {
     var celebList = List<CelebId>()
     
     //MARK: Initializer
-    public convenience init(json: JSON) {
+    convenience init(json: JSON) {
         self.init()
         
         self.id = json["listID"].string!
@@ -49,9 +49,9 @@ public final class ListsModel: Object, NSCopying {
     }
     
     //MARK: Methods
-    override public class func primaryKey() -> String { return "id" }
+    override class func primaryKey() -> String { return "id" }
     
-    public func copyWithZone(zone: NSZone) -> AnyObject {
+    func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = ListsModel()
         copy.id = self.id
         copy.name = self.name

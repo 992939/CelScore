@@ -14,9 +14,9 @@ import MobileCoreServices
 extension CelebrityStruct {
     
     //MARK: Properties
-    public static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
-    public var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id, "imageURL": imageURL, "nickname": nickname, "height": height, "netWorth": netWorth, "prevScore": prevScore, "isFollowed": isFollowed] }
-    public var userActivity: NSUserActivity {
+    static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
+    var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id, "imageURL": imageURL, "nickname": nickname, "height": height, "netWorth": netWorth, "prevScore": prevScore, "isFollowed": isFollowed] }
+    var userActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
@@ -26,7 +26,7 @@ extension CelebrityStruct {
         activity.eligibleForPublicIndexing = true
         return activity
     }
-    public var attributeSet: CSSearchableItemAttributeSet {
+    var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContact as String)
         attributeSet.title = nickname
         attributeSet.contentDescription = "celscore: \(prevScore)"

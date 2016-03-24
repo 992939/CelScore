@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-public struct CelebrityStruct {
+struct CelebrityStruct {
     let id: String
     let imageURL: String
     let nickname: String
@@ -23,10 +23,10 @@ public struct CelebrityStruct {
 
 extension CelebrityStruct: Equatable {}
 
-public func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
+func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
 
 
-public final class CelebrityModel: Object, NSCopying {
+final class CelebrityModel: Object, NSCopying {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -51,7 +51,7 @@ public final class CelebrityModel: Object, NSCopying {
     dynamic var isFollowed: Bool = false
     
     //MARK: Initializer
-    public convenience init(json: JSON) {
+    convenience init(json: JSON) {
         self.init()
         
         self.id = json["celebrityID"].string!
@@ -76,9 +76,9 @@ public final class CelebrityModel: Object, NSCopying {
     }
     
     //MARK: Methods
-    override public class func primaryKey() -> String { return "id" }
+    override class func primaryKey() -> String { return "id" }
     
-    public func copyWithZone(zone: NSZone) -> AnyObject {
+    func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = CelebrityModel()
         copy.id = self.id
         copy.birthdate = self.birthdate
