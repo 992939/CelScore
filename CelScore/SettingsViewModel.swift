@@ -33,7 +33,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 5 else { observer.sendNext(0.0); return }
+            guard ratings.count >= 5 else { observer.sendNext(0.0); return }
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return ratingsModel.getCelScore() < 3 ? false : true
             })
@@ -41,6 +41,21 @@ struct SettingsViewModel {
             observer.sendCompleted()
         }
     }
+    
+    func isPositiveVoteSignal() -> SignalProducer<Bool, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let ratings = realm.objects(UserRatingsModel)
+            guard ratings.count >= 5 else { observer.sendNext(true); return }
+            let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
+                return ratingsModel.getCelScore() < 3 ? false : true
+            })
+            let average = Double(positiveRatings.count)/Double(ratings.count)
+            observer.sendNext(average < 0.5 ? false : true)
+            observer.sendCompleted()
+        }
+    }
+
     
     func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, SettingsError> {
         return SignalProducer { observer, disposable in

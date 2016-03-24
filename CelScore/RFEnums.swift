@@ -32,14 +32,13 @@ public enum OverlayInfo: Int {
     case FirstConsensus
     case FirstPublic
     case FirstStars
-    case FirstNegative //TODO
+    case FirstNegative
     case FirstInterest
-    case FirstCompleted
+    case FirstCompleted //TODO
     case FirstVoteDisable
-    case FirstSocialDisable
     case LogoutUser
-    case LoginError
-    case NetworkError
+    case LoginError //TODO
+    case NetworkError //TODO
     
     public func message() -> String {
         switch self {
@@ -55,7 +54,6 @@ public enum OverlayInfo: Int {
         case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
         case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
-        case .FirstSocialDisable: return "A man without a vote is a like a ship at sea carrying a cargo that will never reach its destination."
         case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus.\n\nYou’re welcome back anytime."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
         case .NetworkError: return "blah blah blah blah blah blah blah blah"
@@ -72,11 +70,10 @@ public enum OverlayInfo: Int {
         case .FirstConsensus: return R.image.worker_green()!
         case .FirstPublic: return R.image.road_green()!
         case .FirstStars: return R.image.spaceship_green()!
-        case .FirstNegative: return R.image.astronaut_green()!
+        case .FirstNegative: return R.image.vote_purple()!
         case .FirstInterest: return R.image.telescope_green()!
         case .FirstCompleted: return R.image.astronaut_green()!
         case .FirstVoteDisable: return R.image.vote_green()!
-        case .FirstSocialDisable: return R.image.consensus_green()!
         case .LogoutUser: return R.image.court_green()!
         case .LoginError: return R.image.error_green()!
         case .NetworkError: return R.image.error_green()!

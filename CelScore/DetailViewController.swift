@@ -32,7 +32,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     private let socialButton: MenuView
     private let profilePicNode: ASNetworkImageNode
     private let celebST: CelebrityStruct
-    private var userST = UserStruct(socialMessage: "", isPositive: false)
+    private var userST = UserStruct(socialMessage: "", isPositive: true)
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -47,7 +47,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(node: ASDisplayNode())
         
-        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.userST = self.userST.updatePositive(value < 0.5 ? false : true) })
+        SettingsViewModel().isPositiveVoteSignal().startWithNext({ value in
+            self.userST = self.userST.updatePositive(value)
+            if value == false {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNegative.message(), image: OverlayInfo.FirstNegative.logo(), options: OverlayInfo.getOptions())
+            }
+        })
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
