@@ -72,7 +72,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let infoLabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kDetailWidth, height: 30))
-        consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:))))
+        SettingsViewModel().getSettingSignal(settingType: .PublicService)
+            .observeOn(UIScheduler())
+            .startWithNext({ status in
+            if (status as! Bool) == true {
+                consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
+        })
         consensusView.tag = tag
         consensusView.depth = .Depth1
         consensusView.backgroundColor = Constants.kMainShade

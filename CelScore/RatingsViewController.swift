@@ -41,7 +41,12 @@ final class RatingsViewController: ASViewController {
                     qualityView.backgroundColor = Constants.kMainShade
                     qualityView.pulseScale = false
                     qualityView.pulseColor = MaterialColor.clear
-                    qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:))))
+                    SettingsViewModel().getSettingSignal(settingType: .PublicService)
+                        .observeOn(UIScheduler())
+                        .startWithNext({ status in
+                        if (status as! Bool) == true {
+                            qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
+                    })
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality

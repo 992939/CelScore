@@ -225,7 +225,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             
             SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext({ first in let firstTime = first as! Bool
                 if firstTime {
-                    AIRTimer.after(2.0, handler: { _ in
+                    AIRTimer.after(1.3, handler: { _ in
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
                             image: OverlayInfo.FirstStars.logo(),
                             options: OverlayInfo.getOptions()) })
