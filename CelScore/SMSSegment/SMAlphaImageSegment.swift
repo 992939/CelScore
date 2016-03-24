@@ -10,35 +10,23 @@ import Foundation
 import UIKit
 
 
-public class SMAlphaImageSegment: SMBasicSegment {
+class SMAlphaImageSegment: SMBasicSegment {
     
     // UI Elements
-    override public var frame: CGRect {
-        didSet {
-            self.resetContentFrame()
-        }
-    }
-    
-    public var margin: CGFloat = 5.0 {
-        didSet {
-            self.resetContentFrame()
-        }
-    }
-    
+    override var frame: CGRect { didSet { self.resetContentFrame() } }
+    var margin: CGFloat = 5.0 { didSet { self.resetContentFrame() } }
     var vertical = false
-    
-    public var animationDuration: NSTimeInterval = 0.5
-    public var selectedAlpha: CGFloat = 1.0
-    public var unselectedAlpha: CGFloat = 0.3
-    public var pressedAlpha: CGFloat = 0.65
-    
+    var animationDuration: NSTimeInterval = 0.5
+    var selectedAlpha: CGFloat = 1.0
+    var unselectedAlpha: CGFloat = 0.3
+    var pressedAlpha: CGFloat = 0.65
     
     internal(set) var imageView: UIImageView = UIImageView()
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(margin: CGFloat, selectedAlpha: CGFloat, unselectedAlpha: CGFloat, pressedAlpha: CGFloat, image: UIImage?) {
+    init(margin: CGFloat, selectedAlpha: CGFloat, unselectedAlpha: CGFloat, pressedAlpha: CGFloat, image: UIImage?) {
         
         self.margin = margin
         self.selectedAlpha = selectedAlpha
@@ -51,13 +39,12 @@ public class SMAlphaImageSegment: SMBasicSegment {
         self.setupUIElements()
     }
     
-    override public func orientationChangedTo(mode: SegmentOrganiseMode) {
+    override func orientationChangedTo(mode: SegmentOrganiseMode) {
        self.vertical = mode == .SegmentOrganiseVertical
         //resetContentFrame(vertical)
     }
     
     func setupUIElements() {
-        
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.addSubview(self.imageView)
     }
@@ -75,12 +62,8 @@ public class SMAlphaImageSegment: SMBasicSegment {
     // MARK: Selections
     override func setSelected(selected: Bool, inView view: SMBasicSegmentView) {
         super.setSelected(selected, inView: view)
-        if selected {
-            self.startAnimationToAlpha(self.selectedAlpha)
-        }
-        else {
-            self.startAnimationToAlpha(self.unselectedAlpha)
-        }
+        if selected { self.startAnimationToAlpha(self.selectedAlpha) }
+        else { self.startAnimationToAlpha(self.unselectedAlpha) }
     }
     
     func startAnimationToAlpha(alpha: CGFloat){
@@ -90,7 +73,7 @@ public class SMAlphaImageSegment: SMBasicSegment {
     }
     
     // MARK: Handle touch
-    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
         if self.isSelected == false {

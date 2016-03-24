@@ -7,30 +7,31 @@
 
 import UIKit
 
-public class SMSegment: SMBasicSegment {
+
+class SMSegment: SMBasicSegment {
     
     // UI Elements
-    override public var frame: CGRect {
+    override var frame: CGRect {
         didSet {
             self.resetContentFrame()
         }
     }
     
-    public var verticalMargin: CGFloat = 5.0 {
+    var verticalMargin: CGFloat = 5.0 {
         didSet {
             self.resetContentFrame()
         }
     }
         
     // Segment Colour
-    public var onSelectionColour: UIColor = UIColor.darkGrayColor() {
+    var onSelectionColour: UIColor = UIColor.darkGrayColor() {
         didSet {
             if self.isSelected == true {
                 self.backgroundColor = self.onSelectionColour
             }
         }
     }
-    public var offSelectionColour: UIColor = UIColor.whiteColor() {
+    var offSelectionColour: UIColor = UIColor.whiteColor() {
         didSet {
             if self.isSelected == false {
                 self.backgroundColor = self.offSelectionColour
@@ -49,7 +50,7 @@ public class SMSegment: SMBasicSegment {
     }
     
     // Segment Title Text & Colour & Font
-    public var title: String? {
+    var title: String? {
         didSet {
             self.label.text = self.title
             
@@ -63,21 +64,21 @@ public class SMSegment: SMBasicSegment {
             self.resetContentFrame()
         }
     }
-    public var onSelectionTextColour: UIColor = UIColor.whiteColor() {
+    var onSelectionTextColour: UIColor = UIColor.whiteColor() {
         didSet {
             if self.isSelected == true {
                 self.label.textColor = self.onSelectionTextColour
             }
         }
     }
-    public var offSelectionTextColour: UIColor = UIColor.darkGrayColor() {
+    var offSelectionTextColour: UIColor = UIColor.darkGrayColor() {
         didSet {
             if self.isSelected == false {
                 self.label.textColor = self.offSelectionTextColour
             }
         }
     }
-    public var titleFont: UIFont = UIFont.systemFontOfSize(17.0) {
+    var titleFont: UIFont = UIFont.systemFontOfSize(17.0) {
         didSet {
             self.label.font = self.titleFont
             
@@ -93,7 +94,7 @@ public class SMSegment: SMBasicSegment {
     }
     
     // Segment Image
-    public var onSelectionImage: UIImage? {
+    var onSelectionImage: UIImage? {
         didSet {
             if self.onSelectionImage != nil {
                 self.resetContentFrame()
@@ -103,7 +104,7 @@ public class SMSegment: SMBasicSegment {
             }
         }
     }
-    public var offSelectionImage: UIImage? {
+    var offSelectionImage: UIImage? {
         didSet {
             if self.offSelectionImage != nil {
                 self.resetContentFrame()
@@ -119,11 +120,11 @@ public class SMSegment: SMBasicSegment {
     private var label: UILabel = UILabel()
     private var labelWidth: CGFloat = 0.0
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(verticalMargin: CGFloat, onSelectionColour: UIColor, offSelectionColour: UIColor, onSelectionTextColour: UIColor, offSelectionTextColour: UIColor, titleFont: UIFont) {
+    init(verticalMargin: CGFloat, onSelectionColour: UIColor, offSelectionColour: UIColor, onSelectionTextColour: UIColor, offSelectionTextColour: UIColor, titleFont: UIFont) {
         
         self.verticalMargin = verticalMargin
         self.onSelectionColour = onSelectionColour
@@ -179,7 +180,7 @@ public class SMSegment: SMBasicSegment {
     }
     
     // MARK: Selections
-    override public func setSelected(selected: Bool, inView view: SMBasicSegmentView) {
+    override func setSelected(selected: Bool, inView view: SMBasicSegmentView) {
         super.setSelected(selected, inView: view)
         if selected {
             self.backgroundColor = self.onSelectionColour
@@ -194,7 +195,7 @@ public class SMSegment: SMBasicSegment {
     }
     
     // MARK: Handle touch
-    override public  func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
         if self.isSelected == false {

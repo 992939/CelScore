@@ -9,18 +9,19 @@
 import Foundation
 import UIKit
 
-public enum SegmentOrganiseMode: Int {
+
+enum SegmentOrganiseMode: Int {
     case SegmentOrganiseHorizontal = 0
     case SegmentOrganiseVertical
 }
 
 
-public protocol SMSegmentViewDelegate: class {
+protocol SMSegmentViewDelegate: class {
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int)
 }
 
-public class SMBasicSegmentView: UIView {
-    public var segments: [SMBasicSegment] = [] {
+class SMBasicSegmentView: UIView {
+    var segments: [SMBasicSegment] = [] {
         didSet {
             var i=0;
             for segment in segments {
@@ -33,14 +34,14 @@ public class SMBasicSegmentView: UIView {
 
         }
     }
-    public weak var delegate: SMSegmentViewDelegate?
+    weak var delegate: SMSegmentViewDelegate?
     
-    public private(set) var indexOfSelectedSegment: Int = NSNotFound
+    private(set) var indexOfSelectedSegment: Int = NSNotFound
     var numberOfSegments: Int {get {
         return segments.count
         }}
     
-    @IBInspectable public var vertical: Bool = false{
+    var vertical: Bool = false{
         didSet {
             let mode = vertical ? SegmentOrganiseMode.SegmentOrganiseVertical : SegmentOrganiseMode.SegmentOrganiseHorizontal
             self.orientationChangedTo(mode)
@@ -48,30 +49,30 @@ public class SMBasicSegmentView: UIView {
     }
     
     // Segment Separator
-    @IBInspectable public var separatorColour: UIColor = UIColor.lightGrayColor() {
+    var separatorColour: UIColor = UIColor.lightGrayColor() {
         didSet {
             self.setNeedsDisplay()
         }
     }
-    @IBInspectable public var separatorWidth: CGFloat = 1.0 {
+    var separatorWidth: CGFloat = 1.0 {
         didSet {
             self.updateFrameForSegments()
         }
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         self.updateFrameForSegments()
     }
     
-    public func orientationChangedTo(mode: SegmentOrganiseMode){
+    func orientationChangedTo(mode: SegmentOrganiseMode){
         for segment in self.segments {
             segment.orientationChangedTo(mode)
         }
         setNeedsDisplay()
     }
     
-    public func updateFrameForSegments() {
+    func updateFrameForSegments() {
         if self.segments.count == 0 {
             return
         }
@@ -103,7 +104,7 @@ public class SMBasicSegmentView: UIView {
     }
     
     
-    public func drawSeparatorWithContext(context: CGContextRef) {
+    func drawSeparatorWithContext(context: CGContextRef) {
         CGContextSaveGState(context)
         
         if self.segments.count > 1 {
@@ -138,14 +139,14 @@ public class SMBasicSegmentView: UIView {
     }
     
     // MARK: Drawing Segment Separators
-    override public func drawRect(rect: CGRect) {
+    override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         let context = UIGraphicsGetCurrentContext()!
         self.drawSeparatorWithContext(context)
     }
     
     // MARK: Actions
-    public func selectSegmentAtIndex(index: Int) {
+    func selectSegmentAtIndex(index: Int) {
         assert(index >= 0 && index < self.segments.count, "Index at \(index) is out of bounds")
         
         if self.indexOfSelectedSegment != NSNotFound {
@@ -158,7 +159,7 @@ public class SMBasicSegmentView: UIView {
         segment.setSelected(true, inView: self)
     }
     
-    public func deselectSegment() {
+    func deselectSegment() {
         if self.indexOfSelectedSegment != NSNotFound {
             let segment = self.segments[self.indexOfSelectedSegment]
             segment.setSelected(false, inView: self)
@@ -166,7 +167,7 @@ public class SMBasicSegmentView: UIView {
         }
     }
     
-    public func addSegment(segment: SMBasicSegment){
+    func addSegment(segment: SMBasicSegment){
         segment.index = self.segments.count
         self.segments.append(segment)
         
