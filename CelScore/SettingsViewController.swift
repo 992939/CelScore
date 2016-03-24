@@ -69,10 +69,23 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             self.node.addSubnode(consensusBarNode)
         })
         
-        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
-            self.node.addSubnode(publicOpinionBarNode)
-        })
+        SettingsViewModel().calculateUserRatingsPercentageSignal()
+            .on(next: { value in
+                let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
+                self.node.addSubnode(publicOpinionBarNode) })
+            .filter({ (value: CGFloat) -> Bool in return value == 100.0 })
+            .promoteErrors(NSError)
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .FirstCompleted) }
+            .on(next: { first in let firstTime = first as! Bool
+                if firstTime {
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstCompleted.message(),
+                        image: OverlayInfo.FirstCompleted.logo(),
+                        options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstCompleted).start() })
+                }
+            })
+            .start()
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
             let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)

@@ -52,7 +52,7 @@ public enum OverlayInfo: Int {
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIn the courthouse stars are symbols, the consensus a journey to explore star qualities and reveal what makes them shine bright."
         case .FirstNegative: return "\"As above so below,\nas within so without.\"\n- Hermes Trismegistus\n\nWelcome to the other side."
         case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
-        case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went. Thank you."
+        case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went.\n\nThank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
         case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus.\n\nYou’re welcome back anytime."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
@@ -72,7 +72,7 @@ public enum OverlayInfo: Int {
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.vote_purple()!
         case .FirstInterest: return R.image.telescope_green()!
-        case .FirstCompleted: return R.image.astronaut_green()!
+        case .FirstCompleted: return R.image.spaceship_green()!
         case .FirstVoteDisable: return R.image.vote_green()!
         case .LogoutUser: return R.image.court_green()!
         case .LoginError: return R.image.error_green()!
