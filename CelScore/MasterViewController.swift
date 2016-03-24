@@ -14,10 +14,9 @@ import TwitterKit
 import Material
 import HMSegmentedControl
 import AIRTimer
-import SVProgressHUD
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate, Sociable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
@@ -94,12 +93,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() {
-        SVProgressHUD.setDefaultStyle(.Custom)
-        SVProgressHUD.setRingThickness(4)
-        SVProgressHUD.setDefaultMaskType(.Black)
-        SVProgressHUD.setBackgroundColor(Constants.kMainShade)
-        SVProgressHUD.setForegroundColor(Constants.kLightGreenShade)
-        SVProgressHUD.show()
+        self.showHUD()
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
@@ -117,7 +111,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
-                SVProgressHUD.dismiss()
+                self.dismissHUD()
             })
             .map({ _ in self.setupUser() })
             .start()
@@ -170,19 +164,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 guard error == nil else { print("FBSDKLogin error: \(error)"); return }
                 guard result.isCancelled == false else { return }
                 
-                SVProgressHUD.setDefaultStyle(.Custom)
-                SVProgressHUD.setRingThickness(4)
-                SVProgressHUD.setDefaultMaskType(.Black)
-                SVProgressHUD.setBackgroundColor(Constants.kMainShade)
-                SVProgressHUD.setForegroundColor(Constants.kLightGreenShade)
-                SVProgressHUD.show()
+                self.showHUD()
                 
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                     .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
                     .on(next: { _ in
-                        SVProgressHUD.dismiss()
+                        self.dismissHUD()
                         self.handleMenu()
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })

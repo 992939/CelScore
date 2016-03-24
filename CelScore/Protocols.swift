@@ -8,12 +8,28 @@
 
 import Foundation
 import Material
+import SVProgressHUD
 
 
 public protocol DetailSubViewable {
     func socialSharing(message message: String)
     func enableVoteButton(positive positive: Bool)
     func rippleEffect(positive positive: Bool, gold: Bool)
+}
+
+public protocol HUDable{}
+
+public extension HUDable{
+    func showHUD() {
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setRingThickness(4)
+        SVProgressHUD.setDefaultMaskType(.Black)
+        SVProgressHUD.setBackgroundColor(Constants.kMainShade)
+        SVProgressHUD.setForegroundColor(Constants.kLightGreenShade)
+        SVProgressHUD.show()
+    }
+    
+    func dismissHUD() { SVProgressHUD.dismiss() }
 }
 
 public protocol Labelable{}
