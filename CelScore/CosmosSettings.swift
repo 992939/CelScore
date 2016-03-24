@@ -9,19 +9,19 @@
 import UIKit
 
 
-public struct CosmosSettings {
-    public var borderColorEmpty = CosmosDefaultSettings.borderColorEmpty
-    public var borderWidthEmpty: Double = CosmosDefaultSettings.borderWidthEmpty
-    public var colorEmpty = CosmosDefaultSettings.colorEmpty
-    public var colorFilled = CosmosDefaultSettings.colorFilled
-    public var userRatingMode = CosmosDefaultSettings.userRatingMode
-    public var previousRating = CosmosDefaultSettings.previousRating
-    public var starMargin: Double = CosmosDefaultSettings.starMargin
-    public var starPoints: [CGPoint] = CosmosDefaultSettings.starPoints
-    public var starSize: Double = CosmosDefaultSettings.starSize
-    public var totalStars = CosmosDefaultSettings.totalStars
-    public var minTouchRating: Double = CosmosDefaultSettings.minTouchRating
-    public var updateOnTouch = CosmosDefaultSettings.updateOnTouch
+struct CosmosSettings {
+    var borderColorEmpty = CosmosDefaultSettings.borderColorEmpty
+    var borderWidthEmpty: Double = CosmosDefaultSettings.borderWidthEmpty
+    var colorEmpty = CosmosDefaultSettings.colorEmpty
+    var colorFilled = CosmosDefaultSettings.colorFilled
+    var userRatingMode = CosmosDefaultSettings.userRatingMode
+    var previousRating = CosmosDefaultSettings.previousRating
+    var starMargin: Double = CosmosDefaultSettings.starMargin
+    var starPoints: [CGPoint] = CosmosDefaultSettings.starPoints
+    var starSize: Double = CosmosDefaultSettings.starSize
+    var totalStars = CosmosDefaultSettings.totalStars
+    var minTouchRating: Double = CosmosDefaultSettings.minTouchRating
+    var updateOnTouch = CosmosDefaultSettings.updateOnTouch
 }
 
 struct CosmosDefaultSettings {

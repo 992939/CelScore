@@ -11,19 +11,19 @@ import Material
 
 
 //MARK: Error
-public enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-public enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
-public enum CelebrityError: ErrorType { case NotFound }
+enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
+enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
+enum CelebrityError: ErrorType { case NotFound }
 
 //MARK: Misc.
-public enum LoginType: Int { case None = 1, Facebook, Twitter }
-public enum SocialNetwork: Int { case Twitter = 0, Facebook }
-public enum RatingsType { case Ratings, UserRatings }
-public enum AWSDataType { case Celebrity, List, Ratings }
-public enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
+enum LoginType: Int { case None = 1, Facebook, Twitter }
+enum SocialNetwork: Int { case Twitter = 0, Facebook }
+enum RatingsType { case Ratings, UserRatings }
+enum AWSDataType { case Celebrity, List, Ratings }
+enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
 
 //MARK: OverlayInfo
-public enum OverlayInfo: Int {
+enum OverlayInfo: Int {
     case WelcomeUser
     case MenuAccess
     case LoginSuccess
@@ -40,7 +40,7 @@ public enum OverlayInfo: Int {
     case LoginError //TODO
     case NetworkError //TODO
     
-    public func message() -> String {
+    func message() -> String {
         switch self {
         case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
         case .MenuAccess: return "Welcome to the courthouse!\n\nA court where no pledge nor oath is required.\n\nA court where you only need to show your I.D to enter."
@@ -60,7 +60,7 @@ public enum OverlayInfo: Int {
         }
     }
     
-    public func logo() -> UIImage {
+    func logo() -> UIImage {
         switch self {
         case .WelcomeUser: return R.image.court_green()!
         case .MenuAccess: return R.image.passport_green()!
@@ -80,13 +80,13 @@ public enum OverlayInfo: Int {
         }
     }
     
-    public static func getOptions() -> TAOverlayOptions {
+    static func getOptions() -> TAOverlayOptions {
         return [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow]
     }
 }
 
 //MARK: Info
-public enum Info: Int {
+enum Info: Int {
     case FirstName
     case MiddleName
     case LastName
@@ -98,7 +98,7 @@ public enum Info: Int {
     case CelScore
     case Networth
     
-    public static func getAll() -> [String] {
+    static func getAll() -> [String] {
         return [
             FirstName.name(),
             MiddleName.name(),
@@ -113,7 +113,7 @@ public enum Info: Int {
         ]
     }
     
-    public func name() -> String {
+    func name() -> String {
         switch self {
         case .FirstName: return "FirstName"
         case .MiddleName: return "MiddleName"
@@ -128,7 +128,7 @@ public enum Info: Int {
         }
     }
     
-    public func text() -> String {
+    func text() -> String {
         switch self {
         case .FirstName: return "first name is"
         case .MiddleName: return "middle name is"
@@ -145,7 +145,7 @@ public enum Info: Int {
 }
 
 //MARK: Qualities
-public enum Qualities: Int {
+enum Qualities: Int {
     case Talent
     case Originality
     case Authenticity
@@ -157,7 +157,7 @@ public enum Qualities: Int {
     case Elegance
     case SexAppeal
     
-    public static func getAll() -> [String] {
+    static func getAll() -> [String] {
         return [
             Talent.name(),
             Originality.name(),
@@ -172,7 +172,7 @@ public enum Qualities: Int {
         ]
     }
 
-    public func name() -> String {
+    func name() -> String {
         switch self {
         case .Talent: return "Talent"
         case .Originality: return "Originality"
@@ -187,7 +187,7 @@ public enum Qualities: Int {
         }
     }
     
-    public func text() -> String {
+    func text() -> String {
         switch self {
         case .Talent: return "talent is"
         case .Originality: return "originality is"
@@ -204,7 +204,7 @@ public enum Qualities: Int {
 }
 
 //MARK: ListInfo
-public enum ListInfo : Int {
+enum ListInfo : Int {
     case PublicOpinion
     case Hollywood
     case HipHop
@@ -213,7 +213,7 @@ public enum ListInfo : Int {
     case Television
     case News
     
-    public static func getAll() -> [String] {
+    static func getAll() -> [String] {
         return [
             PublicOpinion.name(),
             Hollywood.name(),
@@ -225,13 +225,13 @@ public enum ListInfo : Int {
         ]
     }
     
-    public static func getCount() -> Int {
+    static func getCount() -> Int {
         var max: Int = 0
         while let _ = ListInfo(rawValue: max) { max += 1 }
         return max
     }
     
-    public func name() -> String {
+    func name() -> String {
         switch self {
         case .PublicOpinion: return "#PublicOpinion"
         case .Hollywood: return "#Hollywood"
@@ -243,7 +243,7 @@ public enum ListInfo : Int {
         }
     }
     
-    public func getId() -> String {
+    func getId() -> String {
         switch self {
         case .PublicOpinion: return "0001"
         case .Hollywood: return "0004"
@@ -255,7 +255,7 @@ public enum ListInfo : Int {
         }
     }
     
-    public func getIndex() -> Int {
+    func getIndex() -> Int {
         switch self {
         case .PublicOpinion: return 0
         case .Hollywood: return 1
@@ -269,7 +269,7 @@ public enum ListInfo : Int {
 }
 
 //MARK: Zodiac
-public enum Zodiac : Int {
+enum Zodiac : Int {
     case Aries
     case Taurus
     case Gemini
@@ -283,7 +283,7 @@ public enum Zodiac : Int {
     case Aquarius
     case Pisces
 
-    public func name() -> String {
+    func name() -> String {
         switch self {
         case .Aries: return "Aries"
         case .Taurus: return "Taurus"
@@ -300,7 +300,7 @@ public enum Zodiac : Int {
         }
     }
 
-    public func compatableTypes() -> [Zodiac] {
+    func compatableTypes() -> [Zodiac] {
         switch self {
         case .Aries: return [.Gemini, .Sagittarius, .Leo, .Aquarius]
         case .Taurus: return [.Capricorn, .Pisces, .Virgo, .Cancer]
@@ -317,7 +317,7 @@ public enum Zodiac : Int {
         }
     }
 
-    public func symbol() -> String {
+    func symbol() -> String {
         switch self {
             case .Aries: return "♈"
             case .Taurus: return "♉"

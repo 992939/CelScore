@@ -9,10 +9,10 @@
 import UIKit
 
 
-public extension UIView {
+extension UIView {
 
     //MARK: Methods
-    public func slide(right right: Bool, duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+    func slide(right right: Bool, duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         let transition = CATransition()
         if let delegate: AnyObject = completionDelegate { transition.delegate = delegate }
         transition.type = kCATransitionPush
@@ -24,8 +24,8 @@ public extension UIView {
     }
 }
 
-public extension UIButton {
-    public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+extension UIButton {
+    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let buttonSize = self.frame.size
         let widthToAdd = (44-buttonSize.width > 0) ? 44-buttonSize.width : 0
         let heightToAdd = (44-buttonSize.height > 0) ? 44-buttonSize.height : 0
@@ -34,10 +34,10 @@ public extension UIButton {
     }
 }
 
-public extension NSDate {
+extension NSDate {
 
     //MARK: Methods
-    public func zodiacSign() -> Zodiac {
+    func zodiacSign() -> Zodiac {
         let dates = ["March 20", "April 19", "May 20", "June 20", "July 22", "August 22", "September 23", "October 22", "November 21", "December 21", "January 19", "February 18"]
         
         for i in 0...11 {
@@ -50,7 +50,7 @@ public extension NSDate {
         return Zodiac(rawValue: 1)!
     }
 
-    public func checkIfDateIsBetween(firstDate firstDate: NSDate, secondDate: NSDate)-> Bool {
+    func checkIfDateIsBetween(firstDate firstDate: NSDate, secondDate: NSDate)-> Bool {
         let first = NSDate(date: firstDate)
         let second = NSDate(date: secondDate)
         let d = NSDate(date: self)
@@ -58,13 +58,13 @@ public extension NSDate {
         return false
     }
 
-    public func stringMMddyyyyFormat()-> String {
+    func stringMMddyyyyFormat()-> String {
         let f = NSDateFormatter()
         f.dateFormat = "MM/dd/yyyy"
         return f.stringFromDate(self)
     }
 
-    public func stringMMMMddyyyyFormat()-> String {
+    func stringMMMMddyyyyFormat()-> String {
         let f = NSDateFormatter()
         f.dateFormat = "MMMM dd, yyyy"
         return f.stringFromDate(self)
@@ -110,24 +110,24 @@ public extension NSDate {
     }
 }
 
-public extension CGPoint {
+extension CGPoint {
     func minus(p: CGPoint) -> CGPoint { return CGPoint(x: x - p.x, y: y - p.y) }
     var length: CGFloat { return sqrt(x * x + y * y) }
 }
 
-public extension Double {
+extension Double {
     func roundToPlaces(places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor
     }
 }
 
-public extension NSBundle {
+extension NSBundle {
     var releaseVersionNumber: String? { return self.infoDictionary?["CFBundleShortVersionString"] as? String }
     var buildVersionNumber: String? { return self.infoDictionary?["CFBundleVersion"] as? String }
 }
 
-public extension UIDevice {
+extension UIDevice {
     
     var modelName: String {
         var systemInfo = utsname()

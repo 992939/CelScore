@@ -11,15 +11,15 @@ import Material
 import SVProgressHUD
 
 
-public protocol DetailSubViewable {
+protocol DetailSubViewable {
     func socialSharing(message message: String)
     func enableVoteButton(positive positive: Bool)
     func rippleEffect(positive positive: Bool, gold: Bool)
 }
 
-public protocol HUDable{}
+protocol HUDable{}
 
-public extension HUDable{
+extension HUDable{
     func showHUD() {
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setRingThickness(4)
@@ -32,9 +32,9 @@ public extension HUDable{
     func dismissHUD() { SVProgressHUD.dismiss() }
 }
 
-public protocol Labelable{}
+protocol Labelable{}
 
-public extension Labelable {
+extension Labelable {
     func setupLabel(title title: String, frame: CGRect) -> UILabel {
         let label = UILabel(frame: frame)
         label.text = title
@@ -44,12 +44,12 @@ public extension Labelable {
     }
 }
 
-public protocol Sociable {
+protocol Sociable {
     func handleMenu(open: Bool)
     func socialButton(button: UIButton)
 }
 
-public extension Sociable {
+extension Sociable {
     func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
