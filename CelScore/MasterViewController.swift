@@ -73,6 +73,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
+        
+        //            UserViewModel().loginSignal(token: FBSDKAccessToken.currentAccessToken().tokenString, loginType: .Facebook)
+        //                .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+        //                    return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
+        //                }
+        //                .start()
     }
     
     override func viewWillLayoutSubviews() {
@@ -161,9 +167,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if button.tag == 1 {
             let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
             FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                guard error == nil else { print("FBSDKLogin error: \(error)"); return }
+                guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                 guard result.isCancelled == false else { return }
-                
                 self.showHUD()
                 
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
@@ -176,7 +181,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().getUserInfoFromFacebookSignal() }
+                        return UserViewModel().getUserInfoFromSignal(loginType: .Facebook) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: value, dataSetType: .UserInfo) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
@@ -185,12 +190,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .start()
             })
         } else {
-            UserViewModel().loginSignal(token: FBSDKAccessToken.currentAccessToken().tokenString, loginType: .Facebook)
-                .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                    return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
-                }
-                .start()
-            //TWITTER
+            self.showHUD()
+            Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
+                guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
+                
+                print("signed in as \(session!.userName)")
+                print("session: \(session!.description) and token:\(session!.authToken)")
+                UserViewModel().getUserInfoFromSignal(loginType: .Twitter)
+            }
         }
     }
     

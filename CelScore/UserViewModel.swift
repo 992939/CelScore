@@ -73,13 +73,31 @@ struct UserViewModel {
         }
     }
     
-    func getUserInfoFromFacebookSignal() -> SignalProducer<AnyObject, NSError> {
+    func getUserInfoFromSignal(loginType loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                guard error == nil else { observer.sendFailed(error); return }
-                observer.sendNext(object)
-                observer.sendCompleted()
+            switch loginType {
+            case .Facebook:
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                    guard error == nil else { observer.sendFailed(error); return }
+                    observer.sendNext(object)
+                }
+            case .Twitter:
+                let client = TWTRAPIClient()
+                let statusesShowEndpoint = "https://api.twitter.com/1.1/statuses/show.json"
+                let params = ["id": Twitter.sharedInstance().sessionStore.session()!.userID]
+                var clientError : NSError?
+                let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
+                guard request != nil else { observer.sendFailed(clientError); return }
+                
+                client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+                    guard connectionError == nil else { observer.sendFailed(connectionError!); return }
+                    var jsonError : NSError?
+                    let json : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError)
+                    observer.sendNext("to be free")
+                }
+            default: break
             }
+            observer.sendCompleted()
         }
     }
     
