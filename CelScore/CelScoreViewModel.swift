@@ -64,10 +64,6 @@ struct CelScoreViewModel {
     
     func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
-            
-            let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) //TODO
-            let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-            
             let socialVC: SLComposeViewController?
             switch socialNetwork {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)

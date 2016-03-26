@@ -11,6 +11,7 @@ import Material
 import SMSegmentView
 import FBSDKLoginKit
 import AIRTimer
+import Social
 
 
 struct UserStruct {
@@ -174,6 +175,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
+                
+                let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+                let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+                
                 CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage)
                     .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
                     .start() })
