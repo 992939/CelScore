@@ -131,7 +131,7 @@ struct UserViewModel {
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
-                    for index in 0...userRatingsArray.count { //TODO: test bounds
+                    for index in 0..<userRatingsArray.count {
                         let ratings: UserRatingsModel = userRatingsArray[index]
                         dataset.setString(ratings.interpolation(), forKey: ratings.id)
                         realm.beginWrite()
@@ -176,7 +176,7 @@ struct UserViewModel {
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { syncClient.wipe(); observer.sendFailed(task.error!); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
                 switch dataSetType {
                 case .UserInfo: fatalError("Not storing user information locally")
@@ -188,9 +188,8 @@ struct UserViewModel {
                     })
                     try! realm.commitWrite()
                 case .UserSettings:
-                    let dico = dataset.getAll()
+                    let dico: [NSObject : AnyObject] = dataset.getAll()
                     let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    //TODO: check .isEmpty
                     settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue

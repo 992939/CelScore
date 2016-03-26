@@ -14,7 +14,7 @@ import Result
 struct SettingsViewModel {
     
     //MARK: Widget
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance }
+    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
     enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable }
     
     //MARK: Methods
@@ -114,11 +114,11 @@ struct SettingsViewModel {
         }
     }
     
-    func loggedInAsSignal() -> SignalProducer<String, NSError> {
+    func loggedInAsSignal() -> SignalProducer<String, SettingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first ?? SettingsModel()
-            guard model.userName.characters.count > 0 else { observer.sendFailed(NSError(domain: "NoUser", code: 1, userInfo: nil)); return } //TODO: error .isEmpty
+            guard model.userName.characters.count > 0 else { observer.sendFailed(.NoUser); return }
             observer.sendNext(model.userName)
             observer.sendCompleted()
         }

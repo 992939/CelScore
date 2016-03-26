@@ -74,6 +74,7 @@ final class RatingsViewController: ASViewController {
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().loggedInAsSignal()
                         .on(next: { _ in cosmosView.settings.updateOnTouch = true })
+                        .flatMapError { _ in SignalProducer.empty }
                         .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .on(next: { hasRatings in
@@ -86,6 +87,7 @@ final class RatingsViewController: ASViewController {
                         SettingsViewModel().loggedInAsSignal()
                             .observeOn(UIScheduler())
                             .on(failed: { _ in self.requestLogin() })
+                            .flatMapError { _ in SignalProducer.empty }
                             .flatMap(FlattenStrategy.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in
