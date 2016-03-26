@@ -180,6 +180,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         self.handleMenu()
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
+                    .on(failed: { _ in self.dismissHUD() })
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().getUserInfoFromSignal(loginType: .Facebook) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -193,10 +194,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.showHUD()
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                
-                print("signed in as \(session!.userName)")
-                print("session: \(session!.description) and token:\(session!.authToken)")
-                UserViewModel().getUserInfoFromSignal(loginType: .Twitter)
+
+                UserViewModel().getUserInfoFromSignal(loginType: .Twitter).start()
             }
         }
     }

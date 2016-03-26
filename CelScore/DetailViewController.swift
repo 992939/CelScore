@@ -187,7 +187,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                         UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                             .observeOn(QueueScheduler.mainQueueScheduler)
                             .retry(Constants.kNetworkRetry)
-                            .map({ _ in return UserViewModel().getUserInfoFromFacebookSignal().start() })
+                            .map({ _ in return UserViewModel().getUserInfoFromSignal(loginType: .Facebook).start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings).start() })
                             .map({ _ in return self.handleMenu(true) })

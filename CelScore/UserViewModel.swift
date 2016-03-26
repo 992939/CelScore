@@ -12,6 +12,7 @@ import RealmSwift
 import TwitterKit
 import Timepiece
 import Result
+import SwiftyJSON
 
 
 struct UserViewModel {
@@ -83,17 +84,16 @@ struct UserViewModel {
                 }
             case .Twitter:
                 let client = TWTRAPIClient()
-                let statusesShowEndpoint = "https://api.twitter.com/1.1/statuses/show.json"
+                let statusesShowEndpoint = "https://api.twitter.com/1.1/users/lookup.json"
                 let params = ["id": Twitter.sharedInstance().sessionStore.session()!.userID]
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
-                guard request != nil else { observer.sendFailed(clientError); return }
+                guard clientError == nil else { observer.sendFailed(clientError!); return }
                 
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
                     guard connectionError == nil else { observer.sendFailed(connectionError!); return }
-                    var jsonError : NSError?
-                    let json : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError)
-                    observer.sendNext("to be free")
+                    let json = JSON(data: data!)
+                    observer.sendNext(json.arrayObject!)
                 }
             default: break
             }
