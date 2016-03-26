@@ -270,8 +270,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
         else { self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
-        let center = self.profilePicNode.view.center
-        self.profilePicNode.view.dya_ripple(CGPoint(x: self.profilePicNode.view.left + 13, y: center.y - 10))
+        self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
     
     func enableVoteButton(positive positive: Bool) {
@@ -332,6 +331,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
         topView.addSubview(starLayer)
         topView.addSubview(profilePicNode.view)
+        print("profileCircle: \(self.profilePicNode.view.description)")
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
         return topView

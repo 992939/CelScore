@@ -106,7 +106,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     func toggleExpand() { expanded = !expanded; updateExpandButtonTitle(); updatePreferredContentSize(); tableView.reloadData() }
 }
 
-public extension Double {
+extension Double {
     func roundToPlaces(places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor

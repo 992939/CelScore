@@ -37,11 +37,9 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 - (void)dya_ripple:(CGPoint)centerPoint {
     CGRect pathFrame = CGRectMake(-CGRectGetMidX(self.bounds), -CGRectGetMidY(self.bounds), self.bounds.size.width, self.bounds.size.height);
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pathFrame cornerRadius:self.layer.cornerRadius];
-    CGPoint shapePosition = [self convertPoint:self.center fromView:nil];
-
     CAShapeLayer *circleShape = [CAShapeLayer layer];
     circleShape.path = path.CGPath;
-    circleShape.position = centerPoint; //shapePosition;
+    circleShape.position = centerPoint;
     circleShape.fillColor = [self rippleTrailColor].CGColor;
     circleShape.opacity = 0;
     circleShape.masksToBounds = false;
