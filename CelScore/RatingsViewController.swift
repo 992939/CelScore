@@ -91,7 +91,8 @@ final class RatingsViewController: ASViewController {
                             .filter{ hasUserRatings in
                                 if hasUserRatings == false { cosmosView.settings.userRatingMode = true }
                                 return cosmosView.settings.userRatingMode == true }
-                            .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, NSError> in
+                            .flatMapError { _ in SignalProducer.empty }
+                            .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .startWithNext({ userRatings in
                                 self.delegate?.rippleEffect(positive: rating < 3 ? false : true, gold: false)

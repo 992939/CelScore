@@ -12,10 +12,10 @@ import Result
 
 struct RatingsViewModel {
     
-    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, NSError> {
-        return SignalProducer { observer, disposable in //TODO: RatingsError
-            guard 1...5 ~= newRating else { observer.sendFailed(NSError(domain: "rating value out of bounds", code: 1, userInfo: nil)); return }
-            guard 0...9 ~= ratingIndex else { observer.sendFailed(NSError(domain: "rating index out of bounds", code: 1, userInfo: nil)); return }
+    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
+        return SignalProducer { observer, disposable in
+            guard 1...5 ~= newRating else { observer.sendFailed(.RatingValueOutOfBounds); return }
+            guard 0...9 ~= ratingIndex else { observer.sendFailed(.RatingIndexOutOfBounds); return }
             
             let realm = try! Realm()
             realm.beginWrite()
