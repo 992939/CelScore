@@ -90,7 +90,6 @@ struct UserViewModel {
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
                 guard clientError == nil else { observer.sendFailed(clientError!); return }
-                
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
                     guard connectionError == nil else { observer.sendFailed(connectionError!); return }
                     let json = JSON(data: data!)
