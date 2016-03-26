@@ -58,10 +58,10 @@ PODS:
   - SVProgressHUD (2.0)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
-  - TwitterCore (1.15.3):
+  - TwitterCore (2.0.1):
     - Fabric
-  - TwitterKit (1.15.3):
-    - TwitterCore (= 1.15.3)
+  - TwitterKit (2.0.1):
+    - TwitterCore (= 2.0.1)
   - WebASDKImageManager (1.0.1):
     - AsyncDisplayKit (~> 1.1)
     - SDWebImage/Core (~> 3.7)
@@ -87,8 +87,8 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4)
-  - TwitterCore (~> 1.15.3)
-  - TwitterKit (~> 1.15.3)
+  - TwitterCore (~> 2.0.1)
+  - TwitterKit (~> 2.0.1)
   - WebASDKImageManager (~> 1.0)
   - YLProgressBar (~> 3.8)
 
@@ -119,8 +119,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
-  TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3
+  TwitterCore: f8575c28412ab2e3fed1a153764397771de06efb
+  TwitterKit: ebc84244d4ada8cc673afd4ae7b67277e1f05a65
   WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
   YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
 

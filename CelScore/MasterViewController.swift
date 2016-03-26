@@ -194,7 +194,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.showHUD()
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-
                 UserViewModel().getUserInfoFromSignal(loginType: .Twitter).start()
             }
         }

@@ -54,7 +54,7 @@ enum OverlayInfo: Int {
         case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
         case .FirstCompleted: return "You've journeyed into all corners of stardom, shaped and built consensus everywhere you went.\n\nThank you."
         case .FirstVoteDisable: return "\"One Love. One Heart. Let's get together and feel all right.\"\n- Bob Marley\n\nEvery vote is an opportunity to come together and build consensus."
-        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus.\n\nYou’re welcome back anytime."
+        case .LogoutUser: return "\"Our values are not simply words written into parchment, they are a creed that calls us together.\"\n- Barack Obama\n\nThe courthouse hates to see you go, but we thank you for your votes and for building the consensus."
         case .LoginError: return "blah blah blah blah blah blah blah blah"
         case .NetworkError: return "blah blah blah blah blah blah blah blah"
         }

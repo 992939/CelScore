@@ -124,7 +124,7 @@ struct SettingsViewModel {
         }
     }
     
-    func updateUserName(username username: String) -> SignalProducer<SettingsModel, NSError> { //TODO: NoError
+    func updateUserName(username username: String) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
@@ -132,7 +132,6 @@ struct SettingsViewModel {
             model.userName = username
             realm.add(model, update: true)
             try! realm.commitWrite()
-            
             observer.sendNext(model)
             observer.sendCompleted()
         }

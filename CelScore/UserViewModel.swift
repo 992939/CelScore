@@ -81,6 +81,7 @@ struct UserViewModel {
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                     guard error == nil else { observer.sendFailed(error); return }
                     observer.sendNext(object)
+                    observer.sendCompleted()
                 }
             case .Twitter:
                 let client = TWTRAPIClient()
@@ -94,10 +95,10 @@ struct UserViewModel {
                     guard connectionError == nil else { observer.sendFailed(connectionError!); return }
                     let json = JSON(data: data!)
                     observer.sendNext(json.arrayObject!)
+                    observer.sendCompleted()
                 }
             default: break
             }
-            observer.sendCompleted()
         }
     }
     
