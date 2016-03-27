@@ -33,7 +33,7 @@ final class CosmosView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         update()
-        self.frame.size = intrinsicContentSize()
+        //self.frame.size = intrinsicContentSize()
         improvePerformance()
     }
     

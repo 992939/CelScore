@@ -64,7 +64,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
         
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 70, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 80, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
@@ -81,7 +81,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //                .start()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
-            .observeOn(QueueScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .startWithNext { _ in
                 RateLimit.execute(name: "OneADayRefresh", limit: 10) {
                     CelScoreViewModel().getFromAWSSignal(dataType: .List)

@@ -53,6 +53,7 @@ struct ListViewModel {
                 guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
                 let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
                 
+                print("count: \(followed.count)")
                 guard followed.count > 0 else { observer.sendNext(followed); return }
                 var notFollowing: [(index: Int, celebId: CelebId)] = []
                 let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in

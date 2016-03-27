@@ -81,7 +81,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 25, y: Constants.kTopViewRect.bottom - 22), buttonColor: Constants.kDarkShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 2 * Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
@@ -367,7 +367,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 30, y: Constants.kTopViewRect.bottom - 22, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 45, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false

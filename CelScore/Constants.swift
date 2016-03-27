@@ -79,12 +79,12 @@ struct Constants {
     static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 16.0 : 14.0
     
     //DetailVC
-    static let kDetailWidth = kMaxWidth - 2 * kPadding
-    static let kTopViewRect: CGRect = CGRect(x: 2 * kPadding, y: kNavigationBarRect.bottom, width: kDetailWidth, height: 220)
-    static let kSegmentViewRect: CGRect = CGRect(x: 2 * kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
-    static let kBottomViewRect = CGRect(x: 2 * kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - (kSegmentViewRect.bottom + kPadding))
-    static let kBottomHeight = kBottomViewRect.height - 2 * kPadding
-    static let kFabDiameter: CGFloat = 43.0
+    static let kDetailWidth = kMaxWidth 
+    static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kNavigationBarRect.bottom, width: kDetailWidth, height: 220)
+    static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
+    static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - kSegmentViewRect.bottom)
+    static let kBottomHeight = kBottomViewRect.height - kPadding
+    static let kFabDiameter: CGFloat = 50.0
     
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0

@@ -34,7 +34,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFit
-        self.profilePicNode.preferredFrameSize = CGSize(width: 50, height: 50)
+        self.profilePicNode.preferredFrameSize = CGSize(width: 60, height: 60)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
             return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kDarkShade)(originalImage)
         }
@@ -79,7 +79,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 50)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 60)
         self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.42)
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
@@ -90,7 +90,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
             justifyContent: .Start,
             alignItems: .Center,
             children: [self.profilePicNode, self.nameNode, self.ratingsNode])
-        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.9)
+        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.95)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsetsMake(Constants.kPadding, Constants.kPadding, Constants.kPadding, Constants.kPadding),
@@ -131,9 +131,12 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: MaterialSwitchDelegate
     func materialSwitchStateChanged(control: MaterialSwitch) {
-        if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false).start() }
-        else {
+        if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
+            .observeOn(QueueScheduler.mainQueueScheduler)
+            .start()
+        } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
+                .observeOn(QueueScheduler.mainQueueScheduler)
                 .startWithNext { count in
                     if count == 0 { SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithNext({ first in
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()

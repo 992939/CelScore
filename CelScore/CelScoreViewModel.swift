@@ -48,11 +48,14 @@ struct CelScoreViewModel {
                     case .List: awsObject = ListsModel(json: data)
                     case .Ratings: awsObject = RatingsModel(json: data)
                     }
+                    
                     let realm = try! Realm()
                     realm.beginWrite()
                     realm.add(awsObject, update: true)
                     try! realm.commitWrite()
                     //print(awsObject)
+//                    dispatch_async(dispatch_queue_create("background", nil)) {
+//                    }
                 })
                 observer.sendNext(task.result!)
                 return task
