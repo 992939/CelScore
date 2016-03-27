@@ -17,6 +17,7 @@ target 'CelScore' do
     pod 'Fabric', '~> 1.6.7'
     pod 'TwitterKit', '~> 2.0.1'
     pod 'TwitterCore', '~> 2.0.1'
+    pod 'RateLimit', '~> 1.2'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'Timepiece', '~> 0.4'
     pod 'YLProgressBar', '~> 3.8'

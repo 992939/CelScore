@@ -34,6 +34,7 @@ PODS:
   - R.swift (2.0.0):
     - R.swift.Library (~> 2.0.0)
   - R.swift.Library (2.0.0)
+  - RateLimit (1.2.1)
   - ReactiveCocoa (4.0.1):
     - ReactiveCocoa/UI (= 4.0.1)
     - Result (~> 1.0.2)
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - Material (~> 1.37.3)
   - OpinionzAlertView (~> 0.3.1)
   - R.swift (~> 2.0.0)
+  - RateLimit (~> 1.2)
   - ReactiveCocoa (= 4.0.1)
   - RealmSwift (~> 0.98.5)
   - SDWebImage (~> 3.7)
@@ -110,6 +112,7 @@ SPEC CHECKSUMS:
   PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   R.swift: ceb3d2897a26bb5811e08f531184bbba8e4a7110
   R.swift.Library: 9f4b2d12040daa1ffe336d8f7e1574f73721fd01
+  RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
   Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
   RealmSwift: cb11ad1c35e15dc982f2dbf5afe2a3124193a358

@@ -14,6 +14,7 @@ import TwitterKit
 import Material
 import HMSegmentedControl
 import AIRTimer
+import RateLimit
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
@@ -41,9 +42,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func viewWillAppear(animated: Bool) {
-        if let index = self.celebrityTableView.indexPathForSelectedRow {
-            self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
-        }
+        super.viewWillAppear(animated)
+        if let index = self.celebrityTableView.indexPathForSelectedRow { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
         self.socialButton.hidden = false
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
     }
@@ -79,6 +79,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //                    return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
         //                }
         //                .start()
+        
+        NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
+            .startWithNext { _ in
+                RateLimit.execute(name: "OneADayRefresh", limit: Constants.kDayInSeconds) {
+                    CelScoreViewModel().getFromAWSSignal(dataType: .List)
+                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+                        .start()
+                    
+                }
+        }
     }
     
     override func viewWillLayoutSubviews() {
