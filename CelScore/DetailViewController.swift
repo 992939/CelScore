@@ -175,12 +175,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
-                
-                let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-                let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-                
-                CelScoreViewModel().shareVoteOnSignal(socialNetwork: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage)
-                    .on(next: { socialVC in self.presentViewController(socialVC, animated: true, completion: nil) })
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage)
+                    .on(next: { socialVC in
+                        let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+                        let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+                        guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
+                            TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
+                                image: OverlayInfo.LoginError.logo(),
+                                options: OverlayInfo.getOptions())
+                            return
+                        }
+                        
+                        self.presentViewController(socialVC, animated: true, completion: nil) })
                     .start() })
             .on(failed: { _ in
                 if button.tag == 1 {
@@ -199,7 +205,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                             .start()
                     })
                 } else {
-                    //TWITTER
+                    //TWITTER LOGIN
                 }
             })
             .start()
@@ -336,7 +342,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
         topView.addSubview(starLayer)
         topView.addSubview(profilePicNode.view)
-        print("profileCircle: \(self.profilePicNode.view.description)")
         topView.depth = .Depth2
         topView.backgroundColor = Constants.kDarkShade
         return topView

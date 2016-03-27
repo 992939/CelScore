@@ -17,7 +17,7 @@ import SwiftyJSON
 
 struct UserViewModel {
     
-    func loginSignal(token token: String, loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
+    func loginSignal(token token: String, loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
@@ -74,7 +74,7 @@ struct UserViewModel {
         }
     }
     
-    func getUserInfoFromSignal(loginType loginType: LoginType) -> SignalProducer<AnyObject, NSError> {
+    func getUserInfoFromSignal(loginType loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .Facebook:

@@ -62,12 +62,12 @@ struct CelScoreViewModel {
         }
     }
     
-    func shareVoteOnSignal(socialNetwork socialNetwork: SocialNetwork, message: String) -> SignalProducer<SLComposeViewController, NoError> {
+    func shareVoteOnSignal(socialLogin socialLogin: SocialLogin, message: String) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
             let socialVC: SLComposeViewController?
-            switch socialNetwork {
+            switch socialLogin {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            case .Facebook: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            default: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
             socialVC!.setInitialText("#PSA: \(message) #PLND")
             observer.sendNext(socialVC!)

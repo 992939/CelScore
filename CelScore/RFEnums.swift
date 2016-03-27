@@ -16,11 +16,24 @@ enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
 enum CelebrityError: ErrorType { case NotFound }
 
 //MARK: Misc.
-enum LoginType: Int { case None = 1, Facebook, Twitter }
-enum SocialNetwork: Int { case Twitter = 0, Facebook }
 enum RatingsType { case Ratings, UserRatings }
 enum AWSDataType { case Celebrity, List, Ratings }
 enum CognitoDataSet: String { case UserInfo, UserRatings, UserSettings }
+
+//MARK: SocialLogin
+enum SocialLogin: Int {
+    case None = 0
+    case Facebook = 1
+    case Twitter = 2
+    
+    func serviceUnavailable() -> String {
+        switch self {
+        case .Facebook: return "Sharing on Facebook is unavailable. Please check the settings and make sure your Facebook account is accessible."
+        case .Twitter: return "Sharing on Twitter is unavailable. Please check the settings and make sure your Twitter account is accessible."
+        default: return "Social sharing is unavailable. Please check the settings and make sure your social accounts are accessible."
+        }
+    }
+}
 
 //MARK: OverlayInfo
 enum OverlayInfo: Int {
@@ -37,8 +50,8 @@ enum OverlayInfo: Int {
     case FirstCompleted
     case FirstVoteDisable
     case LogoutUser
-    case LoginError //TODO
-    case NetworkError //TODO
+    case LoginError
+    case NetworkError
     
     func message() -> String {
         switch self {
@@ -67,16 +80,16 @@ enum OverlayInfo: Int {
         case .LoginSuccess: return R.image.court_green()!
         case .MaxFollow: return R.image.telescope_green()!
         case .FirstFollow: return R.image.telescope_green()!
-        case .FirstConsensus: return R.image.worker_green()!
+        case .FirstConsensus: return R.image.observatory_green()!
         case .FirstPublic: return R.image.road_green()!
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.vote_purple()!
-        case .FirstInterest: return R.image.telescope_green()!
-        case .FirstCompleted: return R.image.spaceship_green()!
+        case .FirstInterest: return R.image.compass_green()!
+        case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.vote_green()!
-        case .LogoutUser: return R.image.court_green()!
-        case .LoginError: return R.image.error_green()!
-        case .NetworkError: return R.image.error_green()!
+        case .LogoutUser: return R.image.planet_green()!
+        case .LoginError: return R.image.antenna_green()!
+        case .NetworkError: return R.image.antenna_green()!
         }
     }
     
