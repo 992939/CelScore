@@ -45,6 +45,7 @@ struct CelebrityViewModel {
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             realm.beginWrite()
             object.isFollowed = isFollowing
+            print("object: \(object.description)")
             realm.add(object, update: true)
             try! realm.commitWrite()
             observer.sendNext(object)

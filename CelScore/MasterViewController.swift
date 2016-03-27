@@ -31,7 +31,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     init() {
         self.celebrityTableView = ASTableView()
-        self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAll())
+        self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
@@ -81,13 +81,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //                .start()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
+            .observeOn(QueueScheduler())
             .startWithNext { _ in
-                RateLimit.execute(name: "OneADayRefresh", limit: Constants.kDayInSeconds) {
+                RateLimit.execute(name: "OneADayRefresh", limit: 10) {
                     CelScoreViewModel().getFromAWSSignal(dataType: .List)
                         .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, ListError> in
+                            return ListViewModel().updateListsSignal() }
+                        .on(next: { list in print("list count:\(list)") })
                         .start()
-                    
                 }
         }
     }
@@ -154,8 +158,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.reloadData()
                 self.celebrityTableView.endUpdates()
             })
-        
-        //ListViewModel().updateListSignal(listId: "0001").start() //TODO: save list in Realm
     }
     
     //MARK: Sociable

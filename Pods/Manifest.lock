@@ -46,11 +46,11 @@ PODS:
   - ReactiveCocoa/UI (4.0.1):
     - ReactiveCocoa/Core
     - Result (~> 1.0.2)
-  - Realm (0.98.5):
-    - Realm/Headers (= 0.98.5)
-  - Realm/Headers (0.98.5)
-  - RealmSwift (0.98.5):
-    - Realm (= 0.98.5)
+  - Realm (0.98.6):
+    - Realm/Headers (= 0.98.6)
+  - Realm/Headers (0.98.6)
+  - RealmSwift (0.98.6):
+    - Realm (= 0.98.6)
   - Result (1.0.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -83,7 +83,7 @@ DEPENDENCIES:
   - R.swift (~> 2.0.0)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (= 4.0.1)
-  - RealmSwift (~> 0.98.5)
+  - RealmSwift (~> 0.98.6)
   - SDWebImage (~> 3.7)
   - SMSegmentView (~> 1.1)
   - SVProgressHUD (~> 2.0)
@@ -114,8 +114,8 @@ SPEC CHECKSUMS:
   R.swift.Library: 9f4b2d12040daa1ffe336d8f7e1574f73721fd01
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
-  Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
-  RealmSwift: cb11ad1c35e15dc982f2dbf5afe2a3124193a358
+  Realm: 44803f35418c5d89b27825a564247fcd190de37e
+  RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059

@@ -226,7 +226,7 @@ enum ListInfo : Int {
     case Television
     case News
     
-    static func getAll() -> [String] {
+    static func getAllNames() -> [String] {
         return [
             PublicOpinion.name(),
             Hollywood.name(),
@@ -235,6 +235,18 @@ enum ListInfo : Int {
             Music.name(),
             Television.name(),
             News.name()
+        ]
+    }
+    
+    static func getAllIDs() -> [String] {
+        return [
+            PublicOpinion.getId(),
+            Hollywood.getId(),
+            HipHop.getId(),
+            Sports.getId(),
+            Music.getId(),
+            Television.getId(),
+            News.getId()
         ]
     }
     
