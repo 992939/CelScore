@@ -22,7 +22,7 @@ struct Constants {
     static let kFontSize: CGFloat = 16.0
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
-    static let kMaxWidth: CGFloat = kScreenWidth - 2 * kPadding
+    static let kMaxWidth: CGFloat = kScreenWidth - kPadding
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     
@@ -66,7 +66,7 @@ struct Constants {
     }
     
     //MasterVC
-    static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding, y: 124, width: kScreenWidth - 2 * kPadding, height: kScreenHeight - 124)
+    static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)
     
     //SettingsVC
@@ -78,11 +78,10 @@ struct Constants {
     static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 1.2 : 0.7
     static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 16.0 : 14.0
     
-    //DetailVC
-    static let kDetailWidth = kMaxWidth 
-    static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kNavigationBarRect.bottom, width: kDetailWidth, height: 220)
-    static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 1, width: kDetailWidth, height: 40)
-    static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom, width: kDetailWidth, height: kScreenHeight - kSegmentViewRect.bottom)
+    //DetailVC 
+    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: 220)
+    static let kSegmentViewRect: CGRect = CGRect(x: kPadding/2, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
+    static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     

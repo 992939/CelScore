@@ -49,13 +49,14 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
         }
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
-            cosmosView.rating = score
-        }
         
         let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        followSwitch.buttonOnColor = Constants.kWineShade
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
+            cosmosView.rating = score
+            followSwitch.buttonOnColor = score < celebrityStruct.prevScore ? Constants.kWineShade : Constants.kLightGreenShade
+        }
+    
         followSwitch.trackOnColor = followSwitch.trackOffColor
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)

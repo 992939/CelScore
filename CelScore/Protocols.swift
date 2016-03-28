@@ -57,8 +57,8 @@ extension Sociable {
         btn1.backgroundColor = buttonColor
         btn1.tintColor = MaterialColor.white
         btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)
-        btn1.setImage(R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        btn1.setImage(R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
+        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
         btn1.addTarget(controller, action: Selector("handleMenu:"), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn1)
         

@@ -43,7 +43,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
-        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kDetailWidth, height: gaugeHeight))
+        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:))))
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
@@ -53,8 +53,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.minValue = Constants.kMinimumVoteValue
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 0.65 * Constants.kDetailWidth
-        gauge.frame = CGRect(x: (Constants.kDetailWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
+        let gaugeWidth: CGFloat = 0.65 * Constants.kMaxWidth
+        gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
         gauge.limitDotColor = Constants.kDarkGreenShade
@@ -69,9 +69,9 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     
     func getView(y positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
         let consensusLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
-        let infoLabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kDetailWidth - (consensusLabel.width + Constants.kPadding), height: 25))
+        let infoLabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kMaxWidth - (consensusLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
-        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kDetailWidth, height: 30))
+        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
             .startWithNext({ status in

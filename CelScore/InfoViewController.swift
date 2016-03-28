@@ -42,7 +42,7 @@ final class InfoViewController: ASViewController, Labelable {
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                     .startWithNext({ score in
                         for (index, quality) in Info.getAll().enumerate() {
-                            let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kDetailWidth, height: 30))
+                            let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: 30))
                             qualityView.tag = index+1
                             let qualityLabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
                             var infoLabelText = ""
@@ -70,10 +70,10 @@ final class InfoViewController: ASViewController, Labelable {
                             
                             let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
-                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
+                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: 25))
                                 infoLabel!.attributedText = attributedText
                             } else {
-                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kDetailWidth - (qualityLabel.width + Constants.kPadding), height: 25))
+                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: 25))
                             }
                             infoLabel!.textAlignment = .Right
                             qualityView.depth = .Depth1

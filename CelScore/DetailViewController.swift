@@ -123,8 +123,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 MaterialAnimation.delay(2.0) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
-                    self.voteButton.setImage(R.image.vote_black()!, forState: .Normal)
-                    self.voteButton.setImage(R.image.vote_black()!, forState: .Highlighted)
+                    self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
+                    self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
                     self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }})
             .flatMapError { _ in SignalProducer.empty }
@@ -215,8 +215,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton.enabled = true
         self.voteButton.pulseScale = true
         self.voteButton.backgroundColor = Constants.kStarRatingShade
-        self.voteButton.setImage(R.image.vote_black()!, forState: .Normal)
-        self.voteButton.setImage(R.image.vote_black()!, forState: .Highlighted)
+        self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
+        self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
     }
@@ -256,7 +256,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 }
             })
             
-        } else { self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.vote_green()! : R.image.vote_purple()!) }
+        } else { self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!) }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -287,8 +287,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func enableVoteButton(positive positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.enabled = true
-            self.voteButton.setImage(R.image.vote_white()!, forState: .Normal)
-            self.voteButton.setImage(R.image.vote_white()!, forState: .Highlighted)
+            self.voteButton.setImage(R.image.heart_white()!, forState: .Normal)
+            self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
@@ -367,12 +367,12 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-        self.voteButton.frame = CGRect(x: Constants.kDetailWidth - 45, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - 45, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
         self.voteButton.tintColor = MaterialColor.white
-        self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.vote_green()! : R.image.vote_purple()!)
+        self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!)
     }
 }
 

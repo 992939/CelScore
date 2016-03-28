@@ -33,7 +33,7 @@
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:100]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
-#define kDefaultUnitOfMeasurement               @"c-score"
+#define kDefaultUnitOfMeasurement               @"the Score"
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 

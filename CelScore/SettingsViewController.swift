@@ -88,7 +88,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             .start()
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
+            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
             self.node.addSubnode(positiveBarNode)
         })
         
@@ -114,12 +114,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 40, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
                 self.node.addSubnode(notificationNode)
             })
         
         //Logout
-        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 75 + Constants.kPadding, width: maxWidth, height: 40))
+        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 40))
         let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: Constants.kPadding/2, width: 100, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
@@ -215,7 +215,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
         let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 40, height: 40))
-        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 10, width: 30, height: 30))
+        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
         box.onAnimationType = .Bounce
