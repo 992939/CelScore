@@ -62,7 +62,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
         
         let cardView: MaterialPulseView = MaterialPulseView()
-        cardView.borderWidth = 1.0
+        cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kDarkShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
         self.backgroundNode.backgroundColor = Constants.kMainShade
