@@ -52,6 +52,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
+        self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         self.sideNavigationController!.delegate = self
         
