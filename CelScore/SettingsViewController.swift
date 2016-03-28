@@ -71,7 +71,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion Ratio", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
+                let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
                 self.node.addSubnode(publicOpinionBarNode) })
             .filter({ (value: CGFloat) -> Bool in return value == 100.0 })
             .promoteErrors(NSError)
@@ -88,7 +88,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
             .start()
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote Ratio", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
+            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Vote %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
             self.node.addSubnode(positiveBarNode)
         })
         
@@ -213,9 +213,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
-        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 30))
-        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 30, height: 30))
-        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 30, y: 5, width: 20, height: 20))
+        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
+        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 40, height: 40))
+        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 10, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
         box.onAnimationType = .Bounce

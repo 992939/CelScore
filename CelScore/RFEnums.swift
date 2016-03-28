@@ -56,20 +56,20 @@ enum OverlayInfo: Int {
     func message() -> String {
         switch self {
         case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
-        case .MenuAccess: return "Welcome to the courthouse!\n\nA court where no pledge nor oath is required.\n\nA court where you only need to show your I.D to enter."
-        case .LoginSuccess: return "Welcome into the courthouse,\nwhere we study the stars and share opinions\nwhere we come together and build consensus.\n\nPlease, vote responsibly."
-        case .MaxFollow: return "blah blah blah blah blah blah blah blah."
-        case .FirstFollow: return "blah blah blah blah blah blah blah blah."
-        case .FirstConsensus: return "\"Keep your eyes on the stars, and your feet on the ground.\"\n- Theodore Roosevelt\n\nThe consensus will be revealed after casting your votes."
-        case .FirstPublic: return "\"All humanity is connnected through a universal bond of sharing.\"\n- Ubuntu\n\nWelcome to the road less traveled of public service. You can pave the way for others to join the consensus by long pressing on a star quality."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIn the courthouse stars are symbols, the consensus a journey to explore star qualities and reveal what makes them shine bright."
-        case .FirstNegative: return "\"Two men look out the same prison bars; one sees mud and the other stars.\"\n- Beck\n\nWelcome to the other side."
-        case .FirstInterest: return "blah blah blah blah blah blah blah blah. Your selection is automatically saved."
-        case .FirstCompleted: return "blah blah blah blah blah blah blah blah."
-        case .FirstVoteDisable: return "\"blah blah blah blah blah blah blah blah."
-        case .LogoutUser: return "\"We are all of us stars, and we deserve to twinkle.\"\n- Marilyn Monroe\n\nThe courthouse hates to see you go, but we thank you for your votes and for building the consensus."
-        case .LoginError: return "blah blah blah blah blah blah blah blah."
-        case .NetworkError: return "blah blah blah blah blah blah blah blah."
+        case .MenuAccess: return "\"Life all comes down to a few moments. This is one of them.\"\n- Charlie Sheen\n\nYou will need to log in to access this area."
+        case .LoginSuccess: return "\"You either love or you hate. You live in the middle, you get nothing.\"\n- Charlie Sheen\n\nPlease vote responsibly, and may the Score be with you."
+        case .MaxFollow: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nYou've reached the maximum of stars you can follow."
+        case .FirstFollow: return "\"I just didn't believe I was like everybody else. I thought I was unique.\"\n- Charlie Sheen\n\nYou can follow up to ten unique individuals."
+        case .FirstConsensus: return "\"You're either in my corner, or you're with the trolls.\"\n- Charlie Sheen\n\nThe consensus will be revealed after casting your votes."
+        case .FirstPublic: return "\"There’s been a tsunami of media, and I’ve been riding it on a mercury surfboard.\"\n- Charlie Sheen\n\nYou can join the tsunami by long pressing a star quality."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining from within.\n\nMay the Score be with you."
+        case .FirstNegative: return "Welcome to the purple side of the Score."
+        case .FirstInterest: return "Your selection is saved automatically."
+        case .FirstCompleted: return "You've cast your votes on every star throughout the constellation.\n\nThank you, and may the Score always be with you."
+        case .FirstVoteDisable: return "\"I don't think people are ready for the message that I'm delivering with a sense of violent love.\"\n- Charlie Sheen\n\nYou will need to log in to deliver your love."
+        case .LogoutUser: return "\"They were like 'AA this' and I was like 'Bye bye that.'\"\n- Charlie Sheen\n\nThe courthouse hates to see you go, but we thank you for your votes."
+        case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are unable to log you in. Please try again at a later time."
+        case .NetworkError: return "\"I still don't have all the answers.\"\n- Charlie Sheen\n\nWe are unable to connect to the network. Please check your network settings."
         }
     }
     
@@ -128,9 +128,9 @@ enum Info: Int {
     
     func name() -> String {
         switch self {
-        case .FirstName: return "FirstName"
-        case .MiddleName: return "MiddleName"
-        case .LastName: return "LastName"
+        case .FirstName: return "First Name"
+        case .MiddleName: return "Middle Name"
+        case .LastName: return "Last Name"
         case .From: return "From"
         case .Birthdate: return "Date of Birth"
         case .Height: return "Height"
@@ -258,13 +258,13 @@ enum ListInfo : Int {
     
     func name() -> String {
         switch self {
-        case .PublicOpinion: return "#PublicOpinion"
-        case .Hollywood: return "#Hollywood"
-        case .HipHop: return "#HipHop"
-        case .Sports: return "#Sports"
-        case .Music: return "#Music"
-        case .Television: return "#Television"
-        case .News: return "#News"
+        case .PublicOpinion: return "Public Opinion"
+        case .Hollywood: return "Hollywood"
+        case .HipHop: return "Hip Hop"
+        case .Sports: return "Sports"
+        case .Music: return "Music"
+        case .Television: return "Television"
+        case .News: return "News"
         }
     }
     
