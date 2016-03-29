@@ -98,4 +98,11 @@ extension Sociable {
         menuView.menu.views = [btn1, btn2, btn3]
         menuView.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func hideSocialButton(menuView: MenuView) {
+        menuView.menu.close()
+        menuView.hidden = true
+        let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
+        first!.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+    }
 }

@@ -125,28 +125,60 @@ public class MaterialSwitch : UIControl {
 	}
 	
 	/// Button on color.
-	@IBInspectable public var buttonOnColor: UIColor = MaterialColor.clear
+	@IBInspectable public var buttonOnColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Button off color.
-	@IBInspectable public var buttonOffColor: UIColor = MaterialColor.clear
+	@IBInspectable public var buttonOffColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Track on color.
-	@IBInspectable public var trackOnColor: UIColor = MaterialColor.clear
+	@IBInspectable public var trackOnColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Track off color.
-	@IBInspectable public var trackOffColor: UIColor = MaterialColor.clear
+	@IBInspectable public var trackOffColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Button on disabled color.
-	@IBInspectable public var buttonOnDisabledColor: UIColor = MaterialColor.clear
+	@IBInspectable public var buttonOnDisabledColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Track on disabled color.
-	@IBInspectable public var trackOnDisabledColor: UIColor = MaterialColor.clear
+	@IBInspectable public var trackOnDisabledColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Button off disabled color.
-	@IBInspectable public var buttonOffDisabledColor: UIColor = MaterialColor.clear
+	@IBInspectable public var buttonOffDisabledColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Track off disabled color.
-	@IBInspectable public var trackOffDisabledColor: UIColor = MaterialColor.clear
+	@IBInspectable public var trackOffDisabledColor: UIColor = MaterialColor.clear {
+		didSet {
+			styleForState(switchState)
+		}
+	}
 	
 	/// Track view reference.
 	public private(set) var trackLayer: MaterialLayer {
@@ -264,6 +296,24 @@ public class MaterialSwitch : UIControl {
 	}
 	
 	/**
+	An initializer that initializes the object with a CGRect object.
+	If AutoLayout is used, it is better to initilize the instance
+	using the init(state:style:size:) initializer, or set the CGRect
+	to CGRectNull.
+	- Parameter frame: A CGRect instance.
+	*/
+	public override init(frame: CGRect) {
+		trackLayer = MaterialLayer()
+		button = FabButton()
+		super.init(frame: frame)
+		prepareTrack()
+		prepareButton()
+		prepareSwitchSize(.Default)
+		prepareSwitchStyle(.LightContent)
+		prepareSwitchState(.Off)
+	}
+	
+	/**
 	An initializer that sets the state, style, and size of the MaterialSwitch instance.
 	- Parameter state: A MaterialSwitchState value.
 	- Parameter style: A MaterialSwitchStyle value.
@@ -338,16 +388,12 @@ public class MaterialSwitch : UIControl {
 		}
 	}
 	
-	/// Handles the TouchUpInside event.
-	internal func handleTouchUpInside() {
-		toggle()
-	}
-	
 	/**
 	Handle the TouchUpOutside and TouchCancel events.
 	- Parameter sender: A UIButton.
 	- Parameter event: A UIEvent.
 	*/
+	@objc(handleTouchUpOutsideOrCanceled:event:)
 	internal func handleTouchUpOutsideOrCanceled(sender: FabButton, event: UIEvent) {
 		if let v: UITouch = event.touchesForView(sender)?.first {
 			let q: CGFloat = sender.x + v.locationInView(sender).x - v.previousLocationInView(sender).x
@@ -355,11 +401,17 @@ public class MaterialSwitch : UIControl {
 		}
 	}
 	
+	/// Handles the TouchUpInside event.
+	internal func handleTouchUpInside() {
+		toggle()
+	}
+	
 	/**
 	Handle the TouchDragInside event.
 	- Parameter sender: A UIButton.
 	- Parameter event: A UIEvent.
 	*/
+	@objc(handleTouchDragInside:event:)
 	internal func handleTouchDragInside(sender: FabButton, event: UIEvent) {
 		if let v = event.touchesForView(sender)?.first {
 			let q: CGFloat = max(min(sender.x + v.locationInView(sender).x - v.previousLocationInView(sender).x, onPosition), offPosition)
@@ -383,10 +435,10 @@ public class MaterialSwitch : UIControl {
 	/// Prepares the button.
 	private func prepareButton() {
 		button.pulseColor = nil
-		button.addTarget(self, action: "handleTouchUpOutsideOrCanceled:event:", forControlEvents: .TouchUpOutside)
-		button.addTarget(self, action: "handleTouchUpInside", forControlEvents: .TouchUpInside)
-		button.addTarget(self, action: "handleTouchDragInside:event:", forControlEvents: .TouchDragInside)
-		button.addTarget(self, action: "handleTouchUpOutsideOrCanceled:event:", forControlEvents: .TouchCancel)
+		button.addTarget(self, action: #selector(handleTouchUpInside), forControlEvents: .TouchUpInside)
+		button.addTarget(self, action: #selector(handleTouchDragInside), forControlEvents: .TouchDragInside)
+		button.addTarget(self, action: #selector(handleTouchUpOutsideOrCanceled), forControlEvents: .TouchCancel)
+		button.addTarget(self, action: #selector(handleTouchUpOutsideOrCanceled), forControlEvents: .TouchUpOutside)
 		addSubview(button)
 	}
 	
@@ -423,7 +475,7 @@ public class MaterialSwitch : UIControl {
 	*/
 	private func styleForState(state: MaterialSwitchState) {
 		if enabled {
-			updateColorForEnabledState(state)
+			updateColorForState(state)
 		} else {
 			updateColorForDisabledState(state)
 		}
@@ -433,7 +485,7 @@ public class MaterialSwitch : UIControl {
 	Updates the coloring for the enabled state.
 	- Parameter state: MaterialSwitchState.
 	*/
-	private func updateColorForEnabledState(state: MaterialSwitchState) {
+	private func updateColorForState(state: MaterialSwitchState) {
 		if .On == state {
 			button.backgroundColor = buttonOnColor
 			trackLayer.backgroundColor = trackOnColor.CGColor

@@ -67,7 +67,7 @@ enum OverlayInfo: Int {
         case .FirstInterest: return "Your selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes on every star throughout the constellation.\n\nThank you, and may the Score always be with you."
         case .FirstVoteDisable: return "\"I don't think people are ready for the message that I'm delivering with a sense of violent love.\"\n- Charlie Sheen\n\nYou will need to log in to deliver your love."
-        case .LogoutUser: return "\"They were like 'AA this' and I was like 'Bye bye that.'\"\n- Charlie Sheen\n\nThe courthouse hates to see you go, but we thank you for your votes."
+        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes.\n\nMay the Score be with you."
         case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are unable to log you in. Please try again at a later time."
         case .NetworkError: return "\"I still don't have all the answers.\"\n- Charlie Sheen\n\nWe are unable to connect to the network. Please check your network settings."
         }

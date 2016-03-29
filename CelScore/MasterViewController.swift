@@ -54,7 +54,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
-        self.sideNavigationController!.delegate = self
+        self.sideNavigationController?.delegate = self
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
@@ -193,7 +193,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         self.dismissHUD()
                         self.handleMenu()
                         TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.socialButton.hidden = true }) })
+                        TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
                     .on(failed: { _ in self.dismissHUD() })
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().getUserInfoFromSignal(loginType: .Facebook) }

@@ -24,7 +24,7 @@ target 'CelScore' do
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
-    pod 'Material', '~> 1.37.3'
+    pod 'Material', '~> 1.38.2'
     pod 'OpinionzAlertView', '~> 0.3.1'
     pod 'R.swift', '~> 2.0.0'
     pod 'SVProgressHUD', '~> 2.0'
