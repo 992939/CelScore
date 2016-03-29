@@ -84,14 +84,15 @@ struct UserViewModel {
                     observer.sendCompleted()
                 }
             case .Twitter:
-                let client = TWTRAPIClient()
                 let statusesShowEndpoint = "https://api.twitter.com/1.1/users/lookup.json"
+                let client = TWTRAPIClient(userID: Twitter.sharedInstance().sessionStore.session()!.userID)
                 let params = ["id": Twitter.sharedInstance().sessionStore.session()!.userID]
+                print(Twitter.sharedInstance().sessionStore.session()!.userID)
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
                 guard clientError == nil else { observer.sendFailed(clientError!); return }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { observer.sendFailed(connectionError!); return }
+                    guard connectionError == nil else { print("YOLO: \(connectionError!.description)");observer.sendFailed(connectionError!); return }
                     let json = JSON(data: data!)
                     observer.sendNext(json.arrayObject!)
                     observer.sendCompleted()

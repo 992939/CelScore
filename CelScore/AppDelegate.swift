@@ -24,6 +24,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
+        //Realm
         let config = Realm.Configuration(
             schemaVersion: 11,
             migrationBlock: { migration, oldSchemaVersion in
@@ -46,14 +47,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
         
-        // AWS Cognito Access for authenticated requests
+        //AWS
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
-        // Anonymous Access
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         MACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
+        //UI
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = SideNavigationController(mainViewController: MasterViewController(), leftViewController: SettingsViewController())
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
