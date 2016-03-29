@@ -57,7 +57,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
-        gauge.limitDotColor = Constants.kDarkGreenShade
         gauge.valueTextColor = MaterialColor.white
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade

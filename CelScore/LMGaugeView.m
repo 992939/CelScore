@@ -28,7 +28,7 @@
 #define kDefaultSubDivisionsColor               [UIColor colorWithWhite:0.5 alpha:0.5]
 
 #define kDefaultLimitDotRadius                  2
-#define kDefaultLimitDotColor                   [UIColor redColor]
+#define kDefaultLimitDotColor                   [UIColor clearColor]
 
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:100]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
