@@ -59,8 +59,17 @@ struct Constants {
             circleLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius), cornerRadius: radius).CGPath
             circleLayer.position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(frame.width))), y: CGFloat(arc4random_uniform(UInt32(frame.height))))
             circleLayer.fillColor = Int(arc4random_uniform(UInt32(2))) == 1 ? kLightGreenShade.CGColor : kWineShade.CGColor
-            circleLayer.opacity = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
+            
+            let pathAnimation = CABasicAnimation(keyPath: "opacity")
+            pathAnimation.duration = 4.0
+            pathAnimation.removedOnCompletion = false
+            pathAnimation.fillMode = kCAFillModeForwards
+            pathAnimation.fromValue = NSNumber(float: 0.05)
+            let finalValue = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
+            pathAnimation.toValue = finalValue
+            circleLayer.addAnimation(pathAnimation, forKey: "animateOpacity")
             skyLayer.layer.addSublayer(circleLayer)
+            circleLayer.opacity = finalValue
         }
         return skyLayer
     }
