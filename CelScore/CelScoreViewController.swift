@@ -35,7 +35,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
             .startWithNext({ consensus -> () in
                 let percentage = String(consensus.roundToPlaces(2)) + "%"
-                self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "Social Consensus", value: percentage, tag: 2))
+                self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "General Consensus", value: percentage, tag: 2))
             })
         self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
         self.pulseView.backgroundColor = MaterialColor.clear
@@ -94,7 +94,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             })
         case 2:
             RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
-                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s social consensus is \(String(format: "%.2f", consensus))%")
+                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s general consensus is \(String(format: "%.2f", consensus))%")
             })
         case 3: self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         default: self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")

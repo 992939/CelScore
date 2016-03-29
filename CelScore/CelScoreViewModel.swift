@@ -72,7 +72,7 @@ struct CelScoreViewModel {
             case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             default: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
-            socialVC!.setInitialText("#PSA: \(message) #PLND")
+            socialVC!.setInitialText("\(message) #PeopleLieNumbersDont")
             observer.sendNext(socialVC!)
             observer.sendCompleted()
         }
