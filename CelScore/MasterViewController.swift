@@ -43,6 +43,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.sideNavigationController?.delegate = self
         if let index = self.celebrityTableView.indexPathForSelectedRow { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
         self.socialButton.hidden = false
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
@@ -54,7 +55,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
-        self.sideNavigationController?.delegate = self
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr

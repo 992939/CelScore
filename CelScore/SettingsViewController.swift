@@ -215,7 +215,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
         let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 40, height: 40))
-        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
+        let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 27, height: 27))
         box.delegate = self
         box.tag = tag
         box.onAnimationType = .Bounce

@@ -61,7 +61,7 @@ enum OverlayInfo: Int {
         case .MaxFollow: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nYou've reached the maximum of stars you can follow."
         case .FirstFollow: return "\"I just didn't believe I was like everybody else. I thought I was unique.\"\n- Charlie Sheen\n\nYou can follow up to ten unique individuals."
         case .FirstConsensus: return "\"You're either in my corner, or you're with the trolls.\"\n- Charlie Sheen\n\nThe consensus will be revealed after casting your votes."
-        case .FirstPublic: return "\"There’s been a tsunami of media, and I’ve been riding it on a mercury surfboard.\"\n- Charlie Sheen\n\nYou can join the tsunami by long pressing a star quality."
+        case .FirstPublic: return "\"The way you can understand all of the social media is as the creation of a new kind of public space\"\n- Danah Boyd\n\n."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them.\n\nMay the Score be with you."
         case .FirstNegative: return "Welcome to the purple side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
