@@ -78,10 +78,10 @@ enum OverlayInfo: Int {
         case .WelcomeUser: return R.image.court_green()!
         case .MenuAccess: return R.image.passport_green()!
         case .LoginSuccess: return R.image.court_green()!
-        case .MaxFollow: return R.image.telescope_green()!
+        case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.telescope_green()!
-        case .FirstConsensus: return R.image.observatory_green()!
-        case .FirstPublic: return R.image.road_green()!
+        case .FirstConsensus: return R.image.geometry_green()!
+        case .FirstPublic: return R.image.antenna_green()!
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.vote_purple()!
         case .FirstInterest: return R.image.compass_green()!
