@@ -170,7 +170,7 @@ enum Qualities: Int {
     case Elegance
     case SexAppeal
     
-    static func getAll() -> [String] {
+    static func getAll(isMale isMale: Bool = true) -> [String] {
         return [
             Talent.name(),
             Originality.name(),
@@ -179,13 +179,13 @@ enum Qualities: Int {
             RoleModel.name(),
             HardWork.name(),
             Smarts.name(),
-            Charisma.name(),
+            Charisma.name(isMale: isMale),
             Elegance.name(),
-            SexAppeal.name()
+            SexAppeal.name(isMale: isMale)
         ]
     }
 
-    func name() -> String {
+    func name(isMale isMale: Bool = true) -> String {
         switch self {
         case .Talent: return "Talent"
         case .Originality: return "Originality"
@@ -194,13 +194,13 @@ enum Qualities: Int {
         case .RoleModel: return "Role Model"
         case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
-        case .Charisma: return "Charisma"
+        case .Charisma: return isMale ? "Charisma" : "Charm"
         case .Elegance: return "Elegance"
-        case .SexAppeal: return "Handsome"
+        case .SexAppeal: return isMale ? "Handsome" : "Beauty"
         }
     }
     
-    func text() -> String {
+    func text(isMale isMale: Bool = true) -> String {
         switch self {
         case .Talent: return "talent is"
         case .Originality: return "originality is"
@@ -209,9 +209,9 @@ enum Qualities: Int {
         case .RoleModel: return "as a role model is"
         case .HardWork: return "work ethic is"
         case .Smarts: return "smarts are"
-        case .Charisma: return "charisma is"
+        case .Charisma: return isMale ? "charisma is" : "charm is"
         case .Elegance: return "elegance is"
-        case .SexAppeal: return "handsomeness is"
+        case .SexAppeal: return isMale ? "handsomeness is" : "beauty is"
         }
     }
 }

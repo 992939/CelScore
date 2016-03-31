@@ -17,7 +17,7 @@
 #import <WebASDKImageManager/WebASDKImageManager.h>
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
-#import "MACelScoreAPIClient.h"
+#import "BECelScoreAPIClient.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"
 #import "TAOverlay.h"
