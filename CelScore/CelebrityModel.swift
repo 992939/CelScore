@@ -45,8 +45,6 @@ final class CelebrityModel: Object, NSCopying {
     dynamic var picture2x: String = ""
     dynamic var picture3x: String = ""
     dynamic var from: String = ""
-    dynamic var backgroundPic: String = ""
-    dynamic var backgroundColor: String = ""
     dynamic var prevScore: Double = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
@@ -67,8 +65,6 @@ final class CelebrityModel: Object, NSCopying {
         self.picture2x = json["picture2x"].string!
         self.picture3x = json["picture3x"].string!
         self.from = json["from"].string!
-        self.backgroundPic = json["backgroundPic"].string!
-        self.backgroundColor = json["backgroundColor"].string!
         self.rank = json["rank"].string!
         self.status = json["status"].string!
         self.twitter = json["twitter"].string!
@@ -100,8 +96,6 @@ final class CelebrityModel: Object, NSCopying {
         copy.picture2x = self.picture2x
         copy.picture3x = self.picture3x
         copy.from = self.from
-        copy.backgroundPic = self.backgroundPic
-        copy.backgroundColor = self.backgroundColor
         copy.prevScore = self.prevScore
         copy.sex = self.sex
         copy.isFollowed = self.isFollowed
