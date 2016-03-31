@@ -34,7 +34,7 @@ final class RatingsViewController: ASViewController {
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
-                for (index, quality) in Qualities.getAll().enumerate() {
+                for (index, quality) in Qualities.getAll(isMale: self.celebST.sex).enumerate() {
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: 30))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
@@ -64,7 +64,7 @@ final class RatingsViewController: ASViewController {
                     case Qualities.HardWork.name(): cosmosView.rating = ratings.rating6
                     case Qualities.Smarts.name(): cosmosView.rating = ratings.rating7
                     case Qualities.Elegance.name(): cosmosView.rating = ratings.rating8
-                    case Qualities.Charisma.name(): cosmosView.rating = ratings.rating9
+                    case Qualities.Charisma.name() : cosmosView.rating = ratings.rating9
                     case Qualities.SexAppeal.name(): cosmosView.rating = ratings.rating10
                     default: cosmosView.rating = 3 }
                     cosmosView.settings.starSize = 22

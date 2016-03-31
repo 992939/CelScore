@@ -15,9 +15,8 @@ struct CelebrityStruct {
     let id: String
     let imageURL: String
     let nickname: String
-    let height: String
-    let netWorth: String
     let prevScore: Double
+    let sex: Bool
     let isFollowed: Bool
     
     

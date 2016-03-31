@@ -77,9 +77,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             id: userActivity.userInfo!["id"] as! String,
             imageURL: userActivity.userInfo!["imageURL"] as! String,
             nickname: userActivity.userInfo!["nickname"] as! String,
-            height: userActivity.userInfo!["height"] as! String,
-            netWorth: userActivity.userInfo!["netWorth"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
+            sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"]as! Bool)
         
         self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)

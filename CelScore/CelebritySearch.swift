@@ -15,12 +15,12 @@ extension CelebrityStruct {
     
     //MARK: Properties
     static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
-    var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id, "imageURL": imageURL, "nickname": nickname, "height": height, "netWorth": netWorth, "prevScore": prevScore, "isFollowed": isFollowed] }
+    var userActivityUserInfo: [NSObject: AnyObject] { return ["id": id, "imageURL": imageURL, "nickname": nickname, "prevScore": prevScore, "sex":sex, "isFollowed": isFollowed] }
     var userActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
-        activity.keywords = [nickname, "celebrity", "birthday", "score", "height", "net worth", "age", "zodiac"]
+        activity.keywords = [nickname, "celebrity", "stars", "consensus", "celscore"]
         activity.contentAttributeSet = attributeSet
         activity.eligibleForSearch = true
         activity.eligibleForPublicIndexing = true
