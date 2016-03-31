@@ -62,9 +62,9 @@
 		00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DD1B3539480078CA6E /* MasterViewController.swift */; };
 		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
-		00FEF1731CAC8645004141B3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1721CAC8645004141B3 /* R.generated.swift */; };
 		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
 		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
+		00FEF17D1CAD04B1004141B3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF17C1CAD04B1004141B3 /* R.generated.swift */; };
 		0A69B17CE38068A38B02E7C9 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949633FB8E22A987510204C8 /* Pods_CelScore.framework */; };
 		4D5BBBC4D93DB876C2CCE37C /* Pods_CelScoreWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EC253DFF607BB839F0F9E /* Pods_CelScoreWidget.framework */; };
 /* End PBXBuildFile section */
@@ -163,11 +163,11 @@
 		00F6C9E11B353A670078CA6E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		00F902191C8BC9A0009AD588 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
 		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
-		00FEF1721CAC8645004141B3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BECelScoreAPIClient.h; sourceTree = "<group>"; };
 		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
 		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
 		00FEF1771CACE5C6004141B3 /* BEEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEEmpty.m; sourceTree = "<group>"; };
+		00FEF17C1CAD04B1004141B3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		68FA6FC22105C363C5A76B77 /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
 		84F5752F6C1F5E1983876F62 /* Pods-CelScoreWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig"; sourceTree = "<group>"; };
 		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,9 +300,9 @@
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
-				00FEF1721CAC8645004141B3 /* R.generated.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */,
+				00FEF17C1CAD04B1004141B3 /* R.generated.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
 				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
@@ -729,7 +729,7 @@
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
-				00FEF1731CAC8645004141B3 /* R.generated.swift in Sources */,
+				00FEF17D1CAD04B1004141B3 /* R.generated.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

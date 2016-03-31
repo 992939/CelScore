@@ -72,7 +72,7 @@ final class CelebrityModel: Object, NSCopying {
         self.isSynced = true
         
         let realm = try! Realm()
-        let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first!
+        let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
     }
     

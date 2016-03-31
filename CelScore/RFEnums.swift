@@ -55,14 +55,14 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nWelcome to the Courthouse of Public Opinion."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThe CelScore is a constellation, a set of stars to gaze upon."
         case .MenuAccess: return "\"Life all comes down to a few moments. This is one of them.\"\n- Charlie Sheen\n\nYou will need to log in to access this area."
-        case .LoginSuccess: return "\"You either love or you hate. You live in the middle, you get nothing.\"\n- Charlie Sheen\n\nPlease vote responsibly, and may the Score be with you."
+        case .LoginSuccess: return "Welcome to the Courthouse of Public Opinion!\n\nPlease vote responsibly, and may the Score be with you."
         case .MaxFollow: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nYou've reached the maximum of stars you can follow."
         case .FirstFollow: return "\"I just didn't believe I was like everybody else. I thought I was unique.\"\n- Charlie Sheen\n\nYou can follow up to ten unique individuals."
         case .FirstConsensus: return "The consensus will be revealed after casting your votes."
         case .FirstPublic: return "\"Social media is the creation of a new kind of public space.\"\n- Danah Boyd\n\n."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them.\n\nMay the Score be with you."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them."
         case .FirstNegative: return "Welcome to the purple side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes on every star throughout the constellation.\n\nThank you, and may the Score always be with you."
@@ -75,18 +75,18 @@ enum OverlayInfo: Int {
     
     func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return R.image.court_green()!
+        case .WelcomeUser: return R.image.observatory_green()!
         case .MenuAccess: return R.image.passport_green()!
         case .LoginSuccess: return R.image.court_green()!
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.telescope_green()!
         case .FirstConsensus: return R.image.geometry_green()!
         case .FirstPublic: return R.image.antenna_green()!
-        case .FirstStars: return R.image.spaceship_green()!
+        case .FirstStars: return R.image.constellation_green()!
         case .FirstNegative: return R.image.vote_purple()!
         case .FirstInterest: return R.image.compass_green()!
         case .FirstCompleted: return R.image.planet_green()!
-        case .FirstVoteDisable: return R.image.vote_green()!
+        case .FirstVoteDisable: return R.image.spaceship_green()!
         case .LogoutUser: return R.image.planet_green()!
         case .LoginError: return R.image.antenna_green()!
         case .NetworkError: return R.image.antenna_green()!
