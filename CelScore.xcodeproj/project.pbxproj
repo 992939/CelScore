@@ -65,7 +65,6 @@
 		00FEF1731CAC8645004141B3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1721CAC8645004141B3 /* R.generated.swift */; };
 		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
 		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
-		00FEF17B1CACF4F2004141B3 /* Classes in Resources */ = {isa = PBXBuildFile; fileRef = 00FEF17A1CACF4F2004141B3 /* Classes */; };
 		0A69B17CE38068A38B02E7C9 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949633FB8E22A987510204C8 /* Pods_CelScore.framework */; };
 		4D5BBBC4D93DB876C2CCE37C /* Pods_CelScoreWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EC253DFF607BB839F0F9E /* Pods_CelScoreWidget.framework */; };
 /* End PBXBuildFile section */
@@ -169,7 +168,6 @@
 		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
 		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
 		00FEF1771CACE5C6004141B3 /* BEEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEEmpty.m; sourceTree = "<group>"; };
-		00FEF17A1CACF4F2004141B3 /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Classes; sourceTree = "<group>"; };
 		68FA6FC22105C363C5A76B77 /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
 		84F5752F6C1F5E1983876F62 /* Pods-CelScoreWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig"; sourceTree = "<group>"; };
 		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,7 +297,6 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				00FEF17A1CACF4F2004141B3 /* Classes */,
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
@@ -543,7 +540,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00315C501C9926E500003B76 /* icomoon.ttf in Resources */,
-				00FEF17B1CACF4F2004141B3 /* Classes in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);
