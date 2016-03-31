@@ -82,16 +82,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         //                .start()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
-            .observeOn(QueueScheduler.mainQueueScheduler)
             .startWithNext { _ in
-                RateLimit.execute(name: "OneADayRefresh", limit: 10) {
+                RateLimit.execute(name: "DailyAWSRefresh", limit: 10) {
                     CelScoreViewModel().getFromAWSSignal(dataType: .List)
+                        .observeOn(UIScheduler())
                         .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, ListError> in
                             return ListViewModel().updateListsSignal() }
-                        .on(next: { list in print("list count:\(list)") })
+                        .on(next: { list in print("next list") })
                         .start()
                 }
         }
@@ -117,6 +117,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func setupData() {
         self.showHUD()
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+            .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -153,6 +154,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getListSignal(listId: list.getId())
+            .observeOn(UIScheduler())
             .startWithNext({ list in
                 self.count = list.count
                 self.celebrityTableView.beginUpdates()
@@ -222,6 +224,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         var node = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: list.getId(), index: indexPath.row)
+            .observeOn(UIScheduler())
             .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }

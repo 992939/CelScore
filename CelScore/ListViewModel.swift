@@ -53,7 +53,6 @@ struct ListViewModel {
                 guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
                 let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
                 
-                print("count: \(followed.count)")
                 guard followed.count > 0 else { observer.sendNext(followed); return }
                 var notFollowing: [(index: Int, celebId: CelebId)] = []
                 let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
@@ -88,9 +87,9 @@ struct ListViewModel {
             let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList: ListsModel = list else { observer.sendFailed(.EmptyList); return }
             let celebId: CelebId = celebList.celebList[index]
-            let celebrity = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
-            guard let celeb = celebrity else { observer.sendFailed(.EmptyList); return }
-            observer.sendNext(CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, height: celeb.height, netWorth: celeb.netWorth, prevScore: celeb.prevScore, isFollowed:celeb.isFollowed))
+            let celeb = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
+            guard celeb?.id.isEmpty == false else { observer.sendFailed(.EmptyList); return }
+            observer.sendNext(CelebrityStruct(id: celeb!.id, imageURL:celeb!.picture3x, nickname:celeb!.nickName, height: celeb!.height, netWorth: celeb!.netWorth, prevScore: celeb!.prevScore, isFollowed:celeb!.isFollowed))
             observer.sendCompleted()
         }
     }

@@ -133,11 +133,11 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     //MARK: MaterialSwitchDelegate
     func materialSwitchStateChanged(control: MaterialSwitch) {
         if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
-            .observeOn(QueueScheduler.mainQueueScheduler)
+            .observeOn(UIScheduler())
             .start()
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
-                .observeOn(QueueScheduler.mainQueueScheduler)
+                .observeOn(UIScheduler())
                 .startWithNext { count in
                     if count == 0 { SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithNext({ first in
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()

@@ -44,18 +44,19 @@ struct CelScoreViewModel {
                 json["Items"].arrayValue.forEach({ data in
                     let awsObject : Object
                     switch dataType {
-                    case .Celebrity: awsObject = CelebrityModel(json: data)
+                    case .Celebrity:
+                        awsObject = CelebrityModel(json: data)
                     case .List: awsObject = ListsModel(json: data)
                     case .Ratings: awsObject = RatingsModel(json: data)
                     }
                     
-                    let realm = try! Realm()
-                    realm.beginWrite()
-                    realm.add(awsObject, update: true)
-                    try! realm.commitWrite()
-                    //print(awsObject)
-//                    dispatch_async(dispatch_queue_create("background", nil)) {
-//                    }
+                    dispatch_async(dispatch_get_main_queue()){
+                        let realm = try! Realm()
+                        realm.beginWrite()
+                        realm.add(awsObject, update: true)
+                        try! realm.commitWrite()
+                        //print(awsObject)
+                    }
                 })
                 observer.sendNext(task.result!)
                 return task

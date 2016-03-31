@@ -19,6 +19,8 @@ struct CelebrityStruct {
     let netWorth: String
     let prevScore: Double
     let isFollowed: Bool
+    
+    
 }
 
 extension CelebrityStruct: Equatable {}
@@ -73,6 +75,10 @@ final class CelebrityModel: Object, NSCopying {
         self.prevScore = json["prevScore"].double!
         self.sex = json["sex"].bool!
         self.isSynced = true
+        
+        let realm = try! Realm()
+        let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first!
+        if let object = celebrity { self.isFollowed = object.isFollowed }
     }
     
     //MARK: Methods
