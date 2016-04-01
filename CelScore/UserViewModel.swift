@@ -27,12 +27,9 @@ struct UserViewModel {
             case .Facebook:
                 Constants.kCredentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
             case .Twitter:
-                Twitter.sharedInstance().logInWithCompletion {
-                    (session, error) -> Void in
-                    if session != nil {
-                        let value = session!.authToken + ";" + session!.authTokenSecret
-                        Constants.kCredentialsProvider.logins = ["api.twitter.com": value]
-                    } else { print("error: \(error!.localizedDescription)") }
+                Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
+                    guard session != nil else { print("error: \(error!.localizedDescription)"); return }
+                    Constants.kCredentialsProvider.logins = ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]
                 }
             default: break
             }
@@ -86,15 +83,15 @@ struct UserViewModel {
             case .Twitter:
                 let statusesShowEndpoint = "https://api.twitter.com/1.1/users/lookup.json"
                 let client = TWTRAPIClient(userID: Twitter.sharedInstance().sessionStore.session()!.userID)
-                let params = ["id": Twitter.sharedInstance().sessionStore.session()!.userID]
+                let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
                 print(Twitter.sharedInstance().sessionStore.session()!.userID)
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
                 guard clientError == nil else { observer.sendFailed(clientError!); return }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { print("YOLO: \(connectionError!.description)");observer.sendFailed(connectionError!); return }
+                    guard connectionError == nil else { observer.sendFailed(connectionError!); return }
                     let json = JSON(data: data!)
-                    observer.sendNext(json.arrayObject!)
+                    observer.sendNext(json.arrayObject![0])
                     observer.sendCompleted()
                 }
             default: break
@@ -113,7 +110,7 @@ struct UserViewModel {
                 let realm = try! Realm()
                 
                 switch dataSetType {
-                case .UserInfo:
+                case .FacebookInfo:
                     if dataset.getAll().count == 0 {
                         dataset.setString(object.objectForKey("name") as! String, forKey: "name")
                         dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
@@ -129,6 +126,7 @@ struct UserViewModel {
                         dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
                         dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                     }
+                case .TwitterInfo: print("Twitter")
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
@@ -180,7 +178,8 @@ struct UserViewModel {
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
                 switch dataSetType {
-                case .UserInfo: fatalError("Not storing user information locally")
+                case .FacebookInfo: fatalError("Not storing user information locally")
+                case .TwitterInfo: fatalError("Not storing user information locally")
                 case .UserRatings:
                     realm.beginWrite()
                     dataset.getAll().forEach({ dico in

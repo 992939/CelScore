@@ -45,8 +45,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         if let index = self.celebrityTableView.indexPathForSelectedRow { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.socialButton.hidden = false
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialButton.hidden = true }
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+            self.socialButton.hidden = true
+            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        let type = SocialLogin(rawValue:value as! Int)!
+                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+                        return UserViewModel().loginSignal(token: token, loginType: type) }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+                    .start()
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -74,12 +91,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
-        
-        //            UserViewModel().loginSignal(token: FBSDKAccessToken.currentAccessToken().tokenString, loginType: .Facebook)
-        //                .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-        //                    return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings)
-        //                }
-        //                .start()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
             .startWithNext { _ in
@@ -185,9 +196,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                 guard result.isCancelled == false else { return }
+                FBSDKAccessToken.setCurrentAccessToken(result.token)
                 self.showHUD()
                 
-                FBSDKAccessToken.setCurrentAccessToken(result.token)
                 UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
                     .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
@@ -200,17 +211,35 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().getUserInfoFromSignal(loginType: .Facebook) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .UserInfo) }
+                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .FacebookInfo) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
                         return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
+                    .map({ _ in return SettingsViewModel().updateSettingSignal(value: SocialLogin.Facebook.rawValue, settingType: .LoginTypeIndex).start() })
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
                     .start()
             })
         } else {
-            self.showHUD()
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                UserViewModel().getUserInfoFromSignal(loginType: .Twitter).start()
+                self.showHUD()
+                
+                UserViewModel().getUserInfoFromSignal(loginType: .Twitter)
+                    .retry(Constants.kNetworkRetry)
+                    .observeOn(UIScheduler())
+                    .on(next: { _ in
+                        self.dismissHUD()
+                        self.handleMenu()
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
+                    .on(failed: { _ in self.dismissHUD() })
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .TwitterInfo) }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                        print("value \(value.description)")
+                        return SettingsViewModel().updateUserName(username: value.objectForKey("screen_name") as! String) }
+                    .map({ _ in return SettingsViewModel().updateSettingSignal(value: SocialLogin.Twitter.rawValue, settingType: .LoginTypeIndex).start() })
+                    .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
+                    .start()
             }
         }
     }

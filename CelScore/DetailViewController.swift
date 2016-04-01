@@ -113,10 +113,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-            .observeOn(UIScheduler())
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
+            .observeOn(UIScheduler())
             .on(next: { (userRatings:RatingsModel) in
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
@@ -125,7 +125,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
-                    self.voteButton.animate(MaterialAnimation.rotate(angle: 1))
                 }})
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -149,7 +148,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             })
     }
     
-    //MARK: socialButton delegate
     func handleMenu(open: Bool = false) {
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
@@ -325,12 +323,14 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func getTopView() -> MaterialView {
-        let picWidth: CGFloat = 200.0
         let topView = MaterialView(frame: Constants.kTopViewRect)
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
-        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - picWidth/2, y: (topView.height - picWidth) / 2, width: picWidth, height: picWidth)
+        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
+                                           y: (topView.height - Constants.kCircleWidth) / 2,
+                                           width: Constants.kCircleWidth,
+                                           height: Constants.kCircleWidth)
         self.profilePicNode.contentMode = .ScaleAspectFit
-        self.profilePicNode.cornerRadius = picWidth/2
+        self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .startWithNext({ score in
                 let color = score < self.celebST.prevScore ? Constants.kWineShade : Constants.kLightGreenShade

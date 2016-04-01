@@ -110,7 +110,6 @@ struct RatingsViewModel {
         }
     }
     
-    
     func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
         let realm = try! Realm()
