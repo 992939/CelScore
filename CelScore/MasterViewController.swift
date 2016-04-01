@@ -58,7 +58,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                        return UserViewModel().loginSignal(token: token, loginType: type) }
+                        return UserViewModel().loginSignal(token: token, with: type) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
                     .start()
@@ -199,7 +199,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
                 self.showHUD()
                 
-                UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+                UserViewModel().loginSignal(token: result.token.tokenString, with: .Facebook)
                     .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
                     .on(next: { _ in
@@ -235,7 +235,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: value, dataSetType: .TwitterInfo) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                        print("value \(value.description)")
                         return SettingsViewModel().updateUserName(username: value.objectForKey("screen_name") as! String) }
                     .map({ _ in return SettingsViewModel().updateSettingSignal(value: SocialLogin.Twitter.rawValue, settingType: .LoginTypeIndex).start() })
                     .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })

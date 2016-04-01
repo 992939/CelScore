@@ -17,7 +17,7 @@ import SwiftyJSON
 
 struct UserViewModel {
     
-    func loginSignal(token token: String, loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
+    func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
@@ -126,7 +126,22 @@ struct UserViewModel {
                         dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
                         dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                     }
-                case .TwitterInfo: print("Twitter")
+                case .TwitterInfo:
+                    if dataset.getAll().count == 0 {
+                        dataset.setString(object.objectForKey("screen_name") as! String, forKey: "screen_name")
+                        let followers = object.objectForKey("followers_count") as! NSNumber
+                        dataset.setString(followers.stringValue, forKey: "followers_count")
+                        let following = object.objectForKey("following") as! NSNumber
+                        dataset.setString(following.stringValue, forKey: "following")
+                        let verified = object.objectForKey("verified") as! NSNumber
+                        dataset.setString(verified.stringValue, forKey: "verified")
+                        dataset.setString(object.objectForKey("created_at") as! String, forKey: "created_at")
+                        dataset.setString(object.objectForKey("time_zone") as! String, forKey: "time_zone")
+                        dataset.setString(object.objectForKey("location") as! String, forKey: "location")
+                        dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
+                        dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
+                        dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
+                    }
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
                     guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }

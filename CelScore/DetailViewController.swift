@@ -193,7 +193,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                         guard error == nil else { print("FBSDKLogin error: \(error)"); return }
                         guard result.isCancelled == false else { return }
                         FBSDKAccessToken.setCurrentAccessToken(result.token)
-                        UserViewModel().loginSignal(token: result.token.tokenString, loginType: .Facebook)
+                        UserViewModel().loginSignal(token: result.token.tokenString, with: .Facebook)
                             .observeOn(QueueScheduler.mainQueueScheduler)
                             .retry(Constants.kNetworkRetry)
                             .map({ _ in return UserViewModel().getUserInfoFromSignal(loginType: .Facebook).start() })
