@@ -59,6 +59,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
                         return UserViewModel().loginSignal(token: token, with: type) }
+                    .retry(Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
                     .start()
