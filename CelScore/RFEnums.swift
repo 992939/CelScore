@@ -55,21 +55,21 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing the CelScore as your constellation, as a set of stars to gaze upon."
-        case .MenuAccess: return "\"Life all comes down to a few moments. This is one of them.\"\n- Charlie Sheen\n\nYou will need to log in to access this area."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing and downloading the CelScore!\nWe welcome you into a constellation, a set of stars to gaze upon."
+        case .MenuAccess: return "You will need to log in to access this area."
         case .LoginSuccess: return "Welcome to the Courthouse of Public Opinion!\n\nPlease vote responsibly, and may the Score be with you."
-        case .MaxFollow: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nYou've reached the maximum of stars you can follow."
-        case .FirstFollow: return "\"I just didn't believe I was like everybody else. I thought I was unique.\"\n- Charlie Sheen\n\nYou can follow up to ten unique individuals."
-        case .FirstConsensus: return "The consensus will be revealed after casting your votes."
-        case .FirstPublic: return "\"Social media is the creation of a new kind of public space.\"\n- Danah Boyd\n\n."
+        case .MaxFollow: return "You've reached the maximum of stars you can follow."
+        case .FirstFollow: return "You can follow up to ten stars."
+        case .FirstConsensus: return "While social media is prone to negativity and divisiveness, the courthouse calls on each one of us to vote responsibly and pave the way for a true expression of public opinion. The consensus will regenerate after each one of your votes."
+        case .FirstPublic: return "."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them."
         case .FirstNegative: return "Welcome to the other side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
-        case .FirstCompleted: return "You've cast your votes on every star throughout the constellation.\n\nThank you, and may the Score always be with you."
+        case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you, and may the Score always be with you."
         case .FirstVoteDisable: return "\"I don't think people are ready for the message that I'm delivering with a sense of violent love.\"\n- Charlie Sheen\n\nYou will need to log in to deliver your love."
         case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes.\n\nMay the Score be with you."
-        case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are unable to log you in. Please try again at a later time."
-        case .NetworkError: return "\"I still don't have all the answers.\"\n- Charlie Sheen\n\nWe are unable to connect to the network. Please check your network settings."
+        case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are currently not able to log you in. Please try again at a later time."
+        case .NetworkError: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nConnection to the network is currently not available. Please check your network settings."
         }
     }
     

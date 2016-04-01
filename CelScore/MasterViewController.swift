@@ -221,8 +221,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         } else {
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                self.showHUD()
                 
+                UserViewModel().loginSignal(token: "", with: .Twitter)
                 UserViewModel().getUserInfoFromSignal(loginType: .Twitter)
                     .retry(Constants.kNetworkRetry)
                     .observeOn(UIScheduler())
@@ -241,6 +241,28 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .start()
             }
         }
+    }
+    
+    func loginFlow(token token: String, with loginType: SocialLogin) {
+        self.showHUD()
+        UserViewModel().loginSignal(token: token, with: loginType)
+            .retry(Constants.kNetworkRetry)
+            .observeOn(UIScheduler())
+            .on(next: { _ in
+                self.dismissHUD()
+                self.handleMenu()
+                TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
+                TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
+            .on(failed: { _ in self.dismissHUD() })
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateUserName(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
+            .map({ _ in return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex).start() })
+            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
+            .start()
     }
     
     //MARK: ASTableView methods
