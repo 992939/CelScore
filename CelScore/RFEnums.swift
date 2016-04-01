@@ -49,6 +49,8 @@ enum OverlayInfo: Int {
     case FirstInterest
     case FirstCompleted
     case FirstVoteDisable
+    case FirstTrollWarning
+    case Trolling
     case LogoutUser
     case LoginError
     case NetworkError
@@ -67,6 +69,8 @@ enum OverlayInfo: Int {
         case .FirstInterest: return "Your selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you, and may the Score always be with you."
         case .FirstVoteDisable: return "\"I don't think people are ready for the message that I'm delivering with a sense of violent love.\"\n- Charlie Sheen\n\nYou will need to log in to deliver your love."
+        case .FirstTrollWarning: return ""
+        case .Trolling: return ""
         case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes.\n\nMay the Score be with you."
         case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are currently not able to log you in. Please try again at a later time."
         case .NetworkError: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nConnection to the network is currently not available. Please check your network settings."
@@ -87,6 +91,8 @@ enum OverlayInfo: Int {
         case .FirstInterest: return R.image.ballot_green()!
         case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.spaceship_green()!
+        case .FirstTrollWarning: return R.image.criminal_purple()!
+        case .Trolling: return R.image.nuclear_purple()!
         case .LogoutUser: return R.image.planet_green()!
         case .LoginError: return R.image.antenna_green()!
         case .NetworkError: return R.image.antenna_green()!
