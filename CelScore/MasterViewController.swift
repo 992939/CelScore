@@ -197,48 +197,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                 guard result.isCancelled == false else { return }
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
-                self.showHUD()
-                
-                UserViewModel().loginSignal(token: result.token.tokenString, with: .Facebook)
-                    .retry(Constants.kNetworkRetry)
-                    .observeOn(UIScheduler())
-                    .on(next: { _ in
-                        self.dismissHUD()
-                        self.handleMenu()
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
-                    .on(failed: { _ in self.dismissHUD() })
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().getUserInfoFromSignal(loginType: .Facebook) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .FacebookInfo) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                        return SettingsViewModel().updateUserName(username: value.objectForKey("name") as! String) }
-                    .map({ _ in return SettingsViewModel().updateSettingSignal(value: SocialLogin.Facebook.rawValue, settingType: .LoginTypeIndex).start() })
-                    .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
-                    .start()
+                self.loginFlow(token: result.token.tokenString, with: .Facebook)
             })
         } else {
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                
-                UserViewModel().loginSignal(token: "", with: .Twitter)
-                UserViewModel().getUserInfoFromSignal(loginType: .Twitter)
-                    .retry(Constants.kNetworkRetry)
-                    .observeOn(UIScheduler())
-                    .on(next: { _ in
-                        self.dismissHUD()
-                        self.handleMenu()
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
-                    .on(failed: { _ in self.dismissHUD() })
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: value, dataSetType: .TwitterInfo) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                        return SettingsViewModel().updateUserName(username: value.objectForKey("screen_name") as! String) }
-                    .map({ _ in return SettingsViewModel().updateSettingSignal(value: SocialLogin.Twitter.rawValue, settingType: .LoginTypeIndex).start() })
-                    .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
-                    .start()
+                self.loginFlow(token: "", with: .Twitter)
             }
         }
     }
