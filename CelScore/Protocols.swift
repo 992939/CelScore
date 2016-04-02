@@ -17,7 +17,7 @@ protocol DetailSubViewable {
     func rippleEffect(positive positive: Bool, gold: Bool)
 }
 
-protocol HUDable{}
+@objc protocol HUDable{}
 
 extension HUDable{
     func showHUD() {
@@ -44,10 +44,10 @@ extension Labelable {
     }
 }
 
-protocol Sociable: HUDable {
+@objc protocol Sociable: HUDable {
     var socialButton: MenuView { get }
-    func handleMenu(open: Bool)
-    func socialButton(button: UIButton)
+    @objc func handleMenu(open: Bool)
+    @objc func socialButton(button: UIButton)
 }
 
 extension Sociable {
@@ -82,7 +82,7 @@ extension Sociable {
         btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)
         btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
-        btn1.addTarget(controller, action: Selector("handleMenu:"), forControlEvents: .TouchUpInside)
+        btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn1)
         
         var image = R.image.facebooklogo()!
@@ -97,7 +97,7 @@ extension Sociable {
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
-        btn2.addTarget(controller, action: Selector("socialButton:"), forControlEvents: .TouchUpInside)
+        btn2.addTarget(controller, action: #selector(self.socialButton(_:)), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn2)
         
         image = R.image.twitterlogo()!
@@ -112,7 +112,7 @@ extension Sociable {
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
-        btn3.addTarget(controller, action: Selector("socialButton:"), forControlEvents: .TouchUpInside)
+        btn3.addTarget(controller, action: #selector(self.socialButton(_:)), forControlEvents: .TouchUpInside)
         menuView.addSubview(btn3)
         
         menuView.menu.origin = origin
