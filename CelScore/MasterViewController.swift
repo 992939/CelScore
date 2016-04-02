@@ -66,21 +66,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        self.socialButton.hidden = false
-//        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-//            self.socialButton.hidden = true
-//            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
-//                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
-//                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-//                        let type = SocialLogin(rawValue:value as! Int)!
-//                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-//                        return UserViewModel().loginSignal(token: token, with: type) }
-//                    .retry(Constants.kNetworkRetry)
-//                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-//                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
-//                    .start()
-//            }
-//        }
+        self.socialButton.hidden = false
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+            self.socialButton.hidden = true
+            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        let type = SocialLogin(rawValue:value as! Int)!
+                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+                        return UserViewModel().loginSignal(token: token, with: type) }
+                    .retry(Constants.kNetworkRetry)
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+                    .start()
+            }
+        }
     }
     
     override func viewDidLoad() {
