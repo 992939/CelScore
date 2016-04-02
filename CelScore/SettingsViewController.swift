@@ -108,13 +108,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Making History", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Consensus Building", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
                 self.node.addSubnode(notificationNode)
             })
         

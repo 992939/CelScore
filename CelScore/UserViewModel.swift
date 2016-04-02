@@ -214,6 +214,7 @@ struct UserViewModel {
                     try! realm.commitWrite()
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
+                    //TODO: Add missing settings and check once a day and only called when user actually changed a setting
                     let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
                     settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
