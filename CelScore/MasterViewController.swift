@@ -62,7 +62,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.socialButton.hidden = false
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             self.socialButton.hidden = true
