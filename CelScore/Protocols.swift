@@ -9,6 +9,8 @@
 import Foundation
 import Material
 import SVProgressHUD
+import TwitterKit
+import FBSDKLoginKit
 
 
 protocol DetailSubViewable {
@@ -71,6 +73,23 @@ extension Sociable {
             .map({ _ in return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex).start() })
             .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
             .start()
+    }
+    
+    func socialButtonTapped(buttonTag buttonTag: Int, from: UIViewController, hideButton: Bool) {
+        if buttonTag == 1 {
+            let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+            FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: from, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+                guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
+                guard result.isCancelled == false else { return }
+                FBSDKAccessToken.setCurrentAccessToken(result.token)
+                self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton)
+            })
+        } else {
+            Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
+                guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
+                self.loginFlow(token: "", with: .Twitter, hide: hideButton)
+            }
+        }
     }
     
     func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {

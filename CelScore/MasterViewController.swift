@@ -207,20 +207,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         first?.setImage(image, forState: .Highlighted)
     }
     
-    func socialButton(button: UIButton) {
-        if button.tag == 1 {
-            let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-            FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
-                guard result.isCancelled == false else { return }
-                FBSDKAccessToken.setCurrentAccessToken(result.token)
-                self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: true) })
-        } else {
-            Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
-                guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                self.loginFlow(token: "", with: .Twitter, hide: true) }
-        }
-    }
+    func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }

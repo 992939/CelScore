@@ -12,7 +12,6 @@ import SMSegmentView
 import FBSDKLoginKit
 import AIRTimer
 import Social
-import TwitterKit
 
 
 struct UserStruct {
@@ -173,34 +172,18 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage)
-                    .on(next: { socialVC in
-                        let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-                        let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
-                        guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
-                            TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
-                                image: OverlayInfo.LoginError.logo(),
-                                options: OverlayInfo.getOptions())
-                            return
-                        }
-                        self.presentViewController(socialVC, animated: true, completion: nil) })
-                    .start() })
-            .on(failed: { _ in
-                if button.tag == 1 {
-                    let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-                    FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                        guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
-                        guard result.isCancelled == false else { return }
-                        FBSDKAccessToken.setCurrentAccessToken(result.token)
-                        self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: false)
-                    })
-                } else {
-                    Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
-                        guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                        self.loginFlow(token: "", with: .Twitter, hide: false)
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage).startWithNext ({ socialVC in
+                    let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
+                    let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+                    guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
+                        TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
+                            image: OverlayInfo.LoginError.logo(),
+                            options: OverlayInfo.getOptions())
+                        return
                     }
-                }
+                    self.presentViewController(socialVC, animated: true, completion: nil) })
             })
+            .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: false) })
             .start()
     }
     
