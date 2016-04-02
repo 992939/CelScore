@@ -33,7 +33,7 @@ struct SettingsViewModel {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel)
-            guard userRatings.count >= 10 else { observer.sendNext(0); return }
+            guard userRatings.count >= 10 else { return } //observer.sendNext(5); 
             let celscores = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
             let average = celscores.reduce(0, combine: { $0 + $1 }) / Double(celscores.count)
             observer.sendNext(CGFloat(average))

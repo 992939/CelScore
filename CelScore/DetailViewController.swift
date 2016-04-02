@@ -54,7 +54,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .flatMap(.Latest) { (value: Bool) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstNegative) }
             .on(next: { first in let firstTime = first as! Bool
-                if firstTime {
+                if firstTime  {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNegative.message(), image: OverlayInfo.FirstNegative.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstNegative).start() })
                 }
