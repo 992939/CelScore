@@ -47,19 +47,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if let index = self.celebrityTableView.indexPathForSelectedRow {
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
 
-            var average: CGFloat = 0
             SettingsViewModel().calculateUserAverageCelScoreSignal()
+                .on(next: { score in SettingsViewModel().updateSettingSignal(value: score < 1.5 ? true : false, settingType: .Trolling).start() })
                 .filter({ (score:CGFloat) -> Bool in score < 2.0 })
                 .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in average = score
+                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
                     return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
                 .on(next: { first in let firstTime = first as! Bool
                     if firstTime {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
-                    } else if average < 1.5 {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.Trolling.message(), image: OverlayInfo.Trolling.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: true, settingType: .Trolling).start() })
                     }
                 })
                 .start()
