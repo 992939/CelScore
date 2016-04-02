@@ -51,7 +51,7 @@ protocol Sociable: HUDable {
 }
 
 extension Sociable {
-    func loginFlow(token token: String, with loginType: SocialLogin) {
+    func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(Constants.kNetworkRetry)
@@ -60,7 +60,7 @@ extension Sociable {
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
+                TAOverlay.setCompletionBlock({ _ in if hideButton == true { self.hideSocialButton(self.socialButton) }}) })
             .on(failed: { _ in self.dismissHUD() })
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }

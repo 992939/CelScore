@@ -63,7 +63,7 @@ enum OverlayInfo: Int {
         case .FirstFollow: return "You can follow up to ten stars."
         case .FirstConsensus: return "While social media can be prone to negativity, the courthouse calls on each one of us to vote responsibly and pave the way for a true expression of public opinion.\n\nThe consensus will regenerate after each one of your votes."
         case .FirstPublic: return "."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the bright lights shining through them."
         case .FirstNegative: return "Welcome to the other side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you, and may the Score always be with you."
