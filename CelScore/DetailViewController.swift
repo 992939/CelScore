@@ -12,6 +12,7 @@ import SMSegmentView
 import FBSDKLoginKit
 import AIRTimer
 import Social
+import TwitterKit
 
 
 struct UserStruct {
@@ -188,21 +189,16 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                 if button.tag == 1 {
                     let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
                     FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                        guard error == nil else { print("FBSDKLogin error: \(error)"); return }
+                        guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                         guard result.isCancelled == false else { return }
-                        
                         FBSDKAccessToken.setCurrentAccessToken(result.token)
-                        UserViewModel().loginSignal(token: result.token.tokenString, with: .Facebook)
-                            .observeOn(QueueScheduler.mainQueueScheduler)
-                            .retry(Constants.kNetworkRetry)
-                            .map({ _ in return UserViewModel().getUserInfoFromSignal(loginType: .Facebook).start() })
-                            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
-                            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings).start() })
-                            .map({ _ in return self.handleMenu(true) })
-                            .start()
+                        self.loginFlow(token: result.token.tokenString, with: .Facebook)
                     })
                 } else {
-                    //TWITTER LOGIN
+                    Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
+                        guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
+                        self.loginFlow(token: "", with: .Twitter)
+                    }
                 }
             })
             .start()

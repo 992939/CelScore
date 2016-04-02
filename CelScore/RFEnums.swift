@@ -56,7 +56,7 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing and downloading the CelScore!\nWe welcome you into a constellation, a set of stars to gaze upon."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing and downloading the CelScore!\n\nWelcome aboard our constellation, a set of stars to gaze upon."
         case .MenuAccess: return "You will need to log in to access this area."
         case .LoginSuccess: return "Welcome to the Courthouse of Public Opinion!\n\nPlease vote responsibly, and may the Score be with you."
         case .MaxFollow: return "You've reached the maximum of stars you can follow."
@@ -85,7 +85,7 @@ enum OverlayInfo: Int {
         case .FirstConsensus: return R.image.podium_green()!
         case .FirstPublic: return R.image.protest_green()!
         case .FirstStars: return R.image.spaceship_green()!
-        case .FirstNegative: return R.image.criminal_purple()!
+        case .FirstNegative: return R.image.nuclear_purple()!
         case .FirstInterest: return R.image.ballot_green()!
         case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.spaceship_green()!
