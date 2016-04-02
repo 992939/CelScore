@@ -44,27 +44,45 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
-        if let index = self.celebrityTableView.indexPathForSelectedRow { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+        if let index = self.celebrityTableView.indexPathForSelectedRow {
+            self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
+
+            var average: CGFloat = 0
+            SettingsViewModel().calculateUserAverageCelScoreSignal()
+                .filter({ (score:CGFloat) -> Bool in score < 2.0 })
+                .flatMapError { _ in SignalProducer.empty }
+                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in average = score
+                    return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
+                .on(next: { first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
+                    } else if average < 1.5 {
+                        
+                    }
+                })
+                .start()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.socialButton.hidden = false
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            self.socialButton.hidden = true
-            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
-                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        let type = SocialLogin(rawValue:value as! Int)!
-                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                        return UserViewModel().loginSignal(token: token, with: type) }
-                    .retry(Constants.kNetworkRetry)
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
-                    .start()
-            }
-        }
+//        self.socialButton.hidden = false
+//        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+//            self.socialButton.hidden = true
+//            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+//                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
+//                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+//                        let type = SocialLogin(rawValue:value as! Int)!
+//                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+//                        return UserViewModel().loginSignal(token: token, with: type) }
+//                    .retry(Constants.kNetworkRetry)
+//                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+//                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+//                    .start()
+//            }
+//        }
     }
     
     override func viewDidLoad() {

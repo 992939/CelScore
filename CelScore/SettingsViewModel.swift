@@ -15,16 +15,28 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning ,Trolling }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
-            guard userRatingsCount > 4 else { observer.sendNext(0.0); return }
+            guard userRatingsCount > 4 else { observer.sendNext(0); return }
             let celebrityCount: Int = realm.objects(CelebrityModel).count
             observer.sendNext(CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
+            observer.sendCompleted()
+        }
+    }
+    
+    func calculateUserAverageCelScoreSignal() -> SignalProducer <CGFloat, NoError> {
+        return SignalProducer  { observer, disposable in
+            let realm = try! Realm()
+            let userRatings = realm.objects(UserRatingsModel)
+            guard userRatings.count >= 10 else { observer.sendNext(0); return }
+            let celscores = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
+            let average = celscores.reduce(0, combine: { $0 + $1 }) / Double(celscores.count)
+            observer.sendNext(CGFloat(average))
             observer.sendCompleted()
         }
     }
@@ -33,7 +45,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 4 else { observer.sendNext(0.0); return }
+            guard ratings.count > 4 else { observer.sendNext(0); return }
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return ratingsModel.getCelScore() < 3 ? false : true
             })
@@ -91,6 +103,8 @@ struct SettingsViewModel {
                 case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
                 case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
                 case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
+                case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
+                case .Trolling: observer.sendNext(settings.isTrolling)
                 }
             } else {
                 switch settingType {
@@ -108,6 +122,8 @@ struct SettingsViewModel {
                 case .FirstCompleted: observer.sendNext(SettingsModel().isFirstCompleted)
                 case .FirstVoteDisable: observer.sendNext(SettingsModel().isFirstVoteDisabled)
                 case .FirstSocialDisable: observer.sendNext(SettingsModel().isFirstSocialDisabled)
+                case .FirstTrollWarning: observer.sendNext(SettingsModel().isFirstTrollWarning)
+                case .Trolling: observer.sendNext(SettingsModel().isTrolling)
                 }
             }
             observer.sendCompleted()
@@ -157,6 +173,8 @@ struct SettingsViewModel {
             case .FirstCompleted: settings.isFirstCompleted = false
             case .FirstVoteDisable: settings.isFirstVoteDisabled = false
             case .FirstSocialDisable: settings.isFirstSocialDisabled = false
+            case .FirstTrollWarning: settings.isFirstTrollWarning = false
+            case .Trolling: settings.isTrolling = false
             }
             settings.isSynced = false
             realm.add(settings, update: true)

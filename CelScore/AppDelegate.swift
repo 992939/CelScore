@@ -26,13 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 12,
+            schemaVersion: 13,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 10 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["consensusBuilding"] = true
-                    }
-                }
                 if oldSchemaVersion < 11 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
                         newObject!["isFirstStars"] = true
@@ -41,6 +36,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["isFirstCompleted"] = true
                         newObject!["isFirstVoteDisabled"] = true
                         newObject!["isFirstSocialDisabled"] = true
+                        newObject!["isFirstTrollWarning"] = true
+                    }
+                }
+                if oldSchemaVersion < 12 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["isFirstTrollWarning"] = true
+                    }
+                }
+                if oldSchemaVersion < 13 {
+                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
+                        newObject!["isTrolling"] = true
                     }
                 }
         })
