@@ -61,7 +61,7 @@ enum OverlayInfo: Int {
         case .LoginSuccess: return "Welcome to the Courthouse of Public Opinion!\n\nPlease vote responsibly, and may the Score be with you."
         case .MaxFollow: return "You've reached the maximum of stars you can follow."
         case .FirstFollow: return "You can follow up to ten stars."
-        case .FirstConsensus: return "While social media is prone to negativity and divisiveness, the courthouse calls on each one of us to vote responsibly and pave the way for a true expression of public opinion. The consensus will regenerate after each one of your votes."
+        case .FirstConsensus: return "While social media can be prone to negativity, the courthouse calls on each one of us to vote responsibly and pave the way for a true expression of public opinion.\n\nThe consensus will regenerate after each one of your votes."
         case .FirstPublic: return "."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the life forces shining through them."
         case .FirstNegative: return "Welcome to the other side of the Score."

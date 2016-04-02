@@ -44,12 +44,35 @@ extension Labelable {
     }
 }
 
-protocol Sociable {
+protocol Sociable: HUDable {
+    var socialButton: MenuView { get }
     func handleMenu(open: Bool)
     func socialButton(button: UIButton)
 }
 
 extension Sociable {
+    func loginFlow(token token: String, with loginType: SocialLogin) {
+        self.showHUD()
+        UserViewModel().loginSignal(token: token, with: loginType)
+            .retry(Constants.kNetworkRetry)
+            .observeOn(UIScheduler())
+            .on(next: { _ in
+                self.dismissHUD()
+                self.handleMenu(false)
+                TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
+                TAOverlay.setCompletionBlock({ _ in self.hideSocialButton(self.socialButton) }) })
+            .on(failed: { _ in self.dismissHUD() })
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateUserName(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
+            .map({ _ in return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex).start() })
+            .map({ _ in return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings).start() })
+            .start()
+    }
+    
     func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2

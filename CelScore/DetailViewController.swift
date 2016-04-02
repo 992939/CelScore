@@ -17,7 +17,6 @@ import Social
 struct UserStruct {
     let socialMessage: String
     let isPositive: Bool
-    
     func updateMessage(message: String) -> UserStruct { return UserStruct(socialMessage: message, isPositive: isPositive) }
     func updatePositive(positive: Bool) -> UserStruct { return UserStruct(socialMessage: socialMessage, isPositive: positive) }
 }
@@ -30,10 +29,10 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     private let ratingsVC: RatingsViewController
     private let celscoreVC: CelScoreViewController
     private let voteButton: MaterialButton
-    private let socialButton: MenuView
     private let profilePicNode: ASNetworkImageNode
     private let celebST: CelebrityStruct
     private var userST = UserStruct(socialMessage: "", isPositive: true)
+    let socialButton: MenuView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -183,7 +182,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                                 options: OverlayInfo.getOptions())
                             return
                         }
-                        
                         self.presentViewController(socialVC, animated: true, completion: nil) })
                     .start() })
             .on(failed: { _ in
@@ -192,6 +190,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
                     FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                         guard error == nil else { print("FBSDKLogin error: \(error)"); return }
                         guard result.isCancelled == false else { return }
+                        
                         FBSDKAccessToken.setCurrentAccessToken(result.token)
                         UserViewModel().loginSignal(token: result.token.tokenString, with: .Facebook)
                             .observeOn(QueueScheduler.mainQueueScheduler)
@@ -235,10 +234,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         
         if index == 0 || (index == 1 && previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
         else { self.slide(right: true, newView: infoView, oldView: removingView) }
-        
         self.handleMenu()
         
-        if index == 2 {
+        if index == 2 { //TODO: composition
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
@@ -247,10 +245,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext({ first in let firstTime = first as! Bool
                 if firstTime {
                     AIRTimer.after(1.3, handler: { _ in
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(),
-                            image: OverlayInfo.FirstStars.logo(),
-                            options: OverlayInfo.getOptions()) })
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(), image: OverlayInfo.FirstStars.logo(), options: OverlayInfo.getOptions()) })
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
                 }
             })
             
@@ -261,7 +257,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         UIView.animateWithDuration(1.0, animations: { _ in
             if right { oldView.left = -newView.width; newView.slide(right: true, duration: 1.0, completionDelegate: self) }
             else { oldView.left = newView.width + 45; newView.slide(right: false, duration: 1.0, completionDelegate: self) }
-            })
+        })
     }
     
     func getSubView(atIndex index: Int) -> UIView {

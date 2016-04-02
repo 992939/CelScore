@@ -154,7 +154,7 @@ struct UserViewModel {
                         try! realm.commitWrite()
                     }
                 case .UserSettings:
-                    //TODO: Checked once a day and only called when user actually changed a setting
+                    //TODO: Add missing settings and check once a day and only called when user actually changed a setting
                     let model: SettingsModel? = realm.objects(SettingsModel).first
                     guard let settings = model else { observer.sendFailed(NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
                     if settings.isSynced == false {
