@@ -33,7 +33,7 @@ struct SettingsViewModel {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel)
-            guard userRatings.count >= 10 else { return } //observer.sendNext(5); 
+            guard userRatings.count >= 10 else { observer.sendNext(5); return }
             let celscores = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
             let average = celscores.reduce(0, combine: { $0 + $1 }) / Double(celscores.count)
             observer.sendNext(CGFloat(average))
@@ -58,7 +58,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 4 else { observer.sendNext(true); return }
+            guard ratings.count >= 5 else { observer.sendNext(true); return }
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return ratingsModel.getCelScore() < 3 ? false : true
             })

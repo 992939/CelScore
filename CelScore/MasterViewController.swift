@@ -47,7 +47,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if let index = self.celebrityTableView.indexPathForSelectedRow {
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
             SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in score < Constants.kTrollingWarning })
+                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
                 .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
                     return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
