@@ -16,6 +16,8 @@ struct Constants {
     static let kAPIKey: String = "0XwE760Ybs2iA9rYfl9ya898OeAJMYnd2T9jK5uP"
     static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
     
+    static let kTrollingWarning: CGFloat = 2.0
+    static let kTrollingThreshold: CGFloat = 1.5
     static let kDayInSeconds: NSTimeInterval = 86400.0
     static let kMaxFollowedCelebrities: Int = 10
     static let kNetworkRetry: Int = 2

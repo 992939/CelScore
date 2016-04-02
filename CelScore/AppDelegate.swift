@@ -26,7 +26,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 13,
+            schemaVersion: 14,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 11 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
@@ -44,9 +44,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["isFirstTrollWarning"] = true
                     }
                 }
-                if oldSchemaVersion < 13 {
+                if oldSchemaVersion < 14 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isTrolling"] = true
+
                     }
                 }
         })

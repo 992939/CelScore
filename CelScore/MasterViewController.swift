@@ -46,10 +46,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         if let index = self.celebrityTableView.indexPathForSelectedRow {
             self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
-
             SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .on(next: { score in SettingsViewModel().updateSettingSignal(value: score < 1.5 ? true : false, settingType: .Trolling).start() })
-                .filter({ (score:CGFloat) -> Bool in score < 2.0 })
+                .filter({ (score:CGFloat) -> Bool in score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
                 .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
                     return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
@@ -57,8 +55,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     if firstTime {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
-                    }
-                })
+                    }})
                 .start()
         }
     }
@@ -70,7 +67,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             self.socialButton.hidden = true
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
-                SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex)
+                SettingsViewModel().calculateUserAverageCelScoreSignal()
+                    .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
+                    .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                        return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""

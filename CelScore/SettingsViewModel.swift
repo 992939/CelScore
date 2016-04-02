@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning, Trolling }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
@@ -104,7 +104,6 @@ struct SettingsViewModel {
                 case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
                 case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
                 case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
-                case .Trolling: observer.sendNext(settings.isTrolling)
                 }
             } else {
                 switch settingType {
@@ -123,7 +122,6 @@ struct SettingsViewModel {
                 case .FirstVoteDisable: observer.sendNext(SettingsModel().isFirstVoteDisabled)
                 case .FirstSocialDisable: observer.sendNext(SettingsModel().isFirstSocialDisabled)
                 case .FirstTrollWarning: observer.sendNext(SettingsModel().isFirstTrollWarning)
-                case .Trolling: observer.sendNext(SettingsModel().isTrolling)
                 }
             }
             observer.sendCompleted()
@@ -174,7 +172,6 @@ struct SettingsViewModel {
             case .FirstVoteDisable: settings.isFirstVoteDisabled = false
             case .FirstSocialDisable: settings.isFirstSocialDisabled = false
             case .FirstTrollWarning: settings.isFirstTrollWarning = false
-            case .Trolling: settings.isTrolling = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)

@@ -31,7 +31,6 @@ class SettingsModel: Object, NSCopying {
     dynamic var isFirstVoteDisabled: Bool = true
     dynamic var isFirstSocialDisabled: Bool = true
     dynamic var isFirstTrollWarning: Bool = true
-    dynamic var isTrolling: Bool = false
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer
@@ -53,7 +52,6 @@ class SettingsModel: Object, NSCopying {
         self.isFirstVoteDisabled = json["isFirstVoteDisabled"].bool!
         self.isFirstSocialDisabled = json["isFirstSocialDisabled"].bool!
         self.isFirstTrollWarning = json["isFirstTrollWarning"].bool!
-        self.isTrolling = json["isTrolling"].bool!
         self.isSynced = true
     }
     
@@ -79,7 +77,6 @@ class SettingsModel: Object, NSCopying {
         copy.isFirstVoteDisabled = self.isFirstVoteDisabled
         copy.isFirstSocialDisabled = self.isFirstSocialDisabled
         copy.isFirstTrollWarning = self.isFirstTrollWarning
-        copy.isTrolling = self.isTrolling
         copy.isSynced = self.isSynced
         return copy
     }
