@@ -58,7 +58,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
                     } else if average < 1.5 {
-                        
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.Trolling.message(), image: OverlayInfo.Trolling.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: true, settingType: .Trolling).start() })
                     }
                 })
                 .start()

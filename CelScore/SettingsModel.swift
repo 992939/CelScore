@@ -31,7 +31,7 @@ class SettingsModel: Object, NSCopying {
     dynamic var isFirstVoteDisabled: Bool = true
     dynamic var isFirstSocialDisabled: Bool = true
     dynamic var isFirstTrollWarning: Bool = true
-    dynamic var isTrolling: Bool = true
+    dynamic var isTrolling: Bool = false
     dynamic var isSynced: Bool = true
     
     //MARK: Initializer

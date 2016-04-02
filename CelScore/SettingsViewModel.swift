@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning ,Trolling }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning, Trolling }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
@@ -174,7 +174,7 @@ struct SettingsViewModel {
             case .FirstVoteDisable: settings.isFirstVoteDisabled = false
             case .FirstSocialDisable: settings.isFirstSocialDisabled = false
             case .FirstTrollWarning: settings.isFirstTrollWarning = false
-            case .Trolling: settings.isTrolling = false
+            case .Trolling: settings.isTrolling = value as! Bool
             }
             settings.isSynced = false
             realm.add(settings, update: true)
