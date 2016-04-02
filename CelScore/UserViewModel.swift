@@ -45,12 +45,22 @@ struct UserViewModel {
     func logoutSignal() -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
+            
             realm.beginWrite()
             let settings = realm.objects(SettingsModel)
             realm.delete(settings)
             let userRatings = realm.objects(UserRatingsModel)
             realm.delete(userRatings)
             try! realm.commitWrite()
+            
+            realm.beginWrite()
+            let celebs = realm.objects(CelebrityModel)
+            let newCelebs = celebs.map({ (celeb: CelebrityModel) -> CelebrityModel in
+                celeb.isFollowed = false
+                return celeb })
+            realm.add(newCelebs, update: true)
+            try! realm.commitWrite()
+            
             Constants.kCredentialsProvider.clearCredentials()
             observer.sendNext(Constants.kCredentialsProvider)
             observer.sendCompleted()
