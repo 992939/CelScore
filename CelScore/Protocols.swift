@@ -76,6 +76,8 @@ extension Sociable {
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
             .map({ _ in self.socialRefresh() })
             .start()
     }

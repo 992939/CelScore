@@ -224,12 +224,22 @@ struct UserViewModel {
                     })
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
-                    //TODO: Add missing settings and check once a day and only called when user actually changed a setting
                     let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    settings.defaultListIndex = (dico["defaultListId"] as! NSString).integerValue
+                    settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
                     settings.consensusBuilding = (dico["consensusBuilding"] as! NSString).boolValue
+                    settings.isFirstLaunch = (dico["isFirstLaunch"] as! NSString).boolValue
+                    settings.isFirstConsensus = (dico["isFirstConsensus"] as! NSString).boolValue
+                    settings.isFirstPublic = (dico["isFirstPublic"] as! NSString).boolValue
+                    settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue
+                    settings.isFirstStars = (dico["isFirstStars"] as! NSString).boolValue
+                    settings.isFirstNegative = (dico["isFirstNegative"] as! NSString).boolValue
+                    settings.isFirstCompleted = (dico["isFirstCompleted"] as! NSString).boolValue
+                    settings.isFirstInterest = (dico["isFirstInterest"] as! NSString).boolValue
+                    settings.isFirstVoteDisabled = (dico["isFirstVoteDisabled"] as! NSString).boolValue
+                    settings.isFirstSocialDisabled = (dico["isFirstSocialDisabled"] as! NSString).boolValue
+                    settings.isFirstTrollWarning = (dico["isFirstTrollWarning"] as! NSString).boolValue
                     settings.isSynced = true
                     realm.beginWrite()
                     realm.add(settings, update: true)
