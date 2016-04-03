@@ -209,6 +209,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
+    func socialRefresh() {
+        self.celebrityTableView.beginUpdates()
+        self.celebrityTableView.reloadData()
+        self.celebrityTableView.endUpdates()
+    }
+    
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     

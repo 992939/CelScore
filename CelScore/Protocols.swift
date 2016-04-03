@@ -50,6 +50,7 @@ extension Labelable {
     var socialButton: MenuView { get }
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
+    @objc func socialRefresh()
 }
 
 extension Sociable {
@@ -75,6 +76,7 @@ extension Sociable {
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
+            .map({ _ in self.socialRefresh() })
             .start()
     }
     

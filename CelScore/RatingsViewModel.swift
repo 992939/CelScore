@@ -66,8 +66,6 @@ struct RatingsViewModel {
     func hasUserRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<Bool, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let allRatings = realm.objects(UserRatingsModel)
-            print("Madrid: \(allRatings)")
             let ratings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard let userRatings = ratings else { observer.sendNext(false); return }
             print("Barca: \(userRatings)")
