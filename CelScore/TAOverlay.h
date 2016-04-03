@@ -48,7 +48,7 @@
 /**
  * Fill color for shadow.
  */
-#define OVERLAY_SHADOW_COLOR            [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7]
+#define OVERLAY_SHADOW_COLOR            [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8]
 
 /**
  * Fill color for background. Default is white.

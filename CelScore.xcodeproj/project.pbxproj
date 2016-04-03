@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
 		000E0EDA1CB0F64F00F021AA /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E0ED91CB0F64F00F021AA /* R.generated.swift */; };
+		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
+		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
-		001703F21C94D03F0070B811 /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703F11C94D03F0070B811 /* TAOverlay.m */; };
 		00315C501C9926E500003B76 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00315C4F1C9926E500003B76 /* icomoon.ttf */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
@@ -103,11 +104,12 @@
 /* Begin PBXFileReference section */
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
 		000E0ED91CB0F64F00F021AA /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
+		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
+		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
-		001703F01C94D03F0070B811 /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
-		001703F11C94D03F0070B811 /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		00315C4F1C9926E500003B76 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
@@ -222,13 +224,14 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
+				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
+				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
 				00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */,
 				00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */,
 				00FEF1761CACE5C6004141B3 /* BEEmpty.h */,
 				00FEF1771CACE5C6004141B3 /* BEEmpty.m */,
 				00315C4F1C9926E500003B76 /* icomoon.ttf */,
-				001703F01C94D03F0070B811 /* TAOverlay.h */,
-				001703F11C94D03F0070B811 /* TAOverlay.m */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
 				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
 				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
@@ -539,6 +542,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				00315C501C9926E500003B76 /* icomoon.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
@@ -693,7 +697,6 @@
 			files = (
 				006431921C6A67430062BBDB /* StarLayer.swift in Sources */,
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
-				001703F21C94D03F0070B811 /* TAOverlay.m in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
 				00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */,
@@ -708,6 +711,7 @@
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
 				00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */,
+				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */,

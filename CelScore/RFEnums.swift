@@ -182,7 +182,7 @@ enum Qualities: Int {
             RoleModel.name(),
             HardWork.name(),
             Smarts.name(),
-            Elegance.name(),
+            Elegance.name(isMale: isMale),
             Charisma.name(isMale: isMale),
             SexAppeal.name(isMale: isMale)
         ]
@@ -197,7 +197,7 @@ enum Qualities: Int {
         case .RoleModel: return "Role Model"
         case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
-        case .Elegance: return "Elegance"
+        case .Elegance: return isMale == true ? "Style" : "Elegance"
         case .Charisma: return isMale == true ? "Charisma" : "Charm"
         case .SexAppeal: return isMale == true ? "Handsome" : "Beauty"
         }
@@ -212,7 +212,7 @@ enum Qualities: Int {
         case .RoleModel: return "as a role model is"
         case .HardWork: return "work ethic is"
         case .Smarts: return "smarts are"
-        case .Elegance: return "elegance is"
+        case .Elegance: return isMale == true ? "style is" : "elegance is"
         case .Charisma: return isMale == true ? "charisma is" : "charm is"
         case .SexAppeal: return isMale == true ? "handsomeness is" : "beauty is"
         }
