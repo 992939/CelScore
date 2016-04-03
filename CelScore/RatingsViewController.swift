@@ -31,7 +31,12 @@ final class RatingsViewController: ASViewController {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setupStars()
+        self.pulseView.backgroundColor = MaterialColor.clear
+        self.view = self.pulseView
+    }
+    
+    func setupStars() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 for (index, quality) in Qualities.getAll(isMale: self.celebST.sex).enumerate() {
@@ -44,9 +49,9 @@ final class RatingsViewController: ASViewController {
                     SettingsViewModel().getSettingSignal(settingType: .PublicService)
                         .observeOn(UIScheduler())
                         .startWithNext({ status in
-                        if (status as! Bool) == true {
-                            qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
-                    })
+                            if (status as! Bool) == true {
+                                qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
+                        })
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
@@ -108,9 +113,6 @@ final class RatingsViewController: ASViewController {
                     self.pulseView.addSubview(qualityView)
                 }
             })
-        
-        self.pulseView.backgroundColor = MaterialColor.clear
-        self.view = self.pulseView
     }
     
     func requestLogin() {
