@@ -187,7 +187,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
-    func socialRefresh() { self.ratingsVC.setupStars() }
+    func socialRefresh() { self.ratingsVC.displayGoldRatings() }
     
     func enableUpdateButton() {
         self.voteButton.enabled = true
