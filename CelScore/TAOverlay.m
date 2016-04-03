@@ -598,7 +598,7 @@ NSString * const TAOverlayLabelTextUserInfoKey          = @"TAOverlayLabelTextUs
              if (imageArray != nil) imageArray = nil;
              if (image.image == nil) image.image = iconImage;
              if (image.animationImages != nil) image.animationImages = nil;
-             image.frame = CGRectMake(0, 0, 50, 50);
+             image.frame = CGRectMake(0, 0, 65, 65);
              break;
              
          case tOverlayTypeImageArray:

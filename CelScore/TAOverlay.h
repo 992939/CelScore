@@ -113,7 +113,7 @@
 /**
  * Label padding value for Y-axis.
  */
-#define LABEL_PADDING_Y         66.0
+#define LABEL_PADDING_Y         76.0
 
 /**
  * Check if given option is present.
