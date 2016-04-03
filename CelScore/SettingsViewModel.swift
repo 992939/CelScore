@@ -151,7 +151,7 @@ struct SettingsViewModel {
         }
     }
     
-    func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NoError> {
+    func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()

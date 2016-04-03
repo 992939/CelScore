@@ -179,8 +179,7 @@ struct UserViewModel {
                     guard task.error == nil else {
                         if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                         observer.sendFailed(task.error!)
-                        return task
-                    }
+                        return task }
                     observer.sendNext(object)
                     observer.sendCompleted()
                     return task
@@ -192,26 +191,27 @@ struct UserViewModel {
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            dataset.synchronize().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
                 switch dataSetType {
                 case .FacebookInfo: fatalError("Not storing user information locally")
                 case .TwitterInfo: fatalError("Not storing user information locally")
                 case .UserRatings:
-                    realm.beginWrite()
                     dataset.getAll().forEach({ dico in
+                        realm.beginWrite()
+                        print("dico \(dico)")
                         let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
+                        userRatings.totalVotes = 1
                         realm.add(userRatings, update: true)
+                        try! realm.commitWrite()
                     })
-                    try! realm.commitWrite()
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
                     //TODO: Add missing settings and check once a day and only called when user actually changed a setting
@@ -225,6 +225,8 @@ struct UserViewModel {
                     realm.add(settings, update: true)
                     try! realm.commitWrite()
                 }
+                let allRatings = realm.objects(UserRatingsModel)
+                print(allRatings)
                 observer.sendNext(dataset.getAll())
                 observer.sendCompleted()
                 return task
