@@ -68,7 +68,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    override func updateUserActivityState(activity: NSUserActivity) { print(activity) }
+    override func updateUserActivityState(activity: NSUserActivity) {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,7 +187,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .start()
     }
     
-    func socialRefresh() {}
+    func socialRefresh() { self.ratingsVC.setupStars() }
     
     func enableUpdateButton() {
         self.voteButton.enabled = true

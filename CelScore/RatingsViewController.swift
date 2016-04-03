@@ -173,6 +173,7 @@ final class RatingsViewController: ASViewController {
                     cosmos.settings.updateOnTouch = true
                     cosmos.settings.userRatingMode = true
                     cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                    print()
                     cosmos.rating = userRatings[userRatings[index]] as! Double
                     cosmos.update()
                 }

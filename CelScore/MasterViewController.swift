@@ -121,7 +121,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, ListError> in
                             return ListViewModel().updateListsSignal() }
-                        .on(next: { list in print("next list") })
+                        .on(next: { list in print("TODO: refresh list") })
                         .start()
                 }
         }

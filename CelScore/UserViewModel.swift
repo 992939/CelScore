@@ -20,7 +20,7 @@ struct UserViewModel {
     func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("error:\(task.error!)"); observer.sendFailed(task.error!); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil }
 
             switch loginType {
@@ -94,7 +94,6 @@ struct UserViewModel {
                 let statusesShowEndpoint = "https://api.twitter.com/1.1/users/lookup.json"
                 let client = TWTRAPIClient(userID: Twitter.sharedInstance().sessionStore.session()!.userID)
                 let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
-                print(Twitter.sharedInstance().sessionStore.session()!.userID)
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
                 guard clientError == nil else { observer.sendFailed(clientError!); return }
@@ -113,7 +112,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("getIdentityId.error:\(task.error)"); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 
                 let syncClient: AWSCognito = AWSCognito.defaultCognito()
                 let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
@@ -216,7 +215,6 @@ struct UserViewModel {
                 case .UserRatings:
                     dataset.getAll().forEach({ dico in
                         realm.beginWrite()
-                        print("dico \(dico)")
                         let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
                         userRatings.totalVotes = 1
                         realm.add(userRatings, update: true)
@@ -245,8 +243,6 @@ struct UserViewModel {
                     realm.add(settings, update: true)
                     try! realm.commitWrite()
                 }
-                let allRatings = realm.objects(UserRatingsModel)
-                print(allRatings)
                 observer.sendNext(dataset.getAll())
                 observer.sendCompleted()
                 return task
