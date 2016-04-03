@@ -63,7 +63,10 @@ extension Sociable {
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in if hideButton == true { self.hideSocialButton(self.socialButton) }}) })
+                TAOverlay.setCompletionBlock({ _ in
+                    self.socialRefresh()
+                    if hideButton == true { self.hideSocialButton(self.socialButton)
+                    }}) })
             .on(failed: { _ in self.dismissHUD() })
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
@@ -78,7 +81,6 @@ extension Sociable {
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
-            .map({ _ in self.socialRefresh() })
             .start()
     }
     
