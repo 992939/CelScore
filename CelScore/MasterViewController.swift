@@ -77,7 +77,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        print("world")
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        print("warm")
+                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
                     .start()
             }
         }

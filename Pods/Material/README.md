@@ -16,6 +16,7 @@ Express your creativity with Material, an animation and graphics framework for G
 - [x] Material Buttons
 - [x] Material Switch
 - [x] Material Card Views
+- [x] Material Icons
 - [x] Menu Toolset To Create Animated Menus
 - [x] Camera / Video Extension With Extensive Functionality
 - [x] Animation Extension To Create Intricate Animations
@@ -26,7 +27,7 @@ Express your creativity with Material, an animation and graphics framework for G
 ## Requirements
 
 * iOS 8.0+
-* Xcode 7.2+
+* Xcode 7.3+
 
 ## Communication
 
@@ -57,6 +58,7 @@ Material is a growing project and will encounter changes throughout its developm
 #### Colors
 
 * [MaterialColor](#materialcolor)
+* MaterialIcon
 
 #### Base Layers & Views
 
@@ -109,7 +111,7 @@ Material is a growing project and will encounter changes throughout its developm
 * [ToolbarController](#toolbarcontroller)
 * [SearchBar](#searchbar)
 * [SearchBarController](#searchbarcontroller)
-* BottomNavigationBar
+* BottomTabBar
 * BottomNavigationController
 * [SideNavigationController](#sidenavigationcontroller)
 

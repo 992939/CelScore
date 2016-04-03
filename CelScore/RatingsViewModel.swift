@@ -68,7 +68,7 @@ struct RatingsViewModel {
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard let userRatings = ratings else { observer.sendNext(false); return }
-            print("Barca: \(userRatings)")
+            //print("Barca: \(userRatings)")
             observer.sendNext(userRatings.totalVotes > 0 ? true : false ?? false)
             observer.sendCompleted()
         }

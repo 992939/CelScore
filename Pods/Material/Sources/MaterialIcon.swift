@@ -31,7 +31,17 @@
 import UIKit
 
 public struct MaterialIcon {
-    public static let bundle = NSBundle(URL: NSBundle(forClass: MaterialView.self).resourceURL!)
+	private static var internalBundle: NSBundle?
+	public static var bundle: NSBundle {
+		if nil == MaterialIcon.internalBundle {
+			MaterialIcon.internalBundle = NSBundle(forClass: MaterialView.self)
+			let b: NSBundle? = NSBundle(URL: MaterialIcon.internalBundle!.resourceURL!.URLByAppendingPathComponent("io.cosmicmind.Material.bundle"))
+			if let v: NSBundle = b {
+				MaterialIcon.internalBundle = v
+			}
+		}
+		return MaterialIcon.internalBundle!
+	}
     
 	public static let add: UIImage? = UIImage(named: "ic_add_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let arrowBack: UIImage? = UIImage(named: "ic_arrow_back_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
@@ -41,9 +51,11 @@ public struct MaterialIcon {
 	public static let menu: UIImage? = UIImage(named: "ic_menu_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let moreHorizontal: UIImage? = UIImage(named: "ic_more_horiz_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let moreVertical: UIImage? = UIImage(named: "ic_more_vert_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
+	public static let pen: UIImage? = UIImage(named: "ic_pen_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let photoCamera: UIImage? = UIImage(named: "ic_photo_camera_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let photoLibrary: UIImage? = UIImage(named: "ic_photo_library_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let search: UIImage? = UIImage(named: "ic_search_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let share: UIImage? = UIImage(named: "ic_share_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
+	public static let star: UIImage? = UIImage(named: "ic_star_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 	public static let videocam: UIImage? = UIImage(named: "ic_videocam_white", inBundle: bundle, compatibleWithTraitCollection: nil)?.imageWithRenderingMode(.AlwaysTemplate)
 }

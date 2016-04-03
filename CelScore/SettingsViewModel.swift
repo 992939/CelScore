@@ -83,6 +83,29 @@ struct SettingsViewModel {
         }
     }
     
+    func loggedInAsSignal() -> SignalProducer<String, SettingsError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let model = realm.objects(SettingsModel).first ?? SettingsModel()
+            guard model.userName.characters.count > 0 else { observer.sendFailed(.NoUser); return }
+            observer.sendNext(model.userName)
+            observer.sendCompleted()
+        }
+    }
+    
+    func updateUserName(username username: String) -> SignalProducer<SettingsModel, NSError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            realm.beginWrite()
+            let model: SettingsModel = realm.objects(SettingsModel).first ?? SettingsModel()
+            model.userName = username
+            realm.add(model, update: true)
+            try! realm.commitWrite()
+            observer.sendNext(model)
+            observer.sendCompleted()
+        }
+    }
+    
     func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
@@ -124,29 +147,6 @@ struct SettingsViewModel {
                 case .FirstTrollWarning: observer.sendNext(SettingsModel().isFirstTrollWarning)
                 }
             }
-            observer.sendCompleted()
-        }
-    }
-    
-    func loggedInAsSignal() -> SignalProducer<String, SettingsError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first ?? SettingsModel()
-            guard model.userName.characters.count > 0 else { observer.sendFailed(.NoUser); return }
-            observer.sendNext(model.userName)
-            observer.sendCompleted()
-        }
-    }
-    
-    func updateUserName(username username: String) -> SignalProducer<SettingsModel, NSError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            realm.beginWrite()
-            let model: SettingsModel = realm.objects(SettingsModel).first ?? SettingsModel()
-            model.userName = username
-            realm.add(model, update: true)
-            try! realm.commitWrite()
-            observer.sendNext(model)
             observer.sendCompleted()
         }
     }
