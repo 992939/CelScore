@@ -46,7 +46,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         if let index = self.celebrityTableView.indexPathForSelectedRow {
-            self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
+
+            let wasLoggedIn = self.socialButton.hidden
+            self.socialButton.hidden = false
+            
+            SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+                self.socialButton.hidden = true
+                if wasLoggedIn == false { self.socialRefresh() }
+                else { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+                RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+                    SettingsViewModel().calculateUserAverageCelScoreSignal()
+                        .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                            return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
+                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            let type = SocialLogin(rawValue:value as! Int)!
+                            let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+                            return UserViewModel().loginSignal(token: token, with: type) }
+                        .retry(Constants.kNetworkRetry)
+                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
+                        .start()
+                }
+            }
+            
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
@@ -58,33 +84,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
                     }})
                 .start()
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        let wasLoggedIn = self.socialButton.hidden
-        self.socialButton.hidden = false
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            self.socialButton.hidden = true
-            if wasLoggedIn == false { self.socialRefresh() }
-            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
-                SettingsViewModel().calculateUserAverageCelScoreSignal()
-                    .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        let type = SocialLogin(rawValue:value as! Int)!
-                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                        return UserViewModel().loginSignal(token: token, with: type) }
-                    .retry(Constants.kNetworkRetry)
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
-                    .start()
-            }
         }
     }
     
