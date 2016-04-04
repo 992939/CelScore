@@ -41,6 +41,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
@@ -62,9 +63,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        let wasLoggedIn = self.socialButton.hidden
         self.socialButton.hidden = false
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             self.socialButton.hidden = true
+            if wasLoggedIn == false { self.socialRefresh() }
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
@@ -94,15 +97,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
-        
         self.searchBar.delegate = self
         self.searchBar.searchBarStyle = .Minimal
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 80, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
-        
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
