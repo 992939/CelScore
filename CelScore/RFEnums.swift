@@ -63,7 +63,7 @@ enum OverlayInfo: Int {
         case .FirstFollow: return "You can follow up to ten stars."
         case .FirstConsensus: return "While social media can be prone to negativity, the courthouse calls on each one of us to vote responsibly and pave the way for a true expression of public opinion.\n\nThe consensus will regenerate after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nThere is no precedent in history in which so many could participate in the making of public opinion.\n\nYou can share your opinion by long pressing on a star quality."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then star qualities are the bright lights shining through them."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then the values they incarnate are bright lights shining through them."
         case .FirstNegative: return "Welcome to the other side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you for voting and building the consensus."
@@ -169,8 +169,8 @@ enum Qualities: Int {
     case RoleModel
     case HardWork
     case Smarts
-    case Elegance
     case Charisma
+    case Elegance
     case SexAppeal
     
     static func getAll(isMale isMale: Bool = true) -> [String] {
@@ -182,8 +182,8 @@ enum Qualities: Int {
             RoleModel.name(),
             HardWork.name(),
             Smarts.name(),
+            Charisma.name(),
             Elegance.name(isMale: isMale),
-            Charisma.name(isMale: isMale),
             SexAppeal.name(isMale: isMale)
         ]
     }
@@ -197,8 +197,8 @@ enum Qualities: Int {
         case .RoleModel: return "Role Model"
         case .HardWork: return "Work Ethic"
         case .Smarts: return "Smarts"
+        case .Charisma: return "Charisma"
         case .Elegance: return isMale == true ? "Style" : "Elegance"
-        case .Charisma: return isMale == true ? "Charisma" : "Charm"
         case .SexAppeal: return isMale == true ? "Handsome" : "Beauty"
         }
     }
@@ -212,8 +212,8 @@ enum Qualities: Int {
         case .RoleModel: return "as a role model is"
         case .HardWork: return "work ethic is"
         case .Smarts: return "smarts are"
+        case .Charisma: return "charisma is"
         case .Elegance: return isMale == true ? "style is" : "elegance is"
-        case .Charisma: return isMale == true ? "charisma is" : "charm is"
         case .SexAppeal: return isMale == true ? "handsomeness is" : "beauty is"
         }
     }
