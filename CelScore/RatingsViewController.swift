@@ -163,7 +163,7 @@ final class RatingsViewController: ASViewController {
         return cosmos.settings.userRatingMode
     }
     
-    func displayGoldRatings(userRatings: RatingsModel) {
+    func displayGoldRatings(userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
@@ -173,7 +173,7 @@ final class RatingsViewController: ASViewController {
                     cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarRatingShade : MaterialColor.white
                     cosmos.settings.borderColorEmpty = userRatings.getCelScore() > 0 ? Constants.kStarRatingShade : MaterialColor.white
                     cosmos.settings.updateOnTouch = userRatings.getCelScore() > 0 ? false : true
-                    cosmos.settings.userRatingMode = userRatings.getCelScore() > 0 ? false : true
+                    cosmos.settings.userRatingMode = false
                     cosmos.rating = ratings[ratings[index]] as! Double
                     cosmos.update()
                 }

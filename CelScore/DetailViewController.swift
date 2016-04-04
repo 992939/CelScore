@@ -188,15 +188,17 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     }
     
     func socialRefresh() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext { userRatings in
-            self.ratingsVC.displayGoldRatings(userRatings)
-            guard userRatings.getCelScore() > 0 else { return }
-            print("socialRefresh + userRatings.getCelScore() > 0")
-            self.enableUpdateButton()
-            self.voteButton.backgroundColor = Constants.kStarRatingShade
-            self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
-            self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
-        }
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+            .on(next: { userRatings in
+                self.ratingsVC.displayGoldRatings(userRatings)
+                guard userRatings.getCelScore() > 0 else { return }
+                self.enableUpdateButton()
+                self.voteButton.backgroundColor = Constants.kStarRatingShade
+                self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
+                self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
+            })
+            .on(failed: { _ in self.ratingsVC.displayGoldRatings() })
+            .start()
     }
     
     func enableUpdateButton() {

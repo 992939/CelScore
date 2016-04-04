@@ -17,7 +17,6 @@ final class CosmosView: UIView {
     var viewContentSize = CGSize()
     var didTouchCosmos: ((Double)->())?
     var didFinishTouchingCosmos: ((Double)->())?
-    
     private var previousRatingForDidTouchCallback: Double = -123.192
     private var widthOfStars: CGFloat {
         if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
@@ -33,7 +32,6 @@ final class CosmosView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         update()
-        //self.frame.size = intrinsicContentSize()
         improvePerformance()
     }
     
@@ -69,7 +67,6 @@ final class CosmosView: UIView {
         let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth, settings: settings)
         if settings.updateOnTouch { rating = calculatedTouchRating }
         if calculatedTouchRating == previousRatingForDidTouchCallback { return }
-        
         didTouchCosmos?(calculatedTouchRating)
         previousRatingForDidTouchCallback = calculatedTouchRating
     }
@@ -80,7 +77,7 @@ final class CosmosView: UIView {
         super.touchesBegan(touches, withEvent: event)
         if let touch = touches.first {
             let location = touch.locationInView(self).x
-            onDidTouch(location, starsWidth: widthOfStars)
+            self.onDidTouch(location, starsWidth: widthOfStars)
         }
     }
     
@@ -88,17 +85,12 @@ final class CosmosView: UIView {
         super.touchesMoved(touches, withEvent: event)
         if let touch = touches.first {
             let location = touch.locationInView(self).x
-            onDidTouch(location, starsWidth: widthOfStars)
+            self.onDidTouch(location, starsWidth: widthOfStars)
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         didFinishTouchingCosmos?(rating)
-    }
-    
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        let oprimizedBounds = CosmosTouch.optimize(bounds)
-        return oprimizedBounds.contains(point)
     }
 }
