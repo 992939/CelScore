@@ -62,7 +62,6 @@ struct UserViewModel {
             try! realm.commitWrite()
             
             Constants.kCredentialsProvider.clearCredentials()
-            Constants.kCredentialsProvider.clearKeychain()
             observer.sendNext(Constants.kCredentialsProvider)
             observer.sendCompleted()
         }
