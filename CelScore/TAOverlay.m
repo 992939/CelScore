@@ -921,7 +921,7 @@ NSString * const TAOverlayLabelTextUserInfoKey          = @"TAOverlayLabelTextUs
                 NSInteger options = NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin;
                 labelRect = [label.text boundingRectWithSize:CGSizeMake(200, [self ifValue:667.000 IsValue:300.000 ThenValue:[UIScreen mainScreen].bounds.size.height]) options:options attributes:attributes context:NULL];
                 
-                overlayHeight = (labelRect.size.height + 80) > ([[UIScreen mainScreen] bounds].size.height - 2.0*LABEL_PADDING_X) ? ([[UIScreen mainScreen] bounds].size.height - 2.0*LABEL_PADDING_X) : (labelRect.size.height + 80);
+                overlayHeight = (labelRect.size.height + 100) > ([[UIScreen mainScreen] bounds].size.height - 2.0*LABEL_PADDING_X) ? ([[UIScreen mainScreen] bounds].size.height - 2.0*LABEL_PADDING_X) : (labelRect.size.height + 100);
                 overlayWidth = ((labelRect.size.width + 2.0*LABEL_PADDING_X) < 100.0) ? 100.0 : labelRect.size.width + 2.0*LABEL_PADDING_X;
                 labelRect.origin.x = overlayWidth/2.0 - labelRect.size.width/2.0;
                 

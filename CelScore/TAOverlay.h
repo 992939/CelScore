@@ -18,7 +18,7 @@
 /**
  * Font for overlay status.
  */
-#define OVERLAY_LABEL_FONT              [UIFont fontWithName:@"AvenirNext-Regular" size:16]
+#define OVERLAY_LABEL_FONT              [UIFont fontWithName:@"AvenirNext-Regular" size:15]
 
 /**
  * Text color for overlay status.
