@@ -128,7 +128,9 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
-            .filter({ (value: AnyObject) -> Bool in return value as! Bool })
+            .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
+                if isConsensus == false { TAOverlay.showOverlayWithLabel("Thank you for voting", image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions()) }
+                return isConsensus })
             .delay(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
