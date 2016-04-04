@@ -46,14 +46,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         if let index = self.celebrityTableView.indexPathForSelectedRow {
-
             let wasLoggedIn = self.socialButton.hidden
             self.socialButton.hidden = false
+            if wasLoggedIn == false { self.socialRefresh() }
+            else { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
             
             SettingsViewModel().loggedInAsSignal().startWithNext { _ in
                 self.socialButton.hidden = true
-                if wasLoggedIn == false { self.socialRefresh() }
-                else { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+                
                 RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                     SettingsViewModel().calculateUserAverageCelScoreSignal()
                         .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })

@@ -19,9 +19,9 @@ struct UserViewModel {
     
     func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                return nil }
+                return nil })
 
             switch loginType {
             case .Facebook:
@@ -33,7 +33,7 @@ struct UserViewModel {
                 }
             default: break
             }
-            Constants.kCredentialsProvider.refresh().continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.refresh().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 observer.sendNext(task.result!)
                 observer.sendCompleted()
@@ -62,6 +62,7 @@ struct UserViewModel {
             try! realm.commitWrite()
             
             Constants.kCredentialsProvider.clearCredentials()
+            Constants.kCredentialsProvider.clearKeychain()
             observer.sendNext(Constants.kCredentialsProvider)
             observer.sendCompleted()
         }
@@ -223,6 +224,8 @@ struct UserViewModel {
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
                     let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
+                    guard dico.isEmpty == false else { observer.sendFailed(NSError(domain: "NoDio", code: 1, userInfo: nil)); return task }
+                        
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
