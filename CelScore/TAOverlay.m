@@ -958,7 +958,7 @@ NSString * const TAOverlayLabelTextUserInfoKey          = @"TAOverlayLabelTextUs
             }
             
             imagex = overlayWidth/2;
-            imagey = (label.text == nil) ? overlayHeight/2 : 36.0;
+            imagey = (label.text == nil) ? overlayHeight/2 : 40.0;
             
             [CATransaction begin];
             [CATransaction setDisableActions:YES];
