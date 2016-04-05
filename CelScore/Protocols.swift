@@ -66,7 +66,7 @@ extension Sociable {
                 TAOverlay.setCompletionBlock({ _ in
                     self.socialRefresh()
                     if hideButton == true { self.hideSocialButton(self.socialButton)
-                    }}) })
+                }}) })
             .on(failed: { _ in self.dismissHUD() })
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
