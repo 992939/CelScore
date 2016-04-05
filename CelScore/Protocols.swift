@@ -156,4 +156,10 @@ extension Sociable {
         let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
         first!.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
     }
+    
+    func showSocialButton(menuView: MenuView, controller: UIViewController) {
+        menuView.hidden = false
+        let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
+        first!.addTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
+    }
 }

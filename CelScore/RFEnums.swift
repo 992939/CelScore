@@ -69,7 +69,7 @@ enum OverlayInfo: Int {
         case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you for voting and building the consensus."
         case .FirstVoteDisable: return ""
         case .FirstTrollWarning: return ""
-        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for voting and building the consensus."
+        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus."
         case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are currently not able to log you in. Please try again at a later time."
         case .NetworkError: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nConnection to the network is currently not available. Please check your network settings."
         }

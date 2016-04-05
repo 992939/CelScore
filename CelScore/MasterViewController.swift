@@ -47,8 +47,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         
         if let index = self.celebrityTableView.indexPathForSelectedRow {
-            if self.socialButton.hidden == false { self.socialRefresh() }
-            else { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+            if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+            else { self.socialRefresh() }
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
@@ -66,7 +66,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            self.socialButton.hidden = true
+            self.hideSocialButton(self.socialButton)
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
@@ -266,16 +266,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: SideNavigationControllerDelegate
     func sideNavigationDidClose(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
-        self.socialButton.hidden = false
+        self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.socialButton.hidden = true })
+            .on(next: { _ in self.hideSocialButton(self.socialButton) })
             .on(failed: { _ in self.changeList() })
             .start()
     }
     
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) { self.hideSearchBar() }
-    
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool { return true }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
