@@ -45,34 +45,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
+        
         if let index = self.celebrityTableView.indexPathForSelectedRow {
-            let wasLoggedIn = self.socialButton.hidden
-            self.socialButton.hidden = false
-            if wasLoggedIn == false { self.socialRefresh() }
+            if self.socialButton.hidden == false { self.socialRefresh() }
             else { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
-            
-            SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-                self.socialButton.hidden = true
-                
-                RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
-                    SettingsViewModel().calculateUserAverageCelScoreSignal()
-                        .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
-                        .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                            return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
-                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                            let type = SocialLogin(rawValue:value as! Int)!
-                            let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                            return UserViewModel().loginSignal(token: token, with: type) }
-                        .retry(Constants.kNetworkRetry)
-                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                            return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
-                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                            return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
-                        .start()
-                }
-            }
-            
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
@@ -87,12 +63,37 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+            self.socialButton.hidden = true
+            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+                SettingsViewModel().calculateUserAverageCelScoreSignal()
+                    .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
+                    .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                        return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        let type = SocialLogin(rawValue:value as! Int)!
+                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+                        return UserViewModel().loginSignal(token: token, with: type) }
+                    .retry(Constants.kNetworkRetry)
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
+                    .start()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
+        self.socialButton.hidden = false
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
