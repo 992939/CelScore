@@ -238,7 +238,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.modalDelegate = self
-        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Twitter, completion: nil)
+        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Twitter)
     }
     
     func showSearchBar() {
