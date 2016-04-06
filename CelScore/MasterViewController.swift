@@ -17,6 +17,7 @@ import AIRTimer
 import RateLimit
 import TransitionTreasury
 import TransitionAnimation
+import WYInteractiveTransitions
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable, ModalTransitionDelegate {
@@ -28,6 +29,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     let socialButton: MenuView
     private var count: Int = 0
     var tr_presentTransition: TRViewControllerTransitionDelegate?
+    let transitionMgr = WYInteractiveTransitions()
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -237,8 +239,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
-        detailVC.modalDelegate = self
-        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Twitter)
+        transitionMgr.configureTransition(duration: 0.5, toViewController: detailVC,
+                                          handGestureEnable: true, transitionType: WYTransitoinType.Push)
+//        detailVC.modalDelegate = self
+//        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Elevate(maskView: node.view, to: CGPointZero))
     }
     
     func showSearchBar() {

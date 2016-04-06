@@ -108,8 +108,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func backAction() {
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
-            //self.dismissViewControllerAnimated(true, completion: nil)
-            self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
         }
     }
     
