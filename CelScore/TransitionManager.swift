@@ -37,7 +37,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         })
     }
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 0.8 }
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 0.9 }
     
     
     // MARK: UIViewControllerTransitioningDelegate
