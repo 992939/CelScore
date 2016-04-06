@@ -24,8 +24,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
     private let transitionManager = TransitionManager()
-    private var count: Int = 0
     let socialButton: MenuView
+    private var count: Int = 0
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
