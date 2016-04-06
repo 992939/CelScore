@@ -23,7 +23,7 @@ struct UserStruct {
 }
 
 
-final class DetailViewController: ASViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable {
+final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable {
     
     //MARK: Properties
     private let infoVC: InfoViewController
@@ -47,7 +47,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
         self.voteButton = MaterialButton()
         self.socialButton = MenuView()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
-        super.init(node: ASDisplayNode())
+        super.init(nibName: nil, bundle: nil)
         
         SettingsViewModel().isPositiveVoteSignal()
             .on(next: { value in self.userST = self.userST.updatePositive(value) })
@@ -74,6 +74,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
@@ -109,7 +110,6 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     func backAction() {
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
             self.dismissViewControllerAnimated(true, completion: nil)
-            //self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
         }
     }
     

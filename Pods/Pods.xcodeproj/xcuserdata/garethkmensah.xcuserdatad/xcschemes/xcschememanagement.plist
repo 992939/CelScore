@@ -54,7 +54,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Material-io.cosmicmind.Material.xcscheme</key>
+		<key>Material-io.cosmicmind.material.fonts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Material-io.cosmicmind.material.icons.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -217,6 +222,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>569C0F2B7ED517292F9BF8D54E974719</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
 		<dict>
 			<key>primary</key>
@@ -247,6 +257,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8348F0E5728219E3397F49C96FD8B33D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>86AAC4FF9502601C72702949CE30B5BE</key>
 		<dict>
 			<key>primary</key>
@@ -258,11 +273,6 @@
 			<true/>
 		</dict>
 		<key>9287F429013C4438934934C1466EBAF1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9307722F2AEBE33C4EF571F6B689BA45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -302,6 +312,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CA7C965A2FBA306D0ACBA0D0C8ECAF72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D66A8C5DE1037D6AEB1DC92D210AF39B</key>
 		<dict>
 			<key>primary</key>
@@ -313,11 +328,6 @@
 			<true/>
 		</dict>
 		<key>E8CF96D5FF84A0C3B8EF98F5F0AA6BFF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F232F88DF711FB1EC9C2A9CDE4D7B6BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

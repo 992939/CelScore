@@ -15,21 +15,17 @@ import Material
 import HMSegmentedControl
 import AIRTimer
 import RateLimit
-import TransitionTreasury
-import TransitionAnimation
-import WYInteractiveTransitions
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable, ModalTransitionDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
-    let socialButton: MenuView
+    private let transitionManager = TransitionManager()
     private var count: Int = 0
-    var tr_presentTransition: TRViewControllerTransitionDelegate?
-    let transitionMgr = WYInteractiveTransitions()
+    let socialButton: MenuView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -239,10 +235,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
-        transitionMgr.configureTransition(duration: 0.5, toViewController: detailVC,
-                                          handGestureEnable: true, transitionType: WYTransitoinType.Push)
-//        detailVC.modalDelegate = self
-//        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Elevate(maskView: node.view, to: CGPointZero))
+        detailVC.transitioningDelegate = self.transitionManager
+        self.presentViewController(detailVC, animated: true, completion: nil)
+        //self.sideNavigationController?.presentViewController(detailVC, animated: true, completion: nil)
     }
     
     func showSearchBar() {
@@ -339,5 +334,4 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.addTarget(self, action: #selector(MasterViewController.changeList), forControlEvents: .ValueChanged)
     }
 }
-
 
