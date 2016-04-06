@@ -12,6 +12,7 @@ import SMSegmentView
 import FBSDKLoginKit
 import AIRTimer
 import Social
+import TransitionTreasury
 
 
 struct UserStruct {
@@ -33,6 +34,7 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     private let celebST: CelebrityStruct
     private var userST = UserStruct(socialMessage: "", isPositive: true)
     let socialButton: MenuView
+    var modalDelegate: ModalViewControllerDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -106,7 +108,8 @@ final class DetailViewController: ASViewController, SMSegmentViewDelegate, Detai
     
     func backAction() {
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.dismissViewControllerAnimated(true, completion: nil)
+            self.modalDelegate?.modalViewControllerDismiss(callbackData: nil)
         }
     }
     

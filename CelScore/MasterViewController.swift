@@ -15,9 +15,11 @@ import Material
 import HMSegmentedControl
 import AIRTimer
 import RateLimit
+import TransitionTreasury
+import TransitionAnimation
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable, ModalTransitionDelegate {
     
     //MARK: Properties
     private let celebrityTableView: ASTableView
@@ -25,6 +27,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let searchBar: UISearchBar
     let socialButton: MenuView
     private var count: Int = 0
+    var tr_presentTransition: TRViewControllerTransitionDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -234,8 +237,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let node: CelebrityTableViewCell = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
-        detailVC.modalTransitionStyle = .CrossDissolve
-        self.presentViewController(detailVC, animated: true, completion: nil)
+        detailVC.modalDelegate = self
+        self.tr_presentViewController(detailVC, method: TRPresentTransitionMethod.Twitter, completion: nil)
     }
     
     func showSearchBar() {
