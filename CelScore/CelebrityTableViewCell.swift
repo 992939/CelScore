@@ -36,7 +36,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSize(width: 60, height: 60)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(12.0, Constants.kDarkShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(15.0, Constants.kDarkShade)(originalImage)
         }
         
         let cosmosView = CosmosView()
@@ -114,7 +114,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         let pathLayer = CAShapeLayer()
         pathLayer.path = circlePath.CGPath
         pathLayer.fillColor = UIColor.clearColor().CGColor
-        pathLayer.lineWidth = 2.5
+        pathLayer.lineWidth = 4
         
         pathLayer.strokeColor = positive ? Constants.kLightGreenShade.CGColor : Constants.kWineShade.CGColor
         pathLayer.strokeStart = 0.0

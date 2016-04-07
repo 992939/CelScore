@@ -331,7 +331,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .startWithNext({ score in
                 let color = score < self.celebST.prevScore ? Constants.kWineShade : Constants.kLightGreenShade
                 self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                    return ASImageNodeRoundBorderModificationBlock(12.0, color.colorWithAlphaComponent(0.9))(originalImage)
+                    return ASImageNodeRoundBorderModificationBlock(20.0, color)(originalImage)
                 }
             })
         topView.clipsToBounds = false
