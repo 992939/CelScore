@@ -61,7 +61,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade
         gauge.delegate = self
-        AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) }
+        AIRTimer.after(0.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) } }
         gaugeView.addSubview(gauge)
         return gaugeView
     }
