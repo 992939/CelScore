@@ -36,7 +36,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.profilePicNode.contentMode = .ScaleAspectFit
         self.profilePicNode.preferredFrameSize = CGSize(width: 60, height: 60)
         self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(10.0, Constants.kDarkShade)(originalImage)
+            return ASImageNodeRoundBorderModificationBlock(8.0, Constants.kDarkShade)(originalImage)
         }
         
         let cosmosView = CosmosView()

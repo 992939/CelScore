@@ -40,42 +40,6 @@ struct Constants {
     
     static func degreeToRadian(degree: CGFloat) -> CGFloat { return CGFloat(M_PI / 180) * degree }
     
-    //Star Wars
-    typealias Distance = CGFloat
-    typealias Region = CGPoint -> Bool
-    
-    static func drawStarsBackground(frame frame: CGRect) -> UIView {
-        let skyLayer = UIView(frame: frame)
-        skyLayer.clipsToBounds = true
-        let numberOfStars: Int = Int(arc4random_uniform(UInt32(20))) + 60
-        for _ in 1...numberOfStars {
-            let size = Int(arc4random_uniform(UInt32(3))) + 1
-            let rect: CGSize?
-            switch size {
-            case 1: rect = CGSize(width: 5, height: 5)
-            case 2: rect = CGSize(width: 10, height: 10)
-            default: rect = CGSize(width: 20, height: 20)
-            }
-            let circleLayer = CAShapeLayer()
-            let radius: CGFloat = rect!.width
-            circleLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.0 * radius, height: 2.0 * radius), cornerRadius: radius).CGPath
-            circleLayer.position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(frame.width))), y: CGFloat(arc4random_uniform(UInt32(frame.height))))
-            circleLayer.fillColor = Int(arc4random_uniform(UInt32(2))) == 1 ? kLightGreenShade.CGColor : kWineShade.CGColor
-            
-            let pathAnimation = CABasicAnimation(keyPath: "opacity")
-            pathAnimation.duration = 4.0
-            pathAnimation.removedOnCompletion = false
-            pathAnimation.fillMode = kCAFillModeForwards
-            pathAnimation.fromValue = NSNumber(float: 0.05)
-            let finalValue = (Float(arc4random_uniform(UInt32(3))) + 2) / 10
-            pathAnimation.toValue = finalValue
-            circleLayer.addAnimation(pathAnimation, forKey: "animateOpacity")
-            skyLayer.layer.addSublayer(circleLayer)
-            circleLayer.opacity = finalValue
-        }
-        return skyLayer
-    }
-    
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)
