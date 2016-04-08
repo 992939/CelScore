@@ -237,7 +237,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.presentViewController(detailVC, animated: true, completion: nil)
-        //self.sideNavigationController?.presentViewController(detailVC, animated: true, completion: nil)
     }
     
     func showSearchBar() {

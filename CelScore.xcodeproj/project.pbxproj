@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
-		000E0EDA1CB0F64F00F021AA /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E0ED91CB0F64F00F021AA /* R.generated.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
@@ -56,6 +55,7 @@
 		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
 		00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		00F55F6C1CB789D0009DD275 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F55F6B1CB789D0009DD275 /* R.generated.swift */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -104,7 +104,6 @@
 
 /* Begin PBXFileReference section */
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
-		000E0ED91CB0F64F00F021AA /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
+		00F55F6B1CB789D0009DD275 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -306,8 +306,8 @@
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
+				00F55F6B1CB789D0009DD275 /* R.generated.swift */,
 				000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */,
-				000E0ED91CB0F64F00F021AA /* R.generated.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
 				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
@@ -729,6 +729,7 @@
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */,
 				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
+				00F55F6C1CB789D0009DD275 /* R.generated.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
@@ -737,7 +738,6 @@
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
-				000E0EDA1CB0F64F00F021AA /* R.generated.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,

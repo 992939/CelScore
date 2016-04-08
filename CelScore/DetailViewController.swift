@@ -320,25 +320,17 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func getTopView() -> MaterialView {
         let topView = MaterialView(frame: Constants.kTopViewRect)
-        self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
+        self.profilePicNode.image = R.image.tyra()
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
                                            y: (topView.height - Constants.kCircleWidth) / 2,
                                            width: Constants.kCircleWidth,
                                            height: Constants.kCircleWidth)
-        self.profilePicNode.contentMode = .ScaleAspectFit
+        self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-            .startWithNext({ score in
-                let color = score < self.celebST.prevScore ? Constants.kWineShade : Constants.kLightGreenShade
-                self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-                    return ASImageNodeRoundBorderModificationBlock(20.0, color)(originalImage)
-                }
-            })
         topView.clipsToBounds = false
-        let starLayer = Constants.drawStarsBackground(frame: CGRect(x: 0, y: 0, width: Constants.kTopViewRect.width, height: Constants.kTopViewRect.height))
-        topView.addSubview(starLayer)
         topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
+        topView.image = R.image.topView()
         topView.backgroundColor = Constants.kDarkShade
         return topView
     }
