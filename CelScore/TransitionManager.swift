@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
@@ -15,24 +16,30 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     // MARK: UIViewControllerAnimatedTransitioning
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView()
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as! SideNavigationController
+        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as! DetailViewController
+        
+//        let selectedRow = fromView.c
+//        let cell = fromViewController.tableView.cellForRowAtIndexPath(selectedRow!) as WeatherCell
+//        let weatherSnapshot = cell.forecastImage.snapshotViewAfterScreenUpdates(false)
+//        weatherSnapshot.frame = containerView.convertRect(cell.forecastImage.frame, fromView: fromViewController.tableView.cellForRowAtIndexPath(selectedRow!)?.superview)
+//        cell.forecastImage.hidden = true
         
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
         
-        if (self.presenting){ toView.transform = offScreenRight }
-        else { toView.transform = offScreenLeft }
+        if (self.presenting){ toVC.view.transform = offScreenRight }
+        else { toVC.view.transform = offScreenLeft }
         
-        container!.addSubview(toView)
-        container!.addSubview(fromView)
+        container!.addSubview(toVC.view)
+        container!.addSubview(fromVC.rootViewController.view)
         
         let duration = self.transitionDuration(transitionContext)
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            if (self.presenting){ fromView.transform = offScreenLeft }
-            else { fromView.transform = offScreenRight }
-            toView.transform = CGAffineTransformIdentity
+            if (self.presenting){ fromVC.rootViewController.view.transform = offScreenLeft }
+            else { fromVC.rootViewController.view.transform = offScreenRight }
+            toVC.view.transform = CGAffineTransformIdentity
             }, completion: { finished in transitionContext.completeTransition(true)
         })
     }
