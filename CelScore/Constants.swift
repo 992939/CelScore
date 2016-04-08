@@ -95,7 +95,7 @@ struct Constants {
     static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
-    static let kCircleWidth: CGFloat = 250.0
+    static let kCircleWidth: CGFloat = 270.0
     
     static let kMinimumVoteValue: CGFloat = 1.0
     static let kMaximumVoteValue: CGFloat = 5.0
