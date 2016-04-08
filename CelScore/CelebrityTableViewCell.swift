@@ -19,7 +19,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     private let ratingsNode: ASDisplayNode
     private let switchNode: ASDisplayNode
     private let backgroundNode: ASDisplayNode
-    let celebST: CelebrityStruct
+    internal let celebST: CelebrityStruct
     
     //MARK: Initializer
     init(celebrityStruct: CelebrityStruct) {

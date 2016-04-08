@@ -33,8 +33,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     private let profilePicNode: ASNetworkImageNode
     private let celebST: CelebrityStruct
     private var userST = UserStruct(socialMessage: "", isPositive: true)
-    let socialButton: MenuView
-    var modalDelegate: ModalViewControllerDelegate?
+    internal let socialButton: MenuView
+    internal var modalDelegate: ModalViewControllerDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }

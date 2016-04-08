@@ -24,7 +24,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
     private let transitionManager = TransitionManager()
-    let socialButton: MenuView
+    internal let socialButton: MenuView
     private var count: Int = 0
     
     //MARK: Initializers
