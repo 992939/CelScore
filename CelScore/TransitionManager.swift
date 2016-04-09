@@ -47,8 +47,6 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             if (self.presenting){
                 toVC.view.alpha = 1
-                toVC.view.setNeedsLayout()
-                toVC.view.layoutIfNeeded()
                 let detailVC = toVC as! DetailViewController
                 celebSnapshot.frame = detailVC.profilePicNode.view.frame
                 fromVC.view.transform = offScreenLeft
