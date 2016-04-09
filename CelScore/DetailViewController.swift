@@ -30,9 +30,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     private let ratingsVC: RatingsViewController
     private let celscoreVC: CelScoreViewController
     private let voteButton: MaterialButton
-    private let profilePicNode: ASNetworkImageNode
     private let celebST: CelebrityStruct
     private var userST = UserStruct(socialMessage: "", isPositive: true)
+    internal let profilePicNode: ASNetworkImageNode
     internal let socialButton: MenuView
     internal var modalDelegate: ModalViewControllerDelegate?
     
@@ -91,11 +91,21 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
+        
+        self.profilePicNode.image = R.image.tyra()
+        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
+                                           y: 45,
+                                           width: Constants.kCircleWidth,
+                                           height: Constants.kCircleWidth)
+        self.profilePicNode.contentMode = .ScaleAspectFill
+        self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
+        topView.clipsToBounds = false
 
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
         self.view.sendSubviewToBack(navigationBarView)
         self.view.addSubview(topView)
+        self.view.addSubview(profilePicNode.view)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
@@ -324,15 +334,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func getTopView() -> MaterialView {
         let topView = MaterialView(frame: Constants.kTopViewRect)
-        self.profilePicNode.image = R.image.tyra()
-        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
-                                           y: (topView.height - Constants.kCircleWidth) / 2,
-                                           width: Constants.kCircleWidth,
-                                           height: Constants.kCircleWidth)
-        self.profilePicNode.contentMode = .ScaleAspectFill
-        self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
-        topView.clipsToBounds = false
-        topView.addSubview(profilePicNode.view)
         topView.depth = .Depth2
         topView.image = R.image.topView()
         topView.backgroundColor = Constants.kDarkShade

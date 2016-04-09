@@ -32,12 +32,13 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.nameNode.truncationMode = .ByTruncatingTail
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
-        self.profilePicNode.URL = NSURL(string: celebST.imageURL)
-        self.profilePicNode.contentMode = .ScaleAspectFit
-        self.profilePicNode.preferredFrameSize = CGSize(width: 60, height: 60)
-        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-            return ASImageNodeRoundBorderModificationBlock(8.0, Constants.kDarkShade)(originalImage)
-        }
+        //TODO: self.profilePicNode.URL = NSURL(string: celebST.imageURL)
+        self.profilePicNode.image = R.image.tyra()
+        self.profilePicNode.contentMode = .ScaleAspectFill
+        self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
+//        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
+//            return ASImageNodeRoundBorderModificationBlock(8.0, Constants.kDarkShade)(originalImage)
+//        }
         
         let cosmosView = CosmosView()
         cosmosView.settings.starSize = Constants.kStarSize
@@ -80,7 +81,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 60)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 70)
         self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.42)
         self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
         self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
@@ -101,8 +102,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     override func layoutDidFinish() {
         super.layoutDidFinish()
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-            .startWithNext({ score in self.setupCircleLayer(positive: score < self.celebST.prevScore ? false : true) })
+//        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+//            .startWithNext({ score in self.setupCircleLayer(positive: score < self.celebST.prevScore ? false : true) })
     }
 
     func setupCircleLayer(positive positive: Bool) {
