@@ -94,10 +94,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         self.profilePicNode.image = R.image.tyra()
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
-                                           y: 45,
+                                           y: 80,
                                            width: Constants.kCircleWidth,
                                            height: Constants.kCircleWidth)
-        self.profilePicNode.contentMode = .ScaleAspectFill
+        //self.profilePicNode.contentMode = .ScaleToFill
         self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
         topView.clipsToBounds = false
 
