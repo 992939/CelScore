@@ -49,7 +49,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         
         let duration = self.transitionDuration(transitionContext)
         
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             if self.presenting {
                 detailVC.view.alpha = 1
                 celebSnapshot.frame = detailVC.profilePicNode.view.frame
