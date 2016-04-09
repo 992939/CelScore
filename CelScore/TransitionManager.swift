@@ -16,26 +16,25 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     // MARK: UIViewControllerAnimatedTransitioning
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView()
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+    
+        let fromVC = presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let toVC =  presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
         
-        var celebSnapshot: UIView = UIView()
+        let masterVC = (fromVC as! SideNavigationController).rootViewController as! MasterViewController
+        let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
+        let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+        let celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
+        celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
+        cell.profilePicNode.hidden = true
+        toVC.view.frame = transitionContext.finalFrameForViewController(toVC)
+        toVC.view.alpha = 0
+        let detailVC = toVC as! DetailViewController
+        detailVC.profilePicNode.hidden = true
         
-        if (self.presenting){
-            let masterVC = (fromVC as! SideNavigationController).rootViewController as! MasterViewController
-            let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-            let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-            celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
-            celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
-            cell.profilePicNode.hidden = true
-            toVC.view.frame = transitionContext.finalFrameForViewController(toVC)
-            toVC.view.alpha = 0
-            let detailVC = toVC as! DetailViewController
-            detailVC.profilePicNode.hidden = true
-            toVC.view.transform = offScreenRight
+        if (self.presenting){ toVC.view.transform = offScreenRight
         } else { toVC.view.transform = offScreenLeft }
         
         container!.addSubview(toVC.view)
