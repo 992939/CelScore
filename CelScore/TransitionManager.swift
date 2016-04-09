@@ -24,16 +24,25 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         
         let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
         let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-        let celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
-        celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
         cell.profilePicNode.hidden = true
         detailVC.view.frame = transitionContext.finalFrameForViewController(detailVC)
         detailVC.view.alpha = 0
         detailVC.profilePicNode.hidden = true
-        detailVC.view.transform = presenting ? offScreenRight : offScreenLeft
+        detailVC.view.transform = presenting ? offScreenRight : CGAffineTransformMakeTranslation(0, 0)
+        
+        var celebSnapshot = UIView()
+        if self.presenting {
+            celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
+            celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
+        } else {
+            masterVC.view.transform =  CGAffineTransformMakeTranslation(0, 0)
+            celebSnapshot = detailVC.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
+            celebSnapshot.frame = container!.convertRect(detailVC.profilePicNode.view.frame, fromView: detailVC.view)
+        }
+        let topVC = (presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! SideNavigationController
         
         container!.addSubview(detailVC.view)
-        container!.addSubview(masterVC.view)
+        container!.addSubview(topVC.view)
         container!.addSubview(celebSnapshot)
         
         let duration = self.transitionDuration(transitionContext)
@@ -42,29 +51,24 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             if self.presenting {
                 detailVC.view.alpha = 1
                 celebSnapshot.frame = detailVC.profilePicNode.view.frame
+                masterVC.view.transform = offScreenLeft
+                detailVC.view.transform = CGAffineTransformIdentity
             } else {
                 masterVC.view.alpha = 1
+                masterVC.view.transform = CGAffineTransformIdentity
                 let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
                 let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-                let celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
-                celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
+                celebSnapshot.frame = cell.profilePicNode.view.frame
+                detailVC.view.transform = offScreenRight
             }
-            masterVC.view.transform = self.presenting ? offScreenLeft : offScreenRight
-            detailVC.view.transform = CGAffineTransformIdentity
             }, completion: { _ in
-                detailVC.profilePicNode.hidden = false
-                if self.presenting {
-                    let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-                    cell.profilePicNode.hidden = false
-                }
+                detailVC.profilePicNode.view.hidden = self.presenting ? false : true
                 celebSnapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)
         })
     }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 1.0 }
-    
     
     // MARK: UIViewControllerTransitioningDelegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
