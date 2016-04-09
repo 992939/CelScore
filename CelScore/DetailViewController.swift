@@ -119,11 +119,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func backAction() {
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
             self.dismissViewControllerAnimated(true, completion: nil)
-            MaterialAnimation.delay(0.15) {
-                self.celscoreVC.view.hidden = true
-                self.infoVC.view.hidden = true
-                self.ratingsVC.view.hidden = true
-            }
         }
     }
     

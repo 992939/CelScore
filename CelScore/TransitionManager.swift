@@ -26,7 +26,6 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
         cell.profilePicNode.hidden = true
         detailVC.view.frame = transitionContext.finalFrameForViewController(detailVC)
-        detailVC.view.alpha = 0
         detailVC.profilePicNode.hidden = true
         detailVC.view.transform = presenting ? offScreenRight : CGAffineTransformMakeTranslation(0, 0)
         
@@ -35,7 +34,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
             celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
         } else {
-            masterVC.view.transform =  CGAffineTransformMakeTranslation(0, 0)
+            masterVC.view.transform = offScreenLeft
             let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
             let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
             cell.profilePicNode.hidden = true
@@ -61,14 +60,14 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
                 let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
                 cell.profilePicNode.hidden = true
+                detailVC.view.transform = offScreenRight
                 masterVC.view.transform = CGAffineTransformIdentity
                 let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!)
                 let relativeRect = CGRectOffset(rect, -masterVC.celebrityTableView.contentOffset.x, -masterVC.celebrityTableView.contentOffset.y)
                 celebSnapshot.frame = CGRect(x: 16.0, y: relativeRect.origin.y + 133, width: 70, height: 70)
-                detailVC.view.transform = offScreenRight
             }
             }, completion: { _ in
-                detailVC.profilePicNode.view.hidden = self.presenting ? false : true
+                detailVC.profilePicNode.view.hidden = false
                 celebSnapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)
         })
