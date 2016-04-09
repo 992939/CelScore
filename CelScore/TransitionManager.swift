@@ -50,7 +50,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         
         let duration = self.transitionDuration(transitionContext)
         
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             if self.presenting {
                 detailVC.view.alpha = 1
                 celebSnapshot.frame = detailVC.profilePicNode.view.frame
@@ -64,7 +64,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 masterVC.view.transform = CGAffineTransformIdentity
                 let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!)
                 let relativeRect = CGRectOffset(rect, -masterVC.celebrityTableView.contentOffset.x, -masterVC.celebrityTableView.contentOffset.y)
-                celebSnapshot.frame = CGRect(x: 16.3, y: relativeRect.origin.y + 134, width: 70, height: 70)
+                celebSnapshot.frame = CGRect(x: 16.0, y: relativeRect.origin.y + 133, width: 70, height: 70)
                 detailVC.view.transform = offScreenRight
             }
             }, completion: { _ in
