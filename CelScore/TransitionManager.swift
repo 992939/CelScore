@@ -16,14 +16,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     // MARK: UIViewControllerAnimatedTransitioning
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView()
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as! SideNavigationController
-        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as! DetailViewController
-        
-//        let selectedRow = fromView.c
-//        let cell = fromViewController.tableView.cellForRowAtIndexPath(selectedRow!) as WeatherCell
-//        let weatherSnapshot = cell.forecastImage.snapshotViewAfterScreenUpdates(false)
-//        weatherSnapshot.frame = containerView.convertRect(cell.forecastImage.frame, fromView: fromViewController.tableView.cellForRowAtIndexPath(selectedRow!)?.superview)
-//        cell.forecastImage.hidden = true
+        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
@@ -32,17 +26,23 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         else { toVC.view.transform = offScreenLeft }
         
         container!.addSubview(toVC.view)
-        container!.addSubview(fromVC.rootViewController.view)
+        container!.addSubview(fromVC.view)
         
         let duration = self.transitionDuration(transitionContext)
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            if (self.presenting){ fromVC.rootViewController.view.transform = offScreenLeft }
-            else { fromVC.rootViewController.view.transform = offScreenRight }
+            if (self.presenting){ fromVC.view.transform = offScreenLeft }
+            else { fromVC.view.transform = offScreenRight }
             toVC.view.transform = CGAffineTransformIdentity
             }, completion: { finished in transitionContext.completeTransition(true)
         })
     }
+    
+    //        let selectedRow = fromView.c
+    //        let cell = fromViewController.tableView.cellForRowAtIndexPath(selectedRow!) as WeatherCell
+    //        let weatherSnapshot = cell.forecastImage.snapshotViewAfterScreenUpdates(false)
+    //        weatherSnapshot.frame = containerView.convertRect(cell.forecastImage.frame, fromView: fromViewController.tableView.cellForRowAtIndexPath(selectedRow!)?.superview)
+    //        cell.forecastImage.hidden = true
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 1.0 }
     
