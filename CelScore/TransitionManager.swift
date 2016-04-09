@@ -22,8 +22,15 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
         
-        if (self.presenting){ toVC.view.transform = offScreenRight }
-        else { toVC.view.transform = offScreenLeft }
+        if (self.presenting){
+            let masterVC = (fromVC as! SideNavigationController).rootViewController as! MasterViewController
+            let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
+            let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+            let celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
+            celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
+            cell.profilePicNode.hidden = true
+            toVC.view.transform = offScreenRight
+        } else { toVC.view.transform = offScreenLeft }
         
         container!.addSubview(toVC.view)
         container!.addSubview(fromVC.view)
@@ -37,12 +44,6 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             }, completion: { finished in transitionContext.completeTransition(true)
         })
     }
-    
-    //        let selectedRow = fromView.c
-    //        let cell = fromViewController.tableView.cellForRowAtIndexPath(selectedRow!) as WeatherCell
-    //        let weatherSnapshot = cell.forecastImage.snapshotViewAfterScreenUpdates(false)
-    //        weatherSnapshot.frame = containerView.convertRect(cell.forecastImage.frame, fromView: fromViewController.tableView.cellForRowAtIndexPath(selectedRow!)?.superview)
-    //        cell.forecastImage.hidden = true
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 1.0 }
     

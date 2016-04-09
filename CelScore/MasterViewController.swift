@@ -20,10 +20,10 @@ import RateLimit
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
     
     //MARK: Properties
-    private let celebrityTableView: ASTableView
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
     private let transitionManager = TransitionManager()
+    internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
     private var count: Int = 0
     

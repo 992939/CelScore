@@ -15,10 +15,10 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     //MARK: Properties
     private let nameNode: ASTextNode
-    private let profilePicNode: ASNetworkImageNode
     private let ratingsNode: ASDisplayNode
     private let switchNode: ASDisplayNode
     private let backgroundNode: ASDisplayNode
+    internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
     
     //MARK: Initializer
