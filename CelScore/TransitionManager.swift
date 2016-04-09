@@ -62,9 +62,9 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
                 cell.profilePicNode.hidden = true
                 masterVC.view.transform = CGAffineTransformIdentity
-                let cellRect = CGRect(x: 16.3, y: masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!).origin.y + 134, width: 70, height: 70)
-                celebSnapshot.frame = cellRect
-                print("cellRect: \(cellRect)  and rect: \(masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!))")
+                let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!)
+                let relativeRect = CGRectOffset(rect, -masterVC.celebrityTableView.contentOffset.x, -masterVC.celebrityTableView.contentOffset.y)
+                celebSnapshot.frame = CGRect(x: 16.3, y: relativeRect.origin.y + 134, width: 70, height: 70)
                 detailVC.view.transform = offScreenRight
             }
             }, completion: { _ in
