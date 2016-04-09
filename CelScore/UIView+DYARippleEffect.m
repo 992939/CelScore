@@ -58,7 +58,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 
     CAAnimationGroup *animation = [CAAnimationGroup animation];
     animation.animations = @[ scaleAnimation, alphaAnimation ];
-    animation.duration = 1.1f;
+    animation.duration = 1.2f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     [circleShape addAnimation:animation forKey:nil];
 }
