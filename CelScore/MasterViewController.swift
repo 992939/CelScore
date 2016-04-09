@@ -47,20 +47,22 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         
-        if let index = self.celebrityTableView.indexPathForSelectedRow {
-            if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
-            else { self.socialRefresh() }
-            SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
-                .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
-                    return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
-                .on(next: { first in let firstTime = first as! Bool
-                    if firstTime {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
-                    }})
-                .start()
+        MaterialAnimation.delay(0.7) {
+            if let index = self.celebrityTableView.indexPathForSelectedRow {
+                if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
+                else { self.socialRefresh() }
+                SettingsViewModel().calculateUserAverageCelScoreSignal()
+                    .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
+                    .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
+                        return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
+                    .on(next: { first in let firstTime = first as! Bool
+                        if firstTime {
+                            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
+                            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
+                        }})
+                    .start()
+            }
         }
     }
     

@@ -36,6 +36,9 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
         } else {
             masterVC.view.transform =  CGAffineTransformMakeTranslation(0, 0)
+            let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
+            let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+            cell.profilePicNode.hidden = true
             celebSnapshot = detailVC.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
             celebSnapshot.frame = container!.convertRect(detailVC.profilePicNode.view.frame, fromView: detailVC.view)
         }
@@ -55,10 +58,13 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 detailVC.view.transform = CGAffineTransformIdentity
             } else {
                 masterVC.view.alpha = 1
-                masterVC.view.transform = CGAffineTransformIdentity
                 let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
                 let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-                celebSnapshot.frame = cell.profilePicNode.view.frame
+                cell.profilePicNode.hidden = true
+                masterVC.view.transform = CGAffineTransformIdentity
+                let cellRect = CGRect(x: 16.3, y: masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!).origin.y + 134, width: 70, height: 70)
+                celebSnapshot.frame = cellRect
+                print("cellRect: \(cellRect)  and rect: \(masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!))")
                 detailVC.view.transform = offScreenRight
             }
             }, completion: { _ in
