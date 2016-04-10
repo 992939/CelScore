@@ -26,7 +26,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let transitionManager = TransitionManager()
     internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
-    private var count: Int = 0
     private var diffCalculator: TableViewDiffCalculator<CelebId>?
     
     //MARK: Initializers
@@ -172,10 +171,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
             .on(next: { list in
-                //self.count = list.count ?? 0
                 self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
-                self.dismissHUD()
-            })
+                self.dismissHUD() })
             .map({ _ in self.setupUser() })
             .start()
     }
@@ -195,10 +192,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getListSignal(listId: list.getId())
             .observeOn(UIScheduler())
-            .startWithNext({ list in
-                //self.count = list.count
-                self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
-            })
+            .startWithNext { list in self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) }
     }
     
     //MARK: Sociable
@@ -224,7 +218,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.count }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
@@ -285,10 +279,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-                .startWithNext({ list in
-                    //self.count = list.count
-                    self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
-                })
+                .startWithNext{ list in self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) }
         }
     }
     
