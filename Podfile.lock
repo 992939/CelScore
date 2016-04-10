@@ -1,36 +1,36 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9.7):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.7)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7)
-  - AsyncDisplayKit/PINRemoteImage (1.9.7):
+  - AsyncDisplayKit (1.9.7.1):
+    - AsyncDisplayKit/PINRemoteImage (= 1.9.7.1)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7.1)
+  - AsyncDisplayKit/PINRemoteImage (1.9.7.1):
     - AsyncDisplayKit/ASDealloc2MainObject
-    - PINRemoteImage/iOS (>= 2)
+    - PINRemoteImage/iOS (>= 2.1.2)
   - AWSAPIGateway (2.3.6):
     - AWSCore (= 2.3.6)
   - AWSCognito (2.3.6):
     - AWSCore (= 2.3.6)
   - AWSCore (2.3.6)
   - BEMCheckBox (1.2.0)
-  - Bolts (1.6.0):
-    - Bolts/AppLinks (= 1.6.0)
-    - Bolts/Tasks (= 1.6.0)
-  - Bolts/AppLinks (1.6.0):
+  - Bolts (1.7.0):
+    - Bolts/AppLinks (= 1.7.0)
+    - Bolts/Tasks (= 1.7.0)
+  - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.6.0)
+  - Bolts/Tasks (1.7.0)
   - Dwifft (0.3.1)
   - Fabric (1.6.7)
-  - FBSDKCoreKit (4.10.0):
+  - FBSDKCoreKit (4.10.1):
     - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.10.0):
+  - FBSDKLoginKit (4.10.1):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
-  - Material (1.39.4)
+  - Material (1.39.5)
   - OpinionzAlertView (0.3.1)
-  - PINCache (2.2.1)
-  - PINRemoteImage/Core (2.0.1):
+  - PINCache (2.2.2)
+  - PINRemoteImage/Core (2.1.2):
     - PINCache (>= 2.1)
-  - PINRemoteImage/iOS (2.0.1):
+  - PINRemoteImage/iOS (2.1.2):
     - PINRemoteImage/Core
   - R.swift (2.0.0):
     - R.swift.Library (~> 2.0.0)
@@ -57,15 +57,15 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - SMSegmentView (1.1)
-  - SVProgressHUD (2.0)
+  - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
-  - TwitterCore (2.0.1):
+  - TwitterCore (2.0.2):
     - Fabric
-  - TwitterKit (2.0.1):
-    - TwitterCore (= 2.0.1)
-  - WebASDKImageManager (1.0.1):
-    - AsyncDisplayKit (~> 1.1)
+  - TwitterKit (2.0.2):
+    - TwitterCore (= 2.0.2)
+  - WebASDKImageManager (1.1.0):
+    - AsyncDisplayKit (~> 1.9)
     - SDWebImage/Core (~> 3.7)
   - YLProgressBar (3.8.0)
 
@@ -98,21 +98,21 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: eb762d3bfd3896b2901909ebc24b54c97f32d43c
+  AsyncDisplayKit: 2b52f841e384e7326d4f59323b1bf35d00696e17
   AWSAPIGateway: 090586a9c5224c5f72bd441cc5146642be494101
   AWSCognito: af54fe65171c7c994c134e5d29b1ee60ee234825
   AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
   BEMCheckBox: fcfbbf42cf23d38fbb605c72f63db9ae82d6acd3
-  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
-  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
+  FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
+  FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  Material: 9dc677ea723fda5f7c0a6d51ab17c5369c15f5de
+  Material: c6ebc24f0bcb19c2dce94e8c76b48392c0d67a1c
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
-  PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
-  PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
+  PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
+  PINRemoteImage: 2ce3f1fcc52f0360a3821f91f1a1bc653c5d2338
   R.swift: ceb3d2897a26bb5811e08f531184bbba8e4a7110
   R.swift.Library: 9f4b2d12040daa1ffe336d8f7e1574f73721fd01
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
@@ -122,12 +122,12 @@ SPEC CHECKSUMS:
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
-  SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  TwitterCore: f8575c28412ab2e3fed1a153764397771de06efb
-  TwitterKit: ebc84244d4ada8cc673afd4ae7b67277e1f05a65
-  WebASDKImageManager: 8e37e97c115c8e9092fc6111218a71ddec7a73d5
+  TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
+  TwitterKit: c4e40f289a3d7cc9fab9f241edd7502385468b65
+  WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
 
 COCOAPODS: 0.39.0
