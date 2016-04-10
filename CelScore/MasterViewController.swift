@@ -100,10 +100,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         self.socialButton.hidden = false
         
-        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
-        self.diffCalculator!.insertionAnimation = .Fade
-        self.diffCalculator!.deletionAnimation = .Fade
-        
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         self.searchBar.delegate = self
@@ -129,8 +125,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                             return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                            return ListViewModel().updateListsSignal() }
-                        .on(next: { list in self.diffCalculator?.rows = list.celebList.flatMap({ celeb in return celeb }) })
+                            let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
+                            return ListViewModel().updateListSignal(listId: list.getId() )}
+                        .observeOn(UIScheduler())
+                        .on(next: { list in
+                            print("IDs \(list.celebList.flatMap({ celebId in return celebId }))")
+                            self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) })
                         .start()
                 }
         }
@@ -155,6 +155,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         self.showHUD()
+        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
+        self.diffCalculator!.insertionAnimation = .Fade
+        self.diffCalculator!.deletionAnimation = .Fade
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -165,14 +168,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .flatMapError { _ in SignalProducer.empty }
             .observeOn(UIScheduler())
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, ListError> in
+            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
             .on(next: { list in
-                self.count = list.count ?? 0
-                self.celebrityTableView.beginUpdates()
-                self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates()
+                //self.count = list.count ?? 0
+                self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
                 self.dismissHUD()
             })
             .map({ _ in self.setupUser() })
@@ -195,10 +196,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         ListViewModel().getListSignal(listId: list.getId())
             .observeOn(UIScheduler())
             .startWithNext({ list in
-                self.count = list.count
-                self.celebrityTableView.beginUpdates()
-                self.celebrityTableView.reloadData()
-                self.celebrityTableView.endUpdates()
+                //self.count = list.count
+                self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
             })
     }
     
@@ -220,11 +219,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
-    func socialRefresh() {
-        self.celebrityTableView.beginUpdates()
-        self.celebrityTableView.reloadData()
-        self.celebrityTableView.endUpdates()
-    }
+    func socialRefresh() { self.changeList() }
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -291,10 +286,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             ListViewModel().searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
                 .startWithNext({ list in
-                    self.count = list.count
-                    self.celebrityTableView.beginUpdates()
-                    self.celebrityTableView.reloadData()
-                    self.celebrityTableView.endUpdates()
+                    //self.count = list.count
+                    self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
                 })
         }
     }
