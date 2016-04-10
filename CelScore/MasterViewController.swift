@@ -128,9 +128,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
                         .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, ListError> in
+                        .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                             return ListViewModel().updateListsSignal() }
-                        .on(next: { list in print("TODO: refresh list") })
+                        .on(next: { list in self.diffCalculator?.rows = list.celebList.flatMap({ celeb in return celeb }) })
                         .start()
                 }
         }
