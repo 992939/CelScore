@@ -15,6 +15,7 @@ import Material
 import HMSegmentedControl
 import AIRTimer
 import RateLimit
+import Dwifft
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
@@ -26,6 +27,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
     private var count: Int = 0
+    private var diffCalculator: TableViewDiffCalculator<CelebId>?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -97,6 +99,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         self.socialButton.hidden = false
+        
+        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
+        self.diffCalculator!.insertionAnimation = .Fade
+        self.diffCalculator!.deletionAnimation = .Fade
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr

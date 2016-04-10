@@ -20,6 +20,9 @@ final class CelebId: Object, NSCopying {
     func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
 }
 
+extension CelebId: Equatable {}
+
+func == (lhs: CelebId, rhs: CelebId) -> Bool { return lhs.id == rhs.id }
 
 final class ListsModel: Object, NSCopying {
     

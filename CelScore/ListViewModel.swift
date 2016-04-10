@@ -72,9 +72,9 @@ struct ListViewModel {
                     celebId.id = celeb.celebId.id
                     listModel.celebList.append(celebId)
                 }
-                realm.beginWrite()
-                realm.add(listModel, update: true)
-                try! realm.commitWrite()
+//                realm.beginWrite()
+//                realm.add(listModel, update: true)
+//                try! realm.commitWrite()
                 observer.sendNext(listModel.celebList)
             })
             observer.sendCompleted()

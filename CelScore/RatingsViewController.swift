@@ -102,7 +102,7 @@ final class RatingsViewController: ASViewController {
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .startWithNext({ userRatings in
-                                self.delegate?.rippleEffect(positive: rating < 3 ? false : true, gold: false)
+                                self.delegate!.rippleEffect(positive: rating < 3 ? false : true, gold: false)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
                                 let unrated = userRatings.filter{ (userRatings[$0] as! Int) == 0 }

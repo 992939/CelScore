@@ -18,8 +18,6 @@ struct CelebrityStruct {
     let prevScore: Double
     let sex: Bool
     let isFollowed: Bool
-    
-    
 }
 
 extension CelebrityStruct: Equatable {}

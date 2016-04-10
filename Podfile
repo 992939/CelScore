@@ -28,6 +28,7 @@ target 'CelScore' do
     pod 'OpinionzAlertView', '~> 0.3.1'
     pod 'R.swift', '~> 2.0.0'
     pod 'SVProgressHUD', '~> 2.0'
+    pod 'Dwifft', '~> 0.3'
 end
 
 target 'CelScoreTests' do
