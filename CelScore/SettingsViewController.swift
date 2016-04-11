@@ -60,6 +60,17 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.node.addSubnode(logoNode)
+        
+        //Graffiti
+        let publicLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 25, width: 110, height: 40))
+        let opinionLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 115, y: 25, width: 110, height: 40))
+        let graffiti = R.font.adrippingmarker(size: 14)!
+        let attributes2 = [NSFontAttributeName : graffiti, NSForegroundColorAttributeName : Constants.kWineShade]
+        publicLabel.attributedText = NSAttributedString(string: "Of Public", attributes: attributes2)
+        opinionLabel.attributedText = NSAttributedString(string: "Opinion", attributes: attributes2)
+        logoView.addSubview(publicLabel)
+        logoView.addSubview(opinionLabel)
+        
 
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
