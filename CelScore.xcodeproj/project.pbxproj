@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
-		000A89A21CBB7A1500A583ED /* adrip1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000A89A11CBB7A0700A583ED /* adrip1.ttf */; };
 		000A89AF1CBB8A9900A583ED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A89AE1CBB8A9900A583ED /* R.generated.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
@@ -105,7 +104,6 @@
 
 /* Begin PBXFileReference section */
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
-		000A89A11CBB7A0700A583ED /* adrip1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = adrip1.ttf; sourceTree = "<group>"; };
 		000A89AE1CBB8A9900A583ED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */,
 				00FEF1761CACE5C6004141B3 /* BEEmpty.h */,
 				00FEF1771CACE5C6004141B3 /* BEEmpty.m */,
-				000A89A11CBB7A0700A583ED /* adrip1.ttf */,
 				00315C4F1C9926E500003B76 /* icomoon.ttf */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
 				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
@@ -548,7 +545,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000A89A21CBB7A1500A583ED /* adrip1.ttf in Resources */,
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				00315C501C9926E500003B76 /* icomoon.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,

@@ -103,7 +103,7 @@ struct RatingsViewModel {
             }
             let sumDiff = differences.reduce(0, combine: +)
             let percent: Int = 100 - Int(sumDiff * 2)
-            let message = "\(percent)% of the consensus agrees with you. Thank you for voting!"
+            let message = "\(percent)% of the consensus agrees with you. Thank you for building!"
             observer.sendNext(message)
             observer.sendCompleted()
         }

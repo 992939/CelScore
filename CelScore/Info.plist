@@ -135,7 +135,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>icomoon.ttf</string>
-		<string>adrip1.ttf</string>
 	</array>
 </dict>
 </plist>
