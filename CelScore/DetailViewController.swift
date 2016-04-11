@@ -34,7 +34,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     private var userST = UserStruct(socialMessage: "", isPositive: true)
     internal let profilePicNode: ASNetworkImageNode
     internal let socialButton: MenuView
-    internal var modalDelegate: ModalViewControllerDelegate?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
