@@ -26,13 +26,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let transitionManager = TransitionManager()
     internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
-    private var diffCalculator: TableViewDiffCalculator<CelebId>?
+    private let diffCalculator: TableViewDiffCalculator<CelebId>?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
         self.celebrityTableView = ASTableView()
+        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
+        self.diffCalculator!.insertionAnimation = .Fade
+        self.diffCalculator!.deletionAnimation = .Fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
@@ -154,9 +157,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         self.showHUD()
-        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
-        self.diffCalculator!.insertionAnimation = .Fade
-        self.diffCalculator!.deletionAnimation = .Fade
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
