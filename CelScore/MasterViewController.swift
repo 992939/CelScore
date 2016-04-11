@@ -24,9 +24,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
     private let transitionManager = TransitionManager()
+    private let diffCalculator: TableViewDiffCalculator<CelebId>
     internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
-    private let diffCalculator: TableViewDiffCalculator<CelebId>?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -34,8 +34,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     init() {
         self.celebrityTableView = ASTableView()
         self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
-        self.diffCalculator!.insertionAnimation = .Fade
-        self.diffCalculator!.deletionAnimation = .Fade
+        self.diffCalculator.insertionAnimation = .Fade
+        self.diffCalculator.deletionAnimation = .Fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
@@ -132,7 +132,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         .observeOn(UIScheduler())
                         .on(next: { list in
                             print("IDs \(list.celebList.flatMap({ celebId in return celebId }))")
-                            self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                            self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                         .start()
                 }
         }
@@ -171,7 +171,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
             .on(next: { list in
-                self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId })
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
                 self.dismissHUD() })
             .map({ _ in self.setupUser() })
             .start()
@@ -192,7 +192,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getListSignal(listId: list.getId())
             .observeOn(UIScheduler())
-            .startWithNext { list in self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) }
+            .startWithNext { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
     }
     
     //MARK: Sociable
@@ -279,7 +279,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-                .startWithNext{ list in self.diffCalculator?.rows = list.celebList.flatMap({ celebId in return celebId }) }
+                .startWithNext{ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
         }
     }
     
