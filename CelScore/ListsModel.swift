@@ -30,14 +30,12 @@ final class ListsModel: Object, NSCopying {
     dynamic var id: String = ""
     dynamic var name: String = ""
     dynamic var numberOfSearchByLocalUser: Double = 0
-    dynamic var count: Int = 0
     dynamic var isSynced: Bool = true
     var celebList = List<CelebId>()
     
     //MARK: Initializer
     convenience init(json: JSON) {
         self.init()
-        
         self.id = json["listID"].string!
         self.name = json["name"].string!
         let items = json["list"].array!
@@ -47,7 +45,6 @@ final class ListsModel: Object, NSCopying {
             celebId.id = items[index].string!
             self.celebList.append(celebId)
         }
-        self.count = self.celebList.count
         self.isSynced = true
     }
     
@@ -59,7 +56,6 @@ final class ListsModel: Object, NSCopying {
         copy.id = self.id
         copy.name = self.name
         copy.numberOfSearchByLocalUser = self.numberOfSearchByLocalUser
-        copy.count = self.count
         copy.isSynced = self.isSynced
         let objectList = List<CelebId>()
         for object in self.celebList.enumerate() {

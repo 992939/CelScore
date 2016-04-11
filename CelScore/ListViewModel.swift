@@ -39,7 +39,6 @@ struct ListViewModel {
                 celebId.id = celeb.id
                 listModel.celebList.append(celebId)
             }
-            listModel.count = list.count
             realm.add(listModel, update: true)
             try! realm.commitWrite()
             
