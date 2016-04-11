@@ -91,7 +91,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
         
-        self.profilePicNode.image = R.image.tyra()
+        self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
                                            y: 80,
                                            width: Constants.kCircleWidth,
@@ -116,7 +116,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func backAction() {
-        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithNext { _ in
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithCompleted { _ in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

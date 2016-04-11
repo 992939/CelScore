@@ -32,8 +32,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.nameNode.truncationMode = .ByTruncatingTail
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
-        //TODO: self.profilePicNode.URL = NSURL(string: celebST.imageURL)
-        self.profilePicNode.image = R.image.tyra()
+        self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
 //        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in

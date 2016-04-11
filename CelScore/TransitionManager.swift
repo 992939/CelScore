@@ -67,7 +67,12 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 celebSnapshot.frame = CGRect(x: 16.0, y: relativeRect.origin.y + 133, width: 70, height: 70)
             }
             }, completion: { _ in
-                detailVC.profilePicNode.view.hidden = false
+                detailVC.profilePicNode.hidden = false
+                if self.presenting == false {
+                    let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
+                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+                    cell.profilePicNode.hidden = false
+                }
                 celebSnapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)
         })
