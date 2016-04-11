@@ -274,7 +274,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
-            print("WTF")
             ListViewModel().searchSignal(searchToken: searchText)
                 .observeOn(UIScheduler())
                 .startWithNext({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
