@@ -67,7 +67,7 @@ struct UserViewModel {
         }
     }
     
-    func refreshFacebookTokenSignal() -> SignalProducer<AnyObject!, NSError> {
+    func refreshFacebookTokenSignal() -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
             if expirationDate > 10.days.later { observer.sendCompleted() }

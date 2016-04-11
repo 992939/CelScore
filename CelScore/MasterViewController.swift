@@ -50,7 +50,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
-        
         MaterialAnimation.delay(0.7) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
@@ -131,7 +130,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                             return ListViewModel().updateListSignal(listId: list.getId() )}
                         .observeOn(UIScheduler())
                         .on(next: { list in
-                            print("IDs \(list.celebList.flatMap({ celebId in return celebId }))")
                             self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                         .start()
                 }
@@ -217,13 +215,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
         var node = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        ListViewModel().getCelebrityStructSignal(listId: list.getId(), index: indexPath.row)
+        ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
             .observeOn(UIScheduler())
             .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
@@ -277,9 +274,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
+            print("WTF")
             ListViewModel().searchSignal(searchToken: searchText)
-                .throttle(1.0, onScheduler: QueueScheduler.mainQueueScheduler)
-                .startWithNext{ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
+                .observeOn(UIScheduler())
+                .startWithNext({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
         }
     }
     

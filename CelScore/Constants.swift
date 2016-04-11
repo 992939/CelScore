@@ -43,6 +43,7 @@ struct Constants {
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.height, width: kScreenWidth, height: 48)
+    static let kSearchListId: String = "0099"
     
     //SettingsVC
     static let kSettingsViewWidth: CGFloat = 300 < 0.80 * UIScreen.mainScreen().bounds.width ? (0.75 * UIScreen.mainScreen().bounds.width) : 300

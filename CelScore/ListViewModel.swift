@@ -30,8 +30,9 @@ struct ListViewModel {
             let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
             guard list.count > 0 else { observer.sendCompleted(); return }
             
+            realm.beginWrite()
             let listModel = ListsModel()
-            listModel.id = "0099"
+            listModel.id = Constants.kSearchListId
             listModel.name = "SearchList"
             for (_, celeb) in list.enumerate() {
                 let celebId = CelebId()
@@ -39,6 +40,9 @@ struct ListViewModel {
                 listModel.celebList.append(celebId)
             }
             listModel.count = list.count
+            realm.add(listModel, update: true)
+            try! realm.commitWrite()
+            
             observer.sendNext(listModel)
             observer.sendCompleted()
         }
@@ -70,7 +74,6 @@ struct ListViewModel {
                 celebId.id = celeb.celebId.id
                 listModel.celebList.append(celebId)
             }
-            print("name: \(celebList.name) id: \(celebList.id) count: \(listModel.celebList.count)")
             observer.sendNext(listModel)
             observer.sendCompleted()
         }

@@ -10,8 +10,6 @@ import UIKit
 
 
 extension UIView {
-
-    //MARK: Methods
     func slide(right right: Bool, duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         let transition = CATransition()
         if let delegate: AnyObject = completionDelegate { transition.delegate = delegate }

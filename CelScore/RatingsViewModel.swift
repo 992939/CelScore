@@ -73,11 +73,11 @@ struct RatingsViewModel {
         }
     }
     
-    func cleanUpRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<AnyObject, NoError> {
+    func cleanUpRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard newRatings?.isEmpty == false else { observer.sendNext(false); return }
+            guard newRatings?.isEmpty == false else { observer.sendCompleted(); return }
             
             realm.beginWrite()
             if newRatings!.getCelScore() == 0 { newRatings!.totalVotes = 0 }
