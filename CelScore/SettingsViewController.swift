@@ -48,9 +48,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoCircle.backgroundColor = Constants.kDarkGreenShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
-        let courtLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 25, width: 110, height: 40))
-        let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 115, y: 25, width: 110, height: 40))
-        let font = UIFont(name: "Cochin", size: 25.0) ?? UIFont.systemFontOfSize(25.0)
+        let courtLabel = UILabel(frame: CGRect(x: 2.5 * Constants.kPadding, y: 15, width: 110, height: 40))
+        let houseLabel = UILabel(frame: CGRect(x: 2.5 * Constants.kPadding, y: 40, width: 110, height: 40))
+        let font = UIFont(name: "Cochin-Bold", size: 22.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
@@ -62,15 +62,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.node.addSubnode(logoNode)
         
         //Graffiti
-        let publicLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 25, width: 110, height: 40))
-        let opinionLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 115, y: 25, width: 110, height: 40))
-        let graffiti = R.font.adrippingmarker(size: 14)!
-        let attributes2 = [NSFontAttributeName : graffiti, NSForegroundColorAttributeName : Constants.kWineShade]
+        let publicLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 107, y: 17, width: 110, height: 40))
+        let opinionLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 107, y: 42, width: 110, height: 40))
+        let attributes2 = [NSFontAttributeName : R.font.adrippingmarker(size: 31)!, NSForegroundColorAttributeName : Constants.kWineShade]
         publicLabel.attributedText = NSAttributedString(string: "Of Public", attributes: attributes2)
         opinionLabel.attributedText = NSAttributedString(string: "Opinion", attributes: attributes2)
         logoView.addSubview(publicLabel)
         logoView.addSubview(opinionLabel)
-        
 
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0

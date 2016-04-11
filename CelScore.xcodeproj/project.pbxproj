@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */; };
 		000A89A21CBB7A1500A583ED /* adrip1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000A89A11CBB7A0700A583ED /* adrip1.ttf */; };
-		000A89A41CBB7AB700A583ED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A89A31CBB7AB700A583ED /* R.generated.swift */; };
+		000A89AF1CBB8A9900A583ED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000A89AE1CBB8A9900A583ED /* R.generated.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
@@ -106,7 +106,7 @@
 /* Begin PBXFileReference section */
 		000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Closure.swift"; sourceTree = "<group>"; };
 		000A89A11CBB7A0700A583ED /* adrip1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = adrip1.ttf; sourceTree = "<group>"; };
-		000A89A31CBB7AB700A583ED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		000A89AE1CBB8A9900A583ED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
-				000A89A31CBB7AB700A583ED /* R.generated.swift */,
+				000A89AE1CBB8A9900A583ED /* R.generated.swift */,
 				000A3EEA1C7564F500B823A2 /* CAAnimation+Closure.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
@@ -733,7 +733,7 @@
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				000A3EEB1C7564F500B823A2 /* CAAnimation+Closure.swift in Sources */,
 				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
-				000A89A41CBB7AB700A583ED /* R.generated.swift in Sources */,
+				000A89AF1CBB8A9900A583ED /* R.generated.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
