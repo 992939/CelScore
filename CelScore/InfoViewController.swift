@@ -69,6 +69,7 @@ final class InfoViewController: ASViewController, Labelable {
                                 infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: 25))
                             }
                             infoLabel!.textAlignment = .Right
+                        
                             qualityView.depth = .Depth1
                             qualityView.backgroundColor = Constants.kMainShade
                             qualityView.addSubview(qualityLabel)
