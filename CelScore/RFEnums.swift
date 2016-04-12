@@ -96,6 +96,29 @@ enum OverlayInfo: Int {
         }
     }
     
+    static func consensusArray() -> [UIImage] {
+        return [R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green()!,
+                R.image.collective_green2()!,
+                R.image.collective_green3()!,
+                R.image.collective_green4()!,
+                R.image.collective_green4()!,
+                R.image.collective_green4()!]
+    }
+    
     static func getOptions() -> TAOverlayOptions {
         return [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow]
     }
