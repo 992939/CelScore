@@ -96,7 +96,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                                            y: 80,
                                            width: Constants.kCircleWidth,
                                            height: Constants.kCircleWidth)
-        //self.profilePicNode.contentMode = .ScaleToFill
         self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
         topView.clipsToBounds = false
 

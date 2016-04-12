@@ -52,8 +52,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         MaterialAnimation.delay(0.7) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
-                //TODO: if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
-                //else { self.socialRefresh() }
+                if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
+                else { self.socialRefresh() }
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                     .flatMapError { _ in SignalProducer.empty }

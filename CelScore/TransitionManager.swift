@@ -68,7 +68,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             }
             }, completion: { _ in
                 detailVC.profilePicNode.hidden = false
-                if self.presenting == false {
+                if self.presenting == false && masterVC.celebrityTableView.indexPathForSelectedRow != nil {
                     let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
                     let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as? CelebrityTableViewCell
                     cell?.profilePicNode.hidden = false
