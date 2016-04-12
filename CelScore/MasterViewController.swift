@@ -268,6 +268,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
+    func sideNavigationWillOpen(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
+        self.sideNavigationController!.leftViewController?.viewDidAppear(true)
+    }
+    
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) { self.hideSearchBar() }
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool { return true }

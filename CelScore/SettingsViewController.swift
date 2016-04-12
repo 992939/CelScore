@@ -98,8 +98,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
-            .startWithNext({ index in print("layout index: \(index)"); self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
         pickerView.addSubview(pickerLabel)
         pickerView.addSubview(self.picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
@@ -137,6 +135,12 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: Methods
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+            .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+    }
+    
     func logout() {
         let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
             { (_, index: Int) -> Void in if index == 0 {
