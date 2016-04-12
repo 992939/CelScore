@@ -46,7 +46,7 @@ final class InfoViewController: ASViewController, Labelable {
                             qualityView.tag = index+1
                             let qualityLabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
                             var infoLabelText = ""
-                            var attributedText = NSMutableAttributedString()
+                            var attributedText = NSAttributedString()
                             switch quality {
                             case Info.FirstName.name(): infoLabelText = celeb.firstName
                             case Info.MiddleName.name(): infoLabelText = celeb.middleName
@@ -56,18 +56,11 @@ final class InfoViewController: ASViewController, Labelable {
                             case Info.Height.name(): infoLabelText = celeb.height
                             case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.Status.name(): infoLabelText = celeb.status
-                            case Info.CelScore.name():
-                                let difference = score - self.celebST.prevScore
-                                let margin = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
-                                let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
-                                attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
-                                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
-                                let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
-                                attributedText.appendAttributedString(attrString)
+                            case Info.CelScore.name(): attributedText = self.createCelScoreText(score)
                             case Info.Networth.name(): infoLabelText = celeb.netWorth
-                            default: infoLabelText = "n/a"
+                            default: infoLabelText = ""
                             }
-                            //TODO: func setUpLabel()
+                            
                             let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
                                 infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: 25))
@@ -93,6 +86,18 @@ final class InfoViewController: ASViewController, Labelable {
             .start()
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
+    }
+    
+    func createCelScoreText(score: Double) -> NSAttributedString {
+        var attributedText = NSMutableAttributedString()
+        let difference = score - self.celebST.prevScore
+        let margin = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
+        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+        attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
+        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
+        let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
+        attributedText.appendAttributedString(attrString)
+        return attributedText
     }
     
     func longPress(gesture: UIGestureRecognizer) {
