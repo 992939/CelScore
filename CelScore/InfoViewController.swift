@@ -67,7 +67,7 @@ final class InfoViewController: ASViewController, Labelable {
                             case Info.Networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = "n/a"
                             }
-                            
+                            //TODO: func setUpLabel()
                             let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
                                 infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: 25))

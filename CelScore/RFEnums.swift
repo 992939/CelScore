@@ -139,7 +139,7 @@ enum Info: Int {
         case .Height: return "Height"
         case .Zodiac: return "Zodiac"
         case .Status: return "Status"
-        case .CelScore: return "C-Score"
+        case .CelScore: return "Score"
         case .Networth: return "Networth"
         }
     }
@@ -267,7 +267,7 @@ enum ListInfo : Int {
         case .Sports: return "Sports"
         case .Music: return "Music"
         case .Television: return "Television"
-        case .News: return "News"
+        case .News: return "New"
         }
     }
     
