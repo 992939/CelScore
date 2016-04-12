@@ -35,9 +35,6 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
-//        self.profilePicNode.imageModificationBlock = { (originalImage: UIImage) -> UIImage? in
-//            return ASImageNodeRoundBorderModificationBlock(8.0, Constants.kDarkShade)(originalImage)
-//        }
         
         let cosmosView = CosmosView()
         cosmosView.settings.starSize = Constants.kStarSize
@@ -45,6 +42,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in cosmosView.rating = score }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext { hasRatings in
             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
@@ -52,10 +50,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         
         let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
         followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 32)
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
-            cosmosView.rating = score
-            followSwitch.buttonOnColor = score < celebrityStruct.prevScore ? Constants.kWineShade : Constants.kLightGreenShade
-        }
+        followSwitch.buttonOnColor = Constants.kWineShade
     
         followSwitch.trackOnColor = followSwitch.trackOffColor
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
@@ -97,35 +92,6 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
             insets: UIEdgeInsetsMake(Constants.kPadding, Constants.kPadding, Constants.kPadding, Constants.kPadding),
             child: horizontalStack),
             background: self.backgroundNode)
-    }
-    
-    override func layoutDidFinish() {
-        super.layoutDidFinish()
-//        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-//            .startWithNext({ score in self.setupCircleLayer(positive: score < self.celebST.prevScore ? false : true) })
-    }
-
-    func setupCircleLayer(positive positive: Bool) {
-        let radius: CGFloat = (self.profilePicNode.frame.width - 2) / 2
-        let centerX: CGFloat = self.profilePicNode.frame.centerX - 10
-        let centerY: CGFloat = self.profilePicNode.frame.centerY - 10
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Constants.degreeToRadian(-90.0), endAngle: Constants.degreeToRadian(-90 + 360.0), clockwise: true)
-        
-        let pathLayer = CAShapeLayer()
-        pathLayer.path = circlePath.CGPath
-        pathLayer.fillColor = UIColor.clearColor().CGColor
-        pathLayer.lineWidth = 4
-        
-        pathLayer.strokeColor = positive ? Constants.kLightGreenShade.CGColor : Constants.kWineShade.CGColor
-        pathLayer.strokeStart = 0.0
-        pathLayer.strokeEnd = 1.0
-        
-        let pathAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        pathAnimation.duration = 0.75
-        pathAnimation.fromValue = 0.0
-        pathAnimation.toValue = 1.0
-        pathLayer.addAnimation(pathAnimation, forKey: "strokeEndAnimation")
-        self.profilePicNode.layer.addSublayer(pathLayer)
     }
     
     func getId() -> String { return celebST.id }
