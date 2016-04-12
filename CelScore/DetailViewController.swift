@@ -140,7 +140,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
-                if isConsensus == false { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions()) }
+                if isConsensus == false { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions()) }
                 return isConsensus })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
