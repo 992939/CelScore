@@ -109,7 +109,7 @@ struct SettingsViewModel {
     func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let model: SettingsModel? = realm.objects(SettingsModel).first
+            let model = realm.objects(SettingsModel).first
             if let settings = model {
                 switch settingType {
                 case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)

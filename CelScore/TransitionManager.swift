@@ -70,8 +70,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 detailVC.profilePicNode.hidden = false
                 if self.presenting == false {
                     let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-                    cell.profilePicNode.hidden = false
+                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as? CelebrityTableViewCell
+                    cell?.profilePicNode.hidden = false
                 }
                 celebSnapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)

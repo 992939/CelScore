@@ -222,11 +222,11 @@ struct UserViewModel {
                     })
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
-                    let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    guard dico.isEmpty == false else { observer.sendFailed(NSError(domain: "NoDio", code: 1, userInfo: nil)); return task }
-                        
+                    let settings: SettingsModel = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
+                    guard dico.isEmpty == false else { observer.sendFailed(NSError(domain: "NoDico", code: 1, userInfo: nil)); return task }
+                    realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
-                    settings.loginTypeIndex = (dico["loginTypeIndex"] as! NSString).integerValue
+                    settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
                     settings.consensusBuilding = (dico["consensusBuilding"] as! NSString).boolValue
                     settings.isFirstLaunch = (dico["isFirstLaunch"] as! NSString).boolValue
@@ -241,7 +241,6 @@ struct UserViewModel {
                     settings.isFirstSocialDisabled = (dico["isFirstSocialDisabled"] as! NSString).boolValue
                     settings.isFirstTrollWarning = (dico["isFirstTrollWarning"] as! NSString).boolValue
                     settings.isSynced = true
-                    realm.beginWrite()
                     realm.add(settings, update: true)
                     try! realm.commitWrite()
                 }
