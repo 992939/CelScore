@@ -171,19 +171,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(next: { list in
                 self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
                 self.dismissHUD() })
-            .map({ _ in self.setupUser() })
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
+            .on(next: { first in let firstTime = first as! Bool
+                if firstTime {
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })
+                }})
             .start()
-    }
-    
-    func setupUser() {
-        SettingsViewModel().getSettingSignal(settingType: .FirstLaunch)
-            .observeOn(UIScheduler())
-            .startWithNext { first in let firstTime = first as! Bool
-            if firstTime {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })
-            }
-        }
     }
     
     func changeList() {
