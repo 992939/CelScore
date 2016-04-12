@@ -211,7 +211,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
-    func socialRefresh() { self.changeList() }
+    func socialRefresh() { self.diffCalculator.rows = []; self.changeList() }
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -264,7 +264,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in self.hideSocialButton(self.socialButton) })
-            .on(failed: { _ in self.changeList() })
+            .on(failed: { _ in self.diffCalculator.rows = []; self.changeList()  })
             .start()
     }
     
