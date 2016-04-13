@@ -198,7 +198,7 @@ class ModelTests: XCTestCase {
     
     func testUserRatingsGetCelScore() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
-        XCTAssertEqual(userRatings.getCelScore(), Double(1.00), "userRatings.getCelScore() error.")
+        XCTAssertEqual(userRatings.getCelScore(), Double(1.00), "userRatings.getCelScore() error1.")
     }
     
     func testUserRatingsGetAverageVariance() {
