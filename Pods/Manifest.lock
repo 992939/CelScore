@@ -1,9 +1,9 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9.7.1):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.7.1)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7.1)
-  - AsyncDisplayKit/PINRemoteImage (1.9.7.1):
+  - AsyncDisplayKit (1.9.7.2):
+    - AsyncDisplayKit/PINRemoteImage (= 1.9.7.2)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7.2)
+  - AsyncDisplayKit/PINRemoteImage (1.9.7.2):
     - AsyncDisplayKit/ASDealloc2MainObject
     - PINRemoteImage/iOS (>= 2.1.2)
   - AWSAPIGateway (2.3.6):
@@ -25,7 +25,7 @@ PODS:
   - FBSDKLoginKit (4.10.1):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
-  - Material (1.39.5)
+  - Material (1.39.7)
   - OpinionzAlertView (0.3.1)
   - PINCache (2.2.2)
   - PINRemoteImage/Core (2.1.2):
@@ -98,7 +98,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 2b52f841e384e7326d4f59323b1bf35d00696e17
+  AsyncDisplayKit: 1701c47761a3e274b82cc0c77e6294cfa69612f6
   AWSAPIGateway: 090586a9c5224c5f72bd441cc5146642be494101
   AWSCognito: af54fe65171c7c994c134e5d29b1ee60ee234825
   AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  Material: c6ebc24f0bcb19c2dce94e8c76b48392c0d67a1c
+  Material: 92a94dea4511c86f2e0f4cdb16048182d15b03d5
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 2ce3f1fcc52f0360a3821f91f1a1bc653c5d2338

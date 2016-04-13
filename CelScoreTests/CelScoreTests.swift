@@ -8,21 +8,13 @@
 
 
 import XCTest
-import UIKit
-import Result
 import ReactiveCocoa
 @testable import CelebrityScore
 
 class CelScoreTests: XCTestCase {
     
     func testCalculatePositiveVoteSignal() {
-        let calculate = SettingsViewModel().calculatePositiveVoteSignal()
-        let expectation = expectationWithDescription("check that calculatePositiveVoteSignal()")
-        
-        calculate.startWithNext { positive in XCTAssertTrue(true); expectation.fulfill() }
-        
-        waitForExpectationsWithTimeout(1) { error in
-            if let error = error { XCTFail("waitForExpectationsWithTimeout errored: \(error)") }
-        }
+        let ratings = RatingsModel(id: "0001")
+        XCTAssertNotNil(ratings, "RatingsModel() not nil")
     }
 }
