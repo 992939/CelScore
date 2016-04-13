@@ -29,7 +29,7 @@ final class ListsModel: Object, NSCopying {
     //MARK: Properties
     dynamic var id: String = ""
     dynamic var name: String = ""
-    dynamic var numberOfSearchByLocalUser: Double = 0
+    dynamic var numberOfSearchByLocalUser: Int = 0
     dynamic var isSynced: Bool = true
     var celebList = List<CelebId>()
     
