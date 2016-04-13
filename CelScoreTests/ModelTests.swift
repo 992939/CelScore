@@ -11,14 +11,8 @@ import XCTest
 
 class ModelTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
-    func testShareVoteOnSignal() {
+    func testRatingsModelInit() {
+        let ratings = RatingsModel(id: "0001")
+        XCTAssertNotNil(ratings, "RatingsModel() not nil")
     }
 }

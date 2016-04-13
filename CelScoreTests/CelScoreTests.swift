@@ -14,7 +14,16 @@ import ReactiveCocoa
 class CelScoreTests: XCTestCase {
     
     func testCalculatePositiveVoteSignal() {
-        let ratings = RatingsModel(id: "0001")
-        XCTAssertNotNil(ratings, "RatingsModel() not nil")
+        let expectation = expectationWithDescription("SomeService does stuff and runs the callback closure")
+        
+        SettingsViewModel().calculatePositiveVoteSignal().startWithNext { positive in
+            XCTAssertTrue(true)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(1) { error in
+            if let error = error { XCTFail("waitForExpectationsWithTimeout error: \(error)") }
+        }
+        
     }
 }
