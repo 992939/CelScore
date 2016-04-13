@@ -8,24 +8,21 @@
 
 
 import XCTest
+import UIKit
+import Result
+import ReactiveCocoa
 @testable import CelebrityScore
 
 class CelScoreTests: XCTestCase {
     
-    //var celscoreVM: CelScoreViewModel
-    
-    override func setUp() {
-        super.setUp()
-        //celscoreVM = CelScoreViewModel()
+    func testCalculatePositiveVoteSignal() {
+        let calculate = SettingsViewModel().calculatePositiveVoteSignal()
+        let expectation = expectationWithDescription("check that calculatePositiveVoteSignal()")
+        
+        calculate.startWithNext { positive in XCTAssertTrue(true); expectation.fulfill() }
+        
+        waitForExpectationsWithTimeout(1) { error in
+            if let error = error { XCTFail("waitForExpectationsWithTimeout errored: \(error)") }
+        }
     }
-    
-    override func tearDown() {
-        //celscoreVM = nil
-        super.tearDown()
-    }
-    
-//    func testShareVoteOnSignal() {
-//        let composer = celscoreVM.shareVoteOnSignal
-//        expect(composer).willNot.beNil
-//    }
 }

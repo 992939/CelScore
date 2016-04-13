@@ -2,23 +2,26 @@
 use_frameworks!
 platform :ios, '9.0'
 
+def shared_pods
+    pod 'ReactiveCocoa', '~> 4.1'
+    pod 'RealmSwift', '~> 0.98.6'
+    pod 'AIRTimer', '~> 1.0.2'
+    pod 'SwiftyJSON', '~> 2.3.2'
+end
 
 target 'CelScore' do
-    pod 'ReactiveCocoa', '~> 4.1'
+    shared_pods
     pod 'AsyncDisplayKit', '~> 1.9.7.1'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
-    pod 'RealmSwift', '~> 0.98.6'
     pod 'AWSCognito', '~> 2.3.6'
     pod 'AWSAPIGateway', '~> 2.3.6'
-    pod 'SwiftyJSON', '~> 2.3.2'
     pod 'FBSDKLoginKit', '~> 4.10.1'
     pod 'FBSDKCoreKit', '~> 4.10.1'
     pod 'Fabric', '~> 1.6.7'
     pod 'TwitterKit', '~> 2.0.2'
     pod 'TwitterCore', '~> 2.0.2'
     pod 'RateLimit', '~> 1.2'
-    pod 'AIRTimer', '~> 1.0.2'
     pod 'Timepiece', '~> 0.4'
     pod 'YLProgressBar', '~> 3.8'
     pod 'SMSegmentView', '~> 1.1'
@@ -32,12 +35,9 @@ target 'CelScore' do
 end
 
 target 'CelScoreTests' do
-    
+    shared_pods
 end
 
 target 'CelScoreWidget' do
-    pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 0.98.6'
-    pod 'AIRTimer', '~> 1.0.2'
-    pod 'SwiftyJSON', '~> 2.3.2'
+    shared_pods
 end
