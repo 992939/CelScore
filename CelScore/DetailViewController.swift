@@ -12,7 +12,6 @@ import SMSegmentView
 import FBSDKLoginKit
 import AIRTimer
 import Social
-import TransitionTreasury
 
 
 struct UserStruct {

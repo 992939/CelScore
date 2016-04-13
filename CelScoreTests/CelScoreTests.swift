@@ -6,26 +6,26 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import UIKit
+
 import XCTest
-@testable import CelScore
+@testable import CelebrityScore
 
 class CelScoreTests: XCTestCase {
     
-    let celscoreVM: CelScoreViewModel
+    //var celscoreVM: CelScoreViewModel
     
     override func setUp() {
         super.setUp()
-        celscoreVM = CelScoreViewModel()
-    }
-    
-    func testShareVoteOnSignal() {
-        let composer = celscoreVM.shareVoteOnSignal
-        //expect(composer).willNot.beNil
+        //celscoreVM = CelScoreViewModel()
     }
     
     override func tearDown() {
-        celscoreVM = nil
+        //celscoreVM = nil
         super.tearDown()
     }
+    
+//    func testShareVoteOnSignal() {
+//        let composer = celscoreVM.shareVoteOnSignal
+//        expect(composer).willNot.beNil
+//    }
 }
