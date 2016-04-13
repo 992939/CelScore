@@ -15,8 +15,4 @@ class RealmTests: XCTestCase {
     override func setUp() { super.setUp(); Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name }
     override func tearDown() { super.tearDown() }
     
-    func testUserRatingsInterpolation() {
-        let userRatings = UserRatingsModel()
-        XCTAssert((userRatings.interpolation() == "0/0/0/0/0/0/0/0/0/0"), "UserRatingsModel().interpolation() format is wrong.")
-    }
 }

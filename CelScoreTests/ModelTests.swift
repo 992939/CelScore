@@ -190,6 +190,39 @@ class ModelTests: XCTestCase {
         let celebId = CelebId()
         XCTAssert((celebId.id as Any) is String, "CelebId().id is String")
     }
+    
+    func testUserRatingsInterpolation() {
+        let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
+        XCTAssert((userRatings.interpolation() == "1/1/1/1/1/1/1/1/1/1"), "UserRatingsModel().interpolation() error.")
+    }
+    
+    func testUserRatingsGetCelScore() {
+        let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
+        XCTAssertEqual(userRatings.getCelScore(), Double(1.00), "userRatings.getCelScore() error.")
+    }
+    
+    func testUserRatingsGetAverageVariance() {
+        let userRatings = UserRatingsModel()
+        userRatings.variance1 = 1
+        userRatings.variance2 = 1
+        userRatings.variance3 = 1
+        userRatings.variance4 = 1
+        userRatings.variance5 = 1
+        userRatings.variance6 = 1
+        userRatings.variance7 = 1
+        userRatings.variance8 = 1
+        userRatings.variance9 = 1
+        userRatings.variance10 = 1
+        XCTAssertEqual(userRatings.getAvgVariance(), Double(1.00), "userRatings.getAvgVariance() error.")
+    }
+    
+    func testCelebrityStructEquality() {
+        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
+        let celebB = CelebrityStruct(id: "0001", imageURL:"@2x", nickname:"A", prevScore: 2, sex: true, isFollowed:true)
+        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
+        XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
+        XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
+    }
 }
 
 
