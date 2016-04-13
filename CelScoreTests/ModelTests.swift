@@ -12,7 +12,14 @@ import XCTest
 class ModelTests: XCTestCase {
     
     func testRatingsModelInit() {
-        let ratings = RatingsModel(id: "0001")
+        let ratings = RatingsModel()
         XCTAssertNotNil(ratings, "RatingsModel() not nil")
+        XCTAssertNotNil(ratings.id, "RatingsModel().id not nil")
     }
+    
+    func testCelebrityModelInit() { XCTAssertNotNil(CelebrityModel(), "CelebrityModel() not nil") }
+    
+    func testSettingsModelInit() { XCTAssertNotNil(SettingsModel(), "SettingsModel() not nil") }
+    
+    func testListsModelInit() { XCTAssertNotNil(ListsModel(), "ListsModel() not nil") }
 }
