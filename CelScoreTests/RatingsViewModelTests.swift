@@ -16,6 +16,14 @@ class RatingsViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
+        let realm = try! Realm()
+        realm.beginWrite()
+        let ratings = RatingsModel(id: "0001")
+        ratings.rating1 = 5
+        let userRatings = UserRatingsModel(id: "0001", joinedString: "1/2/1/1/1/1/1/1/1/1")
+        realm.add(ratings, update: true)
+        realm.add(userRatings, update: true)
+        try! realm.commitWrite()
     }
     
     func testUpdateUserRatingSignal() {
@@ -32,14 +40,27 @@ class RatingsViewModelTests: XCTestCase {
                 XCTAssertEqual(model.totalVotes, 1, "voteSignal increments userRatings.")
                 XCTAssertEqual(model.isSynced, false, "voteSignal unsynced userRatings.")
                 expectation.fulfill() })
-            .on(failed: { error in expectation.fulfill() })
             .start()
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("voteSignal error: \(error)") } }
     }
     
+    func testGetRatingsSignal() {
+        let expectation = expectationWithDescription("get RatingsSignal callback")
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .Ratings).startWithNext { ratings in
+            XCTAssertEqual(ratings.rating1, 5, "getRatingsSignal returns RatingsModel."); expectation.fulfill() }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("get RatingsSignal error: \(error)") } }
+    }
+    
+    func testGetUserRatingsSignal() {
+        let expectation = expectationWithDescription("get UserRatingsSignal callback")
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .UserRatings).startWithNext { ratings in
+            XCTAssertEqual(ratings.rating2, 2, "getRatingsSignal returns UserRatingsModel."); expectation.fulfill() }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("get UserRatingsSignal error: \(error)") } }
+    }
+    
     func testHasUserRatingsSignal() {
         let expectation = expectationWithDescription("hasUserRatingsSignal callback")
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: "0001").startWithNext { value in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: "0002").startWithNext { value in
             XCTAssertEqual(value, false, "hasUserRatingsSignal returns false."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("hasUserRatingsSignal error: \(error)") } }
     }
@@ -54,6 +75,13 @@ class RatingsViewModelTests: XCTestCase {
             .on(next: { model in XCTAssertEqual(model.getCelScore(), 0, "cleanUpRatingsSignal set celscore to 0"); expectation.fulfill() })
             .start()
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("cleanUpRatingsSignal error: \(error)") } }
+    }
+    
+    func testGetCelScoreSignal() {
+        let expectation = expectationWithDescription("getCelScoreSignal callback")
+        RatingsViewModel().getCelScoreSignal(ratingsId: "0001").startWithNext { score in
+            XCTAssertEqual(score, 1.1, "getCelScoreSignal above 0.5."); expectation.fulfill() }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("getCelScoreSignal error: \(error)") } }
     }
 }
  

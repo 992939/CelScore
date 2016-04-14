@@ -33,9 +33,9 @@ struct RatingsViewModel {
     func voteSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            realm.beginWrite()
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
             guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+            realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
             realm.add(object, update: true)
