@@ -17,7 +17,7 @@ struct CelebrityViewModel {
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
+            let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             observer.sendNext(object)
             observer.sendCompleted()
@@ -27,7 +27,7 @@ struct CelebrityViewModel {
     func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
+            let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
             guard let celeb = celebrity else { observer.sendFailed(.NotFound); return }
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, sex: celeb.sex, isFollowed:celeb.isFollowed)
             let activity = profile.userActivity
@@ -41,7 +41,7 @@ struct CelebrityViewModel {
     func followCebritySignal(id id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
+            let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             realm.beginWrite()
             object.isFollowed = isFollowing

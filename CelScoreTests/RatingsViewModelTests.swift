@@ -8,6 +8,7 @@
 
 import XCTest
 import RealmSwift
+import Result
 @testable import CelebrityScore
 
 class RatingsViewModelTests: XCTestCase {
@@ -41,6 +42,18 @@ class RatingsViewModelTests: XCTestCase {
         RatingsViewModel().hasUserRatingsSignal(ratingsId: "0001").startWithNext { value in
             XCTAssertEqual(value, false, "hasUserRatingsSignal returns false."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("hasUserRatingsSignal error: \(error)") } }
+    }
+    
+    func testCleanUpRatingsSignal() {
+        let expectation = expectationWithDescription("cleanUpRatingsSignal callback")
+        RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4)
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (model) -> SignalProducer<RatingsModel, NoError> in
+                XCTAssert(model.getCelScore() > 0, "hasUserRatingsSignal set celscore above 0")
+                return RatingsViewModel().cleanUpRatingsSignal(ratingsId: "0001") }
+            .on(next: { model in XCTAssertEqual(model.getCelScore(), 0, "cleanUpRatingsSignal set celscore to 0"); expectation.fulfill() })
+            .start()
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("cleanUpRatingsSignal error: \(error)") } }
     }
 }
  
