@@ -17,7 +17,7 @@ struct CelebrityViewModel {
     func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!.copy() as? CelebrityModel
+            let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", id).first!
             guard let object = celebrity else { observer.sendFailed(.NotFound); return }
             observer.sendNext(object)
             observer.sendCompleted()
