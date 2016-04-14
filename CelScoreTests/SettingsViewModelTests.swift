@@ -15,8 +15,7 @@ class SettingsViewModelTests: XCTestCase {
     func testCalculatePositiveVoteSignal() {
         let expectation = expectationWithDescription("calculatePositiveVoteSignal callback")
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext { positive in
-            XCTAssert(positive >= 0, "calculatePositiveVoteSignal superior or equal to zero.")
-            expectation.fulfill() }
+            XCTAssert(positive >= 0, "calculatePositiveVoteSignal superior or equal to zero."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("calculatePositiveVoteSignal error: \(error)") } }
     }
     

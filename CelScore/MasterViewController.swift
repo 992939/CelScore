@@ -41,6 +41,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        
+        //UNIT TEST: SettingsViewModel().loggedInAsSignal().startWithNext { name in print(name) }
     }
     
     //MARK: Methods
