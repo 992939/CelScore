@@ -35,5 +35,12 @@ class RatingsViewModelTests: XCTestCase {
             .start()
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("voteSignal error: \(error)") } }
     }
+    
+    func testHasUserRatingsSignal() {
+        let expectation = expectationWithDescription("hasUserRatingsSignal callback")
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: "0001").startWithNext { value in
+            XCTAssertEqual(value, false, "hasUserRatingsSignal returns false."); expectation.fulfill() }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("hasUserRatingsSignal error: \(error)") } }
+    }
 }
  
