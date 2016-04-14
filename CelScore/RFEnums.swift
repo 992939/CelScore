@@ -116,7 +116,12 @@ enum OverlayInfo: Int {
                 R.image.collective_green3()!,
                 R.image.collective_green4()!,
                 R.image.collective_green4()!,
-                R.image.collective_green4()!]
+                R.image.collective_green4()!,
+                R.image.collective_green4()!,
+                R.image.collective_green4()!,
+                R.image.collective_green4()!,
+                R.image.collective_green3()!,
+                R.image.collective_green2()!]
     }
     
     static func getOptions() -> TAOverlayOptions {
