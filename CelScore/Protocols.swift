@@ -73,7 +73,7 @@ extension Sociable {
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateUserName(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
+                return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }

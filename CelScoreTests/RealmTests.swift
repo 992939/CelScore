@@ -14,5 +14,4 @@ class RealmTests: XCTestCase {
     
     override func setUp() { super.setUp(); Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name }
     override func tearDown() { super.tearDown() }
-    
 }
