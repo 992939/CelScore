@@ -109,43 +109,23 @@ struct SettingsViewModel {
     func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first
-            if let settings = model {
-                switch settingType {
-                case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)
-                case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
-                case .PublicService: observer.sendNext(settings.publicService)
-                case .ConsensusBuilding: observer.sendNext(settings.consensusBuilding)
-                case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
-                case .FirstConsensus: observer.sendNext(settings.isFirstConsensus)
-                case .FirstPublic: observer.sendNext(settings.isFirstPublic)
-                case .FirstFollow: observer.sendNext(settings.isFirstFollow)
-                case .FirstStars: observer.sendNext(settings.isFirstStars)
-                case .FirstNegative: observer.sendNext(settings.isFirstNegative)
-                case .FirstInterest: observer.sendNext(settings.isFirstInterest)
-                case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
-                case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
-                case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
-                case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
-                }
-            } else {
-                switch settingType {
-                case .DefaultListIndex: observer.sendNext(SettingsModel().defaultListIndex)
-                case .LoginTypeIndex: observer.sendNext(SettingsModel().loginTypeIndex)
-                case .PublicService: observer.sendNext(SettingsModel().publicService)
-                case .ConsensusBuilding: observer.sendNext(SettingsModel().consensusBuilding)
-                case .FirstLaunch: observer.sendNext(SettingsModel().isFirstLaunch)
-                case .FirstConsensus: observer.sendNext(SettingsModel().isFirstConsensus)
-                case .FirstPublic: observer.sendNext(SettingsModel().isFirstPublic)
-                case .FirstFollow: observer.sendNext(SettingsModel().isFirstFollow)
-                case .FirstStars: observer.sendNext(SettingsModel().isFirstStars)
-                case .FirstNegative: observer.sendNext(SettingsModel().isFirstNegative)
-                case .FirstInterest: observer.sendNext(SettingsModel().isFirstInterest)
-                case .FirstCompleted: observer.sendNext(SettingsModel().isFirstCompleted)
-                case .FirstVoteDisable: observer.sendNext(SettingsModel().isFirstVoteDisabled)
-                case .FirstSocialDisable: observer.sendNext(SettingsModel().isFirstSocialDisabled)
-                case .FirstTrollWarning: observer.sendNext(SettingsModel().isFirstTrollWarning)
-                }
+            let settings = realm.objects(SettingsModel).first ?? SettingsModel()
+            switch settingType {
+            case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)
+            case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
+            case .PublicService: observer.sendNext(settings.publicService)
+            case .ConsensusBuilding: observer.sendNext(settings.consensusBuilding)
+            case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
+            case .FirstConsensus: observer.sendNext(settings.isFirstConsensus)
+            case .FirstPublic: observer.sendNext(settings.isFirstPublic)
+            case .FirstFollow: observer.sendNext(settings.isFirstFollow)
+            case .FirstStars: observer.sendNext(settings.isFirstStars)
+            case .FirstNegative: observer.sendNext(settings.isFirstNegative)
+            case .FirstInterest: observer.sendNext(settings.isFirstInterest)
+            case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
+            case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
+            case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
+            case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
             }
             observer.sendCompleted()
         }
