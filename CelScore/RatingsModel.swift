@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-class RatingsModel: Object, CollectionType, NSCopying {
+class RatingsModel: Object, CollectionType {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -115,25 +115,6 @@ class RatingsModel: Object, CollectionType, NSCopying {
             }
         }
     }
-    
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = RatingsModel(id: self.id)
-        for ratings in self.generate() { copy[ratings] = self[ratings] }
-        copy.updatedAt = self.updatedAt
-        copy.totalVotes = self.totalVotes
-        copy.isSynced = self.isSynced
-        copy.variance1 = self.variance1
-        copy.variance2 = self.variance2
-        copy.variance3 = self.variance3
-        copy.variance4 = self.variance4
-        copy.variance5 = self.variance5
-        copy.variance6 = self.variance6
-        copy.variance7 = self.variance7
-        copy.variance8 = self.variance8
-        copy.variance9 = self.variance9
-        copy.variance10 = self.variance10
-        return copy
-    }
 }
 
 
@@ -148,15 +129,7 @@ final class UserRatingsModel: RatingsModel {
         self.isSynced = true
     }
     
-    //MARK: Methods
-    override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = UserRatingsModel(id: self.id)
-        for ratings in self.generate() { copy[ratings] = self[ratings] }
-        copy.updatedAt = self.updatedAt
-        copy.isSynced = self.isSynced
-        return copy
-    }
-    
+    //MARK: Method
     func interpolation() -> String {
         let allValues: [String] = self.generate().flatMap{ String(self[$0]!) }
         return allValues.joinWithSeparator("/")

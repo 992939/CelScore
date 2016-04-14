@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-class SettingsModel: Object, NSCopying {
+class SettingsModel: Object {
     
     //MARK: Properties
     dynamic var id: String = "1"
@@ -55,29 +55,6 @@ class SettingsModel: Object, NSCopying {
         self.isSynced = true
     }
     
-    //MARK: Methods
+    //MARK: Method
     override class func primaryKey() -> String { return "id" }
-    
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = SettingsModel()
-        copy.id = self.id
-        copy.userName = self.userName
-        copy.defaultListIndex = self.defaultListIndex
-        copy.loginTypeIndex = self.loginTypeIndex
-        copy.publicService = self.publicService
-        copy.consensusBuilding = self.consensusBuilding
-        copy.isFirstLaunch = self.isFirstLaunch
-        copy.isFirstConsensus = self.isFirstConsensus
-        copy.isFirstPublic = self.isFirstPublic
-        copy.isFirstFollow = self.isFirstFollow
-        copy.isFirstStars = self.isFirstStars
-        copy.isFirstNegative = self.isFirstNegative
-        copy.isFirstCompleted = self.isFirstCompleted
-        copy.isFirstInterest = self.isFirstInterest
-        copy.isFirstVoteDisabled = self.isFirstVoteDisabled
-        copy.isFirstSocialDisabled = self.isFirstSocialDisabled
-        copy.isFirstTrollWarning = self.isFirstTrollWarning
-        copy.isSynced = self.isSynced
-        return copy
-    }
 }

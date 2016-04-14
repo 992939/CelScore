@@ -11,20 +11,13 @@ import RealmSwift
 import SwiftyJSON
 
 
-final class CelebId: Object, NSCopying {
-    
-    //MARK: Properties
-    dynamic var id: String = ""
-    
-    //MARK: Methods
-    func copyWithZone(zone: NSZone) -> AnyObject { let copy = CelebId(); copy.id = self.id; return copy }
-}
+final class CelebId: Object { dynamic var id: String = "" }
 
 extension CelebId: Equatable {}
 
 func == (lhs: CelebId, rhs: CelebId) -> Bool { return lhs.id == rhs.id }
 
-final class ListsModel: Object, NSCopying {
+final class ListsModel: Object {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -48,20 +41,6 @@ final class ListsModel: Object, NSCopying {
         self.isSynced = true
     }
     
-    //MARK: Methods
+    //MARK: Method
     override class func primaryKey() -> String { return "id" }
-    
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = ListsModel()
-        copy.id = self.id
-        copy.name = self.name
-        copy.numberOfSearchByLocalUser = self.numberOfSearchByLocalUser
-        copy.isSynced = self.isSynced
-        let objectList = List<CelebId>()
-        for object in self.celebList.enumerate() {
-            objectList.append(object.element.copy() as! CelebId)
-        }
-        copy.celebList = objectList
-        return copy
-    }
 }
