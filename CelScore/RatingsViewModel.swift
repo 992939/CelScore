@@ -19,14 +19,13 @@ struct RatingsViewModel {
             
             let realm = try! Realm()
             realm.beginWrite()
-            var userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            if userRatings == nil { userRatings = UserRatingsModel(id: ratingsId) }
-            let key = userRatings![ratingIndex]
-            userRatings![key] = newRating
-            userRatings!.isSynced = true
-            realm.add(userRatings!, update: true)
+            let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first ?? UserRatingsModel(id: ratingsId)
+            let key = userRatings[ratingIndex]
+            userRatings[key] = newRating
+            userRatings.isSynced = true
+            realm.add(userRatings, update: true)
             try! realm.commitWrite()
-            observer.sendNext(userRatings!)
+            observer.sendNext(userRatings)
             observer.sendCompleted()
         }
     }
