@@ -51,7 +51,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 if oldSchemaVersion < 16 {
                     migration.enumerate(ListsModel.className()) { oldObject, newObject in
-                        newObject!["numberOfSearchByLocalUser"] = 0 as! Int
+                        newObject!["numberOfSearchByLocalUser"] = 0
                     }
                 }
         })

@@ -158,6 +158,20 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
     }
     
+//    func screenshot() -> UIImage {
+//        let profileFrame = CGRect(x: self.profilePicNode.frame.left - Constants.kPadding, y: Constants.kTopViewRect.origin.y, width: self.profilePicNode.frame.width + 2 * Constants.kPadding, height: Constants.kTopViewRect.height)
+//        let image = self.profilePicNode.view.snapshotViewAfterScreenUpdates(true)
+//        return image
+//    }
+    
+    func imageFromView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(200, 200), true, 0)
+        view.drawViewHierarchyInRect(CGRectMake(0, 0, 200, 200), afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     func handleMenu(open: Bool = false) {
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
@@ -183,7 +197,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage).startWithNext ({ socialVC in
+                let screenshot = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage, screenshot: screenshot).startWithNext ({ socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
