@@ -158,18 +158,13 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
     }
     
-//    func screenshot() -> UIImage {
-//        let profileFrame = CGRect(x: self.profilePicNode.frame.left - Constants.kPadding, y: Constants.kTopViewRect.origin.y, width: self.profilePicNode.frame.width + 2 * Constants.kPadding, height: Constants.kTopViewRect.height)
-//        let image = self.profilePicNode.view.snapshotViewAfterScreenUpdates(true)
-//        return image
-//    }
-    
     func imageFromView(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(200, 200), true, 0)
-        view.drawViewHierarchyInRect(CGRectMake(0, 0, 200, 200), afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: Constants.kCircleWidth, height: Constants.kTopViewRect.height), false, 2)
+        UIGraphicsGetImageFromCurrentImageContext()
+        self.view.drawViewHierarchyInRect(CGRect(x: -view.frame.centerX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
+        let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return screenShot
     }
     
     func handleMenu(open: Bool = false) {
