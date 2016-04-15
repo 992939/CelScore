@@ -64,6 +64,7 @@ PODS:
     - Fabric
   - TwitterKit (2.0.2):
     - TwitterCore (= 2.0.2)
+  - UAObfuscatedString (0.3.2)
   - WebASDKImageManager (1.1.0):
     - AsyncDisplayKit (~> 1.9)
     - SDWebImage/Core (~> 3.7)
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - Timepiece (~> 0.4)
   - TwitterCore (~> 2.0.2)
   - TwitterKit (~> 2.0.2)
+  - UAObfuscatedString (= 0.3.2)
   - WebASDKImageManager (~> 1.0)
   - YLProgressBar (~> 3.8)
 
@@ -127,6 +129,7 @@ SPEC CHECKSUMS:
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
   TwitterKit: c4e40f289a3d7cc9fab9f241edd7502385468b65
+  UAObfuscatedString: 128d0df4876ad570ef07c7851e27e094c6e080a9
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
 

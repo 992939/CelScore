@@ -32,6 +32,7 @@ target 'CelScore' do
     pod 'R.swift', '~> 2.0.0'
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3'
+    pod 'UAObfuscatedString', '0.3.2'
 end
 
 target 'CelScoreTests' do

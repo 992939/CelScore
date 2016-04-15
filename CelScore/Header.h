@@ -17,6 +17,7 @@
 #import <WebASDKImageManager/WebASDKImageManager.h>
 #import <YLProgressBar/YLProgressBar.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
+#import <CommonCrypto/CommonCrypto.h>
 #import "TAOverlay.h"
 #import "BECelScoreAPIClient.h"
 #import "LMGaugeView.h"
