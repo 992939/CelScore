@@ -77,7 +77,14 @@ struct CelScoreViewModel {
             })
     
             guard celebs.count < 100 else { observer.sendCompleted(); return }
-            observer.sendNext("brand new guys")
+            let message: String?
+            if celebs.count <= 3 {
+                message = celebs.map{ celeb in return celeb.nickName }.joinWithSeparator("\n")
+            } else {
+                message = celebs[0...2].map{ celeb in return celeb.nickName }.joinWithSeparator("\n")
+            }
+            
+            observer.sendNext(message!)
             observer.sendCompleted()
         }
     }
