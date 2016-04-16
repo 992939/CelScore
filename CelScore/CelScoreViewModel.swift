@@ -63,6 +63,26 @@ struct CelScoreViewModel {
         }
     }
     
+    func getNewCelebsSignal()-> SignalProducer<String, CelebrityError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
+            guard celebs.count > 0 else { observer.sendFailed(.NotFound); return }
+            
+            celebs.forEach({ celeb in
+                realm.beginWrite()
+                celeb.isNew = false
+                realm.add(celeb, update: true)
+                try! realm.commitWrite()
+            })
+            
+            guard celebs.count < 100 else { observer.sendFailed(.TooManyCelebs); return }
+            observer.sendNext("brand new guys")
+            observer.sendCompleted()
+        }
+    }
+
+    
     func shareVoteOnSignal(socialLogin socialLogin: SocialLogin, message: String, screenshot: UIImage) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
             let socialVC: SLComposeViewController?

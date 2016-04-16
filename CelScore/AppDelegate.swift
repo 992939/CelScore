@@ -26,7 +26,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 16,
+            schemaVersion: 17,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 11 {
                     migration.enumerate(SettingsModel.className()) { oldObject, newObject in
@@ -52,6 +52,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if oldSchemaVersion < 16 {
                     migration.enumerate(ListsModel.className()) { oldObject, newObject in
                         newObject!["numberOfSearchByLocalUser"] = 0
+                    }
+                }
+                if oldSchemaVersion < 17 {
+                    migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["isNew"] = false
                     }
                 }
         })

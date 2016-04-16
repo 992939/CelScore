@@ -46,6 +46,7 @@ final class CelebrityModel: Object {
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
+    dynamic var isNew: Bool = false
     
     //MARK: Initializer
     convenience init(json: JSON) {
@@ -72,6 +73,7 @@ final class CelebrityModel: Object {
         let realm = try! Realm()
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
+        else { self.isNew = true }
     }
     
     //MARK: Method

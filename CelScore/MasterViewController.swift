@@ -120,17 +120,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
             .startWithNext { _ in
                 RateLimit.execute(name: "DailyAWSRefresh", limit: 10) {
-                    CelScoreViewModel().getFromAWSSignal(dataType: .List)
+                    CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                         .observeOn(UIScheduler())
                         .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                            return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                             let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                             return ListViewModel().updateListSignal(listId: list.getId() )}
                         .observeOn(UIScheduler())
-                        .on(next: { list in
-                            self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                        .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                         .start()
                 }
         }

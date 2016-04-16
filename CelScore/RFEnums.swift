@@ -13,7 +13,7 @@ import Material
 //MARK: Error
 enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
 enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
-enum CelebrityError: ErrorType { case NotFound }
+enum CelebrityError: ErrorType { case NotFound, TooManyCelebs }
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }
@@ -56,7 +56,7 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing and downloading the CelScore!\n\nWelcome aboard our constellation, a set of stars to gaze upon."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for downloading the CelScore!\n\nWelcome aboard our constellation, our set of stars for you to gaze upon."
         case .MenuAccess: return "You need to register to access this area."
         case .LoginSuccess: return "Thank you for registering and becoming a member of the Courthouse of Public Opinion!\n\nPlease vote responsibly, and enjoy your journey aboard the constellation."
         case .MaxFollow: return "You've reached the maximum of stars you can follow."
