@@ -125,7 +125,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
                         .flatMapError { _ in SignalProducer.empty }
+                        .observeOn(UIScheduler())
                         .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                        .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                             let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
