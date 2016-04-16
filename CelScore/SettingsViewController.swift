@@ -196,7 +196,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start() })
                     } else {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(), imageArray: OverlayInfo.consensusArray(), duration: 2.5, options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start() })
                     }
                 }
