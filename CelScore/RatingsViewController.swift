@@ -132,7 +132,8 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let value = String(format: "%.2f", ratings[ratings[ratingIndex]] as! Float)
-                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s \(Qualities(rawValue: ratingIndex)!.text()) \(value)")})
+                let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
+                self.delegate!.socialSharing(message: "\(who) \(Qualities(rawValue: ratingIndex)!.text()) \(value)")})
     }
     
     func animateStarsToGold(positive positive: Bool) {

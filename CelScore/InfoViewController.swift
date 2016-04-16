@@ -126,7 +126,8 @@ final class InfoViewController: ASViewController, Labelable {
                 case Info.Networth.text(): infoText = celeb.netWorth
                 default: infoText = "n/a"
                 }
-                self.delegate!.socialSharing(message: "\(self.celebST.nickname)'s \(quality) \(infoText)")
+                let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
+                self.delegate!.socialSharing(message: "\(who) \(quality) \(infoText)")
             })
     }
 }
