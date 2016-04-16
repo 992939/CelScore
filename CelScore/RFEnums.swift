@@ -13,7 +13,7 @@ import Material
 //MARK: Error
 enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
 enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
-enum CelebrityError: ErrorType { case NotFound, TooManyCelebs }
+enum CelebrityError: ErrorType { case NotFound }
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }

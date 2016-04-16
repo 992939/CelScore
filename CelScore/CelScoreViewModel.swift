@@ -75,8 +75,8 @@ struct CelScoreViewModel {
                 realm.add(celeb, update: true)
                 try! realm.commitWrite()
             })
-            
-            guard celebs.count < 100 else { observer.sendFailed(.TooManyCelebs); return }
+    
+            guard celebs.count < 100 else { observer.sendCompleted(); return }
             observer.sendNext("brand new guys")
             observer.sendCompleted()
         }
