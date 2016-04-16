@@ -56,21 +56,21 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for downloading the CelScore!\n\nWelcome aboard our constellation, our set of stars for you to gaze upon."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for downloading the CelScore!\n\nWelcome aboard our star-studded constellation."
         case .MenuAccess: return "You need to register to access this area."
-        case .LoginSuccess: return "Thank you for registering and becoming a member of the Courthouse of Public Opinion!\n\nPlease vote responsibly, and enjoy your journey aboard the constellation."
+        case .LoginSuccess: return "Thank you for registering and becoming a member of the Courthouse of Public Opinion!\n\nPlease vote responsibly, and enjoy your journey aboard our star-studded constellation."
         case .MaxFollow: return "You've reached the maximum of stars you can follow."
         case .FirstFollow: return "You can follow up to ten stars."
-        case .FirstConsensus: return "\"The whole is other than the sum of the parts\"\n- Kurt Koffka\n\nThe consensus is greater than the sum of our votes, rather it is something else altogether.\n\nThe consensus will regenerate after each one of your votes."
+        case .FirstConsensus: return "\"The whole is other than the sum of the parts\"\n- Kurt Koffka\n\nThe consensus is greater than the sum of our votes, yet out of the many, it speaks as one.\n\nThe consensus will regenerate after each votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nThere is no precedent in history in which so many could participate in the making of public opinion.\n\nYou can share your opinion by long pressing on a star quality."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then the values they incarnate are bright lights shining through them."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then the values they incarnate are the bright lights shining through them."
         case .FirstNegative: return "Welcome to the other side of the Score."
         case .FirstInterest: return "Your selection is saved automatically."
-        case .FirstCompleted: return "You've cast your votes on every star in our constellation.\n\nThank you for voting and building the consensus."
+        case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation.\n\nThank you for voting and foe building the consensus."
         case .FirstVoteDisable: return ""
         case .FirstTrollWarning: return ""
         case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus."
-        case .LoginError: return "\"Last night was a shameful train wreck filled with blind cuddly puppies.\"\n- Charlie Sheen\n\nWe are currently not able to log you in. Please try again at a later time."
+        case .LoginError: return "We are currently not able to log you in. Please try again at a later time."
         case .NetworkError: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nConnection to the network is currently not available. Please check your network settings."
         }
     }
