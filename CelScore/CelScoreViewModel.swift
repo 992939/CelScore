@@ -24,10 +24,8 @@ struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            
             let serviceClient = BECelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
-        
             let awsCall : AWSTask
             switch dataType {
             case .Celebrity: awsCall = serviceClient.celebinfoscanservicePost()
@@ -44,8 +42,7 @@ struct CelScoreViewModel {
                 json["Items"].arrayValue.forEach({ data in
                     let awsObject : Object
                     switch dataType {
-                    case .Celebrity:
-                        awsObject = CelebrityModel(json: data)
+                    case .Celebrity: awsObject = CelebrityModel(json: data)
                     case .List: awsObject = ListsModel(json: data)
                     case .Ratings: awsObject = RatingsModel(json: data)
                     }
