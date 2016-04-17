@@ -202,7 +202,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                             options: OverlayInfo.getOptions())
                         return
                     }
-                    self.presentViewController(socialVC, animated: true, completion: { self.handleMenu() }) })
+                    self.presentViewController(socialVC, animated: true, completion: {
+                        MaterialAnimation.delay(2.0) { self.handleMenu() }
+                    })
+                })
             })
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: false) })
             .start()
