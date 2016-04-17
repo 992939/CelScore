@@ -57,8 +57,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if firstTime  {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNegative.message(), image: OverlayInfo.FirstNegative.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstNegative).start() })
-                }
-            })
+                }})
             .start()
         
         CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
@@ -80,7 +79,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 2 * Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 1.5 * Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
@@ -193,20 +192,17 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
                 let screenshot = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage, screenshot: screenshot).startWithNext ({ socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage, screenshot: screenshot).startWithNext { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
                         TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
-                            image: OverlayInfo.LoginError.logo(),
-                            options: OverlayInfo.getOptions())
-                        return
-                    }
+                            image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
+                        return }
+                    
                     self.presentViewController(socialVC, animated: true, completion: {
-                        MaterialAnimation.delay(2.0) { self.handleMenu() }
-                    })
-                })
-            })
+                        MaterialAnimation.delay(2.0) { self.handleMenu() }})
+                }})
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: false) })
             .start()
     }

@@ -259,6 +259,12 @@ public class TextField : UITextField {
 	*/
 	@IBInspectable public var lineLayerDistance: CGFloat = 4
 	
+	/// The height of the line when not active.
+	@IBInspectable public var lineLayerThickness: CGFloat = 1
+	
+	/// The height of the line when active.
+	@IBInspectable public var lineLayerActiveThickness: CGFloat = 2
+	
 	/// The lineLayer color when inactive.
 	@IBInspectable public var lineLayerColor: UIColor? {
 		didSet {
@@ -352,9 +358,7 @@ public class TextField : UITextField {
 	*/
 	@IBInspectable public var detailLabelAutoHideEnabled: Bool = true
 	
-	/**
-	:name:	detailLabelHidden
-	*/
+	/// A boolean that indicates to hide or not hide the detailLabel.
 	@IBInspectable public var detailLabelHidden: Bool = true {
 		didSet {
 			if detailLabelHidden {
@@ -412,7 +416,11 @@ public class TextField : UITextField {
 		self.init(frame: CGRectNull)
 	}
 	
-	/// Overriding the layout callback for sublayers.
+	public override func layoutSubviews() {
+		super.layoutSubviews()
+		layoutClearButton()
+	}
+	
 	public override func layoutSublayersOfLayer(layer: CALayer) {
 		super.layoutSublayersOfLayer(layer)
 		if self.layer == layer {
@@ -483,27 +491,18 @@ public class TextField : UITextField {
 	when subclassing.
 	*/
 	public func prepareView() {
-		backgroundColor = MaterialColor.white
 		masksToBounds = false
-		font = RobotoFont.regularWithSize(16)
+		backgroundColor = MaterialColor.white
 		textColor = MaterialColor.darkText.primary
-		borderStyle = .None
+		font = RobotoFont.regularWithSize(16)
 		prepareClearButton()
 		prepareTitleLabel()
 		prepareLineLayer()
-		reloadView()
 		addTarget(self, action: #selector(textFieldDidBegin), forControlEvents: .EditingDidBegin)
 		addTarget(self, action: #selector(textFieldDidChange), forControlEvents: .EditingChanged)
 		addTarget(self, action: #selector(textFieldDidEnd), forControlEvents: .EditingDidEnd)
 		addTarget(self, action: #selector(textFieldValueChanged), forControlEvents: .ValueChanged)
 	}
-	
-	/// Reloads the view.
-	public func reloadView() {
-		/// Align the clearButton.
-		clearButton.frame = CGRectMake(width - height, 0, height, height)
-	}
-	
 	
 	/// Clears the textField text.
 	internal func handleClearButton() {
@@ -511,7 +510,6 @@ public class TextField : UITextField {
 			return
 		}
 		text = ""
-		sendActionsForControlEvents(.ValueChanged)
 	}
 	
 	/// Ahdnler when text value changed.
@@ -526,7 +524,7 @@ public class TextField : UITextField {
 	internal func textFieldDidBegin() {
 		showTitleLabel()
 		titleLabel.textColor = titleLabelActiveColor
-		lineLayer.frame = CGRectMake(0, bounds.height + lineLayerDistance, bounds.width, 2)
+		lineLayer.frame.size.height = lineLayerActiveThickness
 		lineLayer.backgroundColor = (detailLabelHidden ? nil == lineLayerActiveColor ? titleLabelActiveColor : lineLayerActiveColor : nil == lineLayerDetailActiveColor ? detailLabelActiveColor : lineLayerDetailActiveColor)?.CGColor
 	}
 	
@@ -543,7 +541,7 @@ public class TextField : UITextField {
 			hideTitleLabel()
 		}
 		titleLabel.textColor = titleLabelColor
-		lineLayer.frame = CGRectMake(0, bounds.height + lineLayerDistance, bounds.width, 1)
+		lineLayer.frame.size.height = lineLayerThickness
 		lineLayer.backgroundColor = (detailLabelHidden ? nil == lineLayerColor ? titleLabelColor : lineLayerColor : nil == lineLayerDetailColor ? detailLabelActiveColor : lineLayerDetailColor)?.CGColor
 	}
 	
@@ -598,7 +596,7 @@ public class TextField : UITextField {
 	
 	/// Layout the lineLayer.
 	private func layoutLineLayer() {
-		let h: CGFloat = 1 < lineLayer.frame.height ? lineLayer.frame.height : 1
+		let h: CGFloat = lineLayerActiveThickness == lineLayer.frame.height ? lineLayerActiveThickness : lineLayerThickness
 		lineLayer.frame = CGRectMake(0, bounds.height + lineLayerDistance, bounds.width, h)
 	}
 	
@@ -619,34 +617,47 @@ public class TextField : UITextField {
 		rightView = clearButton
 	}
 	
+	/// Layout the clearButton.
+	private func layoutClearButton() {
+		if 0 < width && 0 < height {
+			clearButton.frame = CGRectMake(width - height, 0, height, height)
+		}
+	}
+	
 	/// Shows and animates the titleLabel property.
 	private func showTitleLabel() {
 		if titleLabel.hidden {
-			if let s: String = placeholder {
-				titleLabel.text = s
-				placeholderText = s
+			if let v: String = placeholder {
+				titleLabel.text = v
+				placeholderText = v
 				placeholder = nil
 			}
 			let h: CGFloat = ceil(titleLabel.font.lineHeight)
 			titleLabel.frame = bounds
 			titleLabel.font = font
 			titleLabel.hidden = false
-			UIView.animateWithDuration(0.15, animations: { [unowned self] in
-				self.titleLabel.alpha = 1
-				self.titleLabel.transform = CGAffineTransformScale(self.titleLabel.transform, 0.75, 0.75)
-				self.titleLabel.frame = CGRectMake(0, -(self.titleLabelAnimationDistance + h), self.bounds.width, h)
+			UIView.animateWithDuration(0.15, animations: { [weak self] in
+                if let v: TextField = self {
+                    v.titleLabel.alpha = 1
+                    v.titleLabel.transform = CGAffineTransformScale(v.titleLabel.transform, 0.75, 0.75)
+                    v.titleLabel.frame = CGRectMake(0, -(v.titleLabelAnimationDistance + h), v.bounds.width, h)
+                }
 			})
 		}
 	}
 	
 	/// Hides and animates the titleLabel property.
 	private func hideTitleLabel() {
-		UIView.animateWithDuration(0.15, animations: { [unowned self] in
-			self.titleLabel.transform = CGAffineTransformIdentity
-			self.titleLabel.frame = self.bounds
-		}) { [unowned self] _ in
-			self.placeholder = self.placeholderText
-			self.titleLabel.hidden = true
+		UIView.animateWithDuration(0.15, animations: { [weak self] in
+			if let v: TextField = self {
+                v.titleLabel.transform = CGAffineTransformIdentity
+                v.titleLabel.frame = v.bounds
+            }
+		}) { [weak self] _ in
+            if let v: TextField = self {
+                v.placeholder = v.placeholderText
+                v.titleLabel.hidden = true
+            }
 		}
 	}
 	
@@ -657,9 +668,11 @@ public class TextField : UITextField {
 				let h: CGFloat = ceil(v.font.lineHeight)
 				v.frame = CGRectMake(0, bounds.height + lineLayerDistance, bounds.width, h)
 				v.hidden = false
-				UIView.animateWithDuration(0.15, animations: { [unowned self] in
-					v.frame.origin.y = self.frame.height + self.lineLayerDistance + self.detailLabelAnimationDistance
-					v.alpha = 1
+				UIView.animateWithDuration(0.15, animations: { [weak self] in
+                    if let s: TextField = self {
+                        v.frame.origin.y = s.frame.height + s.lineLayerDistance + s.detailLabelAnimationDistance
+                        v.alpha = 1
+                    }
 				})
 			}
 		}
@@ -668,9 +681,11 @@ public class TextField : UITextField {
 	/// Hides and animates the detailLabel property.
 	private func hideDetailLabel() {
 		if let v: UILabel = detailLabel {
-			UIView.animateWithDuration(0.15, animations: { [unowned self] in
-				v.alpha = 0
-				v.frame.origin.y -= self.detailLabelAnimationDistance
+			UIView.animateWithDuration(0.15, animations: { [weak self] in
+                if let s: TextField = self {
+                    v.alpha = 0
+                    v.frame.origin.y -= s.detailLabelAnimationDistance
+                }
 			}) { _ in
 				v.hidden = true
 			}

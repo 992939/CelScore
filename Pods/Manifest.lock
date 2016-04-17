@@ -25,7 +25,7 @@ PODS:
   - FBSDKLoginKit (4.10.1):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
-  - Material (1.39.7)
+  - Material (1.39.12)
   - OpinionzAlertView (0.3.1)
   - PINCache (2.2.2)
   - PINRemoteImage/Core (2.1.2):
@@ -81,7 +81,7 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.10.1)
   - FBSDKLoginKit (~> 4.10.1)
   - HMSegmentedControl (~> 1.5)
-  - Material (~> 1.39.5)
+  - Material (~> 1.39.12)
   - OpinionzAlertView (~> 0.3.1)
   - R.swift (~> 2.0.0)
   - RateLimit (~> 1.2)
@@ -111,7 +111,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  Material: 92a94dea4511c86f2e0f4cdb16048182d15b03d5
+  Material: 731d9c85df2cf3dfa18fd08e2614d95a1df8f6ff
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 2ce3f1fcc52f0360a3821f91f1a1bc653c5d2338

@@ -344,7 +344,6 @@ public class TextView: UITextView {
 		titleLabel?.frame.size.width = bounds.width
 	}
 	
-	/// Overriding the layout callback for sublayers.
 	public override func layoutSublayersOfLayer(layer: CALayer) {
 		super.layoutSublayersOfLayer(layer)
 		if self.layer == layer {
