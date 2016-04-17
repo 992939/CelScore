@@ -49,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         }
         
         let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
-        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 40)
+        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 45)
         followSwitch.buttonOnColor = Constants.kWineShade
     
         followSwitch.trackOnColor = followSwitch.trackOffColor
@@ -77,8 +77,8 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 70)
         self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.40)
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.2)
-        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.12)
+        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.15)
+        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.10)
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
