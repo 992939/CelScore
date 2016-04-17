@@ -223,6 +223,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         box.onCheckColor = MaterialColor.white
         box.onFillColor = Constants.kDarkGreenShade
         box.onTintColor = Constants.kDarkGreenShade
+        box.tintColor = Constants.kDarkGreenShade
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
         materialView.addSubview(box)

@@ -53,8 +53,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kWineShade
-        box.onTintColor = Constants.kWineShade
+        box.onFillColor = Constants.kDarkGreenShade
+        box.onTintColor = Constants.kDarkGreenShade
+        box.tintColor = Constants.kDarkGreenShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.preferredFrameSize = CGSize(width: 30, height: 30)
