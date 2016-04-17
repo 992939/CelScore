@@ -361,7 +361,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - 45, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - Constants.kFabDiameter, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
