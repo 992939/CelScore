@@ -61,14 +61,14 @@ enum OverlayInfo: Int {
         case .LoginSuccess: return "You're now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly and enjoy your journey aboard our star-studded constellation."
         case .MaxFollow: return "You've reached the maximum of stars you can follow!"
         case .FirstFollow: return "You've choosen to follow your first star!\nYou can follow up to ten stars."
-        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to build consensus!\nThe consensus will regenerate after each one of your votes."
+        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to help us build the consensus!\nThe consensus will regenerate after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou've choosen to make your opinion public!\nYou can share your opinion by long pressing on the stars."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nYou've entered a space where stars are considered to be symbols and incarnations of values.\nPlease vote responsibly."
-        case .FirstNegative: return "You've ventured into the dark side of the Score!\nPast a certain point of negative votes, all your votes will be discarded."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Prof. Richard Dyer\n\nYou've entered a space where stars are symbols and incarnations of values.\nPlease vote responsibly."
+        case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first topic of interest.\nYour selection is saved automatically."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
-        case .FirstVoteDisable: return "[]"
-        case .FirstTrollWarning: return "[]"
+        case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- Prof. David Marshall\n\nYou'll need to register to access the voting area."
+        case .FirstTrollWarning: return "You've ventured into the trolling zone!\n\nPast a certain point of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time."
         case .NetworkError: return "We are currently not able to connct with the network.\nPlease check your network settings."
@@ -85,7 +85,7 @@ enum OverlayInfo: Int {
         case .FirstConsensus: return R.image.collective_green()!
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstStars: return R.image.spaceship_green()!
-        case .FirstNegative: return R.image.nuclear_purple()!
+        case .FirstNegative: return R.image.mic_purple()!
         case .FirstInterest: return R.image.anchor_green()!
         case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.spaceship_green()!
