@@ -56,29 +56,29 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for downloading the CelScore!\n\nWelcome aboard our star-studded constellation."
-        case .MenuAccess: return "You need to register to access this area."
-        case .LoginSuccess: return "Thank you for registering and becoming a member of the Courthouse of Public Opinion!\n\nPlease vote responsibly, and enjoy your journey aboard our star-studded constellation."
-        case .MaxFollow: return "You've reached the maximum of stars you can follow."
-        case .FirstFollow: return "You can follow up to ten stars."
-        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nThe consensus will regenerate after each one of your votes."
-        case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nThere is no precedent in history in which so many could participate in the making of public opinion.\n\nYou can share your opinion by long pressing on a star quality."
-        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nIf stars are symbols, then the values they incarnate are the bright lights shining through them."
-        case .FirstNegative: return "Welcome to the other side of the Score."
-        case .FirstInterest: return "Your selection is saved automatically."
-        case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation.\n\nThank you for voting and foe building the consensus."
-        case .FirstVoteDisable: return ""
-        case .FirstTrollWarning: return ""
-        case .LogoutUser: return "The courthouse hates to see you go, but we thank you for your votes and for building the consensus."
-        case .LoginError: return "We are currently not able to log you in. Please try again at a later time."
-        case .NetworkError: return "\"I am on a drug. It's called Charlie Sheen. It's not available because if you try it you will die.\"\n- Charlie Sheen\n\nConnection to the network is currently not available. Please check your network settings."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nYou've choosen the CelScore as your next destination!\nWelcome aboard our star-studded constellation."
+        case .MenuAccess: return "You've reached the steps of the Courthouse of Public Opinion!\n\nYou'll need to register to access this area."
+        case .LoginSuccess: return "You're now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly and enjoy your journey aboard our star-studded constellation."
+        case .MaxFollow: return "You've reached the maximum of stars you can follow!"
+        case .FirstFollow: return "You've choosen to follow your first star!\nYou can follow up to ten stars."
+        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to build consensus!\nThe consensus will regenerate after each one of your votes."
+        case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou've choosen to make your opinion public!\nYou can share your opinion by long pressing on the stars."
+        case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- Richard Dyer\n\nYou've entered a space where stars are considered to be symbols and incarnations of values.\nPlease vote responsibly."
+        case .FirstNegative: return "You've ventured into the dark side of the Score!\nPast a certain point of negative votes, all your votes will be discarded."
+        case .FirstInterest: return "You've choosen your first topic of interest.\nYour selection is saved automatically."
+        case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
+        case .FirstVoteDisable: return "[]"
+        case .FirstTrollWarning: return "[]"
+        case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
+        case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time."
+        case .NetworkError: return "We are currently not able to connct with the network.\nPlease check your network settings."
         }
     }
     
     func logo() -> UIImage {
         switch self {
         case .WelcomeUser: return R.image.spaceship_green()!
-        case .MenuAccess: return R.image.passport_green()!
+        case .MenuAccess: return R.image.court_green()!
         case .LoginSuccess: return R.image.planet_green()!
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.observatory_green()!
