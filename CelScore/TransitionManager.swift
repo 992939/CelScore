@@ -64,7 +64,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
                 masterVC.view.transform = CGAffineTransformIdentity
                 let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!)
                 let relativeRect = CGRectOffset(rect, -masterVC.celebrityTableView.contentOffset.x, -masterVC.celebrityTableView.contentOffset.y)
-                celebSnapshot.frame = CGRect(x: 16.0, y: relativeRect.origin.y + 133, width: 70, height: 70)
+                celebSnapshot.frame = CGRect(x: 15.0, y: relativeRect.origin.y + 134, width: 70, height: 70)
             }
             }, completion: { _ in
                 detailVC.profilePicNode.hidden = false
