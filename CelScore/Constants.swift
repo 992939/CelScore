@@ -50,13 +50,13 @@ struct Constants {
     static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
     
     //CelebrityTableViewCell
-    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 1.2 : 0.7
-    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 16.0 : 14.0
+    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 1.0 : 0.7
+    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 12.0
     
     //DetailVC 
     static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: 220)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding/2, y: kTopViewRect.bottom + 1, width: kMaxWidth, height: 40)
-    static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
+    static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = 200.0

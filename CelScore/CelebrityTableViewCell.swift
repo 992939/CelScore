@@ -9,9 +9,10 @@
 import AsyncDisplayKit
 import WebASDKImageManager
 import Material
+import BEMCheckBox
 
 
-final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
+final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: Properties
     private let nameNode: ASTextNode
@@ -48,13 +49,15 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
         }
         
-        let followSwitch = MaterialSwitch(size: .Small, state: self.celebST.isFollowed == true ? .On : .Off)
-        followSwitch.center = CGPoint(x: Constants.kScreenWidth - 50, y: 45)
-        followSwitch.buttonOnColor = Constants.kWineShade
-    
-        followSwitch.trackOnColor = followSwitch.trackOffColor
-        self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return followSwitch })
-        self.switchNode.preferredFrameSize = CGSize(width: 20, height: 20)
+        let box = BEMCheckBox(frame: CGRect(x: Constants.kScreenWidth - 55, y: 30, width: 30, height: 30))
+        box.onAnimationType = .Bounce
+        box.offAnimationType = .Bounce
+        box.onCheckColor = MaterialColor.white
+        box.onFillColor = Constants.kWineShade
+        box.onTintColor = Constants.kWineShade
+        box.setOn(self.celebST.isFollowed, animated: true)
+        self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
+        self.switchNode.preferredFrameSize = CGSize(width: 30, height: 30)
         
         let cardView: MaterialPulseView = MaterialPulseView()
         cardView.borderWidth = 2.0
@@ -64,7 +67,7 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
         
         super.init()
         self.selectionStyle = .None
-        followSwitch.delegate = self
+        box.delegate = self
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -96,9 +99,9 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
     
     func getId() -> String { return celebST.id }
     
-    //MARK: MaterialSwitchDelegate
-    func materialSwitchStateChanged(control: MaterialSwitch) {
-        if control.switchState == .Off { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
+    //MARK: BEMCheckBoxDelegate
+    func didTapCheckBox(checkBox: BEMCheckBox) {
+        if checkBox.on == false { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
             .observeOn(UIScheduler())
             .start()
         } else {
@@ -112,13 +115,13 @@ final class CelebrityTableViewCell: ASCellNode, MaterialSwitchDelegate {
                             TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(),
                                 image: OverlayInfo.FirstFollow.logo(),
                                 options: OverlayInfo.getOptions())}})
-                            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstFollow).start() })
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstFollow).start() })
                     }
                     else if count > 9 {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.MaxFollow.message(),
                             image: OverlayInfo.MaxFollow.logo(),
                             options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in control.setOn(false, animated: true) })
+                        TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) })
                     } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
             }
         }

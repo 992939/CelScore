@@ -91,8 +91,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         cell.sendSubviewToBack(changeBackView)
         cell.profileImage.image = NSURL(string: celebDictionary["image"] as! String).flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }
         cell.profileImage.layer.cornerRadius = 19
-        cell.profileImage.layer.borderWidth = 2
-        cell.profileImage.layer.borderColor = UIColor.whiteColor().CGColor
         cell.profileImage.clipsToBounds = true
         return cell
     }

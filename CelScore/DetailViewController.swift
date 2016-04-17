@@ -79,7 +79,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: 1.5 * Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
