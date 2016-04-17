@@ -8,8 +8,6 @@
  *
  */
 
-#import "ASBaseDefines.h"
-
 /** The direction children are stacked in */
 typedef NS_ENUM(NSUInteger, ASStackLayoutDirection) {
   /** Children are stacked vertically */
@@ -90,19 +88,11 @@ typedef NS_ENUM(NSUInteger, ASHorizontalAlignment) {
   /** No alignment specified. Default value */
   ASHorizontalAlignmentNone,
   /** Left aligned */
-  ASHorizontalAlignmentLeft,
+  ASAlignmentLeft,
   /** Center aligned */
-  ASHorizontalAlignmentMiddle,
+  ASAlignmentMiddle,
   /** Right aligned */
-  ASHorizontalAlignmentRight,
-
-  // After 2.0 has landed, we'll add ASDISPLAYNODE_DEPRECATED here - for now, avoid triggering errors for projects with -Werror
-  /** @deprecated Use ASHorizontalAlignmentLeft instead */
-  ASAlignmentLeft = ASHorizontalAlignmentLeft,
-  /** @deprecated Use ASHorizontalAlignmentMiddle instead */
-  ASAlignmentMiddle = ASHorizontalAlignmentMiddle,
-  /** @deprecated Use ASHorizontalAlignmentRight instead */
-  ASAlignmentRight = ASHorizontalAlignmentRight,
+  ASAlignmentRight,
 };
 
 /** Orientation of children along vertical axis */
@@ -110,17 +100,9 @@ typedef NS_ENUM(NSUInteger, ASVerticalAlignment) {
   /** No alignment specified. Default value */
   ASVerticalAlignmentNone,
   /** Top aligned */
-  ASVerticalAlignmentTop,
+  ASAlignmentTop,
   /** Center aligned */
-  ASVerticalAlignmentCenter,
+  ASAlignmentCenter,
   /** Bottom aligned */
-  ASVerticalAlignmentBottom,
-
-  // After 2.0 has landed, we'll add ASDISPLAYNODE_DEPRECATED here - for now, avoid triggering errors for projects with -Werror
-  /** @deprecated Use ASVerticalAlignmentTop instead */
-  ASAlignmentTop = ASVerticalAlignmentTop,
-  /** @deprecated Use ASVerticalAlignmentCenter instead */
-  ASAlignmentCenter = ASVerticalAlignmentCenter,
-  /** @deprecated Use ASVerticalAlignmentBottom instead */
-  ASAlignmentBottom = ASVerticalAlignmentBottom,
+  ASAlignmentBottom,
 };

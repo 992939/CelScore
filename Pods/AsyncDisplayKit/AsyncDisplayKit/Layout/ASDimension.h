@@ -8,7 +8,6 @@
  *
  */
 
-#pragma once
 #import <UIKit/UIKit.h>
 #import <AsyncDisplayKit/ASBaseDefines.h>
 
@@ -35,8 +34,6 @@ typedef struct {
 
 extern ASRelativeDimension const ASRelativeDimensionUnconstrained;
 
-#define isValidForLayout(x) ((isnormal(x) || x == 0.0) && x >= 0.0 && x < (CGFLOAT_MAX / 2.0))
-
 ASDISPLAYNODE_EXTERN_C_BEGIN
 NS_ASSUME_NONNULL_BEGIN
 
@@ -60,9 +57,6 @@ extern CGFloat ASRelativeDimensionResolve(ASRelativeDimension dimension, CGFloat
 #pragma mark ASSizeRange
 
 extern ASSizeRange ASSizeRangeMake(CGSize min, CGSize max);
-
-/** Creates an ASSizeRange with the provided size as both min and max */
-extern ASSizeRange ASSizeRangeMakeExactSize(CGSize size);
 
 /** Clamps the provided CGSize between the [min, max] bounds of this ASSizeRange. */
 extern CGSize ASSizeRangeClamp(ASSizeRange sizeRange, CGSize size);

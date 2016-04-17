@@ -19,19 +19,20 @@ BOOL ASDisplayShouldFetchBatchForContext(ASBatchContext *context,
     return NO;
   }
 
-  // only Down and Right scrolls are currently supported (tail loading)
-  if (scrollDirection != ASScrollDirectionDown && scrollDirection != ASScrollDirectionRight) {
+  // only Up and Left scrolls are currently supported (tail loading)
+  if (scrollDirection != ASScrollDirectionUp && scrollDirection != ASScrollDirectionLeft) {
     return NO;
   }
 
   // no fetching for null states
-  if (leadingScreens <= 0.0 || CGRectEqualToRect(bounds, CGRectZero)) {
+  if (leadingScreens <= 0.0 ||
+      CGRectEqualToRect(bounds, CGRectZero)) {
     return NO;
   }
 
   CGFloat viewLength, offset, contentLength;
 
-  if (scrollDirection == ASScrollDirectionDown) {
+  if (scrollDirection == ASScrollDirectionUp) {
     viewLength = bounds.size.height;
     offset = targetOffset.y;
     contentLength = contentSize.height;

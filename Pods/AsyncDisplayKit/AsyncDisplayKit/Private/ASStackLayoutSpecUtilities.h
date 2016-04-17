@@ -72,11 +72,11 @@ inline ASStackLayoutAlignItems alignment(ASStackLayoutAlignSelf childAlignment, 
 inline ASStackLayoutAlignItems alignment(ASHorizontalAlignment alignment, ASStackLayoutAlignItems defaultAlignment)
 {
   switch (alignment) {
-    case ASHorizontalAlignmentLeft:
+    case ASAlignmentLeft:
       return ASStackLayoutAlignItemsStart;
-    case ASHorizontalAlignmentMiddle:
+    case ASAlignmentMiddle:
       return ASStackLayoutAlignItemsCenter;
-    case ASHorizontalAlignmentRight:
+    case ASAlignmentRight:
       return ASStackLayoutAlignItemsEnd;
     case ASHorizontalAlignmentNone:
     default:
@@ -87,11 +87,11 @@ inline ASStackLayoutAlignItems alignment(ASHorizontalAlignment alignment, ASStac
 inline ASStackLayoutAlignItems alignment(ASVerticalAlignment alignment, ASStackLayoutAlignItems defaultAlignment)
 {
   switch (alignment) {
-    case ASVerticalAlignmentTop:
+    case ASAlignmentTop:
       return ASStackLayoutAlignItemsStart;
-    case ASVerticalAlignmentCenter:
+    case ASAlignmentCenter:
       return ASStackLayoutAlignItemsCenter;
-    case ASVerticalAlignmentBottom:
+    case ASAlignmentBottom:
       return ASStackLayoutAlignItemsEnd;
     case ASVerticalAlignmentNone:
     default:
@@ -102,11 +102,11 @@ inline ASStackLayoutAlignItems alignment(ASVerticalAlignment alignment, ASStackL
 inline ASStackLayoutJustifyContent justifyContent(ASHorizontalAlignment alignment, ASStackLayoutJustifyContent defaultJustifyContent)
 {
   switch (alignment) {
-    case ASHorizontalAlignmentLeft:
+    case ASAlignmentLeft:
       return ASStackLayoutJustifyContentStart;
-    case ASHorizontalAlignmentMiddle:
+    case ASAlignmentMiddle:
       return ASStackLayoutJustifyContentCenter;
-    case ASHorizontalAlignmentRight:
+    case ASAlignmentRight:
       return ASStackLayoutJustifyContentEnd;
     case ASHorizontalAlignmentNone:
     default:
@@ -117,11 +117,11 @@ inline ASStackLayoutJustifyContent justifyContent(ASHorizontalAlignment alignmen
 inline ASStackLayoutJustifyContent justifyContent(ASVerticalAlignment alignment, ASStackLayoutJustifyContent defaultJustifyContent)
 {
   switch (alignment) {
-    case ASVerticalAlignmentTop:
+    case ASAlignmentTop:
       return ASStackLayoutJustifyContentStart;
-    case ASVerticalAlignmentCenter:
+    case ASAlignmentCenter:
       return ASStackLayoutJustifyContentCenter;
-    case ASVerticalAlignmentBottom:
+    case ASAlignmentBottom:
       return ASStackLayoutJustifyContentEnd;
     case ASVerticalAlignmentNone:
     default:

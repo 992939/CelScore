@@ -28,8 +28,6 @@ CGFloat ASCeilPixelValue(CGFloat f);
 
 CGFloat ASRoundPixelValue(CGFloat f);
 
-BOOL ASRunningOnOS7();
-
 ASDISPLAYNODE_EXTERN_C_END
 
 /**
@@ -47,13 +45,6 @@ ASDISPLAYNODE_INLINE void ASPerformBlockWithoutAnimation(BOOL withoutAnimation, 
   } else {
     block();
   }
-}
-
-ASDISPLAYNODE_INLINE void ASBoundsAndPositionForFrame(CGRect rect, CGPoint origin, CGPoint anchorPoint, CGRect *bounds, CGPoint *position)
-{
-  *bounds   = (CGRect){ origin, rect.size };
-  *position = CGPointMake(rect.origin.x + rect.size.width * anchorPoint.x,
-                          rect.origin.y + rect.size.height * anchorPoint.y);
 }
 
 @interface NSIndexPath (ASInverseComparison)

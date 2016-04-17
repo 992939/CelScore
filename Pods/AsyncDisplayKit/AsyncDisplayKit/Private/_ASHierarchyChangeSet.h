@@ -31,10 +31,7 @@ typedef NS_ENUM(NSInteger, _ASHierarchyChangeType) {
 
 /// Index paths are sorted descending for changeType .Delete, ascending otherwise
 @property (nonatomic, strong, readonly) NSArray *indexPaths;
-
 @property (nonatomic, readonly) _ASHierarchyChangeType changeType;
-
-+ (NSDictionary *)sectionToIndexSetMapFromChanges:(NSArray *)changes ofType:(_ASHierarchyChangeType)changeType;
 @end
 
 @interface _ASHierarchyChangeSet : NSObject

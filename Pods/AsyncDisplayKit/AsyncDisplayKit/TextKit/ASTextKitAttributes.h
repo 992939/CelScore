@@ -8,10 +8,10 @@
  *
  */
 
-#pragma once
-
 #import <UIKit/UIKit.h>
-#import "ASEqualityHelpers.h"
+
+#ifndef ComponentKit_ASTextKitAttributes_h
+#define ComponentKit_ASTextKitAttributes_h
 
 @protocol ASTextKitTruncating;
 
@@ -21,6 +21,11 @@ extern NSString *const ASTextKitTruncationAttributeName;
  text.
  */
 extern NSString *const ASTextKitEntityAttributeName;
+
+static inline BOOL _objectsEqual(id<NSObject> obj1, id<NSObject> obj2)
+{
+  return obj1 == obj2 ? YES : [obj1 isEqual:obj2];
+}
 
 /**
  All NSObject values in this struct should be copied when passed into the TextComponent.
@@ -53,7 +58,6 @@ struct ASTextKitAttributes {
   NSLineBreakMode lineBreakMode;
   /**
    The maximum number of lines to draw in the drawable region.  Leave blank or set to 0 to define no maximum.
-   This is required to apply scale factors to shrink text to fit within a number of lines
    */
   NSUInteger maximumNumberOfLines;
   /**
@@ -78,23 +82,9 @@ struct ASTextKitAttributes {
    */
   CGFloat shadowRadius;
   /**
-   An array of scale factors in descending order to apply to the text to try to make it fit into a constrained size.
+   A pointer to a function that that returns a custom layout manager subclass. If nil, defaults to NSLayoutManager.
    */
-  NSArray *pointSizeScaleFactors;
-  /**
-   An optional block that returns a custom layout manager subclass. If nil, defaults to NSLayoutManager.
-   */
-  NSLayoutManager * (^layoutManagerCreationBlock)(void);
-  
-  /**
-   An optional delegate for the NSLayoutManager
-   */
-  id<NSLayoutManagerDelegate> layoutManagerDelegate;
-
-  /**
-   An optional block that returns a custom NSTextStorage for the layout manager. 
-   */
-  NSTextStorage * (^textStorageCreationBlock)(NSAttributedString *attributedString);
+  NSLayoutManager *(*layoutManagerFactory)(void);
 
   /**
    We provide an explicit copy function so we can use aggregate initializer syntax while providing copy semantics for
@@ -113,10 +103,7 @@ struct ASTextKitAttributes {
       [shadowColor copy],
       shadowOpacity,
       shadowRadius,
-      pointSizeScaleFactors,
-      layoutManagerCreationBlock,
-      layoutManagerDelegate,
-      textStorageCreationBlock,
+      layoutManagerFactory
     };
   };
 
@@ -127,16 +114,16 @@ struct ASTextKitAttributes {
     && maximumNumberOfLines == other.maximumNumberOfLines
     && shadowOpacity == other.shadowOpacity
     && shadowRadius == other.shadowRadius
-    && [pointSizeScaleFactors isEqualToArray:other.pointSizeScaleFactors]
-    && layoutManagerCreationBlock == other.layoutManagerCreationBlock
-    && textStorageCreationBlock == other.textStorageCreationBlock
+    && layoutManagerFactory == other.layoutManagerFactory
     && CGSizeEqualToSize(shadowOffset, other.shadowOffset)
-    && ASObjectIsEqual(exclusionPaths, other.exclusionPaths)
-    && ASObjectIsEqual(avoidTailTruncationSet, other.avoidTailTruncationSet)
-    && ASObjectIsEqual(shadowColor, other.shadowColor)
-    && ASObjectIsEqual(attributedString, other.attributedString)
-    && ASObjectIsEqual(truncationAttributedString, other.truncationAttributedString);
+    && _objectsEqual(exclusionPaths, other.exclusionPaths)
+    && _objectsEqual(avoidTailTruncationSet, other.avoidTailTruncationSet)
+    && _objectsEqual(shadowColor, other.shadowColor)
+    && _objectsEqual(attributedString, other.attributedString)
+    && _objectsEqual(truncationAttributedString, other.truncationAttributedString);
   }
 
   size_t hash() const;
 };
+
+#endif

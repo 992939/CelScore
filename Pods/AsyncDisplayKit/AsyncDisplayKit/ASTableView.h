@@ -56,57 +56,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style asyncDataFetching:(BOOL)asyncDataFetchingEnabled;
 
 /**
- * Tuning parameters for a range type in full mode.
+ * Tuning parameters for a range.
  *
- * @param rangeType The range type to get the tuning parameters for.
+ * @param rangeType The range to get the tuning parameters for.
  *
- * @returns A tuning parameter value for the given range type in full mode.
+ * @returns A tuning parameter value for the given range.
  *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
+ * Defaults to the render range having one sceenful both leading and trailing and the preload range having two 
+ * screenfuls in both directions.
  */
 - (ASRangeTuningParameters)tuningParametersForRangeType:(ASLayoutRangeType)rangeType;
 
 /**
- * Set the tuning parameters for a range type in full mode.
+ * Set the tuning parameters for a range.
  *
- * @param tuningParameters The tuning parameters to store for a range type.
- * @param rangeType The range type to set the tuning parameters for.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
+ * @param tuningParameters The tuning parameters to store for a range.
+ * @param rangeType The range to set the tuning parameters for.
  */
 - (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeType:(ASLayoutRangeType)rangeType;
 
 /**
- * Tuning parameters for a range type in the specified mode.
- *
- * @param rangeMode The range mode to get the running parameters for.
- * @param rangeType The range type to get the tuning parameters for.
- *
- * @returns A tuning parameter value for the given range type in the given mode.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
- */
-- (ASRangeTuningParameters)tuningParametersForRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
-
-/**
- * Set the tuning parameters for a range type in the specified mode.
- *
- * @param tuningParameters The tuning parameters to store for a range type.
- * @param rangeMode The range mode to set the running parameters for.
- * @param rangeType The range type to set the tuning parameters for.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
- */
-- (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
-
-/**
  * The number of screens left to scroll before the delegate -tableView:beginBatchFetchingWithContext: is called.
  *
- * Defaults to two screenfuls.
+ * Defaults to one screenful.
  */
 @property (nonatomic, assign) CGFloat leadingScreensForBatching;
 
@@ -143,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Concludes a series of method calls that insert, delete, select, or reload rows and sections of the table view, with animation enabled and no completion block.
  *  You call this method to bracket a series of method calls that begins with beginUpdates and that consists of operations
  *  to insert, delete, select, and reload rows and sections of the table view. When you call endUpdates, ASTableView begins animating
- *  the operations simultaneously. This method is must be called from the main thread. It's important to remember that the ASTableView will
+ *  the operations simultaneously. This method is must be called from the main thread. It's important to remeber that the ASTableView will
  *  be processing the updates asynchronously after this call is completed.
  */
 - (void)endUpdates;
@@ -152,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Concludes a series of method calls that insert, delete, select, or reload rows and sections of the table view.
  *  You call this method to bracket a series of method calls that begins with beginUpdates and that consists of operations 
  *  to insert, delete, select, and reload rows and sections of the table view. When you call endUpdates, ASTableView begins animating
- *  the operations simultaneously. This method is must be called from the main thread. It's important to remember that the ASTableView will
+ *  the operations simultaneously. This method is must be called from the main thread. It's important to remeber that the ASTableView will
  *  be processing the updates asynchronously after this call and are not guaranteed to be reflected in the ASTableView until
  *  the completion block is executed.
  *
@@ -162,11 +134,6 @@ NS_ASSUME_NONNULL_BEGIN
  *                    NO if they were interrupted. This parameter may be nil. If supplied, the block is run on the main thread.
  */
 - (void)endUpdatesAnimated:(BOOL)animated completion:(void (^ _Nullable)(BOOL completed))completion;
-
-/**
- *  Blocks execution of the main thread until all section and row updates are committed. This method must be called from the main thread.
- */
-- (void)waitUntilAllUpdatesAreCommitted;
 
 /**
  * Inserts one or more sections, with an option to animate the insertion.
@@ -320,8 +287,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @protocol ASTableDataSource <ASCommonTableViewDataSource, NSObject>
 
-@optional
-
 /**
  * Similar to -tableView:cellForRowAtIndexPath:.
  *
@@ -329,29 +294,17 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param indexPath The index path of the requested node.
  *
- * @returns a node for display at this indexpath. This will be called on the main thread and should not implement reuse (it will be called once per row). Unlike UITableView's version, this method
+ * @returns a node for display at this indexpath.  Must be thread-safe (can be called on the main thread or a background
+ * queue) and should not implement reuse (it will be called once per row).  Unlike UITableView's version, this method
  * is not called when the row is about to display.
  */
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath;
 
-
-/**
- * Similar to -tableView:nodeForRowAtIndexPath:
- * This method takes precedence over tableView:nodeForRowAtIndexPath: if implemented.
- * @param tableView The sender.
- *
- * @param indexPath The index path of the requested node.
- *
- * @returns a block that creates the node for display at this indexpath.  
- *   Must be thread-safe (can be called on the main thread or a background
- *   queue) and should not implement reuse (it will be called once per row).
- */
-
-- (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath;
+@optional
 
 /**
  * Indicator to lock the data source for data fetching in async mode.
- * We should not update the data source until the data source has been unlocked. Otherwise, it will incur data inconsistency or exception
+ * We should not update the data source until the data source has been unlocked. Otherwise, it will incur data inconsistence or exception
  * due to the data access in async mode.
  *
  * @param tableView The sender.
@@ -360,7 +313,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Indicator to unlock the data source for data fetching in asyn mode.
- * We should not update the data source until the data source has been unlocked. Otherwise, it will incur data inconsistency or exception
+ * We should not update the data source until the data source has been unlocked. Otherwise, it will incur data inconsistence or exception
  * due to the data access in async mode.
  *
  * @param tableView The sender.

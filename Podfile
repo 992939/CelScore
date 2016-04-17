@@ -11,7 +11,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'AsyncDisplayKit', '~> 1.9.7.1'
+    pod 'AsyncDisplayKit', '1.9.6'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
     pod 'AWSCognito', '~> 2.3.6'

@@ -6,16 +6,19 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <AsyncDisplayKit/ASButtonNode.h>
+#import <AsyncDisplayKit/AsyncDisplayKit.h>
 
-@class AVAsset, AVPlayer, AVPlayerItem;
+typedef NS_ENUM(NSUInteger, ASVideoGravity) {
+  ASVideoGravityResizeAspect,
+  ASVideoGravityResizeAspectFill,
+  ASVideoGravityResize
+};
+
 @protocol ASVideoNodeDelegate;
 
-// IMPORTANT NOTES:
-// 1. Applications using ASVideoNode must link AVFoundation! (this provides the AV* classes below)
-// 2. This is a relatively new component of AsyncDisplayKit.  It has many useful features, but
-//    there is room for further expansion and optimization.  Please report any issues or requests
-//    in an issue on GitHub: https://github.com/facebook/AsyncDisplayKit/issues
+// If you need ASVideoNode, please use AsyncDisplayKit master until this comment is removed.
+// As of 1.9.6, ASVideoNode accidentally triggers creating the AVPlayerLayer even before playing
+// the video.  Using a lot of them intended to show static frame placeholders will be slow.
 
 @interface ASVideoNode : ASControlNode
 @property (atomic, strong, readwrite) AVAsset *asset;
@@ -26,8 +29,6 @@
 // If it leaves the visible interfaceState it will pause but will resume once it has returned
 @property (nonatomic, assign, readwrite) BOOL shouldAutoplay;
 @property (nonatomic, assign, readwrite) BOOL shouldAutorepeat;
-
-@property (nonatomic, assign, readwrite) BOOL muted;
 
 @property (atomic) NSString *gravity;
 @property (atomic) ASButtonNode *playButton;
@@ -44,6 +45,5 @@
 @protocol ASVideoNodeDelegate <NSObject>
 @optional
 - (void)videoPlaybackDidFinish:(ASVideoNode *)videoNode;
-- (void)videoNodeWasTapped:(ASVideoNode *)videoNode;
 @end
 

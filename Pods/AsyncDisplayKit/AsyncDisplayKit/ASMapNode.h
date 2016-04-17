@@ -48,9 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <MKMapViewDelegate> mapDelegate;
 
 /**
- * @abstract The annotations to display on the map.
+ * @discussion This method sets the annotations of the static map view and also to the live map view. Passing an empty array clears the map of any annotations.
+ * @param annotations An array of objects that conform to the MKAnnotation protocol
  */
-@property (nonatomic, copy) NSArray<id<MKAnnotation>> *annotations;
+- (void)setAnnotations:(NSArray<id<MKAnnotation>> *)annotations;
 
 @end
 

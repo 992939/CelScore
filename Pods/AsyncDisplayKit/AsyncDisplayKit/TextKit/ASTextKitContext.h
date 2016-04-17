@@ -28,9 +28,7 @@
                     maximumNumberOfLines:(NSUInteger)maximumNumberOfLines
                           exclusionPaths:(NSArray *)exclusionPaths
                          constrainedSize:(CGSize)constrainedSize
-              layoutManagerCreationBlock:(NSLayoutManager * (^)(void))layoutCreationBlock
-                   layoutManagerDelegate:(id<NSLayoutManagerDelegate>)layoutManagerDelegate
-                textStorageCreationBlock:(NSTextStorage * (^)(NSAttributedString *attributedString))textStorageCreationBlock;
+                    layoutManagerFactory:(NSLayoutManager*(*)(void))layoutManagerFactory;
 
 @property (nonatomic, assign, readwrite) CGSize constrainedSize;
 

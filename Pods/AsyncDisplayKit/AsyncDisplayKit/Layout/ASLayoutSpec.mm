@@ -8,33 +8,29 @@
  *
  */
 
-#import "ASLayoutSpec.h"
+#import "ASLayoutOptionsPrivate.h"
 
 #import "ASAssert.h"
 #import "ASBaseDefines.h"
-#import "ASEnvironmentInternal.h"
 
 #import "ASInternalHelpers.h"
 #import "ASLayout.h"
+#import "ASLayoutOptions.h"
 #import "ASThread.h"
-
 
 #import <objc/runtime.h>
 
 static NSString * const kDefaultChildKey = @"kDefaultChildKey";
 static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
 
-@interface ASLayoutSpec() {
-  ASEnvironmentState _environmentState;
-  ASDN::RecursiveMutex _propertyLock;
-}
+@interface ASLayoutSpec()
 @property (nonatomic, strong) NSMutableDictionary *layoutChildren;
 @end
 
 @implementation ASLayoutSpec
 
 // these dynamic properties all defined in ASLayoutOptionsPrivate.m
-@dynamic spacingAfter, spacingBefore, flexGrow, flexShrink, flexBasis, alignSelf, ascender, descender, sizeRange, layoutPosition;
+@dynamic spacingAfter, spacingBefore, flexGrow, flexShrink, flexBasis, alignSelf, ascender, descender, sizeRange, layoutPosition, layoutOptions;
 @synthesize layoutChildren = _layoutChildren;
 @synthesize isFinalLayoutable = _isFinalLayoutable;
 
@@ -44,8 +40,6 @@ static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
     return nil;
   }
   _isMutable = YES;
-  _environmentState = ASEnvironmentStateMakeDefault();
-  
   return self;
 }
 
@@ -81,14 +75,7 @@ static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
 
     id<ASLayoutable> finalLayoutable = [child finalLayoutable];
     if (finalLayoutable != child) {
-      if (ASEnvironmentStatePropagationEnabled()) {
-        ASEnvironmentStatePropagateUp(finalLayoutable, child.environmentState.layoutOptionsState);
-      } else {
-        // If state propagation is not enabled the layout options state needs to be copied manually
-        ASEnvironmentState finalLayoutableEnvironmentState = finalLayoutable.environmentState;
-        finalLayoutableEnvironmentState.layoutOptionsState = child.environmentState.layoutOptionsState;
-        finalLayoutable.environmentState = finalLayoutableEnvironmentState;
-      }
+      [finalLayoutable.layoutOptions copyFromOptions:child.layoutOptions];
       return finalLayoutable;
     }
   }
@@ -103,16 +90,6 @@ static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
   return _layoutChildren;
 }
 
-- (void)setParent:(id<ASLayoutable>)parent
-{
-  // FIXME: Locking should be evaluated here.  _parent is not widely used yet, though.
-  _parent = parent;
-  
-  if ([parent supportsUpwardPropagation]) {
-    ASEnvironmentStatePropagateUp(parent, self.environmentState.layoutOptionsState);
-  }
-}
-
 - (void)setChild:(id<ASLayoutable>)child;
 {
   [self setChild:child forIdentifier:kDefaultChildKey];
@@ -121,13 +98,7 @@ static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
 - (void)setChild:(id<ASLayoutable>)child forIdentifier:(NSString *)identifier
 {
   ASDisplayNodeAssert(self.isMutable, @"Cannot set properties when layout spec is not mutable");
-  id<ASLayoutable> finalLayoutable = [self layoutableToAddFromLayoutable:child];
-  self.layoutChildren[identifier] = finalLayoutable;
-  if ([finalLayoutable isKindOfClass:[ASLayoutSpec class]]) {
-    [(ASLayoutSpec *)finalLayoutable setParent:self]; // This will trigger upward propogation if needed.
-  } else if ([self supportsUpwardPropagation]) {
-    ASEnvironmentStatePropagateUp(self, finalLayoutable.environmentState.layoutOptionsState); // Probably an ASDisplayNode
-  }
+  self.layoutChildren[identifier] = [self layoutableToAddFromLayoutable:child];;
 }
 
 - (void)setChildren:(NSArray *)children
@@ -156,30 +127,6 @@ static NSString * const kDefaultChildrenKey = @"kDefaultChildrenKey";
 {
   return self.layoutChildren[kDefaultChildrenKey];
 }
-
-
-#pragma mark - ASEnvironment
-
-- (ASEnvironmentState)environmentState
-{
-  return _environmentState;
-}
-
-- (void)setEnvironmentState:(ASEnvironmentState)environmentState
-{
-  _environmentState = environmentState;
-}
-
-// Subclasses can override this method to return NO, because upward propagation is not enabled if a layout
-// specification has more than one child. Currently ASStackLayoutSpec and ASStaticLayoutSpec are currently
-// the specifications that are known to have more than one.
-- (BOOL)supportsUpwardPropagation
-{
-  return ASEnvironmentStatePropagationEnabled();
-}
-
-ASEnvironmentLayoutOptionsForwarding
-ASEnvironmentLayoutExtensibilityForwarding
 
 @end
 

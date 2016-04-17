@@ -24,17 +24,10 @@
 
 // Supports all of the properties included in the ASDisplayNodeViewProperties protocol
 
-- (void)applyToView:(UIView *)view setFrameDirectly:(BOOL)setFrameDirectly;
+- (void)applyToView:(UIView *)view;
 - (void)applyToLayer:(CALayer *)layer;
 
 + (_ASPendingState *)pendingViewStateFromLayer:(CALayer *)layer;
 + (_ASPendingState *)pendingViewStateFromView:(UIView *)view;
-
-@property (nonatomic, readonly) BOOL hasSetNeedsLayout;
-@property (nonatomic, readonly) BOOL hasSetNeedsDisplay;
-
-@property (nonatomic, readonly) BOOL hasChanges;
-
-- (void)clearChanges;
 
 @end

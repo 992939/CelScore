@@ -27,52 +27,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) ASCollectionView *view;
 
 /**
- * Tuning parameters for a range type in full mode.
+ * Tuning parameters for a range type.
  *
  * @param rangeType The range type to get the tuning parameters for.
  *
- * @returns A tuning parameter value for the given range type in full mode.
+ * @returns A tuning parameter value for the given range type.
  *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
+ * Defaults to the render range having one sceenful both leading and trailing and the preload range having two
+ * screenfuls in both directions.
  */
 - (ASRangeTuningParameters)tuningParametersForRangeType:(ASLayoutRangeType)rangeType;
 
 /**
- * Set the tuning parameters for a range type in full mode.
+ * Set the tuning parameters for a range type.
  *
  * @param tuningParameters The tuning parameters to store for a range type.
  * @param rangeType The range type to set the tuning parameters for.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
  */
 - (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeType:(ASLayoutRangeType)rangeType;
-
-/**
- * Tuning parameters for a range type in the specified mode.
- *
- * @param rangeMode The range mode to get the running parameters for.
- * @param rangeType The range type to get the tuning parameters for.
- *
- * @returns A tuning parameter value for the given range type in the given mode.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
- */
-- (ASRangeTuningParameters)tuningParametersForRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
-
-/**
- * Set the tuning parameters for a range type in the specified mode.
- *
- * @param tuningParameters The tuning parameters to store for a range type.
- * @param rangeMode The range mode to set the running parameters for.
- * @param rangeType The range type to set the tuning parameters for.
- *
- * @see ASLayoutRangeMode
- * @see ASLayoutRangeType
- */
-- (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
 
 /**
  * Reload everything from scratch, destroying the working range and all cached nodes.

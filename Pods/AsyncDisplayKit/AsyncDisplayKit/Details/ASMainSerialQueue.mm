@@ -9,7 +9,6 @@
 #import "ASMainSerialQueue.h"
 
 #import "ASThread.h"
-#import "ASInternalHelpers.h"
 
 @interface ASMainSerialQueue ()
 {
@@ -46,7 +45,7 @@
       ASDN::MutexLocker l(_serialQueueLock);
       dispatch_block_t block;
       if (_blocks.count > 0) {
-        block = _blocks[0];
+        block = [_blocks objectAtIndex:0];
         [_blocks removeObjectAtIndex:0];
       } else {
         break;
@@ -56,12 +55,13 @@
     } while (true);
   };
   
-  ASPerformBlockOnMainThread(mainThread);
-}
-
-- (NSString *)description
-{
-  return [[super description] stringByAppendingFormat:@" Blocks: %@", _blocks];
+  if ([NSThread isMainThread]) {
+    mainThread();
+  } else {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      mainThread();
+    });
+  }
 }
 
 @end

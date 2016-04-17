@@ -11,6 +11,7 @@
 #import "ASStaticLayoutSpec.h"
 
 #import "ASLayoutSpecUtilities.h"
+#import "ASLayoutOptions.h"
 #import "ASInternalHelpers.h"
 #import "ASLayout.h"
 
@@ -81,15 +82,6 @@
 {
   ASDisplayNodeAssert(NO, @"ASStaticLayoutSpec only supports children");
   return nil;
-}
-
-@end
-
-@implementation ASStaticLayoutSpec (ASEnvironment)
-
-- (BOOL)supportsUpwardPropagation
-{
-  return NO;
 }
 
 @end

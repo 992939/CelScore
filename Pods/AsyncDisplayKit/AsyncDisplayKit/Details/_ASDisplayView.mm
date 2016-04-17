@@ -8,7 +8,12 @@
 
 #import "_ASDisplayView.h"
 
+#import <objc/runtime.h>
+
 #import "_ASCoreAnimationExtras.h"
+#import "_ASAsyncTransactionContainer.h"
+#import "ASAssert.h"
+#import "ASDisplayNodeExtras.h"
 #import "ASDisplayNodeInternal.h"
 #import "ASDisplayNode+FrameworkPrivate.h"
 #import "ASDisplayNode+Subclasses.h"
@@ -18,7 +23,7 @@
 
 // Keep the node alive while its view is active.  If you create a view, add its layer to a layer hierarchy, then release
 // the view, the layer retains the view to prevent a crash.  This replicates this behaviour for the node abstraction.
-@property (nonatomic, strong, readwrite) ASDisplayNode *keepalive_node;
+@property (nonatomic, retain, readwrite) ASDisplayNode *keepalive_node;
 @end
 
 @implementation _ASDisplayView
@@ -26,7 +31,6 @@
   __unsafe_unretained ASDisplayNode *_node;  // Though UIView has a .node property added via category, since we can add an ivar to a subclass, use that for performance.
   BOOL _inHitTest;
   BOOL _inPointInside;
-  NSArray *_accessibleElements;
 }
 
 @synthesize asyncdisplaykit_node = _node;
@@ -86,11 +90,6 @@
     self.keepalive_node = _node;
   }
   else if (currentSuperview && !newSuperview) {
-    // Clearing keepalive_node may cause deallocation of the node.  In this case, __exitHierarchy may not have an opportunity (e.g. _node will be cleared
-    // by the time -didMoveToWindow occurs after this) to clear the Visible interfaceState, which we need to do before deallocation to meet an API guarantee.
-    if (_node.inHierarchy) {
-      [_node __exitHierarchy];
-    }
     self.keepalive_node = nil;
   }
   
@@ -200,12 +199,6 @@
 
   // Do our own mapping so as not to call super and muck up needsDisplayOnBoundsChange. If we're in a production build, fall back to resize if we see redraw
   self.layer.contentsGravity = (contentMode != UIViewContentModeRedraw) ? ASDisplayNodeCAContentsGravityFromUIContentMode(contentMode) : kCAGravityResize;
-}
-
-- (void)setBounds:(CGRect)bounds
-{
-  [super setBounds:bounds];
-  _node.threadSafeBounds = bounds;
 }
 
 #pragma mark - Event Handling + UIResponder Overrides

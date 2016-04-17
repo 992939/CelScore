@@ -14,23 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSUInteger ASCellNodeAnimation;
 
-typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
-  /**
-   * Indicates a cell has just became visible
-   */
-  ASCellNodeVisibilityEventVisible,
-  /**
-   * Its position (determined by scrollView.contentOffset) has changed while at least 1px remains visible.
-   * It is possible that 100% of the cell is visible both before and after and only its position has changed,
-   * or that the position change has resulted in more or less of the cell being visible.
-   * Use CGRectIntersect between cellFrame and scrollView.bounds to get this rectangle
-   */
-  ASCellNodeVisibilityEventVisibleRectChanged,
-  /**
-   * Indicates a cell is no longer visible
-   */
-  ASCellNodeVisibilityEventInvisible,
-};
+@protocol ASCellNodeLayoutDelegate <NSObject>
+
+/**
+ * Notifies the delegate that the specified cell node has done a relayout.
+ * The notification is done on main thread.
+ *
+ * @param node A node informing the delegate about the relayout.
+ * @param sizeChanged `YES` if the node's `calculatedSize` changed during the relayout, `NO` otherwise.
+ */
+- (void)nodeDidRelayout:(ASCellNode *)node sizeChanged:(BOOL)sizeChanged;
+@end
 
 /**
  * Generic cell node.  Subclass this instead of `ASDisplayNode` to use with `ASTableView` and `ASCollectionView`.
@@ -51,7 +45,7 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
  *
  * With this property set to YES, the main thread will be blocked until display is complete for
  * the cell.  This is more similar to UIKit, and in fact makes AsyncDisplayKit scrolling visually
- * indistinguishable from UIKit's, except being faster.
+ * indistinguishible from UIKit's, except being faster.
  *
  * Using this option does not eliminate all of the performance advantages of AsyncDisplayKit.
  * Normally, a cell has been preloading and is almost done when it reaches the screen, so the
@@ -66,15 +60,20 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
 //@property (atomic, retain) UIColor *backgroundColor;
 @property (nonatomic) UITableViewCellSelectionStyle selectionStyle;
 
-/**
+/*
  * A Boolean value that indicates whether the node is selected.
  */
 @property (nonatomic, assign) BOOL selected;
 
-/**
+/*
  * A Boolean value that indicates whether the node is highlighted.
  */
 @property (nonatomic, assign) BOOL highlighted;
+
+/*
+ * A delegate to be notified (on main thread) after a relayout.
+ */
+@property (nonatomic, weak) id<ASCellNodeLayoutDelegate> layoutDelegate;
 
 /*
  * ASCellNode must forward touch events in order for UITableView and UICollectionView tap handling to work. Overriding
@@ -97,18 +96,16 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
 - (void)setNeedsLayout;
 
 /**
- * @abstract Initializes a cell with a given view controller block.
+ * @abstract Initializes a cell with a given viewControllerBlock.
  *
- * @param viewControllerBlock The block that will be used to create the backing view controller.
- * @param didLoadBlock The block that will be called after the view controller's view is loaded.
+ * @param viewBlock The block that will be used to create the backing view.
+ * @param didLoadBlock The block that will be called after the view created by the viewBlock is loaded
  *
  * @return An ASCellNode created using the root view of the view controller provided by the viewControllerBlock.
- * The view controller's root view is resized to match the calculated size produced during layout.
+ * The view controller's root view is resized to match the calcuated size produced during layout.
  *
  */
-- (instancetype)initWithViewControllerBlock:(ASDisplayNodeViewControllerBlock)viewControllerBlock didLoadBlock:(nullable ASDisplayNodeDidLoadBlock)didLoadBlock;
-
-- (void)cellNodeVisibilityEvent:(ASCellNodeVisibilityEvent)event inScrollView:(UIScrollView *)scrollView withCellFrame:(CGRect)cellFrame;
+- (instancetype)initWithViewControllerBlock:(ASDisplayNodeViewControllerBlock)viewControllerBlock didLoadBlock:(ASDisplayNodeDidLoadBlock)didLoadBlock;
 
 @end
 
@@ -119,24 +116,9 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
 @interface ASTextCellNode : ASCellNode
 
 /**
- * Initializes a text cell with given text attributes and text insets
- */
-- (instancetype)initWithAttributes:(NSDictionary *)textAttributes insets:(UIEdgeInsets)textInsets;
-
-/**
  * Text to display.
  */
 @property (nonatomic, copy) NSString *text;
-
-/**
- * A dictionary containing key-value pairs for text attributes. You can specify the font, text color, text shadow color, and text shadow offset using the keys listed in NSString UIKit Additions Reference.
- */
-@property (nonatomic, copy) NSDictionary *textAttributes;
-
-/**
- * The text inset or outset for each edge. The default value is 15.0 horizontal and 11.0 vertical padding.
- */
-@property (nonatomic, assign) UIEdgeInsets textInsets;
 
 @end
 

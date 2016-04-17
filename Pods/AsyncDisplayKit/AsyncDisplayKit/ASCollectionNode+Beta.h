@@ -15,12 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout layoutFacilitator:(nullable id<ASCollectionViewLayoutFacilitatorProtocol>)layoutFacilitator;
 
-- (void)beginUpdates;
-
-- (void)endUpdatesAnimated:(BOOL)animated;
-
-- (void)endUpdatesAnimated:(BOOL)animated completion:(void (^)(BOOL))completion;
-
 @end
 
 NS_ASSUME_NONNULL_END

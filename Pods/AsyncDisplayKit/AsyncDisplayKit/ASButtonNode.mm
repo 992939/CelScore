@@ -11,8 +11,6 @@
 #import "ASThread.h"
 #import "ASDisplayNode+Subclasses.h"
 #import "ASBackgroundLayoutSpec.h"
-#import "ASInsetLayoutSpec.h"
-#import "ASDisplayNode+Beta.h"
 
 @interface ASButtonNode ()
 {
@@ -21,19 +19,16 @@
   NSAttributedString *_normalAttributedTitle;
   NSAttributedString *_highlightedAttributedTitle;
   NSAttributedString *_selectedAttributedTitle;
-  NSAttributedString *_selectedHighlightedAttributedTitle;
   NSAttributedString *_disabledAttributedTitle;
   
   UIImage *_normalImage;
   UIImage *_highlightedImage;
   UIImage *_selectedImage;
-  UIImage *_selectedHighlightedImage;
   UIImage *_disabledImage;
 
   UIImage *_normalBackgroundImage;
   UIImage *_highlightedBackgroundImage;
   UIImage *_selectedBackgroundImage;
-  UIImage *_selectedHighlightedBackgroundImage;
   UIImage *_disabledBackgroundImage;
 }
 
@@ -43,55 +38,30 @@
 
 @synthesize contentSpacing = _contentSpacing;
 @synthesize laysOutHorizontally = _laysOutHorizontally;
-@synthesize contentVerticalAlignment = _contentVerticalAlignment;
-@synthesize contentHorizontalAlignment = _contentHorizontalAlignment;
-@synthesize contentEdgeInsets = _contentEdgeInsets;
-@synthesize titleNode = _titleNode;
-@synthesize imageNode = _imageNode;
-@synthesize backgroundImageNode = _backgroundImageNode;
 
 - (instancetype)init
 {
-  if (self = [super init]) {
-    self.usesImplicitHierarchyManagement = YES;
-    
+  if (self = [super init]) {    
     _contentSpacing = 8.0;
     _laysOutHorizontally = YES;
-    _contentHorizontalAlignment = ASHorizontalAlignmentMiddle;
-    _contentVerticalAlignment = ASVerticalAlignmentCenter;
-    _contentEdgeInsets = UIEdgeInsetsZero;
-    self.accessibilityTraits = UIAccessibilityTraitButton;
+
+    _titleNode = [[ASTextNode alloc] init];
+    _imageNode = [[ASImageNode alloc] init];
+    _backgroundImageNode = [[ASImageNode alloc] init];
+    [_backgroundImageNode setContentMode:UIViewContentModeScaleToFill];
+    
+    [_titleNode setLayerBacked:YES];
+    [_imageNode setLayerBacked:YES];
+    [_backgroundImageNode setLayerBacked:YES];
+      
+    _contentHorizontalAlignment = ASAlignmentMiddle;
+    _contentVerticalAlignment = ASAlignmentCenter;
+    
+    [self addSubnode:_backgroundImageNode];
+    [self addSubnode:_titleNode];
+    [self addSubnode:_imageNode];
   }
   return self;
-}
-
-- (ASTextNode *)titleNode
-{
-  if (!_titleNode) {
-    _titleNode = [[ASTextNode alloc] init];
-    [_titleNode setLayerBacked:YES];
-    [_titleNode setFlexShrink:YES];
-  }
-  return _titleNode;
-}
-
-- (ASImageNode *)imageNode
-{
-  if (!_imageNode) {
-    _imageNode = [[ASImageNode alloc] init];
-    [_imageNode setLayerBacked:YES];
-  }
-  return _imageNode;
-}
-
-- (ASImageNode *)backgroundImageNode
-{
-  if (!_backgroundImageNode) {
-    _backgroundImageNode = [[ASImageNode alloc] init];
-    [_backgroundImageNode setLayerBacked:YES];
-    [_backgroundImageNode setContentMode:UIViewContentModeScaleToFill];
-  }
-  return _backgroundImageNode;
 }
 
 - (void)setLayerBacked:(BOOL)layerBacked
@@ -103,11 +73,6 @@
 - (void)setEnabled:(BOOL)enabled
 {
   [super setEnabled:enabled];
-  if (enabled) {
-    self.accessibilityTraits = UIAccessibilityTraitButton;
-  } else {
-    self.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitNotEnabled;
-  }
   [self updateButtonContent];
 }
 
@@ -133,7 +98,6 @@
 - (void)setDisplaysAsynchronously:(BOOL)displaysAsynchronously
 {
   [super setDisplaysAsynchronously:displaysAsynchronously];
-  [self.backgroundImageNode setDisplaysAsynchronously:displaysAsynchronously];
   [self.imageNode setDisplaysAsynchronously:displaysAsynchronously];
   [self.titleNode setDisplaysAsynchronously:displaysAsynchronously];
 }
@@ -141,12 +105,10 @@
 - (void)updateImage
 {
   ASDN::MutexLocker l(_propertyLock);
-
+  
   UIImage *newImage;
   if (self.enabled == NO && _disabledImage) {
     newImage = _disabledImage;
-  } else if (self.highlighted && self.selected && _selectedHighlightedImage) {
-    newImage = _selectedHighlightedImage;
   } else if (self.highlighted && _highlightedImage) {
     newImage = _highlightedImage;
   } else if (self.selected && _selectedImage) {
@@ -155,8 +117,8 @@
     newImage = _normalImage;
   }
   
-  if ((_imageNode != nil || newImage != nil) && newImage != self.imageNode.image) {
-    _imageNode.image = newImage;
+  if (newImage != self.imageNode.image) {
+    self.imageNode.image = newImage;
     [self setNeedsLayout];
   }
 }
@@ -167,8 +129,6 @@
   NSAttributedString *newTitle;
   if (self.enabled == NO && _disabledAttributedTitle) {
     newTitle = _disabledAttributedTitle;
-  } else if (self.highlighted && self.selected && _selectedHighlightedAttributedTitle) {
-    newTitle = _selectedHighlightedAttributedTitle;
   } else if (self.highlighted && _highlightedAttributedTitle) {
     newTitle = _highlightedAttributedTitle;
   } else if (self.selected && _selectedAttributedTitle) {
@@ -176,10 +136,9 @@
   } else {
     newTitle = _normalAttributedTitle;
   }
-
-  if ((_titleNode != nil || newTitle.length > 0) && newTitle != self.titleNode.attributedString) {
-    _titleNode.attributedString = newTitle;
-    self.accessibilityLabel = _titleNode.accessibilityLabel;
+  
+  if (newTitle != self.titleNode.attributedString) {
+    self.titleNode.attributedString = newTitle;
     [self setNeedsLayout];
   }
 }
@@ -191,8 +150,6 @@
   UIImage *newImage;
   if (self.enabled == NO && _disabledBackgroundImage) {
     newImage = _disabledBackgroundImage;
-  } else if (self.highlighted && self.selected && _selectedHighlightedBackgroundImage) {
-    newImage = _selectedHighlightedBackgroundImage;
   } else if (self.highlighted && _highlightedBackgroundImage) {
     newImage = _highlightedBackgroundImage;
   } else if (self.selected && _selectedBackgroundImage) {
@@ -201,8 +158,8 @@
     newImage = _normalBackgroundImage;
   }
   
-  if ((_backgroundImageNode != nil || newImage != nil) && newImage != self.backgroundImageNode.image) {
-    _backgroundImageNode.image = newImage;
+  if (newImage != self.backgroundImageNode.image) {
+    self.backgroundImageNode.image = newImage;
     [self setNeedsLayout];
   }
 }
@@ -239,47 +196,11 @@
   [self setNeedsLayout];
 }
 
-- (ASVerticalAlignment)contentVerticalAlignment
-{
-    ASDN::MutexLocker l(_propertyLock);
-    return _contentVerticalAlignment;
-}
-
-- (void)setContentVerticalAlignment:(ASVerticalAlignment)contentVerticalAlignment
-{
-    ASDN::MutexLocker l(_propertyLock);
-    _contentVerticalAlignment = contentVerticalAlignment;
-}
-
-- (ASHorizontalAlignment)contentHorizontalAlignment
-{
-    ASDN::MutexLocker l(_propertyLock);
-    return _contentHorizontalAlignment;
-}
-
-- (void)setContentHorizontalAlignment:(ASHorizontalAlignment)contentHorizontalAlignment
-{
-    ASDN::MutexLocker l(_propertyLock);
-    _contentHorizontalAlignment = contentHorizontalAlignment;
-}
-
-- (UIEdgeInsets)contentEdgeInsets
-{
-    ASDN::MutexLocker l(_propertyLock);
-    return _contentEdgeInsets;
-}
-
-- (void)setContentEdgeInsets:(UIEdgeInsets)contentEdgeInsets
-{
-    ASDN::MutexLocker l(_propertyLock);
-    _contentEdgeInsets = contentEdgeInsets;
-}
-
 - (void)setTitle:(NSString *)title withFont:(UIFont *)font withColor:(UIColor *)color forState:(ASControlState)state
 {
   NSDictionary *attributes = @{
-                               NSFontAttributeName: font ? : [UIFont systemFontOfSize:[UIFont buttonFontSize]],
-                               NSForegroundColorAttributeName : color ? : [UIColor blackColor]
+                               NSFontAttributeName: font ? font :[UIFont systemFontOfSize:[UIFont buttonFontSize]],
+                               NSForegroundColorAttributeName : color ? color : [UIColor blackColor]
                                };
     
   NSAttributedString *string = [[NSAttributedString alloc] initWithString:title
@@ -299,9 +220,6 @@
       
     case ASControlStateSelected:
       return _selectedAttributedTitle;
-        
-    case ASControlStateSelected | ASControlStateHighlighted:
-      return _selectedHighlightedAttributedTitle;
       
     case ASControlStateDisabled:
       return _disabledAttributedTitle;
@@ -326,10 +244,6 @@
     case ASControlStateSelected:
       _selectedAttributedTitle = [title copy];
       break;
-          
-    case ASControlStateSelected | ASControlStateHighlighted:
-      _selectedHighlightedAttributedTitle = [title copy];
-      break;
       
     case ASControlStateDisabled:
       _disabledAttributedTitle = [title copy];
@@ -338,7 +252,6 @@
     default:
       break;
   }
-
   [self updateTitle];
 }
 
@@ -355,9 +268,6 @@
     case ASControlStateSelected:
       return _selectedImage;
       
-    case ASControlStateSelected | ASControlStateHighlighted:
-      return _selectedHighlightedImage;
-          
     case ASControlStateDisabled:
       return _disabledImage;
       
@@ -381,11 +291,7 @@
     case ASControlStateSelected:
       _selectedImage = image;
       break;
-    
-    case ASControlStateSelected | ASControlStateHighlighted:
-      _selectedHighlightedImage = image;
-      break;
-          
+      
     case ASControlStateDisabled:
       _disabledImage = image;
       break;
@@ -394,30 +300,6 @@
       break;
   }
   [self updateImage];
-}
-
-- (UIImage *)backgroundImageForState:(ASControlState)state
-{
-  ASDN::MutexLocker l(_propertyLock);
-  switch (state) {
-    case ASControlStateNormal:
-      return _normalBackgroundImage;
-    
-    case ASControlStateHighlighted:
-      return _highlightedBackgroundImage;
-    
-    case ASControlStateSelected:
-      return _selectedBackgroundImage;
-    
-    case ASControlStateSelected | ASControlStateHighlighted:
-      return _selectedHighlightedBackgroundImage;
-    
-    case ASControlStateDisabled:
-      return _disabledBackgroundImage;
-    
-    default:
-      return _normalBackgroundImage;
-  }
 }
 
 - (void)setBackgroundImage:(UIImage *)image forState:(ASControlState)state
@@ -435,10 +317,6 @@
     case ASControlStateSelected:
       _selectedBackgroundImage = image;
       break;
-          
-    case ASControlStateSelected | ASControlStateHighlighted:
-      _selectedHighlightedBackgroundImage = image;
-      break;
       
     case ASControlStateDisabled:
       _disabledBackgroundImage = image;
@@ -450,52 +328,61 @@
   [self updateBackgroundImage];
 }
 
+- (UIImage *)backgroundImageForState:(ASControlState)state
+{
+  ASDN::MutexLocker l(_propertyLock);
+  switch (state) {
+    case ASControlStateNormal:
+      return _normalBackgroundImage;
+      
+    case ASControlStateHighlighted:
+      return _highlightedBackgroundImage;
+      
+    case ASControlStateSelected:
+      return _selectedBackgroundImage;
+      
+    case ASControlStateDisabled:
+      return _disabledBackgroundImage;
+      
+    default:
+      return _normalBackgroundImage;
+  }
+
+}
+
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-  UIEdgeInsets contentEdgeInsets;
-  ASLayoutSpec *spec;
   ASStackLayoutSpec *stack = [[ASStackLayoutSpec alloc] init];
-  {
-    ASDN::MutexLocker l(_propertyLock);
-    stack.direction = _laysOutHorizontally ? ASStackLayoutDirectionHorizontal : ASStackLayoutDirectionVertical;
-    stack.spacing = _contentSpacing;
-    stack.horizontalAlignment = _contentHorizontalAlignment;
-    stack.verticalAlignment = _contentVerticalAlignment;
-    
-    contentEdgeInsets = _contentEdgeInsets;
-  }
+  stack.direction = self.laysOutHorizontally ? ASStackLayoutDirectionHorizontal : ASStackLayoutDirectionVertical;
+  stack.spacing = self.contentSpacing;
+  stack.horizontalAlignment = _contentHorizontalAlignment;
+  stack.verticalAlignment = _contentVerticalAlignment;
   
   NSMutableArray *children = [[NSMutableArray alloc] initWithCapacity:2];
-  if (_imageNode.image) {
-    [children addObject:_imageNode];
+  if (self.imageNode.image) {
+    [children addObject:self.imageNode];
   }
   
-  if (_titleNode.attributedString.length > 0) {
-    [children addObject:_titleNode];
+  if (self.titleNode.attributedString.length > 0) {
+    [children addObject:self.titleNode];
   }
   
   stack.children = children;
   
-  spec = stack;
-  
-  if (UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, contentEdgeInsets) == NO) {
-    spec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:contentEdgeInsets child:spec];
+  if (self.backgroundImageNode.image) {
+      return [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:stack
+                                                        background:self.backgroundImageNode];
+  } else {
+      return stack;
   }
-  
-  if (_backgroundImageNode.image) {
-    spec = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:spec
-                                                      background:_backgroundImageNode];
-  }
-  
-  return spec;
 }
 
 - (void)layout
 {
   [super layout];
-  _backgroundImageNode.hidden = (_backgroundImageNode.image == nil);
-  _imageNode.hidden = (_imageNode.image == nil);
-  _titleNode.hidden = (_titleNode.attributedString.length == 0);
+  self.backgroundImageNode.hidden = self.backgroundImageNode.image == nil;
+  self.imageNode.hidden = self.imageNode.image == nil;
+  self.titleNode.hidden = self.titleNode.attributedString.length > 0 == NO;
 }
 
 @end

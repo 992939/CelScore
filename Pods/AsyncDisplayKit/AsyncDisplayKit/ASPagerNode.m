@@ -9,16 +9,13 @@
 #import "ASPagerNode.h"
 #import "ASDelegateProxy.h"
 #import "ASDisplayNode+Subclasses.h"
-#import "ASPagerFlowLayout.h"
 #import "UICollectionViewLayout+ASConvenience.h"
 
 @interface ASPagerNode () <ASCollectionDataSource, ASCollectionViewDelegateFlowLayout, ASDelegateProxyInterceptor>
 {
-  ASPagerFlowLayout *_flowLayout;
+  UICollectionViewFlowLayout *_flowLayout;
   ASPagerNodeProxy *_proxy;
   __weak id <ASPagerNodeDataSource> _pagerDataSource;
-  BOOL _pagerDataSourceImplementsNodeBlockAtIndex;
-  BOOL _pagerDataSourceImplementsConstrainedSizeForNode;
 }
 
 @end
@@ -28,7 +25,7 @@
 
 - (instancetype)init
 {
-  ASPagerFlowLayout *flowLayout = [[ASPagerFlowLayout alloc] init];
+  UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
   flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
   flowLayout.minimumInteritemSpacing = 0;
   flowLayout.minimumLineSpacing = 0;
@@ -36,9 +33,9 @@
   return [self initWithCollectionViewLayout:flowLayout];
 }
 
-- (instancetype)initWithCollectionViewLayout:(ASPagerFlowLayout *)flowLayout;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout;
 {
-  ASDisplayNodeAssert([flowLayout isKindOfClass:[ASPagerFlowLayout class]], @"ASPagerNode requires a flow layout.");
+  ASDisplayNodeAssert([flowLayout asdk_isFlowLayout], @"ASPagerNode requires a flow layout.");
   self = [super initWithCollectionViewLayout:flowLayout];
   if (self != nil) {
     _flowLayout = flowLayout;
@@ -63,16 +60,11 @@
   // our view is only horizontally scrollable.  This causes UICollectionViewFlowLayout to log a warning.
   // From here we cannot disable this directly (UIViewController's automaticallyAdjustsScrollViewInsets).
   cv.zeroContentInsets = YES;
-
-  ASRangeTuningParameters minimumRenderParams = { .leadingBufferScreenfuls = 0.0, .trailingBufferScreenfuls = 0.0 };
-  ASRangeTuningParameters minimumPreloadParams = { .leadingBufferScreenfuls = 1.0, .trailingBufferScreenfuls = 1.0 };
-  [self setTuningParameters:minimumRenderParams forRangeMode:ASLayoutRangeModeMinimum rangeType:ASLayoutRangeTypeDisplay];
-  [self setTuningParameters:minimumPreloadParams forRangeMode:ASLayoutRangeModeMinimum rangeType:ASLayoutRangeTypeFetchData];
   
-  ASRangeTuningParameters fullRenderParams = { .leadingBufferScreenfuls = 1.0, .trailingBufferScreenfuls = 1.0 };
-  ASRangeTuningParameters fullPreloadParams = { .leadingBufferScreenfuls = 2.0, .trailingBufferScreenfuls = 2.0 };
-  [self setTuningParameters:fullRenderParams forRangeMode:ASLayoutRangeModeFull rangeType:ASLayoutRangeTypeDisplay];
-  [self setTuningParameters:fullPreloadParams forRangeMode:ASLayoutRangeModeFull rangeType:ASLayoutRangeTypeFetchData];
+  ASRangeTuningParameters preloadParams = { .leadingBufferScreenfuls = 2.0, .trailingBufferScreenfuls = 2.0 };
+  ASRangeTuningParameters renderParams = { .leadingBufferScreenfuls = 1.0, .trailingBufferScreenfuls = 1.0 };
+  [self setTuningParameters:preloadParams forRangeType:ASLayoutRangeTypeFetchData];
+  [self setTuningParameters:renderParams forRangeType:ASLayoutRangeTypeDisplay];
 }
 
 #pragma mark - Helpers
@@ -85,14 +77,11 @@
 
 #pragma mark - ASCollectionViewDataSource
 
-- (ASCellNodeBlock)collectionView:(ASCollectionView *)collectionView nodeBlockForItemAtIndexPath:(NSIndexPath *)indexPath
+- (ASCellNode *)collectionView:(ASCollectionView *)collectionView nodeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   ASDisplayNodeAssert(_pagerDataSource != nil, @"ASPagerNode must have a data source to load nodes to display");
-  if (!_pagerDataSourceImplementsNodeBlockAtIndex) {
-    ASCellNode *node = [_pagerDataSource pagerNode:self nodeAtIndex:indexPath.item];
-    return ^{ return node; };
-  }
-  return [_pagerDataSource pagerNode:self nodeBlockAtIndex:indexPath.item];
+  ASCellNode *pageNode = [_pagerDataSource pagerNode:self nodeAtIndex:indexPath.item];
+  return pageNode;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -103,9 +92,6 @@
 
 - (ASSizeRange)collectionView:(ASCollectionView *)collectionView constrainedSizeForNodeAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (_pagerDataSourceImplementsConstrainedSizeForNode) {
-    return [_pagerDataSource pagerNode:self constrainedSizeForNodeAtIndexPath:indexPath];
-  }
   return ASSizeRangeMake(CGSizeZero, self.view.bounds.size);
 }
 
@@ -120,15 +106,7 @@
 {
   if (pagerDataSource != _pagerDataSource) {
     _pagerDataSource = pagerDataSource;
-    
-    _pagerDataSourceImplementsNodeBlockAtIndex = [_pagerDataSource respondsToSelector:@selector(pagerNode:nodeBlockAtIndex:)];
-    // Data source must implement pagerNode:nodeBlockAtIndex: or pagerNode:nodeAtIndex:
-    ASDisplayNodeAssertTrue(_pagerDataSourceImplementsNodeBlockAtIndex || [_pagerDataSource respondsToSelector:@selector(pagerNode:nodeAtIndex:)]);
-    
-    _pagerDataSourceImplementsConstrainedSizeForNode = [_pagerDataSource respondsToSelector:@selector(pagerNode:constrainedSizeForNodeAtIndexPath:)];
-    
     _proxy = pagerDataSource ? [[ASPagerNodeProxy alloc] initWithTarget:pagerDataSource interceptor:self] : nil;
-    
     super.dataSource = (id <ASCollectionDataSource>)_proxy;
   }
 }

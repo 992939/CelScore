@@ -11,9 +11,8 @@
 #import <AsyncDisplayKit/ASCellNode.h>
 #import <AsyncDisplayKit/ASDataController.h>
 #import <AsyncDisplayKit/ASLayoutController.h>
-#import <AsyncDisplayKit/ASLayoutRangeType.h>
 
-#define ASRangeControllerLoggingEnabled 0
+#define RangeControllerLoggingEnabled 0
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,18 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param contentView UIView to add a (sized) node's view to.
  *
- * @param node The cell node to be added.
+ * @param cellNode The cell node to be added.
  */
 - (void)configureContentView:(UIView *)contentView forCellNode:(ASCellNode *)node;
 
-- (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
-
-- (ASRangeTuningParameters)tuningParametersForRangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType;
-
-// These methods call the corresponding method on each node, visiting each one that
-// the range controller has set a non-default interface state on.
-- (void)clearContents;
-- (void)clearFetchedData;
+- (void)setTuningParameters:(ASRangeTuningParameters)tuningParameters forRangeType:(ASLayoutRangeType)rangeType;
+- (ASRangeTuningParameters)tuningParametersForRangeType:(ASLayoutRangeType)rangeType;
 
 /**
  * An object that describes the layout behavior of the ranged component (table view, collection view, etc.)
@@ -83,6 +76,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface ASRangeControllerStable : ASRangeController
+@end
+
+@interface ASRangeControllerBeta : ASRangeController
+@end
 
 /**
  * Data source for ASRangeController.

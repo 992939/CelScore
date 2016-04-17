@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * @abstract Simple NSURLSession-based image downloader.
  */
-@interface ASBasicImageDownloader : NSObject <ASImageDownloaderProtocolDeprecated, ASImageDownloaderProtocol>
+@interface ASBasicImageDownloader : NSObject <ASImageDownloaderProtocol>
 
 + (instancetype)sharedImageDownloader;
 

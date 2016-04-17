@@ -1,11 +1,8 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9.7.2):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.7.2)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7.2)
-  - AsyncDisplayKit/PINRemoteImage (1.9.7.2):
-    - AsyncDisplayKit/ASDealloc2MainObject
-    - PINRemoteImage/iOS (>= 2.1.2)
+  - AsyncDisplayKit (1.9.6):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9.6)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.6)
   - AWSAPIGateway (2.3.6):
     - AWSCore (= 2.3.6)
   - AWSCognito (2.3.6):
@@ -27,11 +24,6 @@ PODS:
   - HMSegmentedControl (1.5.2)
   - Material (1.39.12)
   - OpinionzAlertView (0.3.1)
-  - PINCache (2.2.2)
-  - PINRemoteImage/Core (2.1.2):
-    - PINCache (>= 2.1)
-  - PINRemoteImage/iOS (2.1.2):
-    - PINRemoteImage/Core
   - R.swift (2.0.0):
     - R.swift.Library (~> 2.0.0)
   - R.swift.Library (2.0.0)
@@ -72,7 +64,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
-  - AsyncDisplayKit (~> 1.9.7.1)
+  - AsyncDisplayKit (= 1.9.6)
   - AWSAPIGateway (~> 2.3.6)
   - AWSCognito (~> 2.3.6)
   - BEMCheckBox (~> 1.2)
@@ -100,7 +92,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 1701c47761a3e274b82cc0c77e6294cfa69612f6
+  AsyncDisplayKit: 56b2845c87345324cb3af3c43d3c3a4556a275be
   AWSAPIGateway: 090586a9c5224c5f72bd441cc5146642be494101
   AWSCognito: af54fe65171c7c994c134e5d29b1ee60ee234825
   AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
@@ -113,8 +105,6 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Material: 731d9c85df2cf3dfa18fd08e2614d95a1df8f6ff
   OpinionzAlertView: 213cf7fa544091962ebd9526ff2e7e120b13c149
-  PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
-  PINRemoteImage: 2ce3f1fcc52f0360a3821f91f1a1bc653c5d2338
   R.swift: ceb3d2897a26bb5811e08f531184bbba8e4a7110
   R.swift.Library: 9f4b2d12040daa1ffe336d8f7e1574f73721fd01
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57

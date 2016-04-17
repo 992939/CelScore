@@ -104,7 +104,11 @@
 - (BOOL)layoutHasSupplementaryViewOfKind:(NSString *)kind inSection:(NSUInteger)section collectionView:(ASCollectionView *)collectionView
 {
   CGSize size = [self sizeForSupplementaryViewOfKind:kind inSection:section collectionView:collectionView];
-  return [self usedLayoutValueForSize:size] > 0;
+  if ([self usedLayoutValueForSize:size] > 0) {
+    return YES;
+  } else {
+    return NO;
+  }
 }
 
 - (CGFloat)usedLayoutValueForSize:(CGSize)size
