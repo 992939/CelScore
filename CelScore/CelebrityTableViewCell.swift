@@ -80,20 +80,26 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     //MARK: Methods
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 70)
-        self.nameNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.40)
-        self.ratingsNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.15)
-        self.switchNode.flexBasis = ASRelativeDimension(type: .Percent, value: 0.10)
+        
+        let verticalStack = ASStackLayoutSpec(
+        direction: .Vertical,
+        spacing: Constants.kPadding,
+        justifyContent: .Start,
+        alignItems: .Start,
+        children: [self.nameNode, self.ratingsNode])
+        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.65)
+        verticalStack.flexGrow = true
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .Horizontal,
             spacing: Constants.kPadding,
             justifyContent: .Start,
             alignItems: .Center,
-            children: [self.profilePicNode, self.nameNode, self.ratingsNode])
+            children: [self.profilePicNode, verticalStack, self.switchNode])
         horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.95)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
-            insets: UIEdgeInsetsMake(Constants.kPadding, Constants.kPadding, Constants.kPadding, Constants.kPadding),
+            insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: 2*Constants.kPadding),
             child: horizontalStack),
             background: self.backgroundNode)
     }

@@ -8,7 +8,7 @@ PODS:
   - AWSCognito (2.3.6):
     - AWSCore (= 2.3.6)
   - AWSCore (2.3.6)
-  - BEMCheckBox (1.2.0)
+  - BEMCheckBox (1.2.1)
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
     - Bolts/Tasks (= 1.7.0)
@@ -60,7 +60,7 @@ PODS:
   - WebASDKImageManager (1.1.0):
     - AsyncDisplayKit (~> 1.9)
     - SDWebImage/Core (~> 3.7)
-  - YLProgressBar (3.8.0)
+  - YLProgressBar (3.8.1)
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
@@ -96,7 +96,7 @@ SPEC CHECKSUMS:
   AWSAPIGateway: 090586a9c5224c5f72bd441cc5146642be494101
   AWSCognito: af54fe65171c7c994c134e5d29b1ee60ee234825
   AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
-  BEMCheckBox: fcfbbf42cf23d38fbb605c72f63db9ae82d6acd3
+  BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
@@ -121,6 +121,6 @@ SPEC CHECKSUMS:
   TwitterKit: c4e40f289a3d7cc9fab9f241edd7502385468b65
   UAObfuscatedString: 128d0df4876ad570ef07c7851e27e094c6e080a9
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
-  YLProgressBar: b6ec76bea4a1b8d6bdfd2995d828055a7e5f3e9a
+  YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
 COCOAPODS: 0.39.0
