@@ -29,25 +29,22 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     required init(coder aDecoder: NSCoder) {
         self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
         let rowsNumber = self.userDefaults.integerForKey("count")
-
         super.init(coder: aDecoder)!
         
         guard rowsNumber > 0 else { return }
-        for index in 0...(rowsNumber-1) {
+        for index in 0..<rowsNumber {
             let x = self.userDefaults.objectForKey(String(index))!
             self.items.append(x)
         }
     }
     
     //MARK: Methods
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.expandButton.addTarget(self, action: #selector(TodayViewController.toggleExpand), forControlEvents: .TouchUpInside)
         updateExpandButtonTitle()
         updatePreferredContentSize()
-        AIRTimer.every(5) { timer in self.userDefaults.synchronize() } //TEST: synchronization
+        AIRTimer.every(1) { timer in print("5");self.userDefaults.synchronize() } //TEST: synchronization
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
@@ -84,14 +81,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         percent = (percent * 100) - 100
         cell.changeLabel.text = (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "% "
         cell.changeLabel.textColor = percent < 0 ? UIColor(red: 225/255, green: 190/255, blue: 231/255, alpha: 1) : UIColor(red: 100/255, green: 255/255, blue: 218/255, alpha: 1)
-        let changeBackView = UIView(frame:cell.changeLabel.frame)
-        changeBackView.frame.origin.x += 7
-        changeBackView.layer.cornerRadius = 4
-        cell.addSubview(changeBackView)
-        cell.sendSubviewToBack(changeBackView)
         cell.profileImage.image = NSURL(string: celebDictionary["image"] as! String).flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }
-        cell.profileImage.layer.cornerRadius = 19
-        cell.profileImage.clipsToBounds = true
         return cell
     }
     
@@ -101,7 +91,13 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: expand
     func updateExpandButtonTitle() { expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal) }
-    func toggleExpand() { expanded = !expanded; updateExpandButtonTitle(); updatePreferredContentSize(); tableView.reloadData() }
+    
+    func toggleExpand() {
+        self.expanded = !self.expanded
+        self.updateExpandButtonTitle()
+        self.updatePreferredContentSize()
+        self.tableView.reloadData()
+    }
 }
 
 extension Double {

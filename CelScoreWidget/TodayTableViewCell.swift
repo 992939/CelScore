@@ -10,8 +10,6 @@ import UIKit
 
 
 final class TodayTableViewCell: UITableViewCell {
-    
-    //MARK: Properties
     @IBOutlet internal var nickNameLabel: UILabel!
     @IBOutlet internal var celscoreLabel: UILabel!
     @IBOutlet internal var changeLabel: UILabel!
