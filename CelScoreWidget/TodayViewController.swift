@@ -94,9 +94,9 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     func toggleExpand() {
         self.expanded = !self.expanded
-        self.updateExpandButtonTitle()
         self.updatePreferredContentSize()
         self.tableView.reloadData()
+        self.updateExpandButtonTitle()
     }
 }
 
