@@ -16,6 +16,7 @@
 
 @class ASTextKitContext;
 @class ASTextKitShadower;
+@class ASTextKitFontSizeAdjuster;
 @protocol ASTextKitTruncating;
 
 /**
@@ -46,14 +47,18 @@
 
 @property (nonatomic, strong, readonly) id<ASTextKitTruncating> truncater;
 
+@property (nonatomic, strong, readonly) ASTextKitFontSizeAdjuster *fontSizeAdjuster;
+
 @property (nonatomic, strong, readonly) ASTextKitShadower *shadower;
 
 @property (nonatomic, assign, readonly) ASTextKitAttributes attributes;
 
 @property (nonatomic, assign, readwrite) CGSize constrainedSize;
 
+@property (nonatomic, assign, readonly) CGFloat currentScaleFactor;
+
 #pragma mark - Drawing
-/*
+/**
  Draw the renderer's text content into the bounds provided.
 
  @param bounds The rect in which to draw the contents of the renderer.
@@ -62,20 +67,20 @@
 
 #pragma mark - Layout
 
-/*
+/**
  Returns the computed size of the renderer given the constrained size and other parameters in the initializer.
  */
 - (CGSize)size;
 
 #pragma mark - Text Ranges
 
-/*
+/**
  The character range from the original attributedString that is displayed by the renderer given the parameters in the
  initializer.
  */
 - (std::vector<NSRange>)visibleRanges;
 
-/*
+/**
  The number of lines shown in the string.
  */
 - (NSUInteger)lineCount;
