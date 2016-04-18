@@ -17,7 +17,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Properties
     let userDefaults: NSUserDefaults!
     let expandButton = UIButton()
-    let defaultNumRows = 3
+    let defaultNumRows = 5
     let maxNumberOfRows = 10
     var items = [AnyObject]()
     var expanded: Bool {
