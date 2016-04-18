@@ -12,6 +12,7 @@ target 'CelScore' do
     shared_pods
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'WebASDKImageManager', '~> 1.0'
+    pod 'Material', '~> 1.39.12'
     pod 'SDWebImage', '~>3.7'
     pod 'AWSCognito', '~> 2.3.6'
     pod 'AWSAPIGateway', '~> 2.3.6'
@@ -26,7 +27,6 @@ target 'CelScore' do
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
-    pod 'Material', '~> 1.39.12'
     pod 'OpinionzAlertView', '~> 0.3.1'
     pod 'R.swift', '~> 2.0.0'
     pod 'SVProgressHUD', '~> 2.0.3'

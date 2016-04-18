@@ -83,8 +83,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         var percent: Double = (celebDictionary["currentScore"] as! Double)/(celebDictionary["prevScore"] as! Double)
         percent = (percent * 100) - 100
         cell.changeLabel.text = (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "% "
+        cell.changeLabel.textColor = percent < 0 ? UIColor(red: 225/255, green: 190/255, blue: 231/255, alpha: 1) : UIColor(red: 100/255, green: 255/255, blue: 218/255, alpha: 1)
         let changeBackView = UIView(frame:cell.changeLabel.frame)
-        changeBackView.backgroundColor = percent < 0 ? UIColor.redColor() : UIColor.greenColor()
         changeBackView.frame.origin.x += 7
         changeBackView.layer.cornerRadius = 4
         cell.addSubview(changeBackView)
