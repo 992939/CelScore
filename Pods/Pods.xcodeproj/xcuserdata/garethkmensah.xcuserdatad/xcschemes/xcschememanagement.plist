@@ -4,17 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AIRTimer 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>AIRTimer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>AWSAPIGateway 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,17 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AWSCognito 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>AWSCognito.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>AWSCore 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -44,17 +24,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AsyncDisplayKit 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>AsyncDisplayKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>BEMCheckBox 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -64,17 +34,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Bolts 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Bolts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Dwifft 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -84,17 +44,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FBSDKCoreKit 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FBSDKLoginKit 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -104,27 +54,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>HMSegmentedControl 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Material 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Material-io.cosmicmind.material 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Material-io.cosmicmind.material 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -144,16 +74,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OpinionzAlertView 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>OpinionzAlertView-OpinionzAlertView 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>OpinionzAlertView-OpinionzAlertView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -164,17 +84,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PINCache 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>PINCache.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PINRemoteImage 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -184,17 +94,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CelScore 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-CelScore.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-CelScoreTests 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -204,17 +104,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CelScoreWidget 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-CelScoreWidget.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>R.swift 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -224,17 +114,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>RateLimit 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>RateLimit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>ReactiveCocoa 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -244,17 +124,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Realm 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Realm.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>RealmSwift 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -264,17 +134,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Result 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Result.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SDWebImage 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -284,17 +144,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SMSegmentView 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SMSegmentView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SVProgressHUD 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -304,17 +154,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftyJSON 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SwiftyJSON.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Timepiece 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -324,27 +164,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UAObfuscatedString 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>UAObfuscatedString.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>WebASDKImageManager 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>WebASDKImageManager.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>YLProgressBar 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

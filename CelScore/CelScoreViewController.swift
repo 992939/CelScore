@@ -90,11 +90,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1:
-            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in
-                self.delegate!.socialSharing(message: "\(who) \(Info.CelScore.text()) \(String(format: "%.2f", celscore))") })
+            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in
+                self.delegate!.socialSharing(message: "\(who) \(Info.CelScore.text()) \(String(format: "%.2f", celscore))") }
         case 2:
-            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
-                self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.2f", consensus))%") })
+            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext { consensus in
+                self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.2f", consensus))%") }
         case 3:
             self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         default:

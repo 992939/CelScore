@@ -18,7 +18,7 @@ import RateLimit
 import Dwifft
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable, HUDable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, UITextFieldDelegate, Sociable, HUDable {
     
     //MARK: Properties
     private let segmentedControl: HMSegmentedControl
@@ -281,6 +281,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 .observeOn(UIScheduler())
                 .startWithNext({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
         }
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     //MARK: ViewDidLoad Helpers
