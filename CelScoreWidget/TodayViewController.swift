@@ -55,7 +55,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.expandButton.addTarget(self, action: #selector(TodayViewController.toggleExpand), forControlEvents: .TouchUpInside)
         updatePreferredContentSize()
     }
     
