@@ -105,7 +105,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         self.expanded = !self.expanded
         self.updatePreferredContentSize()
         self.tableView.reloadData()
-        //self.updateExpandButtonTitle()
     }
 }
 
