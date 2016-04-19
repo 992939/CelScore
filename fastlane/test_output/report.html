@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Results | xcpretty</title>
+    <style type="text/css">
+      body { font-family:Avenir Next, Helvetica Neue, sans-serif; color: #4A4A4A; background-color: #F0F3FB; margin:0;}
+      h1 { font-weight: normal; font-size: 24px; margin: 10px 0 0 0;}
+      h3 { font-weight: normal; margin: 2px; font-size: 1.1em;}
+      header { position: fixed;width: 100%;background: rgba(249, 254, 255, 0.9);margin: 0;padding: 10px;}
+      header:before, header:after { content:""; display:table;}
+      header:after { clear:both;}
+      a:link { color: #A1D761;}
+      footer { clear: both;position: relative;z-index: 10;height: 40px;margin-top: -10px; margin-left:30px; font-size:12px;}
+      table { width:100%; border-collapse: collapse;}
+      tr td:first-child { width:7%}
+      .left { float: left; margin-left:30px;}
+      .right { float: right; margin-right: 40px; margin-top: 0; margin-bottom:0;}
+      .test-suite { margin: 0 0 30px 0;}
+      .test-suite > .heading { font-family:Menlo, Monaco, monospace; font-weight: bold; border-color: #A1D761; background-color: #B8E986; border-width: 1px;}
+      .test-suite.failing > .heading { border-color: #C84F5E; background-color: #E58591;}
+      .test-suite > .heading > .title { margin-top: 4px; margin-left: 10px;}
+      .tests { overflow: scroll;margin: 0 30px 0 60px;}
+      .test, .test-suite > .heading { height: 30px; overflow: hidden; margin: 0 30px;}
+      .test, .test-suite > .heading { border-width: 1px; border-collapse: collapse; border-style: solid; }
+      .test { margin-left: 30px; border-top:none;}
+      .test.failing { border-color: #C84F5E; background-color: #F4DDE0;}
+      .test.passing { border-color: #A1D761;}
+      .test.failing { background-color: #E7A1AA;}
+      .test.passing { background-color: #CAF59F;}
+      .test.failing.odd { background-color: #EEC7CC;}
+      .test.passing.odd { background-color: #E5FBCF;}
+      .details { background-color: #F4DDE0; border: 1px solid #C84F5E;}
+      .test .test-detail:last-child { padding-bottom: 8px;}
+      .test .title { float: left; font-size: 0.9em; margin-top: 8px; font-family: Menlo, Monaco, monospace;}
+      .test .time { float: left;margin: 4px 10px 0 20px;}
+      .test-detail { font-family:Menlo, Monaco, monospace; font-size: 0.9em; margin: 5px 0 5px 0px;}
+      .screenshots { height: auto; overflow: hidden; padding: 4px 4px 0 4px; background-color: #B8E986; border: #A1D761; border-width: 0 1px; border-style: solid; }
+      .screenshots.failing { border-color: #C84F5E; background-color: #E58591; }
+      .screenshot { max-height: 60px; float: left; transition: max-height 0.2s; margin: 0 4px 4px 0 }
+      .screenshot.selected { max-height: 568px; }
+      #test-suites { display: inline-block; width: 100%;margin-top:100px;}
+      #segment-bar { margin-top: 10px;margin-left: 14px;float:right;}
+      #segment-bar a:first-child { border-radius: 9px 0 0 9px; border-right: none;}
+      #segment-bar a:last-child { border-radius: 0 9px 9px 0; border-left: none;}
+      #segment-bar > a { color: #565656; border: 2px solid  #7B7B7B; width: 80px; font-weight: bold; display:inline-block;text-align:center; font-weight: normal;}
+      #segment-bar > a.selected { background-color: #979797; color: #F0F3FB;}
+      #counters { float: left;margin: 10px;text-align: right;}
+      #counters h2 { font-size: 16px; font-family: Avenir, sans-serif; font-weight: lighter; display:inline;}
+      #counters .number { font-size: 20px;}
+      #fail-count { color: #D0021B; margin-left:10px;}
+      @media (max-width: 640px) {
+        h1, #counters, #segment-bar { margin: 5px auto; text-align:center;}
+        header, #segment-bar { width: 100%; position: relative; background:none;}
+        .left, .right { float:none; margin:0;}
+        #test-suites { margin-top: 0;}
+        #counters { float:none;}
+      }
+    </style>
+    <script type="text/javascript">
+      var hide = function(element) { element.style.display = 'none';}
+      var show = function(element) { element.style.display = '';}
+      var isHidden = function(element) { return element.style.display == 'none';}
+      var isSelected = function(element) { return element.classList.contains("selected");}
+      var deselect = function(element) { return element.classList.remove("selected");}
+      var select = function(element) { return element.classList.add("selected");}
+      var toggle = function(element) { isHidden(element) ? show(element) : hide(element);};
+      var toggleTests = function(heading) { toggle(heading.parentNode.children[1]);};
+      var toggleDetails = function(detailClass) {
+        var details = document.querySelectorAll('.' + detailClass);
+        for (var i = details.length - 1; i >= 0; i--) { toggle(details[i]);};
+      };
+      var hideAll = function(collection) {
+        for (var i = collection.length - 1; i >= 0; i--) { hide(collection[i]); };
+      }
+      var showAll = function(collection) {
+        for (var i = collection.length - 1; i >= 0; i--) { show(collection[i]); };
+      }
+      var selectSegment = function(segment) {
+        if (isSelected(segment)) return;
+        var segments = document.querySelectorAll('#segment-bar > a');
+        for (var i = segments.length - 1; i >= 0; i--) { deselect(segments[i]);};
+        select(segment);
+        if (segment.id == "all-segment") {
+          showAll(document.querySelectorAll('.test-suite'));
+          showAll(document.querySelectorAll('.test'));
+        } else if (segment.id == "failing-segment") {
+          hideAll(document.querySelectorAll('.test.passing'));
+          showAll(document.querySelectorAll('.test.failing'));
+          hideAll(document.querySelectorAll('.test-suite.passing'));
+          showAll(document.querySelectorAll('.test-suite.failing'));
+        } else if (segment.id == "passing-segment") {
+          hideAll(document.querySelectorAll('.test.failing'));
+          showAll(document.querySelectorAll('.test.passing'));
+          hideAll(document.querySelectorAll('.test-suite.failing'));
+          showAll(document.querySelectorAll('.test-suite.passing'));
+        }
+      }
+      var toggleScreenshot = function(suiteName, index) {
+        var screenshot = document.getElementById("screenshot-" + suiteName + "-" + index);
+        isSelected(screenshot) ? deselect(screenshot) : select(screenshot);
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <section class="left">
+        <h1>Test Results</h1>
+      </section>
+      <section class="right">
+        <section id="counters">
+          <h2 id="test-count"><span class="number">64</span> tests</h2>
+          
+        </section>
+        <section id="segment-bar">
+          <a id="all-segment" onclick="selectSegment(this);" class="selected">All</a><a id="failing-segment" onclick="selectSegment(this);">Failing</a><a id="passing-segment" onclick="selectSegment(this);">Passing</a>
+        </section>
+      </section>
+    </header>
+    <section id="test-suites">
+      
+        
+        <section class="test-suite passing" id="CelScoreTests.CelebrityViewModelTests">
+          <section class="heading" onclick="toggleTests(this);">
+            <h3 class="title">CelScoreTests.CelebrityViewModelTests</h3>
+          </section>
+          <section class="tests">
+            
+            <table>
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCountFollowedCelebritiesSignal');">
+                <td>
+                  
+                    <h3 class="time">0.109s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCountFollowedCelebritiesSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testFollowCebritySignal');">
+                <td>
+                  
+                    <h3 class="time">0.099s</h3>
+                  
+                </td>
+                <td><h3 class="title">testFollowCebritySignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetCelebritySignal');">
+                <td>
+                  
+                    <h3 class="time">0.100s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetCelebritySignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateUserActivitySignal');">
+                <td>
+                  
+                    <h3 class="time">0.114s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateUserActivitySignal</h3></td>
+              </tr>
+              
+            
+            </table>
+          </section>
+        </section>
+      
+        
+        <section class="test-suite passing" id="CelScoreTests.ListViewModelTests">
+          <section class="heading" onclick="toggleTests(this);">
+            <h3 class="title">CelScoreTests.ListViewModelTests</h3>
+          </section>
+          <section class="tests">
+            
+            <table>
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetCelebrityStructSignal');">
+                <td>
+                  
+                    <h3 class="time">0.098s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetCelebrityStructSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetListSignal');">
+                <td>
+                  
+                    <h3 class="time">0.077s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetListSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testSearchSignal');">
+                <td>
+                  
+                    <h3 class="time">0.087s</h3>
+                  
+                </td>
+                <td><h3 class="title">testSearchSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateListSignal');">
+                <td>
+                  
+                    <h3 class="time">0.076s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateListSignal</h3></td>
+              </tr>
+              
+            
+            </table>
+          </section>
+        </section>
+      
+        
+        <section class="test-suite passing" id="CelScoreTests.ModelTests">
+          <section class="heading" onclick="toggleTests(this);">
+            <h3 class="title">CelScoreTests.ModelTests</h3>
+          </section>
+          <section class="tests">
+            
+            <table>
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCelebIdNil');">
+                <td>
+                  
+                    <h3 class="time">0.002s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCelebIdNil</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testCelebIdType');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCelebIdType</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCelebrityModelNil');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCelebrityModelNil</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testCelebrityModelType');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCelebrityModelType</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCelebrityStructEquality');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCelebrityStructEquality</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testListsModelNil');">
+                <td>
+                  
+                    <h3 class="time">0.003s</h3>
+                  
+                </td>
+                <td><h3 class="title">testListsModelNil</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testListsModelType');">
+                <td>
+                  
+                    <h3 class="time">0.000s</h3>
+                  
+                </td>
+                <td><h3 class="title">testListsModelType</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testRatingsModelNil');">
+                <td>
+                  
+                    <h3 class="time">0.002s</h3>
+                  
+                </td>
+                <td><h3 class="title">testRatingsModelNil</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testRatingsModelType');">
+                <td>
+                  
+                    <h3 class="time">0.000s</h3>
+                  
+                </td>
+                <td><h3 class="title">testRatingsModelType</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testSettingsModelNil');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testSettingsModelNil</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testSettingsModelType');">
+                <td>
+                  
+                    <h3 class="time">0.000s</h3>
+                  
+                </td>
+                <td><h3 class="title">testSettingsModelType</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUserRatingsGetAverageVariance');">
+                <td>
+                  
+                    <h3 class="time">0.000s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUserRatingsGetAverageVariance</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUserRatingsGetCelScore');">
+                <td>
+                  
+                    <h3 class="time">0.003s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUserRatingsGetCelScore</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUserRatingsInterpolation');">
+                <td>
+                  
+                    <h3 class="time">0.001s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUserRatingsInterpolation</h3></td>
+              </tr>
+              
+            
+            </table>
+          </section>
+        </section>
+      
+        
+        <section class="test-suite passing" id="CelScoreTests.RatingsViewModelTests">
+          <section class="heading" onclick="toggleTests(this);">
+            <h3 class="title">CelScoreTests.RatingsViewModelTests</h3>
+          </section>
+          <section class="tests">
+            
+            <table>
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCleanUpRatingsSignal');">
+                <td>
+                  
+                    <h3 class="time">0.097s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCleanUpRatingsSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetCelScoreSignal');">
+                <td>
+                  
+                    <h3 class="time">0.097s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetCelScoreSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetRatingsSignal');">
+                <td>
+                  
+                    <h3 class="time">0.097s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetRatingsSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetUserRatingsSignal');">
+                <td>
+                  
+                    <h3 class="time">0.096s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetUserRatingsSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testHasUserRatingsSignal');">
+                <td>
+                  
+                    <h3 class="time">0.113s</h3>
+                  
+                </td>
+                <td><h3 class="title">testHasUserRatingsSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateUserRatingSignal');">
+                <td>
+                  
+                    <h3 class="time">0.085s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateUserRatingSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testVoteSignal');">
+                <td>
+                  
+                    <h3 class="time">0.089s</h3>
+                  
+                </td>
+                <td><h3 class="title">testVoteSignal</h3></td>
+              </tr>
+              
+            
+            </table>
+          </section>
+        </section>
+      
+        
+        <section class="test-suite passing" id="CelScoreTests.SettingsViewModelTests">
+          <section class="heading" onclick="toggleTests(this);">
+            <h3 class="title">CelScoreTests.SettingsViewModelTests</h3>
+          </section>
+          <section class="tests">
+            
+            <table>
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCalculatePositiveVoteSignal');">
+                <td>
+                  
+                    <h3 class="time">0.096s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCalculatePositiveVoteSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testCalculateSocialConsensusSignal');">
+                <td>
+                  
+                    <h3 class="time">0.123s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCalculateSocialConsensusSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testCalculateUserAverageCelScoreSignal');">
+                <td>
+                  
+                    <h3 class="time">0.093s</h3>
+                  
+                </td>
+                <td><h3 class="title">testCalculateUserAverageCelScoreSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetConsensusBuilding');">
+                <td>
+                  
+                    <h3 class="time">0.091s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetConsensusBuilding</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetDefaultListIndex');">
+                <td>
+                  
+                    <h3 class="time">0.091s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetDefaultListIndex</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstCompleted');">
+                <td>
+                  
+                    <h3 class="time">0.064s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstCompleted</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetFirstConsensus');">
+                <td>
+                  
+                    <h3 class="time">0.065s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstConsensus</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstFollow');">
+                <td>
+                  
+                    <h3 class="time">0.073s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstFollow</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetFirstInterest');">
+                <td>
+                  
+                    <h3 class="time">0.098s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstInterest</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstLaunch');">
+                <td>
+                  
+                    <h3 class="time">0.086s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstLaunch</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetFirstNegative');">
+                <td>
+                  
+                    <h3 class="time">0.107s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstNegative</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstPublic');">
+                <td>
+                  
+                    <h3 class="time">0.088s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstPublic</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetFirstSocialDisable');">
+                <td>
+                  
+                    <h3 class="time">0.095s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstSocialDisable</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstStars');">
+                <td>
+                  
+                    <h3 class="time">0.091s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstStars</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetFirstTrollWarning');">
+                <td>
+                  
+                    <h3 class="time">0.065s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstTrollWarning</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetFirstVoteDisable');">
+                <td>
+                  
+                    <h3 class="time">0.081s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetFirstVoteDisable</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testGetLoginTypeIndex');">
+                <td>
+                  
+                    <h3 class="time">0.087s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetLoginTypeIndex</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testGetPublicService');">
+                <td>
+                  
+                    <h3 class="time">0.090s</h3>
+                  
+                </td>
+                <td><h3 class="title">testGetPublicService</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testIsPositiveVoteSignal');">
+                <td>
+                  
+                    <h3 class="time">0.090s</h3>
+                  
+                </td>
+                <td><h3 class="title">testIsPositiveVoteSignal</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateConsensusBuilding');">
+                <td>
+                  
+                    <h3 class="time">0.093s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateConsensusBuilding</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateDefaultListIndex');">
+                <td>
+                  
+                    <h3 class="time">0.087s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateDefaultListIndex</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstCompleted');">
+                <td>
+                  
+                    <h3 class="time">0.074s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstCompleted</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateFirstConsensus');">
+                <td>
+                  
+                    <h3 class="time">0.073s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstConsensus</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstFollow');">
+                <td>
+                  
+                    <h3 class="time">0.072s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstFollow</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateFirstInterest');">
+                <td>
+                  
+                    <h3 class="time">0.077s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstInterest</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstLaunch');">
+                <td>
+                  
+                    <h3 class="time">0.074s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstLaunch</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateFirstNegative');">
+                <td>
+                  
+                    <h3 class="time">0.088s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstNegative</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstPublic');">
+                <td>
+                  
+                    <h3 class="time">0.082s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstPublic</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateFirstSocialDisable');">
+                <td>
+                  
+                    <h3 class="time">0.079s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstSocialDisable</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstStars');">
+                <td>
+                  
+                    <h3 class="time">0.094s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstStars</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateFirstTrollWarning');">
+                <td>
+                  
+                    <h3 class="time">0.072s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstTrollWarning</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdateFirstVoteDisable');">
+                <td>
+                  
+                    <h3 class="time">0.072s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateFirstVoteDisable</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateLoginTypeIndex');">
+                <td>
+                  
+                    <h3 class="time">0.088s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateLoginTypeIndex</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('testUpdatePublicService');">
+                <td>
+                  
+                    <h3 class="time">0.074s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdatePublicService</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('testUpdateUserNameSignal');">
+                <td>
+                  
+                    <h3 class="time">0.082s</h3>
+                  
+                </td>
+                <td><h3 class="title">testUpdateUserNameSignal</h3></td>
+              </tr>
+              
+            
+            </table>
+          </section>
+        </section>
+      
+    </section>
+    <footer>Report generated with <a href="https://github.com/supermarin/xcpretty">xcpretty</a></footer>
+  </body>
+</html>

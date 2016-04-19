@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites tests='64' failures='0'>
+  <testsuite name='CelScoreTests.CelebrityViewModelTests' tests='4' failures='0'>
+    <testcase classname='CelScoreTests.CelebrityViewModelTests' name='testCountFollowedCelebritiesSignal' time='0.109'/>
+    <testcase classname='CelScoreTests.CelebrityViewModelTests' name='testFollowCebritySignal' time='0.099'/>
+    <testcase classname='CelScoreTests.CelebrityViewModelTests' name='testGetCelebritySignal' time='0.100'/>
+    <testcase classname='CelScoreTests.CelebrityViewModelTests' name='testUpdateUserActivitySignal' time='0.114'/>
+  </testsuite>
+  <testsuite name='CelScoreTests.ListViewModelTests' tests='4' failures='0'>
+    <testcase classname='CelScoreTests.ListViewModelTests' name='testGetCelebrityStructSignal' time='0.098'/>
+    <testcase classname='CelScoreTests.ListViewModelTests' name='testGetListSignal' time='0.077'/>
+    <testcase classname='CelScoreTests.ListViewModelTests' name='testSearchSignal' time='0.087'/>
+    <testcase classname='CelScoreTests.ListViewModelTests' name='testUpdateListSignal' time='0.076'/>
+  </testsuite>
+  <testsuite name='CelScoreTests.ModelTests' tests='14' failures='0'>
+    <testcase classname='CelScoreTests.ModelTests' name='testCelebIdNil' time='0.002'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testCelebIdType' time='0.001'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testCelebrityModelNil' time='0.001'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testCelebrityModelType' time='0.001'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testCelebrityStructEquality' time='0.001'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testListsModelNil' time='0.003'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testListsModelType' time='0.000'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testRatingsModelNil' time='0.002'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testRatingsModelType' time='0.000'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testSettingsModelNil' time='0.001'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testSettingsModelType' time='0.000'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testUserRatingsGetAverageVariance' time='0.000'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testUserRatingsGetCelScore' time='0.003'/>
+    <testcase classname='CelScoreTests.ModelTests' name='testUserRatingsInterpolation' time='0.001'/>
+  </testsuite>
+  <testsuite name='CelScoreTests.RatingsViewModelTests' tests='7' failures='0'>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testCleanUpRatingsSignal' time='0.097'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testGetCelScoreSignal' time='0.097'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testGetRatingsSignal' time='0.097'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testGetUserRatingsSignal' time='0.096'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testHasUserRatingsSignal' time='0.113'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testUpdateUserRatingSignal' time='0.085'/>
+    <testcase classname='CelScoreTests.RatingsViewModelTests' name='testVoteSignal' time='0.089'/>
+  </testsuite>
+  <testsuite name='CelScoreTests.SettingsViewModelTests' tests='35' failures='0'>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testCalculatePositiveVoteSignal' time='0.096'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testCalculateSocialConsensusSignal' time='0.123'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testCalculateUserAverageCelScoreSignal' time='0.093'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetConsensusBuilding' time='0.091'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetDefaultListIndex' time='0.091'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstCompleted' time='0.064'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstConsensus' time='0.065'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstFollow' time='0.073'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstInterest' time='0.098'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstLaunch' time='0.086'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstNegative' time='0.107'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstPublic' time='0.088'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstSocialDisable' time='0.095'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstStars' time='0.091'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstTrollWarning' time='0.065'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetFirstVoteDisable' time='0.081'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetLoginTypeIndex' time='0.087'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testGetPublicService' time='0.090'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testIsPositiveVoteSignal' time='0.090'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateConsensusBuilding' time='0.093'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateDefaultListIndex' time='0.087'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstCompleted' time='0.074'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstConsensus' time='0.073'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstFollow' time='0.072'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstInterest' time='0.077'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstLaunch' time='0.074'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstNegative' time='0.088'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstPublic' time='0.082'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstSocialDisable' time='0.079'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstStars' time='0.094'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstTrollWarning' time='0.072'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateFirstVoteDisable' time='0.072'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateLoginTypeIndex' time='0.088'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdatePublicService' time='0.074'/>
+    <testcase classname='CelScoreTests.SettingsViewModelTests' name='testUpdateUserNameSignal' time='0.082'/>
+  </testsuite>
+</testsuites>
