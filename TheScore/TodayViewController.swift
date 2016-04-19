@@ -1,9 +1,9 @@
 //
 //  TodayViewController.swift
-//  CelScoreWidget
+//  TheScore
 //
-//  Created by Gareth.K.Mensah on 11/9/15.
-//  Copyright © 2015 Gareth.K.Mensah. All rights reserved.
+//  Created by Gareth.K.Mensah on 4/19/16.
+//  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
 import UIKit
@@ -91,7 +91,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.extensionContext?.openURL(NSURL(string: "CelScoreWidget://")!, completionHandler: nil)
+        self.extensionContext?.openURL(NSURL(string: "TheScore://")!, completionHandler: nil)
     }
     
     // MARK: expand

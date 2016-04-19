@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
+		000EB60C1CC6183B00704CF4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
+		000EB60F1CC6183B00704CF4 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EB60E1CC6183B00704CF4 /* TodayViewController.swift */; };
+		000EB6121CC6183B00704CF4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6101CC6183B00704CF4 /* MainInterface.storyboard */; };
+		000EB6161CC6183B00704CF4 /* TheScore.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 000EB60B1CC6183B00704CF4 /* TheScore.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		000EB61C1CC61EE000704CF4 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
+		000EB61E1CC622FE00704CF4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
+		000EB61F1CC6230100704CF4 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
+		000EB6201CC6230300704CF4 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		000EB6211CC6230500704CF4 /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
+		000EB6221CC6230800704CF4 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
+		000EB6241CC6248A00704CF4 /* TheScore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6231CC6248A00704CF4 /* TheScore.entitlements */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
@@ -19,10 +30,6 @@
 		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
 		00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
-		00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
-		00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404AA11BF093540009AD0E /* TodayViewController.swift */; };
-		00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00404AA31BF093540009AD0E /* MainInterface.storyboard */; };
-		00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00417A051CB5B65900E47078 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00417A041CB5B65900E47078 /* TransitionManager.swift */; };
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
@@ -52,15 +59,6 @@
 		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
 		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
 		00CCFAFA1CC351C8002E7E7E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAF91CC351C8002E7E7E /* R.generated.swift */; };
-		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
-		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
-		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
-		00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
-		00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
-		00D0BBB11CC4D03C006EE4F4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */; };
-		00D0BBB31CC4D04A006EE4F4 /* AIRTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */; };
-		00D0BBB51CC4D051006EE4F4 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */; };
-		00D0BBB71CC4D059006EE4F4 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -73,18 +71,18 @@
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
 		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
-		3BDC01E04971C0E208F437BC /* Pods_CelScoreWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */; };
 		57090DAA784577AFC23869FC /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */; };
 		931C8DB9635DA6722917B7E9 /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AD71EF5FDD40AE29412568 /* Pods_CelScoreTests.framework */; };
+		EAC5AC112A981B7B065756C6 /* Pods_TheScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E81D4D5B04EA7E715AB9173 /* Pods_TheScore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00404AA71BF093540009AD0E /* PBXContainerItemProxy */ = {
+		000EB6141CC6183B00704CF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 00404A9C1BF093530009AD0E;
-			remoteInfo = CelScoreWidget;
+			remoteGlobalIDString = 000EB60A1CC6183B00704CF4;
+			remoteInfo = TheScore;
 		};
 		004B56EF1B35332B008A75EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -102,7 +100,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */,
+				000EB6161CC6183B00704CF4 /* TheScore.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +111,11 @@
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
+		000EB60B1CC6183B00704CF4 /* TheScore.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TheScore.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		000EB60E1CC6183B00704CF4 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		000EB6111CC6183B00704CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		000EB6131CC6183B00704CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		000EB6231CC6248A00704CF4 /* TheScore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TheScore.entitlements; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
@@ -124,11 +127,7 @@
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		00404A9D1BF093530009AD0E /* CelScoreWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CelScoreWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		00404A9E1BF093540009AD0E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		00404AA11BF093540009AD0E /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		00404AA41BF093540009AD0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		00404AA61BF093540009AD0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00417A041CB5B65900E47078 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		004492171C3B272200FBCEFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004B56D91B35332A008A75EB /* CelebrityScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelebrityScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,8 +161,7 @@
 		00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAF91CC351C8002E7E7E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
-		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
-		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
+		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
 		00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/RealmSwift.framework"; sourceTree = "<group>"; };
 		00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AIRTimer.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework"; sourceTree = "<group>"; };
@@ -184,6 +182,8 @@
 		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
 		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
 		00FEF1771CACE5C6004141B3 /* BEEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEEmpty.m; sourceTree = "<group>"; };
+		3B8F80837B3172A187FFE463 /* Pods-TheScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheScore/Pods-TheScore.debug.xcconfig"; sourceTree = "<group>"; };
+		3E81D4D5B04EA7E715AB9173 /* Pods_TheScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig"; sourceTree = "<group>"; };
 		618BE4F6F1EB0778069D2279 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,19 +194,16 @@
 		D7EAA51DF5D129F20086E5BA /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
 		EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE919CF7642F150835582D97 /* Pods-CelScoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		FAFE27315DB171720A9014D7 /* Pods-TheScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheScore/Pods-TheScore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00404A9A1BF093530009AD0E /* Frameworks */ = {
+		000EB6081CC6183B00704CF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00D0BBB71CC4D059006EE4F4 /* SwiftyJSON.framework in Frameworks */,
-				00D0BBB51CC4D051006EE4F4 /* ReactiveCocoa.framework in Frameworks */,
-				00D0BBB31CC4D04A006EE4F4 /* AIRTimer.framework in Frameworks */,
-				00D0BBB11CC4D03C006EE4F4 /* RealmSwift.framework in Frameworks */,
-				00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */,
-				3BDC01E04971C0E208F437BC /* Pods_CelScoreWidget.framework in Frameworks */,
+				000EB60C1CC6183B00704CF4 /* NotificationCenter.framework in Frameworks */,
+				EAC5AC112A981B7B065756C6 /* Pods_TheScore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,16 +228,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00404AA01BF093540009AD0E /* CelScoreWidget */ = {
+		000EB60D1CC6183B00704CF4 /* TheScore */ = {
 			isa = PBXGroup;
 			children = (
-				00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */,
-				00404AA11BF093540009AD0E /* TodayViewController.swift */,
+				000EB6231CC6248A00704CF4 /* TheScore.entitlements */,
+				000EB60E1CC6183B00704CF4 /* TodayViewController.swift */,
 				00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */,
-				00404AA31BF093540009AD0E /* MainInterface.storyboard */,
-				00404AA61BF093540009AD0E /* Info.plist */,
+				000EB6101CC6183B00704CF4 /* MainInterface.storyboard */,
+				000EB6131CC6183B00704CF4 /* Info.plist */,
 			);
-			path = CelScoreWidget;
+			path = TheScore;
 			sourceTree = "<group>";
 		};
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
@@ -267,7 +264,7 @@
 			children = (
 				004B56DB1B35332A008A75EB /* CelScore */,
 				004B56F11B35332B008A75EB /* CelScoreTests */,
-				00404AA01BF093540009AD0E /* CelScoreWidget */,
+				000EB60D1CC6183B00704CF4 /* TheScore */,
 				004B56DA1B35332A008A75EB /* Products */,
 				272C664E3752319CD2080EBE /* Frameworks */,
 				7A2EE76051E6C76C20A54D1C /* Pods */,
@@ -279,7 +276,7 @@
 			children = (
 				004B56D91B35332A008A75EB /* CelebrityScore.app */,
 				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
-				00404A9D1BF093530009AD0E /* CelScoreWidget.appex */,
+				000EB60B1CC6183B00704CF4 /* TheScore.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -424,6 +421,7 @@
 				EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */,
 				98AD71EF5FDD40AE29412568 /* Pods_CelScoreTests.framework */,
 				42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */,
+				3E81D4D5B04EA7E715AB9173 /* Pods_TheScore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -437,6 +435,8 @@
 				EE919CF7642F150835582D97 /* Pods-CelScoreTests.release.xcconfig */,
 				D2AA36FB443F4D9398946607 /* Pods-CelScoreWidget.debug.xcconfig */,
 				5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */,
+				3B8F80837B3172A187FFE463 /* Pods-TheScore.debug.xcconfig */,
+				FAFE27315DB171720A9014D7 /* Pods-TheScore.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -444,24 +444,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00404A9C1BF093530009AD0E /* CelScoreWidget */ = {
+		000EB60A1CC6183B00704CF4 /* TheScore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */;
+			buildConfigurationList = 000EB6171CC6183B00704CF4 /* Build configuration list for PBXNativeTarget "TheScore" */;
 			buildPhases = (
-				B4C051BFBD52CFD198AD15FA /* Check Pods Manifest.lock */,
-				00404A991BF093530009AD0E /* Sources */,
-				00404A9A1BF093530009AD0E /* Frameworks */,
-				00404A9B1BF093530009AD0E /* Resources */,
-				0F72C7C056280641ED2A9A84 /* Embed Pods Frameworks */,
-				1AE37852E6B59F8DC06124A1 /* Copy Pods Resources */,
+				1686365972271609BD1767D1 /* Check Pods Manifest.lock */,
+				000EB6071CC6183B00704CF4 /* Sources */,
+				000EB6081CC6183B00704CF4 /* Frameworks */,
+				000EB6091CC6183B00704CF4 /* Resources */,
+				D1566A278A4496BF7AF10B2A /* Embed Pods Frameworks */,
+				6D6A75F9C2E0608CED1CDCDD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CelScoreWidget;
-			productName = CelScoreWidget;
-			productReference = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */;
+			name = TheScore;
+			productName = TheScore;
+			productReference = 000EB60B1CC6183B00704CF4 /* TheScore.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		004B56D81B35332A008A75EB /* CelScore */ = {
@@ -481,7 +481,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				00404AA81BF093540009AD0E /* PBXTargetDependency */,
+				000EB6151CC6183B00704CF4 /* PBXTargetDependency */,
 			);
 			name = CelScore;
 			productName = CelScore;
@@ -515,12 +515,12 @@
 		004B56D11B35332A008A75EB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Gareth.K.Mensah;
 				TargetAttributes = {
-					00404A9C1BF093530009AD0E = {
-						CreatedOnToolsVersion = 7.0;
+					000EB60A1CC6183B00704CF4 = {
+						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 6AEA7P6XSJ;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -558,17 +558,18 @@
 			targets = (
 				004B56D81B35332A008A75EB /* CelScore */,
 				004B56ED1B35332B008A75EB /* CelScoreTests */,
-				00404A9C1BF093530009AD0E /* CelScoreWidget */,
+				000EB60A1CC6183B00704CF4 /* TheScore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00404A9B1BF093530009AD0E /* Resources */ = {
+		000EB6091CC6183B00704CF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */,
+				000EB6241CC6248A00704CF4 /* TheScore.entitlements in Resources */,
+				000EB6121CC6183B00704CF4 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,21 +619,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4 33cd1f8b9b661fc1d2413a92e0956503e0a5e4933cf9303f97f3ade74033b0f7";
 		};
-		0F72C7C056280641ED2A9A84 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		109721B5D1BA539BBEF4BD57 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -648,19 +634,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		1AE37852E6B59F8DC06124A1 /* Copy Pods Resources */ = {
+		1686365972271609BD1767D1 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		362E4F07C963BB64B977BAA9 /* Copy Pods Resources */ = {
@@ -708,19 +694,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B4C051BFBD52CFD198AD15FA /* Check Pods Manifest.lock */ = {
+		6D6A75F9C2E0608CED1CDCDD /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheScore/Pods-TheScore-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C46028EE6DA47F06B4AF4F24 /* Check Pods Manifest.lock */ = {
@@ -753,19 +739,35 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D1566A278A4496BF7AF10B2A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheScore/Pods-TheScore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00404A991BF093530009AD0E /* Sources */ = {
+		000EB6071CC6183B00704CF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */,
-				00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */,
-				00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */,
-				00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */,
-				00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */,
-				00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */,
+				000EB61E1CC622FE00704CF4 /* SettingsModel.swift in Sources */,
+				000EB60F1CC6183B00704CF4 /* TodayViewController.swift in Sources */,
+				000EB61C1CC61EE000704CF4 /* TodayTableViewCell.swift in Sources */,
+				000EB6201CC6230300704CF4 /* CelebrityModel.swift in Sources */,
+				000EB6211CC6230500704CF4 /* RatingsModel.swift in Sources */,
+				000EB61F1CC6230100704CF4 /* ListsModel.swift in Sources */,
+				000EB6221CC6230800704CF4 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,10 +836,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		00404AA81BF093540009AD0E /* PBXTargetDependency */ = {
+		000EB6151CC6183B00704CF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 00404A9C1BF093530009AD0E /* CelScoreWidget */;
-			targetProxy = 00404AA71BF093540009AD0E /* PBXContainerItemProxy */;
+			target = 000EB60A1CC6183B00704CF4 /* TheScore */;
+			targetProxy = 000EB6141CC6183B00704CF4 /* PBXContainerItemProxy */;
 		};
 		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -847,10 +849,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		00404AA31BF093540009AD0E /* MainInterface.storyboard */ = {
+		000EB6101CC6183B00704CF4 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				00404AA41BF093540009AD0E /* Base */,
+				000EB6111CC6183B00704CF4 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -866,80 +868,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		00404AAA1BF093540009AD0E /* Debug */ = {
+		000EB6181CC6183B00704CF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2AA36FB443F4D9398946607 /* Pods-CelScoreWidget.debug.xcconfig */;
+			baseConfigurationReference = 3B8F80837B3172A187FFE463 /* Pods-TheScore.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = TheScore/TheScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				FRAMEWORK_SEARCH_PATHS = "\"$(PROJECT_DIR)\"";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
-				INFOPLIST_FILE = CelScoreWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_FILE = TheScore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-framework",
-					"\"AIRTimer\"",
-					"-framework",
-					"\"AsyncDisplayKit\"",
-					"-framework",
-					"\"ReactiveCocoa\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
-					"-framework",
-					"\"Result\"",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.TheScore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		00404AAB1BF093540009AD0E /* Release */ = {
+		000EB6191CC6183B00704CF4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */;
+			baseConfigurationReference = FAFE27315DB171720A9014D7 /* Pods-TheScore.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = TheScore/TheScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "\"$(PROJECT_DIR)\"";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
-				INFOPLIST_FILE = CelScoreWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_FILE = TheScore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-framework",
-					"\"AIRTimer\"",
-					"-framework",
-					"\"AsyncDisplayKit\"",
-					"-framework",
-					"\"ReactiveCocoa\"",
-					"-framework",
-					"\"Realm\"",
-					"-framework",
-					"\"RealmSwift\"",
-					"-framework",
-					"\"Result\"",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.TheScore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1043,7 +1003,7 @@
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1067,7 +1027,7 @@
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CelScore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1155,11 +1115,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */ = {
+		000EB6171CC6183B00704CF4 /* Build configuration list for PBXNativeTarget "TheScore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				00404AAA1BF093540009AD0E /* Debug */,
-				00404AAB1BF093540009AD0E /* Release */,
+				000EB6181CC6183B00704CF4 /* Debug */,
+				000EB6191CC6183B00704CF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
