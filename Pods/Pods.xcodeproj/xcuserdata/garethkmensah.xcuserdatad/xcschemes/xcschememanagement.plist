@@ -109,10 +109,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>R.swift.Library.xcscheme</key>
+		<key>R.swift.Library.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>RateLimit.xcscheme</key>
 		<dict>
