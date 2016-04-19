@@ -10,7 +10,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 1.39.12'
+    pod 'Material', '~> 1.39.13'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'WebASDKImageManager', '~> 1.0'
     pod 'SDWebImage', '~>3.7'
@@ -28,7 +28,7 @@ target 'CelScore' do
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
     pod 'OpinionzAlertView', '~> 0.3.1'
-    pod 'R.swift', '~> 2.0.0'
+    pod 'R.swift', '~> 2.1'
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3'
     pod 'UAObfuscatedString', '0.3.2'
