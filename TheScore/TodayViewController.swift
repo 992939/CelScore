@@ -16,7 +16,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let userDefaults: NSUserDefaults!
-    let defaultNumRows: Int = 10
     let maxNumberOfRows: Int = 10
     var items = [AnyObject]()
     var expanded: Bool {
@@ -73,12 +72,12 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.items.count > 0 { return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows) }
-        return 0
+        guard self.items.count > 0 else { return 0 }
+        return min(items.count, self.maxNumberOfRows)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CelebItem", forIndexPath: indexPath) as! TodayTableViewCell
+        let cell: TodayTableViewCell = tableView.dequeueReusableCellWithIdentifier("CelebItem", forIndexPath: indexPath) as! TodayTableViewCell
         let celebDictionary = items[indexPath.row]
         cell.nickNameLabel.text = celebDictionary["nickName"] as? String
         cell.celscoreLabel.text = String(celebDictionary["currentScore"]! as! Double)
