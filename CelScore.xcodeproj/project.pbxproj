@@ -22,6 +22,7 @@
 		000EB6241CC6248A00704CF4 /* TheScore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6231CC6248A00704CF4 /* TheScore.entitlements */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
+		00252D771CC6D545007CA826 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00252D761CC6D545007CA826 /* R.generated.swift */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -58,7 +59,6 @@
 		00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */; };
 		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
 		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
-		00CCFAFA1CC351C8002E7E7E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAF91CC351C8002E7E7E /* R.generated.swift */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -120,6 +120,7 @@
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
 		001DD791C72CB7A58C6FC7C4 /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00252D761CC6D545007CA826 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -161,7 +162,6 @@
 		00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
-		00CCFAF91CC351C8002E7E7E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
 		00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -322,8 +322,8 @@
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
-				00CCFAF91CC351C8002E7E7E /* R.generated.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
+				00252D761CC6D545007CA826 /* R.generated.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
 				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
 				0082B14E1C40F8A900E2A9BC /* Reachability.swift */,
@@ -807,7 +807,7 @@
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
 				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
 				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
-				00CCFAFA1CC351C8002E7E7E /* R.generated.swift in Sources */,
+				00252D771CC6D545007CA826 /* R.generated.swift in Sources */,
 				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
 				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
 				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
