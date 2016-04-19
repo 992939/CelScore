@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -19,31 +21,55 @@
                                 <rect key="frame" x="0.0" y="22" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VKX-LW-FKN" id="h7m-7G-iqu">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-qo-H5p">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-qo-H5p">
                                             <rect key="frame" x="56" y="14" width="140" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="key-P4-T6o">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="key-P4-T6o">
                                             <rect key="frame" x="210" y="14" width="45" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="45" id="NW1-Vk-vfG"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MdG-NN-iP2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MdG-NN-iP2">
                                             <rect key="frame" x="10" y="6" width="38" height="38"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="38" id="PkM-ln-879"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSU-Na-h7a">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSU-Na-h7a">
                                             <rect key="frame" x="280" y="14" width="75" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="75" id="W3N-N0-S4h"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="firstBaseline" secondItem="OSU-Na-h7a" secondAttribute="firstBaseline" id="4Ys-6Q-Rhv"/>
+                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="firstBaseline" secondItem="key-P4-T6o" secondAttribute="firstBaseline" id="8yj-td-fOo"/>
+                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="top" secondItem="h7m-7G-iqu" secondAttribute="topMargin" constant="6" id="B4d-SB-Unx"/>
+                                        <constraint firstItem="MdG-NN-iP2" firstAttribute="centerY" secondItem="ZkE-qo-H5p" secondAttribute="centerY" id="CDS-4O-wRj"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="leading" secondItem="ZkE-qo-H5p" secondAttribute="trailing" constant="14" id="Hex-cf-07T"/>
+                                        <constraint firstItem="MdG-NN-iP2" firstAttribute="centerY" secondItem="h7m-7G-iqu" secondAttribute="centerY" id="Hqe-hL-iYk"/>
+                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="leading" secondItem="MdG-NN-iP2" secondAttribute="trailing" constant="8" symbolic="YES" id="Luy-Lx-Qay"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="baseline" secondItem="OSU-Na-h7a" secondAttribute="baseline" id="MOb-Pd-VPd"/>
+                                        <constraint firstItem="MdG-NN-iP2" firstAttribute="leading" secondItem="h7m-7G-iqu" secondAttribute="leadingMargin" constant="2" id="cA6-o6-IsQ"/>
+                                        <constraint firstItem="MdG-NN-iP2" firstAttribute="top" secondItem="h7m-7G-iqu" secondAttribute="topMargin" constant="-2" id="cH8-T0-hor"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="OSU-Na-h7a" secondAttribute="trailing" constant="51" id="ev4-b5-5hh"/>
+                                        <constraint firstItem="OSU-Na-h7a" firstAttribute="leading" secondItem="key-P4-T6o" secondAttribute="trailing" constant="25" id="glD-Y9-nOH"/>
+                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="baseline" secondItem="key-P4-T6o" secondAttribute="baseline" id="zo2-rC-8JV"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="celscoreLabel" destination="key-P4-T6o" id="Caj-yd-M10"/>
