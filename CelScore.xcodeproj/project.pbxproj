@@ -1,3136 +1,1197 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>0002610A1CA3445F00296B87</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"$PODS_ROOT/R.swift/rswift" "$SRCROOT"</string>
-		</dict>
-		<key>000E0EE21CB1C21400F021AA</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.plug-in</string>
-			<key>path</key>
-			<string>TAOverlay.bundle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>000E0EE31CB1C21400F021AA</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TAOverlay.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>000E0EE41CB1C21400F021AA</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TAOverlay.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>000E0EE51CB1C21400F021AA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>000E0EE21CB1C21400F021AA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>000E0EE61CB1C21400F021AA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>000E0EE41CB1C21400F021AA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0016DD221C547AC400021202</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CosmosTouch.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0016DD231C547AC400021202</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0016DD221C547AC400021202</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>001703ED1C8FB4EC0070B811</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>UIView+DYARippleEffect.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>001703EE1C8FB4EC0070B811</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>UIView+DYARippleEffect.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>001703EF1C8FB4EC0070B811</key>
-		<dict>
-			<key>fileRef</key>
-			<string>001703EE1C8FB4EC0070B811</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>003387A11C631BC3008AB0D8</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuartzCore.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/QuartzCore.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>003387A21C631BC3008AB0D8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>003387A11C631BC3008AB0D8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0036DD561C01490C000F533F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RFEnums.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0036DD571C01490C000F533F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RFExtensions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0036DD581C01490C000F533F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0036DD561C01490C000F533F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0036DD591C01490C000F533F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0036DD571C01490C000F533F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0036DD5A1C03A2F2000F533F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Constants.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0036DD5B1C03A2F2000F533F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0036DD5A1C03A2F2000F533F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0036DD5C1C03FEBE000F533F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelebritySearch.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0036DD5D1C03FEBE000F533F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0036DD5C1C03FEBE000F533F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>003FF5C51BD7879D00F7454E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${PODS_ROOT}/Fabric/run" e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4 33cd1f8b9b661fc1d2413a92e0956503e0a5e4933cf9303f97f3ade74033b0f7</string>
-		</dict>
-		<key>00404A911BE7E9550009AD0E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>DetailViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404A921BE7E9550009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A911BE7E9550009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404A951BEE71300009AD0E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>SettingsModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404A961BEE71300009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A951BEE71300009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404A971BEEDB2A0009AD0E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>SettingsViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404A981BEEDB2A0009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A971BEEDB2A0009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404A991BF093530009AD0E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>00D01BC11BF4057B00EF8D0D</string>
-				<string>00D01BC31BF4058E00EF8D0D</string>
-				<string>00D01BC21BF4057F00EF8D0D</string>
-				<string>00404AA21BF093540009AD0E</string>
-				<string>00D01BB91BF322CD00EF8D0D</string>
-				<string>00D01BC01BF4048D00EF8D0D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>00404A9A1BF093530009AD0E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>00D0BBB71CC4D059006EE4F4</string>
-				<string>00D0BBB51CC4D051006EE4F4</string>
-				<string>00D0BBB31CC4D04A006EE4F4</string>
-				<string>00D0BBB11CC4D03C006EE4F4</string>
-				<string>00404A9F1BF093540009AD0E</string>
-				<string>3BDC01E04971C0E208F437BC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>00404A9B1BF093530009AD0E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>00404AA51BF093540009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>00404A9C1BF093530009AD0E</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>00404AAC1BF093540009AD0E</string>
-			<key>buildPhases</key>
-			<array>
-				<string>B4C051BFBD52CFD198AD15FA</string>
-				<string>00404A991BF093530009AD0E</string>
-				<string>00404A9A1BF093530009AD0E</string>
-				<string>00404A9B1BF093530009AD0E</string>
-				<string>0F72C7C056280641ED2A9A84</string>
-				<string>1AE37852E6B59F8DC06124A1</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>CelScoreWidget</string>
-			<key>productName</key>
-			<string>CelScoreWidget</string>
-			<key>productReference</key>
-			<string>00404A9D1BF093530009AD0E</string>
-			<key>productType</key>
-			<string>com.apple.product-type.app-extension</string>
-		</dict>
-		<key>00404A9D1BF093530009AD0E</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.app-extension</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>CelScoreWidget.appex</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>00404A9E1BF093540009AD0E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>NotificationCenter.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/NotificationCenter.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>00404A9F1BF093540009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A9E1BF093540009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404AA01BF093540009AD0E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00D01BC51BF4387C00EF8D0D</string>
-				<string>00404AA11BF093540009AD0E</string>
-				<string>00D01BB81BF322CD00EF8D0D</string>
-				<string>00404AA31BF093540009AD0E</string>
-				<string>00404AA61BF093540009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>CelScoreWidget</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404AA11BF093540009AD0E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TodayViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404AA21BF093540009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404AA11BF093540009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404AA31BF093540009AD0E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00404AA41BF093540009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>MainInterface.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404AA41BF093540009AD0E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/MainInterface.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404AA51BF093540009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404AA31BF093540009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00404AA61BF093540009AD0E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00404AA71BF093540009AD0E</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>004B56D11B35332A008A75EB</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>00404A9C1BF093530009AD0E</string>
-			<key>remoteInfo</key>
-			<string>CelScoreWidget</string>
-		</dict>
-		<key>00404AA81BF093540009AD0E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>00404A9C1BF093530009AD0E</string>
-			<key>targetProxy</key>
-			<string>00404AA71BF093540009AD0E</string>
-		</dict>
-		<key>00404AA91BF093540009AD0E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A9D1BF093530009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>RemoveHeadersOnCopy</string>
-				</array>
-			</dict>
-		</dict>
-		<key>00404AAA1BF093540009AD0E</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D2AA36FB443F4D9398946607</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>CelScoreWidget/CelScoreWidget.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>COCOAPODS=1</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScoreWidget/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>-ObjC</string>
-					<string>-framework</string>
-					<string>"AIRTimer"</string>
-					<string>-framework</string>
-					<string>"AsyncDisplayKit"</string>
-					<string>-framework</string>
-					<string>"ReactiveCocoa"</string>
-					<string>-framework</string>
-					<string>"Realm"</string>
-					<string>-framework</string>
-					<string>"RealmSwift"</string>
-					<string>-framework</string>
-					<string>"Result"</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GreyEcology.CelebrityScore.CelScoreWidget</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>00404AAB1BF093540009AD0E</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5F02F4106F691080197C9AF6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>CelScoreWidget/CelScoreWidget.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>COCOAPODS=1</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScoreWidget/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>-ObjC</string>
-					<string>-framework</string>
-					<string>"AIRTimer"</string>
-					<string>-framework</string>
-					<string>"AsyncDisplayKit"</string>
-					<string>-framework</string>
-					<string>"ReactiveCocoa"</string>
-					<string>-framework</string>
-					<string>"Realm"</string>
-					<string>-framework</string>
-					<string>"RealmSwift"</string>
-					<string>-framework</string>
-					<string>"Result"</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GreyEcology.CelebrityScore.CelScoreWidget</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>00404AAC1BF093540009AD0E</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>00404AAA1BF093540009AD0E</string>
-				<string>00404AAB1BF093540009AD0E</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>00404AAD1BF093540009AD0E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>dstPath</key>
-			<string></string>
-			<key>dstSubfolderSpec</key>
-			<string>13</string>
-			<key>files</key>
-			<array>
-				<string>00404AA91BF093540009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXCopyFilesBuildPhase</string>
-			<key>name</key>
-			<string>Embed App Extensions</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>00417A041CB5B65900E47078</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TransitionManager.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00417A051CB5B65900E47078</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00417A041CB5B65900E47078</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>004492161C3B26E000FBCEFE</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>000E0EE21CB1C21400F021AA</string>
-				<string>000E0EE31CB1C21400F021AA</string>
-				<string>000E0EE41CB1C21400F021AA</string>
-				<string>00FEF1741CACE5C6004141B3</string>
-				<string>00FEF1751CACE5C6004141B3</string>
-				<string>00FEF1761CACE5C6004141B3</string>
-				<string>00FEF1771CACE5C6004141B3</string>
-				<string>001703ED1C8FB4EC0070B811</string>
-				<string>001703EE1C8FB4EC0070B811</string>
-				<string>00F902191C8BC9A0009AD588</string>
-				<string>00F9021A1C8BC9A0009AD588</string>
-				<string>004492171C3B272200FBCEFE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004492171C3B272200FBCEFE</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56D01B35332A008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>004B56DB1B35332A008A75EB</string>
-				<string>004B56F11B35332B008A75EB</string>
-				<string>00404AA01BF093540009AD0E</string>
-				<string>004B56DA1B35332A008A75EB</string>
-				<string>272C664E3752319CD2080EBE</string>
-				<string>7A2EE76051E6C76C20A54D1C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56D11B35332A008A75EB</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0700</string>
-				<key>LastUpgradeCheck</key>
-				<string>0700</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Gareth.K.Mensah</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>00404A9C1BF093530009AD0E</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>7.0</string>
-						<key>DevelopmentTeam</key>
-						<string>6AEA7P6XSJ</string>
-						<key>SystemCapabilities</key>
-						<dict>
-							<key>com.apple.ApplicationGroups.iOS</key>
-							<dict>
-								<key>enabled</key>
-								<string>1</string>
-							</dict>
-						</dict>
-					</dict>
-					<key>004B56D81B35332A008A75EB</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.3.2</string>
-						<key>DevelopmentTeam</key>
-						<string>6AEA7P6XSJ</string>
-						<key>SystemCapabilities</key>
-						<dict>
-							<key>com.apple.ApplicationGroups.iOS</key>
-							<dict>
-								<key>enabled</key>
-								<string>1</string>
-							</dict>
-						</dict>
-					</dict>
-					<key>004B56ED1B35332B008A75EB</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.3.2</string>
-						<key>TestTargetID</key>
-						<string>004B56D81B35332A008A75EB</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>004B56D41B35332A008A75EB</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>004B56D01B35332A008A75EB</string>
-			<key>productRefGroup</key>
-			<string>004B56DA1B35332A008A75EB</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>004B56D81B35332A008A75EB</string>
-				<string>004B56ED1B35332B008A75EB</string>
-				<string>00404A9C1BF093530009AD0E</string>
-			</array>
-		</dict>
-		<key>004B56D41B35332A008A75EB</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>004B56F61B35332B008A75EB</string>
-				<string>004B56F71B35332B008A75EB</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>004B56D51B35332A008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>006431921C6A67430062BBDB</string>
-				<string>0067F49D1BCA37FD006994F5</string>
-				<string>00F6C9DB1B35393C0078CA6E</string>
-				<string>00404A961BEE71300009AD0E</string>
-				<string>00FEF1791CACE5C6004141B3</string>
-				<string>00C347B61C605CB800097089</string>
-				<string>00417A051CB5B65900E47078</string>
-				<string>00C347A11C6016A000097089</string>
-				<string>0016DD231C547AC400021202</string>
-				<string>00F6C9D81B35393C0078CA6E</string>
-				<string>00F6C9DA1B35393C0078CA6E</string>
-				<string>00C347A31C6016B000097089</string>
-				<string>00F6C9D71B35393C0078CA6E</string>
-				<string>008488361BCCA44000B11659</string>
-				<string>0036DD5D1C03FEBE000F533F</string>
-				<string>00F6C9DE1B3539480078CA6E</string>
-				<string>00FEF1781CACE5C6004141B3</string>
-				<string>000E0EE61CB1C21400F021AA</string>
-				<string>00C347B91C605CB800097089</string>
-				<string>0036DD581C01490C000F533F</string>
-				<string>001703EF1C8FB4EC0070B811</string>
-				<string>0036DD591C01490C000F533F</string>
-				<string>00C347B71C605CB800097089</string>
-				<string>006431901C6A66030062BBDB</string>
-				<string>0036DD5B1C03A2F2000F533F</string>
-				<string>00F6C9D91B35393C0078CA6E</string>
-				<string>0064318E1C6A65940062BBDB</string>
-				<string>00F9021B1C8BC9A0009AD588</string>
-				<string>0064318C1C6A64DB0062BBDB</string>
-				<string>00BF75281CA1F8D10061064C</string>
-				<string>0082B14F1C40F8A900E2A9BC</string>
-				<string>00C347B51C605CB800097089</string>
-				<string>00C347BB1C60902E00097089</string>
-				<string>004B56DF1B35332A008A75EB</string>
-				<string>00C347B81C605CB800097089</string>
-				<string>00C347C01C61A1BC00097089</string>
-				<string>00F6C9DF1B3539480078CA6E</string>
-				<string>006431821C694BA40062BBDB</string>
-				<string>00CCFAFA1CC351C8002E7E7E</string>
-				<string>0064318A1C6A64480062BBDB</string>
-				<string>00404A921BE7E9550009AD0E</string>
-				<string>00B4042A1B4A465200B7627E</string>
-				<string>00404A981BEEDB2A0009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56D61B35332A008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>003387A21C631BC3008AB0D8</string>
-				<string>00F6C9E21B353A670078CA6E</string>
-				<string>57090DAA784577AFC23869FC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56D71B35332A008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>000E0EE51CB1C21400F021AA</string>
-				<string>004B56E91B35332A008A75EB</string>
-				<string>004B56E61B35332A008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56D81B35332A008A75EB</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>004B56F81B35332B008A75EB</string>
-			<key>buildPhases</key>
-			<array>
-				<string>109721B5D1BA539BBEF4BD57</string>
-				<string>004B56D51B35332A008A75EB</string>
-				<string>004B56D61B35332A008A75EB</string>
-				<string>004B56D71B35332A008A75EB</string>
-				<string>003FF5C51BD7879D00F7454E</string>
-				<string>00404AAD1BF093540009AD0E</string>
-				<string>0002610A1CA3445F00296B87</string>
-				<string>CA9CDCBCE390009DA9F45DE5</string>
-				<string>362E4F07C963BB64B977BAA9</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>00404AA81BF093540009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>CelScore</string>
-			<key>productName</key>
-			<string>CelScore</string>
-			<key>productReference</key>
-			<string>004B56D91B35332A008A75EB</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>004B56D91B35332A008A75EB</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>CelebrityScore.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>004B56DA1B35332A008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>004B56D91B35332A008A75EB</string>
-				<string>004B56EE1B35332B008A75EB</string>
-				<string>00404A9D1BF093530009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56DB1B35332A008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00D01BC61BF43AC400EF8D0D</string>
-				<string>004B57011B3533E8008A75EB</string>
-				<string>004B57001B3533DF008A75EB</string>
-				<string>004B56FF1B3533D8008A75EB</string>
-				<string>004B56FE1B3533CE008A75EB</string>
-				<string>004492161C3B26E000FBCEFE</string>
-				<string>004B56DE1B35332A008A75EB</string>
-				<string>004B56E51B35332A008A75EB</string>
-				<string>004B56E71B35332A008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>CelScore</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56DE1B35332A008A75EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>AppDelegate.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56DF1B35332A008A75EB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>004B56DE1B35332A008A75EB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>004B56E51B35332A008A75EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56E61B35332A008A75EB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>004B56E51B35332A008A75EB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>004B56E71B35332A008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>004B56E81B35332A008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56E81B35332A008A75EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56E91B35332A008A75EB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>004B56E71B35332A008A75EB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>004B56EA1B35332B008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>00CCFAE51CBF627A002E7E7E</string>
-				<string>00F764821CBE15610012A581</string>
-				<string>00CCFAE91CBF710F002E7E7E</string>
-				<string>00CCFAEB1CBF79E8002E7E7E</string>
-				<string>00CCFAE31CBF272E002E7E7E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56EB1B35332B008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>931C8DB9635DA6722917B7E9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56EC1B35332B008A75EB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>004B56ED1B35332B008A75EB</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>004B56FB1B35332B008A75EB</string>
-			<key>buildPhases</key>
-			<array>
-				<string>C46028EE6DA47F06B4AF4F24</string>
-				<string>004B56EA1B35332B008A75EB</string>
-				<string>004B56EB1B35332B008A75EB</string>
-				<string>004B56EC1B35332B008A75EB</string>
-				<string>54A5C0195763B5A54AA7B9A5</string>
-				<string>67B1B8BEAACB6204036E8452</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>004B56F01B35332B008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>CelScoreTests</string>
-			<key>productName</key>
-			<string>CelScoreTests</string>
-			<key>productReference</key>
-			<string>004B56EE1B35332B008A75EB</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>004B56EE1B35332B008A75EB</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>CelScoreTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>004B56EF1B35332B008A75EB</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>004B56D11B35332A008A75EB</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>004B56D81B35332A008A75EB</string>
-			<key>remoteInfo</key>
-			<string>CelScore</string>
-		</dict>
-		<key>004B56F01B35332B008A75EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>004B56D81B35332A008A75EB</string>
-			<key>targetProxy</key>
-			<string>004B56EF1B35332B008A75EB</string>
-		</dict>
-		<key>004B56F11B35332B008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00CCFAEA1CBF79E8002E7E7E</string>
-				<string>00CCFAE81CBF710F002E7E7E</string>
-				<string>00CCFAE41CBF627A002E7E7E</string>
-				<string>00CCFAE21CBF272E002E7E7E</string>
-				<string>00F764811CBE15610012A581</string>
-				<string>004B56F21B35332B008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>CelScoreTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56F21B35332B008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>004B56F31B35332B008A75EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56F31B35332B008A75EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56F61B35332B008A75EB</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Owholemodule</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>004B56F71B35332B008A75EB</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Owholemodule</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>004B56F81B35332B008A75EB</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>004B56F91B35332B008A75EB</string>
-				<string>004B56FA1B35332B008A75EB</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>004B56F91B35332B008A75EB</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D7EAA51DF5D129F20086E5BA</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>CelScore/CelebrityScore.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>EMBEDDED_CONTENT_CONTAINS_SWIFT</key>
-				<string>$(inherited)</string>
-				<key>ENABLE_BITCODE</key>
-				<string>NO</string>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScore/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>OTHER_SWIFT_FLAGS</key>
-				<string>$(inherited) "-D" "COCOAPODS"</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<key>PRODUCT_NAME</key>
-				<string>CelebrityScore</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
-				<string>CelScore/Header.h</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>004B56FA1B35332B008A75EB</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>618BE4F6F1EB0778069D2279</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>CelScore/CelebrityScore.entitlements</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>EMBEDDED_CONTENT_CONTAINS_SWIFT</key>
-				<string>$(inherited)</string>
-				<key>ENABLE_BITCODE</key>
-				<string>NO</string>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScore/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>OTHER_SWIFT_FLAGS</key>
-				<string>$(inherited) "-D" "COCOAPODS"</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<key>PRODUCT_NAME</key>
-				<string>CelebrityScore</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
-				<string>CelScore/Header.h</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>004B56FB1B35332B008A75EB</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>004B56FC1B35332B008A75EB</string>
-				<string>004B56FD1B35332B008A75EB</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>004B56FC1B35332B008A75EB</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>C558230C572995FE0379212B</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScoreTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>-ObjC</string>
-					<string>-framework</string>
-					<string>"AIRTimer"</string>
-					<string>-framework</string>
-					<string>"ReactiveCocoa"</string>
-					<string>-framework</string>
-					<string>"Realm"</string>
-					<string>-framework</string>
-					<string>"RealmSwift"</string>
-					<string>-framework</string>
-					<string>"Result"</string>
-					<string>-framework</string>
-					<string>"SwiftyJSON"</string>
-					<string>-framework</string>
-					<string>"XCTest"</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>004B56FD1B35332B008A75EB</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>EE919CF7642F150835582D97</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>CelScoreTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>-ObjC</string>
-					<string>-framework</string>
-					<string>"AIRTimer"</string>
-					<string>-framework</string>
-					<string>"ReactiveCocoa"</string>
-					<string>-framework</string>
-					<string>"Realm"</string>
-					<string>-framework</string>
-					<string>"RealmSwift"</string>
-					<string>-framework</string>
-					<string>"Result"</string>
-					<string>-framework</string>
-					<string>"SwiftyJSON"</string>
-					<string>-framework</string>
-					<string>"XCTest"</string>
-				</array>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>004B56FE1B3533CE008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>006431861C6A63A10062BBDB</string>
-				<string>00C347BC1C6097AA00097089</string>
-				<string>0036DD5A1C03A2F2000F533F</string>
-				<string>0036DD561C01490C000F533F</string>
-				<string>00CCFAF91CC351C8002E7E7E</string>
-				<string>0036DD571C01490C000F533F</string>
-				<string>00C347BF1C61A1BC00097089</string>
-				<string>0036DD5C1C03FEBE000F533F</string>
-				<string>0082B14E1C40F8A900E2A9BC</string>
-				<string>00BF75271CA1F8D10061064C</string>
-				<string>00417A041CB5B65900E47078</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Utils</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B56FF1B3533D8008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00B404291B4A465200B7627E</string>
-				<string>0067F49C1BCA37FD006994F5</string>
-				<string>008488351BCCA44000B11659</string>
-				<string>00404A951BEE71300009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Models</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B57001B3533DF008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00F6C9D21B35393C0078CA6E</string>
-				<string>00F6C9D31B35393C0078CA6E</string>
-				<string>00F6C9D41B35393C0078CA6E</string>
-				<string>00F6C9D51B35393C0078CA6E</string>
-				<string>00F6C9D61B35393C0078CA6E</string>
-				<string>00404A971BEEDB2A0009AD0E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ViewModels</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>004B57011B3533E8008A75EB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>006431831C694D320062BBDB</string>
-				<string>00F6C9DC1B3539480078CA6E</string>
-				<string>00F6C9DD1B3539480078CA6E</string>
-				<string>00404A911BE7E9550009AD0E</string>
-				<string>00C347BA1C60902E00097089</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Views</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431811C694BA40062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelScoreViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431821C694BA40062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>006431811C694BA40062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>006431831C694D320062BBDB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C347A01C6016A000097089</string>
-				<string>00C347A21C6016B000097089</string>
-				<string>006431811C694BA40062BBDB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>DetailSubViewsControllers</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431861C6A63A10062BBDB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0064318F1C6A66030062BBDB</string>
-				<string>006431891C6A64480062BBDB</string>
-				<string>0064318B1C6A64DB0062BBDB</string>
-				<string>0016DD221C547AC400021202</string>
-				<string>0064318D1C6A65940062BBDB</string>
-				<string>006431911C6A67430062BBDB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>CosmosStars</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431891C6A64480062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CosmosLayers.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0064318A1C6A64480062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>006431891C6A64480062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0064318B1C6A64DB0062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CosmosRating.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0064318C1C6A64DB0062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0064318B1C6A64DB0062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0064318D1C6A65940062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CosmosSettings.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0064318E1C6A65940062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0064318D1C6A65940062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0064318F1C6A66030062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CosmosView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431901C6A66030062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0064318F1C6A66030062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>006431911C6A67430062BBDB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>StarLayer.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>006431921C6A67430062BBDB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>006431911C6A67430062BBDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0067F49C1BCA37FD006994F5</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelebrityModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0067F49D1BCA37FD006994F5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0067F49C1BCA37FD006994F5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0082B14E1C40F8A900E2A9BC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Reachability.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0082B14F1C40F8A900E2A9BC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0082B14E1C40F8A900E2A9BC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>008488351BCCA44000B11659</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ListsModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>008488361BCCA44000B11659</key>
-		<dict>
-			<key>fileRef</key>
-			<string>008488351BCCA44000B11659</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00B404291B4A465200B7627E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RatingsModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00B4042A1B4A465200B7627E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00B404291B4A465200B7627E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00BF75271CA1F8D10061064C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Protocols.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00BF75281CA1F8D10061064C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00BF75271CA1F8D10061064C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347A01C6016A000097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>InfoViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347A11C6016A000097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347A01C6016A000097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347A21C6016B000097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RatingsViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347A31C6016B000097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347A21C6016B000097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347B01C605CB800097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>SMAlphaImageSegment.swift</string>
-			<key>path</key>
-			<string>SMSSegment/SMAlphaImageSegment.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347B11C605CB800097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>SMBasicSegment.swift</string>
-			<key>path</key>
-			<string>SMSSegment/SMBasicSegment.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347B21C605CB800097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>SMBasicSegmentView.swift</string>
-			<key>path</key>
-			<string>SMSSegment/SMBasicSegmentView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347B31C605CB800097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>SMSegment.swift</string>
-			<key>path</key>
-			<string>SMSSegment/SMSegment.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347B41C605CB800097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>SMSegmentView.swift</string>
-			<key>path</key>
-			<string>SMSSegment/SMSegmentView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347B51C605CB800097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347B01C605CB800097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347B61C605CB800097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347B11C605CB800097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347B71C605CB800097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347B21C605CB800097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347B81C605CB800097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347B31C605CB800097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347B91C605CB800097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347B41C605CB800097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347BA1C60902E00097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>SettingsViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347BB1C60902E00097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347BA1C60902E00097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00C347BC1C6097AA00097089</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00C347B01C605CB800097089</string>
-				<string>00C347B11C605CB800097089</string>
-				<string>00C347B21C605CB800097089</string>
-				<string>00C347B31C605CB800097089</string>
-				<string>00C347B41C605CB800097089</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>SMSegment</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347BF1C61A1BC00097089</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>UIView+Geometry.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00C347C01C61A1BC00097089</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00C347BF1C61A1BC00097089</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00CCFAE21CBF272E002E7E7E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>SettingsViewModelTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00CCFAE31CBF272E002E7E7E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00CCFAE21CBF272E002E7E7E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00CCFAE41CBF627A002E7E7E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RatingsViewModelTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00CCFAE51CBF627A002E7E7E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00CCFAE41CBF627A002E7E7E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00CCFAE81CBF710F002E7E7E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelebrityViewModelTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00CCFAE91CBF710F002E7E7E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00CCFAE81CBF710F002E7E7E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00CCFAEA1CBF79E8002E7E7E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ListViewModelTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00CCFAEB1CBF79E8002E7E7E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00CCFAEA1CBF79E8002E7E7E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00CCFAF91CC351C8002E7E7E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>R.generated.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00CCFAFA1CC351C8002E7E7E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00CCFAF91CC351C8002E7E7E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BB81BF322CD00EF8D0D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TodayTableViewCell.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D01BB91BF322CD00EF8D0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00D01BB81BF322CD00EF8D0D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BC01BF4048D00EF8D0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A971BEEDB2A0009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BC11BF4057B00EF8D0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00404A951BEE71300009AD0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BC21BF4057F00EF8D0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00B404291B4A465200B7627E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BC31BF4058E00EF8D0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0067F49C1BCA37FD006994F5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D01BC51BF4387C00EF8D0D</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xml</string>
-			<key>path</key>
-			<string>CelScoreWidget.entitlements</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D01BC61BF43AC400EF8D0D</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xml</string>
-			<key>path</key>
-			<string>CelebrityScore.entitlements</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D0BBB01CC4D03C006EE4F4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>RealmSwift.framework</string>
-			<key>path</key>
-			<string>../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/RealmSwift.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D0BBB11CC4D03C006EE4F4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00D0BBB01CC4D03C006EE4F4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D0BBB21CC4D04A006EE4F4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AIRTimer.framework</string>
-			<key>path</key>
-			<string>../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D0BBB31CC4D04A006EE4F4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00D0BBB21CC4D04A006EE4F4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D0BBB41CC4D051006EE4F4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>ReactiveCocoa.framework</string>
-			<key>path</key>
-			<string>../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/ReactiveCocoa.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D0BBB51CC4D051006EE4F4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00D0BBB41CC4D051006EE4F4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00D0BBB61CC4D059006EE4F4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>SwiftyJSON.framework</string>
-			<key>path</key>
-			<string>../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00D0BBB71CC4D059006EE4F4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00D0BBB61CC4D059006EE4F4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9D21B35393C0078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ListViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9D31B35393C0078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelebrityViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9D41B35393C0078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelScoreViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9D51B35393C0078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RatingsViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9D61B35393C0078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>UserViewModel.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9D71B35393C0078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9D21B35393C0078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9D81B35393C0078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9D31B35393C0078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9D91B35393C0078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9D41B35393C0078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9DA1B35393C0078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9D51B35393C0078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9DB1B35393C0078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9D61B35393C0078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9DC1B3539480078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>CelebrityTableViewCell.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9DD1B3539480078CA6E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>MasterViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F6C9DE1B3539480078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9DC1B3539480078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9DF1B3539480078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9DD1B3539480078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F6C9E11B353A670078CA6E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>compiled.mach-o.dylib</string>
-			<key>name</key>
-			<string>libsqlite3.dylib</string>
-			<key>path</key>
-			<string>usr/lib/libsqlite3.dylib</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>00F6C9E21B353A670078CA6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F6C9E11B353A670078CA6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F764811CBE15610012A581</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ModelTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F764821CBE15610012A581</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F764811CBE15610012A581</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00F902191C8BC9A0009AD588</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LMGaugeView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F9021A1C8BC9A0009AD588</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LMGaugeView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00F9021B1C8BC9A0009AD588</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00F9021A1C8BC9A0009AD588</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00FEF1741CACE5C6004141B3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>BECelScoreAPIClient.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00FEF1751CACE5C6004141B3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>BECelScoreAPIClient.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00FEF1761CACE5C6004141B3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>BEEmpty.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00FEF1771CACE5C6004141B3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>BEEmpty.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>00FEF1781CACE5C6004141B3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00FEF1751CACE5C6004141B3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>00FEF1791CACE5C6004141B3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>00FEF1771CACE5C6004141B3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0F72C7C056280641ED2A9A84</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>109721B5D1BA539BBEF4BD57</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>1AE37852E6B59F8DC06124A1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>272C664E3752319CD2080EBE</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00D0BBB61CC4D059006EE4F4</string>
-				<string>00D0BBB41CC4D051006EE4F4</string>
-				<string>00D0BBB21CC4D04A006EE4F4</string>
-				<string>00D0BBB01CC4D03C006EE4F4</string>
-				<string>003387A11C631BC3008AB0D8</string>
-				<string>00F6C9E11B353A670078CA6E</string>
-				<string>8C85D2008FC2F053995BEFFD</string>
-				<string>00404A9E1BF093540009AD0E</string>
-				<string>EC4FA10141FC799EFB77A482</string>
-				<string>98AD71EF5FDD40AE29412568</string>
-				<string>42B4EA4E699E7E7A7AFE106E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>362E4F07C963BB64B977BAA9</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>3BDC01E04971C0E208F437BC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>42B4EA4E699E7E7A7AFE106E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>42B4EA4E699E7E7A7AFE106E</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_CelScoreWidget.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>54A5C0195763B5A54AA7B9A5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>57090DAA784577AFC23869FC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC4FA10141FC799EFB77A482</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5F02F4106F691080197C9AF6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScoreWidget.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>618BE4F6F1EB0778069D2279</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScore.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>67B1B8BEAACB6204036E8452</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>7A2EE76051E6C76C20A54D1C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>D7EAA51DF5D129F20086E5BA</string>
-				<string>618BE4F6F1EB0778069D2279</string>
-				<string>C558230C572995FE0379212B</string>
-				<string>EE919CF7642F150835582D97</string>
-				<string>D2AA36FB443F4D9398946607</string>
-				<string>5F02F4106F691080197C9AF6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8C85D2008FC2F053995BEFFD</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>931C8DB9635DA6722917B7E9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>98AD71EF5FDD40AE29412568</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>98AD71EF5FDD40AE29412568</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_CelScoreTests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>B4C051BFBD52CFD198AD15FA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>C46028EE6DA47F06B4AF4F24</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>C558230C572995FE0379212B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScoreTests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA9CDCBCE390009DA9F45DE5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>D2AA36FB443F4D9398946607</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScoreWidget.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D7EAA51DF5D129F20086E5BA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScore.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC4FA10141FC799EFB77A482</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_CelScore.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EE919CF7642F150835582D97</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-CelScoreTests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>004B56D11B35332A008A75EB</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
+		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
+		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
+		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
+		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
+		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
+		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
+		0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5A1C03A2F2000F533F /* Constants.swift */; };
+		0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */; };
+		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; };
+		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
+		00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
+		00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
+		00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404AA11BF093540009AD0E /* TodayViewController.swift */; };
+		00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00404AA31BF093540009AD0E /* MainInterface.storyboard */; };
+		00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		00417A051CB5B65900E47078 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00417A041CB5B65900E47078 /* TransitionManager.swift */; };
+		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
+		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
+		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
+		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
+		0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431891C6A64480062BBDB /* CosmosLayers.swift */; };
+		0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318B1C6A64DB0062BBDB /* CosmosRating.swift */; };
+		0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318D1C6A65940062BBDB /* CosmosSettings.swift */; };
+		006431901C6A66030062BBDB /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318F1C6A66030062BBDB /* CosmosView.swift */; };
+		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
+		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14E1C40F8A900E2A9BC /* Reachability.swift */; };
+		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
+		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
+		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
+		00C347A11C6016A000097089 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A01C6016A000097089 /* InfoViewController.swift */; };
+		00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A21C6016B000097089 /* RatingsViewController.swift */; };
+		00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */; };
+		00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B11C605CB800097089 /* SMBasicSegment.swift */; };
+		00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B21C605CB800097089 /* SMBasicSegmentView.swift */; };
+		00C347B81C605CB800097089 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B31C605CB800097089 /* SMSegment.swift */; };
+		00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347B41C605CB800097089 /* SMSegmentView.swift */; };
+		00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347BA1C60902E00097089 /* SettingsViewController.swift */; };
+		00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */; };
+		00CCFAE31CBF272E002E7E7E /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE21CBF272E002E7E7E /* SettingsViewModelTests.swift */; };
+		00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */; };
+		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
+		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
+		00CCFAFA1CC351C8002E7E7E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAF91CC351C8002E7E7E /* R.generated.swift */; };
+		00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
+		00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
+		00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
+		00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
+		00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		00D0BBB11CC4D03C006EE4F4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */; };
+		00D0BBB31CC4D04A006EE4F4 /* AIRTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */; };
+		00D0BBB51CC4D051006EE4F4 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */; };
+		00D0BBB71CC4D059006EE4F4 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */; };
+		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
+		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
+		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
+		00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D51B35393C0078CA6E /* RatingsViewModel.swift */; };
+		00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D61B35393C0078CA6E /* UserViewModel.swift */; };
+		00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */; };
+		00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DD1B3539480078CA6E /* MasterViewController.swift */; };
+		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
+		00F764821CBE15610012A581 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F764811CBE15610012A581 /* ModelTests.swift */; };
+		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
+		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
+		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
+		3BDC01E04971C0E208F437BC /* Pods_CelScoreWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */; };
+		57090DAA784577AFC23869FC /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */; };
+		931C8DB9635DA6722917B7E9 /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AD71EF5FDD40AE29412568 /* Pods_CelScoreTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00404AA71BF093540009AD0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00404A9C1BF093530009AD0E;
+			remoteInfo = CelScoreWidget;
+		};
+		004B56EF1B35332B008A75EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 004B56D81B35332A008A75EB;
+			remoteInfo = CelScore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		00404AAD1BF093540009AD0E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				00404AA91BF093540009AD0E /* CelScoreWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
+		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
+		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
+		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
+		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
+		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
+		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
+		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
+		0036DD5A1C03A2F2000F533F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearch.swift; sourceTree = "<group>"; };
+		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		00404A9D1BF093530009AD0E /* CelScoreWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CelScoreWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		00404A9E1BF093540009AD0E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		00404AA11BF093540009AD0E /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		00404AA41BF093540009AD0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		00404AA61BF093540009AD0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00417A041CB5B65900E47078 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		004492171C3B272200FBCEFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		004B56D91B35332A008A75EB /* CelebrityScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelebrityScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		004B56DE1B35332A008A75EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		004B56E51B35332A008A75EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
+		006431891C6A64480062BBDB /* CosmosLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosLayers.swift; sourceTree = "<group>"; };
+		0064318B1C6A64DB0062BBDB /* CosmosRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosRating.swift; sourceTree = "<group>"; };
+		0064318D1C6A65940062BBDB /* CosmosSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosSettings.swift; sourceTree = "<group>"; };
+		0064318F1C6A66030062BBDB /* CosmosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
+		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
+		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
+		0082B14E1C40F8A900E2A9BC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
+		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
+		00BF75271CA1F8D10061064C /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		00C347A01C6016A000097089 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		00C347A21C6016B000097089 /* RatingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
+		00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMAlphaImageSegment.swift; path = SMSSegment/SMAlphaImageSegment.swift; sourceTree = "<group>"; };
+		00C347B11C605CB800097089 /* SMBasicSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMBasicSegment.swift; path = SMSSegment/SMBasicSegment.swift; sourceTree = "<group>"; };
+		00C347B21C605CB800097089 /* SMBasicSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMBasicSegmentView.swift; path = SMSSegment/SMBasicSegmentView.swift; sourceTree = "<group>"; };
+		00C347B31C605CB800097089 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSSegment/SMSegment.swift; sourceTree = "<group>"; };
+		00C347B41C605CB800097089 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSSegment/SMSegmentView.swift; sourceTree = "<group>"; };
+		00C347BA1C60902E00097089 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Geometry.swift"; sourceTree = "<group>"; };
+		00CCFAE21CBF272E002E7E7E /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewModelTests.swift; sourceTree = "<group>"; };
+		00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModelTests.swift; sourceTree = "<group>"; };
+		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
+		00CCFAF91CC351C8002E7E7E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
+		00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelScoreWidget.entitlements; sourceTree = "<group>"; };
+		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
+		00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/RealmSwift.framework"; sourceTree = "<group>"; };
+		00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AIRTimer.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework"; sourceTree = "<group>"; };
+		00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/ReactiveCocoa.framework"; sourceTree = "<group>"; };
+		00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
+		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
+		00F6C9D51B35393C0078CA6E /* RatingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewModel.swift; sourceTree = "<group>"; };
+		00F6C9D61B35393C0078CA6E /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityTableViewCell.swift; sourceTree = "<group>"; };
+		00F6C9DD1B3539480078CA6E /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		00F6C9E11B353A670078CA6E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		00F764811CBE15610012A581 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		00F902191C8BC9A0009AD588 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
+		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
+		00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BECelScoreAPIClient.h; sourceTree = "<group>"; };
+		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
+		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
+		00FEF1771CACE5C6004141B3 /* BEEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEEmpty.m; sourceTree = "<group>"; };
+		42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.release.xcconfig"; sourceTree = "<group>"; };
+		618BE4F6F1EB0778069D2279 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
+		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98AD71EF5FDD40AE29412568 /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C558230C572995FE0379212B /* Pods-CelScoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2AA36FB443F4D9398946607 /* Pods-CelScoreWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget.debug.xcconfig"; sourceTree = "<group>"; };
+		D7EAA51DF5D129F20086E5BA /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
+		EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE919CF7642F150835582D97 /* Pods-CelScoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00404A9A1BF093530009AD0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D0BBB71CC4D059006EE4F4 /* SwiftyJSON.framework in Frameworks */,
+				00D0BBB51CC4D051006EE4F4 /* ReactiveCocoa.framework in Frameworks */,
+				00D0BBB31CC4D04A006EE4F4 /* AIRTimer.framework in Frameworks */,
+				00D0BBB11CC4D03C006EE4F4 /* RealmSwift.framework in Frameworks */,
+				00404A9F1BF093540009AD0E /* NotificationCenter.framework in Frameworks */,
+				3BDC01E04971C0E208F437BC /* Pods_CelScoreWidget.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56D61B35332A008A75EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */,
+				00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */,
+				57090DAA784577AFC23869FC /* Pods_CelScore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EB1B35332B008A75EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				931C8DB9635DA6722917B7E9 /* Pods_CelScoreTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00404AA01BF093540009AD0E /* CelScoreWidget */ = {
+			isa = PBXGroup;
+			children = (
+				00D01BC51BF4387C00EF8D0D /* CelScoreWidget.entitlements */,
+				00404AA11BF093540009AD0E /* TodayViewController.swift */,
+				00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */,
+				00404AA31BF093540009AD0E /* MainInterface.storyboard */,
+				00404AA61BF093540009AD0E /* Info.plist */,
+			);
+			path = CelScoreWidget;
+			sourceTree = "<group>";
+		};
+		004492161C3B26E000FBCEFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
+				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
+				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
+				00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */,
+				00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */,
+				00FEF1761CACE5C6004141B3 /* BEEmpty.h */,
+				00FEF1771CACE5C6004141B3 /* BEEmpty.m */,
+				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
+				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
+				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
+				00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */,
+				004492171C3B272200FBCEFE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		004B56D01B35332A008A75EB = {
+			isa = PBXGroup;
+			children = (
+				004B56DB1B35332A008A75EB /* CelScore */,
+				004B56F11B35332B008A75EB /* CelScoreTests */,
+				00404AA01BF093540009AD0E /* CelScoreWidget */,
+				004B56DA1B35332A008A75EB /* Products */,
+				272C664E3752319CD2080EBE /* Frameworks */,
+				7A2EE76051E6C76C20A54D1C /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		004B56DA1B35332A008A75EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				004B56D91B35332A008A75EB /* CelebrityScore.app */,
+				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
+				00404A9D1BF093530009AD0E /* CelScoreWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		004B56DB1B35332A008A75EB /* CelScore */ = {
+			isa = PBXGroup;
+			children = (
+				00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */,
+				004B57011B3533E8008A75EB /* Views */,
+				004B57001B3533DF008A75EB /* ViewModels */,
+				004B56FF1B3533D8008A75EB /* Models */,
+				004B56FE1B3533CE008A75EB /* Utils */,
+				004492161C3B26E000FBCEFE /* Supporting Files */,
+				004B56DE1B35332A008A75EB /* AppDelegate.swift */,
+				004B56E51B35332A008A75EB /* Images.xcassets */,
+				004B56E71B35332A008A75EB /* LaunchScreen.xib */,
+			);
+			path = CelScore;
+			sourceTree = "<group>";
+		};
+		004B56F11B35332B008A75EB /* CelScoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */,
+				00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */,
+				00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */,
+				00CCFAE21CBF272E002E7E7E /* SettingsViewModelTests.swift */,
+				00F764811CBE15610012A581 /* ModelTests.swift */,
+				004B56F21B35332B008A75EB /* Supporting Files */,
+			);
+			path = CelScoreTests;
+			sourceTree = "<group>";
+		};
+		004B56F21B35332B008A75EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				004B56F31B35332B008A75EB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		004B56FE1B3533CE008A75EB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				006431861C6A63A10062BBDB /* CosmosStars */,
+				00C347BC1C6097AA00097089 /* SMSegment */,
+				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				0036DD561C01490C000F533F /* RFEnums.swift */,
+				00CCFAF91CC351C8002E7E7E /* R.generated.swift */,
+				0036DD571C01490C000F533F /* RFExtensions.swift */,
+				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
+				0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */,
+				0082B14E1C40F8A900E2A9BC /* Reachability.swift */,
+				00BF75271CA1F8D10061064C /* Protocols.swift */,
+				00417A041CB5B65900E47078 /* TransitionManager.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		004B56FF1B3533D8008A75EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				00B404291B4A465200B7627E /* RatingsModel.swift */,
+				0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */,
+				008488351BCCA44000B11659 /* ListsModel.swift */,
+				00404A951BEE71300009AD0E /* SettingsModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		004B57001B3533DF008A75EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				00F6C9D21B35393C0078CA6E /* ListViewModel.swift */,
+				00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */,
+				00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */,
+				00F6C9D51B35393C0078CA6E /* RatingsViewModel.swift */,
+				00F6C9D61B35393C0078CA6E /* UserViewModel.swift */,
+				00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		004B57011B3533E8008A75EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				006431831C694D320062BBDB /* DetailSubViewsControllers */,
+				00F6C9DC1B3539480078CA6E /* CelebrityTableViewCell.swift */,
+				00F6C9DD1B3539480078CA6E /* MasterViewController.swift */,
+				00404A911BE7E9550009AD0E /* DetailViewController.swift */,
+				00C347BA1C60902E00097089 /* SettingsViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		006431831C694D320062BBDB /* DetailSubViewsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				00C347A01C6016A000097089 /* InfoViewController.swift */,
+				00C347A21C6016B000097089 /* RatingsViewController.swift */,
+				006431811C694BA40062BBDB /* CelScoreViewController.swift */,
+			);
+			name = DetailSubViewsControllers;
+			sourceTree = "<group>";
+		};
+		006431861C6A63A10062BBDB /* CosmosStars */ = {
+			isa = PBXGroup;
+			children = (
+				0064318F1C6A66030062BBDB /* CosmosView.swift */,
+				006431891C6A64480062BBDB /* CosmosLayers.swift */,
+				0064318B1C6A64DB0062BBDB /* CosmosRating.swift */,
+				0016DD221C547AC400021202 /* CosmosTouch.swift */,
+				0064318D1C6A65940062BBDB /* CosmosSettings.swift */,
+				006431911C6A67430062BBDB /* StarLayer.swift */,
+			);
+			name = CosmosStars;
+			sourceTree = "<group>";
+		};
+		00C347BC1C6097AA00097089 /* SMSegment */ = {
+			isa = PBXGroup;
+			children = (
+				00C347B01C605CB800097089 /* SMAlphaImageSegment.swift */,
+				00C347B11C605CB800097089 /* SMBasicSegment.swift */,
+				00C347B21C605CB800097089 /* SMBasicSegmentView.swift */,
+				00C347B31C605CB800097089 /* SMSegment.swift */,
+				00C347B41C605CB800097089 /* SMSegmentView.swift */,
+			);
+			name = SMSegment;
+			sourceTree = "<group>";
+		};
+		272C664E3752319CD2080EBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */,
+				00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */,
+				00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */,
+				00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */,
+				003387A11C631BC3008AB0D8 /* QuartzCore.framework */,
+				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
+				8C85D2008FC2F053995BEFFD /* Pods.framework */,
+				00404A9E1BF093540009AD0E /* NotificationCenter.framework */,
+				EC4FA10141FC799EFB77A482 /* Pods_CelScore.framework */,
+				98AD71EF5FDD40AE29412568 /* Pods_CelScoreTests.framework */,
+				42B4EA4E699E7E7A7AFE106E /* Pods_CelScoreWidget.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7A2EE76051E6C76C20A54D1C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7EAA51DF5D129F20086E5BA /* Pods-CelScore.debug.xcconfig */,
+				618BE4F6F1EB0778069D2279 /* Pods-CelScore.release.xcconfig */,
+				C558230C572995FE0379212B /* Pods-CelScoreTests.debug.xcconfig */,
+				EE919CF7642F150835582D97 /* Pods-CelScoreTests.release.xcconfig */,
+				D2AA36FB443F4D9398946607 /* Pods-CelScoreWidget.debug.xcconfig */,
+				5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00404A9C1BF093530009AD0E /* CelScoreWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */;
+			buildPhases = (
+				B4C051BFBD52CFD198AD15FA /* Check Pods Manifest.lock */,
+				00404A991BF093530009AD0E /* Sources */,
+				00404A9A1BF093530009AD0E /* Frameworks */,
+				00404A9B1BF093530009AD0E /* Resources */,
+				0F72C7C056280641ED2A9A84 /* Embed Pods Frameworks */,
+				1AE37852E6B59F8DC06124A1 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CelScoreWidget;
+			productName = CelScoreWidget;
+			productReference = 00404A9D1BF093530009AD0E /* CelScoreWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		004B56D81B35332A008A75EB /* CelScore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
+			buildPhases = (
+				109721B5D1BA539BBEF4BD57 /* Check Pods Manifest.lock */,
+				004B56D51B35332A008A75EB /* Sources */,
+				004B56D61B35332A008A75EB /* Frameworks */,
+				004B56D71B35332A008A75EB /* Resources */,
+				003FF5C51BD7879D00F7454E /* ShellScript */,
+				00404AAD1BF093540009AD0E /* Embed App Extensions */,
+				0002610A1CA3445F00296B87 /* ShellScript */,
+				CA9CDCBCE390009DA9F45DE5 /* Embed Pods Frameworks */,
+				362E4F07C963BB64B977BAA9 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00404AA81BF093540009AD0E /* PBXTargetDependency */,
+			);
+			name = CelScore;
+			productName = CelScore;
+			productReference = 004B56D91B35332A008A75EB /* CelebrityScore.app */;
+			productType = "com.apple.product-type.application";
+		};
+		004B56ED1B35332B008A75EB /* CelScoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */;
+			buildPhases = (
+				C46028EE6DA47F06B4AF4F24 /* Check Pods Manifest.lock */,
+				004B56EA1B35332B008A75EB /* Sources */,
+				004B56EB1B35332B008A75EB /* Frameworks */,
+				004B56EC1B35332B008A75EB /* Resources */,
+				54A5C0195763B5A54AA7B9A5 /* Embed Pods Frameworks */,
+				67B1B8BEAACB6204036E8452 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				004B56F01B35332B008A75EB /* PBXTargetDependency */,
+			);
+			name = CelScoreTests;
+			productName = CelScoreTests;
+			productReference = 004B56EE1B35332B008A75EB /* CelScoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		004B56D11B35332A008A75EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Gareth.K.Mensah;
+				TargetAttributes = {
+					00404A9C1BF093530009AD0E = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 6AEA7P6XSJ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					004B56D81B35332A008A75EB = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 6AEA7P6XSJ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					004B56ED1B35332B008A75EB = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 004B56D81B35332A008A75EB;
+					};
+				};
+			};
+			buildConfigurationList = 004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 004B56D01B35332A008A75EB;
+			productRefGroup = 004B56DA1B35332A008A75EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				004B56D81B35332A008A75EB /* CelScore */,
+				004B56ED1B35332B008A75EB /* CelScoreTests */,
+				00404A9C1BF093530009AD0E /* CelScoreWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00404A9B1BF093530009AD0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00404AA51BF093540009AD0E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56D71B35332A008A75EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
+				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
+				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EC1B35332B008A75EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0002610A1CA3445F00296B87 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
+		003FF5C51BD7879D00F7454E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4 33cd1f8b9b661fc1d2413a92e0956503e0a5e4933cf9303f97f3ade74033b0f7";
+		};
+		0F72C7C056280641ED2A9A84 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		109721B5D1BA539BBEF4BD57 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1AE37852E6B59F8DC06124A1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreWidget/Pods-CelScoreWidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		362E4F07C963BB64B977BAA9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54A5C0195763B5A54AA7B9A5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67B1B8BEAACB6204036E8452 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4C051BFBD52CFD198AD15FA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C46028EE6DA47F06B4AF4F24 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CA9CDCBCE390009DA9F45DE5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00404A991BF093530009AD0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D01BC11BF4057B00EF8D0D /* SettingsModel.swift in Sources */,
+				00D01BC31BF4058E00EF8D0D /* CelebrityModel.swift in Sources */,
+				00D01BC21BF4057F00EF8D0D /* RatingsModel.swift in Sources */,
+				00404AA21BF093540009AD0E /* TodayViewController.swift in Sources */,
+				00D01BB91BF322CD00EF8D0D /* TodayTableViewCell.swift in Sources */,
+				00D01BC01BF4048D00EF8D0D /* SettingsViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56D51B35332A008A75EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006431921C6A67430062BBDB /* StarLayer.swift in Sources */,
+				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
+				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
+				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
+				00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */,
+				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,
+				00417A051CB5B65900E47078 /* TransitionManager.swift in Sources */,
+				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
+				0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */,
+				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
+				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
+				00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */,
+				00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */,
+				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
+				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
+				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
+				00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */,
+				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
+				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
+				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
+				001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */,
+				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
+				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,
+				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
+				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
+				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
+				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
+				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,
+				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
+				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
+				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
+				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
+				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
+				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
+				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
+				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
+				00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */,
+				006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */,
+				00CCFAFA1CC351C8002E7E7E /* R.generated.swift in Sources */,
+				0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */,
+				00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */,
+				00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */,
+				00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		004B56EA1B35332B008A75EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */,
+				00F764821CBE15610012A581 /* ModelTests.swift in Sources */,
+				00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */,
+				00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */,
+				00CCFAE31CBF272E002E7E7E /* SettingsViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00404AA81BF093540009AD0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00404A9C1BF093530009AD0E /* CelScoreWidget */;
+			targetProxy = 00404AA71BF093540009AD0E /* PBXContainerItemProxy */;
+		};
+		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 004B56D81B35332A008A75EB /* CelScore */;
+			targetProxy = 004B56EF1B35332B008A75EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		00404AA31BF093540009AD0E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00404AA41BF093540009AD0E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		004B56E71B35332A008A75EB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				004B56E81B35332A008A75EB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00404AAA1BF093540009AD0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2AA36FB443F4D9398946607 /* Pods-CelScoreWidget.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = "\"$(PROJECT_DIR)\"";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = CelScoreWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"AsyncDisplayKit\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		00404AAB1BF093540009AD0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F02F4106F691080197C9AF6 /* Pods-CelScoreWidget.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CelScoreWidget/CelScoreWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"$(PROJECT_DIR)\"";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = CelScoreWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"AsyncDisplayKit\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.CelScoreWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		004B56F61B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Debug;
+		};
+		004B56F71B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		004B56F91B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7EAA51DF5D129F20086E5BA /* Pods-CelScore.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = CelScore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = CelebrityScore;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		004B56FA1B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 618BE4F6F1EB0778069D2279 /* Pods-CelScore.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = CelScore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = CelebrityScore;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
+			};
+			name = Release;
+		};
+		004B56FC1B35332B008A75EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C558230C572995FE0379212B /* Pods-CelScoreTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = CelScoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"XCTest\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore";
+			};
+			name = Debug;
+		};
+		004B56FD1B35332B008A75EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE919CF7642F150835582D97 /* Pods-CelScoreTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = CelScoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"AIRTimer\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"XCTest\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00404AAC1BF093540009AD0E /* Build configuration list for PBXNativeTarget "CelScoreWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00404AAA1BF093540009AD0E /* Debug */,
+				00404AAB1BF093540009AD0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56F61B35332B008A75EB /* Debug */,
+				004B56F71B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56F91B35332B008A75EB /* Debug */,
+				004B56FA1B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				004B56FC1B35332B008A75EB /* Debug */,
+				004B56FD1B35332B008A75EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 004B56D11B35332A008A75EB /* Project object */;
+}
