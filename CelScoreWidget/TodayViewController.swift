@@ -17,17 +17,18 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Properties
     let userDefaults: NSUserDefaults!
     let expandButton = UIButton()
-    let defaultNumRows = 5
+    let defaultNumRows = 10
     let maxNumberOfRows = 10
     var items = [AnyObject]()
     var expanded: Bool {
-        get { return userDefaults.boolForKey("expanded") }
+        get { return true }
         set (newExpanded) { self.userDefaults.setBool(newExpanded, forKey: "expanded"); self.userDefaults.synchronize() }
     }
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) {
         self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
+        self.userDefaults.synchronize()
         let rowsNumber = self.userDefaults.integerForKey("count")
         super.init(coder: aDecoder)!
         
@@ -39,12 +40,15 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     //MARK: Methods
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.toggleExpand()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.expandButton.addTarget(self, action: #selector(TodayViewController.toggleExpand), forControlEvents: .TouchUpInside)
-        updateExpandButtonTitle()
         updatePreferredContentSize()
-        AIRTimer.every(1) { timer in print("5");self.userDefaults.synchronize() } //TEST: synchronization
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
@@ -66,7 +70,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     // MARK: Table view data source
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { return expandButton }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.items.count > 0 { return min(items.count, expanded ? self.maxNumberOfRows : self.defaultNumRows) }
         return 0
@@ -90,8 +93,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     // MARK: expand
-    func updateExpandButtonTitle() { expandButton.setTitle(expanded ? "Show less" : "Show more", forState: .Normal) }
-    
     func toggleExpand() {
         self.expanded = !self.expanded
         self.updatePreferredContentSize()
