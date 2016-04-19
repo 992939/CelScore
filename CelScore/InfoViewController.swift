@@ -34,25 +34,25 @@ final class InfoViewController: ASViewController, Labelable {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(next: { celeb in
                 
-                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                let age = (NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day)) ? (NSDate().year - (birthdate!.year+1)) : (NSDate().year - birthdate!.year)
+                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
+                let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
                 let formatter = NSDateFormatter()
                 formatter.dateStyle = .LongStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                     .startWithNext({ score in
                         for (index, quality) in Info.getAll().enumerate() {
-                            let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: 30))
+                            let qualityView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: 30))
                             qualityView.tag = index+1
-                            let qualityLabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
-                            var infoLabelText = ""
-                            var attributedText = NSAttributedString()
+                            let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25))
+                            var infoLabelText: String = ""
+                            var attributedText: NSAttributedString = NSAttributedString()
                             switch quality {
                             case Info.FirstName.name(): infoLabelText = celeb.firstName
                             case Info.MiddleName.name(): infoLabelText = celeb.middleName
                             case Info.LastName.name(): infoLabelText = celeb.lastName
                             case Info.From.name(): infoLabelText = celeb.from
-                            case Info.Birthdate.name(): infoLabelText = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                            case Info.Birthdate.name(): infoLabelText = formatter.stringFromDate(birthdate) + String(" (\(age))")
                             case Info.Height.name(): infoLabelText = celeb.height
                             case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.Status.name(): infoLabelText = celeb.status
@@ -91,8 +91,8 @@ final class InfoViewController: ASViewController, Labelable {
     
     func createCelScoreText(score: Double) -> NSAttributedString {
         var attributedText = NSMutableAttributedString()
-        let difference = score - self.celebST.prevScore
-        let margin = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
+        let difference: Double = score - self.celebST.prevScore
+        let margin: String = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
         let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
         attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
         let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
@@ -107,8 +107,8 @@ final class InfoViewController: ASViewController, Labelable {
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .startWithNext({ celeb in
-                let birthdate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")
-                let age = (NSDate().month < birthdate!.month || (NSDate().month == birthdate!.month && NSDate().day < birthdate!.day)) ? (NSDate().year - (birthdate!.year+1)) : (NSDate().year - birthdate!.year)
+                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
+                let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
                 let formatter = NSDateFormatter()
                 formatter.dateStyle = NSDateFormatterStyle.LongStyle
                 
@@ -118,7 +118,7 @@ final class InfoViewController: ASViewController, Labelable {
                 case Info.MiddleName.text(): infoText = celeb.middleName
                 case Info.LastName.text(): infoText = celeb.lastName
                 case Info.From.text(): infoText = celeb.from
-                case Info.Birthdate.text(): infoText = formatter.stringFromDate(birthdate!) + String(" (\(age))")
+                case Info.Birthdate.text(): infoText = formatter.stringFromDate(birthdate) + String(" (\(age))")
                 case Info.Height.text(): infoText = celeb.height
                 case Info.Zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
                 case Info.Status.text(): infoText = celeb.status

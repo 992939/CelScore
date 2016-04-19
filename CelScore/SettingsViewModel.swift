@@ -34,7 +34,7 @@ struct SettingsViewModel {
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel)
             guard userRatings.count >= 10 else { observer.sendNext(5); return }
-            let celscores = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
+            let celscores: [Double] = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
             let average = celscores.reduce(0, combine: { $0 + $1 }) / Double(celscores.count)
             observer.sendNext(CGFloat(average))
             observer.sendCompleted()
@@ -62,7 +62,7 @@ struct SettingsViewModel {
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return ratingsModel.getCelScore() < 3 ? false : true
             })
-            let average = Double(positiveRatings.count)/Double(ratings.count)
+            let average: Double = Double(positiveRatings.count)/Double(ratings.count)
             observer.sendNext(average < 0.5 ? false : true)
             observer.sendCompleted()
         }
@@ -74,7 +74,7 @@ struct SettingsViewModel {
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
             guard ratings.count > 0 else { observer.sendFailed(.NoRatingsModel); return }
-            let variances = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
+            let variances: [Double] = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
             guard 0..<5 ~= averageVariance else { observer.sendFailed(.OutOfBoundsVariance); return }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
@@ -166,15 +166,15 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebList = realm.objects(CelebrityModel).filter("isFollowed = true")
-            let userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")
+            let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerate() {
                     let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", celeb.id).first!
-                    let today = ["nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
-                    userDefaults!.setObject(today, forKey: String(index))
+                    let today:[String: AnyObject] = ["nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
+                    userDefaults.setObject(today, forKey: String(index))
                 }
             }
-            userDefaults!.setInteger(celebList.count, forKey: "count")
+            userDefaults.setInteger(celebList.count, forKey: "count")
             observer.sendNext(celebList)
             observer.sendCompleted()
         }

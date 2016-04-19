@@ -10,16 +10,14 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 import AIRTimer
-import Dwifft
 
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
     let userDefaults: NSUserDefaults!
-    let expandButton = UIButton()
-    let defaultNumRows = 10
-    let maxNumberOfRows = 10
+    let defaultNumRows: Int = 10
+    let maxNumberOfRows: Int = 10
     var items = [AnyObject]()
     var expanded: Bool {
         get { return true }
@@ -30,7 +28,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     required init(coder aDecoder: NSCoder) {
         self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
         self.userDefaults.synchronize()
-        let rowsNumber = self.userDefaults.integerForKey("count")
+        let rowsNumber: Int = self.userDefaults.integerForKey("count")
         super.init(coder: aDecoder)!
         
         guard rowsNumber > 0 else { return }
@@ -45,7 +43,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         super.viewWillAppear(animated)
         self.userDefaults.synchronize()
         self.items = []
-        let rowsNumber = self.userDefaults.integerForKey("count")
+        let rowsNumber: Int = self.userDefaults.integerForKey("count")
         guard rowsNumber > 0 else { return }
         for index in 0..<rowsNumber {
             let x = self.userDefaults.objectForKey(String(index))!

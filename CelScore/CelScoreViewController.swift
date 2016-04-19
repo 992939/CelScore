@@ -43,13 +43,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
-        let gaugeView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
+        let gaugeView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:))))
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kMainShade
         gaugeView.pulseScale = false
-        let gauge = LMGaugeView()
+        let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
@@ -67,8 +67,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getView(y positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let consensusLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
-        let infoLabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kMaxWidth - (consensusLabel.width + Constants.kPadding), height: 25))
+        let consensusLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
+        let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kMaxWidth - (consensusLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
         let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -87,7 +87,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func longPress(gesture: UIGestureRecognizer) {
-        let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
+        let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1:
             RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in

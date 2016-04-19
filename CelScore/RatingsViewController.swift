@@ -131,9 +131,9 @@ final class RatingsViewController: ASViewController {
         let ratingIndex = gesture.view!.tag - 1
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
-                let value = ratings[ratings[ratingIndex]] as! Int
-                let stars = "\(value)" + (value < 2 ? " star" : " stars")
-                let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
+                let value: Int = ratings[ratings[ratingIndex]] as! Int
+                let stars: String = "\(value)" + (value < 2 ? " star" : " stars")
+                let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
                 self.delegate!.socialSharing(message: "The consensus on \(who) \(Qualities(rawValue: ratingIndex)!.text()) \(stars)")})
     }
     
