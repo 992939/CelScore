@@ -42,6 +42,14 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Methods
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.userDefaults.synchronize()
+        self.items = []
+        let rowsNumber = self.userDefaults.integerForKey("count")
+        guard rowsNumber > 0 else { return }
+        for index in 0..<rowsNumber {
+            let x = self.userDefaults.objectForKey(String(index))!
+            self.items.append(x)
+        }
         self.toggleExpand()
     }
     
@@ -97,7 +105,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         self.expanded = !self.expanded
         self.updatePreferredContentSize()
         self.tableView.reloadData()
-        self.updateExpandButtonTitle()
+        //self.updateExpandButtonTitle()
     }
 }
 
