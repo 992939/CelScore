@@ -37,7 +37,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
         
-        let cosmosView = CosmosView()
+        let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = Constants.kStarSize
         cosmosView.settings.starMargin = Constants.kStarMargin
         cosmosView.settings.updateOnTouch = false
@@ -49,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
         }
         
-        let box = BEMCheckBox(frame: CGRect(x: Constants.kScreenWidth - 55, y: 30, width: 30, height: 30))
+        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: Constants.kScreenWidth - 55, y: 30, width: 30, height: 30))
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white

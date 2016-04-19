@@ -86,7 +86,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Normal)
         first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Highlighted)
         
-        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
+        let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
         
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
@@ -191,7 +191,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
-                let screenshot = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
+                let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage, screenshot: screenshot).startWithNext { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
@@ -199,9 +199,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                         TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                             image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    
-                    self.presentViewController(socialVC, animated: true, completion: {
-                        MaterialAnimation.delay(2.0) { self.handleMenu() }})
+                    self.presentViewController(socialVC, animated: true, completion: { MaterialAnimation.delay(2.0) { self.handleMenu() }})
                 }})
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: false) })
             .start()
@@ -240,7 +238,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     //MARK: SMSegmentViewDelegate
     func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        let infoView = self.getSubView(atIndex: index)
+        let infoView: UIView = self.getSubView(atIndex: index)
         infoView.hidden = false
         infoView.frame = Constants.kBottomViewRect
         let removingView = self.getSubView(atIndex: previousIndex)
@@ -321,7 +319,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(R.image.dbProfileChevron()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
-        let nameLabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
+        let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         
@@ -334,7 +332,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func getTopView() -> MaterialView {
-        let topView = MaterialView(frame: Constants.kTopViewRect)
+        let topView: MaterialView = MaterialView(frame: Constants.kTopViewRect)
         topView.depth = .Depth2
         topView.image = R.image.topView()
         topView.backgroundColor = Constants.kDarkShade
@@ -342,7 +340,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func getSegmentView() -> SMSegmentView {
-        let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
+        let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.black, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
                 keySegmentOnSelectionColour: Constants.kMainShade,

@@ -35,10 +35,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let maxWidth = self.view.width - 2 * Constants.kPadding
+        let maxWidth: CGFloat = self.view.width - 2 * Constants.kPadding
         
         //Logo
-        let logoView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
+        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
         logoView.depth = .None
         let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - 60)/2 , y: 14, width: 60, height: 60))
         logoCircle.setImage(R.image.court_white()!, forState: .Normal)
@@ -48,9 +48,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoCircle.backgroundColor = Constants.kDarkGreenShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
-        let courtLabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 28, width: 110, height: 40))
-        let houseLabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 28, width: 110, height: 40))
-        let font = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
+        let courtLabel: UILabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 28, width: 110, height: 40))
+        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 28, width: 110, height: 40))
+        let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
@@ -93,8 +93,8 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         })
         
         //PickerView
-        let pickerView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel = self.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
+        let pickerLabel: UILabel = self.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
