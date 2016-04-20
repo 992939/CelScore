@@ -28,6 +28,7 @@ struct Constants {
     static let kMaxWidth: CGFloat = kScreenWidth - kPadding
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
+    static let kIsOriginalIphone: Bool = UIScreen.mainScreen().bounds.width > 320 ? false : true
     
     static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
     static let kMainShade: UIColor = MaterialColor.blueGrey.base
@@ -45,13 +46,13 @@ struct Constants {
     static let kSearchListId: String = "0099"
     
     //SettingsVC
-    static let kSettingsViewWidth: CGFloat = 300 < 0.80 * UIScreen.mainScreen().bounds.width ? (0.75 * UIScreen.mainScreen().bounds.width) : 300
-    static let kPickerViewHeight: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 160 : 100
-    static let kPickerY: CGFloat = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 30 : 10
+    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 300 : (0.75 * kScreenWidth)
+    static let kPickerViewHeight: CGFloat = kIsOriginalIphone ? 100 : 160
+    static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
     
     //CelebrityTableViewCell
-    static let kStarMargin: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 1.0 : 0.7
-    static let kStarSize: Double = 250 < 0.625 * UIScreen.mainScreen().bounds.width ? 15.0 : 12.0
+    static let kStarMargin: Double = kIsOriginalIphone ? 0.7 : 1.0
+    static let kStarSize: Double = kIsOriginalIphone ? 12.0 : 15.0
     
     //DetailVC 
     static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: 220)
