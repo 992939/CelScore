@@ -38,6 +38,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
+        print("C")
         self.celebST = celebrityST
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
@@ -71,6 +72,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("D")
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
@@ -110,6 +112,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kDarkShade
+        print("E")
     }
     
     func backAction() {

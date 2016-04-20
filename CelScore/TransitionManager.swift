@@ -15,6 +15,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     // MARK: UIViewControllerAnimatedTransitioning
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        print("A")
         let container = transitionContext.containerView()
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
@@ -48,6 +49,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         container!.addSubview(celebSnapshot)
         
         let duration = self.transitionDuration(transitionContext)
+        print("B")
         
         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             if self.presenting {
