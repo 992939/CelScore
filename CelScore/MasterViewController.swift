@@ -20,7 +20,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Properties
     private let segmentedControl: HMSegmentedControl
     private let searchBar: UISearchBar
-    private let transitionManager = TransitionManager()
+    private let transitionManager: TransitionManager = TransitionManager()
     private let diffCalculator: TableViewDiffCalculator<CelebId>
     internal let celebrityTableView: ASTableView
     internal let socialButton: MenuView
