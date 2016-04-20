@@ -7,10 +7,8 @@
 //
 
 import AsyncDisplayKit
-import FBSDKLoginKit
 import ReactiveCocoa
 import RealmSwift
-import TwitterKit
 import Material
 import HMSegmentedControl
 import AIRTimer
@@ -18,7 +16,7 @@ import RateLimit
 import Dwifft
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, UITextFieldDelegate, Sociable, HUDable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable {
     
     //MARK: Properties
     private let segmentedControl: HMSegmentedControl

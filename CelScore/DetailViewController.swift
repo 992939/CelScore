@@ -9,7 +9,6 @@
 import AsyncDisplayKit
 import Material
 import SMSegmentView
-import FBSDKLoginKit
 import AIRTimer
 import Social
 
