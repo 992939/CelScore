@@ -30,7 +30,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 68 images.
+  /// This `R.image` struct is generated, and contains static references to 69 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -40,6 +40,8 @@ struct R {
     static let astronaut_green = ImageResource(bundle: _R.hostingBundle, name: "astronaut_green")
     /// Image `ballot_green`.
     static let ballot_green = ImageResource(bundle: _R.hostingBundle, name: "ballot_green")
+    /// Image `celscore_big_white`.
+    static let celscore_big_white = ImageResource(bundle: _R.hostingBundle, name: "celscore_big_white")
     /// Image `celscore_black`.
     static let celscore_black = ImageResource(bundle: _R.hostingBundle, name: "celscore_black")
     /// Image `celscore_green`.
@@ -187,6 +189,11 @@ struct R {
     /// `UIImage(named: "ballot_green", bundle: ..., traitCollection: ...)`
     static func ballot_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.ballot_green, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "celscore_big_white", bundle: ..., traitCollection: ...)`
+    static func celscore_big_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.celscore_big_white, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "celscore_black", bundle: ..., traitCollection: ...)`
