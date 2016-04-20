@@ -210,6 +210,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
+            .observeOn(UIScheduler())
             .on(next: { userRatings in
                 self.ratingsVC.displayGoldRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
@@ -219,7 +220,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
             })
             .on(failed: { _ in self.ratingsVC.displayGoldRatings() })
-            
             .start()
     }
     
