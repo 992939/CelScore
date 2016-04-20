@@ -29,11 +29,11 @@ struct CelebrityViewModel {
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
             guard let celeb = celebrity else { observer.sendFailed(.NotFound); return }
+
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, sex: celeb.sex, isFollowed:celeb.isFollowed)
-            let activity = profile.userActivity
-            activity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
-            activity.becomeCurrent()
-            observer.sendNext(activity)
+            profile.userActivity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
+            profile.userActivity.becomeCurrent()
+            observer.sendNext(profile.userActivity)
             observer.sendCompleted()
         }
     }

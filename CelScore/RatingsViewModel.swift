@@ -83,6 +83,7 @@ struct RatingsViewModel {
             else if newRatings!.totalVotes == 0 { newRatings!.forEach({ rating in newRatings![rating] = 0 }) }
             realm.add(newRatings!, update: true)
             try! realm.commitWrite()
+            print("clean")
             observer.sendNext(newRatings!)
             observer.sendCompleted()
         }

@@ -38,7 +38,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrityST: CelebrityStruct) {
-        print("C")
         self.celebST = celebrityST
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
@@ -47,7 +46,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.socialButton = MenuView()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
-        
+
         SettingsViewModel().isPositiveVoteSignal()
             .on(next: { value in self.userST = self.userST.updatePositive(value) })
             .filter({ (value: Bool) -> Bool in value == false })
@@ -61,7 +60,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 }})
             .start()
         
-        CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id).startWithNext { activity in self.userActivity = activity }
+        CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id)
+            .startOn(QueueScheduler())
+            .startWithNext({ activity in self.userActivity = activity })
+        
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
     
@@ -72,7 +74,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("D")
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
@@ -112,7 +113,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kDarkShade
-        print("E")
     }
     
     func backAction() {
