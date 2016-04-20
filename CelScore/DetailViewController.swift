@@ -160,9 +160,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func imageFromView(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: Constants.kCircleWidth + 2*Constants.kPadding, height: Constants.kTopViewRect.height), false, 2)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: Constants.kCircleWidth + 20, height: Constants.kTopViewRect.height), false, 2)
         UIGraphicsGetImageFromCurrentImageContext()
-        self.view.drawViewHierarchyInRect(CGRect(x: -Constants.kCircleWidth/2 + 2.5*Constants.kPadding, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
+        let newX: CGFloat = Constants.kCircleWidth/2 + 25
+        self.view.drawViewHierarchyInRect(CGRect(x: -newX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return screenShot
@@ -362,7 +363,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func setUpVoteButton() {
-        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - Constants.kFabDiameter, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        let diameter: CGFloat = Constants.kFabDiameter
+        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - diameter, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseScale = false
