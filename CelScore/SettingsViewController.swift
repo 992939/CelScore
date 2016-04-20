@@ -142,7 +142,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let logoutAlert = OpinionzAlertView(title: nil, message: "Some of your votes might get lost, are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
+        let logoutAlert = OpinionzAlertView(title: nil, message: "Your votes and settings might get lost. Are you sure you want to continue?", cancelButtonTitle: "Log Out", otherButtonTitles: ["Cancel"])
             { (_, index: Int) -> Void in if index == 0 {
                 UserViewModel().logoutSignal().startWithNext({ _ in
                     TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions())

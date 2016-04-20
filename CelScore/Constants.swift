@@ -28,7 +28,7 @@ struct Constants {
     static let kMaxWidth: CGFloat = kScreenWidth - kPadding
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
-    static let kIsOriginalIphone: Bool = UIScreen.mainScreen().bounds.width > 320 ? false : true
+    static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
     
     static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
     static let kMainShade: UIColor = MaterialColor.blueGrey.base

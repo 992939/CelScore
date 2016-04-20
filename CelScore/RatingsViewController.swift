@@ -137,6 +137,13 @@ final class RatingsViewController: ASViewController {
                 self.delegate!.socialSharing(message: "The consensus on \(who) \(Qualities(rawValue: ratingIndex)!.text()) \(stars)")})
     }
     
+    func isUserRatingMode() -> Bool {
+        let materialView: MaterialPulseView = self.view.subviews.first as! MaterialPulseView
+        let stars = materialView.subviews.filter({ $0 is CosmosView })
+        let cosmos: CosmosView = stars.first as! CosmosView
+        return cosmos.settings.userRatingMode
+    }
+    
     func animateStarsToGold(positive positive: Bool) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .observeOn(UIScheduler())
@@ -155,13 +162,6 @@ final class RatingsViewController: ASViewController {
                     }
                 }})
             .start()
-    }
-    
-    func isUserRatingMode() -> Bool {
-        let materialView: MaterialPulseView = self.view.subviews.first as! MaterialPulseView
-        let stars = materialView.subviews.filter({ $0 is CosmosView })
-        let cosmos: CosmosView = stars.first as! CosmosView
-        return cosmos.settings.userRatingMode
     }
     
     func displayGoldRatings(userRatings: RatingsModel = RatingsModel()) {
