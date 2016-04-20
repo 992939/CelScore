@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import ReactiveCocoa
-import RealmSwift
 import Material
 import HMSegmentedControl
 import AIRTimer
