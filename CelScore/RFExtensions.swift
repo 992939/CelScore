@@ -197,14 +197,36 @@ extension UIDevice {
         return offset
     }
     
-    static func getprofilePicDiameter() -> CGFloat {
+    static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: diameter = 70.0
-        case Constants.kIPhone5_height: diameter = 130.0
+        case Constants.kIPhone5_height: diameter = 120.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
         }
         return diameter
+    }
+    
+    static func getGaugeDiameter() -> CGFloat {
+        let diameter: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: diameter = 70.0
+        case Constants.kIPhone5_height: diameter = 150.0
+        case Constants.kIPhone6_height: diameter = 200.0
+        default: diameter = 250.0
+        }
+        return diameter
+    }
+    
+    static func getSegmentHeight() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: height = 30.0
+        case Constants.kIPhone5_height: height = 30.0
+        case Constants.kIPhone6_height: height = 40.0
+        default: height = 40.0
+        }
+        return height
     }
 }
