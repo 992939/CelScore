@@ -38,9 +38,10 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let maxWidth: CGFloat = self.view.width - 2 * Constants.kPadding
         
         //Logo
-        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87))
+        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 87 - 2 * UIDevice.getLogoViewHeightOffset()))
         logoView.depth = .None
-        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - 60)/2 , y: 14, width: 60, height: 60))
+        let diameter = 60 - 2 * UIDevice.getLogoViewHeightOffset()
+        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 15 - UIDevice.getLogoViewHeightOffset()/2, width: diameter, height: diameter))
         logoCircle.setImage(R.image.court_white()!, forState: .Normal)
         logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
@@ -49,9 +50,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
-        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 28, width: labelWidth, height: 40))
+        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 28 - 1.1 * UIDevice.getLogoViewHeightOffset(), width: labelWidth, height: 40))
         courtLabel.textAlignment = .Center
-        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 28, width: labelWidth, height: 40))
+        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 28 - 1.1 * UIDevice.getLogoViewHeightOffset(), width: labelWidth, height: 40))
         houseLabel.textAlignment = .Center
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]

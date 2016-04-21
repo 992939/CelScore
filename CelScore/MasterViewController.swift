@@ -49,8 +49,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
         
-        print("Oye \(UIDevice.getFollowCheckBoxPosition())")
-        
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton) }
         
         MaterialAnimation.delay(0.7) {
