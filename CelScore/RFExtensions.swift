@@ -200,7 +200,7 @@ extension UIDevice {
     static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 70.0
+        case Constants.kIPhone4_height: diameter = 100.0
         case Constants.kIPhone5_height: diameter = 120.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
@@ -208,10 +208,21 @@ extension UIDevice {
         return diameter
     }
     
+    static func getProfilePadding() -> CGFloat {
+        let padding: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: padding = 0.0
+        case Constants.kIPhone5_height: padding = 20.0
+        case Constants.kIPhone6_height: padding = 20.0
+        default: padding = 20.0
+        }
+        return padding
+    }
+    
     static func getGaugeDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 70.0
+        case Constants.kIPhone4_height: diameter = 180.0
         case Constants.kIPhone5_height: diameter = 200.0
         case Constants.kIPhone6_height: diameter = 210.0
         default: diameter = 240.0
@@ -222,7 +233,7 @@ extension UIDevice {
     static func getSegmentHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 30.0
+        case Constants.kIPhone4_height: height = 25.0
         case Constants.kIPhone5_height: height = 30.0
         case Constants.kIPhone6_height: height = 40.0
         default: height = 40.0

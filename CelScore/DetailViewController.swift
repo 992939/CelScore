@@ -93,7 +93,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
-                                           y: 80,
+                                           y: topView.centerY - UIDevice.getProfileDiameter()/2,
                                            width: UIDevice.getProfileDiameter(),
                                            height: UIDevice.getProfileDiameter())
         self.profilePicNode.cornerRadius = UIDevice.getProfileDiameter()/2

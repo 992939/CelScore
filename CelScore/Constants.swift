@@ -56,7 +56,7 @@ struct Constants {
     static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
     
     //DetailVC 
-    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: UIDevice.getProfileDiameter() + 20)
+    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: UIDevice.getProfileDiameter() + UIDevice.getProfilePadding())
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding/2, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: UIDevice.getSegmentHeight())
     static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding/2
