@@ -160,9 +160,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func imageFromView(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: Constants.kCircleWidth + 20, height: Constants.kTopViewRect.height), false, 2)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: UIDevice.getProfileDiameter() + 20, height: Constants.kTopViewRect.height), false, 2)
         UIGraphicsGetImageFromCurrentImageContext()
-        let newX: CGFloat = Constants.kCircleWidth/2 + 25
+        let newX: CGFloat = UIDevice.getScreenshotPosition()
         self.view.drawViewHierarchyInRect(CGRect(x: -newX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
