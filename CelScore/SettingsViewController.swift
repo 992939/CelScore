@@ -48,8 +48,11 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoCircle.backgroundColor = Constants.kDarkGreenShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
-        let courtLabel: UILabel = UILabel(frame: CGRect(x: 2 * Constants.kPadding, y: 28, width: 110, height: 40))
-        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - 110, y: 28, width: 110, height: 40))
+        let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
+        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 28, width: labelWidth, height: 40))
+        courtLabel.textAlignment = .Center
+        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 28, width: labelWidth, height: 40))
+        houseLabel.textAlignment = .Center
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
