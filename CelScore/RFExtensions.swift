@@ -196,4 +196,15 @@ extension UIDevice {
         }
         return offset
     }
+    
+    static func getprofilePicDiameter() -> CGFloat {
+        let diameter: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: diameter = 70.0
+        case Constants.kIPhone5_height: diameter = 130.0
+        case Constants.kIPhone6_height: diameter = 200.0
+        default: diameter = 250.0
+        }
+        return diameter
+    }
 }

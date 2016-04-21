@@ -94,9 +94,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
                                            y: 80,
-                                           width: Constants.kCircleWidth,
-                                           height: Constants.kCircleWidth)
-        self.profilePicNode.cornerRadius = Constants.kCircleWidth/2
+                                           width: UIDevice.getprofilePicDiameter(),
+                                           height: UIDevice.getprofilePicDiameter())
+        self.profilePicNode.cornerRadius = UIDevice.getprofilePicDiameter()/2
         topView.clipsToBounds = false
 
         self.view.addSubview(statusView)
