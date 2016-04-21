@@ -30,6 +30,11 @@ struct Constants {
     static let kPadding: CGFloat = 10.0
     static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
     
+    static let kIPhone4_height: CGFloat = 480
+    static let kIPhone5_height: CGFloat = 568
+    static let kIPhone6_height: CGFloat = 667
+    static let kIPhone6Plus_height: CGFloat = 736
+    
     static let kDarkShade: UIColor = MaterialColor.blueGrey.darken4
     static let kMainShade: UIColor = MaterialColor.blueGrey.base
     static let kLightShade: UIColor = MaterialColor.grey.lighten3

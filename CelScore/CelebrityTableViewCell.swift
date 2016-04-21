@@ -49,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
         }
         
-        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: Constants.kScreenWidth - 55, y: 30, width: 30, height: 30))
+        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: UIDevice.getFollowCheckBoxPosition(), y: 30, width: 30, height: 30))
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
@@ -87,7 +87,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         justifyContent: .Start,
         alignItems: .Start,
         children: [self.nameNode, self.ratingsNode])
-        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.65)
+        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: UIDevice.getVerticalStackPercent())
         verticalStack.flexGrow = true
         
         let horizontalStack = ASStackLayoutSpec(
