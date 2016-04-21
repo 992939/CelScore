@@ -39,6 +39,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Methods
     override func viewWillAppear(animated: Bool) {
+        print("viewWillAppear")
         super.viewWillAppear(animated)
         self.userDefaults.synchronize()
         self.items = []
@@ -52,11 +53,14 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func viewDidLoad() {
+        print("viewDidLoad")
         super.viewDidLoad()
         updatePreferredContentSize()
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+        print("widgetPerformUpdateWithCompletionHandler")
+        print("newData \(NCUpdateResult.NewData)")
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -95,6 +99,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: expand
     func toggleExpand() {
+        print("toggleExpand")
         self.expanded = !self.expanded
         self.updatePreferredContentSize()
         self.tableView.reloadData()
