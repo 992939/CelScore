@@ -59,7 +59,7 @@ final class RatingsViewController: ASViewController {
                     qualityLabel.textColor = MaterialColor.white
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5)
                     
-                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - 140, y: 3, width: 140, height: barHeight - 5))
+                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - 140 + UIDevice.getOffset()/2, y: 3, width: 140, height: barHeight - 5))
                     cosmosView.tag = index
                     switch quality {
                     case Qualities.Talent.name(): cosmosView.rating = ratings.rating1

@@ -186,7 +186,7 @@ extension UIDevice {
         return position
     }
     
-    static func getLogoViewHeightOffset() -> CGFloat {
+    static func getOffset() -> CGFloat {
         let offset: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: offset = 30
