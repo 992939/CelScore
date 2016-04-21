@@ -47,6 +47,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
+        self.sideNavigationController?.enabled = false
         MaterialAnimation.delay(0.7) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
@@ -145,6 +146,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
             .on(next: { _ in
+                self.sideNavigationController?.enabled = true
                 self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.sideNavigationController!.openLeftView() })
             .on(failed: { _ in
@@ -257,6 +259,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: SideNavigationControllerDelegate
     func sideNavigationDidClose(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
+        self.sideNavigationController?.enabled = false
         self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in self.hideSocialButton(self.socialButton) })
