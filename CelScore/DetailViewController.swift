@@ -92,7 +92,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         statusView.backgroundColor = Constants.kDarkShade
         
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
-        self.profilePicNode.frame = CGRect(x: topView.bounds.centerX - Constants.kCircleWidth/2,
+        self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
                                            y: 80,
                                            width: UIDevice.getProfileDiameter(),
                                            height: UIDevice.getProfileDiameter())
