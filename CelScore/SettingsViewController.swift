@@ -111,22 +111,23 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag:0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.node.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag:1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
                 self.node.addSubnode(notificationNode)
             })
         
         //Logout
         let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 40))
-        let logoutButton = FlatButton(frame: CGRect(x: Constants.kScreenWidth/2 - 100, y: Constants.kPadding/2, width: 100, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4*Constants.kPadding, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        logoutButton.titleLabel?.textAlignment = .Center
         logoutButton.pulseColor = Constants.kWineShade
         logoutView.addSubview(logoutButton)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
