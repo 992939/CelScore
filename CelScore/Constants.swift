@@ -51,7 +51,7 @@ struct Constants {
     static let kSearchListId: String = "0099"
     
     //SettingsVC
-    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 300 : (0.75 * kScreenWidth)
+    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.75 * kScreenWidth)
     static let kPickerViewHeight: CGFloat = kIsOriginalIphone ? 100 : 160
     static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
     
