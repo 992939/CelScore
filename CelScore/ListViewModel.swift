@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
-import Foundation
 import ReactiveCocoa
 import RealmSwift
 import Result
