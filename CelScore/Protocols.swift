@@ -27,7 +27,7 @@ extension HUDable{
         SVProgressHUD.setRingThickness(4)
         SVProgressHUD.setDefaultMaskType(.Black)
         SVProgressHUD.setBackgroundColor(Constants.kMainShade)
-        SVProgressHUD.setForegroundColor(Constants.kLightGreenShade)
+        SVProgressHUD.setForegroundColor(MaterialColor.white)
         SVProgressHUD.show()
     }
     

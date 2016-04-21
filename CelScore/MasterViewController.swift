@@ -48,6 +48,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
+        
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton) }
+        
         MaterialAnimation.delay(0.7) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
@@ -70,7 +73,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            self.hideSocialButton(self.socialButton)
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
