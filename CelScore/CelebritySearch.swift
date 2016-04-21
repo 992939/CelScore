@@ -37,7 +37,7 @@ extension CelebrityStruct {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContact as String)
         attributeSet.title = nickname
         let gender: String = sex == true ? "him" : "her"
-        attributeSet.contentDescription = "Celscore: \(prevScore.roundToPlaces(2))\nVote for \(gender) on the courthouse of Public Opinion."
+        attributeSet.contentDescription = "CelScore:\(prevScore.roundToPlaces(2)).\nVote for \(gender) on the Courthouse of Public Opinion."
         attributeSet.thumbnailData = NSData(contentsOfURL: NSURL(string: imageURL)!)
         attributeSet.supportsPhoneCall = false
         attributeSet.keywords = [String(prevScore)]
