@@ -32,8 +32,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 80
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
-        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
-            .startWithNext({ consensus -> () in
+        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
                 let percentage = String(consensus.roundToPlaces(2)) + "%"
                 self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "General Consensus", value: percentage, tag: 2))
             })
@@ -44,7 +43,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     
     func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
         let gaugeView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
-        gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:))))
+        
+        SettingsViewModel().getSettingSignal(settingType: .PublicService)
+            .observeOn(UIScheduler())
+            .startWithNext({ status in
+                if (status as! Bool) == true {
+                    gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
+            })
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kMainShade
