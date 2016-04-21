@@ -200,7 +200,7 @@ extension UIDevice {
     static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 100.0
+        case Constants.kIPhone4_height: diameter = 95.0
         case Constants.kIPhone5_height: diameter = 120.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
@@ -211,7 +211,7 @@ extension UIDevice {
     static func getProfilePadding() -> CGFloat {
         let padding: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: padding = 0.0
+        case Constants.kIPhone4_height: padding = -5.0
         case Constants.kIPhone5_height: padding = 20.0
         case Constants.kIPhone6_height: padding = 20.0
         default: padding = 20.0
@@ -237,6 +237,17 @@ extension UIDevice {
         case Constants.kIPhone5_height: height = 30.0
         case Constants.kIPhone6_height: height = 40.0
         default: height = 40.0
+        }
+        return height
+    }
+    
+    static func getPulseBarHeight() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: height = 27.0
+        case Constants.kIPhone5_height: height = 30.0
+        case Constants.kIPhone6_height: height = 30.0
+        default: height = 30.0
         }
         return height
     }

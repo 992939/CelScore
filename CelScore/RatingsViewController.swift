@@ -40,7 +40,8 @@ final class RatingsViewController: ASViewController {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 for (index, quality) in Qualities.getAll(isMale: self.celebST.sex).enumerate() {
-                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: 30))
+                    let barHeight = UIDevice.getPulseBarHeight()
+                    let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = Constants.kMainShade
@@ -56,9 +57,9 @@ final class RatingsViewController: ASViewController {
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
                     qualityLabel.textColor = MaterialColor.white
-                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: 25)
+                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5)
                     
-                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - 140, y: 3, width: 140, height: 25))
+                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - 140, y: 3, width: 140, height: barHeight - 5))
                     cosmosView.tag = index
                     switch quality {
                     case Qualities.Talent.name(): cosmosView.rating = ratings.rating1
@@ -72,7 +73,7 @@ final class RatingsViewController: ASViewController {
                     case Qualities.Charisma.name() : cosmosView.rating = ratings.rating9
                     case Qualities.SexAppeal.name(): cosmosView.rating = ratings.rating10
                     default: cosmosView.rating = 3 }
-                    cosmosView.settings.starSize = 22
+                    cosmosView.settings.starSize = Double(barHeight) - 8
                     cosmosView.settings.starMargin = 5
                     cosmosView.settings.previousRating = Int(cosmosView.rating)
                     cosmosView.settings.updateOnTouch = false
