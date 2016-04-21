@@ -212,9 +212,9 @@ extension UIDevice {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: diameter = 70.0
-        case Constants.kIPhone5_height: diameter = 150.0
-        case Constants.kIPhone6_height: diameter = 200.0
-        default: diameter = 250.0
+        case Constants.kIPhone5_height: diameter = 200.0
+        case Constants.kIPhone6_height: diameter = 210.0
+        default: diameter = 240.0
         }
         return diameter
     }

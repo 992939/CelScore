@@ -58,7 +58,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.minValue = Constants.kMinimumVoteValue
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
-        let gaugeWidth: CGFloat = 210
+        let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
         gauge.divisionsColor = Constants.kLightShade
