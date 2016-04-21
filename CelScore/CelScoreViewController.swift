@@ -30,13 +30,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gaugeHeight = Constants.kBottomHeight - 80
+        let gaugeHeight = Constants.kBottomHeight - 70
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
                 let percentage = String(consensus.roundToPlaces(2)) + "%"
-                self.pulseView.addSubview(self.getView(y: gaugeHeight, title: "General Consensus", value: percentage, tag: 2))
+                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 13.5, title: "General Consensus", value: percentage, tag: 2))
             })
-        self.pulseView.addSubview(getView(y: gaugeHeight + 37, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 47.5, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
     }
@@ -71,24 +71,22 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         return gaugeView
     }
     
-    func getView(y positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let consensusLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
-        let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: consensusLabel.width, y: 3, width: Constants.kMaxWidth - (consensusLabel.width + Constants.kPadding), height: 25))
+    func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
+        let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         infoLabel.textAlignment = .Right
-        let consensusView = MaterialPulseView(frame: CGRect(x: 0, y: positionY + 17, width: Constants.kMaxWidth, height: 30))
+        let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
             .startWithNext({ status in
-            if (status as! Bool) == true {
-                consensusView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
-        })
-        consensusView.tag = tag
-        consensusView.depth = .Depth1
-        consensusView.backgroundColor = Constants.kMainShade
-        consensusView.pulseScale = true
-        consensusView.addSubview(consensusLabel)
-        consensusView.addSubview(infoLabel)
-        return consensusView
+            if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
+        taggedView.tag = tag
+        taggedView.depth = .Depth1
+        taggedView.backgroundColor = Constants.kMainShade
+        taggedView.pulseScale = true
+        taggedView.addSubview(titleLabel)
+        taggedView.addSubview(infoLabel)
+        return taggedView
     }
     
     func longPress(gesture: UIGestureRecognizer) {
