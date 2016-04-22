@@ -49,7 +49,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
         
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton) }
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
         
         MaterialAnimation.delay(0.7) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
@@ -211,7 +211,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
-    func socialRefresh() { self.diffCalculator.rows = []; self.changeList() }
+    func socialRefresh() {
+        self.diffCalculator.rows = []
+        self.changeList()
+        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
+    }
     
     //MARK: ASTableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -264,7 +268,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.enabled = false
         self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.hideSocialButton(self.socialButton) })
+            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
             .on(failed: { _ in self.diffCalculator.rows = []; self.changeList()  })
             .start()
     }

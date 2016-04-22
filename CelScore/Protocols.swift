@@ -63,10 +63,8 @@ extension Sociable {
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in
-                    self.socialRefresh()
-                    if hideButton == true { self.hideSocialButton(self.socialButton)
-                }}) })
+                TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
+            })
             .on(failed: { _ in self.dismissHUD() })
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
@@ -150,11 +148,11 @@ extension Sociable {
         menuView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func hideSocialButton(menuView: MenuView) {
+    func hideSocialButton(menuView: MenuView, controller: UIViewController) {
         menuView.menu.close()
         menuView.hidden = true
         let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
-        first!.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        first!.removeTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
     }
     
     func showSocialButton(menuView: MenuView, controller: UIViewController) {
