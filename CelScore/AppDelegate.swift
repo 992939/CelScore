@@ -85,6 +85,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        print("URL: \(url)")
         if url.absoluteString.containsString("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: "").startWithNext({ celeb in
                 let celebST = CelebrityStruct(

@@ -3,7 +3,7 @@ platform :ios, '9.0'
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 0.98.8'
+    pod 'RealmSwift', '~> 0.99.0'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'PINCache', '~> 2.2'

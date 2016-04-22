@@ -61,7 +61,7 @@ enum OverlayInfo: Int {
         case .LoginSuccess: return "You're now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly and enjoy your journey aboard our star-studded constellation."
         case .MaxFollow: return "You've reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've selected your first star!\n\nYou can choose up to ten stars to appear in the Today view.\n(swipe down from the top of your screen to display it)"
-        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to help us build the consensus!\nThe consensus will regenerate after each one of your votes."
+        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to help us build the consensus!\nThe consensus will rebuild itself after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou've stepped into the Public Sphere!\nYou can add your voice to the public debate by long pressing on the stars."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- P. Richard Dyer\n\nYou've entered a space where stars are symbols and incarnations of values.\nPlease vote responsibly."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
@@ -82,7 +82,7 @@ enum OverlayInfo: Int {
         case .LoginSuccess: return R.image.planet_green()!
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.astronaut_green()!
-        case .FirstConsensus: return R.image.collective_green()!
+        case .FirstConsensus: return R.image.sphere_green()!
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.mic_purple()!
