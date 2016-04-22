@@ -486,7 +486,7 @@
 				004B56D51B35332A008A75EB /* Sources */,
 				004B56D61B35332A008A75EB /* Frameworks */,
 				004B56D71B35332A008A75EB /* Resources */,
-				003FF5C51BD7879D00F7454E /* ShellScript */,
+				003FF5C51BD7879D00F7454E /* Run Script */,
 				00404AAD1BF093540009AD0E /* Embed App Extensions */,
 				0002610A1CA3445F00296B87 /* ShellScript */,
 				6AF3CAA9F17C0518CC20DDAA /* Embed Pods Frameworks */,
@@ -620,13 +620,14 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
 		};
-		003FF5C51BD7879D00F7454E /* ShellScript */ = {
+		003FF5C51BD7879D00F7454E /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

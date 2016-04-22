@@ -83,14 +83,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Twitter.self, AWSCognito.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
-    
+
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        print("URL: \(url)")
         if url.absoluteString.containsString("TheScore://") {
-            CelebrityViewModel().getCelebritySignal(id: "").startWithNext({ celeb in
+            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
-                    imageURL: celeb.picture2x,
+                    imageURL: celeb.picture3x,
                     nickname: celeb.nickName,
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,

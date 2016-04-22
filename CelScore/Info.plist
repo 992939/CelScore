@@ -31,13 +31,12 @@
 			</array>
 		</dict>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.GreyEcology.CelebrityScore</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>TheScore</string>
-				<string>TheScore://celebId?</string>
 			</array>
+			<key>CFBundleURLName</key>
+			<string>com.GreyEcology.CelebrityScore</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>

@@ -96,36 +96,6 @@ enum OverlayInfo: Int {
         }
     }
     
-    static func consensusArray() -> [UIImage] {
-        return [R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer0_green()!,
-                R.image.hammer1_green()!,
-                R.image.hammer3_green()!,
-                R.image.hammer4_green()!,
-                R.image.hammer5_green()!,
-                R.image.hammer6_green()!,
-                R.image.hammer7_green()!,
-                R.image.hammer8_green()!,
-                R.image.hammer10_green()!,
-                R.image.hammer9_green()!,
-                R.image.hammer9_green()!,
-                R.image.hammer9_green()!,
-                R.image.hammer9_green()!,
-                R.image.hammer8_green()!,
-                R.image.hammer7_green()!,
-                R.image.hammer6_green()!,
-                R.image.hammer5_green()!,
-                R.image.hammer4_green()!,
-                R.image.hammer3_green()!,
-                R.image.hammer1_green()!,
-                R.image.hammer0_green()!]
-    }
-    
     static func getOptions() -> TAOverlayOptions {
         return [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow]
     }

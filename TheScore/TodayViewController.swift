@@ -91,7 +91,8 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let celebDictionary = items[indexPath.row]
         let celebId: String = celebDictionary["id"] as! String
-        self.extensionContext?.openURL(NSURL(string: "TheScore://celebId?\(celebId)")!, completionHandler: nil)
+        self.extensionContext?.openURL(NSURL(string: "TheScore://display/celebId?\(celebId)")!, completionHandler: nil)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: expand
