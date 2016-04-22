@@ -36,6 +36,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>TheScore</string>
+				<string>TheScore://celebId?</string>
 			</array>
 		</dict>
 	</array>

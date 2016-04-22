@@ -81,7 +81,7 @@ enum OverlayInfo: Int {
         case .MenuAccess: return R.image.court_green()!
         case .LoginSuccess: return R.image.planet_green()!
         case .MaxFollow: return R.image.observatory_green()!
-        case .FirstFollow: return R.image.observatory_green()!
+        case .FirstFollow: return R.image.astronaut_green()!
         case .FirstConsensus: return R.image.collective_green()!
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstStars: return R.image.spaceship_green()!

@@ -6,6 +6,7 @@ def shared_pods
     pod 'RealmSwift', '~> 0.98.8'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
+    pod 'PINCache', '~> 2.2'
 end
 
 target 'CelScore' do

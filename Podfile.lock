@@ -83,6 +83,7 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5)
   - Material (~> 1.39.13)
   - OpinionzAlertView (~> 0.3.1)
+  - PINCache (~> 2.2)
   - R.swift (~> 2.1)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)

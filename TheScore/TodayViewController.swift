@@ -10,6 +10,7 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 import AIRTimer
+import PINCache
 
 
 final class TodayViewController: UITableViewController, NCWidgetProviding {
@@ -39,7 +40,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Methods
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear")
         super.viewWillAppear(animated)
         self.userDefaults.synchronize()
         self.items = []
@@ -53,16 +53,11 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func viewDidLoad() {
-        print("viewDidLoad")
         super.viewDidLoad()
         updatePreferredContentSize()
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
-        print("widgetPerformUpdateWithCompletionHandler")
-        print("newData \(NCUpdateResult.NewData)")
-        completionHandler(NCUpdateResult.NewData)
-    }
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) { completionHandler(.NewData) }
     
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) { return UIEdgeInsetsZero }
     
@@ -94,12 +89,13 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.extensionContext?.openURL(NSURL(string: "TheScore://")!, completionHandler: nil)
+        let celebDictionary = items[indexPath.row]
+        let celebId: String = celebDictionary["id"] as! String
+        self.extensionContext?.openURL(NSURL(string: "TheScore://celebId?\(celebId)")!, completionHandler: nil)
     }
     
     // MARK: expand
     func toggleExpand() {
-        print("toggleExpand")
         self.expanded = !self.expanded
         self.updatePreferredContentSize()
         self.tableView.reloadData()

@@ -69,7 +69,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
-            let consensusBarNode = self.setupProgressBarNode(title: "Social Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
+            let consensusBarNode = self.setupProgressBarNode(title: "Universal Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
             self.node.addSubnode(consensusBarNode)
         })
         

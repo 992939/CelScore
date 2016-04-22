@@ -85,7 +85,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        if url.absoluteString.containsString("TheScore://") {
+            CelebrityViewModel().getCelebritySignal(id: "").startWithNext({ celeb in
+                let celebST = CelebrityStruct(
+                    id: celeb.id,
+                    imageURL: celeb.picture2x,
+                    nickname: celeb.nickName,
+                    prevScore: celeb.prevScore,
+                    sex: celeb.sex,
+                    isFollowed: celeb.isFollowed)
+                self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+            })
+        }
+        else { FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) }
+        return true
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
