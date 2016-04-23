@@ -66,7 +66,7 @@ enum OverlayInfo: Int {
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou've stepped into the Public Sphere!\nYou can add your voice to the public debate by long pressing on the stars."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- P. Richard Dyer\n\nYou've entered a space where stars are symbols and incarnations of values.\nPlease vote responsibly."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
-        case .FirstInterest: return "You've choosen your first topic of interest.\nYour selection is saved automatically."
+        case .FirstInterest: return "You've choosen your first area of interest!\n\\nYour selection will be saved automatically."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
         case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- P. David Marshall\n\nYou'll need to register to access the voting booth."
         case .FirstTrollWarning: return "You've ventured into the trolling zone!\n\nPast a certain point of negative votes, all your votes will be discarded."
@@ -87,7 +87,7 @@ enum OverlayInfo: Int {
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.mic_purple()!
-        case .FirstInterest: return R.image.anchor_green()!
+        case .FirstInterest: return R.image.geometry_green()!
         case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.spaceship_green()!
         case .FirstTrollWarning: return R.image.nuclear_purple()!
