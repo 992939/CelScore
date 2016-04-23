@@ -73,9 +73,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         guard Reachability.isConnectedToNetwork() else {
-            RateLimit.execute(name: "sendUserOfflineWarning", limit: 300) {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
-            return }
+            TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
+            return
+        }
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
