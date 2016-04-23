@@ -96,7 +96,7 @@ final class InfoViewController: ASViewController, Labelable {
         let margin: String = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
         let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
         attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.white]
+        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
         let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
         attributedText.appendAttributedString(attrString)
         return attributedText
