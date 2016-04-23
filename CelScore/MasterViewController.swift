@@ -48,6 +48,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewWillAppear(animated)
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
+        self.sideNavigationController?.animationDuration = 0.4
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
         
