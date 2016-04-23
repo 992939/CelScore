@@ -28,7 +28,7 @@ struct CelScoreViewModel {
             }
             
             let block = awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                guard task.error == nil else {observer.sendFailed(task.error!); return task }
                 guard task.cancelled == false else { observer.sendInterrupted(); return task }
                 
                 let myData = task.result as! String

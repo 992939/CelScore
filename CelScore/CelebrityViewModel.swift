@@ -18,7 +18,7 @@ struct CelebrityViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
-            guard let object = celebrity else { observer.sendFailed(.NotFound); return }
+            guard let object = celebrity else { return observer.sendFailed(.NotFound) }
             observer.sendNext(object)
             observer.sendCompleted()
         }
@@ -28,7 +28,7 @@ struct CelebrityViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
-            guard let celeb = celebrity else { observer.sendFailed(.NotFound); return }
+            guard let celeb = celebrity else { return observer.sendFailed(.NotFound) }
 
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, sex: celeb.sex, isFollowed:celeb.isFollowed)
             profile.userActivity.addUserInfoEntriesFromDictionary(profile.userActivityUserInfo)
@@ -42,7 +42,7 @@ struct CelebrityViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
-            guard let object = celebrity else { observer.sendFailed(.NotFound); return }
+            guard let object = celebrity else { return observer.sendFailed(.NotFound) }
             realm.beginWrite()
             object.isFollowed = isFollowing
             realm.add(object, update: true)

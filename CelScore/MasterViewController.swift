@@ -72,6 +72,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        guard Reachability.isConnectedToNetwork() else {
+            TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()); return }
+        
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
@@ -115,27 +118,29 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        
+        guard Reachability.isConnectedToNetwork() else { return }
+        
         self.setupData()
         
-        NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil)
-            .startWithNext { _ in
-                RateLimit.execute(name: "DailyAWSRefresh", limit: 10) {
-                    CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
-                        .observeOn(UIScheduler())
-                        .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                            return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-                        .flatMapError { _ in SignalProducer.empty }
-                        .observeOn(UIScheduler())
-                        .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-                        .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
-                        .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                            let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                            return ListViewModel().updateListSignal(listId: list.getId() )}
-                        .observeOn(UIScheduler())
-                        .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
-                        .start()
-                }
+        NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
+            RateLimit.execute(name: "DailyAWSRefresh", limit: 10) {
+                CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
+                    .observeOn(UIScheduler())
+                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+                    .flatMapError { _ in SignalProducer.empty }
+                    .observeOn(UIScheduler())
+                    .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                    .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
+                    .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
+                        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
+                        return ListViewModel().updateListSignal(listId: list.getId() )}
+                    .observeOn(UIScheduler())
+                    .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                    .start()
+            }
         }
     }
     

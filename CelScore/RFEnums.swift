@@ -14,6 +14,7 @@ import Material
 enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
 enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
 enum CelebrityError: ErrorType { case NotFound }
+enum NetworkError: ErrorType { case NotConnected, TimedOut }
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }
@@ -71,7 +72,7 @@ enum OverlayInfo: Int {
         case .FirstTrollWarning: return "You've ventured into the trolling zone!\n\nPast a certain point of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time."
-        case .NetworkError: return "We are currently not able to connct with the network.\nPlease check your network settings."
+        case .NetworkError: return "The Internet connection appears to be offline.\nPlease check your network settings."
         }
     }
     
