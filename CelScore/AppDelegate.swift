@@ -103,7 +103,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return false }
-        
+        print("id is \(userActivity.userInfo!["id"] as! String)")
         let celebST = CelebrityStruct(
             id: userActivity.userInfo!["id"] as! String,
             imageURL: userActivity.userInfo!["imageURL"] as! String,
