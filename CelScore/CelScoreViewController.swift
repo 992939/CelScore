@@ -32,11 +32,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 70
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 2))
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
-                let percentage = String(consensus.roundToPlaces(2)) + "%"
-                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 13.5, title: "General Consensus", value: percentage, tag: 2))
-            })
-        self.pulseView.addSubview(getView(positionY: gaugeHeight + 47.5, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 3))
+            let percentage = String(consensus.roundToPlaces(2)) + "%"
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "General Consensus", value: percentage, tag: 3))
+        })
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
     }
@@ -72,7 +72,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.95
         AIRTimer.after(0.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         gaugeView.addSubview(gauge)
-        print("1: \(firstSlow) 2: \(secondSlow) 3: \(thirdSlow) 4: \(finalSlow) maxValue: \(gauge.maxValue)")
+        //print("1: \(firstSlow) 2: \(secondSlow) 3: \(thirdSlow) 4: \(finalSlow) maxValue: \(gauge.maxValue)")
         return gaugeView
     }
     
@@ -97,16 +97,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     func longPress(gesture: UIGestureRecognizer) {
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
-        case 1:
-            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in
+        case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in
                 self.delegate!.socialSharing(message: "\(who) \(Info.CelScore.text()) \(String(format: "%.2f", celscore))") }
-        case 2:
-            RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext { consensus in
+        case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
+        default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext { consensus in
                 self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.2f", consensus))%") }
-        case 3:
-            self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
-        default:
-            self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
         }
     }
     

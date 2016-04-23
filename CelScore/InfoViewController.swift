@@ -92,7 +92,7 @@ final class InfoViewController: ASViewController, Labelable {
     
     func createCelScoreText(score: Double) -> NSAttributedString {
         var attributedText = NSMutableAttributedString()
-        let difference: Double = score - self.celebST.prevScore
+        let difference: Double = score.roundToPlaces(2) - self.celebST.prevScore.roundToPlaces(2)
         let margin: String = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
         let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
         attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
