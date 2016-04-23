@@ -61,7 +61,7 @@ struct CelScoreViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
-            guard celebs.count > 0 else { observer.sendFailed(.NotFound); return }
+            guard celebs.count > 0 else { return observer.sendFailed(.NotFound) }
 
             var message: String?
             if celebs.count <= 3 {
@@ -72,7 +72,7 @@ struct CelScoreViewModel {
                 message = message! + "\n and \(celebs.count-3) other stars have been added to the score.\n"
             }
             message = message! + "\nSlide to \"New\" to see all the recently added stars."
-            guard celebs.count < 100 else { observer.sendCompleted(); return }
+            guard celebs.count < 100 else { return observer.sendCompleted() }
             observer.sendNext(message!)
             
             celebs.forEach({ celeb in

@@ -14,8 +14,8 @@ struct RatingsViewModel {
     
     func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
-            guard 1...5 ~= newRating else { observer.sendFailed(.RatingValueOutOfBounds); return }
-            guard 0...9 ~= ratingIndex else { observer.sendFailed(.RatingIndexOutOfBounds); return }
+            guard 1...5 ~= newRating else { return observer.sendFailed(.RatingValueOutOfBounds) }
+            guard 0...9 ~= ratingIndex else { return observer.sendFailed(.RatingIndexOutOfBounds) }
             
             let realm = try! Realm()
             realm.beginWrite()
@@ -34,7 +34,7 @@ struct RatingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+            guard let object = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
             realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
@@ -51,11 +51,11 @@ struct RatingsViewModel {
             switch ratingType {
             case .Ratings:
                 let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
-                guard let object = ratings else { observer.sendFailed(.RatingsNotFound); return }
+                guard let object = ratings else { return observer.sendFailed(.RatingsNotFound) }
                 observer.sendNext(object)
             case .UserRatings:
                 let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-                guard let object = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+                guard let object = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
                 observer.sendNext(object)
             }
             observer.sendCompleted()
@@ -66,7 +66,7 @@ struct RatingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard let userRatings = ratings else { observer.sendNext(false); return }
+            guard let userRatings = ratings else { return observer.sendNext(false) }
             observer.sendNext(userRatings.totalVotes > 0 ? true : false ?? false)
             observer.sendCompleted()
         }
@@ -76,7 +76,7 @@ struct RatingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard newRatings?.isEmpty == false else { observer.sendCompleted(); return }
+            guard newRatings?.isEmpty == false else { return observer.sendCompleted() }
             
             realm.beginWrite()
             if newRatings!.getCelScore() == 0 { newRatings!.totalVotes = 0 }
@@ -93,8 +93,8 @@ struct RatingsViewModel {
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard let allRatings = ratings else { observer.sendFailed(.UserRatingsNotFound); return }
-            guard let allUserRatings = userRatings else { observer.sendFailed(.UserRatingsNotFound); return }
+            guard let allRatings = ratings else { return observer.sendFailed(.UserRatingsNotFound) }
+            guard let allUserRatings = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
             
             var differences: [Double] = Array(count: 10, repeatedValue: 0)
             for (index, rating) in allRatings.generate().enumerate() {
