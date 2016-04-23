@@ -73,7 +73,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         guard Reachability.isConnectedToNetwork() else {
-            TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()); return }
+            RateLimit.execute(name: "sendUserOfflineWarning", limit: 300) {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
+            return }
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
@@ -118,13 +120,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        
-        guard Reachability.isConnectedToNetwork() else { return }
-        
         self.setupData()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
-            RateLimit.execute(name: "DailyAWSRefresh", limit: 10) {
+            guard Reachability.isConnectedToNetwork() else { return }
+            RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: 10) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -163,6 +163,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() {
+        guard Reachability.isConnectedToNetwork() else { return }
         self.showHUD()
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
