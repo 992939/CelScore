@@ -66,8 +66,13 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade
         gauge.delegate = self
-        AIRTimer.after(0.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer) } }
+        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.0
+        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.6
+        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.85
+        let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.95
+        AIRTimer.after(0.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         gaugeView.addSubview(gauge)
+        print("1: \(firstSlow) 2: \(secondSlow) 3: \(thirdSlow) 4: \(finalSlow) maxValue: \(gauge.maxValue)")
         return gaugeView
     }
     
@@ -105,8 +110,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         }
     }
     
-    func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer) {
-        if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }
+    func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
+        if gaugeView.value > finalSlow { gaugeView.value += 0.001 }
+        else if gaugeView.value > thirdSlow { gaugeView.value += 0.002 }
+        else if gaugeView.value > secondSlow { gaugeView.value += 0.005 }
+        else if gaugeView.value > firstSlow { gaugeView.value += 0.009 }
+        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }
         else { timer.invalidate() }
     }
     

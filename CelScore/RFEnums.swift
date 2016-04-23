@@ -69,7 +69,7 @@ enum OverlayInfo: Int {
         case .FirstInterest: return "You've choosen your first area of interest!\n\\nYour selection will be saved automatically."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
         case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- P. David Marshall\n\nYou'll need to register to access the voting booth."
-        case .FirstTrollWarning: return "You've ventured into the trolling zone!\n\nPast a certain point of negative votes, all your votes will be discarded."
+        case .FirstTrollWarning: return "You've entered the trolling zone!\n\nPast a certain ratio of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time."
         case .NetworkError: return "The Internet connection appears to be offline.\nPlease check your network settings."
