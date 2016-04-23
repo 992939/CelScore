@@ -91,8 +91,8 @@ enum OverlayInfo: Int {
         case .FirstVoteDisable: return R.image.spaceship_green()!
         case .FirstTrollWarning: return R.image.nuclear_purple()!
         case .LogoutUser: return R.image.planet_green()!
-        case .LoginError: return R.image.antenna_green()!
-        case .NetworkError: return R.image.antenna_green()!
+        case .LoginError: return R.image.networkError()!
+        case .NetworkError: return R.image.networkError()!
         }
     }
     

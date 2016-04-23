@@ -30,12 +30,10 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 53 images.
+  /// This `R.image` struct is generated, and contains static references to 50 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
-    /// Image `antenna_green`.
-    static let antenna_green = ImageResource(bundle: _R.hostingBundle, name: "antenna_green")
     /// Image `astronaut_green`.
     static let astronaut_green = ImageResource(bundle: _R.hostingBundle, name: "astronaut_green")
     /// Image `celscore_big_white`.
@@ -48,12 +46,6 @@ struct R {
     static let celscore_purple = ImageResource(bundle: _R.hostingBundle, name: "celscore_purple")
     /// Image `celscore_white`.
     static let celscore_white = ImageResource(bundle: _R.hostingBundle, name: "celscore_white")
-    /// Image `compass_green`.
-    static let compass_green = ImageResource(bundle: _R.hostingBundle, name: "compass_green")
-    /// Image `consensus_green`.
-    static let consensus_green = ImageResource(bundle: _R.hostingBundle, name: "consensus_green")
-    /// Image `constellation_green`.
-    static let constellation_green = ImageResource(bundle: _R.hostingBundle, name: "constellation_green")
     /// Image `court_green`.
     static let court_green = ImageResource(bundle: _R.hostingBundle, name: "court_green")
     /// Image `court_small_white`.
@@ -102,6 +94,8 @@ struct R {
     static let mic_green = ImageResource(bundle: _R.hostingBundle, name: "mic_green")
     /// Image `mic_purple`.
     static let mic_purple = ImageResource(bundle: _R.hostingBundle, name: "mic_purple")
+    /// Image `networkError`.
+    static let networkError = ImageResource(bundle: _R.hostingBundle, name: "networkError")
     /// Image `nuclear_green`.
     static let nuclear_green = ImageResource(bundle: _R.hostingBundle, name: "nuclear_green")
     /// Image `nuclear_purple`.
@@ -144,11 +138,6 @@ struct R {
       return UIImage(resource: R.image.anchor_green, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "antenna_green", bundle: ..., traitCollection: ...)`
-    static func antenna_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.antenna_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "astronaut_green", bundle: ..., traitCollection: ...)`
     static func astronaut_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.astronaut_green, compatibleWithTraitCollection: traitCollection)
@@ -177,21 +166,6 @@ struct R {
     /// `UIImage(named: "celscore_white", bundle: ..., traitCollection: ...)`
     static func celscore_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.celscore_white, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "compass_green", bundle: ..., traitCollection: ...)`
-    static func compass_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.compass_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "consensus_green", bundle: ..., traitCollection: ...)`
-    static func consensus_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.consensus_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "constellation_green", bundle: ..., traitCollection: ...)`
-    static func constellation_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.constellation_green, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "court_green", bundle: ..., traitCollection: ...)`
@@ -312,6 +286,11 @@ struct R {
     /// `UIImage(named: "mic_purple", bundle: ..., traitCollection: ...)`
     static func mic_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.mic_purple, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "networkError", bundle: ..., traitCollection: ...)`
+    static func networkError(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.networkError, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "nuclear_green", bundle: ..., traitCollection: ...)`

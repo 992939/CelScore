@@ -16,12 +16,6 @@ import Result
 
 struct CelScoreViewModel {
     
-    func checkNetworkStatusSignal() -> SignalProducer<Bool, NoError> {
-        return SignalProducer { observer, disposable in
-            observer.sendNext(Reachability.isConnectedToNetwork())
-        }
-    }
-    
     func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let serviceClient = BECelScoreAPIClient(forKey: "anonymousAccess")
