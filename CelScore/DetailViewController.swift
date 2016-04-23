@@ -59,8 +59,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 }})
             .start()
         
-        CelebrityViewModel().updateUserActivitySignal(id: celebrityST.id)
+        CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
             .startOn(QueueScheduler())
+            .observeOn(UIScheduler())
             .startWithNext({ activity in self.userActivity = activity })
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
@@ -68,7 +69,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     override func updateUserActivityState(activity: NSUserActivity) {}
 
     override func viewDidLoad() {

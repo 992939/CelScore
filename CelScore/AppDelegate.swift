@@ -94,7 +94,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed)
-                self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+                application.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
         else { FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) }
@@ -102,17 +102,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
-        guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return false }
-        print("id is \(userActivity.userInfo!["id"] as! String)")
+        guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return true }
+        guard let id = userActivity.userInfo!["id"] else { return true }
+        
         let celebST = CelebrityStruct(
-            id: userActivity.userInfo!["id"] as! String,
+            id: id as! String,
             imageURL: userActivity.userInfo!["imageURL"] as! String,
             nickname: userActivity.userInfo!["nickname"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"]as! Bool)
         
-        self.window!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+        application.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
     }
     

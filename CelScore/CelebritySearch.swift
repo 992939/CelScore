@@ -15,7 +15,7 @@ extension CelebrityStruct {
     
     static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
     
-    var userActivityUserInfo: [NSObject: AnyObject] {
+    var userActivityUserInfo: [String: AnyObject] {
         return ["id": id,
          "imageURL": imageURL,
          "nickname": nickname,
