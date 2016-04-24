@@ -11,10 +11,10 @@ import Material
 
 
 //MARK: Error
-enum RatingsError: ErrorType { case RatingsNotFound, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-enum ListError: ErrorType { case EmptyList, IndexOutOfBounds, NoLists }
-enum CelebrityError: ErrorType { case NotFound }
-enum NetworkError: ErrorType { case NotConnected, TimedOut }
+enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
+enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
+enum CelebrityError: Int, ErrorType { case NotFound = 0 }
+enum NetworkError: Int, ErrorType { case NotConnected = 0, TimedOut }
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }
