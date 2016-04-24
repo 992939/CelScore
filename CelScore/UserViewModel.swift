@@ -86,7 +86,7 @@ struct UserViewModel {
             switch loginType {
             case .Facebook:
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { observer.sendFailed(error); return }
+                    guard error == nil else { return observer.sendFailed(error) }
                     observer.sendNext(object)
                     observer.sendCompleted()
                 }
@@ -96,9 +96,9 @@ struct UserViewModel {
                 let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
-                guard clientError == nil else { observer.sendFailed(clientError!); return }
+                guard clientError == nil else { return observer.sendFailed(clientError!) }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { observer.sendFailed(connectionError!); return }
+                    guard connectionError == nil else { return observer.sendFailed(connectionError!) }
                     let json = JSON(data: data!)
                     observer.sendNext(json.arrayObject![0])
                     observer.sendCompleted()
