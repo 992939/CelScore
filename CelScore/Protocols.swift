@@ -55,6 +55,9 @@ extension Labelable {
 
 extension Sociable {
     func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
+        guard Reachability.isConnectedToNetwork() else {
+            return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
+        
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(Constants.kNetworkRetry)

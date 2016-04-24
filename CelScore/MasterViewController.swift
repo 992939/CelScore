@@ -73,12 +73,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        guard Reachability.isConnectedToNetwork() else {
-            TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
-            return
-        }
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+            guard Reachability.isConnectedToNetwork() else {
+                return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
+            
             RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
