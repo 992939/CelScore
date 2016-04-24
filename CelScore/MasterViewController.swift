@@ -129,7 +129,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-                    .flatMapError { _ in SignalProducer.empty }
+                    .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: 5.0, onScheduler: QueueScheduler())
+                    .flatMapError { error in print("notificationError: \(error.description)"); return SignalProducer.empty }
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
                     .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
