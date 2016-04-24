@@ -164,6 +164,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         guard Reachability.isConnectedToNetwork() else { return }
+        
         self.showHUD()
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
