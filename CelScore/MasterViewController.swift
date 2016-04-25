@@ -122,11 +122,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
         
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
-        self.view.addSubview(revealingSplashView)
-        revealingSplashView.animationType = SplashAnimationType.WoobleAndZoomOut
-        revealingSplashView.startAnimation(){ print("Completed") }
-        
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
             RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: 10) {
@@ -171,7 +166,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() {
-        guard Reachability.isConnectedToNetwork() else { return }
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
+        self.view.addSubview(revealingSplashView)
+        guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation(){ print("no network") } }
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -185,6 +182,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
                 return SignalProducer.empty }
+            .on(next: { _ in
+                revealingSplashView.animationType = SplashAnimationType.WoobleAndZoomOut
+                revealingSplashView.startAnimation(){ print("Completed") }})
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
