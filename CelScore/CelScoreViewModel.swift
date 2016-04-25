@@ -16,7 +16,7 @@ import Result
 
 struct CelScoreViewModel {
     
-    func getFromAWSSignal(dataType dataType: AWSDataType, timeInterval: NSTimeInterval = 10) -> SignalProducer<AnyObject, NSError> {
+    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let serviceClient = BECelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
@@ -27,7 +27,7 @@ struct CelScoreViewModel {
             case .Ratings: awsCall = serviceClient.celebratingservicePost()
             }
             
-            let block = awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
+            awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 guard task.cancelled == false else { observer.sendInterrupted(); return task }
                 
@@ -50,10 +50,9 @@ struct CelScoreViewModel {
                     }
                 })
                 observer.sendNext(task.result!)
+                observer.sendCompleted()
                 return task
             })
-            AIRTimer.every(timeInterval) { timer in block }
-            block
         }
     }
     

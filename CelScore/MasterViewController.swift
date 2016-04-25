@@ -131,7 +131,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
                     .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
                     .observeOn(UIScheduler())
-                    .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+                    .flatMapError { error in print("NSNotificationCenter"); if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
                         return SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
@@ -168,7 +168,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func setupData() {
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
         self.view.addSubview(revealingSplashView)
-        guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation(){ print("no network") } }
+        guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation() }
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -178,14 +178,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .observeOn(UIScheduler())
-            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
-            .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
-                return SignalProducer.empty }
             .on(next: { _ in
                 revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
-                revealingSplashView.startAnimation(){ print("Completed") }})
-            .observeOn(UIScheduler())
+                revealingSplashView.startAnimation()})
+            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
+            .flatMapError { error in print("setupData: \(error)"); if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
+                return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }

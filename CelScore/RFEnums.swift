@@ -15,7 +15,7 @@ enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFoun
 enum CognitoError: Int, ErrorType { case NoDataSet = 0 }
 enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
 enum CelebrityError: Int, ErrorType { case NotFound = 0 }
-enum NetworkError: Int, ErrorType { case NotConnected = 0, TimedOut }
+enum NetworkError: Int, ErrorType { case NotConnected = 1, TimedOut }
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }
