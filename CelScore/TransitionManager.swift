@@ -72,6 +72,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
                     let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
                     let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as? CelebrityTableViewCell
                     cell?.profilePicNode.hidden = false
+                    masterVC.celebrityTableView.reloadRowsAtIndexPaths([masterVC.celebrityTableView.indexPathForSelectedRow!], withRowAnimation: .None)
                 }
                 celebSnapshot.removeFromSuperview()
                 transitionContext.completeTransition(true)

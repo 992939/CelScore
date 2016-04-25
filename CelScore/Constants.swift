@@ -20,8 +20,9 @@ struct Constants {
     static let kTrollingWarning: CGFloat = 2.0
     static let kTrollingThreshold: CGFloat = 1.5
     static let kDayInSeconds: NSTimeInterval = 86400.0
+    static let kUpdateRatings: NSTimeInterval = 30.0
     static let kMaxFollowedCelebrities: Int = 10
-    static let kTimeout: NSTimeInterval = 10.0
+    static let kTimeout: NSTimeInterval = 7.0
     static let kNetworkRetry: Int = 2
     static let kFontSize: CGFloat = 16.0
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width

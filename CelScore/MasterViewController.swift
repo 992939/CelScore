@@ -54,21 +54,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
         
         MaterialAnimation.delay(0.7) {
-            if let index = self.celebrityTableView.indexPathForSelectedRow {
-                if self.socialButton.hidden == true { self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
-                else { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
-                SettingsViewModel().calculateUserAverageCelScoreSignal()
-                    .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
-                        return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
-                    .on(next: { first in let firstTime = first as! Bool
-                        if firstTime {
-                            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
-                            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
-                        }})
-                    .start()
-            }
+            if self.socialButton.hidden == false { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
+            
+            SettingsViewModel().calculateUserAverageCelScoreSignal()
+                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
+                .flatMapError { _ in SignalProducer.empty }
+                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
+                    return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
+                .on(next: { first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
+                    }})
+                .start()
         }
     }
     
@@ -78,7 +76,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
-            RateLimit.execute(name: "updateUserRatingsOnAWS", limit: 10) {
+            RateLimit.execute(name: "updateRatingsBothWays", limit: Constants.kUpdateRatings) {
                 SettingsViewModel().calculateUserAverageCelScoreSignal()
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                     .flatMapError { _ in SignalProducer.empty }
@@ -124,14 +122,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
-            RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: 10) {
+            RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: Constants.kDayInSeconds) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
                     .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
                     .observeOn(UIScheduler())
-                    .flatMapError { error in print("NSNotificationCenter"); if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+                    .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
                         return SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
@@ -182,8 +180,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 revealingSplashView.startAnimation()})
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
-            .flatMapError { error in print("setupData: \(error)"); if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
+            .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
+                TAOverlay.setCompletionBlock({ _ in revealingSplashView.startAnimation() })
+                }
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)

@@ -70,7 +70,7 @@ extension Sociable {
             .on(failed: { _ in self.dismissHUD() })
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
-            .flatMapError { error in print("loginFlow"); if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+            .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.dismissHUD() }) }
                 return SignalProducer.empty }
