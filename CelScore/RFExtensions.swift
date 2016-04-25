@@ -25,8 +25,9 @@ extension UIView {
 extension UIButton {
     override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let buttonSize = self.frame.size
-        let widthToAdd = (75-buttonSize.width > 0) ? 75-buttonSize.width : 0
-        let heightToAdd = (75-buttonSize.height > 0) ? 75-buttonSize.height : 0
+        let extraHitArea = UIDevice.getButtonExtraArea()
+        let widthToAdd = (extraHitArea - buttonSize.width > 0) ? extraHitArea - buttonSize.width : 0
+        let heightToAdd = (extraHitArea - buttonSize.height > 0) ? extraHitArea - buttonSize.height : 0
         let largerFrame = CGRect(x: 0-(widthToAdd/2), y: 0-(heightToAdd/2), width: buttonSize.width+widthToAdd, height: buttonSize.height+heightToAdd)
         return (CGRectContainsPoint(largerFrame, point)) ? self : nil
     }
@@ -164,6 +165,17 @@ extension UIDevice {
         }
     }
     
+    static func getButtonExtraArea() -> CGFloat {
+        let position: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: position =  30
+        case Constants.kIPhone5_height: position = 30
+        case Constants.kIPhone6_height: position = 65
+        default: position = 65
+        }
+        return position
+    }
+    
     static func getVerticalStackPercent() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {
@@ -256,7 +268,7 @@ extension UIDevice {
         let height: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: height = 102.5
-        case Constants.kIPhone5_height: height = 90
+        case Constants.kIPhone5_height: height = 80
         case Constants.kIPhone6_height: height = 80
         default: height = 75
         }

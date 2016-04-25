@@ -35,7 +35,7 @@ struct UserViewModel {
             }
             Constants.kCredentialsProvider.refresh().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                observer.sendNext(task.result!)
+                observer.sendNext(task)
                 observer.sendCompleted()
                 return task
             })
