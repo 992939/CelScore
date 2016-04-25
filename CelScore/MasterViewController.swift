@@ -13,6 +13,7 @@ import HMSegmentedControl
 import AIRTimer
 import RateLimit
 import Dwifft
+import RevealingSplashView
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable {
@@ -121,6 +122,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
         
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
+        self.view.addSubview(revealingSplashView)
+        revealingSplashView.animationType = SplashAnimationType.WoobleAndZoomOut
+        revealingSplashView.startAnimation(){ print("Completed") }
+        
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
             RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: 10) {
@@ -166,8 +172,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         guard Reachability.isConnectedToNetwork() else { return }
-        
-        self.showHUD()
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -185,9 +189,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in
-                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                self.dismissHUD() })
+            .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }

@@ -33,6 +33,7 @@ target 'CelScore' do
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3'
     pod 'UAObfuscatedString', '0.3.2'
+    pod 'RevealingSplashView', '~> 0.0'
 end
 
 target 'CelScoreTests' do

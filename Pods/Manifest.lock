@@ -53,6 +53,7 @@ PODS:
   - RealmSwift (0.99.0):
     - Realm (= 0.99.0)
   - Result (2.0.0)
+  - RevealingSplashView (0.0.5)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)
   - RealmSwift (~> 0.99.0)
+  - RevealingSplashView (~> 0.0)
   - SDWebImage (~> 3.7)
   - SMSegmentView (~> 1.1)
   - SVProgressHUD (~> 2.0.3)
@@ -123,6 +125,7 @@ SPEC CHECKSUMS:
   Realm: cf275f109b94e5399896960c90285a043edb3d56
   RealmSwift: f40e5634bbc74f063163561d02acc4aa040d40a5
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  RevealingSplashView: f38cd6be822804e69fb5f124a0169d0bb4f38f23
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
