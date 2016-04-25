@@ -183,7 +183,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
                 return SignalProducer.empty }
             .on(next: { _ in
-                revealingSplashView.animationType = SplashAnimationType.WoobleAndZoomOut
+                revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 revealingSplashView.startAnimation(){ print("Completed") }})
             .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
