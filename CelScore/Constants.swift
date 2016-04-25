@@ -21,7 +21,7 @@ struct Constants {
     static let kTrollingThreshold: CGFloat = 1.5
     static let kDayInSeconds: NSTimeInterval = 86400.0
     static let kMaxFollowedCelebrities: Int = 10
-    static let kTimeout: NSTimeInterval = 5.0
+    static let kTimeout: NSTimeInterval = 10.0
     static let kNetworkRetry: Int = 2
     static let kFontSize: CGFloat = 16.0
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
@@ -52,7 +52,7 @@ struct Constants {
     static let kSearchListId: String = "0099"
     
     //SettingsVC
-    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.83 * kScreenWidth)
+    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.80 * kScreenWidth)
     static let kPickerViewHeight: CGFloat = kIsOriginalIphone ? 100 : 160
     static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
     

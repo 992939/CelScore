@@ -153,7 +153,7 @@ struct UserViewModel {
                     }
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
-                    guard userRatingsArray.count > 0 else { observer.sendFailed(NSError(domain: "NoUserRatings", code: 1, userInfo: nil)); return task }
+                    guard userRatingsArray.count > 0 else { observer.sendCompleted(); return task }
                     for index in 0..<userRatingsArray.count {
                         let ratings: UserRatingsModel = userRatingsArray[index]
                         dataset.setString(ratings.interpolation(), forKey: ratings.id)
@@ -164,24 +164,24 @@ struct UserViewModel {
                     }
                 case .UserSettings:
                     let model = realm.objects(SettingsModel).first
-                    guard let settings = model else { observer.sendFailed(NSError(domain: "NoSettings", code: 1, userInfo: nil)); return task }
-                    if settings.isSynced == false {
-                        dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
-                        dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
-                        dataset.setString(String(settings.publicService), forKey: "publicService")
-                        dataset.setString(String(settings.consensusBuilding), forKey: "consensusBuilding")
-                        dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
-                        dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
-                        dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
-                        dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
-                        dataset.setString(String(settings.isFirstStars), forKey: "isFirstStars")
-                        dataset.setString(String(settings.isFirstNegative), forKey: "isFirstNegative")
-                        dataset.setString(String(settings.isFirstCompleted), forKey: "isFirstCompleted")
-                        dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
-                        dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
-                        dataset.setString(String(settings.isFirstSocialDisabled), forKey: "isFirstSocialDisabled")
-                        dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
-                    } else { observer.sendCompleted() }
+                    guard let settings = model else { observer.sendCompleted(); return task }
+                    guard settings.isSynced == false else  { observer.sendCompleted(); return task }
+                    
+                    dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
+                    dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
+                    dataset.setString(String(settings.publicService), forKey: "publicService")
+                    dataset.setString(String(settings.consensusBuilding), forKey: "consensusBuilding")
+                    dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
+                    dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
+                    dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
+                    dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
+                    dataset.setString(String(settings.isFirstStars), forKey: "isFirstStars")
+                    dataset.setString(String(settings.isFirstNegative), forKey: "isFirstNegative")
+                    dataset.setString(String(settings.isFirstCompleted), forKey: "isFirstCompleted")
+                    dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
+                    dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
+                    dataset.setString(String(settings.isFirstSocialDisabled), forKey: "isFirstSocialDisabled")
+                    dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
                 }
                 
                 dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
@@ -223,7 +223,7 @@ struct UserViewModel {
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
                     let settings: SettingsModel = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    guard dico.isEmpty == false else { observer.sendFailed(NSError(domain: "NoDico", code: 1, userInfo: nil)); return task }
+                    guard dico.isEmpty == false else { observer.sendFailed(CognitoError.NoDataSet as NSError); return task }
                     realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue

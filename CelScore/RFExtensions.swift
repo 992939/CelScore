@@ -201,7 +201,7 @@ extension UIDevice {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: diameter = 95.0
-        case Constants.kIPhone5_height: diameter = 120.0
+        case Constants.kIPhone5_height: diameter = 150.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
         }
@@ -212,7 +212,7 @@ extension UIDevice {
         let padding: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: padding = -5.0
-        case Constants.kIPhone5_height: padding = 20.0
+        case Constants.kIPhone5_height: padding = 0.0
         case Constants.kIPhone6_height: padding = 20.0
         default: padding = 20.0
         }

@@ -66,13 +66,12 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade
         gauge.delegate = self
-        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.2
-        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.7
-        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.85
+        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.1
+        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.6
+        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.8
         let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.93
-        AIRTimer.after(0.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
+        AIRTimer.after(1.0) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         gaugeView.addSubview(gauge)
-        //print("1: \(firstSlow) 2: \(secondSlow) 3: \(thirdSlow) 4: \(finalSlow) maxValue: \(gauge.maxValue)")
         return gaugeView
     }
     

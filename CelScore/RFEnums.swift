@@ -12,6 +12,7 @@ import Material
 
 //MARK: Error
 enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
+enum CognitoError: Int, ErrorType { case NoDataSet = 0 }
 enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
 enum CelebrityError: Int, ErrorType { case NotFound = 0 }
 enum NetworkError: Int, ErrorType { case NotConnected = 0, TimedOut }
@@ -54,6 +55,7 @@ enum OverlayInfo: Int {
     case LogoutUser
     case LoginError
     case NetworkError
+    case TimeoutError
     
     func message() -> String {
         switch self {
@@ -73,6 +75,7 @@ enum OverlayInfo: Int {
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time."
         case .NetworkError: return "The Internet connection appears to be offline.\nPlease check your network settings."
+        case .TimeoutError: return "We're unable to update you with the latest data from our servers.\n\nIf the issue persists, please contact @GreyEcologist."
         }
     }
     
@@ -94,6 +97,7 @@ enum OverlayInfo: Int {
         case .LogoutUser: return R.image.planet_green()!
         case .LoginError: return R.image.networkError()!
         case .NetworkError: return R.image.networkError()!
+        case .TimeoutError: return R.image.networkError()!
         }
     }
     
