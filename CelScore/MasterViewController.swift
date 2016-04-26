@@ -43,7 +43,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,11 +50,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.enabled = false
         self.sideNavigationController?.animationDuration = 0.4
         
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
-        
         MaterialAnimation.delay(0.7) {
             if self.socialButton.hidden == false { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
-            
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
