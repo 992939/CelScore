@@ -13,6 +13,7 @@ import HMSegmentedControl
 import AIRTimer
 import RateLimit
 import Dwifft
+import Result
 import RevealingSplashView
 
 
@@ -73,7 +74,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
             RateLimit.execute(name: "updateRatingsBothWays", limit: Constants.kUpdateRatings) {
-                SettingsViewModel().calculateUserAverageCelScoreSignal()
+                CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+                    .observeOn(UIScheduler())
+                    .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                        return SettingsViewModel().calculateUserAverageCelScoreSignal() }
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -86,6 +91,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        print("did it!")
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
                     .start()
             }

@@ -153,7 +153,7 @@ struct UserViewModel {
                     }
                 case .UserRatings:
                     let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
-                    guard userRatingsArray.count > 0 else { observer.sendCompleted(); return task }
+                    guard userRatingsArray.count > 0 else { observer.sendNext(userRatingsArray); observer.sendCompleted(); return task }
                     for index in 0..<userRatingsArray.count {
                         let ratings: UserRatingsModel = userRatingsArray[index]
                         dataset.setString(ratings.interpolation(), forKey: ratings.id)
@@ -164,8 +164,8 @@ struct UserViewModel {
                     }
                 case .UserSettings:
                     let model = realm.objects(SettingsModel).first
-                    guard let settings = model else { observer.sendCompleted(); return task }
-                    guard settings.isSynced == false else  { observer.sendCompleted(); return task }
+                    guard let settings = model else { observer.sendNext(model!); observer.sendCompleted(); return task }
+                    guard settings.isSynced == false else  { observer.sendNext(model!); observer.sendCompleted(); return task }
                     
                     dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                     dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
