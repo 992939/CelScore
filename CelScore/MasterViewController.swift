@@ -73,7 +73,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
-            RateLimit.execute(name: "updateRatingsBothWays", limit: Constants.kUpdateRatings) {
+            RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
                     .observeOn(UIScheduler())
                     .flatMapError { _ in SignalProducer.empty }
@@ -91,7 +91,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        print("did it!")
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
                     .start()
             }

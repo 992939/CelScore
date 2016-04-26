@@ -12,6 +12,7 @@ import Fabric
 import TwitterKit
 import AWSCognito
 import Material
+import RateLimit
 
 
 @UIApplicationMain
@@ -117,9 +118,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationDidBecomeActive(application: UIApplication) {
+        SettingsViewModel().updateTodayWidgetSignal().start()
+        RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+    }
+    
     func applicationWillResignActive(application: UIApplication) { SettingsViewModel().updateTodayWidgetSignal().start() }
-    func applicationDidBecomeActive(application: UIApplication) { SettingsViewModel().updateTodayWidgetSignal().start() }
+    func applicationWillTerminate(application: UIApplication) {}
     func applicationDidEnterBackground(application: UIApplication) {}
     func applicationWillEnterForeground(application: UIApplication) {}
-    func applicationWillTerminate(application: UIApplication) {}
 }
