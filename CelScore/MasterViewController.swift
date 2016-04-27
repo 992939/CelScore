@@ -70,6 +70,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
+        
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
@@ -189,7 +191,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+            .on(next: { list in
+                print("list size: \(list.celebList.count)")
+                 print("A. diff.rows \(self.diffCalculator.rows.count)")
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
+                print("B. diff.rows \(self.diffCalculator.rows.count)")
+            })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }

@@ -56,7 +56,7 @@ struct CelScoreViewModel {
         }
     }
     
-    func getNewCelebsSignal()-> SignalProducer<String, CelebrityError> {
+    func getNewCelebsSignal() -> SignalProducer<String, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)

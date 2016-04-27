@@ -24,6 +24,7 @@ struct SettingsViewModel {
             let userRatingsCount: Int = realm.objects(UserRatingsModel).count
             guard userRatingsCount > 4 else { observer.sendNext(0); return }
             let celebrityCount: Int = realm.objects(CelebrityModel).count
+            print("celeb count: \(celebrityCount) userRatings count: \(userRatingsCount)")
             observer.sendNext(CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
             observer.sendCompleted()
         }

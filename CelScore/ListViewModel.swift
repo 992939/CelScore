@@ -18,6 +18,7 @@ struct ListViewModel {
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList = list else { return observer.sendFailed(.EmptyList) }
+            print("getlist id: \(celebList.id) count: \(celebList.celebList.count)")
             observer.sendNext(celebList)
             observer.sendCompleted()
         }
