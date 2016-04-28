@@ -60,7 +60,6 @@ struct ListViewModel {
                 
                 realm.beginWrite()
                 for (index, _) in notExisting.enumerate() { celebList.celebList.removeAtIndex(index) }
-                print("removed id at index: \(index)")
                 realm.add(celebList, update: true)
                 try! realm.commitWrite()
             })
