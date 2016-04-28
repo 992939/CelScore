@@ -131,13 +131,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+                    .observeOn(UIScheduler())
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().sanitizeListsSignal() }
                     .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                         return ListViewModel().updateListSignal(listId: list.getId()) }
-                    .observeOn(UIScheduler())
+                    .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
+                        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
+                        return ListViewModel().getListSignal(listId: list.getId()) }
                     .on(next: { list in
                         print("notification A. diff.rows \(self.diffCalculator.rows.count)")
                         self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
