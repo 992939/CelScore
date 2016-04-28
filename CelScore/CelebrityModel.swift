@@ -74,6 +74,16 @@ final class CelebrityModel: Object {
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
         else { self.isNew = true }
+        
+        let rating = realm.objects(RatingsModel).filter("id = %@", self.id).first
+        guard rating?.isEmpty == false  else {
+            print("newRating with id: \(self.id)")
+            realm.beginWrite()
+            let newRating = RatingsModel(id: self.id)
+            realm.add(newRating, update: false)
+            try! realm.commitWrite()
+            return
+        }
     }
     
     //MARK: Method

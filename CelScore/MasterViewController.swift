@@ -125,24 +125,33 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
-            RateLimit.execute(name: "updateCelebsAndListsfromAWS", limit: Constants.kDayInSeconds) {
+            RateLimit.execute(name: "updateFromAWS", limit: 10) { //Constants.kDayInSeconds) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
-                    .observeOn(UIScheduler())
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                        return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
-                    .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
-                    .observeOn(UIScheduler())
-                    .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
-                        return SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-                    .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
                     .flatMapError { _ in SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+                        return ListViewModel().sanitizeListsSignal() }
                     .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                        return ListViewModel().updateListSignal(listId: list.getId() )}
+                        return ListViewModel().updateListSignal(listId: list.getId()) }
                     .observeOn(UIScheduler())
-                    .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                    .on(next: { list in
+                        print("A. diff.rows \(self.diffCalculator.rows.count)")
+                        self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
+                        print("B. diff.rows \(self.diffCalculator.rows.count)")
+                    })
+                    .flatMapError { _ in SignalProducer.empty }
+                    //.timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
+//                    .observeOn(UIScheduler())
+//                    .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
+//                        TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
+//                        return SignalProducer.empty }
+                    .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                    .observeOn(UIScheduler())
+                    .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
                     .start()
             }
         }
@@ -191,12 +200,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in
-                print("list size: \(list.celebList.count)")
-                 print("A. diff.rows \(self.diffCalculator.rows.count)")
-                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                print("B. diff.rows \(self.diffCalculator.rows.count)")
-            })
+            .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
@@ -240,7 +244,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: ASTableView methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int { print(self.diffCalculator.rows.count); return self.diffCalculator.rows.count > 0 ? self.diffCalculator.rows.count : 1  }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {

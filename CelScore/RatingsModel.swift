@@ -16,16 +16,16 @@ class RatingsModel: Object, CollectionType {
     //MARK: Properties
     dynamic var id: String = ""
     dynamic var updatedAt: String = ""
-    dynamic var rating1: Double = 0
-    dynamic var rating2: Double = 0
-    dynamic var rating3: Double = 0
-    dynamic var rating4: Double = 0
-    dynamic var rating5: Double = 0
-    dynamic var rating6: Double = 0
-    dynamic var rating7: Double = 0
-    dynamic var rating8: Double = 0
-    dynamic var rating9: Double = 0
-    dynamic var rating10: Double = 0
+    dynamic var rating1: Double = 3
+    dynamic var rating2: Double = 3
+    dynamic var rating3: Double = 3
+    dynamic var rating4: Double = 3
+    dynamic var rating5: Double = 3
+    dynamic var rating6: Double = 3
+    dynamic var rating7: Double = 3
+    dynamic var rating8: Double = 3
+    dynamic var rating9: Double = 3
+    dynamic var rating10: Double = 3
     dynamic var variance1: Double = 0
     dynamic var variance2: Double = 0
     dynamic var variance3: Double = 0
@@ -36,7 +36,7 @@ class RatingsModel: Object, CollectionType {
     dynamic var variance8: Double = 0
     dynamic var variance9: Double = 0
     dynamic var variance10: Double = 0
-    dynamic var totalVotes: Int = 0
+    dynamic var totalVotes: Int = 100
     dynamic var isSynced: Bool = true
     
     var startIndex: Int { get { return 0 }}
