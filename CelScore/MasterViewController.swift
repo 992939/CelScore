@@ -139,9 +139,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return ListViewModel().updateListSignal(listId: list.getId()) }
                     .observeOn(UIScheduler())
                     .on(next: { list in
-                        print("A. diff.rows \(self.diffCalculator.rows.count)")
+                        print("notification A. diff.rows \(self.diffCalculator.rows.count)")
                         self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                        print("B. diff.rows \(self.diffCalculator.rows.count)")
+                        print("notification B. diff.rows \(self.diffCalculator.rows.count)")
                     })
                     .flatMapError { _ in SignalProducer.empty }
                     //.timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
@@ -200,7 +200,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+            .on(next: { list in
+                print("setup A. diff.rows \(self.diffCalculator.rows.count)")
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
+                print("setup B. diff.rows \(self.diffCalculator.rows.count)")
+            })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
@@ -216,7 +220,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getListSignal(listId: list.getId())
             .observeOn(UIScheduler())
-            .startWithNext { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
+            .startWithNext { list in
+                print("changelist A. diff.rows \(self.diffCalculator.rows.count)")
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
+                print("changelist B. diff.rows \(self.diffCalculator.rows.count)")
+        }
     }
     
     //MARK: Sociable
