@@ -180,17 +180,20 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(revealingSplashView)
         guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation() }
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
-            .observeOn(UIScheduler())
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
+                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .observeOn(UIScheduler())
             .on(next: { _ in
                 revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 revealingSplashView.startAnimation()})
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+                return ListViewModel().sanitizeListsSignal() }
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
             .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
