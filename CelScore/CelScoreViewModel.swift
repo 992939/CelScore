@@ -66,10 +66,11 @@ struct CelScoreViewModel {
             guard celebs.count > 0 else { return observer.sendFailed(.NotFound) }
 
             var message: String = celebs.first!.nickName + " has been added to the score!\n\n"
-            if celebs.count > 1 { message = message + "\(celebs.count) stars have been added to the score. " }
+            if celebs.count == 2 { message = message + "\(celebs.count-1) more star has been added to the score. " }
+            else if celebs.count > 2 { message = message + "\(celebs.count-1) more stars have been added to the score. " }
             message = message + "All the recently added stars are available in the \"New\" section."
             guard celebs.count < 100 else { return observer.sendCompleted() }
-            observer.sendNext((message, celebs.first!.picture2x))
+            observer.sendNext((message, celebs.first!.picture3x))
             
             celebs.forEach({ celeb in
                 realm.beginWrite()
