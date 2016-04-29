@@ -21,6 +21,7 @@ target 'CelScore' do
     pod 'FBSDKLoginKit', '~> 4.10.1'
     pod 'FBSDKCoreKit', '~> 4.10.1'
     pod 'Fabric', '~> 1.6.7'
+    pod 'Crashlytics', '~> 3.7.0'
     pod 'TwitterKit', '~> 2.0.2'
     pod 'TwitterCore', '~> 2.0.2'
     pod 'RateLimit', '~> 1.2'
