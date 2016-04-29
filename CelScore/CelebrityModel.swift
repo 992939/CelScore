@@ -77,7 +77,6 @@ final class CelebrityModel: Object {
         
         let rating = realm.objects(RatingsModel).filter("id = %@", self.id).first
         guard rating?.isEmpty == false  else {
-            print("newRating with id: \(self.id)")
             realm.beginWrite()
             let newRating = RatingsModel(id: self.id)
             realm.add(newRating, update: false)
