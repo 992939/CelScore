@@ -144,9 +144,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return ListViewModel().getListSignal(listId: list.getId()) }
                     .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                    .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
                     .observeOn(UIScheduler())
-                    .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
+                    .on(next: { celebInfo in TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions()) })
                     .start()
             }
         }

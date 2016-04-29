@@ -14,6 +14,9 @@ import Social
 import Result
 
 
+public typealias NewCelebInfo = (text: String, image: String)
+
+
 struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
@@ -56,7 +59,7 @@ struct CelScoreViewModel {
         }
     }
     
-    func getNewCelebsSignal() -> SignalProducer<String, CelebrityError> {
+    func getNewCelebsSignal() -> SignalProducer<NewCelebInfo, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
@@ -66,7 +69,7 @@ struct CelScoreViewModel {
             if celebs.count > 1 { message = message + "\(celebs.count) stars have been added to the score. " }
             message = message + "All the recently added stars are available in the \"New\" section."
             guard celebs.count < 100 else { return observer.sendCompleted() }
-            observer.sendNext(message)
+            observer.sendNext((message, celebs.first!.picture2x))
             
             celebs.forEach({ celeb in
                 realm.beginWrite()
