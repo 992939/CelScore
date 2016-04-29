@@ -71,7 +71,6 @@ struct CelebrityViewModel {
             
             let celebList = realm.objects(CelebrityModel)
             let celebIDsList: [String] = celebList.map({ celeb in return celeb.id })
-            print("A: \(celebIDsList.count) B: \(celebIDsOnPublicOpinionList.count)")
             guard celebIDsList.count > celebIDsOnPublicOpinionList.count else { return observer.sendCompleted() }
             
             let set1 = Set(celebIDsList)

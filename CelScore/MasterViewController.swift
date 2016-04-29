@@ -101,6 +101,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .None
@@ -149,11 +150,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .start()
             }
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
     }
     
     func openSettings() {
@@ -258,7 +254,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
-        self.presentViewController(detailVC, animated: true, completion: nil)
+        self.presentViewController(detailVC, animated: false, completion: nil)
     }
     
     func showSearchBar() {
