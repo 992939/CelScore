@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Material
 
 
 //MARK: Error
@@ -16,6 +15,7 @@ enum CognitoError: Int, ErrorType { case NoDataSet = 0 }
 enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
 enum CelebrityError: Int, ErrorType { case NotFound = 0 }
 enum NetworkError: Int, ErrorType { case NotConnected = 1, TimedOut }
+
 
 //MARK: Misc.
 enum RatingsType { case Ratings, UserRatings }

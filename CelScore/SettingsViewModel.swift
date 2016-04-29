@@ -14,18 +14,24 @@ import Result
 struct SettingsViewModel {
     
     //MARK: Widget
-    enum SettingsError: ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
+    enum SettingsError: Int, ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
     enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
-            let userRatingsCount: Int = realm.objects(UserRatingsModel).count
-            guard userRatingsCount > 4 else { observer.sendNext(0); return }
-            let celebrityCount: Int = realm.objects(CelebrityModel).count
-            print("celeb count: \(celebrityCount) userRatings count: \(userRatingsCount)")
-            observer.sendNext(CGFloat(Double(userRatingsCount)/Double(celebrityCount)))
+            let userRatings = realm.objects(UserRatingsModel)
+            guard userRatings.count > 4 else { return observer.sendNext(0) }
+            
+            let publicList = realm.objects(ListsModel).filter("id = '0001'").first
+            guard let list = publicList else { return observer.sendNext(0) }
+            
+            let userRatingCount = list.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                return userRatings.enumerate().contains({ (_, rating: RatingsModel) -> Bool in return rating.id == item.celebId.id })
+            })
+            
+            observer.sendNext(CGFloat(Double(userRatingCount.count)/Double(list.celebList.count)))
             observer.sendCompleted()
         }
     }

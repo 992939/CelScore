@@ -143,11 +143,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return ListViewModel().getListSignal(listId: list.getId()) }
                     .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                     .flatMapError { _ in SignalProducer.empty }
-                    //.timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
-//                    .observeOn(UIScheduler())
-//                    .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-//                        TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions()) }
-//                        return SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<String, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
                     .observeOn(UIScheduler())
                     .on(next: { text in TAOverlay.showOverlayWithLabel(text, image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions()) })
