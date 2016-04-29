@@ -238,7 +238,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: ASTableView methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int { print(self.diffCalculator.rows.count); return self.diffCalculator.rows.count > 0 ? self.diffCalculator.rows.count : 1  }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
     func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
@@ -254,7 +254,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
-        self.presentViewController(detailVC, animated: false, completion: nil)
+        self.presentViewController(detailVC, animated: true, completion: nil)
     }
     
     func showSearchBar() {
