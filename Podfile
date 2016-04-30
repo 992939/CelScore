@@ -41,7 +41,7 @@ target 'CelScoreTests' do
     shared_pods
 end
 
-target 'TheScore' do
+target 'TheObservatory' do
     shared_pods
 end
 

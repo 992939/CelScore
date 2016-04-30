@@ -94,7 +94,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TheScore.xcscheme</key>
+		<key>Pods-TheObservatory.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -292,17 +292,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>803661622B7893179208203BB23BE220</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>80A51EBE3299B2546440D5D2EC055A1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>85CDB899143013D74628361C6C837823</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>88D406C9A8F4ADDD3806B485B64D56C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,8 +1,8 @@
 //
 //  TodayViewController.swift
-//  TheScore
+//  TheObservatory
 //
-//  Created by Gareth.K.Mensah on 4/19/16.
+//  Created by Gareth.K.Mensah on 4/30/16.
 //  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
