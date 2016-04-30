@@ -92,11 +92,11 @@ final class InfoViewController: ASViewController, Labelable {
     
     func createCelScoreText(score: Double) -> NSAttributedString {
         var attributedText = NSMutableAttributedString()
-        let difference: Double = score.roundToPlaces(2) - self.celebST.prevScore.roundToPlaces(2)
-        let margin: String = difference >= 0 ? "(+\(String(difference.roundToPlaces(2)))) " : "(\(String(difference.roundToPlaces(2)))) "
-        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(14.0), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
-        attributedText = NSMutableAttributedString(string: margin, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : difference > 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+        let percent: Double = (score/self.celebST.prevScore) * 100 - 100
+        let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
+        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+        attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
+        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : percent >= 0 ? Constants.kLightGreenShade : Constants.kWineShade]
         let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
         attributedText.appendAttributedString(attrString)
         return attributedText
