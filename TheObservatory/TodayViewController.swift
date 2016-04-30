@@ -16,48 +16,31 @@ import PINCache
 final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     //MARK: Properties
-    let userDefaults: NSUserDefaults!
+    let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
     let maxNumberOfRows: Int = 10
     var items = [AnyObject]()
-    var expanded: Bool {
-        get { return true }
-        set (newExpanded) { self.userDefaults.setBool(newExpanded, forKey: "expanded"); self.userDefaults.synchronize() }
-    }
     
     //MARK: Initializers
-    required init(coder aDecoder: NSCoder) {
-        self.userDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
-        self.userDefaults.synchronize()
-        let rowsNumber: Int = self.userDefaults.integerForKey("count")
-        super.init(coder: aDecoder)!
-        
-        guard rowsNumber > 0 else { return }
-        for index in 0..<rowsNumber {
-            let x = self.userDefaults.objectForKey(String(index))!
-            self.items.append(x)
-        }
-    }
+    required init(coder aDecoder: NSCoder) { super.init(coder: aDecoder)! }
     
     //MARK: Methods
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updatePreferredContentSize()
+    }
+    
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         self.userDefaults.synchronize()
-        self.items = []
         let rowsNumber: Int = self.userDefaults.integerForKey("count")
-        guard rowsNumber > 0 else { return }
+        guard rowsNumber > 0 else { return completionHandler(.Failed) }
+        
         for index in 0..<rowsNumber {
             let x = self.userDefaults.objectForKey(String(index))!
             self.items.append(x)
         }
         self.toggleExpand()
+        completionHandler(.NewData)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updatePreferredContentSize()
-    }
-    
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) { completionHandler(.NewData) }
     
     func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) { return UIEdgeInsetsZero }
     
@@ -67,6 +50,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        //coordinator.animateAlongsideTransition({ context in self.tableView.frame = CGRectMake(0, 0, size.width, size.height)}, completion: nil)
     }
     
     // MARK: Table view data source
@@ -97,7 +81,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: expand
     func toggleExpand() {
-        self.expanded = !self.expanded
         self.updatePreferredContentSize()
         self.tableView.reloadData()
     }
