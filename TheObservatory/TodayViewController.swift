@@ -26,7 +26,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.updatePreferredContentSize()
+        self.toggleExpand()
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
@@ -50,7 +50,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        //coordinator.animateAlongsideTransition({ context in self.tableView.frame = CGRectMake(0, 0, size.width, size.height)}, completion: nil)
     }
     
     // MARK: Table view data source
