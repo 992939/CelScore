@@ -30,12 +30,11 @@ target 'CelScore' do
     pod 'SMSegmentView', '~> 1.1'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'HMSegmentedControl', '~> 1.5'
-    pod 'OpinionzAlertView', '~> 0.3.1'
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3'
     pod 'UAObfuscatedString', '0.3.2'
     pod 'RevealingSplashView', '~> 0.0'
-    pod 'SIAlertView'
+    pod 'SIAlertView', '~> 1.3'
 end
 
 target 'CelScoreTests' do
