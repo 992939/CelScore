@@ -108,6 +108,16 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: BEMCheckBoxDelegate
     func didTapCheckBox(checkBox: BEMCheckBox) {
+        SettingsViewModel().loggedInAsSignal()
+            .on(next: { _ in self.updateCheckBox(checkBox) })
+            .on(failed: { _ in
+                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNotFollow.message(), image: OverlayInfo.FirstNotFollow.logo(), options: OverlayInfo.getOptions())
+               TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) }) 
+            })
+            .start()
+    }
+    
+    func updateCheckBox(checkBox: BEMCheckBox) {
         if checkBox.on == false { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
             .observeOn(UIScheduler())
             .start()
