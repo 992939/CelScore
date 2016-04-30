@@ -72,7 +72,7 @@ enum OverlayInfo: Int {
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first area of interest!\nYour selection will be saved automatically."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
-        case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- P. David Marshall\n\nYou'll need to register to access the interstellar voting booth."
+        case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- P. David Marshall\n\nYou'll need to register to access this voting space."
         case .FirstTrollWarning: return "You've entered the trolling zone!\n\nPast a certain ratio of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time.\n\nIf the issue persists, please contact @GreyEcologist."
