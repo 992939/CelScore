@@ -10,8 +10,8 @@ import UIKit
 
 
 final class TodayTableViewCell: UITableViewCell {
-    @IBOutlet internal var nickNameLabel: UILabel!
-    @IBOutlet internal var celscoreLabel: UILabel!
-    @IBOutlet internal var changeLabel: UILabel!
-    @IBOutlet internal var profileImage: UIImageView!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var celscoreLabel: UILabel!
+    @IBOutlet weak var changeLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
 }

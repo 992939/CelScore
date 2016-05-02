@@ -51,4 +51,16 @@ class CelebrityViewModelTests: XCTestCase {
             XCTAssertEqual(count, 1, "countFollowedCelebritiesSignal returns 1."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("countFollowedCelebritiesSignal error: \(error)") } }
     }
+    
+    func testUpdateWidgetSignal() {
+        let expectation = expectationWithDescription("userdefault returns 1")
+        SettingsViewModel().updateTodayWidgetSignal().startWithNext { result in
+            XCTAssertEqual(result.count, 1, "testUpdateWidgetSignal returns 1."); expectation.fulfill()
+            let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
+            userDefaults.synchronize()
+            let rowsNumber: Int = userDefaults.integerForKey("count")
+            XCTAssertEqual(rowsNumber, 1, "NSUserDefaults equals 1."); expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("testUpdateWidgetSignal error: \(error)") } }
+    }
 }

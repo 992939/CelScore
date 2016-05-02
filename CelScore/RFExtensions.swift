@@ -224,7 +224,7 @@ extension UIDevice {
         let padding: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: padding = -5.0
-        case Constants.kIPhone5_height: padding = 0.0
+        case Constants.kIPhone5_height: padding = -5.0
         case Constants.kIPhone6_height: padding = 20.0
         default: padding = 20.0
         }
