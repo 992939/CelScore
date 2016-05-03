@@ -60,9 +60,9 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing the CelScore!\nWelcome aboard our star-studded constellation."
+        case .WelcomeUser: return "\"We’re all in the gutter, but some of us are looking at the stars.\"\n- Oscar Wilde\n\nThank you for choosing our star-studded constellation!"
         case .MenuAccess: return "You've reached the steps of the Courthouse of Public Opinion!\n\nYou'll need to register to access this area."
-        case .LoginSuccess: return "You're now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly and enjoy your journey aboard our star-studded constellation."
+        case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've selected your first star!\n\nYou can choose up to ten stars to appear in the Today view.\n(swipe down from the top of your screen to display it)"
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
@@ -72,7 +72,7 @@ enum OverlayInfo: Int {
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first area of interest!\nYour selection will be saved automatically."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
-        case .FirstVoteDisable: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market\"\n- P. David Marshall\n\nYou'll need to register to access this voting space."
+        case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You've entered the trolling zone!\n\nPast a certain ratio of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time.\n\nIf the issue persists, please contact @GreyEcologist."
@@ -85,7 +85,7 @@ enum OverlayInfo: Int {
         switch self {
         case .WelcomeUser: return R.image.spaceship_green()!
         case .MenuAccess: return R.image.court_green()!
-        case .LoginSuccess: return R.image.planet_green()!
+        case .LoginSuccess: return R.image.astronaut_green()!
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.astronaut_green()!
         case .FirstNotFollow: return R.image.observatory_green()!
@@ -95,7 +95,7 @@ enum OverlayInfo: Int {
         case .FirstNegative: return R.image.mic_purple()!
         case .FirstInterest: return R.image.geometry_green()!
         case .FirstCompleted: return R.image.planet_green()!
-        case .FirstVoteDisable: return R.image.spaceship_green()!
+        case .FirstVoteDisable: return R.image.mic_green()!
         case .FirstTrollWarning: return R.image.nuclear_purple()!
         case .LogoutUser: return R.image.planet_green()!
         case .LoginError: return R.image.networkError()!
