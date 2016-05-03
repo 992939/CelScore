@@ -94,13 +94,13 @@ class CelebrityViewModelTests: XCTestCase {
         list.celebList.append(celebId2)
         list.celebList.append(celebId3)
         realm.add(list, update: true)
+        try! realm.commitWrite()
         
         let count = realm.objects(CelebrityModel).count
         XCTAssertEqual(count, 1, "count of CelebrityModel must return 0.")
         let expectation = expectationWithDescription("remove the CelebrityModel instance")
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithCompleted {
-            let celebCount = realm.objects(CelebrityModel).count
-            XCTAssertEqual(celebCount, 0, "count of CelebrityModel must return 0.")
+        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithNext { removedCount in
+            XCTAssertEqual(removedCount, 1, "count of CelebrityModel must return 1.")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("removeCelebsNotInPublicOpinionSignal error: \(error)") } }

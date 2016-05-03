@@ -71,7 +71,7 @@ struct CelebrityViewModel {
             
             let celebList = realm.objects(CelebrityModel)
             let celebIDsList: [String] = celebList.map({ celeb in return celeb.id })
-            guard celebIDsList.count > celebIDsOnPublicOpinionList.count else { return observer.sendCompleted() }
+            guard celebIDsList.count > 0 else { return observer.sendCompleted() }
             
             let set1 = Set(celebIDsList)
             let set2 = Set(celebIDsOnPublicOpinionList)
@@ -82,8 +82,7 @@ struct CelebrityViewModel {
                 realm.delete(removable!)
             })
             try! realm.commitWrite()
-
-            observer.sendNext(celebList.count)
+            observer.sendNext(removables.count)
             observer.sendCompleted()
         }
     }
