@@ -52,7 +52,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.animationDuration = 0.4
         
         MaterialAnimation.delay(0.7) {
-            if self.socialButton.hidden == false { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
+            if self.socialButton.hidden == true {
+                if let index = self.celebrityTableView.indexPathForSelectedRow {
+                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
+            } else { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
