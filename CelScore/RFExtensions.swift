@@ -236,7 +236,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: diameter = 180.0
         case Constants.kIPhone5_height: diameter = 200.0
-        case Constants.kIPhone6_height: diameter = 210.0
+        case Constants.kIPhone6_height: diameter = 215.0
         default: diameter = 240.0
         }
         return diameter
