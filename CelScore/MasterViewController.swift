@@ -183,7 +183,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
-            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
+            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in revealingSplashView.startAnimation() })

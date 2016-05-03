@@ -69,7 +69,7 @@ extension Sociable {
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
             .on(failed: { _ in self.dismissHUD() })
             .observeOn(UIScheduler())
-            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler())
+            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
                 TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.dismissHUD() }) }
