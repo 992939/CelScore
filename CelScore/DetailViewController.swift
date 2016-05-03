@@ -145,7 +145,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
-            .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions())})
+            .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions())})
             .start()
     }
     

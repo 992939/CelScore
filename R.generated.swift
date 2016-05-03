@@ -30,7 +30,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 51 images.
+  /// This `R.image` struct is generated, and contains static references to 52 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -96,6 +96,8 @@ struct R {
     static let mic_green = ImageResource(bundle: _R.hostingBundle, name: "mic_green")
     /// Image `mic_purple`.
     static let mic_purple = ImageResource(bundle: _R.hostingBundle, name: "mic_purple")
+    /// Image `mlk_green`.
+    static let mlk_green = ImageResource(bundle: _R.hostingBundle, name: "mlk_green")
     /// Image `networkError`.
     static let networkError = ImageResource(bundle: _R.hostingBundle, name: "networkError")
     /// Image `nuclear_green`.
@@ -293,6 +295,11 @@ struct R {
     /// `UIImage(named: "mic_purple", bundle: ..., traitCollection: ...)`
     static func mic_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.mic_purple, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "mlk_green", bundle: ..., traitCollection: ...)`
+    static func mlk_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.mlk_green, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "networkError", bundle: ..., traitCollection: ...)`

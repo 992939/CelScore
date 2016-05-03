@@ -66,11 +66,11 @@ enum OverlayInfo: Int {
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've selected your first star!\n\nYou can choose up to ten stars to appear in the Today view.\n(swipe down from the top of your screen to display it)"
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
-        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nYou've choosen to help us build the consensus!\nThe consensus will rebuild itself after each one of your votes."
-        case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou've stepped into the Public Sphere!\nYou can add your voice to the public debate by long pressing on the stars."
+        case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nFrom now on the consensus will regenerate after each one of your votes."
+        case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou can now add your voice to the public debate by long pressing on a star.\n\nPlease,\nlong press responsibly."
         case .FirstStars: return "\"We are dealing with the stars in terms of their signification, not with them as real people.\"\n- P. Richard Dyer\n\nYou've entered a space where stars are symbols and values their essences.\nPlease vote responsibly."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
-        case .FirstInterest: return "You've choosen your first area of interest!\nYour selection will be saved automatically."
+        case .FirstInterest: return "You've choosen your first area of interest!\n\nYour selection is automatically saved."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You've entered the trolling zone!\n\nPast a certain ratio of negative votes, all your votes will be discarded."
@@ -89,7 +89,7 @@ enum OverlayInfo: Int {
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.astronaut_green()!
         case .FirstNotFollow: return R.image.observatory_green()!
-        case .FirstConsensus: return R.image.sphere_green()!
+        case .FirstConsensus: return R.image.mlk_green()!
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.mic_purple()!

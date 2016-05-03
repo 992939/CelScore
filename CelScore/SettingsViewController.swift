@@ -70,8 +70,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
             let consensusBarNode = self.setupProgressBarNode(title: "Universal Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
-            self.node.addSubnode(consensusBarNode)
-        })
+            self.node.addSubnode(consensusBarNode) })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in

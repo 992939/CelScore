@@ -80,10 +80,10 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel)
-            guard ratings.count > 0 else { observer.sendFailed(.NoRatingsModel); return }
+            guard ratings.count > 0 else { observer.sendNext(0); return observer.sendCompleted() }
             let variances: [Double] = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
             let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
-            guard 0..<5 ~= averageVariance else { observer.sendFailed(.OutOfBoundsVariance); return }
+            guard 0..<5 ~= averageVariance else { observer.sendNext(0); return observer.sendCompleted() }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
             observer.sendNext(CGFloat(consensus))
             observer.sendCompleted()
