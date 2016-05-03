@@ -135,7 +135,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
                 }})
-            .delay(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
+            .delay(2.1, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
