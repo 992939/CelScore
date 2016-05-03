@@ -254,6 +254,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
+        self.transitionManager.setIndexedCell(index: indexPath.row)
         self.presentViewController(detailVC, animated: true, completion: nil)
     }
     

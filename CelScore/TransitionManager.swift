@@ -12,6 +12,7 @@ import Material
 final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
     private var presenting = true
+    private var indexedCell: Int = 0
     
     // MARK: UIViewControllerAnimatedTransitioning
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -22,8 +23,8 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
         let masterVC = ((presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! SideNavigationController).rootViewController as! MasterViewController
         let detailVC = (presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!) as! DetailViewController
         
-        let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-        let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+        let selectedRow = NSIndexPath(forRow: indexedCell, inSection: 0)
+        let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow) as! CelebrityTableViewCell
         cell.profilePicNode.hidden = true
         detailVC.view.frame = transitionContext.finalFrameForViewController(detailVC)
         detailVC.profilePicNode.hidden = true
@@ -32,7 +33,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
         var celebSnapshot = UIView()
         if self.presenting {
             celebSnapshot = cell.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
-            celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!).view)
+            celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow).view)
         } else {
             masterVC.view.transform = offScreenLeft
             let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
@@ -77,6 +78,8 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
                 transitionContext.completeTransition(true)
         })
     }
+    
+    func setIndexedCell(index index: Int) { self.indexedCell = index }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return 1.0 }
     
