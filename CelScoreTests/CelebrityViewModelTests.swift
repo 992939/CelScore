@@ -72,7 +72,7 @@ class CelebrityViewModelTests: XCTestCase {
     func testUpdateWidgetSignal() {
         let expectation = expectationWithDescription("userdefault returns 1")
         SettingsViewModel().updateTodayWidgetSignal().startWithNext { result in
-            XCTAssertEqual(result.count, 1, "testUpdateWidgetSignal returns 1."); expectation.fulfill()
+            XCTAssertEqual(result.count, 1, "testUpdateWidgetSignal returns 1.")
             let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
             userDefaults.synchronize()
             let rowsNumber: Int = userDefaults.integerForKey("count")
