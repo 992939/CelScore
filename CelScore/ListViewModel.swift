@@ -51,7 +51,7 @@ struct ListViewModel {
             let realm = try! Realm()
             ListInfo.getAllIDs().forEach({ (listId:String) in
                 let list = realm.objects(ListsModel).filter("id = %@", listId).first
-                guard let celebList = list else { return observer.sendFailed(.EmptyList) }
+                guard let celebList = list else { return }
                 
                 let current = realm.objects(CelebrityModel)
                 let notExisting = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in

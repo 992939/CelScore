@@ -22,10 +22,13 @@ class ListViewModelTests: XCTestCase {
         celebId1.id = "0001"
         let celebId2 = CelebId()
         celebId2.id = "0002"
+        let celebId3 = CelebId()
+        celebId3.id = "0003"
         let list = ListsModel()
         list.id = "0001"
         list.celebList.append(celebId1)
         list.celebList.append(celebId2)
+        list.celebList.append(celebId3)
         realm.add(list, update: true)
         
         let celebrity1 = CelebrityModel()
@@ -43,8 +46,22 @@ class ListViewModelTests: XCTestCase {
     func testGetListSignal() {
         let expectation = expectationWithDescription("getListSignal callback")
         ListViewModel().getListSignal(listId: "0001").startWithNext { list in
-            XCTAssertEqual(list.celebList.count, 2, "getListSignal returns list with two items."); expectation.fulfill() }
+            XCTAssertEqual(list.celebList.count, 3, "getListSignal returns list with two items."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("getListSignal error: \(error)") } }
+    }
+    
+    func testSanitizeListsSignal() {
+        let realm = try! Realm()
+        let initialList = realm.objects(ListsModel).filter("id = %@", "0001").first
+        XCTAssertEqual(initialList?.celebList.count, 3, "sanitizeListsSignal: ListViewModel starts with 3 CelebIds.")
+        
+        let expectation = expectationWithDescription("sanitizeListsSignal callback")
+        ListViewModel().sanitizeListsSignal().startWithCompleted {
+            let list = realm.objects(ListsModel).filter("id = %@", "0001").first
+            XCTAssertEqual(list?.celebList.count, 2, "sanitizeListsSignal returns a list with 2 CelebIds.")
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("sanitizeListsSignal error: \(error)") } }
     }
     
     func testSearchSignal() {
@@ -58,13 +75,15 @@ class ListViewModelTests: XCTestCase {
         let expectation = expectationWithDescription("updateListSignal callback")
         ListViewModel().updateListSignal(listId: "0001").startWithNext { list in
             let celebId: CelebId = list.celebList.first!
-            XCTAssertEqual(celebId.id, "0002", "updateListSignal returns list followed item first."); expectation.fulfill() }
+            XCTAssertEqual(celebId.id, "0002", "updateListSignal returns list followed item first.")
+            XCTAssertEqual(list.celebList.count, 3, "updateListSignal returns list of three items.")
+            expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("updateListSignal error: \(error)") } }
     }
     
     func testGetCelebrityStructSignal() {
         let expectation = expectationWithDescription("getCelebrityStructSignal callback")
-        ListViewModel().getCelebrityStructSignal(listId: "0001", index: 1).startWithNext { celeb in
+        ListViewModel().getCelebrityStructSignal(listId: "0001", index: 2).startWithNext { celeb in
             XCTAssertEqual(celeb.id, "0002", "getCelebrityStructSignal returns second item."); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
     }
