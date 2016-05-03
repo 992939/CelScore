@@ -63,6 +63,7 @@
 		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
 		00F764821CBE15610012A581 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F764811CBE15610012A581 /* ModelTests.swift */; };
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
+		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
 		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
@@ -179,6 +180,7 @@
 		00F764811CBE15610012A581 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		00F902191C8BC9A0009AD588 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
 		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
+		00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTests.swift; sourceTree = "<group>"; };
 		00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BECelScoreAPIClient.h; sourceTree = "<group>"; };
 		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
 		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */,
 				00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */,
 				00CCFAE21CBF272E002E7E7E /* SettingsViewModelTests.swift */,
+				00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */,
 				00F764811CBE15610012A581 /* ModelTests.swift */,
 				004B56F21B35332B008A75EB /* Supporting Files */,
 			);
@@ -842,6 +845,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */,
+				00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */,
 				00F764821CBE15610012A581 /* ModelTests.swift in Sources */,
 				00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */,
 				00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */,
