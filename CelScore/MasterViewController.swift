@@ -136,9 +136,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().sanitizeListsSignal() }
-                    .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                        return ListViewModel().updateListSignal(listId: list.getId()) }
+                    .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+                        return ListViewModel().updateAllListsSignal() }
                     .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                         return ListViewModel().getListSignal(listId: list.getId()) }

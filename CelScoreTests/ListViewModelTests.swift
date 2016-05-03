@@ -71,14 +71,16 @@ class ListViewModelTests: XCTestCase {
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("searchSignal error: \(error)") } }
     }
     
-    func testUpdateListSignal() {
-        let expectation = expectationWithDescription("updateListSignal callback")
-        ListViewModel().updateListSignal(listId: "0001").startWithNext { list in
-            let celebId: CelebId = list.celebList.first!
-            XCTAssertEqual(celebId.id, "0002", "updateListSignal returns list followed item first.")
-            XCTAssertEqual(list.celebList.count, 3, "updateListSignal returns list of three items.")
+    func testUpdateAllListsSignal() {
+        let expectation = expectationWithDescription("updateAllListsSignal callback")
+        ListViewModel().updateAllListsSignal().startWithNext { _ in
+            let realm = try! Realm()
+            let list = realm.objects(ListsModel).filter("id = %@", "0001").first
+            let celebId: CelebId = list!.celebList.last!
+            XCTAssertEqual(celebId.id, "0003", "updateAllListsSignal returns list followed item first.")
+            XCTAssertEqual(list!.celebList.count, 3, "updateAllListsSignal returns a list of three items.")
             expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("updateListSignal error: \(error)") } }
+        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("updateAllListsSignal error: \(error)") } }
     }
     
     func testGetCelebrityStructSignal() {

@@ -69,14 +69,14 @@ enum OverlayInfo: Int {
         case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nFrom now on the consensus will regenerate after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou can now add your voice to the public debate by long pressing on a star."
         case .FirstStars: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market.\"\n- P. David Marshall\n\nPlease vote responsibly."
-        case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive/negative votes in the courthouse section."
+        case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first area of interest!\n\nYour selection is automatically saved."
         case .FirstCompleted: return "You've cast your votes in every corner of our star-studded constellation!\n\nThank you for voting and for building the consensus."
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You've entered the trolling zone!\n\nPast a certain ratio of negative votes, all your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
         case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time.\n\nIf the issue persists, please contact @GreyEcologist."
-        case .NetworkError: return "The Internet connection appears to be offline.\nPlease check your network settings.\n\nIf the issue persists, please contact @GreyEcologist."
+        case .NetworkError: return "The internet connection appears to be offline.\nPlease check your network settings.\n\nIf the issue persists, please contact @GreyEcologist."
         case .TimeoutError: return "We're unable to update you with the latest data from our servers.\n\nIf the issue persists, please contact @GreyEcologist."
         }
     }
