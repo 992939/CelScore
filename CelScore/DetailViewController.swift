@@ -79,6 +79,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         let navigationBarView: Toolbar = getNavigationView()
         let topView: MaterialView = getTopView()
+        topView.opaque = true
+        topView.backgroundColor = Constants.kDarkShade
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
@@ -338,7 +340,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getTopView() -> MaterialView {
         let topView: MaterialView = MaterialView(frame: Constants.kTopViewRect)
         topView.depth = .Depth2
+        topView.opaque = true
+        topView.layer.opaque = true
+        topView.visualLayer.opaque = true
         topView.image = R.image.topView()
+        topView.layer.backgroundColor = Constants.kDarkShade.CGColor
+        topView.visualLayer.backgroundColor = Constants.kDarkShade.CGColor
         topView.backgroundColor = Constants.kDarkShade
         return topView
     }

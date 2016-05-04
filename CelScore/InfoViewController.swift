@@ -65,11 +65,11 @@ final class InfoViewController: ASViewController, Labelable {
                             
                             let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
-                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + 2 * Constants.kPadding), height: barHeight - 5))
+                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                                 infoLabel!.attributedText = attributedText
                                 infoLabel!.backgroundColor = Constants.kMainShade
                             } else {
-                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + 2 * Constants.kPadding), height: barHeight - 5))
+                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                             }
                             infoLabel!.textAlignment = .Right
                         
