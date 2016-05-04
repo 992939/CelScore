@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -12,6 +12,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="celscore_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
                     <rect key="frame" x="180" y="180" width="120" height="120"/>
+                    <color key="backgroundColor" red="0.13424258959999999" green="0.1825802859" blue="0.20891704520000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="PCy-tJ-sSn"/>
                         <constraint firstAttribute="width" constant="120" id="eqZ-sh-bbF"/>
@@ -19,6 +20,7 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.13424258959420951" green="0.18258028593450337" blue="0.20891704522122989" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="tintColor" red="0.13424258959999999" green="0.1825802859" blue="0.20891704520000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Eav-iO-oZK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="27w-aY-DtR"/>
                 <constraint firstItem="Eav-iO-oZK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8do-y5-aeF"/>

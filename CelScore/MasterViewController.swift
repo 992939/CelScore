@@ -356,6 +356,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                                                      NSBackgroundColorAttributeName : Constants.kDarkShade]
         self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
+        self.segmentedControl.opaque = true
         self.segmentedControl.clipsToBounds = false
         self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
