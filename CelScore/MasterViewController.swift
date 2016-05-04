@@ -352,7 +352,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.selectionIndicatorColor = Constants.kWineShade
         self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
-            NSFontAttributeName: UIFont.systemFontOfSize(18)]
+                                                     NSFontAttributeName: UIFont.systemFontOfSize(18),
+                                                     NSBackgroundColorAttributeName : Constants.kDarkShade]
         self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.clipsToBounds = false

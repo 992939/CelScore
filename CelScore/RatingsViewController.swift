@@ -56,6 +56,7 @@ final class RatingsViewController: ASViewController {
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
+                    qualityLabel.backgroundColor = Constants.kMainShade
                     qualityLabel.textColor = MaterialColor.white
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5)
                     

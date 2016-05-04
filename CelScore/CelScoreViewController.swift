@@ -65,6 +65,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.valueTextColor = MaterialColor.white
         gauge.unitOfMeasurementTextColor = MaterialColor.white
         gauge.ringBackgroundColor = Constants.kLightShade
+        gauge.backgroundColor = Constants.kMainShade
         gauge.delegate = self
         let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.1
         let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.6

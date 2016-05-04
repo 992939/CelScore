@@ -57,7 +57,9 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
+        courtLabel.backgroundColor = Constants.kMainShade
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
+        houseLabel.backgroundColor = Constants.kMainShade
         logoView.addSubview(courtLabel)
         logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
@@ -230,6 +232,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         box.onFillColor = Constants.kDarkGreenShade
         box.onTintColor = Constants.kDarkGreenShade
         box.tintColor = Constants.kDarkGreenShade
+        box.backgroundColor = Constants.kMainShade
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
         materialView.addSubview(box)
@@ -243,6 +246,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         bar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
         bar.setProgress(value, animated: true)
         bar.type = .Flat
+        bar.backgroundColor = Constants.kMainShade
         bar.indicatorTextDisplayMode = .Progress
         materialView.addSubview(factsLabel)
         materialView.addSubview(bar)
