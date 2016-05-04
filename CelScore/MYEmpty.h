@@ -18,6 +18,6 @@
 #import <AWSCore/AWSCore.h>
 
  
-@interface BEEmpty : AWSModel
+@interface MYEmpty : AWSModel
 
 @end

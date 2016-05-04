@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/AWSCognitoService.h
+../../../AWSCognito/Cognito/AWSCognitoService.h

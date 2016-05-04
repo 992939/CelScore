@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/Internal/AWSCognitoRecord_Internal.h
+../../../AWSCognito/Cognito/Internal/AWSCognitoRecord_Internal.h

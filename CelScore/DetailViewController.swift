@@ -174,7 +174,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         if open {
             self.socialButton.menu.enabled = true
             first?.backgroundColor = self.userST.isPositive ? Constants.kDarkGreenShade : Constants.kWineShade
-            first?.pulseScale = true
+            first?.pulseAnimation = .CenterWithBacking
             first?.pulse()
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
@@ -225,7 +225,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func enableUpdateButton() {
         self.voteButton.enabled = true
-        self.voteButton.pulseScale = true
+        self.voteButton.pulseAnimation = .CenterWithBacking
         self.voteButton.backgroundColor = Constants.kStarRatingShade
         self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
         self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
@@ -304,7 +304,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
-                self.voteButton.pulseScale = true
+                self.voteButton.pulseAnimation = .CenterWithBacking
                 self.voteButton.pulse() }
         })
     }
@@ -318,7 +318,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getNavigationView() -> Toolbar {
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
-        backButton.pulseScale = false
+        backButton.pulseAnimation = .None
         backButton.setImage(R.image.dbProfileChevron()!, forState: .Normal)
         backButton.setImage(R.image.dbProfileChevron()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
@@ -367,7 +367,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth - diameter, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
-        self.voteButton.pulseScale = false
+        self.voteButton.pulseAnimation = .None
         self.voteButton.tintColor = MaterialColor.white
         self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!)
     }

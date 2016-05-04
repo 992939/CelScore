@@ -53,7 +53,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kMainShade
-        gaugeView.pulseScale = false
+        gaugeView.pulseAnimation = .None
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
@@ -87,7 +87,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         taggedView.tag = tag
         taggedView.depth = .Depth1
         taggedView.backgroundColor = Constants.kMainShade
-        taggedView.pulseScale = true
+        taggedView.pulseAnimation = .CenterWithBacking
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
         return taggedView

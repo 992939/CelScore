@@ -45,7 +45,7 @@ final class RatingsViewController: ASViewController {
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = Constants.kMainShade
-                    qualityView.pulseScale = false
+                    qualityView.pulseAnimation = .None
                     qualityView.pulseColor = MaterialColor.clear
                     SettingsViewModel().getSettingSignal(settingType: .PublicService)
                         .observeOn(UIScheduler())

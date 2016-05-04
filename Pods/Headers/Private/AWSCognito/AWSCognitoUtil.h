@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/Internal/AWSCognitoUtil.h
+../../../AWSCognito/Cognito/Internal/AWSCognitoUtil.h

@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/AWSCognitoRecord.h
+../../../AWSCognito/Cognito/AWSCognitoRecord.h

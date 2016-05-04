@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/Internal/AWSCognitoSQLiteManager.h
+../../../AWSCognito/Cognito/Internal/AWSCognitoSQLiteManager.h

@@ -109,7 +109,7 @@ extension Sociable {
     func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
-        btn1.pulseScale = false
+        btn1.pulseAnimation = .None
         btn1.backgroundColor = buttonColor
         btn1.tintColor = MaterialColor.white
         btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)

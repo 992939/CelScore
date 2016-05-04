@@ -105,10 +105,6 @@ typedef NS_ENUM(NSInteger, AWSServiceType) {
      */
     AWSServiceCognitoIdentity,
     /**
-     *  Amazon Cognito Identity Provider
-     */
-    AWSServiceCognitoIdentityProvider,
-    /**
      *  Amazon Cognito Sync
      */
     AWSServiceCognitoSync,

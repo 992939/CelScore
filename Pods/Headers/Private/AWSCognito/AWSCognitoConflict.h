@@ -1,1 +1,1 @@
-../../../AWSCognito/AWSCognito/AWSCognitoConflict.h
+../../../AWSCognito/Cognito/AWSCognitoConflict.h

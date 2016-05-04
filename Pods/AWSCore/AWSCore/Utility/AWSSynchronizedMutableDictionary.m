@@ -63,15 +63,4 @@
     return allKeys;
 }
 
-- (void)removeObject:(id)object {
-    dispatch_sync(self.dispatchQueue, ^{
-        for (NSString *key in self.dictionary) {
-            if (object == self.dictionary[key]) {
-                [self.dictionary removeObjectForKey:key];
-                break;
-            }
-        }
-    });
-}
-
 @end

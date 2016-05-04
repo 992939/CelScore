@@ -21,13 +21,9 @@ NSString *const AWSAPIGatewayErrorDomain = @"com.amazonaws.AWSAPIGatewayErrorDom
 NSString *const AWSAPIGatewayErrorHTTPBodyKey = @"HTTPBody";
 NSString *const AWSAPIGatewayErrorHTTPHeaderFieldsKey = @"HTTPHeaderFields";
 
-static NSString *const AWSAPIGatewayAPIKeyHeader = @"x-api-key";
-
-static NSString *const AWSAPIGatewaySDKVersion = @"2.4.1";
+NSString *const AWSAPIGatewayAPIKeyHeader = @"x-api-key";
 
 @interface AWSAPIGatewayClient()
-
-@property (nonatomic, strong) AWSServiceConfiguration *configuration;
 
 // Networking
 @property (nonatomic, strong) NSURLSession *session;
@@ -35,16 +31,6 @@ static NSString *const AWSAPIGatewaySDKVersion = @"2.4.1";
 @end
 
 @implementation AWSAPIGatewayClient
-
-+ (void)initialize {
-    [super initialize];
-
-    if (![AWSiOSSDKVersion isEqualToString:AWSAPIGatewaySDKVersion]) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:[NSString stringWithFormat:@"AWSCore and AWSAPIGateway versions need to match. Check your SDK installation. AWSCore: %@ AWSAPIGateway: %@", AWSiOSSDKVersion, AWSAPIGatewaySDKVersion]
-                                     userInfo:nil];
-    }
-}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -92,10 +78,39 @@ static NSString *const AWSAPIGatewaySDKVersion = @"2.4.1";
     task = [task continueWithSuccessBlock:^id(AWSTask *task) {
         id signer = [self.configuration.requestInterceptors lastObject];
         if (signer) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
             if ([signer respondsToSelector:@selector(credentialsProvider)]) {
-                id<AWSCredentialsProvider> credentialsProvider = [signer performSelector:@selector(credentialsProvider)];
-                return [credentialsProvider credentials];
+                id credentialsProvider = [signer performSelector:@selector(credentialsProvider)];
+
+                if ([credentialsProvider respondsToSelector:@selector(refresh)]) {
+                    NSString *accessKey = nil;
+                    if ([credentialsProvider respondsToSelector:@selector(accessKey)]) {
+                        accessKey = [credentialsProvider performSelector:@selector(accessKey)];
+                    }
+
+                    NSString *secretKey = nil;
+                    if ([credentialsProvider respondsToSelector:@selector(secretKey)]) {
+                        secretKey = [credentialsProvider performSelector:@selector(secretKey)];
+                    }
+
+                    NSDate *expiration = nil;
+                    if  ([credentialsProvider respondsToSelector:@selector(expiration)]) {
+                        expiration = [credentialsProvider performSelector:@selector(expiration)];
+                    }
+
+                    /**
+                     Preemptively refresh credentials if any of the following is true:
+                     1. accessKey or secretKey is nil.
+                     2. the credentials expires within 10 minutes.
+                     */
+                    if ((!accessKey || !secretKey)
+                        || [expiration compare:[NSDate dateWithTimeIntervalSinceNow:10 * 60]] == NSOrderedAscending) {
+                        return [credentialsProvider performSelector:@selector(refresh)];
+                    }
+                }
             }
+#pragma clang diagnostic pop
         }
         return nil;
     }];

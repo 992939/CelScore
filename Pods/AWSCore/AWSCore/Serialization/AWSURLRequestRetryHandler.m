@@ -15,7 +15,6 @@
 
 #import "AWSURLRequestRetryHandler.h"
 #import "AWSURLResponseSerialization.h"
-#import "AWSService.h"
 
 @interface AWSURLRequestRetryHandler ()
 
@@ -34,13 +33,13 @@
 }
 
 - (BOOL)isClockSkewError:(NSError *)error {
-    if ([error.domain isEqualToString:AWSServiceErrorDomain]) {
+    if ([error.domain isEqualToString:AWSGeneralErrorDomain]) {
         switch (error.code) {
-            case AWSServiceErrorRequestTimeTooSkewed:
-            case AWSServiceErrorInvalidSignatureException:
-            case AWSServiceErrorRequestExpired:
-            case AWSServiceErrorAuthFailure:
-            case AWSServiceErrorSignatureDoesNotMatch:
+            case AWSGeneralErrorRequestTimeTooSkewed:
+            case AWSGeneralErrorInvalidSignatureException:
+            case AWSGeneralErrorRequestExpired:
+            case AWSGeneralErrorAuthFailure:
+            case AWSGeneralErrorSignatureDoesNotMatch:
                 return YES;
             default:
                 break;
@@ -51,17 +50,16 @@
 }
 
 - (AWSNetworkingRetryType)shouldRetry:(uint32_t)currentRetryCount
-                             response:(NSHTTPURLResponse *)response
-                                 data:(NSData *)data
-                                error:(NSError *)error {
-    if (currentRetryCount >= self.maxRetryCount) {
-        return AWSNetworkingRetryTypeShouldNotRetry;
-    }
-
-    // Clock skew exceptions.
+                            response:(NSHTTPURLResponse *)response
+                                data:(NSData *)data
+                               error:(NSError *)error {
     if (!self.isClockSkewRetried && [self isClockSkewError:error]) {
         self.isClockSkewRetried = YES;
         return AWSNetworkingRetryTypeShouldCorrectClockSkewAndRetry;
+    }
+
+    if (currentRetryCount >= self.maxRetryCount) {
+        return AWSNetworkingRetryTypeShouldNotRetry;
     }
 
     if ([error.domain isEqualToString:NSURLErrorDomain]) {
@@ -82,41 +80,6 @@
 
             default:
                 return AWSNetworkingRetryTypeShouldRetry;
-        }
-    }
-
-    // Invalid temporary credentials exceptions.
-    if ([error.domain isEqualToString:AWSServiceErrorDomain]) {
-        switch (error.code) {
-            case AWSServiceErrorIncompleteSignature:
-            case AWSServiceErrorInvalidClientTokenId:
-            case AWSServiceErrorMissingAuthenticationToken:
-            case AWSServiceErrorAccessDenied:
-            case AWSServiceErrorUnrecognizedClientException:
-            case AWSServiceErrorAuthFailure:
-            case AWSServiceErrorAccessDeniedException:
-            case AWSServiceErrorExpiredToken:
-            case AWSServiceErrorInvalidAccessKeyId:
-            case AWSServiceErrorInvalidToken:
-            case AWSServiceErrorTokenRefreshRequired:
-            case AWSServiceErrorAccessFailure:
-            case AWSServiceErrorAuthMissingFailure:
-                return AWSNetworkingRetryTypeShouldRefreshCredentialsAndRetry;
-
-            default:
-                break;
-        }
-    }
-
-    // Throttling exceptions.
-    if ([error.domain isEqualToString:AWSServiceErrorDomain]) {
-        switch (error.code) {
-            case AWSServiceErrorThrottling:
-            case AWSServiceErrorThrottlingException:
-                return AWSNetworkingRetryTypeShouldRetry;
-
-            default:
-                break;
         }
     }
 

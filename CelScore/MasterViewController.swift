@@ -324,14 +324,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func getNavigationView() -> Toolbar {
         let menuButton: FlatButton = FlatButton()
         menuButton.pulseColor = MaterialColor.white
-        menuButton.pulseScale = false
+        menuButton.pulseAnimation = .None
         menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), forControlEvents: .TouchUpInside)
         menuButton.setImage(R.image.ic_menu_white()!, forState: .Normal)
         menuButton.setImage(R.image.ic_menu_white()!, forState: .Highlighted)
         
         let rightButton: FlatButton = FlatButton()
         rightButton.pulseColor = MaterialColor.white
-        rightButton.pulseScale = false
+        rightButton.pulseAnimation = .None
         rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), forControlEvents: .TouchUpInside)
         rightButton.setImage(R.image.ic_search_white()!, forState: .Normal)
         rightButton.setImage(R.image.ic_search_white()!, forState: .Highlighted)

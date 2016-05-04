@@ -14,13 +14,12 @@
 //
 
 #import "AWSLogging.h"
-#import "AWSService.h"
 
 @implementation AWSLogger
 
 - (instancetype)init {
     if (self = [super init]) {
-        _logLevel = AWSLogLevelDebug;
+        _logLevel = AWSLogLevelNone;
     }
 
     return self;
@@ -31,6 +30,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _defaultLogger = [AWSLogger new];
+        _defaultLogger.logLevel = AWSLogLevelError; //set default logLevel
     });
 
     return _defaultLogger;
@@ -40,7 +40,7 @@
     if(self.logLevel >= logLevel) {
         va_list args;
         va_start(args, fmt);
-        NSLog(@"AWSiOSSDK v%@ [%@] %@", AWSiOSSDKVersion, [self logLevelLabel:logLevel], [[NSString alloc] initWithFormat:fmt arguments:args]);
+        NSLog(@"AWSiOSSDKv2 [%@] %@", [self logLevelLabel:logLevel], [[NSString alloc] initWithFormat:fmt arguments:args]);
         va_end(args);
     }
 }

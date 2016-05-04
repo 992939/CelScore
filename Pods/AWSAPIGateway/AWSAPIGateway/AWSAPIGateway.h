@@ -14,12 +14,5 @@
 //
 
 #import <Foundation/Foundation.h>
-
-//! Project version number for AWSAPIGateway.
-FOUNDATION_EXPORT double AWSAPIGatewayVersionNumber;
-
-//! Project version string for AWSAPIGateway.
-FOUNDATION_EXPORT const unsigned char AWSAPIGatewayVersionString[];
-
 #import <AWSCore/AWSCore.h>
 #import "AWSAPIGatewayClient.h"

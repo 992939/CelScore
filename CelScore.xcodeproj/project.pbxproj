@@ -53,6 +53,8 @@
 		00CE26561CD48FC30045106C /* TheObservatory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00CE264B1CD48FC30045106C /* TheObservatory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00CE265A1CD492090045106C /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
 		00CE265B1CD492DE0045106C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6101CC6183B00704CF4 /* MainInterface.storyboard */; };
+		00D165C11CD9D486002D7CCF /* MYCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */; };
+		00D165C21CD9D486002D7CCF /* MYEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D165C01CD9D486002D7CCF /* MYEmpty.m */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -65,8 +67,6 @@
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
-		00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */; };
-		00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FEF1771CACE5C6004141B3 /* BEEmpty.m */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
@@ -170,6 +170,10 @@
 		00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AIRTimer.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework"; sourceTree = "<group>"; };
 		00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/ReactiveCocoa.framework"; sourceTree = "<group>"; };
 		00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		00D165BD1CD9D486002D7CCF /* MYCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYCelScoreAPIClient.h; sourceTree = "<group>"; };
+		00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYCelScoreAPIClient.m; sourceTree = "<group>"; };
+		00D165BF1CD9D486002D7CCF /* MYEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYEmpty.h; sourceTree = "<group>"; };
+		00D165C01CD9D486002D7CCF /* MYEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYEmpty.m; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -183,10 +187,6 @@
 		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
 		00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTests.swift; sourceTree = "<group>"; };
 		00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModelTests.swift; sourceTree = "<group>"; };
-		00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BECelScoreAPIClient.h; sourceTree = "<group>"; };
-		00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BECelScoreAPIClient.m; sourceTree = "<group>"; };
-		00FEF1761CACE5C6004141B3 /* BEEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEEmpty.h; sourceTree = "<group>"; };
-		00FEF1771CACE5C6004141B3 /* BEEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEEmpty.m; sourceTree = "<group>"; };
 		0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		12A676E560E33A57FA31AA47 /* Pods-TheScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheScore/Pods-TheScore.debug.xcconfig"; sourceTree = "<group>"; };
 		1EBD190DB4A22E16732C9BD5 /* Pods-CelScoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,10 +249,10 @@
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
-				00FEF1741CACE5C6004141B3 /* BECelScoreAPIClient.h */,
-				00FEF1751CACE5C6004141B3 /* BECelScoreAPIClient.m */,
-				00FEF1761CACE5C6004141B3 /* BEEmpty.h */,
-				00FEF1771CACE5C6004141B3 /* BEEmpty.m */,
+				00D165BD1CD9D486002D7CCF /* MYCelScoreAPIClient.h */,
+				00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */,
+				00D165BF1CD9D486002D7CCF /* MYEmpty.h */,
+				00D165C01CD9D486002D7CCF /* MYEmpty.m */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
 				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
 				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
@@ -801,7 +801,6 @@
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
-				00FEF1791CACE5C6004141B3 /* BEEmpty.m in Sources */,
 				00C347B61C605CB800097089 /* SMBasicSegment.swift in Sources */,
 				00417A051CB5B65900E47078 /* TransitionManager.swift in Sources */,
 				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
@@ -813,7 +812,6 @@
 				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
-				00FEF1781CACE5C6004141B3 /* BECelScoreAPIClient.m in Sources */,
 				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
@@ -828,8 +826,10 @@
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
+				00D165C11CD9D486002D7CCF /* MYCelScoreAPIClient.m in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
+				00D165C21CD9D486002D7CCF /* MYEmpty.m in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
