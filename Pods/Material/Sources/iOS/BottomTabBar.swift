@@ -200,7 +200,7 @@ public class BottomTabBar : UITabBar {
 	
 	/// A convenience initializer.
 	public convenience init() {
-		self.init(frame: CGRectNull)
+		self.init(frame: CGRectZero)
 	}
 	
 	public override func layoutSubviews() {
@@ -249,6 +249,7 @@ public class BottomTabBar : UITabBar {
 	*/
 	public func prepareView() {
 		depth = .Depth1
+		contentScaleFactor = MaterialDevice.scale
 		backgroundColor = MaterialColor.white
 		let image: UIImage? = UIImage.imageWithColor(MaterialColor.clear, size: CGSizeMake(1, 1))
 		shadowImage = image

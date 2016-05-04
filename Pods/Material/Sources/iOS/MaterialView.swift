@@ -383,7 +383,7 @@ public class MaterialView : UIView {
 	
 	/// A convenience initializer.
 	public convenience init() {
-		self.init(frame: CGRectNull)
+		self.init(frame: CGRectZero)
 	}
 	
 	public override func layoutSublayersOfLayer(layer: CALayer) {
@@ -457,8 +457,9 @@ public class MaterialView : UIView {
 	when subclassing.
 	*/
 	public func prepareView() {
-		prepareVisualLayer()
+		contentScaleFactor = MaterialDevice.scale
 		backgroundColor = MaterialColor.white
+		prepareVisualLayer()
 	}
 	
 	/// Prepares the visualLayer property.

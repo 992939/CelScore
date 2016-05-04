@@ -57,7 +57,7 @@ Material is a growing project and will encounter changes throughout its developm
 
 To help template your project, checkout our latest addition, Material Sticker Sheet.
 
-![MaterialStickerSheet](http://www.materialkit.io/material/images/stickers/material_iso_1.png)
+![MaterialStickerSheet](http://www.cosmicmind.io/MK/material_iso_1.png)
 
 [Get the Sticker Sheet](http://www.materialup.com/posts/material-design-sticker-sheets)
 
@@ -84,6 +84,7 @@ To help template your project, checkout our latest addition, Material Sticker Sh
 #### Text
 
 * [TextField](#textfield)
+* ErrorTextField
 * [TextView](#textview)
 
 #### Buttons
@@ -194,7 +195,7 @@ under the TextField.
 
 ![MaterialTextField](http://www.cosmicmind.io/MK/MaterialTextField.gif)
 
-[Learn More About TextField](https://github.com/CosmicMind/Material/wiki/TextField)
+[Learn More About TextField](http://cosmicmind.sandbox.local/material/textfield)
 
 <a name="textview"></a>
 #### TextView
@@ -396,6 +397,7 @@ Add a new dimension of interactivity with CaptureView. CaptureView is a fully fu
 * Bottom Sheets
 * Dialogs
 * Collapsing Toolbar
+* Pull to Refresh
 * RTL Support
 * Advanced Camera / Audio Toolset & Views
 * More Examples

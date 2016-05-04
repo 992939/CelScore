@@ -327,7 +327,7 @@ public class TextView: UITextView {
 	- Parameter textContainer: A NSTextContainer instance.
 	*/
 	public convenience init(textContainer: NSTextContainer?) {
-		self.init(frame: CGRectNull, textContainer: textContainer)
+		self.init(frame: CGRectZero, textContainer: textContainer)
 	}
 	
 	/** Denitializer. This should never be called unless you know
@@ -466,7 +466,8 @@ public class TextView: UITextView {
 	The super.prepareView method should always be called immediately
 	when subclassing.
 	*/
-	private func prepareView() {
+	public func prepareView() {
+		contentScaleFactor = MaterialDevice.scale
 		textContainerInset = MaterialEdgeInsetToValue(.None)
 		backgroundColor = MaterialColor.white
 		masksToBounds = false

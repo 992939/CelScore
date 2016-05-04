@@ -126,6 +126,7 @@ public class BottomNavigationController : UITabBarController, UITabBarController
 	*/
 	public func prepareView() {
 		view.clipsToBounds = true
+		view.contentScaleFactor = MaterialDevice.scale
 		delegate = self
 		prepareTabBar()
 	}
@@ -143,8 +144,9 @@ public class BottomNavigationController : UITabBarController, UITabBarController
 	/// Prepares the tabBar.
 	private func prepareTabBar() {
 		tabBar.depth = .Depth1
+		let image: UIImage? = UIImage.imageWithColor(MaterialColor.clear, size: CGSizeMake(1, 1))
+		tabBar.shadowImage = image
+		tabBar.backgroundImage = image
 		tabBar.backgroundColor = MaterialColor.white
-		tabBar.shadowImage = UIImage.imageWithColor(MaterialColor.clear, size: CGSizeMake(1, 1))
-		tabBar.backgroundImage = UIImage()
 	}
 }

@@ -228,14 +228,14 @@ public class CardView : MaterialPulseView {
 	:name:	init
 	*/
 	public convenience init() {
-		self.init(frame: CGRectNull)
+		self.init(frame: CGRectZero)
 	}
 	
 	/**
 	:name:	init
 	*/
 	public convenience init?(image: UIImage? = nil, titleLabel: UILabel? = nil, detailView: UIView? = nil, leftButtons: Array<UIButton>? = nil, rightButtons: Array<UIButton>? = nil) {
-		self.init(frame: CGRectNull)
+		self.init(frame: CGRectZero)
 		prepareProperties(image, titleLabel: titleLabel, detailView: detailView, leftButtons: leftButtons, rightButtons: rightButtons)
 	}
 	
@@ -409,7 +409,6 @@ public class CardView : MaterialPulseView {
 	*/
 	public override func prepareView() {
 		super.prepareView()
-		pulseColor = MaterialColor.grey.lighten1
 		depth = .Depth1
 		dividerColor = MaterialColor.grey.lighten3
 		cornerRadiusPreset = .Radius1
