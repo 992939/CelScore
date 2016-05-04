@@ -37,6 +37,8 @@
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:16]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
+#define kDefaultLabelBackgroundColor            [UIColor colorWithRed:96.0/255 green: 125.0/255 blue: 139.0/255 alpha: 1]
+
 @interface LMGaugeView ()
 
 // For calculation
@@ -248,7 +250,7 @@
     if (!self.valueLabel)
     {
         self.valueLabel = [[UILabel alloc] init];
-        self.valueLabel.backgroundColor = [UIColor clearColor];
+        self.valueLabel.backgroundColor = kDefaultLabelBackgroundColor;
         self.valueLabel.textAlignment = NSTextAlignmentCenter;
         self.valueLabel.text = [NSString stringWithFormat:@"%.2f", self.value];
         self.valueLabel.font = self.valueFont;
@@ -257,7 +259,7 @@
         self.valueLabel.textColor = self.valueTextColor;
         [self addSubview:self.valueLabel];
     }
-    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2 + self.divisionsRadius;
+    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2.5 + self.divisionsRadius;
     self.valueLabel.frame = CGRectInset(self.progressLayer.frame, insetX, insetX);
     self.valueLabel.frame = CGRectOffset(self.valueLabel.frame, 0, self.showUnitOfMeasurement ? -self.divisionsPadding/2 : 0);
     
@@ -267,7 +269,7 @@
     if (!self.unitOfMeasurementLabel)
     {
         self.unitOfMeasurementLabel = [[UILabel alloc] init];
-        self.unitOfMeasurementLabel.backgroundColor = [UIColor clearColor];
+        self.unitOfMeasurementLabel.backgroundColor = kDefaultLabelBackgroundColor;
         self.unitOfMeasurementLabel.textAlignment = NSTextAlignmentCenter;
         self.unitOfMeasurementLabel.text = self.unitOfMeasurement;
         self.unitOfMeasurementLabel.font = self.unitOfMeasurementFont;
