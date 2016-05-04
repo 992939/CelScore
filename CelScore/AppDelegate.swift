@@ -15,6 +15,7 @@ import Material
 import RateLimit
 import Fabric
 import Crashlytics
+import SwiftyBeaver
 
 
 @UIApplicationMain
@@ -33,27 +34,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             schemaVersion: 17,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 11 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirstStars"] = true
-                        newObject!["isFirstNegative"] = true
-                        newObject!["isFirstInterest"] = true
-                        newObject!["isFirstCompleted"] = true
-                        newObject!["isFirstVoteDisabled"] = true
-                        newObject!["isFirstSocialDisabled"] = true
-                        newObject!["isFirstTrollWarning"] = true
-                    }
-                }
-                if oldSchemaVersion < 12 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirstTrollWarning"] = true
-                    }
-                }
-                if oldSchemaVersion < 14 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-
-                    }
-                }
                 if oldSchemaVersion < 16 {
                     migration.enumerate(ListsModel.className()) { oldObject, newObject in
                         newObject!["numberOfSearchByLocalUser"] = 0
@@ -67,6 +47,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
+        
+        let log = SwiftyBeaver.self
         
         //AWS
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)

@@ -35,6 +35,7 @@ target 'CelScore' do
     pod 'UAObfuscatedString', '0.3.2'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'SIAlertView', '~> 1.3'
+    pod 'SwiftyBeaver'
 end
 
 target 'CelScoreTests' do
