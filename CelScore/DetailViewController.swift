@@ -323,7 +323,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(R.image.dbProfileChevron()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
-        let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 0, y: 28, width: Constants.kScreenWidth, height: 30))
+        let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         
