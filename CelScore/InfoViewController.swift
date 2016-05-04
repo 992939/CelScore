@@ -46,6 +46,8 @@ final class InfoViewController: ASViewController, Labelable {
                             let qualityView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
+                            qualityLabel.backgroundColor = Constants.kMainShade
+                            
                             var infoLabelText: String = ""
                             var attributedText: NSAttributedString = NSAttributedString()
                             switch quality {
@@ -64,15 +66,17 @@ final class InfoViewController: ASViewController, Labelable {
                             
                             let infoLabel: UILabel?
                             if case Info.CelScore.name() = quality {
-                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
+                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + 2 * Constants.kPadding), height: barHeight - 5))
                                 infoLabel!.attributedText = attributedText
                             } else {
-                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
+                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + 2 * Constants.kPadding), height: barHeight - 5))
                             }
                             infoLabel!.textAlignment = .Right
+                            infoLabel!.backgroundColor = Constants.kMainShade
                         
                             qualityView.depth = .Depth1
                             qualityView.backgroundColor = Constants.kMainShade
+                            
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel!)
                             SettingsViewModel().getSettingSignal(settingType: .PublicService)
