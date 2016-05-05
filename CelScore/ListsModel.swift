@@ -13,6 +13,7 @@ import SwiftyJSON
 
 final class CelebId: Object { dynamic var id: String = "" }
 
+
 final class ListsModel: Object {
     
     //MARK: Properties
