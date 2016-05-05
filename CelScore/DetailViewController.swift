@@ -338,6 +338,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getTopView() -> MaterialView {
         let topView: MaterialView = MaterialView(frame: Constants.kTopViewRect)
         topView.depth = .Depth2
+        topView.backgroundColor = Constants.kDarkShade
+        topView.opaque = true
         topView.image = R.image.topView()
         return topView
     }

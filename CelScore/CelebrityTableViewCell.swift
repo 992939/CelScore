@@ -79,6 +79,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     }
     
     //MARK: Methods
+    
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 70)
         
