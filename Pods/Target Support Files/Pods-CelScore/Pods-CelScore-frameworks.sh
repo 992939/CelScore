@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/AIRTimer.framework"
   install_framework "Pods-CelScore/AWSAPIGateway.framework"
   install_framework "Pods-CelScore/AWSCognito.framework"
@@ -115,6 +116,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/AIRTimer.framework"
   install_framework "Pods-CelScore/AWSAPIGateway.framework"
   install_framework "Pods-CelScore/AWSCognito.framework"

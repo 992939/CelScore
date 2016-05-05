@@ -84,22 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-TheObservatory/Keys.framework"
-  install_framework "Pods-TheObservatory/AIRTimer.framework"
-  install_framework "Pods-TheObservatory/PINCache.framework"
-  install_framework "Pods-TheObservatory/ReactiveCocoa.framework"
-  install_framework "Pods-TheObservatory/Realm.framework"
-  install_framework "Pods-TheObservatory/RealmSwift.framework"
-  install_framework "Pods-TheObservatory/Result.framework"
-  install_framework "Pods-TheObservatory/SwiftyJSON.framework"
+  install_framework "Pods/Keys.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-TheObservatory/Keys.framework"
-  install_framework "Pods-TheObservatory/AIRTimer.framework"
-  install_framework "Pods-TheObservatory/PINCache.framework"
-  install_framework "Pods-TheObservatory/ReactiveCocoa.framework"
-  install_framework "Pods-TheObservatory/Realm.framework"
-  install_framework "Pods-TheObservatory/RealmSwift.framework"
-  install_framework "Pods-TheObservatory/Result.framework"
-  install_framework "Pods-TheObservatory/SwiftyJSON.framework"
+  install_framework "Pods/Keys.framework"
 fi

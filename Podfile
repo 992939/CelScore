@@ -1,5 +1,6 @@
 use_frameworks!
 platform :ios, '9.0'
+plugin 'cocoapods-keys'
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
@@ -43,4 +44,6 @@ end
 target 'TheObservatory' do
     shared_pods
 end
+
+
 

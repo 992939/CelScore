@@ -22,6 +22,7 @@
 #import "MYCelScoreAPIClient.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"
+#import <Keys/CelscoreKeys.h>
 
 #endif /* Header_h */
 #import <BuddyBuildSDK/BuddyBuildSDK.h>
