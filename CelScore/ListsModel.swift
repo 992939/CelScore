@@ -13,8 +13,6 @@ import SwiftyJSON
 
 final class CelebId: Object { dynamic var id: String = "" }
 
-func == (lhs: CelebId, rhs: CelebId) -> Bool { return lhs.id == rhs.id }
-
 final class ListsModel: Object {
     
     //MARK: Properties

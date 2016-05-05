@@ -259,7 +259,8 @@
         self.valueLabel.textColor = self.valueTextColor;
         [self addSubview:self.valueLabel];
     }
-    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2.7 + self.divisionsRadius;
+    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2.7
+    + self.divisionsRadius;
     self.valueLabel.frame = CGRectInset(self.progressLayer.frame, insetX, insetX);
     self.valueLabel.frame = CGRectOffset(self.valueLabel.frame, 0, self.showUnitOfMeasurement ? -self.divisionsPadding/2 : 0);
     

@@ -31,11 +31,13 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
+        self.nameNode.shouldRasterizeDescendants = true
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
+        self.profilePicNode.shouldRasterizeDescendants = true
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = 15
