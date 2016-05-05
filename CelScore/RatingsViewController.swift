@@ -45,7 +45,7 @@ final class RatingsViewController: ASViewController {
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = Constants.kMainShade
-                    qualityView.pulseAnimation = .None
+                    qualityView.pulseAnimation = .CenterWithBacking
                     qualityView.pulseColor = MaterialColor.clear
                     SettingsViewModel().getSettingSignal(settingType: .PublicService)
                         .observeOn(UIScheduler())
@@ -56,7 +56,6 @@ final class RatingsViewController: ASViewController {
                     
                     let qualityLabel = UILabel()
                     qualityLabel.text = quality
-                    qualityLabel.backgroundColor = Constants.kMainShade
                     qualityLabel.textColor = MaterialColor.white
                     qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5)
                     
@@ -152,7 +151,9 @@ final class RatingsViewController: ASViewController {
             .on(next: { ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
-                    AIRTimer.after(0.1 * Double(index)){ timer in subview.pulse()
+                    AIRTimer.after(0.1 * Double(index)){ timer in
+                        subview.pulse()
+                        subview.pulseAnimation = .AtPointWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarRatingShade
@@ -188,6 +189,7 @@ final class RatingsViewController: ASViewController {
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
+                    subview.pulseAnimation = .CenterWithBacking
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.updateOnTouch = true
