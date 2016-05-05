@@ -72,7 +72,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
@@ -168,16 +167,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() {
+        Duration.startMeasurement("setupData")
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
         self.view.addSubview(revealingSplashView)
         guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation() }
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
             .observeOn(UIScheduler())
             .on(next: { _ in
+                Duration.stopMeasurement()
                 revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 revealingSplashView.startAnimation()})
             .flatMapError { _ in SignalProducer.empty }

@@ -3,7 +3,7 @@ platform :ios, '9.0'
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 0.100.0'
+    pod 'RealmSwift', '~> 0.101.0'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'PINCache', '~> 2.2'
@@ -32,10 +32,8 @@ target 'CelScore' do
     pod 'HMSegmentedControl', '~> 1.5'
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3.1'
-    pod 'UAObfuscatedString', '0.3.2'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'SIAlertView', '~> 1.3'
-    pod 'SwiftyBeaver'
 end
 
 target 'CelScoreTests' do

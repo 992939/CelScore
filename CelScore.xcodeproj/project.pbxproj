@@ -33,6 +33,7 @@
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14E1C40F8A900E2A9BC /* Reachability.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
+		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
 		00C347A11C6016A000097089 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A01C6016A000097089 /* InfoViewController.swift */; };
@@ -145,6 +146,7 @@
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		0082B14E1C40F8A900E2A9BC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
+		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00BF75271CA1F8D10061064C /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		00C347A01C6016A000097089 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				00C347BC1C6097AA00097089 /* SMSegment */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
+				0099D4501CDB0C89008C1D6E /* Duration.swift */,
 				00252D781CC6EC6E007CA826 /* R.generated.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
@@ -820,6 +823,7 @@
 				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
+				0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
 				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,

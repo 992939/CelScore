@@ -15,10 +15,10 @@ import BEMCheckBox
 final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: Properties
-    private let nameNode: ASTextNode
     private let ratingsNode: ASDisplayNode
     private let switchNode: ASDisplayNode
     private let backgroundNode: ASDisplayNode
+    internal let nameNode: ASTextNode
     internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
     
@@ -31,13 +31,11 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
-        self.nameNode.shouldRasterizeDescendants = true
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
-        self.profilePicNode.shouldRasterizeDescendants = true
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = 15
@@ -51,7 +49,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
         }
         
-        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: UIDevice.getFollowCheckBoxPosition(), y: 30, width: 30, height: 30))
+        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
@@ -61,7 +59,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         box.backgroundColor = Constants.kMainShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
-        self.switchNode.preferredFrameSize = CGSize(width: 30, height: 30)
+        self.switchNode.preferredFrameSize = box.frame.size
         
         let cardView: MaterialPulseView = MaterialPulseView()
         cardView.borderWidth = 2.0

@@ -25,6 +25,7 @@ final class ListsModel: Object {
     //MARK: Initializer
     convenience init(json: JSON) {
         self.init()
+        Duration.startMeasurement("ListsModel")
         self.id = json["listID"].string!
         self.name = json["name"].string!
         let items = json["list"].array!
@@ -35,6 +36,7 @@ final class ListsModel: Object {
             self.celebList.append(celebId)
         }
         self.isSynced = true
+        Duration.stopMeasurement()
     }
     
     //MARK: Method

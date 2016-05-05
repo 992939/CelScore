@@ -15,7 +15,6 @@ import Material
 import RateLimit
 import Fabric
 import Crashlytics
-import SwiftyBeaver
 
 
 @UIApplicationMain
@@ -48,8 +47,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         _ = try! Realm()
         
-        let log = SwiftyBeaver.self
-        
         //AWS
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
@@ -58,6 +55,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         MYCelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
         //UI
+        CelScoreViewModel().getFromAWSSignal(dataType: .List).start()
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = SideNavigationController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
         let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
