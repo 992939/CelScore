@@ -26,7 +26,6 @@ PODS:
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.1):
     - FBSDKCoreKit
-  - FPSCounter (1.0.0)
   - HMSegmentedControl (1.5.2)
   - Material (1.40.0)
   - PINCache (2.2.2)
@@ -84,7 +83,6 @@ DEPENDENCIES:
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.10.1)
   - FBSDKLoginKit (~> 4.10.1)
-  - FPSCounter (~> 1.0)
   - HMSegmentedControl (~> 1.5)
   - Material (~> 1.40.0)
   - PINCache (~> 2.2)
@@ -117,7 +115,6 @@ SPEC CHECKSUMS:
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
-  FPSCounter: 72678b68f0924f526b8d1d42f7a9b3902dd9e37b
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Material: b69e09c2ff1b1d1d5d897b07cd1da586357a9912
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
