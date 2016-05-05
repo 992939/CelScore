@@ -1,10 +1,6 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## Keys
-
-MIT LICENSE Found in the repo
-
 ## AIRTimer
 
 Copyright 2015 RECRUIT LIFESTYLE CO., LTD.

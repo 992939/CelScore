@@ -1,6 +1,14 @@
 use_frameworks!
 platform :ios, '9.0'
-plugin 'cocoapods-keys'
+
+plugin 'cocoapods-keys', {
+    :project => "CelScore",
+    :target => "CelScore",
+    :keys => [
+    "kAPIKey",
+    "kCognitoIdentityPoolId"
+    ]
+}
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'

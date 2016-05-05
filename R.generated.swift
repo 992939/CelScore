@@ -7,6 +7,7 @@ import UIKit
 
 /// This `R` struct is code generateted, and contains references to static resources.
 struct R {
+  /// This `R.color` struct is generated, and contains static references to 0 color palettes.
   struct color {
     private init() {}
   }
@@ -425,6 +426,11 @@ struct R {
   
   /// This `R.storyboard` struct is generated, and contains static references to 0 storyboards.
   struct storyboard {
+    private init() {}
+  }
+  
+  /// This `R.string` struct is generated, and contains static references to 0 localization tables.
+  struct string {
     private init() {}
   }
   

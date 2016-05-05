@@ -189,7 +189,8 @@ final class RatingsViewController: ASViewController {
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
-                    subview.pulseAnimation = .CenterWithBacking
+                    subview.pulse()
+                    subview.pulseAnimation = .AtPointWithBacking
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.updateOnTouch = true

@@ -84,7 +84,6 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/AIRTimer.framework"
   install_framework "Pods-CelScore/AWSAPIGateway.framework"
   install_framework "Pods-CelScore/AWSCognito.framework"
@@ -96,6 +95,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/FBSDKCoreKit.framework"
   install_framework "Pods-CelScore/FBSDKLoginKit.framework"
   install_framework "Pods-CelScore/HMSegmentedControl.framework"
+  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/Material.framework"
   install_framework "Pods-CelScore/PINCache.framework"
   install_framework "Pods-CelScore/PINRemoteImage.framework"
@@ -116,7 +116,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CelScore/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/AIRTimer.framework"
   install_framework "Pods-CelScore/AWSAPIGateway.framework"
   install_framework "Pods-CelScore/AWSCognito.framework"
@@ -128,6 +127,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CelScore/FBSDKCoreKit.framework"
   install_framework "Pods-CelScore/FBSDKLoginKit.framework"
   install_framework "Pods-CelScore/HMSegmentedControl.framework"
+  install_framework "Pods-CelScore/Keys.framework"
   install_framework "Pods-CelScore/Material.framework"
   install_framework "Pods-CelScore/PINCache.framework"
   install_framework "Pods-CelScore/PINRemoteImage.framework"
