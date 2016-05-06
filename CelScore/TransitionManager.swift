@@ -36,9 +36,6 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
             celebSnapshot.frame = container!.convertRect(cell.profilePicNode.view.frame, fromView: masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow).view)
         } else {
             masterVC.view.transform = offScreenLeft
-            let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-            let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
-            cell.profilePicNode.hidden = true
             celebSnapshot = detailVC.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
             celebSnapshot.frame = container!.convertRect(detailVC.profilePicNode.view.frame, fromView: detailVC.view)
         }
