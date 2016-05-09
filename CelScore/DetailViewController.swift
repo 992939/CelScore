@@ -327,7 +327,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         
-        let navigationBarView: Toolbar = Toolbar(frame: Constants.kNavigationBarRect)
+        let navigationBarView: Toolbar = Toolbar()
+        navigationBarView.frame = Constants.kNavigationBarRect
         navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kMainShade
