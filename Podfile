@@ -20,7 +20,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 1.40.0'
+    pod 'Material', '~> 1.40.1'
     pod 'R.swift', '~> 2.1'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'WebASDKImageManager', '~> 1.0'
