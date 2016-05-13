@@ -28,7 +28,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Keys (1.0.0)
-  - Material (1.40.1)
+  - Material (1.41.1)
   - PINCache (2.2.2)
   - PINRemoteImage/Core (2.1.4):
     - PINCache (>= 2.1)
@@ -86,7 +86,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.10.1)
   - HMSegmentedControl (~> 1.5)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Material (~> 1.40.1)
+  - Material (~> 1.41.1)
   - PINCache (~> 2.2)
   - R.swift (~> 2.1)
   - RateLimit (~> 1.2)
@@ -123,7 +123,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
-  Material: 3b5fead4a1e70fc925e163aeeb694c784256d0c8
+  Material: 441818e40ca8d30a4b83f9795e75a0d8c88ccf97
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   R.swift: 93333ff6e5da17ec1f38463671d5ea306197cf96

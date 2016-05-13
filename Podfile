@@ -4,10 +4,7 @@ platform :ios, '9.0'
 plugin 'cocoapods-keys', {
     :project => "CelScore",
     :target => "CelScore",
-    :keys => [
-    "kAPIKey",
-    "kCognitoIdentityPoolId"
-    ]
+    :keys => ["kAPIKey", "kCognitoIdentityPoolId"]
 }
 
 def shared_pods
@@ -20,7 +17,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 1.40.1'
+    pod 'Material', '~> 1.41.1'
     pod 'R.swift', '~> 2.1'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'WebASDKImageManager', '~> 1.0'

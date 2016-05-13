@@ -130,7 +130,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                MaterialAnimation.delay(2.0) {
+                MaterialAnimation.delay(2.5) {
                     self.voteButton.backgroundColor = Constants.kStarRatingShade
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
