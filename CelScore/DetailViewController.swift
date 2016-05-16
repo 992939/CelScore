@@ -319,8 +319,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
         backButton.pulseAnimation = .None
-        backButton.setImage(R.image.dbProfileChevron()!, forState: .Normal)
-        backButton.setImage(R.image.dbProfileChevron()!, forState: .Highlighted)
+        backButton.setImage(R.image.arrow_white()!, forState: .Normal)
+        backButton.setImage(R.image.arrow_white()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
         let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
