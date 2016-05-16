@@ -81,12 +81,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kDarkShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarRatingShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Normal)
-        first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Highlighted)
+        first?.setImage(R.image.ic_add_black()!, forState: .Normal)
+        first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -185,9 +185,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
-            first?.backgroundColor = Constants.kDarkShade
-            first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Normal)
-            first?.setImage(self.userST.isPositive ? R.image.ic_add_green()! : R.image.ic_add_purple()!, forState: .Highlighted)
+            first?.backgroundColor = Constants.kStarRatingShade
+            first?.setImage(R.image.ic_add_black()!, forState: .Normal)
+            first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
         }
     }
     
