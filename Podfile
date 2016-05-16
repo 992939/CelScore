@@ -9,10 +9,10 @@ plugin 'cocoapods-keys', {
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 0.101.0'
+    pod 'RealmSwift', '~> 0.102.1'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
-    pod 'PINCache', '~> 2.2'
+    pod 'PINCache', '~> 2.2.2'
 end
 
 target 'CelScore' do
@@ -24,8 +24,8 @@ target 'CelScore' do
     pod 'SDWebImage', '~>3.7'
     pod 'AWSCognito', '2.3.6'
     pod 'AWSAPIGateway', '~> 2.3.6'
-    pod 'FBSDKLoginKit', '~> 4.10.1'
-    pod 'FBSDKCoreKit', '~> 4.10.1'
+    pod 'FBSDKLoginKit', '~> 4.11'
+    pod 'FBSDKCoreKit', '~> 4.11'
     pod 'Fabric', '~> 1.6.7'
     pod 'Crashlytics', '~> 3.7.0'
     pod 'TwitterKit', '~> 2.0.2'
@@ -40,6 +40,7 @@ target 'CelScore' do
     pod 'Dwifft', '~> 0.3.1'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'SIAlertView', '~> 1.3'
+    pod 'paper-onboarding', '~> 1.0.1'
 end
 
 target 'CelScoreTests' do
