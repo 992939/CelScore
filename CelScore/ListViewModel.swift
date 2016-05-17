@@ -76,7 +76,7 @@ struct ListViewModel {
             guard let celebList = list else { return }
             let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
             
-            guard followed.count > 0 else { return }
+            guard followed.count > 0 else { return observer.sendNext(true) }
             var notFollowing: [(index: Int, celebId: CelebId)] = []
             let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
                 let isFollowing = followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
@@ -98,7 +98,7 @@ struct ListViewModel {
             
             realm.beginWrite()
             listModel.id = celebList.id
-            listModel.name = celebList.id
+            listModel.name = celebList.name
             realm.add(listModel, update: true)
             try! realm.commitWrite()
             

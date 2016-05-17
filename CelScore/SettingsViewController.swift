@@ -152,7 +152,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         alert.addButtonWithTitle("Cancel", type: SIAlertViewButtonType.Cancel, handler:nil)
         alert.addButtonWithTitle("Log Out", type: SIAlertViewButtonType.Destructive) { alertView in
             UserViewModel().logoutSignal().startWithNext({ _ in
-                TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions())
+                MaterialAnimation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
             })
         }

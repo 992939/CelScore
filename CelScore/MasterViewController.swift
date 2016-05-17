@@ -210,9 +210,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().updateListSignal(listId: list.getId())
-            .observeOn(UIScheduler())
             .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
+            .observeOn(UIScheduler())
             .startWithNext { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
     }
     
