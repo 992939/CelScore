@@ -71,9 +71,9 @@ class ListViewModelTests: XCTestCase {
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("searchSignal error: \(error)") } }
     }
     
-    func testUpdateAllListsSignal() {
+    func testUpdateListSignal() {
         let expectation = expectationWithDescription("updateAllListsSignal callback")
-        ListViewModel().updateAllListsSignal().startWithNext { _ in
+        ListViewModel().updateListSignal(listId: "0001").startWithNext { _ in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", "0001").first
             let celebId: CelebId = list!.celebList.last!

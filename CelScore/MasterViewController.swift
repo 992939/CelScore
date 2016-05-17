@@ -129,6 +129,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
             RateLimit.execute(name: "updateFromAWS", limit: 10) { //TODO: Constants.kDayInSeconds) {
+                let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
@@ -139,9 +140,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().sanitizeListsSignal() }
                     .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
-                        return ListViewModel().updateAllListsSignal() }
+                        return ListViewModel().updateListSignal(listId: list.getId()) }
                     .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                         return ListViewModel().getListSignal(listId: list.getId()) }
                     .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                     .flatMapError { _ in SignalProducer.empty }
