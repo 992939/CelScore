@@ -60,8 +60,8 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "\"I believe if a private citizen is able to affect public opinion in a constructive way he doesn't have to be an elected public servant to perform a public service.\"\n- Warren Beatty\n\nWelcome to the Courthouse of Public Opinion!"
-        case .MenuAccess: return "You've reached the steps of court office!\n\nYou'll need to register to access this area."
+        case .WelcomeUser: return "What happens in a court of public opinion shapes public opinion.\n\nWelcome to the Courthouse of Public Opinion!"
+        case .MenuAccess: return "You've reached the steps of courthouse!\n\nYou'll need to register to access this area."
         case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've selected your first star!\n\nYou can choose up to ten stars to appear in the Today view.\n(swipe down from the top of your screen to display it)"

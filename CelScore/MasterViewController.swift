@@ -10,7 +10,6 @@ import AsyncDisplayKit
 import ReactiveCocoa
 import Material
 import HMSegmentedControl
-import AIRTimer
 import RateLimit
 import Dwifft
 import Result
