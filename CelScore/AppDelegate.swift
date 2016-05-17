@@ -33,7 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 17,
+            schemaVersion: 18,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 16 {
                     migration.enumerate(ListsModel.className()) { oldObject, newObject in

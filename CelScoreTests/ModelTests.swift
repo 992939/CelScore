@@ -165,7 +165,6 @@ class ModelTests: XCTestCase {
         let list = ListsModel()
         XCTAssertNotNil(list, "ListsModel() not nil")
         XCTAssertNotNil(list.id, "ListsModel().id not nil")
-        XCTAssertNotNil(list.numberOfSearchByLocalUser, "ListsModel().numberOfSearchByLocalUser not nil")
         XCTAssertNotNil(list.name, "ListsModel().name not nil")
         XCTAssertNotNil(list.isSynced, "ListsModel().isSynced not nil")
         XCTAssertNotNil(list.celebList, "ListsModel().celebList not nil")
@@ -175,7 +174,6 @@ class ModelTests: XCTestCase {
         let list = ListsModel()
         XCTAssert((list.id as Any) is String, "ListsModel().id is String")
         XCTAssert((list.name as Any) is String, "ListsModel().name is String")
-        XCTAssert((list.numberOfSearchByLocalUser as Any) is Int, "ListsModel().numberOfSearchByLocalUser is Int")
         XCTAssert((list.isSynced as Any) is Bool, "ListsModel().name is Bool")
         XCTAssert((list.celebList as Any) is List<CelebId>, "ListsModel().id is List<CelebId>")
     }

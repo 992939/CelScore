@@ -53,7 +53,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         MaterialAnimation.delay(0.7) {
             if self.socialButton.hidden == true {
                 if let index = self.celebrityTableView.indexPathForSelectedRow {
-                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None) }
+                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
+                }
             } else { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
@@ -127,7 +128,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
-            RateLimit.execute(name: "updateFromAWS", limit: 10) { //Constants.kDayInSeconds) {
+            RateLimit.execute(name: "updateFromAWS", limit: 10) { //TODO: Constants.kDayInSeconds) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
@@ -208,8 +209,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        ListViewModel().getListSignal(listId: list.getId())
+        ListViewModel().updateListSignal(listId: list.getId())
             .observeOn(UIScheduler())
+            .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
+                return ListViewModel().getListSignal(listId: list.getId()) }
             .startWithNext { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
     }
     
