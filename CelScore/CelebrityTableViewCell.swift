@@ -111,7 +111,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     //MARK: BEMCheckBoxDelegate
     func didTapCheckBox(checkBox: BEMCheckBox) {
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.updateCheckBox(checkBox) })
+            .on(next: { _ in
+                self.updateCheckBox(checkBox)
+                SettingsViewModel().updateTodayWidgetSignal().start() })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNotFollow.message(), image: OverlayInfo.FirstNotFollow.logo(), options: OverlayInfo.getOptions())
                TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) }) 

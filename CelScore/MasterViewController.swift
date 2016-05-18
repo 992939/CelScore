@@ -49,8 +49,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
         self.sideNavigationController?.animationDuration = 0.4
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
         
-        MaterialAnimation.delay(0.7) {
+        MaterialAnimation.delay(0.5) {
             if self.socialButton.hidden == true {
                 if let index = self.celebrityTableView.indexPathForSelectedRow {
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
@@ -68,11 +73,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     }})
                 .start()
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
         
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {

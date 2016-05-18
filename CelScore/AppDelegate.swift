@@ -103,7 +103,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        SettingsViewModel().updateTodayWidgetSignal().start()
+        timer?.invalidate()
         RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
     }
     func applicationWillResignActive(application: UIApplication) { timer = AIRTimer.after(60.0, handler: { _ in exit(0) }) }
