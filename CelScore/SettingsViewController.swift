@@ -99,7 +99,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //PickerView
         let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel: UILabel = self.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let pickerLabel: UILabel = self.setupLabel(title: "Your Topic Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
@@ -125,7 +125,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         //Logout
         let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 40))
-        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4*Constants.kPadding, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
@@ -222,7 +222,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
-        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 40, height: 40))
+        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 40))
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
@@ -241,7 +241,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func setupProgressBarNode(title title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
-        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
         bar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
         bar.setProgress(value, animated: true)
