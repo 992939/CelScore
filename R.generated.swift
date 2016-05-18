@@ -55,8 +55,8 @@ struct R {
     static let court_small_white = ImageResource(bundle: _R.hostingBundle, name: "court_small_white")
     /// Image `court_white`.
     static let court_white = ImageResource(bundle: _R.hostingBundle, name: "court_white")
-    /// Image `db-profile-chevron`.
-    static let dbProfileChevron = ImageResource(bundle: _R.hostingBundle, name: "db-profile-chevron")
+    /// Image `cross`.
+    static let cross = ImageResource(bundle: _R.hostingBundle, name: "cross")
     /// Image `facebooklogo`.
     static let facebooklogo = ImageResource(bundle: _R.hostingBundle, name: "facebooklogo")
     /// Image `geometry_green`.
@@ -195,9 +195,9 @@ struct R {
       return UIImage(resource: R.image.court_white, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "db-profile-chevron", bundle: ..., traitCollection: ...)`
-    static func dbProfileChevron(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.dbProfileChevron, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
+    static func cross(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.cross, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "facebooklogo", bundle: ..., traitCollection: ...)`

@@ -85,8 +85,17 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.setImage(R.image.ic_add_black()!, forState: .Normal)
-        first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+        SettingsViewModel().getSettingSignal(settingType: .PublicService)
+            .observeOn(UIScheduler())
+            .startWithNext({ status in
+                if (status as! Bool) == true {
+                    first?.setImage(R.image.ic_add_black()!, forState: .Normal)
+                    first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+                } else {
+                    first?.setImage(R.image.cross()!, forState: .Normal)
+                    first?.setImage(R.image.cross()!, forState: .Highlighted)
+                }
+            })
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -186,8 +195,17 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
             first?.backgroundColor = Constants.kStarRatingShade
-            first?.setImage(R.image.ic_add_black()!, forState: .Normal)
-            first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+            SettingsViewModel().getSettingSignal(settingType: .PublicService)
+                .observeOn(UIScheduler())
+                .startWithNext({ status in
+                    if (status as! Bool) == true {
+                        first?.setImage(R.image.ic_add_black()!, forState: .Normal)
+                        first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+                    } else {
+                        first?.setImage(R.image.cross()!, forState: .Normal)
+                        first?.setImage(R.image.cross()!, forState: .Highlighted)
+                    }
+                })
         }
     }
     
