@@ -79,7 +79,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
-                    .observeOn(UIScheduler())
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<CGFloat, NoError> in
                         return SettingsViewModel().calculateUserAverageCelScoreSignal() }

@@ -55,20 +55,20 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
                 detailVC.view.transform = CGAffineTransformIdentity
             } else {
                 masterVC.view.alpha = 1
-                let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-                let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as! CelebrityTableViewCell
+                let selectedRow = NSIndexPath(forRow: self.indexedCell, inSection: 0)
+                let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow) as! CelebrityTableViewCell
                 cell.profilePicNode.hidden = true
                 detailVC.view.transform = offScreenRight
                 masterVC.view.transform = CGAffineTransformIdentity
-                let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow!)
+                let rect = masterVC.celebrityTableView.rectForRowAtIndexPath(selectedRow)
                 let relativeRect = CGRectOffset(rect, -masterVC.celebrityTableView.contentOffset.x, -masterVC.celebrityTableView.contentOffset.y)
                 celebSnapshot.frame = CGRect(x: 15.0, y: relativeRect.origin.y + 134, width: 70, height: 70)
             }
             }, completion: { _ in
                 detailVC.profilePicNode.hidden = false
                 if self.presenting == false && masterVC.celebrityTableView.indexPathForSelectedRow != nil {
-                    let selectedRow = masterVC.celebrityTableView.indexPathForSelectedRow
-                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow!) as? CelebrityTableViewCell
+                    let selectedRow = NSIndexPath(forRow: self.indexedCell, inSection: 0)
+                    let cell = masterVC.celebrityTableView.nodeForRowAtIndexPath(selectedRow) as? CelebrityTableViewCell
                     cell?.profilePicNode.hidden = false
                 }
                 celebSnapshot.removeFromSuperview()
