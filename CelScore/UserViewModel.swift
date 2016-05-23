@@ -113,88 +113,87 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                
-                let syncClient: AWSCognito = AWSCognito.defaultCognito()
-                let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
-                let realm = try! Realm()
-                
-                switch dataSetType {
-                case .FacebookInfo:
-                    if dataset.getAll().count == 0 {
-                        dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-                        dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-                        dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
-                        dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                        let timezone = object.objectForKey("timezone") as! NSNumber
-                        dataset.setString(timezone.stringValue, forKey: "timezone")
-                        dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                        dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-                        dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-                        dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
-                        dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
-                        dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
-                        dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
-                    }
-                case .TwitterInfo:
-                    if dataset.getAll().count == 0 {
-                        dataset.setString(object.objectForKey("screen_name") as! String, forKey: "screen_name")
-                        let followers = object.objectForKey("followers_count") as! NSNumber
-                        dataset.setString(followers.stringValue, forKey: "followers_count")
-                        let following = object.objectForKey("following") as! NSNumber
-                        dataset.setString(following.stringValue, forKey: "following")
-                        let verified = object.objectForKey("verified") as! NSNumber
-                        dataset.setString(verified.stringValue, forKey: "verified")
-                        dataset.setString(object.objectForKey("created_at") as! String, forKey: "created_at")
-                        dataset.setString(object.objectForKey("time_zone") as! String, forKey: "time_zone")
-                        dataset.setString(object.objectForKey("location") as! String, forKey: "location")
-                        dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
-                        dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
-                        dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
-                    }
-                case .UserRatings:
-                    let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
-                    guard userRatingsArray.count > 0 else { observer.sendNext(userRatingsArray); observer.sendCompleted(); return task }
-                    for index in 0..<userRatingsArray.count {
-                        let ratings: UserRatingsModel = userRatingsArray[index]
-                        dataset.setString(ratings.interpolation(), forKey: ratings.id)
-                        realm.beginWrite()
-                        ratings.isSynced = true
-                        realm.add(ratings, update: true)
-                        try! realm.commitWrite()
-                    }
-                case .UserSettings:
-                    let model = realm.objects(SettingsModel).first
-                    guard let settings = model else { observer.sendNext(model!); observer.sendCompleted(); return task }
-                    guard settings.isSynced == false else  { observer.sendNext(model!); observer.sendCompleted(); return task }
-                    
-                    dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
-                    dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
-                    dataset.setString(String(settings.publicService), forKey: "publicService")
-                    dataset.setString(String(settings.consensusBuilding), forKey: "consensusBuilding")
-                    dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
-                    dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
-                    dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
-                    dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
-                    dataset.setString(String(settings.isFirstStars), forKey: "isFirstStars")
-                    dataset.setString(String(settings.isFirstNegative), forKey: "isFirstNegative")
-                    dataset.setString(String(settings.isFirstCompleted), forKey: "isFirstCompleted")
-                    dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
-                    dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
-                    dataset.setString(String(settings.isFirstSocialDisabled), forKey: "isFirstSocialDisabled")
-                    dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
+                return nil }
+            
+            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
+            let realm = try! Realm()
+            
+            switch dataSetType {
+            case .FacebookInfo:
+                if dataset.getAll().count == 0 {
+                    dataset.setString(object.objectForKey("name") as! String, forKey: "name")
+                    dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
+                    dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                    dataset.setString(object.objectForKey("email") as! String, forKey: "email")
+                    let timezone = object.objectForKey("timezone") as! NSNumber
+                    dataset.setString(timezone.stringValue, forKey: "timezone")
+                    dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                    dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
+                    dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
+                    dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
+                    dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
+                    dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
+                    dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                 }
+            case .TwitterInfo:
+                if dataset.getAll().count == 0 {
+                    dataset.setString(object.objectForKey("screen_name") as! String, forKey: "screen_name")
+                    let followers = object.objectForKey("followers_count") as! NSNumber
+                    dataset.setString(followers.stringValue, forKey: "followers_count")
+                    let following = object.objectForKey("following") as! NSNumber
+                    dataset.setString(following.stringValue, forKey: "following")
+                    let verified = object.objectForKey("verified") as! NSNumber
+                    dataset.setString(verified.stringValue, forKey: "verified")
+                    dataset.setString(object.objectForKey("created_at") as! String, forKey: "created_at")
+                    dataset.setString(object.objectForKey("time_zone") as! String, forKey: "time_zone")
+                    dataset.setString(object.objectForKey("location") as! String, forKey: "location")
+                    dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
+                    dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
+                    dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
+                }
+            case .UserRatings:
+                let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
+                guard userRatingsArray.count > 0 else { observer.sendNext(userRatingsArray); return observer.sendCompleted(); }
+                for index in 0..<userRatingsArray.count {
+                    let ratings: UserRatingsModel = userRatingsArray[index]
+                    dataset.setString(ratings.interpolation(), forKey: ratings.id)
+                    realm.beginWrite()
+                    ratings.isSynced = true
+                    realm.add(ratings, update: true)
+                    try! realm.commitWrite()
+                }
+            case .UserSettings:
+                let model = realm.objects(SettingsModel).first
+                guard let settings = model else { observer.sendNext(model!); return observer.sendCompleted(); }
+                guard settings.isSynced == false else  { observer.sendNext(model!); return observer.sendCompleted(); }
                 
-                dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
-                    guard task.error == nil else {
-                        if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
-                        observer.sendFailed(task.error!)
-                        return task }
-                    observer.sendNext(object)
-                    observer.sendCompleted()
-                    return task
-                })
-                return nil
+                dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
+                dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
+                dataset.setString(String(settings.publicService), forKey: "publicService")
+                dataset.setString(String(settings.consensusBuilding), forKey: "consensusBuilding")
+                dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
+                dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
+                dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
+                dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
+                dataset.setString(String(settings.isFirstStars), forKey: "isFirstStars")
+                dataset.setString(String(settings.isFirstNegative), forKey: "isFirstNegative")
+                dataset.setString(String(settings.isFirstCompleted), forKey: "isFirstCompleted")
+                dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
+                dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
+                dataset.setString(String(settings.isFirstSocialDisabled), forKey: "isFirstSocialDisabled")
+                dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
             }
+            
+            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
+                guard task.error == nil else {
+                    if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
+                    observer.sendFailed(task.error!)
+                    return task }
+                observer.sendNext(object)
+                observer.sendCompleted()
+                return task
+            })
         }
     }
     
