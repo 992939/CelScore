@@ -190,6 +190,8 @@ struct UserViewModel {
                     if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                     observer.sendFailed(task.error!)
                     return task }
+                dataset.clear()
+                dataset.synchronize()
                 observer.sendNext(object)
                 observer.sendCompleted()
                 return task
