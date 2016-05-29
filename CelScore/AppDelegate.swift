@@ -54,7 +54,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
-        MYCelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
+        CACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
         
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .List).start()

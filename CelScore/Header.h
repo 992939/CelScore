@@ -19,7 +19,7 @@
 #import <HMSegmentedControl/HMSegmentedControl.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "TAOverlay.h"
-#import "MYCelScoreAPIClient.h"
+#import "CACelScoreAPIClient.h"
 #import "LMGaugeView.h"
 #import "UIView+DYARippleEffect.h"
 #import <Keys/CelscoreKeys.h>

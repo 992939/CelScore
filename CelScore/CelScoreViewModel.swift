@@ -21,7 +21,7 @@ struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let serviceClient = MYCelScoreAPIClient(forKey: "anonymousAccess")
+            let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
             let awsCall : AWSTask
             switch dataType {

@@ -14,12 +14,12 @@
  */
  
 
-#import "MYCelScoreAPIClient.h"
+#import "CACelScoreAPIClient.h"
 #import <AWSCore/AWSCore.h>
 #import <AWSCore/AWSSignature.h>
 #import <AWSCore/AWSSynchronizedMutableDictionary.h>
 
-#import "MYEmpty.h"
+#import "CAEmpty.h"
 
 @interface AWSAPIGatewayClient()
 
@@ -43,7 +43,7 @@
 
 @end
 
-@interface MYCelScoreAPIClient()
+@interface CACelScoreAPIClient()
 
 @property (nonatomic, strong) AWSServiceConfiguration *configuration;
 
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation MYCelScoreAPIClient
+@implementation CACelScoreAPIClient
 
 @synthesize configuration = _configuration;
 
@@ -70,10 +70,10 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                                                            credentialsProvider:nil];
     }
 
-    static MYCelScoreAPIClient *_defaultClient = nil;
+    static CACelScoreAPIClient *_defaultClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _defaultClient = [[MYCelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
+        _defaultClient = [[CACelScoreAPIClient alloc] initWithConfiguration:serviceConfiguration];
     });
 
     return _defaultClient;
@@ -84,7 +84,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     dispatch_once(&onceToken, ^{
         _serviceClients = [AWSSynchronizedMutableDictionary new];
     });
-    [_serviceClients setObject:[[MYCelScoreAPIClient alloc] initWithConfiguration:configuration]
+    [_serviceClients setObject:[[CACelScoreAPIClient alloc] initWithConfiguration:configuration]
                         forKey:key];
 }
 
@@ -107,7 +107,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     if (self = [super init]) {
         _configuration = [configuration copy];
 
-        NSString *URLString = @"https://o8sryy34vk.execute-api.us-east-1.amazonaws.com/prod";
+        NSString *URLString = @"https://o8sryy34vk.execute-api.us-east-1.amazonaws.com/May29th";
         if ([URLString hasSuffix:@"/"]) {
             URLString = [URLString substringToIndex:[URLString length] - 1];
         }
@@ -144,7 +144,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[MYEmpty class]];
+                     responseClass:[CAEmpty class]];
 }
 
 - (AWSTask *)celeblistsservicePost {
@@ -166,7 +166,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[MYEmpty class]];
+                     responseClass:[CAEmpty class]];
 }
 
 - (AWSTask *)celebratingservicePost {
@@ -188,7 +188,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                    queryParameters:queryParameters
                   headerParameters:headerParameters
                               body:nil
-                     responseClass:[MYEmpty class]];
+                     responseClass:[CAEmpty class]];
 }
 
 

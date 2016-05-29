@@ -14,9 +14,9 @@
  */
  
 
-#import "MYEmpty.h"
+#import "CAEmpty.h"
 
-@implementation MYEmpty
+@implementation CAEmpty
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{

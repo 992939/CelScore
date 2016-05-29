@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */; };
+		000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A61CFBA1B00004A8B9 /* CAEmpty.m */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
@@ -54,8 +56,6 @@
 		00CE26561CD48FC30045106C /* TheObservatory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00CE264B1CD48FC30045106C /* TheObservatory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00CE265A1CD492090045106C /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
 		00CE265B1CD492DE0045106C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6101CC6183B00704CF4 /* MainInterface.storyboard */; };
-		00D165C11CD9D486002D7CCF /* MYCelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */; };
-		00D165C21CD9D486002D7CCF /* MYEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D165C01CD9D486002D7CCF /* MYEmpty.m */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -110,6 +110,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACelScoreAPIClient.h; sourceTree = "<group>"; };
+		000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACelScoreAPIClient.m; sourceTree = "<group>"; };
+		000215A51CFBA1B00004A8B9 /* CAEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAEmpty.h; sourceTree = "<group>"; };
+		000215A61CFBA1B00004A8B9 /* CAEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAEmpty.m; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
@@ -171,10 +175,6 @@
 		00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AIRTimer.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework"; sourceTree = "<group>"; };
 		00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/ReactiveCocoa.framework"; sourceTree = "<group>"; };
 		00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
-		00D165BD1CD9D486002D7CCF /* MYCelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYCelScoreAPIClient.h; sourceTree = "<group>"; };
-		00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYCelScoreAPIClient.m; sourceTree = "<group>"; };
-		00D165BF1CD9D486002D7CCF /* MYEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYEmpty.h; sourceTree = "<group>"; };
-		00D165C01CD9D486002D7CCF /* MYEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYEmpty.m; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -244,14 +244,14 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */,
+				000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */,
+				000215A51CFBA1B00004A8B9 /* CAEmpty.h */,
+				000215A61CFBA1B00004A8B9 /* CAEmpty.m */,
 				00CE26461CD459710045106C /* Header.h */,
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
-				00D165BD1CD9D486002D7CCF /* MYCelScoreAPIClient.h */,
-				00D165BE1CD9D486002D7CCF /* MYCelScoreAPIClient.m */,
-				00D165BF1CD9D486002D7CCF /* MYEmpty.h */,
-				00D165C01CD9D486002D7CCF /* MYEmpty.m */,
 				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
 				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
 				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
@@ -816,18 +816,18 @@
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
+				000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */,
+				000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
 				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
 				0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */,
-				00D165C11CD9D486002D7CCF /* MYCelScoreAPIClient.m in Sources */,
 				00C347B51C605CB800097089 /* SMAlphaImageSegment.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,
-				00D165C21CD9D486002D7CCF /* MYEmpty.m in Sources */,
 				004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */,
 				00C347B81C605CB800097089 /* SMSegment.swift in Sources */,
 				00C347C01C61A1BC00097089 /* UIView+Geometry.swift in Sources */,
