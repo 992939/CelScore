@@ -452,16 +452,14 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 			duration: duration,
 			options: options,
 			animations: animations,
-			completion: { [weak self] (result: Bool) in
-				if let s: SideNavigationController = self {
-					toViewController.didMoveToParentViewController(s)
-					s.rootViewController.removeFromParentViewController()
-					s.rootViewController = toViewController
-					s.rootViewController.view.clipsToBounds = true
-					s.rootViewController.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-					s.view.sendSubviewToBack(s.rootViewController.view)
-					completion?(result)
-				}
+			completion: { [unowned self] (result: Bool) in
+				toViewController.didMoveToParentViewController(self)
+				self.rootViewController.removeFromParentViewController()
+				self.rootViewController = toViewController
+				self.rootViewController.view.clipsToBounds = true
+				self.rootViewController.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+				self.view.sendSubviewToBack(self.rootViewController.view)
+				completion?(result)
 			})
 	}
 	
@@ -490,33 +488,25 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 				
 				if hide {
 					UIView.animateWithDuration(duration,
-						animations: { [weak self] in
-							if let s: SideNavigationController = self {
-								v.bounds.size.width = width
-								v.position.x = -width / 2
-								s.rootViewController.view.alpha = 1
-							}
-						}) { [weak self] _ in
-							if let s: SideNavigationController = self {
-								v.shadowPathAutoSizeEnabled = true
-								s.layoutSubviews()
-								s.hideView(v)
-							}
+						animations: { [unowned self] in
+							v.bounds.size.width = width
+							v.position.x = -width / 2
+							self.rootViewController.view.alpha = 1
+						}) { [unowned self] _ in
+							v.shadowPathAutoSizeEnabled = true
+							self.layoutSubviews()
+							self.hideView(v)
 						}
 				} else {
 					UIView.animateWithDuration(duration,
-						animations: { [weak self] in
-							if let s: SideNavigationController = self {
-								v.bounds.size.width = width
-								v.position.x = width / 2
-								s.rootViewController.view.alpha = 0.5
-							}
-						}) { [weak self] _ in
-							if let s: SideNavigationController = self {
-								v.shadowPathAutoSizeEnabled = true
-								s.layoutSubviews()
-								s.showView(v)
-							}
+						animations: { [unowned self] in
+							v.bounds.size.width = width
+							v.position.x = width / 2
+							self.rootViewController.view.alpha = 0.5
+						}) { [unowned self] _ in
+							v.shadowPathAutoSizeEnabled = true
+							self.layoutSubviews()
+							self.showView(v)
 						}
 				}
 			} else {
@@ -564,33 +554,25 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 				
 				if hide {
 					UIView.animateWithDuration(duration,
-						animations: { [weak self] in
-							if let s: SideNavigationController = self {
-								v.bounds.size.width = width
-								v.position.x = s.view.bounds.width + width / 2
-								s.rootViewController.view.alpha = 1
-							}
-						}) { [weak self] _ in
-							if let s: SideNavigationController = self {
-								v.shadowPathAutoSizeEnabled = true
-								s.layoutSubviews()
-								s.hideView(v)
-							}
+						animations: { [unowned self] in
+							v.bounds.size.width = width
+							v.position.x = self.view.bounds.width + width / 2
+							self.rootViewController.view.alpha = 1
+						}) { [unowned self] _ in
+							v.shadowPathAutoSizeEnabled = true
+							self.layoutSubviews()
+							self.hideView(v)
 						}
 				} else {
 					UIView.animateWithDuration(duration,
-						animations: { [weak self] in
-							if let s: SideNavigationController = self {
-								v.bounds.size.width = width
-								v.position.x = s.view.bounds.width - width / 2
-								s.rootViewController.view.alpha = 0.5
-							}
-						}) { [weak self] _ in
-							if let s: SideNavigationController = self {
-								v.shadowPathAutoSizeEnabled = true
-								s.layoutSubviews()
-								s.showView(v)
-							}
+						animations: { [unowned self] in
+							v.bounds.size.width = width
+							v.position.x = self.view.bounds.width - width / 2
+							self.rootViewController.view.alpha = 0.5
+						}) { [unowned self] _ in
+							v.shadowPathAutoSizeEnabled = true
+							self.layoutSubviews()
+							self.showView(v)
 						}
 				}
 			} else {
@@ -651,10 +633,8 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 					animations: {
 						v.position.x = v.width / 2
 						self.rootViewController.view.alpha = 0.5
-					}) { [weak self] _ in
-						if let s: SideNavigationController = self {
-							s.delegate?.sideNavigationDidOpen?(s, position: .Left)
-						}
+					}) { [unowned self] _ in
+						self.delegate?.sideNavigationDidOpen?(self, position: .Left)
 					}
 			}
 		}
@@ -674,15 +654,11 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 				userInteractionEnabled = false
 				delegate?.sideNavigationWillOpen?(self, position: .Right)
 				UIView.animateWithDuration(Double(0 == velocity ? animationDuration : fmax(0.1, fmin(1, Double(v.x / velocity)))),
-					animations: { [weak self] in
-						if let s: SideNavigationController = self {
-							v.position.x = s.view.bounds.width - v.width / 2
-							s.rootViewController.view.alpha = 0.5
-						}
-					}) { [weak self] _ in
-						if let s: SideNavigationController = self {
-							s.delegate?.sideNavigationDidOpen?(s, position: .Right)
-						}
+					animations: { [unowned self] in
+						v.position.x = self.view.bounds.width - v.width / 2
+						self.rootViewController.view.alpha = 0.5
+					}) { [unowned self] _ in
+						self.delegate?.sideNavigationDidOpen?(self, position: .Right)
 					}
 			}
 		}
@@ -700,17 +676,13 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 				userInteractionEnabled = true
 				delegate?.sideNavigationWillClose?(self, position: .Left)
 				UIView.animateWithDuration(Double(0 == velocity ? animationDuration : fmax(0.1, fmin(1, Double(v.x / velocity)))),
-					animations: { [weak self] in
-						if let s: SideNavigationController = self {
-							v.position.x = -v.width / 2
-							s.rootViewController.view.alpha = 1
-						}
-					}) { [weak self] _ in
-						if let s: SideNavigationController = self {
-							s.hideView(v)
-							s.toggleStatusBar()
-							s.delegate?.sideNavigationDidClose?(s, position: .Left)
-						}
+					animations: { [unowned self] in
+						v.position.x = -v.width / 2
+						self.rootViewController.view.alpha = 1
+					}) { [unowned self] _ in
+						self.hideView(v)
+						self.toggleStatusBar()
+						self.delegate?.sideNavigationDidClose?(self, position: .Left)
 					}
 			}
 		}
@@ -729,17 +701,13 @@ public class SideNavigationController : UIViewController, UIGestureRecognizerDel
 				userInteractionEnabled = true
 				delegate?.sideNavigationWillClose?(self, position: .Right)
 				UIView.animateWithDuration(Double(0 == velocity ? animationDuration : fmax(0.1, fmin(1, Double(v.x / velocity)))),
-					animations: { [weak self] in
-						if let s: SideNavigationController = self {
-							v.position.x = s.view.bounds.width + v.width / 2
-							s.rootViewController.view.alpha = 1
-						}
-					}) { [weak self] _ in
-						if let s: SideNavigationController = self {
-							s.hideView(v)
-							s.toggleStatusBar()
-							s.delegate?.sideNavigationDidClose?(s, position: .Right)
-						}
+					animations: { [unowned self] in
+						v.position.x = self.view.bounds.width + v.width / 2
+						self.rootViewController.view.alpha = 1
+					}) { [unowned self] _ in
+						self.hideView(v)
+						self.toggleStatusBar()
+						self.delegate?.sideNavigationDidClose?(self, position: .Right)
 					}
 			}
 		}

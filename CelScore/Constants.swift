@@ -46,7 +46,8 @@ struct Constants {
     static let kWineShade: UIColor = MaterialColor.purple.lighten4
     static let kStarRatingShade: UIColor = MaterialColor.yellow.darken1
     
-    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 70)
+    static let kStatusViewRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 20)
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 70)
     
     //MasterVC
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
@@ -59,7 +60,7 @@ struct Constants {
     static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
     
     //DetailVC 
-    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.bottom, width: kMaxWidth, height: UIDevice.getProfileDiameter() + UIDevice.getProfilePadding())
+    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kNavigationBarRect.height, width: kMaxWidth, height: UIDevice.getProfileDiameter() + UIDevice.getProfilePadding())
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding/2, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: UIDevice.getSegmentHeight())
     static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding/2

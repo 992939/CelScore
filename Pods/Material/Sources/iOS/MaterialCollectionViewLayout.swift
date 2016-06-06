@@ -53,8 +53,8 @@ public class MaterialCollectionViewLayout : UICollectionViewLayout {
 	/// Layout attribute items.
 	public private(set) var layoutItems: Array<(UICollectionViewLayoutAttributes, NSIndexPath)> = Array<(UICollectionViewLayoutAttributes, NSIndexPath)>()
 	
-	/// Cell data source items.
-	public private(set) var dataSourceItems: Array<MaterialDataSourceItem>?
+	/// Cell items.
+	public private(set) var items: Array<MaterialDataSourceItem>?
 	
 	/// Scroll direction.
 	public var scrollDirection: UICollectionViewScrollDirection = .Vertical
@@ -86,12 +86,12 @@ public class MaterialCollectionViewLayout : UICollectionViewLayout {
 	
 	public override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
 		let attributes: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
-		let item: MaterialDataSourceItem = dataSourceItems![indexPath.item]
+		let item: MaterialDataSourceItem = items![indexPath.item]
 		
 		if 0 < itemSize.width && 0 < itemSize.height {
 			attributes.frame = CGRectMake(offset.x, offset.y, itemSize.width - contentInset.left - contentInset.right, itemSize.height - contentInset.top - contentInset.bottom)
 		} else if .Vertical == scrollDirection {
-			attributes.frame = CGRectMake(contentInset.left, offset.y, collectionView!.bounds.width - contentInset.left - contentInset.right, nil == item.height ? collectionView!.bounds.height : item.height!)
+				attributes.frame = CGRectMake(contentInset.left, offset.y, collectionView!.bounds.width - contentInset.left - contentInset.right, nil == item.height ? collectionView!.bounds.height : item.height!)
 		} else {
 			attributes.frame = CGRectMake(offset.x, contentInset.top, nil == item.width ? collectionView!.bounds.width : item.width!, collectionView!.bounds.height - contentInset.top - contentInset.bottom)
 		}
@@ -118,17 +118,12 @@ public class MaterialCollectionViewLayout : UICollectionViewLayout {
 	}
 	
 	public override func prepareLayout() {
-		if let dataSource: MaterialCollectionViewDataSource = collectionView?.dataSource as? MaterialCollectionViewDataSource {
-			prepareLayoutForItems(dataSource.items())
-		}
+		let dataSource: MaterialCollectionViewDataSource = collectionView!.dataSource as! MaterialCollectionViewDataSource
+		prepareLayoutForItems(dataSource.items())
 	}
 	
-	public override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
-		return proposedContentOffset
-	}
-	
-	private func prepareLayoutForItems(dataSourceItems: Array<MaterialDataSourceItem>) {
-		self.dataSourceItems = dataSourceItems
+	public func prepareLayoutForItems(items: Array<MaterialDataSourceItem>) {
+		self.items = items
 		layoutItems.removeAll()
 		
 		offset.x = contentInset.left
@@ -136,14 +131,14 @@ public class MaterialCollectionViewLayout : UICollectionViewLayout {
 		
 		var indexPath: NSIndexPath?
 		
-		for i in 0..<dataSourceItems.count {
-			let item: MaterialDataSourceItem = dataSourceItems[i]
+		for i in 0..<items.count {
+			let item: MaterialDataSourceItem = items[i]
 			indexPath = NSIndexPath(forItem: i, inSection: 0)
 			layoutItems.append((layoutAttributesForItemAtIndexPath(indexPath!)!, indexPath!))
-			
+				
 			offset.x += spacing
 			offset.x += nil == item.width ? itemSize.width : item.width!
-			
+				
 			offset.y += spacing
 			offset.y += nil == item.height ? itemSize.height : item.height!
 		}
@@ -158,5 +153,9 @@ public class MaterialCollectionViewLayout : UICollectionViewLayout {
 		} else {
 			contentSize = CGSizeMake(offset.x, collectionView!.bounds.height)
 		}
+	}
+	
+	public override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
+		return proposedContentOffset
 	}
 }

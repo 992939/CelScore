@@ -60,7 +60,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         CelScoreViewModel().getFromAWSSignal(dataType: .List).start()
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = SideNavigationController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
-        let statusView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
+        let statusView = UIView(frame: Constants.kStatusViewRect)
         statusView.backgroundColor = Constants.kDarkShade
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kDarkShade

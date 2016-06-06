@@ -17,7 +17,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 1.41.8'
+    pod 'Material', '1.41.2'
     pod 'R.swift', '~> 2.1'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'WebASDKImageManager', '~> 1.0'
@@ -40,7 +40,6 @@ target 'CelScore' do
     pod 'Dwifft', '~> 0.3.1'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'SIAlertView', '~> 1.3'
-    pod 'paper-onboarding', '~> 1.0.1'
 end
 
 target 'CelScoreTests' do

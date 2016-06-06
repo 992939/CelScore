@@ -150,7 +150,7 @@ extension Sociable {
         menuView.addSubview(btn3)
         
         menuView.menu.origin = origin
-        menuView.menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.menu.baseViewSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         menuView.menu.direction = .Up
         menuView.menu.views = [btn1, btn2, btn3]
         menuView.translatesAutoresizingMaskIntoConstraints = false

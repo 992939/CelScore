@@ -49,8 +49,8 @@ public class TextField : UITextField {
 			layer.masksToBounds = value
 		}
 	}
-    
-    /// A property that accesses the backing layer's backgroundColor.
+	
+	/// A property that accesses the backing layer's backgroundColor.
 	@IBInspectable public override var backgroundColor: UIColor? {
 		didSet {
 			layer.backgroundColor = backgroundColor?.CGColor
@@ -201,9 +201,6 @@ public class TextField : UITextField {
 		}
 	}
 	
-	/// This property adds a padding to placeholder y position animation
-	public var placeholderVerticalOffset: CGFloat = 0
-	
 	/// The detailLabel UILabel that is displayed.
 	@IBInspectable public private(set) lazy var detailLabel: UILabel = UILabel(frame: CGRectZero)
 	
@@ -228,13 +225,6 @@ public class TextField : UITextField {
 			if let v: String = detailLabel.text {
 				detailLabel.attributedText = NSAttributedString(string: v, attributes: [NSForegroundColorAttributeName: detailColor])
 			}
-		}
-	}
-    
-	/// Vertical distance for the detailLabel from the divider.
-	@IBInspectable public var detailVerticalOffset: CGFloat = 8 {
-		didSet {
-			layoutDetailLabel()
 		}
 	}
 	
@@ -451,10 +441,6 @@ public class TextField : UITextField {
 	/// Handles the visibilityIconButton TouchUpInside event.
 	public func handleVisibilityIconButton() {
 		secureTextEntry = !secureTextEntry
-		if !secureTextEntry {
-			super.font = nil
-			font = placeholderLabel.font
-		}
 		visibilityIconButton?.tintColor = visibilityIconButton?.tintColor.colorWithAlphaComponent(secureTextEntry ? 0.38 : 0.54)
 	}
 	
@@ -527,7 +513,7 @@ public class TextField : UITextField {
 	/// Layout the detailLabel.
 	public func layoutDetailLabel() {
 		let h: CGFloat = nil == detail ? 12 : detailLabel.font.stringSize(detail!, constrainedToWidth: Double(width)).height
-		detailLabel.frame = CGRectMake(0, divider.frame.origin.y + detailVerticalOffset, width, h)
+		detailLabel.frame = CGRectMake(0, divider.frame.origin.y + 8, width, h)
 	}
 	
 	/// Layout the clearIconButton.
@@ -574,7 +560,7 @@ public class TextField : UITextField {
 						v.placeholderLabel.frame.origin.x = v.width - v.placeholderLabel.frame.width
 					default:break
 					}
-					v.placeholderLabel.frame.origin.y = -v.placeholderLabel.frame.size.height + v.placeholderVerticalOffset
+					v.placeholderLabel.frame.origin.y = -v.placeholderLabel.frame.size.height
 					v.placeholderLabel.textColor = v.placeholderActiveColor
 				}
 			}) { [weak self] _ in

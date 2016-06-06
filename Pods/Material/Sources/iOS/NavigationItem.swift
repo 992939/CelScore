@@ -34,12 +34,6 @@ import UIKit
 private var MaterialAssociatedObjectNavigationItemKey: UInt8 = 0
 
 public class MaterialAssociatedObjectNavigationItem {
-	/**
-	A boolean indicating whether keys are being observed
-	on the UINavigationItem.
-	*/
-	internal var observed: Bool = false
-	
 	/// Back Button.
 	public var backButton: IconButton?
 	
@@ -48,6 +42,9 @@ public class MaterialAssociatedObjectNavigationItem {
 	
 	/// Title label.
 	public private(set) var titleLabel: UILabel!
+	
+	/// Detail text.
+	public var detail: String?
 	
 	/// Detail label.
 	public private(set) var detailLabel: UILabel!
@@ -68,14 +65,14 @@ public class MaterialAssociatedObjectNavigationItem {
 	private func prepareTitleLabel() {
 		titleLabel = UILabel()
 		titleLabel.font = RobotoFont.mediumWithSize(17)
-		titleLabel.textAlignment = .Center
+		titleLabel.textAlignment = .Left
 	}
 	
 	/// Prepares the detailLabel.
 	private func prepareDetailLabel() {
 		detailLabel = UILabel()
 		detailLabel.font = RobotoFont.regularWithSize(12)
-		detailLabel.textAlignment = .Center
+		detailLabel.textAlignment = .Left
 	}
 }
 
@@ -112,16 +109,6 @@ public extension UINavigationItem {
 		}
 	}
 	
-	@nonobjc
-	public var title: String? {
-		get {
-			return titleLabel.text
-		}
-		set(value) {
-			titleLabel.text = value
-		}
-	}
-	
 	/// Title Label.
 	public internal(set) var titleLabel: UILabel {
 		get {
@@ -135,10 +122,10 @@ public extension UINavigationItem {
 	/// Detail text.
 	public var detail: String? {
 		get {
-			return detailLabel.text
+			return item.detail
 		}
 		set(value) {
-			detailLabel.text = value
+			item.detail = value
 		}
 	}
 	

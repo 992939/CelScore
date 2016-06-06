@@ -337,11 +337,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         rightButton.setImage(R.image.ic_search_white()!, forState: .Highlighted)
         
         let navBar: Toolbar = Toolbar()
+        navBar.frame = Constants.kNavigationBarRect
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
         navBar.backgroundColor = Constants.kMainShade
         let celscoreImageView = UIImageView(image: R.image.score_white()!)
-        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY - 2, width: 25, height: 25)
+        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.centerY, width: 25, height: 25)
         navBar.addSubview(celscoreImageView)
         return navBar
     }
