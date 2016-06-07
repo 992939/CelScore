@@ -6,11 +6,11 @@ PODS:
   - AsyncDisplayKit/PINRemoteImage (1.9.7.2):
     - AsyncDisplayKit/ASDealloc2MainObject
     - PINRemoteImage/iOS (>= 2.1.2)
-  - AWSAPIGateway (2.3.6):
-    - AWSCore (= 2.3.6)
-  - AWSCognito (2.3.6):
-    - AWSCore (= 2.3.6)
-  - AWSCore (2.3.6)
+  - AWSAPIGateway (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSCognito (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSCore (2.4.3)
   - BEMCheckBox (1.2.1)
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
@@ -22,9 +22,9 @@ PODS:
     - Fabric (~> 1.6.3)
   - Dwifft (0.3.1)
   - Fabric (1.6.7)
-  - FBSDKCoreKit (4.11.0):
+  - FBSDKCoreKit (4.12.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.11.0):
+  - FBSDKLoginKit (4.12.0):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Keys (1.0.0)
@@ -76,14 +76,14 @@ PODS:
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
   - AsyncDisplayKit (~> 1.9.7.2)
-  - AWSAPIGateway (~> 2.3.6)
-  - AWSCognito (= 2.3.6)
+  - AWSAPIGateway (~> 2.4.3)
+  - AWSCognito (= 2.4.3)
   - BEMCheckBox (~> 1.2)
   - Crashlytics (~> 3.7.0)
   - Dwifft (~> 0.3.1)
   - Fabric (~> 1.6.7)
-  - FBSDKCoreKit (~> 4.11)
-  - FBSDKLoginKit (~> 4.11)
+  - FBSDKCoreKit (~> 4.12)
+  - FBSDKLoginKit (~> 4.12)
   - HMSegmentedControl (~> 1.5)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 1.41.8)
@@ -111,16 +111,16 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
   AsyncDisplayKit: 1701c47761a3e274b82cc0c77e6294cfa69612f6
-  AWSAPIGateway: 090586a9c5224c5f72bd441cc5146642be494101
-  AWSCognito: af54fe65171c7c994c134e5d29b1ee60ee234825
-  AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
+  AWSAPIGateway: 5e588cb28216cc3f275e67a7a1e7aeb61d88e75e
+  AWSCognito: 9a83fcecccd8b9efaa82fec7722ee2a4c723b0fe
+  AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
-  FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
+  FBSDKCoreKit: 6e56d5a2a64a755ad4efb5dbeee8f82fb1b99775
+  FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Material: df01578ac30c9b5aa0b329ce63a2cd51d2cfd158

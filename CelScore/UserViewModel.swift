@@ -33,12 +33,12 @@ struct UserViewModel {
                 }
             default: break
             }
-            Constants.kCredentialsProvider.refresh().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 observer.sendNext(task)
                 observer.sendCompleted()
                 return task
-            })
+            }
         }
     }
     
