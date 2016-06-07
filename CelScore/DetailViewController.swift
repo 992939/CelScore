@@ -346,7 +346,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(nameLabel)
         
         let navigationBarView: Toolbar = Toolbar()
-        navigationBarView.frame = Constants.kNavigationBarRect
+        navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kMainShade

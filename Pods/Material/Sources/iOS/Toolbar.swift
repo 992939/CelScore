@@ -31,8 +31,30 @@
 import UIKit
 
 public class Toolbar : BarView {
+	/// A convenience property to set the titleLabel text.
+	public var title: String? {
+		get {
+			return titleLabel?.text
+		}
+		set(value) {
+			titleLabel?.text = value
+			layoutSubviews()
+		}
+	}
+	
 	/// Title label.
 	public private(set) var titleLabel: UILabel!
+	
+	/// A convenience property to set the detailLabel text.
+	public var detail: String? {
+		get {
+			return detailLabel?.text
+		}
+		set(value) {
+			detailLabel?.text = value
+			layoutSubviews()
+		}
+	}
 	
 	/// Detail label.
 	public private(set) var detailLabel: UILabel!
@@ -40,7 +62,7 @@ public class Toolbar : BarView {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		if willRenderView {
-			if let _: String = detailLabel.text {
+			if let _: String = detail {
 				titleLabel.sizeToFit()
 				detailLabel.sizeToFit()
 				
@@ -54,6 +76,33 @@ public class Toolbar : BarView {
 				titleLabel.frame = contentView.bounds
 			}
 		}
+	}
+	
+	/**
+	An initializer that initializes the object with a NSCoder object.
+	- Parameter aDecoder: A NSCoder instance.
+	*/
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+	/**
+	An initializer that initializes the object with a CGRect object.
+	If AutoLayout is used, it is better to initilize the instance
+	using the init() initializer.
+	- Parameter frame: A CGRect instance.
+	*/
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+	}
+	
+	/**
+	A convenience initializer with parameter settings.
+	- Parameter leftControls: An Array of UIControls that go on the left side.
+	- Parameter rightControls: An Array of UIControls that go on the right side.
+	*/
+	public override init(leftControls: Array<UIControl>? = nil, rightControls: Array<UIControl>? = nil) {
+		super.init(leftControls: leftControls, rightControls: rightControls)
 	}
 	
 	/**

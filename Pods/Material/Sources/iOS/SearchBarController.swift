@@ -48,7 +48,7 @@ public extension UIViewController {
 	}
 }
 
-public class SearchBarController : BarViewController {
+public class SearchBarController : BarController {
 	/// Reference to the SearchBar.
 	public private(set) var searchBar: SearchBar!
 	
@@ -59,20 +59,19 @@ public class SearchBarController : BarViewController {
 	
 	/// Layout subviews.
 	public func layoutSubviews() {
-		let w: CGFloat = MaterialDevice.width
-		let h: CGFloat = MaterialDevice.height
-		
-		if .iPhone == MaterialDevice.type && MaterialDevice.isLandscape {
-			searchBar.contentInset.top = 4
-		} else {
-			searchBar.contentInset.top = 24
+		if let v: SearchBar = searchBar {
+			v.grid.layoutInset.top = .iPhone == MaterialDevice.type && MaterialDevice.isLandscape ? 0 : 20
+			
+			let h: CGFloat = MaterialDevice.height
+			let w: CGFloat = MaterialDevice.width
+			let p: CGFloat = v.intrinsicContentSize().height + v.grid.layoutInset.top + v.grid.layoutInset.bottom
+			
+			v.width = w + v.grid.layoutInset.left + v.grid.layoutInset.right
+			v.height = p
+			
+			rootViewController.view.frame.origin.y = p
+			rootViewController.view.frame.size.height = h - p
 		}
-		
-		searchBar.width = w
-		
-		let p: CGFloat = searchBar.intrinsicContentSize().height
-		rootViewController.view.frame.origin.y = p
-		rootViewController.view.frame.size.height = h - p
 	}
 	
 	/**

@@ -87,6 +87,14 @@ public class NavigationBar : UINavigationBar {
 		}
 	}
 	
+	/// Grid cell factor.
+	@IBInspectable public var gridFactor: CGFloat = 24 {
+		didSet {
+			assert(0 < gridFactor, "[Material Error: gridFactor must be greater than 0.]")
+			layoutSubviews()
+		}
+	}
+	
 	/**
 	The back button image writes to the backIndicatorImage property and
 	backIndicatorTransitionMaskImage property.
@@ -280,11 +288,11 @@ public class NavigationBar : UINavigationBar {
 	public override func intrinsicContentSize() -> CGSize {
 		switch navigationBarStyle {
 		case .Tiny:
-			return CGSizeMake(MaterialDevice.width, 32)
+			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 32)
 		case .Default:
-			return CGSizeMake(MaterialDevice.width, 44)
+			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 44)
 		case .Medium:
-			return CGSizeMake(MaterialDevice.width, 56)
+			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 56)
 		}
 	}
 
@@ -318,8 +326,7 @@ public class NavigationBar : UINavigationBar {
 			
 			if let titleView: UIView = prepareTitleView(item) {
 				if let contentView: UIView = prepareContentView(item) {
-					let factor: CGFloat = 24
-					if let g: Int = Int(width / factor) {
+					if let g: Int = Int(width / gridFactor) {
 						let columns: Int = g + 1
 						
 						titleView.frame.origin = CGPointZero
@@ -336,7 +343,7 @@ public class NavigationBar : UINavigationBar {
 								(c as? UIButton)?.contentEdgeInsets = UIEdgeInsetsZero
 								c.frame.size.height = titleView.frame.size.height - contentInset.top - contentInset.bottom
 								
-								let q: Int = Int(w / factor)
+								let q: Int = Int(w / gridFactor)
 								c.grid.columns = q + 1
 								
 								contentView.grid.columns -= c.grid.columns
@@ -356,7 +363,7 @@ public class NavigationBar : UINavigationBar {
 								(c as? UIButton)?.contentEdgeInsets = UIEdgeInsetsZero
 								c.frame.size.height = titleView.frame.size.height - contentInset.top - contentInset.bottom
 								
-								let q: Int = Int(w / factor)
+								let q: Int = Int(w / gridFactor)
 								c.grid.columns = q + 1
 								
 								contentView.grid.columns -= c.grid.columns
@@ -416,7 +423,7 @@ public class NavigationBar : UINavigationBar {
 	when subclassing.
 	*/
 	public func prepareView() {
-		barStyle = .Default
+		barStyle = .Black
 		translucent = false
 		depth = .Depth1
 		spacingPreset = .Spacing1
@@ -433,7 +440,8 @@ public class NavigationBar : UINavigationBar {
 	- Parameter item: A UINavigationItem to layout.
 	*/
 	private func prepareItem(item: UINavigationItem) {
-		item.title = ""
+		item.hidesBackButton = false
+		item.setHidesBackButton(true, animated: false)
 	}
 	
 	/**
