@@ -68,14 +68,14 @@
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
+		01C948637C8C48AC6089C55C /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
-		347268AAFC69BAE2E7E0353C /* Pods_TheObservatory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E334E2A97A1B07B6C4A1A72E /* Pods_TheObservatory.framework */; };
-		DF42E57302C7FEA5AFA50D14 /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EDDE19A690A3B52772B792 /* Pods_CelScoreTests.framework */; };
+		C1D5C2A2348CFB08CEF53610 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */; };
 		E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */; };
 		E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE024A13E2984F3710F62FEA /* CoreText.framework */; };
-		EA9C9DA21502DBD058D7E16A /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE39B979A80D5E1AA5658F2 /* Pods_CelScore.framework */; };
+		EE5091DF42DDC88975533EB5 /* Pods_TheObservatory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,19 +188,19 @@
 		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
 		00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTests.swift; sourceTree = "<group>"; };
 		00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModelTests.swift; sourceTree = "<group>"; };
-		01EDDE19A690A3B52772B792 /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		03A58CC7FB55D4AFF3ADFFA5 /* Pods-TheObservatory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.debug.xcconfig"; sourceTree = "<group>"; };
-		072BF53953A69CF280D7EEC0 /* Pods-CelScoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		158F389CB1A71E9AB1CF868E /* Pods-CelScoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig"; sourceTree = "<group>"; };
-		180BF20802FBE7817423E3E6 /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
-		3AE39B979A80D5E1AA5658F2 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheObservatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
+		6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.debug.xcconfig"; sourceTree = "<group>"; };
+		8A0A4C7A3E3FA606D0C24A0D /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
 		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAA45B62E9549B2F04DA89F5 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
-		DA585B88C3986878675F167B /* Pods-TheObservatory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.release.xcconfig"; sourceTree = "<group>"; };
-		E334E2A97A1B07B6C4A1A72E /* Pods_TheObservatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheObservatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.release.xcconfig"; sourceTree = "<group>"; };
+		BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
 		EE024A13E2984F3710F62FEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -217,7 +217,7 @@
 				E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */,
 				209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */,
 				33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */,
-				EA9C9DA21502DBD058D7E16A /* Pods_CelScore.framework in Frameworks */,
+				C1D5C2A2348CFB08CEF53610 /* Pods_CelScore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF42E57302C7FEA5AFA50D14 /* Pods_CelScoreTests.framework in Frameworks */,
+				01C948637C8C48AC6089C55C /* Pods_CelScoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00CE264C1CD48FC30045106C /* NotificationCenter.framework in Frameworks */,
-				347268AAFC69BAE2E7E0353C /* Pods_TheObservatory.framework in Frameworks */,
+				EE5091DF42DDC88975533EB5 /* Pods_TheObservatory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +269,7 @@
 				00CE264D1CD48FC30045106C /* TheObservatory */,
 				004B56DA1B35332A008A75EB /* Products */,
 				272C664E3752319CD2080EBE /* Frameworks */,
-				F8929D9E26D4A0415105BE9B /* Pods */,
+				40A8E087926F700762AED30F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -440,22 +440,22 @@
 				EE024A13E2984F3710F62FEA /* CoreText.framework */,
 				40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */,
 				0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */,
-				3AE39B979A80D5E1AA5658F2 /* Pods_CelScore.framework */,
-				01EDDE19A690A3B52772B792 /* Pods_CelScoreTests.framework */,
-				E334E2A97A1B07B6C4A1A72E /* Pods_TheObservatory.framework */,
+				BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */,
+				197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */,
+				406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F8929D9E26D4A0415105BE9B /* Pods */ = {
+		40A8E087926F700762AED30F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				180BF20802FBE7817423E3E6 /* Pods-CelScore.debug.xcconfig */,
-				BAA45B62E9549B2F04DA89F5 /* Pods-CelScore.release.xcconfig */,
-				072BF53953A69CF280D7EEC0 /* Pods-CelScoreTests.debug.xcconfig */,
-				158F389CB1A71E9AB1CF868E /* Pods-CelScoreTests.release.xcconfig */,
-				03A58CC7FB55D4AFF3ADFFA5 /* Pods-TheObservatory.debug.xcconfig */,
-				DA585B88C3986878675F167B /* Pods-TheObservatory.release.xcconfig */,
+				8A0A4C7A3E3FA606D0C24A0D /* Pods-CelScore.debug.xcconfig */,
+				C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */,
+				32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */,
+				A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */,
+				6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */,
+				B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -467,7 +467,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
 			buildPhases = (
-				20EABA9CF1881CB428FD7A85 /* Check Pods Manifest.lock */,
+				63890813C4BDA8C802042131 /* [CP] Check Pods Manifest.lock */,
 				004B56D51B35332A008A75EB /* Sources */,
 				004B56D61B35332A008A75EB /* Frameworks */,
 				004B56D71B35332A008A75EB /* Resources */,
@@ -475,8 +475,8 @@
 				00404AAD1BF093540009AD0E /* Embed App Extensions */,
 				0002610A1CA3445F00296B87 /* ShellScript */,
 				009657B41CD332B50004D793 /* ShellScript */,
-				91F13B4966B7E8550D6BFE20 /* Embed Pods Frameworks */,
-				72387F4A36A717DDD17DD23F /* Copy Pods Resources */,
+				1A666B1E641483CDFF7E4CE6 /* [CP] Embed Pods Frameworks */,
+				16AEADCB3068A6F82FA9E513 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -492,12 +492,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */;
 			buildPhases = (
-				3A3B071401AAD209ED14720D /* Check Pods Manifest.lock */,
+				D8B15DBB70F99340BDB14418 /* [CP] Check Pods Manifest.lock */,
 				004B56EA1B35332B008A75EB /* Sources */,
 				004B56EB1B35332B008A75EB /* Frameworks */,
 				004B56EC1B35332B008A75EB /* Resources */,
-				21327D5FB56C4D0979F5E646 /* Embed Pods Frameworks */,
-				A0DB4921D72C5D0A47E2DB0E /* Copy Pods Resources */,
+				91D4CD84F45CE6C9D344E7B2 /* [CP] Embed Pods Frameworks */,
+				0E2D0C6F571CA1B2F5575B87 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -513,12 +513,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00CE26591CD48FC30045106C /* Build configuration list for PBXNativeTarget "TheObservatory" */;
 			buildPhases = (
-				F24342BE917DB6142DE82CC2 /* Check Pods Manifest.lock */,
+				1C4F3810AE684995B52EFB92 /* [CP] Check Pods Manifest.lock */,
 				00CE26471CD48FC30045106C /* Sources */,
 				00CE26481CD48FC30045106C /* Frameworks */,
 				00CE26491CD48FC30045106C /* Resources */,
-				220CF9DC5FC77C717FEA7E6E /* Embed Pods Frameworks */,
-				E28CF8F478B872055726EA3E /* Copy Pods Resources */,
+				3A14D2DDAA600538FCDDA4BF /* [CP] Embed Pods Frameworks */,
+				E02C0C4C7E5D3F43D061DBB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -652,104 +652,14 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4 33cd1f8b9b661fc1d2413a92e0956503e0a5e4933cf9303f97f3ade74033b0f7";
 		};
-		20EABA9CF1881CB428FD7A85 /* Check Pods Manifest.lock */ = {
+		0E2D0C6F571CA1B2F5575B87 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		21327D5FB56C4D0979F5E646 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		220CF9DC5FC77C717FEA7E6E /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3A3B071401AAD209ED14720D /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		72387F4A36A717DDD17DD23F /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		91F13B4966B7E8550D6BFE20 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0DB4921D72C5D0A47E2DB0E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,34 +667,124 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E28CF8F478B872055726EA3E /* Copy Pods Resources */ = {
+		16AEADCB3068A6F82FA9E513 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F24342BE917DB6142DE82CC2 /* Check Pods Manifest.lock */ = {
+		1A666B1E641483CDFF7E4CE6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1C4F3810AE684995B52EFB92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3A14D2DDAA600538FCDDA4BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63890813C4BDA8C802042131 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		91D4CD84F45CE6C9D344E7B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8B15DBB70F99340BDB14418 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E02C0C4C7E5D3F43D061DBB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -991,7 +991,7 @@
 		};
 		004B56F91B35332B008A75EB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 180BF20802FBE7817423E3E6 /* Pods-CelScore.debug.xcconfig */;
+			baseConfigurationReference = 8A0A4C7A3E3FA606D0C24A0D /* Pods-CelScore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -1020,7 +1020,7 @@
 		};
 		004B56FA1B35332B008A75EB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAA45B62E9549B2F04DA89F5 /* Pods-CelScore.release.xcconfig */;
+			baseConfigurationReference = C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -1048,7 +1048,7 @@
 		};
 		004B56FC1B35332B008A75EB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 072BF53953A69CF280D7EEC0 /* Pods-CelScoreTests.debug.xcconfig */;
+			baseConfigurationReference = 32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -1087,7 +1087,7 @@
 		};
 		004B56FD1B35332B008A75EB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 158F389CB1A71E9AB1CF868E /* Pods-CelScoreTests.release.xcconfig */;
+			baseConfigurationReference = A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -1122,7 +1122,7 @@
 		};
 		00CE26571CD48FC30045106C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03A58CC7FB55D4AFF3ADFFA5 /* Pods-TheObservatory.debug.xcconfig */;
+			baseConfigurationReference = 6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_ENTITLEMENTS = TheScore/TheObservatory.entitlements;
@@ -1141,7 +1141,7 @@
 		};
 		00CE26581CD48FC30045106C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA585B88C3986878675F167B /* Pods-TheObservatory.release.xcconfig */;
+			baseConfigurationReference = B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_ENTITLEMENTS = TheScore/TheObservatory.entitlements;
