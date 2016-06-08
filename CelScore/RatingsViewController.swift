@@ -11,7 +11,7 @@ import Material
 import AIRTimer
 
 
-final class RatingsViewController: ASViewController {
+final class RatingsViewController: ASViewController, Labelable {
     
     //MARK: Properties
     private let celebST: CelebrityStruct
@@ -54,10 +54,7 @@ final class RatingsViewController: ASViewController {
                                 qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
                         })
                     
-                    let qualityLabel = UILabel()
-                    qualityLabel.text = quality
-                    qualityLabel.textColor = MaterialColor.white
-                    qualityLabel.frame = CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5)
+                    let qualityLabel : UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                     
                     let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - 140 + UIDevice.getOffset()/2, y: 3, width: 140, height: barHeight - 5))
                     cosmosView.tag = index

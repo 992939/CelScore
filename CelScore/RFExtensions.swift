@@ -212,8 +212,8 @@ extension UIDevice {
     static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 95.0
-        case Constants.kIPhone5_height: diameter = 150.0
+        case Constants.kIPhone4_height: diameter = 110.0
+        case Constants.kIPhone5_height: diameter = 170.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
         }
@@ -223,8 +223,8 @@ extension UIDevice {
     static func getProfilePadding() -> CGFloat {
         let padding: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: padding = -5.0
-        case Constants.kIPhone5_height: padding = -5.0
+        case Constants.kIPhone4_height: padding = 0.0
+        case Constants.kIPhone5_height: padding = 0.0
         case Constants.kIPhone6_height: padding = 20.0
         default: padding = 20.0
         }
@@ -234,8 +234,8 @@ extension UIDevice {
     static func getGaugeDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 180.0
-        case Constants.kIPhone5_height: diameter = 200.0
+        case Constants.kIPhone4_height: diameter = 170.0
+        case Constants.kIPhone5_height: diameter = 190.0
         case Constants.kIPhone6_height: diameter = 215.0
         default: diameter = 240.0
         }
@@ -256,8 +256,8 @@ extension UIDevice {
     static func getPulseBarHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 27.0
-        case Constants.kIPhone5_height: height = 29.0
+        case Constants.kIPhone4_height: height = 25.0
+        case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
         default: height = 30.0
         }
@@ -271,6 +271,17 @@ extension UIDevice {
         case Constants.kIPhone5_height: height = 75
         case Constants.kIPhone6_height: height = 80
         default: height = 75
+        }
+        return height
+    }
+    
+    static func getFontSize() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: height = 14
+        case Constants.kIPhone5_height: height = 14
+        case Constants.kIPhone6_height: height = 16
+        default: height = 16
         }
         return height
     }
