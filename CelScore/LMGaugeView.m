@@ -30,11 +30,11 @@
 #define kDefaultLimitDotRadius                  2
 #define kDefaultLimitDotColor                   [UIColor clearColor]
 
-#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:70]
+#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:65]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
 #define kDefaultUnitOfMeasurement               @"%/vol"
-#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:16]
+#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:14]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
 #define kDefaultLabelBackgroundColor            [UIColor colorWithRed:96.0/255 green: 125.0/255 blue: 139.0/255 alpha: 1]
@@ -281,7 +281,7 @@
         self.unitOfMeasurementLabel.hidden = !self.showUnitOfMeasurement;
     }
     self.unitOfMeasurementLabel.frame = CGRectMake(self.valueLabel.frame.origin.x,
-                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 15,
+                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 10,
                                                    CGRectGetWidth(self.valueLabel.frame),
                                                    20);
 }

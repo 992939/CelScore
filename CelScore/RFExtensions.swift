@@ -275,6 +275,17 @@ extension UIDevice {
         return height
     }
     
+    static func getStarsWidth() -> CGFloat {
+        let offset: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: offset = 110
+        case Constants.kIPhone5_height: offset = 110
+        case Constants.kIPhone6_height: offset = 140
+        default: offset = 140
+        }
+        return offset
+    }
+    
     static func getFontSize() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
