@@ -9,7 +9,7 @@ plugin 'cocoapods-keys', {
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 0.102.1'
+    pod 'RealmSwift', '~> 1.0'
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'PINCache', '~> 2.2.2'

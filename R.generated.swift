@@ -5,7 +5,7 @@ import Foundation
 import Rswift
 import UIKit
 
-/// This `R` struct is code generateted, and contains references to static resources.
+/// This `R` struct is code generated, and contains references to static resources.
 struct R {
   /// This `R.color` struct is generated, and contains static references to 0 color palettes.
   struct color {
@@ -445,6 +445,7 @@ struct R {
 }
 
 struct _R {
+  static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(NSLocale.init) ?? NSLocale.currentLocale()
   static let hostingBundle = NSBundle(identifier: "com.GreyEcology.CelebrityScore") ?? NSBundle.mainBundle()
   
   struct nib {

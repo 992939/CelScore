@@ -171,10 +171,6 @@
 		00CE26531CD48FC30045106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
-		00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/RealmSwift.framework"; sourceTree = "<group>"; };
-		00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AIRTimer.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/AIRTimer.framework"; sourceTree = "<group>"; };
-		00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/ReactiveCocoa.framework"; sourceTree = "<group>"; };
-		00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/CelScore-asgsaqdxnzwcigehbwdgqnfurkps/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -427,10 +423,6 @@
 		272C664E3752319CD2080EBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00D0BBB61CC4D059006EE4F4 /* SwiftyJSON.framework */,
-				00D0BBB41CC4D051006EE4F4 /* ReactiveCocoa.framework */,
-				00D0BBB21CC4D04A006EE4F4 /* AIRTimer.framework */,
-				00D0BBB01CC4D03C006EE4F4 /* RealmSwift.framework */,
 				003387A11C631BC3008AB0D8 /* QuartzCore.framework */,
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,
@@ -999,7 +991,7 @@
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1028,7 +1020,7 @@
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
