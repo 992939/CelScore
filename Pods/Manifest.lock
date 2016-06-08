@@ -101,7 +101,7 @@ DEPENDENCIES:
   - Timepiece (~> 0.4.2)
   - TwitterCore (~> 2.2.0)
   - TwitterKit (~> 2.2.0)
-  - WebASDKImageManager (~> 1.0)
+  - WebASDKImageManager (~> 1.1)
   - YLProgressBar (~> 3.8.1)
 
 EXTERNAL SOURCES:
@@ -145,6 +145,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 21179824c4b3c1d67f15e0bca2a543dac067cc33
+PODFILE CHECKSUM: b0c3193451dbfe7197e5e78e23d410540550483c
 
 COCOAPODS: 1.0.1

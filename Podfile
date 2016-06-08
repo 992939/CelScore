@@ -20,7 +20,7 @@ target 'CelScore' do
     pod 'Material', '~> 1.41.8'
     pod 'R.swift', '~> 2.3'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
-    pod 'WebASDKImageManager', '~> 1.0'
+    pod 'WebASDKImageManager', '~> 1.1'
     pod 'SDWebImage', '~>3.8.1'
     pod 'AWSCognito', '2.4.3'
     pod 'AWSAPIGateway', '~> 2.4.3'
