@@ -64,10 +64,10 @@ PODS:
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - Timepiece (0.4.2)
-  - TwitterCore (2.0.2):
+  - TwitterCore (2.2.0):
     - Fabric
-  - TwitterKit (2.0.2):
-    - TwitterCore (= 2.0.2)
+  - TwitterKit (2.2.0):
+    - TwitterCore (= 2.2.0)
   - WebASDKImageManager (1.1.0):
     - AsyncDisplayKit (~> 1.9)
     - SDWebImage/Core (~> 3.7)
@@ -84,11 +84,11 @@ DEPENDENCIES:
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.12)
   - FBSDKLoginKit (~> 4.12)
-  - HMSegmentedControl (~> 1.5)
+  - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 1.41.8)
   - PINCache (~> 2.2.2)
-  - R.swift (~> 2.1)
+  - R.swift (~> 2.3)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)
   - RealmSwift (~> 1.0)
@@ -99,8 +99,8 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0.3)
   - SwiftyJSON (~> 2.3.2)
   - Timepiece (~> 0.4.2)
-  - TwitterCore (~> 2.0.2)
-  - TwitterKit (~> 2.0.2)
+  - TwitterCore (~> 2.2.0)
+  - TwitterKit (~> 2.2.0)
   - WebASDKImageManager (~> 1.0)
   - YLProgressBar (~> 3.8.1)
 
@@ -140,11 +140,11 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
-  TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
-  TwitterKit: c4e40f289a3d7cc9fab9f241edd7502385468b65
+  TwitterCore: 115527630bb2986954adc928b8c895a92bcd57e5
+  TwitterKit: 2c64ec342a6261ae6bab565bad85dcbbfd3888b7
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 3a9f38d8c29d57dd818fd45deac4145fa887691b
+PODFILE CHECKSUM: 51674b46c654ae0f8e8bd9de54423790de505f0b
 
 COCOAPODS: 1.0.1
