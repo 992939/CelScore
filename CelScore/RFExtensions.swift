@@ -246,7 +246,7 @@ extension UIDevice {
         let height: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: height = 25.0
-        case Constants.kIPhone5_height: height = 30.0
+        case Constants.kIPhone5_height: height = 35.0
         case Constants.kIPhone6_height: height = 40.0
         default: height = 40.0
         }
