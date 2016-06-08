@@ -370,9 +370,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.celscore_white()!, offSelectionImage: self.userST.isPositive ? R.image.celscore_green()! : R.image.celscore_purple()!)
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: self.userST.isPositive ? R.image.info_green()! : R.image.info_purple()!)
-        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: self.userST.isPositive ? R.image.star_green()! : R.image.star_purple()!)
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.celscore_white()!, offSelectionImage: R.image.celscore_black()!)
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
+        segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = MaterialColor.black.CGColor
