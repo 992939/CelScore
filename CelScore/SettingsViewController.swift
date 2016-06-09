@@ -10,7 +10,7 @@ import YLProgressBar
 import Material
 import BEMCheckBox
 import AIRTimer
-import SIAlertView
+import PMAlertController
 
 
 final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
@@ -148,17 +148,16 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alert = SIAlertView(title: "Warning", andMessage: "Your votes and settings might get lost. Are you sure you want to continue?")
-        alert.addButtonWithTitle("Cancel", type: SIAlertViewButtonType.Cancel, handler:nil)
-        alert.addButtonWithTitle("Log Out", type: SIAlertViewButtonType.Destructive) { alertView in
+        let alertVC = PMAlertController(title: "Warning", description: "Your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_green_big()!, style: .Alert)
+        
+        alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: nil))
+        alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { () in
             UserViewModel().logoutSignal().startWithNext({ _ in
                 MaterialAnimation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
-            })
-        }
-        alert.destructiveButtonColor = UIColor.redColor()
-        alert.transitionStyle = SIAlertViewTransitionStyle.DropDown
-        alert.show()
+                })
+        }))
+        self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
     func refreshAction(button: MaterialButton) {

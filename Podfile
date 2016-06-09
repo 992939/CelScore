@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 platform :ios, '9.0'
 
@@ -39,7 +40,7 @@ target 'CelScore' do
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'Dwifft', '~> 0.3.1'
     pod 'RevealingSplashView', '~> 0.0'
-    pod 'SIAlertView', '~> 1.3'
+    pod 'PMAlertController', '~> 1.0.4'
 end
 
 target 'CelScoreTests' do

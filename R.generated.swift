@@ -31,7 +31,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 53 images.
+  /// This `R.image` struct is generated, and contains static references to 52 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -61,8 +61,6 @@ struct R {
     static let facebooklogo = ImageResource(bundle: _R.hostingBundle, name: "facebooklogo")
     /// Image `geometry_green`.
     static let geometry_green = ImageResource(bundle: _R.hostingBundle, name: "geometry_green")
-    /// Image `geometry_green-1`.
-    static let geometry_green1 = ImageResource(bundle: _R.hostingBundle, name: "geometry_green-1")
     /// Image `heart_black`.
     static let heart_black = ImageResource(bundle: _R.hostingBundle, name: "heart_black")
     /// Image `heart_green`.
@@ -113,8 +111,6 @@ struct R {
     static let passport_green = ImageResource(bundle: _R.hostingBundle, name: "passport_green")
     /// Image `planet_green`.
     static let planet_green = ImageResource(bundle: _R.hostingBundle, name: "planet_green")
-    /// Image `podium_green`.
-    static let podium_green = ImageResource(bundle: _R.hostingBundle, name: "podium_green")
     /// Image `score_black`.
     static let score_black = ImageResource(bundle: _R.hostingBundle, name: "score_black")
     /// Image `score_logo`.
@@ -123,6 +119,8 @@ struct R {
     static let score_white = ImageResource(bundle: _R.hostingBundle, name: "score_white")
     /// Image `spaceship_green`.
     static let spaceship_green = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green")
+    /// Image `spaceship_green_big`.
+    static let spaceship_green_big = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green_big")
     /// Image `sphere_green`.
     static let sphere_green = ImageResource(bundle: _R.hostingBundle, name: "sphere_green")
     /// Image `star_black`.
@@ -208,11 +206,6 @@ struct R {
     /// `UIImage(named: "geometry_green", bundle: ..., traitCollection: ...)`
     static func geometry_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.geometry_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "geometry_green-1", bundle: ..., traitCollection: ...)`
-    static func geometry_green1(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.geometry_green1, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "heart_black", bundle: ..., traitCollection: ...)`
@@ -340,11 +333,6 @@ struct R {
       return UIImage(resource: R.image.planet_green, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "podium_green", bundle: ..., traitCollection: ...)`
-    static func podium_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.podium_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "score_black", bundle: ..., traitCollection: ...)`
     static func score_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.score_black, compatibleWithTraitCollection: traitCollection)
@@ -363,6 +351,11 @@ struct R {
     /// `UIImage(named: "spaceship_green", bundle: ..., traitCollection: ...)`
     static func spaceship_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.spaceship_green, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "spaceship_green_big", bundle: ..., traitCollection: ...)`
+    static func spaceship_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.spaceship_green_big, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "sphere_green", bundle: ..., traitCollection: ...)`

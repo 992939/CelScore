@@ -34,6 +34,7 @@ PODS:
     - PINCache (>= 2.1)
   - PINRemoteImage/iOS (2.1.4):
     - PINRemoteImage/Core
+  - PMAlertController (1.0.4)
   - R.swift (2.3.0):
     - R.swift.Library (~> 2.1.0)
   - R.swift.Library (2.1.0)
@@ -59,7 +60,6 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
-  - SIAlertView (1.3)
   - SMSegmentView (1.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
@@ -88,13 +88,13 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 1.41.8)
   - PINCache (~> 2.2.2)
+  - PMAlertController (~> 1.0.4)
   - R.swift (~> 2.3)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)
   - RealmSwift (~> 1.0)
   - RevealingSplashView (~> 0.0)
   - SDWebImage (~> 3.8.1)
-  - SIAlertView (~> 1.3)
   - SMSegmentView (~> 1.1)
   - SVProgressHUD (~> 2.0.3)
   - SwiftyJSON (~> 2.3.2)
@@ -126,6 +126,7 @@ SPEC CHECKSUMS:
   Material: df01578ac30c9b5aa0b329ce63a2cd51d2cfd158
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
+  PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
   R.swift: 38b2191a603c3d491a09baddfb4ccc7aa9be4d9d
   R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
@@ -135,7 +136,6 @@ SPEC CHECKSUMS:
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   RevealingSplashView: f38cd6be822804e69fb5f124a0169d0bb4f38f23
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  SIAlertView: 20c794b55eaf44d888773ea51647cf8907723919
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
@@ -145,6 +145,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: b0c3193451dbfe7197e5e78e23d410540550483c
+PODFILE CHECKSUM: 0ce45abafe450d8718f950d4e3da6fd2c8a6f952
 
 COCOAPODS: 1.0.1

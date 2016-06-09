@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "podium_green.png",
+      "filename" : "spaceship_green_big.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "podium_green@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "podium_green@3x.png",
       "scale" : "3x"
     }
   ],
