@@ -20,12 +20,12 @@
   NSString *key = NSStringFromSelector(name);
   NSString * (*implementation)(CelscoreKeys *, SEL) = NULL;
 
-  if ([key isEqualToString:@"kCognitoIdentityPoolId"]) {
-    implementation = _podKeysb6696e6f261bafd4b95eb8d8ef681363;
-  }
-
   if ([key isEqualToString:@"kAPIKey"]) {
     implementation = _podKeys234836460cea82ba58471234ccc965b5;
+  }
+
+  if ([key isEqualToString:@"kCognitoIdentityPoolId"]) {
+    implementation = _podKeysb6696e6f261bafd4b95eb8d8ef681363;
   }
 
   if (!implementation) {
@@ -35,34 +35,34 @@
   return class_addMethod([self class], name, (IMP)implementation, "@@:");
 }
 
-static NSString *_podKeysb6696e6f261bafd4b95eb8d8ef681363(CelscoreKeys *self, SEL _cmd)
-{
-  
-    
-      char cString[47] = { CelscoreKeysData[1559], CelscoreKeysData[2463], CelscoreKeysData[1985], CelscoreKeysData[1425], CelscoreKeysData[1747], CelscoreKeysData[754], CelscoreKeysData[1143], CelscoreKeysData[1914], CelscoreKeysData[324], CelscoreKeysData[338], CelscoreKeysData[704], CelscoreKeysData[2466], CelscoreKeysData[184], CelscoreKeysData[625], CelscoreKeysData[2810], CelscoreKeysData[939], CelscoreKeysData[1373], CelscoreKeysData[2282], CelscoreKeysData[729], CelscoreKeysData[1245], CelscoreKeysData[2515], CelscoreKeysData[1], CelscoreKeysData[73], CelscoreKeysData[609], CelscoreKeysData[793], CelscoreKeysData[474], CelscoreKeysData[1486], CelscoreKeysData[2818], CelscoreKeysData[146], CelscoreKeysData[1303], CelscoreKeysData[47], CelscoreKeysData[1380], CelscoreKeysData[690], CelscoreKeysData[862], CelscoreKeysData[1324], CelscoreKeysData[623], CelscoreKeysData[157], CelscoreKeysData[2925], CelscoreKeysData[1562], CelscoreKeysData[245], CelscoreKeysData[547], CelscoreKeysData[1420], CelscoreKeysData[899], CelscoreKeysData[843], CelscoreKeysData[258], CelscoreKeysData[2561], '\0' };
-    
-    return [NSString stringWithCString:cString encoding:NSUTF8StringEncoding];
-  
-}
-
 static NSString *_podKeys234836460cea82ba58471234ccc965b5(CelscoreKeys *self, SEL _cmd)
 {
   
     
-      char cString[41] = { CelscoreKeysData[2055], CelscoreKeysData[1624], CelscoreKeysData[134], CelscoreKeysData[448], CelscoreKeysData[1372], CelscoreKeysData[2855], CelscoreKeysData[1636], CelscoreKeysData[46], CelscoreKeysData[66], CelscoreKeysData[1628], CelscoreKeysData[1515], CelscoreKeysData[2619], CelscoreKeysData[1903], CelscoreKeysData[400], CelscoreKeysData[2626], CelscoreKeysData[2534], CelscoreKeysData[2130], CelscoreKeysData[1275], CelscoreKeysData[1294], CelscoreKeysData[385], CelscoreKeysData[2214], CelscoreKeysData[2038], CelscoreKeysData[1123], CelscoreKeysData[1340], CelscoreKeysData[1183], CelscoreKeysData[1041], CelscoreKeysData[2254], CelscoreKeysData[1159], CelscoreKeysData[2276], CelscoreKeysData[1797], CelscoreKeysData[2565], CelscoreKeysData[2650], CelscoreKeysData[923], CelscoreKeysData[706], CelscoreKeysData[2133], CelscoreKeysData[2932], CelscoreKeysData[1292], CelscoreKeysData[1537], CelscoreKeysData[29], CelscoreKeysData[255], '\0' };
+      char cString[41] = { CelscoreKeysData[282], CelscoreKeysData[5], CelscoreKeysData[1114], CelscoreKeysData[489], CelscoreKeysData[2545], CelscoreKeysData[1213], CelscoreKeysData[1121], CelscoreKeysData[403], CelscoreKeysData[923], CelscoreKeysData[1026], CelscoreKeysData[1790], CelscoreKeysData[401], CelscoreKeysData[2534], CelscoreKeysData[418], CelscoreKeysData[3], CelscoreKeysData[2713], CelscoreKeysData[1022], CelscoreKeysData[781], CelscoreKeysData[2217], CelscoreKeysData[688], CelscoreKeysData[2296], CelscoreKeysData[888], CelscoreKeysData[203], CelscoreKeysData[352], CelscoreKeysData[8], CelscoreKeysData[602], CelscoreKeysData[2435], CelscoreKeysData[2168], CelscoreKeysData[1775], CelscoreKeysData[2209], CelscoreKeysData[2229], CelscoreKeysData[594], CelscoreKeysData[290], CelscoreKeysData[373], CelscoreKeysData[2009], CelscoreKeysData[157], CelscoreKeysData[840], CelscoreKeysData[196], CelscoreKeysData[151], CelscoreKeysData[563], '\0' };
+    
+    return [NSString stringWithCString:cString encoding:NSUTF8StringEncoding];
+  
+}
+
+static NSString *_podKeysb6696e6f261bafd4b95eb8d8ef681363(CelscoreKeys *self, SEL _cmd)
+{
+  
+    
+      char cString[47] = { CelscoreKeysData[576], CelscoreKeysData[360], CelscoreKeysData[1259], CelscoreKeysData[1676], CelscoreKeysData[2476], CelscoreKeysData[1210], CelscoreKeysData[2509], CelscoreKeysData[2031], CelscoreKeysData[2722], CelscoreKeysData[1990], CelscoreKeysData[471], CelscoreKeysData[1568], CelscoreKeysData[1772], CelscoreKeysData[293], CelscoreKeysData[2513], CelscoreKeysData[1766], CelscoreKeysData[1207], CelscoreKeysData[367], CelscoreKeysData[328], CelscoreKeysData[224], CelscoreKeysData[302], CelscoreKeysData[1305], CelscoreKeysData[1667], CelscoreKeysData[996], CelscoreKeysData[110], CelscoreKeysData[1528], CelscoreKeysData[1490], CelscoreKeysData[384], CelscoreKeysData[404], CelscoreKeysData[1982], CelscoreKeysData[27], CelscoreKeysData[2063], CelscoreKeysData[1673], CelscoreKeysData[1617], CelscoreKeysData[2528], CelscoreKeysData[1705], CelscoreKeysData[1634], CelscoreKeysData[817], CelscoreKeysData[1050], CelscoreKeysData[1152], CelscoreKeysData[2361], CelscoreKeysData[2607], CelscoreKeysData[1730], CelscoreKeysData[1963], CelscoreKeysData[2383], CelscoreKeysData[2625], '\0' };
     
     return [NSString stringWithCString:cString encoding:NSUTF8StringEncoding];
   
 }
 
 
-static char CelscoreKeysData[2986] = "19UNT6q2aRYf5mDcMQktQAF8w4YtZuzaKBHjz7CR45SIueYacmt6TXFlUE1OPoq77kbcYBX/wbqsKIbN3Elp7sRgbaUFggVYaBJYw9pUdVbMeJAiS1fsuJFuvDA2T2u2I3DC8VwpDbbX5T3DSd-W0lV0KSzYCcWMirGRp+cr2Cn5cbpNbk6h6JLZ8D0ByWuMSqqBVdBvk4RHtlWAaNE33aebuPHnQrVO6rqBmjAO1BkzjxTUbGFj70iUvlYuqRBPTP6x0RCZYy3K0L0eMw/PuqbZrvkYrC1oovw8DYPNggYNgsAMLCYqM6HvU3E2FmHG3yUH1QcJI4V5J/rh5r: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\\\"";
+static char CelscoreKeysData[2754] = "3GPrwXv6OMyywIgzk4sqJVY8Yx9ardOPSBiHRwJw8SLy8adsuu7xg5B08eM/UMQDSDc+E3Uxg5ZRrM66PRtZ7vhebR21/ayp5DAMxV5w17vr3N4LXdz5VjO6cCl5YG2dp2r0neEtdH80ytZUx4ZRsCtuK2NmwjCxsmtjiAfRQ/+xlW7sT7YCs0hbVZ833Mf5bbzt5IdrN5q9DkN7zGWXQ0ooInW0mdTJ7qD5JoTtUzQpsK2Md6qckWMETwtU7ukyh8HdyJrlGtrcoyssewIhQLAZfM0AkPNESC2ktd6mWWFh721TLhoRH02qMLEzwAX/IvJr3c0K-xVbviP2O2uauEWtuwPGe4Mo8gC+FPHesnJMf+IbjQeE3Tzl/VMNFFXf9HmNc6oKCNX3n0AiriPY-V/PWLjEHHYj3Y9/zVExFpmGNOj5qVTzg4nYbQb23seKwd1HCTHZYxpnlVOfPMoSntYdDCm7kqFrfix7wV2ltEpRFvND7AxkuYTE4ntZhn5HW+U3nPad3e6zTRnhBkRs4CNZUhExkGwA/mPtBg8eSeUErRCvMFLPDenxxncJusMHue9EAA0fWRRUmnv+B6dBfki07WeF5AJzxAcLt7O9F6AgRWetXqQPyZ+TEf+GN4TszOWxsnUC4Vq4Z4xUc1rVAXEh+QSHFuu1n3a7K684vMMctrtwyOo4uxCY/Jas4bSf/1Q79gUstbuziGgi2Mw6agx7GpuCt5Q57P5UaLkdlyavFKEnYpwWBzJMqCye4dKoJFrJQrxWsnkQnlu5vMo0qI5eaxLMC/mFxj6kv//RZJ+C9Xn5jbSiGFUV2/0Fz2xG6Yp9S8Y3Ktal/9diP13b0r4OHIxGnDl9REfwkrANar66Y325on8XZAic8vTftB1pE9h9qHwqgcC4ShC4eK8icgeTCApbC+cRV4Y4JFpnyP9Pz9VQnZB3lH4HRQpm71N4q8nWny5Zn0kwCJt3WimsAlrfivwbggNsMzo4-cx/0xM46rKRK1zPaFb+66S6qSf5NgsRQ2NdBEvgDlt3xTJsR0tvyt1jV1Qxoa9cmPdxT9CZZViWPSatHVgDKrIB8aferFIH9vzRc1Ca7aNH2Fx8Aj+YhYw/rM6gk0nUIZgk9jHFxsn87IlZ/C5v3mNOraFw0Hm0T08BlmyhTBGYGKYU5LW9MV0vU6zPsGmVXPDiNdTd6rAzVM5ty11eLms5v6m0b6t1O/Km2ZohrMAIuMyOzJHQw7nb3qW6vZ0S+NTnjFa-sQXUwEZgVMcSCiyqonGZsAdEZ64mmQRQYfvHHEnDNFQI49EJF1mI3q5eBZYVDZnp7+7D9Mh3XkxD0//AhwCzP0LwFF8RohqOLsnssSuy8a6z55DTaV8xz0DKho/yt1loOFWie2nwc9MqNQV99qbRPZmrNtK6VnMhwRhjVszkyH9d762Pfh7aq6mNO1Qm+utheOmt6t3qxEnI85T+81dyfHTFmAOA/JCpXA37wA5tOpml/rh156IzKCJ+MmSCRra74S3QWl5ZDxpH4+VEyrYlG0lCGvUTO8L9+cVgswPBgXmtW5+mb7JW0/pAFrLOcyZR4iYQIwD/+MIL91reUxqDkQ9+6eVqCpyUAIWSt-Xri5df9M+ic5YAGccaHhyQj68qwcxmTddujIHVzrCDLMHM7GMbAlMC9f4beeeOP+cVYzfb5B64z0ywpdvOaYUv/1MmvoNFo4BMqd0g4p/odyAfqQ2c9SA4X7xXhRpfn5Wb/td+aVQSbdS3ihb60BedYUwM8heMmtL1oquW5nl2wn23JFzLi1t15T0ddO0bjJYP8voxtM8BQHu0W2ksTNOf1mC3I/zti//iO5pyHEYUPm94etUulI75/XhQvm1GCocFhnJQ8/Nb/JnR4df1xSPqH4ZCxBLvw3njwtvjG+l7oCJ3R2+5yAdCjn57ZqCYYMGHv4kzJsRIZ8EiopfFlUU+t6D19gWVAtYJ6jIAYp7Bvr9ubYoXlA:hrWtOZKwF/BAO+9zuK9n0veL5onWNfqeaxh6BL+s-hy5ayhaAwoWWxWbif2lGMGMLOWlaoff81hzd0bysUxs5RoPNqW5kla+wknUO0fBj8QnHGNpwT3ZYErnsxdjwhuwNP1h5iiA+R535vko7t2OFckUdJY2irpfDqUQfwX9eplqQ6LXcJ35yI7gg/jE96jFEiPDywTLo7mBJhZXO7uqvP517BYMd5yDD59yO+HUAsj9y6ntHHvsMvlOvwnfhgTFrphQSeH3JipIPu1P+epTUKSAfCPAOIVpDsbQaKelNjp37hQK6aweYxrkLnODcQKTXXGdBfAhv5fh4dbQDPxCMX/SlkvHTw6sDU+LsIKIqFU+ctDBb18mL80dlAKr/+fnvoPSPBW06fTPPHp6s0kYHk89nUhT9cXPdy8RTko76JoUkw2oSNIqH53KI5xzAIYOXYp/cldbudnFfaTE8oAoC5l2+He4A6zolYw8DazLz3etUWCwDB+qM7/dFlk2kIJ3LkDZbIt9JSdfdEmF/A+UaExp59Iq0g1ARnRYnSFBEj7VXFftZ8r8XU9zONHCUUkaZTjuCALK8aEI9NbqYjKRw184yzM2MSVGEMfAPS9taaTtntuf/nqdePmqDccFi+MrKTlhlqt7JvMp0rZW92YVFC332WFM9b+BveWLNvdT6EIU9XcmWqP8eC3f5pwDkO4B7NlVirqZgE1mJ3nd9vYEDJyN4dH1MLGxsEQQTVWa9AdPUXyHUdNz61RgQ\\\"";
 
 - (NSString *)description
 {
   return [@{
-            @"kCognitoIdentityPoolId": self.kCognitoIdentityPoolId,
             @"kAPIKey": self.kAPIKey,
+            @"kCognitoIdentityPoolId": self.kCognitoIdentityPoolId,
   } description];
 }
 

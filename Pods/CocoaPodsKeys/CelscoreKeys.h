@@ -8,7 +8,7 @@
 
 @interface CelscoreKeys : NSObject
 
-- (NSString *)kCognitoIdentityPoolId;
 - (NSString *)kAPIKey;
+- (NSString *)kCognitoIdentityPoolId;
 
 @end
