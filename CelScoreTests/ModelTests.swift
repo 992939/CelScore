@@ -84,7 +84,6 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(celeb.height, "CelebrityModel().height not nil")
         XCTAssertNotNil(celeb.birthdate, "CelebrityModel().birthdate not nil")
         XCTAssertNotNil(celeb.netWorth, "CelebrityModel().netWorth not nil")
-        XCTAssertNotNil(celeb.picture2x, "CelebrityModel().picture2x not nil")
         XCTAssertNotNil(celeb.picture3x, "CelebrityModel().picture3x not nil")
         XCTAssertNotNil(celeb.from, "CelebrityModel().from not nil")
         XCTAssertNotNil(celeb.rank, "CelebrityModel().rank not nil")
@@ -106,7 +105,6 @@ class ModelTests: XCTestCase {
         XCTAssert((celeb.height as Any) is String, "CelebrityModel().height is String")
         XCTAssert((celeb.birthdate as Any) is String, "CelebrityModel().birthdate is String")
         XCTAssert((celeb.netWorth as Any) is String, "CelebrityModel().netWorth is String")
-        XCTAssert((celeb.picture2x as Any) is String, "CelebrityModel().picture2x is String")
         XCTAssert((celeb.picture3x as Any) is String, "CelebrityModel().picture3x is String")
         XCTAssert((celeb.from as Any) is String, "CelebrityModel().from is String")
         XCTAssert((celeb.rank as Any) is String, "CelebrityModel().rank is String")
@@ -217,7 +215,7 @@ class ModelTests: XCTestCase {
     
     func testCelebrityStructEquality() {
         let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
-        let celebB = CelebrityStruct(id: "0001", imageURL:"@2x", nickname:"A", prevScore: 2, sex: true, isFollowed:true)
+        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, sex: true, isFollowed:true)
         let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
         XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
         XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
