@@ -186,10 +186,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in revealingSplashView.startAnimation() })
-                }
+            .flatMapError { error in
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert() }
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
@@ -241,6 +239,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.rows = []
         self.changeList()
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
+    }
+    
+    func sendNetworkAlert() {
+        let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in self.dismissHUD() }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in self.dismissHUD() }))
+        self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
     //MARK: ASTableView methods

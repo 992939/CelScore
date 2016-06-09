@@ -65,7 +65,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         cell.celscoreLabel.text = String(celebDictionary["currentScore"]! as! Double)
         let percent: Double = (celebDictionary["currentScore"] as! Double)/(celebDictionary["prevScore"] as! Double)
         let percentage: Double = (percent * 100) - 100
-        cell.changeLabel.text = (percent < 0 ? String(percentage.roundToPlaces(2)) : "+" + String(percentage.roundToPlaces(2))) + "% "
+        cell.changeLabel.text = String(percentage.roundToPlaces(2)) + "% "
         cell.changeLabel.textColor = percentage < 0 ? UIColor(red: 225/255, green: 190/255, blue: 231/255, alpha: 1) : UIColor(red: 100/255, green: 255/255, blue: 218/255, alpha: 1)
         cell.profileImage.image = NSURL(string: celebDictionary["image"] as! String).flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }
         return cell

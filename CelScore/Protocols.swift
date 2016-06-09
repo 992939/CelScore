@@ -52,12 +52,14 @@ extension Labelable {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
+    @objc func sendNetworkAlert()
 }
 
 extension Sociable {
     func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         guard Reachability.isConnectedToNetwork() else {
-            return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
+            return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
+        }
         
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
@@ -71,9 +73,8 @@ extension Sociable {
             .on(failed: { _ in self.dismissHUD() })
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMapError { error in if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.dismissHUD() }) }
+            .flatMapError { error in
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert() }
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }

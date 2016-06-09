@@ -179,6 +179,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         return screenShot
     }
     
+    //MARK: Sociable
     func handleMenu(open: Bool = false) {
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
@@ -240,6 +241,13 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
             .on(failed: { _ in self.ratingsVC.displayGoldRatings() })
             .start()
+    }
+    
+    func sendNetworkAlert() {
+        let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in self.dismissHUD() }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in self.dismissHUD() }))
+        self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
     func enableUpdateButton() {
