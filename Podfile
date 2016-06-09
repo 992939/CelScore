@@ -47,7 +47,7 @@ target 'CelScoreTests' do
     shared_pods
 end
 
-target 'TheObservatory' do
+target 'The Courthouse' do
     shared_pods
 end
 

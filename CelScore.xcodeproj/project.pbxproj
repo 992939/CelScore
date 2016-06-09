@@ -19,6 +19,11 @@
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
 		0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5A1C03A2F2000F533F /* Constants.swift */; };
 		0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */; };
+		003AE6951D094FB70055EE56 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
+		003AE6981D094FB70055EE56 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003AE6971D094FB70055EE56 /* TodayViewController.swift */; };
+		003AE69F1D094FB70055EE56 /* The Courthouse.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 003AE6941D094FB70055EE56 /* The Courthouse.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		003AE6A31D09502B0055EE56 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
+		003AE6A41D0950300055EE56 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6101CC6183B00704CF4 /* MainInterface.storyboard */; };
 		00404A921BE7E9550009AD0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A911BE7E9550009AD0E /* DetailViewController.swift */; };
 		00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A951BEE71300009AD0E /* SettingsModel.swift */; };
 		00404A981BEEDB2A0009AD0E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */; };
@@ -51,11 +56,6 @@
 		00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */; };
 		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
 		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
-		00CE264C1CD48FC30045106C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00404A9E1BF093540009AD0E /* NotificationCenter.framework */; };
-		00CE264F1CD48FC30045106C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE264E1CD48FC30045106C /* TodayViewController.swift */; };
-		00CE26561CD48FC30045106C /* TheObservatory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00CE264B1CD48FC30045106C /* TheObservatory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		00CE265A1CD492090045106C /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */; };
-		00CE265B1CD492DE0045106C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000EB6101CC6183B00704CF4 /* MainInterface.storyboard */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -68,30 +68,30 @@
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
-		01C948637C8C48AC6089C55C /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
+		150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039868E1776C0B641362852 /* Pods_CelScore.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
-		C1D5C2A2348CFB08CEF53610 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */; };
+		48495C83CAB64AD9A14EBCE8 /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */; };
+		D864903F442B2D559D28A840 /* Pods_The_Courthouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */; };
 		E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */; };
 		E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE024A13E2984F3710F62FEA /* CoreText.framework */; };
-		EE5091DF42DDC88975533EB5 /* Pods_TheObservatory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		003AE69D1D094FB70055EE56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 003AE6931D094FB70055EE56;
+			remoteInfo = "The Courthouse";
+		};
 		004B56EF1B35332B008A75EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 004B56D81B35332A008A75EB;
 			remoteInfo = CelScore;
-		};
-		00CE26541CD48FC30045106C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 004B56D11B35332A008A75EB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 00CE264A1CD48FC30045106C;
-			remoteInfo = TheObservatory;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -102,7 +102,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				00CE26561CD48FC30045106C /* TheObservatory.appex in Embed App Extensions */,
+				003AE69F1D094FB70055EE56 /* The Courthouse.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +118,6 @@
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		000EB6111CC6183B00704CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		000EB6231CC6248A00704CF4 /* TheObservatory.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TheObservatory.entitlements; path = ../TheScore/TheObservatory.entitlements; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
@@ -128,6 +127,10 @@
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
 		0036DD5A1C03A2F2000F533F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0036DD5C1C03FEBE000F533F /* CelebritySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearch.swift; sourceTree = "<group>"; };
+		003AE6941D094FB70055EE56 /* The Courthouse.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "The Courthouse.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		003AE6971D094FB70055EE56 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		003AE69C1D094FB70055EE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		003AE6AC1D09597D0055EE56 /* The Courthouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "The Courthouse.entitlements"; sourceTree = "<group>"; };
 		00404A911BE7E9550009AD0E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		00404A951BEE71300009AD0E /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		00404A971BEEDB2A0009AD0E /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -166,9 +169,6 @@
 		00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		00CE26461CD459710045106C /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
-		00CE264B1CD48FC30045106C /* TheObservatory.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TheObservatory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		00CE264E1CD48FC30045106C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		00CE26531CD48FC30045106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -185,23 +185,32 @@
 		00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTests.swift; sourceTree = "<group>"; };
 		00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModelTests.swift; sourceTree = "<group>"; };
 		0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		267F5EA2D2C278A4663EC5BC /* Pods-The Courthouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Courthouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse.release.xcconfig"; sourceTree = "<group>"; };
 		32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.debug.xcconfig"; sourceTree = "<group>"; };
-		406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheObservatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
-		6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.debug.xcconfig"; sourceTree = "<group>"; };
 		8A0A4C7A3E3FA606D0C24A0D /* Pods-CelScore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.debug.xcconfig"; sourceTree = "<group>"; };
 		8C85D2008FC2F053995BEFFD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Courthouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests.release.xcconfig"; sourceTree = "<group>"; };
-		B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheObservatory.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory.release.xcconfig"; sourceTree = "<group>"; };
-		BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B039868E1776C0B641362852 /* Pods_CelScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CelScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0EAEB97DA919E7B47306353 /* Pods-The Courthouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Courthouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse.debug.xcconfig"; sourceTree = "<group>"; };
 		C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
 		EE024A13E2984F3710F62FEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		003AE6911D094FB70055EE56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003AE6951D094FB70055EE56 /* NotificationCenter.framework in Frameworks */,
+				D864903F442B2D559D28A840 /* Pods_The_Courthouse.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D61B35332A008A75EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,7 +222,7 @@
 				E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */,
 				209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */,
 				33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */,
-				C1D5C2A2348CFB08CEF53610 /* Pods_CelScore.framework in Frameworks */,
+				150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,22 +230,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01C948637C8C48AC6089C55C /* Pods_CelScoreTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		00CE26481CD48FC30045106C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00CE264C1CD48FC30045106C /* NotificationCenter.framework in Frameworks */,
-				EE5091DF42DDC88975533EB5 /* Pods_TheObservatory.framework in Frameworks */,
+				48495C83CAB64AD9A14EBCE8 /* Pods_CelScoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		003AE6961D094FB70055EE56 /* The Courthouse */ = {
+			isa = PBXGroup;
+			children = (
+				003AE6AC1D09597D0055EE56 /* The Courthouse.entitlements */,
+				000EB6101CC6183B00704CF4 /* MainInterface.storyboard */,
+				00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */,
+				003AE6971D094FB70055EE56 /* TodayViewController.swift */,
+				003AE69C1D094FB70055EE56 /* Info.plist */,
+			);
+			path = "The Courthouse";
+			sourceTree = "<group>";
+		};
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,7 +274,7 @@
 			children = (
 				004B56DB1B35332A008A75EB /* CelScore */,
 				004B56F11B35332B008A75EB /* CelScoreTests */,
-				00CE264D1CD48FC30045106C /* TheObservatory */,
+				003AE6961D094FB70055EE56 /* The Courthouse */,
 				004B56DA1B35332A008A75EB /* Products */,
 				272C664E3752319CD2080EBE /* Frameworks */,
 				40A8E087926F700762AED30F /* Pods */,
@@ -274,7 +286,7 @@
 			children = (
 				004B56D91B35332A008A75EB /* CelebrityScore.app */,
 				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
-				00CE264B1CD48FC30045106C /* TheObservatory.appex */,
+				003AE6941D094FB70055EE56 /* The Courthouse.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,18 +420,6 @@
 			name = SMSegment;
 			sourceTree = "<group>";
 		};
-		00CE264D1CD48FC30045106C /* TheObservatory */ = {
-			isa = PBXGroup;
-			children = (
-				000EB6231CC6248A00704CF4 /* TheObservatory.entitlements */,
-				000EB6101CC6183B00704CF4 /* MainInterface.storyboard */,
-				00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */,
-				00CE264E1CD48FC30045106C /* TodayViewController.swift */,
-				00CE26531CD48FC30045106C /* Info.plist */,
-			);
-			path = TheObservatory;
-			sourceTree = "<group>";
-		};
 		272C664E3752319CD2080EBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,9 +432,9 @@
 				EE024A13E2984F3710F62FEA /* CoreText.framework */,
 				40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */,
 				0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */,
-				BBA18A377CD7170DA97798C4 /* Pods_CelScore.framework */,
-				197A69CD59AE329E054429B9 /* Pods_CelScoreTests.framework */,
-				406B02DB3BA46CF12D8C21CD /* Pods_TheObservatory.framework */,
+				B039868E1776C0B641362852 /* Pods_CelScore.framework */,
+				A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */,
+				95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -446,8 +446,8 @@
 				C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */,
 				32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */,
 				A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */,
-				6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */,
-				B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */,
+				C0EAEB97DA919E7B47306353 /* Pods-The Courthouse.debug.xcconfig */,
+				267F5EA2D2C278A4663EC5BC /* Pods-The Courthouse.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -455,6 +455,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		003AE6931D094FB70055EE56 /* The Courthouse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 003AE6A21D094FB80055EE56 /* Build configuration list for PBXNativeTarget "The Courthouse" */;
+			buildPhases = (
+				F2CC73451BE84EC26D845723 /* [CP] Check Pods Manifest.lock */,
+				003AE6901D094FB70055EE56 /* Sources */,
+				003AE6911D094FB70055EE56 /* Frameworks */,
+				003AE6921D094FB70055EE56 /* Resources */,
+				8E92D5B9337EA5EE239D1DAD /* [CP] Embed Pods Frameworks */,
+				8671DC7CDA4688842A31D000 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "The Courthouse";
+			productName = "The Courthouse";
+			productReference = 003AE6941D094FB70055EE56 /* The Courthouse.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		004B56D81B35332A008A75EB /* CelScore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
@@ -473,7 +493,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				00CE26551CD48FC30045106C /* PBXTargetDependency */,
+				003AE69E1D094FB70055EE56 /* PBXTargetDependency */,
 			);
 			name = CelScore;
 			productName = CelScore;
@@ -501,26 +521,6 @@
 			productReference = 004B56EE1B35332B008A75EB /* CelScoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		00CE264A1CD48FC30045106C /* TheObservatory */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 00CE26591CD48FC30045106C /* Build configuration list for PBXNativeTarget "TheObservatory" */;
-			buildPhases = (
-				1C4F3810AE684995B52EFB92 /* [CP] Check Pods Manifest.lock */,
-				00CE26471CD48FC30045106C /* Sources */,
-				00CE26481CD48FC30045106C /* Frameworks */,
-				00CE26491CD48FC30045106C /* Resources */,
-				3A14D2DDAA600538FCDDA4BF /* [CP] Embed Pods Frameworks */,
-				E02C0C4C7E5D3F43D061DBB9 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TheObservatory;
-			productName = TheObservatory;
-			productReference = 00CE264B1CD48FC30045106C /* TheObservatory.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -531,6 +531,15 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Gareth.K.Mensah;
 				TargetAttributes = {
+					003AE6931D094FB70055EE56 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6AEA7P6XSJ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					004B56D81B35332A008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 6AEA7P6XSJ;
@@ -543,15 +552,6 @@
 					004B56ED1B35332B008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
 						TestTargetID = 004B56D81B35332A008A75EB;
-					};
-					00CE264A1CD48FC30045106C = {
-						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 6AEA7P6XSJ;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
 					};
 				};
 			};
@@ -570,12 +570,20 @@
 			targets = (
 				004B56D81B35332A008A75EB /* CelScore */,
 				004B56ED1B35332B008A75EB /* CelScoreTests */,
-				00CE264A1CD48FC30045106C /* TheObservatory */,
+				003AE6931D094FB70055EE56 /* The Courthouse */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		003AE6921D094FB70055EE56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003AE6A41D0950300055EE56 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D71B35332A008A75EB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -590,14 +598,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		00CE26491CD48FC30045106C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00CE265B1CD492DE0045106C /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,36 +689,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScore/Pods-CelScore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1C4F3810AE684995B52EFB92 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3A14D2DDAA600538FCDDA4BF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63890813C4BDA8C802042131 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -732,6 +702,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8671DC7CDA4688842A31D000 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E92D5B9337EA5EE239D1DAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		91D4CD84F45CE6C9D344E7B2 /* [CP] Embed Pods Frameworks */ = {
@@ -764,24 +764,33 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E02C0C4C7E5D3F43D061DBB9 /* [CP] Copy Pods Resources */ = {
+		F2CC73451BE84EC26D845723 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheObservatory/Pods-TheObservatory-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		003AE6901D094FB70055EE56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003AE6981D094FB70055EE56 /* TodayViewController.swift in Sources */,
+				003AE6A31D09502B0055EE56 /* TodayTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		004B56D51B35332A008A75EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -847,27 +856,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		00CE26471CD48FC30045106C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00CE264F1CD48FC30045106C /* TodayViewController.swift in Sources */,
-				00CE265A1CD492090045106C /* TodayTableViewCell.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		003AE69E1D094FB70055EE56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 003AE6931D094FB70055EE56 /* The Courthouse */;
+			targetProxy = 003AE69D1D094FB70055EE56 /* PBXContainerItemProxy */;
+		};
 		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 004B56D81B35332A008A75EB /* CelScore */;
 			targetProxy = 004B56EF1B35332B008A75EB /* PBXContainerItemProxy */;
-		};
-		00CE26551CD48FC30045106C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 00CE264A1CD48FC30045106C /* TheObservatory */;
-			targetProxy = 00CE26541CD48FC30045106C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -892,6 +892,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		003AE6A01D094FB80055EE56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0EAEB97DA919E7B47306353 /* Pods-The Courthouse.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = "The Courthouse/The Courthouse.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "The Courthouse/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.CelebrityScore.The-Courthouse";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		003AE6A11D094FB80055EE56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 267F5EA2D2C278A4663EC5BC /* Pods-The Courthouse.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = "The Courthouse/The Courthouse.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "The Courthouse/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.CelebrityScore.The-Courthouse";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		004B56F61B35332B008A75EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -914,6 +950,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -962,6 +999,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1112,45 +1150,18 @@
 			};
 			name = Release;
 		};
-		00CE26571CD48FC30045106C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D8759DCF5017E5E65796069 /* Pods-TheObservatory.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_ENTITLEMENTS = TheScore/TheObservatory.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = TheObservatory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.TheObservatory;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		00CE26581CD48FC30045106C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B49EF9A8105E94880E9E4CD7 /* Pods-TheObservatory.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_ENTITLEMENTS = TheScore/TheObservatory.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = TheObservatory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.CelebrityScore.TheObservatory;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		003AE6A21D094FB80055EE56 /* Build configuration list for PBXNativeTarget "The Courthouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				003AE6A01D094FB80055EE56 /* Debug */,
+				003AE6A11D094FB80055EE56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1174,15 +1185,6 @@
 			buildConfigurations = (
 				004B56FC1B35332B008A75EB /* Debug */,
 				004B56FD1B35332B008A75EB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		00CE26591CD48FC30045106C /* Build configuration list for PBXNativeTarget "TheObservatory" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00CE26571CD48FC30045106C /* Debug */,
-				00CE26581CD48FC30045106C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

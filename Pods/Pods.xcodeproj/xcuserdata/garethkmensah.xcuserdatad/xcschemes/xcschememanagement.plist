@@ -109,7 +109,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TheObservatory.xcscheme</key>
+		<key>Pods-The Courthouse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -222,6 +222,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>255FA87509788FAD4BF758184438FBF0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D333F48EDD1A4D314F58CDE240A2D3B</key>
 		<dict>
 			<key>primary</key>
@@ -243,11 +248,6 @@
 			<true/>
 		</dict>
 		<key>566D684A68E09758048DBF71B5F34369</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>576F5DE09347273CAC17D72333E5BA59</key>
 		<dict>
 			<key>primary</key>
 			<true/>

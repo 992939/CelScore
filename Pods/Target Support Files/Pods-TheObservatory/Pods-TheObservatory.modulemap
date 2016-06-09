@@ -1,6 +1,0 @@
-framework module Pods_TheObservatory {
-  umbrella header "Pods-TheObservatory-umbrella.h"
-
-  export *
-  module * { export * }
-}

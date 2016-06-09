@@ -1,8 +1,8 @@
 //
 //  TodayViewController.swift
-//  TheObservatory
+//  The Courthouse
 //
-//  Created by Gareth.K.Mensah on 4/30/16.
+//  Created by Gareth.K.Mensah on 6/9/16.
 //  Copyright © 2016 Gareth.K.Mensah. All rights reserved.
 //
 
