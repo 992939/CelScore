@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: Int, ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstStars, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
@@ -126,7 +126,6 @@ struct SettingsViewModel {
             case .FirstConsensus: observer.sendNext(settings.isFirstConsensus)
             case .FirstPublic: observer.sendNext(settings.isFirstPublic)
             case .FirstFollow: observer.sendNext(settings.isFirstFollow)
-            case .FirstStars: observer.sendNext(settings.isFirstStars)
             case .FirstNegative: observer.sendNext(settings.isFirstNegative)
             case .FirstInterest: observer.sendNext(settings.isFirstInterest)
             case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
@@ -152,7 +151,6 @@ struct SettingsViewModel {
             case .FirstConsensus: settings.isFirstConsensus = false
             case .FirstPublic: settings.isFirstPublic = false
             case .FirstFollow: settings.isFirstFollow = false
-            case .FirstStars: settings.isFirstStars = false
             case .FirstNegative: settings.isFirstNegative = false
             case .FirstInterest: settings.isFirstInterest = false
             case .FirstCompleted: settings.isFirstCompleted = false

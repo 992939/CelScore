@@ -11,6 +11,7 @@ import Material
 import SMSegmentView
 import AIRTimer
 import Social
+import PMAlertController
 
 
 struct UserStruct {
@@ -270,21 +271,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.handleMenu()
         
         if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
-                .on(next: { userRatings in
-                    guard userRatings.getCelScore() > 0 else { return }
-                    if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
-                    else { self.enableUpdateButton() }})
-                .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                    return SettingsViewModel().getSettingSignal(settingType: .FirstStars) }
-                .on(next: { first in let firstTime = first as! Bool
-                    if firstTime {
-                        AIRTimer.after(1.3, handler: { _ in
-                            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstStars.message(), image: OverlayInfo.FirstStars.logo(), options: OverlayInfo.getOptions()) })
-                            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstStars).start() })
-                    }})
-                .start()
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
+                guard userRatings.getCelScore() > 0 else { return }
+                if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
+                else { self.enableUpdateButton() }
+            })
         } else { self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!) }
     }
     

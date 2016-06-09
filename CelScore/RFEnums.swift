@@ -47,7 +47,6 @@ enum OverlayInfo: Int {
     case FirstNotFollow
     case FirstConsensus
     case FirstPublic
-    case FirstStars
     case FirstNegative
     case FirstInterest
     case FirstCompleted
@@ -68,7 +67,6 @@ enum OverlayInfo: Int {
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
         case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nFrom now on the consensus will regenerate after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou can now add your voice to the public debate by long pressing on a star."
-        case .FirstStars: return "\"The celebrity exists above the real world, in the realm of symbols that gain and lose value like commodities on the stock market.\"\n- P. David Marshall\n\nPlease vote responsibly."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour realm is automatically saved."
         case .FirstCompleted: return "You've cast your votes in every realm of our star-studded constellation!\n\nThank you for voting and for building the consensus."
@@ -91,7 +89,6 @@ enum OverlayInfo: Int {
         case .FirstNotFollow: return R.image.observatory_green()!
         case .FirstConsensus: return R.image.mlk_green()!
         case .FirstPublic: return R.image.lincoln_green()!
-        case .FirstStars: return R.image.spaceship_green()!
         case .FirstNegative: return R.image.mic_purple()!
         case .FirstInterest: return R.image.geometry_green()!
         case .FirstCompleted: return R.image.planet_green()!

@@ -110,13 +110,6 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("FirstFollow error: \(error)") } }
     }
     
-    func testGetFirstStars() {
-        let expectation = expectationWithDescription("FirstStars returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstStars).startWithNext { value in
-            XCTAssert((value as Any) is Bool); expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("FirstStars error: \(error)") } }
-    }
-    
     func testGetFirstNegative() {
         let expectation = expectationWithDescription("FirstNegative returns Bool")
         SettingsViewModel().getSettingSignal(settingType: .FirstNegative).startWithNext { value in
@@ -221,14 +214,6 @@ class SettingsViewModelTests: XCTestCase {
         SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstFollow).startWithNext { settings in
             XCTAssertEqual(settings.isFirstFollow, false); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("set FirstFollow error: \(error)") } }
-    }
-    
-    func testUpdateFirstStars() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = expectationWithDescription("set FirstFollow to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstStars).startWithNext { settings in
-            XCTAssertEqual(settings.isFirstStars, false); expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("set FirstStars error: \(error)") } }
     }
     
     func testUpdateFirstNegative() {
