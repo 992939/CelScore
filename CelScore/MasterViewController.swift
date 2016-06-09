@@ -13,6 +13,7 @@ import HMSegmentedControl
 import RateLimit
 import Dwifft
 import Result
+import PMAlertController
 import RevealingSplashView
 
 
@@ -77,7 +78,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
-            //RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
+            //TODO: RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<CGFloat, NoError> in
@@ -197,11 +198,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
-            .delay(3, onScheduler: QueueScheduler.mainQueueScheduler)
+            .delay(2, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { first in let firstTime = first as! Bool
                 if firstTime {
-                    TAOverlay.showOverlayWithLabel(OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start() })
+                    let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
+                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { () in
+                        SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
+                    }))
+                    self.presentViewController(alertVC, animated: true, completion: nil)
                 }})
             .start()
     }

@@ -149,7 +149,6 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
     
     func logout() {
         let alertVC = PMAlertController(title: "Warning", description: "Your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_green_big()!, style: .Alert)
-        
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: nil))
         alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { () in
             UserViewModel().logoutSignal().startWithNext({ _ in
