@@ -11,6 +11,7 @@ plugin 'cocoapods-keys', {
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
+    pod 'Realm', '~> 1.0'
     pod 'RealmSwift', '~> 1.0'
 end
 
