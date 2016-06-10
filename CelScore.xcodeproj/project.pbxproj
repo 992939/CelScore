@@ -41,6 +41,7 @@
 		0082B14F1C40F8A900E2A9BC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B14E1C40F8A900E2A9BC /* Reachability.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
+		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
 		00C347A11C6016A000097089 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A01C6016A000097089 /* InfoViewController.swift */; };
@@ -154,6 +155,7 @@
 		0082B14E1C40F8A900E2A9BC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00BF75271CA1F8D10061064C /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		00C347A01C6016A000097089 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				0082B14E1C40F8A900E2A9BC /* Reachability.swift */,
 				00BF75271CA1F8D10061064C /* Protocols.swift */,
 				00417A041CB5B65900E47078 /* TransitionManager.swift */,
+				00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				00C347B91C605CB800097089 /* SMSegmentView.swift in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
+				00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */,
 				001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				00C347B71C605CB800097089 /* SMBasicSegmentView.swift in Sources */,

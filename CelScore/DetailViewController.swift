@@ -245,9 +245,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func sendNetworkAlert() {
+        self.dismissHUD()
         let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in self.dismissHUD() }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in self.dismissHUD() }))
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in  }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in }))
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     

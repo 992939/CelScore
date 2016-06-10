@@ -21,25 +21,37 @@ struct UserViewModel {
     
     func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
+            
             Constants.kCredentialsProvider.getIdentityId().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil })
-
+            
             switch loginType {
             case .Facebook:
-                Constants.kCredentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
+                let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
+                
+                credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                    guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                    observer.sendNext(task)
+                    observer.sendCompleted()
+                    return task
+                }
+                
+                //Constants.kCredentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
                     guard session != nil else { print("error: \(error!.localizedDescription)"); return }
-                    Constants.kCredentialsProvider.logins = ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]
+                    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
+                    //Constants.kCredentialsProvider.logins = ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]
+                    
+                    credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                        guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                        observer.sendNext(task)
+                        observer.sendCompleted()
+                        return task
+                    }
                 }
             default: break
-            }
-            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                observer.sendNext(task)
-                observer.sendCompleted()
-                return task
             }
         }
     }
