@@ -1391,6 +1391,7 @@
 					"\"Result\"",
 					"-framework",
 					"\"XCTest\"",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1419,6 +1420,7 @@
 					"\"Result\"",
 					"-framework",
 					"\"XCTest\"",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
