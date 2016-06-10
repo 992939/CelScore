@@ -47,6 +47,10 @@ end
 
 target 'CelScoreTests' do
     shared_pods
+    pod 'AsyncDisplayKit', '~> 1.9.7.2'
+    pod 'AWSCognito', '2.4.3'
+    pod 'AWSAPIGateway', '~> 2.4.3'
+    pod 'BEMCheckBox', '~> 1.2'
 end
 
 target 'The Courthouse' do

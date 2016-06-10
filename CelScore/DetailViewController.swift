@@ -12,6 +12,7 @@ import SMSegmentView
 import AIRTimer
 import Social
 import PMAlertController
+import ReactiveCocoa
 
 
 struct UserStruct {

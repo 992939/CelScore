@@ -68,11 +68,11 @@
 		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
+		06EAF43F5B4C30242F4E48FC /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039868E1776C0B641362852 /* Pods_CelScore.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
-		74A98755C591E8F73DAA96F8 /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */; };
 		D864903F442B2D559D28A840 /* Pods_The_Courthouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */; };
 		E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */; };
 		E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE024A13E2984F3710F62FEA /* CoreText.framework */; };
@@ -150,6 +150,7 @@
 		0064318F1C6A66030062BBDB /* CosmosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
 		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
+		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		0082B14E1C40F8A900E2A9BC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
@@ -168,7 +169,6 @@
 		00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModelTests.swift; sourceTree = "<group>"; };
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
-		00CE26461CD459710045106C /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74A98755C591E8F73DAA96F8 /* Pods_CelScoreTests.framework in Frameworks */,
+				06EAF43F5B4C30242F4E48FC /* Pods_CelScoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,11 +252,11 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				006A61B71D0A561300D01CA0 /* Header.h */,
 				000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */,
 				000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */,
 				000215A51CFBA1B00004A8B9 /* CAEmpty.h */,
 				000215A61CFBA1B00004A8B9 /* CAEmpty.m */,
-				00CE26461CD459710045106C /* Header.h */,
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
@@ -459,7 +459,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 003AE6A21D094FB80055EE56 /* Build configuration list for PBXNativeTarget "The Courthouse" */;
 			buildPhases = (
-				FEE72620B5D3A38C8A1BAA9E /* Check Pods Manifest.lock */,
+				FEE72620B5D3A38C8A1BAA9E /* [CP] Check Pods Manifest.lock */,
 				94608EBF1230378B92F018C1 /* [CP] Check Pods Manifest.lock */,
 				F2CC73451BE84EC26D845723 /* [CP] Check Pods Manifest.lock */,
 				003AE6901D094FB70055EE56 /* Sources */,
@@ -485,7 +485,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
 			buildPhases = (
-				98418748EA3EBC9F55B57A84 /* Check Pods Manifest.lock */,
+				98418748EA3EBC9F55B57A84 /* [CP] Check Pods Manifest.lock */,
 				4DE2E50E5747E5F1012537A0 /* [CP] Check Pods Manifest.lock */,
 				63890813C4BDA8C802042131 /* [CP] Check Pods Manifest.lock */,
 				004B56D51B35332A008A75EB /* Sources */,
@@ -516,7 +516,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 004B56FB1B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScoreTests" */;
 			buildPhases = (
-				DD6045D1E7C53912AD567788 /* Check Pods Manifest.lock */,
+				DD6045D1E7C53912AD567788 /* [CP] Check Pods Manifest.lock */,
 				8059C448DC5D8369753FA07D /* [CP] Check Pods Manifest.lock */,
 				D8B15DBB70F99340BDB14418 /* [CP] Check Pods Manifest.lock */,
 				004B56EA1B35332B008A75EB /* Sources */,
@@ -902,14 +902,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		98418748EA3EBC9F55B57A84 /* Check Pods Manifest.lock */ = {
+		98418748EA3EBC9F55B57A84 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -992,14 +992,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DD6045D1E7C53912AD567788 /* Check Pods Manifest.lock */ = {
+		DD6045D1E7C53912AD567788 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1052,14 +1052,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FEE72620B5D3A38C8A1BAA9E /* Check Pods Manifest.lock */ = {
+		FEE72620B5D3A38C8A1BAA9E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1331,6 +1331,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CelebrityScore;
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1360,6 +1361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CelebrityScore;
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
 			};
 			name = Release;
@@ -1380,20 +1382,13 @@
 				INFOPLIST_FILE = CelScoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-framework",
-					"\"AIRTimer\"",
-					"-framework",
 					"\"ReactiveCocoa\"",
-					"-framework",
-					"\"Realm\"",
 					"-framework",
 					"\"RealmSwift\"",
 					"-framework",
 					"\"Result\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-framework",
 					"\"XCTest\"",
 				);
@@ -1415,20 +1410,13 @@
 				INFOPLIST_FILE = CelScoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-framework",
-					"\"AIRTimer\"",
-					"-framework",
 					"\"ReactiveCocoa\"",
-					"-framework",
-					"\"Realm\"",
 					"-framework",
 					"\"RealmSwift\"",
 					"-framework",
 					"\"Result\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-framework",
 					"\"XCTest\"",
 				);

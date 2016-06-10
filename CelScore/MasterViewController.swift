@@ -15,6 +15,7 @@ import Dwifft
 import Result
 import PMAlertController
 import RevealingSplashView
+import FBSDKCoreKit
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable {

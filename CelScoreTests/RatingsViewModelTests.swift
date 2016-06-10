@@ -8,6 +8,7 @@
 
 import XCTest
 import RealmSwift
+import ReactiveCocoa
 import Result
 @testable import CelebrityScore
 

@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
+import AWSCore
 import RealmSwift
 import Result
+import ReactiveCocoa
 
 
 struct RatingsViewModel {

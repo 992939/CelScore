@@ -11,6 +11,7 @@ import Material
 import SVProgressHUD
 import TwitterKit
 import FBSDKLoginKit
+import ReactiveCocoa
 
 
 protocol DetailSubViewable {

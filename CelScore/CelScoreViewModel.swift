@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
+import AWSCore
 import SwiftyJSON
 import RealmSwift
 import ReactiveCocoa

@@ -16,6 +16,8 @@ import RateLimit
 import Fabric
 import Crashlytics
 import AIRTimer
+import ReactiveCocoa
+import FBSDKCoreKit
 
 
 @UIApplicationMain

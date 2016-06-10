@@ -13,6 +13,8 @@ import TwitterKit
 import Timepiece
 import Result
 import SwiftyJSON
+import ReactiveCocoa
+import FBSDKCoreKit
 
 
 struct UserViewModel {

@@ -9,15 +9,6 @@
 #ifndef Header_h
 #define Header_h
 
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
-#import <ReactiveCocoa/ReactiveCocoa.h>
-#import <AWSCognito/AWSCognito.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <WebASDKImageManager/WebASDKImageManager.h>
-#import <YLProgressBar/YLProgressBar.h>
-#import <HMSegmentedControl/HMSegmentedControl.h>
-#import <AWSAPIGateway/AWSAPIGateway.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "TAOverlay.h"
 #import "CACelScoreAPIClient.h"

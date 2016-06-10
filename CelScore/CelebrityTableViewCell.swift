@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import WebASDKImageManager
 import Material
 import BEMCheckBox
+import ReactiveCocoa
 
 
 final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
