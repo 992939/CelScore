@@ -30,7 +30,7 @@ struct UserViewModel {
             case .Facebook:
                 let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
                 
-                credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                credentialsProvider.credentials().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else { observer.sendFailed(task.error!); return task }
                     observer.sendNext(task)
                     observer.sendCompleted()
