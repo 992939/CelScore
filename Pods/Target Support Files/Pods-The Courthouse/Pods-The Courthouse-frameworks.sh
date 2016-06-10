@@ -82,36 +82,3 @@ strip_invalid_archs() {
   fi
 }
 
-
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-The Courthouse/AIRTimer.framework"
-  install_framework "Pods-The Courthouse/AWSAPIGateway.framework"
-  install_framework "Pods-The Courthouse/AWSCognito.framework"
-  install_framework "Pods-The Courthouse/AWSCore.framework"
-  install_framework "Pods-The Courthouse/AsyncDisplayKit.framework"
-  install_framework "Pods-The Courthouse/BEMCheckBox.framework"
-  install_framework "Pods-The Courthouse/PINCache.framework"
-  install_framework "Pods-The Courthouse/PINRemoteImage.framework"
-  install_framework "Pods-The Courthouse/ReactiveCocoa.framework"
-  install_framework "Pods-The Courthouse/Realm.framework"
-  install_framework "Pods-The Courthouse/RealmSwift.framework"
-  install_framework "Pods-The Courthouse/Result.framework"
-  install_framework "Pods-The Courthouse/SDWebImage.framework"
-  install_framework "Pods-The Courthouse/SwiftyJSON.framework"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-The Courthouse/AIRTimer.framework"
-  install_framework "Pods-The Courthouse/AWSAPIGateway.framework"
-  install_framework "Pods-The Courthouse/AWSCognito.framework"
-  install_framework "Pods-The Courthouse/AWSCore.framework"
-  install_framework "Pods-The Courthouse/AsyncDisplayKit.framework"
-  install_framework "Pods-The Courthouse/BEMCheckBox.framework"
-  install_framework "Pods-The Courthouse/PINCache.framework"
-  install_framework "Pods-The Courthouse/PINRemoteImage.framework"
-  install_framework "Pods-The Courthouse/ReactiveCocoa.framework"
-  install_framework "Pods-The Courthouse/Realm.framework"
-  install_framework "Pods-The Courthouse/RealmSwift.framework"
-  install_framework "Pods-The Courthouse/Result.framework"
-  install_framework "Pods-The Courthouse/SDWebImage.framework"
-  install_framework "Pods-The Courthouse/SwiftyJSON.framework"
-fi

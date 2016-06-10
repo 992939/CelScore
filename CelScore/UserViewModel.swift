@@ -164,9 +164,8 @@ struct UserViewModel {
                     try! realm.commitWrite()
                 }
             case .UserSettings:
-                let model = realm.objects(SettingsModel).first
-                guard let settings = model else { observer.sendNext(model!); return observer.sendCompleted(); }
-                guard settings.isSynced == false else  { observer.sendNext(model!); return observer.sendCompleted(); }
+                let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
+                guard settings.isSynced == false else  { observer.sendNext(settings); return observer.sendCompleted(); }
                 
                 dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                 dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")

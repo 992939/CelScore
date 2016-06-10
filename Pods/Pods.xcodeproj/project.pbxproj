@@ -221,7 +221,6 @@
 		29866DE811C9B01336EE086EF46FE454 /* AWSExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = EB181C7CC22C6559854639F43B57840B /* AWSExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29D5072854A624ECD53A502670BE3498 /* FBSDKServerConfigurationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 442F478759B290BB18259FCD386A72FF /* FBSDKServerConfigurationManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29E0774B598546991F36606C6215F6BB /* ASLayoutSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2379DB1DF2E3388ABCE4740E148E71C0 /* ASLayoutSpec.mm */; };
-		2A16D2664295DB8C65D33554A91C68BA /* Pods-The Courthouse-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BEBCCA2A605A8F0166C77A97E4D7B2 /* Pods-The Courthouse-dummy.m */; };
 		2A8FBAE2FEB78D12E61A11754CA0BEBB /* RLMObject.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = D830DF3033D9AEC0F97907414513EB7D /* RLMObject.h */; };
 		2B1CB97E723ADB1172A9A3BBC1DD112A /* BEMPathManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A903D34407A5BA5A621610531EAA91AA /* BEMPathManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2B4B089D17A18902594B8E4985C6E246 /* PINRemoteImageMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A48C454CECAEDD9803FD99C609952042 /* PINRemoteImageMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -272,6 +271,7 @@
 		36F2A5382A9A2FC23555D09A2EB7AE20 /* BEMCheckBox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 95D372D31F7632B8E21347EE5337093B /* BEMCheckBox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3727D92D4B6CF5B09E53F33C773876D2 /* FBSDKMonotonicTime.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB7F172E8ACC10412C9D959BDA109B3 /* FBSDKMonotonicTime.m */; };
 		37392B53EF2908B434B0D64F1123DD07 /* ASTextNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0E7CAD5F95FD15C17E9840DC08AB56AB /* ASTextNode.mm */; };
+		376680C1259213F4A1C5F713756443E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCE79EDE386430AAF9697CDB37FE26C /* Foundation.framework */; };
 		378708A2D7D4B30CF13D1BA8EFCAFC67 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = C07FFF7778AEEBA7A0CE1D27B12DB00A /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37A57BD2E1AA53589B54486B055DF604 /* RACScopedDisposable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3FCD47C7DE94AD3FCD77229CD98C69 /* RACScopedDisposable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3823A8BFFA8A36D1F2B1D718A1057719 /* FBSDKSystemAccountStoreAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3151110800D782075DE08E8BBB771B01 /* FBSDKSystemAccountStoreAdapter.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -439,6 +439,7 @@
 		5BAF832E5A2CE0FDFEC4F1865F75ED79 /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5479C679F94B95C8541526E3E3A7E9B /* PMAlertController.swift */; };
 		5BBB7E62DBE23E6A0874510918E97E86 /* _ASAsyncTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = F72A0E5A431BDEA1AE03419B5BCE1F27 /* _ASAsyncTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C6C8FE8FA726DFAA681E7293931FCFF /* PINRemoteImageCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = DE06C960D4F267A6AA73C699751AD655 /* PINRemoteImageCallbacks.m */; };
+		5C889FA82A8E811E01BD2C485928B7E4 /* Pods-The Courthouse-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F19696A518A39145397A83460C5ED78A /* Pods-The Courthouse-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C8C09FF7B01168F82779CAFB746C10F /* UIAlertView+RACSignalSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB00519881E03985F905969BF649D7E /* UIAlertView+RACSignalSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D0CBF871FD7D01017120EC164048EF8 /* ASEditableTextNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 229EDEC614114FBD963C93C4149B439C /* ASEditableTextNode.mm */; };
 		5D2D8FCF9A3287A2D559659A8BD3454C /* Flatten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807CDF55E0DF993457B6C6F12E84CDF /* Flatten.swift */; };
@@ -856,7 +857,6 @@
 		ABAE12A9196086AE70494F15005B8988 /* RLMObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 540C9CD4EA7A01BB3A295E8F53022AD4 /* RLMObjectStore.h */; };
 		ABBC769244D3C1F076C3A7ABA6F2F330 /* FBSDKAppEventsDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF9F367283FC335D054B6FCE00F771B /* FBSDKAppEventsDeviceInfo.m */; };
 		ABBF00BCE92885F25F188D6C8E8166A3 /* ASBatchContext.h in Headers */ = {isa = PBXBuildFile; fileRef = BE5590070EE46287172CE920FCB28515 /* ASBatchContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ABC28C5BD653744089AD83903D6E0BFC /* Pods-The Courthouse-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F19696A518A39145397A83460C5ED78A /* Pods-The Courthouse-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABD53CE82EED9054CB6BE0A9E212C2BB /* NSIndexSet+RACSequenceAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E17FD25C1172F3E62E84CAE7ADBDCC4 /* NSIndexSet+RACSequenceAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABE45433C4D5440C9B6331AF3C825B52 /* FBSDKGraphRequestDataAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE2A20856B949D3F05CB40F63D4482D /* FBSDKGraphRequestDataAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABF35A2CA14CAE1C05FCF31341D9131A /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E3E38F00B9357A4AD5C312EC5B480F /* SDWebImageManager.m */; };
@@ -929,7 +929,6 @@
 		B9E818C9AF7848526912A8E2CDF04D1C /* RLMResults.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DA0F76124B0B78918743094AE2C5F6F /* RLMResults.h */; };
 		B9F9061D1F2918DBFA3E8DEEDD978D95 /* RACEagerSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 956ECD1E448B11EB0191D9ED955CC94E /* RACEagerSequence.m */; };
 		BA32965B7BE610864A98B537F2A72A9D /* ASStackBaselinePositionedLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = E2F6662087D801E0F9E86FEE1E57F2BA /* ASStackBaselinePositionedLayout.mm */; };
-		BACF7FBC5BB8EDE6091546D5980C902B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCE79EDE386430AAF9697CDB37FE26C /* Foundation.framework */; };
 		BAE1B8DD63B80B3153A96EF585D8B01F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCE79EDE386430AAF9697CDB37FE26C /* Foundation.framework */; };
 		BAFEF0DAA6D4867B59CD5C3E76A98322 /* ASEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 414937FBC3C6EFC874E75568EFA436D7 /* ASEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC339879B9328A7E649A5E123401B75E /* RLMConstants.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = FC1BD11325CDE7C08D7C5E6A3B37C4E4 /* RLMConstants.h */; };
@@ -1159,6 +1158,7 @@
 		E5BB354A22F8D86938289251614920A8 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB30342C10F7103E01D639B19581C76 /* SortDescriptor.swift */; };
 		E5FFE022FD6699990599EEA6529BC636 /* FBSDKBridgeAPIProtocolWebV1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0096F8D42E6471B174808918B7AB2653 /* FBSDKBridgeAPIProtocolWebV1.m */; };
 		E60F4C39CFD4B10BD985C1A13D0AA786 /* NSData+RACSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 4705C43646D68D60D88E6FBE820E8419 /* NSData+RACSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61EC12A219847198F711C1010C303A6 /* Pods-The Courthouse-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BEBCCA2A605A8F0166C77A97E4D7B2 /* Pods-The Courthouse-dummy.m */; };
 		E6D504A4DEDA3BB58E7C6493EE96AFD9 /* FBSDKAppEvents+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = DC5990373032D6249D7F1FDCB4632EEC /* FBSDKAppEvents+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E6D79C5E2EA5DFFC3C901F0B192E0896 /* AIRTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B32BCFBC7A2B290089D7C01A5253 /* AIRTimer.swift */; };
 		E711270BDFC4F1689649CE8A38F7AF2E /* io.cosmicmind.material.fonts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B81CEF6A30D52E618630691AB6F2C7B /* io.cosmicmind.material.fonts.bundle */; };
@@ -1317,13 +1317,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		07DEB11067ADEB7B6ED1E7E0DF3D5167 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B818B70BB7B8A964E6BEFFC048157D9A;
-			remoteInfo = SwiftyJSON;
-		};
 		14E6F2171F90ED16491CC6067FA83BA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1436,33 +1429,12 @@
 			remoteGlobalIDString = 0CC5BF5A11F28FD561298BAEAEC3CCB7;
 			remoteInfo = Result;
 		};
-		4F6E96CB4A04C11055F3E674075273C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DDDEAC5848DE297A6FD6D6ED311E1D71;
-			remoteInfo = SDWebImage;
-		};
 		4F72567632499B164C9A165CD6EC5B81 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F32D052B04179AB9F26154B2F92C1532;
 			remoteInfo = Keys;
-		};
-		5A3D58B4C7FB3D3449C2792FC4D8D092 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B25A7A575B81D08E1179A3E773307281;
-			remoteInfo = PINRemoteImage;
-		};
-		5D957245368E2187BFE62572E547FC8B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1E22CE4300F3EA7545DDDF1DE1AAE60C;
-			remoteInfo = RealmSwift;
 		};
 		602FFC2DFB9A49E9CCC5E402B837EA60 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1484,13 +1456,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DDDEAC5848DE297A6FD6D6ED311E1D71;
 			remoteInfo = SDWebImage;
-		};
-		665290947A91B02A7E712DE578091D5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C453BB136580E7207412ECA40769A616;
-			remoteInfo = Realm;
 		};
 		671279AD11B5E91274962F503C090821 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1527,13 +1492,6 @@
 			remoteGlobalIDString = C0DB47E9AD9BC6F4ACF0E85F90DD95E0;
 			remoteInfo = RateLimit;
 		};
-		752691ECBE8CE20D0ED6582433CD87FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0373A753A1184F934859AD89A5773468;
-			remoteInfo = AWSCore;
-		};
 		7AB3410FCF97900A7BB2E19F19415DA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1562,21 +1520,7 @@
 			remoteGlobalIDString = 6BC61111B1FF7FB66C001AD15791A05B;
 			remoteInfo = RevealingSplashView;
 		};
-		8E51103EA31F753D8A845DF3DC97710B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BAA396C4D689A02A15029B49E076FAF0;
-			remoteInfo = AWSCognito;
-		};
 		958953A6E334A9A3137F2DCD03FDDBF1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 566D684A68E09758048DBF71B5F34369;
-			remoteInfo = BEMCheckBox;
-		};
-		95F69DB8B12D89705FB4D547150B9387 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -1597,20 +1541,6 @@
 			remoteGlobalIDString = 0373A753A1184F934859AD89A5773468;
 			remoteInfo = AWSCore;
 		};
-		B27F8DBB862DCE28C410BE7D2194A896 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0CC5BF5A11F28FD561298BAEAEC3CCB7;
-			remoteInfo = Result;
-		};
-		B7A03458F7871A92DA203000082DDC30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1577A05DDA4635E2CAD31DD94CA0591A;
-			remoteInfo = AWSAPIGateway;
-		};
 		C2C4488C5A823FFFAB9A3BD3254EAA13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -1618,33 +1548,12 @@
 			remoteGlobalIDString = B963C330116427E53A03AF441DE11B50;
 			remoteInfo = WebASDKImageManager;
 		};
-		C726471FEC12A9536104AAD7661B0B30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6C9F7D7DE17A94379CF0EE4D0897AF5E;
-			remoteInfo = PINCache;
-		};
-		CAA9B9DDFAA9DB3979ACADADD14840AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3BE77CEBEE2FE182424E00562DD4B1BD;
-			remoteInfo = ReactiveCocoa;
-		};
 		CB3006F9937A373D236D7610D970C7D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E5AB1C0293AFBBE30818EC1F7565FA51;
 			remoteInfo = PMAlertController;
-		};
-		CB973DA5731EAAF092F4D50291EFB256 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D333F48EDD1A4D314F58CDE240A2D3B;
-			remoteInfo = AIRTimer;
 		};
 		CD2A51D78E902B2A38BF093B15575777 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1694,13 +1603,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 52D82BFDD1E808D9CB257431922C1EE4;
 			remoteInfo = Bolts;
-		};
-		E6CCE27EEC95C7A52BF69484623F23C0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 022D2F18C6DE9AD107FCB2F4900EF74F;
-			remoteInfo = AsyncDisplayKit;
 		};
 		E7AEDB02C0CD38F9A1C4E89DA06ADB0F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3465,20 +3367,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E08BBA19E5317574FDB9BC545F4A7B9C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BACF7FBC5BB8EDE6091546D5980C902B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E197120AB90976256F845713E2975F56 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				05DDEBF862B0E2561E2BA7232ED9FA80 /* Foundation.framework in Frameworks */,
 				EAAFC7EADABC80CF7CCFC58505C79264 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8261C265E9B6F5C31A165E07EAF3A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				376680C1259213F4A1C5F713756443E0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6503,19 +6405,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED6B6AAB5C0814EAD12A89A3E3E61587 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C889FA82A8E811E01BD2C485928B7E4 /* Pods-The Courthouse-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0B2B126E6DC938F757632481BE53586 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				184744C8A31AF7E1E64EF6E14C4D4FDC /* SwiftyJSON-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2E14AA550EC9E8BCBCCDB1944296450 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ABC28C5BD653744089AD83903D6E0BFC /* Pods-The Courthouse-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6574,37 +6476,6 @@
 			name = AWSCore;
 			productName = AWSCore;
 			productReference = 7BB51970A8D08875AE5CC63E2ABFB8AD /* AWSCore.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		078D9CFA9B2BD0C76F727E6FC16CBB3F /* Pods-The Courthouse */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 70912E40D663D2354AFE1695E7EA02E8 /* Build configuration list for PBXNativeTarget "Pods-The Courthouse" */;
-			buildPhases = (
-				061940B79042823815E233960066442A /* Sources */,
-				E08BBA19E5317574FDB9BC545F4A7B9C /* Frameworks */,
-				F2E14AA550EC9E8BCBCCDB1944296450 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				79659C523123BD1C0033F3A569568651 /* PBXTargetDependency */,
-				B4ED1971093C9F3F91FA075CDF80E5B3 /* PBXTargetDependency */,
-				F9C049995911D910C7EAAC3F7E3CA283 /* PBXTargetDependency */,
-				04585D7E059B9EEC06329ED3E1C22F00 /* PBXTargetDependency */,
-				7F78C7E52444CE6FE8704D8DEEB6B39B /* PBXTargetDependency */,
-				F1DCD553C0EE727553F594D0AFB6406C /* PBXTargetDependency */,
-				DBE1ED094233A9321A792BB178EADE71 /* PBXTargetDependency */,
-				2B3EB4DFC02197BD6B5E6B2402EFCFC8 /* PBXTargetDependency */,
-				DE7D1EE5BCEABF37995C06857B653E14 /* PBXTargetDependency */,
-				A5E489CAD26C35B61CEEE52AD4207583 /* PBXTargetDependency */,
-				B3E0B17BE0AE17AF8B7E6A3366E673C3 /* PBXTargetDependency */,
-				0566C98978133ED342CE71FCC3CFA33A /* PBXTargetDependency */,
-				BAFB5E6F9A43010592B129278A36B413 /* PBXTargetDependency */,
-				50A0506029CAC2C1D8D6D582038D8DDF /* PBXTargetDependency */,
-			);
-			name = "Pods-The Courthouse";
-			productName = "Pods-The Courthouse";
-			productReference = 13539DDEABD63B5B5E45EEEDB1C06317 /* Pods_The_Courthouse.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		0CC5BF5A11F28FD561298BAEAEC3CCB7 /* Result */ = {
@@ -6696,6 +6567,23 @@
 			name = R.swift.Library;
 			productName = R.swift.Library;
 			productReference = 999E6BBF1A747A1F4945D3BF94D689FD /* Rswift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1D4381AE760F2258FAD0C61598FB6C9D /* Pods-The Courthouse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD5E3AAFA81C677A9DDB783A818379F1 /* Build configuration list for PBXNativeTarget "Pods-The Courthouse" */;
+			buildPhases = (
+				BDEEC9CC26A92A907709C0E4191161C6 /* Sources */,
+				EF8261C265E9B6F5C31A165E07EAF3A0 /* Frameworks */,
+				ED6B6AAB5C0814EAD12A89A3E3E61587 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-The Courthouse";
+			productName = "Pods-The Courthouse";
+			productReference = 13539DDEABD63B5B5E45EEEDB1C06317 /* Pods_The_Courthouse.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1E22CE4300F3EA7545DDDF1DE1AAE60C /* RealmSwift */ = {
@@ -7226,7 +7114,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -7261,7 +7149,7 @@
 				C2AB96F7E8DD8856CD05BD74C0ABBF9C /* PMAlertController-PMAlertController */,
 				8B678140992B96937D974D10DC33CC90 /* Pods-CelScore */,
 				1311658193C6A51F52B5A55EE936C3B0 /* Pods-CelScoreTests */,
-				078D9CFA9B2BD0C76F727E6FC16CBB3F /* Pods-The Courthouse */,
+				1D4381AE760F2258FAD0C61598FB6C9D /* Pods-The Courthouse */,
 				15DCEF9A28BED6D99C2A27DE37D5CD88 /* R.swift.Library */,
 				C0DB47E9AD9BC6F4ACF0E85F90DD95E0 /* RateLimit */,
 				3BE77CEBEE2FE182424E00562DD4B1BD /* ReactiveCocoa */,
@@ -7337,14 +7225,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		061940B79042823815E233960066442A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2A16D2664295DB8C65D33554A91C68BA /* Pods-The Courthouse-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0AA4A68351B3081E9FE7305C1A1B1145 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8015,6 +7895,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BDEEC9CC26A92A907709C0E4191161C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E61EC12A219847198F711C1010C303A6 /* Pods-The Courthouse-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF7D68FD6D695A41603C316F01C315E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8238,12 +8126,6 @@
 			target = 0373A753A1184F934859AD89A5773468 /* AWSCore */;
 			targetProxy = 671279AD11B5E91274962F503C090821 /* PBXContainerItemProxy */;
 		};
-		04585D7E059B9EEC06329ED3E1C22F00 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AWSCore;
-			target = 0373A753A1184F934859AD89A5773468 /* AWSCore */;
-			targetProxy = 752691ECBE8CE20D0ED6582433CD87FB /* PBXContainerItemProxy */;
-		};
 		04A3E446E7969DC5188B90675D4D6C1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Timepiece;
@@ -8255,12 +8137,6 @@
 			name = BEMCheckBox;
 			target = 566D684A68E09758048DBF71B5F34369 /* BEMCheckBox */;
 			targetProxy = 958953A6E334A9A3137F2DCD03FDDBF1 /* PBXContainerItemProxy */;
-		};
-		0566C98978133ED342CE71FCC3CFA33A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Result;
-			target = 0CC5BF5A11F28FD561298BAEAEC3CCB7 /* Result */;
-			targetProxy = B27F8DBB862DCE28C410BE7D2194A896 /* PBXContainerItemProxy */;
 		};
 		0A6561047ECAA15C27118B2E87D905D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8310,12 +8186,6 @@
 			target = C453BB136580E7207412ECA40769A616 /* Realm */;
 			targetProxy = 44C197C54F1A36C4D51EE08ECA3F08F3 /* PBXContainerItemProxy */;
 		};
-		2B3EB4DFC02197BD6B5E6B2402EFCFC8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PINRemoteImage;
-			target = B25A7A575B81D08E1179A3E773307281 /* PINRemoteImage */;
-			targetProxy = 5A3D58B4C7FB3D3449C2792FC4D8D092 /* PBXContainerItemProxy */;
-		};
 		2D81EACA188250616733E4724946D164 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Keys;
@@ -8358,12 +8228,6 @@
 			target = 52D82BFDD1E808D9CB257431922C1EE4 /* Bolts */;
 			targetProxy = 7BDFEC0F5B0693C2D315E9D3973E276E /* PBXContainerItemProxy */;
 		};
-		50A0506029CAC2C1D8D6D582038D8DDF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = B818B70BB7B8A964E6BEFFC048157D9A /* SwiftyJSON */;
-			targetProxy = 07DEB11067ADEB7B6ED1E7E0DF3D5167 /* PBXContainerItemProxy */;
-		};
 		5C8C5D6FA2368DFA5E3AF18489AF74AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PINCache;
@@ -8400,23 +8264,11 @@
 			target = 0EB19C1377A747F81110D44E2D5FCF78 /* FBSDKCoreKit */;
 			targetProxy = 259888B004F898069A61DD1F851ED51B /* PBXContainerItemProxy */;
 		};
-		79659C523123BD1C0033F3A569568651 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AIRTimer;
-			target = 2D333F48EDD1A4D314F58CDE240A2D3B /* AIRTimer */;
-			targetProxy = CB973DA5731EAAF092F4D50291EFB256 /* PBXContainerItemProxy */;
-		};
 		7BC9D3419EE6F7CE0E6066AA99539F6B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Realm;
 			target = C453BB136580E7207412ECA40769A616 /* Realm */;
 			targetProxy = DF0C36724FF06820FFE23F8D328A86D8 /* PBXContainerItemProxy */;
-		};
-		7F78C7E52444CE6FE8704D8DEEB6B39B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AsyncDisplayKit;
-			target = 022D2F18C6DE9AD107FCB2F4900EF74F /* AsyncDisplayKit */;
-			targetProxy = E6CCE27EEC95C7A52BF69484623F23C0 /* PBXContainerItemProxy */;
 		};
 		9005CB9ACC07F9B1127C1C2FB98CBA51 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8448,12 +8300,6 @@
 			target = 0373A753A1184F934859AD89A5773468 /* AWSCore */;
 			targetProxy = 6FAE0D17840BA08B8C0829DF22474BAF /* PBXContainerItemProxy */;
 		};
-		A5E489CAD26C35B61CEEE52AD4207583 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Realm;
-			target = C453BB136580E7207412ECA40769A616 /* Realm */;
-			targetProxy = 665290947A91B02A7E712DE578091D5C /* PBXContainerItemProxy */;
-		};
 		A6B1B885C2539D7793E956A1A2A0279C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AWSCognito;
@@ -8472,12 +8318,6 @@
 			target = B963C330116427E53A03AF441DE11B50 /* WebASDKImageManager */;
 			targetProxy = C2C4488C5A823FFFAB9A3BD3254EAA13 /* PBXContainerItemProxy */;
 		};
-		B3E0B17BE0AE17AF8B7E6A3366E673C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RealmSwift;
-			target = 1E22CE4300F3EA7545DDDF1DE1AAE60C /* RealmSwift */;
-			targetProxy = 5D957245368E2187BFE62572E547FC8B /* PBXContainerItemProxy */;
-		};
 		B427F544CA04A66D6C9FA82BBBAC5FF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AsyncDisplayKit;
@@ -8490,12 +8330,6 @@
 			target = 0EB19C1377A747F81110D44E2D5FCF78 /* FBSDKCoreKit */;
 			targetProxy = EABFFC381088C7EDB3C50BF9184E2232 /* PBXContainerItemProxy */;
 		};
-		B4ED1971093C9F3F91FA075CDF80E5B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AWSAPIGateway;
-			target = 1577A05DDA4635E2CAD31DD94CA0591A /* AWSAPIGateway */;
-			targetProxy = B7A03458F7871A92DA203000082DDC30 /* PBXContainerItemProxy */;
-		};
 		B7242FC55C861412F6D7D5BFC3CA54E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PMAlertController;
@@ -8507,12 +8341,6 @@
 			name = AWSCore;
 			target = 0373A753A1184F934859AD89A5773468 /* AWSCore */;
 			targetProxy = ADB180856044D0C59CE2518CD9DBF568 /* PBXContainerItemProxy */;
-		};
-		BAFB5E6F9A43010592B129278A36B413 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SDWebImage;
-			target = DDDEAC5848DE297A6FD6D6ED311E1D71 /* SDWebImage */;
-			targetProxy = 4F6E96CB4A04C11055F3E674075273C7 /* PBXContainerItemProxy */;
 		};
 		BD8AA260546569CC5D970598CA33A37D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8550,18 +8378,6 @@
 			target = 3BE77CEBEE2FE182424E00562DD4B1BD /* ReactiveCocoa */;
 			targetProxy = 45D0752653305EAE41E0EB93DF060BAE /* PBXContainerItemProxy */;
 		};
-		DBE1ED094233A9321A792BB178EADE71 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PINCache;
-			target = 6C9F7D7DE17A94379CF0EE4D0897AF5E /* PINCache */;
-			targetProxy = C726471FEC12A9536104AAD7661B0B30 /* PBXContainerItemProxy */;
-		};
-		DE7D1EE5BCEABF37995C06857B653E14 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ReactiveCocoa;
-			target = 3BE77CEBEE2FE182424E00562DD4B1BD /* ReactiveCocoa */;
-			targetProxy = CAA9B9DDFAA9DB3979ACADADD14840AF /* PBXContainerItemProxy */;
-		};
 		DE95AAEBF4EC3A7A62F86675A332E7DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SMSegmentView;
@@ -8580,18 +8396,6 @@
 			target = 0CC5BF5A11F28FD561298BAEAEC3CCB7 /* Result */;
 			targetProxy = CD2A51D78E902B2A38BF093B15575777 /* PBXContainerItemProxy */;
 		};
-		F1DCD553C0EE727553F594D0AFB6406C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BEMCheckBox;
-			target = 566D684A68E09758048DBF71B5F34369 /* BEMCheckBox */;
-			targetProxy = 95F69DB8B12D89705FB4D547150B9387 /* PBXContainerItemProxy */;
-		};
-		F9C049995911D910C7EAAC3F7E3CA283 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AWSCognito;
-			target = BAA396C4D689A02A15029B49E076FAF0 /* AWSCognito */;
-			targetProxy = 8E51103EA31F753D8A845DF3DC97710B /* PBXContainerItemProxy */;
-		};
 		FFEC97EC3FC157622E9455D9F4A04991 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Material-io.cosmicmind.material.icons";
@@ -8609,7 +8413,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Material/ResourceBundle-io.cosmicmind.material.fonts-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = io.cosmicmind.material.fonts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8637,8 +8440,36 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Dwifft;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		02895AA606751CD09C93C44C3F118E22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAA7D9B26BD6E0BCDF6581DB830445F4 /* SDWebImage.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -8689,6 +8520,39 @@
 			};
 			name = Debug;
 		};
+		044B2E0B93BE23B11DC1710FA1698FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE50D4CD91B4B42E50A7F90D92FC461F /* Pods-The Courthouse.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-The Courthouse/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-The Courthouse/Pods-The Courthouse.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_The_Courthouse;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		099D8BDDCA47D8942D680DD9EBE64832 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0064677B87EDD09B688E2D90B0D28609 /* Keys.xcconfig */;
@@ -8709,7 +8573,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Keys/Keys.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Keys;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8739,7 +8602,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = FBSDKCoreKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8748,37 +8610,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		0A98122E50CD5B3ADB63386FAC0CF679 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A90F5BEFCFBC2AFAB213C8ED48CC4F95 /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		0AD88259F62FFAACC1DD516E7F5F7FD2 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -8800,7 +8631,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/PMAlertController/PMAlertController.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = PMAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8810,36 +8640,34 @@
 			};
 			name = Release;
 		};
-		0AE3D9DA2442B0DD5CED0D099FD19464 /* Debug */ = {
+		0C3127E2582EE11B855FFE989A893E99 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67740353A7D08CA0C7F426D3906AA8BC /* PINCache.xcconfig */;
+			baseConfigurationReference = D52426B41887A9A03EECB3CA815FD826 /* BEMCheckBox.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BEMCheckBox/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = PINCache;
+				MODULEMAP_FILE = "Target Support Files/BEMCheckBox/BEMCheckBox.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = BEMCheckBox;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		119BA0A2A2C1DD202B1F8FA02652A1AB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -8874,11 +8702,68 @@
 			};
 			name = Release;
 		};
-		1223B22E4E6059798C112A4CD49236DB /* Debug */ = {
+		15B8A9237C41753AC2B4DD5537EF35D0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9FA0AFD33F579F2A4B71956BBB0E30A6 /* AWSCore.xcconfig */;
+			baseConfigurationReference = A0423D354B5D0AE1820A3B42C938E91D /* ReactiveCocoa.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ReactiveCocoa/ReactiveCocoa-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReactiveCocoa/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReactiveCocoa/ReactiveCocoa.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ReactiveCocoa;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		16059D8893B53B7E2AFB6349EB343C04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 065716B6AF45415CEEA3DD70803D2D78 /* RealmSwift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RealmSwift/RealmSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RealmSwift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RealmSwift/RealmSwift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RealmSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		17329A8B4346C83DBE91C37214FBBC42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6A5BC7AB6CB4E0BFDF12A6CB2D5BC8C /* Pods-The Courthouse.debug.xcconfig */;
+			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -8888,15 +8773,47 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-The Courthouse/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-The Courthouse/Pods-The Courthouse.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_The_Courthouse;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1FA07A5EA8FC6CDA6836851B734F4A4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31004EC972EB5397F8739CDC50A0ADD1 /* PINRemoteImage.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PINRemoteImage/PINRemoteImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PINRemoteImage/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MODULEMAP_FILE = "Target Support Files/PINRemoteImage/PINRemoteImage.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSCore;
+				PRODUCT_NAME = PINRemoteImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -8925,7 +8842,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -8935,11 +8851,10 @@
 			};
 			name = Release;
 		};
-		23B7733282349BAD12721CD3A1795875 /* Debug */ = {
+		2495F8A601545D7549AB13DD5D6C6B82 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F180356361E5D00097FE6DDE3670ACEA /* AWSAPIGateway.xcconfig */;
+			baseConfigurationReference = 6D316B615A1BFEDC52EC92352356441E /* AWSCognito.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -8949,15 +8864,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSAPIGateway/AWSAPIGateway-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSAPIGateway/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSAPIGateway/AWSAPIGateway.modulemap";
+				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSAPIGateway;
+				PRODUCT_NAME = AWSCognito;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -8986,8 +8900,36 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/YLProgressBar/YLProgressBar.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = YLProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		284700F62A1B505FC7002BC58360DC41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F180356361E5D00097FE6DDE3670ACEA /* AWSAPIGateway.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSAPIGateway/AWSAPIGateway-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSAPIGateway/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSAPIGateway/AWSAPIGateway.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AWSAPIGateway;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9030,37 +8972,6 @@
 			};
 			name = Debug;
 		};
-		32E4EEE4B33513823616DCE35C711821 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAA7D9B26BD6E0BCDF6581DB830445F4 /* SDWebImage.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = SDWebImage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		37C626CEFBF55D59F205D9886D67B26A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B1F1D03C3DC1BE60212FF48D83E778DE /* HMSegmentedControl.xcconfig */;
@@ -9081,42 +8992,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/HMSegmentedControl/HMSegmentedControl.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = HMSegmentedControl;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		39A46BDEA046230CF21058DB7AADE540 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8890769F8377CB1A9E6F1A195B273317 /* Result.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Result/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = Result;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -9131,7 +9009,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/ResourceBundle-PMAlertController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = PMAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9139,67 +9016,34 @@
 			};
 			name = Debug;
 		};
-		407D2E2F0296B626BE9CDA1D59836FD6 /* Release */ = {
+		3ECB00004A29C821537BCA75ACF8055F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67740353A7D08CA0C7F426D3906AA8BC /* PINCache.xcconfig */;
+			baseConfigurationReference = 9FA0AFD33F579F2A4B71956BBB0E30A6 /* AWSCore.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = PINCache;
+				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AWSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
-		};
-		44C1E76B3E8FD7469678D5119CB9FA58 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8890769F8377CB1A9E6F1A195B273317 /* Result.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Result/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = Result;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
+			name = Debug;
 		};
 		45196FF469C13C13D04E97C4BDF84328 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -9221,7 +9065,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Keys/Keys.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Keys;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9251,7 +9094,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/WebASDKImageManager/WebASDKImageManager.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = WebASDKImageManager;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9261,11 +9103,39 @@
 			};
 			name = Debug;
 		};
-		4CC974F47E41083D3643203E8DB7C3A8 /* Debug */ = {
+		482371199A6186F0A08DE5F93E5ED4CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52426B41887A9A03EECB3CA815FD826 /* BEMCheckBox.xcconfig */;
+			baseConfigurationReference = 6D316B615A1BFEDC52EC92352356441E /* AWSCognito.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AWSCognito;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4DC719D4403E83197E12FF00FF11DF83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 065716B6AF45415CEEA3DD70803D2D78 /* RealmSwift.xcconfig */;
+			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -9275,59 +9145,27 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BEMCheckBox/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/RealmSwift/RealmSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RealmSwift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BEMCheckBox/BEMCheckBox.modulemap";
+				MODULEMAP_FILE = "Target Support Files/RealmSwift/RealmSwift.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = BEMCheckBox;
+				PRODUCT_NAME = RealmSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		55C9A3DF8DF63DBCB9F0446965436E1A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64835CD38E687B662E9E282473DE983F /* Realm.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Realm/Realm-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Realm/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Realm/Realm.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = Realm;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5724BDC3A93BF9771254CCA810FF7EB0 /* Debug */ = {
+		51CB152739D432BF66D195653D593414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A90F5BEFCFBC2AFAB213C8ED48CC4F95 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -9344,7 +9182,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = SwiftyJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9375,7 +9212,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/RevealingSplashView/RevealingSplashView.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = RevealingSplashView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9393,7 +9229,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Material/ResourceBundle-io.cosmicmind.material.icons-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = io.cosmicmind.material.icons;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9409,7 +9244,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Material/ResourceBundle-io.cosmicmind.material.icons-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = io.cosmicmind.material.icons;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9437,7 +9271,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Material/Material.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Material;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9502,7 +9335,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/R.swift.Library/R.swift.Library.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Rswift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9533,7 +9365,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Timepiece;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9564,7 +9395,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FBSDKLoginKit/FBSDKLoginKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = FBSDKLoginKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9574,14 +9404,42 @@
 			};
 			name = Release;
 		};
-		68345877EEA1CD048C6C60A881BA1651 /* Debug */ = {
+		77BDFBEF3720D0655E7A8C4976503576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64835CD38E687B662E9E282473DE983F /* Realm.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Realm/Realm-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Realm/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Realm/Realm.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Realm;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7C45B2D0A93E31FA48E550774558E98A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 31004EC972EB5397F8739CDC50A0ADD1 /* PINRemoteImage.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -9594,8 +9452,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/PINRemoteImage/PINRemoteImage.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = PINRemoteImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9603,13 +9460,12 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		6932778A7F6D2CF852E3F16929F55AAD /* Release */ = {
+		7CC564B24F0E25AFBD7B8E45E106C022 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 001E25E66ED053B72B1DFAF71193652C /* AsyncDisplayKit.xcconfig */;
+			baseConfigurationReference = 8890769F8377CB1A9E6F1A195B273317 /* Result.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9619,15 +9475,43 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Result/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AsyncDisplayKit;
+				PRODUCT_NAME = Result;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7D680FBE2ED99AA1D1694FB60B57CCD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67740353A7D08CA0C7F426D3906AA8BC /* PINCache.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = PINCache;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9656,70 +9540,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/HMSegmentedControl/HMSegmentedControl.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = HMSegmentedControl;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8049B059E75BB7B5747CFE70A696843F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9FA0AFD33F579F2A4B71956BBB0E30A6 /* AWSCore.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9002E0915FE3CDB621599E283DCA9114 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D316B615A1BFEDC52EC92352356441E /* AWSCognito.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSCognito;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9748,7 +9569,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Dwifft;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9759,36 +9579,34 @@
 			};
 			name = Debug;
 		};
-		9260EA8982A7525E9A26FD0CAD5C63D4 /* Release */ = {
+		938FFBB7AC702C607339A4156CAA7CC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05724A76B3ED070ACE65A9169872175D /* AIRTimer.xcconfig */;
+			baseConfigurationReference = AAA7D9B26BD6E0BCDF6581DB830445F4 /* SDWebImage.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AIRTimer;
+				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SDWebImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		93DE5C901570FA1E9EAD46058FCED648 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -9810,7 +9628,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/YLProgressBar/YLProgressBar.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = YLProgressBar;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9819,6 +9636,35 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		9412939DEBAC1594517FE8811733C314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 001E25E66ED053B72B1DFAF71193652C /* AsyncDisplayKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AsyncDisplayKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		9C521572C2ABD9C57FE0FA852111D046 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -9840,74 +9686,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9C54802C4C056EC46DDD6641438DB2D3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05724A76B3ED070ACE65A9169872175D /* AIRTimer.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AIRTimer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9D71074262CEDCAD4C0CC3A3E1D8350F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0423D354B5D0AE1820A3B42C938E91D /* ReactiveCocoa.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/ReactiveCocoa/ReactiveCocoa-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReactiveCocoa/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReactiveCocoa/ReactiveCocoa.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = ReactiveCocoa;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -9934,7 +9715,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SMSegmentView/SMSegmentView.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = SMSegmentView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9964,7 +9744,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/RateLimit/RateLimit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = RateLimit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -9974,11 +9753,10 @@
 			};
 			name = Release;
 		};
-		ADBBCAD2AD05ADE00FC6C54075122FFC /* Debug */ = {
+		AC35E80C19567CDC6CF09F1E2C17E998 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 065716B6AF45415CEEA3DD70803D2D78 /* RealmSwift.xcconfig */;
+			baseConfigurationReference = 67740353A7D08CA0C7F426D3906AA8BC /* PINCache.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -9988,18 +9766,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RealmSwift/RealmSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RealmSwift/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/RealmSwift/RealmSwift.modulemap";
+				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = RealmSwift;
+				PRODUCT_NAME = PINCache;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -10026,7 +9802,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/WebASDKImageManager/WebASDKImageManager.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = WebASDKImageManager;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10044,7 +9819,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Material/ResourceBundle-io.cosmicmind.material.fonts-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = io.cosmicmind.material.fonts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10072,7 +9846,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Timepiece/Timepiece.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Timepiece;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10081,6 +9854,36 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		B601E66C3A759F06DD13419BE2809B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8890769F8377CB1A9E6F1A195B273317 /* Result.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Result/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Result;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		B823492D50F23DC727C8DA09A1E335A5 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -10102,7 +9905,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/R.swift.Library/R.swift.Library.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Rswift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10132,7 +9934,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FBSDKLoginKit/FBSDKLoginKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = FBSDKLoginKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10142,11 +9943,10 @@
 			};
 			name = Debug;
 		};
-		B8F9F233F2D58BF5BA75858200BEA9A3 /* Debug */ = {
+		BEDBD46DBA287829D383D0C3389A0C9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 001E25E66ED053B72B1DFAF71193652C /* AsyncDisplayKit.xcconfig */;
+			baseConfigurationReference = D52426B41887A9A03EECB3CA815FD826 /* BEMCheckBox.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -10156,15 +9956,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BEMCheckBox/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MODULEMAP_FILE = "Target Support Files/BEMCheckBox/BEMCheckBox.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AsyncDisplayKit;
+				PRODUCT_NAME = BEMCheckBox;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -10193,7 +9992,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = SVProgressHUD;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10223,108 +10021,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/RateLimit/RateLimit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = RateLimit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C244941F699FC79665B3EEA3D7B2F086 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAA7D9B26BD6E0BCDF6581DB830445F4 /* SDWebImage.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SDWebImage/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SDWebImage/SDWebImage.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = SDWebImage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C2B8135B4CB4C4C9FC09E43730520DDA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE50D4CD91B4B42E50A7F90D92FC461F /* Pods-The Courthouse.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-The Courthouse/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-The Courthouse/Pods-The Courthouse.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_The_Courthouse;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C3F523C7AC37A3DAA159451E3F0ACB32 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6A5BC7AB6CB4E0BFDF12A6CB2D5BC8C /* Pods-The Courthouse.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-The Courthouse/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-The Courthouse/Pods-The Courthouse.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_The_Courthouse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -10354,8 +10051,37 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/PMAlertController/PMAlertController.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = PMAlertController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C666894391F6094FBFA9DC56E68B4521 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0423D354B5D0AE1820A3B42C938E91D /* ReactiveCocoa.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ReactiveCocoa/ReactiveCocoa-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReactiveCocoa/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReactiveCocoa/ReactiveCocoa.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ReactiveCocoa;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -10403,14 +10129,42 @@
 			};
 			name = Release;
 		};
-		CA5B2CFE2F27385EC012C0EB82E022F4 /* Release */ = {
+		C9B0EA21C200A7C13763999752D466FD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64835CD38E687B662E9E282473DE983F /* Realm.xcconfig */;
+			baseConfigurationReference = 9FA0AFD33F579F2A4B71956BBB0E30A6 /* AWSCore.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSCore/AWSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSCore/AWSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AWSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CA32F10C9481C0B678B4E08146E31553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64835CD38E687B662E9E282473DE983F /* Realm.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -10423,8 +10177,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Realm/Realm.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Realm;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10432,7 +10185,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		CD7191F92D54D6E2E559C6EE32AD2418 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -10467,6 +10220,93 @@
 			};
 			name = Release;
 		};
+		D080D4756B57D561321A366EBAF27F3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F180356361E5D00097FE6DDE3670ACEA /* AWSAPIGateway.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AWSAPIGateway/AWSAPIGateway-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AWSAPIGateway/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AWSAPIGateway/AWSAPIGateway.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AWSAPIGateway;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D392C27637AC149A7227AB34F3476CE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 001E25E66ED053B72B1DFAF71193652C /* AsyncDisplayKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AsyncDisplayKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AsyncDisplayKit/AsyncDisplayKit.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AsyncDisplayKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D64C002FE097E8F3EB8EB94E248A352F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05724A76B3ED070ACE65A9169872175D /* AIRTimer.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AIRTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		D6DF5C3F93AE639DDC42BAE79DF226C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54683849DFBD5572D2B076C91E1F7070 /* RevealingSplashView.xcconfig */;
@@ -10487,42 +10327,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/RevealingSplashView/RevealingSplashView.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = RevealingSplashView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		DDE6E87E4530BA94333A191F6790978C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D316B615A1BFEDC52EC92352356441E /* AWSCognito.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSCognito/AWSCognito-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSCognito/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSCognito/AWSCognito.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSCognito;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -10549,7 +10357,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = FBSDKCoreKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10567,42 +10374,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/ResourceBundle-PMAlertController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = PMAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		DF983891760730170420CB96D16354CE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F180356361E5D00097FE6DDE3670ACEA /* AWSAPIGateway.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AWSAPIGateway/AWSAPIGateway-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AWSAPIGateway/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AWSAPIGateway/AWSAPIGateway.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = AWSAPIGateway;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -10626,7 +10401,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SMSegmentView/SMSegmentView.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = SMSegmentView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10637,36 +10411,35 @@
 			};
 			name = Debug;
 		};
-		E9861C210B19D1AF5B7AC6423D697138 /* Release */ = {
+		E5793D985420E6F9225599FC1FA8F11F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0423D354B5D0AE1820A3B42C938E91D /* ReactiveCocoa.xcconfig */;
+			baseConfigurationReference = 05724A76B3ED070ACE65A9169872175D /* AIRTimer.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/ReactiveCocoa/ReactiveCocoa-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReactiveCocoa/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AIRTimer/AIRTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AIRTimer/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReactiveCocoa/ReactiveCocoa.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = ReactiveCocoa;
+				MODULEMAP_FILE = "Target Support Files/AIRTimer/AIRTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AIRTimer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		F23D0CEE823907ADA3ADE55283BBC76D /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -10688,39 +10461,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Material/Material.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = Material;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F6066AF6972B668344959866213C321B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D52426B41887A9A03EECB3CA815FD826 /* BEMCheckBox.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BEMCheckBox/BEMCheckBox-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BEMCheckBox/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BEMCheckBox/BEMCheckBox.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = BEMCheckBox;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -10749,7 +10490,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
 				PRODUCT_NAME = SVProgressHUD;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -10759,11 +10499,10 @@
 			};
 			name = Release;
 		};
-		FBBA68750A7EF46D86EBE8A9BEEBC512 /* Release */ = {
+		FD7627774AA1B9F5B8BE71D51EEA9E0D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 065716B6AF45415CEEA3DD70803D2D78 /* RealmSwift.xcconfig */;
+			baseConfigurationReference = A90F5BEFCFBC2AFAB213C8ED48CC4F95 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -10773,46 +10512,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RealmSwift/RealmSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RealmSwift/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/RealmSwift/RealmSwift.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = RealmSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		FD13807CAEEA0ADB850CDF4FE5F075F2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31004EC972EB5397F8739CDC50A0ADD1 /* PINRemoteImage.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/PINRemoteImage/PINRemoteImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PINRemoteImage/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PINRemoteImage/PINRemoteImage.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_BUNDLE_IDENTIFIER}";
-				PRODUCT_NAME = PINRemoteImage;
+				PRODUCT_NAME = SwiftyJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -10827,8 +10534,8 @@
 		001D30561475CE701057A9D9AC6A80BA /* Build configuration list for PBXNativeTarget "SDWebImage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				32E4EEE4B33513823616DCE35C711821 /* Debug */,
-				C244941F699FC79665B3EEA3D7B2F086 /* Release */,
+				938FFBB7AC702C607339A4156CAA7CC3 /* Debug */,
+				02895AA606751CD09C93C44C3F118E22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -10872,8 +10579,8 @@
 		1C3232CE682797D16B33B6092C43D48B /* Build configuration list for PBXNativeTarget "AWSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1223B22E4E6059798C112A4CD49236DB /* Debug */,
-				8049B059E75BB7B5747CFE70A696843F /* Release */,
+				3ECB00004A29C821537BCA75ACF8055F /* Debug */,
+				C9B0EA21C200A7C13763999752D466FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -10881,8 +10588,8 @@
 		25D8160E5ACE36EE3FC1EA5B343836BD /* Build configuration list for PBXNativeTarget "Realm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				55C9A3DF8DF63DBCB9F0446965436E1A /* Debug */,
-				CA5B2CFE2F27385EC012C0EB82E022F4 /* Release */,
+				CA32F10C9481C0B678B4E08146E31553 /* Debug */,
+				77BDFBEF3720D0655E7A8C4976503576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -10917,8 +10624,8 @@
 		4CA7AC64EDC56C9A4E2800D4A6FE52FF /* Build configuration list for PBXNativeTarget "AIRTimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C54802C4C056EC46DDD6641438DB2D3 /* Debug */,
-				9260EA8982A7525E9A26FD0CAD5C63D4 /* Release */,
+				E5793D985420E6F9225599FC1FA8F11F /* Debug */,
+				D64C002FE097E8F3EB8EB94E248A352F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -10935,8 +10642,8 @@
 		572515FC30F28605F2C741468679EF54 /* Build configuration list for PBXNativeTarget "AsyncDisplayKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B8F9F233F2D58BF5BA75858200BEA9A3 /* Debug */,
-				6932778A7F6D2CF852E3F16929F55AAD /* Release */,
+				D392C27637AC149A7227AB34F3476CE1 /* Debug */,
+				9412939DEBAC1594517FE8811733C314 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -10968,15 +10675,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		70912E40D663D2354AFE1695E7EA02E8 /* Build configuration list for PBXNativeTarget "Pods-The Courthouse" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C3F523C7AC37A3DAA159451E3F0ACB32 /* Debug */,
-				C2B8135B4CB4C4C9FC09E43730520DDA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		77FDE346653C4422D0F22E5263DC5E9F /* Build configuration list for PBXNativeTarget "RevealingSplashView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -10989,8 +10687,8 @@
 		7C4DB2377EE4E4BF3892A61079D7D3A1 /* Build configuration list for PBXNativeTarget "ReactiveCocoa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9D71074262CEDCAD4C0CC3A3E1D8350F /* Debug */,
-				E9861C210B19D1AF5B7AC6423D697138 /* Release */,
+				C666894391F6094FBFA9DC56E68B4521 /* Debug */,
+				15B8A9237C41753AC2B4DD5537EF35D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11025,8 +10723,8 @@
 		9E89C38FF223842D7B94132C987F18C0 /* Build configuration list for PBXNativeTarget "RealmSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ADBBCAD2AD05ADE00FC6C54075122FFC /* Debug */,
-				FBBA68750A7EF46D86EBE8A9BEEBC512 /* Release */,
+				4DC719D4403E83197E12FF00FF11DF83 /* Debug */,
+				16059D8893B53B7E2AFB6349EB343C04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11079,8 +10777,8 @@
 		B871E8892E1EF7BDF2CB4906FF9BC811 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5724BDC3A93BF9771254CCA810FF7EB0 /* Debug */,
-				0A98122E50CD5B3ADB63386FAC0CF679 /* Release */,
+				51CB152739D432BF66D195653D593414 /* Debug */,
+				FD7627774AA1B9F5B8BE71D51EEA9E0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11088,8 +10786,8 @@
 		C77F1BCB0CDCE606916D8441D08A782E /* Build configuration list for PBXNativeTarget "PINCache" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0AE3D9DA2442B0DD5CED0D099FD19464 /* Debug */,
-				407D2E2F0296B626BE9CDA1D59836FD6 /* Release */,
+				AC35E80C19567CDC6CF09F1E2C17E998 /* Debug */,
+				7D680FBE2ED99AA1D1694FB60B57CCD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11097,8 +10795,17 @@
 		C780707EB2908F5E58470E8E88888FE6 /* Build configuration list for PBXNativeTarget "AWSCognito" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DDE6E87E4530BA94333A191F6790978C /* Debug */,
-				9002E0915FE3CDB621599E283DCA9114 /* Release */,
+				2495F8A601545D7549AB13DD5D6C6B82 /* Debug */,
+				482371199A6186F0A08DE5F93E5ED4CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD5E3AAFA81C677A9DDB783A818379F1 /* Build configuration list for PBXNativeTarget "Pods-The Courthouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17329A8B4346C83DBE91C37214FBBC42 /* Debug */,
+				044B2E0B93BE23B11DC1710FA1698FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11106,8 +10813,8 @@
 		E987DCB1930AEA4C03394D637B31272B /* Build configuration list for PBXNativeTarget "Result" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				39A46BDEA046230CF21058DB7AADE540 /* Debug */,
-				44C1E76B3E8FD7469678D5119CB9FA58 /* Release */,
+				B601E66C3A759F06DD13419BE2809B82 /* Debug */,
+				7CC564B24F0E25AFBD7B8E45E106C022 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11124,8 +10831,8 @@
 		F21EF731291BE96F2B065C63E0A72195 /* Build configuration list for PBXNativeTarget "AWSAPIGateway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23B7733282349BAD12721CD3A1795875 /* Debug */,
-				DF983891760730170420CB96D16354CE /* Release */,
+				D080D4756B57D561321A366EBAF27F3F /* Debug */,
+				284700F62A1B505FC7002BC58360DC41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11133,8 +10840,8 @@
 		F43DF450DAB678D7927B8943ED050C60 /* Build configuration list for PBXNativeTarget "BEMCheckBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CC974F47E41083D3643203E8DB7C3A8 /* Debug */,
-				F6066AF6972B668344959866213C321B /* Release */,
+				BEDBD46DBA287829D383D0C3389A0C9C /* Debug */,
+				0C3127E2582EE11B855FFE989A893E99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -11142,8 +10849,8 @@
 		FA45803743E246B98B10708EEB99544E /* Build configuration list for PBXNativeTarget "PINRemoteImage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				68345877EEA1CD048C6C60A881BA1651 /* Debug */,
-				FD13807CAEEA0ADB850CDF4FE5F075F2 /* Release */,
+				1FA07A5EA8FC6CDA6836851B734F4A4D /* Debug */,
+				7C45B2D0A93E31FA48E550774558E98A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

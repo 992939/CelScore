@@ -12,18 +12,17 @@ plugin 'cocoapods-keys', {
 def shared_pods
     pod 'ReactiveCocoa', '~> 4.1'
     pod 'RealmSwift', '~> 1.0'
+end
+
+target 'CelScore' do
+    shared_pods
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
-    pod 'PINCache', '~> 2.2.2'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'AsyncDisplayKit', '~> 1.9.7.2'
     pod 'AWSCognito', '2.4.3'
     pod 'AWSAPIGateway', '~> 2.4.3'
     pod 'SDWebImage', '~>3.8.1'
-end
-
-target 'CelScore' do
-    shared_pods
     pod 'Material', '~> 1.41.8'
     pod 'R.swift', '~> 2.3'
     pod 'WebASDKImageManager', '~> 1.1'
@@ -42,15 +41,15 @@ target 'CelScore' do
     pod 'Dwifft', '~> 0.3.1'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
+
 end
 
 target 'CelScoreTests' do
-    pod 'ReactiveCocoa', '~> 4.1'
-    pod 'RealmSwift', '~> 1.0'
+    shared_pods
 end
 
 target 'The Courthouse' do
-    shared_pods
+    
 end
 
 
