@@ -158,6 +158,18 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
             .on(next: { message in TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions())})
             .start()
+        
+        SettingsViewModel().calculateUserAverageCelScoreSignal()
+            .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
+                return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
+            .on(next: { first in let firstTime = first as! Bool
+                if firstTime {
+                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
+                }})
+            .start()
     }
     
     func updateAction() {

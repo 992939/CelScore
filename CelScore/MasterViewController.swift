@@ -51,11 +51,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.delegate = self
         self.sideNavigationController?.enabled = false
         self.sideNavigationController?.animationDuration = 0.4
+        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
         
         MaterialAnimation.delay(0.5) {
             if self.socialButton.hidden == true {
@@ -63,19 +63,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
                 }
             } else { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
-            SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
-                .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
-                    return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
-                .on(next: { first in let firstTime = first as! Bool
-                    if firstTime {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
-                    }})
-                .start()
         }
-        
+    
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
