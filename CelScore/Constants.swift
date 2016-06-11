@@ -18,7 +18,7 @@ struct Constants {
     static let kAPIKey: String = CelscoreKeys().kAPIKey()
     static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
     
-    static let kTrollingWarning: CGFloat = 2.0
+    static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5
     static let kOneDay: NSTimeInterval = 86400.0
     static let kUpdateRatings: NSTimeInterval = 30.0
