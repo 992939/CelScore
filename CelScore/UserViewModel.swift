@@ -33,7 +33,7 @@ struct UserViewModel {
                         }
                         return task
                     }
-                    print("login result: \(task.result)")
+                    //print("login result: \(task.result)")
                     observer.sendNext(task)
                     observer.sendCompleted()
                     return task
@@ -127,7 +127,7 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                print("update cognito result: \(task.result)")
+                //print("update cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -217,7 +217,7 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                print("from cognito result: \(task.result)")
+                //print("from cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
