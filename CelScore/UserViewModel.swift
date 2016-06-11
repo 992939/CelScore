@@ -22,27 +22,28 @@ struct UserViewModel {
     func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                return nil })
-            
             switch loginType {
             case .Facebook:
-                let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
-                
-                credentialsProvider.credentials().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                    guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
+                Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                    guard task.error == nil else {
+                        observer.sendFailed(task.error!)
+                        if task.error!.code == 8 || task.error!.code == 10 {
+                            Constants.kCredentialsProvider.clearKeychain()
+                        }
+                        return task
+                    }
+                    print("login result: \(task.result)")
                     observer.sendNext(task)
                     observer.sendCompleted()
                     return task
                 }
-                
-                //Constants.kCredentialsProvider.logins = [AWSCognitoLoginProviderKey.Facebook.rawValue: token] as [NSObject: AnyObject]
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
                     guard session != nil else { print("error: \(error!.localizedDescription)"); return }
                     let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
-                    //Constants.kCredentialsProvider.logins = ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]
+                    let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
+                    AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
                     
                     credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else { observer.sendFailed(task.error!); return task }
@@ -59,7 +60,6 @@ struct UserViewModel {
     func logoutSignal() -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            
             realm.beginWrite()
             let settings = realm.objects(SettingsModel)
             realm.delete(settings)
@@ -127,6 +127,7 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                print("update cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -199,10 +200,10 @@ struct UserViewModel {
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
-                    if task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
+                    if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                     observer.sendFailed(task.error!)
                     return task }
-                dataset.clear()
+                if case .UserRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
                 observer.sendNext(object)
                 observer.sendCompleted()
@@ -213,8 +214,10 @@ struct UserViewModel {
     
     func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
+            
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                print("from cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()

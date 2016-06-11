@@ -52,6 +52,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
+        AWSLogger.defaultLogger().logLevel = .Error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
@@ -67,7 +68,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kDarkShade
         self.window!.makeKeyAndVisible()
-        Fabric.with([Twitter.self, Crashlytics.self])   //[Twitter.self, AWSCognito.self, Crashlytics.self]
+        Fabric.with([Twitter.self, Crashlytics.self])   //TODO: [Twitter.self, AWSCognito.self, Crashlytics.self]
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
