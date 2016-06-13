@@ -72,19 +72,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func updateUserActivityState(activity: NSUserActivity) {}
-    
-    func showingButtons() {
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first!.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(Constants.kPadding + 100)
-        ]))
-
-        self.voteButton.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(-(Constants.kFabDiameter + 100))
-        ]))
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +128,25 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.showingButtons()
+    }
+    
+    func showingButtons() {
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first!.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(Constants.kPadding + 100)
+            ]))
+        
+        self.voteButton.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(-(Constants.kFabDiameter + 100))
+            ]))
+        
+        for subview in self.socialButton.menu.views!.enumerate() {
+            if subview.element.tag == 1 || subview.element.tag == 2 {
+                subview.element.frame.offsetInPlace(dx: Constants.kPadding + 100, dy: 0)
+            }
+        }
     }
     
     func backAction() {
