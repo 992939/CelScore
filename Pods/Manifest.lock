@@ -1,5 +1,6 @@
 PODS:
   - AIRTimer (1.0.2)
+  - Armchair (0.1.1)
   - AsyncDisplayKit (1.9.80):
     - AsyncDisplayKit/PINRemoteImage (= 1.9.80)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9.80)
@@ -77,6 +78,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
+  - Armchair (~> 0.1)
   - AsyncDisplayKit (~> 1.9.80)
   - AWSAPIGateway (~> 2.4.3)
   - AWSCognito (~> 2.4.3)
@@ -112,6 +114,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
+  Armchair: 276f0dadba704b562870613301bdf7b595a29315
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
   AWSAPIGateway: 5e588cb28216cc3f275e67a7a1e7aeb61d88e75e
   AWSCognito: 9a83fcecccd8b9efaa82fec7722ee2a4c723b0fe
@@ -147,6 +150,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 9e8b2e840165005ea17f8da1383703b52c9c3020
+PODFILE CHECKSUM: f5813377c2f78db161b8492f15e6ec0338f4a68e
 
 COCOAPODS: 1.0.1
