@@ -107,7 +107,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight - 70), buttonColor: Constants.kDarkGreenShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kDarkGreenShade)
         self.view.backgroundColor = Constants.kDarkShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
@@ -192,9 +192,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
                     alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { () in
                         SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
+                        self.showingSocialButton()
                     }))
                     self.presentViewController(alertVC, animated: true, completion: nil)
-                }})
+                }else { self.showingSocialButton() }
+            })
             .start()
     }
     
@@ -218,9 +220,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
         }
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.animate(MaterialAnimation.rotate(rotation: 1))
+        first?.animate(MaterialAnimation.rotate(rotation: 5))
         first?.setImage(image, forState: .Normal)
         first?.setImage(image, forState: .Highlighted)
+    }
+    
+    func showingSocialButton() {
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first!.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 5),
+            MaterialAnimation.translateY(-70)
+        ]))
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }

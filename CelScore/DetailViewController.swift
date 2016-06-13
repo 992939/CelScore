@@ -72,6 +72,19 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: Methods
     override func prefersStatusBarHidden() -> Bool { return true }
     override func updateUserActivityState(activity: NSUserActivity) {}
+    
+    func showingButtons() {
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first!.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(Constants.kPadding + 100)
+        ]))
+
+        self.voteButton.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(-(Constants.kFabDiameter + 100))
+        ]))
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +96,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kPadding, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarRatingShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarRatingShade)
         
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
@@ -123,6 +136,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kDarkShade
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showingButtons()
     }
     
     func backAction() {
@@ -407,7 +425,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func setUpVoteButton() {
         let diameter: CGFloat = Constants.kFabDiameter
-        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - diameter, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
+        self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseAnimation = .None
