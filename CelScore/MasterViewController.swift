@@ -63,7 +63,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
                 }
             } else {
-                if self.celebrityTableView.indexPathForSelectedRow != nil { self.showingSocialButton() }
+                if self.celebrityTableView.indexPathForSelectedRow != nil { self.movingSocialButton(onScreen: true) }
                 SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }
             }
         }
@@ -195,10 +195,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
                     alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { () in
                         SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
-                        self.showingSocialButton()
+                        self.movingSocialButton(onScreen: true)
                     }))
                     self.presentViewController(alertVC, animated: true, completion: nil)
-                }else { self.showingSocialButton() }
+                }else { self.movingSocialButton(onScreen: true) }
             })
             .start()
     }
@@ -228,19 +228,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         first?.setImage(image, forState: .Highlighted)
     }
     
-    func showingSocialButton() {
+    func movingSocialButton(onScreen onScreen: Bool) {
+        let y: CGFloat = onScreen ? -70 : 70
+        self.socialButton.menu.close()
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         first!.animate(MaterialAnimation.animationGroup([
             MaterialAnimation.rotate(rotation: 5),
-            MaterialAnimation.translateY(-70)
-        ]))
-    }
-    
-    func hidingSocialButton() {
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first!.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 5),
-            MaterialAnimation.translateY(70)
+            MaterialAnimation.translateY(y)
         ]))
     }
     
@@ -275,7 +269,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.hidingSocialButton()
+        self.movingSocialButton(onScreen: false)
         let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
@@ -320,7 +314,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                MaterialAnimation.delay(1.0) { self.showingSocialButton() }
+                MaterialAnimation.delay(1.0) { self.movingSocialButton(onScreen: true) }
             })
             .start()
     }
