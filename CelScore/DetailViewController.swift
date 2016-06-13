@@ -149,9 +149,25 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         }
     }
     
+    func hideButtons() {
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first!.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(-(Constants.kPadding + 100))
+            ]))
+        
+        self.voteButton.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 3),
+            MaterialAnimation.translateX(Constants.kFabDiameter + 100)
+            ]))
+    }
+    
     func backAction() {
-        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithCompleted { _ in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        self.hideButtons()
+        MaterialAnimation.delay(0.15) {
+            RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithCompleted { _ in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
     }
     

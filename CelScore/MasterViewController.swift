@@ -57,12 +57,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        MaterialAnimation.delay(0.5) {
+        MaterialAnimation.delay(0.3) {
             if self.socialButton.hidden == true {
                 if let index = self.celebrityTableView.indexPathForSelectedRow {
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
                 }
-            } else { SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }}
+            } else {
+                if self.celebrityTableView.indexPathForSelectedRow != nil { self.showingSocialButton() }
+                SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }
+            }
         }
     
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
@@ -233,6 +236,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         ]))
     }
     
+    func hidingSocialButton() {
+        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        first!.animate(MaterialAnimation.animationGroup([
+            MaterialAnimation.rotate(rotation: 5),
+            MaterialAnimation.translateY(70)
+        ]))
+    }
+    
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
     func socialRefresh() {
@@ -262,6 +273,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.hidingSocialButton()
         let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
