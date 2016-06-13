@@ -1,11 +1,13 @@
 PODS:
   - AIRTimer (1.0.2)
-  - AsyncDisplayKit (1.9.7.2):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.7.2)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.7.2)
-  - AsyncDisplayKit/PINRemoteImage (1.9.7.2):
+  - AsyncDisplayKit (1.9.80):
+    - AsyncDisplayKit/PINRemoteImage (= 1.9.80)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.80)
+  - AsyncDisplayKit/Core (1.9.80):
     - AsyncDisplayKit/ASDealloc2MainObject
-    - PINRemoteImage/iOS (>= 2.1.2)
+  - AsyncDisplayKit/PINRemoteImage (1.9.80):
+    - AsyncDisplayKit/Core
+    - PINRemoteImage/iOS (>= 3.0.0-beta.2)
   - AWSAPIGateway (2.4.3):
     - AWSCore (= 2.4.3)
   - AWSCognito (2.4.3):
@@ -30,9 +32,9 @@ PODS:
   - Keys (1.0.0)
   - Material (1.41.8)
   - PINCache (2.2.2)
-  - PINRemoteImage/Core (2.1.4):
+  - PINRemoteImage/Core (3.0.0-beta.2):
     - PINCache (>= 2.1)
-  - PINRemoteImage/iOS (2.1.4):
+  - PINRemoteImage/iOS (3.0.0-beta.2):
     - PINRemoteImage/Core
   - PMAlertController (1.0.4)
   - R.swift (2.3.0):
@@ -75,7 +77,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
-  - AsyncDisplayKit (~> 1.9.7.2)
+  - AsyncDisplayKit (~> 1.9.80)
   - AWSAPIGateway (~> 2.4.3)
   - AWSCognito (= 2.4.3)
   - BEMCheckBox (~> 1.2)
@@ -110,7 +112,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  AsyncDisplayKit: 1701c47761a3e274b82cc0c77e6294cfa69612f6
+  AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
   AWSAPIGateway: 5e588cb28216cc3f275e67a7a1e7aeb61d88e75e
   AWSCognito: 9a83fcecccd8b9efaa82fec7722ee2a4c723b0fe
   AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
@@ -125,7 +127,7 @@ SPEC CHECKSUMS:
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: df01578ac30c9b5aa0b329ce63a2cd51d2cfd158
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
-  PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
+  PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
   PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
   R.swift: 38b2191a603c3d491a09baddfb4ccc7aa9be4d9d
   R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
@@ -145,6 +147,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 542b4626f9e01dbfa8ebcacb0b3322927d3ade63
+PODFILE CHECKSUM: a542ba0acc1cee4c8311261557a1e6b3fd00bc84
 
 COCOAPODS: 1.0.1
