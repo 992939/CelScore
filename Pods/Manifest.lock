@@ -79,7 +79,7 @@ DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
   - AsyncDisplayKit (~> 1.9.80)
   - AWSAPIGateway (~> 2.4.3)
-  - AWSCognito (= 2.4.3)
+  - AWSCognito (~> 2.4.3)
   - BEMCheckBox (~> 1.2)
   - Crashlytics (~> 3.7.0)
   - Dwifft (~> 0.3.1)
@@ -147,6 +147,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: a542ba0acc1cee4c8311261557a1e6b3fd00bc84
+PODFILE CHECKSUM: 9e8b2e840165005ea17f8da1383703b52c9c3020
 
 COCOAPODS: 1.0.1

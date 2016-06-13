@@ -244,7 +244,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.rows = []
         self.changeList()
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in print("refresh next"); self.hideSocialButton(self.socialButton, controller: self) })
+            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
             .start()
     }
     

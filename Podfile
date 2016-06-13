@@ -21,7 +21,7 @@ target 'CelScore' do
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'BEMCheckBox', '~> 1.2'
     pod 'AsyncDisplayKit', '~> 1.9.80'
-    pod 'AWSCognito', '2.4.3'
+    pod 'AWSCognito', '~> 2.4.3'
     pod 'AWSAPIGateway', '~> 2.4.3'
     pod 'SDWebImage', '~>3.8.1'
     pod 'Material', '~> 1.41.8'
@@ -48,7 +48,7 @@ end
 target 'CelScoreTests' do
     shared_pods
     pod 'AsyncDisplayKit', '~> 1.9.80'
-    pod 'AWSCognito', '2.4.3'
+    pod 'AWSCognito', '~> 2.4.3'
     pod 'AWSAPIGateway', '~> 2.4.3'
     pod 'BEMCheckBox', '~> 1.2'
 end

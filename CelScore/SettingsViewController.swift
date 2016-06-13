@@ -15,7 +15,7 @@ import PMAlertController
 import ReactiveCocoa
 
 
-final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
+final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
     
     //MARK: Property
     private let picker: UIPickerView
@@ -31,7 +31,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         self.fact1Bar = YLProgressBar()
         self.fact2Bar = YLProgressBar()
         self.fact3Bar = YLProgressBar()
-        super.init(node: ASDisplayNode())
+        super.init(nibName: nil, bundle: nil)
     }
     
     //MARK: Method
@@ -67,19 +67,19 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoView.addSubview(logoCircle)
         logoView.backgroundColor = Constants.kMainShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
-        self.node.addSubnode(logoNode)
+        self.view.addSubnode(logoNode)
 
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
             let consensusBarNode = self.setupProgressBarNode(title: "Universal Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
-            self.node.addSubnode(consensusBarNode) })
+            self.view.addSubnode(consensusBarNode) })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal()
             .on(next: { value in
                 let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
-                self.node.addSubnode(publicOpinionBarNode) })
+                self.view.addSubnode(publicOpinionBarNode) })
             .filter({ (value: CGFloat) -> Bool in return value == 100.0 })
             .promoteErrors(NSError)
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -96,7 +96,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
             let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
-            self.node.addSubnode(positiveBarNode)
+            self.view.addSubnode(positiveBarNode)
         })
         
         //PickerView
@@ -108,7 +108,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         pickerView.addSubview(pickerLabel)
         pickerView.addSubview(self.picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
-        self.node.addSubnode(pickerNode)
+        self.view.addSubnode(pickerNode)
         
         //Check Boxes
         let publicNodeHeight = logoView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
@@ -116,13 +116,13 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
                 let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
-                self.node.addSubnode(publicServiceNode)
+                self.view.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
                 let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
-                self.node.addSubnode(notificationNode)
+                self.view.addSubnode(notificationNode)
             })
         
         //Logout
@@ -136,7 +136,7 @@ final class SettingsViewController: ASViewController, UIPickerViewDelegate, UIPi
         logoutView.addSubview(logoutButton)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
-        self.node.addSubnode(logoutNode)
+        self.view.addSubnode(logoutNode)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.sideNavigationController!.depth = .Depth1
