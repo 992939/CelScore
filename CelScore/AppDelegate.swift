@@ -18,6 +18,7 @@ import Crashlytics
 import AIRTimer
 import ReactiveCocoa
 import FBSDKCoreKit
+import Armchair
 
 
 @UIApplicationMain
@@ -29,10 +30,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        //BuddyBuild
         BuddyBuildSDK.setup()
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-
+        //ArmChair
+        Armchair.appID("783417076")
+       
         //Realm
         let config = Realm.Configuration(
             schemaVersion: 20,
