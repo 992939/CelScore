@@ -247,9 +247,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
     func socialRefresh() {
+        print("REFRESH")
         self.diffCalculator.rows = []
         self.changeList()
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.hideSocialButton(self.socialButton, controller: self) }
+        SettingsViewModel().loggedInAsSignal()
+            .on(next: { _ in print("NEXT"); self.hideSocialButton(self.socialButton, controller: self) })
+            .on(failed: { _ in print("FAILED"); self.showingSocialButton()  })
+            .start()
     }
     
     func sendNetworkAlert() {
