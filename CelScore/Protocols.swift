@@ -70,7 +70,7 @@ extension Sociable {
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
+            })
             .on(failed: { _ in self.dismissHUD() })
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
@@ -89,6 +89,7 @@ extension Sociable {
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
+            .map({ _ in self.socialRefresh() })
             .start()
     }
     

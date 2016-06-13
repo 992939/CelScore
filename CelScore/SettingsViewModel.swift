@@ -94,6 +94,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel).first ?? SettingsModel()
+            print("loggedIn \(model.userName)")
             guard model.userName.characters.count > 0 else { observer.sendFailed(.NoUser); return }
             observer.sendNext(model.userName)
             observer.sendCompleted()

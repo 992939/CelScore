@@ -247,12 +247,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
     
     func socialRefresh() {
-        print("REFRESH")
         self.diffCalculator.rows = []
         self.changeList()
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in print("NEXT"); self.hideSocialButton(self.socialButton, controller: self) })
-            .on(failed: { _ in print("FAILED"); self.showingSocialButton()  })
+            .on(next: { _ in print("refresh next"); self.hideSocialButton(self.socialButton, controller: self) })
             .start()
     }
     
@@ -316,8 +314,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.sideNavigationController?.enabled = false
         self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
-            .on(failed: { _ in self.diffCalculator.rows = []; self.changeList()  })
+            .on(next: { _ in
+                self.hideSocialButton(self.socialButton, controller: self)
+            })
+            .on(failed: { _ in
+                self.diffCalculator.rows = []
+                self.changeList()
+                MaterialAnimation.delay(1.0) { self.showingSocialButton() }
+            })
             .start()
     }
     

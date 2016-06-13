@@ -33,7 +33,6 @@ struct UserViewModel {
                         }
                         return task
                     }
-                    //print("login result: \(task.result)")
                     observer.sendNext(task)
                     observer.sendCompleted()
                     return task
