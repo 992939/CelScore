@@ -1,6 +1,6 @@
 PODS:
   - AIRTimer (1.0.2)
-  - Armchair (0.1.1)
+  - Armchair (0.1.2)
   - AsyncDisplayKit (1.9.80):
     - AsyncDisplayKit/PINRemoteImage (= 1.9.80)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9.80)
@@ -114,7 +114,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  Armchair: 276f0dadba704b562870613301bdf7b595a29315
+  Armchair: 10f49453001a25036e1dc8e74e4f1b699add562c
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
   AWSAPIGateway: 5e588cb28216cc3f275e67a7a1e7aeb61d88e75e
   AWSCognito: 9a83fcecccd8b9efaa82fec7722ee2a4c723b0fe

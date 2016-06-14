@@ -16,7 +16,6 @@ import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
-import Armchair
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {

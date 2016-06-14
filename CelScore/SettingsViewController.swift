@@ -13,7 +13,6 @@ import BEMCheckBox
 import AIRTimer
 import PMAlertController
 import ReactiveCocoa
-import Armchair
 
 
 final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
