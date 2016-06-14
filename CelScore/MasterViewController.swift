@@ -16,6 +16,7 @@ import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
+import Armchair
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable {
@@ -193,10 +194,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(next: { first in let firstTime = first as! Bool
                 if firstTime {
                     let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
-                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { () in
+                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
+                        self.dismissViewControllerAnimated(true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
                         self.movingSocialButton(onScreen: true)
                     }))
+                    
+                    alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+                    alertVC.view.opaque = false
                     self.presentViewController(alertVC, animated: true, completion: nil)
                 }else { self.movingSocialButton(onScreen: true) }
             })
@@ -250,8 +255,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func sendNetworkAlert() {
         let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in self.dismissHUD() }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in self.dismissHUD() }))
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissHUD(); self.dismissViewControllerAnimated(true, completion: nil) }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in self.dismissHUD(); self.dismissViewControllerAnimated(true, completion: nil) }))
+        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+        alertVC.view.opaque = false
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     

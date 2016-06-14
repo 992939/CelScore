@@ -68,7 +68,7 @@ enum OverlayInfo: Int {
         case .FirstConsensus: return "\"A genuine leader is not a searcher for consensus but a molder of consensus.\"\n- Martin Luther King Jr.\n\nThe consensus will regenerate after each one of your votes."
         case .FirstPublic: return "\"With public sentiment, nothing can fail.\"\n- Abraham Lincoln\n\nYou can now add your voice to the public debate by long pressing on a star."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive votes in the courthouse section."
-        case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour realm is automatically saved."
+        case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour selection is automatically saved."
         case .FirstCompleted: return "You've cast your votes in every realm of our star-studded constellation!\n\nThank you for voting and for building the consensus."
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."

@@ -309,8 +309,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func sendNetworkAlert() {
         self.dismissHUD()
         let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { () in  }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { () in }))
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
+        
+        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+        alertVC.view.opaque = false
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     

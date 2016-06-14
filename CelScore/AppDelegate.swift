@@ -37,6 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ArmChair
         Armchair.appID("783417076")
+        Armchair.significantEventsUntilPrompt(2)
        
         //Realm
         let config = Realm.Configuration(

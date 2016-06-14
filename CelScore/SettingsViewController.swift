@@ -13,6 +13,7 @@ import BEMCheckBox
 import AIRTimer
 import PMAlertController
 import ReactiveCocoa
+import Armchair
 
 
 final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
@@ -151,13 +152,16 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func logout() {
         let alertVC = PMAlertController(title: "Warning", description: "Your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_green_big()!, style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: nil))
-        alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { () in
+        alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) } ))
+        alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { _ in
+            self.dismissViewControllerAnimated(true, completion: nil)
             UserViewModel().logoutSignal().startWithNext({ _ in
                 MaterialAnimation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
-                })
+            })
         }))
+        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+        alertVC.view.opaque = false
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     

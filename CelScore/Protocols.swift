@@ -12,6 +12,7 @@ import SVProgressHUD
 import TwitterKit
 import FBSDKLoginKit
 import ReactiveCocoa
+import Armchair
 
 
 protocol DetailSubViewable {
