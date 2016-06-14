@@ -364,9 +364,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         navBar.frame = Constants.kNavigationBarRect
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
+        navBar.grid.contentInset.bottom = 2 * Constants.kPadding
         navBar.backgroundColor = Constants.kMainShade
         let celscoreImageView = UIImageView(image: R.image.score_white()!)
-        celscoreImageView.frame = CGRect(x: navBar.width/2, y: navBar.top/2, width: 25, height: 25)
+        celscoreImageView.frame = CGRect(x: navBar.width/2 - 3, y: navBar.top/2 + 2.5, width: 25, height: 25)
         navBar.addSubview(celscoreImageView)
         return navBar
     }
