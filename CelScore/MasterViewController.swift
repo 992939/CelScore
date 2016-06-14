@@ -61,7 +61,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         MaterialAnimation.delay(0.3) {
             if self.socialButton.hidden == true {
                 if let index = self.celebrityTableView.indexPathForSelectedRow {
-                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .None)
+                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
                 }
             } else {
                 if self.celebrityTableView.indexPathForSelectedRow != nil { self.movingSocialButton(onScreen: true) }
