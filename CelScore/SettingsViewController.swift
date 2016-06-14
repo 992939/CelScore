@@ -140,7 +140,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(logoutNode)
         
         self.view.backgroundColor = Constants.kDarkShade
-        self.sideNavigationController!.depth = .Depth1
+        self.navigationDrawerController!.depth = .Depth1
     }
     
     //MARK: Methods
@@ -157,7 +157,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.dismissViewControllerAnimated(true, completion: nil)
             UserViewModel().logoutSignal().startWithNext({ _ in
                 MaterialAnimation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
-                TAOverlay.setCompletionBlock({ _ in self.sideNavigationController!.closeLeftView() })
+                TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
             })
         }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)

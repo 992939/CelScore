@@ -19,7 +19,7 @@ import FBSDKCoreKit
 import Armchair
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, SideNavigationControllerDelegate, Sociable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
     
     //MARK: Properties
     private let segmentedControl: HMSegmentedControl
@@ -49,9 +49,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.sideNavigationController?.delegate = self
-        self.sideNavigationController?.enabled = false
-        self.sideNavigationController?.animationDuration = 0.4
+        self.navigationDrawerController?.delegate = self
+        self.navigationDrawerController?.enabled = false
+        self.navigationDrawerController?.animationDuration = 0.4
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
     }
     
@@ -117,7 +117,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
-        MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
@@ -151,9 +151,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal()
             .observeOn(UIScheduler())
             .on(next: { _ in
-                self.sideNavigationController?.enabled = true
-                self.sideNavigationController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
-                self.sideNavigationController!.openLeftView() })
+                self.navigationDrawerController?.enabled = true
+                self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
+                self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
                 TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: OverlayInfo.MenuAccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() }) })
@@ -311,13 +311,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: SideNavigationControllerDelegate
-    func sideNavigationDidClose(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
-        self.sideNavigationController?.enabled = false
+    func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: SideNavigationPosition) {
+        self.navigationDrawerController?.enabled = false
         self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in
-                self.hideSocialButton(self.socialButton, controller: self)
-            })
+            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
@@ -326,8 +324,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func sideNavigationWillOpen(sideNavigationController: SideNavigationController, position: SideNavigationPosition) {
-        self.sideNavigationController!.leftViewController?.viewDidAppear(true)
+    func navigationDrawerWillOpen(navigationDrawerController: NavigationDrawerController, position: SideNavigationPosition) {
+        self.navigationDrawerController!.leftViewController?.viewDidAppear(true)
     }
     
     //MARK: UISearchBarDelegate
@@ -342,13 +340,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) { searchBar.resignFirstResponder() }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) { searchBar.resignFirstResponder() }
     
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> Toolbar {

@@ -24,7 +24,7 @@ target 'CelScore' do
     pod 'AWSCognito', '~> 2.4.3'
     pod 'AWSAPIGateway', '~> 2.4.3'
     pod 'SDWebImage', '~>3.8.1'
-    pod 'Material', '~> 1.41.8'
+    pod 'Material', '1.42.1'
     pod 'R.swift', '~> 2.3'
     pod 'WebASDKImageManager', '~> 1.1'
     pod 'FBSDKLoginKit', '~> 4.12'

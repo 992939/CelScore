@@ -54,9 +54,11 @@ public class NavigationBar : UINavigationBar {
 	/// NavigationBarStyle value.
 	public var navigationBarStyle: NavigationBarStyle = .Default
 	
+	internal var animating: Bool = false
+	
 	/// Will render the view.
 	public var willRenderView: Bool {
-		return 0 < width
+		return 0 < width && 0 < height
 	}
 	
 	/// A preset wrapper around contentInset.
@@ -288,14 +290,14 @@ public class NavigationBar : UINavigationBar {
 	public override func intrinsicContentSize() -> CGSize {
 		switch navigationBarStyle {
 		case .Tiny:
-			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 32)
+			return CGSizeMake(width ?? MaterialDevice.width, 32)
 		case .Default:
-			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 44)
+			return CGSizeMake(width ?? MaterialDevice.width, 44)
 		case .Medium:
-			return CGSizeMake(superview?.bounds.width ?? MaterialDevice.width, 56)
+			return CGSizeMake(width ?? MaterialDevice.width, 56)
 		}
 	}
-
+	
 	public override func sizeThatFits(size: CGSize) -> CGSize {
 		return intrinsicContentSize()
 	}
@@ -329,7 +331,7 @@ public class NavigationBar : UINavigationBar {
 					if let g: Int = Int(width / gridFactor) {
 						let columns: Int = g + 1
 						
-						titleView.frame.origin = CGPointZero
+						titleView.frame.origin = CGPoint.zero
 						titleView.frame.size = intrinsicContentSize()
 						titleView.grid.views = []
 						titleView.grid.axis.columns = columns
@@ -352,7 +354,7 @@ public class NavigationBar : UINavigationBar {
 								titleView.grid.views?.append(c)
 							}
 						}
-	
+						
 						titleView.addSubview(contentView)
 						titleView.grid.views?.append(contentView)
 						
@@ -372,7 +374,7 @@ public class NavigationBar : UINavigationBar {
 								titleView.grid.views?.append(c)
 							}
 						}
-	
+						
 						titleView.grid.contentInset = contentInset
 						titleView.grid.spacing = spacing
 						titleView.grid.reloadLayout()
@@ -423,7 +425,6 @@ public class NavigationBar : UINavigationBar {
 	when subclassing.
 	*/
 	public func prepareView() {
-		barStyle = .Black
 		translucent = false
 		depth = .Depth1
 		spacingPreset = .Spacing1
@@ -433,6 +434,7 @@ public class NavigationBar : UINavigationBar {
 		let image: UIImage? = UIImage.imageWithColor(MaterialColor.clear, size: CGSizeMake(1, 1))
 		shadowImage = image
 		setBackgroundImage(image, forBarMetrics: .Default)
+		backgroundColor = MaterialColor.white
 	}
 	
 	/**

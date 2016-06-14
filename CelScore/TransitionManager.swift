@@ -20,7 +20,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
         let offScreenRight = CGAffineTransformMakeTranslation(container!.frame.width, 0)
         let offScreenLeft = CGAffineTransformMakeTranslation(-container!.frame.width, 0)
     
-        let masterVC = ((presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! SideNavigationController).rootViewController as! MasterViewController
+        let masterVC = ((presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! NavigationDrawerController).rootViewController as! MasterViewController
         let detailVC = (presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!) as! DetailViewController
         
         let selectedRow = NSIndexPath(forRow: indexedCell, inSection: 0)
@@ -39,7 +39,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
             celebSnapshot = detailVC.profilePicNode.view.snapshotViewAfterScreenUpdates(false)
             celebSnapshot.frame = container!.convertRect(detailVC.profilePicNode.view.frame, fromView: detailVC.view)
         }
-        let topVC = (presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! SideNavigationController
+        let topVC = (presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!) as! NavigationDrawerController
         
         container!.addSubview(detailVC.view)
         container!.addSubview(topVC.view)

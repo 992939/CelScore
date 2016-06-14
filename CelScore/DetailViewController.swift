@@ -116,7 +116,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton)
-        MaterialLayout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.view.addSubview(self.voteButton)
         self.view.addSubview(self.profilePicNode.view)
         self.view.addSubview(self.infoVC.view)
