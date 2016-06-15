@@ -126,7 +126,6 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                //print("update cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -189,7 +188,6 @@ struct UserViewModel {
                 dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
                 dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
                 dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
-                dataset.setString(String(settings.isFirstNegative), forKey: "isFirstNegative")
                 dataset.setString(String(settings.isFirstCompleted), forKey: "isFirstCompleted")
                 dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
                 dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
@@ -216,7 +214,6 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                //print("from cognito result: \(task.result)")
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -248,7 +245,6 @@ struct UserViewModel {
                     settings.isFirstConsensus = (dico["isFirstConsensus"] as! NSString).boolValue
                     settings.isFirstPublic = (dico["isFirstPublic"] as! NSString).boolValue
                     settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue
-                    settings.isFirstNegative = (dico["isFirstNegative"] as! NSString).boolValue
                     settings.isFirstCompleted = (dico["isFirstCompleted"] as! NSString).boolValue
                     settings.isFirstInterest = (dico["isFirstInterest"] as! NSString).boolValue
                     settings.isFirstVoteDisabled = (dico["isFirstVoteDisabled"] as! NSString).boolValue

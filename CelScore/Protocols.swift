@@ -14,6 +14,7 @@ import FBSDKLoginKit
 import ReactiveCocoa
 import RevealingSplashView
 import PMAlertController
+import MessageUI
 
 protocol DetailSubViewable {
     func socialSharing(message message: String)
@@ -49,7 +50,7 @@ extension Labelable {
     }
 }
 
-@objc protocol Sociable: HUDable {
+@objc protocol Sociable: HUDable, MFMailComposeViewControllerDelegate {
     var socialButton: MenuView { get }
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
@@ -97,11 +98,24 @@ extension Sociable {
         self.dismissHUD()
         let alertVC = PMAlertController(title: "bad cloud", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in from.dismissViewControllerAnimated(true, completion: nil) }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in from.dismissViewControllerAnimated(true, completion: nil) }))
-        
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
+            from.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail(from) }})
+        }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
         alertVC.view.opaque = false
         from.presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
+    func sendEmail(from: UIViewController) {
+        guard MFMailComposeViewController.canSendMail() else {
+            return TAOverlay.showOverlayWithLabel("We are unable to verify that an email has been setup on this device.", image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
+        }
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients(["gmensah@gmail.com"]) //TODO: change email address
+        mail.setSubject("CelScore Issue Report")
+        mail.setMessageBody("Please provide some information about the issue.", isHTML: false)
+        MaterialAnimation.delay(0.5) { from.presentViewController(mail, animated: true, completion: nil) }
     }
     
     func socialButtonTapped(buttonTag buttonTag: Int, from: UIViewController, hideButton: Bool) {

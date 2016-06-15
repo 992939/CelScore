@@ -51,15 +51,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
 
         SettingsViewModel().isPositiveVoteSignal()
             .on(next: { value in self.userST = self.userST.updatePositive(value) })
-            .filter({ (value: Bool) -> Bool in value == false })
-            .promoteErrors(NSError)
-            .flatMap(.Latest) { (value: Bool) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .FirstNegative) }
-            .on(next: { first in let firstTime = first as! Bool
-                if firstTime  {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstNegative.message(), image: OverlayInfo.FirstNegative.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstNegative).start() })
-                }})
             .start()
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
@@ -368,6 +359,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         button.backgroundColor = Constants.kDarkShade
         button.setImage(image, forState: .Normal)
         button.setImage(image, forState: .Highlighted)
+    }
+    
+    //MARK: MFMailComposeViewControllerDelegate
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: SMSegmentViewDelegate

@@ -190,7 +190,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        let alertVC = PMAlertController(title: "public sphere", description: OverlayInfo.FirstPublic.message(), image: R.image.sphere_green_big()!, style: .Alert)
+                        let alertVC = PMAlertController(title: "public sphere", description: OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Cancel, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))
@@ -198,7 +198,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         alertVC.view.opaque = false
                         self.presentViewController(alertVC, animated: true, completion: nil)
                     } else {
-                        let alertVC = PMAlertController(title: "work in progress", description: OverlayInfo.FirstConsensus.message(), image: R.image.worker_green_big()!, style: .Alert)
+                        let alertVC = PMAlertController(title: "work in progress", description: OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), style: .Alert)
                         alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Cancel, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))

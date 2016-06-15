@@ -24,7 +24,6 @@ class SettingsModel: Object {
     dynamic var isFirstConsensus: Bool = true
     dynamic var isFirstPublic: Bool = true
     dynamic var isFirstFollow: Bool = true
-    dynamic var isFirstNegative: Bool = true
     dynamic var isFirstCompleted: Bool = true
     dynamic var isFirst25: Bool = true
     dynamic var isFirst50: Bool = true
@@ -47,7 +46,6 @@ class SettingsModel: Object {
         self.isFirstConsensus = json["isFirstConsensus"].bool!
         self.isFirstPublic = json["isFirstPublic"].bool!
         self.isFirstFollow = json["isFirstFollow"].bool!
-        self.isFirstNegative = json["isFirstNegative"].bool!
         self.isFirstCompleted = json["isFirstCompleted"].bool!
         self.isFirst25 = json["isFirst25"].bool!
         self.isFirst50 = json["isFirst50"].bool!

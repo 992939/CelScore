@@ -47,7 +47,6 @@ enum OverlayInfo: Int {
     case FirstNotFollow
     case FirstConsensus
     case FirstPublic
-    case FirstNegative
     case FirstInterest
     case FirstCompleted
     case FirstVoteDisable
@@ -70,7 +69,6 @@ enum OverlayInfo: Int {
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
         case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re out of bubblegum.\n\nWe came here to vote and shape public opinion, one vote at a time.\n\nIt's up to you to be a part of it."
         case .FirstPublic: return "There are only two types of opinions in this world, public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nFeel free to share your opinion by long pressing on a star."
-        case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour selection is automatically saved."
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
@@ -93,9 +91,8 @@ enum OverlayInfo: Int {
         case .MaxFollow: return R.image.observatory_green()!
         case .FirstFollow: return R.image.astronaut_green()!
         case .FirstNotFollow: return R.image.observatory_green()!
-        case .FirstConsensus: return R.image.mlk_green()!
-        case .FirstPublic: return R.image.lincoln_green()!
-        case .FirstNegative: return R.image.mic_purple()!
+        case .FirstConsensus: return R.image.worker_green_big()!
+        case .FirstPublic: return R.image.sphere_green_big()!
         case .FirstInterest: return R.image.geometry_green()!
         case .First25: return R.image.planet_green()!
         case .First50: return R.image.planet_green()!

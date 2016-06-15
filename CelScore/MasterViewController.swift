@@ -271,7 +271,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.dismissViewControllerAnimated(true, completion: { _ in
                 splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 splashView.startAnimation()
-                MaterialAnimation.delay(0.5) { self.sendEmail()
+                MaterialAnimation.delay(0.5) { self.sendEmail(self)
             }})
         }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
@@ -279,20 +279,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
-    //MARK MessageUI
-    func sendEmail() {
-        guard MFMailComposeViewController.canSendMail() else {
-            return TAOverlay.showOverlayWithLabel("We are unable to verify that an email has been setup on this device.", image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
-        }
-        
-        let mail = MFMailComposeViewController()
-        mail.mailComposeDelegate = self
-        mail.setToRecipients(["gmensah@gmail.com"]) //TODO: change email address
-        mail.setSubject("CelScore Issue Report")
-        mail.setMessageBody("Please provide some information about the issue.", isHTML: false)
-        MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
-    }
-    
+    //MARK: MFMailComposeViewControllerDelegate
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
