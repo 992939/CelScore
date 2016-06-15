@@ -31,7 +31,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 54 images.
+  /// This `R.image` struct is generated, and contains static references to 55 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -141,6 +141,8 @@ struct R {
     static let twitterlogo = ImageResource(bundle: _R.hostingBundle, name: "twitterlogo")
     /// Image `Tyra`.
     static let tyra = ImageResource(bundle: _R.hostingBundle, name: "Tyra")
+    /// Image `worker_green_big`.
+    static let worker_green_big = ImageResource(bundle: _R.hostingBundle, name: "worker_green_big")
     
     /// `UIImage(named: "anchor_green", bundle: ..., traitCollection: ...)`
     static func anchor_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
@@ -410,6 +412,11 @@ struct R {
     /// `UIImage(named: "Tyra", bundle: ..., traitCollection: ...)`
     static func tyra(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.tyra, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "worker_green_big", bundle: ..., traitCollection: ...)`
+    static func worker_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.worker_green_big, compatibleWithTraitCollection: traitCollection)
     }
     
     private init() {}

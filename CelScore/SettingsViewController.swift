@@ -202,13 +202,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         if checkBox.on {
             SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus).startWithNext({ first in
                 let firstTime = first as! Bool
-                if firstTime {
+                if firstTime == false {
                     if checkBox.tag == 0 {
                         TAOverlay.showOverlayWithLabel(OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start() })
                     } else {
-                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstConsensus.message(), image:  OverlayInfo.FirstConsensus.logo(), options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start() })
+                        let alertVC = PMAlertController(title: "work in progress", description: OverlayInfo.FirstConsensus.message(), image: R.image.worker_green_big()!, style: .Alert)
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Cancel, action: { _ in
+                            SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start()
+                            self.dismissViewControllerAnimated(true, completion: nil) }))
+                        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+                        alertVC.view.opaque = false
+                        self.presentViewController(alertVC, animated: true, completion: nil)
                     }
                 }
             })

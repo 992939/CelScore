@@ -154,10 +154,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                
                 let alertVC = PMAlertController(title: "registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_green_big()!, style: .Alert)
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Cancel, action: { _ in
-                    MaterialAnimation.delay(1.0) { self.socialButton.menu.open() }
+                    MaterialAnimation.delay(0.5) { self.socialButton.menu.open() }
                     self.dismissViewControllerAnimated(true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
                 alertVC.view.opaque = false
