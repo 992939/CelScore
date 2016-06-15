@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Gareth.K.Mensah. All rights reserved.
 //
 
+import Foundation
 import AsyncDisplayKit
 import ReactiveCocoa
 import Material
@@ -16,9 +17,10 @@ import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
+import MessageUI
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
     private let segmentedControl: HMSegmentedControl
@@ -186,7 +188,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert() }
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(revealingSplashView) }
+                self.dismissHUD()
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
@@ -202,9 +205,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
                         self.dismissViewControllerAnimated(true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
-                        self.movingSocialButton(onScreen: true)
-                    }))
-                    
+                        self.movingSocialButton(onScreen: true) }))
                     alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
                     alertVC.view.opaque = false
                     self.presentViewController(alertVC, animated: true, completion: nil)
@@ -258,13 +259,42 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func sendNetworkAlert() {
-        let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissHUD(); self.dismissViewControllerAnimated(true, completion: nil) }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in self.dismissHUD(); self.dismissViewControllerAnimated(true, completion: nil) }))
+    func sendNetworkAlert(splashView: RevealingSplashView) {
+        let alertVC = PMAlertController(title: "bad cloud", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
+            self.dismissViewControllerAnimated(true, completion: {
+                splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
+                splashView.startAnimation()
+            })
+        }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
+            self.dismissViewControllerAnimated(true, completion: { _ in
+                splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
+                splashView.startAnimation()
+                MaterialAnimation.delay(0.5) { self.sendEmail()
+            }})
+        }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
         alertVC.view.opaque = false
         self.presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
+    //MARK MessageUI
+    func sendEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            return TAOverlay.showOverlayWithLabel("We are unable to verify that an email has been setup on this device.", image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
+        }
+        
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients(["gmensah@gmail.com"]) //TODO: change email address
+        mail.setSubject("CelScore Issue Report")
+        mail.setMessageBody("Please provide some information about the issue.", isHTML: false)
+        MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: ASTableView methods
@@ -290,20 +320,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func showSearchBar() {
-        if self.view.subviews.contains(self.searchBar) { hideSearchBar() }
-        else {
-             self.searchBar.alpha = 0.0
-            UIView.animateWithDuration(0.5, animations: {
-                self.searchBar.alpha = 1.0
-                self.searchBar.showsCancelButton = true
-                self.searchBar.tintColor = Constants.kWineShade
-                self.searchBar.backgroundColor = Constants.kDarkShade
-                self.searchBar.barTintColor = MaterialColor.white
-                self.searchBar.frame = Constants.kSegmentedControlRect
-                self.view.addSubview(self.searchBar)
-                self.searchBar.endEditing(true)
-                }, completion: { _ in self.searchBar.becomeFirstResponder() })
-        }
+        guard self.view.subviews.contains(self.searchBar) else { return hideSearchBar() }
+         self.searchBar.alpha = 0.0
+        UIView.animateWithDuration(0.5, animations: {
+            self.searchBar.alpha = 1.0
+            self.searchBar.showsCancelButton = true
+            self.searchBar.tintColor = Constants.kWineShade
+            self.searchBar.backgroundColor = Constants.kDarkShade
+            self.searchBar.barTintColor = MaterialColor.white
+            self.searchBar.frame = Constants.kSegmentedControlRect
+            self.view.addSubview(self.searchBar)
+            self.searchBar.endEditing(true)
+            }, completion: { _ in self.searchBar.becomeFirstResponder() })
     }
     
     func hideSearchBar() {

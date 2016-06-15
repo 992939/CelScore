@@ -12,7 +12,8 @@ import SVProgressHUD
 import TwitterKit
 import FBSDKLoginKit
 import ReactiveCocoa
-
+import RevealingSplashView
+import PMAlertController
 
 protocol DetailSubViewable {
     func socialSharing(message message: String)
@@ -53,11 +54,10 @@ extension Labelable {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
-    @objc func sendNetworkAlert()
 }
 
 extension Sociable {
-    func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
+    func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool, from: UIViewController) {
         guard Reachability.isConnectedToNetwork() else {
             return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
         }
@@ -75,7 +75,7 @@ extension Sociable {
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert() }
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(from) }
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
@@ -93,6 +93,17 @@ extension Sociable {
             .start()
     }
     
+    func sendNetworkAlert(from: UIViewController) {
+        self.dismissHUD()
+        let alertVC = PMAlertController(title: "bad cloud", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in from.dismissViewControllerAnimated(true, completion: nil) }))
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in from.dismissViewControllerAnimated(true, completion: nil) }))
+        
+        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+        alertVC.view.opaque = false
+        from.presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
     func socialButtonTapped(buttonTag buttonTag: Int, from: UIViewController, hideButton: Bool) {
         if buttonTag == 1 {
             let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
@@ -100,12 +111,12 @@ extension Sociable {
                 guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                 guard result.isCancelled == false else { return }
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
-                self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton)
+                self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton, from: from)
             })
         } else {
             Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
                 guard error == nil else { print("Twitter login error: \(error!.localizedDescription)"); return }
-                self.loginFlow(token: "", with: .Twitter, hide: hideButton)
+                self.loginFlow(token: "", with: .Twitter, hide: hideButton, from: from)
             }
         }
     }

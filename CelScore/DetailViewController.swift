@@ -13,6 +13,7 @@ import AIRTimer
 import Social
 import PMAlertController
 import ReactiveCocoa
+import MessageUI
 
 
 struct UserStruct {
@@ -23,7 +24,7 @@ struct UserStruct {
 }
 
 
-final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable {
+final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
     private let infoVC: InfoViewController
@@ -350,17 +351,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
             .on(failed: { _ in self.ratingsVC.displayGoldRatings() })
             .start()
-    }
-    
-    func sendNetworkAlert() {
-        self.dismissHUD()
-        let alertVC = PMAlertController(title: "ooops!", description: OverlayInfo.TimeoutError.message(), image: OverlayInfo.TimeoutError.logo(), style: .Alert)
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
-        
-        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-        alertVC.view.opaque = false
-        self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
     func enableUpdateButton() {

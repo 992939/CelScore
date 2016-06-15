@@ -79,9 +79,9 @@ enum OverlayInfo: Int {
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "We are currently not able to log you in.\nPlease try again at a later time.\n\nIf the issue persists, please contact @GreyEcologist."
-        case .NetworkError: return "The internet connection appears to be offline.\nPlease check your network settings.\n\nIf the issue persists, please contact @GreyEcologist."
-        case .TimeoutError: return "We're unable to update you with the latest data from our servers.\n\nIf the issue persists, please contact @GreyEcologist."
+        case .LoginError: return "We are not able to log you in at the moment.\n\nPlease check your connection and try again at a later time. If the issue persists, please contact us."
+        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the issue persists, please contact us."
+        case .TimeoutError: return "We are not able to access the cloud and grab the lastest data.\n\nIf the issue persists, please contact us."
         }
     }
     
