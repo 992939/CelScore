@@ -205,7 +205,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 if firstTime {
                     if checkBox.tag == 0 {
                         let alertVC = PMAlertController(title: "public sphere", description: OverlayInfo.FirstPublic.message(), image: R.image.sphere_green_big()!, style: .Alert)
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to share", style: .Cancel, action: { _ in
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Cancel, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))
                         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
