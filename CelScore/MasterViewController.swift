@@ -121,7 +121,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
             guard Reachability.isConnectedToNetwork() else { return }
-            RateLimit.execute(name: "updateFromAWS", limit: 10) { //TODO: Constants.kDayInSeconds) {
+            RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -154,8 +154,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                TAOverlay.showOverlayWithLabel(OverlayInfo.MenuAccess.message(), image: OverlayInfo.MenuAccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.socialButton.menu.open() }) })
+                
+                let alertVC = PMAlertController(title: "registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_green_big()!, style: .Alert)
+                alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Cancel, action: { _ in
+                    MaterialAnimation.delay(1.0) { self.socialButton.menu.open() }
+                    self.dismissViewControllerAnimated(true, completion: nil) }))
+                alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+                alertVC.view.opaque = false
+                self.presentViewController(alertVC, animated: true, completion: nil)
+            })
             .start()
     }
     
