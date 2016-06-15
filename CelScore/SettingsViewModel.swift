@@ -15,7 +15,7 @@ struct SettingsViewModel {
     
     //MARK: Widget
     enum SettingsError: Int, ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstNegative, FirstInterest, FirstCompleted, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
+    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstNegative, FirstInterest, FirstCompleted, First25, First50, First75, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
@@ -129,6 +129,9 @@ struct SettingsViewModel {
             case .FirstNegative: observer.sendNext(settings.isFirstNegative)
             case .FirstInterest: observer.sendNext(settings.isFirstInterest)
             case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
+            case .First25: observer.sendNext(settings.isFirst25)
+            case .First50: observer.sendNext(settings.isFirst50)
+            case .First75: observer.sendNext(settings.isFirst75)
             case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
             case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
             case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
@@ -154,6 +157,9 @@ struct SettingsViewModel {
             case .FirstNegative: settings.isFirstNegative = false
             case .FirstInterest: settings.isFirstInterest = false
             case .FirstCompleted: settings.isFirstCompleted = false
+            case .First25: settings.isFirst25 = false
+            case .First50: settings.isFirst50 = false
+            case .First75: settings.isFirst75 = false
             case .FirstVoteDisable: settings.isFirstVoteDisabled = false
             case .FirstSocialDisable: settings.isFirstSocialDisabled = false
             case .FirstTrollWarning: settings.isFirstTrollWarning = false

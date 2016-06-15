@@ -52,6 +52,9 @@ enum OverlayInfo: Int {
     case FirstCompleted
     case FirstVoteDisable
     case FirstTrollWarning
+    case First25
+    case First50
+    case First75
     case LogoutUser
     case LoginError
     case NetworkError
@@ -69,7 +72,10 @@ enum OverlayInfo: Int {
         case .FirstPublic: return "There are only two types of opinions in this world, public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nFeel free to share your opinion by long pressing on a star."
         case .FirstNegative: return "You've ventured into the dark side of the Score!\n\nYou can check your ratio of positive votes in the courthouse section."
         case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour selection is automatically saved."
-        case .FirstCompleted: return "You've cast your votes in every realm of our star-studded constellation!\n\nThank you for voting and for building the consensus."
+        case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .First75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .FirstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
@@ -91,6 +97,9 @@ enum OverlayInfo: Int {
         case .FirstPublic: return R.image.lincoln_green()!
         case .FirstNegative: return R.image.mic_purple()!
         case .FirstInterest: return R.image.geometry_green()!
+        case .First25: return R.image.planet_green()!
+        case .First50: return R.image.planet_green()!
+        case .First75: return R.image.planet_green()!
         case .FirstCompleted: return R.image.planet_green()!
         case .FirstVoteDisable: return R.image.mic_green()!
         case .FirstTrollWarning: return R.image.nuclear_purple()!

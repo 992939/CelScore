@@ -209,7 +209,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func trollAction() {
         MaterialAnimation.delay(0.5) {
             SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
+                .filter({ (score:CGFloat) -> Bool in
+                    if score > Constants.kTrollingWarning { self.progressAction() }
+                    return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
                 .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
                     return SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning) }
@@ -220,6 +222,50 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     }})
                 .start()
         }
+    }
+    
+    func progressAction() {
+        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
+            switch value * 100.0 {
+            case 100.0:
+                SettingsViewModel().getSettingSignal(settingType: .FirstCompleted).startWithNext({ first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstCompleted.message(),
+                            image: OverlayInfo.FirstCompleted.logo(),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstCompleted).start() })
+                    }
+                })
+            case 75.0..<100.0:
+                SettingsViewModel().getSettingSignal(settingType: .First75).startWithNext({ first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.First75.message(),
+                            image: OverlayInfo.First75.logo(),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .First75).start() })
+                    }
+                })
+            case 50.0..<75.0:
+                SettingsViewModel().getSettingSignal(settingType: .First50).startWithNext({ first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.First50.message(),
+                            image: OverlayInfo.First50.logo(),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .First50).start() })
+                    }
+                })
+            case 25.0..<50.0:
+                SettingsViewModel().getSettingSignal(settingType: .First25).startWithNext({ first in let firstTime = first as! Bool
+                    if firstTime {
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.First25.message(),
+                            image: OverlayInfo.First25.logo(),
+                            options: OverlayInfo.getOptions())
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .First25).start() })
+                    }
+                })
+            default: break
+            }
+        })
     }
     
     func updateAction() {

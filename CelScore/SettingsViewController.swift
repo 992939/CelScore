@@ -76,23 +76,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             let consensusBarNode = self.setupProgressBarNode(title: "Universal Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
             self.view.addSubnode(consensusBarNode) })
         
-        SettingsViewModel().calculateUserRatingsPercentageSignal()
-            .on(next: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
-                self.view.addSubnode(publicOpinionBarNode) })
-            .filter({ (value: CGFloat) -> Bool in return value == 100.0 })
-            .promoteErrors(NSError)
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .FirstCompleted) }
-            .on(next: { first in let firstTime = first as! Bool
-                if firstTime {
-                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstCompleted.message(),
-                        image: OverlayInfo.FirstCompleted.logo(),
-                        options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstCompleted).start() })
-                }
-            })
-            .start()
+        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
+            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
+            self.view.addSubnode(publicOpinionBarNode) })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
             let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
