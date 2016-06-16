@@ -27,8 +27,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     private let searchBar: UISearchBar
     private let transitionManager: TransitionManager = TransitionManager()
     private let diffCalculator: TableViewDiffCalculator<CelebId>
+    private let socialButton: MenuView
     internal let celebrityTableView: ASTableView
-    internal let socialButton: MenuView
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -65,8 +65,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
                 }
             } else {
-                if self.celebrityTableView.indexPathForSelectedRow != nil { self.movingSocialButton(onScreen: true) }
-                SettingsViewModel().loggedInAsSignal().startWithNext { _ in self.socialRefresh() }
+                SettingsViewModel().loggedInAsSignal()
+                    .on(next: { _ in self.socialRefresh() })
+                    .on(failed: { _ in self.movingSocialButton(onScreen: true) })
+                    .start()
             }
         }
     
@@ -103,7 +105,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .None
         self.celebrityTableView.backgroundColor = MaterialColor.clear
-        self.socialButton.hidden = false
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
@@ -202,7 +203,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
             .delay(2, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { first in let firstTime = first as! Bool
-                guard firstTime else { return self.movingSocialButton(onScreen: true) }
+                guard firstTime else { return }
                 let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
                 alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
                     self.dismissViewControllerAnimated(true, completion: nil)

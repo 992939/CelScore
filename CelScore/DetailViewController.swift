@@ -31,9 +31,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     private let celscoreVC: CelScoreViewController
     private let voteButton: MaterialButton
     private let celebST: CelebrityStruct
-    internal let profilePicNode: ASNetworkImageNode
-    internal let socialButton: MenuView
+    private let socialButton: MenuView
     private var userST = UserStruct(socialMessage: "", isPositive: true)
+    internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
