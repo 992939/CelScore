@@ -11,7 +11,6 @@ import Material
 import SMSegmentView
 import AIRTimer
 import Social
-import PMAlertController
 import ReactiveCocoa
 import MessageUI
 

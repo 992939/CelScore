@@ -78,7 +78,6 @@ extension Supportable where Self: UIViewController {
 }
 
 @objc protocol Sociable: HUDable, Supportable {
-    var socialButton: MenuView { get }
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
