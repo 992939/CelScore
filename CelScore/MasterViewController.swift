@@ -59,7 +59,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        MaterialAnimation.delay(0.3) {
+        MaterialAnimation.delay(0.2) {
             if self.socialButton.hidden == true {
                 if let index = self.celebrityTableView.indexPathForSelectedRow {
                     self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
@@ -302,7 +302,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: indexPath.row)
-        self.presentViewController(detailVC, animated: true, completion: nil)
+        MaterialAnimation.delay(0.2) { self.presentViewController(detailVC, animated: true, completion: nil) }
     }
     
     func showSearchBar() {
