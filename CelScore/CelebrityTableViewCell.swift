@@ -133,10 +133,8 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
                     if count == 0 { SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithNext({ first in
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                         let firstTime = first as! Bool
-                        if firstTime {
-                            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(),
-                                image: OverlayInfo.FirstFollow.logo(),
-                                options: OverlayInfo.getOptions())}})
+                        guard firstTime else { return }
+                        TAOverlay.showOverlayWithLabel(OverlayInfo.FirstFollow.message(), image: OverlayInfo.FirstFollow.logo(), options: OverlayInfo.getOptions()) })
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstFollow).start() })
                     }
                     else if count > 9 {

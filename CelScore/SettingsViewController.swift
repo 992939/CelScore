@@ -173,12 +173,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
         SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithNext({ first in let firstTime = first as! Bool
-            if firstTime {
-                TAOverlay.showOverlayWithLabel(OverlayInfo.FirstInterest.message(),
-                    image: OverlayInfo.FirstInterest.logo(),
-                    options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstInterest).start() })
-            }
+            guard firstTime else { return }
+            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstInterest.message(), image: OverlayInfo.FirstInterest.logo(), options: OverlayInfo.getOptions())
+            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstInterest).start() })
         })
     }
     

@@ -202,16 +202,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
             .delay(2, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { first in let firstTime = first as! Bool
-                if firstTime {
-                    let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
-                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                        SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
-                        self.movingSocialButton(onScreen: true) }))
-                    alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                    alertVC.view.opaque = false
-                    self.presentViewController(alertVC, animated: true, completion: nil)
-                }else { self.movingSocialButton(onScreen: true) }
+                guard firstTime else { return self.movingSocialButton(onScreen: true) }
+                let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
+                alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
+                    self.movingSocialButton(onScreen: true) }))
+                alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+                alertVC.view.opaque = false
+                self.presentViewController(alertVC, animated: true, completion: nil)
             })
             .start()
     }
