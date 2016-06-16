@@ -56,8 +56,7 @@ struct Constants {
     
     //SettingsVC
     static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.80 * kScreenWidth)
-    static let kPickerViewHeight: CGFloat = kIsOriginalIphone ? 100 : 160
-    static let kPickerY: CGFloat = kIsOriginalIphone ? 10 : 30
+    static let kPickerY: CGFloat = kIsOriginalIphone ? -5 : 30
     
     //DetailVC 
     static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)

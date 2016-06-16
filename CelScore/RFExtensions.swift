@@ -176,6 +176,17 @@ extension UIDevice {
         return position
     }
     
+    static func getPickerHeight() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: height =  65
+        case Constants.kIPhone5_height: height = 80
+        case Constants.kIPhone6_height: height = 160
+        default: height = 180
+        }
+        return height
+    }
+    
     static func getVerticalStackPercent() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {

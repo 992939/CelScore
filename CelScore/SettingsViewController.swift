@@ -86,8 +86,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         })
         
         //PickerView
-        let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: Constants.kPickerViewHeight))
-        let pickerLabel: UILabel = self.setupLabel(title: "Your Realm Of Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
+        let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: UIDevice.getPickerHeight()))
+        let pickerLabel: UILabel = self.setupLabel(title: "Main Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
@@ -97,7 +97,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(pickerNode)
         
         //Check Boxes
-        let publicNodeHeight = logoView.bottom + Constants.kPickerViewHeight + 2 * Constants.kPadding + 3 * progressNodeHeight
+        let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 2 * Constants.kPadding + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
@@ -123,6 +123,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
         self.view.addSubnode(logoutNode)
+        
+        //Issue
+        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 140 + Constants.kPadding, width: maxWidth, height: 40))
+        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
+        issueButton.setTitle("Report An Issue", forState: .Normal)
+        issueButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        issueButton.titleLabel?.textAlignment = .Center
+        issueButton.pulseColor = Constants.kWineShade
+        issueView.addSubview(issueButton)
+        issueButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
+        let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
+        self.view.addSubnode(issueNode)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.navigationDrawerController!.depth = .Depth1
