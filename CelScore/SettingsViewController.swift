@@ -149,8 +149,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
-    func support() { self.sendEmail() }
-    
     func logout() {
         let alertVC = PMAlertController(title: "Warning", description: "Your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_green_big()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) } ))
@@ -179,9 +177,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    //MARK: MFMailComposeViewControllerDelegate
+    func support() { self.sendEmail() }
+    
+    //MARK: 
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismissViewControllerAnimated(true, completion: { _ in self.navigationDrawerController!.closeLeftView() })
     }
     
     //MARK: UIPickerViewDelegate
