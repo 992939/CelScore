@@ -190,11 +190,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { error in
                 if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(revealingSplashView) }
                 self.dismissHUD()
+                self.changeList()
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+            .on(next: { list in
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
