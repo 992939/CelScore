@@ -278,8 +278,8 @@ extension UIDevice {
     static func getScreenshotPosition() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 102.5
-        case Constants.kIPhone5_height: height = 75
+        case Constants.kIPhone4_height: height = 95
+        case Constants.kIPhone5_height: height = 65
         case Constants.kIPhone6_height: height = 80
         default: height = 75
         }
