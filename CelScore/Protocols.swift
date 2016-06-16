@@ -184,17 +184,4 @@ extension Sociable where Self: UIViewController {
         menuView.menu.views = [btn1, btn2, btn3]
         menuView.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    func hideSocialButton(menuView: MenuView, controller: UIViewController) {
-        menuView.menu.close()
-        menuView.hidden = true
-        let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
-        first!.removeTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
-    }
-    
-    func showSocialButton(menuView: MenuView, controller: UIViewController) {
-        menuView.hidden = false
-        let first: MaterialButton? = menuView.menu.views?.first as? MaterialButton
-        first!.addTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
-    }
 }

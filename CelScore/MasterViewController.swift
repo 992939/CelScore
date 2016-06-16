@@ -255,7 +255,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func socialRefresh() {
         self.diffCalculator.rows = []
         self.changeList()
-        self.hideSocialButton(self.socialButton, controller: self)
+        self.movingSocialButton(onScreen: false)
     }
     
     func sendNetworkAlert(splashView: RevealingSplashView) {
@@ -332,9 +332,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: SideNavigationControllerDelegate
     func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: SideNavigationPosition) {
         self.navigationDrawerController?.enabled = false
-        self.showSocialButton(self.socialButton, controller: self)
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
+            .on(next: { _ in self.movingSocialButton(onScreen: false) })
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
