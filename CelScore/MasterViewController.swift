@@ -250,7 +250,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         ]))
     }
     
-    func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, from: self, hideButton: true) }
+    func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
     
     func socialRefresh() {
         self.diffCalculator.rows = []
@@ -272,8 +272,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.dismissViewControllerAnimated(true, completion: { _ in
                 splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 splashView.startAnimation()
-                MaterialAnimation.delay(0.5) { self.sendEmail(self)
-            }})
+                MaterialAnimation.delay(0.5) { self.sendEmail() }
+            })
         }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
         alertVC.view.opaque = false

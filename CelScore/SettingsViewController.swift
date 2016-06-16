@@ -13,9 +13,10 @@ import BEMCheckBox
 import AIRTimer
 import PMAlertController
 import ReactiveCocoa
+import MessageUI
 
 
-final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable {
+final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, MFMailComposeViewControllerDelegate {
     
     //MARK: Property
     private let picker: UIPickerView
@@ -128,6 +129,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 140 + Constants.kPadding, width: maxWidth, height: 40))
         let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         issueButton.setTitle("Report An Issue", forState: .Normal)
+        issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
         issueButton.setTitleColor(Constants.kWineShade, forState: .Normal)
         issueButton.titleLabel?.textAlignment = .Center
         issueButton.pulseColor = Constants.kWineShade
@@ -146,6 +148,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
+    
+    func support() { self.sendEmail() }
     
     func logout() {
         let alertVC = PMAlertController(title: "Warning", description: "Your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_green_big()!, style: .Alert)
@@ -173,6 +177,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.fact3Bar.setProgress(value, animated: true) })
             button.enabled = true
         }
+    }
+    
+    //MARK: MFMailComposeViewControllerDelegate
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: UIPickerViewDelegate
