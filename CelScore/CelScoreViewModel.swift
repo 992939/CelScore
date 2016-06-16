@@ -50,7 +50,6 @@ struct CelScoreViewModel {
                         realm.beginWrite()
                         realm.add(awsObject, update: true)
                         try! realm.commitWrite()
-                        //print(awsObject)
                     }
                 })
                 observer.sendNext(task.result!)

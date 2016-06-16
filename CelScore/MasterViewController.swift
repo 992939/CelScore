@@ -255,9 +255,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func socialRefresh() {
         self.diffCalculator.rows = []
         self.changeList()
-        SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.hideSocialButton(self.socialButton, controller: self) })
-            .start()
+        self.hideSocialButton(self.socialButton, controller: self)
     }
     
     func sendNetworkAlert(splashView: RevealingSplashView) {
