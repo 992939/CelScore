@@ -121,7 +121,7 @@ extension Sociable where Self: UIViewController {
     func socialButtonTapped(buttonTag buttonTag: Int, hideButton: Bool) {
         if buttonTag == 1 {
             let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-            FBSDKLoginManager().logInWithReadPermissions(readPermissions, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+            FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 guard error == nil else { print("Facebook Login error: \(error!.localizedDescription)"); return }
                 guard result.isCancelled == false else { return }
                 FBSDKAccessToken.setCurrentAccessToken(result.token)
