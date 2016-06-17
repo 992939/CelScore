@@ -39,13 +39,15 @@ struct UserViewModel {
                 }
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
-                    guard session != nil else { print("error: \(error!.localizedDescription)"); return }
-                    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: Constants.kCognitoIdentityPoolId, identityProviderManager: CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
-                    let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
-                    AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
-                    
-                    credentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                        guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                    Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
+                    Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                        guard task.error == nil else {
+                            observer.sendFailed(task.error!)
+                            if task.error!.code == 8 || task.error!.code == 10 {
+                                Constants.kCredentialsProvider.clearKeychain()
+                            }
+                            return task
+                        }
                         observer.sendNext(task)
                         observer.sendCompleted()
                         return task

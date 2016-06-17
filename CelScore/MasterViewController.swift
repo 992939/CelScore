@@ -84,6 +84,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
+                    .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""

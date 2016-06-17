@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>e7bc1c87c4ca6b57ab8ff0d9d24d521082934fb4</string>
-    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -36,12 +31,20 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.GreyEcology.CelebrityScore</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>TheScore</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>com.GreyEcology.CelebrityScore</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-EKczkoEeUbMNkBplemTY7rypt</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -125,6 +128,8 @@
 	<array>
 		<string>com.GreyEcology.CelebrityScore.Celebrity</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -137,7 +142,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array/>
 </dict>
 </plist>

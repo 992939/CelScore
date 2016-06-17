@@ -78,6 +78,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kDarkShade
         self.window!.makeKeyAndVisible()
+        
+        Twitter.sharedInstance().startWithConsumerKey("EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
