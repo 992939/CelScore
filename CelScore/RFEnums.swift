@@ -61,7 +61,7 @@ enum OverlayInfo: Int {
     
     func message() -> String {
         switch self {
-        case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed upon in court of public opinion is entirely up to you.\n\nWelcome to the courthouse!"
+        case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed upon in court of public opinion is entirely up to you.\n\nWelcome to the courthouse\nof Public Opinion."
         case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to VOTE RESPONSIBLY.\n\nIf this is your first time in the courthouse, you'll have to register."
         case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
@@ -85,7 +85,7 @@ enum OverlayInfo: Int {
     
     func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return R.image.court_green()!
+        case .WelcomeUser: return R.image.jurors_green_big()!
         case .MenuAccess: return R.image.court_green()!
         case .LoginSuccess: return R.image.astronaut_green()!
         case .MaxFollow: return R.image.observatory_green()!

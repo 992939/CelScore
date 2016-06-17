@@ -204,7 +204,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .delay(2, onScheduler: QueueScheduler.mainQueueScheduler)
             .on(next: { first in let firstTime = first as! Bool
                 guard firstTime else { return }
-                let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: R.image.temple_green_big()!, style: .Alert)
+                let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
                 alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
                     self.dismissViewControllerAnimated(true, completion: nil)
                     SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
