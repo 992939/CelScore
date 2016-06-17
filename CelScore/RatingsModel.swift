@@ -100,17 +100,17 @@ class RatingsModel: Object, CollectionType {
     func generate() -> Generator {
         var i = 0
         return AnyGenerator {
-            switch i++ {
-            case 0: return ("rating1")
-            case 1: return ("rating2")
-            case 2: return ("rating3")
-            case 3: return ("rating4")
-            case 4: return ("rating5")
-            case 5: return ("rating6")
-            case 6: return ("rating7")
-            case 7: return ("rating8")
-            case 8: return ("rating9")
-            case 9: return ("rating10")
+            switch i {
+            case 0: i += 1; return ("rating1")
+            case 1: i += 1; return ("rating2")
+            case 2: i += 1; return ("rating3")
+            case 3: i += 1; return ("rating4")
+            case 4: i += 1; return ("rating5")
+            case 5: i += 1; return ("rating6")
+            case 6: i += 1; return ("rating7")
+            case 7: i += 1; return ("rating8")
+            case 8: i += 1; return ("rating9")
+            case 9: i += 1; return ("rating10")
             default: return nil
             }
         }
