@@ -59,7 +59,7 @@ extension Supportable where Self: UIViewController {
         }
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
-        mail.setToRecipients(["gmensah@gmail.com"]) //TODO: change email address
+        mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue Report")
         mail.setMessageBody("Please provide some information about the issue.", isHTML: false)
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
