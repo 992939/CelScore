@@ -60,10 +60,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewDidAppear(animated)
         
         MaterialAnimation.delay(0.2) {
-            if self.socialButton.hidden == true {
-                if let index = self.celebrityTableView.indexPathForSelectedRow {
-                    self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
-                }
+            if let index = self.celebrityTableView.indexPathForSelectedRow {
+                self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
             } else {
                 SettingsViewModel().loggedInAsSignal()
                     .on(next: { _ in self.socialRefresh() })
