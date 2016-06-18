@@ -303,7 +303,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func showSearchBar() {
-        guard self.view.subviews.contains(self.searchBar) else { return hideSearchBar() }
+        guard self.view.subviews.contains(self.searchBar) == false else { return hideSearchBar() }
          self.searchBar.alpha = 0.0
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1.0
