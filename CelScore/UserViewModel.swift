@@ -215,7 +215,7 @@ struct UserViewModel {
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
             dataset.synchronize().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 let realm = try! Realm()
