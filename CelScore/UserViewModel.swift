@@ -28,9 +28,7 @@ struct UserViewModel {
                 Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         observer.sendFailed(task.error!)
-                        if task.error!.code == 8 || task.error!.code == 10 {
-                            Constants.kCredentialsProvider.clearKeychain()
-                        }
+                        if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                         return task
                     }
                     observer.sendNext(task)
@@ -43,9 +41,7 @@ struct UserViewModel {
                     Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
                             observer.sendFailed(task.error!)
-                            if task.error!.code == 8 || task.error!.code == 10 {
-                                Constants.kCredentialsProvider.clearKeychain()
-                            }
+                            if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
                             return task
                         }
                         observer.sendNext(task)

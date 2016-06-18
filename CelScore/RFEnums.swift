@@ -38,7 +38,7 @@ enum SocialLogin: Int {
 }
 
 //MARK: OverlayInfo
-enum OverlayInfo: Int {
+enum OverlayInfo {
     case WelcomeUser
     case MenuAccess
     case LoginSuccess
@@ -59,7 +59,7 @@ enum OverlayInfo: Int {
     case NetworkError
     case TimeoutError
     
-    func message() -> String {
+    func message(social: String = "") -> String {
         switch self {
         case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed upon in court of public opinion is entirely up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
         case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to VOTE RESPONSIBLY.\n\nIf this is your first time in the courthouse, you'll have to register."
@@ -67,7 +67,7 @@ enum OverlayInfo: Int {
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've added your first star to the Today View!\n\nYou can swipe down from the top of your screen to display the view."
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
-        case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re out of bubblegum.\n\nWe came here to vote and shape public opinion, one vote at a time.\n\nIt's up to you to be a part of it."
+        case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re out of bubblegum.\n\nWe came here to vote and shape public opinion, one vote at a time.\n\nIt's up to you to be a part of the consensus."
         case .FirstPublic: return "There are only two types of opinions in this world, public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nFeel free to share your opinion by long pressing on a star."
         case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour selection is automatically saved."
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
@@ -77,9 +77,9 @@ enum OverlayInfo: Int {
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "We are not able to log you in at the moment.\n\nPlease check your connection and try again at a later time. If the issue persists, please contact us."
-        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the issue persists, please contact us."
-        case .TimeoutError: return "We are not able to access the cloud and grab the lastest data.\n\nIf the issue persists, please contact us."
+        case .LoginError: return "We were not able to log you in.\n\nCheck in the settings your network connection and that the CelebrityScore has access to your \(social) account.\n\nIf the issue persists, please report the issue."
+        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the issue persists, please report the issue."
+        case .TimeoutError: return "We were not able to connect to the cloud.\n\nCheck in the settings your network connection and that the CelebrityScore has access to your \(social) account.\n\nIf the issue persists, please report the issue."
         }
     }
     
