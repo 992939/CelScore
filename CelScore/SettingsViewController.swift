@@ -121,7 +121,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoutButton.titleLabel?.textAlignment = .Center
         logoutButton.pulseColor = Constants.kWineShade
         logoutView.addSubview(logoutButton)
-        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
+        logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
         self.view.addSubnode(logoutNode)
         
@@ -134,7 +134,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         issueButton.titleLabel?.textAlignment = .Center
         issueButton.pulseColor = Constants.kWineShade
         issueView.addSubview(issueButton)
-        issueButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: 16)
+        issueButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
         self.view.addSubnode(issueNode)
         
