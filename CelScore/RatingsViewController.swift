@@ -115,11 +115,13 @@ final class RatingsViewController: ASViewController, Labelable {
     }
     
     func requestLogin() {
-        self.delegate!.socialSharing(message: "")
         SettingsViewModel().getSettingSignal(settingType: .FirstVoteDisable).startWithNext({ first in let firstTime = first as! Bool
-            guard firstTime else { return }
+            guard firstTime else { return self.delegate!.socialSharing(message: "") }
             MaterialAnimation.delay(0.5) { TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(), image: OverlayInfo.FirstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
-            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start() })
+            TAOverlay.setCompletionBlock({ _ in
+                self.delegate!.socialSharing(message: "")
+                SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start()
+            })
         })
     }
     

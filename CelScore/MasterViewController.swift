@@ -61,13 +61,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         MaterialAnimation.delay(0.2) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
-                self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
-            } else {
-                SettingsViewModel().loggedInAsSignal()
-                    .on(next: { _ in self.socialRefresh() })
-                    .on(failed: { _ in self.movingSocialButton(onScreen: true) })
-                    .start()
-            }
+                self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade) }
+            
+            SettingsViewModel().loggedInAsSignal().startWithFailed({ _ in
+                self.movingSocialButton(onScreen: true) })
         }
     
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
