@@ -50,7 +50,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-    scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.15, 1.15, 1)];
+    scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1)];
 
     CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     alphaAnimation.fromValue = @1;
@@ -58,7 +58,7 @@ static void *kDYARippleTrailColor = @"kDYARippleTrailColor";
 
     CAAnimationGroup *animation = [CAAnimationGroup animation];
     animation.animations = @[ scaleAnimation, alphaAnimation ];
-    animation.duration = 1.2f;
+    animation.duration = 1.4f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     [circleShape addAnimation:animation forKey:nil];
 }
