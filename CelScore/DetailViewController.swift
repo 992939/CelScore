@@ -343,7 +343,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func disableButton(button button: MaterialButton, image: UIImage) {
         button.enabled = false
-        button.backgroundColor = Constants.kDarkShade
+        button.backgroundColor = MaterialColor.white
         button.setImage(image, forState: .Normal)
         button.setImage(image, forState: .Highlighted)
     }
@@ -370,7 +370,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-        } else { self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!) }
+        } else { self.disableButton(button: self.voteButton, image: R.image.heart_black()!) }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -474,7 +474,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.depth = .Depth2
         self.voteButton.pulseAnimation = .None
         self.voteButton.tintColor = MaterialColor.white
-        self.disableButton(button: self.voteButton, image: self.userST.isPositive ? R.image.heart_green()! : R.image.heart_purple()!)
+        self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
     }
 }
 
