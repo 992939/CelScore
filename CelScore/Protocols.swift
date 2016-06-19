@@ -91,13 +91,13 @@ extension Sociable where Self: UIViewController {
         
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
-            .retry(Constants.kNetworkRetry)
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
                 self.dismissHUD()
                 self.sendAlert(.TimeoutError, with: loginType)
                 return SignalProducer.empty }
+            .retry(Constants.kNetworkRetry)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in

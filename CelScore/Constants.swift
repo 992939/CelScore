@@ -24,7 +24,7 @@ struct Constants {
     static let kUpdateRatings: NSTimeInterval = 20.0
     static let kMaxFollowedCelebrities: Int = 10
     static let kTimeout: NSTimeInterval = 5.0
-    static let kNetworkRetry: Int = 4
+    static let kNetworkRetry: Int = 6
     static let kFontSize: CGFloat = UIDevice.getFontSize()
     static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
