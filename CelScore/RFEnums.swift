@@ -70,7 +70,7 @@ enum OverlayInfo {
     func message(social: String = "") -> String {
         switch self {
         case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed in court of public opinion is entirely up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
-        case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to VOTE RESPONSIBLY.\n\nIf this is your first time in the courthouse, you'll have to register."
+        case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is... to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
         case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've added your first star to the Today View!\n\nYou can swipe down from the top of your screen to display the view."

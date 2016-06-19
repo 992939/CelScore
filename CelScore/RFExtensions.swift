@@ -165,6 +165,17 @@ extension UIDevice {
         }
     }
     
+    static func getRowHeight() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone4_height: height =  70
+        case Constants.kIPhone5_height: height = 70
+        case Constants.kIPhone6_height: height = 80
+        default: height = 80
+        }
+        return height
+    }
+    
     static func getButtonExtraArea() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {
@@ -192,8 +203,8 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: position =  0.55
         case Constants.kIPhone5_height: position = 0.55
-        case Constants.kIPhone6_height: position = 0.65
-        default: position = 0.65
+        case Constants.kIPhone6_height: position = 0.55
+        default: position = 0.55
         }
         return position
     }
@@ -203,8 +214,8 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: position = Constants.kScreenWidth - 80
         case Constants.kIPhone5_height: position = Constants.kScreenWidth - 80
-        case Constants.kIPhone6_height: position = Constants.kScreenWidth - 55
-        default: position = Constants.kScreenWidth - 55
+        case Constants.kIPhone6_height: position = Constants.kScreenWidth - 80
+        default: position = Constants.kScreenWidth - 80
         }
         return position
     }

@@ -28,7 +28,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(18.0), NSForegroundColorAttributeName : MaterialColor.white]
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : MaterialColor.white]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
@@ -36,7 +36,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
         self.profilePicNode.contentMode = .ScaleAspectFill
-        self.profilePicNode.preferredFrameSize = CGSize(width: 70, height: 70)
+        self.profilePicNode.preferredFrameSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = 15
@@ -57,7 +57,6 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         box.onFillColor = Constants.kDarkGreenShade
         box.onTintColor = Constants.kDarkGreenShade
         box.tintColor = Constants.kDarkGreenShade
-        //box.backgroundColor = Constants.kMainShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.preferredFrameSize = box.frame.size
@@ -82,7 +81,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     //MARK: Methods
     
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: 70)
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: UIDevice.getRowHeight())
         
         let verticalStack = ASStackLayoutSpec(
         direction: .Vertical,
@@ -99,7 +98,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .Start,
             alignItems: .Center,
             children: [self.profilePicNode, verticalStack, self.switchNode])
-        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 0.95)
+        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: 2*Constants.kPadding),
