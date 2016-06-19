@@ -86,6 +86,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
+                        if type == .Facebook { UserViewModel().refreshFacebookTokenSignal() }
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
