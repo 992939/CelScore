@@ -274,7 +274,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.socialButton.menu.enabled = true
             first?.backgroundColor = self.userST.isPositive ? Constants.kDarkGreenShade : Constants.kWineShade
             first?.pulseAnimation = .CenterWithBacking
-            first?.pulse()
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
             let image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
