@@ -83,7 +83,7 @@ struct UserViewModel {
             if expirationDate > 10.days.later { observer.sendCompleted() }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { print("facebook refresh: \(error)"); observer.sendFailed(error); return }
+                    guard error == nil else { return observer.sendFailed(error) }
                     observer.sendNext(object)
                     observer.sendCompleted()
                 }
@@ -210,7 +210,6 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                print("id: \(task.result)")
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil }
             
