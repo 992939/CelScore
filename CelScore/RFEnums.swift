@@ -35,6 +35,14 @@ enum SocialLogin: Int {
         default: return "Social sharing is unavailable. Please check the settings and make sure your social accounts are accessible."
         }
     }
+    
+    func getTitle() -> String {
+        switch self {
+        case .Facebook: return "Facebook"
+        case .Twitter: return "Twitter"
+        default: return ""
+        }
+    }
 }
 
 //MARK: OverlayInfo
@@ -61,7 +69,7 @@ enum OverlayInfo {
     
     func message(social: String = "") -> String {
         switch self {
-        case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed upon in court of public opinion is entirely up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
+        case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted on and agreed in court of public opinion is entirely up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
         case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to VOTE RESPONSIBLY.\n\nIf this is your first time in the courthouse, you'll have to register."
         case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
@@ -77,9 +85,9 @@ enum OverlayInfo {
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "We were not able to log you in.\n\nCheck in the settings your network connection and that the CelebrityScore has access to your \(social) account.\n\nIf the issue persists, please report the issue."
-        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the issue persists, please report the issue."
-        case .TimeoutError: return "We were not able to connect to the cloud.\n\nCheck in the settings your network connection and that the CelebrityScore has access to your \(social) account.\n\nIf the issue persists, please report the issue."
+        case .LoginError: return "We were not able to log you in.\n\nCheck your network connection in the settings and that the CelebrityScore has permission to access to your \(social) account.\n\nIf the problem persists, please report the issue."
+        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the problem persists, please report the issue."
+        case .TimeoutError: return "We were not able to connect to the cloud.\n\nCheck your network connection in the settings and that the CelebrityScore has permission to access to your \(social) account.\n\nIf the problem persists, please report the issue."
         }
     }
     

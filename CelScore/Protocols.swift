@@ -65,8 +65,8 @@ extension Supportable where Self: UIViewController {
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     
-    func sendNetworkAlert() {
-        let alertVC = PMAlertController(title: "bad cloud", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
+    func sendAlert(info: OverlayInfo, with loginType: SocialLogin) {
+        let alertVC = PMAlertController(title: "bad cloud", description: info.message(loginType.getTitle()), image: R.image.cloud_green_big()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
             self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail() }})
@@ -95,7 +95,8 @@ extension Sociable where Self: UIViewController {
             .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.dismissHUD(); self.sendNetworkAlert() }
+                self.dismissHUD()
+                self.sendAlert(.TimeoutError, with: loginType)
                 return SignalProducer.empty }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
@@ -114,7 +115,12 @@ extension Sociable where Self: UIViewController {
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
-            .on(failed: { _ in self.dismissHUD() })
+            .on(failed: { error in
+                self.dismissHUD()
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue
+                { self.sendAlert(.TimeoutError, with: loginType) }
+                else { self.sendAlert(.LoginError, with: loginType) }
+            })
             .start()
     }
     

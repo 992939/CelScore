@@ -21,7 +21,6 @@ struct UserViewModel {
     
     func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            
             switch loginType {
             case .Facebook:
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
@@ -211,6 +210,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                print("id: \(task.result)")
                 guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil }
             
