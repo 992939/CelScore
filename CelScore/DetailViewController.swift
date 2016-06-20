@@ -75,7 +75,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarRatingShade)
-        
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -84,9 +83,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, forState: .Normal)
                     first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+                    first?.backgroundColor = Constants.kStarRatingShade
                 } else {
                     first?.setImage(R.image.cross()!, forState: .Normal)
                     first?.setImage(R.image.cross()!, forState: .Highlighted)
+                    first?.backgroundColor = MaterialColor.white
                 }
             })
         
@@ -283,16 +284,17 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.close()
             self.socialButton.menu.enabled = false
-            first?.backgroundColor = Constants.kStarRatingShade
             SettingsViewModel().getSettingSignal(settingType: .PublicService)
                 .observeOn(UIScheduler())
                 .startWithNext({ status in
                     if (status as! Bool) == true {
                         first?.setImage(R.image.ic_add_black()!, forState: .Normal)
                         first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+                        first?.backgroundColor = Constants.kStarRatingShade
                     } else {
                         first?.setImage(R.image.cross()!, forState: .Normal)
                         first?.setImage(R.image.cross()!, forState: .Highlighted)
+                        first?.backgroundColor = MaterialColor.white
                     }
                 })
         }
