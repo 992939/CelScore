@@ -260,7 +260,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func sendNetworkAlert(splashView: RevealingSplashView) {
-        let alertVC = PMAlertController(title: "bad cloud", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
+        let alertVC = PMAlertController(title: "cloud error", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
             self.dismissViewControllerAnimated(true, completion: {
                 splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
