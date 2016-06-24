@@ -117,7 +117,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         
         let verticalStack = ASStackLayoutSpec(
         direction: .Vertical,
-        spacing: Constants.kPadding/3,
+        spacing: Constants.kPadding/4,
         justifyContent: .Start,
         alignItems: .Start,
         children: [self.nameNode, self.ratingsNode, minisStack])
