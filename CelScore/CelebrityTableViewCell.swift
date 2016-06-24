@@ -21,6 +21,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     private let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
+    internal let fireNode: ASImageNode
+    internal let consensusNode: ASImageNode
+    internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
     
@@ -69,8 +72,20 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.backgroundNode.backgroundColor = Constants.kMainShade
         
         self.trendNode = ASImageNode()
-        self.trendNode.image = R.image.sphere_green()!
-        self.trendNode.preferredFrameSize = CGSize(width: 15, height: 15)
+        self.trendNode.image = R.image.arrow_up()!
+        self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.fireNode = ASImageNode()
+        self.fireNode.image = R.image.arrow_down()!
+        self.fireNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.consensusNode = ASImageNode()
+        self.consensusNode.image = R.image.arrow_up()!
+        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.faceNode = ASImageNode()
+        self.faceNode.image = R.image.arrow_up()!
+        self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         super.init()
         self.selectionStyle = .None
@@ -82,6 +97,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
+        self.addSubnode(self.fireNode)
+        self.addSubnode(self.consensusNode)
+        self.addSubnode(self.faceNode)
     }
     
     //MARK: Methods
@@ -89,12 +107,20 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: UIDevice.getRowHeight())
         
+        let minisStack = ASStackLayoutSpec(
+            direction: .Horizontal,
+            spacing: Constants.kPadding/2,
+            justifyContent: .Start,
+            alignItems: .Start,
+            children: [self.trendNode, self.fireNode, self.consensusNode, self.faceNode])
+        minisStack.flexGrow = true
+        
         let verticalStack = ASStackLayoutSpec(
         direction: .Vertical,
         spacing: Constants.kPadding/3,
         justifyContent: .Start,
         alignItems: .Start,
-        children: [self.nameNode, self.ratingsNode, self.trendNode])
+        children: [self.nameNode, self.ratingsNode, minisStack])
         verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: Constants.kVerticalStackPercent)
         verticalStack.flexGrow = true
         

@@ -31,10 +31,14 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 55 images.
+  /// This `R.image` struct is generated, and contains static references to 57 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
+    /// Image `arrow_down`.
+    static let arrow_down = ImageResource(bundle: _R.hostingBundle, name: "arrow_down")
+    /// Image `arrow_up`.
+    static let arrow_up = ImageResource(bundle: _R.hostingBundle, name: "arrow_up")
     /// Image `arrow_white`.
     static let arrow_white = ImageResource(bundle: _R.hostingBundle, name: "arrow_white")
     /// Image `astronaut_green`.
@@ -147,6 +151,16 @@ struct R {
     /// `UIImage(named: "anchor_green", bundle: ..., traitCollection: ...)`
     static func anchor_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.anchor_green, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "arrow_down", bundle: ..., traitCollection: ...)`
+    static func arrow_down(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.arrow_down, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "arrow_up", bundle: ..., traitCollection: ...)`
+    static func arrow_up(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.arrow_up, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "arrow_white", bundle: ..., traitCollection: ...)`
