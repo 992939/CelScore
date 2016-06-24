@@ -20,6 +20,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     private let switchNode: ASDisplayNode
     private let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
+    internal let trendNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
     
@@ -67,6 +68,10 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
         self.backgroundNode.backgroundColor = Constants.kMainShade
         
+        self.trendNode = ASImageNode()
+        self.trendNode.image = R.image.sphere_green()!
+        self.trendNode.preferredFrameSize = CGSize(width: 15, height: 15)
+        
         super.init()
         self.selectionStyle = .None
         box.delegate = self
@@ -76,6 +81,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
+        self.addSubnode(self.trendNode)
     }
     
     //MARK: Methods
@@ -85,11 +91,11 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         
         let verticalStack = ASStackLayoutSpec(
         direction: .Vertical,
-        spacing: Constants.kPadding,
+        spacing: Constants.kPadding/3,
         justifyContent: .Start,
         alignItems: .Start,
-        children: [self.nameNode, self.ratingsNode])
-        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: UIDevice.getVerticalStackPercent())
+        children: [self.nameNode, self.ratingsNode, self.trendNode])
+        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: Constants.kVerticalStackPercent)
         verticalStack.flexGrow = true
         
         let horizontalStack = ASStackLayoutSpec(

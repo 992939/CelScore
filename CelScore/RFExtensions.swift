@@ -198,17 +198,6 @@ extension UIDevice {
         return height
     }
     
-    static func getVerticalStackPercent() -> CGFloat {
-        let position: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: position =  0.55
-        case Constants.kIPhone5_height: position = 0.55
-        case Constants.kIPhone6_height: position = 0.55
-        default: position = 0.55
-        }
-        return position
-    }
-    
     static func getFollowCheckBoxPosition() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {
