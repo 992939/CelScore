@@ -41,27 +41,13 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
-        self.trendNode = ASImageNode()
-        self.trendNode.image = R.image.arrow_up()!
-        self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        
-        self.consensusNode = ASImageNode()
-        self.consensusNode.image = R.image.sphere_green()!
-        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        
-        self.faceNode = ASImageNode()
-        self.faceNode.image = R.image.sadFace()!
-        self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = 15
         cosmosView.settings.starMargin = 1.0
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
-            cosmosView.rating = score
-        }
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in cosmosView.rating = score }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext { hasRatings in
             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
             cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
@@ -84,9 +70,24 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
         self.backgroundNode.backgroundColor = Constants.kMainShade
         
+        self.trendNode = ASImageNode()
+        self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.consensusNode = ASImageNode()
+        self.consensusNode.image = R.image.sphere_green()!
+        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.faceNode = ASImageNode()
+        self.faceNode.image = R.image.sadFace()!
+        self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
         super.init()
         self.selectionStyle = .None
         box.delegate = self
+        
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
+            self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
+        }
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
