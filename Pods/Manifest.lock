@@ -78,7 +78,7 @@ PODS:
 
 DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
-  - Armchair (~> 0.1)
+  - Armchair (= 0.1.2)
   - AsyncDisplayKit (~> 1.9.80)
   - AWSAPIGateway (~> 2.4.3)
   - AWSCognito (~> 2.4.3)
@@ -150,6 +150,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: c26fa6362496f3d41dde06b45cf49c23fb8dcde2
+PODFILE CHECKSUM: 12e4c3885289a7d2595e2e2a9534d28a55f3b3c7
 
 COCOAPODS: 1.0.1

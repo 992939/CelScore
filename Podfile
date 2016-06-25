@@ -42,7 +42,7 @@ target 'CelScore' do
     pod 'Dwifft', '~> 0.3.1'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
-    pod 'Armchair', '~> 0.1'
+    pod 'Armchair', '0.1.2'
 
 end
 
