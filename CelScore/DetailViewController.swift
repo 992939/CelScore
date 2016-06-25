@@ -188,16 +188,22 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
                 if isConsensus == false {
-                    TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                    SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
+                        if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions()) }
+                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
+                        TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                    }
                 }
                 return isConsensus })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
             .on(next: { message in
-                TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
+                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions()) }
+                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
+                    TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                }
             })
             .start()
     }

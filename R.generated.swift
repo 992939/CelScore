@@ -31,7 +31,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 64 images.
+  /// This `R.image` struct is generated, and contains static references to 66 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -111,6 +111,8 @@ struct R {
     static let mic_green = ImageResource(bundle: _R.hostingBundle, name: "mic_green")
     /// Image `mic_purple`.
     static let mic_purple = ImageResource(bundle: _R.hostingBundle, name: "mic_purple")
+    /// Image `mic_yellow`.
+    static let mic_yellow = ImageResource(bundle: _R.hostingBundle, name: "mic_yellow")
     /// Image `networkError`.
     static let networkError = ImageResource(bundle: _R.hostingBundle, name: "networkError")
     /// Image `nosmileFace`.
@@ -147,6 +149,8 @@ struct R {
     static let sphere_green_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_mini")
     /// Image `sphere_pink_mini`.
     static let sphere_pink_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_pink_mini")
+    /// Image `sphere_yellow`.
+    static let sphere_yellow = ImageResource(bundle: _R.hostingBundle, name: "sphere_yellow")
     /// Image `star_black`.
     static let star_black = ImageResource(bundle: _R.hostingBundle, name: "star_black")
     /// Image `star_green`.
@@ -357,6 +361,11 @@ struct R {
       return UIImage(resource: R.image.mic_purple, compatibleWithTraitCollection: traitCollection)
     }
     
+    /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
+    static func mic_yellow(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.mic_yellow, compatibleWithTraitCollection: traitCollection)
+    }
+    
     /// `UIImage(named: "networkError", bundle: ..., traitCollection: ...)`
     static func networkError(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.networkError, compatibleWithTraitCollection: traitCollection)
@@ -445,6 +454,11 @@ struct R {
     /// `UIImage(named: "sphere_pink_mini", bundle: ..., traitCollection: ...)`
     static func sphere_pink_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sphere_pink_mini, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_yellow", bundle: ..., traitCollection: ...)`
+    static func sphere_yellow(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_yellow, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "star_black", bundle: ..., traitCollection: ...)`
