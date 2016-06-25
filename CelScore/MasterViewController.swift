@@ -18,6 +18,7 @@ import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
 import MessageUI
+import Timepiece
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
@@ -86,7 +87,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                        if type == .Facebook { UserViewModel().refreshFacebookTokenSignal() }
+                        if type == .Facebook { self.facebookTokenCheck() }
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -147,6 +148,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .start()
             }
         }
+    }
+    
+    func facebookTokenCheck() {
+        let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
+        if expirationDate < NSDate.today() { self.facebookLogin(false) }
+        else { UserViewModel().refreshFacebookTokenSignal() }
     }
     
     func openSettings() {
