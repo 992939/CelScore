@@ -235,17 +235,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Sociable
     func handleMenu(open: Bool = false) {
         let image: UIImage?
-        if self.socialButton.menu.opened {
-            self.socialButton.menu.close()
-            image = R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate)
-        } else {
+        if open || (open == false && self.socialButton.menu.opened == false){
             self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
             image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
+            let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+            first?.animate(MaterialAnimation.rotate(rotation: 5))
+            first?.setImage(image, forState: .Normal)
+            first?.setImage(image, forState: .Highlighted)
+        } else if self.socialButton.menu.opened {
+            self.socialButton.menu.close()
+            image = R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate)
+            let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+            first?.animate(MaterialAnimation.rotate(rotation: 5))
+            first?.setImage(image, forState: .Normal)
+            first?.setImage(image, forState: .Highlighted)
         }
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first?.animate(MaterialAnimation.rotate(rotation: 5))
-        first?.setImage(image, forState: .Normal)
-        first?.setImage(image, forState: .Highlighted)
     }
     
     func movingSocialButton(onScreen onScreen: Bool) {
