@@ -172,6 +172,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observeOn(UIScheduler())
             .on(next: { (userRatings:RatingsModel) in
+                let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+                first?.backgroundColor = Constants.kStarRatingShade
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
@@ -343,8 +345,13 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
+        
+        MaterialAnimation.delay(1) {
+            self.voteButton.pulseAnimation = .CenterWithBacking
+            self.voteButton.pulse()
+        }
     }
-    
+
     func disableButton(button button: MaterialButton, image: UIImage) {
         button.enabled = false
         button.setImage(image, forState: .Normal)
