@@ -125,23 +125,28 @@ extension Sociable where Self: UIViewController {
     }
     
     func socialButtonTapped(buttonTag buttonTag: Int, hideButton: Bool) {
-        if buttonTag == 1 {
-            let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-            FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                guard error == nil else {
+        if buttonTag == 1 { self.facebookLogin(hideButton) }
+        else { self.twitterLogin(hideButton) }
+    }
+    
+    func facebookLogin(hideButton: Bool) {
+        let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
+        FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+            guard error == nil else {
                 return TAOverlay.showOverlayWithLabel(OverlayInfo.LoginError.message("Facebook"), image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
-                }
-                guard result.isCancelled == false else { return }
-                FBSDKAccessToken.setCurrentAccessToken(result.token)
-                self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton)
-            })
-        } else {
-            Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
-                guard error == nil else {
-                    return TAOverlay.showOverlayWithLabel(OverlayInfo.LoginError.message("Twitter"), image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
-                }
-                self.loginFlow(token: "", with: .Twitter, hide: hideButton)
             }
+            guard result.isCancelled == false else { return }
+            FBSDKAccessToken.setCurrentAccessToken(result.token)
+            self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton)
+        })
+    }
+    
+    func twitterLogin(hideButton: Bool) {
+        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
+            guard error == nil else {
+                return TAOverlay.showOverlayWithLabel(OverlayInfo.LoginError.message("Twitter"), image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
+            }
+            self.loginFlow(token: "", with: .Twitter, hide: hideButton)
         }
     }
     
