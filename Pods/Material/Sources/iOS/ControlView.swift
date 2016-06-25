@@ -33,7 +33,7 @@ import UIKit
 public class ControlView : MaterialView {
 	/// Will render the view.
 	public var willRenderView: Bool {
-		return 0 < width
+		return 0 < width && 0 < height
 	}
 	
 	/// A preset wrapper around contentInset.
@@ -126,7 +126,6 @@ public class ControlView : MaterialView {
 	*/
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		prepareView()
 	}
 	
 	/**
@@ -137,14 +136,12 @@ public class ControlView : MaterialView {
 	*/
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		prepareView()
 	}
 	
 	/// Basic initializer.
 	public init() {
-		super.init(frame: CGRectZero)
+		super.init(frame: CGRect.zero)
 		frame.size = intrinsicContentSize()
-		prepareView()
 	}
 	
 	/**
@@ -153,9 +150,8 @@ public class ControlView : MaterialView {
 	- Parameter rightControls: An Array of UIControls that go on the right side.
 	*/
 	public init(leftControls: Array<UIControl>? = nil, rightControls: Array<UIControl>? = nil) {
-		super.init(frame: CGRectZero)
+		super.init(frame: CGRect.zero)
 		frame.size = intrinsicContentSize()
-		prepareView()
 		prepareProperties(leftControls, rightControls: rightControls)
 	}
 	

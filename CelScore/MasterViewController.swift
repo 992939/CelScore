@@ -331,7 +331,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: SideNavigationControllerDelegate
-    func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: SideNavigationPosition) {
+    func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController?.enabled = false
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in self.movingSocialButton(onScreen: false) })
@@ -343,7 +343,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func navigationDrawerWillOpen(navigationDrawerController: NavigationDrawerController, position: SideNavigationPosition) {
+    func navigationDrawerWillOpen(navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController!.leftViewController?.viewDidAppear(true)
     }
     

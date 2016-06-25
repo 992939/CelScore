@@ -31,7 +31,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Keys (1.0.0)
-  - Material (1.42.1)
+  - Material (1.42.6)
   - PINCache (2.2.2)
   - PINRemoteImage/Core (3.0.0-beta.2):
     - PINCache (>= 2.1)
@@ -53,11 +53,11 @@ PODS:
   - ReactiveCocoa/UI (4.1.0):
     - ReactiveCocoa/Core
     - Result (~> 2.0)
-  - Realm (1.0.0):
-    - Realm/Headers (= 1.0.0)
-  - Realm/Headers (1.0.0)
-  - RealmSwift (1.0.0):
-    - Realm (= 1.0.0)
+  - Realm (1.0.1):
+    - Realm/Headers (= 1.0.1)
+  - Realm/Headers (1.0.1)
+  - RealmSwift (1.0.1):
+    - Realm (= 1.0.1)
   - Result (2.0.0)
   - RevealingSplashView (0.0.5)
   - SDWebImage (3.8.1):
@@ -90,13 +90,13 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.12)
   - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Material (~> 1.42.1)
+  - Material (= 1.42.6)
   - PMAlertController (~> 1.0.4)
   - R.swift (~> 2.3)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)
-  - Realm (~> 1.0)
-  - RealmSwift (~> 1.0)
+  - Realm (= 1.0.1)
+  - RealmSwift (= 1.0.1)
   - RevealingSplashView (~> 0.0)
   - SDWebImage (~> 3.8.1)
   - SMSegmentView (~> 1.1)
@@ -128,7 +128,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Material: d4b27f1cb0993c66bf9dd92b7f80e06833fc4258
+  Material: 76dc9b14ad8b3a2ad673b77ad73dd66ed1eee68c
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
   PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
@@ -136,8 +136,8 @@ SPEC CHECKSUMS:
   R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
-  Realm: e15cd8e7c11d3e576f628ba0b7cb855269b4991c
-  RealmSwift: 3229306d020d96f83b335f87a0dcbf2cef0e6a2b
+  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
+  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   RevealingSplashView: f38cd6be822804e69fb5f124a0169d0bb4f38f23
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
@@ -150,6 +150,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: b36cfb902c6b221b33f132f93e19278a0adcebc6
+PODFILE CHECKSUM: c26fa6362496f3d41dde06b45cf49c23fb8dcde2
 
 COCOAPODS: 1.0.1
