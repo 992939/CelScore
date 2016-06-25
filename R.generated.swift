@@ -31,7 +31,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 62 images.
+  /// This `R.image` struct is generated, and contains static references to 64 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -143,6 +143,10 @@ struct R {
     static let sphere_green = ImageResource(bundle: _R.hostingBundle, name: "sphere_green")
     /// Image `sphere_green_big`.
     static let sphere_green_big = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_big")
+    /// Image `sphere_green_mini`.
+    static let sphere_green_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_mini")
+    /// Image `sphere_pink_mini`.
+    static let sphere_pink_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_pink_mini")
     /// Image `star_black`.
     static let star_black = ImageResource(bundle: _R.hostingBundle, name: "star_black")
     /// Image `star_green`.
@@ -431,6 +435,16 @@ struct R {
     /// `UIImage(named: "sphere_green_big", bundle: ..., traitCollection: ...)`
     static func sphere_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sphere_green_big, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_green_mini", bundle: ..., traitCollection: ...)`
+    static func sphere_green_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_green_mini, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_pink_mini", bundle: ..., traitCollection: ...)`
+    static func sphere_pink_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_pink_mini, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "star_black", bundle: ..., traitCollection: ...)`

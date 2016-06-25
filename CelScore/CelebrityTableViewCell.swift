@@ -74,11 +74,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.consensusNode = ASImageNode()
-        self.consensusNode.image = R.image.sphere_green()!
         self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.faceNode = ASImageNode()
-        self.faceNode.image = R.image.sadFace()!
         self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         super.init()
@@ -88,6 +86,24 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
             self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
         }
+        
+        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext { consensus in
+            self.consensusNode.image = consensus >= 70 ? R.image.sphere_green_mini()! : R.image.sphere_pink_mini()!
+        }
+        
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.UserRatings)
+            .on(failed: { _ in self.faceNode.image = R.image.emptyCircle()! })
+            .on(next: { ratings in
+                switch ratings.getCelScore() {
+                case 4.5..<5.0: self.faceNode.image = R.image.happyFace()!
+                case 3.5..<4.5: self.faceNode.image = R.image.smileFace()!
+                case 3.0..<3.5: self.faceNode.image = R.image.nosmileFace()!
+                case 2.0..<3.0: self.faceNode.image = R.image.sadFace()!
+                case 1.0..<2.0: self.faceNode.image = R.image.angryFace()!
+                default: self.faceNode.image = R.image.emptyCircle()!
+                }
+            })
+            .start()
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
