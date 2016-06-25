@@ -95,7 +95,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             .on(failed: { _ in self.faceNode.image = R.image.emptyCircle()! })
             .on(next: { ratings in
                 switch ratings.getCelScore() {
-                case 4.5..<5.0: self.faceNode.image = R.image.happyFace()!
+                case 4.5..<5.1: self.faceNode.image = R.image.happyFace()!
                 case 3.5..<4.5: self.faceNode.image = R.image.smileFace()!
                 case 3.0..<3.5: self.faceNode.image = R.image.nosmileFace()!
                 case 2.0..<3.0: self.faceNode.image = R.image.sadFace()!

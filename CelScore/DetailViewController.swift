@@ -83,13 +83,15 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, forState: .Normal)
                     first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
-                    first?.backgroundColor = Constants.kStarRatingShade
                 } else {
                     first?.setImage(R.image.cross()!, forState: .Normal)
                     first?.setImage(R.image.cross()!, forState: .Highlighted)
-                    first?.backgroundColor = MaterialColor.white
                 }
             })
+        
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+        })
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kDarkShade
@@ -290,13 +292,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     if (status as! Bool) == true {
                         first?.setImage(R.image.ic_add_black()!, forState: .Normal)
                         first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
-                        first?.backgroundColor = Constants.kStarRatingShade
                     } else {
                         first?.setImage(R.image.cross()!, forState: .Normal)
                         first?.setImage(R.image.cross()!, forState: .Highlighted)
-                        first?.backgroundColor = MaterialColor.white
                     }
                 })
+            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+                first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            })
         }
     }
     
@@ -344,9 +347,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func disableButton(button button: MaterialButton, image: UIImage) {
         button.enabled = false
-        button.backgroundColor = MaterialColor.white
         button.setImage(image, forState: .Normal)
         button.setImage(image, forState: .Highlighted)
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            button.tintColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            button.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+        })
     }
     
     //MARK: MFMailComposeViewControllerDelegate
@@ -474,8 +480,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseAnimation = .None
-        self.voteButton.tintColor = MaterialColor.white
         self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            self.voteButton.tintColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+        })
     }
 }
 
