@@ -189,8 +189,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
                 if isConsensus == false {
                     SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
-                        if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions()) }
-                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
+                        if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
+                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions()) }
                         TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                     }
                 }
@@ -200,8 +200,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
             .on(next: { message in
                 SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
-                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions()) }
-                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
+                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
+                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions()) }
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
             })
