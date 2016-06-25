@@ -21,7 +21,6 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     private let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
-    internal let fireNode: ASImageNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -75,16 +74,12 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.trendNode.image = R.image.arrow_up()!
         self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
-        self.fireNode = ASImageNode()
-        self.fireNode.image = R.image.arrow_down()!
-        self.fireNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        
         self.consensusNode = ASImageNode()
-        self.consensusNode.image = R.image.arrow_up()!
+        self.consensusNode.image = R.image.sphere_green()!
         self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.faceNode = ASImageNode()
-        self.faceNode.image = R.image.arrow_up()!
+        self.faceNode.image = R.image.angryFace()!
         self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         super.init()
@@ -97,7 +92,6 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
-        self.addSubnode(self.fireNode)
         self.addSubnode(self.consensusNode)
         self.addSubnode(self.faceNode)
     }
@@ -112,7 +106,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: Constants.kPadding/2,
             justifyContent: .Start,
             alignItems: .Start,
-            children: [self.trendNode, self.fireNode, self.consensusNode, self.faceNode])
+            children: [self.trendNode, self.consensusNode, self.faceNode])
         minisStack.flexGrow = true
         
         let verticalStack = ASStackLayoutSpec(
