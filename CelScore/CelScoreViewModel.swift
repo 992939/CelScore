@@ -61,18 +61,16 @@ struct CelScoreViewModel {
     
     func getNewCelebsSignal() -> SignalProducer<NewCelebInfo, CelebrityError> {
         return SignalProducer { observer, disposable in
-            print("getNewCelebsSignal A")
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
             guard celebs.count > 0 else { return observer.sendFailed(.NotFound) }
 
-            var message: String = celebs.first!.nickName + " has been added to the score!\n\n"
-            if celebs.count == 2 { message = message + "\(celebs.count-1) more star has been added to the score. " }
-            else if celebs.count > 2 { message = message + "\(celebs.count-1) more stars have been added to the score. " }
-            message = message + "All the recently added stars are available in the \"New\" section."
+            let message: String?
+            if celebs.count == 1 { message = celebs.first!.nickName + " has been added to the score.\n\n" }
+            else { message = celebs.first!.nickName + " and \(celebs.count-1) other celeb(s) have been added to the score. " }
+            let completeMessage = message! + "All the recently added celebs are available in the \"New\" section."
             guard celebs.count < 100 else { return observer.sendCompleted() }
-            observer.sendNext((message, celebs.first!.picture3x))
-            print("getNewCelebsSignal B")
+            observer.sendNext((completeMessage, celebs.first!.picture3x))
             
             celebs.forEach({ celeb in
                 realm.beginWrite()
