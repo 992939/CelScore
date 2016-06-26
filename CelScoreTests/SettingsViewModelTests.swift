@@ -36,15 +36,6 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("calculateSocialConsensusSignal error: \(error)") } }
     }
     
-    func testIsPositiveVoteSignal() {
-        let expectation = expectationWithDescription("isPositiveVoteSignal callback")
-        SettingsViewModel().isPositiveVoteSignal()
-            .on(next: { value in XCTAssert((value as Any) is Bool); expectation.fulfill() })
-            .on(failed: { value in XCTAssert((value as Any) is Bool); expectation.fulfill() })
-            .start()
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("isPositiveVoteSignal error: \(error)") } }
-    }
-    
     func testUpdateUserNameSignal() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = expectationWithDescription("updateUserNameSignal callback")

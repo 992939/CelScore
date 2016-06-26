@@ -15,14 +15,6 @@ import ReactiveCocoa
 import MessageUI
 
 
-struct UserStruct {
-    let socialMessage: String
-    let isPositive: Bool
-    func updateMessage(message: String) -> UserStruct { return UserStruct(socialMessage: message, isPositive: isPositive) }
-    func updatePositive(positive: Bool) -> UserStruct { return UserStruct(socialMessage: socialMessage, isPositive: positive) }
-}
-
-
 final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
@@ -32,7 +24,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     private let voteButton: MaterialButton
     private let celebST: CelebrityStruct
     private let socialButton: MenuView
-    private var userST = UserStruct(socialMessage: "", isPositive: true)
+    private var socialMessage: String = ""
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -47,10 +39,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.socialButton = MenuView()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
-
-        SettingsViewModel().isPositiveVoteSignal()
-            .on(next: { value in self.userST = self.userST.updatePositive(value) })
-            .start()
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
             .startOn(QueueScheduler())
@@ -283,7 +271,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
             self.socialButton.menu.enabled = true
-            first?.backgroundColor = self.userST.isPositive ? Constants.kDarkGreenShade : Constants.kWineShade
+            first?.backgroundColor = Constants.kDarkGreenShade
             first?.pulseAnimation = .CenterWithBacking
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
@@ -315,7 +303,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.userST.socialMessage, screenshot: screenshot).startWithNext { socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage, screenshot: screenshot).startWithNext { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
@@ -434,7 +422,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
 
     func socialSharing(message message: String) {
         self.handleMenu(true)
-        self.userST = self.userST.updateMessage(message)
+        self.socialMessage = message
     }
     
     //MARK: ViewDidLoad Helpers
