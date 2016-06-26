@@ -208,17 +208,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
-            .delay(2, onScheduler: QueueScheduler.mainQueueScheduler)
-            .on(next: { first in let firstTime = first as! Bool
-                guard firstTime else { return }
-                let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
-                alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
-                    self.movingSocialButton(onScreen: true) }))
-                alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                alertVC.view.opaque = false
-                self.presentViewController(alertVC, animated: true, completion: nil)
+            .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
+                if firstTime {
+                    let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
+                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
+                        self.movingSocialButton(onScreen: true) }))
+                    alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+                    alertVC.view.opaque = false
+                    MaterialAnimation.delay(2) { self.presentViewController(alertVC, animated: true, completion: nil) }
+                }
+                return firstTime == false
+            })
+            .flatMapError { _ in SignalProducer.empty }
+            .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+            .observeOn(UIScheduler())
+            .on(next: { celebInfo in MaterialAnimation.delay(1) {
+                    TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
+                }
             })
             .start()
     }
