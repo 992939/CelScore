@@ -15,7 +15,6 @@ import Material
 import RateLimit
 import Fabric
 import Crashlytics
-import AIRTimer
 import ReactiveCocoa
 import FBSDKCoreKit
 import Armchair
@@ -27,7 +26,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Property
     var window: UIWindow?
-    var timer: AIRTimer?
     
     //MARK: Methods
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -118,10 +116,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        timer?.invalidate()
         RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
     }
-    func applicationWillResignActive(application: UIApplication) { timer = AIRTimer.after(120.0, handler: { _ in exit(0) }) }
+    func applicationWillResignActive(application: UIApplication) { }
     func applicationDidEnterBackground(application: UIApplication) { }
-    func applicationWillEnterForeground(application: UIApplication) { timer?.invalidate() }
+    func applicationWillEnterForeground(application: UIApplication) { }
 }
