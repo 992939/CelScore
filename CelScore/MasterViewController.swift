@@ -164,7 +164,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_green_big()!, style: .Alert)
+                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_green_big()!, style: .Alert)
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Cancel, action: { _ in
                     MaterialAnimation.delay(0.5) { self.handleMenu(true) }
                     self.dismissViewControllerAnimated(true, completion: nil) }))
@@ -210,7 +210,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
-                    let alertVC = PMAlertController(title: "welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
+                    let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
                     alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Cancel, action: { _ in
                         self.dismissViewControllerAnimated(true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
