@@ -245,10 +245,10 @@ extension UIDevice {
     static func getGaugeDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 170.0
-        case Constants.kIPhone5_height: diameter = 190.0
-        case Constants.kIPhone6_height: diameter = 215.0
-        default: diameter = 240.0
+        case Constants.kIPhone4_height: diameter = 140.0
+        case Constants.kIPhone5_height: diameter = 160.0
+        case Constants.kIPhone6_height: diameter = 185.0
+        default: diameter = 210.0
         }
         return diameter
     }

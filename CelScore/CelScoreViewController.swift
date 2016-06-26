@@ -31,13 +31,15 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gaugeHeight = Constants.kBottomHeight - 70
+        let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 2))
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
             let percentage = String(consensus.roundToPlaces(2)) + "%"
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "General Consensus", value: percentage, tag: 3))
         })
+        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: "Talented", tag: 4))
+        
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
     }
