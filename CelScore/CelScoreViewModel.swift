@@ -61,6 +61,7 @@ struct CelScoreViewModel {
     
     func getNewCelebsSignal() -> SignalProducer<NewCelebInfo, CelebrityError> {
         return SignalProducer { observer, disposable in
+            print("getNewCelebsSignal A")
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
             guard celebs.count > 0 else { return observer.sendFailed(.NotFound) }
@@ -71,6 +72,7 @@ struct CelScoreViewModel {
             message = message + "All the recently added stars are available in the \"New\" section."
             guard celebs.count < 100 else { return observer.sendCompleted() }
             observer.sendNext((message, celebs.first!.picture3x))
+            print("getNewCelebsSignal B")
             
             celebs.forEach({ celeb in
                 realm.beginWrite()
