@@ -38,6 +38,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
+        self.profilePicNode.defaultImage = R.image.anonymous()
         self.profilePicNode.contentMode = .ScaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
