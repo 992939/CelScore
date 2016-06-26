@@ -85,9 +85,9 @@ enum OverlayInfo {
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "We were not able to log you in.\n\nCheck your network connection in the settings and that the CelebrityScore has permission to access to your \(social) account.\n\nIf the problem persists, please report the issue."
-        case .NetworkError: return "We are not able to get a good connection and grab the lastest data.\n\nIf the problem persists, please report the issue."
-        case .TimeoutError: return "We were not able to connect to the cloud.\n\nCheck your network connection in the settings and that the CelebrityScore has permission to access to your \(social) account.\n\nIf the problem persists, please report the issue."
+        case .LoginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .NetworkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
+        case .TimeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
     
@@ -109,9 +109,9 @@ enum OverlayInfo {
         case .FirstVoteDisable: return R.image.mic_green()!
         case .FirstTrollWarning: return R.image.nuclear_purple()!
         case .LogoutUser: return R.image.planet_green()!
-        case .LoginError: return R.image.networkError()!
-        case .NetworkError: return R.image.networkError()!
-        case .TimeoutError: return R.image.networkError()!
+        case .LoginError: return R.image.cloud_green()!
+        case .NetworkError: return R.image.cloud_green()!
+        case .TimeoutError: return R.image.cloud_green()!
         }
     }
     

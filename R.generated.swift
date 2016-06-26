@@ -57,6 +57,8 @@ struct R {
     static let celscore_purple = ImageResource(bundle: _R.hostingBundle, name: "celscore_purple")
     /// Image `celscore_white`.
     static let celscore_white = ImageResource(bundle: _R.hostingBundle, name: "celscore_white")
+    /// Image `cloud_green`.
+    static let cloud_green = ImageResource(bundle: _R.hostingBundle, name: "cloud_green")
     /// Image `cloud_green_big`.
     static let cloud_green_big = ImageResource(bundle: _R.hostingBundle, name: "cloud_green_big")
     /// Image `contract_green_big`.
@@ -115,8 +117,6 @@ struct R {
     static let mic_purple = ImageResource(bundle: _R.hostingBundle, name: "mic_purple")
     /// Image `mic_yellow`.
     static let mic_yellow = ImageResource(bundle: _R.hostingBundle, name: "mic_yellow")
-    /// Image `networkError`.
-    static let networkError = ImageResource(bundle: _R.hostingBundle, name: "networkError")
     /// Image `nosmileFace`.
     static let nosmileFace = ImageResource(bundle: _R.hostingBundle, name: "nosmileFace")
     /// Image `nuclear_green`.
@@ -226,6 +226,11 @@ struct R {
     /// `UIImage(named: "celscore_white", bundle: ..., traitCollection: ...)`
     static func celscore_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.celscore_white, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "cloud_green", bundle: ..., traitCollection: ...)`
+    static func cloud_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.cloud_green, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "cloud_green_big", bundle: ..., traitCollection: ...)`
@@ -371,11 +376,6 @@ struct R {
     /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
     static func mic_yellow(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.mic_yellow, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "networkError", bundle: ..., traitCollection: ...)`
-    static func networkError(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.networkError, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "nosmileFace", bundle: ..., traitCollection: ...)`

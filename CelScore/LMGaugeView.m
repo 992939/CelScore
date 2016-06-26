@@ -16,7 +16,7 @@
 #define kDefaultNumOfDivisions                  6
 #define kDefaultNumOfSubDivisions               10
 
-#define kDefaultRingThickness                   15
+#define kDefaultRingThickness                   14
 #define kDefaultRingBackgroundColor             [UIColor colorWithWhite:0.9 alpha:1]
 #define kDefaultRingColor                       [UIColor colorWithRed:76.0/255 green:217.0/255 blue:100.0/255 alpha:1]
 
