@@ -14,8 +14,8 @@ def shared_pods
     pod 'Realm', '1.0.1'
     pod 'RealmSwift', '1.0.1'
     pod 'AsyncDisplayKit', '~> 1.9.80'
-    pod 'AWSCognito', '~> 2.4.3'
-    pod 'AWSAPIGateway', '~> 2.4.3'
+    pod 'AWSCognito', '~> 2.4.4'
+    pod 'AWSAPIGateway', '~> 2.4.4'
     pod 'BEMCheckBox', '~> 1.2'
 end
 
@@ -25,12 +25,12 @@ target 'CelScore' do
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'SDWebImage', '~>3.8.1'
     pod 'Material', '1.42.6'
-    pod 'R.swift', '~> 2.3'
+    pod 'R.swift', '~> 2.4'
     pod 'WebASDKImageManager', '~> 1.1'
-    pod 'FBSDKLoginKit', '~> 4.12'
-    pod 'FBSDKCoreKit', '~> 4.12'
+    pod 'FBSDKLoginKit', '~> 4.13'
+    pod 'FBSDKCoreKit', '~> 4.13'
     pod 'Fabric', '~> 1.6.7'
-    pod 'Crashlytics', '~> 3.7.0'
+    pod 'Crashlytics', '~> 3.7.2'
     pod 'TwitterKit', '~> 2.2.0'
     pod 'TwitterCore', '~> 2.2.0'
     pod 'RateLimit', '~> 1.2'
@@ -43,7 +43,6 @@ target 'CelScore' do
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
     pod 'Armchair', '0.1.2'
-
 end
 
 target 'CelScoreTests' do

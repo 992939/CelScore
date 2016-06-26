@@ -9,11 +9,11 @@ PODS:
   - AsyncDisplayKit/PINRemoteImage (1.9.80):
     - AsyncDisplayKit/Core
     - PINRemoteImage/iOS (>= 3.0.0-beta.2)
-  - AWSAPIGateway (2.4.3):
-    - AWSCore (= 2.4.3)
-  - AWSCognito (2.4.3):
-    - AWSCore (= 2.4.3)
-  - AWSCore (2.4.3)
+  - AWSAPIGateway (2.4.4):
+    - AWSCore (= 2.4.4)
+  - AWSCognito (2.4.4):
+    - AWSCore (= 2.4.4)
+  - AWSCore (2.4.4)
   - BEMCheckBox (1.2.1)
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
@@ -21,13 +21,13 @@ PODS:
   - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.7.0)
-  - Crashlytics (3.7.0):
+  - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - Dwifft (0.3.1)
   - Fabric (1.6.7)
-  - FBSDKCoreKit (4.12.0):
+  - FBSDKCoreKit (4.13.1):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.12.0):
+  - FBSDKLoginKit (4.13.1):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Keys (1.0.0)
@@ -38,9 +38,9 @@ PODS:
   - PINRemoteImage/iOS (3.0.0-beta.2):
     - PINRemoteImage/Core
   - PMAlertController (1.0.4)
-  - R.swift (2.3.0):
-    - R.swift.Library (~> 2.1.0)
-  - R.swift.Library (2.1.0)
+  - R.swift (2.4.0):
+    - R.swift.Library (~> 2.2.0)
+  - R.swift.Library (2.2.0)
   - RateLimit (1.2.1)
   - ReactiveCocoa (4.1.0):
     - ReactiveCocoa/UI (= 4.1.0)
@@ -58,7 +58,7 @@ PODS:
   - Realm/Headers (1.0.1)
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
-  - Result (2.0.0)
+  - Result (2.1.1)
   - RevealingSplashView (0.0.5)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -66,13 +66,13 @@ PODS:
   - SMSegmentView (1.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
-  - Timepiece (0.4.2)
+  - Timepiece (0.4.3)
   - TwitterCore (2.2.0):
     - Fabric
   - TwitterKit (2.2.0):
     - TwitterCore (= 2.2.0)
-  - WebASDKImageManager (1.1.0):
-    - AsyncDisplayKit (~> 1.9)
+  - WebASDKImageManager (1.1.1):
+    - AsyncDisplayKit/Core (~> 1.9)
     - SDWebImage/Core (~> 3.7)
   - YLProgressBar (3.8.1)
 
@@ -80,19 +80,19 @@ DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
   - Armchair (= 0.1.2)
   - AsyncDisplayKit (~> 1.9.80)
-  - AWSAPIGateway (~> 2.4.3)
-  - AWSCognito (~> 2.4.3)
+  - AWSAPIGateway (~> 2.4.4)
+  - AWSCognito (~> 2.4.4)
   - BEMCheckBox (~> 1.2)
-  - Crashlytics (~> 3.7.0)
+  - Crashlytics (~> 3.7.2)
   - Dwifft (~> 0.3.1)
   - Fabric (~> 1.6.7)
-  - FBSDKCoreKit (~> 4.12)
-  - FBSDKLoginKit (~> 4.12)
+  - FBSDKCoreKit (~> 4.13)
+  - FBSDKLoginKit (~> 4.13)
   - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (= 1.42.6)
   - PMAlertController (~> 1.0.4)
-  - R.swift (~> 2.3)
+  - R.swift (~> 2.4)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (~> 4.1)
   - Realm (= 1.0.1)
@@ -116,40 +116,40 @@ SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
   Armchair: 10f49453001a25036e1dc8e74e4f1b699add562c
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
-  AWSAPIGateway: 5e588cb28216cc3f275e67a7a1e7aeb61d88e75e
-  AWSCognito: 9a83fcecccd8b9efaa82fec7722ee2a4c723b0fe
-  AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
+  AWSAPIGateway: 17003560963e861b35c8b53de2df02afe0b1dabf
+  AWSCognito: 49a62a8f56d605a0454c900a37be207539bcb6e1
+  AWSCore: 67be10cc1e295e8238809e980fb1572b9e2ad8e6
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
-  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: 6e56d5a2a64a755ad4efb5dbeee8f82fb1b99775
-  FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
+  FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
+  FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: 76dc9b14ad8b3a2ad673b77ad73dd66ed1eee68c
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
   PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
-  R.swift: 38b2191a603c3d491a09baddfb4ccc7aa9be4d9d
-  R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
+  R.swift: 0ef9c42dc6c94ac44a3c78a7639c73f855a8e159
+  R.swift.Library: 31a487b65381f37a7d203a6f1f935b43c9be35b0
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
-  Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  Result: 822c879f145943320cc80a9a8372378e3d699fe4
   RevealingSplashView: f38cd6be822804e69fb5f124a0169d0bb4f38f23
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
+  Timepiece: b5038887b91d6eb70653173f4270e06b3abeac41
   TwitterCore: 115527630bb2986954adc928b8c895a92bcd57e5
   TwitterKit: 2c64ec342a6261ae6bab565bad85dcbbfd3888b7
-  WebASDKImageManager: fb20a10f3a286887e807e96ba5d73a2e4d2b3822
+  WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 12e4c3885289a7d2595e2e2a9534d28a55f3b3c7
+PODFILE CHECKSUM: 87dc8c70f89443b55042d66b8febbbd2782578eb
 
 COCOAPODS: 1.0.1
