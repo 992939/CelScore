@@ -38,7 +38,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             let percentage = String(consensus.roundToPlaces(2)) + "%"
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "General Consensus", value: percentage, tag: 3))
         })
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: "Talented", tag: 4))
+        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: Qualities(rawValue: 9)!.moneyShot(isMale: self.celebST.sex), tag: 4))
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
