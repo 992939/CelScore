@@ -38,7 +38,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             let percentage = String(consensus.roundToPlaces(2)) + "%"
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "General Consensus", value: percentage, tag: 3))
         })
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: Qualities(rawValue: 9)!.moneyShot(isMale: self.celebST.sex), tag: 4))
+        
+        RatingsViewModel().getMoneyShotSignal(ratingsId: self.celebST.id)
+            .on(failed: { _ in self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: "n/a", tag: 4)) })
+            .on(next: { index in  self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: Qualities(rawValue: index)!.moneyShot(isMale: self.celebST.sex), tag: 4))})
+            .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
@@ -82,7 +86,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
-        if tag == 4 { infoLabel.textColor = Constants.kLightGreenShade }
+        if tag == 4 && value != "n/a" { infoLabel.textColor = Constants.kLightGreenShade }
         infoLabel.textAlignment = .Right
         let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)

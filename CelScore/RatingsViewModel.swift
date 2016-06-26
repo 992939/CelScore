@@ -110,6 +110,17 @@ struct RatingsViewModel {
         }
     }
     
+    func getMoneyShotSignal(ratingsId ratingsId: String) -> SignalProducer<Int, RatingsError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", ratingsId).first!
+            guard let max = ratings.maxElement() else { return observer.sendFailed(.RatingsNotFound) }
+            guard (ratings[max] as! Double) >= 3 else { return observer.sendFailed(.RatingsNotFound) }
+            observer.sendNext(ratings.indexOf(max)!)
+            observer.sendCompleted()
+        }
+    }
+    
     func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
         let realm = try! Realm()
