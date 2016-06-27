@@ -85,10 +85,6 @@ extension Supportable where Self: UIViewController {
 
 extension Sociable where Self: UIViewController {
     func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
-        guard Reachability.isConnectedToNetwork() else {
-            return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
-        }
-        
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .observeOn(UIScheduler())

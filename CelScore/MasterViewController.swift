@@ -72,8 +72,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
-            guard Reachability.isConnectedToNetwork() else {
-                return TAOverlay.showOverlayWithLabel(OverlayInfo.NetworkError.message(), image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions()) }
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
                     .flatMapError { _ in SignalProducer.empty }
@@ -124,7 +122,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.setupData()
         
         NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
-            guard Reachability.isConnectedToNetwork() else { return }
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
@@ -179,7 +176,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         Duration.startMeasurement("setupData")
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
         self.view.addSubview(revealingSplashView)
-        guard Reachability.isConnectedToNetwork() else { return revealingSplashView.startAnimation() }
+        
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
@@ -188,24 +185,21 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 Duration.stopMeasurement()
                 revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
                 revealingSplashView.startAnimation()})
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
+            .on(next: { (value:AnyObject) in
+                self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
+                self.changeList() })
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(revealingSplashView) }
+                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(revealingSplashView) } else { revealingSplashView.startAnimation() }
                 self.dismissHUD()
                 self.changeList()
                 return SignalProducer.empty }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<ListsModel, ListError> in
-                self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
-                return ListViewModel().getListSignal(listId: ListInfo(rawValue: (value as! Int))!.getId()) }
-            .on(next: { list in
-                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
-            .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
@@ -279,7 +273,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func sendNetworkAlert(splashView: RevealingSplashView) {
-        let alertVC = PMAlertController(title: "cloud error", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
+        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_green_big()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
             self.dismissViewControllerAnimated(true, completion: {
                 splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
