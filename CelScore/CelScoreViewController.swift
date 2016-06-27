@@ -40,8 +40,8 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         })
         
         RatingsViewModel().getMoneyShotSignal(ratingsId: self.celebST.id)
-            .on(failed: { _ in self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: "n/a", tag: 4)) })
-            .on(next: { index in  self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Money Shot", value: Qualities(rawValue: index)!.moneyShot(isMale: self.celebST.sex), tag: 4))})
+            .on(failed: { _ in self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Claim to Fame", value: "n/a", tag: 4)) })
+            .on(next: { index in  self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Claim to Fame", value: Qualities(rawValue: index)!.name(isMale: self.celebST.sex), tag: 4))})
             .start()
         
         self.pulseView.backgroundColor = MaterialColor.clear
