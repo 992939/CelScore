@@ -345,7 +345,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: SideNavigationControllerDelegate
     func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
-        print("in closing")
         self.navigationDrawerController?.enabled = false
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in self.movingSocialButton(onScreen: false) })
