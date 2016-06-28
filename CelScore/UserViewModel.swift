@@ -190,7 +190,6 @@ struct UserViewModel {
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
                     if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 13 {
-                        print("error code be \(task.error!.code)")
                         Constants.kCredentialsProvider.clearKeychain()
                     }
                     observer.sendFailed(task.error!)

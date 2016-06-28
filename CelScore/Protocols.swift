@@ -60,8 +60,8 @@ extension Supportable where Self: UIViewController {
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
         mail.setToRecipients(["support@greyecology.io"])
-        mail.setSubject("CelScore Issue Report")
-        mail.setMessageBody("Please provide some information about the issue.", isHTML: false)
+        mail.setSubject("CelScore Issue")
+        mail.setMessageBody("Voter Id: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide more information about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     

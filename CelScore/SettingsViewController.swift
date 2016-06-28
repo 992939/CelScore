@@ -181,7 +181,12 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: 
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: { _ in self.navigationDrawerController!.closeLeftView() })
+        print("1. enabled: \(self.navigationDrawerController!.enabled) and left: \(self.navigationDrawerController!.enabledLeftView)")
+        controller.dismissViewControllerAnimated(true, completion: { _ in
+            self.navigationDrawerController!.enabled = true
+            print("2. enabled: \(self.navigationDrawerController!.enabled) and left: \(self.navigationDrawerController!.enabledLeftView)")
+            self.navigationDrawerController!.closeLeftView()
+        })
     }
     
     //MARK: UIPickerViewDelegate

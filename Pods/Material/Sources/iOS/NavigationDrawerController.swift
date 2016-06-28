@@ -658,12 +658,16 @@ public class NavigationDrawerController : RootController, UIGestureRecognizerDel
 	leftView. Defaults to 0.
 	*/
 	public func closeLeftView(velocity: CGFloat = 0) {
+        print("Helllloooooo")
 		if enabledLeftView {
+            print("enabled")
 			if let v: MaterialView = leftView {
+                print("left")
 				userInteractionEnabled = true
 				delegate?.navigationDrawerWillClose?(self, position: .Left)
 				UIView.animateWithDuration(Double(0 == velocity ? animationDuration : fmax(0.1, fmin(1, Double(v.x / velocity)))),
 					animations: { [weak self] in
+                         print("animation")
 						if let s: NavigationDrawerController = self {
 							v.position.x = -v.width / 2
 							s.rootViewController.view.alpha = 1
