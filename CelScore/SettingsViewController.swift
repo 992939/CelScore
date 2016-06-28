@@ -14,9 +14,10 @@ import AIRTimer
 import PMAlertController
 import ReactiveCocoa
 import MessageUI
+import SafariServices
 
 
-final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, MFMailComposeViewControllerDelegate {
+final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, MFMailComposeViewControllerDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Property
     private let picker: UIPickerView
@@ -41,10 +42,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let maxWidth: CGFloat = self.view.width - 2 * Constants.kPadding
         
         //Logo
-        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 75 - 2 * UIDevice.getOffset()))
+        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 70 - 2 * UIDevice.getOffset()))
         logoView.depth = .None
         let diameter = 60 - 2 * UIDevice.getOffset()
-        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 7 - UIDevice.getOffset()/2, width: diameter, height: diameter))
+        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 5 - UIDevice.getOffset()/2, width: diameter, height: diameter))
         logoCircle.setImage(R.image.court_white()!, forState: .Normal)
         logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
@@ -53,9 +54,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
-        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
+        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
         courtLabel.textAlignment = .Center
-        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 20 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
+        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
         houseLabel.textAlignment = .Center
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
@@ -112,31 +113,44 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.view.addSubnode(notificationNode)
             })
         
+        //Issue
+        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 30))
+        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
+        issueButton.setTitle("Report An Issue", forState: .Normal)
+        issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
+        issueButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        issueButton.titleLabel!.textAlignment = .Center
+        issueButton.pulseColor = Constants.kWineShade
+        issueView.addSubview(issueButton)
+        issueButton.titleLabel!.font = UIFont(name: issueButton.titleLabel!.font.fontName, size: Constants.kFontSize)
+        let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
+        self.view.addSubnode(issueNode)
+        
+        //Privacy
+        let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 130 + Constants.kPadding, width: maxWidth, height: 30))
+        let privacyButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
+        privacyButton.setTitle("Privacy Policy", forState: .Normal)
+        privacyButton.addTarget(self, action:#selector(self.showPolicy), forControlEvents: .TouchUpInside)
+        privacyButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        privacyButton.titleLabel!.textAlignment = .Center
+        privacyButton.pulseColor = Constants.kWineShade
+        privacyView.addSubview(privacyButton)
+        privacyButton.titleLabel!.font = UIFont(name: privacyButton.titleLabel!.font.fontName, size: Constants.kFontSize)
+        let privacyNode = ASDisplayNode(viewBlock: { () -> UIView in return privacyView })
+        self.view.addSubnode(privacyNode)
+        
         //Logout
-        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 40))
-        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
+        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 170 + Constants.kPadding, width: maxWidth, height: 30))
+        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
-        logoutButton.titleLabel?.textAlignment = .Center
+        logoutButton.titleLabel!.textAlignment = .Center
         logoutButton.pulseColor = Constants.kWineShade
         logoutView.addSubview(logoutButton)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
         self.view.addSubnode(logoutNode)
-        
-        //Issue
-        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 140 + Constants.kPadding, width: maxWidth, height: 40))
-        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
-        issueButton.setTitle("Report An Issue", forState: .Normal)
-        issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
-        issueButton.setTitleColor(Constants.kWineShade, forState: .Normal)
-        issueButton.titleLabel?.textAlignment = .Center
-        issueButton.pulseColor = Constants.kWineShade
-        issueView.addSubview(issueButton)
-        issueButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
-        let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
-        self.view.addSubnode(issueNode)
         
         self.view.backgroundColor = Constants.kDarkShade
         self.navigationDrawerController!.depth = .Depth1
@@ -179,11 +193,25 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func support() { self.sendEmail() }
     
-    //MARK: 
+    func showPolicy() {
+        let url = NSURL(string: Constants.kPolicyURL)
+        let vc = SFSafariViewController(URL: url!, entersReaderIfAvailable: false)
+        vc.delegate = self
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    //MARK: SFSafariViewControllerDelegate
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        MaterialAnimation.delay(0.75) {
+            self.navigationDrawerController!.enabled = true
+            self.navigationDrawerController!.closeLeftView()
+        }
+    }
+    
+    //MARK: MFMailComposeViewControllerDelegate
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: { _ in
             self.navigationDrawerController!.enabled = true
-            self.navigationDrawerController!.closeLeftView()
         })
     }
     

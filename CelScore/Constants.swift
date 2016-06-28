@@ -17,6 +17,7 @@ struct Constants {
     static let kCognitoIdentityPoolId: String = CelscoreKeys().kCognitoIdentityPoolId()
     static let kAPIKey: String = CelscoreKeys().kAPIKey()
     static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
+    static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
     
     static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5
@@ -56,7 +57,7 @@ struct Constants {
     static let kSearchListId: String = "0099"
     
     //SettingsVC
-    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.80 * kScreenWidth)
+    static let kSettingsViewWidth: CGFloat = kIsOriginalIphone ? 280 : (0.85 * kScreenWidth)
     static let kPickerY: CGFloat = kIsOriginalIphone ? -5 : 30
     
     //DetailVC 
