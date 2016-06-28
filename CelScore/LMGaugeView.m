@@ -281,7 +281,7 @@
         self.unitOfMeasurementLabel.hidden = !self.showUnitOfMeasurement;
     }
     self.unitOfMeasurementLabel.frame = CGRectMake(self.valueLabel.frame.origin.x,
-                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 5,
+                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 6,
                                                    CGRectGetWidth(self.valueLabel.frame),
                                                    20);
 }
