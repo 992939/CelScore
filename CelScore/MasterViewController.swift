@@ -419,6 +419,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
+        self.segmentedControl.isAccessibilityElement = true
+        self.segmentedControl.accessibilityLabel = "List Segmented Control"
         self.segmentedControl.addTarget(self, action: #selector(MasterViewController.changeList), forControlEvents: .ValueChanged)
     }
 }

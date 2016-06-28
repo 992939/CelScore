@@ -129,7 +129,9 @@
 		<string>com.GreyEcology.CelebrityScore.Celebrity</string>
 	</array>
 	<key>UIAppFonts</key>
-	<array/>
+	<array>
+		<string>icomoon2.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

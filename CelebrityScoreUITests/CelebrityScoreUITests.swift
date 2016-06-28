@@ -29,6 +29,23 @@ class CelebrityScoreUITests: XCTestCase {
     }
     
     func testExample() {
+        
+        let app = XCUIApplication()
+        let taylorSwiftElement = app.tables.cells.otherElements.containingType(.StaticText, identifier:"Taylor Swift").element
+        taylorSwiftElement.tap()
+        
+        let celebritySegmentViewElement = app.otherElements["Celebrity Segment View"]
+        celebritySegmentViewElement.tap()
+        celebritySegmentViewElement.tap()
+        celebritySegmentViewElement.tap()
+        celebritySegmentViewElement.tap()
+        app.buttons["Back Button"].tap()
+        
+        let listSegmentedControlElement = app.otherElements["List Segmented Control"]
+        listSegmentedControlElement.tap()
+        listSegmentedControlElement.tap()
+        taylorSwiftElement.tap()
+        
     }
     
 }

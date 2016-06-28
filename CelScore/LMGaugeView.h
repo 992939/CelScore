@@ -111,7 +111,7 @@ IB_DESIGNABLE
 /*!
  *  The unit of measurement.
  */
-@property (nonatomic, copy) IBInspectable NSString *unitOfMeasurement;
+@property (nonatomic, strong) IBInspectable NSString *unitOfMeasurement;
 
 /*!
  *  Font of unit of measurement label.

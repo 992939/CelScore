@@ -123,5 +123,16 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     //MARK: LMGaugeViewDelegate
-    func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! { return Constants.kLightGreenShade }
+    func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
+        switch value {
+        case 4.5..<5.1: gaugeView.unitOfMeasurement = GaugeFace.Grin.emoji()
+        case 3.5..<4.5: gaugeView.unitOfMeasurement = GaugeFace.BigSmile.emoji()
+        case 3.0..<3.5: gaugeView.unitOfMeasurement = GaugeFace.Smile.emoji()
+        case 2.5..<3.0: gaugeView.unitOfMeasurement = GaugeFace.NoSmile.emoji()
+        case 2.0..<2.5: gaugeView.unitOfMeasurement = GaugeFace.SadFace.emoji()
+        case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.Angry.emoji()
+        default: gaugeView.unitOfMeasurement = GaugeFace.Awaking.emoji()
+        }
+        return Constants.kLightGreenShade
+    }
 }

@@ -12,10 +12,18 @@ struct R {
     private init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 1 files.
+  /// This `R.file` struct is generated, and contains static references to 2 files.
   struct file {
+    /// Resource file `icomoon2.ttf`.
+    static let icomoon2Ttf = FileResource(bundle: _R.hostingBundle, name: "icomoon2", pathExtension: "ttf")
     /// Resource file `TAOverlay.bundle`.
     static let tAOverlayBundle = FileResource(bundle: _R.hostingBundle, name: "TAOverlay", pathExtension: "bundle")
+    
+    /// `bundle.URLForResource("icomoon2", withExtension: "ttf")`
+    static func icomoon2Ttf(_: Void) -> NSURL? {
+      let fileResource = R.file.icomoon2Ttf
+      return fileResource.bundle.URLForResource(fileResource)
+    }
     
     /// `bundle.URLForResource("TAOverlay", withExtension: "bundle")`
     static func tAOverlayBundle(_: Void) -> NSURL? {
@@ -26,8 +34,16 @@ struct R {
     private init() {}
   }
   
-  /// This `R.font` struct is generated, and contains static references to 0 fonts.
+  /// This `R.font` struct is generated, and contains static references to 1 fonts.
   struct font {
+    /// Font `icomoon`.
+    static let icomoon = FontResource(fontName: "icomoon")
+    
+    /// `UIFont(name: "icomoon", size: ...)`
+    static func icomoon(size size: CGFloat) -> UIFont? {
+      return UIFont(resource: icomoon, size: size)
+    }
+    
     private init() {}
   }
   

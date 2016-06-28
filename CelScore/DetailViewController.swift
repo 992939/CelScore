@@ -430,6 +430,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
         backButton.pulseAnimation = .None
+        backButton.accessibilityLabel = "Back Button"
         backButton.setImage(R.image.arrow_white()!, forState: .Normal)
         backButton.setImage(R.image.arrow_white()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
@@ -444,6 +445,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kMainShade
         navigationBarView.contentMode = .ScaleAspectFit
+        navigationBarView.accessibilityLabel = "Navigation Bar"
         return navigationBarView
     }
     
@@ -459,7 +461,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getSegmentView() -> SMSegmentView {
         let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.black, separatorWidth: 1,
-            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(12),
+            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(0),
                 keySegmentOnSelectionColour: Constants.kMainShade,
                 keySegmentOffSelectionColour: Constants.kDarkShade,
                 keyContentVerticalMargin: 5])
@@ -471,6 +473,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         segmentView.layer.shadowColor = MaterialColor.black.CGColor
         segmentView.layer.shadowOffset = CGSize(width: 0, height: 2)
         segmentView.layer.shadowOpacity = 0.3
+        segmentView.segments[0].isAccessibilityElement = true
+        segmentView.segments[0].accessibilityLabel = "CelScore View"
+        segmentView.segments[1].isAccessibilityElement = true
+        segmentView.segments[1].accessibilityLabel = "Info View"
+        segmentView.segments[2].isAccessibilityElement = true
+        segmentView.segments[2].accessibilityLabel = "Vote View"
+        segmentView.isAccessibilityElement = true
+        segmentView.accessibilityLabel = "Celebrity Segment View"
         segmentView.delegate = self
         return segmentView
     }
@@ -481,6 +491,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
         self.voteButton.pulseAnimation = .None
+        self.voteButton.accessibilityLabel = "Vote Button"
         self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white

@@ -39,6 +39,7 @@
 		006431901C6A66030062BBDB /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318F1C6A66030062BBDB /* CosmosView.swift */; };
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		00736F671D230AE10088B806 /* icomoon2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00736F661D230AE10088B806 /* icomoon2.ttf */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
@@ -162,6 +163,7 @@
 		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		00736F661D230AE10088B806 /* icomoon2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon2.ttf; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00736F661D230AE10088B806 /* icomoon2.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */,
 				000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */,
@@ -667,6 +670,7 @@
 			files = (
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
+				00736F671D230AE10088B806 /* icomoon2.ttf in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1547,6 +1551,7 @@
 				0048E94A1D22E9DB00936CAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004B56D41B35332A008A75EB /* Build configuration list for PBXProject "CelScore" */ = {
 			isa = XCConfigurationList;
