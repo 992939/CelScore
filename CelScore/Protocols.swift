@@ -87,7 +87,6 @@ extension Sociable where Self: UIViewController {
     func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
-            .observeOn(UIScheduler())
             .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
                 self.dismissHUD()
@@ -115,8 +114,7 @@ extension Sociable where Self: UIViewController {
                 self.dismissHUD()
                 if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue
                 { self.sendAlert(.TimeoutError, with: loginType) }
-                else { self.sendAlert(.LoginError, with: loginType) }
-            })
+                else { self.sendAlert(.LoginError, with: loginType) } })
             .start()
     }
     

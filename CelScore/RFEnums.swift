@@ -11,7 +11,6 @@ import Foundation
 
 //MARK: Error
 enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-enum CognitoError: Int, ErrorType { case NoDataSet = 0 }
 enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
 enum CelebrityError: Int, ErrorType { case NotFound = 0 }
 enum NetworkError: Int, ErrorType { case NotConnected = 1, TimedOut }

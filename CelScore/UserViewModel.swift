@@ -95,7 +95,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .Facebook:
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, timezone, gender, locale, birthday, location"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                     guard error == nil else { return observer.sendFailed(error) }
                     observer.sendNext(object)
                     observer.sendCompleted()
@@ -136,12 +136,7 @@ struct UserViewModel {
                     dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
                     dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
                     dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                    let timezone = object.objectForKey("timezone") as! NSNumber
-                    dataset.setString(timezone.stringValue, forKey: "timezone")
                     dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                    dataset.setString(object.objectForKey("locale") as! String, forKey: "locale")
-                    dataset.setString(object.objectForKey("birthday") as! String, forKey: "birthday")
-                    dataset.setString(object.objectForKey("location")?.objectForKey("name") as! String, forKey: "location")
                     dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
                     dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
                     dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
@@ -194,7 +189,10 @@ struct UserViewModel {
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
-                    if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
+                    if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 13 {
+                        print("error code be \(task.error!.code)")
+                        Constants.kCredentialsProvider.clearKeychain()
+                    }
                     observer.sendFailed(task.error!)
                     return task }
                 if case .UserRatings = dataSetType { dataset.clear() }
@@ -210,13 +208,19 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                guard task.error == nil else {
+                    if task.error!.code == 13 { print("A. say whaaaaat?"); Constants.kCredentialsProvider.clearKeychain() }
+                    observer.sendFailed(task.error!)
+                    return task }
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
             dataset.synchronize().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+                guard task.error == nil else {
+                    if task.error!.code == 13 { print("B. say whaaaaat?"); Constants.kCredentialsProvider.clearKeychain() }
+                    observer.sendFailed(task.error!)
+                    return task }
                 let realm = try! Realm()
                 switch dataSetType {
                 case .FacebookInfo: fatalError("Not storing user information locally")
@@ -232,7 +236,7 @@ struct UserViewModel {
                 case .UserSettings:
                     let dico: [NSObject : AnyObject] = dataset.getAll()
                     let settings: SettingsModel = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    guard dico.isEmpty == false else { observer.sendFailed(CognitoError.NoDataSet as NSError); return task }
+                    guard dico.isEmpty == false else { observer.sendNext(task); return task }
                     realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
