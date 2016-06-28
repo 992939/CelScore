@@ -18,6 +18,7 @@ import Crashlytics
 import ReactiveCocoa
 import FBSDKCoreKit
 import Armchair
+import SafariServices
 
 
 @UIApplicationMain
@@ -97,6 +98,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else { FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) }
         return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        if Twitter.sharedInstance().application(app, openURL:url, options: options) { return true }
+        else if FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String, annotation: nil) { return true }
+        return false
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {

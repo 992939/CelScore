@@ -61,7 +61,7 @@ extension Supportable where Self: UIViewController {
         mail.mailComposeDelegate = self
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
-        mail.setMessageBody("Voter Id: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide more information about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
+        mail.setMessageBody("voterId: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide more information about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     
@@ -93,24 +93,33 @@ extension Sociable where Self: UIViewController {
                 self.sendAlert(.TimeoutError, with: loginType)
                 return SignalProducer.empty }
             .retry(Constants.kNetworkRetry)
+            .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                print("1")
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                print("2")
                 return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                print("3")
                 return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                print("4")
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                print("5")
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                print("6")
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
             .on(next: { _ in
+                print("7")
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
             .on(failed: { error in
+                print("8")
                 self.dismissHUD()
                 if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue
                 { self.sendAlert(.TimeoutError, with: loginType) }

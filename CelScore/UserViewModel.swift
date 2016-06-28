@@ -27,7 +27,8 @@ struct UserViewModel {
                 Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         observer.sendFailed(task.error!)
-                        if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
+                        print("login error code \(task.error!.code)")
+                        if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                         return task
                     }
                     observer.sendNext(task)
@@ -40,7 +41,8 @@ struct UserViewModel {
                     Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
                             observer.sendFailed(task.error!)
-                            if task.error!.code == 8 || task.error!.code == 10 { Constants.kCredentialsProvider.clearKeychain() }
+                            print("login error code \(task.error!.code)")
+                            if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                             return task
                         }
                         observer.sendNext(task)
@@ -96,7 +98,7 @@ struct UserViewModel {
             switch loginType {
             case .Facebook:
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { return observer.sendFailed(error) }
+                    guard error == nil else { print("fb error: \(error)"); return observer.sendFailed(error) }
                     observer.sendNext(object)
                     observer.sendCompleted()
                 }
