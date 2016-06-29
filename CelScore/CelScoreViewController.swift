@@ -82,7 +82,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 160, height: 25))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         if tag == 3 { infoLabel.textColor = Constants.kLightGreenShade }
         else if tag == 4 {
