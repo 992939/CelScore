@@ -431,6 +431,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.pulseColor = MaterialColor.white
         backButton.pulseAnimation = .None
         backButton.accessibilityLabel = "Back Button"
+        backButton.isAccessibilityElement = true
         backButton.setImage(R.image.arrow_white()!, forState: .Normal)
         backButton.setImage(R.image.arrow_white()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
@@ -445,7 +446,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kMainShade
         navigationBarView.contentMode = .ScaleAspectFit
-        navigationBarView.accessibilityLabel = "Navigation Bar"
         return navigationBarView
     }
     
@@ -479,8 +479,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         segmentView.segments[1].accessibilityLabel = "Info View"
         segmentView.segments[2].isAccessibilityElement = true
         segmentView.segments[2].accessibilityLabel = "Vote View"
-        segmentView.isAccessibilityElement = true
-        segmentView.accessibilityLabel = "Celebrity Segment View"
         segmentView.delegate = self
         return segmentView
     }
