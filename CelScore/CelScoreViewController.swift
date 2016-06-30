@@ -76,7 +76,14 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.6
         let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.8
         let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.93
-        AIRTimer.after(1.5) { _ in AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
+        var timer: AIRTimer?
+        AIRTimer.after(1.5) { _ in timer = AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
+        AIRTimer.every(30) { _ in
+            timer?.invalidate()
+            let diceRoll = Int(arc4random_uniform(2) + 7)
+            gauge.unitOfMeasurement = GaugeFace(rawValue: diceRoll)!.emoji()
+            AIRTimer.after(2) { _ in timer?.restart() }
+        }
         gaugeView.addSubview(gauge)
         return gaugeView
     }

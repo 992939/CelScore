@@ -128,6 +128,8 @@ enum GaugeFace: Int {
     case SadFace
     case Angry
     case Awaking
+    case TongueOut
+    case Shades
     
     func emoji() -> String {
         switch self {
@@ -138,6 +140,8 @@ enum GaugeFace: Int {
         case .SadFace: return ""
         case .Angry: return ""
         case .Awaking: return ""
+        case .TongueOut: return ""
+        case .Shades: return ""
         }
     }
 }
