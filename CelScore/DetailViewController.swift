@@ -320,14 +320,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .observeOn(UIScheduler())
             .on(next: { userRatings in
-                self.ratingsVC.displayGoldRatings(userRatings)
+                self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
                 self.enableUpdateButton()
                 self.voteButton.backgroundColor = Constants.kStarRatingShade
                 self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                 self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
             })
-            .on(failed: { _ in self.ratingsVC.displayGoldRatings() })
+            .on(failed: { _ in self.ratingsVC.displayRatings() })
             .start()
     }
     

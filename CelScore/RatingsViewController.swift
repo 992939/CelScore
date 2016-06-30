@@ -95,7 +95,10 @@ final class RatingsViewController: ASViewController, Labelable {
                             .flatMap(.Latest){ (_) -> SignalProducer<Bool, NSError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in
-                                if hasUserRatings == false { cosmosView.settings.userRatingMode = true }
+                                if hasUserRatings == false {
+                                    cosmosView.settings.userRatingMode = true
+                                    cosmosView.settings.updateOnTouch = true
+                                }
                                 return cosmosView.settings.userRatingMode == true }
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.Latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
@@ -164,7 +167,7 @@ final class RatingsViewController: ASViewController, Labelable {
             .start()
     }
     
-    func displayGoldRatings(userRatings: RatingsModel = RatingsModel()) {
+    func displayRatings(userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
