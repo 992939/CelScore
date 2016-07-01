@@ -74,7 +74,6 @@
 		150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039868E1776C0B641362852 /* Pods_CelScore.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
-		D864903F442B2D559D28A840 /* Pods_The_Courthouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */; };
 		E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */; };
 		E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE024A13E2984F3710F62FEA /* CoreText.framework */; };
 /* End PBXBuildFile section */
@@ -209,7 +208,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				003AE6951D094FB70055EE56 /* NotificationCenter.framework in Frameworks */,
-				D864903F442B2D559D28A840 /* Pods_The_Courthouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,18 +460,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 003AE6A21D094FB80055EE56 /* Build configuration list for PBXNativeTarget "The Courthouse" */;
 			buildPhases = (
-				FEE72620B5D3A38C8A1BAA9E /* [CP] Check Pods Manifest.lock */,
-				94608EBF1230378B92F018C1 /* [CP] Check Pods Manifest.lock */,
 				F2CC73451BE84EC26D845723 /* [CP] Check Pods Manifest.lock */,
 				003AE6901D094FB70055EE56 /* Sources */,
 				003AE6911D094FB70055EE56 /* Frameworks */,
 				003AE6921D094FB70055EE56 /* Resources */,
-				8E92D5B9337EA5EE239D1DAD /* [CP] Embed Pods Frameworks */,
-				8671DC7CDA4688842A31D000 /* [CP] Copy Pods Resources */,
 				D115857362DF0B71108481DB /* 📦 Embed Pods Frameworks */,
 				D8855D886000094FD2C11421 /* 📦 Copy Pods Resources */,
 				5347D9B0E647070D43DA7B57 /* Embed Pods Frameworks */,
 				BF6E05B20A9B7BD3D218B0A4 /* Copy Pods Resources */,
+				001343811D261FEE00BE778D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -638,6 +633,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
+		001343811D261FEE00BE778D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
 		003FF5C51BD7879D00F7454E /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -846,36 +854,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8671DC7CDA4688842A31D000 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8E92D5B9337EA5EE239D1DAD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		91D4CD84F45CE6C9D344E7B2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -889,21 +867,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CelScoreTests/Pods-CelScoreTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		94608EBF1230378B92F018C1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		98418748EA3EBC9F55B57A84 /* [CP] Check Pods Manifest.lock */ = {
@@ -1056,21 +1019,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FEE72620B5D3A38C8A1BAA9E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1193,6 +1141,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "The Courthouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1209,8 +1158,9 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_ENTITLEMENTS = "The Courthouse/The Courthouse.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "The Courthouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1323,7 +1273,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1349,11 +1299,11 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1377,6 +1327,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1409,7 +1360,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = CelScoreTests/Info.plist;
