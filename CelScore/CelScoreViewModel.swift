@@ -13,6 +13,7 @@ import ReactiveCocoa
 import AIRTimer
 import Social
 import Result
+import Accounts
 
 
 public typealias NewCelebInfo = (text: String, image: String)

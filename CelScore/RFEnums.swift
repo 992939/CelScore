@@ -65,6 +65,7 @@ enum OverlayInfo {
     case LoginError
     case NetworkError
     case TimeoutError
+    case PermissionError
     
     func message(social: String = "") -> String {
         switch self {
@@ -87,6 +88,7 @@ enum OverlayInfo {
         case .LoginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
         case .NetworkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
         case .TimeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .PermissionError: return "Unable to authenticate using your \(social) account.\n\nIn Settings, check that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
     
@@ -111,6 +113,7 @@ enum OverlayInfo {
         case .LoginError: return R.image.cloud_green()!
         case .NetworkError: return R.image.cloud_green()!
         case .TimeoutError: return R.image.cloud_green()!
+        case .PermissionError: return R.image.cloud_green()!
         }
     }
     

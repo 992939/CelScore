@@ -19,6 +19,7 @@ import RevealingSplashView
 import FBSDKCoreKit
 import MessageUI
 import Timepiece
+import Accounts
 
 
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
@@ -83,10 +84,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        print("social value: \(value)")
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
                         if type == .Facebook { self.facebookTokenCheck() }
+                        else { self.twitterAccessCheck() }
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -152,6 +153,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
         if expirationDate < NSDate.today() { self.facebookLogin(false) }
         else { UserViewModel().refreshFacebookTokenSignal() }
+    }
+    
+    func twitterAccessCheck() {
+        let account = ACAccountStore()
+        let accountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        account.requestAccessToAccountsWithType(accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
+            if success == false { print("finally fuckingly"); self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }
+        })
     }
     
     func openSettings() {

@@ -27,7 +27,6 @@ struct UserViewModel {
                 Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         observer.sendFailed(task.error!)
-                        print("login error code \(task.error!.code)")
                         if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                         return task
                     }
@@ -41,7 +40,6 @@ struct UserViewModel {
                     Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
                             observer.sendFailed(task.error!)
-                            print("login error code \(task.error!.code)")
                             if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                             return task
                         }
@@ -111,7 +109,7 @@ struct UserViewModel {
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
                 guard clientError == nil else { print("twitter error: \(clientError)"); return observer.sendFailed(clientError!) }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { return observer.sendFailed(connectionError!) }
+                    guard connectionError == nil else { print("twitter request error: \(clientError)"); return observer.sendFailed(connectionError!) }
                     let json = JSON(data: data!)
                     observer.sendNext(json.arrayObject![0])
                     observer.sendCompleted()
