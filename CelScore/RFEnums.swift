@@ -84,7 +84,7 @@ enum OverlayInfo {
         case .FirstVoteDisable: return "Welcome to our star-studded voting booth!\n\nYou'll need to register to make your opinion public."
         case .FirstTrollWarning: return "You're trolling in the danger zone!\n\nBelow a certain level of negative votes, ALL your votes will be discarded."
         case .LogoutUser: return "The courthouse hates to see you go!\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .LoginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
         case .NetworkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
         case .TimeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
