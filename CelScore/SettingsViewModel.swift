@@ -148,7 +148,6 @@ struct SettingsViewModel {
             case .FirstTrollWarning: settings.isFirstTrollWarning = false
             }
             settings.isSynced = false
-            print("settings \(settings)")
             realm.add(settings, update: true)
             try! realm.commitWrite()
             

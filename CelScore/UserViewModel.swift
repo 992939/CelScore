@@ -125,7 +125,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { print("D. say whaaaaat?"); observer.sendFailed(task.error!); return task }
+                guard task.error == nil else { observer.sendFailed(task.error!); return task }
                 return nil }
             
             let syncClient: AWSCognito = AWSCognito.defaultCognito()
@@ -192,7 +192,6 @@ struct UserViewModel {
             
             dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
-                    print("C. say whaaaaat?");
                     if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 13 {
                         Constants.kCredentialsProvider.clearKeychain()
                     }
@@ -212,7 +211,6 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    print("A. say whaaaaat?");
                     if task.error!.code == 13 { Constants.kCredentialsProvider.clearKeychain() }
                     observer.sendFailed(task.error!)
                     return task }
@@ -222,7 +220,6 @@ struct UserViewModel {
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
             dataset.synchronize().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    print("B. say whaaaaat?");
                     if task.error!.code == 13 { Constants.kCredentialsProvider.clearKeychain() }
                     observer.sendFailed(task.error!)
                     return task }
