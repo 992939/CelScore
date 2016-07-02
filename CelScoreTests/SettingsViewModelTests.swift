@@ -146,9 +146,9 @@ class SettingsViewModelTests: XCTestCase {
     
     func testUpdateLoginTypeIndex() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = expectationWithDescription("set LoginTypeIndex to Int(1)")
-        SettingsViewModel().updateSettingSignal(value: Int(1), settingType: .LoginTypeIndex).startWithNext { settings in
-            XCTAssertEqual(settings.loginTypeIndex, Int(1)); expectation.fulfill() }
+        let expectation = expectationWithDescription("set LoginTypeIndex to Int(2)")
+        SettingsViewModel().updateSettingSignal(value: Int(2), settingType: .LoginTypeIndex).startWithNext { settings in
+            XCTAssertEqual(settings.loginTypeIndex, Int(2)); expectation.fulfill() }
         waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("set LoginTypeIndex error: \(error)") } }
     }
     

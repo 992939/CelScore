@@ -17,7 +17,7 @@ class SettingsModel: Object {
     dynamic var id: String = "1"
     dynamic var userName: String = ""
     dynamic var defaultListIndex: Int = 0
-    dynamic var loginTypeIndex: Int = 1
+    dynamic var loginTypeIndex: Int = 0
     dynamic var publicService: Bool = false
     dynamic var consensusBuilding: Bool = false
     dynamic var isFirstLaunch: Bool = true
