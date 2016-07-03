@@ -84,6 +84,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        print("type \(SocialLogin(rawValue:value as! Int)!.getTitle())")
                         let type = SocialLogin(rawValue:value as! Int)!
                         let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
                         if type == .Facebook { self.facebookTokenCheck() }
