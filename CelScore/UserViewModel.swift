@@ -107,9 +107,9 @@ struct UserViewModel {
                 let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
                 var clientError : NSError?
                 let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
-                guard clientError == nil else { print("twitter error: \(clientError)"); return observer.sendFailed(clientError!) }
+                guard clientError == nil else { return observer.sendFailed(clientError!) }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { print("twitter request error: \(clientError)"); return observer.sendFailed(connectionError!) }
+                    guard connectionError == nil else { return observer.sendFailed(connectionError!) }
                     let json = JSON(data: data!)
                     observer.sendNext(json.arrayObject![0])
                     observer.sendCompleted()

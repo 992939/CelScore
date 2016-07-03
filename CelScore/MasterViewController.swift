@@ -159,7 +159,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let account = ACAccountStore()
         let accountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         account.requestAccessToAccountsWithType(accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
-            if success == false { print("finally fuckingly"); self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }
+            if success == false { MaterialAnimation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
         })
     }
     
