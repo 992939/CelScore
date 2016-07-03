@@ -106,6 +106,8 @@ extension Sociable where Self: UIViewController {
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
             .flatMap(.Latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
+            .flatMap(.Latest) { (_) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
             .observeOn(UIScheduler())

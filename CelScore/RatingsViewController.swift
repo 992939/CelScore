@@ -197,7 +197,6 @@ final class RatingsViewController: ASViewController, Labelable {
                     cosmos.settings.userRatingMode = true
                     cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
                     cosmos.rating = userRatings[userRatings[index]] as! Double
-                    print("C");
                     cosmos.update()
                 }
         })
