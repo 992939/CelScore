@@ -61,7 +61,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        MaterialAnimation.delay(0.2) {
+        MaterialAnimation.delay(0.4) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)

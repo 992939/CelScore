@@ -100,14 +100,15 @@ extension Sociable where Self: UIViewController {
                 return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
                 return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
+            .flatMap(.Latest) { (_) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
+            .observeOn(UIScheduler())
             .on(next: { _ in
                 self.dismissHUD()
                 self.handleMenu(false)
