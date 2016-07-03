@@ -86,7 +86,6 @@ final class RatingsViewController: ASViewController, Labelable {
                             cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
                             cosmosView.settings.updateOnTouch = hasRatings ? false : true })
                         .start()
-                    
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observeOn(UIScheduler())
@@ -98,6 +97,7 @@ final class RatingsViewController: ASViewController, Labelable {
                                 if hasUserRatings == false {
                                     cosmosView.settings.userRatingMode = true
                                     cosmosView.settings.updateOnTouch = true
+                                    cosmosView.update()
                                 }
                                 return cosmosView.settings.userRatingMode == true }
                             .flatMapError { _ in SignalProducer.empty }
@@ -197,6 +197,7 @@ final class RatingsViewController: ASViewController, Labelable {
                     cosmos.settings.userRatingMode = true
                     cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
                     cosmos.rating = userRatings[userRatings[index]] as! Double
+                    print("C");
                     cosmos.update()
                 }
         })
