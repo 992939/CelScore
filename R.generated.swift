@@ -47,7 +47,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 67 images.
+  /// This `R.image` struct is generated, and contains static references to 69 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -147,6 +147,10 @@ struct R {
     static let planet_green = ImageResource(bundle: _R.hostingBundle, name: "planet_green")
     /// Image `sadFace`.
     static let sadFace = ImageResource(bundle: _R.hostingBundle, name: "sadFace")
+    /// Image `scale_black`.
+    static let scale_black = ImageResource(bundle: _R.hostingBundle, name: "scale_black")
+    /// Image `scale_white`.
+    static let scale_white = ImageResource(bundle: _R.hostingBundle, name: "scale_white")
     /// Image `score_black`.
     static let score_black = ImageResource(bundle: _R.hostingBundle, name: "score_black")
     /// Image `score_logo`.
@@ -427,6 +431,16 @@ struct R {
     /// `UIImage(named: "sadFace", bundle: ..., traitCollection: ...)`
     static func sadFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sadFace, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "scale_black", bundle: ..., traitCollection: ...)`
+    static func scale_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.scale_black, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "scale_white", bundle: ..., traitCollection: ...)`
+    static func scale_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.scale_white, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "score_black", bundle: ..., traitCollection: ...)`
