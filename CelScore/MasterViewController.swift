@@ -241,7 +241,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .observeOn(UIScheduler())
-            .startWithNext { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
+            .startWithNext { list in
+                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
+                MaterialAnimation.delay(0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
+        }
     }
     
     //MARK: Sociable

@@ -76,7 +76,7 @@ enum OverlayInfo {
         case .FirstFollow: return "You've added your first star to the Today View!\n\nYou can swipe down from the top of your screen to display the view."
         case FirstNotFollow: return "You've reached the steps of observatory!\n\nYou'll need to register to access this area."
         case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nWe came here to vote and shape public opinion, one vote at a time.\n\nIt's up to you to be a part of building the consensus."
-        case .FirstPublic: return "There are only two types of opinions in this world, public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nFeel free to share your opinion by long pressing on a star."
+        case .FirstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nFeel free to share your opinion by long pressing on a star."
         case .FirstInterest: return "You've choosen your first realm of interest!\n\nYour selection is automatically saved."
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
