@@ -36,6 +36,7 @@ struct UserViewModel {
                 }
             case .Twitter:
                 Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
+                    guard error == nil else { return observer.sendFailed(error!) }
                     Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
                     Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
