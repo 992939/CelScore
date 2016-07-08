@@ -82,8 +82,8 @@ final class RatingsViewController: ASViewController, Labelable {
                         .flatMap(.Latest){ (_) -> SignalProducer<Bool, NSError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .on(next: { hasRatings in
-                            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                            cosmosView.settings.borderColorEmpty = MaterialColor.black
+                            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
+                            cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
                             cosmosView.settings.updateOnTouch = hasRatings ? false : true })
                         .start()
                     cosmosView.didTouchCosmos = { (rating:Double) in
@@ -156,8 +156,8 @@ final class RatingsViewController: ASViewController, Labelable {
                         subview.pulseAnimation = .AtPointWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
-                        cosmos.settings.colorFilled = Constants.kStarRatingShade
-                        cosmos.settings.borderColorEmpty = MaterialColor.black
+                        cosmos.settings.colorFilled = Constants.kStarGoldShade
+                        cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
                         cosmos.settings.userRatingMode = false
                         cosmos.settings.updateOnTouch = false
                         cosmos.rating = ratings[ratings[index]] as! Double
@@ -174,8 +174,8 @@ final class RatingsViewController: ASViewController, Labelable {
                 for (index, subview) in viewArray.enumerate() {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
-                    cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarRatingShade : MaterialColor.white
-                    cosmos.settings.borderColorEmpty = MaterialColor.black
+                    cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarGoldShade : MaterialColor.white
+                    cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
                     cosmos.settings.updateOnTouch = userRatings.getCelScore() > 0 ? false : true
                     cosmos.settings.userRatingMode = false
                     cosmos.rating = ratings[ratings[index]] as! Double
@@ -195,7 +195,7 @@ final class RatingsViewController: ASViewController, Labelable {
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.updateOnTouch = true
                     cosmos.settings.userRatingMode = true
-                    cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                    cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
                     cosmos.rating = userRatings[userRatings[index]] as! Double
                     cosmos.update()
                 }

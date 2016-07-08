@@ -62,7 +62,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let topView: MaterialView = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarRatingShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
         self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -78,7 +78,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
+            first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
@@ -161,12 +161,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .observeOn(UIScheduler())
             .on(next: { (userRatings:RatingsModel) in
                 let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-                first?.backgroundColor = Constants.kStarRatingShade
+                first?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 MaterialAnimation.delay(2.5) {
-                    self.voteButton.backgroundColor = Constants.kStarRatingShade
+                    self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
                 }})
@@ -294,7 +294,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     }
                 })
             RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-                first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
+                first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             })
         }
     }
@@ -323,7 +323,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
                 self.enableUpdateButton()
-                self.voteButton.backgroundColor = Constants.kStarRatingShade
+                self.voteButton.backgroundColor = Constants.kStarGoldShade
                 self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                 self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
             })
@@ -334,7 +334,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func enableUpdateButton() {
         self.voteButton.enabled = true
         self.voteButton.pulseAnimation = .CenterWithBacking
-        self.voteButton.backgroundColor = Constants.kStarRatingShade
+        self.voteButton.backgroundColor = Constants.kStarGoldShade
         self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
         self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
@@ -351,8 +351,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         button.setImage(image, forState: .Normal)
         button.setImage(image, forState: .Highlighted)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            button.tintColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
-            button.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
+            button.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+            button.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }
     
@@ -400,7 +400,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     //MARK: RatingsViewDelegate
     func rippleEffect(positive positive: Bool, gold: Bool = false) {
-        if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
+        if gold { self.profilePicNode.view.rippleColor = Constants.kStarGoldShade }
         else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueShade : Constants.kRedShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
@@ -494,7 +494,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            self.voteButton.tintColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
+            self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }
 }

@@ -50,8 +50,8 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in cosmosView.rating = score }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext { hasRatings in
-            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-            cosmosView.settings.borderColorEmpty = MaterialColor.black
+            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
+            cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
         }
         
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))

@@ -45,7 +45,8 @@ struct Constants {
     static let kBlueText: UIColor = MaterialColor.blue.darken1
     static let kRedShade: UIColor = MaterialColor.red.lighten2
     static let kRedText: UIColor = MaterialColor.red.darken1
-    static let kStarRatingShade: UIColor = MaterialColor.yellow.darken1
+    static let kStarGoldShade: UIColor = MaterialColor.yellow.darken1
+    static let kStarGreyShade: UIColor = MaterialColor.grey.lighten1
     static let kGreyBackground: UIColor = MaterialColor.grey.lighten3
     
     static let kStatusViewRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 20)
