@@ -50,7 +50,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
-        logoCircle.backgroundColor = Constants.kDarkGreenShade
+        logoCircle.backgroundColor = Constants.kMainShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
@@ -61,13 +61,16 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
-        courtLabel.backgroundColor = Constants.kMainShade
+        courtLabel.backgroundColor = Constants.kDarkShade
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
-        houseLabel.backgroundColor = Constants.kMainShade
+        houseLabel.backgroundColor = Constants.kDarkShade
         logoView.addSubview(courtLabel)
         logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
-        logoView.backgroundColor = Constants.kMainShade
+        logoView.layer.shadowColor = MaterialColor.black.CGColor
+        logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        logoView.layer.shadowOpacity = 0.1
+        logoView.backgroundColor = Constants.kDarkShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 
@@ -118,9 +121,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
         issueButton.setTitle("Report An Issue", forState: .Normal)
         issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
-        issueButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        issueButton.setTitleColor(MaterialColor.black, forState: .Normal)
         issueButton.titleLabel!.textAlignment = .Center
-        issueButton.pulseColor = Constants.kWineShade
+        issueButton.pulseColor = Constants.kDarkShade
         issueView.addSubview(issueButton)
         issueButton.titleLabel!.font = UIFont(name: issueButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
@@ -131,9 +134,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let privacyButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
         privacyButton.setTitle("Privacy Policy", forState: .Normal)
         privacyButton.addTarget(self, action:#selector(self.showPolicy), forControlEvents: .TouchUpInside)
-        privacyButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        privacyButton.setTitleColor(MaterialColor.black, forState: .Normal)
         privacyButton.titleLabel!.textAlignment = .Center
-        privacyButton.pulseColor = Constants.kWineShade
+        privacyButton.pulseColor = Constants.kDarkShade
         privacyView.addSubview(privacyButton)
         privacyButton.titleLabel!.font = UIFont(name: privacyButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let privacyNode = ASDisplayNode(viewBlock: { () -> UIView in return privacyView })
@@ -144,9 +147,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
-        logoutButton.setTitleColor(Constants.kWineShade, forState: .Normal)
+        logoutButton.setTitleColor(MaterialColor.black, forState: .Normal)
         logoutButton.titleLabel!.textAlignment = .Center
-        logoutButton.pulseColor = Constants.kWineShade
+        logoutButton.pulseColor = Constants.kDarkShade
         logoutView.addSubview(logoutButton)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
@@ -219,7 +222,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.white, NSBackgroundColorAttributeName : Constants.kMainShade])
+        return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.black, NSBackgroundColorAttributeName : Constants.kGreyBackground])
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -264,7 +267,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func setupMaterialView(frame frame: CGRect) -> MaterialView {
         let materialView = MaterialView(frame: frame)
         materialView.depth = .Depth1
-        materialView.backgroundColor = Constants.kMainShade
+        materialView.backgroundColor = Constants.kGreyBackground
         return materialView
     }
     
@@ -277,10 +280,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kDarkGreenShade
-        box.onTintColor = Constants.kDarkGreenShade
-        box.tintColor = Constants.kDarkGreenShade
-        box.backgroundColor = Constants.kMainShade
+        box.onFillColor = Constants.kMainShade
+        box.onTintColor = Constants.kMainShade
+        box.tintColor = Constants.kMainShade
+        box.backgroundColor = Constants.kGreyBackground
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
         materialView.addSubview(box)
@@ -291,7 +294,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
-        bar.progressTintColors = [Constants.kWineShade, Constants.kDarkGreenShade]
+        bar.progressTintColors = [Constants.kWineShade, Constants.kMainShade]
         bar.setProgress(value, animated: true)
         bar.type = .Flat
         bar.backgroundColor = Constants.kMainShade

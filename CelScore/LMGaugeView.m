@@ -37,7 +37,7 @@
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"icomoon" size:20]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
-#define kDefaultLabelBackgroundColor            [UIColor colorWithRed:96.0/255 green: 125.0/255 blue: 139.0/255 alpha: 1]
+#define kDefaultLabelBackgroundColor            [UIColor colorWithRed:238.0/255 green: 238.0/255 blue: 238.0/255 alpha: 1]
 
 @interface LMGaugeView ()
 

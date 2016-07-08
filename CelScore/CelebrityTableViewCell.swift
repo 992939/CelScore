@@ -31,7 +31,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : MaterialColor.white]
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : MaterialColor.black]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .ByTruncatingTail
@@ -51,16 +51,16 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in cosmosView.rating = score }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext { hasRatings in
             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-            cosmosView.settings.borderColorEmpty = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            cosmosView.settings.borderColorEmpty = MaterialColor.black
         }
         
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kDarkGreenShade
-        box.onTintColor = Constants.kDarkGreenShade
-        box.tintColor = Constants.kDarkGreenShade
+        box.onFillColor = Constants.kMainShade
+        box.onTintColor = Constants.kMainShade
+        box.tintColor = Constants.kMainShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.preferredFrameSize = box.frame.size
@@ -69,7 +69,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kDarkShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
-        self.backgroundNode.backgroundColor = Constants.kMainShade
+        self.backgroundNode.backgroundColor = Constants.kGreyBackground
         
         self.trendNode = ASImageNode()
         self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)

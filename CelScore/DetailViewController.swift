@@ -78,7 +78,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
         })
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
@@ -271,7 +271,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
             self.socialButton.menu.enabled = true
-            first?.backgroundColor = Constants.kDarkGreenShade
+            first?.backgroundColor = Constants.kDarkShade
             first?.pulseAnimation = .CenterWithBacking
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
@@ -294,7 +294,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     }
                 })
             RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-                first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+                first?.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
             })
         }
     }
@@ -351,8 +351,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         button.setImage(image, forState: .Normal)
         button.setImage(image, forState: .Highlighted)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            button.tintColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-            button.backgroundColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            button.tintColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
+            button.backgroundColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
         })
     }
     
@@ -401,7 +401,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: RatingsViewDelegate
     func rippleEffect(positive positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
-        else { self.profilePicNode.view.rippleColor = positive ? Constants.kLightGreenShade : Constants.kWineShade }
+        else { self.profilePicNode.view.rippleColor = positive ? Constants.kDarkShade : Constants.kWineShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
@@ -413,7 +413,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
-            self.voteButton.backgroundColor = positive == true ? Constants.kDarkGreenShade : Constants.kWineShade },
+            self.voteButton.backgroundColor = positive == true ? Constants.kDarkShade : Constants.kWineShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseAnimation = .CenterWithBacking
                 self.voteButton.pulse() }
@@ -437,6 +437,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
         let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
+        nameLabel.backgroundColor = Constants.kMainShade
+        nameLabel.textColor = MaterialColor.white
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
         
@@ -463,7 +465,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             separatorColour: MaterialColor.black, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(0),
                 keySegmentOnSelectionColour: Constants.kMainShade,
-                keySegmentOffSelectionColour: Constants.kDarkShade,
+                keySegmentOffSelectionColour: Constants.kGreyBackground,
                 keyContentVerticalMargin: 5])
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
@@ -492,7 +494,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            self.voteButton.tintColor = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
+            self.voteButton.tintColor = hasRatings ? Constants.kStarRatingShade : Constants.kGreyBackground
         })
     }
 }

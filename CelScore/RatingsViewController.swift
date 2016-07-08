@@ -45,7 +45,7 @@ final class RatingsViewController: ASViewController, Labelable {
                     let qualityView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
                     qualityView.depth = .Depth1
-                    qualityView.backgroundColor = Constants.kMainShade
+                    qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .CenterWithBacking
                     qualityView.pulseColor = MaterialColor.clear
                     SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -83,7 +83,7 @@ final class RatingsViewController: ASViewController, Labelable {
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .on(next: { hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarRatingShade : MaterialColor.white
-                            cosmosView.settings.borderColorEmpty = hasRatings ? MaterialColor.yellow.darken3 : MaterialColor.white
+                            cosmosView.settings.borderColorEmpty = MaterialColor.black
                             cosmosView.settings.updateOnTouch = hasRatings ? false : true })
                         .start()
                     cosmosView.didTouchCosmos = { (rating:Double) in
@@ -157,7 +157,7 @@ final class RatingsViewController: ASViewController, Labelable {
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarRatingShade
-                        cosmos.settings.borderColorEmpty = MaterialColor.yellow.darken3
+                        cosmos.settings.borderColorEmpty = MaterialColor.black
                         cosmos.settings.userRatingMode = false
                         cosmos.settings.updateOnTouch = false
                         cosmos.rating = ratings[ratings[index]] as! Double
@@ -175,7 +175,7 @@ final class RatingsViewController: ASViewController, Labelable {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarRatingShade : MaterialColor.white
-                    cosmos.settings.borderColorEmpty = userRatings.getCelScore() > 0 ? Constants.kStarRatingShade : MaterialColor.white
+                    cosmos.settings.borderColorEmpty = MaterialColor.black
                     cosmos.settings.updateOnTouch = userRatings.getCelScore() > 0 ? false : true
                     cosmos.settings.userRatingMode = false
                     cosmos.rating = ratings[ratings[index]] as! Double

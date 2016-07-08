@@ -184,7 +184,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         Duration.startMeasurement("setupData")
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kDarkShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kMainShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
@@ -338,7 +338,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1.0
             self.searchBar.showsCancelButton = true
-            self.searchBar.tintColor = Constants.kWineShade
+            self.searchBar.tintColor = MaterialColor.white
             self.searchBar.backgroundColor = Constants.kDarkShade
             self.searchBar.barTintColor = MaterialColor.white
             self.searchBar.frame = Constants.kSegmentedControlRect

@@ -43,8 +43,8 @@ extension Labelable {
     func setupLabel(title title: String, frame: CGRect) -> UILabel {
         let label = UILabel(frame: frame)
         label.text = title
-        label.textColor = MaterialColor.white
-        label.backgroundColor = Constants.kMainShade
+        label.textColor = MaterialColor.black
+        label.backgroundColor = Constants.kGreyBackground
         label.font = UIFont(name: label.font.fontName, size: Constants.kFontSize)
         return label
     }

@@ -57,7 +57,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             })
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
-        gaugeView.backgroundColor = Constants.kMainShade
+        gaugeView.backgroundColor = Constants.kGreyBackground
         gaugeView.pulseAnimation = .None
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
@@ -66,11 +66,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kDarkShade
-        gauge.divisionsColor = Constants.kLightShade
-        gauge.valueTextColor = MaterialColor.white
-        gauge.unitOfMeasurementTextColor = MaterialColor.white
-        gauge.ringBackgroundColor = Constants.kLightShade
-        gauge.backgroundColor = Constants.kMainShade
+        gauge.divisionsColor = MaterialColor.black
+        gauge.valueTextColor = MaterialColor.black
+        gauge.unitOfMeasurementTextColor = MaterialColor.black
+        gauge.ringBackgroundColor = Constants.kDarkShade
+        gauge.backgroundColor = Constants.kGreyBackground
         gauge.delegate = self
         let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.2
         let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.6
@@ -91,7 +91,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
-        if tag == 4 { infoLabel.textColor = Constants.kLightGreenShade }
+        if tag == 4 { infoLabel.textColor = Constants.kMainShade }
         else if tag == 3 {
             infoLabel.text = value + "%"
             infoLabel.textColor = Double(value) >= Constants.kPositiveConsensus ? Constants.kLightGreenShade : Constants.kWineShade
@@ -104,7 +104,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.tag = tag
         taggedView.depth = .Depth1
-        taggedView.backgroundColor = Constants.kMainShade
+        taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .CenterWithBacking
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
@@ -142,6 +142,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.Angry.emoji()
         default: gaugeView.unitOfMeasurement = GaugeFace.Awaking.emoji()
         }
-        return Constants.kLightGreenShade
+        return Constants.kMainShade
     }
 }

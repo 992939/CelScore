@@ -68,14 +68,14 @@ final class InfoViewController: ASViewController, Labelable {
                             if case Info.CelScore.name() = quality {
                                 infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                                 infoLabel!.attributedText = attributedText
-                                infoLabel!.backgroundColor = Constants.kMainShade
+                                infoLabel!.backgroundColor = Constants.kGreyBackground
                             } else {
                                 infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                             }
                             infoLabel!.textAlignment = .Right
                         
                             qualityView.depth = .Depth1
-                            qualityView.backgroundColor = Constants.kMainShade
+                            qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel!)
                             SettingsViewModel().getSettingSignal(settingType: .PublicService)
