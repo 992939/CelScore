@@ -97,9 +97,9 @@ final class InfoViewController: ASViewController, Labelable {
         var attributedText = NSMutableAttributedString()
         let percent: Double = (score/self.celebST.prevScore) * 100 - 100
         let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
-        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kDarkShade : Constants.kWineShade]
         attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : percent >= 0 ? Constants.kLightGreenShade : Constants.kWineShade]
+        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : percent >= 0 ? Constants.kDarkShade : Constants.kWineShade]
         let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
         attributedText.appendAttributedString(attrString)
         return attributedText
