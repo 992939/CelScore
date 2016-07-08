@@ -50,7 +50,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
-        logoCircle.backgroundColor = Constants.kMainShade
+        logoCircle.backgroundColor = Constants.kRedShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
@@ -61,16 +61,16 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
-        courtLabel.backgroundColor = Constants.kDarkShade
+        courtLabel.backgroundColor = Constants.kBlueShade
         houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
-        houseLabel.backgroundColor = Constants.kDarkShade
+        houseLabel.backgroundColor = Constants.kBlueShade
         logoView.addSubview(courtLabel)
         logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = MaterialColor.black.CGColor
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
-        logoView.backgroundColor = Constants.kDarkShade
+        logoView.backgroundColor = Constants.kBlueShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 
@@ -123,7 +123,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
         issueButton.setTitleColor(MaterialColor.black, forState: .Normal)
         issueButton.titleLabel!.textAlignment = .Center
-        issueButton.pulseColor = Constants.kDarkShade
+        issueButton.pulseColor = Constants.kBlueShade
         issueView.addSubview(issueButton)
         issueButton.titleLabel!.font = UIFont(name: issueButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
@@ -136,7 +136,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         privacyButton.addTarget(self, action:#selector(self.showPolicy), forControlEvents: .TouchUpInside)
         privacyButton.setTitleColor(MaterialColor.black, forState: .Normal)
         privacyButton.titleLabel!.textAlignment = .Center
-        privacyButton.pulseColor = Constants.kDarkShade
+        privacyButton.pulseColor = Constants.kBlueShade
         privacyView.addSubview(privacyButton)
         privacyButton.titleLabel!.font = UIFont(name: privacyButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let privacyNode = ASDisplayNode(viewBlock: { () -> UIView in return privacyView })
@@ -149,13 +149,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(MaterialColor.black, forState: .Normal)
         logoutButton.titleLabel!.textAlignment = .Center
-        logoutButton.pulseColor = Constants.kDarkShade
+        logoutButton.pulseColor = Constants.kBlueShade
         logoutView.addSubview(logoutButton)
         logoutButton.titleLabel!.font = UIFont(name: logoutButton.titleLabel!.font.fontName, size: Constants.kFontSize)
         let logoutNode = ASDisplayNode(viewBlock: { () -> UIView in return logoutView })
         self.view.addSubnode(logoutNode)
         
-        self.view.backgroundColor = Constants.kDarkShade
+        self.view.backgroundColor = Constants.kBlueShade
         self.navigationDrawerController!.depth = .Depth1
     }
     
@@ -280,9 +280,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kMainShade
-        box.onTintColor = Constants.kMainShade
-        box.tintColor = Constants.kMainShade
+        box.onFillColor = Constants.kRedShade
+        box.onTintColor = Constants.kRedShade
+        box.tintColor = Constants.kRedShade
         box.backgroundColor = Constants.kGreyBackground
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
@@ -294,10 +294,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
-        bar.progressTintColors = [Constants.kWineShade, Constants.kMainShade]
+        bar.progressTintColors = [Constants.kRedShade, Constants.kRedShade]
         bar.setProgress(value, animated: true)
         bar.type = .Flat
-        bar.backgroundColor = Constants.kMainShade
+        bar.backgroundColor = Constants.kRedShade
         bar.indicatorTextDisplayMode = .Progress
         materialView.addSubview(factsLabel)
         materialView.addSubview(bar)

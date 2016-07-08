@@ -73,9 +73,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.contentViewController.view.backgroundColor = UIColor.clearColor()
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
-        statusView.backgroundColor = Constants.kDarkShade
+        statusView.backgroundColor = Constants.kBlueShade
         window!.rootViewController!.view.addSubview(statusView)
-        self.window!.backgroundColor = Constants.kDarkShade
+        self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
         
         Twitter.sharedInstance().startWithConsumerKey("EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")

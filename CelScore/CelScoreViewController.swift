@@ -65,11 +65,11 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
-        gauge.subDivisionsColor = Constants.kDarkShade
+        gauge.subDivisionsColor = Constants.kBlueShade
         gauge.divisionsColor = MaterialColor.black
         gauge.valueTextColor = MaterialColor.black
         gauge.unitOfMeasurementTextColor = MaterialColor.black
-        gauge.ringBackgroundColor = Constants.kDarkShade
+        gauge.ringBackgroundColor = Constants.kBlueShade
         gauge.backgroundColor = Constants.kGreyBackground
         gauge.delegate = self
         let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.2
@@ -91,10 +91,10 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
-        if tag == 4 { infoLabel.textColor = Constants.kDarkShade }
+        if tag == 4 { infoLabel.textColor = Constants.kBlueShade }
         else if tag == 3 {
             infoLabel.text = value + "%"
-            infoLabel.textColor = Double(value) >= Constants.kPositiveConsensus ? Constants.kDarkShade : Constants.kMainShade
+            infoLabel.textColor = Double(value) >= Constants.kPositiveConsensus ? Constants.kBlueShade : Constants.kRedShade
         }
         infoLabel.textAlignment = .Right
         let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
@@ -142,6 +142,6 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.Angry.emoji()
         default: gaugeView.unitOfMeasurement = GaugeFace.Awaking.emoji()
         }
-        return Constants.kMainShade
+        return Constants.kRedShade
     }
 }

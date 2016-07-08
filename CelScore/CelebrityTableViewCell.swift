@@ -58,16 +58,16 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         box.onAnimationType = .Bounce
         box.offAnimationType = .Bounce
         box.onCheckColor = MaterialColor.white
-        box.onFillColor = Constants.kMainShade
-        box.onTintColor = Constants.kMainShade
-        box.tintColor = Constants.kMainShade
+        box.onFillColor = Constants.kRedShade
+        box.onTintColor = Constants.kRedShade
+        box.tintColor = Constants.kRedShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.preferredFrameSize = box.frame.size
         
         let cardView: MaterialPulseView = MaterialPulseView()
         cardView.borderWidth = 2.0
-        cardView.borderColor = Constants.kDarkShade
+        cardView.borderColor = Constants.kBlueShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
         self.backgroundNode.backgroundColor = Constants.kGreyBackground
         

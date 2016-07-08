@@ -115,7 +115,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kDarkGreenShade)
-        self.view.backgroundColor = Constants.kDarkShade
+        self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
@@ -184,7 +184,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         Duration.startMeasurement("setupData")
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kMainShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kRedShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
@@ -339,7 +339,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.searchBar.alpha = 1.0
             self.searchBar.showsCancelButton = true
             self.searchBar.tintColor = MaterialColor.white
-            self.searchBar.backgroundColor = Constants.kDarkShade
+            self.searchBar.backgroundColor = Constants.kBlueShade
             self.searchBar.barTintColor = MaterialColor.white
             self.searchBar.frame = Constants.kSegmentedControlRect
             self.view.addSubview(self.searchBar)
@@ -410,7 +410,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         navBar.leftControls = [menuButton]
         navBar.rightControls = [rightButton]
         navBar.grid.contentInset.bottom = 2 * Constants.kPadding
-        navBar.backgroundColor = Constants.kMainShade
+        navBar.backgroundColor = Constants.kRedShade
         let celscoreImageView = UIImageView(image: R.image.score_white()!)
         celscoreImageView.frame = CGRect(x: navBar.width/2 - 3, y: navBar.top/2 + 2.5, width: 25, height: 25)
         navBar.addSubview(celscoreImageView)
@@ -419,12 +419,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupSegmentedControl() {
         self.segmentedControl.frame = Constants.kSegmentedControlRect
-        self.segmentedControl.backgroundColor = Constants.kDarkShade
-        self.segmentedControl.selectionIndicatorColor = Constants.kWineShade
+        self.segmentedControl.backgroundColor = Constants.kBlueShade
+        self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
         self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
                                                      NSFontAttributeName: UIFont.systemFontOfSize(18),
-                                                     NSBackgroundColorAttributeName : Constants.kDarkShade]
+                                                     NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.opaque = true

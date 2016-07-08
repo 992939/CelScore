@@ -82,7 +82,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         })
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
-        statusView.backgroundColor = Constants.kDarkShade
+        statusView.backgroundColor = Constants.kBlueShade
         
         self.profilePicNode.URL = NSURL(string: celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
@@ -104,7 +104,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.addSubview(self.infoVC.view)
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
-        self.view.backgroundColor = Constants.kDarkShade
+        self.view.backgroundColor = Constants.kBlueShade
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -271,7 +271,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         if open {
             self.socialButton.menu.enabled = true
-            first?.backgroundColor = Constants.kDarkShade
+            first?.backgroundColor = Constants.kBlueShade
             first?.pulseAnimation = .CenterWithBacking
             first?.animate(MaterialAnimation.rotate(rotation: 1))
             self.socialButton.menu.open()
@@ -401,7 +401,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: RatingsViewDelegate
     func rippleEffect(positive positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarRatingShade }
-        else { self.profilePicNode.view.rippleColor = positive ? Constants.kDarkShade : Constants.kWineShade }
+        else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueShade : Constants.kRedShade }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
@@ -413,7 +413,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
-            self.voteButton.backgroundColor = positive == true ? Constants.kDarkShade : Constants.kWineShade },
+            self.voteButton.backgroundColor = positive == true ? Constants.kBlueShade : Constants.kRedShade },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseAnimation = .CenterWithBacking
                 self.voteButton.pulse() }
@@ -437,7 +437,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
         let nameLabel: UILabel = self.setupLabel(title: self.celebST.nickname, frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
-        nameLabel.backgroundColor = Constants.kMainShade
+        nameLabel.backgroundColor = Constants.kRedShade
         nameLabel.textColor = MaterialColor.white
         nameLabel.textAlignment = .Center
         self.view.addSubview(nameLabel)
@@ -446,7 +446,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.leftControls = [backButton]
         navigationBarView.depth = .Depth3
-        navigationBarView.backgroundColor = Constants.kMainShade
+        navigationBarView.backgroundColor = Constants.kRedShade
         navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
     }
@@ -454,7 +454,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getTopView() -> MaterialView {
         let topView: MaterialView = MaterialView(frame: Constants.kTopViewRect)
         topView.depth = .Depth2
-        topView.backgroundColor = Constants.kDarkShade
+        topView.backgroundColor = Constants.kBlueShade
         topView.opaque = true
         topView.image = R.image.topView()
         return topView
@@ -464,7 +464,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
             separatorColour: MaterialColor.black, separatorWidth: 1,
             segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(0),
-                keySegmentOnSelectionColour: Constants.kMainShade,
+                keySegmentOnSelectionColour: Constants.kRedShade,
                 keySegmentOffSelectionColour: Constants.kGreyBackground,
                 keyContentVerticalMargin: 5])
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
