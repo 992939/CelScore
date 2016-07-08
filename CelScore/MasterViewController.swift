@@ -114,7 +114,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kBlueShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)

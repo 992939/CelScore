@@ -174,7 +174,7 @@ final class RatingsViewController: ASViewController, Labelable {
                 for (index, subview) in viewArray.enumerate() {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
-                    cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarGoldShade : MaterialColor.white
+                    cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarGoldShade : Constants.kStarGreyShade
                     cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
                     cosmos.settings.updateOnTouch = userRatings.getCelScore() > 0 ? false : true
                     cosmos.settings.userRatingMode = false
