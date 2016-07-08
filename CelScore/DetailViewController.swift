@@ -189,7 +189,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .on(next: { message in
                 SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
                     if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
-                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_green(), options: OverlayInfo.getOptions()) }
+                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_red(), options: OverlayInfo.getOptions()) }
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
             })

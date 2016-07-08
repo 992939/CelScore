@@ -101,7 +101,7 @@ enum OverlayInfo {
         case .FirstFollow: return R.image.astronaut_green()!
         case .FirstNotFollow: return R.image.observatory_green()!
         case .FirstConsensus: return R.image.worker_green_big()!
-        case .FirstPublic: return R.image.sphere_green_big()!
+        case .FirstPublic: return R.image.sphere_red_big()!
         case .FirstInterest: return R.image.geometry_green()!
         case .First25: return R.image.planet_green()!
         case .First50: return R.image.planet_green()!

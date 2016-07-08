@@ -47,7 +47,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 69 images.
+  /// This `R.image` struct is generated, and contains static references to 73 images.
   struct image {
     /// Image `anchor_green`.
     static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
@@ -163,6 +163,8 @@ struct R {
     static let spaceship_green = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green")
     /// Image `spaceship_green_big`.
     static let spaceship_green_big = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green_big")
+    /// Image `sphere_blue_mini`.
+    static let sphere_blue_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_blue_mini")
     /// Image `sphere_green`.
     static let sphere_green = ImageResource(bundle: _R.hostingBundle, name: "sphere_green")
     /// Image `sphere_green_big`.
@@ -171,6 +173,12 @@ struct R {
     static let sphere_green_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_mini")
     /// Image `sphere_pink_mini`.
     static let sphere_pink_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_pink_mini")
+    /// Image `sphere_red`.
+    static let sphere_red = ImageResource(bundle: _R.hostingBundle, name: "sphere_red")
+    /// Image `sphere_red_big`.
+    static let sphere_red_big = ImageResource(bundle: _R.hostingBundle, name: "sphere_red_big")
+    /// Image `sphere_red_mini`.
+    static let sphere_red_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_red_mini")
     /// Image `sphere_yellow`.
     static let sphere_yellow = ImageResource(bundle: _R.hostingBundle, name: "sphere_yellow")
     /// Image `star_black`.
@@ -473,6 +481,11 @@ struct R {
       return UIImage(resource: R.image.spaceship_green_big, compatibleWithTraitCollection: traitCollection)
     }
     
+    /// `UIImage(named: "sphere_blue_mini", bundle: ..., traitCollection: ...)`
+    static func sphere_blue_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_blue_mini, compatibleWithTraitCollection: traitCollection)
+    }
+    
     /// `UIImage(named: "sphere_green", bundle: ..., traitCollection: ...)`
     static func sphere_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sphere_green, compatibleWithTraitCollection: traitCollection)
@@ -491,6 +504,21 @@ struct R {
     /// `UIImage(named: "sphere_pink_mini", bundle: ..., traitCollection: ...)`
     static func sphere_pink_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sphere_pink_mini, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_red", bundle: ..., traitCollection: ...)`
+    static func sphere_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_red, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_red_big", bundle: ..., traitCollection: ...)`
+    static func sphere_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_red_big, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "sphere_red_mini", bundle: ..., traitCollection: ...)`
+    static func sphere_red_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.sphere_red_mini, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "sphere_yellow", bundle: ..., traitCollection: ...)`
