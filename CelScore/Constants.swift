@@ -42,7 +42,9 @@ struct Constants {
     static let kIPhone6Plus_height: CGFloat = 736
     
     static let kBlueShade: UIColor = MaterialColor.blue.lighten2
+    static let kBlueText: UIColor = MaterialColor.blue.darken1
     static let kRedShade: UIColor = MaterialColor.red.lighten2
+    static let kRedText: UIColor = MaterialColor.red.darken1
     static let kStarRatingShade: UIColor = MaterialColor.yellow.darken1
     static let kGreyBackground: UIColor = MaterialColor.grey.lighten3
     
