@@ -47,10 +47,8 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 73 images.
+  /// This `R.image` struct is generated, and contains static references to 56 images.
   struct image {
-    /// Image `anchor_green`.
-    static let anchor_green = ImageResource(bundle: _R.hostingBundle, name: "anchor_green")
     /// Image `angryFace`.
     static let angryFace = ImageResource(bundle: _R.hostingBundle, name: "angryFace")
     /// Image `Anonymous`.
@@ -61,26 +59,24 @@ struct R {
     static let arrow_up = ImageResource(bundle: _R.hostingBundle, name: "arrow_up")
     /// Image `arrow_white`.
     static let arrow_white = ImageResource(bundle: _R.hostingBundle, name: "arrow_white")
-    /// Image `astronaut_green`.
-    static let astronaut_green = ImageResource(bundle: _R.hostingBundle, name: "astronaut_green")
+    /// Image `astronaut_red`.
+    static let astronaut_red = ImageResource(bundle: _R.hostingBundle, name: "astronaut_red")
     /// Image `celscore_big_white`.
     static let celscore_big_white = ImageResource(bundle: _R.hostingBundle, name: "celscore_big_white")
     /// Image `celscore_black`.
     static let celscore_black = ImageResource(bundle: _R.hostingBundle, name: "celscore_black")
-    /// Image `celscore_green`.
-    static let celscore_green = ImageResource(bundle: _R.hostingBundle, name: "celscore_green")
-    /// Image `celscore_purple`.
-    static let celscore_purple = ImageResource(bundle: _R.hostingBundle, name: "celscore_purple")
     /// Image `celscore_white`.
     static let celscore_white = ImageResource(bundle: _R.hostingBundle, name: "celscore_white")
-    /// Image `cloud_green`.
-    static let cloud_green = ImageResource(bundle: _R.hostingBundle, name: "cloud_green")
-    /// Image `cloud_green_big`.
-    static let cloud_green_big = ImageResource(bundle: _R.hostingBundle, name: "cloud_green_big")
+    /// Image `cloud_big_red`.
+    static let cloud_big_red = ImageResource(bundle: _R.hostingBundle, name: "cloud_big_red")
+    /// Image `cloud_red`.
+    static let cloud_red = ImageResource(bundle: _R.hostingBundle, name: "cloud_red")
     /// Image `contract_green_big`.
     static let contract_green_big = ImageResource(bundle: _R.hostingBundle, name: "contract_green_big")
-    /// Image `court_green`.
-    static let court_green = ImageResource(bundle: _R.hostingBundle, name: "court_green")
+    /// Image `contract_red_big`.
+    static let contract_red_big = ImageResource(bundle: _R.hostingBundle, name: "contract_red_big")
+    /// Image `court_red`.
+    static let court_red = ImageResource(bundle: _R.hostingBundle, name: "court_red")
     /// Image `court_small_white`.
     static let court_small_white = ImageResource(bundle: _R.hostingBundle, name: "court_small_white")
     /// Image `court_white`.
@@ -91,24 +87,16 @@ struct R {
     static let emptyCircle = ImageResource(bundle: _R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
     static let facebooklogo = ImageResource(bundle: _R.hostingBundle, name: "facebooklogo")
-    /// Image `geometry_green`.
-    static let geometry_green = ImageResource(bundle: _R.hostingBundle, name: "geometry_green")
+    /// Image `geometry_red`.
+    static let geometry_red = ImageResource(bundle: _R.hostingBundle, name: "geometry_red")
     /// Image `happyFace`.
     static let happyFace = ImageResource(bundle: _R.hostingBundle, name: "happyFace")
     /// Image `heart_black`.
     static let heart_black = ImageResource(bundle: _R.hostingBundle, name: "heart_black")
-    /// Image `heart_green`.
-    static let heart_green = ImageResource(bundle: _R.hostingBundle, name: "heart_green")
-    /// Image `heart_purple`.
-    static let heart_purple = ImageResource(bundle: _R.hostingBundle, name: "heart_purple")
     /// Image `heart_white`.
     static let heart_white = ImageResource(bundle: _R.hostingBundle, name: "heart_white")
     /// Image `ic_add_black`.
     static let ic_add_black = ImageResource(bundle: _R.hostingBundle, name: "ic_add_black")
-    /// Image `ic_add_green`.
-    static let ic_add_green = ImageResource(bundle: _R.hostingBundle, name: "ic_add_green")
-    /// Image `ic_add_purple`.
-    static let ic_add_purple = ImageResource(bundle: _R.hostingBundle, name: "ic_add_purple")
     /// Image `ic_add_white`.
     static let ic_add_white = ImageResource(bundle: _R.hostingBundle, name: "ic_add_white")
     /// Image `ic_close_white`.
@@ -119,32 +107,22 @@ struct R {
     static let ic_search_white = ImageResource(bundle: _R.hostingBundle, name: "ic_search_white")
     /// Image `info_black`.
     static let info_black = ImageResource(bundle: _R.hostingBundle, name: "info_black")
-    /// Image `info_green`.
-    static let info_green = ImageResource(bundle: _R.hostingBundle, name: "info_green")
-    /// Image `info_purple`.
-    static let info_purple = ImageResource(bundle: _R.hostingBundle, name: "info_purple")
     /// Image `info_white`.
     static let info_white = ImageResource(bundle: _R.hostingBundle, name: "info_white")
-    /// Image `jurors_green_big`.
-    static let jurors_green_big = ImageResource(bundle: _R.hostingBundle, name: "jurors_green_big")
-    /// Image `mic_green`.
-    static let mic_green = ImageResource(bundle: _R.hostingBundle, name: "mic_green")
-    /// Image `mic_purple`.
-    static let mic_purple = ImageResource(bundle: _R.hostingBundle, name: "mic_purple")
+    /// Image `jurors_red_big`.
+    static let jurors_red_big = ImageResource(bundle: _R.hostingBundle, name: "jurors_red_big")
+    /// Image `mic_red`.
+    static let mic_red = ImageResource(bundle: _R.hostingBundle, name: "mic_red")
     /// Image `mic_yellow`.
     static let mic_yellow = ImageResource(bundle: _R.hostingBundle, name: "mic_yellow")
     /// Image `nosmileFace`.
     static let nosmileFace = ImageResource(bundle: _R.hostingBundle, name: "nosmileFace")
-    /// Image `nuclear_green`.
-    static let nuclear_green = ImageResource(bundle: _R.hostingBundle, name: "nuclear_green")
-    /// Image `nuclear_purple`.
-    static let nuclear_purple = ImageResource(bundle: _R.hostingBundle, name: "nuclear_purple")
-    /// Image `observatory_green`.
-    static let observatory_green = ImageResource(bundle: _R.hostingBundle, name: "observatory_green")
-    /// Image `passport_green`.
-    static let passport_green = ImageResource(bundle: _R.hostingBundle, name: "passport_green")
-    /// Image `planet_green`.
-    static let planet_green = ImageResource(bundle: _R.hostingBundle, name: "planet_green")
+    /// Image `nuclear_red`.
+    static let nuclear_red = ImageResource(bundle: _R.hostingBundle, name: "nuclear_red")
+    /// Image `observatory_red`.
+    static let observatory_red = ImageResource(bundle: _R.hostingBundle, name: "observatory_red")
+    /// Image `planet_red`.
+    static let planet_red = ImageResource(bundle: _R.hostingBundle, name: "planet_red")
     /// Image `sadFace`.
     static let sadFace = ImageResource(bundle: _R.hostingBundle, name: "sadFace")
     /// Image `scale_black`.
@@ -159,20 +137,12 @@ struct R {
     static let score_white = ImageResource(bundle: _R.hostingBundle, name: "score_white")
     /// Image `smileFace`.
     static let smileFace = ImageResource(bundle: _R.hostingBundle, name: "smileFace")
-    /// Image `spaceship_green`.
-    static let spaceship_green = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green")
-    /// Image `spaceship_green_big`.
-    static let spaceship_green_big = ImageResource(bundle: _R.hostingBundle, name: "spaceship_green_big")
+    /// Image `spaceship_red`.
+    static let spaceship_red = ImageResource(bundle: _R.hostingBundle, name: "spaceship_red")
+    /// Image `spaceship_red_big`.
+    static let spaceship_red_big = ImageResource(bundle: _R.hostingBundle, name: "spaceship_red_big")
     /// Image `sphere_blue_mini`.
     static let sphere_blue_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_blue_mini")
-    /// Image `sphere_green`.
-    static let sphere_green = ImageResource(bundle: _R.hostingBundle, name: "sphere_green")
-    /// Image `sphere_green_big`.
-    static let sphere_green_big = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_big")
-    /// Image `sphere_green_mini`.
-    static let sphere_green_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_green_mini")
-    /// Image `sphere_pink_mini`.
-    static let sphere_pink_mini = ImageResource(bundle: _R.hostingBundle, name: "sphere_pink_mini")
     /// Image `sphere_red`.
     static let sphere_red = ImageResource(bundle: _R.hostingBundle, name: "sphere_red")
     /// Image `sphere_red_big`.
@@ -183,23 +153,14 @@ struct R {
     static let sphere_yellow = ImageResource(bundle: _R.hostingBundle, name: "sphere_yellow")
     /// Image `star_black`.
     static let star_black = ImageResource(bundle: _R.hostingBundle, name: "star_black")
-    /// Image `star_green`.
-    static let star_green = ImageResource(bundle: _R.hostingBundle, name: "star_green")
     /// Image `star_icon`.
     static let star_icon = ImageResource(bundle: _R.hostingBundle, name: "star_icon")
-    /// Image `star_purple`.
-    static let star_purple = ImageResource(bundle: _R.hostingBundle, name: "star_purple")
     /// Image `topView`.
     static let topView = ImageResource(bundle: _R.hostingBundle, name: "topView")
     /// Image `twitterlogo`.
     static let twitterlogo = ImageResource(bundle: _R.hostingBundle, name: "twitterlogo")
-    /// Image `worker_green_big`.
-    static let worker_green_big = ImageResource(bundle: _R.hostingBundle, name: "worker_green_big")
-    
-    /// `UIImage(named: "anchor_green", bundle: ..., traitCollection: ...)`
-    static func anchor_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.anchor_green, compatibleWithTraitCollection: traitCollection)
-    }
+    /// Image `worker_red_big`.
+    static let worker_red_big = ImageResource(bundle: _R.hostingBundle, name: "worker_red_big")
     
     /// `UIImage(named: "angryFace", bundle: ..., traitCollection: ...)`
     static func angryFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
@@ -226,9 +187,9 @@ struct R {
       return UIImage(resource: R.image.arrow_white, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "astronaut_green", bundle: ..., traitCollection: ...)`
-    static func astronaut_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.astronaut_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "astronaut_red", bundle: ..., traitCollection: ...)`
+    static func astronaut_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.astronaut_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "celscore_big_white", bundle: ..., traitCollection: ...)`
@@ -241,29 +202,19 @@ struct R {
       return UIImage(resource: R.image.celscore_black, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "celscore_green", bundle: ..., traitCollection: ...)`
-    static func celscore_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.celscore_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "celscore_purple", bundle: ..., traitCollection: ...)`
-    static func celscore_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.celscore_purple, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "celscore_white", bundle: ..., traitCollection: ...)`
     static func celscore_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.celscore_white, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "cloud_green", bundle: ..., traitCollection: ...)`
-    static func cloud_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cloud_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "cloud_big_red", bundle: ..., traitCollection: ...)`
+    static func cloud_big_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.cloud_big_red, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "cloud_green_big", bundle: ..., traitCollection: ...)`
-    static func cloud_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cloud_green_big, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "cloud_red", bundle: ..., traitCollection: ...)`
+    static func cloud_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.cloud_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "contract_green_big", bundle: ..., traitCollection: ...)`
@@ -271,9 +222,14 @@ struct R {
       return UIImage(resource: R.image.contract_green_big, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "court_green", bundle: ..., traitCollection: ...)`
-    static func court_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.court_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "contract_red_big", bundle: ..., traitCollection: ...)`
+    static func contract_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.contract_red_big, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "court_red", bundle: ..., traitCollection: ...)`
+    static func court_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.court_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "court_small_white", bundle: ..., traitCollection: ...)`
@@ -301,9 +257,9 @@ struct R {
       return UIImage(resource: R.image.facebooklogo, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "geometry_green", bundle: ..., traitCollection: ...)`
-    static func geometry_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.geometry_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "geometry_red", bundle: ..., traitCollection: ...)`
+    static func geometry_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.geometry_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`
@@ -316,16 +272,6 @@ struct R {
       return UIImage(resource: R.image.heart_black, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "heart_green", bundle: ..., traitCollection: ...)`
-    static func heart_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.heart_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "heart_purple", bundle: ..., traitCollection: ...)`
-    static func heart_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.heart_purple, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "heart_white", bundle: ..., traitCollection: ...)`
     static func heart_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.heart_white, compatibleWithTraitCollection: traitCollection)
@@ -334,16 +280,6 @@ struct R {
     /// `UIImage(named: "ic_add_black", bundle: ..., traitCollection: ...)`
     static func ic_add_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.ic_add_black, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "ic_add_green", bundle: ..., traitCollection: ...)`
-    static func ic_add_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_add_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "ic_add_purple", bundle: ..., traitCollection: ...)`
-    static func ic_add_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_add_purple, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "ic_add_white", bundle: ..., traitCollection: ...)`
@@ -371,34 +307,19 @@ struct R {
       return UIImage(resource: R.image.info_black, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "info_green", bundle: ..., traitCollection: ...)`
-    static func info_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "info_purple", bundle: ..., traitCollection: ...)`
-    static func info_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_purple, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "info_white", bundle: ..., traitCollection: ...)`
     static func info_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.info_white, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "jurors_green_big", bundle: ..., traitCollection: ...)`
-    static func jurors_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.jurors_green_big, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "jurors_red_big", bundle: ..., traitCollection: ...)`
+    static func jurors_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.jurors_red_big, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "mic_green", bundle: ..., traitCollection: ...)`
-    static func mic_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.mic_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "mic_purple", bundle: ..., traitCollection: ...)`
-    static func mic_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.mic_purple, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "mic_red", bundle: ..., traitCollection: ...)`
+    static func mic_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.mic_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
@@ -411,29 +332,19 @@ struct R {
       return UIImage(resource: R.image.nosmileFace, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "nuclear_green", bundle: ..., traitCollection: ...)`
-    static func nuclear_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.nuclear_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "nuclear_red", bundle: ..., traitCollection: ...)`
+    static func nuclear_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.nuclear_red, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "nuclear_purple", bundle: ..., traitCollection: ...)`
-    static func nuclear_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.nuclear_purple, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "observatory_red", bundle: ..., traitCollection: ...)`
+    static func observatory_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.observatory_red, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "observatory_green", bundle: ..., traitCollection: ...)`
-    static func observatory_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.observatory_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "passport_green", bundle: ..., traitCollection: ...)`
-    static func passport_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.passport_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "planet_green", bundle: ..., traitCollection: ...)`
-    static func planet_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.planet_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "planet_red", bundle: ..., traitCollection: ...)`
+    static func planet_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.planet_red, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "sadFace", bundle: ..., traitCollection: ...)`
@@ -471,39 +382,19 @@ struct R {
       return UIImage(resource: R.image.smileFace, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "spaceship_green", bundle: ..., traitCollection: ...)`
-    static func spaceship_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.spaceship_green, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "spaceship_red", bundle: ..., traitCollection: ...)`
+    static func spaceship_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.spaceship_red, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "spaceship_green_big", bundle: ..., traitCollection: ...)`
-    static func spaceship_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.spaceship_green_big, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "spaceship_red_big", bundle: ..., traitCollection: ...)`
+    static func spaceship_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.spaceship_red_big, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "sphere_blue_mini", bundle: ..., traitCollection: ...)`
     static func sphere_blue_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.sphere_blue_mini, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_green", bundle: ..., traitCollection: ...)`
-    static func sphere_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_green_big", bundle: ..., traitCollection: ...)`
-    static func sphere_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_green_big, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_green_mini", bundle: ..., traitCollection: ...)`
-    static func sphere_green_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_green_mini, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_pink_mini", bundle: ..., traitCollection: ...)`
-    static func sphere_pink_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_pink_mini, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "sphere_red", bundle: ..., traitCollection: ...)`
@@ -531,19 +422,9 @@ struct R {
       return UIImage(resource: R.image.star_black, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "star_green", bundle: ..., traitCollection: ...)`
-    static func star_green(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.star_green, compatibleWithTraitCollection: traitCollection)
-    }
-    
     /// `UIImage(named: "star_icon", bundle: ..., traitCollection: ...)`
     static func star_icon(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.star_icon, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "star_purple", bundle: ..., traitCollection: ...)`
-    static func star_purple(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.star_purple, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "topView", bundle: ..., traitCollection: ...)`
@@ -556,9 +437,9 @@ struct R {
       return UIImage(resource: R.image.twitterlogo, compatibleWithTraitCollection: traitCollection)
     }
     
-    /// `UIImage(named: "worker_green_big", bundle: ..., traitCollection: ...)`
-    static func worker_green_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.worker_green_big, compatibleWithTraitCollection: traitCollection)
+    /// `UIImage(named: "worker_red_big", bundle: ..., traitCollection: ...)`
+    static func worker_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.worker_red_big, compatibleWithTraitCollection: traitCollection)
     }
     
     private init() {}

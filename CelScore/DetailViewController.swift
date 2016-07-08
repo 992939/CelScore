@@ -178,7 +178,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if isConsensus == false {
                     SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
                         if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
-                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_green(), options: OverlayInfo.getOptions()) }
+                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_red(), options: OverlayInfo.getOptions()) }
                         TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                     }
                 }

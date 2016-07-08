@@ -94,26 +94,26 @@ enum OverlayInfo {
     
     func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return R.image.jurors_green_big()!
-        case .MenuAccess: return R.image.court_green()!
-        case .LoginSuccess: return R.image.astronaut_green()!
-        case .MaxFollow: return R.image.observatory_green()!
-        case .FirstFollow: return R.image.astronaut_green()!
-        case .FirstNotFollow: return R.image.observatory_green()!
-        case .FirstConsensus: return R.image.worker_green_big()!
+        case .WelcomeUser: return R.image.jurors_red_big()!
+        case .MenuAccess: return R.image.court_red()!
+        case .LoginSuccess: return R.image.astronaut_red()!
+        case .MaxFollow: return R.image.observatory_red()!
+        case .FirstFollow: return R.image.astronaut_red()!
+        case .FirstNotFollow: return R.image.observatory_red()!
+        case .FirstConsensus: return R.image.worker_red_big()!
         case .FirstPublic: return R.image.sphere_red_big()!
-        case .FirstInterest: return R.image.geometry_green()!
-        case .First25: return R.image.planet_green()!
-        case .First50: return R.image.planet_green()!
-        case .First75: return R.image.planet_green()!
-        case .FirstCompleted: return R.image.planet_green()!
-        case .FirstVoteDisable: return R.image.mic_green()!
-        case .FirstTrollWarning: return R.image.nuclear_purple()!
-        case .LogoutUser: return R.image.planet_green()!
-        case .LoginError: return R.image.cloud_green()!
-        case .NetworkError: return R.image.cloud_green()!
-        case .TimeoutError: return R.image.cloud_green()!
-        case .PermissionError: return R.image.cloud_green()!
+        case .FirstInterest: return R.image.geometry_red()!
+        case .First25: return R.image.planet_red()!
+        case .First50: return R.image.planet_red()!
+        case .First75: return R.image.planet_red()!
+        case .FirstCompleted: return R.image.planet_red()!
+        case .FirstVoteDisable: return R.image.mic_red()!
+        case .FirstTrollWarning: return R.image.nuclear_red()!
+        case .LogoutUser: return R.image.planet_red()!
+        case .LoginError: return R.image.cloud_red()!
+        case .NetworkError: return R.image.cloud_red()!
+        case .TimeoutError: return R.image.cloud_red()!
+        case .PermissionError: return R.image.cloud_red()!
         }
     }
     
