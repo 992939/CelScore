@@ -193,7 +193,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .observeOn(UIScheduler())
             .on(next: { _ in
                 Duration.stopMeasurement()
-                revealingSplashView.animationType = SplashAnimationType.SqueezeAndZoomOut
+                revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
                 revealingSplashView.startAnimation()})
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
@@ -289,13 +289,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_red()!, style: .Alert)
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
             self.dismissViewControllerAnimated(true, completion: {
-                splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
+                splashView.animationType = SplashAnimationType.PopAndZoomOut
                 splashView.startAnimation()
             })
         }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
             self.dismissViewControllerAnimated(true, completion: { _ in
-                splashView.animationType = SplashAnimationType.SqueezeAndZoomOut
+                splashView.animationType = SplashAnimationType.PopAndZoomOut
                 splashView.startAnimation()
                 MaterialAnimation.delay(0.5) { self.sendEmail() }
             })
