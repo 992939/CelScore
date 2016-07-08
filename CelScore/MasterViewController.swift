@@ -114,7 +114,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
+        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kBlueShade)
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
@@ -184,7 +184,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         Duration.startMeasurement("setupData")
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kRedShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
