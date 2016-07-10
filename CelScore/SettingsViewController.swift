@@ -168,6 +168,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func logout() {
         let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against switching accounts as your votes and settings might get lost. Are you sure you want to continue?", image: R.image.spaceship_red_big()!, style: .Alert)
+        alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { _ in
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -242,7 +243,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        let alertVC = PMAlertController(title: "★ The Public Sphere ★", description: OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), style: .Alert)
+                        let alertVC = PMAlertController(title: "The Public Sphere", description: OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), style: .Alert)
+                        alertVC.alertTitle.textColor = Constants.kBlueText
                         alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Cancel, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))
@@ -250,7 +252,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         alertVC.view.opaque = false
                         self.presentViewController(alertVC, animated: true, completion: nil)
                     } else {
-                        let alertVC = PMAlertController(title: "★ Work in Progress ★", description: OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), style: .Alert)
+                        let alertVC = PMAlertController(title: "Work in Progress", description: OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), style: .Alert)
+                        alertVC.alertTitle.textColor = Constants.kBlueText
                         alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Cancel, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))

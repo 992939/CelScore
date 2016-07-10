@@ -67,6 +67,7 @@ extension Supportable where Self: UIViewController {
     
     func sendAlert(info: OverlayInfo, with loginType: SocialLogin) {
         let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .Alert)
+        alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
             self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail() }})
