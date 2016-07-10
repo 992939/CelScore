@@ -171,7 +171,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_red_big()!, style: .Alert)
+                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_blue_big()!, style: .Alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Default, action: { _ in
                     MaterialAnimation.delay(0.5) { self.handleMenu(true) }
@@ -288,7 +288,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func sendNetworkAlert(splashView: RevealingSplashView) {
-        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_red()!, style: .Alert)
+        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_blue()!, style: .Alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
             self.dismissViewControllerAnimated(true, completion: {

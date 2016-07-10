@@ -245,7 +245,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                     if checkBox.tag == 0 {
                         let alertVC = PMAlertController(title: "The Public Sphere", description: OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), style: .Alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Cancel, action: { _ in
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))
                         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
@@ -254,7 +254,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                     } else {
                         let alertVC = PMAlertController(title: "Work in Progress", description: OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), style: .Alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Cancel, action: { _ in
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start()
                             self.dismissViewControllerAnimated(true, completion: nil) }))
                         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)

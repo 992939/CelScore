@@ -70,7 +70,7 @@ enum OverlayInfo {
     func message(social: String = "") -> String {
         switch self {
         case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted and agreed in a court of public opinion is entirely up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
-        case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is..., to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
+        case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly!\n\nIf this is your first time in the courthouse, you'll have to register."
         case .LoginSuccess: return "You are now a registered member of the Courthouse of Public Opinion!\n\nPlease vote responsibly."
         case .MaxFollow: return "You've already reached the maximum number of stars you can follow!"
         case .FirstFollow: return "You've added your first star to the Today View!\n\nYou can swipe down from the top of your screen to display the view."
@@ -94,14 +94,14 @@ enum OverlayInfo {
     
     func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return R.image.jurors_red_big()!
+        case .WelcomeUser: return R.image.jurors_blue_big()!
         case .MenuAccess: return R.image.court_red()!
         case .LoginSuccess: return R.image.astronaut_red()!
         case .MaxFollow: return R.image.observatory_red()!
         case .FirstFollow: return R.image.astronaut_red()!
         case .FirstNotFollow: return R.image.observatory_red()!
-        case .FirstConsensus: return R.image.worker_red_big()!
-        case .FirstPublic: return R.image.sphere_red_big()!
+        case .FirstConsensus: return R.image.worker_blue_big()!
+        case .FirstPublic: return R.image.sphere_blue_big()!
         case .FirstInterest: return R.image.geometry_red()!
         case .First25: return R.image.planet_red()!
         case .First50: return R.image.planet_red()!
