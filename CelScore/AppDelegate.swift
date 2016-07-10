@@ -101,7 +101,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        if Twitter.sharedInstance().application(app, openURL:url, options: options) { return true }
+        if url.absoluteString.containsString("TheScore://") {
+            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
+                let celebST = CelebrityStruct(
+                    id: celeb.id,
+                    imageURL: celeb.picture3x,
+                    nickname: celeb.nickName,
+                    prevScore: celeb.prevScore,
+                    sex: celeb.sex,
+                    isFollowed: celeb.isFollowed)
+                app.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+            })
+        }
+        else if Twitter.sharedInstance().application(app, openURL:url, options: options) { return true }
         else if FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String, annotation: nil) { return true }
         return false
     }
