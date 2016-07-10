@@ -39,10 +39,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Method
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let maxWidth: CGFloat = self.view.width - 2 * Constants.kPadding
+        let maxWidth: CGFloat = Constants.kSettingsViewWidth - 2 * Constants.kPadding
         
         //Logo
-        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 70 - 2 * UIDevice.getOffset()))
+        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 70 - 2 * UIDevice.getOffset()))
         logoView.depth = .None
         let diameter = 60 - 2 * UIDevice.getOffset()
         let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 5 - UIDevice.getOffset()/2, width: diameter, height: diameter))
@@ -53,7 +53,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.backgroundColor = Constants.kRedShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
-        let labelWidth: CGFloat = (self.view.width - logoCircle.width)/2
+        let labelWidth: CGFloat = (Constants.kSettingsViewWidth - logoCircle.width)/2
         let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
         courtLabel.textAlignment = .Center
         let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
