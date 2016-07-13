@@ -405,7 +405,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: RatingsViewDelegate
     func rippleEffect(positive positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarGoldShade }
-        else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueShade : Constants.kRedShade }
+        else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueText : Constants.kRedText }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
@@ -417,7 +417,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
-            self.voteButton.backgroundColor = positive == true ? Constants.kBlueShade : Constants.kRedShade },
+            self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
             completion: { _ in MaterialAnimation.delay(2) {
                 self.voteButton.pulseAnimation = .CenterWithBacking
                 self.voteButton.pulse() }
