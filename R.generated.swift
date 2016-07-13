@@ -47,7 +47,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 62 images.
+  /// This `R.image` struct is generated, and contains static references to 64 images.
   struct image {
     /// Image `angryFace`.
     static let angryFace = ImageResource(bundle: _R.hostingBundle, name: "angryFace")
@@ -109,6 +109,10 @@ struct R {
     static let ic_search_white = ImageResource(bundle: _R.hostingBundle, name: "ic_search_white")
     /// Image `info_black`.
     static let info_black = ImageResource(bundle: _R.hostingBundle, name: "info_black")
+    /// Image `info_button`.
+    static let info_button = ImageResource(bundle: _R.hostingBundle, name: "info_button")
+    /// Image `info_overlay_blue`.
+    static let info_overlay_blue = ImageResource(bundle: _R.hostingBundle, name: "info_overlay_blue")
     /// Image `info_white`.
     static let info_white = ImageResource(bundle: _R.hostingBundle, name: "info_white")
     /// Image `jurors_blue_big`.
@@ -322,6 +326,16 @@ struct R {
     /// `UIImage(named: "info_black", bundle: ..., traitCollection: ...)`
     static func info_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.info_black, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "info_button", bundle: ..., traitCollection: ...)`
+    static func info_button(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.info_button, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "info_overlay_blue", bundle: ..., traitCollection: ...)`
+    static func info_overlay_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.info_overlay_blue, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "info_white", bundle: ..., traitCollection: ...)`

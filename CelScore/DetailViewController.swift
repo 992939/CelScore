@@ -152,6 +152,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         }
     }
     
+    func infoAction() {
+       TAOverlay.showOverlayWithLabel(OverlayInfo.InfoSource.message(), image: OverlayInfo.InfoSource.logo(), options: OverlayInfo.getOptions())
+    }
+    
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
@@ -440,6 +444,15 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         backButton.setImage(R.image.arrow_white()!, forState: .Highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
         
+        let infoButton: FlatButton = FlatButton()
+        infoButton.pulseColor = MaterialColor.white
+        infoButton.pulseAnimation = .None
+        infoButton.accessibilityLabel = "Info Button"
+        infoButton.isAccessibilityElement = true
+        infoButton.setImage(R.image.info_button()!, forState: .Normal)
+        infoButton.setImage(R.image.info_button()!, forState: .Highlighted)
+        infoButton.addTarget(self, action: #selector(DetailViewController.infoAction), forControlEvents: .TouchUpInside)
+        
         let nameLabel: UILabel = self.setupLabel(title: "★  " + self.celebST.nickname + "   ★", frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
         nameLabel.backgroundColor = Constants.kRedShade
         nameLabel.textColor = MaterialColor.white
@@ -449,9 +462,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.leftControls = [backButton]
+        navigationBarView.rightControls = [infoButton]
         navigationBarView.depth = .Depth3
         navigationBarView.backgroundColor = Constants.kRedShade
-        navigationBarView.contentMode = .ScaleAspectFit
         return navigationBarView
     }
     
