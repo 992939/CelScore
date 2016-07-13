@@ -63,7 +63,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
-        self.socialButton.menu.enabled = false
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
@@ -268,35 +267,40 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     //MARK: Sociable
     func handleMenu(open: Bool = false) {
+        if open { self.openHandleMenu() }
+        else if self.socialButton.menu.opened { self.closeHandleMenu() }
+        else { TAOverlay.showOverlayWithLabel(OverlayInfo.NoSharing.message(), image: OverlayInfo.NoSharing.logo(), options: OverlayInfo.getOptions()) }
+    }
+    
+    func openHandleMenu() {
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        if open {
-            self.socialButton.menu.enabled = true
-            first?.backgroundColor = Constants.kBlueShade
-            first?.pulseAnimation = .CenterWithBacking
-            first?.animate(MaterialAnimation.rotate(rotation: 1))
-            self.socialButton.menu.open()
-            let image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
-            first?.setImage(image, forState: .Normal)
-            first?.setImage(image, forState: .Highlighted)
-        } else if self.socialButton.menu.opened {
-            first?.animate(MaterialAnimation.rotate(rotation: 1))
-            self.socialButton.menu.close()
-            self.socialButton.menu.enabled = false
-            SettingsViewModel().getSettingSignal(settingType: .PublicService)
-                .observeOn(UIScheduler())
-                .startWithNext({ status in
-                    if (status as! Bool) == true {
-                        first?.setImage(R.image.ic_add_black()!, forState: .Normal)
-                        first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
-                    } else {
-                        first?.setImage(R.image.cross()!, forState: .Normal)
-                        first?.setImage(R.image.cross()!, forState: .Highlighted)
-                    }
-                })
-            RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-                first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+        first?.backgroundColor = Constants.kBlueShade
+        first?.pulseAnimation = .CenterWithBacking
+        first?.animate(MaterialAnimation.rotate(rotation: 1))
+        self.socialButton.menu.open()
+        let image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
+        first?.setImage(image, forState: .Normal)
+        first?.setImage(image, forState: .Highlighted)
+    }
+    
+    func closeHandleMenu() {
+       let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        if self.socialButton.menu.opened { first?.animate(MaterialAnimation.rotate(rotation: 1)) }
+        self.socialButton.menu.close()
+        SettingsViewModel().getSettingSignal(settingType: .PublicService)
+            .observeOn(UIScheduler())
+            .startWithNext({ status in
+                if (status as! Bool) == true {
+                    first?.setImage(R.image.ic_add_black()!, forState: .Normal)
+                    first?.setImage(R.image.ic_add_black()!, forState: .Highlighted)
+                } else {
+                    first?.setImage(R.image.cross()!, forState: .Normal)
+                    first?.setImage(R.image.cross()!, forState: .Highlighted)
+                }
             })
-        }
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+            first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+        })
     }
     
     func socialButton(button: UIButton) {
@@ -310,7 +314,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                         TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                             image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    self.presentViewController(socialVC, animated: true, completion: { MaterialAnimation.delay(2.0) { self.handleMenu() }})
+                    self.presentViewController(socialVC, animated: true, completion: { MaterialAnimation.delay(2.0) { self.socialButton.menu.close() }})
                 }})
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
             .start()
@@ -370,7 +374,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         
         if index == 0 || (index == 1 && previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
         else { self.slide(right: true, newView: infoView, oldView: removingView) }
-        self.handleMenu()
+        self.closeHandleMenu()
         
         if index == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings).startWithNext({ userRatings in
@@ -421,7 +425,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
 
     func socialSharing(message message: String) {
-        self.handleMenu(true)
+        self.openHandleMenu()
         self.socialMessage = message
     }
     
