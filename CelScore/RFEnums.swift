@@ -98,7 +98,7 @@ enum OverlayInfo {
         switch self {
         case .WelcomeUser: return R.image.jurors_blue_big()!
         case .MenuAccess: return R.image.court_red()!
-        case .LoginSuccess: return R.image.astronaut_red()!
+        case .LoginSuccess: return R.image.sphere_blue()!
         case .MaxFollow: return R.image.observatory_red()!
         case .FirstFollow: return R.image.astronaut_red()!
         case .FirstConsensus: return R.image.worker_blue_big()!
