@@ -81,7 +81,7 @@ enum OverlayInfo {
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .InfoSource: return "The data in the profile view is based on search engine results.\n\nIf you believe an info is outdated or inaccurate please let us know by going to the Settings and filling out a report."
+        case .InfoSource: return "The data in the profile view is based on search engine results.\n\nIf you believe an information is outdated or inaccurate please let us know by going in the app settings and filling out a report."
         case .FirstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
         case .NoSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the Public Service mode."
         case .FirstVoteDisable: return "Welcome to the voting booth.\n\nYou'll need to register to make your opinion public."

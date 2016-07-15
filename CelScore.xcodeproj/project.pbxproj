@@ -70,6 +70,7 @@
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
 		06EAF43F5B4C30242F4E48FC /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */; };
+		0ECD1EA775ABCB43628C1E04 /* Pods_The_Courthouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95119D0D80C521CE38D52F83 /* Pods_The_Courthouse.framework */; };
 		149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039868E1776C0B641362852 /* Pods_CelScore.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
@@ -208,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				003AE6951D094FB70055EE56 /* NotificationCenter.framework in Frameworks */,
+				0ECD1EA775ABCB43628C1E04 /* Pods_The_Courthouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,8 +466,8 @@
 				003AE6901D094FB70055EE56 /* Sources */,
 				003AE6911D094FB70055EE56 /* Frameworks */,
 				003AE6921D094FB70055EE56 /* Resources */,
-				D115857362DF0B71108481DB /* 📦 Embed Pods Frameworks */,
-				D8855D886000094FD2C11421 /* 📦 Copy Pods Resources */,
+				D115857362DF0B71108481DB /* [CP] Embed Pods Frameworks */,
+				D8855D886000094FD2C11421 /* [CP] Copy Pods Resources */,
 				5347D9B0E647070D43DA7B57 /* Embed Pods Frameworks */,
 				BF6E05B20A9B7BD3D218B0A4 /* Copy Pods Resources */,
 				001343811D261FEE00BE778D /* ShellScript */,
@@ -899,14 +901,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D115857362DF0B71108481DB /* 📦 Embed Pods Frameworks */ = {
+		D115857362DF0B71108481DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -914,14 +916,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D8855D886000094FD2C11421 /* 📦 Copy Pods Resources */ = {
+		D8855D886000094FD2C11421 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
