@@ -107,7 +107,7 @@ enum OverlayInfo {
         case .First25: return R.image.planet_red()!
         case .First50: return R.image.planet_red()!
         case .First75: return R.image.planet_red()!
-        case .InfoSource: return R.image.info_overlay_blue()!
+        case .InfoSource: return R.image.head_red()!
         case .FirstCompleted: return R.image.planet_red()!
         case .NoSharing: return R.image.sphere_blue()!
         case .FirstVoteDisable: return R.image.mic_red()!

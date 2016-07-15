@@ -93,6 +93,8 @@ struct R {
     static let geometry_red = ImageResource(bundle: _R.hostingBundle, name: "geometry_red")
     /// Image `happyFace`.
     static let happyFace = ImageResource(bundle: _R.hostingBundle, name: "happyFace")
+    /// Image `head_red`.
+    static let head_red = ImageResource(bundle: _R.hostingBundle, name: "head_red")
     /// Image `heart_black`.
     static let heart_black = ImageResource(bundle: _R.hostingBundle, name: "heart_black")
     /// Image `heart_white`.
@@ -111,8 +113,6 @@ struct R {
     static let info_black = ImageResource(bundle: _R.hostingBundle, name: "info_black")
     /// Image `info_button`.
     static let info_button = ImageResource(bundle: _R.hostingBundle, name: "info_button")
-    /// Image `info_overlay_blue`.
-    static let info_overlay_blue = ImageResource(bundle: _R.hostingBundle, name: "info_overlay_blue")
     /// Image `info_white`.
     static let info_white = ImageResource(bundle: _R.hostingBundle, name: "info_white")
     /// Image `jurors_blue_big`.
@@ -288,6 +288,11 @@ struct R {
       return UIImage(resource: R.image.happyFace, compatibleWithTraitCollection: traitCollection)
     }
     
+    /// `UIImage(named: "head_red", bundle: ..., traitCollection: ...)`
+    static func head_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.head_red, compatibleWithTraitCollection: traitCollection)
+    }
+    
     /// `UIImage(named: "heart_black", bundle: ..., traitCollection: ...)`
     static func heart_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.heart_black, compatibleWithTraitCollection: traitCollection)
@@ -331,11 +336,6 @@ struct R {
     /// `UIImage(named: "info_button", bundle: ..., traitCollection: ...)`
     static func info_button(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.info_button, compatibleWithTraitCollection: traitCollection)
-    }
-    
-    /// `UIImage(named: "info_overlay_blue", bundle: ..., traitCollection: ...)`
-    static func info_overlay_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_overlay_blue, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "info_white", bundle: ..., traitCollection: ...)`
