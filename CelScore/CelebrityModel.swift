@@ -42,6 +42,7 @@ final class CelebrityModel: Object {
     dynamic var picture3x: String = ""
     dynamic var from: String = ""
     dynamic var prevScore: Double = 0
+    dynamic var prevWeek: Double = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
@@ -65,6 +66,7 @@ final class CelebrityModel: Object {
         self.status = json["status"].string!
         self.twitter = json["twitter"].string!
         self.prevScore = json["prevScore"].double!
+        self.prevWeek = json["prevWeek"].double!
         self.sex = json["sex"].bool!
         self.isSynced = true
         

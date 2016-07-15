@@ -33,14 +33,15 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
-        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday's Score", value: String("\(self.celebST.prevScore.roundToPlaces(2))"), tag: 2))
+        
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
+        
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithNext({ celeb in
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3)) })
+        
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
             let percentage = String(consensus.roundToPlaces(2))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Consensus of Opinion", value: percentage, tag: 3)) })
-        RatingsViewModel().getMoneyShotSignal(ratingsId: self.celebST.id)
-            .on(failed: { _ in self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Claim to Fame", value: "n/a", tag: 4)) })
-            .on(next: { index in  self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Claim to Fame", value: Qualities(rawValue: index)!.name(isMale: self.celebST.sex), tag: 4))})
-            .start()
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Consensus of Opinion", value: percentage, tag: 4)) })
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
@@ -89,10 +90,22 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
-        if tag == 4 { infoLabel.textColor = Constants.kBlueText }
-        else if tag == 3 {
+        if tag < 4 {
+            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in
+                var attributedText = NSMutableAttributedString()
+                let percent: Double = (celscore/Double(value)!) * 100 - 100
+                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
+                let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
+                attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
+                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.black]
+                let attrString = NSAttributedString(string: String(format: " %.2f", Double(value)!), attributes: attr2)
+                attributedText.appendAttributedString(attrString)
+                infoLabel.attributedText = attributedText
+            })
+        }
+        else if tag == 4 {
             infoLabel.text = value + "%"
             infoLabel.textColor = Double(value) >= Constants.kPositiveConsensus ? Constants.kBlueText : Constants.kRedText
         }
