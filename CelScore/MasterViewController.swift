@@ -191,7 +191,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
-            .observeOn(UIScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .on(next: { _ in
                 Duration.stopMeasurement()
                 revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
@@ -229,7 +229,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .observeOn(UIScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .on(next: { celebInfo in MaterialAnimation.delay(1) {
                     TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
                 }

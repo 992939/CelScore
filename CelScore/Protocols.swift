@@ -94,7 +94,7 @@ extension Sociable where Self: UIViewController {
                 self.sendAlert(.TimeoutError, with: loginType)
                 return SignalProducer.empty }
             .retry(Constants.kNetworkRetry)
-            .observeOn(UIScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -111,7 +111,7 @@ extension Sociable where Self: UIViewController {
                 return SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
-            .observeOn(UIScheduler())
+            .observeOn(QueueScheduler.mainQueueScheduler)
             .on(next: { _ in
                 self.dismissHUD()
                 self.handleMenu(false)
