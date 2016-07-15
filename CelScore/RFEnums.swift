@@ -100,19 +100,19 @@ enum OverlayInfo {
         case .MenuAccess: return R.image.court_red()!
         case .LoginSuccess: return R.image.sphere_blue()!
         case .MaxFollow: return R.image.observatory_red()!
-        case .FirstFollow: return R.image.astronaut_red()!
+        case .FirstFollow: return R.image.sphere_red()!
         case .FirstConsensus: return R.image.worker_blue_big()!
         case .FirstPublic: return R.image.sphere_blue_big()!
         case .FirstInterest: return R.image.geometry_red()!
-        case .First25: return R.image.planet_red()!
-        case .First50: return R.image.planet_red()!
-        case .First75: return R.image.planet_red()!
+        case .First25: return R.image.sphere_red()!
+        case .First50: return R.image.sphere_red()!
+        case .First75: return R.image.sphere_red()!
         case .InfoSource: return R.image.head_red()!
-        case .FirstCompleted: return R.image.planet_red()!
+        case .FirstCompleted: return R.image.sphere_red()!
         case .NoSharing: return R.image.sphere_blue()!
         case .FirstVoteDisable: return R.image.mic_red()!
         case .FirstTrollWarning: return R.image.nuclear_red()!
-        case .LogoutUser: return R.image.planet_red()!
+        case .LogoutUser: return R.image.sphere_blue()!
         case .LoginError: return R.image.cloud_red()!
         case .NetworkError: return R.image.cloud_red()!
         case .TimeoutError: return R.image.cloud_red()!
