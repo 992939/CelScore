@@ -42,10 +42,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let maxWidth: CGFloat = Constants.kSettingsViewWidth - 2 * Constants.kPadding
         
         //Logo
-        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 70 - 2 * UIDevice.getOffset()))
+        let logoView: MaterialView = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 80 - 2 * UIDevice.getOffset()))
         logoView.depth = .None
         let diameter = 60 - 2 * UIDevice.getOffset()
-        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 5 - UIDevice.getOffset()/2, width: diameter, height: diameter))
+        let logoCircle: MaterialButton = MaterialButton(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 10 - UIDevice.getOffset()/2, width: diameter, height: diameter))
         logoCircle.setImage(R.image.court_white()!, forState: .Normal)
         logoCircle.setImage(R.image.court_white()!, forState: .Highlighted)
         logoCircle.shape = .Circle
@@ -54,9 +54,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), forControlEvents: .TouchUpInside)
         
         let labelWidth: CGFloat = (Constants.kSettingsViewWidth - logoCircle.width)/2
-        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
+        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
         courtLabel.textAlignment = .Center
-        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 17 - 1.1 * UIDevice.getOffset(), width: labelWidth, height: 40))
+        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
         houseLabel.textAlignment = .Center
         let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
@@ -78,20 +78,20 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
-            let consensusBarNode = self.setupProgressBarNode(title: "General Consensus %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding), value: value, bar: self.fact1Bar)
+            let consensusBarNode = self.setupProgressBarNode(title: "General Consensus %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
             self.view.addSubnode(consensusBarNode) })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding + progressNodeHeight, value: value, bar: self.fact2Bar)
+            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
             self.view.addSubnode(publicOpinionBarNode) })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: (logoView.bottom + Constants.kPadding + 2 * progressNodeHeight), value: value, bar: self.fact3Bar)
+            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
             self.view.addSubnode(positiveBarNode)
         })
         
         //PickerView
-        let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + Constants.kPadding + 3 * progressNodeHeight), width: maxWidth, height: UIDevice.getPickerHeight()))
+        let pickerView: MaterialView = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + 3 * progressNodeHeight - Constants.kPadding/2), width: maxWidth, height: UIDevice.getPickerHeight()))
         let pickerLabel: UILabel = self.setupLabel(title: "Main Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
@@ -102,7 +102,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(pickerNode)
         
         //Check Boxes
-        let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 2 * Constants.kPadding + 3 * progressNodeHeight
+        let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .startWithNext({ status in
@@ -112,13 +112,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
             .startWithNext({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 50, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
         
         //Issue
-        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90 + Constants.kPadding, width: maxWidth, height: 30))
-        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
+        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
+        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         issueButton.setTitle("Report An Issue", forState: .Normal)
         issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
         issueButton.setTitleColor(MaterialColor.black, forState: .Normal)
@@ -130,8 +130,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(issueNode)
         
         //Privacy
-        let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 130 + Constants.kPadding, width: maxWidth, height: 30))
-        let privacyButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
+        let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 135, width: maxWidth, height: 40))
+        let privacyButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         privacyButton.setTitle("Privacy Policy", forState: .Normal)
         privacyButton.addTarget(self, action:#selector(self.showPolicy), forControlEvents: .TouchUpInside)
         privacyButton.setTitleColor(MaterialColor.black, forState: .Normal)
@@ -143,8 +143,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(privacyNode)
         
         //Logout
-        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 170 + Constants.kPadding, width: maxWidth, height: 30))
-        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/4, width: maxWidth - 4 * Constants.kPadding, height: 25))
+        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 180, width: maxWidth, height: 40))
+        let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), forControlEvents: .TouchUpInside)
         logoutButton.setTitleColor(MaterialColor.black, forState: .Normal)
