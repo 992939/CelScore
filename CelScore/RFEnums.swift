@@ -72,7 +72,7 @@ enum OverlayInfo {
         switch self {
         case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted in a court of public opinion is up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
         case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
-        case .LoginSuccess: return "You are now registered in the Courthouse of Public Opinion.\n\nPlease vote responsibly."
+        case .LoginSuccess: return "Your registration was successful.\nYou are ready to vote.\n\nPlease vote responsibly."
         case .MaxFollow: return "You've reached the maximum number of stars you can follow."
         case .FirstFollow: return "You will get updates on your favorite stars in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
         case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
@@ -81,7 +81,7 @@ enum OverlayInfo {
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .InfoSource: return "The data in the profile view is based on search engine results.\n\nIf you believe an information is outdated or inaccurate please let us know by going in the app settings and filling out a report."
+        case .InfoSource: return "The information in the Profile View (2nd button in the menu) is based on search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling out a report in the app settings."
         case .FirstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
         case .NoSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the Public Service mode."
         case .FirstVoteDisable: return "Welcome to the voting booth.\n\nYou'll need to register to make your opinion public."
