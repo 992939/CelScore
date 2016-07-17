@@ -53,7 +53,7 @@ extension Labelable {
 @objc protocol Supportable: MFMailComposeViewControllerDelegate {}
 
 extension Supportable where Self: UIViewController {
-    func sendEmail() {
+    func sendEmail(errorMessage: String) {
         guard MFMailComposeViewController.canSendMail() else {
             return TAOverlay.showOverlayWithLabel("We are unable to verify that an email has been setup on this device.", image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
         }
@@ -61,16 +61,16 @@ extension Supportable where Self: UIViewController {
         mail.mailComposeDelegate = self
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
-        mail.setMessageBody("voterId: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide more information about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
+        mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\nerror: \(errorMessage)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     
-    func sendAlert(info: OverlayInfo, with loginType: SocialLogin) {
+    func sendAlert(info: OverlayInfo, errorMessage: String, with loginType: SocialLogin) {
         let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .Alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail() }})
+            self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail(errorMessage) }})
         }))
         alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
         alertVC.view.opaque = false
@@ -112,7 +112,7 @@ extension Sociable where Self: UIViewController {
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
-            .on(failed: { error in self.dismissHUD(); self.sendAlert(.LoginError, with: loginType) })
+            .on(failed: { error in self.dismissHUD(); self.sendAlert(.LoginError, errorMessage: error.debugDescription, with: loginType) })
             .start()
     }
     

@@ -159,7 +159,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let account = ACAccountStore()
         let accountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         account.requestAccessToAccountsWithType(accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
-            if success == false { MaterialAnimation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
+            if success == false { MaterialAnimation.delay(3) { self.sendAlert(.PermissionError, errorMessage: error.debugDescription, with: SocialLogin.Twitter) }}
         })
     }
     
@@ -286,26 +286,26 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.movingSocialButton(onScreen: false)
     }
     
-    func sendNetworkAlert(splashView: RevealingSplashView) {
-        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_blue()!, style: .Alert)
-        alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: {
-                splashView.animationType = SplashAnimationType.PopAndZoomOut
-                splashView.startAnimation()
-            })
-        }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: { _ in
-                splashView.animationType = SplashAnimationType.PopAndZoomOut
-                splashView.startAnimation()
-                MaterialAnimation.delay(0.5) { self.sendEmail() }
-            })
-        }))
-        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-        alertVC.view.opaque = false
-        self.presentViewController(alertVC, animated: true, completion: nil)
-    }
+//    func sendNetworkAlert(splashView: RevealingSplashView) {
+//        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_blue()!, style: .Alert)
+//        alertVC.alertTitle.textColor = Constants.kBlueText
+//        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in
+//            self.dismissViewControllerAnimated(true, completion: {
+//                splashView.animationType = SplashAnimationType.PopAndZoomOut
+//                splashView.startAnimation()
+//            })
+//        }))
+//        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
+//            self.dismissViewControllerAnimated(true, completion: { _ in
+//                splashView.animationType = SplashAnimationType.PopAndZoomOut
+//                splashView.startAnimation()
+//                MaterialAnimation.delay(0.5) { self.sendEmail() }
+//            })
+//        }))
+//        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
+//        alertVC.view.opaque = false
+//        self.presentViewController(alertVC, animated: true, completion: nil)
+//    }
     
     //MARK: MFMailComposeViewControllerDelegate
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
