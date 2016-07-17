@@ -205,9 +205,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(next: { (value:AnyObject) in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 self.changeList() })
-            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
             .flatMapError { error in
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue { self.sendNetworkAlert(revealingSplashView) } else { revealingSplashView.startAnimation() }
+                revealingSplashView.startAnimation()
                 self.dismissHUD()
                 self.changeList()
                 return SignalProducer.empty }

@@ -88,11 +88,6 @@ extension Sociable where Self: UIViewController {
     func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
-            .timeoutWithError(NetworkError.TimedOut as NSError, afterInterval: Constants.kTimeout, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMapError { error in
-                self.dismissHUD()
-                self.sendAlert(.TimeoutError, with: loginType)
-                return SignalProducer.empty }
             .retry(Constants.kNetworkRetry)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -117,11 +112,7 @@ extension Sociable where Self: UIViewController {
                 self.handleMenu(false)
                 TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
-            .on(failed: { error in
-                self.dismissHUD()
-                if error.domain == "CelebrityScore.NetworkError" && error.code == NetworkError.TimedOut.hashValue
-                { self.sendAlert(.TimeoutError, with: loginType) }
-                else { self.sendAlert(.LoginError, with: loginType) } })
+            .on(failed: { error in self.dismissHUD(); self.sendAlert(.LoginError, with: loginType) })
             .start()
     }
     

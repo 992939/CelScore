@@ -13,7 +13,7 @@ import Foundation
 enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
 enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
 enum CelebrityError: Int, ErrorType { case NotFound = 0 }
-enum NetworkError: Int, ErrorType { case NotConnected = 1, TimedOut }
+enum NetworkError: Int, ErrorType { case NotConnected = 1 }
 
 
 //MARK: Misc.
