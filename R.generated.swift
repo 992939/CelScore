@@ -47,7 +47,7 @@ struct R {
     private init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 64 images.
+  /// This `R.image` struct is generated, and contains static references to 65 images.
   struct image {
     /// Image `angryFace`.
     static let angryFace = ImageResource(bundle: _R.hostingBundle, name: "angryFace")
@@ -119,6 +119,8 @@ struct R {
     static let jurors_blue_big = ImageResource(bundle: _R.hostingBundle, name: "jurors_blue_big")
     /// Image `jurors_red_big`.
     static let jurors_red_big = ImageResource(bundle: _R.hostingBundle, name: "jurors_red_big")
+    /// Image `mic_blue`.
+    static let mic_blue = ImageResource(bundle: _R.hostingBundle, name: "mic_blue")
     /// Image `mic_red`.
     static let mic_red = ImageResource(bundle: _R.hostingBundle, name: "mic_red")
     /// Image `mic_yellow`.
@@ -351,6 +353,11 @@ struct R {
     /// `UIImage(named: "jurors_red_big", bundle: ..., traitCollection: ...)`
     static func jurors_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
       return UIImage(resource: R.image.jurors_red_big, compatibleWithTraitCollection: traitCollection)
+    }
+    
+    /// `UIImage(named: "mic_blue", bundle: ..., traitCollection: ...)`
+    static func mic_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
+      return UIImage(resource: R.image.mic_blue, compatibleWithTraitCollection: traitCollection)
     }
     
     /// `UIImage(named: "mic_red", bundle: ..., traitCollection: ...)`
