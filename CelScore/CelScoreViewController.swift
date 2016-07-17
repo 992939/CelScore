@@ -90,7 +90,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         if tag < 4 {
             RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in
