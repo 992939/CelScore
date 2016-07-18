@@ -120,7 +120,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
         let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         issueButton.setTitle("Report An Issue", forState: .Normal)
-        issueButton.addTarget(self, action:#selector(self.support(_:)), forControlEvents: .TouchUpInside)
+        issueButton.addTarget(self, action:#selector(self.support), forControlEvents: .TouchUpInside)
         issueButton.setTitleColor(MaterialColor.black, forState: .Normal)
         issueButton.titleLabel!.textAlignment = .Center
         issueButton.pulseColor = Constants.kBlueShade
@@ -195,7 +195,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func support(errorMessage: String = "") { self.sendEmail(errorMessage) }
+    func support() { self.sendEmail() }
     
     func showPolicy() {
         let url = NSURL(string: Constants.kPolicyURL)
