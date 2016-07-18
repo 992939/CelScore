@@ -61,6 +61,7 @@ enum OverlayInfo {
     case First50
     case First75
     case NoSharing
+    case VoteHelp
     case InfoSource
     case LogoutUser
     case LoginError
@@ -81,6 +82,7 @@ enum OverlayInfo {
         case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
         case .First75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .VoteHelp: return "The Voting Booth\n(3rd button in the menu)\nis where registered users can use this button to send and update theirs votes\n\n(each vote must have all ten qualities)."
         case .InfoSource: return "The Profile View\n(2nd button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling out a report in the app settings."
         case .FirstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
         case .NoSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
@@ -107,6 +109,7 @@ enum OverlayInfo {
         case .First25: return R.image.sphere_red()!
         case .First50: return R.image.sphere_red()!
         case .First75: return R.image.sphere_red()!
+        case .VoteHelp: return R.image.mic_blue()!
         case .InfoSource: return R.image.head_red()!
         case .FirstCompleted: return R.image.sphere_red()!
         case .NoSharing: return R.image.sphere_blue()!

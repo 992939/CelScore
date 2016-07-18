@@ -156,6 +156,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
        TAOverlay.showOverlayWithLabel(OverlayInfo.InfoSource.message(), image: OverlayInfo.InfoSource.logo(), options: OverlayInfo.getOptions())
     }
     
+    func helpAction() {
+        TAOverlay.showOverlayWithLabel(OverlayInfo.VoteHelp.message(), image: OverlayInfo.VoteHelp.logo(), options: OverlayInfo.getOptions())
+    }
+    
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .UserRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
@@ -340,7 +344,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func enableUpdateButton() {
-        self.voteButton.enabled = true
         self.voteButton.pulseAnimation = .CenterWithBacking
         self.voteButton.backgroundColor = Constants.kStarGoldShade
         self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
@@ -354,13 +357,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         }
     }
 
-    func disableButton(button button: MaterialButton, image: UIImage) {
-        button.enabled = false
-        button.setImage(image, forState: .Normal)
-        button.setImage(image, forState: .Highlighted)
+    func disableVoteButton(image: UIImage) {
+        self.voteButton.setImage(image, forState: .Normal)
+        self.voteButton.setImage(image, forState: .Highlighted)
+        self.voteButton.removeTarget(self, action: nil, forControlEvents: .TouchUpInside)
+        self.voteButton.addTarget(self, action: #selector(DetailViewController.helpAction), forControlEvents: .TouchUpInside)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
-            button.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-            button.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+            self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+            self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }
     
@@ -386,7 +390,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-        } else { self.disableButton(button: self.voteButton, image: R.image.heart_black()!) }
+        } else { disableVoteButton(R.image.heart_black()!) }
     }
     
     func slide(right right: Bool, newView: UIView, oldView: UIView) {
@@ -416,7 +420,6 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func enableVoteButton(positive positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
-            self.voteButton.enabled = true
             self.voteButton.setImage(R.image.heart_white()!, forState: .Normal)
             self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
@@ -509,7 +512,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.depth = .Depth2
         self.voteButton.pulseAnimation = .None
         self.voteButton.accessibilityLabel = "Vote Button"
-        self.disableButton(button: self.voteButton, image: R.image.heart_black()!)
+        self.disableVoteButton(R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
