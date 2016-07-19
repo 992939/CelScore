@@ -440,6 +440,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func getNavigationView() -> Toolbar {
         let backButton: FlatButton = FlatButton()
         backButton.pulseColor = MaterialColor.white
+        backButton.setTitle("BACK", forState: .Normal)
+        backButton.setTitleColor(MaterialColor.clear, forState: .Normal)
         backButton.pulseAnimation = .None
         backButton.accessibilityLabel = "Back Button"
         backButton.isAccessibilityElement = true
