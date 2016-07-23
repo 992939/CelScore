@@ -145,11 +145,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     
     func backAction() {
         self.hideButtons()
-        MaterialAnimation.delay(0.15) {
-            RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).startWithCompleted { _ in
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
+        MaterialAnimation.delay(0.15){ self.dismissViewControllerAnimated(true, completion: nil) }
     }
     
     func infoAction() {

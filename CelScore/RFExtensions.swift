@@ -180,7 +180,7 @@ extension UIDevice {
         let position: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone4_height: position =  30
-        case Constants.kIPhone5_height: position = 40
+        case Constants.kIPhone5_height: position = 45
         case Constants.kIPhone6_height: position = 65
         default: position = 65
         }
