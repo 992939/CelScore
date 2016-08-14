@@ -40,18 +40,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 23,
+            schemaVersion: 24,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 21 {
-                    migration.enumerate(SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirst25"] = true
-                        newObject!["isFirst50"] = true
-                        newObject!["isFirst75"] = true
-                    }
-                }
                 if oldSchemaVersion < 23 {
                     migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
                         newObject!["prevWeek"] = 0
+                    }
+                }
+                if oldSchemaVersion < 24 {
+                    migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["fan"] = ""
                     }
                 }
         })

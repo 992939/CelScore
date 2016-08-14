@@ -37,11 +37,9 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithNext({ celeb in
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3)) })
-        
-        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext({ consensus in
-            let percentage = String(consensus.roundToPlaces(2))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Consensus of Opinion", value: percentage, tag: 4)) })
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Biggest Fan", value: celeb.fan, tag: 4))
+        })
         
         self.pulseView.backgroundColor = MaterialColor.clear
         self.view = self.pulseView
@@ -106,8 +104,9 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
             })
         }
         else if tag == 4 {
-            infoLabel.text = value + "%"
-            infoLabel.textColor = Double(value) >= Constants.kPositiveConsensus ? Constants.kBlueText : Constants.kRedText
+            infoLabel.text = value
+            infoLabel.lineBreakMode = .ByWordWrapping
+            infoLabel.textColor = Constants.kBlueLight
         }
         infoLabel.textAlignment = .Right
         let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))

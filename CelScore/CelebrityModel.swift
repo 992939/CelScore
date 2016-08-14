@@ -41,6 +41,7 @@ final class CelebrityModel: Object {
     dynamic var rank: String = ""
     dynamic var picture3x: String = ""
     dynamic var from: String = ""
+    dynamic var fan: String = ""
     dynamic var prevScore: Double = 0
     dynamic var prevWeek: Double = 0
     dynamic var sex: Bool = false
@@ -60,6 +61,7 @@ final class CelebrityModel: Object {
         self.height = json["height"].string!
         self.birthdate = json["birthdate"].string!
         self.netWorth = json["netWorth"].string!
+        self.fan = json["fan"].string!
         self.picture3x = json["picture3x"].string!
         self.from = json["from"].string!
         self.rank = json["rank"].string!
