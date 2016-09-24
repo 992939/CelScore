@@ -44,6 +44,7 @@ final class CelebrityModel: Object {
     dynamic var fan: String = ""
     dynamic var prevScore: Double = 0
     dynamic var prevWeek: Double = 0
+    dynamic var daysOnThrone: Int = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
@@ -67,6 +68,7 @@ final class CelebrityModel: Object {
         self.rank = json["rank"].string!
         self.status = json["status"].string!
         self.twitter = json["twitter"].string!
+        self.daysOnThrone = json["daysOnThrone"].int!
         self.prevScore = json["prevScore"].double!
         self.prevWeek = json["prevWeek"].double!
         self.sex = json["sex"].bool!
