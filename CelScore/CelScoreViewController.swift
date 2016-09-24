@@ -38,7 +38,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithNext({ celeb in
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Biggest Stan", value: celeb.fan, tag: 4))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Biggest Fan", value: celeb.fan, tag: 4))
         })
         
         self.pulseView.backgroundColor = MaterialColor.clear
