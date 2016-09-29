@@ -31,7 +31,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.2)
   - Keys (1.0.0)
-  - Material (1.42.7)
+  - Material (2.0.0)
   - PINCache (2.2.2)
   - PINRemoteImage/Core (3.0.0-beta.2):
     - PINCache (>= 2.1)
@@ -81,7 +81,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.14)
   - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Material (= 1.42.7)
+  - Material (from `https://github.com/CosmicMind/Material.git`, branch `development`)
   - PMAlertController (~> 1.0.4)
   - R.swift (~> 2.4)
   - RateLimit (~> 1.2)
@@ -102,6 +102,14 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
+  Material:
+    :branch: development
+    :git: https://github.com/CosmicMind/Material.git
+
+CHECKOUT OPTIONS:
+  Material:
+    :commit: 5c350d9a78ed06fc1e68ae61e89ca5d06ed8a9c3
+    :git: https://github.com/CosmicMind/Material.git
 
 SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
@@ -119,7 +127,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Material: 2d46a44719b1f19e52956518af8aea54ac714963
+  Material: 61dcd49507c32d07c1557267ec360ce35bd0b1c5
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
   PMAlertController: 7f969c937a80bea634a5bf957b66943b493e1aca
@@ -141,6 +149,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: e4d7f4b6f6dec8cccb588a4085efca9004334a1e
+PODFILE CHECKSUM: d56aa75feef5a5f55babe5edfb95fc9b6ca59a69
 
 COCOAPODS: 1.0.1

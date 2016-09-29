@@ -24,7 +24,7 @@ target 'CelScore' do
     pod 'AIRTimer', '~> 1.0.2'
     pod 'SwiftyJSON', '~> 2.3.2'
     pod 'SDWebImage', '~>3.8.1'
-    pod 'Material', '1.42.7'
+    pod 'Material', :git => 'https://github.com/CosmicMind/Material.git', :branch => 'development'
     pod 'R.swift', '~> 2.4'
     pod 'WebASDKImageManager', '~> 1.1'
     pod 'FBSDKLoginKit', '~> 4.14'
