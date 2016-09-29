@@ -10,7 +10,7 @@ import UIKit
 
 
 struct CosmosTouch {
-    static func touchRating(locationX: CGFloat, starsWidth: CGFloat, settings: CosmosSettings) -> Double {
+    static func touchRating(_ locationX: CGFloat, starsWidth: CGFloat, settings: CosmosSettings) -> Double {
         let position = locationX / starsWidth
         let totalStars = Double(settings.totalStars)
         let actualRating = totalStars * Double(position)

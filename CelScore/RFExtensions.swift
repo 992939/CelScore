@@ -10,7 +10,7 @@ import UIKit
 
 
 extension UIView {
-    func slide(right right: Bool, duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+    func slide(right: Bool, duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         let transition = CATransition()
         if let delegate: AnyObject = completionDelegate { transition.delegate = delegate }
         transition.type = kCATransitionPush
@@ -18,110 +18,110 @@ extension UIView {
         transition.duration = duration
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.fillMode = kCAFillModeBoth
-        self.layer.addAnimation(transition, forKey: "slideTransition")
+        self.layer.add(transition, forKey: "slideTransition")
     }
 }
 
 extension UIButton {
-    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let buttonSize = self.frame.size
         let extraHitArea = UIDevice.getButtonExtraArea()
         let widthToAdd = (extraHitArea - buttonSize.width > 0) ? extraHitArea - buttonSize.width : 0
         let heightToAdd = (extraHitArea - buttonSize.height > 0) ? extraHitArea - buttonSize.height : 0
         let largerFrame = CGRect(x: 0-(widthToAdd/2), y: 0-(heightToAdd/2), width: buttonSize.width+widthToAdd, height: buttonSize.height+heightToAdd)
-        return (CGRectContainsPoint(largerFrame, point)) ? self : nil
+        return (largerFrame.contains(point)) ? self : nil
     }
 }
 
-extension NSDate {
+extension Date {
 
     //MARK: Methods
     func zodiacSign() -> Zodiac {
         let dates = ["March 20", "April 19", "May 20", "June 20", "July 22", "August 22", "September 23", "October 22", "November 21", "December 21", "January 19", "February 18"]
         
         for i in 0...11 {
-            let date = NSDate(aString: dates[i])
+            let date = Date(aString: dates[i])
             let second = i < 11 ? dates[i + 1] : dates[0] as String
-            let sD = NSDate(aString: second)
-            let d = NSDate(anDate: self)
-            if d.compare(date) == NSComparisonResult.OrderedDescending && d.compare(sD) == .OrderedAscending { return Zodiac(rawValue: i)! }
+            let sD = Date(aString: second)
+            let d = Date(anDate: self)
+            if d.compare(date) == ComparisonResult.orderedDescending && d.compare(sD) == .orderedAscending { return Zodiac(rawValue: i)! }
         }
         return Zodiac(rawValue: 1)!
     }
 
-    func checkIfDateIsBetween(firstDate firstDate: NSDate, secondDate: NSDate)-> Bool {
-        let first = NSDate(date: firstDate)
-        let second = NSDate(date: secondDate)
-        let d = NSDate(date: self)
-        if d.compare(first) == .OrderedDescending && d.compare(second) == .OrderedAscending { return true }
+    func checkIfDateIsBetween(firstDate: Date, secondDate: Date)-> Bool {
+        let first = Date(date: firstDate)
+        let second = Date(date: secondDate)
+        let d = Date(date: self)
+        if d.compare(first) == .orderedDescending && d.compare(second) == .orderedAscending { return true }
         return false
     }
 
     func stringMMddyyyyFormat()-> String {
-        let f = NSDateFormatter()
+        let f = DateFormatter()
         f.dateFormat = "MM/dd/yyyy"
-        return f.stringFromDate(self)
+        return f.string(from: self)
     }
 
     func stringMMMMddyyyyFormat()-> String {
-        let f = NSDateFormatter()
+        let f = DateFormatter()
         f.dateFormat = "MMMM dd, yyyy"
-        return f.stringFromDate(self)
+        return f.string(from: self)
     }
 
     //MARK: Private Methods
-    private convenience init(date: NSDate) {
-        let f = NSDateFormatter()
+    fileprivate init(date: Date) {
+        let f = DateFormatter()
         f.dateFormat = "MM dd yyyy"
-        let s = f.stringFromDate(date)
-        let d = f.dateFromString(s)!
-        self.init(timeInterval: 0, sinceDate: d)
+        let s = f.string(from: date)
+        let d = f.date(from: s)!
+        (self as NSDate).init(timeInterval: 0, since: d)
     }
 
-    private convenience init(anDate: NSDate) {
-        let formatter = NSDateFormatter()
+    fileprivate init(anDate: Date) {
+        let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
-        let string = formatter.stringFromDate(anDate)
-        let date = formatter.dateFromString(string)
-        self.init(timeInterval: 0, sinceDate:date!)
+        let string = formatter.string(from: anDate)
+        let date = formatter.date(from: string)
+        (self as NSDate).init(timeInterval: 0, since:date!)
     }
 
-    convenience init(adate: NSDate) {
-        let formatter = NSDateFormatter()
+    init(adate: Date) {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
-        let s = formatter.stringFromDate(adate)
-        let date = formatter.dateFromString(s)
-        self.init(timeInterval: 0, sinceDate:date!)
+        let s = formatter.string(from: adate)
+        let date = formatter.date(from: s)
+        (self as NSDate).init(timeInterval: 0, since:date!)
     }
 
-    private convenience init(aString: String) {
-        let formatter = NSDateFormatter()
+    fileprivate init(aString: String) {
+        let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
-        let date = formatter.dateFromString(aString)
-        self.init(timeInterval: 0, sinceDate:date!)
+        let date = formatter.date(from: aString)
+        (self as NSDate).init(timeInterval: 0, since:date!)
     }
 
-    convenience init(string: String) {
-        let f = NSDateFormatter()
+    init(string: String) {
+        let f = DateFormatter()
         f.dateFormat = "MMM dd yyyy"
-        let d = f.dateFromString(string)
-        self.init(timeInterval: 0, sinceDate:d!)
+        let d = f.date(from: string)
+        (self as NSDate).init(timeInterval: 0, since:d!)
     }
 }
 
 extension CGPoint {
-    func minus(p: CGPoint) -> CGPoint { return CGPoint(x: x - p.x, y: y - p.y) }
+    func minus(_ p: CGPoint) -> CGPoint { return CGPoint(x: x - p.x, y: y - p.y) }
     var length: CGFloat { return sqrt(x * x + y * y) }
 }
 
 extension Double {
-    func roundToPlaces(places:Int) -> Double {
+    func roundToPlaces(_ places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor
     }
 }
 
-extension NSBundle {
+extension Bundle {
     var releaseVersionNumber: String? { return self.infoDictionary?["CFBundleShortVersionString"] as? String }
     var buildVersionNumber: String? { return self.infoDictionary?["CFBundleVersion"] as? String }
 }
@@ -133,7 +133,7 @@ extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         

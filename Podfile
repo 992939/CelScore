@@ -21,7 +21,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'AIRTimer', '~> 1.0.2'
+    pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 2.4'
     pod 'SDWebImage', '~>3.8.1'
     pod 'Material', :git => 'https://github.com/CosmicMind/Material.git', :branch => 'development'
@@ -34,7 +34,7 @@ target 'CelScore' do
     pod 'TwitterKit', '~> 2.4'
     pod 'TwitterCore', '~> 2.4'
     pod 'RateLimit', '~> 1.2'
-    pod 'Timepiece', '~> 0.4.3'
+    pod 'Timepiece', :git => 'https://github.com/skofgar/Timepiece.git', :branch => 'swift3'
     pod 'YLProgressBar', '~> 3.8.1'
     pod 'SMSegmentView', '~> 1.1'
     pod 'HMSegmentedControl', '~> 1.5.2'
@@ -42,7 +42,6 @@ target 'CelScore' do
     pod 'Dwifft', '~> 0.4'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
-    pod 'Armchair', '0.1.2'
 end
 
 target 'CelScoreTests' do

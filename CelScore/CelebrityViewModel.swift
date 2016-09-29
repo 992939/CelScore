@@ -14,7 +14,7 @@ import Result
 
 struct CelebrityViewModel {
     
-    func getCelebritySignal(id id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
+    func getCelebritySignal(id: String) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
@@ -24,7 +24,7 @@ struct CelebrityViewModel {
         }
     }
     
-    func updateUserActivitySignal(id id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
+    func updateUserActivitySignal(id: String) -> SignalProducer<NSUserActivity, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first
@@ -38,7 +38,7 @@ struct CelebrityViewModel {
         }
     }
     
-    func followCebritySignal(id id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
+    func followCebritySignal(id: String, isFollowing: Bool) -> SignalProducer<CelebrityModel, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel).filter("id = %@", id).first

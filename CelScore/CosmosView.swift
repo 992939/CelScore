@@ -17,9 +17,9 @@ final class CosmosView: UIView {
     var viewContentSize = CGSize()
     var didTouchCosmos: ((Double)->())?
     var didFinishTouchingCosmos: ((Double)->())?
-    private var previousRatingForDidTouchCallback: Double = -123.192
-    private var widthOfStars: CGFloat {
-        if let sublayers = self.layer.sublayers where settings.totalStars <= sublayers.count {
+    fileprivate var previousRatingForDidTouchCallback: Double = -123.192
+    fileprivate var widthOfStars: CGFloat {
+        if let sublayers = self.layer.sublayers , settings.totalStars <= sublayers.count {
             let starLayers = Array(sublayers[0..<settings.totalStars])
             return calculateSizeToFitLayers(starLayers).width
         }
@@ -42,18 +42,18 @@ final class CosmosView: UIView {
         updateSize(layers)
     }
     
-    private func improvePerformance() {
+    fileprivate func improvePerformance() {
         self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.mainScreen().scale
-        self.opaque = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.isOpaque = true
     }
     
-    private func updateSize(layers: [CALayer]) {
+    fileprivate func updateSize(_ layers: [CALayer]) {
         viewContentSize = calculateSizeToFitLayers(layers)
         invalidateIntrinsicContentSize()
     }
     
-    private func calculateSizeToFitLayers(layers: [CALayer]) -> CGSize {
+    fileprivate func calculateSizeToFitLayers(_ layers: [CALayer]) -> CGSize {
         var size = CGSize()
         for layer in layers {
             if layer.frame.maxX > size.width { size.width = layer.frame.maxX }
@@ -63,7 +63,7 @@ final class CosmosView: UIView {
     }
     
     //MARK: Touch recognition
-    func onDidTouch(locationX: CGFloat, starsWidth: CGFloat) {
+    func onDidTouch(_ locationX: CGFloat, starsWidth: CGFloat) {
         let calculatedTouchRating = CosmosTouch.touchRating(locationX, starsWidth: starsWidth, settings: settings)
         if settings.updateOnTouch { rating = calculatedTouchRating }
         if calculatedTouchRating == previousRatingForDidTouchCallback { return }
@@ -71,26 +71,26 @@ final class CosmosView: UIView {
         previousRatingForDidTouchCallback = calculatedTouchRating
     }
     
-    override func intrinsicContentSize() -> CGSize { return viewContentSize }
+    override var intrinsicContentSize : CGSize { return viewContentSize }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         if let touch = touches.first {
-            let location = touch.locationInView(self).x
+            let location = touch.location(in: self).x
             self.onDidTouch(location, starsWidth: widthOfStars)
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         if let touch = touches.first {
-            let location = touch.locationInView(self).x
+            let location = touch.location(in: self).x
             self.onDidTouch(location, starsWidth: widthOfStars)
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         didFinishTouchingCosmos?(rating)
     }
 }

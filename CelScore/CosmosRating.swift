@@ -17,7 +17,7 @@ struct CosmosRating {
      - parameter fillMode: Describe how stars should be filled: full, half or precise.
      - returns: Decimal value between 0 and 1 describing the star fill level. 1 is a fully filled star. 0 is an empty star. 0.5 is a half-star.
      */
-    static func starFillLevel(ratingRemainder ratingRemainder: Double) -> Double {
+    static func starFillLevel(ratingRemainder: Double) -> Double {
         var result = ratingRemainder
         if result > 1 { result = 1 }
         if result < 0 { result = 0 }
@@ -29,7 +29,7 @@ struct CosmosRating {
      - parameter starFillLevel: Decimal number between 0 and 1 describing the star fill level.
      - returns: The rounded fill level.
      */
-    static func roundFillLevel(starFillLevel: Double) -> Double {
+    static func roundFillLevel(_ starFillLevel: Double) -> Double {
         return Double(round(starFillLevel))
     }
     
@@ -41,7 +41,7 @@ struct CosmosRating {
      - parameter totalStars: Total number of stars.
      - returns: Returns rating that is displayed to the user taking into account the star fill mode.
      */
-    static func displayedRatingFromPreciseRating(preciseRating: Double, totalStars: Int) -> Double {
+    static func displayedRatingFromPreciseRating(_ preciseRating: Double, totalStars: Int) -> Double {
         let starFloorNumber = floor(preciseRating)
         let singleStarRemainder = preciseRating - starFloorNumber
         var displayedRating = starFloorNumber + starFillLevel(ratingRemainder: singleStarRemainder)
@@ -57,7 +57,7 @@ struct CosmosRating {
      - parameter totalNumberOfStars: Total number of stars.
      - returns: Number of filled stars. If rating is biggen than the total number of stars (usually 5) it returns the maximum number of stars.
      */
-    static func numberOfFilledStars(rating: Double, totalNumberOfStars: Int) -> Double {
+    static func numberOfFilledStars(_ rating: Double, totalNumberOfStars: Int) -> Double {
         if rating > Double(totalNumberOfStars) { return Double(totalNumberOfStars) }
         if rating < 0 { return 0 }
         return rating

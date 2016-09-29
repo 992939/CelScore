@@ -84,11 +84,9 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AIRTimer/AIRTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSAPIGateway/AWSAPIGateway.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSCognito/AWSCognito.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSCore/AWSCore.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Armchair/Armchair.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AsyncDisplayKit/AsyncDisplayKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
@@ -112,16 +110,15 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SMSegmentView/SMSegmentView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyTimer/SwiftyTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Timepiece/Timepiece.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WebASDKImageManager/WebASDKImageManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YLProgressBar/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AIRTimer/AIRTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSAPIGateway/AWSAPIGateway.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSCognito/AWSCognito.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSCore/AWSCore.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Armchair/Armchair.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AsyncDisplayKit/AsyncDisplayKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
@@ -145,6 +142,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SMSegmentView/SMSegmentView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyTimer/SwiftyTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Timepiece/Timepiece.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WebASDKImageManager/WebASDKImageManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YLProgressBar/YLProgressBar.framework"

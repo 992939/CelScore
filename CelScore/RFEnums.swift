@@ -10,35 +10,35 @@ import Foundation
 
 
 //MARK: Error
-enum RatingsError: Int, ErrorType { case RatingsNotFound = 0, UserRatingsNotFound, RatingValueOutOfBounds, RatingIndexOutOfBounds }
-enum ListError: Int, ErrorType { case EmptyList = 0, IndexOutOfBounds, NoLists }
-enum CelebrityError: Int, ErrorType { case NotFound = 0 }
-enum NetworkError: Int, ErrorType { case NotConnected = 1 }
+enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
+enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
+enum CelebrityError: Int, Error { case notFound = 0 }
+enum NetworkError: Int, Error { case notConnected = 1 }
 
 
 //MARK: Misc.
-enum RatingsType { case Ratings, UserRatings }
-enum AWSDataType { case Celebrity, List, Ratings }
+enum RatingsType { case ratings, userRatings }
+enum AWSDataType { case celebrity, list, ratings }
 enum CognitoDataSet: String { case FacebookInfo, TwitterInfo, UserRatings, UserSettings }
 
 //MARK: SocialLogin
 enum SocialLogin: Int {
-    case None = 0
-    case Facebook = 1
-    case Twitter = 2
+    case none = 0
+    case facebook = 1
+    case twitter = 2
     
     func serviceUnavailable() -> String {
         switch self {
-        case .Facebook: return "Sharing on Facebook is unavailable. Please check the settings and make sure your Facebook account is accessible."
-        case .Twitter: return "Sharing on Twitter is unavailable. Please check the settings and make sure your Twitter account is accessible."
+        case .facebook: return "Sharing on Facebook is unavailable. Please check the settings and make sure your Facebook account is accessible."
+        case .twitter: return "Sharing on Twitter is unavailable. Please check the settings and make sure your Twitter account is accessible."
         default: return "Social sharing is unavailable. Please check the settings and make sure your social accounts are accessible."
         }
     }
     
     func getTitle() -> String {
         switch self {
-        case .Facebook: return "Facebook"
-        case .Twitter: return "Twitter"
+        case .facebook: return "Facebook"
+        case .twitter: return "Twitter"
         default: return ""
         }
     }
@@ -46,264 +46,264 @@ enum SocialLogin: Int {
 
 //MARK: OverlayInfo
 enum OverlayInfo {
-    case WelcomeUser
-    case MenuAccess
-    case LoginSuccess
-    case MaxFollow
-    case FirstFollow
-    case FirstConsensus
-    case FirstPublic
-    case FirstInterest
-    case FirstCompleted
-    case FirstVoteDisable
-    case FirstTrollWarning
-    case First25
-    case First50
-    case First75
-    case NoSharing
-    case VoteHelp
-    case InfoSource
-    case LogoutUser
-    case LoginError
-    case NetworkError
-    case TimeoutError
-    case PermissionError
+    case welcomeUser
+    case menuAccess
+    case loginSuccess
+    case maxFollow
+    case firstFollow
+    case firstConsensus
+    case firstPublic
+    case firstInterest
+    case firstCompleted
+    case firstVoteDisable
+    case firstTrollWarning
+    case first25
+    case first50
+    case first75
+    case noSharing
+    case voteHelp
+    case infoSource
+    case logoutUser
+    case loginError
+    case networkError
+    case timeoutError
+    case permissionError
     
-    func message(social: String = "") -> String {
+    func message(_ social: String = "") -> String {
         switch self {
-        case .WelcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted in a court of public opinion is up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
-        case .MenuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
-        case .LoginSuccess: return "Your registration was successful.\nYou are ready to vote.\n\nPlease vote responsibly."
-        case .MaxFollow: return "You've reached the maximum number of stars you can follow."
-        case .FirstFollow: return "You will get updates on your favorite stars in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
-        case .FirstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
-        case .FirstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
-        case .FirstInterest: return "Your selection is automatically saved."
-        case .First25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .First50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .First75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .VoteHelp: return "The Voting Booth\n(3rd button in the menu)\nis where registered users can use this button to send and update theirs votes\n\n(each vote must have all ten qualities)."
-        case .InfoSource: return "The Profile View\n(2nd button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling out a report in the app settings."
-        case .FirstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
-        case .NoSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
-        case .FirstVoteDisable: return "Welcome to the voting booth.\n\nYou'll need to register to make your opinion public."
-        case .FirstTrollWarning: return "You're venturing near the trolling zone.\n\nBelow a certain level of negative votes, all your votes will be discarded."
-        case .LogoutUser: return "The courthouse hates to see you go.\n\nThank you for voting and for building the consensus."
-        case .LoginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
-        case .NetworkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
-        case .TimeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
-        case .PermissionError: return "Unable to authenticate using your \(social) account.\n\nIn Settings, check that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .welcomeUser: return "What happens in a court of public opinion stays in a court of public opinion.\n\nWhat is voted in a court of public opinion is up to you.\n\nWelcome to the Courthouse\nof Public Opinion."
+        case .menuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
+        case .loginSuccess: return "Your registration was successful.\nYou are ready to vote.\n\nPlease vote responsibly."
+        case .maxFollow: return "You've reached the maximum number of stars you can follow."
+        case .firstFollow: return "You will get updates on your favorite stars in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
+        case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
+        case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
+        case .firstInterest: return "Your selection is automatically saved."
+        case .first25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .first50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .first75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .voteHelp: return "The Voting Booth\n(3rd button in the menu)\nis where registered users can use this button to send and update theirs votes\n\n(each vote must have all ten qualities)."
+        case .infoSource: return "The Profile View\n(2nd button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling out a report in the app settings."
+        case .firstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
+        case .noSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
+        case .firstVoteDisable: return "Welcome to the voting booth.\n\nYou'll need to register to make your opinion public."
+        case .firstTrollWarning: return "You're venturing near the trolling zone.\n\nBelow a certain level of negative votes, all your votes will be discarded."
+        case .logoutUser: return "The courthouse hates to see you go.\n\nThank you for voting and for building the consensus."
+        case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
+        case .networkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
+        case .timeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .permissionError: return "Unable to authenticate using your \(social) account.\n\nIn Settings, check that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
     
     func logo() -> UIImage {
         switch self {
-        case .WelcomeUser: return R.image.jurors_blue_big()!
-        case .MenuAccess: return R.image.court_red()!
-        case .LoginSuccess: return R.image.sphere_blue()!
-        case .MaxFollow: return R.image.observatory_red()!
-        case .FirstFollow: return R.image.sphere_red()!
-        case .FirstConsensus: return R.image.worker_blue_big()!
-        case .FirstPublic: return R.image.sphere_blue_big()!
-        case .FirstInterest: return R.image.geometry_red()!
-        case .First25: return R.image.sphere_red()!
-        case .First50: return R.image.sphere_red()!
-        case .First75: return R.image.sphere_red()!
-        case .VoteHelp: return R.image.mic_blue()!
-        case .InfoSource: return R.image.head_red()!
-        case .FirstCompleted: return R.image.sphere_red()!
-        case .NoSharing: return R.image.sphere_blue()!
-        case .FirstVoteDisable: return R.image.mic_red()!
-        case .FirstTrollWarning: return R.image.nuclear_red()!
-        case .LogoutUser: return R.image.sphere_blue()!
-        case .LoginError: return R.image.cloud_red()!
-        case .NetworkError: return R.image.cloud_red()!
-        case .TimeoutError: return R.image.cloud_red()!
-        case .PermissionError: return R.image.cloud_red()!
+        case .welcomeUser: return R.image.jurors_blue_big()!
+        case .menuAccess: return R.image.court_red()!
+        case .loginSuccess: return R.image.sphere_blue()!
+        case .maxFollow: return R.image.observatory_red()!
+        case .firstFollow: return R.image.sphere_red()!
+        case .firstConsensus: return R.image.worker_blue_big()!
+        case .firstPublic: return R.image.sphere_blue_big()!
+        case .firstInterest: return R.image.geometry_red()!
+        case .first25: return R.image.sphere_red()!
+        case .first50: return R.image.sphere_red()!
+        case .first75: return R.image.sphere_red()!
+        case .voteHelp: return R.image.mic_blue()!
+        case .infoSource: return R.image.head_red()!
+        case .firstCompleted: return R.image.sphere_red()!
+        case .noSharing: return R.image.sphere_blue()!
+        case .firstVoteDisable: return R.image.mic_red()!
+        case .firstTrollWarning: return R.image.nuclear_red()!
+        case .logoutUser: return R.image.sphere_blue()!
+        case .loginError: return R.image.cloud_red()!
+        case .networkError: return R.image.cloud_red()!
+        case .timeoutError: return R.image.cloud_red()!
+        case .permissionError: return R.image.cloud_red()!
         }
     }
     
     static func getOptions() -> TAOverlayOptions {
-        return [.OverlaySizeRoundedRect, .OverlayDismissTap, .OverlayAnimateTransistions, .OverlayShadow]
+        return [.overlaySizeRoundedRect, .overlayDismissTap, .overlayAnimateTransistions, .overlayShadow]
     }
 }
 
 //MARK: GaugeFace
 enum GaugeFace: Int {
-    case Grin
-    case BigSmile
-    case Smile
-    case NoSmile
-    case SadFace
-    case Angry
-    case Awaking
-    case TongueOut
-    case Shades
+    case grin
+    case bigSmile
+    case smile
+    case noSmile
+    case sadFace
+    case angry
+    case awaking
+    case tongueOut
+    case shades
     
     func emoji() -> String {
         switch self {
-        case .Grin: return ""
-        case .BigSmile: return ""
-        case .Smile: return ""
-        case .NoSmile: return ""
-        case .SadFace: return ""
-        case .Angry: return ""
-        case .Awaking: return ""
-        case .TongueOut: return ""
-        case .Shades: return ""
+        case .grin: return ""
+        case .bigSmile: return ""
+        case .smile: return ""
+        case .noSmile: return ""
+        case .sadFace: return ""
+        case .angry: return ""
+        case .awaking: return ""
+        case .tongueOut: return ""
+        case .shades: return ""
         }
     }
 }
 
 //MARK: Info
 enum Info: Int {
-    case FirstName
-    case MiddleName
-    case LastName
-    case From
-    case Birthdate
-    case Height
-    case Zodiac
-    case Status
-    case CelScore
-    case Networth
+    case firstName
+    case middleName
+    case lastName
+    case from
+    case birthdate
+    case height
+    case zodiac
+    case status
+    case celScore
+    case networth
     
     static func getAll() -> [String] {
         return [
-            FirstName.name(),
-            MiddleName.name(),
-            LastName.name(),
-            From.name(),
-            Birthdate.name(),
-            Height.name(),
-            Zodiac.name(),
-            Status.name(),
-            CelScore.name(),
-            Networth.name()
+            firstName.name(),
+            middleName.name(),
+            lastName.name(),
+            from.name(),
+            birthdate.name(),
+            height.name(),
+            zodiac.name(),
+            status.name(),
+            celScore.name(),
+            networth.name()
         ]
     }
     
     func name() -> String {
         switch self {
-        case .FirstName: return "First Name"
-        case .MiddleName: return "Middle Name"
-        case .LastName: return "Last Name"
-        case .From: return "From"
-        case .Birthdate: return "Date of Birth"
-        case .Height: return "Height"
-        case .Zodiac: return "Zodiac"
-        case .Status: return "Status"
-        case .CelScore: return "Score"
-        case .Networth: return "Networth"
+        case .firstName: return "First Name"
+        case .middleName: return "Middle Name"
+        case .lastName: return "Last Name"
+        case .from: return "From"
+        case .birthdate: return "Date of Birth"
+        case .height: return "Height"
+        case .zodiac: return "Zodiac"
+        case .status: return "Status"
+        case .celScore: return "Score"
+        case .networth: return "Networth"
         }
     }
     
     func text() -> String {
         switch self {
-        case .FirstName: return "first name is"
-        case .MiddleName: return "middle name is"
-        case .LastName: return "last name is"
-        case .From: return "is from"
-        case .Birthdate: return "was born"
-        case .Height: return "height is"
-        case .Zodiac: return "zodiac sign is"
-        case .Status: return "relationship status is"
-        case .CelScore: return "celscore is"
-        case .Networth: return "networth is"
+        case .firstName: return "first name is"
+        case .middleName: return "middle name is"
+        case .lastName: return "last name is"
+        case .from: return "is from"
+        case .birthdate: return "was born"
+        case .height: return "height is"
+        case .zodiac: return "zodiac sign is"
+        case .status: return "relationship status is"
+        case .celScore: return "celscore is"
+        case .networth: return "networth is"
         }
     }
 }
 
 //MARK: Qualities
 enum Qualities: Int {
-    case Talent
-    case Originality
-    case Authenticity
-    case Generosity
-    case RoleModel
-    case HardWork
-    case Smarts
-    case Charisma
-    case Elegance
-    case SexAppeal
+    case talent
+    case originality
+    case authenticity
+    case generosity
+    case roleModel
+    case hardWork
+    case smarts
+    case charisma
+    case elegance
+    case sexAppeal
     
-    static func getAll(isMale isMale: Bool = true) -> [String] {
+    static func getAll(isMale: Bool = true) -> [String] {
         return [
-            Talent.name(),
-            Originality.name(),
-            Authenticity.name(),
-            Generosity.name(),
-            RoleModel.name(),
-            HardWork.name(),
-            Smarts.name(),
-            Charisma.name(),
-            Elegance.name(isMale: isMale),
-            SexAppeal.name(isMale: isMale)
+            talent.name(),
+            originality.name(),
+            authenticity.name(),
+            generosity.name(),
+            roleModel.name(),
+            hardWork.name(),
+            smarts.name(),
+            charisma.name(),
+            elegance.name(isMale: isMale),
+            sexAppeal.name(isMale: isMale)
         ]
     }
 
-    func name(isMale isMale: Bool = true) -> String {
+    func name(isMale: Bool = true) -> String {
         switch self {
-        case .Talent: return "Talent"
-        case .Originality: return "Originality"
-        case .Authenticity: return "Authenticity"
-        case .Generosity: return "Generosity"
-        case .RoleModel: return "Role Model"
-        case .HardWork: return "Work Ethic"
-        case .Smarts: return "Smarts"
-        case .Charisma: return "Charisma"
-        case .Elegance: return isMale == true ? "Style" : "Elegance"
-        case .SexAppeal: return isMale == true ? "Handsome" : "Beauty"
+        case .talent: return "Talent"
+        case .originality: return "Originality"
+        case .authenticity: return "Authenticity"
+        case .generosity: return "Generosity"
+        case .roleModel: return "Role Model"
+        case .hardWork: return "Work Ethic"
+        case .smarts: return "Smarts"
+        case .charisma: return "Charisma"
+        case .elegance: return isMale == true ? "Style" : "Elegance"
+        case .sexAppeal: return isMale == true ? "Handsome" : "Beauty"
         }
     }
     
-    func text(isMale isMale: Bool = true) -> String {
+    func text(isMale: Bool = true) -> String {
         switch self {
-        case .Talent: return "talent is"
-        case .Originality: return "originality is"
-        case .Authenticity: return "authenticity is"
-        case .Generosity: return "generosity is"
-        case .RoleModel: return "as a role model is"
-        case .HardWork: return "work ethic is"
-        case .Smarts: return "smarts are"
-        case .Charisma: return "charisma is"
-        case .Elegance: return isMale == true ? "style is" : "elegance is"
-        case .SexAppeal: return isMale == true ? "handsomeness is" : "beauty is"
+        case .talent: return "talent is"
+        case .originality: return "originality is"
+        case .authenticity: return "authenticity is"
+        case .generosity: return "generosity is"
+        case .roleModel: return "as a role model is"
+        case .hardWork: return "work ethic is"
+        case .smarts: return "smarts are"
+        case .charisma: return "charisma is"
+        case .elegance: return isMale == true ? "style is" : "elegance is"
+        case .sexAppeal: return isMale == true ? "handsomeness is" : "beauty is"
         }
     }
 }
 
 //MARK: ListInfo
 enum ListInfo : Int {
-    case PublicOpinion
-    case Hollywood
-    case HipHop
-    case Sports
-    case Music
-    case Television
-    case News
+    case publicOpinion
+    case hollywood
+    case hipHop
+    case sports
+    case music
+    case television
+    case news
     
     static func getAllNames() -> [String] {
         return [
-            PublicOpinion.name(),
-            Hollywood.name(),
-            HipHop.name(),
-            Sports.name(),
-            Music.name(),
-            Television.name(),
-            News.name()
+            publicOpinion.name(),
+            hollywood.name(),
+            hipHop.name(),
+            sports.name(),
+            music.name(),
+            television.name(),
+            news.name()
         ]
     }
     
     static func getAllIDs() -> [String] {
         return [
-            PublicOpinion.getId(),
-            Hollywood.getId(),
-            HipHop.getId(),
-            Sports.getId(),
-            Music.getId(),
-            Television.getId(),
-            News.getId()
+            publicOpinion.getId(),
+            hollywood.getId(),
+            hipHop.getId(),
+            sports.getId(),
+            music.getId(),
+            television.getId(),
+            news.getId()
         ]
     }
     
@@ -315,87 +315,87 @@ enum ListInfo : Int {
     
     func name() -> String {
         switch self {
-        case .PublicOpinion: return "Public Opinion"
-        case .Hollywood: return "Hollywood"
-        case .HipHop: return "Hip Hop"
-        case .Sports: return "Sports"
-        case .Music: return "Music"
-        case .Television: return "Television"
-        case .News: return "New"
+        case .publicOpinion: return "Public Opinion"
+        case .hollywood: return "Hollywood"
+        case .hipHop: return "Hip Hop"
+        case .sports: return "Sports"
+        case .music: return "Music"
+        case .television: return "Television"
+        case .news: return "New"
         }
     }
     
     func getId() -> String {
         switch self {
-        case .PublicOpinion: return "0001"
-        case .Hollywood: return "0004"
-        case .HipHop: return "0007"
-        case .Sports: return "0002"
-        case .Music: return "0003"
-        case .Television: return "0005"
-        case .News: return "0006"
+        case .publicOpinion: return "0001"
+        case .hollywood: return "0004"
+        case .hipHop: return "0007"
+        case .sports: return "0002"
+        case .music: return "0003"
+        case .television: return "0005"
+        case .news: return "0006"
         }
     }
     
     func getIndex() -> Int {
         switch self {
-        case .PublicOpinion: return 0
-        case .Hollywood: return 1
-        case .HipHop: return 2
-        case .Sports: return 3
-        case .Music: return 4
-        case .Television: return 5
-        case .News: return 6
+        case .publicOpinion: return 0
+        case .hollywood: return 1
+        case .hipHop: return 2
+        case .sports: return 3
+        case .music: return 4
+        case .television: return 5
+        case .news: return 6
         }
     }
 }
 
 //MARK: Zodiac
 enum Zodiac : Int {
-    case Aries
-    case Taurus
-    case Gemini
-    case Cancer
-    case Leo
-    case Virgo
-    case Libra
-    case Scorpio
-    case Sagittarius
-    case Capricorn
-    case Aquarius
-    case Pisces
+    case aries
+    case taurus
+    case gemini
+    case cancer
+    case leo
+    case virgo
+    case libra
+    case scorpio
+    case sagittarius
+    case capricorn
+    case aquarius
+    case pisces
 
     func name() -> String {
         switch self {
-        case .Aries: return "Aries"
-        case .Taurus: return "Taurus"
-        case .Gemini: return "Gemini"
-        case .Cancer: return "Cancer"
-        case .Leo: return "Leo"
-        case .Virgo: return "Virgo"
-        case .Libra: return "Libra"
-        case .Scorpio: return "Scorpio"
-        case .Sagittarius: return "Sagittarius"
-        case .Capricorn: return "Capricorn"
-        case .Aquarius: return "Aquarius"
-        case .Pisces: return "Pisces"
+        case .aries: return "Aries"
+        case .taurus: return "Taurus"
+        case .gemini: return "Gemini"
+        case .cancer: return "Cancer"
+        case .leo: return "Leo"
+        case .virgo: return "Virgo"
+        case .libra: return "Libra"
+        case .scorpio: return "Scorpio"
+        case .sagittarius: return "Sagittarius"
+        case .capricorn: return "Capricorn"
+        case .aquarius: return "Aquarius"
+        case .pisces: return "Pisces"
         }
     }
 
     func symbol() -> String {
         switch self {
-            case .Aries: return "♈"
-            case .Taurus: return "♉"
-            case .Gemini: return "♊"
-            case .Cancer: return "♋"
-            case .Leo: return "♌"
-            case .Virgo: return "♍"
-            case .Libra: return "♎"
-            case .Scorpio: return "♏"
-            case .Sagittarius: return "♐"
-            case .Capricorn: return "♑"
-            case .Aquarius: return "♒"
-            case .Pisces: return "♓"
+            case .aries: return "♈"
+            case .taurus: return "♉"
+            case .gemini: return "♊"
+            case .cancer: return "♋"
+            case .leo: return "♌"
+            case .virgo: return "♍"
+            case .libra: return "♎"
+            case .scorpio: return "♏"
+            case .sagittarius: return "♐"
+            case .capricorn: return "♑"
+            case .aquarius: return "♒"
+            case .pisces: return "♓"
         }
     }
 }

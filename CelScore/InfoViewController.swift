@@ -12,11 +12,11 @@ import Material
 import ReactiveCocoa
 
 
-final class InfoViewController: ASViewController, Labelable {
+final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     //MARK: Properties
-    private let celebST: CelebrityStruct
-    private let pulseView: MaterialView
+    fileprivate let celebST: CelebrityStruct
+    fileprivate let pulseView: MaterialView
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -26,7 +26,7 @@ final class InfoViewController: ASViewController, Labelable {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.hidden = true
+        self.view.isHidden = true
     }
     
     //MARK: Methods
@@ -93,11 +93,11 @@ final class InfoViewController: ASViewController, Labelable {
         self.view = self.pulseView
     }
     
-    func createCelScoreText(score: Double) -> NSAttributedString {
+    func createCelScoreText(_ score: Double) -> NSAttributedString {
         var attributedText = NSMutableAttributedString()
         let percent: Double = (score/self.celebST.prevScore) * 100 - 100
         let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
-        let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
+        let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
         attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
         let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.black]
         let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
@@ -105,7 +105,7 @@ final class InfoViewController: ASViewController, Labelable {
         return attributedText
     }
     
-    func longPress(gesture: UIGestureRecognizer) {
+    func longPress(_ gesture: UIGestureRecognizer) {
         let celebIndex = gesture.view!.tag - 1
         let quality = Info(rawValue: celebIndex)!.text()
         

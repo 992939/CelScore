@@ -10,7 +10,6 @@ import AWSCore
 import SwiftyJSON
 import RealmSwift
 import ReactiveCocoa
-import AIRTimer
 import Social
 import Result
 import Accounts
@@ -21,7 +20,7 @@ public typealias NewCelebInfo = (text: String, image: String)
 
 struct CelScoreViewModel {
     
-    func getFromAWSSignal(dataType dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
+    func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
@@ -82,7 +81,7 @@ struct CelScoreViewModel {
         }
     }
     
-    func shareVoteOnSignal(socialLogin socialLogin: SocialLogin, message: String, screenshot: UIImage) -> SignalProducer<SLComposeViewController, NoError> {
+    func shareVoteOnSignal(socialLogin: SocialLogin, message: String, screenshot: UIImage) -> SignalProducer<SLComposeViewController, NoError> {
         return SignalProducer { observer, disposable in
             let socialVC: SLComposeViewController?
             switch socialLogin {

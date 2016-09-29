@@ -13,7 +13,7 @@ import Result
 
 struct ListViewModel {
     
-    func getListSignal(listId listId: String) -> SignalProducer<ListsModel, ListError> {
+    func getListSignal(listId: String) -> SignalProducer<ListsModel, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", listId).first
@@ -23,7 +23,7 @@ struct ListViewModel {
         }
     }
     
-    func searchSignal(searchToken searchToken: String) -> SignalProducer<ListsModel, NoError> {
+    func searchSignal(searchToken: String) -> SignalProducer<ListsModel, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
@@ -68,7 +68,7 @@ struct ListViewModel {
         }
     }
     
-    func updateListSignal(listId listId: String) -> SignalProducer<Bool, ListError> {
+    func updateListSignal(listId: String) -> SignalProducer<Bool, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             
@@ -107,7 +107,7 @@ struct ListViewModel {
         }
     }
     
-    func getCelebrityStructSignal(listId listId: String, index: Int) -> SignalProducer<CelebrityStruct, ListError> {
+    func getCelebrityStructSignal(listId: String, index: Int) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", listId).first

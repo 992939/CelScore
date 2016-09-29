@@ -14,7 +14,7 @@ import ReactiveCocoa
 
 struct RatingsViewModel {
     
-    func updateUserRatingSignal(ratingsId ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
+    func updateUserRatingSignal(ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             guard 1...5 ~= newRating else { return observer.sendFailed(.RatingValueOutOfBounds) }
             guard 0...9 ~= ratingIndex else { return observer.sendFailed(.RatingIndexOutOfBounds) }
@@ -32,7 +32,7 @@ struct RatingsViewModel {
         }
     }
     
-    func voteSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
+    func voteSignal(ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
@@ -47,7 +47,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getRatingsSignal(ratingsId ratingsId: String, ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
+    func getRatingsSignal(ratingsId: String, ratingType: RatingsType) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             switch ratingType {
@@ -64,7 +64,7 @@ struct RatingsViewModel {
         }
     }
     
-    func hasUserRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<Bool, NSError> {
+    func hasUserRatingsSignal(ratingsId: String) -> SignalProducer<Bool, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
@@ -74,7 +74,7 @@ struct RatingsViewModel {
         }
     }
     
-    func cleanUpRatingsSignal(ratingsId ratingsId: String) -> SignalProducer<RatingsModel, NoError> {
+    func cleanUpRatingsSignal(ratingsId: String) -> SignalProducer<RatingsModel, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let newRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
@@ -90,7 +90,7 @@ struct RatingsViewModel {
         }
     }
     
-    func consensusBuildingSignal(ratingsId ratingsId: String) -> SignalProducer<String, RatingsError> {
+    func consensusBuildingSignal(ratingsId: String) -> SignalProducer<String, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
@@ -110,7 +110,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getMoneyShotSignal(ratingsId ratingsId: String) -> SignalProducer<Int, RatingsError> {
+    func getMoneyShotSignal(ratingsId: String) -> SignalProducer<Int, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", ratingsId).first!
@@ -121,7 +121,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getConsensusSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
+    func getConsensusSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
         let realm = try! Realm()
         let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", ratingsId).first!
@@ -131,7 +131,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getCelScoreSignal(ratingsId ratingsId: String) -> SignalProducer<Double, NoError> {
+    func getCelScoreSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first

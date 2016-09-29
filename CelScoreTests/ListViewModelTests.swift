@@ -44,10 +44,10 @@ class ListViewModelTests: XCTestCase {
     }
     
     func testGetListSignal() {
-        let expectation = expectationWithDescription("getListSignal callback")
+        let expectation = self.expectation(description: "getListSignal callback")
         ListViewModel().getListSignal(listId: "0001").startWithNext { list in
             XCTAssertEqual(list.celebList.count, 3, "getListSignal returns list with two items."); expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("getListSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getListSignal error: \(error)") } }
     }
     
     func testSanitizeListsSignal() {
@@ -55,24 +55,24 @@ class ListViewModelTests: XCTestCase {
         let initialList = realm.objects(ListsModel).filter("id = %@", "0001").first
         XCTAssertEqual(initialList?.celebList.count, 3, "sanitizeListsSignal: ListViewModel starts with 3 CelebIds.")
         
-        let expectation = expectationWithDescription("sanitizeListsSignal callback")
+        let expectation = self.expectation(description: "sanitizeListsSignal callback")
         ListViewModel().sanitizeListsSignal().startWithCompleted {
             let list = realm.objects(ListsModel).filter("id = %@", "0001").first
             XCTAssertEqual(list?.celebList.count, 2, "sanitizeListsSignal returns a list with 2 CelebIds.")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("sanitizeListsSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("sanitizeListsSignal error: \(error)") } }
     }
     
     func testSearchSignal() {
-        let expectation = expectationWithDescription("searchSignal callback")
+        let expectation = self.expectation(description: "searchSignal callback")
         ListViewModel().searchSignal(searchToken: "test").startWithNext { list in
             XCTAssertEqual(list.celebList.count, 1, "searchSignal returns list with one item."); expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("searchSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("searchSignal error: \(error)") } }
     }
     
     func testUpdateListSignal() {
-        let expectation = expectationWithDescription("updateAllListsSignal callback")
+        let expectation = self.expectation(description: "updateAllListsSignal callback")
         ListViewModel().updateListSignal(listId: "0001").startWithNext { _ in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", "0001").first
@@ -80,13 +80,13 @@ class ListViewModelTests: XCTestCase {
             XCTAssertEqual(celebId.id, "0003", "updateAllListsSignal returns list followed item first.")
             XCTAssertEqual(list!.celebList.count, 3, "updateAllListsSignal returns a list of three items.")
             expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("updateAllListsSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateAllListsSignal error: \(error)") } }
     }
     
     func testGetCelebrityStructSignal() {
-        let expectation = expectationWithDescription("getCelebrityStructSignal callback")
+        let expectation = self.expectation(description: "getCelebrityStructSignal callback")
         ListViewModel().getCelebrityStructSignal(listId: "0001", index: 1).startWithNext { celeb in
             XCTAssertEqual(celeb.id, "0002", "getCelebrityStructSignal returns second item."); expectation.fulfill() }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
     }
 }

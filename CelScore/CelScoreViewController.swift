@@ -8,15 +8,15 @@
 
 import AsyncDisplayKit
 import Material
-import AIRTimer
+import SwiftyTimer
 import ReactiveCocoa
 
 
-final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Labelable {
+final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeViewDelegate, Labelable {
     
     //MARK: Properties
-    private let celebST: CelebrityStruct
-    private let pulseView: MaterialView
+    fileprivate let celebST: CelebrityStruct
+    fileprivate let pulseView: MaterialView
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -45,7 +45,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         self.view = self.pulseView
     }
     
-    func getGaugeView(gaugeHeight: CGFloat) -> MaterialPulseView {
+    func getGaugeView(_ gaugeHeight: CGFloat) -> MaterialPulseView {
         let gaugeView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -75,19 +75,20 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.8
         let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.9
         let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.94
-        var timer: AIRTimer?
-        AIRTimer.after(1.5) { _ in timer = AIRTimer.every(0.1){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
-        AIRTimer.every(30) { _ in
+        var timer: Timer?
+        
+        Timer.after(1.5.seconds) { _ in timer = Timer.every(100.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
+        Timer.every(30.seconds) { _ in
             timer?.invalidate()
             let diceRoll = Int(arc4random_uniform(2) + 7)
             gauge.unitOfMeasurement = GaugeFace(rawValue: diceRoll)!.emoji()
-            AIRTimer.after(2) { _ in timer?.restart() }
+            Timer.after(2.seconds) { _ in timer?.restart() }
         }
         gaugeView.addSubview(gauge)
         return gaugeView
     }
     
-    func getView(positionY positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
+    func getView(positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         if tag < 4 {
@@ -105,10 +106,10 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         }
         else if tag == 4 {
             infoLabel.text = value
-            infoLabel.lineBreakMode = .ByWordWrapping
+            infoLabel.lineBreakMode = .byWordWrapping
             infoLabel.textColor = Constants.kBlueLight
         }
-        infoLabel.textAlignment = .Right
+        infoLabel.textAlignment = .right
         let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
@@ -123,7 +124,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         return taggedView
     }
     
-    func longPress(gesture: UIGestureRecognizer) {
+    func longPress(_ gesture: UIGestureRecognizer) {
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in
@@ -134,7 +135,7 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
         }
     }
     
-    func updateGauge(gaugeView: LMGaugeView, timer: AIRTimer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
+    func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
         if gaugeView.value > finalSlow { gaugeView.value += 0.0005 }
         else if gaugeView.value > thirdSlow { gaugeView.value += 0.0015 }
         else if gaugeView.value > secondSlow { gaugeView.value += 0.0035 }
@@ -144,15 +145,15 @@ final class CelScoreViewController: ASViewController, LMGaugeViewDelegate, Label
     }
     
     //MARK: LMGaugeViewDelegate
-    func gaugeView(gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
+    func gaugeView(_ gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
         switch value {
-        case 4.5..<5.1: gaugeView.unitOfMeasurement = GaugeFace.Grin.emoji()
-        case 3.5..<4.5: gaugeView.unitOfMeasurement = GaugeFace.BigSmile.emoji()
-        case 3.0..<3.5: gaugeView.unitOfMeasurement = GaugeFace.Smile.emoji()
-        case 2.5..<3.0: gaugeView.unitOfMeasurement = GaugeFace.NoSmile.emoji()
-        case 2.0..<2.5: gaugeView.unitOfMeasurement = GaugeFace.SadFace.emoji()
-        case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.Angry.emoji()
-        default: gaugeView.unitOfMeasurement = GaugeFace.Awaking.emoji()
+        case 4.5..<5.1: gaugeView.unitOfMeasurement = GaugeFace.grin.emoji()
+        case 3.5..<4.5: gaugeView.unitOfMeasurement = GaugeFace.bigSmile.emoji()
+        case 3.0..<3.5: gaugeView.unitOfMeasurement = GaugeFace.smile.emoji()
+        case 2.5..<3.0: gaugeView.unitOfMeasurement = GaugeFace.noSmile.emoji()
+        case 2.0..<2.5: gaugeView.unitOfMeasurement = GaugeFace.sadFace.emoji()
+        case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.angry.emoji()
+        default: gaugeView.unitOfMeasurement = GaugeFace.awaking.emoji()
         }
         return Constants.kRedShade
     }

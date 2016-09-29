@@ -29,7 +29,7 @@ final class ListsModel: Object {
         self.name = json["name"].string!
         let items = json["list"].array!
         
-        for (index, _) in items.enumerate() {
+        for (index, _) in items.enumerated() {
             let celebId = CelebId()
             celebId.id = items[index].string!
             self.celebList.append(celebId)

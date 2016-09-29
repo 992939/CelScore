@@ -16,19 +16,19 @@ struct Constants {
     //Universal
     static let kCognitoIdentityPoolId: String = CelscoreKeys().kCognitoIdentityPoolId()
     static let kAPIKey: String = CelscoreKeys().kAPIKey()
-    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
+    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .usEast1, identityPoolId: kCognitoIdentityPoolId)
     static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
     
     static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5
-    static let kOneDay: NSTimeInterval = 86400.0
-    static let kUpdateRatings: NSTimeInterval = 20.0
+    static let kOneDay: TimeInterval = 86400.0
+    static let kUpdateRatings: TimeInterval = 20.0
     static let kMaxFollowedCelebrities: Int = 10
-    static let kTimeout: NSTimeInterval = 10.0
+    static let kTimeout: TimeInterval = 10.0
     static let kNetworkRetry: Int = 7
     static let kFontSize: CGFloat = UIDevice.getFontSize()
-    static let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
-    static let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+    static let kScreenWidth: CGFloat = UIScreen.main.bounds.width
+    static let kScreenHeight: CGFloat = UIScreen.main.bounds.height
     static let kMaxWidth: CGFloat = kScreenWidth - kPadding
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0

@@ -11,7 +11,6 @@ import AWSCognito
 import RealmSwift
 import TwitterKit
 import Timepiece
-import Result
 import SwiftyJSON
 import ReactiveCocoa
 import FBSDKCoreKit
@@ -19,7 +18,7 @@ import FBSDKCoreKit
 
 struct UserViewModel {
     
-    func loginSignal(token token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
+    func loginSignal(token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .Facebook:
@@ -93,7 +92,7 @@ struct UserViewModel {
         }
     }
     
-    func getUserInfoFromSignal(loginType loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
+    func getUserInfoFromSignal(loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .Facebook:
@@ -120,7 +119,7 @@ struct UserViewModel {
         }
     }
     
-    func updateCognitoSignal(object object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
+    func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
@@ -205,7 +204,7 @@ struct UserViewModel {
         }
     }
     
-    func getFromCognitoSignal(dataSetType dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
+    func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
@@ -235,7 +234,7 @@ struct UserViewModel {
                         try! realm.commitWrite()
                     })
                 case .UserSettings:
-                    let dico: [NSObject : AnyObject] = dataset.getAll()
+                    let dico: [AnyHashable: Any] = dataset.getAll()
                     let settings: SettingsModel = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
                     guard dico.isEmpty == false else { observer.sendNext(task); return task }
                     realm.beginWrite()

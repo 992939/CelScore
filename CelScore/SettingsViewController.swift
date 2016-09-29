@@ -10,7 +10,7 @@ import AsyncDisplayKit
 import YLProgressBar
 import Material
 import BEMCheckBox
-import AIRTimer
+import SwiftyTimer
 import PMAlertController
 import ReactiveCocoa
 import MessageUI
@@ -20,10 +20,10 @@ import SafariServices
 final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, MFMailComposeViewControllerDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Property
-    private let picker: UIPickerView
-    private let fact1Bar: YLProgressBar
-    private let fact2Bar: YLProgressBar
-    private let fact3Bar: YLProgressBar
+    fileprivate let picker: UIPickerView
+    fileprivate let fact1Bar: YLProgressBar
+    fileprivate let fact2Bar: YLProgressBar
+    fileprivate let fact3Bar: YLProgressBar
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -55,10 +55,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         let labelWidth: CGFloat = (Constants.kSettingsViewWidth - logoCircle.width)/2
         let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
-        courtLabel.textAlignment = .Center
+        courtLabel.textAlignment = .center
         let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
-        houseLabel.textAlignment = .Center
-        let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFontOfSize(23.0)
+        houseLabel.textAlignment = .center
+        let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFont(ofSize: 23.0)
         let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : MaterialColor.white]
         courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
         courtLabel.backgroundColor = Constants.kBlueShade
@@ -160,34 +160,34 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: Methods
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against switching accounts as your votes and settings might get lost. Are you sure you want to continue?", image: R.image.contract_red_big()!, style: .Alert)
+        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against switching accounts as your votes and settings might get lost. Are you sure you want to continue?", image: R.image.contract_red_big()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) } ))
-        alertVC.addAction(PMAlertAction(title: "Log Out", style: .Default, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
+        alertVC.addAction(PMAlertAction(title: "Log Out", style: .default, action: { _ in
+            self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal().startWithNext({ _ in
                 MaterialAnimation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
             })
         }))
-        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-        alertVC.view.opaque = false
-        self.presentViewController(alertVC, animated: true, completion: nil)
+        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+        alertVC.view.isOpaque = false
+        self.present(alertVC, animated: true, completion: nil)
     }
     
-    func refreshAction(button: MaterialButton) {
+    func refreshAction(_ button: MaterialButton) {
         button.enabled = false
         self.fact1Bar.setProgress(0, animated: true)
         self.fact2Bar.setProgress(0, animated: true)
         self.fact3Bar.setProgress(0, animated: true)
-        AIRTimer.after(2.0){ _ in
+        Timer.after(2.seconds){ _ in
             SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in self.fact1Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in self.fact2Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.fact3Bar.setProgress(value, animated: true) })
@@ -198,14 +198,14 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func support() { self.sendEmail() }
     
     func showPolicy() {
-        let url = NSURL(string: Constants.kPolicyURL)
-        let vc = SFSafariViewController(URL: url!, entersReaderIfAvailable: false)
+        let url = URL(string: Constants.kPolicyURL)
+        let vc = SFSafariViewController(url: url!, entersReaderIfAvailable: false)
         vc.delegate = self
-        presentViewController(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
     
     //MARK: SFSafariViewControllerDelegate
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         MaterialAnimation.delay(0.75) {
             self.navigationDrawerController!.enabled = true
             self.navigationDrawerController!.closeLeftView()
@@ -213,20 +213,20 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismissViewControllerAnimated(true, completion: { _ in
             self.navigationDrawerController!.enabled = true
         })
     }
     
     //MARK: UIPickerViewDelegate
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return ListInfo.getCount() }
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         return NSAttributedString(string: ListInfo(rawValue: row)!.name(), attributes: [NSForegroundColorAttributeName : MaterialColor.black, NSBackgroundColorAttributeName : Constants.kGreyBackground])
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
         SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithNext({ first in let firstTime = first as! Bool
             guard firstTime else { return }
@@ -236,7 +236,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: BEMCheckBoxDelegate
-    func didTapCheckBox(checkBox: BEMCheckBox) {
+    func didTap(_ checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .ConsensusBuilding)).start()
         if checkBox.on {
             SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus).startWithNext({ first in
@@ -267,21 +267,21 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: DidLayoutSubviews Helpers
-    func setupMaterialView(frame frame: CGRect) -> MaterialView {
+    func setupMaterialView(frame: CGRect) -> MaterialView {
         let materialView = MaterialView(frame: frame)
         materialView.depth = .Depth1
         materialView.backgroundColor = Constants.kGreyBackground
         return materialView
     }
     
-    func setupCheckBoxNode(title title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
+    func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
         let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 40))
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
-        box.onAnimationType = .Bounce
-        box.offAnimationType = .Bounce
+        box.onAnimationType = .bounce
+        box.offAnimationType = .bounce
         box.onCheckColor = MaterialColor.white
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
@@ -293,15 +293,15 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })
     }
     
-    func setupProgressBarNode(title title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
+    func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
         bar.progressTintColors = [Constants.kRedShade, Constants.kRedShade]
         bar.setProgress(value, animated: true)
-        bar.type = .Flat
+        bar.type = .flat
         bar.backgroundColor = Constants.kRedShade
-        bar.indicatorTextDisplayMode = .Progress
+        bar.indicatorTextDisplayMode = .progress
         materialView.addSubview(factsLabel)
         materialView.addSubview(bar)
         return ASDisplayNode(viewBlock: { () -> UIView in return materialView })

@@ -14,8 +14,8 @@ import Result
 struct SettingsViewModel {
     
     //MARK: Widget
-    enum SettingsError: Int, ErrorType { case NoCelebrityModels, NoRatingsModel, NoUserRatingsModel, OutOfBoundsVariance, NoUser }
-    enum SettingType: Int { case DefaultListIndex = 0, LoginTypeIndex, PublicService, ConsensusBuilding, FirstLaunch, FirstConsensus, FirstPublic, FirstFollow, FirstInterest, FirstCompleted, First25, First50, First75, FirstVoteDisable, FirstSocialDisable, FirstTrollWarning }
+    enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
+    enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, consensusBuilding, firstLaunch, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
     
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
@@ -85,7 +85,7 @@ struct SettingsViewModel {
         }
     }
     
-    func updateUserNameSignal(username username: String) -> SignalProducer<SettingsModel, NSError> {
+    func updateUserNameSignal(username: String) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
@@ -98,7 +98,7 @@ struct SettingsViewModel {
         }
     }
     
-    func getSettingSignal(settingType settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
+    func getSettingSignal(settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let settings = realm.objects(SettingsModel).first ?? SettingsModel()
@@ -124,7 +124,7 @@ struct SettingsViewModel {
         }
     }
     
-    func updateSettingSignal(value value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NSError> {
+    func updateSettingSignal(value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()

@@ -9,7 +9,6 @@
 import AsyncDisplayKit
 import Material
 import SMSegmentView
-import AIRTimer
 import Social
 import ReactiveCocoa
 import MessageUI
@@ -18,13 +17,13 @@ import MessageUI
 final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
-    private let infoVC: InfoViewController
-    private let ratingsVC: RatingsViewController
-    private let celscoreVC: CelScoreViewController
-    private let voteButton: MaterialButton
-    private let celebST: CelebrityStruct
-    private let socialButton: MenuView
-    private var socialMessage: String = ""
+    fileprivate let infoVC: InfoViewController
+    fileprivate let ratingsVC: RatingsViewController
+    fileprivate let celscoreVC: CelScoreViewController
+    fileprivate let voteButton: MaterialButton
+    fileprivate let celebST: CelebrityStruct
+    fileprivate let socialButton: MenuView
+    fileprivate var socialMessage: String = ""
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -49,8 +48,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: Methods
-    override func prefersStatusBarHidden() -> Bool { return true }
-    override func updateUserActivityState(activity: NSUserActivity) {}
+    override var prefersStatusBarHidden : Bool { return true }
+    override func updateUserActivityState(_ activity: NSUserActivity) {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +82,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kBlueShade
         
-        self.profilePicNode.URL = NSURL(string: celebST.imageURL)
+        self.profilePicNode.url = URL(string: celebST.imageURL)
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
                                            y: topView.centerY - UIDevice.getProfileDiameter()/2,
                                            width: UIDevice.getProfileDiameter(),
@@ -106,7 +105,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.view.backgroundColor = Constants.kBlueShade
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showingButtons()
     }
@@ -150,11 +149,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func infoAction() {
-       TAOverlay.showOverlayWithLabel(OverlayInfo.InfoSource.message(), image: OverlayInfo.InfoSource.logo(), options: OverlayInfo.getOptions())
+       TAOverlay.show(withLabel: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), options: OverlayInfo.getOptions())
     }
     
     func helpAction() {
-        TAOverlay.showOverlayWithLabel(OverlayInfo.VoteHelp.message(), image: OverlayInfo.VoteHelp.logo(), options: OverlayInfo.getOptions())
+        TAOverlay.show(withLabel: OverlayInfo.voteHelp.message(), image: OverlayInfo.voteHelp.logo(), options: OverlayInfo.getOptions())
     }
     
     func voteAction() {
@@ -260,21 +259,21 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             })
     }
     
-    func imageFromView(view: UIView) -> UIImage {
+    func imageFromView(_ view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: UIDevice.getProfileDiameter() + 20, height: Constants.kTopViewRect.height), false, 2)
         UIGraphicsGetImageFromCurrentImageContext()
         let newX: CGFloat = UIDevice.getScreenshotPosition()
-        self.view.drawViewHierarchyInRect(CGRect(x: -newX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
+        self.view.drawHierarchy(in: CGRect(x: -newX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return screenShot
+        return screenShot!
     }
     
     //MARK: Sociable
-    func handleMenu(open: Bool = false) {
+    func handleMenu(_ open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.menu.opened { self.closeHandleMenu() }
-        else { TAOverlay.showOverlayWithLabel(OverlayInfo.NoSharing.message(), image: OverlayInfo.NoSharing.logo(), options: OverlayInfo.getOptions()) }
+        else { TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions()) }
     }
     
     func openHandleMenu() {
@@ -283,7 +282,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         first?.pulseAnimation = .CenterWithBacking
         first?.animate(MaterialAnimation.rotate(rotation: 1))
         self.socialButton.menu.open()
-        let image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
+        let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
         first?.setImage(image, forState: .Normal)
         first?.setImage(image, forState: .Highlighted)
     }
@@ -308,7 +307,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         })
     }
     
-    func socialButton(button: UIButton) {
+    func socialButton(_ button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotViewAfterScreenUpdates(true))
@@ -354,7 +353,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         }
     }
 
-    func disableVoteButton(image: UIImage) {
+    func disableVoteButton(_ image: UIImage) {
         self.voteButton.setImage(image, forState: .Normal)
         self.voteButton.setImage(image, forState: .Highlighted)
         self.voteButton.removeTarget(self, action: nil, forControlEvents: .TouchUpInside)
@@ -366,14 +365,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
+    func segmentView(_ segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         let infoView: UIView = self.getSubView(atIndex: index)
-        infoView.hidden = false
+        infoView.isHidden = false
         infoView.frame = Constants.kBottomViewRect
         let removingView = self.getSubView(atIndex: previousIndex)
         
@@ -390,8 +389,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         } else { disableVoteButton(R.image.heart_black()!) }
     }
     
-    func slide(right right: Bool, newView: UIView, oldView: UIView) {
-        UIView.animateWithDuration(1.0, animations: { _ in
+    func slide(right: Bool, newView: UIView, oldView: UIView) {
+        UIView.animate(withDuration: 1.0, animations: { _ in
             if right { oldView.left = -newView.width; newView.slide(right: true, duration: 1.0, completionDelegate: self) }
             else { oldView.left = newView.width + 45; newView.slide(right: false, duration: 1.0, completionDelegate: self) }
         })
@@ -408,14 +407,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     //MARK: RatingsViewDelegate
-    func rippleEffect(positive positive: Bool, gold: Bool = false) {
+    func rippleEffect(positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarGoldShade }
         else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueText : Constants.kRedText }
         self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
     
-    func enableVoteButton(positive positive: Bool) {
+    func enableVoteButton(positive: Bool) {
         UIView.animateWithDuration(0.3, animations: {
             self.voteButton.setImage(R.image.heart_white()!, forState: .Normal)
             self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
@@ -428,7 +427,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         })
     }
 
-    func socialSharing(message message: String) {
+    func socialSharing(message: String) {
         self.openHandleMenu()
         self.socialMessage = message
     }
@@ -458,7 +457,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let nameLabel: UILabel = self.setupLabel(title: "★  " + self.celebST.nickname + "   ★", frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
         nameLabel.backgroundColor = Constants.kRedShade
         nameLabel.textColor = MaterialColor.white
-        nameLabel.textAlignment = .Center
+        nameLabel.textAlignment = .center
         self.view.addSubview(nameLabel)
         
         let navigationBarView: Toolbar = Toolbar()

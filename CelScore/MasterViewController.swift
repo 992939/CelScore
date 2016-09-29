@@ -25,11 +25,11 @@ import Accounts
 final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
-    private let segmentedControl: HMSegmentedControl
-    private let searchBar: UISearchBar
-    private let transitionManager: TransitionManager = TransitionManager()
-    private let diffCalculator: TableViewDiffCalculator<CelebId>
-    private let socialButton: MenuView
+    fileprivate let segmentedControl: HMSegmentedControl
+    fileprivate let searchBar: UISearchBar
+    fileprivate let transitionManager: TransitionManager = TransitionManager()
+    fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
+    fileprivate let socialButton: MenuView
     internal let celebrityTableView: ASTableView
     
     //MARK: Initializers
@@ -44,13 +44,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
-        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        FBSDKProfile.enableUpdates(onAccessTokenChange: true)
     }
     
     //MARK: Methods
-    override func prefersStatusBarHidden() -> Bool { return true }
+    override var prefersStatusBarHidden : Bool { return true }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationDrawerController?.delegate = self
         self.navigationDrawerController?.enabled = false
@@ -58,7 +58,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         MaterialAnimation.delay(0.4) {
@@ -104,13 +104,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
-        self.celebrityTableView.separatorStyle = .None
+        self.celebrityTableView.separatorStyle = .none
         self.celebrityTableView.backgroundColor = MaterialColor.clear
         
         let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         self.searchBar.delegate = self
-        self.searchBar.searchBarStyle = .Minimal
+        self.searchBar.searchBarStyle = .minimal
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
@@ -123,7 +123,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         self.setupData()
         
-        NSNotificationCenter.defaultCenter().rac_notifications(UIApplicationWillEnterForegroundNotification, object: nil).startWithNext { _ in
+        NotificationCenter.default.rac_notifications(NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithNext { _ in
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
@@ -150,15 +150,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func facebookTokenCheck() {
-        let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
-        if expirationDate < NSDate.today() { self.facebookLogin(false) }
+        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
+        if expirationDate < Date.today() { self.facebookLogin(false) }
         else { UserViewModel().refreshFacebookTokenSignal() }
     }
     
     func twitterAccessCheck() {
         let account = ACAccountStore()
-        let accountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-        account.requestAccessToAccountsWithType(accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
+        let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+        account.requestAccessToAccounts(with: accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
             if success == false { MaterialAnimation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
         })
     }
@@ -185,7 +185,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func setupData() {
         Duration.startMeasurement("setupData")
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSizeMake(120, 120), backgroundColor: Constants.kBlueShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
@@ -230,7 +230,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .observeOn(QueueScheduler.mainQueueScheduler)
             .on(next: { celebInfo in MaterialAnimation.delay(1) {
-                    TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
+                    TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
                 }
             })
             .start()
@@ -249,18 +249,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: Sociable
-    func handleMenu(open: Bool = false) {
+    func handleMenu(_ open: Bool = false) {
         let image: UIImage?
         if open || (open == false && self.socialButton.menu.opened == false){
             self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
-            image = R.image.ic_close_white()?.imageWithRenderingMode(.AlwaysTemplate)
+            image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
             let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
             first?.animate(MaterialAnimation.rotate(rotation: 5))
             first?.setImage(image, forState: .Normal)
             first?.setImage(image, forState: .Highlighted)
         } else if self.socialButton.menu.opened {
             self.socialButton.menu.close()
-            image = R.image.ic_add_white()?.imageWithRenderingMode(.AlwaysTemplate)
+            image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
             let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
             first?.animate(MaterialAnimation.rotate(rotation: 5))
             first?.setImage(image, forState: .Normal)
@@ -268,7 +268,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    func movingSocialButton(onScreen onScreen: Bool) {
+    func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.menu.close()
         let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
@@ -278,7 +278,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         ]))
     }
     
-    func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
+    func socialButton(_ button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
     
     func socialRefresh() {
         self.diffCalculator.rows = []
@@ -308,15 +308,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
 //    }
     
     //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     //MARK: ASTableView methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
+    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
-    func tableView(tableView: ASTableView, nodeForRowAtIndexPath indexPath: NSIndexPath) -> ASCellNode {
+    func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
@@ -325,19 +325,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         return node
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movingSocialButton(onScreen: false)
-        let node = self.celebrityTableView.nodeForRowAtIndexPath(indexPath) as! CelebrityTableViewCell
+        let node = self.celebrityTableView.nodeForRow(at: indexPath) as! CelebrityTableViewCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
-        self.transitionManager.setIndexedCell(index: indexPath.row)
+        self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
         MaterialAnimation.delay(0.2) { self.presentViewController(detailVC, animated: true, completion: nil) }
     }
     
     func showSearchBar() {
         guard self.view.subviews.contains(self.searchBar) == false else { return hideSearchBar() }
          self.searchBar.alpha = 0.0
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.searchBar.alpha = 1.0
             self.searchBar.showsCancelButton = true
             self.searchBar.tintColor = MaterialColor.white
@@ -350,7 +350,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func hideSearchBar() {
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.searchBar.alpha = 0 },
             completion: { _ in
                 self.searchBar.removeFromSuperview()
@@ -359,7 +359,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     //MARK: SideNavigationControllerDelegate
-    func navigationDrawerDidClose(navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
+    func navigationDrawerDidClose(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController?.enabled = false
         SettingsViewModel().loggedInAsSignal()
             .on(next: { _ in self.movingSocialButton(onScreen: false) })
@@ -371,15 +371,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func navigationDrawerWillOpen(navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
+    func navigationDrawerWillOpen(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController!.leftViewController?.viewDidAppear(true)
     }
     
     //MARK: UISearchBarDelegate
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) { self.hideSearchBar() }
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool { return true }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) { self.hideSearchBar() }
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool { return true }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .observeOn(UIScheduler())
@@ -387,9 +387,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) { searchBar.resignFirstResponder() }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) { searchBar.resignFirstResponder() }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) { searchBar.resignFirstResponder() }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { searchBar.resignFirstResponder() }
     
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> Toolbar {
@@ -429,14 +429,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
-        self.segmentedControl.opaque = true
+        self.segmentedControl.isOpaque = true
         self.segmentedControl.clipsToBounds = false
         self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
         self.segmentedControl.isAccessibilityElement = true
         self.segmentedControl.accessibilityLabel = "List Segmented Control"
-        self.segmentedControl.addTarget(self, action: #selector(MasterViewController.changeList), forControlEvents: .ValueChanged)
+        self.segmentedControl.addTarget(self, action: #selector(MasterViewController.changeList), for: .valueChanged)
     }
 }
 

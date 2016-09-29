@@ -24,13 +24,13 @@ class UserViewModelTests: XCTestCase {
     }
     
     func testLogoutSignal() {
-        let expectation = expectationWithDescription("logoutSignal callback")
+        let expectation = self.expectation(description: "logoutSignal callback")
         UserViewModel().logoutSignal().startWithNext { _ in
             let realm = try! Realm()
             let count = realm.objects(SettingsModel).count
             XCTAssertEqual(count, 0, "logout must delete all SettingsModel.")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("logoutSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("logoutSignal error: \(error)") } }
     }
 }

@@ -8,15 +8,15 @@
 
 import AsyncDisplayKit
 import Material
-import AIRTimer
+import SwiftyTimer
 import ReactiveCocoa
 
 
-final class RatingsViewController: ASViewController, Labelable {
+final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     //MARK: Properties
-    private let celebST: CelebrityStruct
-    private let pulseView: MaterialView
+    fileprivate let celebST: CelebrityStruct
+    fileprivate let pulseView: MaterialView
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -26,7 +26,7 @@ final class RatingsViewController: ASViewController, Labelable {
         self.celebST = celebrityST
         self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
-        self.view.hidden = true
+        self.view.isHidden = true
     }
     
     //MARK: Methods
@@ -128,7 +128,7 @@ final class RatingsViewController: ASViewController, Labelable {
         })
     }
     
-    func longPress(gesture: UIGestureRecognizer) {
+    func longPress(_ gesture: UIGestureRecognizer) {
         let ratingIndex = gesture.view!.tag - 1
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
@@ -145,13 +145,13 @@ final class RatingsViewController: ASViewController, Labelable {
         return cosmos.settings.userRatingMode
     }
     
-    func animateStarsToGold(positive positive: Bool) {
+    func animateStarsToGold(positive: Bool) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .observeOn(UIScheduler())
             .on(next: { ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
                 for (index, subview) in viewArray.enumerate() {
-                    AIRTimer.after(0.1 * Double(index)){ timer in
+                    Timer.after(100.ms * Double(index)){ timer in
                         subview.pulse()
                         subview.pulseAnimation = .AtPointWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
@@ -167,7 +167,7 @@ final class RatingsViewController: ASViewController, Labelable {
             .start()
     }
     
-    func displayRatings(userRatings: RatingsModel = RatingsModel()) {
+    func displayRatings(_ userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
@@ -184,7 +184,7 @@ final class RatingsViewController: ASViewController, Labelable {
             })
     }
     
-    func displayUserRatings(userRatings: RatingsModel) {
+    func displayUserRatings(_ userRatings: RatingsModel) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .startWithNext({ ratings in
                 let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]

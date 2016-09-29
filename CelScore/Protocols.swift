@@ -17,18 +17,18 @@ import PMAlertController
 import MessageUI
 
 protocol DetailSubViewable {
-    func socialSharing(message message: String)
-    func enableVoteButton(positive positive: Bool)
-    func rippleEffect(positive positive: Bool, gold: Bool)
+    func socialSharing(message: String)
+    func enableVoteButton(positive: Bool)
+    func rippleEffect(positive: Bool, gold: Bool)
 }
 
 @objc protocol HUDable{}
 
 extension HUDable{
     func showHUD() {
-        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setRingThickness(4)
-        SVProgressHUD.setDefaultMaskType(.Black)
+        SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.setBackgroundColor(Constants.kRedShade)
         SVProgressHUD.setForegroundColor(MaterialColor.white)
         SVProgressHUD.show()
@@ -40,7 +40,7 @@ extension HUDable{
 protocol Labelable{}
 
 extension Labelable {
-    func setupLabel(title title: String, frame: CGRect) -> UILabel {
+    func setupLabel(title: String, frame: CGRect) -> UILabel {
         let label = UILabel(frame: frame)
         label.text = title
         label.textColor = MaterialColor.black
@@ -55,7 +55,7 @@ extension Labelable {
 extension Supportable where Self: UIViewController {
     func sendEmail() {
         guard MFMailComposeViewController.canSendMail() else {
-            return TAOverlay.showOverlayWithLabel("We are unable to verify that an email has been setup on this device.", image: OverlayInfo.NetworkError.logo(), options: OverlayInfo.getOptions())
+            return TAOverlay.show(withLabel: "We are unable to verify that an email has been setup on this device.", image: OverlayInfo.networkError.logo(), options: OverlayInfo.getOptions())
         }
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
@@ -65,27 +65,27 @@ extension Supportable where Self: UIViewController {
         MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     
-    func sendAlert(info: OverlayInfo, with loginType: SocialLogin) {
-        let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .Alert)
+    func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
+        let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .Cancel, action: { _ in self.dismissViewControllerAnimated(true, completion: nil) }))
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
             self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail() }})
         }))
-        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-        alertVC.view.opaque = false
-        self.presentViewController(alertVC, animated: true, completion: nil)
+        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+        alertVC.view.isOpaque = false
+        self.present(alertVC, animated: true, completion: nil)
     }
 }
 
 @objc protocol Sociable: HUDable, Supportable {
-    @objc func handleMenu(open: Bool)
-    @objc func socialButton(button: UIButton)
+    @objc func handleMenu(_ open: Bool)
+    @objc func socialButton(_ button: UIButton)
     @objc func socialRefresh()
 }
 
 extension Sociable where Self: UIViewController {
-    func loginFlow(token token: String, with loginType: SocialLogin, hide hideButton: Bool) {
+    func loginFlow(token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(Constants.kNetworkRetry)
@@ -116,33 +116,33 @@ extension Sociable where Self: UIViewController {
             .start()
     }
     
-    func socialButtonTapped(buttonTag buttonTag: Int, hideButton: Bool) {
+    func socialButtonTapped(buttonTag: Int, hideButton: Bool) {
         if buttonTag == 1 { self.facebookLogin(hideButton) }
         else { self.twitterLogin(hideButton) }
     }
     
-    func facebookLogin(hideButton: Bool) {
+    func facebookLogin(_ hideButton: Bool) {
         let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        FBSDKLoginManager().logInWithReadPermissions(readPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+        FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
             guard error == nil else {
-                return TAOverlay.showOverlayWithLabel(OverlayInfo.LoginError.message("Facebook"), image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
+                return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Facebook"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
             guard result.isCancelled == false else { return }
-            FBSDKAccessToken.setCurrentAccessToken(result.token)
-            self.loginFlow(token: result.token.tokenString, with: .Facebook, hide: hideButton)
+            FBSDKAccessToken.setCurrent(result.token)
+            self.loginFlow(token: result.token.tokenString, with: .facebook, hide: hideButton)
         })
     }
     
-    func twitterLogin(hideButton: Bool) {
-        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession?, error: NSError?) -> Void in
+    func twitterLogin(_ hideButton: Bool) {
+        Twitter.sharedInstance().logIn { (session: TWTRSession?, error: NSError?) -> Void in
             guard error == nil else {
-                return TAOverlay.showOverlayWithLabel(OverlayInfo.LoginError.message("Twitter"), image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
+                return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
-            self.loginFlow(token: "", with: .Twitter, hide: hideButton)
-        }
+            self.loginFlow(token: "", with: .twitter, hide: hideButton)
+        } as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion
     }
     
-    func setUpSocialButton(menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
+    func setUpSocialButton(_ menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
         btn1.pulseAnimation = .None

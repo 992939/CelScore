@@ -27,8 +27,8 @@ struct CosmosSettings {
 struct CosmosDefaultSettings {
     static let defaultColor = Constants.kStarGreyShade
     static let borderColorEmpty = defaultColor
-    static let borderWidthEmpty: Double = 1 / Double(UIScreen.mainScreen().scale)
-    static let colorEmpty = UIColor.clearColor()
+    static let borderWidthEmpty: Double = 1 / Double(UIScreen.main.scale)
+    static let colorEmpty = UIColor.clear
     static let colorFilled = defaultColor
     static let userRatingMode = false
     static let previousRating = 3

@@ -17,5 +17,5 @@ class CustomIdentityProvider: NSObject, AWSIdentityProviderManager {
     init(tokens: [NSString : NSString]) { self.tokens = tokens }
     
     //MARK: Method
-    @objc func logins() -> AWSTask { return AWSTask(result: tokens) }
+    @objc func logins() -> AWSTask<AnyObject> { return AWSTask(result: tokens) }
 }

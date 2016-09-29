@@ -16,9 +16,9 @@ import ReactiveCocoa
 final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: Properties
-    private let ratingsNode: ASDisplayNode
-    private let switchNode: ASDisplayNode
-    private let backgroundNode: ASDisplayNode
+    fileprivate let ratingsNode: ASDisplayNode
+    fileprivate let switchNode: ASDisplayNode
+    fileprivate let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
     internal let consensusNode: ASImageNode
@@ -34,12 +34,12 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : MaterialColor.black]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
-        self.nameNode.truncationMode = .ByTruncatingTail
+        self.nameNode.truncationMode = .byTruncatingTail
     
         self.profilePicNode = ASNetworkImageNode(webImage: ())
-        self.profilePicNode.URL = NSURL(string: self.celebST.imageURL)
+        self.profilePicNode.url = URL(string: self.celebST.imageURL)
         self.profilePicNode.defaultImage = R.image.anonymous()
-        self.profilePicNode.contentMode = .ScaleAspectFill
+        self.profilePicNode.contentMode = .scaleAspectFill
         self.profilePicNode.preferredFrameSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
         let cosmosView: CosmosView = CosmosView()
@@ -55,8 +55,8 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         }
         
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
-        box.onAnimationType = .Bounce
-        box.offAnimationType = .Bounce
+        box.onAnimationType = .bounce
+        box.offAnimationType = .bounce
         box.onCheckColor = MaterialColor.white
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
@@ -81,7 +81,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         super.init()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         box.delegate = self
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in
@@ -118,33 +118,33 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: Methods
     
-    override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .Points, value: UIDevice.getRowHeight())
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        self.profilePicNode.flexBasis = ASRelativeDimension(type: .points, value: UIDevice.getRowHeight())
         
         let minisStack = ASStackLayoutSpec(
-            direction: .Horizontal,
+            direction: .horizontal,
             spacing: Constants.kPadding/2,
-            justifyContent: .Start,
-            alignItems: .Start,
+            justifyContent: .start,
+            alignItems: .start,
             children: [self.trendNode, self.consensusNode, self.faceNode])
         minisStack.flexGrow = true
         
         let verticalStack = ASStackLayoutSpec(
-        direction: .Vertical,
+        direction: .vertical,
         spacing: Constants.kPadding/4,
-        justifyContent: .Start,
-        alignItems: .Start,
+        justifyContent: .start,
+        alignItems: .start,
         children: [self.nameNode, self.ratingsNode, minisStack])
-        verticalStack.flexBasis = ASRelativeDimension(type: .Percent, value: Constants.kVerticalStackPercent)
+        verticalStack.flexBasis = ASRelativeDimension(type: .percent, value: Constants.kVerticalStackPercent)
         verticalStack.flexGrow = true
         
         let horizontalStack = ASStackLayoutSpec(
-            direction: .Horizontal,
+            direction: .horizontal,
             spacing: Constants.kPadding,
-            justifyContent: .Start,
-            alignItems: .Center,
+            justifyContent: .start,
+            alignItems: .center,
             children: [self.profilePicNode, verticalStack, self.switchNode])
-        horizontalStack.flexBasis = ASRelativeDimension(type: .Percent, value: 1)
+        horizontalStack.flexBasis = ASRelativeDimension(type: .percent, value: 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: 2*Constants.kPadding),
@@ -155,12 +155,12 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     func getId() -> String { return celebST.id }
     
     //MARK: BEMCheckBoxDelegate
-    func didTapCheckBox(checkBox: BEMCheckBox) {
+    func didTap(_ checkBox: BEMCheckBox) {
         self.updateCheckBox(checkBox)
         SettingsViewModel().updateTodayWidgetSignal().start()
     }
     
-    func updateCheckBox(checkBox: BEMCheckBox) {
+    func updateCheckBox(_ checkBox: BEMCheckBox) {
         if checkBox.on == false { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
             .observeOn(UIScheduler())
             .start()

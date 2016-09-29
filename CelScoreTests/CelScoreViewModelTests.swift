@@ -17,11 +17,11 @@ class CelScoreViewModelTests: XCTestCase {
     }
     
     func testShareVoteOnSignal() {
-        let expectation = expectationWithDescription("shareVoteOnSignal callback")
+        let expectation = self.expectation(description: "shareVoteOnSignal callback")
         CelScoreViewModel().shareVoteOnSignal(socialLogin: .Facebook, message: "message", screenshot: UIImage()).startWithNext { composer in
             XCTAssertNotNil(composer, "SLComposeViewController must not be nil")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1) { error in if let error = error { XCTFail("shareVoteOnSignal error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("shareVoteOnSignal error: \(error)") } }
     }
 }

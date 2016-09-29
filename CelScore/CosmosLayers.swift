@@ -13,7 +13,7 @@ import Material
 final class CosmosLayers {
 
     //MARK: Methods
-    class func createStarLayers(rating: Double, settings: CosmosSettings) -> [CALayer] {
+    class func createStarLayers(_ rating: Double, settings: CosmosSettings) -> [CALayer] {
         var ratingRemander = CosmosRating.numberOfFilledStars(rating, totalNumberOfStars: settings.totalStars)
         var starLayers = [CALayer]()
 
@@ -28,18 +28,18 @@ final class CosmosLayers {
     }
     
     //MARK: Private Methods
-    private class func createCompositeStarLayer(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
+    fileprivate class func createCompositeStarLayer(_ starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
         if starFillLevel >= 1 { return createStarLayer(true, settings: settings, index: index) }
         if starFillLevel == 0 { return createStarLayer(false, settings: settings, index: index) }
         return createPartialStar(starFillLevel, settings: settings, index: index)
     }
 
-    private class func createPartialStar(starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
+    fileprivate class func createPartialStar(_ starFillLevel: Double, settings: CosmosSettings, index: Int) -> CALayer {
         let filledStar = createStarLayer(true, settings: settings, index: index)
         let emptyStar = createStarLayer(false, settings: settings, index: index)
         
         let parentLayer = CALayer()
-        parentLayer.contentsScale = UIScreen.mainScreen().scale
+        parentLayer.contentsScale = UIScreen.main.scale
         parentLayer.bounds = CGRect(origin: CGPoint(), size: filledStar.bounds.size)
         parentLayer.anchorPoint = CGPoint()
         parentLayer.addSublayer(emptyStar)
@@ -49,7 +49,7 @@ final class CosmosLayers {
         return parentLayer
     }
     
-    private class func positionStarLayers(layers: [CALayer], starMargin: Double) {
+    fileprivate class func positionStarLayers(_ layers: [CALayer], starMargin: Double) {
         var positionX:CGFloat = 0
         for layer in layers {
             layer.position.x = positionX
@@ -57,7 +57,7 @@ final class CosmosLayers {
         }
     }
     
-    private class func createStarLayer(isFilled: Bool, settings: CosmosSettings, index: Int) -> CALayer {
+    fileprivate class func createStarLayer(_ isFilled: Bool, settings: CosmosSettings, index: Int) -> CALayer {
         var colorFilled = settings.colorFilled
         
         if (settings.userRatingMode) {

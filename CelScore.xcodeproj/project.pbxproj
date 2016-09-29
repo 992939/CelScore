@@ -552,6 +552,7 @@
 					003AE6931D094FB70055EE56 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6AEA7P6XSJ;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -561,6 +562,7 @@
 					004B56D81B35332A008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 6AEA7P6XSJ;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -569,6 +571,7 @@
 					};
 					004B56ED1B35332B008A75EB = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 004B56D81B35332A008A75EB;
 					};
 				};
@@ -1151,6 +1154,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1169,6 +1173,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.CelebrityScore.The-Courthouse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1294,6 +1299,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1323,6 +1329,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1356,6 +1363,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore";
 			};
 			name = Debug;
@@ -1388,6 +1396,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GrandPopo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CelebrityScore.app/CelebrityScore";
 			};
 			name = Release;

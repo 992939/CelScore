@@ -11,13 +11,13 @@ import UIKit
 
 
 enum SegmentOrganiseMode: Int {
-    case SegmentOrganiseHorizontal = 0
-    case SegmentOrganiseVertical
+    case segmentOrganiseHorizontal = 0
+    case segmentOrganiseVertical
 }
 
 
 protocol SMSegmentViewDelegate: class {
-    func segmentView(segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int)
+    func segmentView(_ segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int)
 }
 
 class SMBasicSegmentView: UIView {
@@ -36,20 +36,20 @@ class SMBasicSegmentView: UIView {
     }
     weak var delegate: SMSegmentViewDelegate?
     
-    private(set) var indexOfSelectedSegment: Int = NSNotFound
+    fileprivate(set) var indexOfSelectedSegment: Int = NSNotFound
     var numberOfSegments: Int {get {
         return segments.count
         }}
     
     var vertical: Bool = false{
         didSet {
-            let mode = vertical ? SegmentOrganiseMode.SegmentOrganiseVertical : SegmentOrganiseMode.SegmentOrganiseHorizontal
+            let mode = vertical ? SegmentOrganiseMode.segmentOrganiseVertical : SegmentOrganiseMode.segmentOrganiseHorizontal
             self.orientationChangedTo(mode)
         }
     }
     
     // Segment Separator
-    var separatorColour: UIColor = UIColor.lightGrayColor() {
+    var separatorColour: UIColor = UIColor.lightGray {
         didSet {
             self.setNeedsDisplay()
         }
@@ -65,7 +65,7 @@ class SMBasicSegmentView: UIView {
         self.updateFrameForSegments()
     }
     
-    func orientationChangedTo(mode: SegmentOrganiseMode){
+    func orientationChangedTo(_ mode: SegmentOrganiseMode){
         for segment in self.segments {
             segment.orientationChangedTo(mode)
         }
@@ -104,11 +104,11 @@ class SMBasicSegmentView: UIView {
     }
     
     
-    func drawSeparatorWithContext(context: CGContextRef) {
-        CGContextSaveGState(context)
+    func drawSeparatorWithContext(_ context: CGContext) {
+        context.saveGState()
         
         if self.segments.count > 1 {
-            let path = CGPathCreateMutable()
+            let path = CGMutablePath()
             
             if self.vertical == false {
                 var originX: CGFloat = self.segments[0].frame.size.width + self.separatorWidth/2.0
@@ -129,24 +129,24 @@ class SMBasicSegmentView: UIView {
                 }
             }
             
-            CGContextAddPath(context, path)
-            CGContextSetStrokeColorWithColor(context, self.separatorColour.CGColor)
-            CGContextSetLineWidth(context, self.separatorWidth)
-            CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+            context.addPath(path)
+            context.setStrokeColor(self.separatorColour.cgColor)
+            context.setLineWidth(self.separatorWidth)
+            context.drawPath(using: CGPathDrawingMode.stroke)
         }
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
     }
     
     // MARK: Drawing Segment Separators
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         let context = UIGraphicsGetCurrentContext()!
         self.drawSeparatorWithContext(context)
     }
     
     // MARK: Actions
-    func selectSegmentAtIndex(index: Int) {
+    func selectSegmentAtIndex(_ index: Int) {
         assert(index >= 0 && index < self.segments.count, "Index at \(index) is out of bounds")
         
         if self.indexOfSelectedSegment != NSNotFound {
@@ -167,7 +167,7 @@ class SMBasicSegmentView: UIView {
         }
     }
     
-    func addSegment(segment: SMBasicSegment){
+    func addSegment(_ segment: SMBasicSegment){
         segment.index = self.segments.count
         self.segments.append(segment)
         

@@ -1,6 +1,4 @@
 PODS:
-  - AIRTimer (1.0.2)
-  - Armchair (0.1.2)
   - AsyncDisplayKit (1.9.80):
     - AsyncDisplayKit/PINRemoteImage (= 1.9.80)
   - AsyncDisplayKit/ASDealloc2MainObject (1.9.80)
@@ -57,6 +55,7 @@ PODS:
   - SMSegmentView (1.1)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.4.0)
+  - SwiftyTimer (2.0.0)
   - Timepiece (0.4.3)
   - TwitterCore (2.4.0):
     - Fabric
@@ -68,8 +67,6 @@ PODS:
   - YLProgressBar (3.8.1)
 
 DEPENDENCIES:
-  - AIRTimer (~> 1.0.2)
-  - Armchair (= 0.1.2)
   - AsyncDisplayKit (~> 1.9.80)
   - AWSAPIGateway (~> 2.4.9)
   - AWSCognito (~> 2.4.9)
@@ -93,7 +90,8 @@ DEPENDENCIES:
   - SMSegmentView (~> 1.1)
   - SVProgressHUD (~> 2.0.3)
   - SwiftyJSON (~> 2.4)
-  - Timepiece (~> 0.4.3)
+  - SwiftyTimer (~> 2.0.0)
+  - Timepiece (from `https://github.com/skofgar/Timepiece.git`, branch `swift3`)
   - TwitterCore (~> 2.4)
   - TwitterKit (~> 2.4)
   - WebASDKImageManager (~> 1.1)
@@ -105,15 +103,19 @@ EXTERNAL SOURCES:
   Material:
     :branch: development
     :git: https://github.com/CosmicMind/Material.git
+  Timepiece:
+    :branch: swift3
+    :git: https://github.com/skofgar/Timepiece.git
 
 CHECKOUT OPTIONS:
   Material:
     :commit: 5c350d9a78ed06fc1e68ae61e89ca5d06ed8a9c3
     :git: https://github.com/CosmicMind/Material.git
+  Timepiece:
+    :commit: c3b7badbce11f59a7221992076f46dfe437dcf87
+    :git: https://github.com/skofgar/Timepiece.git
 
 SPEC CHECKSUMS:
-  AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
-  Armchair: 10f49453001a25036e1dc8e74e4f1b699add562c
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
   AWSAPIGateway: 5f2e458275476ac4b5a1a86620fce259291fdccb
   AWSCognito: 4fa9fefcadae1d8425b01cbde27d564c21e3fd35
@@ -143,12 +145,13 @@ SPEC CHECKSUMS:
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
+  SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   Timepiece: b5038887b91d6eb70653173f4270e06b3abeac41
   TwitterCore: a139904c80805ad3dde9eef1100704f96f646d1d
   TwitterKit: 1cf9742edf9d182c1518cfdd6aaac0dfe313b38b
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 39fd97521228dc157c3364fa1e59b6589160e1dc
+PODFILE CHECKSUM: 25e4c0b9285468924611cebbf606cc1d2fd4a375
 
 COCOAPODS: 1.0.1

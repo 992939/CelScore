@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 
-class RatingsModel: Object, CollectionType {
+class RatingsModel: Object, Collection {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -44,7 +44,7 @@ class RatingsModel: Object, CollectionType {
     
     typealias Index = Int
     typealias KeyIndex = (key: String, value: Int)
-    typealias Generator = AnyGenerator<String>
+    typealias Iterator = AnyIterator<String>
     
     //MARK: Initializers
     override class func primaryKey() -> String { return "id" }
@@ -65,13 +65,13 @@ class RatingsModel: Object, CollectionType {
         self.variance8 = json["variance8"].double!
         self.variance9 = json["variance9"].double!
         self.variance10 = json["variance10"].double!
-        for ratings in self.generate() { self[ratings] = json[ratings].double! }
+        for ratings in self.makeIterator() { self[ratings] = json[ratings].double! }
         self.isSynced = true
     }
     
     //MARK: Methods
     func getCelScore() -> Double {
-        let score: Double = self.map{ self[$0] as! Double }.reduce(0, combine: { $0 + $1 })
+        let score: Double = self.map{ self[$0] as! Double }.reduce(0, { $0 + $1 })
         return (score/10).roundToPlaces(2)
     }
     
@@ -97,9 +97,9 @@ class RatingsModel: Object, CollectionType {
         }
     }
     
-    func generate() -> Generator {
+    func makeIterator() -> Iterator {
         var i = 0
-        return AnyGenerator {
+        return AnyIterator {
             switch i {
             case 0: i += 1; return ("rating1")
             case 1: i += 1; return ("rating2")
@@ -124,14 +124,14 @@ final class UserRatingsModel: RatingsModel {
     internal convenience init(id: String, joinedString: String) {
         self.init()
         self.id = id
-        let ratingArray = joinedString.componentsSeparatedByString("/").flatMap { Double($0) }
-        for (index, ratings) in self.generate().enumerate() { self[ratings] = ratingArray[index] }
+        let ratingArray = joinedString.components(separatedBy: "/").flatMap { Double($0) }
+        for (index, ratings) in self.makeIterator().enumerated() { self[ratings] = ratingArray[index] }
         self.isSynced = true
     }
     
     //MARK: Method
     func interpolation() -> String {
-        let allValues: [String] = self.generate().flatMap{ String(self[$0]!) }
-        return allValues.joinWithSeparator("/")
+        let allValues: [String] = self.makeIterator().flatMap{ String(self[$0]!) }
+        return allValues.joined(separator: "/")
     }
 }

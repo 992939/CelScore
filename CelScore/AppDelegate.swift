@@ -17,7 +17,6 @@ import Fabric
 import Crashlytics
 import ReactiveCocoa
 import FBSDKCoreKit
-import Armchair
 import SafariServices
 
 
@@ -29,14 +28,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //MARK: Methods
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-         UIApplication.sharedApplication().statusBarStyle = .LightContent
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+         UIApplication.shared.statusBarStyle = .lightContent
         
         //BuddyBuild
         BuddyBuildSDK.setup()
         
-        //ArmChair
-        Armchair.appID("783417076")
+//        //ArmChair
+//        Armchair.appID("783417076")
        
         //Realm
         let config = Realm.Configuration(
@@ -52,16 +51,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSLogger.defaultLogger().logLevel = .Error
-        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+        AWSLogger.default().logLevel = .error
+        let configuration = AWSServiceConfiguration(region: .usEast1, credentialsProvider: Constants.kCredentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
-        CACelScoreAPIClient.registerClientWithConfiguration(configurationAnonymous, forKey: "anonymousAccess")
+        let configurationAnonymous = AWSServiceConfiguration(region: .usEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
+        CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
         
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .List).start()
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
         nav.contentViewController.view.backgroundColor = UIColor.clearColor()
         self.window!.rootViewController = nav
@@ -71,13 +70,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
         
-        Twitter.sharedInstance().startWithConsumerKey("EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
+        Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        if url.absoluteString.containsString("TheScore://") {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
@@ -89,12 +88,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 application.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
-        else { FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) }
+        else { FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
         return true
     }
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        if url.absoluteString.containsString("TheScore://") {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
@@ -106,12 +105,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 app.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
-        else if Twitter.sharedInstance().application(app, openURL:url, options: options) { return true }
-        else if FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String, annotation: nil) { return true }
+        else if Twitter.sharedInstance().application(app, open:url, options: options) { return true }
+        else if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String, annotation: nil) { return true }
         return false
     }
     
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return true }
         guard let id = userActivity.userInfo!["id"] else { return true }
         
@@ -123,14 +122,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"]as! Bool)
         
-        application.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+        application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
     }
-    func applicationWillResignActive(application: UIApplication) { }
-    func applicationDidEnterBackground(application: UIApplication) { }
-    func applicationWillEnterForeground(application: UIApplication) { }
+    func applicationWillResignActive(_ application: UIApplication) { }
+    func applicationDidEnterBackground(_ application: UIApplication) { }
+    func applicationWillEnterForeground(_ application: UIApplication) { }
 }
