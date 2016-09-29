@@ -9,11 +9,11 @@ PODS:
   - AsyncDisplayKit/PINRemoteImage (1.9.80):
     - AsyncDisplayKit/Core
     - PINRemoteImage/iOS (>= 3.0.0-beta.2)
-  - AWSAPIGateway (2.4.4):
-    - AWSCore (= 2.4.4)
-  - AWSCognito (2.4.4):
-    - AWSCore (= 2.4.4)
-  - AWSCore (2.4.4)
+  - AWSAPIGateway (2.4.9):
+    - AWSCore (= 2.4.9)
+  - AWSCognito (2.4.9):
+    - AWSCore (= 2.4.9)
+  - AWSCore (2.4.9)
   - BEMCheckBox (1.2.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -71,8 +71,8 @@ DEPENDENCIES:
   - AIRTimer (~> 1.0.2)
   - Armchair (= 0.1.2)
   - AsyncDisplayKit (~> 1.9.80)
-  - AWSAPIGateway (~> 2.4.4)
-  - AWSCognito (~> 2.4.4)
+  - AWSAPIGateway (~> 2.4.9)
+  - AWSCognito (~> 2.4.9)
   - BEMCheckBox (~> 1.2)
   - Crashlytics (~> 3.7.2)
   - Dwifft (~> 0.3.1)
@@ -107,9 +107,9 @@ SPEC CHECKSUMS:
   AIRTimer: a86656e89a2635262c3a91755f69edb5a08ecf59
   Armchair: 10f49453001a25036e1dc8e74e4f1b699add562c
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
-  AWSAPIGateway: 17003560963e861b35c8b53de2df02afe0b1dabf
-  AWSCognito: 49a62a8f56d605a0454c900a37be207539bcb6e1
-  AWSCore: 67be10cc1e295e8238809e980fb1572b9e2ad8e6
+  AWSAPIGateway: 5f2e458275476ac4b5a1a86620fce259291fdccb
+  AWSCognito: 4fa9fefcadae1d8425b01cbde27d564c21e3fd35
+  AWSCore: 175208358b95492e0ebe0337df2ab415300bddac
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
@@ -141,6 +141,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 438a2c47b9528beb6ad22b665927d0c7ad7b1c91
+PODFILE CHECKSUM: a181e856e65258a45c817e03ce380c795d565cf1
 
 COCOAPODS: 1.0.1
