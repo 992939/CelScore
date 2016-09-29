@@ -10,7 +10,7 @@ plugin 'cocoapods-keys', {
 }
 
 def shared_pods
-    pod 'ReactiveCocoa', '4.2.1'
+    pod 'ReactiveCocoa', '4.2.2'
     pod 'Realm', '~> 1.1.0'
     pod 'RealmSwift', '~> 1.1.0'
     pod 'AsyncDisplayKit', '~> 1.9.80'
@@ -22,7 +22,7 @@ end
 target 'CelScore' do
     shared_pods
     pod 'AIRTimer', '~> 1.0.2'
-    pod 'SwiftyJSON', '~> 2.3.2'
+    pod 'SwiftyJSON', '~> 2.4'
     pod 'SDWebImage', '~>3.8.1'
     pod 'Material', :git => 'https://github.com/CosmicMind/Material.git', :branch => 'development'
     pod 'R.swift', '~> 2.4'
@@ -31,15 +31,15 @@ target 'CelScore' do
     pod 'FBSDKCoreKit', '~> 4.14'
     pod 'Fabric', '~> 1.6.7'
     pod 'Crashlytics', '~> 3.7.2'
-    pod 'TwitterKit', '~> 2.2.0'
-    pod 'TwitterCore', '~> 2.2.0'
+    pod 'TwitterKit', '~> 2.4'
+    pod 'TwitterCore', '~> 2.4'
     pod 'RateLimit', '~> 1.2'
     pod 'Timepiece', '~> 0.4.3'
     pod 'YLProgressBar', '~> 3.8.1'
     pod 'SMSegmentView', '~> 1.1'
     pod 'HMSegmentedControl', '~> 1.5.2'
     pod 'SVProgressHUD', '~> 2.0.3'
-    pod 'Dwifft', '~> 0.3.1'
+    pod 'Dwifft', '~> 0.4'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
     pod 'Armchair', '0.1.2'

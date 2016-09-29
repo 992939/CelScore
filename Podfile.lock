@@ -23,7 +23,7 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
-  - Dwifft (0.3.1)
+  - Dwifft (0.4)
   - Fabric (1.6.7)
   - FBSDKCoreKit (4.14.0):
     - Bolts (~> 1.7)
@@ -42,7 +42,7 @@ PODS:
     - R.swift.Library (~> 2.2.0)
   - R.swift.Library (2.2.0)
   - RateLimit (1.2.1)
-  - ReactiveCocoa (4.2.1):
+  - ReactiveCocoa (4.2.2):
     - Result (~> 2.0)
   - Realm (1.1.0):
     - Realm/Headers (= 1.1.0)
@@ -56,12 +56,12 @@ PODS:
   - SDWebImage/Core (3.8.1)
   - SMSegmentView (1.1)
   - SVProgressHUD (2.0.3)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (2.4.0)
   - Timepiece (0.4.3)
-  - TwitterCore (2.2.0):
+  - TwitterCore (2.4.0):
     - Fabric
-  - TwitterKit (2.2.0):
-    - TwitterCore (= 2.2.0)
+  - TwitterKit (2.4.0):
+    - TwitterCore (= 2.4.0)
   - WebASDKImageManager (1.1.1):
     - AsyncDisplayKit/Core (~> 1.9)
     - SDWebImage/Core (~> 3.7)
@@ -75,7 +75,7 @@ DEPENDENCIES:
   - AWSCognito (~> 2.4.9)
   - BEMCheckBox (~> 1.2)
   - Crashlytics (~> 3.7.2)
-  - Dwifft (~> 0.3.1)
+  - Dwifft (~> 0.4)
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.14)
   - FBSDKLoginKit (~> 4.14)
@@ -85,17 +85,17 @@ DEPENDENCIES:
   - PMAlertController (~> 1.0.4)
   - R.swift (~> 2.4)
   - RateLimit (~> 1.2)
-  - ReactiveCocoa (= 4.2.1)
+  - ReactiveCocoa (= 4.2.2)
   - Realm (~> 1.1.0)
   - RealmSwift (~> 1.1.0)
   - RevealingSplashView (~> 0.0)
   - SDWebImage (~> 3.8.1)
   - SMSegmentView (~> 1.1)
   - SVProgressHUD (~> 2.0.3)
-  - SwiftyJSON (~> 2.3.2)
+  - SwiftyJSON (~> 2.4)
   - Timepiece (~> 0.4.3)
-  - TwitterCore (~> 2.2.0)
-  - TwitterKit (~> 2.2.0)
+  - TwitterCore (~> 2.4)
+  - TwitterKit (~> 2.4)
   - WebASDKImageManager (~> 1.1)
   - YLProgressBar (~> 3.8.1)
 
@@ -121,7 +121,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
+  Dwifft: 9cc1be3ee5d94b5b8fd679e20bbc95c7ca6b7054
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
@@ -134,7 +134,7 @@ SPEC CHECKSUMS:
   R.swift: 0ef9c42dc6c94ac44a3c78a7639c73f855a8e159
   R.swift.Library: 31a487b65381f37a7d203a6f1f935b43c9be35b0
   RateLimit: a9f79f45f4387b96e229b4f7ab8972c386570b57
-  ReactiveCocoa: 5a42745f11ea236f405bb9ce5e97c5e3b23562dd
+  ReactiveCocoa: 72263e7ac0770c274617ccd345e01049d0ca38ae
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
@@ -142,13 +142,13 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   Timepiece: b5038887b91d6eb70653173f4270e06b3abeac41
-  TwitterCore: 115527630bb2986954adc928b8c895a92bcd57e5
-  TwitterKit: 2c64ec342a6261ae6bab565bad85dcbbfd3888b7
+  TwitterCore: a139904c80805ad3dde9eef1100704f96f646d1d
+  TwitterKit: 1cf9742edf9d182c1518cfdd6aaac0dfe313b38b
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: d56aa75feef5a5f55babe5edfb95fc9b6ca59a69
+PODFILE CHECKSUM: 39fd97521228dc157c3364fa1e59b6589160e1dc
 
 COCOAPODS: 1.0.1
