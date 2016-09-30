@@ -25,7 +25,7 @@ target 'CelScore' do
     pod 'SwiftyJSON', '~> 2.4'
     pod 'SDWebImage', '~>3.8.1'
     pod 'Material', :git => 'https://github.com/CosmicMind/Material.git', :branch => 'development'
-    pod 'R.swift', '~> 2.4'
+    pod 'R.swift', '~> 3.0'
     pod 'WebASDKImageManager', '~> 1.1'
     pod 'FBSDKLoginKit', '~> 4.14'
     pod 'FBSDKCoreKit', '~> 4.14'
@@ -40,7 +40,7 @@ target 'CelScore' do
     pod 'HMSegmentedControl', '~> 1.5.2'
     pod 'SVProgressHUD', '~> 2.0.3'
     pod 'RevealingSplashView', '~> 0.0'
-    pod 'PMAlertController', '~> 1.0.4'
+    pod 'PMAlertController', '~> 2.0'
     pod 'Dwifft', '~> 0.4'
 end
 
@@ -50,6 +50,14 @@ end
 
 target 'The Courthouse' do
     
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
 end
 
 

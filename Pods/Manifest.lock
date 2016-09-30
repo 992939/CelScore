@@ -35,10 +35,10 @@ PODS:
     - PINCache (>= 3.0.0-beta)
   - PINRemoteImage/iOS (3.0.0-beta.3):
     - PINRemoteImage/Core
-  - PMAlertController (1.0.5)
-  - R.swift (2.5.0):
-    - R.swift.Library (~> 2.3.0)
-  - R.swift.Library (2.3.0)
+  - PMAlertController (2.0.0)
+  - R.swift (3.0.0):
+    - R.swift.Library (~> 3.0.0)
+  - R.swift.Library (3.0.1)
   - RateLimit (1.3.0)
   - ReactiveCocoa (4.2.2):
     - Result (~> 2.0)
@@ -79,8 +79,8 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (from `https://github.com/CosmicMind/Material.git`, branch `development`)
-  - PMAlertController (~> 1.0.4)
-  - R.swift (~> 2.4)
+  - PMAlertController (~> 2.0)
+  - R.swift (~> 3.0)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (= 4.2.2)
   - Realm (~> 1.1.0)
@@ -132,9 +132,9 @@ SPEC CHECKSUMS:
   Material: 61dcd49507c32d07c1557267ec360ce35bd0b1c5
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
-  PMAlertController: 779265aacbceca054e27ef4f164169e697976d5a
-  R.swift: 01b9966e8dbe587a11ca2f65a1834dac2fa7b247
-  R.swift.Library: 75df6abfd22492c852136c4d7b6a9ca21664772a
+  PMAlertController: edd2ae1f2a31ec77db72103a2dd81a77d6b5de95
+  R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
+  R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
   RateLimit: cf2c2f0e77a32dba9b4005533087bec2a4377cc5
   ReactiveCocoa: 72263e7ac0770c274617ccd345e01049d0ca38ae
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
@@ -152,6 +152,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: e4a48b0d8451c0e52ba7a0386226cb25c7c082a9
+PODFILE CHECKSUM: 02d9884a69abe7956840fc7f6c5532eba5e06f48
 
 COCOAPODS: 1.0.1
