@@ -11,7 +11,7 @@ import Foundation
 public protocol ImageResourceType {
 
   /// Bundle this image is in
-  var bundle: Bundle { get }
+  var bundle: NSBundle { get }
 
   /// Name of the image
   var name: String { get }
@@ -20,12 +20,12 @@ public protocol ImageResourceType {
 public struct ImageResource: ImageResourceType {
 
   /// Bundle this image is in
-  public let bundle: Bundle
+  public let bundle: NSBundle
 
   /// Name of the image
   public let name: String
 
-  public init(bundle: Bundle, name: String) {
+  public init(bundle: NSBundle, name: String) {
     self.bundle = bundle
     self.name = name
   }

@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASDisplayNodeExtras.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASDisplayNodeExtras.h"
 #import "ASDisplayNodeInternal.h"
@@ -78,8 +80,9 @@ extern void ASDisplayNodePerformBlockOnEveryNodeBFS(ASDisplayNode *node, void(^b
     block(node);
 
     // Add all subnodes to process in next step
-    for (int i = 0; i < node.subnodes.count; i++)
-      queue.push(node.subnodes[i]);
+    for (ASDisplayNode *subnode in node.subnodes) {
+      queue.push(subnode);
+    }
   }
 }
 
@@ -142,7 +145,7 @@ static void _ASDisplayNodeFindAllSubnodes(NSMutableArray *array, ASDisplayNode *
 
   for (ASDisplayNode *subnode in node.subnodes) {
     if (block(subnode)) {
-      [array addObject:node];
+      [array addObject:subnode];
     }
 
     _ASDisplayNodeFindAllSubnodes(array, subnode, block);

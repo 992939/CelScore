@@ -1,21 +1,19 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASMultiplexImageNode.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #if TARGET_OS_IOS
 
 #import "ASMultiplexImageNode.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#import <Photos/Photos.h>
-#import <libkern/OSAtomic.h>
-
 #import "ASAvailability.h"
-#import "ASBaseDefines.h"
 #import "ASDisplayNode+Subclasses.h"
 #import "ASDisplayNode+FrameworkPrivate.h"
 #import "ASLog.h"
@@ -86,7 +84,7 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
   id _downloadIdentifier;
   
   // Properties
-  ASDN::RecursiveMutex _propertyLock;
+  ASDN::RecursiveMutex __instanceLock__;
   BOOL _shouldRenderProgressImages;
   
   //set on init only
@@ -295,11 +293,11 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
   }
 }
 
-/* visibilityDidChange in ASNetworkImageNode has a very similar implementation. Changes here are likely necessary
+/* visibileStateDidChange in ASNetworkImageNode has a very similar implementation. Changes here are likely necessary
  in ASNetworkImageNode as well. */
-- (void)visibilityDidChange:(BOOL)isVisible
+- (void)visibleStateDidChange:(BOOL)isVisible
 {
-  [super visibilityDidChange:isVisible];
+  [super visibleStateDidChange:isVisible];
   
   if (_downloaderImplementsSetPriority) {
     ASDN::MutexLocker l(_downloadIdentifierLock);
@@ -348,7 +346,7 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
 
 - (void)setShouldRenderProgressImages:(BOOL)shouldRenderProgressImages
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   if (shouldRenderProgressImages == _shouldRenderProgressImages) {
     return;
   }
@@ -356,13 +354,13 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
   _shouldRenderProgressImages = shouldRenderProgressImages;
   
   
-  ASDN::MutexUnlocker u(_propertyLock);
+  ASDN::MutexUnlocker u(__instanceLock__);
   [self _updateProgressImageBlockOnDownloaderIfNeeded];
 }
 
 - (BOOL)shouldRenderProgressImages
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   return _shouldRenderProgressImages;
 }
 
@@ -529,7 +527,7 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
   BOOL shouldReleaseImageOnBackgroundThread = imageSize.width > kMinReleaseImageOnBackgroundSize.width ||
   imageSize.height > kMinReleaseImageOnBackgroundSize.height;
   if (shouldReleaseImageOnBackgroundThread) {
-    ASPerformBlockOnBackgroundThread(^{
+    ASPerformBlockOnDeallocationQueue(^{
       image = nil;
     });
   }

@@ -83,7 +83,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
 }
 
 extension Double {
-    func roundToPlaces(_ places:Int) -> Double {
+    mutating mutating mutating func roundToPlaces(_ places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor
     }

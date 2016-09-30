@@ -1,19 +1,18 @@
-/*
- *  Copyright (c) 2014-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASStackUnpositionedLayout.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASStackUnpositionedLayout.h"
 
 #import <numeric>
 
 #import "ASLayoutSpecUtilities.h"
-#import "ASStackLayoutSpecUtilities.h"
 
 /**
  Sizes the child given the parameters specified, and returns the computed layout.
@@ -29,7 +28,9 @@ static ASLayout *crossChildLayout(const id<ASLayoutable> child,
   // stretched children will have a cross dimension of at least crossMin
   const CGFloat childCrossMin = alignItems == ASStackLayoutAlignItemsStretch ? crossMin : 0;
   const ASSizeRange childSizeRange = directionSizeRange(style.direction, stackMin, stackMax, childCrossMin, crossMax);
-  return [child measureWithSizeRange:childSizeRange];
+  ASLayout *layout = [child measureWithSizeRange:childSizeRange];
+  ASDisplayNodeCAssertNotNil(layout, @"ASLayout returned from measureWithSizeRange: must not be nil: %@", child);
+  return layout ? : [ASLayout layoutWithLayoutableObject:child constrainedSizeRange:childSizeRange size:CGSizeZero];
 }
 
 /**

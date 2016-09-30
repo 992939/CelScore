@@ -1,6 +1,6 @@
 ![Banner](/Web/banner.png)
 
-[![Build Status](https://travis-ci.org/PiXeL16/RevealingSplashView.svg?branch=master)](https://travis-ci.org/PiXeL16/RevealingSplashView/) [![codecov.io](https://codecov.io/github/PiXeL16/RevealingSplashView/coverage.svg?branch=master)](https://codecov.io/github/PiXeL16/RevealingSplashView?branch=master) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RevealingSplashView.svg)](https://img.shields.io/cocoapods/v/RevealingSplashView.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/PiXeL16/RevealingSplashView/master/LICENSE)
+[![Build Status](https://travis-ci.org/PiXeL16/RevealingSplashView.svg?branch=master)](https://travis-ci.org/PiXeL16/RevealingSplashView/) [![codecov.io](https://codecov.io/github/PiXeL16/RevealingSplashView/coverage.svg?branch=master)](https://codecov.io/github/PiXeL16/RevealingSplashView?branch=master) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RevealingSplashView.svg)](https://img.shields.io/cocoapods/v/RevealingSplashView.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/matteocrippa/awesome-swift) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/PiXeL16/RevealingSplashView/master/LICENSE)
 
 # RevealingSplashView
 A Splash view that animates and reveals its content, inspired by the `Twitter` splash.
@@ -20,11 +20,13 @@ A Splash view that animates and reveals its content, inspired by the `Twitter` s
 
 :octocat: Installation
 ---
-Get `RevealingSplashView` on CocoaPods, just add `pod 'RevealingSplashView'` to your `Podfile` and then run `pod install`.
+Get `RevealingSplashView` on CocoaPods, just add `pod 'RevealingSplashView'` to your `Podfile` and then run `pod install`. You can also add the github to your `Carthage` file.
+
+If you use `Carthage` you can just install it by adding `github "PiXeL16/RevealingSplashView"` to your `Carthage` file.
 
 :metal: Usage
 ---
-Usage is pretty easy, just initialize your `RevealingSplashView` and add it to your view. Then call `startAnimation()`:
+Usage is pretty easy, just initialize your `RevealingSplashView` in your entry `ViewController` and in your `viewDidLoad()` function add it to your view. Then call `startAnimation()`:
 
 ```swift
 import RevealingSplashView
@@ -49,6 +51,46 @@ override func viewDidLoad() {
 **Ideally** your `iconInitialSize` should match the size of the icon in your `LaunchScreen.storyboard`.
 
 So it you set your constrains in your `LaunchScreen.storyboard` to be 80 `height` and 80 `width` you should set the same size as the initial size of the `RevealingSplashView`
+
+### Custom Icon Color
+You are also able to change the color of your `iconImage`.
+
+```swift
+import RevealingSplashView
+
+override func viewDidLoad() {
+        super.viewDidLoad()
+
+        //Initialize a revealing Splash with with the iconImage, the initial size and the background color
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "twitterLogo")!,iconInitialSize: CGSizeMake(70, 70), backgroundColor: UIColor(rgba:"#1D8FF1"))
+
+        revealingSplashView.useCustomIconColor = true
+        revealingSplashView.iconColor = UIColor.redColor
+
+        //Adds the revealing splash view as a sub view
+        self.view.addSubview(revealingSplashView)
+
+        //Starts animation
+        revealingSplashView.startAnimation(){
+            print("Completed")
+        }
+
+    }
+```
+This will change the actual icon color to red before the animation.
+
+### Using NavigationBar or TabBar?
+If you are using a `NavigationBar` or `TabBar` as your entry view controller, chances are that the animation will look offset by some pixels.
+There are a couple of options here:
+Instead of adding the `RevealingSplashView` to your ViewController, you can add it to your `window`.
+```
+let window = UIApplication.sharedApplication().keyWindow
+window?.addSubview(revealingSplashView)
+```
+
+You can also create `another` entry view controller. Then add the `RevealingSplashView` to that ViewController instead of the one with the `NavigationBar` or `TabBar`.
+Then after the animation of the `RevealingSplashView` ends you can transition to your NavigationViewController.
+
 
 :thumbsup: Animations Types
 ----
@@ -117,7 +159,7 @@ TODO
 
 :alien: Author
 ------
-Chris Jimenez - http://chrisjimenez.net, [@chrisjimeneznat](http://twitter.com/chrisjimeneznat)
+Chris Jimenez - http://code.chrisjimenez.net, [@chrisjimeneznat](http://twitter.com/chrisjimeneznat)
 
 ## License
 `RevealingSplashView` is released under the MIT license. See [LICENSE](https://github.com/pixel16/RevealingSplashView/blob/master/LICENSE) for details.

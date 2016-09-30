@@ -233,7 +233,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
 			<key>Title</key>
 			<string>Fabric</string>
 			<key>Type</key>
@@ -624,7 +624,7 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (c) 2012-2015 Sam Soffes, http://soff.es
+			<string>Copyright (c) 2012&#8211;2016 Sam Soffes, http://soff.es
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

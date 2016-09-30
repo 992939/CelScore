@@ -3,7 +3,11 @@
 //  AsyncDisplayKit
 //
 //  Created by Garrett Moon on 2/5/16.
-//  Copyright © 2016 Facebook. All rights reserved.
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
 //
 
 #if PIN_REMOTE_IMAGE
@@ -26,6 +30,7 @@
 #import <PINCache/PINCache.h>
 
 #if PIN_ANIMATED_AVAILABLE
+
 @interface ASPINRemoteImageDownloader () <PINRemoteImageManagerAlternateRepresentationProvider>
 
 @end
@@ -56,8 +61,26 @@
   return self.fileReady;
 }
 
+- (BOOL)isDataSupported:(NSData *)data
+{
+  return [data pin_isGIF];
+}
+
 @end
 #endif
+
+@interface ASPINRemoteImageManager : PINRemoteImageManager
+@end
+
+@implementation ASPINRemoteImageManager
+
+//Share image cache with sharedImageManager image cache.
+- (PINCache *)defaultImageCache
+{
+    return [[PINRemoteImageManager sharedImageManager] cache];
+}
+
+@end
 
 @implementation ASPINRemoteImageDownloader
 
@@ -73,13 +96,29 @@
 
 - (PINRemoteImageManager *)sharedPINRemoteImageManager
 {
-  static PINRemoteImageManager *sharedPINRemoteImageManager = nil;
+  static ASPINRemoteImageManager *sharedPINRemoteImageManager = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
+  
 #if PIN_ANIMATED_AVAILABLE
-    sharedPINRemoteImageManager = [[PINRemoteImageManager alloc] initWithSessionConfiguration:nil alternativeRepresentationProvider:self];
+    // Check that Carthage users have linked both PINRemoteImage & PINCache by testing for one file each
+    if (!(NSClassFromString(@"PINRemoteImageManager"))) {
+        NSException *e = [NSException
+                          exceptionWithName:@"FrameworkSetupException"
+                          reason:@"Missing the path to the PINRemoteImage framework."
+                          userInfo:nil];
+        @throw e;
+    }
+    if (!(NSClassFromString(@"PINCache"))) {
+        NSException *e = [NSException
+                          exceptionWithName:@"FrameworkSetupException"
+                          reason:@"Missing the path to the PINCache framework."
+                          userInfo:nil];
+        @throw e;
+    }
+    sharedPINRemoteImageManager = [[ASPINRemoteImageManager alloc] initWithSessionConfiguration:nil alternativeRepresentationProvider:self];
 #else
-    sharedPINRemoteImageManager = [[PINRemoteImageManager alloc] initWithSessionConfiguration:nil];
+    sharedPINRemoteImageManager = [[ASPINRemoteImageManager alloc] initWithSessionConfiguration:nil];
 #endif
   });
   return sharedPINRemoteImageManager;
@@ -139,10 +178,10 @@
     
     /// If we're targeting the main queue and we're on the main thread, call immediately.
     if (ASDisplayNodeThreadIsMain() && callbackQueue == dispatch_get_main_queue()) {
-      downloadProgress(totalBytes / (CGFloat)completedBytes);
+      downloadProgress(completedBytes / (CGFloat)totalBytes);
     } else {
       dispatch_async(callbackQueue, ^{
-        downloadProgress(totalBytes / (CGFloat)completedBytes);
+        downloadProgress(completedBytes / (CGFloat)totalBytes);
       });
     }
   } completion:^(PINRemoteImageManagerResult * _Nonnull result) {
@@ -175,6 +214,10 @@
 
 - (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier
 {
+  if (!downloadIdentifier) {
+    return;
+  }
+  
   ASDisplayNodeAssert([downloadIdentifier isKindOfClass:[NSUUID class]], @"downloadIdentifier must be NSUUID");
   [[self sharedPINRemoteImageManager] cancelTaskWithUUID:downloadIdentifier];
 }

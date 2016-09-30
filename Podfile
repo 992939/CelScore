@@ -39,9 +39,9 @@ target 'CelScore' do
     pod 'SMSegmentView', '~> 1.1'
     pod 'HMSegmentedControl', '~> 1.5.2'
     pod 'SVProgressHUD', '~> 2.0.3'
-    pod 'Dwifft', '~> 0.4'
     pod 'RevealingSplashView', '~> 0.0'
     pod 'PMAlertController', '~> 1.0.4'
+    pod 'Dwifft', '~> 0.4'
 end
 
 target 'CelScoreTests' do

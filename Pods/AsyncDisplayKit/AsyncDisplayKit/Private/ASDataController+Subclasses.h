@@ -1,12 +1,15 @@
-/* Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASDataController+Subclasses.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #pragma once
+#import <vector>
 
 @class ASIndexedNodeContext;
 
@@ -30,6 +33,21 @@ typedef void (^ASDataControllerCompletionBlock)(NSArray<ASCellNode *> *nodes, NS
  * Read only access to the underlying completed nodes of the given kind
  */
 - (NSMutableArray *)completedNodesOfKind:(NSString *)kind;
+
+/**
+ * Ensure that next time `itemCountsFromDataSource` is called, new values are retrieved.
+ *
+ * This must be called on the main thread.
+ */
+- (void)invalidateDataSourceItemCounts;
+
+/**
+ * Returns the most recently gathered item counts from the data source. If the counts
+ * have been invalidated, this synchronously queries the data source and saves the result.
+ *
+ * This must be called on the main thread.
+ */
+- (std::vector<NSInteger>)itemCountsFromDataSource;
 
 #pragma mark - Node sizing
 
@@ -127,28 +145,6 @@ typedef void (^ASDataControllerCompletionBlock)(NSArray<ASCellNode *> *nodes, NS
 - (void)willDeleteSections:(NSIndexSet *)sections;
 
 /**
- * Notifies the subclass to perform any work needed before the given sections will be reloaded.
- *
- * @discussion This method will be performed before the data controller enters its editing queue, usually on the main
- * thread. The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
- * data stores before entering into editing the backing store on a background thread.
- *
- * @param sections Indices of sections to be reloaded
- */
-- (void)prepareForReloadSections:(NSIndexSet *)sections;
-
-/**
- * Notifies the subclass that the data controller will reload the sections in the given index set
- *
- * @discussion This method will be performed on the data controller's editing background queue before the parent's
- * concrete implementation. This is a great place to perform any additional transformations like supplementary views
- * or header/footer nodes.
- *
- * @param sections Indices of sections to be reloaded
- */
-- (void)willReloadSections:(NSIndexSet *)sections;
-
-/**
  * Notifies the subclass that the data controller will move a section to a new position
  *
  * @discussion This method will be performed on the data controller's editing background queue before the parent's
@@ -203,27 +199,5 @@ typedef void (^ASDataControllerCompletionBlock)(NSArray<ASCellNode *> *nodes, NS
  * @param indexPaths Index paths for the rows to be deleted.
  */
 - (void)willDeleteRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-
-/**
- * Notifies the subclass to perform any work needed before the given rows will be reloaded.
- *
- * @discussion This method will be performed before the data controller enters its editing queue, usually on the main
- * thread. The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
- * data stores before entering into editing the backing store on a background thread.
- *
- * @param indexPaths Index paths for the rows to be reloaded.
- */
-- (void)prepareForReloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-
-/**
- * Notifies the subclass that the data controller will reload the rows at the given index paths.
- *
- * @discussion This method will be performed on the data controller's editing background queue before the parent's
- * concrete implementation. This is a great place to perform any additional transformations like supplementary views
- * or header/footer nodes.
- *
- * @param indexPaths Index paths for the rows to be reloaded.
- */
-- (void)willReloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 
 @end

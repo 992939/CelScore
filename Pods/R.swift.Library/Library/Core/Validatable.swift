@@ -9,7 +9,7 @@
 import Foundation
 
 /// Error thrown during validation
-public struct ValidationError: Error, CustomStringConvertible {
+public struct ValidationError: ErrorType, CustomStringConvertible {
   /// Human readable description
   public let description: String
 
@@ -35,11 +35,11 @@ extension Validatable {
     assert( theRealAssert() )
   }
 
-  fileprivate static func theRealAssert() -> Bool {
+  private static func theRealAssert() -> Bool {
     do {
       try validate()
     } catch {
-      assertionFailure("Validation of \(type(of: self)) failed with error: \(error)")
+      assertionFailure("Validation of \(self.dynamicType) failed with error: \(error)")
     }
 
     return true

@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASNetworkImageNode.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASImageNode.h>
 #import <AsyncDisplayKit/ASImageProtocols.h>
@@ -45,19 +47,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The delegate, which must conform to the <ASNetworkImageNodeDelegate> protocol.
  */
-@property (nullable, atomic, weak, readwrite) id<ASNetworkImageNodeDelegate> delegate;
+@property (nullable, nonatomic, weak, readwrite) id<ASNetworkImageNodeDelegate> delegate;
 
 /**
  * A placeholder image to display while the URL is loading.
  */
-@property (nullable, atomic, strong, readwrite) UIImage *defaultImage;
+@property (nullable, nonatomic, strong, readwrite) UIImage *defaultImage;
 
 /**
  * The URL of a new image to download and display.
  *
  * @discussion Changing this property will reset the displayed image to a placeholder (<defaultImage>) while loading.
  */
-@property (nullable, atomic, strong, readwrite) NSURL *URL;
+@property (nullable, nonatomic, strong, readwrite) NSURL *URL;
 
 /**
  * Download and display a new image.

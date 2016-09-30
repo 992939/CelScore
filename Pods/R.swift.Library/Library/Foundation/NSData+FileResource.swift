@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Data {
+public extension NSData {
 
   /**
    Creates and returns NSData with the contents of the specified file resource (R.file.*).
@@ -17,8 +17,8 @@ public extension Data {
 
    - returns: A NSData object with the contents of the specified file.
    */
-  public init?(resource: FileResourceType) {
+  public convenience init?(resource: FileResourceType) {
     guard let url = resource.url() else { return nil }
-    (self as NSData).init(contentsOf: url)
+    self.init(contentsOfURL: url)
   }
 }

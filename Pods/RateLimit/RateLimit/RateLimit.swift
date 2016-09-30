@@ -10,7 +10,7 @@ import Foundation
 
 open class RateLimit: NSObject {
 
-    open class func execute(name: String, limit: TimeInterval, block: (Void) -> ()) -> Bool {
+    @discardableResult open class func execute(name: String, limit: TimeInterval, block: (Void) -> ()) -> Bool {
         if shouldExecute(name: name, limit: limit) {
             block()
 			return true
@@ -21,7 +21,7 @@ open class RateLimit: NSObject {
 
     open class func resetLimitForName(_ name: String) {
         queue.sync {
-            dictionary.removeValue(forKey: name)
+            let _ = dictionary.removeValue(forKey: name)
         }
     }
 

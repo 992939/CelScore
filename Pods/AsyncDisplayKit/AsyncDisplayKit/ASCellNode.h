@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASCellNode.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASDisplayNode.h>
 
@@ -75,18 +77,20 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
 /*
  * ASTableView uses these properties when configuring UITableViewCells that host ASCellNodes.
  */
-//@property (atomic, retain) UIColor *backgroundColor;
+//@property (nonatomic, retain) UIColor *backgroundColor;
 @property (nonatomic) UITableViewCellSelectionStyle selectionStyle;
 
 /**
- * A Boolean value that indicates whether the node is selected.
+ * A Boolean value that is synchronized with the underlying collection or tableView cell property.
+ * Setting this value is equivalent to calling selectItem / deselectItem on the collection or table.
  */
-@property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
 
 /**
- * A Boolean value that indicates whether the node is highlighted.
+ * A Boolean value that is synchronized with the underlying collection or tableView cell property.
+ * Setting this value is equivalent to calling highlightItem / unHighlightItem on the collection or table.
  */
-@property (nonatomic, assign) BOOL highlighted;
+@property (nonatomic, assign, getter=isHighlighted) BOOL highlighted;
 
 /*
  * ASCellNode must forward touch events in order for UITableView and UICollectionView tap handling to work. Overriding
@@ -96,6 +100,13 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event ASDISPLAYNODE_REQUIRES_SUPER;
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event ASDISPLAYNODE_REQUIRES_SUPER;
 - (void)touchesCancelled:(nullable NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event ASDISPLAYNODE_REQUIRES_SUPER;
+
+/** 
+ * Called by the system when ASCellNode is used with an ASCollectionNode.  It will not be called by ASTableNode.
+ * When the UICollectionViewLayout object returns a new UICollectionViewLayoutAttributes object, the corresponding ASCellNode will be updated.
+ * See UICollectionViewCell's applyLayoutAttributes: for a full description.
+*/
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes;
 
 /**
  * @abstract Initializes a cell with a given view controller block.
@@ -109,7 +120,7 @@ typedef NS_ENUM(NSUInteger, ASCellNodeVisibilityEvent) {
  */
 - (instancetype)initWithViewControllerBlock:(ASDisplayNodeViewControllerBlock)viewControllerBlock didLoadBlock:(nullable ASDisplayNodeDidLoadBlock)didLoadBlock;
 
-- (void)cellNodeVisibilityEvent:(ASCellNodeVisibilityEvent)event inScrollView:(UIScrollView *)scrollView withCellFrame:(CGRect)cellFrame;
+- (void)cellNodeVisibilityEvent:(ASCellNodeVisibilityEvent)event inScrollView:(nullable UIScrollView *)scrollView withCellFrame:(CGRect)cellFrame;
 
 @end
 
