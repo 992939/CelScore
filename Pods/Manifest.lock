@@ -40,21 +40,23 @@ PODS:
     - R.swift.Library (~> 3.0.0)
   - R.swift.Library (3.0.1)
   - RateLimit (1.3.0)
-  - ReactiveCocoa (4.2.2):
-    - Result (~> 2.0)
+  - ReactiveCocoa (5.0.0-alpha.1):
+    - ReactiveSwift (~> 1.0.0-alpha.1)
+  - ReactiveSwift (1.0.0-alpha.1):
+    - Result (~> 3.0)
   - Realm (1.1.0):
     - Realm/Headers (= 1.1.0)
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
-  - Result (2.1.3)
+  - Result (3.0.0)
   - RevealingSplashView (0.0.8)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SMSegmentView (1.1)
+  - SMSegmentView (0.0.2)
   - SVProgressHUD (2.0.3)
-  - SwiftyJSON (2.4.0)
+  - SwiftyJSON (3.1.0)
   - SwiftyTimer (2.0.0)
   - Timepiece (0.4.3)
   - TwitterCore (2.5.0):
@@ -82,14 +84,15 @@ DEPENDENCIES:
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.0)
   - RateLimit (~> 1.2)
-  - ReactiveCocoa (= 4.2.2)
+  - ReactiveCocoa (from `https://github.com/ReactiveCocoa/ReactiveCocoa.git`, branch `add-podspec`)
   - Realm (~> 1.1.0)
   - RealmSwift (~> 1.1.0)
+  - Result (~> 3.0.0)
   - RevealingSplashView (~> 0.0)
   - SDWebImage (~> 3.8.1)
-  - SMSegmentView (~> 1.1)
+  - SMSegmentView (from `https://github.com/sima-11/SMSegmentView.git`)
   - SVProgressHUD (~> 2.0.3)
-  - SwiftyJSON (~> 2.4)
+  - SwiftyJSON (~> 3.1)
   - SwiftyTimer (~> 2.0.0)
   - Timepiece (from `https://github.com/skofgar/Timepiece.git`, branch `swift3`)
   - TwitterCore (~> 2.4)
@@ -103,6 +106,11 @@ EXTERNAL SOURCES:
   Material:
     :branch: development
     :git: https://github.com/CosmicMind/Material.git
+  ReactiveCocoa:
+    :branch: add-podspec
+    :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
+  SMSegmentView:
+    :git: https://github.com/sima-11/SMSegmentView.git
   Timepiece:
     :branch: swift3
     :git: https://github.com/skofgar/Timepiece.git
@@ -111,6 +119,12 @@ CHECKOUT OPTIONS:
   Material:
     :commit: 5c350d9a78ed06fc1e68ae61e89ca5d06ed8a9c3
     :git: https://github.com/CosmicMind/Material.git
+  ReactiveCocoa:
+    :commit: 8b6a19d416d2d110b9f1f132597f1e4297b27e6c
+    :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
+  SMSegmentView:
+    :commit: 3d0ed978ef10e802e2352ed9d0ff34d74e1b7fdf
+    :git: https://github.com/sima-11/SMSegmentView.git
   Timepiece:
     :commit: c3b7badbce11f59a7221992076f46dfe437dcf87
     :git: https://github.com/skofgar/Timepiece.git
@@ -136,15 +150,16 @@ SPEC CHECKSUMS:
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
   RateLimit: cf2c2f0e77a32dba9b4005533087bec2a4377cc5
-  ReactiveCocoa: 72263e7ac0770c274617ccd345e01049d0ca38ae
+  ReactiveCocoa: 94b4ea2fac009075055151ff9d14b216dcebc270
+  ReactiveSwift: cf34523b2b0dd8fbfc8fda484b0d0585e3d74955
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
-  Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
+  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   RevealingSplashView: 417f68412a7b8cbf9ff0e6d8565fefe4bdfbc356
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SMSegmentView: a99862f36ea73478558ae665c209cb80c0d4f059
+  SMSegmentView: 021507cbbdaa33986fab44b5aa23c1a983a47380
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
-  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   Timepiece: b5038887b91d6eb70653173f4270e06b3abeac41
   TwitterCore: 95c46af93112768a7983bd370d66023553601d01
@@ -152,6 +167,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 02d9884a69abe7956840fc7f6c5532eba5e06f48
+PODFILE CHECKSUM: 67c4749a04f8039566bc22a3315442d3c8f3e07d
 
 COCOAPODS: 1.0.1
