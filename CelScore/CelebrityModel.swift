@@ -75,11 +75,11 @@ final class CelebrityModel: Object {
         self.isSynced = true
         
         let realm = try! Realm()
-        let celebrity: CelebrityModel? = realm.objects(CelebrityModel).filter("id = %@", self.id).first
+        let celebrity: CelebrityModel? = realm.objects(CelebrityModel.self).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
         else { self.isNew = true }
         
-        let rating = realm.objects(RatingsModel).filter("id = %@", self.id).first
+        let rating = realm.objects(RatingsModel.self).filter("id = %@", self.id).first
         guard rating?.isEmpty == false  else {
             realm.beginWrite()
             let newRating = RatingsModel(id: self.id)

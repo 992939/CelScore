@@ -22,9 +22,9 @@ struct UserViewModel {
     func loginSignal(token: String, with loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             switch loginType {
-            case .Facebook:
-                Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token] as [NSString: NSString]))
-                Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+            case .facebook:
+                Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
+                Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         observer.sendFailed(task.error!)
                         if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
@@ -34,17 +34,17 @@ struct UserViewModel {
                     observer.sendCompleted()
                     return task
                 }
-            case .Twitter:
-                Twitter.sharedInstance().logInWithCompletion { (session, error) -> Void in
-                    guard error == nil else { return observer.sendFailed(error!) }
+            case .twitter:
+                Twitter.sharedInstance().logIn { (session, error) -> Void in
+                    guard error == nil else { return observer.send(error: error as! NSError) }
                     Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
-                    Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+                    Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
-                            observer.sendFailed(task.error!)
+                            observer.send(error: task.error as! NSError)
                             if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                             return task
                         }
-                        observer.sendNext(task)
+                        observer.send(value: task)
                         observer.sendCompleted()
                         return task
                     }
@@ -81,7 +81,7 @@ struct UserViewModel {
     
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let expirationDate = FBSDKAccessToken.currentAccessToken().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
+            let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
             if expirationDate > 10.days.later { observer.sendCompleted() }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
@@ -96,23 +96,23 @@ struct UserViewModel {
     func getUserInfoFromSignal(loginType: SocialLogin) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             switch loginType {
-            case .Facebook:
+            case .facebook:
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                     guard error == nil else { print("fb error: \(error)"); return observer.sendFailed(error) }
                     observer.sendNext(object)
                     observer.sendCompleted()
                 }
-            case .Twitter:
+            case .twitter:
                 let statusesShowEndpoint = "https://api.twitter.com/1.1/users/lookup.json"
                 let client = TWTRAPIClient(userID: Twitter.sharedInstance().sessionStore.session()!.userID)
                 let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
                 var clientError : NSError?
-                let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
-                guard clientError == nil else { return observer.sendFailed(clientError!) }
+                let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
+                guard clientError == nil else { return observer.send(error: clientError! as NSError) }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                    guard connectionError == nil else { return observer.sendFailed(connectionError!) }
+                    guard connectionError == nil else { return observer.send(error: connectionError! as NSError) }
                     let json = JSON(data: data!)
-                    observer.sendNext(json.arrayObject![0])
+                    observer.send(value: json.arrayObject![0] as AnyObject)
                     observer.sendCompleted()
                 }
             default: break
@@ -123,25 +123,25 @@ struct UserViewModel {
     func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
+            Constants.kCredentialsProvider.getIdentityId().continue({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 return nil }
             
-            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             let realm = try! Realm()
             
             switch dataSetType {
             case .FacebookInfo:
                 if dataset.getAll().count == 0 {
-                    dataset.setString(object.objectForKey("name") as! String, forKey: "name")
-                    dataset.setString(object.objectForKey("first_name") as! String, forKey: "first_name")
-                    dataset.setString(object.objectForKey("last_name") as! String, forKey: "last_name")
+                    dataset.setString(object. as! String, forKey: "name")
+                    dataset.setString(object.object("first_name") as! String, forKey: "first_name")
+                    dataset.setString(object.object("last_name") as! String, forKey: "last_name")
                     dataset.setString(object.objectForKey("email") as! String, forKey: "email")
                     dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
-                    dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
-                    dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
-                    dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
+                    dataset.setString(UIDevice.current.modelName, forKey: "device")
+                    dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
+                    dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
                 }
             case .TwitterInfo:
                 if dataset.getAll().count == 0 {
@@ -160,8 +160,8 @@ struct UserViewModel {
                     dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
                 }
             case .UserRatings:
-                let userRatingsArray = realm.objects(UserRatingsModel).filter("isSynced = false")
-                guard userRatingsArray.count > 0 else { observer.sendNext(userRatingsArray); return observer.sendCompleted(); }
+                let userRatingsArray = realm.objects(UserRatingsModel.self).filter("isSynced = false")
+                guard userRatingsArray.count > 0 else { observer.send(value: userRatingsArray); return observer.sendCompleted(); }
                 for index in 0..<userRatingsArray.count {
                     let ratings: UserRatingsModel = userRatingsArray[index]
                     dataset.setString(ratings.interpolation(), forKey: ratings.id)
@@ -171,8 +171,8 @@ struct UserViewModel {
                     try! realm.commitWrite()
                 }
             case .UserSettings:
-                let settings = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                guard settings.isSynced == false else  { observer.sendNext(settings); return observer.sendCompleted(); }
+                let settings = realm.objects(SettingsModel.self).isEmpty ? SettingsModel() : realm.objects(SettingsModel.self).first!
+                guard settings.isSynced == false else  { observer.send(value: settings); return observer.sendCompleted(); }
                 
                 dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                 dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
@@ -189,16 +189,16 @@ struct UserViewModel {
                 dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
             }
             
-            dataset.synchronize().continueWithBlock({ (task: AWSTask!) -> AnyObject in
+            dataset.synchronize().continue({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
                     if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 13 {
                         Constants.kCredentialsProvider.clearKeychain()
                     }
-                    observer.sendFailed(task.error!)
+                    observer.send(error: task.error as! NSError)
                     return task }
                 if case .UserRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
-                observer.sendNext(object)
+                observer.send(value: object)
                 observer.sendCompleted()
                 return task
             })
@@ -208,19 +208,17 @@ struct UserViewModel {
     func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continueWithBlock { (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    if task.error!.code == 13 { Constants.kCredentialsProvider.clearKeychain() }
-                    observer.sendFailed(task.error!)
+                    observer.sendFailed(task.error! as NSError)
                     return task }
                 return nil }
             
-            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
-            dataset.synchronize().continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock:{ (task: AWSTask!) -> AnyObject! in
+            dataset.synchronize().continue(with: AWSExecutor.mainThread(), with:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    if task.error!.code == 13 { Constants.kCredentialsProvider.clearKeychain() }
-                    observer.sendFailed(task.error!)
+                    observer.send(error: task.error as! NSError)
                     return task }
                 let realm = try! Realm()
                 switch dataSetType {
@@ -236,8 +234,8 @@ struct UserViewModel {
                     })
                 case .UserSettings:
                     let dico: [AnyHashable: Any] = dataset.getAll()
-                    let settings: SettingsModel = realm.objects(SettingsModel).isEmpty ? SettingsModel() : realm.objects(SettingsModel).first!
-                    guard dico.isEmpty == false else { observer.sendNext(task); return task }
+                    let settings: SettingsModel = realm.objects(SettingsModel.self).isEmpty ? SettingsModel() : realm.objects(SettingsModel.self).first!
+                    guard dico.isEmpty == false else { observer.send(value: task); return task }
                     realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
@@ -256,7 +254,7 @@ struct UserViewModel {
                     realm.add(settings, update: true)
                     try! realm.commitWrite()
                 }
-                observer.sendNext(dataset.getAll())
+                observer.sendNext(dataset.getAll() as AnyObject)
                 observer.sendCompleted()
                 return task
             })
