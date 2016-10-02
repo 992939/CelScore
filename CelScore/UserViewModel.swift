@@ -15,6 +15,7 @@ import SwiftyJSON
 import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
+import Result
 
 
 struct UserViewModel {
@@ -58,14 +59,14 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let settings = realm.objects(SettingsModel)
+            let settings = realm.objects(SettingsModel.self)
             realm.delete(settings)
-            let userRatings = realm.objects(UserRatingsModel)
+            let userRatings = realm.objects(UserRatingsModel.self)
             realm.delete(userRatings)
             try! realm.commitWrite()
             
             realm.beginWrite()
-            let celebs = realm.objects(CelebrityModel)
+            let celebs = realm.objects(CelebrityModel.self)
             let newCelebs = celebs.map({ (celeb: CelebrityModel) -> CelebrityModel in
                 celeb.isFollowed = false
                 return celeb })
@@ -74,7 +75,7 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.clearKeychain()
             Constants.kCredentialsProvider.clearCredentials()
-            observer.sendNext(Constants.kCredentialsProvider)
+            observer.send(value: Constants.kCredentialsProvider)
             observer.sendCompleted()
         }
     }
@@ -155,9 +156,9 @@ struct UserViewModel {
                     dataset.setString(object.objectForKey("created_at") as! String, forKey: "created_at")
                     dataset.setString(object.objectForKey("time_zone") as! String, forKey: "time_zone")
                     dataset.setString(object.objectForKey("location") as! String, forKey: "location")
-                    dataset.setString(UIDevice.currentDevice().modelName, forKey: "device")
-                    dataset.setString(NSBundle.mainBundle().releaseVersionNumber, forKey: "release_version")
-                    dataset.setString(NSBundle.mainBundle().buildVersionNumber, forKey: "build_version")
+                    dataset.setString(UIDevice.current.modelName, forKey: "device")
+                    dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
+                    dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
                 }
             case .UserRatings:
                 let userRatingsArray = realm.objects(UserRatingsModel.self).filter("isSynced = false")
@@ -254,7 +255,7 @@ struct UserViewModel {
                     realm.add(settings, update: true)
                     try! realm.commitWrite()
                 }
-                observer.sendNext(dataset.getAll() as AnyObject)
+                observer.send(value: dataset.getAll() as AnyObject)
                 observer.sendCompleted()
                 return task
             })

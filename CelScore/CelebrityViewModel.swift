@@ -8,6 +8,7 @@
 
 import RealmSwift
 import ReactiveCocoa
+import ReactiveSwift
 import Timepiece
 import Result
 

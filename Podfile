@@ -22,10 +22,10 @@ end
 
 target 'CelScore' do
     shared_pods
+    pod 'Material', '~> 2.1'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'
-    pod 'Material', :git => 'https://github.com/CosmicMind/Material.git', :branch => 'development'
     pod 'R.swift', '~> 3.0'
     pod 'WebASDKImageManager', '~> 1.1'
     pod 'FBSDKLoginKit', '~> 4.14'

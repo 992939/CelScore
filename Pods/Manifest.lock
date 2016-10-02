@@ -29,7 +29,7 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.3)
   - Keys (1.0.0)
-  - Material (2.0.0)
+  - Material (2.1.0)
   - PINCache (3.0.1-beta)
   - PINRemoteImage/Core (3.0.0-beta.3):
     - PINCache (>= 3.0.0-beta)
@@ -80,7 +80,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.14)
   - HMSegmentedControl (~> 1.5.2)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Material (from `https://github.com/CosmicMind/Material.git`, branch `development`)
+  - Material (~> 2.1)
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.0)
   - RateLimit (~> 1.2)
@@ -103,9 +103,6 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
-  Material:
-    :branch: development
-    :git: https://github.com/CosmicMind/Material.git
   ReactiveCocoa:
     :branch: add-podspec
     :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
@@ -116,9 +113,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/skofgar/Timepiece.git
 
 CHECKOUT OPTIONS:
-  Material:
-    :commit: 5c350d9a78ed06fc1e68ae61e89ca5d06ed8a9c3
-    :git: https://github.com/CosmicMind/Material.git
   ReactiveCocoa:
     :commit: 8b6a19d416d2d110b9f1f132597f1e4297b27e6c
     :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
@@ -143,7 +137,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Material: 61dcd49507c32d07c1557267ec360ce35bd0b1c5
+  Material: c5c334bd7fa8c0307cb35be143b7c51c5e2c52a7
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
   PMAlertController: edd2ae1f2a31ec77db72103a2dd81a77d6b5de95
@@ -167,6 +161,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: b40f10e35d57b936dc20b74ead2bab728cd9758c
+PODFILE CHECKSUM: 88854ae50175c880e9e11a74edc987959207d67b
 
 COCOAPODS: 1.0.1
