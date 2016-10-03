@@ -25,30 +25,32 @@ struct UserViewModel {
             switch loginType {
             case .facebook:
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
-                Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
+                Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
-                        observer.sendFailed(task.error!)
-                        if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
+                        let error: NSError = task.error! as NSError
+                        observer.send(error: error)
+                        if error.code == 8 || error.code == 10 || error.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                         return task
                     }
-                    observer.sendNext(task)
+                    observer.send(value: task)
                     observer.sendCompleted()
                     return task
-                }
+                })
             case .twitter:
                 Twitter.sharedInstance().logIn { (session, error) -> Void in
                     guard error == nil else { return observer.send(error: error as! NSError) }
-                    Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": session!.authToken + ";" + session!.authTokenSecret]))
-                    Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
+                    Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": NSString(session!.authToken + ";" + session!.authTokenSecret)]))
+                    Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
-                            observer.send(error: task.error as! NSError)
-                            if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
+                            let error: NSError = task.error! as NSError
+                            observer.send(error: error)
+                            if error.code == 8 || error.code == 10 || error.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
                             return task
                         }
                         observer.send(value: task)
                         observer.sendCompleted()
                         return task
-                    }
+                    })
                 }
             default: break
             }
@@ -82,8 +84,8 @@ struct UserViewModel {
     
     func refreshFacebookTokenSignal() -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
-            if expirationDate > 10.days.later { observer.sendCompleted() }
+            let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy", locale: Locale(identifier: "en_US_POSIX"))
+            if expirationDate! > 10.days.later { observer.sendCompleted() }
             else {
                 FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
                     guard error == nil else { return observer.sendFailed(error) }
@@ -128,34 +130,34 @@ struct UserViewModel {
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 return nil }
             
-            let syncClient: AWSCognito = AWSCognito.default()
+            let syncClient: AWSCognito = AWSCognito.defaultCognito()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             let realm = try! Realm()
             
             switch dataSetType {
             case .FacebookInfo:
                 if dataset.getAll().count == 0 {
-                    dataset.setString(object. as! String, forKey: "name")
-                    dataset.setString(object.object("first_name") as! String, forKey: "first_name")
-                    dataset.setString(object.object("last_name") as! String, forKey: "last_name")
-                    dataset.setString(object.objectForKey("email") as! String, forKey: "email")
-                    dataset.setString(object.objectForKey("gender") as! String, forKey: "gender")
+                    dataset.setString(object.object(forKey: "name") as! String, forKey: "name")
+                    dataset.setString(object.object(forKey: "first_name") as! String, forKey: "first_name")
+                    dataset.setString(object.object(forKey: "last_name") as! String, forKey: "last_name")
+                    dataset.setString(object.object(forKey: "email") as! String, forKey: "email")
+                    dataset.setString(object.object(forKey: "gender") as! String, forKey: "gender")
                     dataset.setString(UIDevice.current.modelName, forKey: "device")
                     dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
                     dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
                 }
             case .TwitterInfo:
                 if dataset.getAll().count == 0 {
-                    dataset.setString(object.objectForKey("screen_name") as! String, forKey: "screen_name")
-                    let followers = object.objectForKey("followers_count") as! NSNumber
+                    dataset.setString(object.object(forKey: "screen_name") as! String, forKey: "screen_name")
+                    let followers = object.object(forKey: "followers_count") as! NSNumber
                     dataset.setString(followers.stringValue, forKey: "followers_count")
-                    let following = object.objectForKey("following") as! NSNumber
+                    let following = object.object(forKey: "following") as! NSNumber
                     dataset.setString(following.stringValue, forKey: "following")
-                    let verified = object.objectForKey("verified") as! NSNumber
+                    let verified = object.object(forKey: "verified") as! NSNumber
                     dataset.setString(verified.stringValue, forKey: "verified")
-                    dataset.setString(object.objectForKey("created_at") as! String, forKey: "created_at")
-                    dataset.setString(object.objectForKey("time_zone") as! String, forKey: "time_zone")
-                    dataset.setString(object.objectForKey("location") as! String, forKey: "location")
+                    dataset.setString(object.object(forKey: "created_at") as! String, forKey: "created_at")
+                    dataset.setString(object.object(forKey: "time_zone") as! String, forKey: "time_zone")
+                    dataset.setString(object.object(forKey: "location") as! String, forKey: "location")
                     dataset.setString(UIDevice.current.modelName, forKey: "device")
                     dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
                     dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
@@ -192,7 +194,8 @@ struct UserViewModel {
             
             dataset.synchronize().continue({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
-                    if task.error!.code == 8 || task.error!.code == 10 || task.error!.code == 13 {
+                    let error: NSError = task.error! as NSError
+                    if error.code == 8 || error.code == 10 || error.code == 13 {
                         Constants.kCredentialsProvider.clearKeychain()
                     }
                     observer.send(error: task.error as! NSError)
@@ -209,11 +212,11 @@ struct UserViewModel {
     func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continue { (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    observer.sendFailed(task.error! as NSError)
+                    observer.send(error: task.error as! NSError)
                     return task }
-                return nil }
+                return nil })
             
             let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
