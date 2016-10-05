@@ -57,10 +57,10 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gaugeView.depth = .Depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
-        gaugeView.pulseAnimation = .None
+        gaugeView.pulseAnimation = .none
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
@@ -92,15 +92,15 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         if tag < 4 {
-            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext({ celscore in
+            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
                 var attributedText = NSMutableAttributedString()
                 let percent: Double = (celscore/Double(value)!) * 100 - 100
                 let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
-                let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
+                let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
                 attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
+                let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
                 let attrString = NSAttributedString(string: String(format: " %.2f", Double(value)!), attributes: attr2)
-                attributedText.appendAttributedString(attrString)
+                attributedText.append(attrString)
                 infoLabel.attributedText = attributedText
             })
         }
@@ -127,10 +127,10 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     func longPress(_ gesture: UIGestureRecognizer) {
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
-        case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { celscore in
-                self.delegate!.socialSharing(message: "\(who) \(Info.CelScore.text()) \(String(format: "%.2f", celscore))") }
+        case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
+                self.delegate!.socialSharing(message: "\(who) \(Info.celScore.text()) \(String(format: "%.2f", celscore))") }
         case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
-        default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithNext { consensus in
+        default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
                 self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.2f", consensus))%") }
         }
     }

@@ -38,8 +38,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     init() {
         self.celebrityTableView = ASTableView()
         self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
-        self.diffCalculator.insertionAnimation = .Fade
-        self.diffCalculator.deletionAnimation = .Fade
+        self.diffCalculator.insertionAnimation = .fade
+        self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
         self.socialButton = MenuView()
         self.searchBar = UISearchBar()
@@ -61,10 +61,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Animation.delay(0.4) {
+        Animation.delay(time: 0.4) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 self.celebrityTableView.beginUpdates()
-                self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
+                self.celebrityTableView.reloadRows(at: [index], with: .fade)
                 self.celebrityTableView.endUpdates()
             }
             
@@ -107,7 +107,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.separatorStyle = .none
         self.celebrityTableView.backgroundColor = Color.clear
         
-        let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
+        let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         self.searchBar.delegate = self
         self.searchBar.searchBarStyle = .minimal
@@ -120,7 +120,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
-        Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter)
+        Layout.size(parent: self.view, child: self.socialButton, size: Constants.kFabDiameter)
         self.setupData()
         
         NotificationCenter.default.rac_notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
@@ -272,9 +272,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.menu.close()
         let first: Button? = self.socialButton.menu.views?.first as? Button
-        first!.animate(animation: Animation.animationGroup([
+        first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 5),
-            Animation.translateY(y)
+            Animation.translateY(translation: y)
         ]))
     }
     
@@ -362,11 +362,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func navigationDrawerDidClose(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController?.enabled = false
         SettingsViewModel().loggedInAsSignal()
-            .on(next: { _ in self.movingSocialButton(onScreen: false) })
+            .on(starting: { _ in self.movingSocialButton(onScreen: false) })
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                Animation.delay(1.0) { self.movingSocialButton(onScreen: true) }
+                Animation.delay(time: 1.0) { self.movingSocialButton(onScreen: true) }
             })
             .start()
     }

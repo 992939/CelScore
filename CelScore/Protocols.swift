@@ -12,6 +12,7 @@ import SVProgressHUD
 import TwitterKit
 import FBSDKLoginKit
 import ReactiveCocoa
+import ReactiveSwift
 import RevealingSplashView
 import PMAlertController
 import MessageUI
@@ -62,7 +63,7 @@ extension Supportable where Self: UIViewController {
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
         mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
-        Animation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
+        Animation.delay(time: 0.5) { self.present(mail, animated: true, completion: nil) }
     }
     
     func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
@@ -88,7 +89,7 @@ extension Sociable where Self: UIViewController {
     func loginFlow(token: String, with loginType: SocialLogin, hide hideButton: Bool) {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
-            .retry(Constants.kNetworkRetry)
+            .retry(upTo: Constants.kNetworkRetry)
             .observeOn(QueueScheduler.mainQueueScheduler)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
@@ -139,26 +140,26 @@ extension Sociable where Self: UIViewController {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
             self.loginFlow(token: "", with: .twitter, hide: hideButton)
-        } as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion
+        } as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion
     }
     
     func setUpSocialButton(_ menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depth = .Depth2
-        btn1.pulseAnimation = .None
+        btn1.pulseAnimation = .none
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
-        btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)
-        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
-        btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), forControlEvents: .TouchUpInside)
+        btn1.setImage(R.image.ic_add_black()!, for: .Disabled)
+        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), for: .normal)
+        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), for: .highlighted)
+        btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
         menuView.addSubview(btn1)
         
         var image = R.image.facebooklogo()!
         let btn2: FabButton = FabButton()
         btn2.tag = 1
         btn2.clipsToBounds = true
-        btn2.contentMode = .ScaleToFill
+        btn2.contentMode = .scaleToFill
         btn2.depth = .Depth1
         btn2.pulseColor = Color.white
         btn2.backgroundColor = Color.indigo.darken1
@@ -166,13 +167,13 @@ extension Sociable where Self: UIViewController {
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
-        btn2.addTarget(controller, action: #selector(self.socialButton(_:)), forControlEvents: .TouchUpInside)
+        btn2.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.addSubview(btn2)
         
         image = R.image.twitterlogo()!
         let btn3: FabButton = FabButton()
         btn3.tag = 2
-        btn3.contentMode = .ScaleToFill
+        btn3.contentMode = .scaleToFill
         btn3.clipsToBounds = true
         btn3.depth = .Depth1
         btn3.backgroundColor = Color.lightBlue.base
@@ -181,7 +182,7 @@ extension Sociable where Self: UIViewController {
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)
-        btn3.addTarget(controller, action: #selector(self.socialButton(_:)), forControlEvents: .TouchUpInside)
+        btn3.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.addSubview(btn3)
         
         menuView.menu.origin = origin

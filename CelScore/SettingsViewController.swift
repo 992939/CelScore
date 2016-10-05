@@ -51,7 +51,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoCircle.shape = .Circle
         logoCircle.depth = .Depth2
         logoCircle.backgroundColor = Constants.kRedShade
-        logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .TouchUpInside)
+        logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         
         let labelWidth: CGFloat = (Constants.kSettingsViewWidth - logoCircle.width)/2
         let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
@@ -67,7 +67,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.addSubview(courtLabel)
         logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
-        logoView.layer.shadowColor = Color.black.CGColor
+        logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
         logoView.backgroundColor = Constants.kBlueShade
@@ -81,11 +81,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             let consensusBarNode = self.setupProgressBarNode(title: "General Consensus %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
             self.view.addSubnode(consensusBarNode) })
         
-        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in
+        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
             let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
             self.view.addSubnode(publicOpinionBarNode) })
         
-        SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in
+        SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in
             let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
             self.view.addSubnode(positiveBarNode)
         })
@@ -104,13 +104,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Check Boxes
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
         
-        SettingsViewModel().getSettingSignal(settingType: .PublicService)
+        SettingsViewModel().getSettingSignal(settingType: .publicService)
             .startWithNext({ status in
                 let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode)
             })
         
-        SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)
+        SettingsViewModel().getSettingSignal(settingType: .consensusBuilding)
             .startWithNext({ status in
                 let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
@@ -147,7 +147,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), for: .touchUpInside)
-        logoutButton.setTitleColor(Color.black, forState: .Normal)
+        logoutButton.setTitleColor(Color.black, for: .normal)
         logoutButton.titleLabel!.textAlignment = .center
         logoutButton.pulseColor = Constants.kBlueShade
         logoutView.addSubview(logoutButton)
@@ -162,7 +162,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex)
+        SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
@@ -189,8 +189,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact3Bar.setProgress(0, animated: true)
         Timer.after(2.seconds){ _ in
             SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in self.fact1Bar.setProgress(value, animated: true) })
-            SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext({ value in self.fact2Bar.setProgress(value, animated: true) })
-            SettingsViewModel().calculatePositiveVoteSignal().startWithNext({ value in self.fact3Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in self.fact2Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in self.fact3Bar.setProgress(value, animated: true) })
             button.isEnabled = true
         }
     }
@@ -227,39 +227,39 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SettingsViewModel().updateSettingSignal(value: row, settingType: .DefaultListIndex).start()
-        SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithNext({ first in let firstTime = first as! Bool
+        SettingsViewModel().updateSettingSignal(value: row as AnyObject, settingType: .defaultListIndex).start()
+        SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithNext({ first in let firstTime = first as! Bool
             guard firstTime else { return }
-            TAOverlay.showOverlayWithLabel(OverlayInfo.FirstInterest.message(), image: OverlayInfo.FirstInterest.logo(), options: OverlayInfo.getOptions())
-            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstInterest).start() })
+            TAOverlay.show(withLabel: OverlayInfo.firstInterest.message(), image: OverlayInfo.firstInterest.logo(), options: OverlayInfo.getOptions())
+            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstInterest).start() })
         })
     }
     
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on, settingType: (checkBox.tag == 0 ? .PublicService : .ConsensusBuilding)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .consensusBuilding)).start()
         if checkBox.on {
-            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .FirstPublic : .FirstConsensus).startWithNext({ first in
+            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .firstPublic : .firstConsensus).startWithNext({ first in
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        let alertVC = PMAlertController(title: "The Public Sphere", description: OverlayInfo.FirstPublic.message(), image: OverlayInfo.FirstPublic.logo(), style: .Alert)
+                        let alertVC = PMAlertController(title: "The Public Sphere", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .Default, action: { _ in
-                            SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstPublic).start()
-                            self.dismissViewControllerAnimated(true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                        alertVC.view.opaque = false
-                        self.presentViewController(alertVC, animated: true, completion: nil)
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .default, action: { _ in
+                            SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstPublic).start()
+                            self.dismiss(animated: true, completion: nil) }))
+                        alertVC.view.backgroundColor = UIColor.clear.colorWithAlphaComponent(0.7)
+                        alertVC.view.isOpaque = false
+                        self.present(alertVC, animated: true, completion: nil)
                     } else {
-                        let alertVC = PMAlertController(title: "Work in Progress", description: OverlayInfo.FirstConsensus.message(), image: OverlayInfo.FirstConsensus.logo(), style: .Alert)
+                        let alertVC = PMAlertController(title: "Work in Progress", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .Default, action: { _ in
-                            SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstConsensus).start()
-                            self.dismissViewControllerAnimated(true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                        alertVC.view.opaque = false
-                        self.presentViewController(alertVC, animated: true, completion: nil)
+                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .default, action: { _ in
+                            SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstConsensus).start()
+                            self.dismiss(animated: true, completion: nil) }))
+                        alertVC.view.backgroundColor = UIColor.clearColor.colorWithAlphaComponent(0.7)
+                        alertVC.view.isOpaque = false
+                        self.present(alertVC, animated: true, completion: nil)
                     }
                 }
             })

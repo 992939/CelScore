@@ -10,6 +10,7 @@ import AWSCore
 import RealmSwift
 import Result
 import ReactiveCocoa
+import ReactiveSwift
 
 
 struct RatingsViewModel {

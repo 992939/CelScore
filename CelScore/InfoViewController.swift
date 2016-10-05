@@ -41,8 +41,8 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 formatter.dateStyle = .longStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-                    .startWithNext({ score in
-                        for (index, quality) in Info.getAll().enumerate() {
+                    .startWithValues({ score in
+                        for (index, quality) in Info.getAll().enumerated() {
                             let barHeight = UIDevice.getPulseBarHeight()
                             let qualityView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
@@ -51,28 +51,28 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             var infoLabelText: String = ""
                             var attributedText: NSAttributedString = NSAttributedString()
                             switch quality {
-                            case Info.FirstName.name(): infoLabelText = celeb.firstName
-                            case Info.MiddleName.name(): infoLabelText = celeb.middleName
-                            case Info.LastName.name(): infoLabelText = celeb.lastName
-                            case Info.From.name(): infoLabelText = celeb.from
-                            case Info.Birthdate.name(): infoLabelText = formatter.stringFromDate(birthdate) + String(" (\(age))")
-                            case Info.Height.name(): infoLabelText = celeb.height
-                            case Info.Zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                            case Info.Status.name(): infoLabelText = celeb.status
-                            case Info.CelScore.name(): attributedText = self.createCelScoreText(score)
-                            case Info.Networth.name(): infoLabelText = celeb.netWorth
+                            case Info.firstName.name(): infoLabelText = celeb.firstName
+                            case Info.middleName.name(): infoLabelText = celeb.middleName
+                            case Info.lastName.name(): infoLabelText = celeb.lastName
+                            case Info.from.name(): infoLabelText = celeb.from
+                            case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
+                            case Info.height.name(): infoLabelText = celeb.height
+                            case Info.zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                            case Info.status.name(): infoLabelText = celeb.status
+                            case Info.celScore.name(): attributedText = self.createCelScoreText(score)
+                            case Info.networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = ""
                             }
                             
                             let infoLabel: UILabel?
-                            if case Info.CelScore.name() = quality {
+                            if case Info.celScore.name() = quality {
                                 infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                                 infoLabel!.attributedText = attributedText
                                 infoLabel!.backgroundColor = Constants.kGreyBackground
                             } else {
                                 infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                             }
-                            infoLabel!.textAlignment = .Right
+                            infoLabel!.textAlignment = .right
                         
                             qualityView.depth = .Depth1
                             qualityView.backgroundColor = Constants.kGreyBackground

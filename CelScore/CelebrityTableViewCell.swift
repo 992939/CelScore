@@ -31,7 +31,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
+        let attr = [NSFontAttributeName: UIFont.systemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .byTruncatingTail
@@ -48,7 +48,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithNext { score in cosmosView.rating = score }
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { score in cosmosView.rating = score }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext { hasRatings in
             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
             cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
@@ -65,7 +65,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.preferredFrameSize = box.frame.size
         
-        let cardView: MaterialPulseView = MaterialPulseView()
+        let cardView: PulseView = MaterialPulseView()
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kBlueShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
@@ -92,7 +92,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.sphere_blue_mini()! : R.image.sphere_red_mini()!
         }
         
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.UserRatings)
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
             .on(failed: { _ in self.faceNode.image = R.image.emptyCircle()! })
             .on(next: { ratings in
                 switch ratings.getCelScore() {
