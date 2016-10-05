@@ -11,7 +11,9 @@ import Material
 import SMSegmentView
 import Social
 import ReactiveCocoa
+import ReactiveSwift
 import MessageUI
+import Material
 
 
 final class DetailViewController: UIViewController, SMSegmentViewDelegate, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate {
@@ -20,9 +22,9 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     fileprivate let infoVC: InfoViewController
     fileprivate let ratingsVC: RatingsViewController
     fileprivate let celscoreVC: CelScoreViewController
-    fileprivate let voteButton: MaterialButton
+    fileprivate let voteButton: Button
     fileprivate let celebST: CelebrityStruct
-    fileprivate let socialButton: MenuView
+    fileprivate let socialButton: View
     fileprivate var socialMessage: String = ""
     internal let profilePicNode: ASNetworkImageNode
     
@@ -34,8 +36,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.infoVC = InfoViewController(celebrityST: self.celebST)
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
-        self.voteButton = MaterialButton()
-        self.socialButton = MenuView()
+        self.voteButton = Button()
+        self.socialButton = View()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
         
@@ -58,11 +60,11 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.celscoreVC.delegate = self
         
         let navigationBarView: Toolbar = getNavigationView()
-        let topView: MaterialView = getTopView()
+        let topView: View = getTopView()
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
             .startWithNext({ status in
@@ -92,7 +94,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
 
         self.view.addSubview(statusView)
         self.view.addSubview(navigationBarView)
-        self.view.sendSubviewToBack(navigationBarView)
+        self.view.sendSubview(toBack: navigationBarView)
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton)
@@ -111,15 +113,15 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func showingButtons() {
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first!.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(Constants.kPadding + 100)
+        let first: Button? = self.socialButton.menu.views?.first as? Button
+        first!.animate(animation: Animation.animationGroup(animations: [
+            Animation.rotate(rotation: 3),
+            Animation.translateX(translation: Constants.kPadding + 100)
             ]))
         
-        self.voteButton.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(-(Constants.kFabDiameter + 100))
+        self.voteButton.animate(animation: Animation.animationGroup(animations: [
+            Animation.rotate(rotation: 3),
+            Animation.translateX(translation: -(Constants.kFabDiameter + 100))
             ]))
         
         for subview in self.socialButton.menu.views!.enumerate() {
@@ -130,22 +132,22 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func hideButtons() {
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first!.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(-(Constants.kPadding + 100))
+        let first: Button? = self.socialButton.menu.views?.first as? Button
+        first!.animate(animation: Animation.animationGroup(animations: [
+            Animation.rotate(rotation: 3),
+            Animation.translateX(translation: -(Constants.kPadding + 100))
             ]))
         
-        self.voteButton.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 3),
-            MaterialAnimation.translateX(Constants.kFabDiameter + 100)
+        self.voteButton.animate(animation: Animation.animationGroup(animations: [
+            Animation.rotate(rotation: 3),
+            Animation.translateX(translation: Constants.kFabDiameter + 100)
             ]))
     }
     
     func backAction() {
         self.hideButtons()
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
-        MaterialAnimation.delay(0.15){ self.dismissViewControllerAnimated(true, completion: nil) }
+        Animation.delay(time: 0.15){ self.dismiss(animated: true, completion: nil) }
     }
     
     func infoAction() {
@@ -200,7 +202,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func trollAction() {
-        MaterialAnimation.delay(0.5) {
+        Animation.delay(time: 0.5) {
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in
                     if score > Constants.kTrollingWarning { self.progressAction() }
@@ -277,10 +279,10 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func openHandleMenu() {
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+        let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
         first?.backgroundColor = Constants.kBlueShade
-        first?.pulseAnimation = .CenterWithBacking
-        first?.animate(MaterialAnimation.rotate(rotation: 1))
+        first?.pulseAnimation = .centerWithBacking
+        first?.animate(animation: Animation.rotate(rotation: 1))
         self.socialButton.menu.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
         first?.setImage(image, forState: .Normal)
@@ -288,7 +290,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func closeHandleMenu() {
-       let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+       let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
         if self.socialButton.menu.opened { first?.animate(MaterialAnimation.rotate(rotation: 1)) }
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
@@ -340,24 +342,24 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func enableUpdateButton() {
-        self.voteButton.pulseAnimation = .CenterWithBacking
+        self.voteButton.pulseAnimation = .centerWithBacking
         self.voteButton.backgroundColor = Constants.kStarGoldShade
-        self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
-        self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
-        self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
-        self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
+        self.voteButton.setImage(R.image.heart_black()!, for: .Normal)
+        self.voteButton.setImage(R.image.heart_black()!, for: .Highlighted)
+        self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
+        self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
         
-        MaterialAnimation.delay(1) {
-            self.voteButton.pulseAnimation = .CenterWithBacking
+        Animation.delay(time: 1) {
+            self.voteButton.pulseAnimation = .centerWithBacking
             self.voteButton.pulse()
         }
     }
 
     func disableVoteButton(_ image: UIImage) {
-        self.voteButton.setImage(image, forState: .Normal)
-        self.voteButton.setImage(image, forState: .Highlighted)
-        self.voteButton.removeTarget(self, action: nil, forControlEvents: .TouchUpInside)
-        self.voteButton.addTarget(self, action: #selector(DetailViewController.helpAction), forControlEvents: .TouchUpInside)
+        self.voteButton.setImage(image, for: .normal)
+        self.voteButton.setImage(image, for: .highlighted)
+        self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
+        self.voteButton.addTarget(self, action: #selector(DetailViewController.helpAction), for: .touchUpInside)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
@@ -410,19 +412,19 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func rippleEffect(positive: Bool, gold: Bool = false) {
         if gold { self.profilePicNode.view.rippleColor = Constants.kStarGoldShade }
         else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueText : Constants.kRedText }
-        self.profilePicNode.view.rippleTrailColor = MaterialColor.clear
+        self.profilePicNode.view.rippleTrailColor = Color.clear
         self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
     }
     
     func enableVoteButton(positive: Bool) {
-        UIView.animateWithDuration(0.3, animations: {
-            self.voteButton.setImage(R.image.heart_white()!, forState: .Normal)
-            self.voteButton.setImage(R.image.heart_white()!, forState: .Highlighted)
-            self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), forControlEvents: .TouchUpInside)
-            self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), forControlEvents: .TouchUpInside)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.voteButton.setImage(R.image.heart_white()!, for: .Normal)
+            self.voteButton.setImage(R.image.heart_white()!, for: .Highlighted)
+            self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
+            self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
-            completion: { _ in MaterialAnimation.delay(2) {
-                self.voteButton.pulseAnimation = .CenterWithBacking
+            completion: { _ in Animation.delay(time: 2) {
+                self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulse() }
         })
     }
@@ -435,28 +437,28 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> Toolbar {
         let backButton: FlatButton = FlatButton()
-        backButton.pulseColor = MaterialColor.white
-        backButton.setTitle("BACK", forState: .Normal)
-        backButton.setTitleColor(MaterialColor.clear, forState: .Normal)
-        backButton.pulseAnimation = .None
+        backButton.pulseColor = Color.white
+        backButton.setTitle("BACK", for: .normal)
+        backButton.setTitleColor(Color.clear, for: .normal)
+        backButton.pulseAnimation = .none
         backButton.accessibilityLabel = "Back Button"
         backButton.isAccessibilityElement = true
-        backButton.setImage(R.image.arrow_white()!, forState: .Normal)
-        backButton.setImage(R.image.arrow_white()!, forState: .Highlighted)
-        backButton.addTarget(self, action: #selector(DetailViewController.backAction), forControlEvents: .TouchUpInside)
+        backButton.setImage(R.image.arrow_white()!, for: .Normal)
+        backButton.setImage(R.image.arrow_white()!, for: .Highlighted)
+        backButton.addTarget(self, action: #selector(DetailViewController.backAction), for: .touchUpInside)
         
         let infoButton: FlatButton = FlatButton()
-        infoButton.pulseColor = MaterialColor.white
-        infoButton.pulseAnimation = .None
+        infoButton.pulseColor = Color.white
+        infoButton.pulseAnimation = .none
         infoButton.accessibilityLabel = "Info Button"
         infoButton.isAccessibilityElement = true
-        infoButton.setImage(R.image.info_button()!, forState: .Normal)
-        infoButton.setImage(R.image.info_button()!, forState: .Highlighted)
-        infoButton.addTarget(self, action: #selector(DetailViewController.infoAction), forControlEvents: .TouchUpInside)
+        infoButton.setImage(R.image.info_button()!, for: .Normal)
+        infoButton.setImage(R.image.info_button()!, for: .Highlighted)
+        infoButton.addTarget(self, action: #selector(DetailViewController.infoAction), for: .touchUpInside)
         
         let nameLabel: UILabel = self.setupLabel(title: "★  " + self.celebST.nickname + "   ★", frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
         nameLabel.backgroundColor = Constants.kRedShade
-        nameLabel.textColor = MaterialColor.white
+        nameLabel.textColor = Color.white
         nameLabel.textAlignment = .center
         self.view.addSubview(nameLabel)
         
@@ -464,27 +466,27 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.leftControls = [backButton]
         navigationBarView.rightControls = [infoButton]
-        navigationBarView.depth = .Depth3
+        navigationBarView.depth = .depth3
         navigationBarView.backgroundColor = Constants.kRedShade
         return navigationBarView
     }
     
-    func getTopView() -> MaterialView {
-        let topView: MaterialView = MaterialView(frame: Constants.kTopViewRect)
-        topView.depth = .Depth2
+    func getTopView() -> View {
+        let topView: View = View(frame: Constants.kTopViewRect)
+        topView.depth = .depth2
         topView.backgroundColor = Constants.kBlueShade
-        topView.opaque = true
+        topView.isOpaque = true
         topView.image = R.image.topView()
         return topView
     }
     
     func getSegmentView() -> SMSegmentView {
         let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-            separatorColour: MaterialColor.black, separatorWidth: 1,
-            segmentProperties:[keySegmentTitleFont: UIFont.systemFontOfSize(0),
+            separatorColour: Color.black, separatorWidth: 1,
+            segmentProperties:[keySegmentTitleFont: UIFont.systemFont(ofSize: 0),
                 keySegmentOnSelectionColour: Constants.kRedShade,
                 keySegmentOffSelectionColour: Constants.kGreyBackground,
-                keyContentVerticalMargin: 5])
+                keyContentVerticalMargin: 5 as AnyObject])
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
@@ -508,7 +510,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shape = .Circle
         self.voteButton.depth = .Depth2
-        self.voteButton.pulseAnimation = .None
+        self.voteButton.pulseAnimation = .none
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableVoteButton(R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in

@@ -18,7 +18,7 @@ class RatingsModel: Object, Collection {
     ///   `endIndex`.
     /// - Returns: The index value immediately after `i`.
     public func index(after i: Int) -> Int {
-        <#code#>
+        return 1
     }
 
     

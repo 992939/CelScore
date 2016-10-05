@@ -24,7 +24,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
+        self.pulseView = MKOverlayView(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.isHidden = true
     }
