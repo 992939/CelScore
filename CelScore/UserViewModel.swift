@@ -39,7 +39,7 @@ struct UserViewModel {
             case .twitter:
                 Twitter.sharedInstance().logIn { (session, error) -> Void in
                     guard error == nil else { return observer.send(error: error as! NSError) }
-                    Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": NSString(session!.authToken + ";" + session!.authTokenSecret)]))
+                    Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": String(session!.authToken + ";" + session!.authTokenSecret) as NSString]))
                     Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
                             let error: NSError = task.error! as NSError
