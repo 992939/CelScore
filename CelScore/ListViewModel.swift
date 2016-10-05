@@ -7,6 +7,7 @@
 //
 
 import ReactiveCocoa
+import ReactiveSwift
 import RealmSwift
 import Result
 
@@ -18,7 +19,7 @@ struct ListViewModel {
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", listId).first
             guard let celebList = list else { return observer.sendFailed(.EmptyList) }
-            observer.sendNext(celebList)
+            observer.send(value: celebList)
             observer.sendCompleted()
         }
     }
@@ -41,7 +42,7 @@ struct ListViewModel {
             realm.add(listModel, update: true)
             try! realm.commitWrite()
             
-            observer.sendNext(listModel)
+            observer.send(value: listModel)
             observer.sendCompleted()
         }
     }
@@ -63,7 +64,7 @@ struct ListViewModel {
                 realm.add(celebList, update: true)
                 try! realm.commitWrite()
             })
-            observer.sendNext(true)
+            observer.send(value: true)
             observer.sendCompleted()
         }
     }
@@ -76,7 +77,7 @@ struct ListViewModel {
             guard let celebList = list else { return }
             let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
             
-            guard followed.count > 0 else { return observer.sendNext(true) }
+            guard followed.count > 0 else { return observer.send(value: true) }
             var notFollowing: [(index: Int, celebId: CelebId)] = []
             let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
                 let isFollowing = followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
@@ -85,12 +86,12 @@ struct ListViewModel {
             })
             
             let listModel = ListsModel()
-            for (_, celeb) in following.enumerate() {
+            for (_, celeb) in following.enumerated() {
                 let celebId = CelebId()
                 celebId.id = celeb.element.id
                 listModel.celebList.append(celebId)
             }
-            for (_, celeb) in notFollowing.enumerate() {
+            for (_, celeb) in notFollowing.enumerated() {
                 let celebId = CelebId()
                 celebId.id = celeb.celebId.id
                 listModel.celebList.append(celebId)
@@ -102,7 +103,7 @@ struct ListViewModel {
             realm.add(listModel, update: true)
             try! realm.commitWrite()
             
-            observer.sendNext(true)
+            observer.send(value: true)
             observer.sendCompleted()
         }
     }
@@ -115,7 +116,7 @@ struct ListViewModel {
             let celebId: CelebId = celebList.celebList[index]
             let celeb = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
             guard celeb?.id.isEmpty == false else { return observer.sendFailed(.EmptyList) }
-            observer.sendNext(CelebrityStruct(id: celeb!.id, imageURL:celeb!.picture3x, nickname:celeb!.nickName, prevScore: celeb!.prevScore, sex: celeb!.sex, isFollowed:celeb!.isFollowed))
+            observer.send(value: CelebrityStruct(id: celeb!.id, imageURL:celeb!.picture3x, nickname:celeb!.nickName, prevScore: celeb!.prevScore, sex: celeb!.sex, isFollowed:celeb!.isFollowed))
             observer.sendCompleted()
         }
     }

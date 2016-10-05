@@ -83,7 +83,7 @@ struct CelebrityViewModel {
                 realm.delete(removable!)
             })
             try! realm.commitWrite()
-            observer.sendNext(removables.count)
+            observer.send(value: removables.count)
             observer.sendCompleted()
         }
     }

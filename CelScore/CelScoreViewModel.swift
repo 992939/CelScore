@@ -10,6 +10,7 @@ import AWSCore
 import SwiftyJSON
 import RealmSwift
 import ReactiveCocoa
+import ReactiveSwift
 import Social
 import Result
 import Accounts
@@ -24,7 +25,7 @@ struct CelScoreViewModel {
         return SignalProducer { observer, disposable in
             let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")
             serviceClient.APIKey = Constants.kAPIKey
-            let awsCall : AWSTask
+            let awsCall : AWSTask<AnyObject>
             switch dataType {
             case .Celebrity: awsCall = serviceClient.celebinfoscanservicePost()
             case .List: awsCall = serviceClient.celeblistsservicePost()
@@ -52,7 +53,7 @@ struct CelScoreViewModel {
                         try! realm.commitWrite()
                     }
                 })
-                observer.sendNext(task.result!)
+                observer.send(value: task.result!)
                 observer.sendCompleted()
                 return task
             })
@@ -63,14 +64,14 @@ struct CelScoreViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
-            guard celebs.count > 0 else { return observer.sendFailed(.NotFound) }
+            guard celebs.count > 0 else { return observer.sendFailed(.notFound) }
 
             let message: String?
             if celebs.count == 1 { message = celebs.first!.nickName + " has been added to the score.\n\n" }
             else { message = celebs.first!.nickName + " and \(celebs.count-1) other celeb(s) have been added to the score. " }
             let completeMessage = message! + "All the recently added celebs are available in the \"New\" section."
             guard celebs.count < 100 else { return observer.sendCompleted() }
-            observer.sendNext((completeMessage, celebs.first!.picture3x))
+            observer.send(value: (completeMessage, celebs.first!.picture3x))
             
             celebs.forEach({ celeb in
                 realm.beginWrite()
@@ -90,7 +91,7 @@ struct CelScoreViewModel {
             }
             socialVC!.setInitialText("\(message) #voteForMoi")
             socialVC!.addImage(screenshot)
-            observer.sendNext(socialVC!)
+            observer.send(value: socialVC!)
             observer.sendCompleted()
         }
     }

@@ -71,7 +71,7 @@ extension Supportable where Self: UIViewController {
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: { _ in MaterialAnimation.delay(0.5) { self.sendEmail() }})
+            self.dismissViewControllerAnimated(true, completion: { _ in Animation.delay(0.5) { self.sendEmail() }})
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
@@ -140,7 +140,7 @@ extension Sociable where Self: UIViewController {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
             self.loginFlow(token: "", with: .twitter, hide: hideButton)
-        } as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion as! TWTRLogInCompletion
+        }
     }
     
     func setUpSocialButton(_ menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {

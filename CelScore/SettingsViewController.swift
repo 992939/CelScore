@@ -248,7 +248,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstPublic).start()
                             self.dismiss(animated: true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clear.colorWithAlphaComponent(0.7)
+                        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                         alertVC.view.isOpaque = false
                         self.present(alertVC, animated: true, completion: nil)
                     } else {
@@ -257,7 +257,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstConsensus).start()
                             self.dismiss(animated: true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clearColor.colorWithAlphaComponent(0.7)
+                        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                         alertVC.view.isOpaque = false
                         self.present(alertVC, animated: true, completion: nil)
                     }

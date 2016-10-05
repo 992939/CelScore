@@ -208,12 +208,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     if score > Constants.kTrollingWarning { self.progressAction() }
                     return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.Latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
+                .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
                     return SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning) }
                 .on(starting: { first in let firstTime = first as! Bool
                     guard firstTime else { return }
-                    TAOverlay.showOverlayWithLabel(OverlayInfo.FirstTrollWarning.message(), image: OverlayInfo.FirstTrollWarning.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstTrollWarning).start() })
+                    TAOverlay.show(withLabel: OverlayInfo.firstTrollWarning.message(), image: OverlayInfo.firstTrollWarning.logo(), options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstTrollWarning).start() })
                     })
                 .start()
         }

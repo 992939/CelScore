@@ -9,6 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 import ReactiveCocoa
+import ReactiveSwift
 import Material
 import HMSegmentedControl
 import RateLimit
@@ -126,11 +127,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         NotificationCenter.default.rac_notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
+                CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+                        return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return CelScoreViewModel().getFromAWSSignal(dataType: .List) }
+                        return CelScoreViewModel().getFromAWSSignal(dataType: .list) }
                     .observeOn(UIScheduler())
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in

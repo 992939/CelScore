@@ -22,17 +22,17 @@ struct SettingsViewModel {
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
-            let userRatings = realm.objects(UserRatingsModel)
-            guard userRatings.count > 4 else { return observer.sendNext(0) }
+            let userRatings = realm.objects(UserRatingsModel.self)
+            guard userRatings.count > 4 else { return observer.send(value: 0) }
             
-            let publicList = realm.objects(ListsModel).filter("id = '0001'").first
-            guard let list = publicList else { return observer.sendNext(0) }
+            let publicList = realm.objects(ListsModel.self).filter("id = '0001'").first
+            guard let list = publicList else { return observer.send(value: 0) }
             
-            let userRatingCount = list.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                return userRatings.enumerate().contains({ (_, rating: RatingsModel) -> Bool in return rating.id == item.celebId.id })
+            let userRatingCount = list.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                return userRatings.enumerated().contains(where: { (_, rating: RatingsModel) -> Bool in return rating.id == item.celebId.id })
             })
             
-            observer.sendNext(CGFloat(Double(userRatingCount.count)/Double(list.celebList.count)))
+            observer.send(value: CGFloat(Double(userRatingCount.count)/Double(list.celebList.count)))
             observer.sendCompleted()
         }
     }
@@ -40,11 +40,11 @@ struct SettingsViewModel {
     func calculateUserAverageCelScoreSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
-            let userRatings = realm.objects(UserRatingsModel)
-            guard userRatings.count >= 10 else { observer.sendNext(5); return }
+            let userRatings = realm.objects(UserRatingsModel.self)
+            guard userRatings.count >= 10 else { observer.send(value: 5); return }
             let celscores: [Double] = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
-            let average = celscores.reduce(0, combine: { $0 + $1 }) / Double(celscores.count)
-            observer.sendNext(CGFloat(average))
+            let average = celscores.reduce(0, { $0 + $1 }) / Double(celscores.count)
+            observer.send(value: CGFloat(average))
             observer.sendCompleted()
         }
     }
@@ -52,12 +52,12 @@ struct SettingsViewModel {
     func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let ratings = realm.objects(UserRatingsModel)
-            guard ratings.count > 4 else { observer.sendNext(0); return }
+            let ratings = realm.objects(UserRatingsModel.self)
+            guard ratings.count > 4 else { observer.send(value: 0); return }
             let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
                 return ratingsModel.getCelScore() < 3 ? false : true
             })
-            observer.sendNext(CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
+            observer.send(value: CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
             observer.sendCompleted()
         }
     }
@@ -65,13 +65,13 @@ struct SettingsViewModel {
     func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, SettingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let ratings = realm.objects(RatingsModel)
-            guard ratings.count > 0 else { observer.sendNext(0); return observer.sendCompleted() }
+            let ratings = realm.objects(RatingsModel.self)
+            guard ratings.count > 0 else { observer.send(value: 0); return observer.sendCompleted() }
             let variances: [Double] = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
-            let averageVariance = variances.reduce(0, combine: { $0 + $1 }) / Double(variances.count)
-            guard 0..<5 ~= averageVariance else { observer.sendNext(0); return observer.sendCompleted() }
+            let averageVariance = variances.reduce(0, { $0 + $1 }) / Double(variances.count)
+            guard 0..<5 ~= averageVariance else { observer.send(value: 0); return observer.sendCompleted() }
             let consensus: Double = 1 - Double(0.2 * averageVariance)
-            observer.sendNext(CGFloat(consensus))
+            observer.send(value: CGFloat(consensus))
             observer.sendCompleted()
         }
     }
@@ -79,9 +79,9 @@ struct SettingsViewModel {
     func loggedInAsSignal() -> SignalProducer<String, SettingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let model = realm.objects(SettingsModel).first ?? SettingsModel()
-            guard model.userName.characters.count > 0 else { observer.sendFailed(.NoUser); return }
-            observer.sendNext(model.userName)
+            let model = realm.objects(SettingsModel.self).first ?? SettingsModel()
+            guard model.userName.characters.count > 0 else { observer.sendFailed(.noUser); return }
+            observer.send(value: model.userName)
             observer.sendCompleted()
         }
     }
@@ -90,11 +90,11 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let model: SettingsModel = realm.objects(SettingsModel).first ?? SettingsModel()
+            let model: SettingsModel = realm.objects(SettingsModel.self).first ?? SettingsModel()
             model.userName = username
             realm.add(model, update: true)
             try! realm.commitWrite()
-            observer.sendNext(model)
+            observer.send(value: model)
             observer.sendCompleted()
         }
     }
@@ -104,22 +104,22 @@ struct SettingsViewModel {
             let realm = try! Realm()
             let settings = realm.objects(SettingsModel).first ?? SettingsModel()
             switch settingType {
-            case .DefaultListIndex: observer.sendNext(settings.defaultListIndex)
-            case .LoginTypeIndex: observer.sendNext(settings.loginTypeIndex)
-            case .PublicService: observer.sendNext(settings.publicService)
-            case .ConsensusBuilding: observer.sendNext(settings.consensusBuilding)
-            case .FirstLaunch: observer.sendNext(settings.isFirstLaunch)
-            case .FirstConsensus: observer.sendNext(settings.isFirstConsensus)
-            case .FirstPublic: observer.sendNext(settings.isFirstPublic)
-            case .FirstFollow: observer.sendNext(settings.isFirstFollow)
-            case .FirstInterest: observer.sendNext(settings.isFirstInterest)
-            case .FirstCompleted: observer.sendNext(settings.isFirstCompleted)
-            case .First25: observer.sendNext(settings.isFirst25)
-            case .First50: observer.sendNext(settings.isFirst50)
-            case .First75: observer.sendNext(settings.isFirst75)
-            case .FirstVoteDisable: observer.sendNext(settings.isFirstVoteDisabled)
-            case .FirstSocialDisable: observer.sendNext(settings.isFirstSocialDisabled)
-            case .FirstTrollWarning: observer.sendNext(settings.isFirstTrollWarning)
+            case .DefaultListIndex: observer.send(value: settings.defaultListIndex)
+            case .LoginTypeIndex: observer.send(value: settings.loginTypeIndex)
+            case .PublicService: observer.send(value: settings.publicService)
+            case .ConsensusBuilding: observer.send(value: settings.consensusBuilding)
+            case .FirstLaunch: observer.send(value: settings.isFirstLaunch)
+            case .FirstConsensus: observer.send(value: settings.isFirstConsensus)
+            case .FirstPublic: observer.send(value: settings.isFirstPublic)
+            case .FirstFollow: observer.send(value: settings.isFirstFollow)
+            case .FirstInterest: observer.send(value: settings.isFirstInterest)
+            case .FirstCompleted: observer.send(value: settings.isFirstCompleted)
+            case .First25: observer.send(value: settings.isFirst25)
+            case .First50: observer.send(value: settings.isFirst50)
+            case .First75: observer.send(value: settings.isFirst75)
+            case .FirstVoteDisable: observer.send(value: settings.isFirstVoteDisabled)
+            case .FirstSocialDisable: observer.send(value: settings.isFirstSocialDisabled)
+            case .FirstTrollWarning: observer.send(value: settings.isFirstTrollWarning)
             }
             observer.sendCompleted()
         }
@@ -129,7 +129,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             realm.beginWrite()
-            let settings = realm.objects(SettingsModel).first ?? SettingsModel()
+            let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
             switch settingType {
             case .DefaultListIndex: settings.defaultListIndex = value as! Int
             case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
@@ -152,7 +152,7 @@ struct SettingsViewModel {
             realm.add(settings, update: true)
             try! realm.commitWrite()
             
-            observer.sendNext(settings)
+            observer.send(value: settings)
             observer.sendCompleted()
         }
     }
@@ -160,17 +160,17 @@ struct SettingsViewModel {
     func updateTodayWidgetSignal() -> SignalProducer<Results<CelebrityModel>, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebList = realm.objects(CelebrityModel).filter("isFollowed = true")
-            let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
+            let celebList = realm.objects(CelebrityModel.self).filter("isFollowed = true")
+            let userDefaults: UserDefaults = UserDefaults(suiteName:"group.NotificationApp")!
             if celebList.count > 0 {
-                for (index, celeb) in celebList.enumerate() {
-                    let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
-                    let today:[String: AnyObject] = ["id": celeb.id, "nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
-                    userDefaults.setObject(today, forKey: String(index))
+                for (index, celeb) in celebList.enumerated() {
+                    let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
+                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
+                    userDefaults.set(today, forKey: String(index))
                 }
             }
-            userDefaults.setInteger(celebList.count, forKey: "count")
-            observer.sendNext(celebList)
+            userDefaults.set(celebList.count, forKey: "count")
+            observer.send(value: celebList)
             observer.sendCompleted()
         }
     }

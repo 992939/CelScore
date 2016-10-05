@@ -17,18 +17,18 @@ struct RatingsViewModel {
     
     func updateUserRatingSignal(ratingsId: String, ratingIndex: Int, newRating: Int) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
-            guard 1...5 ~= newRating else { return observer.sendFailed(.RatingValueOutOfBounds) }
-            guard 0...9 ~= ratingIndex else { return observer.sendFailed(.RatingIndexOutOfBounds) }
+            guard 1...5 ~= newRating else { return observer.sendFailed(.ratingValueOutOfBounds) }
+            guard 0...9 ~= ratingIndex else { return observer.sendFailed(.ratingIndexOutOfBounds) }
             
             let realm = try! Realm()
             realm.beginWrite()
-            let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first ?? UserRatingsModel(id: ratingsId)
+            let userRatings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first ?? UserRatingsModel(id: ratingsId)
             let key = userRatings[ratingIndex]
             userRatings[key] = newRating
             userRatings.isSynced = true
             realm.add(userRatings, update: true)
             try! realm.commitWrite()
-            observer.sendNext(userRatings)
+            observer.send(value: userRatings)
             observer.sendCompleted()
         }
     }
@@ -36,14 +36,14 @@ struct RatingsViewModel {
     func voteSignal(ratingsId: String) -> SignalProducer<RatingsModel, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
+            let userRatings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first
             guard let object = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
             realm.beginWrite()
             object.isSynced = false
             object.totalVotes += 1
             realm.add(object, update: true)
             try! realm.commitWrite()
-            observer.sendNext(object)
+            observer.send(value: object)
             observer.sendCompleted()
         }
     }
@@ -53,13 +53,13 @@ struct RatingsViewModel {
             let realm = try! Realm()
             switch ratingType {
             case .Ratings:
-                let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
-                guard let object = ratings else { return observer.sendFailed(.RatingsNotFound) }
-                observer.sendNext(object)
+                let ratings = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first
+                guard let object = ratings else { return observer.sendFailed(.ratingsNotFound) }
+                observer.send(value: object)
             case .UserRatings:
-                let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-                guard let object = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
-                observer.sendNext(object)
+                let userRatings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first
+                guard let object = userRatings else { return observer.send(error: .userRatingsNotFound) }
+                observer.send(value: object)
             }
             observer.sendCompleted()
         }
@@ -68,9 +68,9 @@ struct RatingsViewModel {
     func hasUserRatingsSignal(ratingsId: String) -> SignalProducer<Bool, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let ratings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard let userRatings = ratings else { return observer.sendNext(false) }
-            observer.sendNext(userRatings.totalVotes > 0 ? true : false ?? false)
+            let ratings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first
+            guard let userRatings = ratings else { return observer.send(value: false) }
+            observer.send(value: userRatings.totalVotes > 0 ? true : false)
             observer.sendCompleted()
         }
     }
@@ -86,7 +86,7 @@ struct RatingsViewModel {
             else if newRatings!.totalVotes == 0 { newRatings!.forEach({ rating in newRatings![rating] = 0 }) }
             realm.add(newRatings!, update: true)
             try! realm.commitWrite()
-            observer.sendNext(newRatings!)
+            observer.send(value: newRatings!)
             observer.sendCompleted()
         }
     }
@@ -94,10 +94,10 @@ struct RatingsViewModel {
     func consensusBuildingSignal(ratingsId: String) -> SignalProducer<String, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let ratings = realm.objects(RatingsModel).filter("id = %@", ratingsId).first
-            let userRatings = realm.objects(UserRatingsModel).filter("id = %@", ratingsId).first
-            guard let allRatings = ratings else { return observer.sendFailed(.UserRatingsNotFound) }
-            guard let allUserRatings = userRatings else { return observer.sendFailed(.UserRatingsNotFound) }
+            let ratings = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first
+            let userRatings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first
+            guard let allRatings = ratings else { return observer.sendFailed(.userRatingsNotFound) }
+            guard let allUserRatings = userRatings else { return observer.sendFailed(.userRatingsNotFound) }
             
             var differences: [Double] = Array(count: 10, repeatedValue: 0)
             for (index, rating) in allRatings.generate().enumerate() {
@@ -106,7 +106,7 @@ struct RatingsViewModel {
             let sumDiff = differences.reduce(0, combine: +)
             let percent: Int = 100 - Int(sumDiff * 2)
             let message = "\(percent)% of the consensus agrees with you. Thank you for building!"
-            observer.sendNext(message)
+            observer.send(value: message)
             observer.sendCompleted()
         }
     }
@@ -117,7 +117,7 @@ struct RatingsViewModel {
             let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", ratingsId).first!
             guard let max = ratings.maxElement() else { return observer.sendFailed(.RatingsNotFound) }
             guard (ratings[max] as! Double) >= 3 else { return observer.sendFailed(.RatingsNotFound) }
-            observer.sendNext(ratings.indexOf(max)!)
+            observer.send(value: ratings.indexOf(max)!)
             observer.sendCompleted()
         }
     }
@@ -127,7 +127,7 @@ struct RatingsViewModel {
         let realm = try! Realm()
         let ratings: RatingsModel = realm.objects(RatingsModel).filter("id = %@", ratingsId).first!
         let consensus = 100 - ( 20 * ratings.getAvgVariance())
-        observer.sendNext(consensus)
+        observer.send(value: consensus)
         observer.sendCompleted()
         }
     }
@@ -143,7 +143,7 @@ struct RatingsViewModel {
                 celScore *= Double(ratings!.totalVotes)
                 celScore = (celScore + userRatings.getCelScore()) / Double(ratings!.totalVotes + 1)
             }
-            observer.sendNext(celScore)
+            observer.send(value: celScore)
             observer.sendCompleted()
         }
     }
