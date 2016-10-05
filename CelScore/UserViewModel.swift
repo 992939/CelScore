@@ -100,9 +100,9 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .facebook:
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { print("fb error: \(error)"); return observer.sendFailed(error) }
-                    observer.sendNext(object)
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).start { (FBSDKGraphRequestConnection, object: Any?, error: Error?) in
+                    guard error == nil else { print("fb error: \(error)"); return observer.send(error: error as! NSError) }
+                    observer.send(value: object as AnyObject)
                     observer.sendCompleted()
                 }
             case .twitter:
