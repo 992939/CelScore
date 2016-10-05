@@ -64,7 +64,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
-        let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
+        let first: Button? = self.socialButton.menu.views?.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
             .startWithNext({ status in
@@ -165,12 +165,12 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observeOn(UIScheduler())
             .on(next: { (userRatings:RatingsModel) in
-                let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
+                let first: Button? = self.socialButton.menu.views?.first as? Button
                 first?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                MaterialAnimation.delay(2.5) {
+                Animation.delay(2.5) {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
@@ -279,7 +279,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func openHandleMenu() {
-        let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
+        let first: Button? = self.socialButton.menu.views?.first as? Button
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
         first?.animate(animation: Animation.rotate(rotation: 1))
@@ -290,8 +290,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func closeHandleMenu() {
-       let first: Button? = self.socialButton.menu.views?.first as? MaterialButton
-        if self.socialButton.menu.opened { first?.animate(MaterialAnimation.rotate(rotation: 1)) }
+       let first: Button? = self.socialButton.menu.views?.first as? Button
+        if self.socialButton.menu.opened { first?.animate(Animation.rotate(rotation: 1)) }
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
@@ -320,7 +320,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                         TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                             image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    self.presentViewController(socialVC, animated: true, completion: { MaterialAnimation.delay(2.0) { self.socialButton.menu.close() }})
+                    self.presentViewController(socialVC, animated: true, completion: { Animation.delay(2.0) { self.socialButton.menu.close() }})
                 }})
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
             .start()
@@ -492,7 +492,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
         segmentView.selectSegmentAtIndex(0)
         segmentView.clipsToBounds = false
-        segmentView.layer.shadowColor = MaterialColor.black.CGColor
+        segmentView.layer.shadowColor = Color.black.CGColor
         segmentView.layer.shadowOffset = CGSize(width: 0, height: 2)
         segmentView.layer.shadowOpacity = 0.3
         segmentView.segments[0].isAccessibilityElement = true

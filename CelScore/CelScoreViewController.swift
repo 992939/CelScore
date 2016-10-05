@@ -16,7 +16,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     //MARK: Properties
     fileprivate let celebST: CelebrityStruct
-    fileprivate let pulseView: MaterialView
+    fileprivate let pulseView: View
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -24,7 +24,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
+        self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
     }
     
@@ -41,12 +41,12 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
         })
         
-        self.pulseView.backgroundColor = MaterialColor.clear
+        self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
     
-    func getGaugeView(_ gaugeHeight: CGFloat) -> MaterialPulseView {
-        let gaugeView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
+    func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
+        let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
@@ -65,9 +65,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kBlueShade
-        gauge.divisionsColor = MaterialColor.black
-        gauge.valueTextColor = MaterialColor.black
-        gauge.unitOfMeasurementTextColor = MaterialColor.black
+        gauge.divisionsColor = Color.black
+        gauge.valueTextColor = Color.black
+        gauge.unitOfMeasurementTextColor = Color.black
         gauge.ringBackgroundColor = Constants.kBlueShade
         gauge.backgroundColor = Constants.kGreyBackground
         gauge.delegate = self
@@ -88,7 +88,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return gaugeView
     }
     
-    func getView(positionY: CGFloat, title: String, value: String, tag: Int) -> MaterialPulseView {
+    func getView(positionY: CGFloat, title: String, value: String, tag: Int) -> PulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
         if tag < 4 {
@@ -98,7 +98,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
                 let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
                 let attr1 = [NSFontAttributeName: UIFont.systemFontOfSize(13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
                 attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.black]
+                let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
                 let attrString = NSAttributedString(string: String(format: " %.2f", Double(value)!), attributes: attr2)
                 attributedText.appendAttributedString(attrString)
                 infoLabel.attributedText = attributedText

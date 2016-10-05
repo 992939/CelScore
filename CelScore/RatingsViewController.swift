@@ -16,7 +16,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     //MARK: Properties
     fileprivate let celebST: CelebrityStruct
-    fileprivate let pulseView: MaterialView
+    fileprivate let pulseView: View
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -24,7 +24,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MaterialView(frame: Constants.kBottomViewRect)
+        self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.isHidden = true
     }
@@ -33,7 +33,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupStars()
-        self.pulseView.backgroundColor = MaterialColor.clear
+        self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
     
@@ -47,7 +47,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.depth = .Depth1
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .CenterWithBacking
-                    qualityView.pulseColor = MaterialColor.clear
+                    qualityView.pulseColor = Color.clear
                     SettingsViewModel().getSettingSignal(settingType: .PublicService)
                         .observeOn(UIScheduler())
                         .startWithNext({ status in
@@ -120,7 +120,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     func requestLogin() {
         SettingsViewModel().getSettingSignal(settingType: .FirstVoteDisable).startWithNext({ first in let firstTime = first as! Bool
             guard firstTime else { return self.delegate!.socialSharing(message: "") }
-            MaterialAnimation.delay(0.5) { TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(), image: OverlayInfo.FirstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
+            Animation.delay(0.5) { TAOverlay.showOverlayWithLabel(OverlayInfo.FirstVoteDisable.message(), image: OverlayInfo.FirstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
             TAOverlay.setCompletionBlock({ _ in
                 self.delegate!.socialSharing(message: "")
                 SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstVoteDisable).start()
@@ -139,7 +139,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     }
     
     func isUserRatingMode() -> Bool {
-        let materialView: MaterialPulseView = self.view.subviews.first as! MaterialPulseView
+        let materialView: PulseView = self.view.subviews.first as! PulseView
         let stars = materialView.subviews.filter({ $0 is CosmosView })
         let cosmos: CosmosView = stars.first as! CosmosView
         return cosmos.settings.userRatingMode
@@ -149,7 +149,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .Ratings)
             .observeOn(UIScheduler())
             .on(next: { ratings in
-                let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
+                let viewArray: [PulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerate() {
                     Timer.after(100.ms * Double(index)){ timer in
                         subview.pulse()

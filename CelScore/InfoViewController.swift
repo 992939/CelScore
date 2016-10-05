@@ -16,7 +16,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     //MARK: Properties
     fileprivate let celebST: CelebrityStruct
-    fileprivate let pulseView: MaterialView
+    fileprivate let pulseView: View
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
@@ -24,7 +24,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     init(celebrityST: CelebrityStruct) {
         self.celebST = celebrityST
-        self.pulseView = MKOverlayView(frame: Constants.kBottomViewRect)
+        self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.isHidden = true
     }
@@ -33,12 +33,12 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     override func viewDidLoad() {
         super.viewDidLoad()
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(next: { celeb in
+            .on(starting: { celeb in
                 
                 let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
                 let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
-                let formatter = NSDateFormatter()
-                formatter.dateStyle = .LongStyle
+                let formatter = DateFormatter()
+                formatter.dateStyle = .longStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                     .startWithNext({ score in
@@ -89,7 +89,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                     })
             })
             .start()
-        self.pulseView.backgroundColor = MaterialColor.clear
+        self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
     
@@ -99,9 +99,9 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
         let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
         attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFontOfSize(Constants.kFontSize), NSForegroundColorAttributeName : MaterialColor.black]
+        let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
         let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
-        attributedText.appendAttributedString(attrString)
+        attributedText.append(attrString)
         return attributedText
     }
     
@@ -111,23 +111,23 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .startWithNext({ celeb in
-                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
+                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as NSDate
                 let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
-                let formatter = NSDateFormatter()
-                formatter.dateStyle = NSDateFormatterStyle.LongStyle
+                let formatter = DateFormatter()
+                formatter.dateStyle = DateFormatter.Style.LongStyle
                 
                 let infoText: String
                 switch quality {
-                case Info.FirstName.text(): infoText = celeb.firstName
-                case Info.MiddleName.text(): infoText = celeb.middleName
-                case Info.LastName.text(): infoText = celeb.lastName
-                case Info.From.text(): infoText = celeb.from
-                case Info.Birthdate.text(): infoText = formatter.stringFromDate(birthdate) + String(" (\(age))")
-                case Info.Height.text(): infoText = celeb.height
-                case Info.Zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
-                case Info.Status.text(): infoText = celeb.status
-                case Info.CelScore.text(): infoText = String(format: "%.2f", celeb.prevScore)
-                case Info.Networth.text(): infoText = celeb.netWorth
+                case Info.firstName.text(): infoText = celeb.firstName
+                case Info.middleName.text(): infoText = celeb.middleName
+                case Info.lastName.text(): infoText = celeb.lastName
+                case Info.from.text(): infoText = celeb.from
+                case Info.birthdate.text(): infoText = formatter.string(from: birthdate as Date) + String(" (\(age))")
+                case Info.height.text(): infoText = celeb.height
+                case Info.zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                case Info.status.text(): infoText = celeb.status
+                case Info.celScore.text(): infoText = String(format: "%.2f", celeb.prevScore)
+                case Info.networth.text(): infoText = celeb.netWorth
                 default: infoText = "n/a"
                 }
                 let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"

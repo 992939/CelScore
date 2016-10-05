@@ -31,7 +31,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : MaterialColor.black]
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
         self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .byTruncatingTail
@@ -57,7 +57,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
         box.onAnimationType = .bounce
         box.offAnimationType = .bounce
-        box.onCheckColor = MaterialColor.white
+        box.onCheckColor = Color.white
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
         box.tintColor = Constants.kRedShade

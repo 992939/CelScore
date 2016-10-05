@@ -30,7 +30,7 @@ extension HUDable{
         SVProgressHUD.setRingThickness(4)
         SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.setBackgroundColor(Constants.kRedShade)
-        SVProgressHUD.setForegroundColor(MaterialColor.white)
+        SVProgressHUD.setForegroundColor(Color.white)
         SVProgressHUD.show()
     }
     
@@ -43,7 +43,7 @@ extension Labelable {
     func setupLabel(title: String, frame: CGRect) -> UILabel {
         let label = UILabel(frame: frame)
         label.text = title
-        label.textColor = MaterialColor.black
+        label.textColor = Color.black
         label.backgroundColor = Constants.kGreyBackground
         label.font = UIFont(name: label.font.fontName, size: Constants.kFontSize)
         return label
@@ -62,7 +62,7 @@ extension Supportable where Self: UIViewController {
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
         mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
-        MaterialAnimation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
+        Animation.delay(0.5) { self.presentViewController(mail, animated: true, completion: nil) }
     }
     
     func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
@@ -147,7 +147,7 @@ extension Sociable where Self: UIViewController {
         btn1.depth = .Depth2
         btn1.pulseAnimation = .None
         btn1.backgroundColor = buttonColor
-        btn1.tintColor = MaterialColor.white
+        btn1.tintColor = Color.white
         btn1.setImage(R.image.ic_add_black()!, forState: .Disabled)
         btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), forState: .Highlighted)
@@ -160,9 +160,9 @@ extension Sociable where Self: UIViewController {
         btn2.clipsToBounds = true
         btn2.contentMode = .ScaleToFill
         btn2.depth = .Depth1
-        btn2.pulseColor = MaterialColor.white
-        btn2.backgroundColor = MaterialColor.indigo.darken1
-        btn2.borderColor = MaterialColor.white
+        btn2.pulseColor = Color.white
+        btn2.backgroundColor = Color.indigo.darken1
+        btn2.borderColor = Color.white
         btn2.borderWidth = 2
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
@@ -175,9 +175,9 @@ extension Sociable where Self: UIViewController {
         btn3.contentMode = .ScaleToFill
         btn3.clipsToBounds = true
         btn3.depth = .Depth1
-        btn3.backgroundColor = MaterialColor.lightBlue.base
-        btn3.pulseColor = MaterialColor.white
-        btn3.borderColor = MaterialColor.white
+        btn3.backgroundColor = Color.lightBlue.base
+        btn3.pulseColor = Color.white
+        btn3.borderColor = Color.white
         btn3.borderWidth = 2
         btn3.setImage(image, forState: .Normal)
         btn3.setImage(image, forState: .Highlighted)

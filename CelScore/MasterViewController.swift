@@ -61,7 +61,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        MaterialAnimation.delay(0.4) {
+        Animation.delay(0.4) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadRowsAtIndexPaths([index], withRowAnimation: .Fade)
@@ -105,9 +105,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
         self.celebrityTableView.separatorStyle = .none
-        self.celebrityTableView.backgroundColor = MaterialColor.clear
+        self.celebrityTableView.backgroundColor = Color.clear
         
-        let attr = [NSForegroundColorAttributeName: MaterialColor.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
+        let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFontOfSize(14.0)]
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
         self.searchBar.delegate = self
         self.searchBar.searchBarStyle = .minimal
@@ -120,10 +120,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
-        Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        Layout.size(self.view, child: self.socialButton, width: Constants.kFabDiameter)
         self.setupData()
         
-        NotificationCenter.default.rac_notifications(NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithNext { _ in
+        NotificationCenter.default.rac_notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity)
@@ -159,7 +159,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let account = ACAccountStore()
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
         account.requestAccessToAccounts(with: accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
-            if success == false { MaterialAnimation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
+            if success == false { Animation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
         })
     }
     
@@ -229,7 +229,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .observeOn(QueueScheduler.mainQueueScheduler)
-            .on(next: { celebInfo in MaterialAnimation.delay(1) {
+            .on(next: { celebInfo in Animation.delay(1) {
                     TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
                 }
             })
@@ -244,7 +244,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .observeOn(UIScheduler())
             .startWithNext { list in
                 self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                MaterialAnimation.delay(0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
+                Animation.delay(0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
         }
     }
     
@@ -252,29 +252,29 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func handleMenu(_ open: Bool = false) {
         let image: UIImage?
         if open || (open == false && self.socialButton.menu.opened == false){
-            self.socialButton.menu.open() { (v: UIView) in (v as? MaterialButton)?.pulse() }
+            self.socialButton.menu.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-            first?.animate(MaterialAnimation.rotate(rotation: 5))
-            first?.setImage(image, forState: .Normal)
-            first?.setImage(image, forState: .Highlighted)
+            let first: Button? = self.socialButton.menu.views?.first as? Button
+            first?.animate(animation: Animation.rotate(rotation: 5))
+            first?.setImage(image, for: .normal)
+            first?.setImage(image, for: .highlighted)
         } else if self.socialButton.menu.opened {
             self.socialButton.menu.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-            first?.animate(MaterialAnimation.rotate(rotation: 5))
-            first?.setImage(image, forState: .Normal)
-            first?.setImage(image, forState: .Highlighted)
+            let first: Button? = self.socialButton.menu.views?.first as? Button
+            first?.animate(animation: Animation.rotate(rotation: 5))
+            first?.setImage(image, for: .normal)
+            first?.setImage(image, for: .highlighted)
         }
     }
     
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.menu.close()
-        let first: MaterialButton? = self.socialButton.menu.views?.first as? MaterialButton
-        first!.animate(MaterialAnimation.animationGroup([
-            MaterialAnimation.rotate(rotation: 5),
-            MaterialAnimation.translateY(y)
+        let first: Button? = self.socialButton.menu.views?.first as? Button
+        first!.animate(animation: Animation.animationGroup([
+            Animation.rotate(rotation: 5),
+            Animation.translateY(y)
         ]))
     }
     
@@ -331,7 +331,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
-        MaterialAnimation.delay(0.2) { self.presentViewController(detailVC, animated: true, completion: nil) }
+        Animation.delay(time: 0.2) { self.present(detailVC, animated: true, completion: nil) }
     }
     
     func showSearchBar() {
@@ -340,9 +340,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         UIView.animate(withDuration: 0.5, animations: {
             self.searchBar.alpha = 1.0
             self.searchBar.showsCancelButton = true
-            self.searchBar.tintColor = MaterialColor.white
+            self.searchBar.tintColor = Color.white
             self.searchBar.backgroundColor = Constants.kBlueShade
-            self.searchBar.barTintColor = MaterialColor.white
+            self.searchBar.barTintColor = Color.white
             self.searchBar.frame = Constants.kSegmentedControlRect
             self.view.addSubview(self.searchBar)
             self.searchBar.endEditing(true)
@@ -366,7 +366,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                MaterialAnimation.delay(1.0) { self.movingSocialButton(onScreen: true) }
+                Animation.delay(1.0) { self.movingSocialButton(onScreen: true) }
             })
             .start()
     }
@@ -394,18 +394,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: ViewDidLoad Helpers
     func getNavigationView() -> Toolbar {
         let menuButton: FlatButton = FlatButton()
-        menuButton.pulseColor = MaterialColor.white
-        menuButton.pulseAnimation = .None
-        menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), forControlEvents: .TouchUpInside)
-        menuButton.setImage(R.image.ic_menu_white()!, forState: .Normal)
-        menuButton.setImage(R.image.ic_menu_white()!, forState: .Highlighted)
+        menuButton.pulseColor = Color.white
+        menuButton.pulseAnimation = .none
+        menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), for: .touchUpInside)
+        menuButton.setImage(R.image.ic_menu_white()!, for: .Normal)
+        menuButton.setImage(R.image.ic_menu_white()!, for: .Highlighted)
         
         let rightButton: FlatButton = FlatButton()
-        rightButton.pulseColor = MaterialColor.white
-        rightButton.pulseAnimation = .None
-        rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), forControlEvents: .TouchUpInside)
-        rightButton.setImage(R.image.ic_search_white()!, forState: .Normal)
-        rightButton.setImage(R.image.ic_search_white()!, forState: .Highlighted)
+        rightButton.pulseColor = Color.white
+        rightButton.pulseAnimation = .none
+        rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), for: .touchUpInside)
+        rightButton.setImage(R.image.ic_search_white()!, for: .Normal)
+        rightButton.setImage(R.image.ic_search_white()!, for: .Highlighted)
         
         let navBar: Toolbar = Toolbar()
         navBar.frame = Constants.kNavigationBarRect
@@ -424,14 +424,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.backgroundColor = Constants.kBlueShade
         self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
         self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : MaterialColor.white,
-                                                     NSFontAttributeName: UIFont.systemFontOfSize(18),
+        self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : Color.white,
+                                                     NSFontAttributeName: UIFont.systemFont(ofSize: 18),
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.isOpaque = true
         self.segmentedControl.clipsToBounds = false
-        self.segmentedControl.layer.shadowColor = MaterialColor.black.CGColor
+        self.segmentedControl.layer.shadowColor = Color.black.cgColor
         self.segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.segmentedControl.layer.shadowOpacity = 0.3
         self.segmentedControl.isAccessibilityElement = true
