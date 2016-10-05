@@ -1276,7 +1276,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A0A4C7A3E3FA606D0C24A0D /* Pods-CelScore.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1307,7 +1307,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1337,7 +1337,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32576654128FDDF94E6AD457 /* Pods-CelScoreTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				ENABLE_BITCODE = YES;
@@ -1372,7 +1372,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A06617D3FC118FE7FCF1FA8A /* Pods-CelScoreTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";

@@ -87,11 +87,11 @@ struct UserViewModel {
             let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy", locale: Locale(identifier: "en_US_POSIX"))
             if expirationDate! > 10.days.later { observer.sendCompleted() }
             else {
-                FBSDKAccessToken.refreshCurrentAccessToken { (connection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) -> Void in
-                    guard error == nil else { return observer.sendFailed(error) }
-                    observer.sendNext(object)
+                FBSDKAccessToken.refreshCurrentAccessToken({ (FBSDKGraphRequestConnection, object: Any?, error: Error?) in
+                    guard error == nil else { return observer.send(error: error! as NSError) }
+                    observer.send(value: object as AnyObject)
                     observer.sendCompleted()
-                }
+                })
             }
         }
     }
@@ -128,9 +128,9 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continue({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
-                return nil }
+                return nil })
             
-            let syncClient: AWSCognito = AWSCognito.defaultCognito()
+            let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
             let realm = try! Realm()
             
