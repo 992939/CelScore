@@ -128,19 +128,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
-                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
-                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                         return CelScoreViewModel().getFromAWSSignal(dataType: .list) }
-                    .observeOn(UIScheduler())
+                    .observe(on: UIScheduler())
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().sanitizeListsSignal() }
-                    .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().updateListSignal(listId: list.getId()) }
-                    .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                         return ListViewModel().getListSignal(listId: list.getId()) }
-                    .on(next: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                    .on(starting: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
                     .observeOn(UIScheduler())
@@ -189,9 +189,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
-        CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+        CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .Celebrity) }
+                return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .observeOn(QueueScheduler.mainQueueScheduler)
             .on(next: { _ in
                 Duration.stopMeasurement()
