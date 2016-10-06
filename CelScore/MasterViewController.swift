@@ -30,7 +30,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     fileprivate let searchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
-    fileprivate let socialButton: MenuView
+    fileprivate let socialButton: Menu
     internal let celebrityTableView: ASTableView
     
     //MARK: Initializers
@@ -42,7 +42,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
-        self.socialButton = MenuView()
+        self.socialButton = Menu()
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
@@ -75,14 +75,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
         SettingsViewModel().loggedInAsSignal().startWithNext { _ in
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
-                CelScoreViewModel().getFromAWSSignal(dataType: .Ratings)
+                CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<CGFloat, NoError> in
                         return SettingsViewModel().calculateUserAverageCelScoreSignal() }
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex) }
+                        return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
@@ -90,7 +90,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         if type == .Facebook { self.facebookTokenCheck() }
                         else { self.twitterAccessCheck() }
                         return UserViewModel().loginSignal(token: token, with: type) }
-                    .retry(Constants.kNetworkRetry)
+                    .retry(upTo: Constants.kNetworkRetry)
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -166,13 +166,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func openSettings() {
         SettingsViewModel().loggedInAsSignal()
-            .observeOn(UIScheduler())
-            .on(next: { _ in
+            .observe(on: UIScheduler())
+            .on(starting: { _ in
                 self.navigationDrawerController?.enabled = true
-                self.navigationDrawerController!.setLeftViewWidth(Constants.kSettingsViewWidth, hidden: true, animated: false)
+                self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.MenuAccess.message(), image: R.image.contract_blue_big()!, style: .Alert)
+                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .Alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Default, action: { _ in
                     MaterialAnimation.delay(0.5) { self.handleMenu(true) }
@@ -240,12 +240,12 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().updateListSignal(listId: list.getId())
-            .flatMap(.Latest) { (_) -> SignalProducer<ListsModel, ListError> in
+            .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
-            .observeOn(UIScheduler())
+            .observe(on: UIScheduler())
             .startWithNext { list in
                 self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                Animation.delay(0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
+                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
         }
     }
     
@@ -321,7 +321,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
-            .observeOn(UIScheduler())
+            .observe(on: UIScheduler())
             .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }
@@ -383,8 +383,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
-                .observeOn(UIScheduler())
-                .startWithNext({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                .observe(on: UIScheduler())
+                .startWithValues({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
         }
     }
     

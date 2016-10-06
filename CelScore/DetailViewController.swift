@@ -113,7 +113,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func showingButtons() {
-        let first: Button? = self.socialButton.menu.views?.first as? Button
+        let first: Button? = self.socialButton.views?.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 3),
             Animation.translateX(translation: Constants.kPadding + 100)
@@ -124,7 +124,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             Animation.translateX(translation: -(Constants.kFabDiameter + 100))
             ]))
         
-        for subview in self.socialButton.menu.views!.enumerate() {
+        for subview in self.socialButton.views!.enumerate() {
             if subview.element.tag == 1 || subview.element.tag == 2 {
                 subview.element.frame.offsetInPlace(dx: Constants.kPadding + 100, dy: 0)
             }
@@ -132,7 +132,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     }
     
     func hideButtons() {
-        let first: Button? = self.socialButton.menu.views?.first as? Button
+        let first: Button? = self.socialButton.views?.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 3),
             Animation.translateX(translation: -(Constants.kPadding + 100))
@@ -466,14 +466,14 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.leftControls = [backButton]
         navigationBarView.rightControls = [infoButton]
-        navigationBarView.depth = .depth3
+        navigationBarView.depthPreset = .depth3
         navigationBarView.backgroundColor = Constants.kRedShade
         return navigationBarView
     }
     
     func getTopView() -> View {
         let topView: View = View(frame: Constants.kTopViewRect)
-        topView.depth = .depth2
+        topView.depthPreset = .depth2
         topView.backgroundColor = Constants.kBlueShade
         topView.isOpaque = true
         topView.image = R.image.topView()
@@ -508,8 +508,8 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
     func setUpVoteButton() {
         let diameter: CGFloat = Constants.kFabDiameter
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
-        self.voteButton.shape = .Circle
-        self.voteButton.depth = .Depth2
+        self.voteButton.shape = .circle
+        self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .none
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableVoteButton(R.image.heart_black()!)

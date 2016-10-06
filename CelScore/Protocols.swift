@@ -143,9 +143,9 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func setUpSocialButton(_ menuView: MenuView, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
+    func setUpSocialButton(_ menuView: Menu, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
-        btn1.depth = .Depth2
+        btn1.depthPreset = .depth2
         btn1.pulseAnimation = .none
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
@@ -160,7 +160,7 @@ extension Sociable where Self: UIViewController {
         btn2.tag = 1
         btn2.clipsToBounds = true
         btn2.contentMode = .scaleToFill
-        btn2.depth = .Depth1
+        btn2.depthPreset = .depth1
         btn2.pulseColor = Color.white
         btn2.backgroundColor = Color.indigo.darken1
         btn2.borderColor = Color.white
@@ -175,7 +175,7 @@ extension Sociable where Self: UIViewController {
         btn3.tag = 2
         btn3.contentMode = .scaleToFill
         btn3.clipsToBounds = true
-        btn3.depth = .Depth1
+        btn3.depthPreset = .depth1
         btn3.backgroundColor = Color.lightBlue.base
         btn3.pulseColor = Color.white
         btn3.borderColor = Color.white
@@ -185,10 +185,10 @@ extension Sociable where Self: UIViewController {
         btn3.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.addSubview(btn3)
         
-        menuView.menu.origin = origin
-        menuView.menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        menuView.menu.direction = .Up
-        menuView.menu.views = [btn1, btn2, btn3]
+        menuView.center = origin
+        menuView.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.direction = .up
+        menuView.views = [btn1, btn2, btn3]
         menuView.translatesAutoresizingMaskIntoConstraints = false
     }
 }

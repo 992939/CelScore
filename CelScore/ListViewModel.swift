@@ -17,8 +17,8 @@ struct ListViewModel {
     func getListSignal(listId: String) -> SignalProducer<ListsModel, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let list = realm.objects(ListsModel).filter("id = %@", listId).first
-            guard let celebList = list else { return observer.sendFailed(.EmptyList) }
+            let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
+            guard let celebList = list else { return observer.send(error: .emptyList) }
             observer.send(value: celebList)
             observer.sendCompleted()
         }
@@ -27,14 +27,14 @@ struct ListViewModel {
     func searchSignal(searchToken: String) -> SignalProducer<ListsModel, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let list = realm.objects(CelebrityModel).filter("nickName contains[c] %@", searchToken)
+            let list = realm.objects(CelebrityModel.self).filter("nickName contains[c] %@", searchToken)
             guard list.count > 0 else { return observer.sendCompleted() }
             
             realm.beginWrite()
             let listModel = ListsModel()
             listModel.id = Constants.kSearchListId
             listModel.name = "SearchList"
-            for (_, celeb) in list.enumerate() {
+            for (_, celeb) in list.enumerated() {
                 let celebId = CelebId()
                 celebId.id = celeb.id
                 listModel.celebList.append(celebId)
@@ -51,16 +51,16 @@ struct ListViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             ListInfo.getAllIDs().forEach({ (listId:String) in
-                let list = realm.objects(ListsModel).filter("id = %@", listId).first
+                let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
                 guard let celebList = list else { return }
                 
-                let current = realm.objects(CelebrityModel)
-                let notExisting = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                    return !current.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id }) })
+                let current = realm.objects(CelebrityModel.self)
+                let notExisting = celebList.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                    return !current.enumerated().contains(where: { (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id }) })
                 guard notExisting.count > 0 else { return }
                 
                 realm.beginWrite()
-                for (index, _) in notExisting.enumerate() { celebList.celebList.removeAtIndex(index) }
+                for (index, _) in notExisting.enumerated() { celebList.celebList.remove(at: index) }
                 realm.add(celebList, update: true)
                 try! realm.commitWrite()
             })
@@ -73,14 +73,14 @@ struct ListViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             
-            let list = realm.objects(ListsModel).filter("id = %@", listId).first
+            let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
             guard let celebList = list else { return }
-            let followed = realm.objects(CelebrityModel).filter("isFollowed = true")
+            let followed = realm.objects(CelebrityModel.self).filter("isFollowed = true")
             
             guard followed.count > 0 else { return observer.send(value: true) }
             var notFollowing: [(index: Int, celebId: CelebId)] = []
-            let following = celebList.celebList.enumerate().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                let isFollowing = followed.enumerate().contains({ (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
+            let following = celebList.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+                let isFollowing = followed.enumerated().contains(where: { (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
                 if !isFollowing { notFollowing.append(item) }
                 return isFollowing
             })
@@ -111,11 +111,11 @@ struct ListViewModel {
     func getCelebrityStructSignal(listId: String, index: Int) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let list = realm.objects(ListsModel).filter("id = %@", listId).first
-            guard let celebList: ListsModel = list else { return observer.sendFailed(.EmptyList) }
+            let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
+            guard let celebList: ListsModel = list else { return observer.send(error: .emptyList) }
             let celebId: CelebId = celebList.celebList[index]
-            let celeb = realm.objects(CelebrityModel).filter("id = %@", celebId.id).first
-            guard celeb?.id.isEmpty == false else { return observer.sendFailed(.EmptyList) }
+            let celeb = realm.objects(CelebrityModel.self).filter("id = %@", celebId.id).first
+            guard celeb?.id.isEmpty == false else { return observer.send(error: .emptyList) }
             observer.send(value: CelebrityStruct(id: celeb!.id, imageURL:celeb!.picture3x, nickname:celeb!.nickName, prevScore: celeb!.prevScore, sex: celeb!.sex, isFollowed:celeb!.isFollowed))
             observer.sendCompleted()
         }

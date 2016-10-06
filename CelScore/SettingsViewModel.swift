@@ -80,7 +80,7 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let model = realm.objects(SettingsModel.self).first ?? SettingsModel()
-            guard model.userName.characters.count > 0 else { observer.sendFailed(.noUser); return }
+            guard model.userName.characters.count > 0 else { observer.send(error: .noUser); return }
             observer.send(value: model.userName)
             observer.sendCompleted()
         }
@@ -102,24 +102,24 @@ struct SettingsViewModel {
     func getSettingSignal(settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let settings = realm.objects(SettingsModel).first ?? SettingsModel()
+            let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
             switch settingType {
-            case .DefaultListIndex: observer.send(value: settings.defaultListIndex)
-            case .LoginTypeIndex: observer.send(value: settings.loginTypeIndex)
-            case .PublicService: observer.send(value: settings.publicService)
-            case .ConsensusBuilding: observer.send(value: settings.consensusBuilding)
-            case .FirstLaunch: observer.send(value: settings.isFirstLaunch)
-            case .FirstConsensus: observer.send(value: settings.isFirstConsensus)
-            case .FirstPublic: observer.send(value: settings.isFirstPublic)
-            case .FirstFollow: observer.send(value: settings.isFirstFollow)
-            case .FirstInterest: observer.send(value: settings.isFirstInterest)
-            case .FirstCompleted: observer.send(value: settings.isFirstCompleted)
-            case .First25: observer.send(value: settings.isFirst25)
-            case .First50: observer.send(value: settings.isFirst50)
-            case .First75: observer.send(value: settings.isFirst75)
-            case .FirstVoteDisable: observer.send(value: settings.isFirstVoteDisabled)
-            case .FirstSocialDisable: observer.send(value: settings.isFirstSocialDisabled)
-            case .FirstTrollWarning: observer.send(value: settings.isFirstTrollWarning)
+            case .defaultListIndex: observer.send(value: settings.defaultListIndex)
+            case .loginTypeIndex: observer.send(value: settings.loginTypeIndex)
+            case .publicService: observer.send(value: settings.publicService)
+            case .consensusBuilding: observer.send(value: settings.consensusBuilding)
+            case .firstLaunch: observer.send(value: settings.isFirstLaunch)
+            case .firstConsensus: observer.send(value: settings.isFirstConsensus)
+            case .firstPublic: observer.send(value: settings.isFirstPublic)
+            case .firstFollow: observer.send(value: settings.isFirstFollow)
+            case .firstInterest: observer.send(value: settings.isFirstInterest)
+            case .firstCompleted: observer.send(value: settings.isFirstCompleted)
+            case .first25: observer.send(value: settings.isFirst25)
+            case .first50: observer.send(value: settings.isFirst50)
+            case .first75: observer.send(value: settings.isFirst75)
+            case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled)
+            case .firstSocialDisable: observer.send(value: settings.isFirstSocialDisabled)
+            case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning)
             }
             observer.sendCompleted()
         }
@@ -131,22 +131,22 @@ struct SettingsViewModel {
             realm.beginWrite()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
             switch settingType {
-            case .DefaultListIndex: settings.defaultListIndex = value as! Int
-            case .LoginTypeIndex: settings.loginTypeIndex = value as! Int
-            case .PublicService: settings.publicService = value as! Bool
-            case .ConsensusBuilding: settings.consensusBuilding = value as! Bool
-            case .FirstLaunch: settings.isFirstLaunch = false
-            case .FirstConsensus: settings.isFirstConsensus = false
-            case .FirstPublic: settings.isFirstPublic = false
-            case .FirstFollow: settings.isFirstFollow = false
-            case .FirstInterest: settings.isFirstInterest = false
-            case .FirstCompleted: settings.isFirstCompleted = false
-            case .First25: settings.isFirst25 = false
-            case .First50: settings.isFirst50 = false
-            case .First75: settings.isFirst75 = false
-            case .FirstVoteDisable: settings.isFirstVoteDisabled = false
-            case .FirstSocialDisable: settings.isFirstSocialDisabled = false
-            case .FirstTrollWarning: settings.isFirstTrollWarning = false
+            case .defaultListIndex: settings.defaultListIndex = value as! Int
+            case .loginTypeIndex: settings.loginTypeIndex = value as! Int
+            case .publicService: settings.publicService = value as! Bool
+            case .consensusBuilding: settings.consensusBuilding = value as! Bool
+            case .firstLaunch: settings.isFirstLaunch = false
+            case .firstConsensus: settings.isFirstConsensus = false
+            case .firstPublic: settings.isFirstPublic = false
+            case .firstFollow: settings.isFirstFollow = false
+            case .firstInterest: settings.isFirstInterest = false
+            case .firstCompleted: settings.isFirstCompleted = false
+            case .first25: settings.isFirst25 = false
+            case .first50: settings.isFirst50 = false
+            case .first75: settings.isFirst75 = false
+            case .firstVoteDisable: settings.isFirstVoteDisabled = false
+            case .firstSocialDisable: settings.isFirstSocialDisabled = false
+            case .firstTrollWarning: settings.isFirstTrollWarning = false
             }
             settings.isSynced = false
             realm.add(settings, update: true)
@@ -165,7 +165,7 @@ struct SettingsViewModel {
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerated() {
                     let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
-                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
+                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
                     userDefaults.set(today, forKey: String(index))
                 }
             }

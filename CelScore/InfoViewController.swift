@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import UIKit
 import Material
 import ReactiveCocoa
+import ReactiveSwift
 
 
 final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
@@ -33,7 +34,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     override func viewDidLoad() {
         super.viewDidLoad()
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(starting: { celeb in
+            .on(starting: { (celeb: CelebrityModel) in
                 
                 let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
                 let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
@@ -44,7 +45,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                     .startWithValues({ score in
                         for (index, quality) in Info.getAll().enumerated() {
                             let barHeight = UIDevice.getPulseBarHeight()
-                            let qualityView: MaterialPulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
+                            let qualityView: PulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                             
@@ -74,12 +75,12 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             }
                             infoLabel!.textAlignment = .right
                         
-                            qualityView.depth = .Depth1
+                            qualityView.depthPreset = .depth1
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel!)
-                            SettingsViewModel().getSettingSignal(settingType: .PublicService)
-                                .observeOn(UIScheduler())
+                            SettingsViewModel().getSettingSignal(settingType: .publicService)
+                                .observe(on: UIScheduler())
                                 .startWithNext({ status in
                                 if (status as! Bool) == true {
                                     qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(InfoViewController.longPress(_:)))) }

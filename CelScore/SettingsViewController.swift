@@ -43,13 +43,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         //Logo
         let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 80 - 2 * UIDevice.getOffset()))
-        logoView.depth = .None
+        logoView.depthPreset = .none
         let diameter = 60 - 2 * UIDevice.getOffset()
         let logoCircle: Button = Button(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 10 - UIDevice.getOffset()/2, width: diameter, height: diameter))
         logoCircle.setImage(R.image.court_white()!, for: .Normal)
         logoCircle.setImage(R.image.court_white()!, for: .Highlighted)
-        logoCircle.shape = .Circle
-        logoCircle.depth = .Depth2
+        logoCircle.shape = .circle
+        logoCircle.depthPreset = .depth2
         logoCircle.backgroundColor = Constants.kRedShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         
@@ -156,7 +156,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(logoutNode)
         
         self.view.backgroundColor = Constants.kBlueShade
-        self.navigationDrawerController!.depth = .Depth1
+        self.navigationDrawerController!.depthPreset = .depth1
     }
     
     //MARK: Methods
@@ -269,7 +269,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: DidLayoutSubviews Helpers
     func setupMaterialView(frame: CGRect) -> View {
         let materialView = View(frame: frame)
-        materialView.depth = .depth1
+        materialView.depthPreset = .depth1
         materialView.backgroundColor = Constants.kGreyBackground
         return materialView
     }

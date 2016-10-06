@@ -54,7 +54,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
                 if (status as! Bool) == true {
                     gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
             })
-        gaugeView.depth = .Depth1
+        gaugeView.depthPreset = .depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
         gaugeView.pulseAnimation = .none
@@ -116,7 +116,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             .startWithNext({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.tag = tag
-        taggedView.depth = .Depth1
+        taggedView.depthPreset = .depth1
         taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .CenterWithBacking
         taggedView.addSubview(titleLabel)

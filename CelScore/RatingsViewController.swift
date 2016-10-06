@@ -45,7 +45,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     let barHeight = UIDevice.getPulseBarHeight()
                     let qualityView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
-                    qualityView.depth = .Depth1
+                    qualityView.depthPreset = .depth1
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .centerWithBacking
                     qualityView.pulseColor = Color.clear
@@ -154,7 +154,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                 for (index, subview) in viewArray.enumerated() {
                     Timer.after(100.ms * Double(index)){ timer in
                         subview.pulse()
-                        subview.pulseAnimation = .AtPointWithBacking
+                        subview.pulseAnimation = .atPointWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarGoldShade
@@ -171,8 +171,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     func displayRatings(_ userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
             .startWithNext({ ratings in
-                let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
-                for (index, subview) in viewArray.enumerate() {
+                let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
+                for (index, subview) in viewArray.enumerated() {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.colorFilled = userRatings.getCelScore() > 0 ? Constants.kStarGoldShade : Constants.kStarGreyShade
@@ -188,10 +188,10 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     func displayUserRatings(_ userRatings: RatingsModel) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
             .startWithNext({ ratings in
-                let viewArray: [MaterialPulseView] = self.view.subviews.sort({ $0.tag < $1.tag }) as! [MaterialPulseView]
-                for (index, subview) in viewArray.enumerate() {
+                let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
+                for (index, subview) in viewArray.enumerated() {
                     subview.pulse()
-                    subview.pulseAnimation = .AtPointWithBacking
+                    subview.pulseAnimation = .atPointWithBacking
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.updateOnTouch = true

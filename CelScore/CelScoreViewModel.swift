@@ -23,30 +23,30 @@ struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")
-            serviceClient.APIKey = Constants.kAPIKey
+            let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")!
+            serviceClient.apiKey = Constants.kAPIKey
             let awsCall : AWSTask<AnyObject>
             switch dataType {
-            case .Celebrity: awsCall = serviceClient.celebinfoscanservicePost()
-            case .List: awsCall = serviceClient.celeblistsservicePost()
-            case .Ratings: awsCall = serviceClient.celebratingservicePost()
+            case .celebrity: awsCall = serviceClient.celebinfoscanservicePost()
+            case .list: awsCall = serviceClient.celeblistsservicePost()
+            case .ratings: awsCall = serviceClient.celebratingservicePost()
             }
             
-            awsCall.continueWithBlock({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else { observer.sendFailed(task.error!); return task }
-                guard task.cancelled == false else { observer.sendInterrupted(); return task }
+            awsCall.continue({ (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
+                guard task.isCancelled == false else { observer.sendInterrupted(); return task }
                 
                 let myData = task.result as! String
-                let json = JSON(data: myData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                let json = JSON(data: myData.data(using: String.Encoding.utf8)!)
                 json["Items"].arrayValue.forEach({ data in
                     let awsObject : Object
                     switch dataType {
-                    case .Celebrity: awsObject = CelebrityModel(json: data)
-                    case .List: awsObject = ListsModel(json: data)
-                    case .Ratings: awsObject = RatingsModel(json: data)
+                    case .celebrity: awsObject = CelebrityModel(json: data)
+                    case .list: awsObject = ListsModel(json: data)
+                    case .ratings: awsObject = RatingsModel(json: data)
                     }
                     
-                    dispatch_async(dispatch_get_main_queue()){
+                    DispatchQueue.main.async {
                         let realm = try! Realm()
                         realm.beginWrite()
                         realm.add(awsObject, update: true)
@@ -63,8 +63,8 @@ struct CelScoreViewModel {
     func getNewCelebsSignal() -> SignalProducer<NewCelebInfo, CelebrityError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
-            guard celebs.count > 0 else { return observer.sendFailed(.notFound) }
+            let celebs = realm.objects(CelebrityModel.self).filter("isNew = %@", true)
+            guard celebs.count > 0 else { return observer.send(error: .notFound) }
 
             let message: String?
             if celebs.count == 1 { message = celebs.first!.nickName + " has been added to the score.\n\n" }
@@ -86,11 +86,11 @@ struct CelScoreViewModel {
         return SignalProducer { observer, disposable in
             let socialVC: SLComposeViewController?
             switch socialLogin {
-            case .Twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            case .twitter: socialVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             default: socialVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             }
-            socialVC!.setInitialText("\(message) #voteForMoi")
-            socialVC!.addImage(screenshot)
+            socialVC!.setInitialText("\(message) #Hollywood")
+            socialVC!.add(screenshot)
             observer.send(value: socialVC!)
             observer.sendCompleted()
         }
