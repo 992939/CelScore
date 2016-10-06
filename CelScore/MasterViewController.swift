@@ -91,9 +91,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         else { self.twitterAccessCheck() }
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(upTo: Constants.kNetworkRetry)
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserRatings) }
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .UserRatings) }
+                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
                     .start()
             }
@@ -252,17 +252,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Sociable
     func handleMenu(_ open: Bool = false) {
         let image: UIImage?
-        if open || (open == false && self.socialButton.menu.opened == false){
-            self.socialButton.menu.open() { (v: UIView) in (v as? Button)?.pulse() }
+        if open || (open == false && self.socialButton.isOpened == false){
+            self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.menu.views?.first as? Button
+            let first: Button? = self.socialButton.views.first as? Button
             first?.animate(animation: Animation.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
-        } else if self.socialButton.menu.opened {
-            self.socialButton.menu.close()
+        } else if self.socialButton.isOpened {
+            self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.menu.views?.first as? Button
+            let first: Button? = self.socialButton.views.first as? Button
             first?.animate(animation: Animation.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
@@ -271,8 +271,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
-        self.socialButton.menu.close()
-        let first: Button? = self.socialButton.menu.views?.first as? Button
+        self.socialButton.close()
+        let first: Button? = self.socialButton.views.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 5),
             Animation.translateY(translation: y)
