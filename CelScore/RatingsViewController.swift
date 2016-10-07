@@ -81,15 +81,14 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmosView.settings.updateOnTouch = false
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().loggedInAsSignal()
-                        .on(starting: { _ in cosmosView.settings.updateOnTouch = true })
-                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMapError { error -> SignalProducer<String, NoError> in return .empty }
+                        .startWithValues { _ in cosmosView.settings.updateOnTouch = true }
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NSError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .on(starting: { hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
                             cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
                             cosmosView.settings.updateOnTouch = hasRatings ? false : true })
-                        .start()
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observe(on: UIScheduler())
