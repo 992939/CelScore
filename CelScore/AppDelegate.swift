@@ -59,10 +59,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
         
         //UI
-        CelScoreViewModel().getFromAWSSignal(dataType: .List).start()
+        CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
-        nav.contentViewController.view.backgroundColor = UIColor.clearColor()
+        nav.contentViewController.view.backgroundColor = UIColor.clearColor
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
         statusView.backgroundColor = Constants.kBlueShade
@@ -77,7 +77,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.contains("TheScore://") {
-            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
+            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithResult({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
@@ -94,7 +94,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {
-            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithNext({ celeb in
+            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithResult({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
@@ -127,7 +127,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .Ratings) }
+        RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
     }
     func applicationWillResignActive(_ application: UIApplication) { }
     func applicationDidEnterBackground(_ application: UIApplication) { }

@@ -48,13 +48,9 @@ extension Date {
         }
         return Zodiac(rawValue: 1)!
     }
-
+    
     func checkIfDateIsBetween(firstDate: Date, secondDate: Date)-> Bool {
-        let first = Date(date: firstDate)
-        let second = Date(date: secondDate)
-        let d = Date(date: self)
-        if d.compare(first) == .orderedDescending && d.compare(second) == .orderedAscending { return true }
-        return false
+        return firstDate.compare(self) == self.compare(secondDate)
     }
 
     func stringMMddyyyyFormat()-> String {
@@ -68,45 +64,6 @@ extension Date {
         f.dateFormat = "MMMM dd, yyyy"
         return f.string(from: self)
     }
-
-    //MARK: Private Methods
-    fileprivate init(date: Date) {
-        let f = DateFormatter()
-        f.dateFormat = "MM dd yyyy"
-        let s = f.string(from: date)
-        let d = f.date(from: s)!
-        (self as NSDate).init(timeInterval: 0, since: d)
-    }
-
-    fileprivate init(anDate: Date) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        let string = formatter.string(from: anDate)
-        let date = formatter.date(from: string)
-        (self as NSDate).init(timeInterval: 0, since:date!)
-    }
-
-    init(adate: Date) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        let s = formatter.string(from: adate)
-        let date = formatter.date(from: s)
-        (self as NSDate).init(timeInterval: 0, since:date!)
-    }
-
-    fileprivate init(aString: String) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        let date = formatter.date(from: aString)
-        (self as NSDate).init(timeInterval: 0, since:date!)
-    }
-
-    init(string: String) {
-        let f = DateFormatter()
-        f.dateFormat = "MMM dd yyyy"
-        let d = f.date(from: string)
-        (self as NSDate).init(timeInterval: 0, since:d!)
-    }
 }
 
 extension CGPoint {
@@ -115,7 +72,7 @@ extension CGPoint {
 }
 
 extension Double {
-    func roundToPlaces(_ places:Int) -> Double {
+    mutating func roundToPlaces(_ places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor
     }

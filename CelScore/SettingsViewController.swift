@@ -77,7 +77,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
-        SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in
+        SettingsViewModel().calculateSocialConsensusSignal().startWithValues({ value in
             let consensusBarNode = self.setupProgressBarNode(title: "General Consensus %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
             self.view.addSubnode(consensusBarNode) })
         
@@ -105,13 +105,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .publicService)
-            .startWithNext({ status in
+            .startWithValues({ status in
                 let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .consensusBuilding)
-            .startWithNext({ status in
+            .startWithValues({ status in
                 let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
@@ -163,7 +163,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
-            .startWithNext({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+            .startWithValues({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
     }
     
     func logout() {
@@ -172,7 +172,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Log Out", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
-            UserViewModel().logoutSignal().startWithNext({ _ in
+            UserViewModel().logoutSignal().startWithValues({ _ in
                 Animation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
             })
@@ -188,7 +188,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact2Bar.setProgress(0, animated: true)
         self.fact3Bar.setProgress(0, animated: true)
         Timer.after(2.seconds){ _ in
-            SettingsViewModel().calculateSocialConsensusSignal().startWithNext({ value in self.fact1Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculateSocialConsensusSignal().startWithValues({ value in self.fact1Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in self.fact2Bar.setProgress(value, animated: true) })
             SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in self.fact3Bar.setProgress(value, animated: true) })
             button.isEnabled = true
@@ -228,7 +228,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         SettingsViewModel().updateSettingSignal(value: row as AnyObject, settingType: .defaultListIndex).start()
-        SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithNext({ first in let firstTime = first as! Bool
+        SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithValues({ first in let firstTime = first as! Bool
             guard firstTime else { return }
             TAOverlay.show(withLabel: OverlayInfo.firstInterest.message(), image: OverlayInfo.firstInterest.logo(), options: OverlayInfo.getOptions())
             TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstInterest).start() })
@@ -239,7 +239,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func didTap(_ checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .consensusBuilding)).start()
         if checkBox.on {
-            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .firstPublic : .firstConsensus).startWithNext({ first in
+            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .firstPublic : .firstConsensus).startWithValues({ first in
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {

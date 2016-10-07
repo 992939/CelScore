@@ -11,6 +11,7 @@ import Material
 import SwiftyTimer
 import ReactiveCocoa
 import ReactiveSwift
+import Result
 
 
 final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
@@ -40,7 +41,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func setupStars() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .startWithNext({ ratings in
+            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
+            .startWithValues({ ratings in
                 for (index, quality) in Qualities.getAll(isMale: self.celebST.sex).enumerated() {
                     let barHeight = UIDevice.getPulseBarHeight()
                     let qualityView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
@@ -51,7 +53,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.pulseColor = Color.clear
                     SettingsViewModel().getSettingSignal(settingType: .publicService)
                         .observe(on: UIScheduler())
-                        .startWithNext({ status in
+                        .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
+                        .startWithValues({ status in
                             if (status as! Bool) == true {
                                 qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
                         })
@@ -104,7 +107,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
-                            .startWithNext({ userRatings in
+                            .startWithValues({ userRatings in
                                 self.delegate!.rippleEffect(positive: rating < 3 ? false : true, gold: false)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
@@ -119,7 +122,9 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     }
     
     func requestLogin() {
-        SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable).startWithNext({ first in let firstTime = first as! Bool
+        SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable)
+            .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
+            .startWithValues({ first in let firstTime = first as! Bool
             guard firstTime else { return self.delegate!.socialSharing(message: "") }
             Animation.delay(time: 0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
             TAOverlay.setCompletionBlock({ _ in
@@ -132,7 +137,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     func longPress(_ gesture: UIGestureRecognizer) {
         let ratingIndex = gesture.view!.tag - 1
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .startWithNext({ ratings in
+            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
+            .startWithValues({ ratings in
                 let value: Int = ratings[ratings[ratingIndex]] as! Int
                 let stars: String = "\(value)" + (value < 2 ? " star" : " stars")
                 let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
@@ -154,7 +160,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                 for (index, subview) in viewArray.enumerated() {
                     Timer.after(100.ms * Double(index)){ timer in
                         subview.pulse()
-                        subview.pulseAnimation = .atPointWithBacking
+                        subview.pulseAnimation = .pointWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarGoldShade
@@ -170,7 +176,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func displayRatings(_ userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .startWithNext({ ratings in
+            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
+            .startWithValues({ ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
@@ -187,11 +194,11 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func displayUserRatings(_ userRatings: RatingsModel) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .startWithNext({ ratings in
+            .startWithResult({ ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
                     subview.pulse()
-                    subview.pulseAnimation = .atPointWithBacking
+                    subview.pulseAnimation = .pointWithBacking
                     let stars = subview.subviews.filter({ $0 is CosmosView })
                     let cosmos: CosmosView = stars.first as! CosmosView
                     cosmos.settings.updateOnTouch = true

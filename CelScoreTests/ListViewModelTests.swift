@@ -45,7 +45,7 @@ class ListViewModelTests: XCTestCase {
     
     func testGetListSignal() {
         let expectation = self.expectation(description: "getListSignal callback")
-        ListViewModel().getListSignal(listId: "0001").startWithNext { list in
+        ListViewModel().getListSignal(listId: "0001").startWithValues { list in
             XCTAssertEqual(list.celebList.count, 3, "getListSignal returns list with two items."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getListSignal error: \(error)") } }
     }
@@ -66,14 +66,14 @@ class ListViewModelTests: XCTestCase {
     
     func testSearchSignal() {
         let expectation = self.expectation(description: "searchSignal callback")
-        ListViewModel().searchSignal(searchToken: "test").startWithNext { list in
+        ListViewModel().searchSignal(searchToken: "test").startWithValues { list in
             XCTAssertEqual(list.celebList.count, 1, "searchSignal returns list with one item."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("searchSignal error: \(error)") } }
     }
     
     func testUpdateListSignal() {
         let expectation = self.expectation(description: "updateAllListsSignal callback")
-        ListViewModel().updateListSignal(listId: "0001").startWithNext { _ in
+        ListViewModel().updateListSignal(listId: "0001").startWithValues { _ in
             let realm = try! Realm()
             let list = realm.objects(ListsModel).filter("id = %@", "0001").first
             let celebId: CelebId = list!.celebList.last!
@@ -85,7 +85,7 @@ class ListViewModelTests: XCTestCase {
     
     func testGetCelebrityStructSignal() {
         let expectation = self.expectation(description: "getCelebrityStructSignal callback")
-        ListViewModel().getCelebrityStructSignal(listId: "0001", index: 1).startWithNext { celeb in
+        ListViewModel().getCelebrityStructSignal(listId: "0001", index: 1).startWithValues { celeb in
             XCTAssertEqual(celeb.id, "0002", "getCelebrityStructSignal returns second item."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
     }

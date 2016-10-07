@@ -28,21 +28,21 @@ class CelebrityViewModelTests: XCTestCase {
     
     func testGetCelebritySignal() {
         let expectation = self.expectation(description: "getCelebritySignal callback")
-        CelebrityViewModel().getCelebritySignal(id: "0001").startWithNext { celeb in
+        CelebrityViewModel().getCelebritySignal(id: "0001").startWithResult { celeb in
             XCTAssert((celeb as Any) is CelebrityModel, "getCelebritySignal returns CelebrityModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebritySignal error: \(error)") } }
     }
     
     func testUpdateUserActivitySignal() {
         let expectation = self.expectation(description: "updateUserActivitySignal callback")
-        CelebrityViewModel().updateUserActivitySignal(id: "0001").startWithNext { activity in
+        CelebrityViewModel().updateUserActivitySignal(id: "0001").startWithResult { activity in
             XCTAssertEqual(activity.eligibleForSearch, true, "NSUserActivity must be eligibleForSearch."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserActivitySignal error: \(error)") } }
     }
     
     func testFollowCebritySignal() {
         let expectation = self.expectation(description: "followCebritySignal callback")
-        CelebrityViewModel().followCebritySignal(id: "0001", isFollowing: false).startWithNext { celeb in
+        CelebrityViewModel().followCebritySignal(id: "0001", isFollowing: false).startWithResult { celeb in
             XCTAssertEqual(celeb.isFollowed, false, "Celebrity isFollowed must be false."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("followCebritySignal error: \(error)") } }
     }
@@ -64,14 +64,14 @@ class CelebrityViewModelTests: XCTestCase {
     
     func testCountFollowedCelebritiesSignal() {
         let expectation = self.expectation(description: "countFollowedCelebritiesSignal callback")
-        CelebrityViewModel().countFollowedCelebritiesSignal().startWithNext { count in
+        CelebrityViewModel().countFollowedCelebritiesSignal().startWithResult { count in
             XCTAssertEqual(count, 1, "countFollowedCelebritiesSignal returns 1."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("countFollowedCelebritiesSignal error: \(error)") } }
     }
     
     func testUpdateWidgetSignal() {
         let expectation = self.expectation(description: "userdefault returns 1")
-        SettingsViewModel().updateTodayWidgetSignal().startWithNext { result in
+        SettingsViewModel().updateTodayWidgetSignal().startWithResult { result in
             XCTAssertEqual(result.count, 1, "testUpdateWidgetSignal returns 1.")
             let userDefaults: NSUserDefaults = NSUserDefaults(suiteName:"group.NotificationApp")!
             userDefaults.synchronize()
@@ -99,7 +99,7 @@ class CelebrityViewModelTests: XCTestCase {
         let count = realm.objects(CelebrityModel).count
         XCTAssertEqual(count, 1, "count of CelebrityModel must return 0.")
         let expectation = self.expectation(description: "remove the CelebrityModel instance")
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithNext { removedCount in
+        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithResult { removedCount in
             XCTAssertEqual(removedCount, 1, "count of CelebrityModel must return 1.")
             expectation.fulfill()
         }

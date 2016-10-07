@@ -74,12 +74,12 @@ struct CelebrityViewModel {
             let celebIDsList: [String] = celebList.map({ celeb in return celeb.id })
             guard celebIDsList.count > 0 else { return observer.sendCompleted() }
             
-            var set1 = Set(celebIDsList)
+            let set1 = Set(celebIDsList)
             let set2 = Set(celebIDsOnPublicOpinionList)
-            let removables = set1.subtract(set2)
+            let removables: Set = set1.subtracting(set2)
             realm.beginWrite()
             removables.forEach({ id in
-                let removable = realm.objects(CelebrityModel).filter("id = %@", id).first
+                let removable = realm.objects(CelebrityModel.self).filter("id = %@", id).first
                 realm.delete(removable!)
             })
             try! realm.commitWrite()

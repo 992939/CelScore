@@ -29,7 +29,7 @@ class RatingsViewModelTests: XCTestCase {
     
     func testUpdateUserRatingSignal() {
         let expectation = self.expectation(description: "updateUserRatingSignal callback")
-        RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4).startWithNext { model in
+        RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4).startWithValues { model in
              XCTAssertEqual(model.rating3, 4, "updateUserRatingSignal rating is newRating."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserRatingSignal error: \(error)") } }
     }
@@ -47,21 +47,21 @@ class RatingsViewModelTests: XCTestCase {
     
     func testGetRatingsSignal() {
         let expectation = self.expectation(description: "get RatingsSignal callback")
-        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .Ratings).startWithNext { ratings in
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .Ratings).startWithValues { ratings in
             XCTAssertEqual(ratings.rating1, 5, "getRatingsSignal returns RatingsModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("get RatingsSignal error: \(error)") } }
     }
     
     func testGetUserRatingsSignal() {
         let expectation = self.expectation(description: "get UserRatingsSignal callback")
-        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .UserRatings).startWithNext { ratings in
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .UserRatings).startWithValues { ratings in
             XCTAssertEqual(ratings.rating2, 2, "getRatingsSignal returns UserRatingsModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("get UserRatingsSignal error: \(error)") } }
     }
     
     func testHasUserRatingsSignal() {
         let expectation = self.expectation(description: "hasUserRatingsSignal callback")
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: "0002").startWithNext { value in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: "0002").startWithValues { value in
             XCTAssertEqual(value, false, "hasUserRatingsSignal returns false."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("hasUserRatingsSignal error: \(error)") } }
     }
@@ -80,7 +80,7 @@ class RatingsViewModelTests: XCTestCase {
     
     func testGetCelScoreSignal() {
         let expectation = self.expectation(description: "getCelScoreSignal callback")
-        RatingsViewModel().getCelScoreSignal(ratingsId: "0001").startWithNext { score in
+        RatingsViewModel().getCelScoreSignal(ratingsId: "0001").startWithValues { score in
             XCTAssertEqual(score, 1.1, "getCelScoreSignal above 0.5."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelScoreSignal error: \(error)") } }
     }

@@ -36,7 +36,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
         
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithNext({ celeb in
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithResult({ celeb in
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
         })
@@ -50,7 +50,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
-            .startWithNext({ status in
+            .startWithResult({ status in
                 if (status as! Bool) == true {
                     gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
             })
@@ -113,7 +113,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .PublicService)
             .observeOn(UIScheduler())
-            .startWithNext({ status in
+            .startWithResult({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.tag = tag
         taggedView.depthPreset = .depth1

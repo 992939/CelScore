@@ -11,6 +11,7 @@ import UIKit
 import Material
 import ReactiveCocoa
 import ReactiveSwift
+import Result
 
 
 final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
@@ -34,18 +35,19 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     override func viewDidLoad() {
         super.viewDidLoad()
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(starting: { (celeb: CelebrityModel) in
-                
-                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")!
-                let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
+            .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
+            .startWithValues({ celeb in
+                let birthdate: Date = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as Date) as Date
+                let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
                 let formatter = DateFormatter()
                 formatter.dateStyle = .longStyle
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+                    .flatMapError { error -> SignalProducer<Double, NoError> in return .empty }
                     .startWithValues({ score in
                         for (index, quality) in Info.getAll().enumerated() {
                             let barHeight = UIDevice.getPulseBarHeight()
-                            let qualityView: PulseView = MaterialPulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
+                            let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                             
@@ -81,7 +83,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             qualityView.addSubview(infoLabel!)
                             SettingsViewModel().getSettingSignal(settingType: .publicService)
                                 .observe(on: UIScheduler())
-                                .startWithNext({ status in
+                                .startWithResult({ status in
                                 if (status as! Bool) == true {
                                     qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(InfoViewController.longPress(_:)))) }
                             })
@@ -89,7 +91,6 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                         }
                     })
             })
-            .start()
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
@@ -111,7 +112,8 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         let quality = Info(rawValue: celebIndex)!.text()
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .startWithNext({ celeb in
+            .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
+            .startWithValues({ celeb in
                 let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as NSDate
                 let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
                 let formatter = DateFormatter()

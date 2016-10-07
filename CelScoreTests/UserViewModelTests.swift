@@ -25,7 +25,7 @@ class UserViewModelTests: XCTestCase {
     
     func testLogoutSignal() {
         let expectation = self.expectation(description: "logoutSignal callback")
-        UserViewModel().logoutSignal().startWithNext { _ in
+        UserViewModel().logoutSignal().startWithValues { _ in
             let realm = try! Realm()
             let count = realm.objects(SettingsModel).count
             XCTAssertEqual(count, 0, "logout must delete all SettingsModel.")

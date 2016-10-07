@@ -22,13 +22,13 @@ struct R {
     /// `bundle.URLForResource("icomoon2", withExtension: "ttf")`
     static func icomoon2Ttf(_: Void) -> NSURL? {
       let fileResource = R.file.icomoon2Ttf
-      return fileResource.bundle.URLForResource(fileResource)
+      return fileResource.bundle.url(forResource: fileResource) as NSURL?
     }
     
     /// `bundle.URLForResource("TAOverlay", withExtension: "bundle")`
     static func tAOverlayBundle(_: Void) -> NSURL? {
       let fileResource = R.file.tAOverlayBundle
-      return fileResource.bundle.URLForResource(fileResource)
+      return fileResource.bundle.url(forResource: fileResource) as NSURL?
     }
     
     private init() {}
@@ -40,7 +40,7 @@ struct R {
     static let icomoon = FontResource(fontName: "icomoon")
     
     /// `UIFont(name: "icomoon", size: ...)`
-    static func icomoon(size size: CGFloat) -> UIFont? {
+    static func icomoon(size: CGFloat) -> UIFont? {
       return UIFont(resource: icomoon, size: size)
     }
     
@@ -545,8 +545,8 @@ struct R {
 }
 
 struct _R {
-  static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(NSLocale.init) ?? NSLocale.currentLocale()
-  static let hostingBundle = NSBundle(identifier: "com.GreyEcology.CelebrityScore") ?? NSBundle.mainBundle()
+  static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(NSLocale.init) ?? NSLocale.currentLocale
+  static let hostingBundle = Bundle(identifier: "com.GreyEcology.CelebrityScore") ?? Bundle.main
   
   struct nib {
     struct _LaunchScreen: NibResourceType {
@@ -554,7 +554,7 @@ struct _R {
       let name = "LaunchScreen"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIView? {
-        return instantiateWithOwner(ownerOrNil, options: optionsOrNil)[0] as? UIView
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIView
       }
       
       private init() {}

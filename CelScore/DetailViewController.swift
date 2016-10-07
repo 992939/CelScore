@@ -44,7 +44,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
             .startOn(QueueScheduler())
             .observeOn(UIScheduler())
-            .startWithNext({ activity in self.userActivity = activity })
+            .startWithResult({ activity in self.userActivity = activity })
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
@@ -67,7 +67,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         let first: Button? = self.socialButton.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
-            .startWithNext({ status in
+            .startWithResult({ status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -77,7 +77,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 }
             })
         
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
             first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
         
@@ -181,7 +181,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
                 if isConsensus == false {
-                    SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
+                    SettingsViewModel().calculateUserRatingsPercentageSignal().startWithResult { value in
                         if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
                         else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_red(), options: OverlayInfo.getOptions()) }
                         TAOverlay.setCompletionBlock({ _ in self.trollAction() })
@@ -192,7 +192,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
             .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
             .on(next: { message in
-                SettingsViewModel().calculateUserRatingsPercentageSignal().startWithNext { value in
+                SettingsViewModel().calculateUserRatingsPercentageSignal().startWithResult { value in
                     if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
                     else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_blue(), options: OverlayInfo.getOptions()) }
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
@@ -223,25 +223,25 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
             switch value * 100.0 {
             case 100.0:
-                SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithNext({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithResult({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.firstCompleted.message(), image: OverlayInfo.firstCompleted.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstCompleted).start() })
                 })
             case 75.0..<100.0:
-                SettingsViewModel().getSettingSignal(settingType: .first75).startWithValues({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first75).startWithResult({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.showOverlayWithLabel(OverlayInfo.First75.message(), image: OverlayInfo.first75.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .first75).start() })
                 })
             case 50.0..<75.0:
-                SettingsViewModel().getSettingSignal(settingType: .first50).startWithValues({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first50).startWithResult({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.showOverlayWithLabel(OverlayInfo.First50.message(), image: OverlayInfo.first50.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false, settingType: .first50).start() })
                 })
             case 25.0..<50.0:
-                SettingsViewModel().getSettingSignal(settingType: .first25).startWithValues({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first25).startWithResult({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.showOverlayWithLabel(OverlayInfo.First25.message(), Image: OverlayInfo.First25.logo(), Options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first25).start() })
@@ -295,7 +295,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
-            .startWithNext({ status in
+            .startWithResult({ status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -304,7 +304,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
                     first?.setImage(R.image.cross()!, for: .highlighted)
                 }
             })
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
             first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }
@@ -313,7 +313,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         SettingsViewModel().loggedInAsSignal()
             .on(starting: { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotView(afterScreenUpdates: true)!)
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage, screenshot: screenshot).startWithNext { socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage, screenshot: screenshot).startWithResult { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
@@ -360,7 +360,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.helpAction), for: .touchUpInside)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
@@ -383,7 +383,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.closeHandleMenu()
         
         if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings).startWithNext({ userRatings in
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings).startWithResult({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
@@ -513,7 +513,7 @@ final class DetailViewController: UIViewController, SMSegmentViewDelegate, Detai
         self.voteButton.pulseAnimation = .none
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableVoteButton(R.image.heart_black()!)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithNext({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }

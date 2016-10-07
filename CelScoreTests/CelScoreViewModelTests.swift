@@ -18,7 +18,7 @@ class CelScoreViewModelTests: XCTestCase {
     
     func testShareVoteOnSignal() {
         let expectation = self.expectation(description: "shareVoteOnSignal callback")
-        CelScoreViewModel().shareVoteOnSignal(socialLogin: .Facebook, message: "message", screenshot: UIImage()).startWithNext { composer in
+        CelScoreViewModel().shareVoteOnSignal(socialLogin: .Facebook, message: "message", screenshot: UIImage()).startWithResult { composer in
             XCTAssertNotNil(composer, "SLComposeViewController must not be nil")
             expectation.fulfill()
         }

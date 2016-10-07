@@ -73,7 +73,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.movingSocialButton(onScreen: true) })
         }
     
-        SettingsViewModel().loggedInAsSignal().startWithNext { _ in
+        SettingsViewModel().loggedInAsSignal()
+            .startWithValues { _ in
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
                     .flatMapError { _ in SignalProducer.empty }
@@ -168,18 +169,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal()
             .observe(on: UIScheduler())
             .on(starting: { _ in
-                self.navigationDrawerController?.enabled = true
+                self.navigationDrawerController?.isEnabled = true
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .Alert)
+                let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .Default, action: { _ in
-                    MaterialAnimation.delay(0.5) { self.handleMenu(true) }
-                    self.dismissViewControllerAnimated(true, completion: nil) }))
-                alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                alertVC.view.opaque = false
-                self.presentViewController(alertVC, animated: true, completion: nil)
+                alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .default, action: { _ in
+                    Animation.delay(time: 0.5) { self.handleMenu(true) }
+                    self.dismiss(animated: true, completion: nil) }))
+                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                alertVC.view.isOpaque = false
+                self.present(alertVC, animated: true, completion: nil)
             })
             .start()
     }
@@ -243,7 +244,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .observe(on: UIScheduler())
-            .startWithNext { list in
+            .startWithValues { list in
                 self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
                 Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
         }
@@ -322,7 +323,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
             .observe(on: UIScheduler())
-            .startWithNext({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
+            .startWithValues({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }
     
