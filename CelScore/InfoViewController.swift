@@ -37,7 +37,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
             .startWithValues({ celeb in
-                let birthdate: Date = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as Date) as Date
+                let birthdate: Date = (celeb.birthdate.dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)! as Date) as Date
                 let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
                 let formatter = DateFormatter()
                 formatter.dateStyle = DateFormatter.Style.long
@@ -60,7 +60,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             case Info.from.name(): infoLabelText = celeb.from
                             case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
                             case Info.height.name(): infoLabelText = celeb.height
-                            case Info.zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                            case Info.zodiac.name(): infoLabelText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)?.zodiacSign().name())!
                             case Info.status.name(): infoLabelText = celeb.status
                             case Info.celScore.name(): attributedText = self.createCelScoreText(score)
                             case Info.networth.name(): infoLabelText = celeb.netWorth
@@ -114,7 +114,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
             .startWithValues({ celeb in
-                let birthdate: Date = celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as Date
+                let birthdate: Date = celeb.birthdate.dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)! as Date
                 let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
                 let formatter = DateFormatter()
                 formatter.dateStyle = .long
@@ -127,7 +127,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 case Info.from.text(): infoText = celeb.from
                 case Info.birthdate.text(): infoText = formatter.string(from: birthdate as Date) + String(" (\(age))")
                 case Info.height.text(): infoText = celeb.height
-                case Info.zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")?.zodiacSign().name())!
+                case Info.zodiac.text(): infoText = (celeb.birthdate.dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)?.zodiacSign().name())!
                 case Info.status.text(): infoText = celeb.status
                 case Info.celScore.text(): infoText = String(format: "%.2f", celeb.prevScore)
                 case Info.networth.text(): infoText = celeb.netWorth

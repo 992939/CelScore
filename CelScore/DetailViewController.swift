@@ -361,7 +361,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.helpAction), for: .touchUpInside)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
@@ -373,7 +373,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(_ segmentView: SMBasicSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
+    func segmentView(_ segmentView: SMSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
         let infoView: UIView = self.getSubView(atIndex: index)
         infoView.isHidden = false
         infoView.frame = Constants.kBottomViewRect
@@ -384,7 +384,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.closeHandleMenu()
         
         if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings).startWithResult({ userRatings in
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings).startWithValues({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
@@ -419,8 +419,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func enableVoteButton(positive: Bool) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.voteButton.setImage(R.image.heart_white()!, for: .Normal)
-            self.voteButton.setImage(R.image.heart_white()!, for: .Highlighted)
+            self.voteButton.setImage(R.image.heart_white()!, for: .normal)
+            self.voteButton.setImage(R.image.heart_white()!, for: .highlighted)
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
@@ -444,8 +444,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         backButton.pulseAnimation = .none
         backButton.accessibilityLabel = "Back Button"
         backButton.isAccessibilityElement = true
-        backButton.setImage(R.image.arrow_white()!, for: .Normal)
-        backButton.setImage(R.image.arrow_white()!, for: .Highlighted)
+        backButton.setImage(R.image.arrow_white()!, for: .normal)
+        backButton.setImage(R.image.arrow_white()!, for: .highlighted)
         backButton.addTarget(self, action: #selector(DetailViewController.backAction), for: .touchUpInside)
         
         let infoButton: FlatButton = FlatButton()
@@ -453,8 +453,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         infoButton.pulseAnimation = .none
         infoButton.accessibilityLabel = "Info Button"
         infoButton.isAccessibilityElement = true
-        infoButton.setImage(R.image.info_button()!, for: .Normal)
-        infoButton.setImage(R.image.info_button()!, for: .Highlighted)
+        infoButton.setImage(R.image.info_button()!, for: .normal)
+        infoButton.setImage(R.image.info_button()!, for: .highlighted)
         infoButton.addTarget(self, action: #selector(DetailViewController.infoAction), for: .touchUpInside)
         
         let nameLabel: UILabel = self.setupLabel(title: "★  " + self.celebST.nickname + "   ★", frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
@@ -514,7 +514,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.pulseAnimation = .none
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableVoteButton(R.image.heart_black()!)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }

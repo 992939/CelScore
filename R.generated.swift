@@ -182,327 +182,327 @@ struct R {
     
     /// `UIImage(named: "angryFace", bundle: ..., traitCollection: ...)`
     static func angryFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.angryFace, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.angryFace, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "Anonymous", bundle: ..., traitCollection: ...)`
     static func anonymous(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.anonymous, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.anonymous, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "arrow_down", bundle: ..., traitCollection: ...)`
     static func arrow_down(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.arrow_down, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.arrow_down, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "arrow_up", bundle: ..., traitCollection: ...)`
     static func arrow_up(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.arrow_up, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.arrow_up, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "arrow_white", bundle: ..., traitCollection: ...)`
     static func arrow_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.arrow_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.arrow_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "astronaut_red", bundle: ..., traitCollection: ...)`
     static func astronaut_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.astronaut_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.astronaut_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "celscore_big_white", bundle: ..., traitCollection: ...)`
     static func celscore_big_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.celscore_big_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.celscore_big_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "celscore_black", bundle: ..., traitCollection: ...)`
     static func celscore_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.celscore_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.celscore_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "celscore_white", bundle: ..., traitCollection: ...)`
     static func celscore_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.celscore_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.celscore_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "cloud_big_blue", bundle: ..., traitCollection: ...)`
     static func cloud_big_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cloud_big_blue, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.cloud_big_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "cloud_big_red", bundle: ..., traitCollection: ...)`
     static func cloud_big_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cloud_big_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.cloud_big_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "cloud_red", bundle: ..., traitCollection: ...)`
     static func cloud_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cloud_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.cloud_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "contract_blue_big", bundle: ..., traitCollection: ...)`
     static func contract_blue_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.contract_blue_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.contract_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "contract_red_big", bundle: ..., traitCollection: ...)`
     static func contract_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.contract_red_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.contract_red_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "court_red", bundle: ..., traitCollection: ...)`
     static func court_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.court_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.court_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "court_small_white", bundle: ..., traitCollection: ...)`
     static func court_small_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.court_small_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.court_small_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "court_white", bundle: ..., traitCollection: ...)`
     static func court_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.court_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.court_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
     static func cross(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.cross, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.cross, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "emptyCircle", bundle: ..., traitCollection: ...)`
     static func emptyCircle(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.emptyCircle, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.emptyCircle, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "facebooklogo", bundle: ..., traitCollection: ...)`
     static func facebooklogo(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.facebooklogo, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.facebooklogo, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "geometry_red", bundle: ..., traitCollection: ...)`
     static func geometry_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.geometry_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.geometry_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`
     static func happyFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.happyFace, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.happyFace, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "head_red", bundle: ..., traitCollection: ...)`
     static func head_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.head_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.head_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "heart_black", bundle: ..., traitCollection: ...)`
     static func heart_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.heart_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.heart_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "heart_white", bundle: ..., traitCollection: ...)`
     static func heart_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.heart_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.heart_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_add_black", bundle: ..., traitCollection: ...)`
     static func ic_add_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_add_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.ic_add_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_add_white", bundle: ..., traitCollection: ...)`
     static func ic_add_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_add_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.ic_add_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_close_white", bundle: ..., traitCollection: ...)`
     static func ic_close_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_close_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.ic_close_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_menu_white", bundle: ..., traitCollection: ...)`
     static func ic_menu_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_menu_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.ic_menu_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_search_white", bundle: ..., traitCollection: ...)`
     static func ic_search_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.ic_search_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.ic_search_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "info_black", bundle: ..., traitCollection: ...)`
     static func info_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.info_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "info_button", bundle: ..., traitCollection: ...)`
     static func info_button(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_button, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.info_button, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "info_white", bundle: ..., traitCollection: ...)`
     static func info_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.info_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.info_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "jurors_blue_big", bundle: ..., traitCollection: ...)`
     static func jurors_blue_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.jurors_blue_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.jurors_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "jurors_red_big", bundle: ..., traitCollection: ...)`
     static func jurors_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.jurors_red_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.jurors_red_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mic_blue", bundle: ..., traitCollection: ...)`
     static func mic_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.mic_blue, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.mic_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mic_red", bundle: ..., traitCollection: ...)`
     static func mic_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.mic_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.mic_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
     static func mic_yellow(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.mic_yellow, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.mic_yellow, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "nosmileFace", bundle: ..., traitCollection: ...)`
     static func nosmileFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.nosmileFace, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.nosmileFace, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "nuclear_red", bundle: ..., traitCollection: ...)`
     static func nuclear_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.nuclear_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.nuclear_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "observatory_red", bundle: ..., traitCollection: ...)`
     static func observatory_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.observatory_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.observatory_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "planet_red", bundle: ..., traitCollection: ...)`
     static func planet_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.planet_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.planet_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sadFace", bundle: ..., traitCollection: ...)`
     static func sadFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sadFace, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sadFace, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "scale_black", bundle: ..., traitCollection: ...)`
     static func scale_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.scale_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.scale_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "scale_white", bundle: ..., traitCollection: ...)`
     static func scale_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.scale_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.scale_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "score_black", bundle: ..., traitCollection: ...)`
     static func score_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.score_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.score_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "score_logo", bundle: ..., traitCollection: ...)`
     static func score_logo(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.score_logo, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.score_logo, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "score_white", bundle: ..., traitCollection: ...)`
     static func score_white(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.score_white, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.score_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "smileFace", bundle: ..., traitCollection: ...)`
     static func smileFace(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.smileFace, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.smileFace, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "spaceship_blue_big", bundle: ..., traitCollection: ...)`
     static func spaceship_blue_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.spaceship_blue_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.spaceship_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "spaceship_red", bundle: ..., traitCollection: ...)`
     static func spaceship_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.spaceship_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.spaceship_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "spaceship_red_big", bundle: ..., traitCollection: ...)`
     static func spaceship_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.spaceship_red_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.spaceship_red_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_blue", bundle: ..., traitCollection: ...)`
     static func sphere_blue(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_blue, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_blue_big", bundle: ..., traitCollection: ...)`
     static func sphere_blue_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_blue_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_blue_mini", bundle: ..., traitCollection: ...)`
     static func sphere_blue_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_blue_mini, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_blue_mini, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_red", bundle: ..., traitCollection: ...)`
     static func sphere_red(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_red, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_red_big", bundle: ..., traitCollection: ...)`
     static func sphere_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_red_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_red_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_red_mini", bundle: ..., traitCollection: ...)`
     static func sphere_red_mini(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_red_mini, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_red_mini, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_yellow", bundle: ..., traitCollection: ...)`
     static func sphere_yellow(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.sphere_yellow, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.sphere_yellow, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "star_black", bundle: ..., traitCollection: ...)`
     static func star_black(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.star_black, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.star_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "star_icon", bundle: ..., traitCollection: ...)`
     static func star_icon(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.star_icon, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.star_icon, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "topView", bundle: ..., traitCollection: ...)`
     static func topView(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.topView, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.topView, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "twitterlogo", bundle: ..., traitCollection: ...)`
     static func twitterlogo(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.twitterlogo, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.twitterlogo, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "worker_blue_big", bundle: ..., traitCollection: ...)`
     static func worker_blue_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.worker_blue_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.worker_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "worker_red_big", bundle: ..., traitCollection: ...)`
     static func worker_red_big(compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) -> UIImage? {
-      return UIImage(resource: R.image.worker_red_big, compatibleWithTraitCollection: traitCollection)
+      return UIImage(resource: R.image.worker_red_big, compatibleWith: traitCollection)
     }
     
     private init() {}
@@ -515,7 +515,7 @@ struct R {
     
     /// `UINib(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void) -> UINib {
-      return UINib(resource: R.nib.launchScreen)
+      return UINib(resource: R.nib.launchScreen as! NibResourceType)
     }
     
     private init() {}

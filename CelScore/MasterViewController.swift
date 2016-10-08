@@ -30,7 +30,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     fileprivate let searchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
-    fileprivate let socialButton: Menu
+    fileprivate let socialButton: MenuController
     internal let celebrityTableView: ASTableView
     
     //MARK: Initializers
@@ -42,7 +42,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
-        self.socialButton = Menu()
+        self.socialButton = MenuController()
         self.searchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
@@ -74,6 +74,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     
         SettingsViewModel().loggedInAsSignal()
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues { _ in
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
@@ -110,7 +111,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebrityTableView.backgroundColor = Color.clear
         
         let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)]
-        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = attr
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attr
         self.searchBar.delegate = self
         self.searchBar.searchBarStyle = .minimal
         
@@ -122,7 +123,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton)
-        Layout.size(parent: self.view, child: self.socialButton, size: Constants.kFabDiameter)
+        Layout.size(parent: self.view, child: self.socialButton, size: CGSize(Constants.kFabDiameter, Constants.kFabDiameter))
         self.setupData()
         
         NotificationCenter.default.rac_notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
