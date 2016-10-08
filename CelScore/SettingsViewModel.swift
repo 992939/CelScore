@@ -14,10 +14,6 @@ import Result
 
 struct SettingsViewModel {
     
-    //MARK: Widget
-    enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-    enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, consensusBuilding, firstLaunch, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
-    
     //MARK: Methods
     func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
@@ -104,22 +100,22 @@ struct SettingsViewModel {
             let realm = try! Realm()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
             switch settingType {
-            case .defaultListIndex: observer.send(value: settings.defaultListIndex)
-            case .loginTypeIndex: observer.send(value: settings.loginTypeIndex)
-            case .publicService: observer.send(value: settings.publicService)
-            case .consensusBuilding: observer.send(value: settings.consensusBuilding)
-            case .firstLaunch: observer.send(value: settings.isFirstLaunch)
-            case .firstConsensus: observer.send(value: settings.isFirstConsensus)
-            case .firstPublic: observer.send(value: settings.isFirstPublic)
-            case .firstFollow: observer.send(value: settings.isFirstFollow)
-            case .firstInterest: observer.send(value: settings.isFirstInterest)
-            case .firstCompleted: observer.send(value: settings.isFirstCompleted)
-            case .first25: observer.send(value: settings.isFirst25)
-            case .first50: observer.send(value: settings.isFirst50)
-            case .first75: observer.send(value: settings.isFirst75)
-            case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled)
-            case .firstSocialDisable: observer.send(value: settings.isFirstSocialDisabled)
-            case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning)
+            case .defaultListIndex: observer.send(value: settings.defaultListIndex as AnyObject)
+            case .loginTypeIndex: observer.send(value: settings.loginTypeIndex as AnyObject)
+            case .publicService: observer.send(value: settings.publicService as AnyObject)
+            case .consensusBuilding: observer.send(value: settings.consensusBuilding as AnyObject)
+            case .firstLaunch: observer.send(value: settings.isFirstLaunch as AnyObject)
+            case .firstConsensus: observer.send(value: settings.isFirstConsensus as AnyObject)
+            case .firstPublic: observer.send(value: settings.isFirstPublic as AnyObject)
+            case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
+            case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
+            case .firstCompleted: observer.send(value: settings.isFirstCompleted as AnyObject)
+            case .first25: observer.send(value: settings.isFirst25 as AnyObject)
+            case .first50: observer.send(value: settings.isFirst50 as AnyObject)
+            case .first75: observer.send(value: settings.isFirst75 as AnyObject)
+            case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
+            case .firstSocialDisable: observer.send(value: settings.isFirstSocialDisabled as AnyObject)
+            case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning as AnyObject)
             }
             observer.sendCompleted()
         }
@@ -165,7 +161,7 @@ struct SettingsViewModel {
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerated() {
                     let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
-                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x, "prevScore": celeb.prevScore, "currentScore": ratings.getCelScore()]
+                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x as AnyObject, "prevScore": celeb.prevScore as AnyObject, "currentScore": ratings.getCelScore()]
                     userDefaults.set(today, forKey: String(index))
                 }
             }

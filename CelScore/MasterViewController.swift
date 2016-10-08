@@ -54,7 +54,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationDrawerController?.delegate = self
-        self.navigationDrawerController?.enabled = false
+        self.navigationDrawerController?.isEnabled = false
         self.navigationDrawerController?.animationDuration = 0.4
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
     }

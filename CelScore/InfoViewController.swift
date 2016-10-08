@@ -40,7 +40,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 let birthdate: Date = (celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as Date) as Date
                 let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
                 let formatter = DateFormatter()
-                formatter.dateStyle = .longStyle
+                formatter.dateStyle = DateFormatter.Style.long
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
                     .flatMapError { error -> SignalProducer<Double, NoError> in return .empty }
@@ -97,7 +97,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func createCelScoreText(_ score: Double) -> NSAttributedString {
         var attributedText = NSMutableAttributedString()
-        let percent: Double = (score/self.celebST.prevScore) * 100 - 100
+        var percent: Double = (score/self.celebST.prevScore) * 100 - 100
         let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
         let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
         attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
@@ -114,10 +114,10 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
             .startWithValues({ celeb in
-                let birthdate: NSDate = celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as NSDate
-                let age: Int = (NSDate().month < birthdate.month || (NSDate().month == birthdate.month && NSDate().day < birthdate.day)) ? (NSDate().year - (birthdate.year+1)) : (NSDate().year - birthdate.year)
+                let birthdate: Date = celeb.birthdate.dateFromFormat("MM/dd/yyyy")! as Date
+                let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
                 let formatter = DateFormatter()
-                formatter.dateStyle = DateFormatter.Style.LongStyle
+                formatter.dateStyle = .long
                 
                 let infoText: String
                 switch quality {

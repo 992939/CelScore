@@ -70,8 +70,8 @@ extension Supportable where Self: UIViewController {
         let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .Default, action: { _ in
-            self.dismissViewControllerAnimated(true, completion: { _ in Animation.delay(0.5) { self.sendEmail() }})
+        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .default, action: { _ in
+            self.dismiss(animated: true, completion: { _ in Animation.delay(time: 0.5) { self.sendEmail() }})
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
@@ -90,13 +90,13 @@ extension Sociable where Self: UIViewController {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(upTo: Constants.kNetworkRetry)
-            .observeOn(QueueScheduler.mainQueueScheduler)
+            .observeOn(UIScheduler())
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getUserInfoFromSignal(loginType: loginType == .Facebook ? .Facebook : .Twitter) }
+                return UserViewModel().getUserInfoFromSignal(loginType: loginType == .facebook ? .facebook : .twitter) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .Facebook ? .FacebookInfo : .TwitterInfo) }
+                return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .Facebook ? "name" : "screen_name") as! String) }
+                return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .facebook ? "name" : "screen_name") as! String) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -143,17 +143,17 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func setUpSocialButton(_ menuView: Menu, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
+    func setUpSocialButton(_ menuView: MenuController, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depthPreset = .depth2
         btn1.pulseAnimation = .none
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
-        btn1.setImage(R.image.ic_add_black()!, for: .Disabled)
-        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), for: .normal)
-        btn1.setImage(R.image.ic_add_white()!.imageWithRenderingMode(.AlwaysTemplate), for: .highlighted)
+        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
+        btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .normal)
+        btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .highlighted)
         btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
-        menuView.addSubview(btn1)
+        menuView.menu.addSubview(btn1)
         
         var image = R.image.facebooklogo()!
         let btn2: FabButton = FabButton()
@@ -165,10 +165,10 @@ extension Sociable where Self: UIViewController {
         btn2.backgroundColor = Color.indigo.darken1
         btn2.borderColor = Color.white
         btn2.borderWidth = 2
-        btn2.setImage(image, forState: .Normal)
-        btn2.setImage(image, forState: .Highlighted)
+        btn2.setImage(image, for: .normal)
+        btn2.setImage(image, for: .highlighted)
         btn2.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
-        menuView.addSubview(btn2)
+        menuView.menu.addSubview(btn2)
         
         image = R.image.twitterlogo()!
         let btn3: FabButton = FabButton()
@@ -180,15 +180,15 @@ extension Sociable where Self: UIViewController {
         btn3.pulseColor = Color.white
         btn3.borderColor = Color.white
         btn3.borderWidth = 2
-        btn3.setImage(image, forState: .Normal)
-        btn3.setImage(image, forState: .Highlighted)
+        btn3.setImage(image, for: .normal)
+        btn3.setImage(image, for: .highlighted)
         btn3.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
-        menuView.addSubview(btn3)
+        menuView.menu.addSubview(btn3)
         
-        menuView.center = origin
-        menuView.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        menuView.direction = .up
-        menuView.views = [btn1, btn2, btn3]
-        menuView.translatesAutoresizingMaskIntoConstraints = false
+        menuView.menu.center = origin
+        menuView.menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.menu.direction = .up
+        menuView.menu.views = [btn1, btn2, btn3]
+        menuView.menu.translatesAutoresizingMaskIntoConstraints = false
     }
 }

@@ -545,7 +545,7 @@ struct R {
 }
 
 struct _R {
-  static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(NSLocale.init) ?? NSLocale.currentLocale
+  static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(NSLocale.init)
   static let hostingBundle = Bundle(identifier: "com.GreyEcology.CelebrityScore") ?? Bundle.main
   
   struct nib {

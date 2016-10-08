@@ -10,6 +10,8 @@ import Foundation
 
 
 //MARK: Error
+enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, consensusBuilding, firstLaunch, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
