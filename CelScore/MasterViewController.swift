@@ -83,7 +83,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return SettingsViewModel().calculateUserAverageCelScoreSignal() }
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NoError> in
                         return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
                     .observeOn(UIScheduler())
                     .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -94,9 +94,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         return UserViewModel().loginSignal(token: token, with: type) }
                     .retry(upTo: Constants.kNetworkRetry)
                     .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .UserRatings) }
+                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
                     .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
+                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
                     .start()
             }
         }
