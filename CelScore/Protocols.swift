@@ -96,7 +96,7 @@ extension Sociable where Self: UIViewController {
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateUserNameSignal(username: value.object(loginType == .facebook ? "name" : "screen_name") as! String) }
+                return SettingsViewModel().updateUserNameSignal(username: (loginType == .facebook ? "name" : "screen_name")) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .userRatings) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -111,7 +111,7 @@ extension Sociable where Self: UIViewController {
             .on(starting: { _ in
                 self.dismissHUD()
                 self.handleMenu(false)
-                TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
+                TAOverlay.show(withLabel: OverlayInfo.loginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
             .on(failed: { error in self.dismissHUD(); self.sendAlert(.loginError, with: loginType) })
             .start()

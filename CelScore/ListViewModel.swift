@@ -69,7 +69,7 @@ struct ListViewModel {
         }
     }
     
-    func updateListSignal(listId: String) -> SignalProducer<Bool, ListError> {
+    func updateListSignal(listId: String) -> SignalProducer<Bool, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             

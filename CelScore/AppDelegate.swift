@@ -16,6 +16,7 @@ import RateLimit
 import Fabric
 import Crashlytics
 import ReactiveCocoa
+import ReactiveSwift
 import FBSDKCoreKit
 import SafariServices
 
@@ -77,7 +78,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.contains("TheScore://") {
-            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithValues({ celeb in
+            CelebrityViewModel().getCelebritySignal(id: url.query!)
+                .flatMapError { _ in SignalProducer.empty }
+                .startWithValues({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
@@ -85,7 +88,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed)
-                application.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+                application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
         else { FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
@@ -94,7 +97,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {
-            CelebrityViewModel().getCelebritySignal(id: url.query!).startWithValues({ celeb in
+            CelebrityViewModel().getCelebritySignal(id: url.query!)
+                .flatMapError { _ in SignalProducer.empty }
+                .startWithValues({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
@@ -102,7 +107,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed)
-                app.keyWindow!.rootViewController!.presentViewController(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+                app.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
         else if Twitter.sharedInstance().application(app, open:url, options: options) { return true }

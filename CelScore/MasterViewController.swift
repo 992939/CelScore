@@ -192,7 +192,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .on(starting: { _ in
                 Duration.stopMeasurement()
@@ -201,18 +201,18 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NoError> in
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                 return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
-            .on(starting: { (value:AnyObject) in
+            .map { (value:AnyObject) in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
-                self.changeList() })
+                self.changeList() }
             .flatMapError { error in
                 revealingSplashView.startAnimation()
                 self.dismissHUD()
                 self.changeList()
                 return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                return SettingsViewModel().getSettingSignal(settingType: .firstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
                     let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
@@ -229,8 +229,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .on(next: { celebInfo in Animation.delay(1) {
+            .on(starting: { celebInfo in Animation.delay(time: 1) {
                     TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
                 }
             })
@@ -322,6 +321,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
             .observe(on: UIScheduler())
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
         return node
     }
