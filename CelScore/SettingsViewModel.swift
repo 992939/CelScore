@@ -58,7 +58,7 @@ struct SettingsViewModel {
         }
     }
     
-    func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, SettingsError> {
+    func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel.self)

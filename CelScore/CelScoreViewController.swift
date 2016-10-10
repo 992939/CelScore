@@ -51,7 +51,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
-            .startWithResult({ status in
+            .startWithValues({ status in
                 if (status as! Bool) == true {
                     gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
             })

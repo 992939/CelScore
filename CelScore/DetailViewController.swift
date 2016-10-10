@@ -66,7 +66,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let first: Button? = self.socialButton.menu.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
-            .startWithResult({ status in
+            .startWithValues({ status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -223,25 +223,25 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
             switch value * 100.0 {
             case 100.0:
-                SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithResult({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithValues({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.firstCompleted.message(), image: OverlayInfo.firstCompleted.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstCompleted).start() })
                 })
             case 75.0..<100.0:
-                SettingsViewModel().getSettingSignal(settingType: .first75).startWithResult({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first75).startWithValues({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.first75.message(), image: OverlayInfo.first75.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first75).start() })
                 })
             case 50.0..<75.0:
-                SettingsViewModel().getSettingSignal(settingType: .first50).startWithResult({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first50).startWithValues({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.first50.message(), image: OverlayInfo.first50.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first50).start() })
                 })
             case 25.0..<50.0:
-                SettingsViewModel().getSettingSignal(settingType: .first25).startWithResult({ first in let firstTime = first as! Bool
+                SettingsViewModel().getSettingSignal(settingType: .first25).startWithValues({ first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.first25.message(), image: OverlayInfo.first25.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first25).start() })

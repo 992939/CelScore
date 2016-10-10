@@ -194,18 +194,16 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
             .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .on(next: { _ in
+            .on(starting: { _ in
                 Duration.stopMeasurement()
                 revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
                 revealingSplashView.startAnimation()})
             .flatMapError { _ in return SignalProducer.empty }
-            .flatMap(.Latest) { (_) -> SignalProducer<Bool, ListError> in
+            .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
-            .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex) }
-            .on(next: { (value:AnyObject) in
+            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
+            .on(starting: { (value:AnyObject) in
                 self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
                 self.changeList() })
             .flatMapError { error in
@@ -213,7 +211,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.dismissHUD()
                 self.changeList()
                 return SignalProducer.empty }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .FirstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
