@@ -95,7 +95,7 @@ struct SettingsViewModel {
         }
     }
     
-    func getSettingSignal(settingType: SettingType) -> SignalProducer<AnyObject, NSError> {
+    func getSettingSignal(settingType: SettingType) -> SignalProducer<AnyObject, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
@@ -161,7 +161,7 @@ struct SettingsViewModel {
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerated() {
                     let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
-                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x as AnyObject, "prevScore": celeb.prevScore as AnyObject, "currentScore": ratings.getCelScore()]
+                    let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x as AnyObject, "prevScore": celeb.prevScore as AnyObject, "currentScore": ratings.getCelScore() as AnyObject]
                     userDefaults.set(today, forKey: String(index))
                 }
             }

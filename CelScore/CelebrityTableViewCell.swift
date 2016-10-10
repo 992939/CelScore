@@ -173,7 +173,8 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
                 .observe(on: UIScheduler())
                 .flatMapError { error -> SignalProducer<Int, NoError> in return .empty }
                 .startWithValues { count in
-                    if count == 0 { SettingsViewModel().getSettingSignal(settingType: .firstFollow).startWithResult({ first in
+                    if count == 0 {
+                        SettingsViewModel().getSettingSignal(settingType: .firstFollow).startWithValues({ first in
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                         let firstTime = first as! Bool
                         guard firstTime else { return }
