@@ -135,7 +135,7 @@ struct UserViewModel {
             let realm = try! Realm()
             
             switch dataSetType {
-            case .FacebookInfo:
+            case .facebookInfo:
                 if dataset.getAll().count == 0 {
                     dataset.setString(object.object(forKey: "name") as! String, forKey: "name")
                     dataset.setString(object.object(forKey: "first_name") as! String, forKey: "first_name")
@@ -146,7 +146,7 @@ struct UserViewModel {
                     dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
                     dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
                 }
-            case .TwitterInfo:
+            case .twitterInfo:
                 if dataset.getAll().count == 0 {
                     dataset.setString(object.object(forKey: "screen_name") as! String, forKey: "screen_name")
                     let followers = object.object(forKey: "followers_count") as! NSNumber
@@ -162,7 +162,7 @@ struct UserViewModel {
                     dataset.setString(Bundle.main.releaseVersionNumber, forKey: "release_version")
                     dataset.setString(Bundle.main.buildVersionNumber, forKey: "build_version")
                 }
-            case .UserRatings:
+            case .userRatings:
                 let userRatingsArray = realm.objects(UserRatingsModel.self).filter("isSynced = false")
                 guard userRatingsArray.count > 0 else { observer.send(value: userRatingsArray); return observer.sendCompleted(); }
                 for index in 0..<userRatingsArray.count {
@@ -173,7 +173,7 @@ struct UserViewModel {
                     realm.add(ratings, update: true)
                     try! realm.commitWrite()
                 }
-            case .UserSettings:
+            case .userSettings:
                 let settings = realm.objects(SettingsModel.self).isEmpty ? SettingsModel() : realm.objects(SettingsModel.self).first!
                 guard settings.isSynced == false else  { observer.send(value: settings); return observer.sendCompleted(); }
                 
@@ -200,7 +200,7 @@ struct UserViewModel {
                     }
                     observer.send(error: task.error as! NSError)
                     return task }
-                if case .UserRatings = dataSetType { dataset.clear() }
+                if case .userRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
                 observer.send(value: object)
                 observer.sendCompleted()
@@ -219,16 +219,16 @@ struct UserViewModel {
                 return nil })
             
             let syncClient: AWSCognito = AWSCognito.default()
-            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .UserRatings ? "UserVotes" : dataSetType.rawValue )
+            let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .userRatings ? "UserVotes" : dataSetType.rawValue )
             dataset.synchronize().continue(with: AWSExecutor.mainThread(), with:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     observer.send(error: task.error as! NSError)
                     return task }
                 let realm = try! Realm()
                 switch dataSetType {
-                case .FacebookInfo: fatalError("Not storing user information locally")
-                case .TwitterInfo: fatalError("Not storing user information locally")
-                case .UserRatings:
+                case .facebookInfo: fatalError("Not storing user information locally")
+                case .twitterInfo: fatalError("Not storing user information locally")
+                case .userRatings:
                     dataset.getAll().forEach({ dico in
                         realm.beginWrite()
                         let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
@@ -236,7 +236,7 @@ struct UserViewModel {
                         realm.add(userRatings, update: true)
                         try! realm.commitWrite()
                     })
-                case .UserSettings:
+                case .userSettings:
                     let dico: [AnyHashable: Any] = dataset.getAll()
                     let settings: SettingsModel = realm.objects(SettingsModel.self).isEmpty ? SettingsModel() : realm.objects(SettingsModel.self).first!
                     guard dico.isEmpty == false else { observer.send(value: task); return task }

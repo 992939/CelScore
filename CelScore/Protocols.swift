@@ -90,30 +90,30 @@ extension Sociable where Self: UIViewController {
         self.showHUD()
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(upTo: Constants.kNetworkRetry)
-            .observeOn(UIScheduler())
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+            .observe(on: UIScheduler())
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .facebook ? .facebook : .twitter) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
-            .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateUserNameSignal(username: value.objectForKey(loginType == .facebook ? "name" : "screen_name") as! String) }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getFromCognitoSignal(dataSetType: .UserRatings) }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().getFromCognitoSignal(dataSetType: .UserSettings) }
-            .flatMap(.Latest) { (_) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateSettingSignal(value: loginType.rawValue, settingType: .LoginTypeIndex) }
-            .flatMap(.Latest) { (_) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch) }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().updateCognitoSignal(object: "", dataSetType: .UserSettings) }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-            .on(next: { _ in
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateUserNameSignal(username: value.object(loginType == .facebook ? "name" : "screen_name") as! String) }
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getFromCognitoSignal(dataSetType: .userRatings) }
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().getFromCognitoSignal(dataSetType: .userSettings) }
+            .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateSettingSignal(value: loginType.rawValue as AnyObject, settingType: .loginTypeIndex) }
+            .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch) }
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
+            .observe(on: UIScheduler())
+            .on(starting: { _ in
                 self.dismissHUD()
                 self.handleMenu(false)
-                TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.LoginSuccess.logo(), options: OverlayInfo.getOptions())
+                TAOverlay.showOverlayWithLabel(OverlayInfo.LoginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
-            .on(failed: { error in self.dismissHUD(); self.sendAlert(.LoginError, with: loginType) })
+            .on(failed: { error in self.dismissHUD(); self.sendAlert(.loginError, with: loginType) })
             .start()
     }
     

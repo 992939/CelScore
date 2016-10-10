@@ -21,7 +21,7 @@ enum NetworkError: Int, Error { case notConnected = 1 }
 //MARK: Misc.
 enum RatingsType { case ratings, userRatings }
 enum AWSDataType { case celebrity, list, ratings }
-enum CognitoDataSet: String { case FacebookInfo, TwitterInfo, UserRatings, UserSettings }
+enum CognitoDataSet: String { case facebookInfo, twitterInfo, userRatings, userSettings }
 
 //MARK: SocialLogin
 enum SocialLogin: Int {
