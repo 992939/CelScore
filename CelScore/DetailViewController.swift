@@ -64,7 +64,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
-        let first: Button? = self.socialButton.menu.first as? Button
+        let first: Button? = self.socialButton.menu.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
             .startWithResult({ status in
@@ -99,7 +99,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton.menu)
-        Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(Constants.kFabDiameter, Constants.kFabDiameter))
+        Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.view.addSubview(self.voteButton)
         self.view.addSubview(self.profilePicNode.view)
         self.view.addSubview(self.infoVC.view)
@@ -465,8 +465,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        navigationBarView.leftControls = [backButton]
-        navigationBarView.rightControls = [infoButton]
+        navigationBarView.leftViews = [backButton]
+        navigationBarView.rightViews = [infoButton]
         navigationBarView.depthPreset = .depth3
         navigationBarView.backgroundColor = Constants.kRedShade
         return navigationBarView

@@ -122,8 +122,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(self.socialButton)
-        Layout.size(parent: self.view, child: self.socialButton, size: CGSize(Constants.kFabDiameter, Constants.kFabDiameter))
+        self.view.addSubview(self.socialButton.menu)
+        Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
@@ -412,8 +412,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navBar: Toolbar = Toolbar()
         navBar.frame = Constants.kNavigationBarRect
-        navBar.leftControls = [menuButton]
-        navBar.rightControls = [rightButton]
+        navBar.leftViews = [menuButton]
+        navBar.rightViews = [rightButton]
         navBar.grid.contentInset.bottom = 2 * Constants.kPadding
         navBar.backgroundColor = Constants.kRedShade
         let celscoreImageView = UIImageView(image: R.image.score_white()!)
@@ -426,11 +426,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.segmentedControl.frame = Constants.kSegmentedControlRect
         self.segmentedControl.backgroundColor = Constants.kBlueShade
         self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
-        self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        self.segmentedControl.selectionIndicatorLocation = .down
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : Color.white,
                                                      NSFontAttributeName: UIFont.systemFont(ofSize: 18),
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
-        self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe
+        self.segmentedControl.selectionStyle = .textWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.isOpaque = true
         self.segmentedControl.clipsToBounds = false
