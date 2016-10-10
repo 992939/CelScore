@@ -511,7 +511,7 @@ struct R {
   /// This `R.nib` struct is generated, and contains static references to 1 nibs.
   struct nib {
     /// Nib `LaunchScreen`.
-    static let launchScreen = _R.nib._LaunchScreen()
+    static let launchScreen = _R.nib._LaunchScreen.self
     
     /// `UINib(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void) -> UINib {
