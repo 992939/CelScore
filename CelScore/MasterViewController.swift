@@ -138,24 +138,24 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     .flatMapError { _ in SignalProducer.empty }
                     .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                         return ListViewModel().sanitizeListsSignal() }
-                    .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<Bool, NoError> in
                         return ListViewModel().updateListSignal(listId: list.getId()) }
                     .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                         return ListViewModel().getListSignal(listId: list.getId()) }
-                    .on(starting: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                    .map { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-                    .observeOn(UIScheduler())
-                    .on(next: { celebInfo in TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions()) })
+                    .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                    .observe(on:UIScheduler())
+                    .on(starting: { celebInfo in TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: NSData(contentsOfURL: NSURL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions()) })
                     .start()
             }
         }
     }
     
     func facebookTokenCheck() {
-        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy")!
+        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)!
         if expirationDate < Date.today() { self.facebookLogin(false) }
-        else { UserViewModel().refreshFacebookTokenSignal() }
+        else { UserViewModel().refreshFacebookTokenSignal().start() }
     }
     
     func twitterAccessCheck() {
@@ -230,7 +230,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .on(starting: { celebInfo in Animation.delay(time: 1) {
-                    TAOverlay.showOverlayWithLabel(celebInfo.text, image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), options: OverlayInfo.getOptions())
+                    TAOverlay.showOverlayWithLabel(celebInfo.text, Image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), Options: OverlayInfo.getOptions())
                 }
             })
             .start()

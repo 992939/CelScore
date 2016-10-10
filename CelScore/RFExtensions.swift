@@ -10,9 +10,9 @@ import UIKit
 
 
 extension UIView {
-    func slide(right: Bool, duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+    func slide(right: Bool, duration: TimeInterval = 1.0, completionDelegate: CAAnimationDelegate? = nil) {
         let transition = CATransition()
-        if let delegate: AnyObject = completionDelegate { transition.delegate = delegate }
+        if let delegate = completionDelegate { transition.delegate = delegate }
         transition.type = kCATransitionPush
         transition.subtype = right ? kCATransitionFromRight : kCATransitionFromLeft
         transition.duration = duration

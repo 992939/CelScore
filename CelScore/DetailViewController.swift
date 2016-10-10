@@ -42,7 +42,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         super.init(nibName: nil, bundle: nil)
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
-            .observeOn(UIScheduler())
+            .observe(on: UIScheduler())
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues { activity in self.userActivity = activity }
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
@@ -161,9 +162,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
-            .flatMap(.Latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
+            .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
-            .observeOn(UIScheduler())
+            .observe(on: UIScheduler())
             .on(starting: { (userRatings:RatingsModel) in
                 let first: Button? = self.socialButton.menu.views?.first as? Button
                 first?.backgroundColor = Constants.kStarGoldShade
@@ -254,6 +255,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func updateAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .observe(on: UIScheduler())
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ (userRatings:RatingsModel) in
                 self.rippleEffect(positive: false, gold: true)
                 self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
