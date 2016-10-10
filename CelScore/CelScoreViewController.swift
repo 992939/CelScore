@@ -37,7 +37,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
         
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithValues({ celeb in
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues({ celeb in
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
         })

@@ -161,7 +161,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func twitterAccessCheck() {
         let account = ACAccountStore()
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-        account.requestAccessToAccounts(with: accountType, options: nil, completion: {(success: Bool, error: NSError!) -> Void in
+        account.requestAccessToAccounts(with: accountType, options: nil, completion: {(success: Bool, error: NSError?) -> Void in
             if success == false { Animation.delay(3) { self.sendAlert(.PermissionError, with: SocialLogin.Twitter) }}
         })
     }
@@ -228,7 +228,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return firstTime == false
             })
             .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+            .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .on(starting: { celebInfo in Animation.delay(time: 1) {
                     TAOverlay.showOverlayWithLabel(celebInfo.text, Image: UIImage(data: Data(contentsOfURL: URL(string: celebInfo.image)!)!), Options: OverlayInfo.getOptions())
                 }
@@ -242,9 +242,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .observe(on: UIScheduler())
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues { list in
                 self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPointZero, animated:true) }
+                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }
         }
     }
     

@@ -14,9 +14,10 @@ import ReactiveCocoa
 import ReactiveSwift
 import MessageUI
 import Material
+import Result
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
@@ -208,14 +209,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 .filter({ (score:CGFloat) -> Bool in
                     if score > Constants.kTrollingWarning { self.progressAction() }
                     return score < Constants.kTrollingWarning })
-                .flatMapError { _ in SignalProducer.empty }
                 .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NoError> in
                     return SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning) }
-                .on(starting: { first in let firstTime = first as! Bool
+                .map { first in let firstTime = first as! Bool
                     guard firstTime else { return }
                     TAOverlay.show(withLabel: OverlayInfo.firstTrollWarning.message(), image: OverlayInfo.firstTrollWarning.logo(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstTrollWarning).start() })
-                    })
+                    }
                 .start()
         }
     }
@@ -313,25 +313,28 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func socialButton(_ button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
-            .flatMapError { error -> SignalProducer<String, SettingsError> in return .empty }
+            .flatMapError { _ in
+                self.socialButtonTapped(buttonTag: button.tag, hideButton: false)
+                return SignalProducer.empty }
             .startWithValues { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotView(afterScreenUpdates: true)!)
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage, screenshot: screenshot).startWithResult { socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage, screenshot: screenshot).startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
                         TAOverlay.show(withLabel: SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                                        image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    self.presentViewController(socialVC, animated: true, completion: { Animation.delay(2.0) { self.socialButton.menu.close() }})
+                    self.present(socialVC, animated: true, completion: { Animation.delay(time: 2.0) { self.socialButton.menu.close() }})
                 }}
-            .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
     }
     
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .observe(on: UIScheduler())
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in
+                self.ratingsVC.displayRatings()
+                return SignalProducer.empty }
             .startWithValues({ userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
@@ -340,7 +343,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.voteButton.setImage(R.image.heart_black()!, for: .normal)
                 self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
             })
-            .on(failed: { _ in self.ratingsVC.displayRatings() })
     }
     
     func enableUpdateButton() {
@@ -385,7 +387,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.closeHandleMenu()
         
         if index == 2 {
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings).startWithValues({ userRatings in
+            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+                .flatMapError { _ in SignalProducer.empty }
+                .startWithValues({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
