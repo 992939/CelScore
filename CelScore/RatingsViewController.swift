@@ -83,9 +83,9 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     SettingsViewModel().loggedInAsSignal()
                         .flatMapError { _ in SignalProducer.empty }
                         .on(starting: { _ in cosmosView.settings.updateOnTouch = true })
-                        .flatMap(.latest){ (_) -> SignalProducer<Bool, NSError> in
+                        .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
-                        .flatMapError { error -> SignalProducer<Bool, NSError> in return .empty }
+                        .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
                         .map({ hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
                             cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
@@ -95,7 +95,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                             .observe(on: UIScheduler())
                             .on(failed: { _ in self.requestLogin() })
                             .flatMapError { _ in SignalProducer.empty }
-                            .flatMap(.latest){ (_) -> SignalProducer<Bool, NSError> in
+                            .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                             .filter{ hasUserRatings in
                                 if hasUserRatings == false {

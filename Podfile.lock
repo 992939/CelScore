@@ -78,11 +78,11 @@ DEPENDENCIES:
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.14)
   - FBSDKLoginKit (~> 4.14)
-  - HMSegmentedControl (~> 1.5.2)
+  - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.1)
   - PMAlertController (~> 2.0)
-  - R.swift (~> 3.0)
+  - R.swift (~> 3.1)
   - RateLimit (~> 1.2)
   - ReactiveCocoa (from `https://github.com/ReactiveCocoa/ReactiveCocoa.git`, branch `add-podspec`)
   - Realm (~> 2.0)
@@ -161,6 +161,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 88854ae50175c880e9e11a74edc987959207d67b
+PODFILE CHECKSUM: 90edc29bac98c999b7b3b17e3925276609ef9215
 
 COCOAPODS: 1.0.1

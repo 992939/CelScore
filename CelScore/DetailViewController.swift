@@ -99,7 +99,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.addSubview(topView)
         self.view.addSubview(segmentView)
         self.view.addSubview(self.socialButton.menu)
-        Layout.size(parent: self.view, child: self.socialButton.menu, size: Constants.kFabDiameter)
+        Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(Constants.kFabDiameter, Constants.kFabDiameter))
         self.view.addSubview(self.voteButton)
         self.view.addSubview(self.profilePicNode.view)
         self.view.addSubview(self.infoVC.view)
@@ -114,7 +114,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-        let first: Button? = self.socialButton.menu.first as? Button
+        let first: Button? = self.socialButton.menu.views.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 3),
             Animation.translateX(translation: Constants.kPadding + 100)
@@ -125,7 +125,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             Animation.translateX(translation: -(Constants.kFabDiameter + 100))
             ]))
         
-        for subview in self.socialButton.menu.enumerate() {
+        for subview in self.socialButton.menu.views.enumerated() {
             if subview.element.tag == 1 || subview.element.tag == 2 {
                 subview.element.frame.offsetInPlace(dx: Constants.kPadding + 100, dy: 0)
             }
@@ -133,7 +133,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func hideButtons() {
-        let first: Button? = self.socialButton.menu.first as? Button
+        let first: Button? = self.socialButton.menu.views.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 3),
             Animation.translateX(translation: -(Constants.kPadding + 100))
@@ -209,7 +209,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     if score > Constants.kTrollingWarning { self.progressAction() }
                     return score < Constants.kTrollingWarning })
                 .flatMapError { _ in SignalProducer.empty }
-                .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NSError> in
+                .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NoError> in
                     return SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning) }
                 .on(starting: { first in let firstTime = first as! Bool
                     guard firstTime else { return }
@@ -296,7 +296,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
-            .startWithResult({ status in
+            .startWithValues({ status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -305,14 +305,15 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     first?.setImage(R.image.cross()!, for: .highlighted)
                 }
             })
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithResult({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
             first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
     }
     
     func socialButton(_ button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
-            .on(starting: { _ in
+            .flatMapError { error -> SignalProducer<String, SettingsError> in return .empty }
+            .startWithValues { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotView(afterScreenUpdates: true)!)
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage, screenshot: screenshot).startWithResult { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
@@ -322,14 +323,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                                        image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
                     self.presentViewController(socialVC, animated: true, completion: { Animation.delay(2.0) { self.socialButton.menu.close() }})
-                }})
+                }}
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
-            .start()
     }
     
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .observe(on: UIScheduler())
+            .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
@@ -481,27 +482,26 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func getSegmentView() -> SMSegmentView {
+        let appearance = SMSegmentAppearance()
+        appearance.segmentOnSelectionColour = Constants.kRedShade
+        appearance.segmentOffSelectionColour = Constants.kGreyBackground
+        appearance.titleOnSelectionFont = UIFont.systemFont(ofSize: 0)
+        appearance.titleOffSelectionFont = UIFont.systemFont(ofSize: 0)
+        appearance.contentVerticalMargin = 5.0
+        
         let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-            separatorColour: Color.black, separatorWidth: 1,
-            segmentProperties:[keySegmentTitleFont: UIFont.systemFont(ofSize: 0),
-                keySegmentOnSelectionColour: Constants.kRedShade,
-                keySegmentOffSelectionColour: Constants.kGreyBackground,
-                keyContentVerticalMargin: 5 as AnyObject])
+                                                       dividerColour: Color.black,
+                                                       dividerWidth: 1,
+                                                       segmentAppearance: appearance)
+        
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
-        segmentView.selectSegmentAtIndex(0)
+        segmentView.selectedSegmentIndex = 0
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = Color.black.cgColor
         segmentView.layer.shadowOffset = CGSize(width: 0, height: 2)
         segmentView.layer.shadowOpacity = 0.3
-        segmentView.segments[0].isAccessibilityElement = true
-        segmentView.segments[0].accessibilityLabel = "CelScore View"
-        segmentView.segments[1].isAccessibilityElement = true
-        segmentView.segments[1].accessibilityLabel = "Info View"
-        segmentView.segments[2].isAccessibilityElement = true
-        segmentView.segments[2].accessibilityLabel = "Vote View"
-        segmentView.delegate = self
         return segmentView
     }
     
