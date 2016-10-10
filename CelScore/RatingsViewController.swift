@@ -85,7 +85,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                         .on(starting: { _ in cosmosView.settings.updateOnTouch = true })
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NSError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
-                        .on(starting: { hasRatings in
+                        .flatMapError { error -> SignalProducer<Bool, NSError> in return .empty }
+                        .map({ hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
                             cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
                             cosmosView.settings.updateOnTouch = hasRatings ? false : true })
@@ -106,7 +107,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
-                            .startWithValues({ userRatings in
+                            .map({ userRatings in
                                 self.delegate!.rippleEffect(positive: rating < 3 ? false : true, gold: false)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
