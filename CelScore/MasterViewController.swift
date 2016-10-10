@@ -79,19 +79,19 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
                 CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                         return SettingsViewModel().calculateUserAverageCelScoreSignal() }
                     .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                     .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                         return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
-                    .observeOn(UIScheduler())
-                    .flatMap(.Latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                    .observe(on: UIScheduler())
+                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         let type = SocialLogin(rawValue:value as! Int)!
-                        let token = type == .Facebook ? FBSDKAccessToken.currentAccessToken().tokenString : ""
-                        if type == .Facebook { self.facebookTokenCheck() }
+                        let token = type == .facebook ? FBSDKAccessToken.current().tokenString : ""
+                        if type == .facebook { self.facebookTokenCheck() }
                         else { self.twitterAccessCheck() }
-                        return UserViewModel().loginSignal(token: token, with: type) }
+                        return UserViewModel().loginSignal(token: token!, with: type) }
                     .retry(upTo: Constants.kNetworkRetry)
                     .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                         return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
