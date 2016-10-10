@@ -42,9 +42,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         super.init(nibName: nil, bundle: nil)
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
-            .startOn(QueueScheduler())
             .observeOn(UIScheduler())
-            .startWithResult { activity in self.userActivity = activity }
+            .startWithValues { activity in self.userActivity = activity }
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
@@ -127,7 +126,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         for subview in self.socialButton.menu.views.enumerated() {
             if subview.element.tag == 1 || subview.element.tag == 2 {
-                subview.element.frame.offsetInPlace(dx: Constants.kPadding + 100, dy: 0)
+                subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
             }
         }
     }
