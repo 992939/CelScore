@@ -166,7 +166,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
-            .on(starting: { (userRatings:RatingsModel) in
+            .map { userRatings in
                 let first: Button? = self.socialButton.menu.views?.first as? Button
                 first?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
@@ -176,8 +176,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
                     self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
-                }})
-            .delay(2.1, onScheduler: QueueScheduler.mainQueueScheduler)
+                }}
+            .delay(2.1, on: QueueScheduler.mainQueueScheduler)
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
