@@ -126,7 +126,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         Layout.size(parent: self.view, child: self.socialButton, size: CGSize(Constants.kFabDiameter, Constants.kFabDiameter))
         self.setupData()
         
-        NotificationCenter.default.rac_notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
+        NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
@@ -254,17 +254,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Sociable
     func handleMenu(_ open: Bool = false) {
         let image: UIImage?
-        if open || (open == false && self.socialButton.isOpened == false){
-            self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
+        if open || (open == false && self.socialButton.menu.isOpened == false){
+            self.socialButton.menu.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.views.first as? Button
+            let first: Button? = self.socialButton.menu.views.first as? Button
             first?.animate(animation: Animation.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
-        } else if self.socialButton.isOpened {
-            self.socialButton.close()
+        } else if self.socialButton.menu.isOpened {
+            self.socialButton.menu.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.views.first as? Button
+            let first: Button? = self.socialButton.menu.views.first as? Button
             first?.animate(animation: Animation.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
@@ -273,8 +273,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
-        self.socialButton.close()
-        let first: Button? = self.socialButton.views.first as? Button
+        self.socialButton.menu.close()
+        let first: Button? = self.socialButton.menu.views.first as? Button
         first!.animate(animation: Animation.animationGroup(animations: [
             Animation.rotate(rotation: 5),
             Animation.translateY(translation: y)
@@ -363,7 +363,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: SideNavigationControllerDelegate
     func navigationDrawerDidClose(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
-        self.navigationDrawerController?.enabled = false
+        self.navigationDrawerController?.isEnabled = false
         SettingsViewModel().loggedInAsSignal()
             .on(starting: { _ in self.movingSocialButton(onScreen: false) })
             .on(failed: { _ in
@@ -400,15 +400,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         menuButton.pulseColor = Color.white
         menuButton.pulseAnimation = .none
         menuButton.addTarget(self, action: #selector(MasterViewController.openSettings), for: .touchUpInside)
-        menuButton.setImage(R.image.ic_menu_white()!, for: .Normal)
-        menuButton.setImage(R.image.ic_menu_white()!, for: .Highlighted)
+        menuButton.setImage(R.image.ic_menu_white()!, for: .normal)
+        menuButton.setImage(R.image.ic_menu_white()!, for: .highlighted)
         
         let rightButton: FlatButton = FlatButton()
         rightButton.pulseColor = Color.white
         rightButton.pulseAnimation = .none
         rightButton.addTarget(self, action: #selector(MasterViewController.showSearchBar), for: .touchUpInside)
-        rightButton.setImage(R.image.ic_search_white()!, for: .Normal)
-        rightButton.setImage(R.image.ic_search_white()!, for: .Highlighted)
+        rightButton.setImage(R.image.ic_search_white()!, for: .normal)
+        rightButton.setImage(R.image.ic_search_white()!, for: .highlighted)
         
         let navBar: Toolbar = Toolbar()
         navBar.frame = Constants.kNavigationBarRect

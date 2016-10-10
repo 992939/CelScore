@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import Material
 import SwiftyTimer
 import ReactiveCocoa
+import ReactiveSwift
 
 
 final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeViewDelegate, Labelable {
@@ -36,7 +37,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
         
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithResult({ celeb in
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id).startWithValues({ celeb in
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
         })
@@ -48,8 +49,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
         let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         
-        SettingsViewModel().getSettingSignal(settingType: .PublicService)
-            .observeOn(UIScheduler())
+        SettingsViewModel().getSettingSignal(settingType: .publicService)
+            .observe(on: UIScheduler())
             .startWithResult({ status in
                 if (status as! Bool) == true {
                     gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
@@ -60,7 +61,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gaugeView.pulseAnimation = .none
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(2)) })
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(places: 2)) })
         gauge.limitValue = Constants.kMiddleVoteValue
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
@@ -95,7 +96,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
                 var attributedText = NSMutableAttributedString()
                 let percent: Double = (celscore/Double(value)!) * 100 - 100
-                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(2)) : "+" + String(percent.roundToPlaces(2))) + "%)"
+                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 2)) : "+" + String(percent.roundToPlaces(places: 2))) + "%)"
                 let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
                 attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
                 let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
@@ -110,15 +111,15 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             infoLabel.textColor = Constants.kBlueLight
         }
         infoLabel.textAlignment = .right
-        let taggedView = MaterialPulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
-        SettingsViewModel().getSettingSignal(settingType: .PublicService)
-            .observeOn(UIScheduler())
-            .startWithResult({ status in
+        let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
+        SettingsViewModel().getSettingSignal(settingType: .publicService)
+            .observe(on: UIScheduler())
+            .startWithValues({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.tag = tag
         taggedView.depthPreset = .depth1
         taggedView.backgroundColor = Constants.kGreyBackground
-        taggedView.pulseAnimation = .CenterWithBacking
+        taggedView.pulseAnimation = .centerWithBacking
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
         return taggedView

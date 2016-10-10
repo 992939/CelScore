@@ -275,24 +275,24 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     //MARK: Sociable
     func handleMenu(_ open: Bool = false) {
         if open { self.openHandleMenu() }
-        else if self.socialButton.menu.opened { self.closeHandleMenu() }
+        else if self.socialButton.menu.isOpened { self.closeHandleMenu() }
         else { TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions()) }
     }
     
     func openHandleMenu() {
-        let first: Button? = self.socialButton.menu.views?.first as? Button
+        let first: Button? = self.socialButton.menu.views.first as? Button
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
         first?.animate(animation: Animation.rotate(rotation: 1))
         self.socialButton.menu.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-        first?.setImage(image, forState: .Normal)
-        first?.setImage(image, forState: .Highlighted)
+        first?.setImage(image, for: .normal)
+        first?.setImage(image, for: .highlighted)
     }
     
     func closeHandleMenu() {
-       let first: Button? = self.socialButton.menu.views?.first as? Button
-        if self.socialButton.menu.opened { first?.animate(animation: Animation.rotate(rotation: 1)) }
+       let first: Button? = self.socialButton.menu.views.first as? Button
+        if self.socialButton.menu.isOpened { first?.animate(animation: Animation.rotate(rotation: 1)) }
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
@@ -314,12 +314,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         SettingsViewModel().loggedInAsSignal()
             .on(starting: { _ in
                 let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotView(afterScreenUpdates: true)!)
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .Facebook: .Twitter), message: self.socialMessage, screenshot: screenshot).startWithResult { socialVC in
-                    let isFacebookAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)
-                    let isTwitterAvailable: Bool = SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage, screenshot: screenshot).startWithResult { socialVC in
+                    let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
+                    let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
-                        TAOverlay.showOverlayWithLabel(SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
-                            image: OverlayInfo.LoginError.logo(), options: OverlayInfo.getOptions())
+                        TAOverlay.show(withLabel: SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
+                                       image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
                     self.presentViewController(socialVC, animated: true, completion: { Animation.delay(2.0) { self.socialButton.menu.close() }})
                 }})
@@ -330,7 +330,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .observe(on: UIScheduler())
-            .on(starting: { userRatings in
+            .startWithValues({ userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
                 self.enableUpdateButton()
@@ -339,14 +339,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
             })
             .on(failed: { _ in self.ratingsVC.displayRatings() })
-            .start()
     }
     
     func enableUpdateButton() {
         self.voteButton.pulseAnimation = .centerWithBacking
         self.voteButton.backgroundColor = Constants.kStarGoldShade
-        self.voteButton.setImage(R.image.heart_black()!, for: .Normal)
-        self.voteButton.setImage(R.image.heart_black()!, for: .Highlighted)
+        self.voteButton.setImage(R.image.heart_black()!, for: .normal)
+        self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
         
@@ -509,7 +508,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func setUpVoteButton() {
         let diameter: CGFloat = Constants.kFabDiameter
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
-        self.voteButton.shape = .circle
+        self.voteButton.shapePreset = .circle
         self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .none
         self.voteButton.accessibilityLabel = "Vote Button"

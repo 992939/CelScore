@@ -46,9 +46,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.depthPreset = .none
         let diameter = 60 - 2 * UIDevice.getOffset()
         let logoCircle: Button = Button(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 10 - UIDevice.getOffset()/2, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.court_white()!, for: .Normal)
-        logoCircle.setImage(R.image.court_white()!, for: .Highlighted)
-        logoCircle.shape = .circle
+        logoCircle.setImage(R.image.court_white()!, for: .normal)
+        logoCircle.setImage(R.image.court_white()!, for: .highlighted)
+        logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
         logoCircle.backgroundColor = Constants.kRedShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
@@ -173,7 +173,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         alertVC.addAction(PMAlertAction(title: "Log Out", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal().startWithValues({ _ in
-                Animation.delay(1.0) { TAOverlay.showOverlayWithLabel(OverlayInfo.LogoutUser.message(), image: OverlayInfo.LogoutUser.logo(), options: OverlayInfo.getOptions()) }
+                Animation.delay(time: 1.0) { TAOverlay.show(withLabel: OverlayInfo.logoutUser.message(), image: OverlayInfo.logoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
             })
         }))
@@ -207,15 +207,15 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: SFSafariViewControllerDelegate
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         Animation.delay(time: 0.75) {
-            self.navigationDrawerController!.enabled = true
+            self.navigationDrawerController!.isEnabled = true
             self.navigationDrawerController!.closeLeftView()
         }
     }
     
     //MARK: MFMailComposeViewControllerDelegate
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismissViewControllerAnimated(true, completion: { _ in
-            self.navigationDrawerController!.enabled = true
+        controller.dismiss(animated: true, completion: { _ in
+            self.navigationDrawerController!.isEnabled = true
         })
     }
     

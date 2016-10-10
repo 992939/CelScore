@@ -42,7 +42,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             schemaVersion: 26,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 26 {
-                    migration.enumerate(CelebrityModel.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["daysOnThrone"] = 0
                     }
                 }
@@ -62,7 +62,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
-        nav.contentViewController.view.backgroundColor = UIColor.clearColor
+        nav.contentViewController.view.backgroundColor = UIColor.clear
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
         statusView.backgroundColor = Constants.kBlueShade

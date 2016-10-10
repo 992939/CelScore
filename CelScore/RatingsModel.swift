@@ -81,13 +81,13 @@ class RatingsModel: Object, Collection {
     //MARK: Methods
     func getCelScore() -> Double {
         let score: Double = self.map{ self[$0] as! Double }.reduce(0, { $0 + $1 })
-        return (score/10).roundToPlaces(2)
+        return (score/10).roundToPlaces(places: 2)
     }
     
     func getAvgVariance() -> Double {
         let avgVariance: Double = (self.variance1 + self.variance2 + self.variance3 + self.variance4 + self.variance5
         + self.variance6 + self.variance7 + self.variance8 + self.variance9 + self.variance10)/10
-        return avgVariance.roundToPlaces(2)
+        return avgVariance.roundToPlaces(places: 2)
     }
     
     subscript(i: Int) -> String {
