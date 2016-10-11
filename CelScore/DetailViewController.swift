@@ -193,13 +193,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
-            .on(starting: { message in
+            .map { message in
                 SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues { value in
-                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, Image: R.image.sphere_yellow(), Options: OverlayInfo.getOptions()) }
-                    else { TAOverlay.showOverlayWithLabel(message, Image: R.image.sphere_blue(), Options: OverlayInfo.getOptions()) }
+                    if value > 99.0 { TAOverlay.show(withLabel: message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
+                    else { TAOverlay.show(withLabel: message, image: R.image.sphere_blue(), options: OverlayInfo.getOptions()) }
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
-            })
+            }
             .start()
     }
     
