@@ -215,15 +215,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .firstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
-                    let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.WelcomeUser.message(), image: OverlayInfo.WelcomeUser.logo(), style: .Alert)
+                    let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .Default, action: { _ in
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                        SettingsViewModel().updateSettingSignal(value: false, settingType: .FirstLaunch).start()
+                    alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .default, action: { _ in
+                        self.dismiss(animated: true, completion: nil)
+                        SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch).start()
                         self.movingSocialButton(onScreen: true) }))
-                    alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
-                    alertVC.view.opaque = false
-                    Animation.delay(2) { self.presentViewController(alertVC, animated: true, completion: nil) }
+                    alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                    alertVC.view.isOpaque = false
+                    Animation.delay(time: 2) { self.present(alertVC, animated: true, completion: nil) }
                 }
                 return firstTime == false
             })
