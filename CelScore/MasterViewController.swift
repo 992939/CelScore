@@ -229,10 +229,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .on(starting: { celebInfo in Animation.delay(time: 1) {
-                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
+            .map { celebInfo in Animation.delay(time: 1) {
+                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: Data(contentsOf: URL(string: celebInfo.image )!)), options: OverlayInfo.getOptions())
                 }
-            })
+            }
             .start()
     }
     
