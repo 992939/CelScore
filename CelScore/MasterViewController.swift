@@ -223,14 +223,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         self.movingSocialButton(onScreen: true) }))
                     alertVC.view.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0.7)
                     alertVC.view.opaque = false
-                    MaterialAnimation.delay(2) { self.presentViewController(alertVC, animated: true, completion: nil) }
+                    Animation.delay(2) { self.presentViewController(alertVC, animated: true, completion: nil) }
                 }
                 return firstTime == false
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .on(starting: { celebInfo in Animation.delay(time: 1) {
-                    TAOverlay.showOverlayWithLabel(celebInfo.text, Image: UIImage(data: Data(contentsOf: URL(string: celebInfo.image)!)), Options: OverlayInfo.getOptions())
+                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
             })
             .start()
