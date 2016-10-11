@@ -124,14 +124,14 @@ extension Sociable where Self: UIViewController {
     
     func facebookLogin(_ hideButton: Bool) {
         let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:Error?) -> Void in
+        FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self) { (result:FBSDKLoginManagerLoginResult?, error:Error?) in
             guard error == nil else {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Facebook"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
-            guard result.isCancelled == false else { return }
-            FBSDKAccessToken.setCurrent(result.token)
-            self.loginFlow(token: result.token.tokenString, with: .facebook, hide: hideButton)
-        })
+            guard result?.isCancelled == false else { return }
+            FBSDKAccessToken.setCurrent(result?.token)
+            self.loginFlow(token: (result?.token.tokenString)!, with: .facebook, hide: hideButton)
+        }
     }
     
     func twitterLogin(_ hideButton: Bool) {
