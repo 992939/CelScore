@@ -167,36 +167,36 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
             .map { userRatings in
-                let first: Button? = self.socialButton.menu.views?.first as? Button
+                let first: Button? = self.socialButton.menu.views.first as? Button
                 first?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                Animation.delay(2.5) {
+                Animation.delay(time: 2.5) {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
-                    self.voteButton.setImage(R.image.heart_black()!, forState: .Normal)
-                    self.voteButton.setImage(R.image.heart_black()!, forState: .Highlighted)
+                    self.voteButton.setImage(R.image.heart_black()!, for: .normal)
+                    self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
                 }}
-            .delay(2.1, on: QueueScheduler.mainQueueScheduler)
+            .delay(2.1, on: QueueScheduler.main)
             .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding)}
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                return SettingsViewModel().getSettingSignal(settingType: .consensusBuilding)}
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
                 if isConsensus == false {
-                    SettingsViewModel().calculateUserRatingsPercentageSignal().startWithResult { value in
-                        if value > 99.0 { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
-                        else { TAOverlay.showOverlayWithLabel("Thank you for voting!", image: R.image.mic_red(), options: OverlayInfo.getOptions()) }
+                    SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues { value in
+                        if value > 99.0 { TAOverlay.show(withLabel: "Thank you for voting!", image: R.image.mic_yellow(), options: OverlayInfo.getOptions()) }
+                        else { TAOverlay.show(withLabel: "Thank you for voting!", image: R.image.mic_red(), options: OverlayInfo.getOptions()) }
                         TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                     }
                 }
                 return isConsensus })
             .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
+            .flatMap(.latest) { (value: AnyObject) -> SignalProducer<String, RatingsError> in
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
-            .on(next: { message in
-                SettingsViewModel().calculateUserRatingsPercentageSignal().startWithResult { value in
-                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_yellow(), options: OverlayInfo.getOptions()) }
-                    else { TAOverlay.showOverlayWithLabel(message, image: R.image.sphere_blue(), options: OverlayInfo.getOptions()) }
+            .on(starting: { message in
+                SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues { value in
+                    if value > 99.0 { TAOverlay.showOverlayWithLabel(message, Image: R.image.sphere_yellow(), Options: OverlayInfo.getOptions()) }
+                    else { TAOverlay.showOverlayWithLabel(message, Image: R.image.sphere_blue(), Options: OverlayInfo.getOptions()) }
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
             })
