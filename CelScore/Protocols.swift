@@ -124,7 +124,7 @@ extension Sociable where Self: UIViewController {
     
     func facebookLogin(_ hideButton: Bool) {
         let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
-        FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+        FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self, handler: { (result:FBSDKLoginManagerLoginResult!, error:Error?) -> Void in
             guard error == nil else {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Facebook"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
@@ -135,7 +135,7 @@ extension Sociable where Self: UIViewController {
     }
     
     func twitterLogin(_ hideButton: Bool) {
-        Twitter.sharedInstance().logIn { (session: TWTRSession?, error: NSError?) -> Void in
+        Twitter.sharedInstance().logIn { (session: TWTRSession?, error: Error?) -> Void in
             guard error == nil else {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
             }
