@@ -111,7 +111,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         else if Twitter.sharedInstance().application(app, open:url, options: options) { return true }
-        else if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String, annotation: nil) { return true }
+        else if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: nil) { return true }
         return false
     }
     
@@ -134,7 +134,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
-    func applicationWillResignActive(_ application: UIApplication) { }
+    func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }
     func applicationWillEnterForeground(_ application: UIApplication) { }
 }
