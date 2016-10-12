@@ -64,6 +64,21 @@ extension Date {
         f.dateFormat = "MMMM dd, yyyy"
         return f.string(from: self)
     }
+    
+    private init(anDate: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        let string = formatter.string(from: anDate)
+        let date = formatter.date(from: string)
+        self.init(timeInterval: 0, since:date!)
+    }
+    
+    private init(aString: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        let date = formatter.date(from: aString)
+        self.init(timeInterval: 0, since:date!)
+    }
 }
 
 extension CGPoint {
