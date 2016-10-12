@@ -8,6 +8,9 @@
 
 import XCTest
 import RealmSwift
+import ReactiveCocoa
+import ReactiveSwift
+import Result
 @testable import CelebrityScore
 
 class SettingsViewModelTests: XCTestCase {
@@ -30,7 +33,7 @@ class SettingsViewModelTests: XCTestCase {
     func testCalculateSocialConsensusSignal() {
         let expectation = self.expectation(description: "calculateSocialConsensusSignal callback")
         SettingsViewModel().calculateSocialConsensusSignal()
-            .on(next: { consensus in XCTAssert(consensus >= 0, "calculateSocialConsensusSignal superior or equal to zero."); expectation.fulfill() })
+            .on(value: { consensus in XCTAssert(consensus >= 0, "calculateSocialConsensusSignal superior or equal to zero."); expectation.fulfill() })
             .on(failed: { error in expectation.fulfill() })
             .start()
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("calculateSocialConsensusSignal error: \(error)") } }
@@ -39,7 +42,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateUserNameSignal() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "updateUserNameSignal callback")
-        SettingsViewModel().updateUserNameSignal(username: "user1").startWithValues { model in
+        SettingsViewModel().updateUserNameSignal(username: "user1")
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { model in
             XCTAssertEqual(model.userName, "user1", "updateUserNameSignal must update SettingsViewModel with given username.");
             expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserNameSignal error: \(error)") } }
@@ -47,91 +52,91 @@ class SettingsViewModelTests: XCTestCase {
     
     func testGetDefaultListIndex() {
         let expectation = self.expectation(description: "DefaultListIndex returns Int")
-        SettingsViewModel().getSettingSignal(settingType: .DefaultListIndex).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .defaultListIndex).startWithValues { value in
             XCTAssert((value as Any) is Int); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("DefaultListIndex error: \(error)") } }
     }
     
     func testGetLoginTypeIndex() {
         let expectation = self.expectation(description: "LoginTypeIndex returns Int")
-        SettingsViewModel().getSettingSignal(settingType: .LoginTypeIndex).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex).startWithValues { value in
             XCTAssert((value as Any) is Int); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("LoginTypeIndex error: \(error)") } }
     }
     
     func testGetPublicService() {
         let expectation = self.expectation(description: "PublicService returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .PublicService).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .publicService).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("PublicService error: \(error)") } }
     }
     
     func testGetConsensusBuilding() {
         let expectation = self.expectation(description: "ConsensusBuilding returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .ConsensusBuilding).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .consensusBuilding).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("ConsensusBuilding error: \(error)") } }
     }
     
     func testGetFirstLaunch() {
         let expectation = self.expectation(description: "FirstLaunch returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstLaunch).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstLaunch).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstLaunch error: \(error)") } }
     }
     
     func testGetFirstConsensus() {
         let expectation = self.expectation(description: "FirstConsensus returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstConsensus).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstConsensus).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstConsensus error: \(error)") } }
     }
     
     func testGetFirstPublic() {
         let expectation = self.expectation(description: "FirstPublic returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstPublic).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstPublic).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstPublic error: \(error)") } }
     }
     
     func testGetFirstFollow() {
         let expectation = self.expectation(description: "FirstFollow returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstFollow).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstFollow).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstFollow error: \(error)") } }
     }
     
     func testGetFirstInterest() {
         let expectation = self.expectation(description: "FirstInterest returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstInterest).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstInterest error: \(error)") } }
     }
     
     func testGetFirstCompleted() {
         let expectation = self.expectation(description: "FirstCompleted returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstCompleted).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstCompleted error: \(error)") } }
     }
     
     func testGetFirstVoteDisable() {
         let expectation = self.expectation(description: "FirstVoteDisable returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstVoteDisable).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstVoteDisable error: \(error)") } }
     }
     
     func testGetFirstSocialDisable() {
         let expectation = self.expectation(description: "FirstSocialDisable returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstSocialDisable).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstSocialDisable).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstSocialDisable error: \(error)") } }
     }
     
     func testGetFirstTrollWarning() {
         let expectation = self.expectation(description: "FirstTrollWarning returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .FirstTrollWarning).startWithValues { value in
+        SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstTrollWarning error: \(error)") } }
     }
@@ -139,7 +144,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateDefaultListIndex() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set DefaultListIndex to Int(1)")
-        SettingsViewModel().updateSettingSignal(value: Int(1), settingType: .DefaultListIndex).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: Int(1) as AnyObject, settingType: .defaultListIndex)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.defaultListIndex, Int(1)); expectation.fulfill() }
        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set DefaultListIndex error: \(error)") } }
     }
@@ -147,7 +154,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateLoginTypeIndex() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set LoginTypeIndex to Int(2)")
-        SettingsViewModel().updateSettingSignal(value: Int(2), settingType: .LoginTypeIndex).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: Int(2) as AnyObject, settingType: .loginTypeIndex)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.loginTypeIndex, Int(2)); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set LoginTypeIndex error: \(error)") } }
     }
@@ -155,7 +164,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdatePublicService() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set PublicService to true")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .PublicService).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .publicService)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.publicService, true); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set PublicService error: \(error)") } }
     }
@@ -163,7 +174,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateConsensusBuilding() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set ConsensusBuilding to true")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .ConsensusBuilding).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .consensusBuilding)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.consensusBuilding, true); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set ConsensusBuilding error: \(error)") } }
     }
@@ -171,7 +184,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstLaunch() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstLaunch to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstLaunch).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstLaunch)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstLaunch, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstLaunch error: \(error)") } }
     }
@@ -179,7 +194,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstConsensus() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstConsensus to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstConsensus).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstConsensus)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstConsensus, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstConsensus error: \(error)") } }
     }
@@ -187,7 +204,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstPublic() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstPublic to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstPublic).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstPublic)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstPublic, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstPublic error: \(error)") } }
     }
@@ -195,7 +214,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstFollow() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstFollow to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstFollow).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstFollow)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstFollow, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstFollow error: \(error)") } }
     }
@@ -203,7 +224,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstInterest() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstInterest to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstInterest).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstInterest)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstInterest, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstInterest error: \(error)") } }
     }
@@ -211,7 +234,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstCompleted() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstCompleted to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstCompleted).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstCompleted)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstCompleted, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstCompleted error: \(error)") } }
     }
@@ -219,7 +244,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstVoteDisable() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstVoteDisable to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstVoteDisable).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstVoteDisable)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstVoteDisabled, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstVoteDisable error: \(error)") } }
     }
@@ -227,7 +254,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstSocialDisable() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstSocialDisable to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstSocialDisable).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstSocialDisable)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstSocialDisabled, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstSocialDisable error: \(error)") } }
     }
@@ -235,7 +264,9 @@ class SettingsViewModelTests: XCTestCase {
     func testUpdateFirstTrollWarning() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstTrollWarning to false")
-        SettingsViewModel().updateSettingSignal(value: true, settingType: .FirstTrollWarning).startWithValues { settings in
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstTrollWarning)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
             XCTAssertEqual(settings.isFirstTrollWarning, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstTrollWarning error: \(error)") } }
     }

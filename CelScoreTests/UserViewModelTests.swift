@@ -17,7 +17,7 @@ class UserViewModelTests: XCTestCase {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let realm = try! Realm()
         realm.beginWrite()
-        let model: SettingsModel = realm.objects(SettingsModel).first ?? SettingsModel()
+        let model: SettingsModel = realm.objects(SettingsModel.self).first ?? SettingsModel()
         model.userName = "testUser"
         realm.add(model, update: true)
         try! realm.commitWrite()
@@ -27,7 +27,7 @@ class UserViewModelTests: XCTestCase {
         let expectation = self.expectation(description: "logoutSignal callback")
         UserViewModel().logoutSignal().startWithValues { _ in
             let realm = try! Realm()
-            let count = realm.objects(SettingsModel).count
+            let count = realm.objects(SettingsModel.self).count
             XCTAssertEqual(count, 0, "logout must delete all SettingsModel.")
             expectation.fulfill()
         }

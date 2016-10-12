@@ -52,12 +52,12 @@ class ListViewModelTests: XCTestCase {
     
     func testSanitizeListsSignal() {
         let realm = try! Realm()
-        let initialList = realm.objects(ListsModel).filter("id = %@", "0001").first
+        let initialList = realm.objects(ListsModel.self).filter("id = %@", "0001").first
         XCTAssertEqual(initialList?.celebList.count, 3, "sanitizeListsSignal: ListViewModel starts with 3 CelebIds.")
         
         let expectation = self.expectation(description: "sanitizeListsSignal callback")
         ListViewModel().sanitizeListsSignal().startWithCompleted {
-            let list = realm.objects(ListsModel).filter("id = %@", "0001").first
+            let list = realm.objects(ListsModel.self).filter("id = %@", "0001").first
             XCTAssertEqual(list?.celebList.count, 2, "sanitizeListsSignal returns a list with 2 CelebIds.")
             expectation.fulfill()
         }
@@ -75,7 +75,7 @@ class ListViewModelTests: XCTestCase {
         let expectation = self.expectation(description: "updateAllListsSignal callback")
         ListViewModel().updateListSignal(listId: "0001").startWithValues { _ in
             let realm = try! Realm()
-            let list = realm.objects(ListsModel).filter("id = %@", "0001").first
+            let list = realm.objects(ListsModel.self).filter("id = %@", "0001").first
             let celebId: CelebId = list!.celebList.last!
             XCTAssertEqual(celebId.id, "0003", "updateAllListsSignal returns list followed item first.")
             XCTAssertEqual(list!.celebList.count, 3, "updateAllListsSignal returns a list of three items.")

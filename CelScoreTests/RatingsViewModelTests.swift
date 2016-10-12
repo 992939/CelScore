@@ -9,6 +9,7 @@
 import XCTest
 import RealmSwift
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 @testable import CelebrityScore
 
@@ -29,7 +30,9 @@ class RatingsViewModelTests: XCTestCase {
     
     func testUpdateUserRatingSignal() {
         let expectation = self.expectation(description: "updateUserRatingSignal callback")
-        RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4).startWithValues { model in
+        RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4)
+            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
+            .startWithValues { model in
              XCTAssertEqual(model.rating3, 4, "updateUserRatingSignal rating is newRating."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserRatingSignal error: \(error)") } }
     }
@@ -37,24 +40,28 @@ class RatingsViewModelTests: XCTestCase {
     func testVoteSignal() {
         let expectation = self.expectation(description: "voteSignal callback")
         RatingsViewModel().voteSignal(ratingsId: "0001")
-            .on(next: { model in
+            .map { model in
                 XCTAssertEqual(model.totalVotes, 1, "voteSignal increments userRatings.")
                 XCTAssertEqual(model.isSynced, false, "voteSignal unsynced userRatings.")
-                expectation.fulfill() })
+                expectation.fulfill() }
             .start()
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("voteSignal error: \(error)") } }
     }
     
     func testGetRatingsSignal() {
         let expectation = self.expectation(description: "get RatingsSignal callback")
-        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .Ratings).startWithValues { ratings in
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .ratings)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { ratings in
             XCTAssertEqual(ratings.rating1, 5, "getRatingsSignal returns RatingsModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("get RatingsSignal error: \(error)") } }
     }
     
     func testGetUserRatingsSignal() {
         let expectation = self.expectation(description: "get UserRatingsSignal callback")
-        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .UserRatings).startWithValues { ratings in
+        RatingsViewModel().getRatingsSignal(ratingsId: "0001", ratingType: .userRatings)
+            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
+            .startWithValues { ratings in
             XCTAssertEqual(ratings.rating2, 2, "getRatingsSignal returns UserRatingsModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("get UserRatingsSignal error: \(error)") } }
     }
@@ -70,10 +77,10 @@ class RatingsViewModelTests: XCTestCase {
         let expectation = self.expectation(description: "cleanUpRatingsSignal callback")
         RatingsViewModel().updateUserRatingSignal(ratingsId: "0001", ratingIndex: 2, newRating: 4)
             .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.Latest) { (model) -> SignalProducer<RatingsModel, NoError> in
+            .flatMap(.latest) { (model) -> SignalProducer<RatingsModel, NoError> in
                 XCTAssert(model.getCelScore() > 0, "hasUserRatingsSignal set celscore above 0")
                 return RatingsViewModel().cleanUpRatingsSignal(ratingsId: "0001") }
-            .on(next: { model in XCTAssertEqual(model.getCelScore(), 0, "cleanUpRatingsSignal set celscore to 0"); expectation.fulfill() })
+            .map { model in XCTAssertEqual(model.getCelScore(), 0, "cleanUpRatingsSignal set celscore to 0"); expectation.fulfill() }
             .start()
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("cleanUpRatingsSignal error: \(error)") } }
     }

@@ -31,6 +31,7 @@
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
+		004EEE401DAE0ECB006B190C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */; };
 		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
 		0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431891C6A64480062BBDB /* CosmosLayers.swift */; };
 		0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318B1C6A64DB0062BBDB /* CosmosRating.swift */; };
@@ -71,7 +72,6 @@
 		150753FAF20DD1F64BE45A97 /* Pods_CelScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039868E1776C0B641362852 /* Pods_CelScore.framework */; };
 		209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */; };
 		33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */; };
-		E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */; };
 		E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE024A13E2984F3710F62FEA /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +140,7 @@
 		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
 		006431891C6A64480062BBDB /* CosmosLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosLayers.swift; sourceTree = "<group>"; };
 		0064318B1C6A64DB0062BBDB /* CosmosRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosRating.swift; sourceTree = "<group>"; };
@@ -192,7 +193,6 @@
 		C0EAEB97DA919E7B47306353 /* Pods-The Courthouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Courthouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-The Courthouse/Pods-The Courthouse.debug.xcconfig"; sourceTree = "<group>"; };
 		C37D256B8F0E7B02F2849E28 /* Pods-CelScore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CelScore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CelScore/Pods-CelScore.release.xcconfig"; sourceTree = "<group>"; };
 		EE024A13E2984F3710F62FEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,10 +209,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004EEE401DAE0ECB006B190C /* AssetsLibrary.framework in Frameworks */,
 				003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */,
 				00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */,
 				149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */,
-				E189D73A71F846D3344DC8EF /* AssetsLibrary.framework in Frameworks */,
 				E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */,
 				209DE85F77C0942E9B3DA893 /* CoreTelephony.framework in Frameworks */,
 				33E914D31AC0CA7F68927826 /* SystemConfiguration.framework in Frameworks */,
@@ -406,12 +406,12 @@
 		272C664E3752319CD2080EBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */,
 				003387A11C631BC3008AB0D8 /* QuartzCore.framework */,
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,
 				00404A9E1BF093540009AD0E /* NotificationCenter.framework */,
 				698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */,
-				F13E318B24A2B4A86262AE2D /* AssetsLibrary.framework */,
 				EE024A13E2984F3710F62FEA /* CoreText.framework */,
 				40972A337CA499E6DBE99FF8 /* CoreTelephony.framework */,
 				0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */,

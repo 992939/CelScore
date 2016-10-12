@@ -196,7 +196,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .on(starting: { _ in
-                Duration.stopMeasurement()
+                //Duration.stopMeasurement()
                 revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
                 revealingSplashView.startAnimation()})
             .flatMapError { _ in return SignalProducer.empty }

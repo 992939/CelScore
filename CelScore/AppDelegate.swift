@@ -34,9 +34,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //BuddyBuild
         BuddyBuildSDK.setup()
-        
-//        //ArmChair
-//        Armchair.appID("783417076")
        
         //Realm
         let config = Realm.Configuration(

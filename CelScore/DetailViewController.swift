@@ -263,16 +263,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             })
     }
     
-    func imageFromView(_ view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: UIDevice.getProfileDiameter() + 20, height: Constants.kTopViewRect.height), false, 2)
-        UIGraphicsGetImageFromCurrentImageContext()
-        let newX: CGFloat = UIDevice.getScreenshotPosition()
-        self.view.drawHierarchy(in: CGRect(x: -newX, y: -Constants.kNavigationBarRect.height, width: self.view.width, height: self.view.height), afterScreenUpdates: true)
-        let screenShot = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return screenShot!
-    }
-    
     //MARK: Sociable
     func handleMenu(_ open: Bool = false) {
         if open { self.openHandleMenu() }
@@ -317,8 +307,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.socialButtonTapped(buttonTag: button.tag, hideButton: false)
                 return SignalProducer.empty }
             .startWithValues { _ in
-                let screenshot: UIImage = self.imageFromView(self.profilePicNode.view.snapshotView(afterScreenUpdates: true)!)
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage, screenshot: screenshot).startWithValues { socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage).startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {

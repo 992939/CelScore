@@ -28,21 +28,21 @@ class CelebrityViewModelTests: XCTestCase {
     
     func testGetCelebritySignal() {
         let expectation = self.expectation(description: "getCelebritySignal callback")
-        CelebrityViewModel().getCelebritySignal(id: "0001").startWithResult { celeb in
+        CelebrityViewModel().getCelebritySignal(id: "0001").startWithValues  { celeb in
             XCTAssert((celeb as Any) is CelebrityModel, "getCelebritySignal returns CelebrityModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebritySignal error: \(error)") } }
     }
     
     func testUpdateUserActivitySignal() {
         let expectation = self.expectation(description: "updateUserActivitySignal callback")
-        CelebrityViewModel().updateUserActivitySignal(id: "0001").startWithResult { activity in
+        CelebrityViewModel().updateUserActivitySignal(id: "0001").startWithValues { activity in
             XCTAssertEqual(activity.eligibleForSearch, true, "NSUserActivity must be eligibleForSearch."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserActivitySignal error: \(error)") } }
     }
     
     func testFollowCebritySignal() {
         let expectation = self.expectation(description: "followCebritySignal callback")
-        CelebrityViewModel().followCebritySignal(id: "0001", isFollowing: false).startWithResult { celeb in
+        CelebrityViewModel().followCebritySignal(id: "0001", isFollowing: false).startWithValues  { celeb in
             XCTAssertEqual(celeb.isFollowed, false, "Celebrity isFollowed must be false."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("followCebritySignal error: \(error)") } }
     }
@@ -50,12 +50,12 @@ class CelebrityViewModelTests: XCTestCase {
     func testGetNewCelebsSignal() {
         let expectation = self.expectation(description: "getNewCelebsSignal callback")
         CelScoreViewModel().getNewCelebsSignal()
-            .on(next: { celebInfo in
+            .on(value: { celebInfo in
             XCTAssert(celebInfo.text.characters.count > 0, "NewCelebInfo text String must be > 0")
             XCTAssert(celebInfo.image.characters.count > 0, "NewCelebInfo image String must be > 0") })
             .on(completed: {
                 let realm = try! Realm()
-                let celebs = realm.objects(CelebrityModel).filter("isNew = %@", true)
+                let celebs = realm.objects(CelebrityModel.self).filter("isNew = %@", true)
                 XCTAssertEqual(celebs.count, 0, "new celebs count must be 0")
                 expectation.fulfill() })
             .start()
@@ -96,7 +96,7 @@ class CelebrityViewModelTests: XCTestCase {
         realm.add(list, update: true)
         try! realm.commitWrite()
         
-        let count = realm.objects(CelebrityModel).count
+        let count = realm.objects(CelebrityModel.self).count
         XCTAssertEqual(count, 1, "count of CelebrityModel must return 0.")
         let expectation = self.expectation(description: "remove the CelebrityModel instance")
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithResult { removedCount in
