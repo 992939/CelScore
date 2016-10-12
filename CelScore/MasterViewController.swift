@@ -187,7 +187,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .start()
     }
     
-    func setupData() {
+    func setupData() throws {
         Duration.startMeasurement("setupData")
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
@@ -231,7 +231,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .map { celebInfo in Animation.delay(time: 1) {
-                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: Data(contentsOf: URL(string: celebInfo.image )!)), options: OverlayInfo.getOptions())
+                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
             }
             .start()

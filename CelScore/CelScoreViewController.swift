@@ -82,12 +82,13 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         Timer.after(1.5.seconds) { _ in timer = Timer.every(100.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         
-        Timer.every(30.seconds) { timer in
+        Timer.after(30.seconds) { _ in
             timer?.invalidate()
             let diceRoll = Int(arc4random_uniform(2) + 7)
             gauge.unitOfMeasurement = GaugeFace(rawValue: diceRoll)!.emoji()
-            Timer.after(2.seconds) { _ in timer?.restart() }
+            Timer.after(2.seconds) { _ in timer?.start() }
         }
+        
         gaugeView.addSubview(gauge)
         return gaugeView
     }
