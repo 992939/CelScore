@@ -124,7 +124,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton.menu)
         Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
-        self.setupData()
+        try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
             RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
@@ -231,7 +231,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
             .map { celebInfo in Animation.delay(time: 1) {
-                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
+                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
             }
             .start()
