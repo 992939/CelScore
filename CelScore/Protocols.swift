@@ -108,7 +108,7 @@ extension Sociable where Self: UIViewController {
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
             .observe(on: UIScheduler())
-            .on(starting: { _ in
+            .on(value: { _ in
                 self.dismissHUD()
                 self.handleMenu(false)
                 TAOverlay.show(withLabel: OverlayInfo.loginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())

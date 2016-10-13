@@ -12,13 +12,9 @@ import SwiftyJSON
 
 
 class RatingsModel: Object, Collection {
-    /// Returns the position immediately after the given index.
-    ///
-    /// - Parameter i: A valid index of the collection. `i` must be less than
-    ///   `endIndex`.
-    /// - Returns: The index value immediately after `i`.
     public func index(after i: Int) -> Int {
-        return 1
+        guard i < 9 else { return 0 }
+        return i + 1
     }
 
     

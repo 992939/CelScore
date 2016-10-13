@@ -27,7 +27,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
-    fileprivate let searchBar: UISearchBar
+    fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
     fileprivate let socialButton: MenuController
@@ -43,7 +43,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
         self.socialButton = MenuController()
-        self.searchBar = UISearchBar()
+        self.celebSearchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
     }
@@ -112,8 +112,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attr
-        self.searchBar.delegate = self
-        self.searchBar.searchBarStyle = .minimal
+        self.celebSearchBar.delegate = self
+        self.celebSearchBar.searchBarStyle = .minimal
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
@@ -188,25 +188,27 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func setupData() throws {
-        Duration.startMeasurement("setupData")
         let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
+            .observe(on: UIScheduler())
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
-            .on(starting: { _ in
-                //Duration.stopMeasurement()
+            .on(value: { _ in
                 revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
-                revealingSplashView.startAnimation()})
+                revealingSplashView.startAnimation()
+            })
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                 return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
-            .map { (value:AnyObject) in
-                self.segmentedControl.setSelectedSegmentIndex(value as! UInt, animated: true)
-                self.changeList() }
+            .observe(on: UIScheduler())
+            .on(value: { index in
+                self.segmentedControl.setSelectedSegmentIndex(index as! UInt, animated: true)
+                //self.changeList()
+            })
             .flatMapError { error in
                 revealingSplashView.startAnimation()
                 self.dismissHUD()
@@ -230,24 +232,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .map { celebInfo in Animation.delay(time: 1) {
+            .on(value: { celebInfo in Animation.delay(time: 1) {
                     TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
-            }
+            })
             .start()
     }
     
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().updateListSignal(listId: list.getId())
+            .observe(on: UIScheduler())
             .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
-            .observe(on: UIScheduler())
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { list in
-                self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId })
-                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }
-        }
+            .on(value: { list in
+                print("A. weeknd: \(list.celebList.count)")
+                self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
+                print("B. weeknd: \(self.diffCalculator.rows.count)")
+                Animation.delay(time: 0.7){ print("OOOOO"); self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
+            .start()
     }
     
     //MARK: Sociable
@@ -321,10 +324,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        ListViewModel().getCelebrityStructSignal(listId: self.view.subviews.contains(self.searchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
+        ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
             .observe(on: UIScheduler())
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues({ value in node = CelebrityTableViewCell(celebrityStruct: value) })
+            .on(value: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
+            .start()
         return node
     }
     
@@ -338,25 +341,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func showSearchBar() {
-        guard self.view.subviews.contains(self.searchBar) == false else { return hideSearchBar() }
-         self.searchBar.alpha = 0.0
+        guard self.view.subviews.contains(self.celebSearchBar) == false else { return hideSearchBar() }
+         self.celebSearchBar.alpha = 0.0
         UIView.animate(withDuration: 0.5, animations: {
-            self.searchBar.alpha = 1.0
-            self.searchBar.showsCancelButton = true
-            self.searchBar.tintColor = Color.white
-            self.searchBar.backgroundColor = Constants.kBlueShade
-            self.searchBar.barTintColor = Color.white
-            self.searchBar.frame = Constants.kSegmentedControlRect
-            self.view.addSubview(self.searchBar)
-            self.searchBar.endEditing(true)
-            }, completion: { _ in self.searchBar.becomeFirstResponder() })
+            self.celebSearchBar.alpha = 1.0
+            self.celebSearchBar.showsCancelButton = true
+            self.celebSearchBar.tintColor = Color.white
+            self.celebSearchBar.backgroundColor = Constants.kBlueShade
+            self.celebSearchBar.barTintColor = Color.white
+            self.celebSearchBar.frame = Constants.kSegmentedControlRect
+            self.view.addSubview(self.celebSearchBar)
+            self.celebSearchBar.endEditing(true)
+            }, completion: { _ in self.celebSearchBar.becomeFirstResponder() })
     }
     
     func hideSearchBar() {
         UIView.animate(withDuration: 0.3, animations: {
-            self.searchBar.alpha = 0 },
+            self.celebSearchBar.alpha = 0 },
             completion: { _ in
-                self.searchBar.removeFromSuperview()
+                self.celebSearchBar.removeFromSuperview()
                 self.changeList()
         })
     }
