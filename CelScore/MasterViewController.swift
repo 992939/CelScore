@@ -207,7 +207,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .observe(on: UIScheduler())
             .on(value: { index in
                 self.segmentedControl.setSelectedSegmentIndex(index as! UInt, animated: true)
-                //self.changeList()
+                self.changeList()
             })
             .flatMapError { error in
                 revealingSplashView.startAnimation()
@@ -319,7 +319,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.diffCalculator.rows.count }
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()
