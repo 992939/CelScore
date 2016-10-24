@@ -41,6 +41,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
         }
         let topVC = (presenting ? transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)! : transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!) as! NavigationDrawerController
         
+        topVC.view.backgroundColor = UIColor.clear
         container.addSubview(detailVC.view)
         container.addSubview(topVC.view)
         container.addSubview(celebSnapshot)
