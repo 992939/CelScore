@@ -69,7 +69,7 @@ PODS:
   - YLProgressBar (3.8.1)
 
 DEPENDENCIES:
-  - AsyncDisplayKit (~> 1.9.80)
+  - AsyncDisplayKit (~> 1.9.90)
   - AWSAPIGateway (~> 2.4.9)
   - AWSCognito (~> 2.4.9)
   - BEMCheckBox (~> 1.2)
@@ -161,6 +161,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 90edc29bac98c999b7b3b17e3925276609ef9215
+PODFILE CHECKSUM: 0390371e3fa2160614d33a467a6ea7ca2f3585a6
 
 COCOAPODS: 1.0.1

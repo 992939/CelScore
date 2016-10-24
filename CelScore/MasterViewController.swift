@@ -246,10 +246,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
-                print("A. weeknd: \(list.celebList.count)")
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
-                print("B. weeknd: \(self.diffCalculator.rows.count)")
-                Animation.delay(time: 0.7){ print("OOOOO"); self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
+                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
     
@@ -319,7 +317,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.diffCalculator.rows.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()

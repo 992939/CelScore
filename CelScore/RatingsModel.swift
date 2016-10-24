@@ -12,12 +12,7 @@ import SwiftyJSON
 
 
 class RatingsModel: Object, Collection {
-    public func index(after i: Int) -> Int {
-        guard i < 9 else { return 0 }
-        return i + 1
-    }
 
-    
     //MARK: Properties
     dynamic var id: String = ""
     dynamic var updatedAt: String = ""
@@ -75,9 +70,18 @@ class RatingsModel: Object, Collection {
     }
     
     //MARK: Methods
+    
+    public func index(after i: Int) -> Int {
+        print("i: \(i)")
+        guard i < 9 else { return 0 }
+        return i + 1
+    }
+
+
     func getCelScore() -> Double {
-        let score: Double = self.map{ self[$0] as! Double }.reduce(0, { $0 + $1 })
-        return (score/10).roundToPlaces(places: 2)
+        let average: Double = (self.rating1 + self.rating2 + self.rating3 + self.rating4 + self.rating5
+            + self.rating6 + self.rating7 + self.rating8 + self.rating9 + self.rating10)/10
+        return (average/10).roundToPlaces(places: 2)
     }
     
     func getAvgVariance() -> Double {
