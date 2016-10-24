@@ -154,6 +154,7 @@ extension Sociable where Self: UIViewController {
         btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .highlighted)
         btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
         menuView.menu.addSubview(btn1)
+        btn1.position = origin
         
         var image = R.image.facebooklogo()!
         let btn2: FabButton = FabButton()
@@ -185,7 +186,6 @@ extension Sociable where Self: UIViewController {
         btn3.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.menu.addSubview(btn3)
         
-        menuView.menu.center = origin
         menuView.menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         menuView.menu.direction = .up
         menuView.menu.views = [btn1, btn2, btn3]
