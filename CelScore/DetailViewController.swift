@@ -27,6 +27,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let celebST: CelebrityStruct
     fileprivate let socialButton: MenuController
     fileprivate var socialMessage: String = ""
+    fileprivate var previousIndex: Int = 0
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -365,17 +366,17 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: SMSegmentViewDelegate
-    func segmentView(_ segmentView: SMSegmentView, didSelectSegmentAtIndex index: Int, previousIndex: Int) {
-        let infoView: UIView = self.getSubView(atIndex: index)
+    func segmentView(_ segmentView: SMSegmentView) {
+        let infoView: UIView = self.getSubView(atIndex: segmentView.selectedSegmentIndex)
         infoView.isHidden = false
         infoView.frame = Constants.kBottomViewRect
         let removingView = self.getSubView(atIndex: previousIndex)
         
-        if index == 0 || (index == 1 && previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
+        if segmentView.selectedSegmentIndex == 0 || (segmentView.selectedSegmentIndex == 1 && self.previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
         else { self.slide(right: true, newView: infoView, oldView: removingView) }
         self.closeHandleMenu()
         
-        if index == 2 {
+        if segmentView.selectedSegmentIndex == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
                 .flatMapError { _ in SignalProducer.empty }
                 .startWithValues({ userRatings in
@@ -384,6 +385,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 else { self.enableUpdateButton() }
             })
         } else { disableVoteButton(R.image.heart_black()!) }
+        self.previousIndex = segmentView.selectedSegmentIndex
     }
     
     func slide(right: Bool, newView: UIView, oldView: UIView) {
@@ -491,6 +493,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
+        
+        segmentView.addTarget(self, action: #selector(self.segmentView(_:)), for: .valueChanged)
+        
         segmentView.selectedSegmentIndex = 0
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = Color.black.cgColor
