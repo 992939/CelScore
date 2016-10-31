@@ -29,7 +29,9 @@ PODS:
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.3)
   - Keys (1.0.0)
-  - Material (2.1.2)
+  - Material (2.2.5):
+    - Material/Core (= 2.2.5)
+  - Material/Core (2.2.5)
   - PINCache (3.0.1-beta)
   - PINRemoteImage/Core (3.0.0-beta.3):
     - PINCache (>= 3.0.0-beta)
@@ -80,7 +82,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.14)
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Material (~> 2.1)
+  - Material (~> 2.2)
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.1)
   - RateLimit (~> 1.2)
@@ -137,7 +139,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Material: e27257b2efea0ea145150b141da22e1d68bef552
+  Material: 9d1d084759d908a5bddc37e6e9d22874da296621
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
@@ -161,6 +163,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: 0390371e3fa2160614d33a467a6ea7ca2f3585a6
+PODFILE CHECKSUM: cbb8a75ad60422dbed20e0a195732c8f6a0e89f8
 
 COCOAPODS: 1.0.1

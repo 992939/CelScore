@@ -34,25 +34,24 @@ internal class MaterialLayer {
     /// A reference to the CALayer.
     internal weak var layer: CALayer?
     
+    /// A property that sets the height of the layer's frame.
+    internal var heightPreset = HeightPreset.default {
+        didSet {
+            layer?.height = CGFloat(heightPreset.rawValue)
+        }
+    }
+    
     /// A property that sets the cornerRadius of the backing layer.
     internal var cornerRadiusPreset = CornerRadiusPreset.none {
         didSet {
-            guard let v = layer else {
-                return
-            }
-            
-            v.cornerRadius = CornerRadiusPresetToValue(preset: cornerRadiusPreset)
+            layer?.cornerRadius = CornerRadiusPresetToValue(preset: cornerRadiusPreset)
         }
     }
     
     /// A preset property to set the borderWidth.
     internal var borderWidthPreset = BorderWidthPreset.none {
         didSet {
-            guard let v = layer else {
-                return
-            }
-            
-            v.borderWidth = BorderWidthPresetToValue(preset: borderWidthPreset)
+            layer?.borderWidth = BorderWidthPresetToValue(preset: borderWidthPreset)
         }
     }
     
@@ -174,6 +173,16 @@ extension CALayer {
         }
     }
     
+    /// HeightPreset value.
+    open var heightPreset: HeightPreset {
+        get {
+            return materialLayer.heightPreset
+        }
+        set(value) {
+            materialLayer.heightPreset = value
+        }
+    }
+    
     /**
      A property that manages the overall shape for the object. If either the
      width or height property is set, the other will be automatically adjusted
@@ -236,16 +245,6 @@ extension CALayer {
         }
         set(value) {
             materialLayer.borderWidthPreset = value
-        }
-    }
-    
-    /// A UIColor reference to the `backgroundColor.cgColor`.
-    open var color: UIColor? {
-        get {
-            return nil == backgroundColor ? nil : UIColor(cgColor: backgroundColor!)
-        }
-        set(value) {
-            backgroundColor = color?.cgColor
         }
     }
     
@@ -316,13 +315,15 @@ extension CALayer {
         guard isShadowPathAutoSizing else {
             return
         }
-        
+       
         if .none == depthPreset {
             shadowPath = nil
         } else if nil == shadowPath {
             shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
         } else {
-            animate(animation: Animation.shadowPath(path: UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath, duration: 0))
+            let a = Animation.shadowPath(path: UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath)
+            a.fromValue = shadowPath
+            animate(animation: a)
         }
     }
 }

@@ -45,7 +45,7 @@ public protocol TabBarDelegate {
      - Parameter button: A UIButton.
      */
     @objc
-    optional func tabBarWillSelectButton(tabBar: TabBar, button: UIButton)
+    optional func tabBar(tabBar: TabBar, willSelect button: UIButton)
     
     /**
      A delegation method that is executed when the button did complete the
@@ -54,7 +54,7 @@ public protocol TabBarDelegate {
      - Parameter button: A UIButton.
      */
     @objc
-    optional func tabBarDidSelectButton(tabBar: TabBar, button: UIButton)
+    optional func tabBar(tabBar: TabBar, didSelect button: UIButton)
 }
 
 open class TabBar: Bar {
@@ -63,10 +63,6 @@ open class TabBar: Bar {
     
     /// A delegation reference.
     open weak var delegate: TabBarDelegate?
-    
-    open override var intrinsicContentSize: CGSize {
-        return CGSize(width: width, height: 49)
-    }
     
     /// The currently selected button.
     open internal(set) var selected: UIButton?
@@ -126,6 +122,7 @@ open class TabBar: Bar {
             line.height = value
         }
     }
+    
     open override func layoutSubviews() {
 		super.layoutSubviews()
         guard willLayout else {
@@ -178,7 +175,7 @@ open class TabBar: Bar {
      - Paramater completion: An optional completion block.
      */
     open func animate(to button: UIButton, completion: ((UIButton) -> Void)? = nil) {
-        delegate?.tabBarWillSelectButton?(tabBar: self, button: button)
+        delegate?.tabBar?(tabBar: self, willSelect: button)
         selected = button
         isAnimating = true
         UIView.animate(withDuration: 0.25, animations: { [weak self, button = button] in
@@ -192,7 +189,7 @@ open class TabBar: Bar {
                 return
             }
             s.isAnimating = false
-            s.delegate?.tabBarDidSelectButton?(tabBar: s, button: button)
+            s.delegate?.tabBar?(tabBar: s, didSelect: button)
             completion?(button)
         }
     }
@@ -215,7 +212,7 @@ open class TabBar: Bar {
 	// Prepares the line.
 	private func prepareLine() {
 		line = UIView()
-        line.zPosition = 5100
+        line.zPosition = 6000
 		lineColor = Color.blueGrey.lighten3
 		lineHeight = 3
         addSubview(line)

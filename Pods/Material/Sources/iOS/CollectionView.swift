@@ -32,16 +32,16 @@ import UIKit
 
 open class CollectionView: UICollectionView {
     /// A preset wrapper around contentEdgeInsets.
-	open var contentEdgeInsetsPreset: EdgeInsets {
+	open var contentEdgeInsetsPreset: EdgeInsetsPreset {
 		get {
-			return (collectionViewLayout as? CollectionViewLayout)!.contentEdgeInsets
+			return (collectionViewLayout as? CollectionViewLayout)!.contentEdgeInsetsPreset
 		}
 		set(value) {
-			(collectionViewLayout as? CollectionViewLayout)!.contentEdgeInsets = value
+			(collectionViewLayout as? CollectionViewLayout)!.contentEdgeInsetsPreset = value
 		}
 	}
 	
-	open override var contentInset: UIEdgeInsets {
+	open var contentEdgeInsets: EdgeInsets {
 		get {
 			return (collectionViewLayout as? CollectionViewLayout)!.contentEdgeInsets
 		}
@@ -68,7 +68,8 @@ open class CollectionView: UICollectionView {
 	}
 	
 	/// Spacing between items.
-	@IBInspectable open var interimSpace: InterimSpace {
+	@IBInspectable
+    open var interimSpace: InterimSpace {
 		get {
 			return (collectionViewLayout as? CollectionViewLayout)!.interimSpace
 		}
@@ -119,7 +120,7 @@ open class CollectionView: UICollectionView {
      */
 	open func prepare() {
 		contentScaleFactor = Device.scale
-		backgroundColor = Color.clear
-		contentInset = .zero
+		backgroundColor = .clear
+		contentEdgeInsets = .zero
     }
 }

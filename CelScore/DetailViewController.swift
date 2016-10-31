@@ -507,7 +507,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shapePreset = .circle
         self.voteButton.depthPreset = .depth2
-        self.voteButton.pulseAnimation = .none
+        self.voteButton.pulseAnimation = .center
         self.voteButton.accessibilityLabel = "Vote Button"
         self.disableVoteButton(R.image.heart_black()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in

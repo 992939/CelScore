@@ -30,7 +30,6 @@
 
 import UIKit
 
-@objc(View)
 open class View: UIView {
 	/**
      A CAShapeLayer used to manage elements that would be affected by
@@ -99,9 +98,9 @@ open class View: UIView {
 	
 	/// A Preset for the contentsGravity property.
 	@IBInspectable
-    open var contentsGravityPreset: MaterialGravity {
+    open var contentsGravityPreset: Gravity {
 		didSet {
-			contentsGravity = MaterialGravityToValue(gravity: contentsGravityPreset)
+			contentsGravity = GravityToValue(gravity: contentsGravityPreset)
 		}
 	}
 	
@@ -116,7 +115,7 @@ open class View: UIView {
 		}
 	}
 	
-	/// A property that accesses the backing layer's backgroundColor.
+	/// A property that accesses the backing layer's background
 	@IBInspectable
     open override var backgroundColor: UIColor? {
 		didSet {
@@ -129,7 +128,7 @@ open class View: UIView {
      - Parameter aDecoder: A NSCoder instance.
      */
 	public required init?(coder aDecoder: NSCoder) {
-		contentsGravityPreset = .ResizeAspectFill
+		contentsGravityPreset = .resizeAspectFill
 		super.init(coder: aDecoder)
 		prepare()
 	}
@@ -141,7 +140,7 @@ open class View: UIView {
      - Parameter frame: A CGRect instance.
      */
 	public override init(frame: CGRect) {
-		contentsGravityPreset = .ResizeAspectFill
+		contentsGravityPreset = .resizeAspectFill
 		super.init(frame: frame)
 		prepare()
 	}
