@@ -453,14 +453,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         infoButton.setImage(R.image.info_button()!, for: .highlighted)
         infoButton.addTarget(self, action: #selector(DetailViewController.infoAction), for: .touchUpInside)
         
-        let nameLabel: UILabel = self.setupLabel(title: "★  " + self.celebST.nickname + "   ★", frame: CGRect(x: 40, y: 28, width: Constants.kScreenWidth - 80, height: 30))
-        nameLabel.backgroundColor = Constants.kRedShade
-        nameLabel.textColor = Color.white
-        nameLabel.textAlignment = .center
-        self.view.addSubview(nameLabel)
-        
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
+        navigationBarView.title = "★  " + self.celebST.nickname + "   ★"
+        navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.leftViews = [backButton]
         navigationBarView.rightViews = [infoButton]
         navigationBarView.depthPreset = .depth3
