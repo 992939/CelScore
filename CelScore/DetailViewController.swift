@@ -27,7 +27,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let celebST: CelebrityStruct
     fileprivate let socialButton: MenuController
     fileprivate var socialMessage: String = ""
-    fileprivate var previousIndex: Int = 0
+    fileprivate var previousIndex: Int = 1
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -493,9 +493,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.scale_white()!, offSelectionImage: R.image.scale_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.info_white()!, offSelectionImage: R.image.info_black()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
-        
         segmentView.addTarget(self, action: #selector(self.segmentView(_:)), for: .valueChanged)
-        
         segmentView.selectedSegmentIndex = 0
         segmentView.clipsToBounds = false
         segmentView.layer.shadowColor = Color.black.cgColor
