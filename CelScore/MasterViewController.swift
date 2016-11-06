@@ -206,7 +206,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
             .observe(on: UIScheduler())
             .on(value: { index in
-                print(index)
                 self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
                 self.changeList()
             })

@@ -69,7 +69,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let first: Button? = self.socialButton.menu.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .startWithValues({ status in
-                print("getSettingSignal!")
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
