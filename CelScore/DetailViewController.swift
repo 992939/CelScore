@@ -44,8 +44,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         super.init(nibName: nil, bundle: nil)
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { activity in self.userActivity = activity }
+            .start(on: QueueScheduler())
+            .map { activity in self.userActivity = activity }
+            .start()
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }

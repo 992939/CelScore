@@ -30,7 +30,6 @@ struct CelebrityViewModel {
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel.self).filter("id = %@", id).first
             guard let celeb = celebrity else { return observer.send(error: .notFound) }
-
             let profile = CelebrityStruct(id: celeb.id, imageURL:celeb.picture3x, nickname:celeb.nickName, prevScore: celeb.prevScore, sex: celeb.sex, isFollowed:celeb.isFollowed)
             profile.userActivity.addUserInfoEntries(from: profile.userActivityUserInfo)
             profile.userActivity.becomeCurrent()
