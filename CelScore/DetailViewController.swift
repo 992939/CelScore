@@ -42,18 +42,17 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.socialButton = MenuController()
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
-        
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
             .start(on: QueueScheduler())
-            .map { activity in self.userActivity = activity }
-            .start()
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues({ activity in self.userActivity = activity })
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
     
     //MARK: Methods
     override var prefersStatusBarHidden : Bool { return true }
-    override func updateUserActivityState(_ activity: NSUserActivity) {}
+    override func updateUserActivityState(_ activity: NSUserActivity) { activity.becomeCurrent() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
