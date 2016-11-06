@@ -59,13 +59,11 @@ struct ListViewModel {
                     return !current.enumerated().contains(where: { (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id }) })
                 guard notExisting.count > 0 else { return }
                 
-                print("D2")
-//                realm.beginWrite()
-//                for (index, _) in notExisting.enumerated() { celebList.celebList.remove(at: index) }
-//                realm.add(celebList, update: true)
-//                try! realm.commitWrite()
+                realm.beginWrite()
+                for (index, _) in notExisting.enumerated() { celebList.celebList.remove(at: index) }
+                realm.add(celebList, update: true)
+                try! realm.commitWrite()
             })
-            print("D3")
             observer.send(value: true)
             observer.sendCompleted()
         }

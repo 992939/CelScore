@@ -318,15 +318,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     //MARK: ASTableView methods
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 0 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.diffCalculator.rows.count }
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
-            .on(value: { value in
-                node = CelebrityTableViewCell(celebrityStruct: value)
-            })
+            .on(value: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
             .start()
         return node
     }
