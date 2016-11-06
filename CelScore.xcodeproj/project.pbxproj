@@ -31,7 +31,6 @@
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
-		004EEE401DAE0ECB006B190C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */; };
 		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
 		0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431891C6A64480062BBDB /* CosmosLayers.swift */; };
 		0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318B1C6A64DB0062BBDB /* CosmosRating.swift */; };
@@ -209,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				004EEE401DAE0ECB006B190C /* AssetsLibrary.framework in Frameworks */,
 				003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */,
 				00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */,
 				149ED5D5ADDF0C0586A1E427 /* BuddyBuildSDK.framework in Frameworks */,
@@ -526,7 +524,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Gareth.K.Mensah;
 				TargetAttributes = {
 					003AE6931D094FB70055EE56 = {
@@ -1269,7 +1267,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CelScore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1300,7 +1298,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CelScore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";

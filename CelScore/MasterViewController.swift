@@ -192,9 +192,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
-            .observe(on: UIScheduler())
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
+            .observe(on: UIScheduler())
             .on(value: { _ in
                 revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
                 revealingSplashView.startAnimation()
@@ -206,7 +206,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
             .observe(on: UIScheduler())
             .on(value: { index in
-                self.segmentedControl.setSelectedSegmentIndex(index as! UInt, animated: true)
+                print(index)
+                self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
                 self.changeList()
             })
             .flatMapError { error in
@@ -323,8 +324,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
-            .observe(on: UIScheduler())
-            .on(value: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
+            .on(value: { value in
+                node = CelebrityTableViewCell(celebrityStruct: value)
+            })
             .start()
         return node
     }

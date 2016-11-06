@@ -44,7 +44,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         super.init(nibName: nil, bundle: nil)
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
-            .observe(on: UIScheduler())
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues { activity in self.userActivity = activity }
         
@@ -68,8 +67,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
         let first: Button? = self.socialButton.menu.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
-            .observe(on: UIScheduler())
             .startWithValues({ status in
+                print("getSettingSignal!")
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
