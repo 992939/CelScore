@@ -63,7 +63,7 @@ extension Supportable where Self: UIViewController {
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
         mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
-        Animation.delay(time: 0.5) { self.present(mail, animated: true, completion: nil) }
+        Motion.delay(time: 0.5, execute: { self.present(mail, animated: true, completion: nil) })
     }
     
     func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
@@ -71,7 +71,7 @@ extension Supportable where Self: UIViewController {
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .default, action: { _ in
-            self.dismiss(animated: true, completion: { _ in Animation.delay(time: 0.5) { self.sendEmail() }})
+            self.dismiss(animated: true, completion: { _ in Motion.delay(time: 0.5) { self.sendEmail() }})
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false

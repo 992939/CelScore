@@ -62,7 +62,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Animation.delay(time: 0.4) {
+        Motion.delay(time: 0.4) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadRows(at: [index], with: .fade)
@@ -163,7 +163,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
         account.requestAccessToAccounts(with: accountType, options: nil) { (success: Bool, error: Error?) in
-            if success == false { Animation.delay(time: 3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
+            if success == false { Motion.delay(time: 3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
         }
     }
     
@@ -178,7 +178,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .default, action: { _ in
-                    Animation.delay(time: 0.5) { self.handleMenu(true) }
+                    Motion.delay(time: 0.5) { self.handleMenu(true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -226,13 +226,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         self.movingSocialButton(onScreen: true) }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
-                    Animation.delay(time: 2) { self.present(alertVC, animated: true, completion: nil) }
+                    Motion.delay(time: 2) { self.present(alertVC, animated: true, completion: nil) }
                 }
                 return firstTime == false
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .on(value: { celebInfo in Animation.delay(time: 1) {
+            .on(value: { celebInfo in Motion.delay(time: 1) {
                     TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
             })
@@ -247,7 +247,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
-                Animation.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
+                Motion.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
     
@@ -258,14 +258,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.socialButton.menu.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.menu.views.first as? Button
-            first?.animate(animation: Animation.rotate(rotation: 5))
+            first?.animate(animation: Motion.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         } else if self.socialButton.menu.isOpened {
             self.socialButton.menu.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.menu.views.first as? Button
-            first?.animate(animation: Animation.rotate(rotation: 5))
+            first?.animate(animation: Motion.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         }
@@ -275,9 +275,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.menu.close()
         let first: Button? = self.socialButton.menu.views.first as? Button
-        first!.animate(animation: Animation.animationGroup(animations: [
-            Animation.rotate(rotation: 5),
-            Animation.translateY(translation: y)
+        first!.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 5),
+            Motion.translationY(by: y)
         ]))
     }
     
@@ -334,7 +334,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
-        Animation.delay(time: 0.2) { self.present(detailVC, animated: true, completion: nil) }
+        Motion.delay(time: 0.2) { self.present(detailVC, animated: true, completion: nil) }
     }
     
     func showSearchBar() {
@@ -369,7 +369,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                Animation.delay(time: 1.0) { self.movingSocialButton(onScreen: true) }
+                Motion.delay(time: 1.0) { self.movingSocialButton(onScreen: true) }
             })
             .start()
     }

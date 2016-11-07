@@ -22,7 +22,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 2.2'
+    pod 'Material', '~> 2.3'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'

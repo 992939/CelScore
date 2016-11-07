@@ -139,7 +139,6 @@
 		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
 		006431891C6A64480062BBDB /* CosmosLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosLayers.swift; sourceTree = "<group>"; };
 		0064318B1C6A64DB0062BBDB /* CosmosRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosRating.swift; sourceTree = "<group>"; };
@@ -404,7 +403,6 @@
 		272C664E3752319CD2080EBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				004EEE3F1DAE0ECB006B190C /* AssetsLibrary.framework */,
 				003387A11C631BC3008AB0D8 /* QuartzCore.framework */,
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,

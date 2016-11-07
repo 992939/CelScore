@@ -82,14 +82,16 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().loggedInAsSignal()
                         .flatMapError { _ in SignalProducer.empty }
-                        .on(starting: { _ in cosmosView.settings.updateOnTouch = true })
+                        .on(started: { _ in
+                            cosmosView.settings.updateOnTouch = true })
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
-                        .on(value: { hasRatings in
+                        .map { hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
                             cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
-                            cosmosView.settings.updateOnTouch = hasRatings ? false : true })
+                            cosmosView.settings.updateOnTouch = hasRatings ? false : true }
+                        .start()
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observe(on: UIScheduler())
@@ -107,12 +109,13 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
-                            .on(value: { userRatings in
+                            .map { userRatings in
                                 self.delegate!.rippleEffect(positive: rating < 3 ? false : true, gold: false)
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
                                 let unrated = userRatings.filter{ (userRatings[$0] as! Int) == 0 }
-                                if unrated.isEmpty { self.delegate!.enableVoteButton(positive: userRatings.getCelScore() < 3 ? false : true) }})
+                                if unrated.isEmpty { self.delegate!.enableVoteButton(positive: userRatings.getCelScore() < 3 ? false : true) }}
+                            .start()
                     }
                     qualityView.addSubview(qualityLabel)
                     qualityView.addSubview(cosmosView)
@@ -125,13 +128,13 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
         SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable)
             .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
             .startWithValues({ first in let firstTime = first as! Bool
-            guard firstTime else { return self.delegate!.socialSharing(message: "") }
-            Animation.delay(time: 0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
-            TAOverlay.setCompletionBlock({ _ in
-                self.delegate!.socialSharing(message: "")
-                SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstVoteDisable).start()
+                guard firstTime else { return self.delegate!.socialSharing(message: "") }
+                Motion.delay(time: 0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
+                TAOverlay.setCompletionBlock({ _ in
+                    self.delegate!.socialSharing(message: "")
+                    SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstVoteDisable).start()
+                })
             })
-        })
     }
     
     func longPress(_ gesture: UIGestureRecognizer) {

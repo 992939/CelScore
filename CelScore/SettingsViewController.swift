@@ -173,7 +173,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         alertVC.addAction(PMAlertAction(title: "Log Out", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal().startWithValues({ _ in
-                Animation.delay(time: 1.0) { TAOverlay.show(withLabel: OverlayInfo.logoutUser.message(), image: OverlayInfo.logoutUser.logo(), options: OverlayInfo.getOptions()) }
+                Motion.delay(time: 1.0) { TAOverlay.show(withLabel: OverlayInfo.logoutUser.message(), image: OverlayInfo.logoutUser.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
             })
         }))
@@ -206,7 +206,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: SFSafariViewControllerDelegate
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        Animation.delay(time: 0.75) {
+        Motion.delay(time: 0.75) {
             self.navigationDrawerController!.isEnabled = true
             self.navigationDrawerController!.closeLeftView()
         }

@@ -115,14 +115,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func showingButtons() {
         let first: Button? = self.socialButton.menu.views.first as? Button
-        first!.animate(animation: Animation.animationGroup(animations: [
-            Animation.rotate(rotation: 3),
-            Animation.translateX(translation: Constants.kPadding + 100)
+        first!.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translationX(by: Constants.kPadding + 100)
             ]))
         
-        self.voteButton.animate(animation: Animation.animationGroup(animations: [
-            Animation.rotate(rotation: 3),
-            Animation.translateX(translation: -(Constants.kFabDiameter + 100))
+        self.voteButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translationX(by: -(Constants.kFabDiameter + 100))
             ]))
         
         for subview in self.socialButton.menu.views.enumerated() {
@@ -134,21 +134,21 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func hideButtons() {
         let first: Button? = self.socialButton.menu.views.first as? Button
-        first!.animate(animation: Animation.animationGroup(animations: [
-            Animation.rotate(rotation: 3),
-            Animation.translateX(translation: -(Constants.kPadding + 100))
+        first!.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translationX(by: -(Constants.kPadding + 100))
             ]))
         
-        self.voteButton.animate(animation: Animation.animationGroup(animations: [
-            Animation.rotate(rotation: 3),
-            Animation.translateX(translation: Constants.kFabDiameter + 100)
+        self.voteButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translationX(by: Constants.kFabDiameter + 100)
             ]))
     }
     
     func backAction() {
         self.hideButtons()
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
-        Animation.delay(time: 0.15){ self.dismiss(animated: true, completion: nil) }
+        Motion.delay(time: 0.15){ self.dismiss(animated: true, completion: nil) }
     }
     
     func infoAction() {
@@ -171,7 +171,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                Animation.delay(time: 2.5) {
+                Motion.delay(time: 2.5) {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.heart_black()!, for: .normal)
                     self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
@@ -203,7 +203,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func trollAction() {
-        Animation.delay(time: 0.5) {
+        Motion.delay(time: 0.5) {
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in
                     if score > Constants.kTrollingWarning { self.progressAction() }
@@ -273,7 +273,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let first: Button? = self.socialButton.menu.views.first as? Button
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
-        first?.animate(animation: Animation.rotate(rotation: 1))
+        first?.animate(animation: Motion.rotate(rotation: 1))
         self.socialButton.menu.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
         first?.setImage(image, for: .normal)
@@ -282,7 +282,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func closeHandleMenu() {
        let first: Button? = self.socialButton.menu.views.first as? Button
-        if self.socialButton.menu.isOpened { first?.animate(animation: Animation.rotate(rotation: 1)) }
+        if self.socialButton.menu.isOpened { first?.animate(animation: Motion.rotate(rotation: 1)) }
         self.socialButton.menu.close()
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
@@ -313,7 +313,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                         TAOverlay.show(withLabel: SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                                        image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    self.present(socialVC, animated: true, completion: { Animation.delay(time: 2.0) { self.socialButton.menu.close() }})
+                    self.present(socialVC, animated: true, completion: { Motion.delay(time: 2.0) { self.socialButton.menu.close() }})
                 }}
     }
     
@@ -341,7 +341,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.removeTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
         
-        Animation.delay(time: 1) {
+        Motion.delay(time: 1) {
             self.voteButton.pulseAnimation = .centerWithBacking
             self.voteButton.pulse()
         }
@@ -418,7 +418,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             self.voteButton.removeTarget(self, action: #selector(DetailViewController.updateAction), for: .touchUpInside)
             self.voteButton.addTarget(self, action: #selector(DetailViewController.voteAction), for: .touchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
-            completion: { _ in Animation.delay(time: 2) {
+            completion: { _ in Motion.delay(time: 2) {
                 self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulse() }
         })
