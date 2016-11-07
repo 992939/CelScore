@@ -23,7 +23,7 @@ import Timepiece
 import Accounts
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate, MenuDelegate {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
@@ -117,13 +117,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton(self.socialButton, controller: self, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
+        self.setUpSocialButton(menuView: self.socialButton, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
         self.view.addSubview(self.socialButton.menu)
-        Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
+        //Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
+        print("B: \(self.socialButton.menu.frame.debugDescription)")
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
@@ -154,7 +155,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func facebookTokenCheck() {
         let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)!
-        if expirationDate < Date.today() { self.facebookLogin(false) }
+        if expirationDate < Date.today() { self.facebookLogin(hideButton: false) }
         else { UserViewModel().refreshFacebookTokenSignal().start() }
     }
     
@@ -271,6 +272,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
+    func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
+        print("YAYA TOURE")
+    }
+    
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.menu.close()
@@ -288,6 +293,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.changeList()
         self.movingSocialButton(onScreen: false)
     }
+    
     
 //    func sendNetworkAlert(splashView: RevealingSplashView) {
 //        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_blue()!, style: .Alert)

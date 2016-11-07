@@ -79,10 +79,11 @@ extension Supportable where Self: UIViewController {
     }
 }
 
-@objc protocol Sociable: HUDable, Supportable {
+@objc protocol Sociable: HUDable, Supportable, MenuDelegate {
     @objc func handleMenu(_ open: Bool)
     @objc func socialButton(_ button: UIButton)
     @objc func socialRefresh()
+    @objc func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool)
 }
 
 extension Sociable where Self: UIViewController {
@@ -118,11 +119,11 @@ extension Sociable where Self: UIViewController {
     }
     
     func socialButtonTapped(buttonTag: Int, hideButton: Bool) {
-        if buttonTag == 1 { self.facebookLogin(hideButton) }
-        else { self.twitterLogin(hideButton) }
+        if buttonTag == 1 { self.facebookLogin(hideButton: hideButton) }
+        else { self.twitterLogin(hideButton: hideButton) }
     }
     
-    func facebookLogin(_ hideButton: Bool) {
+    func facebookLogin(hideButton: Bool) {
         let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self) { (result:FBSDKLoginManagerLoginResult?, error:Error?) in
             guard error == nil else {
@@ -134,7 +135,7 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func twitterLogin(_ hideButton: Bool) {
+    func twitterLogin(hideButton: Bool) {
         Twitter.sharedInstance().logIn { (session: TWTRSession?, error: Error?) -> Void in
             guard error == nil else {
                 return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
@@ -143,16 +144,16 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func setUpSocialButton(_ menuView: MenuController, controller: UIViewController, origin: CGPoint, buttonColor: UIColor) {
+    func setUpSocialButton(menuView: MenuController, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depthPreset = .depth2
-        btn1.pulseAnimation = .none
+        btn1.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
         btn1.setImage(R.image.ic_add_black()!, for: .disabled)
         btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .normal)
         btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .highlighted)
-        btn1.addTarget(controller, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
+        btn1.addTarget(self, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
         menuView.menu.addSubview(btn1)
         btn1.position = origin
         
@@ -168,7 +169,7 @@ extension Sociable where Self: UIViewController {
         btn2.borderWidth = 2
         btn2.setImage(image, for: .normal)
         btn2.setImage(image, for: .highlighted)
-        btn2.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
+        btn2.addTarget(self, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.menu.addSubview(btn2)
         
         image = R.image.twitterlogo()!
@@ -183,11 +184,12 @@ extension Sociable where Self: UIViewController {
         btn3.borderWidth = 2
         btn3.setImage(image, for: .normal)
         btn3.setImage(image, for: .highlighted)
-        btn3.addTarget(controller, action: #selector(self.socialButton(_:)), for: .touchUpInside)
+        btn3.addTarget(self, action: #selector(self.socialButton(_:)), for: .touchUpInside)
         menuView.menu.addSubview(btn3)
         
-        menuView.menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menuView.menu.frame = CGRect(x: 0, y: 0, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
         menuView.menu.direction = .up
+        menuView.menu.delegate = self
         menuView.menu.views = [btn1, btn2, btn3]
         menuView.menu.translatesAutoresizingMaskIntoConstraints = false
     }
