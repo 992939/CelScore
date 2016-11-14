@@ -36,7 +36,7 @@ extension UIWindow {
      - Returns: An optional UIImage.
      */
     open func capture() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, Device.scale)
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, Screen.scale)
         layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

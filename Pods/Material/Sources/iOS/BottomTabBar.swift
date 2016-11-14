@@ -76,10 +76,6 @@ open class BottomTabBar: UITabBar {
 	
     open override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
-        guard self.layer == layer else {
-            return
-        }
-        
         layoutShape()
     }
     
@@ -131,7 +127,7 @@ open class BottomTabBar: UITabBar {
 		heightPreset = .normal
         depthPreset = .depth1
         dividerAlignment = .top
-		contentScaleFactor = Device.scale
+		contentScaleFactor = Screen.scale
 		backgroundColor = .white
         let image = UIImage.image(with: .clear, size: CGSize(width: 1, height: 1))
 		shadowImage = image

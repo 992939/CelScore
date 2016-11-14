@@ -37,7 +37,7 @@ open class View: UIView {
      allows the dropshadow effect on the backing layer, while clipping
      the image to a desired shape within the visualLayer.
      */
-	open private(set) lazy var visualLayer = CAShapeLayer()
+	open internal(set) var visualLayer = CAShapeLayer()
 	
 	/**
      A property that manages an image for the visualLayer's contents
@@ -46,9 +46,16 @@ open class View: UIView {
      */
 	@IBInspectable
     open var image: UIImage? {
-		didSet {
-            visualLayer.contents = image?.cgImage
-		}
+        get {
+            guard let v = visualLayer.contents else {
+                return nil
+            }
+            
+            return UIImage(cgImage: v as! CGImage)
+        }
+        set(value) {
+            visualLayer.contents = value?.cgImage
+        }
 	}
 	
 	/**
@@ -84,7 +91,7 @@ open class View: UIView {
 	/**
      A floating point value that defines a ratio between the pixel
      dimensions of the visualLayer's contents property and the size
-     of the view. By default, this value is set to the Device.scale.
+     of the view. By default, this value is set to the Screen.scale.
      */
 	@IBInspectable
     open var contentsScale: CGFloat {
@@ -98,7 +105,7 @@ open class View: UIView {
 	
 	/// A Preset for the contentsGravity property.
 	@IBInspectable
-    open var contentsGravityPreset: Gravity {
+    open var contentsGravityPreset = Gravity.resize {
 		didSet {
 			contentsGravity = GravityToValue(gravity: contentsGravityPreset)
 		}
@@ -128,7 +135,6 @@ open class View: UIView {
      - Parameter aDecoder: A NSCoder instance.
      */
 	public required init?(coder aDecoder: NSCoder) {
-		contentsGravityPreset = .resizeAspectFill
 		super.init(coder: aDecoder)
 		prepare()
 	}
@@ -140,22 +146,18 @@ open class View: UIView {
      - Parameter frame: A CGRect instance.
      */
 	public override init(frame: CGRect) {
-		contentsGravityPreset = .resizeAspectFill
 		super.init(frame: frame)
 		prepare()
 	}
-	
-	/// A convenience initializer.
-	public convenience init() {
-		self.init(frame: .zero)
-	}
+    
+    /// Convenience initializer.
+    public convenience init() {
+        self.init(frame: .zero)
+        prepare()
+    }
 	
 	open override func layoutSublayers(of layer: CALayer) {
 		super.layoutSublayers(of: layer)
-        guard self.layer == layer else {
-            return
-        }
-        
         layoutShape()
         layoutVisualLayer()
 	}
@@ -173,21 +175,25 @@ open class View: UIView {
      when subclassing.
      */
 	open func prepare() {
-		contentScaleFactor = Device.scale
+		contentScaleFactor = Screen.scale
 		backgroundColor = .white
 		prepareVisualLayer()
 	}
-	
-	/// Prepares the visualLayer property.
-	internal func prepareVisualLayer() {
-		visualLayer.zPosition = 0
-		visualLayer.masksToBounds = true
-		layer.addSublayer(visualLayer)
-	}
-	
-	/// Manages the layout for the visualLayer property.
-	internal func layoutVisualLayer() {
-		visualLayer.frame = bounds
-		visualLayer.cornerRadius = cornerRadius
-	}
+}
+
+extension View {
+    /// Prepares the visualLayer property.
+    fileprivate func prepareVisualLayer() {
+        visualLayer.zPosition = 0
+        visualLayer.masksToBounds = true
+        layer.addSublayer(visualLayer)
+    }
+}
+
+extension View {
+    /// Manages the layout for the visualLayer property.
+    fileprivate func layoutVisualLayer() {
+        visualLayer.frame = bounds
+        visualLayer.cornerRadius = cornerRadius
+    }
 }

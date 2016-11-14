@@ -62,7 +62,7 @@ public protocol SearchBarDelegate {
 
 open class SearchBar: Bar {
 	/// The UITextField for the searchBar.
-	open private(set) lazy var textField = UITextField()
+	open private(set) var textField = UITextField()
 	
 	/// Reference to the clearButton.
 	open private(set) var clearButton: IconButton!
@@ -122,7 +122,7 @@ open class SearchBar: Bar {
 			}
 		}
 	}
-	
+    
 	open override func layoutSubviews() {
 		super.layoutSubviews()
         guard willLayout else {
@@ -149,16 +149,6 @@ open class SearchBar: Bar {
      */
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-	}
-	
-	/**
-     A convenience initializer with parameter settings.
-     - Parameter leftViews: An Array of UIViews that go on the left side.
-     - Parameter rightViews: An Array of UIViews that go on the right side.
-     - Parameter centerViews: An Array of UIViews that go in the center.
-     */
-    public override init(leftViews: [UIView]? = nil, rightViews: [UIView]? = nil, centerViews: [UIView]? = nil) {
-        super.init(leftViews: leftViews, rightViews: rightViews, centerViews: centerViews)
 	}
 	
 	/**
@@ -204,7 +194,7 @@ open class SearchBar: Bar {
     
 	/// Prepares the textField.
 	private func prepareTextField() {
-		textField.contentScaleFactor = Device.scale
+		textField.contentScaleFactor = Screen.scale
 		textField.font = RobotoFont.regular(with: 17)
 		textField.backgroundColor = Color.clear
 		textField.clearButtonMode = .whileEditing
