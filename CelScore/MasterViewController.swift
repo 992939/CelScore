@@ -23,14 +23,14 @@ import Timepiece
 import Accounts
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate, MenuDelegate {
+final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
     fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
-    fileprivate let socialButton: MenuController
+    fileprivate let socialButton: Menu
     internal let celebrityTableView: ASTableView
     
     //MARK: Initializers
@@ -42,7 +42,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
-        self.socialButton = MenuController()
+        self.socialButton = Menu(frame: CGRect(x: 0, y: 0, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.celebSearchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
@@ -117,14 +117,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setupSegmentedControl()
-        self.setUpSocialButton(menuView: self.socialButton, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
+        self.setUpSocialButton(menu: self.socialButton, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(self.socialButton.menu)
+        self.view.addSubview(self.socialButton)
         //Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
-        print("B: \(self.socialButton.menu.frame.debugDescription)")
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
@@ -255,17 +254,17 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     //MARK: Sociable
     func handleMenu(_ open: Bool = false) {
         let image: UIImage?
-        if open || (open == false && self.socialButton.menu.isOpened == false){
-            self.socialButton.menu.open() { (v: UIView) in (v as? Button)?.pulse() }
+        if open || (open == false && self.socialButton.isOpened == false){
+            self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.menu.views.first as? Button
+            let first: Button? = self.socialButton.views.first as? Button
             first?.animate(animation: Motion.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
-        } else if self.socialButton.menu.isOpened {
-            self.socialButton.menu.close()
+        } else if self.socialButton.isOpened {
+            self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.menu.views.first as? Button
+            let first: Button? = self.socialButton.views.first as? Button
             first?.animate(animation: Motion.rotate(rotation: 5))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
@@ -278,8 +277,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
-        self.socialButton.menu.close()
-        let first: Button? = self.socialButton.menu.views.first as? Button
+        self.socialButton.close()
+        let first: Button? = self.socialButton.views.first as? Button
         first!.animate(animation: Motion.animate(group: [
             Motion.rotate(rotation: 5),
             Motion.translationY(by: y)

@@ -17,6 +17,7 @@ import RevealingSplashView
 import PMAlertController
 import MessageUI
 
+
 protocol DetailSubViewable {
     func socialSharing(message: String)
     func enableVoteButton(positive: Bool)
@@ -79,11 +80,10 @@ extension Supportable where Self: UIViewController {
     }
 }
 
-@objc protocol Sociable: HUDable, Supportable, MenuDelegate {
+@objc protocol Sociable: HUDable, Supportable {
     @objc func handleMenu(_ open: Bool)
     @objc func socialButton(_ button: UIButton)
     @objc func socialRefresh()
-    @objc func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool)
 }
 
 extension Sociable where Self: UIViewController {
@@ -144,18 +144,15 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func setUpSocialButton(menuView: MenuController, origin: CGPoint, buttonColor: UIColor) {
+    func setUpSocialButton(menu: Menu, origin: CGPoint, buttonColor: UIColor) {
         let btn1: FabButton = FabButton()
         btn1.depthPreset = .depth2
         btn1.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
         btn1.setImage(R.image.ic_add_black()!, for: .disabled)
-        btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .normal)
-        btn1.setImage(R.image.ic_add_white()!.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        btn1.image = R.image.ic_add_white()!
         btn1.addTarget(self, action: #selector(self.handleMenu(_:)), for: .touchUpInside)
-        menuView.menu.addSubview(btn1)
-        btn1.position = origin
         
         var image = R.image.facebooklogo()!
         let btn2: FabButton = FabButton()
@@ -167,10 +164,8 @@ extension Sociable where Self: UIViewController {
         btn2.backgroundColor = Color.indigo.darken1
         btn2.borderColor = Color.white
         btn2.borderWidth = 2
-        btn2.setImage(image, for: .normal)
-        btn2.setImage(image, for: .highlighted)
+        btn2.image = image
         btn2.addTarget(self, action: #selector(self.socialButton(_:)), for: .touchUpInside)
-        menuView.menu.addSubview(btn2)
         
         image = R.image.twitterlogo()!
         let btn3: FabButton = FabButton()
@@ -182,15 +177,12 @@ extension Sociable where Self: UIViewController {
         btn3.pulseColor = Color.white
         btn3.borderColor = Color.white
         btn3.borderWidth = 2
-        btn3.setImage(image, for: .normal)
-        btn3.setImage(image, for: .highlighted)
+        btn3.image = image
         btn3.addTarget(self, action: #selector(self.socialButton(_:)), for: .touchUpInside)
-        menuView.menu.addSubview(btn3)
         
-        menuView.menu.frame = CGRect(x: 0, y: 0, width: Constants.kFabDiameter, height: Constants.kFabDiameter)
-        menuView.menu.direction = .up
-        menuView.menu.delegate = self
-        menuView.menu.views = [btn1, btn2, btn3]
-        menuView.menu.translatesAutoresizingMaskIntoConstraints = false
+        menu.direction = .up
+        menu.baseSize = CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)
+        menu.views = [btn1, btn2, btn3]
+        menu.translatesAutoresizingMaskIntoConstraints = false
     }
 }

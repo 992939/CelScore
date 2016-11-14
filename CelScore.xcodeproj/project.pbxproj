@@ -40,6 +40,7 @@
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		00736F671D230AE10088B806 /* icomoon2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00736F661D230AE10088B806 /* icomoon2.ttf */; };
 		007B2F411DA763490038665C /* SMSegment in Resources */ = {isa = PBXBuildFile; fileRef = 007B2F401DA763490038665C /* SMSegment */; };
+		007FC3F81DD962EC005DD773 /* AppMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007FC3F71DD962EC005DD773 /* AppMenuController.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
@@ -149,6 +150,7 @@
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		00736F661D230AE10088B806 /* icomoon2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon2.ttf; sourceTree = "<group>"; };
 		007B2F401DA763490038665C /* SMSegment */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SMSegment; sourceTree = "<group>"; };
+		007FC3F71DD962EC005DD773 /* AppMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMenuController.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				007B2F401DA763490038665C /* SMSegment */,
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				007FC3F71DD962EC005DD773 /* AppMenuController.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0099D4501CDB0C89008C1D6E /* Duration.swift */,
 				00252D781CC6EC6E007CA826 /* R.generated.swift */,
@@ -1037,6 +1040,7 @@
 				001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
+				007FC3F81DD962EC005DD773 /* AppMenuController.swift in Sources */,
 				000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */,
