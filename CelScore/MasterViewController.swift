@@ -281,7 +281,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         let first: Button? = self.socialButton.views.first as? Button
         first!.animate(animation: Motion.animate(group: [
             Motion.rotate(rotation: 5),
-            Motion.translationY(by: y)
+            Motion.translateY(by: y)
         ]))
     }
     

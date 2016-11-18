@@ -143,7 +143,7 @@ public protocol NavigationDrawerControllerDelegate {
 }
 
 @objc(NavigationDrawerController)
-open class NavigationDrawerController: RootController, UIGestureRecognizerDelegate {
+open class NavigationDrawerController: RootController {
 	/**
      A CGFloat property that is used internally to track
      the original (x) position of the container view when panning.
@@ -179,8 +179,7 @@ open class NavigationDrawerController: RootController, UIGestureRecognizerDelega
      the NavigationDrawerController. When the panning gesture has
      ended, if the position is beyond the threshold,
      the leftView is opened, if it is below the threshold, the
-     leftView is closed. The leftViewThreshold is always at half
-     the width of the leftView.
+     leftView is closed.
      */
 	@IBInspectable public var leftThreshold: CGFloat = 64
 	fileprivate var leftViewThreshold: CGFloat = 0
@@ -190,8 +189,7 @@ open class NavigationDrawerController: RootController, UIGestureRecognizerDelega
      the NavigationDrawerController. When the panning gesture has
      ended, if the position is beyond the threshold,
      the rightView is closed, if it is below the threshold, the
-     rightView is opened. The rightViewThreshold is always at half
-     the width of the rightView.
+     rightView is opened.
      */
 	@IBInspectable public var rightThreshold: CGFloat = 64
 	fileprivate var rightViewThreshold: CGFloat = 0
@@ -1077,13 +1075,14 @@ extension NavigationDrawerController {
     }
 }
 
-extension NavigationDrawerController {
+extension NavigationDrawerController: UIGestureRecognizerDelegate {
     /**
      Detects the gesture recognizer being used.
      - Parameter gestureRecognizer: A UIGestureRecognizer to detect.
      - Parameter touch: The UITouch event.
      - Returns: A Boolean of whether to continue the gesture or not.
      */
+    @objc
     open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if !isRightViewOpened && gestureRecognizer == leftPanGesture && (isLeftViewOpened || isPointContainedWithinLeftThreshold(point: touch.location(in: view))) {
             return true

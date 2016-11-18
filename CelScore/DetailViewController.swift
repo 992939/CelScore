@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = Button()
-        self.socialButton = Menu(frame: CGRect(x: Constants.kPadding * 2, y: Constants.kTopViewRect.bottom - 35, width: 48, height: 48))
+        self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: 48, height: 48))
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
@@ -115,34 +115,45 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
+
+        self.voteButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translateX(by: -(Constants.kFabDiameter + 100))
+            ]))
+        
+        self.socialButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translateX(by: Constants.kPadding + 100)
+            ]))
+        
 //        let first: Button? = self.socialButton.views.first as? Button
 //        first!.animate(animation: Motion.animate(group: [
 //            Motion.rotate(rotation: 3),
 //            Motion.translationX(by: Constants.kPadding + 100)
 //            ]))
-        
-//        self.voteButton.animate(animation: Motion.animate(group: [
-//            Motion.rotate(rotation: 3),
-//            Motion.translationX(by: -(Constants.kFabDiameter + 100))
-//            ]))
-        
-//        for subview in self.socialButton.views.enumerated() {
-//            if subview.element.tag == 1 || subview.element.tag == 2 {
-//                subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
-//            }
-//        }
+
+        for subview in self.socialButton.views.enumerated() {
+            //if subview.element.tag == 1 || subview.element.tag == 2 {
+                subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
+            //}
+        }
     }
     
     func hideButtons() {
-//        let first: Button? = self.socialButton.views.first as? Button
-//        first!.animate(animation: Motion.animate(group: [
-//            Motion.rotate(rotation: 3),
-//            Motion.translationX(by: -(Constants.kPadding + 100))
-//            ]))
+        let first: Button? = self.socialButton.views.first as? Button
+        first!.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translateX(by: -(Constants.kPadding + 100))
+            ]))
+        
+        self.socialButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translateX(by: -(Constants.kPadding + 100))
+            ]))
         
         self.voteButton.animate(animation: Motion.animate(group: [
             Motion.rotate(rotation: 3),
-            Motion.translationX(by: Constants.kFabDiameter + 100)
+            Motion.translateX(by: Constants.kFabDiameter + 100)
             ]))
     }
     
@@ -272,6 +283,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
     func openHandleMenu() {
         let first: Button? = self.socialButton.views.first as? Button
+        print("definition \(self.socialButton.debugDescription)")
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
         first?.animate(animation: Motion.rotate(rotation: 1))
@@ -507,7 +519,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func setUpVoteButton() {
         let diameter: CGFloat = Constants.kFabDiameter
-        self.voteButton.frame = CGRect(x: Constants.kMaxWidth - 50, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
+        self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
             //CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shapePreset = .circle
         self.voteButton.depthPreset = .depth2
