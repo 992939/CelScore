@@ -42,7 +42,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
-        self.socialButton = Menu(frame: CGRect(x: 0, y: 0, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
+        self.socialButton = Menu()
         self.celebSearchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
@@ -70,7 +70,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             }
             
             SettingsViewModel().loggedInAsSignal().startWithFailed({ _ in
-                self.movingSocialButton(onScreen: true) })
+                self.movingSocialButton(onScreen: true)
+            })
         }
     
         SettingsViewModel().loggedInAsSignal()
@@ -115,15 +116,15 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebSearchBar.delegate = self
         self.celebSearchBar.searchBarStyle = .minimal
         
+        setUpSocialButton(buttonColor: Constants.kRedShade)
         let navigationBarView: Toolbar = self.getNavigationView()
-        self.setupSegmentedControl()
-        self.setUpSocialButton(menu: self.socialButton, origin: CGPoint(x: Constants.kScreenWidth - 65, y: Constants.kScreenHeight), buttonColor: Constants.kRedShade)
+        setupSegmentedControl()
+        
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableView)
-        self.view.addSubview(self.socialButton)
-        //Layout.size(parent: self.view, child: self.socialButton.menu, size: CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter))
+        view.layout(socialButton).size(socialButton.baseSize).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
@@ -178,7 +179,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 let alertVC = PMAlertController(title: "Registration", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "I'm ready to register", style: .default, action: { _ in
-                    Motion.delay(time: 0.5) { self.handleMenu(true) }
+                    Motion.delay(time: 0.5) { self.handleMenu(open: true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -223,7 +224,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                     alertVC.addAction(PMAlertAction(title: "I'm ready to vote", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch).start()
-                        self.movingSocialButton(onScreen: true) }))
+                        self.movingSocialButton(onScreen: true)
+                    }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
                     Motion.delay(time: 2) { self.present(alertVC, animated: true, completion: nil) }
@@ -250,47 +252,87 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 Motion.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
-    
-    //MARK: Sociable
-    func handleMenu(_ open: Bool = false) {
+
+    func handleMenu(open: Bool = false) {
+        print("HandleMenu")
         let image: UIImage?
         if open || (open == false && self.socialButton.isOpened == false){
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate(rotation: 5))
+            first?.animate(animation: Motion.rotate())
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         } else if self.socialButton.isOpened {
             self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate(rotation: 5))
+            first?.animate(animation: Motion.rotate())
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         }
     }
-    
-    func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
-        print("YAYA TOURE")
-    }
-    
+
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? -70 : 70
         self.socialButton.close()
-        let first: Button? = self.socialButton.views.first as? Button
-        first!.animate(animation: Motion.animate(group: [
-            Motion.rotate(rotation: 5),
-            Motion.translateY(by: y)
-        ]))
+        
+//        self.socialButton.animate(animation: Motion.animate(group: [
+//            Motion.rotate(rotation: 5),
+//            Motion.translateY(by: y)
+//        ]))
     }
     
-    func socialButton(_ button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
+    func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
     
     func socialRefresh() {
         self.diffCalculator.rows = []
         self.changeList()
         self.movingSocialButton(onScreen: false)
+    }
+    
+    func setUpSocialButton(buttonColor: UIColor) {
+        let btn1 = FabButton()
+        btn1.depthPreset = .depth2
+        btn1.pulseAnimation = .centerWithBacking
+        btn1.backgroundColor = buttonColor
+        btn1.tintColor = Color.white
+        //btn1.setImage(R.image.ic_add_black()!, for: .disabled)
+        btn1.image = R.image.ic_add_white()!
+        btn1.addTarget(self, action: #selector(handleMenu(open:)), for: .touchUpInside)
+        
+        let btn2 = FabButton()
+        btn2.tag = 1
+        btn2.contentMode = .scaleToFill
+        btn2.depthPreset = .depth1
+        btn2.pulseColor = Color.white
+        btn2.backgroundColor = Color.indigo.darken1
+        btn2.borderColor = Color.white
+        btn2.borderWidth = 2
+        btn2.image = R.image.facebooklogo()!
+        btn2.addTarget(self, action: #selector(coco), for: .touchUpInside)
+        
+        let btn3 = FabButton()
+        btn3.tag = 2
+        btn3.contentMode = .scaleToFill
+        btn3.depthPreset = .depth1
+        btn3.backgroundColor = Color.lightBlue.base
+        btn3.pulseColor = Color.white
+        btn3.borderColor = Color.white
+        btn3.borderWidth = 2
+        btn3.image = R.image.twitterlogo()!
+        btn3.addTarget(self, action: #selector(cucu), for: .touchUpInside)
+        
+        socialButton.direction = .up
+        socialButton.views = [btn1, btn2, btn3]
+    }
+    
+    func coco() {
+        print("Coco")
+    }
+    
+    func cucu() {
+        print("Cucu")
     }
     
     
@@ -374,7 +416,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                Motion.delay(time: 1.0) { self.movingSocialButton(onScreen: true) }
+                Motion.delay(time: 1.0) { self.movingSocialButton(onScreen: true)
+                }
             })
             .start()
     }

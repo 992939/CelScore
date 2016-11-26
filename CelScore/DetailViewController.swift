@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = Button()
-        self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: 48, height: 48))
+        self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
@@ -65,8 +65,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         
-        self.setUpSocialButton(menu: self.socialButton, origin: CGPoint(x: Constants.kPadding * 2, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
-            //CGPoint(x: -100, y: Constants.kTopViewRect.bottom - 35), buttonColor: Constants.kStarGoldShade)
+        self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
         let first: Button? = self.socialButton.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .startWithValues({ status in
@@ -125,17 +124,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             Motion.rotate(rotation: 3),
             Motion.translateX(by: Constants.kPadding + 100)
             ]))
-        
-//        let first: Button? = self.socialButton.views.first as? Button
-//        first!.animate(animation: Motion.animate(group: [
-//            Motion.rotate(rotation: 3),
-//            Motion.translationX(by: Constants.kPadding + 100)
-//            ]))
 
         for subview in self.socialButton.views.enumerated() {
-            //if subview.element.tag == 1 || subview.element.tag == 2 {
+            if subview.element.tag == 1 || subview.element.tag == 2 {
                 subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
-            //}
+            }
         }
     }
     
@@ -275,7 +268,45 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: Sociable
-    func handleMenu(_ open: Bool = false) {
+    func setUpSocialButton(menu: Menu, buttonColor: UIColor) {
+        let btn1: FabButton = FabButton()
+        btn1.depthPreset = .depth2
+        btn1.pulseAnimation = .centerWithBacking
+        btn1.backgroundColor = buttonColor
+        btn1.tintColor = Color.white
+        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
+        btn1.image = R.image.ic_add_white()!
+        btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
+        
+        var image = R.image.facebooklogo()!
+        let btn2: FabButton = FabButton()
+        //btn2.tag = 1
+        btn2.contentMode = .scaleToFill
+        btn2.depthPreset = .depth1
+        btn2.pulseColor = Color.white
+        btn2.backgroundColor = Color.indigo.darken1
+        btn2.borderColor = Color.white
+        btn2.borderWidth = 2
+        btn2.image = image
+        //btn2.addTarget(self, action: #selector(self.coco), for: .touchUpInside)
+        
+        image = R.image.twitterlogo()!
+        let btn3: FabButton = FabButton()
+        //btn3.tag = 2
+        btn3.contentMode = .scaleToFill
+        btn3.depthPreset = .depth1
+        btn3.backgroundColor = Color.lightBlue.base
+        btn3.pulseColor = Color.white
+        btn3.borderColor = Color.white
+        btn3.borderWidth = 2
+        btn3.image = image
+        //btn3.addTarget(self, action: #selector(self.cucu), for: .touchUpInside)
+        
+        menu.direction = .up
+        menu.views = [btn1, btn2, btn3]
+    }
+    
+    func handleMenu(open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.isOpened { self.closeHandleMenu() }
         else { TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions()) }
@@ -283,7 +314,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
     func openHandleMenu() {
         let first: Button? = self.socialButton.views.first as? Button
-        print("definition \(self.socialButton.debugDescription)")
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
         first?.animate(animation: Motion.rotate(rotation: 1))
@@ -313,7 +343,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         })
     }
     
-    func socialButton(_ button: UIButton) {
+    func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .flatMapError { _ in
                 self.socialButtonTapped(buttonTag: button.tag, hideButton: false)
