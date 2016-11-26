@@ -105,6 +105,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
         self.celebrityTableView.asyncDataSource = self
         self.celebrityTableView.asyncDelegate = self
@@ -116,8 +117,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.celebSearchBar.delegate = self
         self.celebSearchBar.searchBarStyle = .minimal
         
-        setUpSocialButton(buttonColor: Constants.kRedShade)
+        
         let navigationBarView: Toolbar = self.getNavigationView()
+        self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kRedShade)
         setupSegmentedControl()
         
         self.view.backgroundColor = Constants.kBlueShade
@@ -274,8 +276,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
 
     func movingSocialButton(onScreen: Bool) {
-        let y: CGFloat = onScreen ? -70 : 70
-        self.socialButton.close()
+        //let y: CGFloat = onScreen ? -70 : 70
+        //self.socialButton.close()
         
 //        self.socialButton.animate(animation: Motion.animate(group: [
 //            Motion.rotate(rotation: 5),
@@ -290,51 +292,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.changeList()
         self.movingSocialButton(onScreen: false)
     }
-    
-    func setUpSocialButton(buttonColor: UIColor) {
-        let btn1 = FabButton()
-        btn1.depthPreset = .depth2
-        btn1.pulseAnimation = .centerWithBacking
-        btn1.backgroundColor = buttonColor
-        btn1.tintColor = Color.white
-        //btn1.setImage(R.image.ic_add_black()!, for: .disabled)
-        btn1.image = R.image.ic_add_white()!
-        btn1.addTarget(self, action: #selector(handleMenu(open:)), for: .touchUpInside)
-        
-        let btn2 = FabButton()
-        btn2.tag = 1
-        btn2.contentMode = .scaleToFill
-        btn2.depthPreset = .depth1
-        btn2.pulseColor = Color.white
-        btn2.backgroundColor = Color.indigo.darken1
-        btn2.borderColor = Color.white
-        btn2.borderWidth = 2
-        btn2.image = R.image.facebooklogo()!
-        btn2.addTarget(self, action: #selector(coco), for: .touchUpInside)
-        
-        let btn3 = FabButton()
-        btn3.tag = 2
-        btn3.contentMode = .scaleToFill
-        btn3.depthPreset = .depth1
-        btn3.backgroundColor = Color.lightBlue.base
-        btn3.pulseColor = Color.white
-        btn3.borderColor = Color.white
-        btn3.borderWidth = 2
-        btn3.image = R.image.twitterlogo()!
-        btn3.addTarget(self, action: #selector(cucu), for: .touchUpInside)
-        
-        socialButton.direction = .up
-        socialButton.views = [btn1, btn2, btn3]
-    }
-    
-    func coco() {
-        print("Coco")
-    }
-    
-    func cucu() {
-        print("Cucu")
-    }
-    
     
 //    func sendNetworkAlert(splashView: RevealingSplashView) {
 //        let alertVC = PMAlertController(title: "No Connection", description: OverlayInfo.TimeoutError.message(), image: R.image.cloud_big_blue()!, style: .Alert)

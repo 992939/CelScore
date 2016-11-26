@@ -268,44 +268,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: Sociable
-    func setUpSocialButton(menu: Menu, buttonColor: UIColor) {
-        let btn1: FabButton = FabButton()
-        btn1.depthPreset = .depth2
-        btn1.pulseAnimation = .centerWithBacking
-        btn1.backgroundColor = buttonColor
-        btn1.tintColor = Color.white
-        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
-        btn1.image = R.image.ic_add_white()!
-        btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
-        
-        var image = R.image.facebooklogo()!
-        let btn2: FabButton = FabButton()
-        //btn2.tag = 1
-        btn2.contentMode = .scaleToFill
-        btn2.depthPreset = .depth1
-        btn2.pulseColor = Color.white
-        btn2.backgroundColor = Color.indigo.darken1
-        btn2.borderColor = Color.white
-        btn2.borderWidth = 2
-        btn2.image = image
-        //btn2.addTarget(self, action: #selector(self.coco), for: .touchUpInside)
-        
-        image = R.image.twitterlogo()!
-        let btn3: FabButton = FabButton()
-        //btn3.tag = 2
-        btn3.contentMode = .scaleToFill
-        btn3.depthPreset = .depth1
-        btn3.backgroundColor = Color.lightBlue.base
-        btn3.pulseColor = Color.white
-        btn3.borderColor = Color.white
-        btn3.borderWidth = 2
-        btn3.image = image
-        //btn3.addTarget(self, action: #selector(self.cucu), for: .touchUpInside)
-        
-        menu.direction = .up
-        menu.views = [btn1, btn2, btn3]
-    }
-    
     func handleMenu(open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.isOpened { self.closeHandleMenu() }
@@ -550,7 +512,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func setUpVoteButton() {
         let diameter: CGFloat = Constants.kFabDiameter
         self.voteButton.frame = CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
-            //CGRect(x: Constants.kMaxWidth + 100, y: Constants.kTopViewRect.bottom - 35, width: diameter, height: diameter)
         self.voteButton.shapePreset = .circle
         self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .center

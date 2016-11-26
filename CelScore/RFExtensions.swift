@@ -22,16 +22,16 @@ extension UIView {
     }
 }
 
-extension UIButton {
-    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let buttonSize = self.frame.size
-        let extraHitArea = UIDevice.getButtonExtraArea()
-        let widthToAdd = (extraHitArea - buttonSize.width > 0) ? extraHitArea - buttonSize.width : 0
-        let heightToAdd = (extraHitArea - buttonSize.height > 0) ? extraHitArea - buttonSize.height : 0
-        let largerFrame = CGRect(x: 0-(widthToAdd/2), y: 0-(heightToAdd/2), width: buttonSize.width+widthToAdd, height: buttonSize.height+heightToAdd)
-        return (largerFrame.contains(point)) ? self : nil
-    }
-}
+//extension UIButton {
+//    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+//        let buttonSize = self.frame.size
+//        let extraHitArea = UIDevice.getButtonExtraArea()
+//        let widthToAdd = (extraHitArea - buttonSize.width > 0) ? extraHitArea - buttonSize.width : 0
+//        let heightToAdd = (extraHitArea - buttonSize.height > 0) ? extraHitArea - buttonSize.height : 0
+//        let largerFrame = CGRect(x: 0-(widthToAdd/2), y: 0-(heightToAdd/2), width: buttonSize.width+widthToAdd, height: buttonSize.height+heightToAdd)
+//        return (largerFrame.contains(point)) ? self : nil
+//    }
+//}
 
 extension Date {
 
