@@ -60,7 +60,7 @@ PODS:
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (3.1.1)
   - SwiftyTimer (2.0.0)
-  - Timepiece (0.5.0)
+  - Timepiece (1.0.1)
   - TwitterCore (2.5.0):
     - Fabric
   - TwitterKit (2.5.0):
@@ -96,7 +96,7 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.0.3)
   - SwiftyJSON (~> 3.1)
   - SwiftyTimer (~> 2.0.0)
-  - Timepiece (from `https://github.com/skofgar/Timepiece.git`, branch `swift3`)
+  - Timepiece (~> 1.0)
   - TwitterCore (~> 2.4)
   - TwitterKit (~> 2.4)
   - WebASDKImageManager (~> 1.1)
@@ -110,9 +110,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
   SMSegmentView:
     :git: https://github.com/sima-11/SMSegmentView.git
-  Timepiece:
-    :branch: swift3
-    :git: https://github.com/skofgar/Timepiece.git
 
 CHECKOUT OPTIONS:
   ReactiveCocoa:
@@ -121,9 +118,6 @@ CHECKOUT OPTIONS:
   SMSegmentView:
     :commit: 3d0ed978ef10e802e2352ed9d0ff34d74e1b7fdf
     :git: https://github.com/sima-11/SMSegmentView.git
-  Timepiece:
-    :commit: 53f5bdf36b11885c029e058478273719f5e93ee9
-    :git: https://github.com/skofgar/Timepiece.git
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 926ded3ca3fb7026565e0e81f0e132fea4d3a6eb
@@ -157,12 +151,12 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
-  Timepiece: c8360276f0aa935bfb0e53f8ed38abe41c93b5b4
+  Timepiece: 59cdc48089645cce07803c15116293b346ca457d
   TwitterCore: 95c46af93112768a7983bd370d66023553601d01
   TwitterKit: dd8042698b0ff5bd3066fa919b3b2b50d8eed829
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: c6699d75d58042377132c9301d3ab8fd0204937d
 
-PODFILE CHECKSUM: e9d2c4186e8b6dcce5bd0abe4a9ffeeb4116b421
+PODFILE CHECKSUM: 224e5e358e7f2c99f8208ae21b91cca1154336c9
 
 COCOAPODS: 1.0.1

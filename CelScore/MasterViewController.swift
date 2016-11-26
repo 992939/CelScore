@@ -156,7 +156,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
     
     func facebookTokenCheck() {
-        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().dateFromFormat("MM/dd/yyyy", locale: DateFormatter().locale)!
+        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().date(inFormat:"MM/dd/yyyy")!
         if expirationDate < Date.today() { self.facebookLogin(hideButton: false) }
         else { UserViewModel().refreshFacebookTokenSignal().start() }
     }
