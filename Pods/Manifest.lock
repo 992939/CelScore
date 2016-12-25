@@ -19,7 +19,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.7.3):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Dwifft (0.5)
   - Fabric (1.6.9)
@@ -41,7 +41,7 @@ PODS:
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
-  - RateLimit (2.1.0)
+  - RateLimit (1.4.1)
   - ReactiveCocoa (5.0.0-alpha.1):
     - ReactiveSwift (~> 1.0.0-alpha.1)
   - ReactiveSwift (1.0.0-alpha.2):
@@ -75,7 +75,7 @@ DEPENDENCIES:
   - AWSAPIGateway (~> 2.4.9)
   - AWSCognito (~> 2.4.9)
   - BEMCheckBox (~> 1.4)
-  - Crashlytics (~> 3.7.2)
+  - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.18)
@@ -85,7 +85,7 @@ DEPENDENCIES:
   - Material (~> 2.4)
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
-  - RateLimit (~> 2.1)
+  - RateLimit (~> 1.4)
   - ReactiveCocoa (from `https://github.com/ReactiveCocoa/ReactiveCocoa.git`, branch `add-podspec`)
   - Realm (~> 2.1)
   - RealmSwift (~> 2.1)
@@ -126,7 +126,7 @@ SPEC CHECKSUMS:
   AWSCore: c78eff928514e90075c3bd53f5ff2d9a77f8658e
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
@@ -139,7 +139,7 @@ SPEC CHECKSUMS:
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
-  RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
+  RateLimit: e86b061a33c9e37e1cffdfe5c444a91676a9375d
   ReactiveCocoa: 94b4ea2fac009075055151ff9d14b216dcebc270
   ReactiveSwift: 967383cc7b58baa05c997965f9a76b7fd796f2a7
   Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
@@ -157,6 +157,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: c14c769b2c4ac609b102a90bde008268fae43860
+PODFILE CHECKSUM: 501b8c341907494ca6c65e68e6e7d6bbb9b57cf8
 
 COCOAPODS: 1.0.1
