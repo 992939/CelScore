@@ -485,6 +485,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func getSegmentView() -> SMSegmentView {
+
         let appearance = SMSegmentAppearance()
         appearance.segmentOnSelectionColour = Constants.kRedShade
         appearance.segmentOffSelectionColour = Constants.kGreyBackground

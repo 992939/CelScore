@@ -17,7 +17,7 @@ def shared_pods
     pod 'AsyncDisplayKit', '~> 1.9.90'
     pod 'AWSCognito', '~> 2.4.9'
     pod 'AWSAPIGateway', '~> 2.4.9'
-    pod 'BEMCheckBox', '~> 1.2'
+    pod 'BEMCheckBox', '~> 1.4'
 end
 
 target 'CelScore' do
@@ -26,10 +26,10 @@ target 'CelScore' do
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'
-    pod 'R.swift', '~> 3.1'
+    pod 'R.swift', '~> 3.2'
     pod 'WebASDKImageManager', '~> 1.1'
-    pod 'FBSDKLoginKit', '~> 4.14'
-    pod 'FBSDKCoreKit', '~> 4.14'
+    pod 'FBSDKLoginKit', '~> 4.18'
+    pod 'FBSDKCoreKit', '~> 4.18'
     pod 'Fabric', '~> 1.6.7'
     pod 'Crashlytics', '~> 3.7.2'
     pod 'TwitterKit', '~> 2.7'
@@ -37,12 +37,12 @@ target 'CelScore' do
     pod 'RateLimit', '~> 1.2'
     pod 'Timepiece', '~> 1.0'
     pod 'YLProgressBar', '~> 3.8.1'
-    pod 'SMSegmentView', '~> 1.1'
+    pod 'SMSegmentView', :git => 'https://github.com/sima-11/SMSegmentView.git'
     pod 'HMSegmentedControl', '~> 1.5.3'
     pod 'SVProgressHUD', '~> 2.0.3'
-    pod 'RevealingSplashView', '~> 0.0'
+    pod 'RevealingSplashView', '~> 0.1'
     pod 'PMAlertController', '~> 2.0'
-    pod 'Dwifft', '~> 0.4'
+    pod 'Dwifft', '~> 0.5'
 end
 
 target 'CelScoreTests' do
