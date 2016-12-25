@@ -39,7 +39,7 @@ target 'CelScore' do
     pod 'YLProgressBar', '~> 3.10'
     pod 'SMSegmentView', :git => 'https://github.com/sima-11/SMSegmentView.git'
     pod 'HMSegmentedControl', '~> 1.5.3'
-    pod 'SVProgressHUD', '~> 2.0.3'
+    pod 'SVProgressHUD', '~> 2.1'
     pod 'RevealingSplashView', '~> 0.1'
     pod 'PMAlertController', '~> 2.0'
     pod 'Dwifft', '~> 0.5'
