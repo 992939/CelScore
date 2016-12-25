@@ -106,6 +106,11 @@ open class NavigationController: UINavigationController {
         v.layoutNavigationItem(item: item)
 	}
     
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        navigationBar.width = view.width
+    }
+    
 	/**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
@@ -115,6 +120,7 @@ open class NavigationController: UINavigationController {
      */
 	open func prepare() {
         navigationBar.heightPreset = .normal
+        navigationBar.width = view.width
         
         view.clipsToBounds = true
 		view.backgroundColor = .white
@@ -141,7 +147,7 @@ extension NavigationController: UINavigationBarDelegate {
         if let v = navigationBar as? NavigationBar {
             item.backButton.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
             item.backButton.image = v.backButtonImage
-            item.leftViews.append(item.backButton)
+            item.leftViews.insert(item.backButton, at: 0)
             v.layoutNavigationItem(item: item)
         }
         return true

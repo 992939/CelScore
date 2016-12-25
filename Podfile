@@ -22,7 +22,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 2.3'
+    pod 'Material', '~> 2.4'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'
@@ -31,12 +31,12 @@ target 'CelScore' do
     pod 'FBSDKLoginKit', '~> 4.18'
     pod 'FBSDKCoreKit', '~> 4.18'
     pod 'Fabric', '~> 1.6.7'
-    pod 'Crashlytics', '~> 3.7.2'
+    pod 'Crashlytics', '~> 3.8'
     pod 'TwitterKit', '~> 2.7'
     pod 'TwitterCore', '~> 2.7'
-    pod 'RateLimit', '~> 1.2'
+    pod 'RateLimit', '~> 2.1'
     pod 'Timepiece', '~> 1.0'
-    pod 'YLProgressBar', '~> 3.8.1'
+    pod 'YLProgressBar', '~> 3.10'
     pod 'SMSegmentView', :git => 'https://github.com/sima-11/SMSegmentView.git'
     pod 'HMSegmentedControl', '~> 1.5.3'
     pod 'SVProgressHUD', '~> 2.0.3'

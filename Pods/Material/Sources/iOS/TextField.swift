@@ -186,7 +186,7 @@ open class TextField: UITextField {
 	
 	/// The placeholder UILabel.
 	@IBInspectable
-    open fileprivate(set) var placeholderLabel = UILabel()
+    open let placeholderLabel = UILabel()
 	
 	/// Placeholder normal text
 	@IBInspectable
@@ -210,7 +210,7 @@ open class TextField: UITextField {
 	
 	/// The detailLabel UILabel that is displayed.
 	@IBInspectable
-    open fileprivate(set) var detailLabel = UILabel()
+    open let detailLabel = UILabel()
 	
 	/// The detailLabel text value.
 	@IBInspectable
@@ -372,13 +372,15 @@ open class TextField: UITextField {
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
+        guard willLayout && !isAnimating else {
+            return
+        }
+        
+        layoutShape()
         reload()
 	}
 	
-	open override func layoutSublayers(of layer: CALayer) {
-		super.layoutSublayers(of: layer)
-        layoutShape()
-	}
+    
     
 	/**
      Prepares the view instance when intialized. When subclassing,
@@ -402,10 +404,6 @@ open class TextField: UITextField {
     
 	/// Ensures that the components are sized correctly.
 	open func reload() {
-        guard willLayout && !isAnimating else {
-            return
-        }
-        
         layoutPlaceholderLabel()
         layoutDetailLabel()
         layoutButton(button: clearIconButton)

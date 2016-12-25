@@ -122,6 +122,11 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
    * The indicator text is diplayed over the progress bar.
    */
   YLProgressBarIndicatorTextDisplayModeProgress = 2,
+  /**
+   * The indicator text is displayed over the track bar and over the progress
+   * bar in the right.
+   */
+  YLProgressBarIndicatorTextDisplayModeFixedRight = 3
 };
 
 /**
@@ -215,23 +220,29 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL progressStretch;
 
 /**
+ * @abstract Set whether the color shown for the portion of the progress bar that is uniform.
+ * @discussion The default value is NO.
+ */
+@property (nonatomic, assign) IBInspectable BOOL uniformTintColor; //UI_APPEARANCE_SELECTOR;
+
+/**
  * @abstract The colors shown for the portion of the progress bar
  * that is filled.
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, strong) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, strong) IBInspectable UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not
  * filled.
  */
-@property (nonatomic, strong) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A CGFloat value that determines the inset between the track and the
@@ -265,7 +276,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * @discussion By default the label text is set to nil and its text color change
  * using the background color.
  */
-@property (nonatomic, strong) UILabel *indicatorTextLabel;
+@property (nonatomic, strong, nonnull) UILabel *indicatorTextLabel;
 
 /**
  * @abstract The display indicator text mode. It defines where the indicator
@@ -321,7 +332,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 /**
  * @abstract The color show for the stripes over the progress bar.
  */
-@property (nonatomic, strong) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The x-coordinate distance in pixels between the top point and the
@@ -347,3 +358,9 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL hideTrack;
 
 @end
+
+//! Project version number for YLProgressBar.
+FOUNDATION_EXPORT double YLProgressBarVersionNumber;
+
+//! Project version string for YLProgressBar.
+FOUNDATION_EXPORT const unsigned char YLProgressBarVersionString[];

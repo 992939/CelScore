@@ -130,7 +130,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
-            RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
+                RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
                     .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -199,7 +199,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .observe(on: UIScheduler())
             .on(value: { _ in
-                revealingSplashView.animationType = SplashAnimationType.PopAndZoomOut
+                revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
                 revealingSplashView.startAnimation()
             })
             .flatMapError { _ in return SignalProducer.empty }

@@ -113,9 +113,7 @@ open class Layer: CAShapeLayer {
     open override var cornerRadius: CGFloat {
 		didSet {
 			layoutShadowPath()
-			if .circle == shapePreset {
-				shapePreset = .none
-			}
+			shapePreset = .none
 		}
 	}
 	
@@ -136,7 +134,7 @@ open class Layer: CAShapeLayer {
      */
 	public override init(layer: Any) {
 		contentsGravityPreset = .resizeAspectFill
-		super.init()
+        super.init(layer: layer)
 		prepareVisualLayer()
 	}
 	

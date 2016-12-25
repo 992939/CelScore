@@ -61,7 +61,8 @@ open class SearchBarController: StatusBarController {
     }
     
     /// Reference to the SearchBar.
-    open fileprivate(set) var searchBar = SearchBar()
+    @IBInspectable
+    open let searchBar = SearchBar()
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
