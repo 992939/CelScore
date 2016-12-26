@@ -42,10 +42,10 @@ PODS:
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - RateLimit (1.4.1)
-  - ReactiveCocoa (5.0.0-alpha.1):
-    - ReactiveSwift (~> 1.0.0-alpha.1)
-  - ReactiveSwift (1.0.0-alpha.2):
-    - Result (~> 3.0)
+  - ReactiveCocoa (5.0.0-alpha.2):
+    - ReactiveSwift (~> 1.0.0-alpha.3)
+  - ReactiveSwift (1.0.0-rc.3):
+    - Result (~> 3.1)
   - Realm (2.1.1):
     - Realm/Headers (= 2.1.1)
   - Realm/Headers (2.1.1)
@@ -86,7 +86,7 @@ DEPENDENCIES:
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
   - RateLimit (~> 1.4)
-  - ReactiveCocoa (from `https://github.com/ReactiveCocoa/ReactiveCocoa.git`, branch `add-podspec`)
+  - ReactiveCocoa (= 5.0.0-alpha.2)
   - Realm (~> 2.1)
   - RealmSwift (~> 2.1)
   - Result (~> 3.1.0)
@@ -105,16 +105,10 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
-  ReactiveCocoa:
-    :branch: add-podspec
-    :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
   SMSegmentView:
     :git: https://github.com/sima-11/SMSegmentView.git
 
 CHECKOUT OPTIONS:
-  ReactiveCocoa:
-    :commit: 8b6a19d416d2d110b9f1f132597f1e4297b27e6c
-    :git: https://github.com/ReactiveCocoa/ReactiveCocoa.git
   SMSegmentView:
     :commit: 3d0ed978ef10e802e2352ed9d0ff34d74e1b7fdf
     :git: https://github.com/sima-11/SMSegmentView.git
@@ -140,8 +134,8 @@ SPEC CHECKSUMS:
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: e86b061a33c9e37e1cffdfe5c444a91676a9375d
-  ReactiveCocoa: 94b4ea2fac009075055151ff9d14b216dcebc270
-  ReactiveSwift: 967383cc7b58baa05c997965f9a76b7fd796f2a7
+  ReactiveCocoa: 14a6358d1009c90c3078bc352ce84c102b78c45e
+  ReactiveSwift: 443cb065e9aa9451b30f0c85e9d7e9b4cec369cd
   Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
   RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
   Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
@@ -157,6 +151,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 48d80dfed1efd3ec49c325a87131967e808a3bd8
+PODFILE CHECKSUM: 34070118f26f0615c441004702732b8be7bd279f
 
 COCOAPODS: 1.0.1

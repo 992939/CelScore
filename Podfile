@@ -10,7 +10,7 @@ plugin 'cocoapods-keys', {
 }
 
 def shared_pods
-    pod 'ReactiveCocoa', :git => 'https://github.com/ReactiveCocoa/ReactiveCocoa.git', :branch => 'add-podspec'
+    pod 'ReactiveCocoa', '5.0.0-alpha.2'
     pod 'Result', '~> 3.1.0'
     pod 'Realm', '~> 2.1'
     pod 'RealmSwift', '~> 2.1'

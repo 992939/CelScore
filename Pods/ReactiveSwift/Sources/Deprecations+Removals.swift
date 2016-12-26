@@ -52,6 +52,19 @@ extension Disposable {
 	public var disposed: Bool { fatalError() }
 }
 
+extension SerialDisposable {
+	@available(*, unavailable, renamed:"inner")
+	public var innerDisposable: Disposable? {
+		get { fatalError() }
+		set { fatalError() }
+ }
+}
+
+extension ScopedDisposable {
+	@available(*, unavailable, renamed:"inner")
+	public var innerDisposable: Disposable { fatalError() }
+}
+
 extension ActionProtocol {
 	@available(*, unavailable, renamed:"isEnabled")
 	public var enabled: Bool { fatalError() }
@@ -179,7 +192,7 @@ extension SignalProtocol {
 	public func skip(_ count: Int) -> Signal<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"observe(on:)")
-	public func observeOn(_ scheduler: UIScheduler) -> Signal<Value, Error> { fatalError() }
+	public func observeOn(_ scheduler: SchedulerProtocol) -> Signal<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"combineLatest(with:)")
 	public func combineLatestWith<S: SignalProtocol>(_ otherSignal: S) -> Signal<(Value, S.Value), Error> { fatalError() }
@@ -203,7 +216,7 @@ extension SignalProtocol {
 	public func takeWhile(_ predicate: (Value) -> Bool) -> Signal<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"timeout(after:raising:on:)")
-	public func timeoutWithError(_ error: Error, afterInterval: TimeInterval, onScheduler: SchedulerProtocol) -> Signal<Value, Error> { fatalError() }
+	public func timeoutWithError(_ error: Error, afterInterval: TimeInterval, onScheduler: DateSchedulerProtocol) -> Signal<Value, Error> { fatalError() }
 
 	@available(*, unavailable, message: "This Signal may emit errors which must be handled explicitly, or observed using `observeResult(_:)`")
 	public func observeNext(_ next: (Value) -> Void) -> Disposable? { fatalError() }
@@ -229,11 +242,14 @@ extension SignalProducerProtocol {
 	@available(*, unavailable, renamed:"skip(first:)")
 	public func skip(_ count: Int) -> SignalProducer<Value, Error> { fatalError() }
 
+	@available(*, unavailable, renamed:"retry(upTo:)")
+	public func retry(_ count: Int) -> SignalProducer<Value, Error> { fatalError() }
+
 	@available(*, unavailable, renamed:"observe(on:)")
-	public func observeOn(_ scheduler: UIScheduler) -> SignalProducer<Value, Error> { fatalError() }
+	public func observeOn(_ scheduler: SchedulerProtocol) -> SignalProducer<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"start(on:)")
-	public func startOn(_ scheduler: UIScheduler) -> SignalProducer<Value, Error> { fatalError() }
+	public func startOn(_ scheduler: SchedulerProtocol) -> SignalProducer<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"combineLatest(with:)")
 	public func combineLatestWith<U>(_ otherProducer: SignalProducer<U, Error>) -> SignalProducer<(Value, U), Error> { fatalError() }
@@ -272,10 +288,13 @@ extension SignalProducerProtocol {
 	public func takeWhile(_ predicate: (Value) -> Bool) -> SignalProducer<Value, Error> { fatalError() }
 
 	@available(*, unavailable, renamed:"timeout(after:raising:on:)")
-	public func timeoutWithError(_ error: Error, afterInterval: TimeInterval, onScheduler: SchedulerProtocol) -> SignalProducer<Value, Error> { fatalError() }
+	public func timeoutWithError(_ error: Error, afterInterval: TimeInterval, onScheduler: DateSchedulerProtocol) -> SignalProducer<Value, Error> { fatalError() }
 
 	@available(*, unavailable, message:"This SignalProducer may emit errors which must be handled explicitly, or observed using `startWithResult(_:)`.")
 	public func startWithNext(_ next: (Value) -> Void) -> Disposable { fatalError() }
+
+	@available(*, unavailable, renamed:"repeat(_:)")
+	public func times(_ count: Int) -> SignalProducer<Value, Error> { fatalError() }
 }
 
 extension SignalProducerProtocol where Value: OptionalProtocol {
@@ -291,6 +310,12 @@ extension SignalProducerProtocol where Error == NoError {
 extension SignalProducer {
 	@available(*, unavailable, message:"Use properties instead. `buffer(_:)` is removed in RAC 5.0.")
 	public static func buffer(_ capacity: Int) -> (SignalProducer, Signal<Value, Error>.Observer) { fatalError() }
+
+	@available(*, unavailable, renamed:"init(_:)")
+	public init<S: SignalProtocol>(signal: S) where S.Value == Value, S.Error == Error { fatalError() }
+
+	@available(*, unavailable, renamed:"init(_:)")
+	public init<S: Sequence>(values: S) where S.Iterator.Element == Value { fatalError() }
 }
 
 extension PropertyProtocol {
@@ -302,10 +327,10 @@ extension PropertyProtocol {
 }
 
 extension Property {
-	@available(*, unavailable, renamed:"AnyProperty(initial:then:)")
+	@available(*, unavailable, renamed:"Property(initial:then:)")
 	public convenience init(initialValue: Value, producer: SignalProducer<Value, NoError>) { fatalError() }
 
-	@available(*, unavailable, renamed:"AnyProperty(initial:then:)")
+	@available(*, unavailable, renamed:"Property(initial:then:)")
 	public convenience init(initialValue: Value, signal: Signal<Value, NoError>) { fatalError() }
 }
 
@@ -315,6 +340,12 @@ extension DateSchedulerProtocol {
 
 	@available(*, unavailable, renamed:"schedule(after:interval:leeway:)")
 	func scheduleAfter(date: Date, repeatingEvery: TimeInterval, withLeeway: TimeInterval, action: () -> Void) -> Disposable? { fatalError() }
+
+	@available(*, unavailable, message:"schedule(after:interval:leeway:action:) now uses DispatchTimeInterval")
+	func schedule(after date: Date, interval: TimeInterval, leeway: TimeInterval, action: @escaping () -> Void) -> Disposable? { fatalError() }
+
+	@available(*, unavailable, message:"schedule(after:interval:action:) now uses DispatchTimeInterval")
+	public func schedule(after date: Date, interval: TimeInterval, action: @escaping () -> Void) -> Disposable? { fatalError() }
 }
 
 extension TestScheduler {
@@ -323,6 +354,12 @@ extension TestScheduler {
 
 	@available(*, unavailable, renamed:"advance(to:)")
 	public func advanceToDate(_ date: Date) { fatalError() }
+
+	@available(*, unavailable, message:"advance(by:) now uses DispatchTimeInterval")
+	public func advance(by interval: TimeInterval) { fatalError() }
+
+	@available(*, unavailable, message:"rewind(by:) now uses DispatchTimeInterval")
+	public func rewind(by interval: TimeInterval) { fatalError() }
 }
 
 extension QueueScheduler {
@@ -340,7 +377,18 @@ extension URLSession {
 	public func rac_data(with request: URLRequest) -> SignalProducer<(Data, URLResponse), NSError> { fatalError() }
 }
 
+extension Reactive where Base: URLSession {
+	@available(*, unavailable, message:"Use the overload which returns `SignalProducer<(Data, URLResponse), AnyError>` instead, and cast `AnyError.error` to `NSError` as you need")
+	public func data(with request: URLRequest) -> SignalProducer<(Data, URLResponse), NSError> { fatalError() }
+}
+
 // Free functions
+
+@available(*, unavailable, message:"timer(interval:on:) now uses DispatchTimeInterval")
+public func timer(interval: TimeInterval, on scheduler: DateSchedulerProtocol) -> SignalProducer<Date, NoError> { fatalError() }
+
+@available(*, unavailable, message:"timer(interval:on:leeway:) now uses DispatchTimeInterval")
+public func timer(interval: TimeInterval, on scheduler: DateSchedulerProtocol, leeway: TimeInterval) -> SignalProducer<Date, NoError> { fatalError() }
 
 @available(*, unavailable, renamed:"Signal.combineLatest")
 public func combineLatest<A, B, Error>(_ a: Signal<A, Error>, _ b: Signal<B, Error>) -> Signal<(A, B), Error> { fatalError() }

@@ -129,7 +129,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         view.layout(socialButton).size(socialButton.baseSize).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
         try! self.setupData()
         
-        NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil).startWithValues { _ in
+        NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+            .map {_ in 
                 RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
                 let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
                 CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
