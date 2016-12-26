@@ -3,12 +3,17 @@
 #import <objc/message.h>
 #import <objc/runtime.h>
 
+void _rac_objc_setAssociatedObject(const void* object, const void* key, id value, objc_AssociationPolicy policy) {
+	__unsafe_unretained id obj = (__bridge typeof(obj)) object;
+	objc_setAssociatedObject(obj, key, value, policy);
+}
+
 NSString * const RACSelectorSignalErrorDomain = @"RACSelectorSignalErrorDomain";
 const NSInteger RACSelectorSignalErrorMethodSwizzlingRace = 1;
 const NSExceptionName RACSwizzleException = @"RACSwizzleException";
 
-static NSString * const RACSignalForSelectorAliasPrefix = @"rac_alias_";
-static NSString * const RACSubclassSuffix = @"_RACSelectorSignal";
+static NSString * const RACSignalForSelectorAliasPrefix = @"rac_swift_";
+static NSString * const RACSubclassSuffix = @"_RACIntercepting";
 static void *RACSubclassAssociationKey = &RACSubclassAssociationKey;
 
 static NSMutableSet *swizzledClasses() {
