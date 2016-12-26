@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import Material
-import SMSegmentView
 import Social
 import ReactiveCocoa
 import ReactiveSwift

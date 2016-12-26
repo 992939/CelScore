@@ -22,20 +22,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 2 files.
   struct file {
-    /// Resource file `SMSegment`.
-    static let sMSegment = Rswift.FileResource(bundle: R.hostingBundle, name: "SMSegment", pathExtension: "")
     /// Resource file `TAOverlay.bundle`.
     static let tAOverlayBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "TAOverlay", pathExtension: "bundle")
     /// Resource file `icomoon2.ttf`.
     static let icomoon2Ttf = Rswift.FileResource(bundle: R.hostingBundle, name: "icomoon2", pathExtension: "ttf")
-    
-    /// `bundle.url(forResource: "SMSegment", withExtension: "")`
-    static func sMSegment(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.sMSegment
-      return fileResource.bundle.url(forResource: fileResource)
-    }
     
     /// `bundle.url(forResource: "TAOverlay", withExtension: "bundle")`
     static func tAOverlayBundle(_: Void = ()) -> Foundation.URL? {

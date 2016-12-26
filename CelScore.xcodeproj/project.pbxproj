@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */; };
 		000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A61CFBA1B00004A8B9 /* CAEmpty.m */; };
+		0003BDC21E11DE9300B931D4 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBE1E11DE9300B931D4 /* SMSegment.swift */; };
+		0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */; };
+		0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */; };
+		0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		00159AE01E0F7BAD00EEA05B /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
@@ -40,7 +44,6 @@
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		00736F671D230AE10088B806 /* icomoon2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00736F661D230AE10088B806 /* icomoon2.ttf */; };
-		007B2F411DA763490038665C /* SMSegment in Resources */ = {isa = PBXBuildFile; fileRef = 007B2F401DA763490038665C /* SMSegment */; };
 		007FC3F81DD962EC005DD773 /* AppMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007FC3F71DD962EC005DD773 /* AppMenuController.swift */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
@@ -111,6 +114,10 @@
 		000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACelScoreAPIClient.m; sourceTree = "<group>"; };
 		000215A51CFBA1B00004A8B9 /* CAEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAEmpty.h; sourceTree = "<group>"; };
 		000215A61CFBA1B00004A8B9 /* CAEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAEmpty.m; sourceTree = "<group>"; };
+		0003BDBE1E11DE9300B931D4 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSegment/SMSegment.swift; sourceTree = "<group>"; };
+		0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentAppearance.swift; path = SMSegment/SMSegmentAppearance.swift; sourceTree = "<group>"; };
+		0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSegment/SMSegmentView.swift; sourceTree = "<group>"; };
+		0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentViewConstants.swift; path = SMSegment/SMSegmentViewConstants.swift; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
@@ -149,7 +156,6 @@
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		00736F661D230AE10088B806 /* icomoon2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon2.ttf; sourceTree = "<group>"; };
-		007B2F401DA763490038665C /* SMSegment */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SMSegment; sourceTree = "<group>"; };
 		007FC3F71DD962EC005DD773 /* AppMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMenuController.swift; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
@@ -230,6 +236,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0003BDBD1E11DE7800B931D4 /* SMSegment */ = {
+			isa = PBXGroup;
+			children = (
+				0003BDBE1E11DE9300B931D4 /* SMSegment.swift */,
+				0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */,
+				0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */,
+				0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */,
+			);
+			name = SMSegment;
+			sourceTree = "<group>";
+		};
 		003AE6961D094FB70055EE56 /* The Courthouse */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +344,7 @@
 		004B56FE1B3533CE008A75EB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				007B2F401DA763490038665C /* SMSegment */,
+				0003BDBD1E11DE7800B931D4 /* SMSegment */,
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
 				007FC3F71DD962EC005DD773 /* AppMenuController.swift */,
@@ -588,7 +605,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				007B2F411DA763490038665C /* SMSegment in Resources */,
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				00736F671D230AE10088B806 /* icomoon2.ttf in Resources */,
@@ -1041,10 +1057,14 @@
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
 				007FC3F81DD962EC005DD773 /* AppMenuController.swift in Sources */,
+				0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */,
 				000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */,
+				0003BDC21E11DE9300B931D4 /* SMSegment.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */,
+				0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */,
 				000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */,
+				0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
 				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,
