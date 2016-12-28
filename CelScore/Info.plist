@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>CelScore</string>
+	<string>Celeb&amp;Noble</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -81,7 +81,7 @@
 	<key>FacebookAppID</key>
 	<string>197662803702116</string>
 	<key>FacebookDisplayName</key>
-	<string>The CelScore App</string>
+	<string>Celebs&amp;Nobles</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
