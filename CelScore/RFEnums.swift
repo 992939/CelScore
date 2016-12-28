@@ -195,7 +195,7 @@ enum Info: Int {
         case .height: return "Height"
         case .zodiac: return "Zodiac"
         case .status: return "Status"
-        case .celScore: return "Score"
+        case .celScore: return "Royalty"
         case .networth: return "Networth"
         }
     }
