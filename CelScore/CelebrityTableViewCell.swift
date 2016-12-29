@@ -80,7 +80,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.consensusNode = ASImageNode()
-        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)
         
         self.faceNode = ASImageNode()
         self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
@@ -94,7 +94,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         }
         
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
-            self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.sphere_blue_mini()! : R.image.sphere_red_mini()!
+            self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.crown_blue_mini()! : R.image.crown_red_mini()!
         }
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)

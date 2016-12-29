@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 65 images.
+  /// This `R.image` struct is generated, and contains static references to 67 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -99,6 +99,10 @@ struct R: Rswift.Validatable {
     static let court_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "court_white")
     /// Image `cross`.
     static let cross = Rswift.ImageResource(bundle: R.hostingBundle, name: "cross")
+    /// Image `crown_blue_mini`.
+    static let crown_blue_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_blue_mini")
+    /// Image `crown_red_mini`.
+    static let crown_red_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_red_mini")
     /// Image `emptyCircle`.
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
@@ -282,6 +286,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
     static func cross(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.cross, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "crown_blue_mini", bundle: ..., traitCollection: ...)`
+    static func crown_blue_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_blue_mini, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "crown_red_mini", bundle: ..., traitCollection: ...)`
+    static func crown_red_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_red_mini, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "emptyCircle", bundle: ..., traitCollection: ...)`
