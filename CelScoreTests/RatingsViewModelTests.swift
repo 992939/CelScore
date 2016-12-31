@@ -88,7 +88,7 @@ class RatingsViewModelTests: XCTestCase {
     func testGetCelScoreSignal() {
         let expectation = self.expectation(description: "getCelScoreSignal callback")
         RatingsViewModel().getCelScoreSignal(ratingsId: "0001").startWithValues { score in
-            XCTAssertEqual(score, 1.1, "getCelScoreSignal above 0.5."); expectation.fulfill() }
+            XCTAssertEqual(score, 22, "getCelScoreSignal equals 22."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelScoreSignal error: \(error)") } }
     }
 }

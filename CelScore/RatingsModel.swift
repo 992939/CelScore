@@ -79,9 +79,9 @@ class RatingsModel: Object, Collection {
 
 
     func getCelScore() -> Double {
-        let average: Double = (self.rating1 + self.rating2 + self.rating3 + self.rating4 + self.rating5
-            + self.rating6 + self.rating7 + self.rating8 + self.rating9 + self.rating10)/10
-        return average.roundToPlaces(places: 2)
+        let total: Double = (self.rating1 + self.rating2 + self.rating3 + self.rating4 + self.rating5
+            + self.rating6 + self.rating7 + self.rating8 + self.rating9 + self.rating10) * 2
+        return total.roundToPlaces(places: 2)
     }
     
     func getAvgVariance() -> Double {

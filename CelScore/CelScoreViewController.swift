@@ -35,12 +35,12 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         
-        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: String("\(self.celebST.prevScore)"), tag: 2))
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: "88.5" /*String("\(self.celebST.prevScore)")*/, tag: 2))
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ celeb in
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: String(celeb.prevWeek), tag: 3))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: "80.2"/*String(celeb.prevWeek)*/, tag: 3))
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
         })
         
@@ -78,16 +78,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.8
         let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.9
         let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.94
-        var timer: Timer?
         
-        Timer.after(1.5.seconds) { _ in timer = Timer.every(100.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
-        
-        Timer.after(30.seconds) { _ in
-            timer?.invalidate()
-            let diceRoll = Int(arc4random_uniform(2) + 7)
-            gauge.unitOfMeasurement = GaugeFace(rawValue: diceRoll)!.emoji()
-            Timer.after(2.seconds) { _ in timer?.start() }
-        }
+        Timer.after(1.5.seconds) { _ in Timer.every(50.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         
         gaugeView.addSubview(gauge)
         return gaugeView
@@ -100,11 +92,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
                 var attributedText = NSMutableAttributedString()
                 let percent: Double = (celscore/Double(value)!) * 100 - 100
-                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 2)) : "+" + String(percent.roundToPlaces(places: 2))) + "%)"
+                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 1)) : "+" + String(percent.roundToPlaces(places: 1))) + ")"
                 let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
                 attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
                 let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
-                let attrString = NSAttributedString(string: String(format: " %.2f", Double(value)!), attributes: attr2)
+                let attrString = NSAttributedString(string: String(format: " %.1f", Double(value)!) + "%", attributes: attr2)
                 attributedText.append(attrString)
                 infoLabel.attributedText = attributedText
             })
@@ -133,33 +125,24 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
-                self.delegate!.socialSharing(message: "\(who) \(Info.celScore.text()) \(String(format: "%.2f", celscore))") }
-        case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.2f", self.celebST.prevScore))")
+                self.delegate!.socialSharing(message: "\(who) \(Info.celScore.text()) \(String(format: "%.1f", celscore))") }
+        case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.1f", self.celebST.prevScore))")
         default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
-                self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.2f", consensus))%") }
+                self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.1f", consensus))%") }
         }
     }
     
     func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
-        if gaugeView.value > finalSlow { gaugeView.value += 0.0005 }
-        else if gaugeView.value > thirdSlow { gaugeView.value += 0.0015 }
-        else if gaugeView.value > secondSlow { gaugeView.value += 0.0035 }
-        else if gaugeView.value > firstSlow { gaugeView.value += 0.007 }
-        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.05 }
+        if gaugeView.value > finalSlow { gaugeView.value += 0.01 }
+        else if gaugeView.value > thirdSlow { gaugeView.value += 0.03 }
+        else if gaugeView.value > secondSlow { gaugeView.value += 0.07 }
+        else if gaugeView.value > firstSlow { gaugeView.value += 0.1 }
+        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.2 }
         else { timer.invalidate() }
     }
     
     //MARK: LMGaugeViewDelegate
     func gaugeView(_ gaugeView: LMGaugeView!, ringStokeColorForValue value: CGFloat) -> UIColor! {
-        switch value {
-        case 4.5..<5.1: gaugeView.unitOfMeasurement = GaugeFace.grin.emoji()
-        case 3.5..<4.5: gaugeView.unitOfMeasurement = GaugeFace.bigSmile.emoji()
-        case 3.0..<3.5: gaugeView.unitOfMeasurement = GaugeFace.smile.emoji()
-        case 2.5..<3.0: gaugeView.unitOfMeasurement = GaugeFace.noSmile.emoji()
-        case 2.0..<2.5: gaugeView.unitOfMeasurement = GaugeFace.sadFace.emoji()
-        case 1.0..<2.0: gaugeView.unitOfMeasurement = GaugeFace.angry.emoji()
-        default: gaugeView.unitOfMeasurement = GaugeFace.awaking.emoji()
-        }
         return Constants.kRedShade
     }
 }

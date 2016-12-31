@@ -54,7 +54,7 @@ struct Constants {
     static let kStatusViewRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 20)
     
     //MasterVC
-    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45) //65
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)
     static let kCelebrityTableViewRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: 48)
     static let kSearchListId: String = "0099"
@@ -72,9 +72,9 @@ struct Constants {
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = UIDevice.getGaugeDiameter()
     
-    static let kMinimumVoteValue: CGFloat = 1.0
-    static let kMaximumVoteValue: CGFloat = 5.0
-    static let kMiddleVoteValue: CGFloat = 3.0
+    static let kMinimumVoteValue: CGFloat = 20.0
+    static let kMaximumVoteValue: CGFloat = 100.0
+    static let kMiddleVoteValue: CGFloat = 80.0
     
     //CelebrityTableVC
     static let kMiniCircleDiameter: CGFloat = 15

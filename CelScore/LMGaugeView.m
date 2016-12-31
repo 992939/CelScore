@@ -10,7 +10,7 @@
 
 #define kDefaultStartAngle                      M_PI_4 * 3
 #define kDefaultEndAngle                        M_PI_4
-#define kDefaultMinValue                        0
+#define kDefaultMinValue                        20
 #define kDefaultMaxValue                        120
 #define kDefaultLimitValue                      50
 #define kDefaultNumOfDivisions                  6
@@ -33,8 +33,8 @@
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:40]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
-#define kDefaultUnitOfMeasurement               @""
-#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"icomoon" size:20]
+#define kDefaultUnitOfMeasurement               @"F.F.F"
+#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:12]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
 #define kDefaultLabelBackgroundColor            [UIColor colorWithRed:238.0/255 green: 238.0/255 blue: 238.0/255 alpha: 1]
@@ -318,7 +318,7 @@
     /*!
      *  Set text for value label
      */
-    self.valueLabel.text = [NSString stringWithFormat:@"%.2f", _value];
+    self.valueLabel.text = [NSString stringWithFormat:@"%.1f", _value];
 
     /*!
      *  Trigger the stoke animation of ring layer.
