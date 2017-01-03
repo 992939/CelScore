@@ -74,10 +74,10 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gauge.ringBackgroundColor = Constants.kBlueShade
         gauge.backgroundColor = Constants.kGreyBackground
         gauge.delegate = self
-        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9.6
-        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.8
-        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.9
-        let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.94
+        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9
+        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.5
+        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.8
+        let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.9
         
         Timer.after(1.5.seconds) { _ in Timer.every(50.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
         
@@ -95,7 +95,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
                 let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 1)) : "+" + String(percent.roundToPlaces(places: 1))) + ")"
                 let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
                 attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-                let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
+                let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Double(value)! >= 80 ? Constants.kBlueText : Constants.kRedText]
                 let attrString = NSAttributedString(string: String(format: " %.1f", Double(value)!) + "%", attributes: attr2)
                 attributedText.append(attrString)
                 infoLabel.attributedText = attributedText
@@ -133,11 +133,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
-        if gaugeView.value > finalSlow { gaugeView.value += 0.01 }
-        else if gaugeView.value > thirdSlow { gaugeView.value += 0.03 }
-        else if gaugeView.value > secondSlow { gaugeView.value += 0.07 }
-        else if gaugeView.value > firstSlow { gaugeView.value += 0.1 }
-        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.2 }
+        if gaugeView.value > finalSlow { gaugeView.value += 0.5 }
+        else if gaugeView.value > thirdSlow { gaugeView.value += 0.1 }
+        else if gaugeView.value > secondSlow { gaugeView.value += 0.15 }
+        else if gaugeView.value > firstSlow { gaugeView.value += 0.25 }
+        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.5 }
         else { timer.invalidate() }
     }
     

@@ -33,8 +33,8 @@
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:40]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
-#define kDefaultUnitOfMeasurement               @"F.F.F"
-#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:12]
+#define kDefaultUnitOfMeasurement               @"%"
+#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-Bold" size:13]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:1]
 
 #define kDefaultLabelBackgroundColor            [UIColor colorWithRed:238.0/255 green: 238.0/255 blue: 238.0/255 alpha: 1]
