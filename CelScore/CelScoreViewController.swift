@@ -41,7 +41,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ celeb in
             self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: "80.2"/*String(celeb.prevWeek)*/, tag: 3))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone) + " Day(s)", tag: 4))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone), tag: 4))
         })
         
         self.pulseView.backgroundColor = Color.clear
@@ -102,9 +102,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             })
         }
         else if tag == 4 {
-            infoLabel.text = value
+            infoLabel.text = value + " Day(s)"
             infoLabel.lineBreakMode = .byWordWrapping
-            infoLabel.textColor = Constants.kBlueLight
+            infoLabel.textColor = Double(value)! > 0 ? Constants.kBlueLight : Constants.kRedLight
         }
         infoLabel.textAlignment = .right
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
