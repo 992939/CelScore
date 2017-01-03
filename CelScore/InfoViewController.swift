@@ -101,8 +101,8 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 2)) : "+" + String(percent.roundToPlaces(places: 2))) + "%)"
         let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
         attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
-        let attrString = NSAttributedString(string: String(format: " %.2f", score), attributes: attr2)
+        let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : score >= 80 ? Constants.kBlueText : Constants.kRedText]
+        let attrString = NSAttributedString(string: String(format: " %.1f", score)+"%", attributes: attr2)
         attributedText.append(attrString)
         return attributedText
     }
