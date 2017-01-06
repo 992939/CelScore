@@ -52,7 +52,6 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                             
                             var infoLabelText: String = ""
-                            var attributedText: NSAttributedString = NSAttributedString()
                             switch quality {
                             case Info.firstName.name(): infoLabelText = celeb.firstName
                             case Info.middleName.name(): infoLabelText = celeb.middleName
@@ -62,25 +61,21 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             case Info.height.name(): infoLabelText = celeb.height
                             case Info.zodiac.name(): infoLabelText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.status.name(): infoLabelText = celeb.status
-                            case Info.celScore.name(): attributedText = self.createCelScoreText(score)
+                            case Info.celScore.name(): infoLabelText = String(celeb.daysOnThrone) + " Day(s)"
                             case Info.networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = ""
                             }
                             
-                            let infoLabel: UILabel?
+                            let infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
+                            infoLabel.textAlignment = .right
                             if case Info.celScore.name() = quality {
-                                infoLabel = UILabel(frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
-                                infoLabel!.attributedText = attributedText
-                                infoLabel!.backgroundColor = Constants.kGreyBackground
-                            } else {
-                                infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
+                                infoLabel.textColor = celeb.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
                             }
-                            infoLabel!.textAlignment = .right
                         
                             qualityView.depthPreset = .depth1
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
-                            qualityView.addSubview(infoLabel!)
+                            qualityView.addSubview(infoLabel)
                             SettingsViewModel().getSettingSignal(settingType: .publicService)
                                 .observe(on: UIScheduler())
                                 .startWithValues({ status in
@@ -93,18 +88,6 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
             })
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
-    }
-    
-    func createCelScoreText(_ score: Double) -> NSAttributedString {
-        var attributedText = NSMutableAttributedString()
-        let percent: Double = (score/self.celebST.prevScore) * 100 - 100
-        let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 2)) : "+" + String(percent.roundToPlaces(places: 2))) + "%)"
-        let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
-        attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-        let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : score >= 80 ? Constants.kBlueText : Constants.kRedText]
-        let attrString = NSAttributedString(string: String(format: " %.1f", score)+"%", attributes: attr2)
-        attributedText.append(attrString)
-        return attributedText
     }
     
     func longPress(_ gesture: UIGestureRecognizer) {
@@ -129,7 +112,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 case Info.height.text(): infoText = celeb.height
                 case Info.zodiac.text(): infoText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
                 case Info.status.text(): infoText = celeb.status
-                case Info.celScore.text(): infoText = String(format: "%.2f", celeb.prevScore)
+                case Info.celScore.text(): infoText = String(celeb.daysOnThrone) + " Day(s)"
                 case Info.networth.text(): infoText = celeb.netWorth
                 default: infoText = "n/a"
                 }

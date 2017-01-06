@@ -35,13 +35,13 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         
-        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Since Yesterday", value: "88.5" /*String("\(self.celebST.prevScore)")*/, tag: 2))
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday", value: "88.5" /*String("\(self.celebST.prevScore)")*/))
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ celeb in
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Since Last Week", value: "80.2"/*String(celeb.prevWeek)*/, tag: 3))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "On The Throne", value: String(celeb.daysOnThrone), tag: 4))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Last Week", value: "80.2"/*String(celeb.prevWeek)*/))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Last Month", value: "89.5" /*String(celeb.daysOnThrone)*/))
         })
         
         self.pulseView.backgroundColor = Color.clear
@@ -85,34 +85,28 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return gaugeView
     }
     
-    func getView(positionY: CGFloat, title: String, value: String, tag: Int) -> PulseView {
+    func getView(positionY: CGFloat, title: String, value: String) -> PulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
-        if tag < 4 {
-            RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
-                var attributedText = NSMutableAttributedString()
-                let percent: Double = (celscore/Double(value)!) * 100 - 100
-                let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 1)) : "+" + String(percent.roundToPlaces(places: 1))) + "%)"
-                let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
-                attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-                let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Double(value)! >= 80 ? Constants.kBlueText : Constants.kRedText]
-                let attrString = NSAttributedString(string: String(format: " %.1f", Double(value)!) + "%", attributes: attr2)
-                attributedText.append(attrString)
-                infoLabel.attributedText = attributedText
-            })
-        }
-        else if tag == 4 {
-            infoLabel.text = value + " Day(s)"
-            infoLabel.lineBreakMode = .byWordWrapping
-            infoLabel.textColor = Double(value)! > 0 ? Constants.kBlueLight : Constants.kRedLight
-        }
+
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
+            var attributedText = NSMutableAttributedString()
+            let percent: Double = (celscore/Double(value)!) * 100 - 100
+            let percentage: String = "(" + (percent < 0 ? String(percent.roundToPlaces(places: 1)) : "+" + String(percent.roundToPlaces(places: 1))) + "%)"
+            let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
+            attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
+            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Double(value)! >= 80 ? Constants.kBlueText : Constants.kRedText]
+            let attrString = NSAttributedString(string: String(format: " %.1f", Double(value)!) + "%", attributes: attr2)
+            attributedText.append(attrString)
+            infoLabel.attributedText = attributedText
+        })
+        
         infoLabel.textAlignment = .right
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .observe(on: UIScheduler())
             .startWithValues({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
-        taggedView.tag = tag
         taggedView.depthPreset = .depth1
         taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .centerWithBacking
