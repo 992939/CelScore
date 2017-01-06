@@ -61,14 +61,14 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             case Info.height.name(): infoLabelText = celeb.height
                             case Info.zodiac.name(): infoLabelText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.status.name(): infoLabelText = celeb.status
-                            case Info.celScore.name(): infoLabelText = String(celeb.daysOnThrone) + " Day(s)"
+                            case Info.throne.name(): infoLabelText = String(celeb.daysOnThrone) + " Day(s)"
                             case Info.networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = ""
                             }
                             
                             let infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                             infoLabel.textAlignment = .right
-                            if case Info.celScore.name() = quality {
+                            if case Info.throne.name() = quality {
                                 infoLabel.textColor = celeb.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
                             }
                         
@@ -112,7 +112,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 case Info.height.text(): infoText = celeb.height
                 case Info.zodiac.text(): infoText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
                 case Info.status.text(): infoText = celeb.status
-                case Info.celScore.text(): infoText = String(celeb.daysOnThrone) + " Day(s)"
+                case Info.throne.text(): infoText = String(celeb.daysOnThrone) + " Day(s)"
                 case Info.networth.text(): infoText = celeb.netWorth
                 default: infoText = "n/a"
                 }

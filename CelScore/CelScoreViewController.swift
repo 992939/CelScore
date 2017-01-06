@@ -115,11 +115,12 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return taggedView
     }
     
+    /* to be fixed */
     func longPress(_ gesture: UIGestureRecognizer) {
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
-                self.delegate!.socialSharing(message: "\(who) \(Info.celScore.text()) \(String(format: "%.1f", celscore))") }
+                self.delegate!.socialSharing(message: "\(who) \(Info.throne.text()) \(String(format: "%.1f", celscore))") }
         case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.1f", self.celebST.prevScore))")
         default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
                 self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.1f", consensus))%") }

@@ -167,7 +167,7 @@ enum Info: Int {
     case height
     case zodiac
     case status
-    case celScore
+    case throne
     case networth
     
     static func getAll() -> [String] {
@@ -180,7 +180,7 @@ enum Info: Int {
             height.name(),
             zodiac.name(),
             status.name(),
-            celScore.name(),
+            throne.name(),
             networth.name()
         ]
     }
@@ -195,7 +195,7 @@ enum Info: Int {
         case .height: return "Height"
         case .zodiac: return "Zodiac"
         case .status: return "Status"
-        case .celScore: return "On The Throne"
+        case .throne: return "On The Throne"
         case .networth: return "Networth"
         }
     }
@@ -210,7 +210,7 @@ enum Info: Int {
         case .height: return "height is"
         case .zodiac: return "zodiac sign is"
         case .status: return "relationship status is"
-        case .celScore: return "celscore is"
+        case .throne: return "day(s) on the throne are"
         case .networth: return "networth is"
         }
     }
