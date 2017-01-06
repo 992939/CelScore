@@ -185,13 +185,13 @@ class ModelTests: XCTestCase {
     
     func testUserRatingsInterpolation() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/2/1/1/1/1/1/1/1/1")
-        XCTAssertEqual(userRatings.rating2, Double(2), "UserRatingsModel().interpolation() error1.")
+        XCTAssertEqual(userRatings.rating2, Double(2.00), "UserRatingsModel().interpolation() error1.")
         XCTAssertEqual(userRatings.interpolation(), "1/2/1/1/1/1/1/1/1/1", "UserRatingsModel().interpolation() error2.")
     }
     
     func testUserRatingsGetCelScore() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
-        XCTAssertEqual(userRatings.getCelScore(), Double(1.00), "userRatings.getCelScore() error.")
+        XCTAssertEqual(userRatings.getCelScore(), Double(20), "userRatings.getCelScore() error.")
     }
     
     func testUserRatingsGetAverageVariance() {
