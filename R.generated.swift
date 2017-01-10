@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 72 images.
+  /// This `R.image` struct is generated, and contains static references to 75 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -105,6 +105,12 @@ struct R: Rswift.Validatable {
     static let crown_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_black")
     /// Image `crown_blue_mini`.
     static let crown_blue_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_blue_mini")
+    /// Image `crown_filling_blue`.
+    static let crown_filling_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_blue")
+    /// Image `crown_filling_red`.
+    static let crown_filling_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_red")
+    /// Image `crown_filling_yellow`.
+    static let crown_filling_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_yellow")
     /// Image `crown_red_mini`.
     static let crown_red_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_red_mini")
     /// Image `crown_white`.
@@ -311,6 +317,21 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "crown_blue_mini", bundle: ..., traitCollection: ...)`
     static func crown_blue_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.crown_blue_mini, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "crown_filling_blue", bundle: ..., traitCollection: ...)`
+    static func crown_filling_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_filling_blue, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "crown_filling_red", bundle: ..., traitCollection: ...)`
+    static func crown_filling_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_filling_red, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "crown_filling_yellow", bundle: ..., traitCollection: ...)`
+    static func crown_filling_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_filling_yellow, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "crown_red_mini", bundle: ..., traitCollection: ...)`
