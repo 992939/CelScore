@@ -174,7 +174,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func openSettings() {
         SettingsViewModel().loggedInAsSignal()
             .observe(on: UIScheduler())
-            .on(starting: { _ in
+            .on(completed: { _ in
                 self.navigationDrawerController?.isEnabled = true
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
