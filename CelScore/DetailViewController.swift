@@ -180,13 +180,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.voteButton.setImage(R.image.heart_black()!, for: .normal)
                     self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
                 }}
-            .delay(2.1, on: QueueScheduler.main)
+            .delay(2, on: QueueScheduler.main)
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                 return SettingsViewModel().getSettingSignal(settingType: .consensusBuilding)}
             .filter({ (value: AnyObject) -> Bool in let isConsensus = value as! Bool
                 if isConsensus == false {
-                    TAOverlay.show(withLabel: "Thank you for voting!\n6 hours left until crowning, Hollywood will be watching.", image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
+                    TAOverlay.show(withLabel: "Thank you for celebrating!", image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
                 return isConsensus })
@@ -195,7 +195,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().consensusBuildingSignal(ratingsId: self.celebST.id)}
             .map { message in
                 SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues { value in
-                    TAOverlay.show(withLabel: "Thank you for voting!\n6 hours left until crowning, Hollywood will be watching.", image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
+                    TAOverlay.show(withLabel: "Thank you for celebrating!\n\n6 hours left until crowning, Hollywood will be watching.", image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 }
             }
