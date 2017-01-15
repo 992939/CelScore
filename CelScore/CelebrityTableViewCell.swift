@@ -51,7 +51,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         self.ratingsNode.backgroundColor = UIColor.clear
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { score in cosmosView.rating = score }
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { score in cosmosView.rating = score/20 }
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
             .startWithValues{ hasRatings in

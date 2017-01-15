@@ -82,7 +82,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().loggedInAsSignal()
                         .flatMapError { _ in SignalProducer.empty }
-                        .on(started: { _ in
+                        .on(completed: { _ in
                             cosmosView.settings.updateOnTouch = true })
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
