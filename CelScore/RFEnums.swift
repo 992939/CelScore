@@ -75,7 +75,7 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
         case .menuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
-        case .loginSuccess: return "Your registration was successful.\nYou are ready to vote.\n\nPlease vote responsibly."
+        case .loginSuccess: return "Your registration was successful.\nYou are now ready to vote."
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will get updates on your favorite stars in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
