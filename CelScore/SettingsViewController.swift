@@ -112,7 +112,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .startWithValues({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Crowning Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
         
