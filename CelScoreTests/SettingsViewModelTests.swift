@@ -71,11 +71,11 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("PublicService error: \(error)") } }
     }
     
-    func testGetConsensusBuilding() {
-        let expectation = self.expectation(description: "ConsensusBuilding returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .consensusBuilding).startWithValues { value in
+    func testGetonCountdown() {
+        let expectation = self.expectation(description: "onCountdown returns Bool")
+        SettingsViewModel().getSettingSignal(settingType: .onCountdown).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("ConsensusBuilding error: \(error)") } }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("onCountdown error: \(error)") } }
     }
     
     func testGetFirstLaunch() {
@@ -171,14 +171,14 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set PublicService error: \(error)") } }
     }
     
-    func testUpdateConsensusBuilding() {
+    func testUpdateonCountdown() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set ConsensusBuilding to true")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .consensusBuilding)
+        let expectation = self.expectation(description: "set onCountdown to true")
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .onCountdown)
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues { settings in
-            XCTAssertEqual(settings.consensusBuilding, true); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set ConsensusBuilding error: \(error)") } }
+            XCTAssertEqual(settings.onCountdown, true); expectation.fulfill() }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set onCountdown error: \(error)") } }
     }
     
     func testUpdateFirstLaunch() {

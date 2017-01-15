@@ -110,7 +110,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.view.addSubnode(publicServiceNode)
             })
         
-        SettingsViewModel().getSettingSignal(settingType: .consensusBuilding)
+        SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .startWithValues({ status in
                 let notificationNode = self.setupCheckBoxNode(title: "Building Consensus", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
@@ -237,7 +237,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .consensusBuilding)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .onCountdown)).start()
         if checkBox.on {
             SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .firstPublic : .firstConsensus).startWithValues({ first in
                 let firstTime = first as! Bool

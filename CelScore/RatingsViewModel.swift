@@ -91,7 +91,7 @@ struct RatingsViewModel {
         }
     }
     
-    func consensusBuildingSignal(ratingsId: String) -> SignalProducer<String, RatingsError> {
+    func onCountdownSignal(ratingsId: String) -> SignalProducer<String, RatingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first

@@ -37,11 +37,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 26,
+            schemaVersion: 27,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 26 {
-                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["daysOnThrone"] = 0
+                if oldSchemaVersion < 27 {
+                    migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
+                        newObject!["onCountdown"] = 0
                     }
                 }
         })

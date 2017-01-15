@@ -103,7 +103,7 @@ struct SettingsViewModel {
             case .defaultListIndex: observer.send(value: settings.defaultListIndex as AnyObject)
             case .loginTypeIndex: observer.send(value: settings.loginTypeIndex as AnyObject)
             case .publicService: observer.send(value: settings.publicService as AnyObject)
-            case .consensusBuilding: observer.send(value: settings.consensusBuilding as AnyObject)
+            case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
             case .firstLaunch: observer.send(value: settings.isFirstLaunch as AnyObject)
             case .firstConsensus: observer.send(value: settings.isFirstConsensus as AnyObject)
             case .firstPublic: observer.send(value: settings.isFirstPublic as AnyObject)
@@ -130,7 +130,7 @@ struct SettingsViewModel {
             case .defaultListIndex: settings.defaultListIndex = value as! Int
             case .loginTypeIndex: settings.loginTypeIndex = value as! Int
             case .publicService: settings.publicService = value as! Bool
-            case .consensusBuilding: settings.consensusBuilding = value as! Bool
+            case .onCountdown: settings.onCountdown = value as! Bool
             case .firstLaunch: settings.isFirstLaunch = false
             case .firstConsensus: settings.isFirstConsensus = false
             case .firstPublic: settings.isFirstPublic = false

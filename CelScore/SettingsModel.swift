@@ -19,7 +19,7 @@ class SettingsModel: Object {
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 0
     dynamic var publicService: Bool = false
-    dynamic var consensusBuilding: Bool = false
+    dynamic var onCountdown: Bool = false
     dynamic var isFirstLaunch: Bool = true
     dynamic var isFirstConsensus: Bool = true
     dynamic var isFirstPublic: Bool = true
@@ -41,7 +41,7 @@ class SettingsModel: Object {
         self.defaultListIndex = json["defaultListIndex"].int!
         self.loginTypeIndex = json["loginTypeIndex"].int!
         self.publicService = json["publicService"].bool!
-        self.consensusBuilding = json["consensusBuilding"].bool!
+        self.onCountdown = json["onCountdown"].bool!
         self.isFirstLaunch = json["isFirstLaunch"].bool!
         self.isFirstConsensus = json["isFirstConsensus"].bool!
         self.isFirstPublic = json["isFirstPublic"].bool!
