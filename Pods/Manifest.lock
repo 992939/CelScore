@@ -41,7 +41,7 @@ PODS:
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
-  - RateLimit (1.4.1)
+  - RateLimit (2.1.0)
   - ReactiveCocoa (5.0.0-alpha.6):
     - ReactiveSwift (~> 1.0.0-rc.3)
   - ReactiveSwift (1.0.0-rc.3):
@@ -84,7 +84,7 @@ DEPENDENCIES:
   - Material (~> 2.4)
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
-  - RateLimit (~> 1.4)
+  - RateLimit (~> 2.1)
   - ReactiveCocoa (~> 5.0.0-alpha.1)
   - Realm (~> 2.1)
   - RealmSwift (~> 2.1)
@@ -124,7 +124,7 @@ SPEC CHECKSUMS:
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
-  RateLimit: e86b061a33c9e37e1cffdfe5c444a91676a9375d
+  RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
   ReactiveCocoa: cc8589376491836cf5b3b09e557fb490f0a46521
   ReactiveSwift: 443cb065e9aa9451b30f0c85e9d7e9b4cec369cd
   Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
@@ -141,6 +141,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: d50288250bcfe80c4aab29d6c59e32beb5206e51
+PODFILE CHECKSUM: 318610eb8883ebd722727a4bef7029b6920ab1f4
 
 COCOAPODS: 1.0.1

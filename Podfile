@@ -34,7 +34,7 @@ target 'CelScore' do
     pod 'Crashlytics', '~> 3.8'
     pod 'TwitterKit', '~> 2.7'
     pod 'TwitterCore', '~> 2.7'
-    pod 'RateLimit', '~> 1.4'
+    pod 'RateLimit', '~> 2.1'
     pod 'Timepiece', '~> 1.0'
     pod 'YLProgressBar', '~> 3.10'
     pod 'HMSegmentedControl', '~> 1.5.3'
