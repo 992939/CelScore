@@ -14,6 +14,7 @@ import ReactiveSwift
 import MessageUI
 import Material
 import Result
+import PMAlertController
 
 
 final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate {
@@ -76,6 +77,23 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     first?.setImage(R.image.cross()!, for: .highlighted)
                 }
             })
+        
+        SettingsViewModel().getSettingSignal(settingType: .firstDetail)
+            .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
+                if firstTime {
+                    let alertVC = PMAlertController(title: "to celebrate (verb)", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
+                    alertVC.alertTitle.textColor = Constants.kBlueText
+                    alertVC.addAction(PMAlertAction(title: "I'm ready to celebrate", style: .default, action: { _ in
+                        self.dismiss(animated: true, completion: nil)
+                        SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstDetail).start()
+                    }))
+                    alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                    alertVC.view.isOpaque = false
+                    Motion.delay(time: 1.5) { self.present(alertVC, animated: true, completion: nil) }
+                }
+                return firstTime == false
+            })
+            .start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .flatMapError { _ in SignalProducer.empty }

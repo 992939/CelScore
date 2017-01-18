@@ -52,6 +52,7 @@ enum OverlayInfo {
     case menuAccess
     case loginSuccess
     case maxFollow
+    case firstDetail
     case firstFollow
     case firstConsensus
     case firstPublic
@@ -74,6 +75,7 @@ enum OverlayInfo {
     func message(_ social: String = "") -> String {
         switch self {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
+        case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
         case .menuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
         case .loginSuccess: return "Your registration was successful.\nYou are now ready to vote."
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
@@ -105,6 +107,7 @@ enum OverlayInfo {
         case .loginSuccess: return R.image.sphere_blue()!
         case .maxFollow: return R.image.observatory_red()!
         case .firstFollow: return R.image.sphere_red()!
+        case .firstDetail: return R.image.celebration_cup_blue()!
         case .firstConsensus: return R.image.worker_blue_big()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
