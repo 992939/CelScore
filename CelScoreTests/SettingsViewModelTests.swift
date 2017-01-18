@@ -85,6 +85,13 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstLaunch error: \(error)") } }
     }
     
+    func testGetFirstDetail() {
+        let expectation = self.expectation(description: "FirstDetail returns Bool")
+        SettingsViewModel().getSettingSignal(settingType: .firstDetail).startWithValues { value in
+            XCTAssert((value as Any) is Bool); expectation.fulfill() }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstDetail error: \(error)") } }
+    }
+    
     func testGetFirstConsensus() {
         let expectation = self.expectation(description: "FirstConsensus returns Bool")
         SettingsViewModel().getSettingSignal(settingType: .firstConsensus).startWithValues { value in
@@ -189,6 +196,16 @@ class SettingsViewModelTests: XCTestCase {
             .startWithValues { settings in
             XCTAssertEqual(settings.isFirstLaunch, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstLaunch error: \(error)") } }
+    }
+    
+    func testUpdateFirstDetail() {
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
+        let expectation = self.expectation(description: "set FirstDetail to false")
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstDetail)
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { settings in
+                XCTAssertEqual(settings.isFirstDetail, false); expectation.fulfill() }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstDetail error: \(error)") } }
     }
     
     func testUpdateFirstConsensus() {

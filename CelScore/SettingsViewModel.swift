@@ -105,6 +105,7 @@ struct SettingsViewModel {
             case .publicService: observer.send(value: settings.publicService as AnyObject)
             case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
             case .firstLaunch: observer.send(value: settings.isFirstLaunch as AnyObject)
+            case .firstDetail: observer.send(value: settings.isFirstDetail as AnyObject)
             case .firstConsensus: observer.send(value: settings.isFirstConsensus as AnyObject)
             case .firstPublic: observer.send(value: settings.isFirstPublic as AnyObject)
             case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
@@ -132,6 +133,7 @@ struct SettingsViewModel {
             case .publicService: settings.publicService = value as! Bool
             case .onCountdown: settings.onCountdown = value as! Bool
             case .firstLaunch: settings.isFirstLaunch = false
+            case .firstDetail: settings.isFirstDetail = false
             case .firstConsensus: settings.isFirstConsensus = false
             case .firstPublic: settings.isFirstPublic = false
             case .firstFollow: settings.isFirstFollow = false

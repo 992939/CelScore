@@ -182,6 +182,7 @@ struct UserViewModel {
                 dataset.setString(String(settings.publicService), forKey: "publicService")
                 dataset.setString(String(settings.onCountdown), forKey: "onCountdown")
                 dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
+                dataset.setString(String(settings.isFirstDetail), forKey: "isFirstDetail")
                 dataset.setString(String(settings.isFirstConsensus), forKey: "isFirstConsensus")
                 dataset.setString(String(settings.isFirstPublic), forKey: "isFirstPublic")
                 dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
@@ -246,6 +247,7 @@ struct UserViewModel {
                     settings.publicService = (dico["publicService"] as! NSString).boolValue
                     settings.onCountdown = (dico["onCountdown"] as! NSString).boolValue
                     settings.isFirstLaunch = (dico["isFirstLaunch"] as! NSString).boolValue
+                    settings.isFirstDetail = (dico["isFirstDetail"] as! NSString).boolValue
                     settings.isFirstConsensus = (dico["isFirstConsensus"] as! NSString).boolValue
                     settings.isFirstPublic = (dico["isFirstPublic"] as! NSString).boolValue
                     settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue

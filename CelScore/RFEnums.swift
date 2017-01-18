@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -81,12 +81,12 @@ enum OverlayInfo {
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
         case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
         case .firstInterest: return "Your selection is automatically saved."
-        case .first25: return "You've cast your votes on 25% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .first50: return "You've cast your votes on 50% of the celebrities in our star-studded constellation!\n\nThank you for voting."
-        case .first75: return "You've cast your votes on 75% of the celebrities in our star-studded constellation!\n\nThank you for voting."
+        case .first25: return "You've cast your votes on 25% of the celebrities in the kingdom.\n\nThank you for celebrating."
+        case .first50: return "You've cast your votes on 50% of the celebrities in the kingdom.\n\nThank you for celebrating."
+        case .first75: return "You've cast your votes on 75% of the celebrities in the kingdom.\n\nThank you for celebrating."
         case .voteHelp: return "The Voting Booth\n(3rd button in the menu)\nis where registered users can use this button to send and update theirs votes\n\n(each vote must have all ten qualities)."
         case .infoSource: return "The Profile View\n(2nd button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling out a report in the app settings."
-        case .firstCompleted: return "You've cast your votes on every celebrity part of our star-studded constellation!\n\nThank you for voting and for building consensus."
+        case .firstCompleted: return "You've cast your votes on every celebrity in the kingdom.\n\nThank you for celebrating."
         case .noSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
         case .firstVoteDisable: return "Welcome to the voting booth.\n\nYou'll need to register to make your opinion public."
         case .firstTrollWarning: return "You're venturing near the trolling zone.\n\nBelow a certain level of negative votes, all your votes will be discarded."

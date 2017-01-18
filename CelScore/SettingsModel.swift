@@ -21,6 +21,7 @@ class SettingsModel: Object {
     dynamic var publicService: Bool = false
     dynamic var onCountdown: Bool = false
     dynamic var isFirstLaunch: Bool = true
+    dynamic var isFirstDetail: Bool = true
     dynamic var isFirstConsensus: Bool = true
     dynamic var isFirstPublic: Bool = true
     dynamic var isFirstFollow: Bool = true
@@ -43,6 +44,7 @@ class SettingsModel: Object {
         self.publicService = json["publicService"].bool!
         self.onCountdown = json["onCountdown"].bool!
         self.isFirstLaunch = json["isFirstLaunch"].bool!
+        self.isFirstDetail = json["isFirstDetail"].bool!
         self.isFirstConsensus = json["isFirstConsensus"].bool!
         self.isFirstPublic = json["isFirstPublic"].bool!
         self.isFirstFollow = json["isFirstFollow"].bool!
