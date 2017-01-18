@@ -222,7 +222,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .firstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
-                    let alertVC = PMAlertController(title: "to crown (verb)", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
+                    let alertVC = PMAlertController(title: "crown (verb)", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: "I'm ready to crown", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
