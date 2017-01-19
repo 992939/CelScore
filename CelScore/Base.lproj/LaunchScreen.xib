@@ -17,7 +17,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="celscore_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
                     <rect key="frame" x="180" y="180" width="120" height="120"/>
-                    <color key="backgroundColor" red="0.31372549019607843" green="0.63921568627450975" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.3921568627" green="0.70980392160000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="PCy-tJ-sSn"/>
                         <constraint firstAttribute="width" constant="120" id="eqZ-sh-bbF"/>
