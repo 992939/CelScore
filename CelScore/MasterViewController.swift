@@ -67,11 +67,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadRows(at: [index], with: .fade)
                 self.celebrityTableView.endUpdates()
-                
-                SettingsViewModel().loggedInAsSignal()
-                    .on(failed: { _ in self.movingSocialButton(onScreen: true) })
-                    .start()
             }
+            
+            SettingsViewModel().loggedInAsSignal()
+                .on(failed: { _ in self.movingSocialButton(onScreen: true) })
+                .start()
         }
     
         SettingsViewModel().loggedInAsSignal()
