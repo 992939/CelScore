@@ -67,11 +67,11 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.celebrityTableView.beginUpdates()
                 self.celebrityTableView.reloadRows(at: [index], with: .fade)
                 self.celebrityTableView.endUpdates()
+                
+                SettingsViewModel().loggedInAsSignal()
+                    .on(failed: { _ in self.movingSocialButton(onScreen: true) })
+                    .start()
             }
-            
-            SettingsViewModel().loggedInAsSignal().startWithFailed({ _ in
-                self.movingSocialButton(onScreen: true)
-            })
         }
     
         SettingsViewModel().loggedInAsSignal()
@@ -257,7 +257,6 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
 
     func handleMenu(open: Bool = false) {
-        print("HandleMenu")
         let image: UIImage?
         if open || (open == false && self.socialButton.isOpened == false){
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
@@ -277,13 +276,13 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     }
 
     func movingSocialButton(onScreen: Bool) {
-        //let y: CGFloat = onScreen ? -70 : 70
-        //self.socialButton.close()
+        let y: CGFloat = onScreen ? 0 : 70
+        self.socialButton.close()
         
-//        self.socialButton.animate(animation: Motion.animate(group: [
-//            Motion.rotate(rotation: 5),
-//            Motion.translateY(by: y)
-//        ]))
+        self.socialButton.animate(animation: Motion.animate(group: [
+            Motion.rotate(rotation: 3),
+            Motion.translateY(by: y)
+        ]))
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
