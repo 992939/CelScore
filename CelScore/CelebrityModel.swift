@@ -40,6 +40,7 @@ final class CelebrityModel: Object {
     dynamic var twitter: String = ""
     dynamic var rank: String = ""
     dynamic var picture3x: String = ""
+    dynamic var gold3x: String = ""
     dynamic var from: String = ""
     dynamic var fan: String = ""
     dynamic var prevScore: Double = 0
@@ -64,6 +65,7 @@ final class CelebrityModel: Object {
         self.netWorth = json["netWorth"].string!
         self.fan = json["fan"].string!
         self.picture3x = json["picture3x"].string!
+        self.gold3x = json["gold3x"].string!
         self.from = json["from"].string!
         self.rank = json["rank"].string!
         self.status = json["status"].string!

@@ -280,7 +280,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.socialButton.close()
         
         self.socialButton.animate(animation: Motion.animate(group: [
-            Motion.rotate(rotation: 3),
+            Motion.rotate(rotation: 5),
             Motion.translateY(by: y)
         ]))
     }
