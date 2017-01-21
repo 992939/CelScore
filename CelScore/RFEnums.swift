@@ -77,7 +77,7 @@ enum OverlayInfo {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
         case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
         case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nAccess to the kingdom is exclusively for Hollywood royalty and loyal fans only."
-        case .loginSuccess: return "Once upon a time in a kingdom named Hollywood, the Fame Gods created the loyal fan and the casual fool.\n\nYour registration was successful."
+        case .loginSuccess: return "What’s a star when its most important fan is missing?\n\nNothing, because loyalty isn’t everything, it’s the only thing."
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will get updates in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
