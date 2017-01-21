@@ -142,7 +142,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
+        let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
+        _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }

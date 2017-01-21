@@ -77,29 +77,31 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         SettingsViewModel().loggedInAsSignal()
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues { _ in
-            RateLimit.execute(name: "updateRatings", limit: Constants.kUpdateRatings) {
-                CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
-                        return SettingsViewModel().calculateUserAverageCelScoreSignal() }
-                    .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                        return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
-                    .observe(on: UIScheduler())
-                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        let type = SocialLogin(rawValue:value as! Int)!
-                        let token = type == .facebook ? FBSDKAccessToken.current().tokenString : ""
-                        if type == .facebook { self.facebookTokenCheck() }
-                        else { self.twitterAccessCheck() }
-                        return UserViewModel().loginSignal(token: token!, with: type) }
-                    .retry(upTo: Constants.kNetworkRetry)
-                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
-                    .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                        return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
-                    .start()
-            }
+                
+                let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
+                _ = refresh.execute {
+                    CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                            return SettingsViewModel().calculateUserAverageCelScoreSignal() }
+                        .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                            return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
+                        .observe(on: UIScheduler())
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            let type = SocialLogin(rawValue:value as! Int)!
+                            let token = type == .facebook ? FBSDKAccessToken.current().tokenString : ""
+                            if type == .facebook { self.facebookTokenCheck() }
+                            else { self.twitterAccessCheck() }
+                            return UserViewModel().loginSignal(token: token!, with: type) }
+                        .retry(upTo: Constants.kNetworkRetry)
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
+                        .start()
+                }
         }
     }
     
@@ -131,28 +133,30 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
             .observeValues { _ in
-                RateLimit.execute(name: "updateFromAWS", limit: Constants.kOneDay) {
-                let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
-                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
-                    .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                        return CelScoreViewModel().getFromAWSSignal(dataType: .list) }
-                    .observe(on: UIScheduler())
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
-                        return ListViewModel().sanitizeListsSignal() }
-                    .flatMap(.latest) { (_) -> SignalProducer<Bool, NoError> in
-                        return ListViewModel().updateListSignal(listId: list.getId()) }
-                    .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                        return ListViewModel().getListSignal(listId: list.getId()) }
-                    .map { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
-                    .flatMapError { _ in SignalProducer.empty }
-                    .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-                    .observe(on:UIScheduler())
-                    .map { celebInfo in TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: NSData(contentsOf: NSURL(string: celebInfo.image)! as URL)! as Data), options: OverlayInfo.getOptions()) }
-                    .start()
-            }
+                
+                let refresh = TimedLimiter(limit: Constants.kOneDay)
+                _ = refresh.execute {
+                    let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
+                    CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
+                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
+                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .list) }
+                        .observe(on: UIScheduler())
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
+                            return ListViewModel().sanitizeListsSignal() }
+                        .flatMap(.latest) { (_) -> SignalProducer<Bool, NoError> in
+                            return ListViewModel().updateListSignal(listId: list.getId()) }
+                        .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
+                            return ListViewModel().getListSignal(listId: list.getId()) }
+                        .map { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+                        .observe(on:UIScheduler())
+                        .map { celebInfo in TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: NSData(contentsOf: NSURL(string: celebInfo.image)! as URL)! as Data), options: OverlayInfo.getOptions()) }
+                        .start()
+                }
         }
     }
     
