@@ -76,7 +76,7 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
         case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
-        case .menuAccess: return "The first rule in the courthouse is to vote responsibly.\n\nThe second rule in the courthouse is to vote responsibly.\n\nIf this is your first time in the courthouse, you'll have to register."
+        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nAccess to the kingdom is exclusively for Hollywood royalty and loyal fans only."
         case .loginSuccess: return "Once upon a time in a kingdom named Hollywood, the Fame Gods created the loyal fan and the casual fool.\n\nYour registration was successful."
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will get updates in the Today View.\n\nYou can swipe down from the top of your screen to display the Today view."
@@ -103,7 +103,7 @@ enum OverlayInfo {
     func logo() -> UIImage {
         switch self {
         case .welcomeUser: return R.image.big_crown_blue()!
-        case .menuAccess: return R.image.court_red()!
+        case .menuAccess: return R.image.contract_red_big()!
         case .loginSuccess: return R.image.sphere_blue()!
         case .maxFollow: return R.image.observatory_red()!
         case .firstFollow: return R.image.sphere_red()!
