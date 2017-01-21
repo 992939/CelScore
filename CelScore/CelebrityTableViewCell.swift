@@ -95,6 +95,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
             self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.crown_filling_blue()! : R.image.crown_filling_red()!
+            if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! }
         }
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)

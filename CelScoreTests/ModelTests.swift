@@ -94,6 +94,7 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(celeb.sex, "CelebrityModel().sex not nil")
         XCTAssertNotNil(celeb.isSynced, "CelebrityModel().isSynced not nil")
         XCTAssertNotNil(celeb.isFollowed, "CelebrityModel().isFollowed not nil")
+        XCTAssertNotNil(celeb.isKing, "CelebrityModel().isKing not nil")
     }
     
     func testCelebrityModelType() {
@@ -116,6 +117,7 @@ class ModelTests: XCTestCase {
         XCTAssert((celeb.sex as Any) is Bool, "CelebrityModel().sex is Bool")
         XCTAssert((celeb.isSynced as Any) is Bool, "CelebrityModel().isSynced is Bool")
         XCTAssert((celeb.isFollowed as Any) is Bool, "CelebrityModel().isFollowed is Bool")
+        XCTAssert((celeb.isKing as Any) is Bool, "CelebrityModel().isKing is Bool")
     }
     
     func testSettingsModelNil() {
@@ -214,9 +216,9 @@ class ModelTests: XCTestCase {
     }
     
     func testCelebrityStructEquality() {
-        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
-        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, sex: true, isFollowed:true)
-        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false)
+        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false, isKing:true)
+        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, sex: true, isFollowed:true, isKing:false)
+        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false, isKing:falsex)
         XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
         XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
     }

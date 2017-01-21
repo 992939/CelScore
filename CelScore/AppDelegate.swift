@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 29,
+            schemaVersion: 30,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 28 {
                     migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
@@ -47,6 +47,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if oldSchemaVersion < 29 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["gold3x"] = ""
+                    }
+                }
+                if oldSchemaVersion < 30 {
+                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["isKing"] = false
                     }
                 }
         })
@@ -89,7 +94,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     nickname: celeb.nickName,
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,
-                    isFollowed: celeb.isFollowed)
+                    isFollowed: celeb.isFollowed,
+                    isKing: celeb.isKing)
                 application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
@@ -108,7 +114,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     nickname: celeb.nickName,
                     prevScore: celeb.prevScore,
                     sex: celeb.sex,
-                    isFollowed: celeb.isFollowed)
+                    isFollowed: celeb.isFollowed,
+                    isKing: celeb.isKing)
                 app.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
         }
@@ -127,7 +134,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             nickname: userActivity.userInfo!["nickname"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
             sex: userActivity.userInfo!["sex"] as! Bool,
-            isFollowed: userActivity.userInfo!["isFollowed"]as! Bool)
+            isFollowed: userActivity.userInfo!["isFollowed"]as! Bool,
+            isKing: userActivity.userInfo!["isKing"]as! Bool)
         
         application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true

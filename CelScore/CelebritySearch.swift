@@ -21,7 +21,8 @@ extension CelebrityStruct {
          "nickname": nickname as AnyObject,
          "prevScore": prevScore as AnyObject,
          "sex":sex as AnyObject,
-         "isFollowed": isFollowed as AnyObject] }
+         "isFollowed": isFollowed as AnyObject,
+         "isKing": isKing as AnyObject] }
     
     var userActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)

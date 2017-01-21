@@ -18,6 +18,7 @@ struct CelebrityStruct {
     let prevScore: Double
     let sex: Bool
     let isFollowed: Bool
+    let isKing: Bool
 }
 
 extension CelebrityStruct: Equatable {}
@@ -50,6 +51,7 @@ final class CelebrityModel: Object {
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
     dynamic var isNew: Bool = false
+    dynamic var isKing: Bool = false
     
     //MARK: Initializer
     convenience init(json: JSON) {
@@ -75,6 +77,7 @@ final class CelebrityModel: Object {
         self.prevWeek = json["prevWeek"].double!
         self.sex = json["sex"].bool!
         self.isSynced = true
+        self.isKing = false
         
         let realm = try! Realm()
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel.self).filter("id = %@", self.id).first
