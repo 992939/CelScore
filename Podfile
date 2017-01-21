@@ -12,8 +12,8 @@ plugin 'cocoapods-keys', {
 def shared_pods
     pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
     pod 'Result', '~> 3.1.0'
-    pod 'Realm', '~> 2.1'
-    pod 'RealmSwift', '~> 2.1'
+    pod 'Realm', '~> 2.3'
+    pod 'RealmSwift', '~> 2.3'
     pod 'AsyncDisplayKit', '~> 1.9.90'
     pod 'AWSCognito', '~> 2.4.9'
     pod 'AWSAPIGateway', '~> 2.4.9'
