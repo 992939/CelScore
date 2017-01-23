@@ -118,7 +118,7 @@ extension Sociable where Self: UIViewController {
                 calendar.timeZone = TimeZone(identifier: "PST")!
                 let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
                 let countdown = components.hour! < 21 ? (21 - components.hour!) : (24 - (components.hour! - 21))
-                let registration = OverlayInfo.loginSuccess.message() + "\n" + String(countdown) + " hour(s) left until crowning."
+                let registration = OverlayInfo.loginSuccess.message() + "\nThere's " + String(countdown) + " hour(s) left until we crown the King of Hollywood."
 
                 TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() }) })
