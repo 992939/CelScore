@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 77 images.
+  /// This `R.image` struct is generated, and contains static references to 79 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -133,6 +133,10 @@ struct R: Rswift.Validatable {
     static let heart_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "heart_black")
     /// Image `heart_white`.
     static let heart_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "heart_white")
+    /// Image `hour_glass`.
+    static let hour_glass = Rswift.ImageResource(bundle: R.hostingBundle, name: "hour_glass")
+    /// Image `hourglass_black`.
+    static let hourglass_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "hourglass_black")
     /// Image `ic_add_black`.
     static let ic_add_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_add_black")
     /// Image `ic_add_white`.
@@ -391,6 +395,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "heart_white", bundle: ..., traitCollection: ...)`
     static func heart_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.heart_white, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "hour_glass", bundle: ..., traitCollection: ...)`
+    static func hour_glass(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.hour_glass, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "hourglass_black", bundle: ..., traitCollection: ...)`
+    static func hourglass_black(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.hourglass_black, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic_add_black", bundle: ..., traitCollection: ...)`
