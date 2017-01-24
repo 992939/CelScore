@@ -91,37 +91,6 @@ struct RatingsViewModel {
         }
     }
     
-    func onCountdownSignal(ratingsId: String) -> SignalProducer<String, RatingsError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let ratings = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first
-            let userRatings = realm.objects(UserRatingsModel.self).filter("id = %@", ratingsId).first
-            guard let allRatings = ratings else { return observer.send(error: .userRatingsNotFound) }
-            guard let allUserRatings = userRatings else { return observer.send(error: .userRatingsNotFound) }
-            
-            var differences: [Double] = Array(repeating: 0, count: 10)
-            for (index, rating) in allRatings.makeIterator().enumerated() {
-                differences[index] = abs((allRatings[rating] as! Double) - (allUserRatings[allUserRatings[index]] as! Double))
-            }
-            let sumDiff = differences.reduce(0, +)
-            let percent: Int = 100 - Int(sumDiff * 2)
-            let message = "\(percent)% of the consensus agrees with you. Thank you for building!"
-            observer.send(value: message)
-            observer.sendCompleted()
-        }
-    }
-    
-    func getMoneyShotSignal(ratingsId: String) -> SignalProducer<Int, RatingsError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first!
-            guard let max = ratings.max() else { return observer.send(error: .ratingsNotFound) }
-            guard (ratings[max] as! Double) >= 3 else { return observer.send(error: .ratingsNotFound) }
-            observer.send(value: ratings.index(of: max)!)
-            observer.sendCompleted()
-        }
-    }
-    
     func getConsensusSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
         let realm = try! Realm()
