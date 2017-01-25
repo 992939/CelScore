@@ -112,7 +112,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .startWithValues({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Crowning Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
         
@@ -167,14 +167,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against switching accounts as your votes and settings might get lost. Are you sure you want to continue?", image: R.image.contract_red_big()!, style: .alert)
-        alertVC.alertTitle.textColor = Constants.kBlueText
+        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against undoing your registration, your votes and settings may get removed.\n\nAre you sure you want to continue?", image: R.image.contract_red_big()!, style: .alert)
+        alertVC.alertTitle.textColor = Constants.kRedText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
-        alertVC.addAction(PMAlertAction(title: "Log Out", style: .default, action: { _ in
+        alertVC.addAction(PMAlertAction(title: "Continue", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal().startWithValues({ _ in
-                Motion.delay(time: 1.0) { TAOverlay.show(withLabel: OverlayInfo.logoutUser.message(), image: OverlayInfo.logoutUser.logo(), options: OverlayInfo.getOptions()) }
-                TAOverlay.setCompletionBlock({ _ in self.navigationDrawerController!.closeLeftView() })
+                Motion.delay(time: 1.0) { self.navigationDrawerController!.closeLeftView() }
             })
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)

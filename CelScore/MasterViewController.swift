@@ -91,10 +91,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                         .observe(on: UIScheduler())
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             let type = SocialLogin(rawValue:value as! Int)!
-                            let token = type == .facebook ? FBSDKAccessToken.current().tokenString : ""
-                            if type == .facebook { self.facebookTokenCheck() }
-                            else { self.twitterAccessCheck() }
-                            return UserViewModel().loginSignal(token: token!, with: type) }
+                            let token = type == .facebook ? self.facebookToken() : self.twitterAccess()
+                            return UserViewModel().loginSignal(token: token, with: type) }
                         .retry(upTo: Constants.kNetworkRetry)
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
@@ -160,19 +158,25 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     }
     
-    func facebookTokenCheck() {
-        let expirationDate = FBSDKAccessToken.current().expirationDate.stringMMddyyyyFormat().date(inFormat:"MM/dd/yyyy")!
+    func facebookToken() -> String {
+        guard let current = FBSDKAccessToken.current() else {
+            UserViewModel().refreshFacebookTokenSignal().start()
+            return ""
+        }
+        let expirationDate = current.expirationDate.stringMMddyyyyFormat().date(inFormat:"MM/dd/yyyy")!
         if expirationDate < Date.today() { self.facebookLogin(hideButton: false) }
         else { UserViewModel().refreshFacebookTokenSignal().start() }
+        return current.tokenString
     }
     
-    func twitterAccessCheck() {
+    func twitterAccess() -> String {
         let account = ACAccountStore()
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
         account.requestAccessToAccounts(with: accountType, options: nil) { (success: Bool, error: Error?) in
             if success == false { Motion.delay(time: 3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
         }
+        return ""
     }
     
     func openSettings() {

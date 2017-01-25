@@ -66,7 +66,6 @@ enum OverlayInfo {
     case noSharing
     case voteHelp
     case infoSource
-    case logoutUser
     case loginError
     case networkError
     case timeoutError
@@ -76,8 +75,8 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
         case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
-        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nRegistration to Celeb&Noble is for Hollywood royalty and loyal fans only."
-        case .loginSuccess: return "Your registration was successful!"
+        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation."
+        case .loginSuccess: return "Your registration to the coronation was successful!"
         case .maxFollow: return "You've reached the maximum number of celebrities you can follow on CNN."
         case .firstFollow: return "You can now see CNN updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
@@ -86,13 +85,12 @@ enum OverlayInfo {
         case .first25: return "You've cast your votes on 25% of the celebrities on CNN.\n\nThank you for celebrating."
         case .first50: return "You've cast your votes on 50% of the celebrities on CNN.\n\nThank you for celebrating."
         case .first75: return "You've cast your votes on 75% of the celebrities on CNN.\n\nThank you for celebrating."
-        case .voteHelp: return "The voting button\nis for registered users to send and update theirs votes.\n\nEach vote must have all ten qualities."
+        case .voteHelp: return "The voting button\nis for registered members to send and update theirs votes.\n\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
         case .firstCompleted: return "You've cast your votes on every celebrity on CNN.\n\nThank you for celebrating."
         case .noSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
-        case .firstVoteDisable: return "You need to first register on Celeb&Noble."
+        case .firstVoteDisable: return "If you want to celebrate the stars you will need to register."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
-        case .logoutUser: return "Thank you for celebrating."
         case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
         case .networkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
         case .timeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
@@ -108,7 +106,7 @@ enum OverlayInfo {
         case .maxFollow: return R.image.observatory_red()!
         case .firstFollow: return R.image.sphere_red()!
         case .firstDetail: return R.image.celebration_cup_blue()!
-        case .firstConsensus: return R.image.worker_blue_big()!
+        case .firstConsensus: return R.image.formula_blue_big()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
         case .first25: return R.image.sphere_red()!
@@ -118,9 +116,8 @@ enum OverlayInfo {
         case .infoSource: return R.image.head_red()!
         case .firstCompleted: return R.image.sphere_red()!
         case .noSharing: return R.image.sphere_blue()!
-        case .firstVoteDisable: return R.image.mic_red()!
+        case .firstVoteDisable: return R.image.observatory_red()!
         case .firstTrollWarning: return R.image.nuclear_red()!
-        case .logoutUser: return R.image.sphere_blue()!
         case .loginError: return R.image.cloud_red()!
         case .networkError: return R.image.cloud_red()!
         case .timeoutError: return R.image.cloud_red()!
