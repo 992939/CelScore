@@ -83,7 +83,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 if firstTime {
                     let alertVC = PMAlertController(title: "To Celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: "I'm ready to celebrate", style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: "Done", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstDetail).start()
                     }))
@@ -204,6 +204,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
             .map { value in let isConsensus = value as! Bool
                 let message = isConsensus ? "Thank you for celebrating!\n\n6 hours left until crowning, Hollywood will be watching." : "Thank you for celebrating!"
+                
                 TAOverlay.show(withLabel: message, image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.trollAction() })
             }
@@ -213,9 +214,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func trollAction() {
         Motion.delay(time: 0.5) {
             SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in
-                    if score > Constants.kTrollingWarning { self.progressAction() }
-                    return score < Constants.kTrollingWarning })
+                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NoError> in
                     return SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning) }
                 .map { first in let firstTime = first as! Bool
@@ -225,38 +224,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     }
                 .start()
         }
-    }
-    
-    func progressAction() {
-        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
-            switch value * 100.0 {
-            case 100.0:
-                SettingsViewModel().getSettingSignal(settingType: .firstCompleted).startWithValues({ first in let firstTime = first as! Bool
-                    guard firstTime else { return }
-                    TAOverlay.show(withLabel: OverlayInfo.firstCompleted.message(), image: OverlayInfo.firstCompleted.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstCompleted).start() })
-                })
-            case 75.0..<100.0:
-                SettingsViewModel().getSettingSignal(settingType: .first75).startWithValues({ first in let firstTime = first as! Bool
-                    guard firstTime else { return }
-                    TAOverlay.show(withLabel: OverlayInfo.first75.message(), image: OverlayInfo.first75.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first75).start() })
-                })
-            case 50.0..<75.0:
-                SettingsViewModel().getSettingSignal(settingType: .first50).startWithValues({ first in let firstTime = first as! Bool
-                    guard firstTime else { return }
-                    TAOverlay.show(withLabel: OverlayInfo.first50.message(), image: OverlayInfo.first50.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first50).start() })
-                })
-            case 25.0..<50.0:
-                SettingsViewModel().getSettingSignal(settingType: .first25).startWithValues({ first in let firstTime = first as! Bool
-                    guard firstTime else { return }
-                    TAOverlay.show(withLabel: OverlayInfo.first25.message(), image: OverlayInfo.first25.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .first25).start() })
-                })
-            default: break
-            }
-        })
     }
     
     func updateAction() {

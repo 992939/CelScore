@@ -110,10 +110,6 @@ struct SettingsViewModel {
             case .firstPublic: observer.send(value: settings.isFirstPublic as AnyObject)
             case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
-            case .firstCompleted: observer.send(value: settings.isFirstCompleted as AnyObject)
-            case .first25: observer.send(value: settings.isFirst25 as AnyObject)
-            case .first50: observer.send(value: settings.isFirst50 as AnyObject)
-            case .first75: observer.send(value: settings.isFirst75 as AnyObject)
             case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
             case .firstSocialDisable: observer.send(value: settings.isFirstSocialDisabled as AnyObject)
             case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning as AnyObject)
@@ -138,10 +134,6 @@ struct SettingsViewModel {
             case .firstPublic: settings.isFirstPublic = false
             case .firstFollow: settings.isFirstFollow = false
             case .firstInterest: settings.isFirstInterest = false
-            case .firstCompleted: settings.isFirstCompleted = false
-            case .first25: settings.isFirst25 = false
-            case .first50: settings.isFirst50 = false
-            case .first75: settings.isFirst75 = false
             case .firstVoteDisable: settings.isFirstVoteDisabled = false
             case .firstSocialDisable: settings.isFirstSocialDisabled = false
             case .firstTrollWarning: settings.isFirstTrollWarning = false

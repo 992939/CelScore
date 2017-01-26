@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstConsensus, firstPublic, firstFollow, firstInterest, firstCompleted, first25, first50, first75, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstConsensus, firstPublic, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -57,12 +57,8 @@ enum OverlayInfo {
     case firstConsensus
     case firstPublic
     case firstInterest
-    case firstCompleted
     case firstVoteDisable
     case firstTrollWarning
-    case first25
-    case first50
-    case first75
     case noSharing
     case voteHelp
     case infoSource
@@ -76,18 +72,14 @@ enum OverlayInfo {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
         case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
         case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation."
-        case .loginSuccess: return "Once upon a time in a kingdom named Hollywood, the Fame Gods created the loyal fan and the casual fool.\n\nYour registration to the coronation was successful."
+        case .loginSuccess: return "Your registration was successful!"
         case .maxFollow: return "You've reached the maximum number of celebrities you can follow on CNN."
         case .firstFollow: return "You can now see CNN updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
         case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
         case .firstInterest: return "Your selection is automatically saved."
-        case .first25: return "You've cast your votes on 25% of the celebrities on CNN.\n\nThank you for celebrating."
-        case .first50: return "You've cast your votes on 50% of the celebrities on CNN.\n\nThank you for celebrating."
-        case .first75: return "You've cast your votes on 75% of the celebrities on CNN.\n\nThank you for celebrating."
         case .voteHelp: return "The voting button\nis for registered members to send and update theirs votes.\n\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
-        case .firstCompleted: return "You've cast your votes on every celebrity on CNN.\n\nThank you for celebrating."
         case .noSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
         case .firstVoteDisable: return "If you want to celebrate the stars you will need to register."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
@@ -109,12 +101,8 @@ enum OverlayInfo {
         case .firstConsensus: return R.image.formula_blue_big()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
-        case .first25: return R.image.sphere_red()!
-        case .first50: return R.image.sphere_red()!
-        case .first75: return R.image.sphere_red()!
         case .voteHelp: return R.image.mic_blue()!
         case .infoSource: return R.image.head_red()!
-        case .firstCompleted: return R.image.sphere_red()!
         case .noSharing: return R.image.sphere_blue()!
         case .firstVoteDisable: return R.image.observatory_red()!
         case .firstTrollWarning: return R.image.nuclear_red()!
