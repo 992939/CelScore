@@ -187,7 +187,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "to join:", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
+                let alertVC = PMAlertController(title: "To Join", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "I'm ready to join", style: .default, action: { _ in
                     Motion.delay(time: 0.5) { self.handleMenu(open: true) }
@@ -230,7 +230,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return SettingsViewModel().getSettingSignal(settingType: .firstLaunch) }
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
-                    let alertVC = PMAlertController(title: "to crown:", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
+                    let alertVC = PMAlertController(title: "To Crown", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: "I'm ready to crown", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)

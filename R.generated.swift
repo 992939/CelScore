@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 74 images.
+  /// This `R.image` struct is generated, and contains static references to 77 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -95,6 +95,8 @@ struct R: Rswift.Validatable {
     static let contract_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "contract_blue_big")
     /// Image `contract_red_big`.
     static let contract_red_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "contract_red_big")
+    /// Image `coronation_big_blue`.
+    static let coronation_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "coronation_big_blue")
     /// Image `court_red`.
     static let court_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "court_red")
     /// Image `court_small_white`.
@@ -113,6 +115,8 @@ struct R: Rswift.Validatable {
     static let crown_filling_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_yellow")
     /// Image `crown_white`.
     static let crown_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_white")
+    /// Image `dethrone_big_blue`.
+    static let dethrone_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "dethrone_big_blue")
     /// Image `emptyCircle`.
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
@@ -207,6 +211,8 @@ struct R: Rswift.Validatable {
     static let star_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_black")
     /// Image `star_icon`.
     static let star_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_icon")
+    /// Image `throne_big`.
+    static let throne_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "throne_big")
     /// Image `topView`.
     static let topView = Rswift.ImageResource(bundle: R.hostingBundle, name: "topView")
     /// Image `twitterlogo`.
@@ -292,6 +298,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.contract_red_big, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "coronation_big_blue", bundle: ..., traitCollection: ...)`
+    static func coronation_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.coronation_big_blue, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "court_red", bundle: ..., traitCollection: ...)`
     static func court_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.court_red, compatibleWith: traitCollection)
@@ -335,6 +346,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "crown_white", bundle: ..., traitCollection: ...)`
     static func crown_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.crown_white, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "dethrone_big_blue", bundle: ..., traitCollection: ...)`
+    static func dethrone_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.dethrone_big_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "emptyCircle", bundle: ..., traitCollection: ...)`
@@ -570,6 +586,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "star_icon", bundle: ..., traitCollection: ...)`
     static func star_icon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.star_icon, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "throne_big", bundle: ..., traitCollection: ...)`
+    static func throne_big(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.throne_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "topView", bundle: ..., traitCollection: ...)`
