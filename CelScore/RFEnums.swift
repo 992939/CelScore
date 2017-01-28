@@ -73,7 +73,7 @@ enum OverlayInfo {
         case .firstDetail: return "1. To perform a religious ceremony publicly.\n2. To observe a notable occasion with festivities.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
         case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation every night."
         case .loginSuccess: return "Your registration was successful!"
-        case .maxFollow: return "You've reached the maximum number of celebrities you can follow on CNN."
+        case .maxFollow: return "You've reached the maximum number of celebrities you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
         case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
@@ -94,8 +94,8 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return R.image.crown_big_blue()!
         case .menuAccess: return R.image.swords_big_blue()!
-        case .loginSuccess: return R.image.trophy_big_blue()!
-        case .maxFollow: return R.image.observatory_red()!
+        case .loginSuccess: return R.image.star_circle()!
+        case .maxFollow: return R.image.star_circle()!
         case .firstFollow: return R.image.sphere_red()!
         case .firstDetail: return R.image.medal_big_blue()!
         case .firstConsensus: return R.image.formula_blue_big()!
