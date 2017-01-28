@@ -81,7 +81,7 @@ enum OverlayInfo {
         case .voteHelp: return "The voting button\nis for registered members to send and update theirs votes.\n\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
         case .noSharing: return "You can share any of the information below the menu by long pressing on the item.\n\nTo enable sharing, go to settings and select the\nPublic Service mode."
-        case .firstVoteDisable: return "If you want to celebrate the stars you will need to register."
+        case .firstVoteDisable: return "Registration is required to honor or celebrate a star."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
         case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
         case .networkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
@@ -104,7 +104,7 @@ enum OverlayInfo {
         case .voteHelp: return R.image.mic_blue()!
         case .infoSource: return R.image.head_red()!
         case .noSharing: return R.image.sphere_blue()!
-        case .firstVoteDisable: return R.image.observatory_red()!
+        case .firstVoteDisable: return R.image.star_circle()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
         case .networkError: return R.image.cloud_red()!

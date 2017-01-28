@@ -75,9 +75,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         }
     
         SettingsViewModel().loggedInAsSignal()
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { _ in
-                
+            .observe(on: UIScheduler())
+            .on(completed: { _ in
                 let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
                 _ = refresh.execute {
                     CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
@@ -100,7 +99,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
                         .start()
                 }
-        }
+        }).start()
     }
     
     override func viewDidLoad() {

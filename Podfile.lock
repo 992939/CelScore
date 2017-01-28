@@ -23,9 +23,9 @@ PODS:
     - Fabric (~> 1.6.3)
   - Dwifft (0.5)
   - Fabric (1.6.9)
-  - FBSDKCoreKit (4.18.0):
+  - FBSDKCoreKit (4.19.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.18.0):
+  - FBSDKLoginKit (4.19.0):
     - FBSDKCoreKit
   - HMSegmentedControl (1.5.3)
   - Keys (1.0.0)
@@ -77,8 +77,8 @@ DEPENDENCIES:
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.7)
-  - FBSDKCoreKit (~> 4.18)
-  - FBSDKLoginKit (~> 4.18)
+  - FBSDKCoreKit (~> 4.19)
+  - FBSDKLoginKit (~> 4.19)
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.4.10)
@@ -114,8 +114,8 @@ SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
-  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
-  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
+  FBSDKCoreKit: 894b2b6eda6a4c8c4204e92e59cc355709ef045c
+  FBSDKLoginKit: 83ca4d8f12a2022570af9fd6aacf27f6b425b99f
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: ef1e6da2e242d582205c87847a5346138894a633
@@ -141,6 +141,6 @@ SPEC CHECKSUMS:
   WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 91a0872902aedff62ec5d71f4bf313049c9b35c3
+PODFILE CHECKSUM: c55ea5cbabd6b2359e394212e774cfadf00c0354
 
 COCOAPODS: 1.0.1

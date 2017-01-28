@@ -126,8 +126,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func requestLogin() {
         SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable)
-            .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
-            .startWithValues({ first in let firstTime = first as! Bool
+            .observe(on: UIScheduler())
+            .on(value: { first in let firstTime = first as! Bool
                 guard firstTime else { return self.delegate!.socialSharing(message: "") }
                 Motion.delay(time: 0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in
@@ -135,6 +135,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstVoteDisable).start()
                 })
             })
+            .start()
     }
     
     func longPress(_ gesture: UIGestureRecognizer) {

@@ -106,13 +106,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .startWithValues({ status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Public Service", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .startWithValues({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
         
@@ -167,7 +167,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against undoing your registration, your votes and settings may get removed.\n\nAre you sure you want to continue?", image: R.image.contract_red_big()!, style: .alert)
+        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against undoing your registration, your votes and settings may get removed.\n\nAre you sure you want to continue?", image: R.image.tomb_big_red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kRedText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Continue", style: .default, action: { _ in
@@ -242,18 +242,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let firstTime = first as! Bool
                 if firstTime {
                     if checkBox.tag == 0 {
-                        let alertVC = PMAlertController(title: "The Public Sphere", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
+                        let alertVC = PMAlertController(title: "Sharing", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to participate", style: .default, action: { _ in
+                        alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstPublic).start()
                             self.dismiss(animated: true, completion: nil) }))
                         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                         alertVC.view.isOpaque = false
                         self.present(alertVC, animated: true, completion: nil)
                     } else {
-                        let alertVC = PMAlertController(title: "Work in Progress", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
+                        let alertVC = PMAlertController(title: "Coronation", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
                         alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "I'm ready to build", style: .default, action: { _ in
+                        alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                             SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstConsensus).start()
                             self.dismiss(animated: true, completion: nil) }))
                         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
