@@ -187,9 +187,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "To Join", description: OverlayInfo.menuAccess.message(), image: R.image.contract_blue_big()!, style: .alert)
+                let alertVC = PMAlertController(title: "To Join", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: "Done", style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                     Motion.delay(time: 0.5) { self.handleMenu(open: true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
@@ -232,7 +232,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 if firstTime {
                     let alertVC = PMAlertController(title: "To Crown", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: "Done", style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch).start()
                         self.movingSocialButton(onScreen: true)

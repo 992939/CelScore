@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "hourglass_black.png",
+      "filename" : "fireworks_big_blue.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "hourglass_black@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "hourglass_black@3x.png",
       "scale" : "3x"
     }
   ],

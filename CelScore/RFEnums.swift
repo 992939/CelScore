@@ -70,11 +70,11 @@ enum OverlayInfo {
     func message(_ social: String = "") -> String {
         switch self {
         case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
-        case .firstDetail: return "1. To acknowledge with a social gathering or enjoyable activity.\n2. To perform a religious ceremony publicly and duly.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
-        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group or organization.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation."
+        case .firstDetail: return "1. To perform a religious ceremony publicly.\n2. To observe a notable occasion with festivities.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
+        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation every night."
         case .loginSuccess: return "Your registration was successful!"
         case .maxFollow: return "You've reached the maximum number of celebrities you can follow on CNN."
-        case .firstFollow: return "You can now see CNN updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
+        case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
         case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
         case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
         case .firstInterest: return "Your selection is automatically saved."
@@ -92,12 +92,12 @@ enum OverlayInfo {
     
     func logo() -> UIImage {
         switch self {
-        case .welcomeUser: return R.image.big_crown_blue()!
-        case .menuAccess: return R.image.contract_red_big()!
-        case .loginSuccess: return R.image.hourglass_black()!
+        case .welcomeUser: return R.image.crown_big_blue()!
+        case .menuAccess: return R.image.swords_big_blue()!
+        case .loginSuccess: return R.image.king_big_blue()!
         case .maxFollow: return R.image.observatory_red()!
         case .firstFollow: return R.image.sphere_red()!
-        case .firstDetail: return R.image.celebration_cup_blue()!
+        case .firstDetail: return R.image.medal_big_blue()!
         case .firstConsensus: return R.image.formula_blue_big()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!

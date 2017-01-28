@@ -83,7 +83,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 if firstTime {
                     let alertVC = PMAlertController(title: "To Celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: "Done", style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstDetail).start()
                     }))
@@ -131,7 +131,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-
         self.voteButton.animate(animation: Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: -(Constants.kFabDiameter + 100))
@@ -205,7 +204,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .map { value in let isConsensus = value as! Bool
                 let message = isConsensus ? "Thank you for celebrating!\n\n6 hours left until crowning, Hollywood will be watching." : "Thank you for celebrating!"
                 
-                TAOverlay.show(withLabel: message, image: R.image.formula_blue_big(), options: OverlayInfo.getOptions())
+                TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.trollAction() })
             }
             .start()
