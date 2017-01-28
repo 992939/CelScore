@@ -119,7 +119,7 @@ extension Sociable where Self: UIViewController {
                 let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
                 let countdown = components.hour! < 21 ? (21 - components.hour!) : (24 - (components.hour! - 21))
                 let registration = OverlayInfo.loginSuccess.message() + "\n\n" + String(countdown) + " hour(s) left until we crown the King of Hollywood."
-                let alertVC = PMAlertController(title: "Hollywood Royalty", description: registration, image: OverlayInfo.loginSuccess.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "", description: registration, image: OverlayInfo.loginSuccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                     Motion.delay(time: 0.5) { self.socialRefresh() }
