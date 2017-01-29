@@ -106,13 +106,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .publicService)
             .startWithValues({ status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Social Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode)
             })
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .startWithValues({ status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode)
             })
         
@@ -238,30 +238,23 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func didTap(_ checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .onCountdown)).start()
         if checkBox.on {
-            SettingsViewModel().getSettingSignal(settingType: checkBox.tag == 0 ? .firstPublic : .firstConsensus).startWithValues({ first in
-                let firstTime = first as! Bool
-                if firstTime {
-                    if checkBox.tag == 0 {
-                        let alertVC = PMAlertController(title: "Sharing", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
-                        alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
-                            SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstPublic).start()
-                            self.dismiss(animated: true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                        alertVC.view.isOpaque = false
-                        self.present(alertVC, animated: true, completion: nil)
-                    } else {
-                        let alertVC = PMAlertController(title: "Coronation", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
-                        alertVC.alertTitle.textColor = Constants.kBlueText
-                        alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
-                            SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstConsensus).start()
-                            self.dismiss(animated: true, completion: nil) }))
-                        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                        alertVC.view.isOpaque = false
-                        self.present(alertVC, animated: true, completion: nil)
-                    }
-                }
-            })
+            if checkBox.tag == 0 {
+                let alertVC = PMAlertController(title: "Social Sharing", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
+                alertVC.alertTitle.textColor = Constants.kBlueText
+                alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
+                    self.dismiss(animated: true, completion: nil) }))
+                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                alertVC.view.isOpaque = false
+                self.present(alertVC, animated: true, completion: nil)
+            } else {
+                let alertVC = PMAlertController(title: "Coronation Countdown", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
+                alertVC.alertTitle.textColor = Constants.kBlueText
+                alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
+                    self.dismiss(animated: true, completion: nil) }))
+                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                alertVC.view.isOpaque = false
+                self.present(alertVC, animated: true, completion: nil)
+            }
         }
     }
     

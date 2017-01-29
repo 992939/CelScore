@@ -106,8 +106,6 @@ struct SettingsViewModel {
             case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
             case .firstLaunch: observer.send(value: settings.isFirstLaunch as AnyObject)
             case .firstDetail: observer.send(value: settings.isFirstDetail as AnyObject)
-            case .firstConsensus: observer.send(value: settings.isFirstConsensus as AnyObject)
-            case .firstPublic: observer.send(value: settings.isFirstPublic as AnyObject)
             case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
             case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
@@ -130,8 +128,6 @@ struct SettingsViewModel {
             case .onCountdown: settings.onCountdown = value as! Bool
             case .firstLaunch: settings.isFirstLaunch = false
             case .firstDetail: settings.isFirstDetail = false
-            case .firstConsensus: settings.isFirstConsensus = false
-            case .firstPublic: settings.isFirstPublic = false
             case .firstFollow: settings.isFirstFollow = false
             case .firstInterest: settings.isFirstInterest = false
             case .firstVoteDisable: settings.isFirstVoteDisabled = false

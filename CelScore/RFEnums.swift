@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstConsensus, firstPublic, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -96,9 +96,9 @@ enum OverlayInfo {
         case .menuAccess: return R.image.swords_big_blue()!
         case .loginSuccess: return R.image.star_circle()!
         case .maxFollow: return R.image.star_circle()!
-        case .firstFollow: return R.image.sphere_red()!
+        case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
-        case .firstConsensus: return R.image.formula_blue_big()!
+        case .firstConsensus: return R.image.king_big_blue()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.mic_blue()!
