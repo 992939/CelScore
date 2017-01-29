@@ -187,6 +187,7 @@ extension Sociable where Self: UIViewController {
         btn3.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         menu.direction = .up
+        menu.delegate
         menu.views = [btn1, btn2, btn3]
     }
 }
