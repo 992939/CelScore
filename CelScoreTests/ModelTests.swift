@@ -133,7 +133,6 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(settings.isFirstConsensus, "SettingsModel().isFirstConsensus not nil")
         XCTAssertNotNil(settings.isFirstPublic, "SettingsModel().isFirstPublic not nil")
         XCTAssertNotNil(settings.isFirstFollow, "SettingsModel().isFirstFollow not nil")
-        XCTAssertNotNil(settings.isFirstCompleted, "SettingsModel().isFirstCompleted not nil")
         XCTAssertNotNil(settings.isFirstInterest, "SettingsModel().isFirstInterest not nil")
         XCTAssertNotNil(settings.isFirstVoteDisabled, "SettingsModel().isFirstVoteDisabled not nil")
         XCTAssertNotNil(settings.isFirstSocialDisabled, "SettingsModel().isFirstSocialDisabled not nil")
@@ -153,7 +152,6 @@ class ModelTests: XCTestCase {
         XCTAssert((settings.isFirstConsensus as Any) is Bool, "SettingsModel().isFirstConsensus is Bool")
         XCTAssert((settings.isFirstPublic as Any) is Bool, "SettingsModel().isFirstPublic is Bool")
         XCTAssert((settings.isFirstFollow as Any) is Bool, "SettingsModel().isFirstFollow is Bool")
-        XCTAssert((settings.isFirstCompleted as Any) is Bool, "SettingsModel().isFirstCompleted is Bool")
         XCTAssert((settings.isFirstInterest as Any) is Bool, "SettingsModel().isFirstInterest is Bool")
         XCTAssert((settings.isFirstVoteDisabled as Any) is Bool, "SettingsModel().isFirstVoteDisabled is Bool")
         XCTAssert((settings.isFirstSocialDisabled as Any) is Bool, "SettingsModel().isFirstSocialDisabled is Bool")
@@ -218,7 +216,7 @@ class ModelTests: XCTestCase {
     func testCelebrityStructEquality() {
         let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false, isKing:true)
         let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, sex: true, isFollowed:true, isKing:false)
-        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false, isKing:falsex)
+        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, sex: false, isFollowed:false, isKing:false)
         XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
         XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
     }

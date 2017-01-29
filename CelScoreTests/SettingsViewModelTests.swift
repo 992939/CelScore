@@ -248,16 +248,6 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstInterest error: \(error)") } }
     }
     
-    func testUpdateFirstCompleted() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set FirstCompleted to false")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstCompleted)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { settings in
-            XCTAssertEqual(settings.isFirstCompleted, false); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstCompleted error: \(error)") } }
-    }
-    
     func testUpdateFirstVoteDisable() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set FirstVoteDisable to false")
