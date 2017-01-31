@@ -54,7 +54,7 @@ enum OverlayInfo {
     case maxFollow
     case firstDetail
     case firstFollow
-    case firstConsensus
+    case countdown
     case firstPublic
     case firstInterest
     case firstVoteDisable
@@ -75,8 +75,8 @@ enum OverlayInfo {
         case .loginSuccess: return "Your registration is successful!"
         case .maxFollow: return "You've reached the maximum number of celebrities you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
-        case .firstConsensus: return "We came here to chew gum and build consensus, and we’re all out of bubblegum.\n\nThe consensus has been enabled and will show up after every vote."
-        case .firstPublic: return "There are only two types of opinions: public opinion, and opinion that doesn’t matter because it wasn’t made public.\n\nYou can share your opinion by long pressing on a star's information."
+        case .countdown: return "\n\nBecause royalty isn't everything, it's the only thing."
+        case .firstPublic: return "\n\nGood fans share on social media, great fans rule social media."
         case .firstInterest: return "Your selection is automatically saved."
         case .voteHelp: return "The voting button\nis for registered members to send and update theirs votes.\n\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
@@ -98,7 +98,7 @@ enum OverlayInfo {
         case .maxFollow: return R.image.star_circle()!
         case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
-        case .firstConsensus: return R.image.king_big_blue()!
+        case .countdown: return R.image.king_big_blue()!
         case .firstPublic: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.mic_blue()!

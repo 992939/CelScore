@@ -35,13 +35,13 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         
-        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday", value: "88.5" /*String("\(self.celebST.prevScore)")*/))
+        self.pulseView.addSubview(getView(positionY: gaugeHeight + 13.5, title: "Yesterday", value: "88.5", tag: 2))
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues({ celeb in
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Last Week", value: "80.2"/*String(celeb.prevWeek)*/))
-            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Last Month", value: "89.5" /*String(celeb.daysOnThrone)*/))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Last Week", value: "80.2", tag: 3))
+            self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Last Month", value: "89.5", tag: 4))
         })
         
         self.pulseView.backgroundColor = Color.clear
@@ -85,7 +85,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return gaugeView
     }
     
-    func getView(positionY: CGFloat, title: String, value: String) -> PulseView {
+    func getView(positionY: CGFloat, title: String, value: String, tag: Int) -> PulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: value, frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
 
@@ -108,6 +108,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             .startWithValues({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.depthPreset = .depth1
+        taggedView.tag = tag
         taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .centerWithBacking
         taggedView.addSubview(titleLabel)
@@ -115,15 +116,14 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return taggedView
     }
     
-    /* to be fixed */
     func longPress(_ gesture: UIGestureRecognizer) {
         let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
-                self.delegate!.socialSharing(message: "\(who) \(Info.throne.text()) \(String(format: "%.1f", celscore))") }
-        case 2: self.delegate!.socialSharing(message: "\(who) score yesterday was \(String(format: "%.1f", self.celebST.prevScore))")
-        default: RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
-                self.delegate!.socialSharing(message: "\(who) general consensus is \(String(format: "%.1f", consensus))%") }
+            self.delegate!.socialSharing(message: "\(who) royalty is \(String(format: "%.1f", celscore))%") }
+        case 2: self.delegate!.socialSharing(message: "\(who) royalty yesterday was \(String(format: "%.1f", self.celebST.prevScore))%")
+        case 3: self.delegate!.socialSharing(message: "\(who) royalty last week was \(String(format: "%.1f", self.celebST.prevWeek))%")
+        default: self.delegate!.socialSharing(message: "\(who) royalty last month was \(String(format: "%.1f", self.celebST.prevMonth))%")
         }
     }
     

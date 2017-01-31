@@ -16,6 +16,8 @@ struct CelebrityStruct {
     let imageURL: String
     let nickname: String
     let prevScore: Double
+    let prevWeek: Double
+    let prevMonth: Double
     let sex: Bool
     let isFollowed: Bool
     let isKing: Bool
@@ -46,6 +48,7 @@ final class CelebrityModel: Object {
     dynamic var fan: String = ""
     dynamic var prevScore: Double = 0
     dynamic var prevWeek: Double = 0
+    dynamic var prevMonth: Double = 0
     dynamic var daysOnThrone: Int = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
@@ -75,6 +78,7 @@ final class CelebrityModel: Object {
         self.daysOnThrone = json["daysOnThrone"].int!
         self.prevScore = json["prevScore"].double!
         self.prevWeek = json["prevWeek"].double!
+        self.prevMonth = json["prevMonth"].double!
         self.sex = json["sex"].bool!
         self.isSynced = true
         self.isKing = false

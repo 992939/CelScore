@@ -247,7 +247,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
             } else {
-                let alertVC = PMAlertController(title: "Coronation Countdown", description: OverlayInfo.firstConsensus.message(), image: OverlayInfo.firstConsensus.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Coronation Countdown", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))

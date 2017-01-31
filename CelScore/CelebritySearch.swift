@@ -28,7 +28,7 @@ extension CelebrityStruct {
         let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
         activity.title = nickname
         activity.userInfo = userActivityUserInfo
-        activity.keywords = [nickname, "celebrity", "stars", "consensus", "celscore", "news", "score"]
+        activity.keywords = [nickname, "celebrity", "stars", "crown", "king", "news", "score"]
         activity.contentAttributeSet = attributeSet
         activity.isEligibleForSearch = true
         activity.isEligibleForPublicIndexing = true
