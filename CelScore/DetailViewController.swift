@@ -432,8 +432,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             let index = decomposedName[1].index(decomposedName[1].startIndex, offsetBy: 1)
             let lastName = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
             let title = self.celebST.nickname.characters.count > 13 ? lastName : self.celebST.nickname
-            navigationBarView.title = "★  " + title! + "   ★"
-        } else { navigationBarView.title = "★  " + self.celebST.nickname + "   ★" }
+            navigationBarView.title = "★ " + title! + " ★"
+        } else { navigationBarView.title = "★ " + self.celebST.nickname + " ★" }
     
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true

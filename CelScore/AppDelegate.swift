@@ -37,21 +37,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 32,
+            schemaVersion: 33,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 28 {
-                    migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
-                        newObject!["isFirstDetail"] = true
-                    }
-                }
-                if oldSchemaVersion < 29 {
-                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["gold3x"] = ""
-                    }
-                }
                 if oldSchemaVersion < 30 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["isKing"] = false
+                    }
+                }
+                if oldSchemaVersion < 32 {
+                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["prevWeek"] = 0
+                    }
+                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["prevMonth"] = 0
                     }
                 }
         })
@@ -93,6 +91,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     imageURL: celeb.picture3x,
                     nickname: celeb.nickName,
                     prevScore: celeb.prevScore,
+                    prevWeek: celeb.prevWeek,
+                    prevMonth: celeb.prevMonth,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
                     isKing: celeb.isKing)
@@ -113,6 +113,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     imageURL: celeb.picture3x,
                     nickname: celeb.nickName,
                     prevScore: celeb.prevScore,
+                    prevWeek: celeb.prevWeek,
+                    prevMonth: celeb.prevMonth,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
                     isKing: celeb.isKing)
@@ -133,6 +135,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             imageURL: userActivity.userInfo!["imageURL"] as! String,
             nickname: userActivity.userInfo!["nickname"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
+            prevWeek: userActivity.userInfo!["prevWeek"] as! Double,
+            prevMonth: userActivity.userInfo!["prevMonth"] as! Double,
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"]as! Bool,
             isKing: userActivity.userInfo!["isKing"]as! Bool)
