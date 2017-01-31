@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 33,
+            schemaVersion: 34,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 30 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -50,6 +50,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["prevMonth"] = 0
+                    }
+                }
+                if oldSchemaVersion < 33 {
+                    migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
+                        newObject!["onSocialSharing"] = false
                     }
                 }
         })

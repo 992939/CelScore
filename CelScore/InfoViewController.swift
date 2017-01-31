@@ -76,7 +76,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel)
-                            SettingsViewModel().getSettingSignal(settingType: .publicService)
+                            SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
                                 .observe(on: UIScheduler())
                                 .startWithValues({ status in
                                 if (status as! Bool) == true {

@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, publicService, onCountdown, firstLaunch, firstDetail, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onSocialSharing, onCountdown, firstLaunch, firstDetail, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -55,7 +55,7 @@ enum OverlayInfo {
     case firstDetail
     case firstFollow
     case countdown
-    case firstPublic
+    case socialSharing
     case firstInterest
     case firstVoteDisable
     case firstTrollWarning
@@ -76,7 +76,7 @@ enum OverlayInfo {
         case .maxFollow: return "You've reached the maximum number of celebrities you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
         case .countdown: return "\n\nBecause royalty isn't everything, it's the only thing."
-        case .firstPublic: return "\n\nGood fans share on social media, great fans rule social media."
+        case .socialSharing: return "\n\nGood fans share on social media, great fans rule social media."
         case .firstInterest: return "Your selection is automatically saved."
         case .voteHelp: return "The voting button\nis for registered members to send and update theirs votes.\n\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
@@ -99,7 +99,7 @@ enum OverlayInfo {
         case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
         case .countdown: return R.image.king_big_blue()!
-        case .firstPublic: return R.image.sphere_blue_big()!
+        case .socialSharing: return R.image.sphere_blue_big()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.mic_blue()!
         case .infoSource: return R.image.head_red()!

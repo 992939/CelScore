@@ -67,7 +67,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
         let first: Button? = self.socialButton.views.first as? Button
-        SettingsViewModel().getSettingSignal(settingType: .publicService)
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .startWithValues({ status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
@@ -258,7 +258,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
        let first: Button? = self.socialButton.views.first as? Button
         if self.socialButton.isOpened { first?.animate(animation: Motion.rotate(rotation: 1)) }
         self.socialButton.close()
-        SettingsViewModel().getSettingSignal(settingType: .publicService)
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .observe(on: UIScheduler())
             .startWithValues({ status in
                 if (status as! Bool) == true {

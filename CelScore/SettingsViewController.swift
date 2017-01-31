@@ -104,7 +104,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Check Boxes
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
         
-        SettingsViewModel().getSettingSignal(settingType: .publicService)
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .startWithValues({ status in
                 let publicServiceNode = self.setupCheckBoxNode(title: "Social Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode)
@@ -236,10 +236,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .publicService : .onCountdown)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .onSocialSharing : .onCountdown)).start()
         if checkBox.on {
             if checkBox.tag == 0 {
-                let alertVC = PMAlertController(title: "Social Sharing", description: OverlayInfo.firstPublic.message(), image: OverlayInfo.firstPublic.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Social Sharing", description: OverlayInfo.socialSharing.message(), image: OverlayInfo.socialSharing.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))

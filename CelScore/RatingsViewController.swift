@@ -51,7 +51,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .centerWithBacking
                     qualityView.pulseColor = Color.clear
-                    SettingsViewModel().getSettingSignal(settingType: .publicService)
+                    SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
                         .observe(on: UIScheduler())
                         .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
                         .startWithValues({ status in

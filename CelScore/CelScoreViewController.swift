@@ -51,7 +51,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
         let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         
-        SettingsViewModel().getSettingSignal(settingType: .publicService)
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .observe(on: UIScheduler())
             .startWithValues({ status in
                 if (status as! Bool) == true {
@@ -103,7 +103,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         infoLabel.textAlignment = .right
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
-        SettingsViewModel().getSettingSignal(settingType: .publicService)
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .observe(on: UIScheduler())
             .startWithValues({ status in
             if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
