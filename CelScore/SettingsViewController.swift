@@ -241,7 +241,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             if checkBox.tag == 0 {
                 let alertVC = PMAlertController(title: "Social Sharing", description: OverlayInfo.socialSharing.message(), image: OverlayInfo.socialSharing.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -249,7 +249,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             } else {
                 let alertVC = PMAlertController(title: "Coronation Countdown", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false

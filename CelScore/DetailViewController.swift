@@ -83,7 +83,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 if firstTime {
                     let alertVC = PMAlertController(title: "To Celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: "Long live the King!", style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstDetail).start()
                     }))
