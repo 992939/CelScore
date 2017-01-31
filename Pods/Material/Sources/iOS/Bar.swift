@@ -75,12 +75,9 @@ open class Bar: View {
     }
     
     /// A preset wrapper around interimSpace.
-    open var interimSpacePreset: InterimSpacePreset {
-        get {
-            return grid.interimSpacePreset
-        }
-        set(value) {
-            grid.interimSpacePreset = value
+    open var interimSpacePreset = InterimSpacePreset.none {
+        didSet {
+            interimSpace = InterimSpacePresetToValue(preset: interimSpacePreset)
         }
     }
     

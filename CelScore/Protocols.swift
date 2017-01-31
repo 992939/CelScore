@@ -80,7 +80,7 @@ extension Supportable where Self: UIViewController {
     }
 }
 
-@objc protocol Sociable: HUDable, Supportable {
+@objc protocol Sociable: HUDable, Supportable, MenuDelegate {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
@@ -187,7 +187,7 @@ extension Sociable where Self: UIViewController {
         btn3.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         menu.direction = .up
-        menu.delegate
+        menu.delegate = self
         menu.views = [btn1, btn2, btn3]
     }
 }

@@ -141,7 +141,7 @@ open class BottomNavigationController: UITabBarController, UITabBarControllerDel
 	open func prepare() {
 		view.clipsToBounds = true
 		view.contentScaleFactor = Screen.scale
-		view.backgroundColor = .white
+		view.backgroundColor = Color.white
         delegate = self
         prepareTabBar()
 	}
@@ -164,6 +164,6 @@ open class BottomNavigationController: UITabBarController, UITabBarControllerDel
         let image = UIImage.image(with: Color.clear, size: CGSize(width: 1, height: 1))
 		tabBar.shadowImage = image
 		tabBar.backgroundImage = image
-		tabBar.backgroundColor = .white
+		tabBar.backgroundColor = Color.white
 	}
 }

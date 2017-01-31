@@ -67,48 +67,6 @@ open class TabBar: Bar {
     /// The currently selected button.
     open internal(set) var selected: UIButton?
     
-    /// A preset wrapper around contentEdgeInsets.
-    open override var contentEdgeInsetsPreset: EdgeInsetsPreset {
-        get {
-            return contentView.grid.contentEdgeInsetsPreset
-        }
-        set(value) {
-            contentView.grid.contentEdgeInsetsPreset = value
-        }
-    }
-    
-    /// A reference to EdgeInsets.
-    @IBInspectable
-    open override var contentEdgeInsets: EdgeInsets {
-        get {
-            return contentView.grid.contentEdgeInsets
-        }
-        set(value) {
-            contentView.grid.contentEdgeInsets = value
-        }
-    }
-    
-    /// A preset wrapper around interimSpace.
-    open override var interimSpacePreset: InterimSpacePreset {
-        get {
-            return contentView.grid.interimSpacePreset
-        }
-        set(value) {
-            contentView.grid.interimSpacePreset = value
-        }
-    }
-    
-    /// A wrapper around contentView.grid.interimSpace.
-    @IBInspectable
-    open override var interimSpace: InterimSpace {
-        get {
-            return contentView.grid.interimSpace
-        }
-        set(value) {
-            contentView.grid.interimSpace = value
-        }
-    }
-    
 	/// Buttons.
 	open var buttons = [UIButton]() {
 		didSet {
@@ -137,7 +95,7 @@ open class TabBar: Bar {
     }
     
     /// A reference to the line UIView.
-    open let line = UIView()
+    internal var line: UIView!
     
     /// The line color.
     open var lineColor: UIColor? {
@@ -214,8 +172,9 @@ open class TabBar: Bar {
 extension TabBar {
     // Prepares the line.
     fileprivate func prepareLine() {
+        line = UIView()
         line.zPosition = 6000
-        lineColor = Color.blue.base
+        lineColor = Color.blueGrey.lighten3
         lineHeight = 3
         addSubview(line)
     }

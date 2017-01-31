@@ -104,16 +104,6 @@ open class Button: UIButton, Pulseable {
         didSet {
             setTitle(title, for: .normal)
             setTitle(title, for: .highlighted)
-            
-            guard nil != title else {
-                return
-            }
-            
-            guard nil == titleColor else {
-                return
-            }
-            
-            titleColor = Color.blue.base
         }
     }
     
@@ -132,7 +122,6 @@ open class Button: UIButton, Pulseable {
      */
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-        tintColor = Color.blue.base
 		prepare()
 	}
 	
@@ -144,7 +133,6 @@ open class Button: UIButton, Pulseable {
      */
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-        tintColor = Color.blue.base
 		prepare()
 	}
 	

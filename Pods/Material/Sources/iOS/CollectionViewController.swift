@@ -35,9 +35,9 @@ public protocol CollectionViewDelegate: UICollectionViewDelegate {}
 public protocol CollectionViewDataSource: UICollectionViewDataSource {
     /**
      Retrieves the data source items for the collectionView.
-     - Returns: An Array of DataSourceItem objects.
+     - Returns: An Array of CollectionViewDataSourceItem objects.
      */
-    var dataSourceItems: [DataSourceItem] { get }
+    var dataSourceItems: [CollectionViewDataSourceItem] { get }
 }
 
 extension UIViewController {
@@ -62,7 +62,7 @@ open class CollectionViewController: UIViewController {
     /// A reference to a Reminder.
     open let collectionView = CollectionView()
     
-    open var dataSourceItems = [DataSourceItem]()
+    open var dataSourceItems = [CollectionViewDataSourceItem]()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ open class CollectionViewController: UIViewController {
      */
     open func prepare() {
         view.clipsToBounds = true
-        view.backgroundColor = .white
+        view.backgroundColor = Color.white
         view.contentScaleFactor = Screen.scale
         prepareCollectionView()
     }

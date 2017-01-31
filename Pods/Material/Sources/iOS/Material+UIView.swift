@@ -110,7 +110,7 @@ extension UIView {
         }
     }
     
-    /// Depth reference.
+    /// Grid reference.
     open var depth: Depth {
         get {
             return layer.depth

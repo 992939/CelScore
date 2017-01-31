@@ -30,12 +30,6 @@
 
 import UIKit
 
-@objc(TextFieldPlaceholderAnimation)
-public enum TextFieldPlaceholderAnimation: Int {
-    case `default`
-    case hidden
-}
-
 @objc(TextFieldDelegate)
 public protocol TextFieldDelegate: UITextFieldDelegate {
     /**
@@ -64,6 +58,11 @@ public protocol TextFieldDelegate: UITextFieldDelegate {
 }
 
 open class TextField: UITextField {
+    /// Will layout the view.
+    open var willLayout: Bool {
+        return 0 < width && 0 < height && nil != superview
+    }
+    
     /// Default size when using AutoLayout.
     open override var intrinsicContentSize: CGSize {
         return CGSize(width: width, height: 32)
@@ -73,16 +72,12 @@ open class TextField: UITextField {
     @IBInspectable
     open var isPlaceholderAnimated = true
     
-    /// Set the placeholder animation value.
-    open var placeholderAnimation = TextFieldPlaceholderAnimation.default {
-        didSet {
-            placeholderLabel.isHidden = .hidden == placeholderAnimation && !isEmpty
-        }
-    }
-    
+    /// A Boolean that indicates if the TextField is in an animating state.
+	open internal(set) var isAnimating = false
+	
     /// A boolean indicating whether the text is empty.
     open var isEmpty: Bool {
-        return 0 == text?.utf16.count
+        return true == text?.isEmpty
     }
     
     open override var leftView: UIView? {
@@ -377,14 +372,15 @@ open class TextField: UITextField {
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
+        guard willLayout && !isAnimating else {
+            return
+        }
+        
         layoutShape()
         reload()
 	}
 	
-    open override func becomeFirstResponder() -> Bool {
-        layoutSubviews()
-        return super.becomeFirstResponder()
-    }
+    
     
 	/**
      Prepares the view instance when intialized. When subclassing,
@@ -481,13 +477,12 @@ extension TextField {
         let w = leftViewWidth
         let h = 0 == height ? intrinsicContentSize.height : height
         
-        placeholderLabel.transform = CGAffineTransform.identity
-        
         guard isEditing || !isEmpty || !isPlaceholderAnimated else {
             placeholderLabel.frame = CGRect(x: w, y: 0, width: width - w, height: h)
             return
         }
         
+        placeholderLabel.transform = CGAffineTransform.identity
         placeholderLabel.frame = CGRect(x: w, y: 0, width: width - w, height: h)
         placeholderLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         
@@ -505,7 +500,7 @@ extension TextField {
     /// Layout the detailLabel.
     fileprivate func layoutDetailLabel() {
         let c = dividerContentEdgeInsets
-        detailLabel.height = detailLabel.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)).height
+        detailLabel.sizeToFit()
         detailLabel.x = c.left
         detailLabel.y = height + detailVerticalOffset
         detailLabel.width = width - c.left - c.right
@@ -513,6 +508,10 @@ extension TextField {
     
     /// Layout the a button.
     fileprivate func layoutButton(button: UIButton?) {
+        guard 0 < width && 0 < height else {
+            return
+        }
+        
         button?.frame = CGRect(x: width - height, y: 0, width: height, height: height)
     }
     
@@ -612,21 +611,17 @@ extension TextField {
     
     /// The animation for the placeholder when editing begins.
     fileprivate func placeholderEditingDidBeginAnimation() {
-        guard .default == placeholderAnimation else {
-            placeholderLabel.isHidden = true
-            return
-        }
-        
         updatePlaceholderLabelColor()
         
         guard isPlaceholderAnimated else {
             return
         }
         
-        guard isEmpty else {
+        guard isEmpty && !isAnimating else {
             return
         }
         
+        isAnimating = true
         UIView.animate(withDuration: 0.15, animations: { [weak self] in
             guard let s = self else {
                 return
@@ -643,26 +638,24 @@ extension TextField {
             }
             
             s.placeholderLabel.y = -s.placeholderLabel.height + s.placeholderVerticalOffset
-        })
+        }) { [weak self] _ in
+            self?.isAnimating = false
+        }
     }
     
     /// The animation for the placeholder when editing ends.
     fileprivate func placeholderEditingDidEndAnimation() {
-        guard .default == placeholderAnimation else {
-            placeholderLabel.isHidden = !isEmpty
-            return
-        }
-        
         updatePlaceholderLabelColor()
         
         guard isPlaceholderAnimated else {
             return
         }
         
-        guard isEmpty else {
+        guard isEmpty && !isAnimating else {
             return
         }
         
+        isAnimating = true
         UIView.animate(withDuration: 0.15, animations: { [weak self] in
             guard let s = self else {
                 return
@@ -671,6 +664,8 @@ extension TextField {
             s.placeholderLabel.transform = CGAffineTransform.identity
             s.placeholderLabel.x = s.leftViewWidth
             s.placeholderLabel.y = 0
-        })
+        }) { [weak self] _ in
+            self?.isAnimating = false
+        }
     }
 }

@@ -39,15 +39,13 @@ We moved all sample projects to a separate repo named [Samples](https://github.c
 - [x] Sample Projects
 - [x] And More...
 
-## Releasing January 2017 - Material 2.5.0
+## Releasing December 2016
 
 - [x] Reminders
 - [x] Text Editor
 - [x] Toasts
 - [x] Dialogs & Alerts
 - [x] Bottom Sheets
-- [x] Transitions
-- [x] Updated Motion API
 - [x] And More...
 
 ## Requirements

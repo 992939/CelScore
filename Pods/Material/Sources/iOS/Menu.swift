@@ -104,7 +104,15 @@ open class Menu: View {
     open var itemSize = CGSize(width: 48, height: 48)
     
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard isOpened, isEnabled else {
+        /**
+         Since the subviews will be outside the bounds of this view,
+         we need to look at the subviews to see if we have a hit.
+         */
+        guard !isHidden else {
+            return nil
+        }
+        
+        guard isOpened else {
             return super.hitTest(point, with: event)
         }
         
@@ -118,7 +126,7 @@ open class Menu: View {
         
         delegate?.menu?(menu: self, tappedAt: point, isOutside: true)
         
-        return self.hitTest(point, with: event)
+        return super.hitTest(point, with: event)
     }
     
     /**
@@ -142,45 +150,9 @@ open class Menu: View {
     /// Reload the view layout.
     open func reload() {
         isOpened = false
-        guard let base = views.first else {
-            return
-        }
-        
-        base.frame.size = baseSize
-        base.zPosition = 10000
-        
-        for i in 1..<views.count {
-            let v = views[i]
-            v.alpha = 0
-            v.isHidden = true
-            v.frame.size = itemSize
-            v.x = base.x + (baseSize.width - itemSize.width) / 2
-            v.y = base.y + (baseSize.height - itemSize.height) / 2
-            v.zPosition = CGFloat(10000 - views.count - i)
-        }
+        layoutViews()
     }
     
-    /// Disable the Menu if views exist.
-    fileprivate func disable() {
-        guard 0 < views.count else {
-            return
-        }
-        isEnabled = false
-    }
-    
-    /**
-     Enable the Menu if the last view is equal to the passed in view.
-     - Parameter view: UIView that is passed in to compare.
-     */
-    fileprivate func enable(view: UIView) {
-        guard view == views.last else {
-            return
-        }
-        isEnabled = true
-    }
-}
-
-extension Menu {
     /**
      Open the Menu component with animation options.
      - Parameter duration: The time for each view's animation.
@@ -232,9 +204,7 @@ extension Menu {
             }
         }
     }
-}
-
-extension Menu {
+    
     /**
      Open the Menu component with animation options in the Up direction.
      - Parameter duration: The time for each view's animation.
@@ -245,7 +215,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func openUpAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func openUpAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -255,11 +225,11 @@ extension Menu {
             v.isHidden = false
             
             UIView.animate(withDuration: Double(i) * duration,
-               delay: delay,
-               usingSpringWithDamping: usingSpringWithDamping,
-               initialSpringVelocity: initialSpringVelocity,
-               options: options,
-               animations: { [weak self, base = base, v = v] in
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [weak self, base = base, v = v] in
                     guard let s = self else {
                         return
                     }
@@ -294,36 +264,36 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func closeUpAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func closeUpAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
         
         for i in 1..<views.count {
             UIView.animate(withDuration: Double(i) * duration,
-               delay: delay,
-               usingSpringWithDamping: usingSpringWithDamping,
-               initialSpringVelocity: initialSpringVelocity,
-               options: options,
-               animations: { [base = base, v = views[i]] in
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [base = base, v = views[i]] in
                     v.alpha = 0
                     v.y = base.y
                     
                     animations?(v)
-            }) { [weak self, v = views[i]] _ in
-                guard let s = self else {
-                    return
+                }) { [weak self, v = views[i]] _ in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.isHidden = true
+                    s.enable(view: v)
+                    
+                    if v == s.views.last {
+                        s.isOpened = false
+                    }
+                    
+                    completion?(v)
                 }
-                
-                v.isHidden = true
-                s.enable(view: v)
-                
-                if v == s.views.last {
-                    s.isOpened = false
-                }
-                
-                completion?(v)
-            }
         }
     }
     
@@ -337,7 +307,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func openDownAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func openDownAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -347,34 +317,34 @@ extension Menu {
         for i in 1..<views.count {
             let v = views[i]
             v.isHidden = false
-            
+                
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [weak self, base = base, v = v] in
-                            guard let s = self else {
-                                return
-                            }
-                            
-                            v.alpha = 1
-                            v.y = base.y + h + CGFloat(i - 1) * s.itemSize.height + CGFloat(i) * s.interimSpace
-                            
-                            animations?(v)
-            }) { [weak self, v = v] _ in
-                guard let s = self else {
-                    return
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [weak self, base = base, v = v] in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.alpha = 1
+                    v.y = base.y + h + CGFloat(i - 1) * s.itemSize.height + CGFloat(i) * s.interimSpace
+                    
+                    animations?(v)
+                }) { [weak self, v = v] _ in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    s.enable(view: v)
+                    
+                    if v == s.views.last {
+                        s.isOpened = true
+                    }
+                    
+                    completion?(v)
                 }
-                
-                s.enable(view: v)
-                
-                if v == s.views.last {
-                    s.isOpened = true
-                }
-                
-                completion?(v)
-            }
         }
     }
     
@@ -388,7 +358,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func closeDownAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func closeDownAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -397,15 +367,15 @@ extension Menu {
         
         for i in 1..<views.count {
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [base = base, v = views[i]] in
-                            v.alpha = 0
-                            v.y = base.y + h
-                            
-                            animations?(v)
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [base = base, v = views[i]] in
+                    v.alpha = 0
+                    v.y = base.y + h
+                    
+                    animations?(v)
             }) { [weak self, v = views[i]] _ in
                 guard let s = self else {
                     return
@@ -433,7 +403,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func openLeftAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func openLeftAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -443,19 +413,19 @@ extension Menu {
             v.isHidden = false
             
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [weak self, base = base, v = v] in
-                            guard let s = self else {
-                                return
-                            }
-                            
-                            v.alpha = 1
-                            v.x = base.x - CGFloat(i) * s.itemSize.width - CGFloat(i) * s.interimSpace
-                            
-                            animations?(v)
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [weak self, base = base, v = v] in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.alpha = 1
+                    v.x = base.x - CGFloat(i) * s.itemSize.width - CGFloat(i) * s.interimSpace
+                    
+                    animations?(v)
             }) { [weak self, v = v] _ in
                 guard let s = self else {
                     return
@@ -482,36 +452,36 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func closeLeftAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func closeLeftAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
         
         for i in 1..<views.count {
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [v = views[i]] in
-                            v.alpha = 0
-                            v.x = base.x
-                            
-                            animations?(v)
-            }) { [weak self, v = views[i]] _ in
-                guard let s = self else {
-                    return
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [v = views[i]] in
+                    v.alpha = 0
+                    v.x = base.x
+                    
+                    animations?(v)
+                }) { [weak self, v = views[i]] _ in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.isHidden = true
+                    s.enable(view: v)
+                    
+                    if v == s.views.last {
+                        s.isOpened = false
+                    }
+                    
+                    completion?(v)
                 }
-                
-                v.isHidden = true
-                s.enable(view: v)
-                
-                if v == s.views.last {
-                    s.isOpened = false
-                }
-                
-                completion?(v)
-            }
         }
     }
     
@@ -525,7 +495,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func openRightAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func openRightAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -537,32 +507,32 @@ extension Menu {
             v.isHidden = false
             
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [weak self, base = base, v = v] in
-                            guard let s = self else {
-                                return
-                            }
-                            
-                            v.alpha = 1
-                            v.x = base.x + h + CGFloat(i - 1) * s.itemSize.width + CGFloat(i) * s.interimSpace
-                            
-                            animations?(v)
-            }) { [weak self, v = v] _ in
-                guard let s = self else {
-                    return
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [weak self, base = base, v = v] in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.alpha = 1
+                    v.x = base.x + h + CGFloat(i - 1) * s.itemSize.width + CGFloat(i) * s.interimSpace
+                    
+                    animations?(v)
+                }) { [weak self, v = v] _ in
+                    guard let s = self else {
+                        return
+                    }
+                
+                    s.enable(view: v)
+                    
+                    if v == s.views.last {
+                        s.isOpened = true
+                    }
+                    
+                    completion?(v)
                 }
-                
-                s.enable(view: v)
-                
-                if v == s.views.last {
-                    s.isOpened = true
-                }
-                
-                completion?(v)
-            }
         }
     }
     
@@ -576,7 +546,7 @@ extension Menu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    fileprivate func closeRightAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
+    private func closeRightAnimation(duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions, animations: ((UIView) -> Void)?, completion: ((UIView) -> Void)?) {
         guard let base = views.first else {
             return
         }
@@ -585,29 +555,68 @@ extension Menu {
         
         for i in 1..<views.count {
             UIView.animate(withDuration: Double(i) * duration,
-                           delay: delay,
-                           usingSpringWithDamping: usingSpringWithDamping,
-                           initialSpringVelocity: initialSpringVelocity,
-                           options: options,
-                           animations: { [base = base, v = views[i]] in
-                            v.alpha = 0
-                            v.x = base.x + w
-                            
-                            animations?(v)
-            }) { [weak self, v = views[i]] _ in
-                guard let s = self else {
-                    return
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: options,
+                animations: { [base = base, v = views[i]] in
+                    v.alpha = 0
+                    v.x = base.x + w
+                    
+                    animations?(v)
+                }) { [weak self, v = views[i]] _ in
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    v.isHidden = true
+                    s.enable(view: v)
+                    
+                    if v == s.views.last {
+                        s.isOpened = false
+                    }
+                    
+                    completion?(v)
                 }
-                
-                v.isHidden = true
-                s.enable(view: v)
-                
-                if v == s.views.last {
-                    s.isOpened = false
-                }
-                
-                completion?(v)
-            }
         }
+    }
+    
+    /// Layout the views.
+    private func layoutViews() {
+        guard let base = views.first else {
+            return
+        }
+        
+        base.frame.size = baseSize
+        base.zPosition = 10000
+        
+        for i in 1..<views.count {
+            let v = views[i]
+            v.alpha = 0
+            v.isHidden = true
+            v.frame.size = itemSize
+            v.x = base.x + (baseSize.width - itemSize.width) / 2
+            v.y = base.y + (baseSize.height - itemSize.height) / 2
+            v.zPosition = CGFloat(10000 - views.count - i)
+        }
+    }
+    
+    /// Disable the Menu if views exist.
+    private func disable() {
+        guard 0 < views.count else {
+            return
+        }
+        isEnabled = false
+    }
+    
+    /**
+     Enable the Menu if the last view is equal to the passed in view.
+     - Parameter view: UIView that is passed in to compare.
+     */
+    private func enable(view: UIView) {
+        guard view == views.last else {
+            return
+        }
+        isEnabled = true
     }
 }

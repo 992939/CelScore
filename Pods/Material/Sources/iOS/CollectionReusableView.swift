@@ -172,14 +172,11 @@ open class CollectionReusableView: UICollectionReusableView, Pulseable {
 	}
 	
 	/// A preset wrapper around interimSpace.
-    open var interimSpacePreset: InterimSpacePreset {
-        get {
-            return grid.interimSpacePreset
-        }
-        set(value) {
-            grid.interimSpacePreset = value
-        }
-    }
+	open var interimSpacePreset = InterimSpacePreset.none {
+		didSet {
+            interimSpace = InterimSpacePresetToValue(preset: interimSpacePreset)
+		}
+	}
 	
 	/// A wrapper around grid.interimSpace.
 	@IBInspectable
