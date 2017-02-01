@@ -113,12 +113,8 @@ extension Sociable where Self: UIViewController {
                 self.dismissHUD()
                 self.handleMenu(open: false)
                 
-                var calendar = NSCalendar.current
-                let unitFlags = Set<Calendar.Component>([.hour, .year, .minute])
-                calendar.timeZone = TimeZone(identifier: "PST")!
-                let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
-                let countdown = components.hour! < 21 ? (21 - components.hour!) : (24 - (components.hour! - 21))
-                let registration = OverlayInfo.loginSuccess.message() + "\n\n" + String(countdown) + " hour(s) left until we crown the King of Hollywood."
+                let hours = self.getCountdownHours()
+                let registration = OverlayInfo.loginSuccess.message() + "\n\n" + String(hours) + " hour(s) left until we crown the King of Hollywood."
                 TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
             })

@@ -22,6 +22,17 @@ extension UIView {
     }
 }
 
+extension UIViewController {
+    func getCountdownHours() -> Int {
+        var calendar = NSCalendar.current
+        let unitFlags = Set<Calendar.Component>([.hour, .year, .minute])
+        calendar.timeZone = TimeZone(identifier: "PST")!
+        let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
+        let countdown = components.hour! < 21 ? (21 - components.hour!) : (24 - (components.hour! - 21))
+        return countdown
+    }
+}
+
 
 extension Date {
 

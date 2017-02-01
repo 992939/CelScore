@@ -202,7 +202,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                 return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
             .map { value in let isConsensus = value as! Bool
-                let message = isConsensus ? "Thank you for celebrating!\n\n6 hours left until crowning, Hollywood will be watching." : "Thank you for celebrating!"
+                let hours = self.getCountdownHours()
+                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until crowning, Hollywood will be watching." : "Thank you for celebrating!"
                 
                 TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.trollAction() })
