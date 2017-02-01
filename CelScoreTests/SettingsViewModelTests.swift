@@ -65,8 +65,8 @@ class SettingsViewModelTests: XCTestCase {
     }
     
     func testGetPublicService() {
-        let expectation = self.expectation(description: "PublicService returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .publicService).startWithValues { value in
+        let expectation = self.expectation(description: "onSocialSharing returns Bool")
+        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("PublicService error: \(error)") } }
     }
@@ -149,11 +149,11 @@ class SettingsViewModelTests: XCTestCase {
     
     func testUpdatePublicService() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set PublicService to true")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .publicService)
+        let expectation = self.expectation(description: "set onSocialSharing to true")
+        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .onSocialSharing)
             .flatMapError { _ in SignalProducer.empty }
             .startWithValues { settings in
-            XCTAssertEqual(settings.publicService, true); expectation.fulfill() }
+            XCTAssertEqual(settings.onSocialSharing, true); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set PublicService error: \(error)") } }
     }
     
