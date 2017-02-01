@@ -117,13 +117,13 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func longPress(_ gesture: UIGestureRecognizer) {
-        let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
+        let who: String = self.celebST.nickname
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
-            self.delegate!.socialSharing(message: "\(who) royalty is \(String(format: "%.1f", celscore))%") }
-        case 2: self.delegate!.socialSharing(message: "\(who) royalty yesterday was \(String(format: "%.1f", self.celebST.prevScore))%")
-        case 3: self.delegate!.socialSharing(message: "\(who) royalty last week was \(String(format: "%.1f", self.celebST.prevWeek))%")
-        default: self.delegate!.socialSharing(message: "\(who) royalty last month was \(String(format: "%.1f", self.celebST.prevMonth))%")
+            self.delegate!.socialSharing(message: "\(who) is \(String(format: "%.1f", celscore))% Hollywood Royalty today.") }
+        case 2: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevScore))% Hollywood Royalty yesterday.")
+        case 3: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevWeek))% Hollywood Royalty last week.")
+        default: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevMonth))% Hollywood Royalty last month.")
         }
     }
     
