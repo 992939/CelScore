@@ -98,7 +98,7 @@ enum OverlayInfo {
         case .maxFollow: return R.image.star_circle()!
         case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
-        case .countdown: return R.image.king_big_blue()!
+        case .countdown: return R.image.guillotine_big_blue()!
         case .socialSharing: return R.image.social_big_blue()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.mic_blue()!
