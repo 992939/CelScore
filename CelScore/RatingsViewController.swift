@@ -81,9 +81,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmosView.settings.updateOnTouch = false
                     cosmosView.settings.userRatingMode = false
                     SettingsViewModel().loggedInAsSignal()
-                        .flatMapError { _ in SignalProducer.empty }
-                        .on(completed: { _ in
-                            cosmosView.settings.updateOnTouch = true })
+                        .on(value: { _ in cosmosView.settings.updateOnTouch = true })
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                             return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
                         .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
@@ -141,12 +139,12 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     func longPress(_ gesture: UIGestureRecognizer) {
         let ratingIndex = gesture.view!.tag - 1
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
-            .startWithValues({ ratings in
+            .on(value: { ratings in
                 let value: Int = ratings[ratings[ratingIndex]] as! Int
                 let stars: String = "\(value)" + (value < 2 ? " star" : " stars")
                 let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
-                self.delegate!.socialSharing(message: "The consensus on \(who) \(Qualities(rawValue: ratingIndex)!.text()) \(stars)")})
+                self.delegate!.socialSharing(message: "The consensus on \(who) \(Qualities(rawValue: ratingIndex)!.text()) \(stars)")
+            }).start()
     }
     
     func isUserRatingMode() -> Bool {
@@ -158,9 +156,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     
     func animateStarsToGold(positive: Bool) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .observe(on: UIScheduler())
-            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
-            .startWithValues({ ratings in
+            .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
                     Timer.after(100.ms * Double(index)){ timer in
@@ -175,13 +171,13 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                         cosmos.rating = ratings[ratings[index]] as! Double
                         cosmos.update()
                     }
-                }})
+                }
+            }).start()
     }
     
     func displayRatings(_ userRatings: RatingsModel = RatingsModel()) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
-            .startWithValues({ ratings in
+            .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
                     let stars = subview.subviews.filter({ $0 is CosmosView })
@@ -193,12 +189,12 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmos.rating = ratings[ratings[index]] as! Double
                     cosmos.update()
                 }
-            })
+            }).start()
     }
     
     func displayUserRatings(_ userRatings: RatingsModel) {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .startWithResult({ ratings in
+            .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
                     subview.pulse()
@@ -211,6 +207,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmos.rating = userRatings[userRatings[index]] as! Double
                     cosmos.update()
                 }
-        })
+            }).start()
     }
 }

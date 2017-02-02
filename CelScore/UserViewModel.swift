@@ -237,8 +237,8 @@ struct UserViewModel {
                     realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
-                    settings.onSocialSharing = (dico["onSocialSharing"] as! NSString).boolValue
-                    settings.onCountdown = (dico["onCountdown"] as! NSString).boolValue
+                    settings.onSocialSharing = (dico["onSocialSharing"] as? NSString)?.boolValue ?? true
+                    settings.onCountdown = (dico["onCountdown"] as? NSString)?.boolValue ?? true
                     settings.isFirstLaunch = (dico["isFirstLaunch"] as! NSString).boolValue
                     settings.isFirstDetail = (dico["isFirstDetail"] as! NSString).boolValue
                     settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue
