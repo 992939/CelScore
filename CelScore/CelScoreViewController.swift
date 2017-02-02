@@ -114,9 +114,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         switch gesture.view!.tag {
         case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
             self.delegate!.socialSharing(message: "\(who) is \(String(format: "%.1f", celscore))% Hollywood Royalty today.") }
-        case 2: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevScore.getRoyalty()))% Hollywood Royalty yesterday.")
-        case 3: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevWeek.getRoyalty()))% Hollywood Royalty last week.")
-        default: self.delegate!.socialSharing(message: "\(who) was \(String(format: "%.1f", self.celebST.prevMonth.getRoyalty()))% Hollywood Royalty last month.")
+        case 2: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevScore.getRoyalty()))% Hollywood Royalty yesterday.")
+        case 3: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevWeek.getRoyalty()))% Hollywood Royalty last week.")
+        default: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevMonth.getRoyalty()))% Hollywood Royalty last month.")
         }
     }
     
