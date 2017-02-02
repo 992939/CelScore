@@ -101,9 +101,9 @@ enum OverlayInfo {
         case .countdown: return R.image.guillotine_big_blue()!
         case .socialSharing: return R.image.social_big_blue()!
         case .firstInterest: return R.image.geometry_red()!
-        case .voteHelp: return R.image.mic_blue()!
-        case .infoSource: return R.image.head_red()!
-        case .noSharing: return R.image.sphere_blue()!
+        case .voteHelp: return R.image.star_circle()!
+        case .infoSource: return R.image.king()!
+        case .noSharing: return R.image.social()!
         case .firstVoteDisable: return R.image.star_circle()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
