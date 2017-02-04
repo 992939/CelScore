@@ -51,14 +51,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .centerWithBacking
                     qualityView.pulseColor = Color.clear
-                    SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-                        .observe(on: UIScheduler())
-                        .flatMapError { error -> SignalProducer<AnyObject, NoError> in return .empty }
-                        .startWithValues({ status in
-                            if (status as! Bool) == true {
-                                qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(RatingsViewController.longPress(_:)))) }
-                        })
-                    
                     let qualityLabel : UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                     qualityLabel.backgroundColor = UIColor.clear
                     let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - UIDevice.getStarsWidth(), y: 3, width: UIDevice.getStarsWidth(), height: barHeight - 5))
@@ -134,17 +126,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                 })
             })
             .start()
-    }
-    
-    func longPress(_ gesture: UIGestureRecognizer) {
-        let ratingIndex = gesture.view!.tag - 1
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
-            .on(value: { ratings in
-                let value: Int = ratings[ratings[ratingIndex]] as! Int
-                let stars: String = "\(value)" + (value < 2 ? " star" : " stars")
-                let who: String = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
-                self.delegate!.socialSharing(message: "The consensus on \(who) \(Qualities(rawValue: ratingIndex)!.text()) \(stars)")
-            }).start()
     }
     
     func isUserRatingMode() -> Bool {

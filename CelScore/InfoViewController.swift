@@ -76,48 +76,11 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel)
-                            SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-                                .observe(on: UIScheduler())
-                                .startWithValues({ status in
-                                if (status as! Bool) == true {
-                                    qualityView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(InfoViewController.longPress(_:)))) }
-                            })
                             self.pulseView.addSubview(qualityView)
                         }
                     })
             })
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
-    }
-    
-    func longPress(_ gesture: UIGestureRecognizer) {
-        let celebIndex = gesture.view!.tag - 1
-        let quality = Info(rawValue: celebIndex)!.text()
-        
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
-            .startWithValues({ celeb in
-                let birthdate: Date = celeb.birthdate.date(inFormat:"MM/dd/yyyy")!
-                let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
-                let formatter = DateFormatter()
-                formatter.dateStyle = .long
-                
-                let infoText: String
-                switch quality {
-                case Info.firstName.text(): infoText = celeb.firstName
-                case Info.middleName.text(): infoText = celeb.middleName
-                case Info.lastName.text(): infoText = celeb.lastName
-                case Info.from.text(): infoText = celeb.from
-                case Info.birthdate.text(): infoText = formatter.string(from: birthdate as Date) + String(" (\(age))")
-                case Info.height.text(): infoText = celeb.height
-                case Info.zodiac.text(): infoText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
-                case Info.status.text(): infoText = celeb.status
-                case Info.throne.text(): infoText = String(celeb.daysOnThrone) + " Day(s)"
-                case Info.networth.text(): infoText = celeb.netWorth
-                default: infoText = "n/a"
-                }
-                let who = self.celebST.nickname.characters.last == "s" ? "\(self.celebST.nickname)'" : "\(self.celebST.nickname)'s"
-                self.delegate!.socialSharing(message: "\(who) \(quality) \(infoText)")
-            })
     }
 }

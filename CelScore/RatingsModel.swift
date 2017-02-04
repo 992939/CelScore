@@ -77,7 +77,6 @@ class RatingsModel: Object, Collection {
         return i + 1
     }
 
-
     func getCelScore() -> Double {
         let total: Double = (self.rating1 + self.rating2 + self.rating3 + self.rating4 + self.rating5
             + self.rating6 + self.rating7 + self.rating8 + self.rating9 + self.rating10) * 2

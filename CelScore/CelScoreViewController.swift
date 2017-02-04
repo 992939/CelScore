@@ -43,13 +43,6 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
         let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
-        
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .observe(on: UIScheduler())
-            .startWithValues({ status in
-                if (status as! Bool) == true {
-                    gaugeView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) }
-            })
         gaugeView.depthPreset = .depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
@@ -96,10 +89,6 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         infoLabel.textAlignment = .right
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .observe(on: UIScheduler())
-            .startWithValues({ status in
-            if (status as! Bool) == true { taggedView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CelScoreViewController.longPress(_:)))) } })
         taggedView.depthPreset = .depth1
         taggedView.tag = tag
         taggedView.backgroundColor = Constants.kGreyBackground
@@ -107,17 +96,6 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
         return taggedView
-    }
-    
-    func longPress(_ gesture: UIGestureRecognizer) {
-        let who: String = self.celebST.nickname
-        switch gesture.view!.tag {
-        case 1: RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { celscore in
-            self.delegate!.socialSharing(message: "\(who) is \(String(format: "%.1f", celscore))% Hollywood Royalty today.") }
-        case 2: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevScore.getRoyalty()))% Hollywood Royalty yesterday.")
-        case 3: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevWeek.getRoyalty()))% Hollywood Royalty last week.")
-        default: self.delegate!.socialSharing(message: "\(who) was \(String(self.celebST.prevMonth.getRoyalty()))% Hollywood Royalty last month.")
-        }
     }
     
     func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
