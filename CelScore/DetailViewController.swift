@@ -202,7 +202,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
             .map { value in let isConsensus = value as! Bool
                 let hours = self.getCountdownHours()
-                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until crowning, Hollywood will be watching." : "Thank you for celebrating!"
+                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until the coronation, Hollywood will be watching." : "Thank you for celebrating!"
                 
                 TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.trollAction() })
@@ -275,10 +275,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
-            .flatMapError { _ in
-                self.socialButtonTapped(buttonTag: button.tag, hideButton: false)
-                return SignalProducer.empty }
-            .startWithValues { _ in
+            .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
+            .on(value: { _ in
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: "")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
@@ -288,23 +286,21 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                                        image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
                     self.present(socialVC, animated: true, completion: { Motion.delay(time: 2.0) { self.socialButton.close() }})
-                }}
+                }})
+            .start()
     }
     
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
-            .observe(on: UIScheduler())
-            .flatMapError { _ in
-                self.ratingsVC.displayRatings()
-                return SignalProducer.empty }
-            .startWithValues({ userRatings in
+            .on(failed: { _ in self.ratingsVC.displayRatings() })
+            .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
                 self.enableUpdateButton()
                 self.voteButton.backgroundColor = Constants.kStarGoldShade
                 self.voteButton.setImage(R.image.heart_black()!, for: .normal)
                 self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
-            })
+            }).start()
     }
     
     func enableUpdateButton() {
