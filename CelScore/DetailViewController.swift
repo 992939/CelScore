@@ -26,7 +26,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let voteButton: Button
     fileprivate let celebST: CelebrityStruct
     fileprivate let socialButton: Menu
-    fileprivate var socialMessage: String = ""
     fileprivate var previousIndex: Int = 1
     internal let profilePicNode: ASNetworkImageNode
     
@@ -228,13 +227,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func updateAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
-            .observe(on: UIScheduler())
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues({ (userRatings:RatingsModel) in
+            .on(value: { (userRatings:RatingsModel) in
                 self.rippleEffect(positive: false, gold: true)
                 self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
-            })
+            }).start()
     }
     
     //MARK: Sociable
@@ -256,12 +253,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func closeHandleMenu() {
-       let first: Button? = self.socialButton.views.first as? Button
+        let first: Button? = self.socialButton.views.first as? Button
         if self.socialButton.isOpened { first?.animate(animation: Motion.rotate(rotation: 1)) }
         self.socialButton.close()
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .observe(on: UIScheduler())
-            .startWithValues({ status in
+            .on(value: { status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -269,10 +265,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     first?.setImage(R.image.cross()!, for: .normal)
                     first?.setImage(R.image.cross()!, for: .highlighted)
                 }
-            })
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
-            first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-        })
+            }).start()
+        
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
+            .on(value: { hasRatings in
+                first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+            }).start()
     }
     
     func socialButton(button: UIButton) {
@@ -281,7 +279,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.socialButtonTapped(buttonTag: button.tag, hideButton: false)
                 return SignalProducer.empty }
             .startWithValues { _ in
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: self.socialMessage).startWithValues { socialVC in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: "")
+                    .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
@@ -397,11 +396,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulse() }
         })
-    }
-
-    func socialSharing(message: String) {
-        self.openHandleMenu()
-        self.socialMessage = message
     }
     
     //MARK: ViewDidLoad Helpers

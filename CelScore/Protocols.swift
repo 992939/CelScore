@@ -19,7 +19,6 @@ import MessageUI
 
 
 protocol DetailSubViewable {
-    func socialSharing(message: String)
     func enableVoteButton(positive: Bool)
     func rippleEffect(positive: Bool, gold: Bool)
 }
