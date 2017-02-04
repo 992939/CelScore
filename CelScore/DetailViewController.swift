@@ -202,7 +202,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
             .map { value in let isConsensus = value as! Bool
                 let hours = self.getCountdownHours()
-                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until the coronation, Hollywood will be watching." : "Thank you for celebrating!"
+                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until we crown the King of Hollywood." : "Thank you for celebrating!"
                 
                 TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.trollAction() })
@@ -238,7 +238,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func handleMenu(open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.isOpened { self.closeHandleMenu() }
-        else { TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions()) }
+        else {
+            SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
+                .on(value: { status in
+                    guard (status as! Bool) == true else { return TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions())
+                    }
+                    self.openHandleMenu()
+                }).start()
+        }
     }
 
     func openHandleMenu() {
@@ -273,6 +280,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             }).start()
     }
     
+    //update the message shared
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
