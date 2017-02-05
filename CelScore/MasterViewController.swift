@@ -269,14 +269,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate())
+            first?.animate(animation: Motion.rotate(rotation: 1))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         } else if self.socialButton.isOpened {
             self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
             let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate())
+            first?.animate(animation: Motion.rotate(rotation: 1))
             first?.setImage(image, for: .normal)
             first?.setImage(image, for: .highlighted)
         }
