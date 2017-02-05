@@ -287,7 +287,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id) }
             .on(value: { score in
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                                                      message: "\(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty today! #CNN")
+                                                      message: "Today on #CNN, \(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty.")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
