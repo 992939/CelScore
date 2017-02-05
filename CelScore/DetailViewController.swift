@@ -193,8 +193,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(time: 2.5) {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
-                    self.voteButton.setImage(R.image.heart_black()!, for: .normal)
-                    self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
+                    self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+                    self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
                 }}
             .delay(2, on: QueueScheduler.main)
             .flatMapError { _ in .empty }
@@ -308,16 +308,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 guard userRatings.getCelScore() > 0 else { return }
                 self.enableUpdateButton()
                 self.voteButton.backgroundColor = Constants.kStarGoldShade
-                self.voteButton.setImage(R.image.heart_black()!, for: .normal)
-                self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
+                self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+                self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
             }).start()
     }
     
     func enableUpdateButton() {
         self.voteButton.pulseAnimation = .centerWithBacking
         self.voteButton.backgroundColor = Constants.kStarGoldShade
-        self.voteButton.setImage(R.image.heart_black()!, for: .normal)
-        self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
+        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
         self.voteButton.removeTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
         
@@ -362,7 +362,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
                 else { self.enableUpdateButton() }
             })
-        } else { disableVoteButton(R.image.heart_black()!) }
+        } else { disableVoteButton(R.image.blackstar()!) }
         self.previousIndex = segmentView.selectedSegmentIndex
     }
     
@@ -393,8 +393,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func enableVoteButton(positive: Bool) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.voteButton.setImage(R.image.heart_white()!, for: .normal)
-            self.voteButton.setImage(R.image.heart_white()!, for: .highlighted)
+            self.voteButton.setImage(R.image.whitestar()!, for: .normal)
+            self.voteButton.setImage(R.image.whitestar()!, for: .highlighted)
             self.voteButton.removeTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
             self.voteButton.addTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
@@ -487,7 +487,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .center
         self.voteButton.accessibilityLabel = "Vote Button"
-        self.disableVoteButton(R.image.heart_black()!)
+        self.disableVoteButton(R.image.blackstar()!)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
             self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
