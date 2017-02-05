@@ -89,7 +89,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!)
-                .flatMapError { _ in SignalProducer.empty }
+                .flatMapError { _ in .empty }
                 .startWithValues({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,
@@ -111,7 +111,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!)
-                .flatMapError { _ in SignalProducer.empty }
+                .flatMapError { _ in .empty }
                 .startWithValues({ celeb in
                 let celebST = CelebrityStruct(
                     id: celeb.id,

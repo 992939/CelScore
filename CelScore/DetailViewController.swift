@@ -43,7 +43,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         super.init(nibName: nil, bundle: nil)
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
             .start(on: QueueScheduler())
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .startWithValues({ activity in self.userActivity = activity })
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
@@ -95,7 +95,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .startWithValues({ hasRatings in first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
         })
         
@@ -197,7 +197,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.voteButton.setImage(R.image.heart_black()!, for: .highlighted)
                 }}
             .delay(2, on: QueueScheduler.main)
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                 return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
             .map { value in let isConsensus = value as! Bool
@@ -280,12 +280,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             }).start()
     }
     
-    //update the message shared
     func socialButton(button: UIButton) {
         SettingsViewModel().loggedInAsSignal()
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
-            .on(value: { _ in
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: "")
+            .flatMap(.latest) { (_) -> SignalProducer<Double, NoError> in
+                return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id) }
+            .on(value: { score in
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
+                                                      message: "\(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty today! #CNN")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)

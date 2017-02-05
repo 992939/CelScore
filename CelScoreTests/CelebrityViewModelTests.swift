@@ -33,7 +33,7 @@ class CelebrityViewModelTests: XCTestCase {
     func testGetCelebritySignal() {
         let expectation = self.expectation(description: "getCelebritySignal callback")
         CelebrityViewModel().getCelebritySignal(id: "0001")
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .startWithValues  { celeb in
             XCTAssert((celeb as Any) is CelebrityModel, "getCelebritySignal returns CelebrityModel."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebritySignal error: \(error)") } }
@@ -42,7 +42,7 @@ class CelebrityViewModelTests: XCTestCase {
     func testUpdateUserActivitySignal() {
         let expectation = self.expectation(description: "updateUserActivitySignal callback")
         CelebrityViewModel().updateUserActivitySignal(id: "0001")
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .startWithValues { activity in
             XCTAssertEqual(activity.isEligibleForSearch, true, "NSUserActivity must be eligibleForSearch."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateUserActivitySignal error: \(error)") } }
@@ -51,7 +51,7 @@ class CelebrityViewModelTests: XCTestCase {
     func testFollowCebritySignal() {
         let expectation = self.expectation(description: "followCebritySignal callback")
         CelebrityViewModel().followCebritySignal(id: "0001", isFollowing: false)
-            .flatMapError { _ in SignalProducer.empty }
+            .flatMapError { _ in .empty }
             .startWithValues  { celeb in
             XCTAssertEqual(celeb.isFollowed, false, "Celebrity isFollowed must be false."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("followCebritySignal error: \(error)") } }
