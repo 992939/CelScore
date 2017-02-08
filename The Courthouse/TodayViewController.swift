@@ -23,7 +23,10 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.toggleExpand()
+        if #available(iOSApplicationExtension 10.0, *) {
+            self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        }
+        self.tableView.reloadData()
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -35,15 +38,11 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
             let x = self.userDefaults.object(forKey: String(index))!
             self.items.append(x as AnyObject)
         }
-        self.toggleExpand()
+        self.tableView.reloadData()
         completionHandler(.newData)
     }
     
     func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) { return UIEdgeInsets.zero }
-    
-    func updatePreferredContentSize() {
-        preferredContentSize = CGSize(width: CGFloat(0), height: CGFloat(tableView(tableView, numberOfRowsInSection: 0)) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
-    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -52,7 +51,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
     // MARK: Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard self.items.count > 0 else { return 0 }
-        return min(items.count, self.maxNumberOfRows)
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,9 +73,9 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // MARK: expand
-    func toggleExpand() {
-        self.updatePreferredContentSize()
-        self.tableView.reloadData()
+    @available(iOS 10.0, *)
+    @available(iOSApplicationExtension 10.0, *)
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        self.preferredContentSize = (activeDisplayMode == .expanded) ? CGSize(width: 320, height: CGFloat(items.count)*121 + 44) : CGSize(width: maxSize.width, height: 110)
     }
 }
