@@ -79,7 +79,7 @@ enum OverlayInfo {
         case .socialSharing: return "Good fans are those who share on social media,\ndiehard fans are those who rule social media."
         case .firstInterest: return "Your selection is automatically saved."
         case .voteHelp: return "The voting button is enabled only for the star spangled banner view.\n\nEach vote must have all ten qualities."
-        case .infoSource: return "The profile view\n(middle button in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
+        case .infoSource: return "The profile view\n(middle in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
         case .noSharing: return "While good fans are those who share on social media,\ndiehard fans are those who rule social media.\n\nGo to settings to enable social sharing."
         case .firstVoteDisable: return "Registration is required to honor or celebrate a star."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."

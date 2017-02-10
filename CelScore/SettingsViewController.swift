@@ -46,31 +46,17 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.depthPreset = .none
         let diameter = 60 - 2 * UIDevice.getOffset()
         let logoCircle: Button = Button(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 10 - UIDevice.getOffset()/2, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.court_white()!, for: .normal)
-        logoCircle.setImage(R.image.court_white()!, for: .highlighted)
+        logoCircle.setImage(R.image.mainstar()!, for: .normal)
+        logoCircle.setImage(R.image.mainstar()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kRedShade
+        logoCircle.backgroundColor = Constants.kRedLight
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
-        
-        let labelWidth: CGFloat = (Constants.kSettingsViewWidth - logoCircle.width)/2
-        let courtLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
-        courtLabel.textAlignment = .center
-        let houseLabel: UILabel = UILabel(frame: CGRect(x: Constants.kSettingsViewWidth - labelWidth, y: 20 - UIDevice.getOffset(), width: labelWidth, height: 40))
-        houseLabel.textAlignment = .center
-        let font: UIFont = UIFont(name: "Cochin-Bold", size: 25.0) ?? UIFont.systemFont(ofSize: 23.0)
-        let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : Color.white]
-        courtLabel.attributedText = NSAttributedString(string: "COURT", attributes: attributes)
-        courtLabel.backgroundColor = Constants.kBlueShade
-        houseLabel.attributedText = NSAttributedString(string: "HOUSE", attributes: attributes)
-        houseLabel.backgroundColor = Constants.kBlueShade
-        logoView.addSubview(courtLabel)
-        logoView.addSubview(houseLabel)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
-        logoView.backgroundColor = Constants.kBlueShade
+        logoView.backgroundColor = Color.blue.lighten1
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 
@@ -78,25 +64,23 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let progressNodeHeight: CGFloat = 60.0
         
         SettingsViewModel().calculateSocialConsensusSignal().startWithValues({ value in
-            let consensusBarNode = self.setupProgressBarNode(title: "General Consensus %", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
+            let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
             self.view.addSubnode(consensusBarNode) })
         
         SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode(title: "Your Public Opinion %", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
+            let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
             self.view.addSubnode(publicOpinionBarNode) })
         
         SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Your Positive Votes %", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
+            let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
             self.view.addSubnode(positiveBarNode)
         })
         
         //PickerView
         let pickerView: View = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + 3 * progressNodeHeight - Constants.kPadding/2), width: maxWidth, height: UIDevice.getPickerHeight()))
-        let pickerLabel: UILabel = self.setupLabel(title: "Main Interest", frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
         self.picker.dataSource = self
         self.picker.delegate = self
-        pickerView.addSubview(pickerLabel)
         pickerView.addSubview(self.picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         self.view.addSubnode(pickerNode)
@@ -287,7 +271,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
-        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 25))
+        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
         bar.progressTintColors = [Constants.kRedShade, Constants.kRedShade]
         bar.setProgress(value, animated: true)
