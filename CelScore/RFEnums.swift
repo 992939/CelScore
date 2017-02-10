@@ -16,6 +16,7 @@ enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, r
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
 enum NetworkError: Int, Error { case notConnected = 1 }
+enum RoyalDay: Int { case Today = 0, LastWeek, LastMonth }
 
 
 //MARK: Misc.

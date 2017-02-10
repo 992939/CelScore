@@ -72,6 +72,24 @@ struct SettingsViewModel {
         }
     }
     
+    func calculateAverageRoyaltySignal(day: RoyalDay) -> SignalProducer<CGFloat, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let celebs = realm.objects(CelebrityModel.self)
+            guard celebs.count > 0 else { observer.send(value: 60); return observer.sendCompleted() }
+            let royalties: [Double] = celebs.map{ (celebModel: CelebrityModel) -> Double in
+                switch day {
+                case .Today: return celebModel.prevScore
+                case .LastWeek: return celebModel.prevWeek
+                case .LastMonth: return celebModel.prevMonth
+                }
+            }
+            let average = royalties.reduce(0, { $0 + $1 }) / Double(celebs.count) * 20
+            observer.send(value: CGFloat(average.roundToPlaces(places: 1) / 100))
+            observer.sendCompleted()
+        }
+    }
+    
     func loggedInAsSignal() -> SignalProducer<String, SettingsError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

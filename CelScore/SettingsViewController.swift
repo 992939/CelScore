@@ -63,18 +63,23 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
-        SettingsViewModel().calculateSocialConsensusSignal().startWithValues({ value in
-            let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
-            self.view.addSubnode(consensusBarNode) })
+        SettingsViewModel().calculateAverageRoyaltySignal(day: .Today)
+            .on(value: { value in
+                let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
+                self.view.addSubnode(consensusBarNode) })
+            .start()
         
-        SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in
-            let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
-            self.view.addSubnode(publicOpinionBarNode) })
+        SettingsViewModel().calculateAverageRoyaltySignal(day: .LastWeek)
+            .on(value: { value in
+                let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
+                self.view.addSubnode(publicOpinionBarNode) })
+            .start()
         
-        SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in
-            let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
-            self.view.addSubnode(positiveBarNode)
-        })
+        SettingsViewModel().calculateAverageRoyaltySignal(day: .LastMonth)
+            .on(value: { value in
+                let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
+                self.view.addSubnode(positiveBarNode) })
+            .start()
         
         //PickerView
         let pickerView: View = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + 3 * progressNodeHeight - Constants.kPadding/2), width: maxWidth, height: UIDevice.getPickerHeight()))
@@ -89,16 +94,16 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
         
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .startWithValues({ status in
+            .on(value: { status in
                 let publicServiceNode = self.setupCheckBoxNode(title: "Social Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
-                self.view.addSubnode(publicServiceNode)
-            })
+                self.view.addSubnode(publicServiceNode) })
+            .start()
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
-            .startWithValues({ status in
+            .on(value: { status in
                 let notificationNode = self.setupCheckBoxNode(title: "Coronation Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
-                self.view.addSubnode(notificationNode)
-            })
+                self.view.addSubnode(notificationNode) })
+            .start()
         
         //Issue
         let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
@@ -147,7 +152,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
-            .startWithValues({ index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+            .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+            .start()
     }
     
     func logout() {
@@ -156,9 +162,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Continue", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
-            UserViewModel().logoutSignal().startWithValues({ _ in
-                Motion.delay(time: 1.0) { self.navigationDrawerController!.closeLeftView() }
-            })
+            UserViewModel().logoutSignal()
+                .on(value: { _ in Motion.delay(time: 1.0) { self.navigationDrawerController!.closeLeftView() } })
+                .start()
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
@@ -170,10 +176,20 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact1Bar.setProgress(0, animated: true)
         self.fact2Bar.setProgress(0, animated: true)
         self.fact3Bar.setProgress(0, animated: true)
+        
         Timer.after(2.seconds){ _ in
-            SettingsViewModel().calculateSocialConsensusSignal().startWithValues({ value in self.fact1Bar.setProgress(value, animated: true) })
-            SettingsViewModel().calculateUserRatingsPercentageSignal().startWithValues({ value in self.fact2Bar.setProgress(value, animated: true) })
-            SettingsViewModel().calculatePositiveVoteSignal().startWithValues({ value in self.fact3Bar.setProgress(value, animated: true) })
+            SettingsViewModel().calculateAverageRoyaltySignal(day: .Today)
+                .on(value: { value in self.fact1Bar.setProgress(value, animated: true) })
+                .start()
+            
+            SettingsViewModel().calculateAverageRoyaltySignal(day: .LastWeek)
+                .on(value: { value in self.fact2Bar.setProgress(value, animated: true) })
+                .start()
+            
+            SettingsViewModel().calculateAverageRoyaltySignal(day: .LastMonth)
+                .on(value: { value in self.fact3Bar.setProgress(value, animated: true) })
+                .start()
+        
             button.isEnabled = true
         }
     }
