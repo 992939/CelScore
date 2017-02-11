@@ -355,7 +355,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     func navigationDrawerDidClose(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
         self.navigationDrawerController?.isEnabled = false
         SettingsViewModel().loggedInAsSignal()
-            .on(starting: { _ in self.movingSocialButton(onScreen: false) })
+            .on(value: { _ in self.movingSocialButton(onScreen: false) })
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
@@ -377,7 +377,8 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .observe(on: UIScheduler())
-                .startWithValues({ list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                .on(value: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                .start()
         }
     }
     

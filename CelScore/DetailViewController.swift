@@ -41,10 +41,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.profilePicNode = ASNetworkImageNode(webImage: ())
         super.init(nibName: nil, bundle: nil)
+        
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
+            .on(value: { activity in self.userActivity = activity })
             .start(on: QueueScheduler())
-            .flatMapError { _ in .empty }
-            .startWithValues({ activity in self.userActivity = activity })
+            .start()
         
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
     }
@@ -67,15 +68,15 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
         let first: Button? = self.socialButton.views.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .startWithValues({ status in
+            .on(value: { status in
                 if (status as! Bool) == true {
                     first?.setImage(R.image.ic_add_black()!, for: .normal)
                     first?.setImage(R.image.ic_add_black()!, for: .highlighted)
                 } else {
                     first?.setImage(R.image.cross()!, for: .normal)
                     first?.setImage(R.image.cross()!, for: .highlighted)
-                }
-            })
+                }})
+            .start()
         
         SettingsViewModel().getSettingSignal(settingType: .firstDetail)
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
@@ -90,14 +91,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     alertVC.view.isOpaque = false
                     Motion.delay(time: 1.5) { self.present(alertVC, animated: true, completion: nil) }
                 }
-                return firstTime == false
-            })
+                return firstTime == false })
             .start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .flatMapError { _ in .empty }
-            .startWithValues({ hasRatings in first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-        })
+            .on(value: { hasRatings in first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
+            .start()
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kBlueShade
@@ -331,10 +330,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(self.helpAction), for: .touchUpInside)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
-            self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-            self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-        })
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
+            .on(value: { hasRatings in
+                self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+                self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
+            .start()
     }
     
     //MARK: MFMailComposeViewControllerDelegate

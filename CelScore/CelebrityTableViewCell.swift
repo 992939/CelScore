@@ -51,13 +51,16 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
         self.ratingsNode.backgroundColor = UIColor.clear
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { score in cosmosView.rating = score/20 }
+        
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+            .on(value: { score in cosmosView.rating = score/20 })
+            .start()
+        
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
-            .startWithValues{ hasRatings in
-            cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
-            cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
-        }
+            .on(value: { hasRatings in
+                cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
+                cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade })
+            .start()
         
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
         box.onAnimationType = .bounce
@@ -89,28 +92,29 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues { score in
-            self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
-        }
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+            .on(value: { score in
+                self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()! })
+            .start()
         
-        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id).startWithValues { consensus in
-            self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.crown_filling_blue()! : R.image.crown_filling_red()!
-            if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! }
-        }
+        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
+            .on(value: { consensus in
+                self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.crown_filling_blue()! : R.image.crown_filling_red()!
+                if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! } })
+            .start()
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
             .on(failed: { _ in self.faceNode.image = R.image.emptyCircle()! })
-            .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
-            .startWithValues ({ ratings in
+            .on(value: { ratings in
                 switch ratings.getCelScore() {
-                case 4.5..<5.1: self.faceNode.image = R.image.happyFace()!
-                case 3.5..<4.5: self.faceNode.image = R.image.smileFace()!
-                case 3.0..<3.5: self.faceNode.image = R.image.nosmileFace()!
-                case 2.0..<3.0: self.faceNode.image = R.image.sadFace()!
-                case 1.0..<2.0: self.faceNode.image = R.image.angryFace()!
+                case 90..<101: self.faceNode.image = R.image.happyFace()!
+                case 75..<90: self.faceNode.image = R.image.smileFace()!
+                case 60..<75: self.faceNode.image = R.image.nosmileFace()!
+                case 40..<60: self.faceNode.image = R.image.sadFace()!
+                case 20..<40: self.faceNode.image = R.image.angryFace()!
                 default: self.faceNode.image = R.image.emptyCircle()!
-                }
-            })
+                } })
+            .start()
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.profilePicNode)
@@ -172,15 +176,13 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             .start()
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
-                .observe(on: UIScheduler())
-                .flatMapError { error -> SignalProducer<Int, NoError> in return .empty }
-                .startWithValues { count in
+                .on(value: { count in
                     if count == 0 {
                         SettingsViewModel().getSettingSignal(settingType: .firstFollow).startWithValues({ first in
-                        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
-                        let firstTime = first as! Bool
-                        guard firstTime else { return }
-                        TAOverlay.show(withLabel: OverlayInfo.firstFollow.message(), image: OverlayInfo.firstFollow.logo(), options: OverlayInfo.getOptions()) })
+                            CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
+                            let firstTime = first as! Bool
+                            guard firstTime else { return }
+                            TAOverlay.show(withLabel: OverlayInfo.firstFollow.message(), image: OverlayInfo.firstFollow.logo(), options: OverlayInfo.getOptions()) })
                         TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstFollow).start() })
                     }
                     else if count > 9 {
@@ -189,7 +191,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
                                        options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) })
                     } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
-            }
+                }).start()
         }
     }
 }
