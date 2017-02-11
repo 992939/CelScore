@@ -112,7 +112,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyTimer/SwiftyTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Timepiece/Timepiece.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/WebASDKImageManager/WebASDKImageManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YLProgressBar/YLProgressBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -144,6 +143,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyTimer/SwiftyTimer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Timepiece/Timepiece.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/WebASDKImageManager/WebASDKImageManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YLProgressBar/YLProgressBar.framework"
 fi

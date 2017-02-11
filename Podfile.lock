@@ -1,12 +1,11 @@
 PODS:
-  - AsyncDisplayKit (1.9.90):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.90)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.90)
-  - AsyncDisplayKit/Core (1.9.90):
-    - AsyncDisplayKit/ASDealloc2MainObject
-  - AsyncDisplayKit/PINRemoteImage (1.9.90):
+  - AsyncDisplayKit (2.1):
+    - AsyncDisplayKit/PINRemoteImage (= 2.1)
+  - AsyncDisplayKit/Core (2.1)
+  - AsyncDisplayKit/PINRemoteImage (2.1):
     - AsyncDisplayKit/Core
-    - PINRemoteImage/iOS (>= 3.0.0-beta.3)
+    - PINRemoteImage/iOS (= 3.0.0-beta.7)
+    - PINRemoteImage/PINCache
   - AWSAPIGateway (2.4.10):
     - AWSCore (= 2.4.10)
   - AWSCognito (2.4.10):
@@ -32,10 +31,17 @@ PODS:
   - Material (2.4.1):
     - Material/Core (= 2.4.1)
   - Material/Core (2.4.1)
-  - PINCache (3.0.1-beta)
-  - PINRemoteImage/Core (3.0.0-beta.3):
-    - PINCache (>= 3.0.0-beta)
-  - PINRemoteImage/iOS (3.0.0-beta.3):
+  - PINCache (3.0.1-beta.2):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
+    - PINCache/Core (= 3.0.1-beta.2)
+  - PINCache/Arc-exception-safe (3.0.1-beta.2):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.2)
+  - PINRemoteImage/Core (3.0.0-beta.7)
+  - PINRemoteImage/iOS (3.0.0-beta.7):
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.7):
+    - PINCache (= 3.0.1-beta.2)
     - PINRemoteImage/Core
   - PMAlertController (2.0.1)
   - R.swift (3.2.0):
@@ -64,13 +70,10 @@ PODS:
     - Fabric
   - TwitterKit (2.7.0):
     - TwitterCore (= 2.7.0)
-  - WebASDKImageManager (1.1.1):
-    - AsyncDisplayKit/Core (~> 1.9)
-    - SDWebImage/Core (~> 3.7)
   - YLProgressBar (3.10.0)
 
 DEPENDENCIES:
-  - AsyncDisplayKit (~> 1.9.90)
+  - AsyncDisplayKit (~> 2.1)
   - AWSAPIGateway (~> 2.4.9)
   - AWSCognito (~> 2.4.9)
   - BEMCheckBox (~> 1.4)
@@ -97,7 +100,6 @@ DEPENDENCIES:
   - Timepiece (~> 1.0)
   - TwitterCore (~> 2.7)
   - TwitterKit (~> 2.7)
-  - WebASDKImageManager (~> 1.1)
   - YLProgressBar (~> 3.10)
 
 EXTERNAL SOURCES:
@@ -105,7 +107,7 @@ EXTERNAL SOURCES:
     :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: 926ded3ca3fb7026565e0e81f0e132fea4d3a6eb
+  AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   AWSAPIGateway: bf62f9d3722f59638a53b8ed3ce9270fcb55436c
   AWSCognito: d9c6932091ceedac47e187ae04f0248505242cb0
   AWSCore: c78eff928514e90075c3bd53f5ff2d9a77f8658e
@@ -119,8 +121,8 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: bdf4386e3600537077c2667764292f8dd581e541
-  PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
-  PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
+  PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
+  PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
@@ -138,9 +140,8 @@ SPEC CHECKSUMS:
   Timepiece: 59cdc48089645cce07803c15116293b346ca457d
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
-  WebASDKImageManager: 15f6abbac6b53b4b216e27fba0acf74c49a64d4c
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 4e21760ab3278256f018319de6904e06562529f2
+PODFILE CHECKSUM: c9ec78fad117b457acf2b250d66204f7da30e6ba
 
 COCOAPODS: 1.0.1

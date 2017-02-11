@@ -23,7 +23,7 @@ import Timepiece
 import Accounts
 
 
-final class MasterViewController: UIViewController, ASTableViewDataSource, ASTableViewDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
+final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
@@ -31,14 +31,14 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
     fileprivate let socialButton: Menu
-    internal let celebrityTableView: ASTableView
+    internal let celebrityTableView: ASTableNode
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.celebrityTableView = ASTableView()
-        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView)
+        self.celebrityTableView = ASTableNode()
+        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView.view)
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
@@ -64,9 +64,9 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         
         Motion.delay(time: 0.4) {
             if let index = self.celebrityTableView.indexPathForSelectedRow {
-                self.celebrityTableView.beginUpdates()
-                self.celebrityTableView.reloadRows(at: [index], with: .fade)
-                self.celebrityTableView.endUpdates()
+                self.celebrityTableView.performBatchUpdates({ 
+                   self.celebrityTableView.reloadRows(at: [index], with: .fade)
+                }, completion: nil)
             }
             
             SettingsViewModel().loggedInAsSignal()
@@ -106,10 +106,10 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         super.viewDidLoad()
         
         self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
-        self.celebrityTableView.asyncDataSource = self
-        self.celebrityTableView.asyncDelegate = self
-        self.celebrityTableView.separatorStyle = .none
+        //self.celebrityTableView.separatorStyle = .none
         self.celebrityTableView.backgroundColor = Color.clear
+        self.celebrityTableView.dataSource = self
+        self.celebrityTableView.delegate = self
         
         let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attr
@@ -124,7 +124,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
-        self.view.addSubview(self.celebrityTableView)
+        self.view.addSubview(self.celebrityTableView.view)
         view.layout(socialButton).size(socialButton.baseSize).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
         try! self.setupData()
         
@@ -259,7 +259,7 @@ final class MasterViewController: UIViewController, ASTableViewDataSource, ASTab
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
-                Motion.delay(time: 0.7){ self.celebrityTableView.setContentOffset(CGPoint.zero, animated:true) }})
+                Motion.delay(time: 0.7){ self.celebrityTableView.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
 

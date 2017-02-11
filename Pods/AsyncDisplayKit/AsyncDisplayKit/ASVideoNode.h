@@ -12,10 +12,10 @@
 #import <AsyncDisplayKit/ASButtonNode.h>
 #import <AsyncDisplayKit/ASNetworkImageNode.h>
 
-@class AVAsset, AVPlayer, AVPlayerItem, AVVideoComposition, AVAudioMix;
+@class AVAsset, AVPlayer, AVPlayerLayer, AVPlayerItem, AVVideoComposition, AVAudioMix;
 @protocol ASVideoNodeDelegate;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, ASVideoNodePlayerState) {
   ASVideoNodePlayerStateUnknown,
   ASVideoNodePlayerStateInitialLoading,
   ASVideoNodePlayerStateReadyToPlay,
@@ -24,7 +24,7 @@ typedef enum {
   ASVideoNodePlayerStateLoading,
   ASVideoNodePlayerStatePaused,
   ASVideoNodePlayerStateFinished
-} ASVideoNodePlayerState;
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,11 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play;
 - (void)pause;
 - (BOOL)isPlaying;
+- (void)resetToPlaceholder;
 
 @property (nullable, nonatomic, strong, readwrite) AVAsset *asset;
 /**
  ** @abstract The URL with which the asset was initialized.
- ** @discussion Setting the URL will overwrite the current asset with a newly created AVURLAsset created from the given URL, and AVAsset *asset will point to that newly created AVURLAsset.  Please don't set both assetURL and asset.
+ ** @discussion Setting the URL will override the current asset with a newly created AVURLAsset created from the given URL, and AVAsset *asset will point to that newly created AVURLAsset.  Please don't set both assetURL and asset.
  ** @return Current URL the asset was initialized or nil if no URL was given.
  **/
 @property (nullable, nonatomic, strong, readwrite) NSURL *assetURL;
@@ -51,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong, readwrite) AVAudioMix *audioMix;
 
 @property (nullable, nonatomic, strong, readonly) AVPlayer *player;
+@property (nullable, nonatomic, strong, readonly) AVPlayerLayer *playerLayer;
 @property (nullable, nonatomic, strong, readonly) AVPlayerItem *currentItem;
 
 
@@ -69,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int32_t periodicTimeObserverTimescale;
 
 //! Defaults to AVLayerVideoGravityResizeAspect
-@property (nonatomic) NSString *gravity;
+@property (nonatomic, copy) NSString *gravity;
 
 @property (nullable, nonatomic, weak, readwrite) id<ASVideoNodeDelegate, ASNetworkImageNodeDelegate> delegate;
 
@@ -141,12 +143,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)videoNodeDidRecoverFromStall:(ASVideoNode *)videoNode;
 
-// Below are deprecated methods.  To be removed in ASDK 2.0 release
-- (void)videoPlaybackDidFinish:(ASVideoNode *)videoNode __deprecated;
-- (void)videoNodeWasTapped:(ASVideoNode *)videoNode __deprecated;
-- (void)videoNode:(ASVideoNode *)videoNode didPlayToSecond:(NSTimeInterval)second __deprecated;
+@end
+
+@interface ASVideoNode (Unavailable)
+
+- (instancetype)initWithViewBlock:(ASDisplayNodeViewBlock)viewBlock didLoadBlock:(nullable ASDisplayNodeDidLoadBlock)didLoadBlock __unavailable;
 
 @end
+
 NS_ASSUME_NONNULL_END
 #endif
 

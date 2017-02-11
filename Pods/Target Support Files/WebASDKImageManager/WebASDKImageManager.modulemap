@@ -1,6 +1,0 @@
-framework module WebASDKImageManager {
-  umbrella header "WebASDKImageManager-umbrella.h"
-
-  export *
-  module * { export * }
-}

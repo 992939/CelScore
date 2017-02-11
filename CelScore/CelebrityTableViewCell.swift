@@ -7,7 +7,6 @@
 //
 
 import AsyncDisplayKit
-import WebASDKImageManager
 import Material
 import BEMCheckBox
 import ReactiveCocoa
@@ -34,22 +33,22 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.nameNode = ASTextNode()
         let attr = [NSFontAttributeName: UIFont.systemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
-        self.nameNode.attributedString = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
+        self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebST.nickname)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .byTruncatingTail
     
-        self.profilePicNode = ASNetworkImageNode(webImage: ())
+        self.profilePicNode = ASNetworkImageNode()
         self.profilePicNode.url = URL(string: self.celebST.imageURL)
         self.profilePicNode.defaultImage = R.image.anonymous()
         self.profilePicNode.contentMode = .scaleAspectFill
-        self.profilePicNode.preferredFrameSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
+        self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = 15
         cosmosView.settings.starMargin = 1.0
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
-        self.ratingsNode.preferredFrameSize = CGSize(width: 10, height: 20)
+        self.ratingsNode.style.preferredSize = CGSize(width: 10, height: 20)
         self.ratingsNode.backgroundColor = UIColor.clear
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
@@ -71,7 +70,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         box.tintColor = Constants.kRedShade
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
-        self.switchNode.preferredFrameSize = box.frame.size
+        self.switchNode.style.preferredSize = box.frame.size
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -80,13 +79,13 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         self.backgroundNode.backgroundColor = Constants.kGreyBackground
         
         self.trendNode = ASImageNode()
-        self.trendNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.trendNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.consensusNode = ASImageNode()
-        self.consensusNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)
+        self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)
         
         self.faceNode = ASImageNode()
-        self.faceNode.preferredFrameSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.faceNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         super.init()
         self.selectionStyle = .none
@@ -100,7 +99,9 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
             .on(value: { consensus in
                 self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.crown_filling_blue()! : R.image.crown_filling_red()!
-                if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! } })
+                if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! }
+                if self.celebST.id == "0014" { print("king :\(self.celebST.isKing)") }
+            })
             .start()
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
@@ -129,7 +130,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
     //MARK: Methods
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.profilePicNode.flexBasis = ASRelativeDimension(type: .points, value: UIDevice.getRowHeight())
+        self.profilePicNode.style.flexBasis = ASDimensionMake(.points, UIDevice.getRowHeight())
         
         let minisStack = ASStackLayoutSpec(
             direction: .horizontal,
@@ -137,7 +138,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .start,
             children: [self.trendNode, self.consensusNode, self.faceNode])
-        minisStack.flexGrow = true
+        minisStack.style.flexGrow = 1
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
@@ -145,8 +146,8 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, self.ratingsNode, minisStack])
-        verticalStack.flexBasis = ASRelativeDimension(type: .percent, value: Constants.kVerticalStackPercent)
-        verticalStack.flexGrow = true
+        verticalStack.style.flexBasis = ASDimensionMake(.fraction, Constants.kVerticalStackPercent)
+        verticalStack.style.flexGrow = 1
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
@@ -154,7 +155,7 @@ final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .center,
             children: [self.profilePicNode, verticalStack, self.switchNode])
-        horizontalStack.flexBasis = ASRelativeDimension(type: .percent, value: 1)
+        horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: 2*Constants.kPadding),

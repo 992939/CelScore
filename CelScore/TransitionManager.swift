@@ -33,7 +33,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
         var celebSnapshot = UIView()
         if self.presenting {
             celebSnapshot = cell.profilePicNode.view.snapshotView(afterScreenUpdates: false)!
-            celebSnapshot.frame = container.convert(cell.profilePicNode.view.frame, from: masterVC.celebrityTableView.nodeForRow(at: selectedRow).view)
+            celebSnapshot.frame = container.convert(cell.profilePicNode.view.frame, from: masterVC.celebrityTableView.nodeForRow(at: selectedRow)?.view)
         } else {
             masterVC.view.transform = offScreenLeft
             celebSnapshot = detailVC.profilePicNode.view.snapshotView(afterScreenUpdates: false)!
@@ -62,7 +62,7 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
                 detailVC.view.transform = offScreenRight
                 masterVC.view.transform = CGAffineTransform.identity
                 let rect = masterVC.celebrityTableView.rectForRow(at: selectedRow)
-                let relativeRect = rect.offsetBy(dx: -masterVC.celebrityTableView.contentOffset.x, dy: -masterVC.celebrityTableView.contentOffset.y)
+                let relativeRect = rect.offsetBy(dx: -masterVC.celebrityTableView.view.contentOffset.x, dy: -masterVC.celebrityTableView.view.contentOffset.y)
                 celebSnapshot.frame = CGRect(x: 15.0, y: relativeRect.origin.y + 134, width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
             }
             }, completion: { _ in

@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = Button()
         self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
-        self.profilePicNode = ASNetworkImageNode(webImage: ())
+        self.profilePicNode = ASNetworkImageNode()
         super.init(nibName: nil, bundle: nil)
         
         CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
