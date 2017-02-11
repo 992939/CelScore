@@ -1,5 +1,5 @@
 //
-//  CelebrityTableViewCell.swift
+//  celebrityTableNodeCell.swift
 //  CelScore
 //
 //  Created by Gareth.K.Mensah on 5/23/15.
@@ -14,7 +14,7 @@ import ReactiveSwift
 import Result
 
 
-final class CelebrityTableViewCell: ASCellNode, BEMCheckBoxDelegate {
+final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     
     //MARK: Properties
     fileprivate let ratingsNode: ASDisplayNode

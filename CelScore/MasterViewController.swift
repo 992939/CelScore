@@ -31,14 +31,14 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
     fileprivate let socialButton: Menu
-    internal let celebrityTableView: ASTableNode
+    internal let celebrityTableNode: ASTableNode
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init() {
-        self.celebrityTableView = ASTableNode()
-        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableView.view)
+        self.celebrityTableNode = ASTableNode()
+        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableNode.view)
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
@@ -63,9 +63,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         super.viewDidAppear(animated)
         
         Motion.delay(time: 0.4) {
-            if let index = self.celebrityTableView.indexPathForSelectedRow {
-                self.celebrityTableView.performBatchUpdates({ 
-                   self.celebrityTableView.reloadRows(at: [index], with: .fade)
+            if let index = self.celebrityTableNode.indexPathForSelectedRow {
+                self.celebrityTableNode.performBatchUpdates({ 
+                   self.celebrityTableNode.reloadRows(at: [index], with: .fade)
                 }, completion: nil)
             }
             
@@ -105,11 +105,11 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.celebrityTableView.frame = Constants.kCelebrityTableViewRect
-        //self.celebrityTableView.separatorStyle = .none
-        self.celebrityTableView.backgroundColor = Color.clear
-        self.celebrityTableView.dataSource = self
-        self.celebrityTableView.delegate = self
+        self.celebrityTableNode.frame = Constants.kcelebrityTableNodeRect
+        //self.celebrityTableNode.separatorStyle = .none
+        self.celebrityTableNode.backgroundColor = Color.clear
+        self.celebrityTableNode.dataSource = self
+        self.celebrityTableNode.delegate = self
         
         let attr = [NSForegroundColorAttributeName: Color.white, NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attr
@@ -124,7 +124,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
-        self.view.addSubview(self.celebrityTableView.view)
+        self.view.addSubview(self.celebrityTableNode.view)
         view.layout(socialButton).size(socialButton.baseSize).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
         try! self.setupData()
         
@@ -259,7 +259,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
-                Motion.delay(time: 0.7){ self.celebrityTableView.view.setContentOffset(CGPoint.zero, animated:true) }})
+                Motion.delay(time: 0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
 
@@ -313,14 +313,14 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
-            .on(value: { value in node = CelebrityTableViewCell(celebrityStruct: value) })
+            .on(value: { value in node = celebrityTableNodeCell(celebrityStruct: value) })
             .start()
         return node
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movingSocialButton(onScreen: false)
-        let node = self.celebrityTableView.nodeForRow(at: indexPath) as! CelebrityTableViewCell
+        let node = self.celebrityTableNode.nodeForRow(at: indexPath) as! celebrityTableNodeCell
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
