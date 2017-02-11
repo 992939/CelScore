@@ -15,71 +15,38 @@ import Result
 struct SettingsViewModel {
     
     //MARK: Methods
-    func calculateUserRatingsPercentageSignal() -> SignalProducer <CGFloat, NoError> {
-        return SignalProducer  { observer, disposable in
-            let realm = try! Realm()
-            let userRatings = realm.objects(UserRatingsModel.self)
-            guard userRatings.count > 4 else { return observer.send(value: 0) }
-            
-            let publicList = realm.objects(ListsModel.self).filter("id = '0001'").first
-            guard let list = publicList else { return observer.send(value: 0) }
-            
-            let userRatingCount = list.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                return userRatings.enumerated().contains(where: { (_, rating: RatingsModel) -> Bool in return rating.id == item.celebId.id })
-            })
-            
-            observer.send(value: CGFloat(Double(userRatingCount.count)/Double(list.celebList.count)))
-            observer.sendCompleted()
-        }
-    }
-    
     func calculateUserAverageCelScoreSignal() -> SignalProducer <CGFloat, NoError> {
         return SignalProducer  { observer, disposable in
             let realm = try! Realm()
             let userRatings = realm.objects(UserRatingsModel.self)
             guard userRatings.count >= 10 else { observer.send(value: 5); return }
             let celscores: [Double] = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
-            let average = celscores.reduce(0, { $0 + $1 }) / Double(celscores.count)
-            observer.send(value: CGFloat(average))
+            let average = celscores.reduce(0, { $0 + $1 }) / Double(celscores.count) * 20
+            observer.send(value: CGFloat(average) / 100)
             observer.sendCompleted()
         }
     }
     
-    func calculatePositiveVoteSignal() -> SignalProducer<CGFloat, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let ratings = realm.objects(UserRatingsModel.self)
-            guard ratings.count > 4 else { observer.send(value: 0); return }
-            let positiveRatings = ratings.filter({ (ratingsModel: RatingsModel) -> Bool in
-                return ratingsModel.getCelScore() < 3 ? false : true
-            })
-            observer.send(value: CGFloat(Double(positiveRatings.count)/Double(ratings.count)))
-            observer.sendCompleted()
-        }
-    }
-    
-    func calculateSocialConsensusSignal() -> SignalProducer<CGFloat, NoError> {
+    func calculateAverageRoyaltySignal() -> SignalProducer<CGFloat, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel.self)
-            guard ratings.count > 0 else { observer.send(value: 0); return observer.sendCompleted() }
-            let variances: [Double] = ratings.map{ (ratingsModel: RatingsModel) -> Double in return ratingsModel.getAvgVariance() }
-            let averageVariance = variances.reduce(0, { $0 + $1 }) / Double(variances.count)
-            guard 0..<5 ~= averageVariance else { observer.send(value: 0); return observer.sendCompleted() }
-            let consensus: Double = 1 - Double(0.2 * averageVariance)
-            observer.send(value: CGFloat(consensus))
+            guard ratings.count > 0 else { observer.send(value: 60); return observer.sendCompleted() }
+            let royalties: [Double] = ratings.map{ (ratingModel: RatingsModel) -> Double in return ratingModel.getCelScore() }
+            let average = royalties.reduce(0, { $0 + $1 }) / Double(ratings.count)
+            observer.send(value: CGFloat(average.roundToPlaces(places: 1) / 100))
             observer.sendCompleted()
         }
     }
     
-    func calculateAverageRoyaltySignal(day: RoyalDay) -> SignalProducer<CGFloat, NoError> {
+    func calculatePrevAverageRoyaltySignal(day: PrevDay) -> SignalProducer<CGFloat, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebs = realm.objects(CelebrityModel.self)
             guard celebs.count > 0 else { observer.send(value: 60); return observer.sendCompleted() }
             let royalties: [Double] = celebs.map{ (celebModel: CelebrityModel) -> Double in
                 switch day {
-                case .Today: return celebModel.prevScore
+                case .Yesterday: return celebModel.prevScore
                 case .LastWeek: return celebModel.prevWeek
                 case .LastMonth: return celebModel.prevMonth
                 }

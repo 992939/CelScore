@@ -16,7 +16,7 @@ enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, r
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
 enum NetworkError: Int, Error { case notConnected = 1 }
-enum RoyalDay: Int { case Today = 0, LastWeek, LastMonth }
+enum PrevDay: Int { case Yesterday = 0, LastWeek, LastMonth }
 
 
 //MARK: Misc.
@@ -70,19 +70,19 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm PST, we crown the King of Hollywood."
+        case .welcomeUser: return "1. To give someone the power and title of a king or queen.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm Pacific Time, we crown the King of Hollywood."
         case .firstDetail: return "1. To perform a religious ceremony publicly.\n2. To observe a notable occasion with festivities.\n3. To honor or praise publicly.\n\nEveryday we celebrate the stars, every night we crown a monarch."
         case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation every night."
         case .loginSuccess: return "Your registration is successful!"
-        case .maxFollow: return "You've reached the maximum number of celebrities you can follow."
+        case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
-        case .countdown: return "\n\nBecause royalty isn't everything, it's the only thing."
-        case .socialSharing: return "Good fans are those who share on social media,\ndiehard fans are those who rule social media."
+        case .countdown: return "Every night at 9pm Pacific Time, we dethrone or crown the King of Hollywood.\n\nYou've now enabled the coronation countdown."
+        case .socialSharing: return "Good fans share on social media.\nDiehard fans rule social media.\n\nYou've now enabled social sharing."
         case .firstInterest: return "Your selection is automatically saved."
-        case .voteHelp: return "The voting button is enabled only for the star spangled banner view.\n\nEach vote must have all ten qualities."
-        case .infoSource: return "The profile view\n(middle in the menu)\nis based on data from search engine results.\n\nIf the information is outdated or inaccurate please let us know by filling a report in the settings."
-        case .noSharing: return "While good fans are those who share on social media,\ndiehard fans are those who rule social media.\n\nGo to settings to enable social sharing."
-        case .firstVoteDisable: return "Registration is required to honor or celebrate a star."
+        case .voteHelp: return "The voting button is for the star spangled banner view.\nEach vote must have all ten qualities."
+        case .infoSource: return "The profile view\n(middle in the menu)\nis based on search engine data.\n\nPlease fill out a report in the settings if you see any inaccuracy."
+        case .noSharing: return "Good fans share on social media.\nDiehard fans rule social media.\n\nGo to settings to enable social sharing."
+        case .firstVoteDisable: return "Registration is required to celebrate the stars."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
         case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
         case .networkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
@@ -99,7 +99,7 @@ enum OverlayInfo {
         case .maxFollow: return R.image.star_circle()!
         case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
-        case .countdown: return R.image.guillotine_big_blue()!
+        case .countdown: return R.image.crown_big_blue()!
         case .socialSharing: return R.image.social_big_blue()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.star_circle()!

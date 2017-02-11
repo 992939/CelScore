@@ -15,28 +15,12 @@ import Result
 
 class SettingsViewModelTests: XCTestCase {
     
-    func testCalculatePositiveVoteSignal() {
-        let expectation = self.expectation(description: "calculatePositiveVoteSignal callback")
-        SettingsViewModel().calculatePositiveVoteSignal().startWithValues { positive in
-            XCTAssert(positive >= 0, "calculatePositiveVoteSignal superior or equal to zero."); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("calculatePositiveVoteSignal error: \(error)") } }
-    }
-    
     func testCalculateUserAverageCelScoreSignal() {
         let expectation = self.expectation(description: "calculateUserAverageCelScoreSignal callback")
         SettingsViewModel().calculateUserAverageCelScoreSignal().startWithValues { score in
             XCTAssert(score >= 0, "calculateUserAverageCelScoreSignal superior or equal to zero.")
             expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("calculateUserAverageCelScoreSignal error: \(error)") } }
-    }
-    
-    func testCalculateSocialConsensusSignal() {
-        let expectation = self.expectation(description: "calculateSocialConsensusSignal callback")
-        SettingsViewModel().calculateSocialConsensusSignal()
-            .on(value: { consensus in XCTAssert(consensus >= 0, "calculateSocialConsensusSignal superior or equal to zero."); expectation.fulfill() })
-            .on(failed: { error in expectation.fulfill() })
-            .start()
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("calculateSocialConsensusSignal error: \(error)") } }
     }
     
     func testUpdateUserNameSignal() {

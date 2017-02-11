@@ -63,19 +63,19 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
-        SettingsViewModel().calculateAverageRoyaltySignal(day: .Today)
+        SettingsViewModel().calculateAverageRoyaltySignal()
             .on(value: { value in
                 let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
                 self.view.addSubnode(consensusBarNode) })
             .start()
         
-        SettingsViewModel().calculateAverageRoyaltySignal(day: .LastWeek)
+        SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek)
             .on(value: { value in
                 let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
                 self.view.addSubnode(publicOpinionBarNode) })
             .start()
         
-        SettingsViewModel().calculateAverageRoyaltySignal(day: .LastMonth)
+        SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth)
             .on(value: { value in
                 let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
                 self.view.addSubnode(positiveBarNode) })
@@ -178,18 +178,15 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact3Bar.setProgress(0, animated: true)
         
         Timer.after(2.seconds){ _ in
-            SettingsViewModel().calculateAverageRoyaltySignal(day: .Today)
+            SettingsViewModel().calculateAverageRoyaltySignal()
                 .on(value: { value in self.fact1Bar.setProgress(value, animated: true) })
                 .start()
-            
-            SettingsViewModel().calculateAverageRoyaltySignal(day: .LastWeek)
+            SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek)
                 .on(value: { value in self.fact2Bar.setProgress(value, animated: true) })
                 .start()
-            
-            SettingsViewModel().calculateAverageRoyaltySignal(day: .LastMonth)
+            SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth)
                 .on(value: { value in self.fact3Bar.setProgress(value, animated: true) })
                 .start()
-        
             button.isEnabled = true
         }
     }
