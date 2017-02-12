@@ -50,15 +50,15 @@ PODS:
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - RateLimit (2.1.0)
-  - ReactiveCocoa (5.0.0-alpha.6):
-    - ReactiveSwift (~> 1.0.0-rc.3)
-  - ReactiveSwift (1.0.0-rc.3):
+  - ReactiveCocoa (5.0.0):
+    - ReactiveSwift (~> 1.0.0)
+  - ReactiveSwift (1.0.0):
     - Result (~> 3.1)
-  - Realm (2.3.0):
-    - Realm/Headers (= 2.3.0)
-  - Realm/Headers (2.3.0)
-  - RealmSwift (2.3.0):
-    - Realm (= 2.3.0)
+  - Realm (2.4.2):
+    - Realm/Headers (= 2.4.2)
+  - Realm/Headers (2.4.2)
+  - RealmSwift (2.4.2):
+    - Realm (= 2.4.2)
   - Result (3.1.0)
   - RevealingSplashView (0.1.0)
   - SDWebImage (3.8.2):
@@ -91,9 +91,9 @@ DEPENDENCIES:
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
   - RateLimit (~> 2.1)
-  - ReactiveCocoa (~> 5.0.0-alpha.1)
-  - Realm (~> 2.3)
-  - RealmSwift (~> 2.3)
+  - ReactiveCocoa (~> 5.0)
+  - Realm (~> 2.4)
+  - RealmSwift (~> 2.4)
   - Result (~> 3.1.0)
   - RevealingSplashView (~> 0.1)
   - SDWebImage (~> 3.8.1)
@@ -131,10 +131,10 @@ SPEC CHECKSUMS:
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
-  ReactiveCocoa: cc8589376491836cf5b3b09e557fb490f0a46521
-  ReactiveSwift: 443cb065e9aa9451b30f0c85e9d7e9b4cec369cd
-  Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
-  RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
+  ReactiveCocoa: 60ef0da915b4f70c34ebecc3f4fb8f96af0e53d6
+  ReactiveSwift: f391724ee318a2cfd3e37dfb041cd49ecf4e7869
+  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
+  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
   RevealingSplashView: 501dd03d975ba2c4165dd463ea1c7c407fb9d13e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -146,6 +146,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: f0e64070b492d99c65eac09c8e1f1cdd7f62a59a
+PODFILE CHECKSUM: acf73b30a8b73ec5a2c1fc052c6f597f94ef5468
 
 COCOAPODS: 1.0.1
