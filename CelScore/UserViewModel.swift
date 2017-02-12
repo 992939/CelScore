@@ -25,7 +25,7 @@ struct UserViewModel {
             switch loginType {
             case .facebook:
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
-                Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
+                Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
                         let error: NSError = task.error! as NSError
                         observer.send(error: error)
@@ -35,12 +35,12 @@ struct UserViewModel {
                     observer.send(value: task)
                     observer.sendCompleted()
                     return task
-                })
+                }))
             case .twitter:
                 Twitter.sharedInstance().logIn { (session, error) -> Void in
                     guard error == nil else { return observer.send(error: error as! NSError) }
                     Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": String(session!.authToken + ";" + session!.authTokenSecret) as NSString]))
-                    Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
+                    Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
                             let error: NSError = task.error! as NSError
                             observer.send(error: error)
@@ -50,7 +50,7 @@ struct UserViewModel {
                         observer.send(value: task)
                         observer.sendCompleted()
                         return task
-                    })
+                    }))
                 }
             default: break
             }
@@ -122,9 +122,9 @@ struct UserViewModel {
     func updateCognitoSignal(object: AnyObject!, dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continue({ (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continueWith(block:({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
-                return nil })
+                return nil }))
             
             let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType.rawValue)
@@ -186,7 +186,7 @@ struct UserViewModel {
                 dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
             }
             
-            dataset.synchronize().continue({ (task: AWSTask!) -> AnyObject in
+            dataset.synchronize().continueWith(block:({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
                     let error: NSError = task.error! as NSError
                     if error.code == 8 || error.code == 10 || error.code == 13 {
@@ -199,22 +199,22 @@ struct UserViewModel {
                 observer.send(value: object)
                 observer.sendCompleted()
                 return task
-            })
+            }))
         }
     }
     
     func getFromCognitoSignal(dataSetType: CognitoDataSet) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
             
-            Constants.kCredentialsProvider.getIdentityId().continue ({ (task: AWSTask!) -> AnyObject! in
+            Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     observer.send(error: task.error as! NSError)
                     return task }
-                return nil })
+                return nil }))
             
             let syncClient: AWSCognito = AWSCognito.default()
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .userRatings ? "UserVotes" : dataSetType.rawValue )
-            dataset.synchronize().continue(with: AWSExecutor.mainThread(), with:{ (task: AWSTask!) -> AnyObject! in
+            dataset.synchronize().continueWith(executor: AWSExecutor.mainThread(), block:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
                     observer.send(error: task.error as! NSError)
                     return task }
@@ -225,7 +225,7 @@ struct UserViewModel {
                 case .userRatings:
                     dataset.getAll().forEach({ dico in
                         realm.beginWrite()
-                        let userRatings = UserRatingsModel(id: dico.0 as! String, joinedString: dico.1 as! String)
+                        let userRatings = UserRatingsModel(id: dico.0 , joinedString: dico.1)
                         userRatings.totalVotes = 1
                         realm.add(userRatings, update: true)
                         try! realm.commitWrite()

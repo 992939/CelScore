@@ -63,10 +63,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //AWS
         AWSLogger.default().logLevel = .error
-        let configuration = AWSServiceConfiguration(region: .usEast1, credentialsProvider: Constants.kCredentialsProvider)
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        let configurationAnonymous = AWSServiceConfiguration(region: .usEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
+        let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
         
         //UI

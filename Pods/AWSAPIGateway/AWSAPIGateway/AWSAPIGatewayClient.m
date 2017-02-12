@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ NSString *const AWSAPIGatewayErrorHTTPHeaderFieldsKey = @"HTTPHeaderFields";
 
 static NSString *const AWSAPIGatewayAPIKeyHeader = @"x-api-key";
 
-static NSString *const AWSAPIGatewaySDKVersion = @"2.4.10";
+static NSString *const AWSAPIGatewaySDKVersion = @"2.5.0";
 
 static int defaultChunkSize = 1024;
 
@@ -219,7 +219,7 @@ static int defaultChunkSize = 1024;
               headerParameters:(NSDictionary *)headerParameters
                           body:(id)body
                  responseClass:(Class)responseClass {
-    NSURL *URL = [self requestURL:[URLString aws_stringWithURLEncodingPath] query:queryParameters URLPathComponentsDictionary:pathParameters];
+    NSURL *URL = [self requestURL:URLString  query:queryParameters URLPathComponentsDictionary:pathParameters];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
     request.HTTPMethod = HTTPMethod;
     request.allHTTPHeaderFields = headerParameters;
@@ -374,7 +374,9 @@ static int defaultChunkSize = 1024;
         [mutableURLString appendFormat:@"?%@", queryString];
     }
 
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.configuration.baseURL, mutableURLString]];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", self.configuration.baseURL, mutableURLString];
+    
+    return [NSURL URLWithString:urlString];
 }
 
 // TODO: merge it with - (void)processParameters:(NSDictionary *)parameters queryString:(NSMutableString *)queryString in AWSURLRequestSerialization.m

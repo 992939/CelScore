@@ -32,7 +32,7 @@ struct CelScoreViewModel {
             case .ratings: awsCall = serviceClient.celebratingservicePost()
             }
             
-            awsCall.continue({ (task: AWSTask!) -> AnyObject! in
+            awsCall.continueWith(block: { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 guard task.isCancelled == false else { observer.sendInterrupted(); return task }
                 

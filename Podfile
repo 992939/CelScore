@@ -12,11 +12,12 @@ plugin 'cocoapods-keys', {
 def shared_pods
     pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
     pod 'Result', '~> 3.1.0'
-    pod 'Realm', '~> 2.3'
-    pod 'RealmSwift', '~> 2.3'
+    pod 'Realm', '~> 2.4'
+    pod 'RealmSwift', '~> 2.4'
     pod 'AsyncDisplayKit', '~> 2.1'
-    pod 'AWSCognito', '~> 2.4.9'
-    pod 'AWSAPIGateway', '~> 2.4.9'
+    pod 'AWSCognito', '~> 2.5'
+    pod 'AWSAPIGateway', '~> 2.5'
+    pod 'AWSPinpoint', '~> 2.5'
     pod 'BEMCheckBox', '~> 1.4'
 end
 

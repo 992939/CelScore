@@ -16,7 +16,7 @@ struct Constants {
     //Universal
     static let kCognitoIdentityPoolId: String = CelscoreKeys().kCognitoIdentityPoolId()
     static let kAPIKey: String = CelscoreKeys().kAPIKey()
-    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .usEast1, identityPoolId: kCognitoIdentityPoolId)
+    static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
     static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
     static let kAlertAction: String = "Long live the King!"
     
