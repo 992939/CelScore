@@ -351,8 +351,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         })
     }
     
-    //MARK: SideNavigationControllerDelegate
-    func navigationDrawerDidClose(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
+    //MARK: NavigationDrawerControllerDelegate
+    func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didClose position: NavigationDrawerPosition) {
         self.navigationDrawerController?.isEnabled = false
         SettingsViewModel().loggedInAsSignal()
             .on(value: { _ in self.movingSocialButton(onScreen: false) })
@@ -365,7 +365,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .start()
     }
     
-    func navigationDrawerWillOpen(_ navigationDrawerController: NavigationDrawerController, position: NavigationDrawerPosition) {
+    func navigationDrawerController(navigationDrawerController: NavigationDrawerController, willOpen position: NavigationDrawerPosition) {
         self.navigationDrawerController!.leftViewController?.viewDidAppear(true)
     }
     
