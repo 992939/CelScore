@@ -19,6 +19,7 @@
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
 		00252D791CC6EC6E007CA826 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00252D781CC6EC6E007CA826 /* R.generated.swift */; };
+		002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D18AA1E5030BE00E59DDF /* libz.tbd */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
 		0036DD581C01490C000F533F /* RFEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD561C01490C000F533F /* RFEnums.swift */; };
 		0036DD591C01490C000F533F /* RFExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0036DD571C01490C000F533F /* RFExtensions.swift */; };
@@ -126,6 +127,7 @@
 		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
 		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
 		00252D781CC6EC6E007CA826 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		002D18AA1E5030BE00E59DDF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0036DD561C01490C000F533F /* RFEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFEnums.swift; sourceTree = "<group>"; };
 		0036DD571C01490C000F533F /* RFExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFExtensions.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */,
 				00159AE01E0F7BAD00EEA05B /* BuddyBuildSDK.framework in Frameworks */,
 				003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */,
 				00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */,
@@ -423,6 +426,7 @@
 		272C664E3752319CD2080EBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				002D18AA1E5030BE00E59DDF /* libz.tbd */,
 				003387A11C631BC3008AB0D8 /* QuartzCore.framework */,
 				00F6C9E11B353A670078CA6E /* libsqlite3.dylib */,
 				8C85D2008FC2F053995BEFFD /* Pods.framework */,
