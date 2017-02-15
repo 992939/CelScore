@@ -11,6 +11,7 @@ import RealmSwift
 import Fabric
 import TwitterKit
 import AWSCognito
+import AWSPinpoint
 import Material
 import RateLimit
 import Fabric
@@ -68,6 +69,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
+        //AWSPinpointTargeting.register(with: configuration!, forKey: "USWest2PinpointTargeting")
+        AWSPinpointTargeting.default()
         
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
