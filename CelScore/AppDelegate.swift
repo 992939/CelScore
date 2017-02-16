@@ -69,7 +69,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
-        //AWSPinpointTargeting.register(with: configuration!, forKey: "USWest2PinpointTargeting")
+        AWSPinpointTargeting.register(with: configuration!, forKey: "CelScore")
         AWSPinpointTargeting.default()
         
         //UI

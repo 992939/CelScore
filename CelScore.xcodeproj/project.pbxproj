@@ -563,8 +563,12 @@
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 6AEA7P6XSJ;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1300,6 +1304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CelebrityScore;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1317,7 +1322,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CelScore/CelebrityScore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6AEA7P6XSJ;
 				ENABLE_BITCODE = YES;
@@ -1332,6 +1337,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CelebrityScore;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = CelScore/Header.h;
 				SWIFT_VERSION = 3.0;
