@@ -66,11 +66,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSLogger.default().logLevel = .error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
+        AWSPinpointTargeting.register(with: configuration!, forKey: "USWest2PinpointTargeting")
+        AWSPinpointTargeting.default()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
-        AWSPinpointTargeting.register(with: configuration!, forKey: "CelScore")
-        AWSPinpointTargeting.default()
         
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()

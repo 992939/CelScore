@@ -21,6 +21,7 @@ import FBSDKCoreKit
 import MessageUI
 import Timepiece
 import Accounts
+import AWSPinpoint
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
@@ -106,7 +107,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         super.viewDidLoad()
         
         self.celebrityTableNode.frame = Constants.kcelebrityTableNodeRect
-        //self.celebrityTableNode.separatorStyle = .none
         self.celebrityTableNode.backgroundColor = Color.clear
         self.celebrityTableNode.dataSource = self
         self.celebrityTableNode.delegate = self
