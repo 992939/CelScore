@@ -99,11 +99,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
-        if gaugeView.value > finalSlow { gaugeView.value += 0.5 }
+        if gaugeView.value > finalSlow { gaugeView.value += 0.05 }
         else if gaugeView.value > thirdSlow { gaugeView.value += 0.1 }
         else if gaugeView.value > secondSlow { gaugeView.value += 0.15 }
         else if gaugeView.value > firstSlow { gaugeView.value += 0.25 }
-        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.5 }
+        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.75 }
         else { timer.invalidate() }
     }
     
