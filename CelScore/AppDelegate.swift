@@ -20,6 +20,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
 import SafariServices
+import UserNotifications
 
 
 @UIApplicationMain
@@ -28,6 +29,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Property
     var window: UIWindow?
+    var pinpoint: AWSPinpoint?
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -66,8 +68,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSLogger.default().logLevel = .error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        AWSPinpointTargeting.register(with: configuration!, forKey: "USWest2PinpointTargeting")
-        AWSPinpointTargeting.default()
+        
+        pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+        //let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "783417076", launchOptions: launchOptions)
+        //pinpoint = AWSPinpoint.init(configuration:pinpointConfig)
+        
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        UIApplication.shared.registerForRemoteNotifications()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
@@ -157,6 +166,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
         _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
+    }
+    
+    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+    }
+
+    
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }
     func applicationWillEnterForeground(_ application: UIApplication) { }
