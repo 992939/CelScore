@@ -31,7 +31,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
-    fileprivate let socialButton: Menu
+    fileprivate let socialButton: FABMenu
     internal let celebrityTableNode: ASTableNode
     
     //MARK: Initializers
@@ -43,7 +43,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
-        self.socialButton = Menu()
+        self.socialButton = FABMenu()
         self.celebSearchBar = UISearchBar()
         super.init(nibName: nil, bundle: nil)
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
@@ -63,7 +63,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Motion.delay(time: 0.4) {
+        Motion.delay(0.4) {
             if let index = self.celebrityTableNode.indexPathForSelectedRow {
                 self.celebrityTableNode.performBatchUpdates({ 
                    self.celebrityTableNode.reloadRows(at: [index], with: .fade)
@@ -173,7 +173,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
         account.requestAccessToAccounts(with: accountType, options: nil) { (success: Bool, error: Error?) in
-            if success == false { Motion.delay(time: 3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
+            if success == false { Motion.delay(3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
         }
         return ""
     }
@@ -189,7 +189,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 let alertVC = PMAlertController(title: "To Join", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                    Motion.delay(time: 0.5) { self.handleMenu(open: true) }
+                    Motion.delay(0.5) { self.handleMenu(open: true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -238,13 +238,13 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
-                    Motion.delay(time: 2) { self.present(alertVC, animated: true, completion: nil) }
+                    Motion.delay(2) { self.present(alertVC, animated: true, completion: nil) }
                 }
                 return firstTime == false
             })
             .flatMapError { _ in SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-            .on(value: { celebInfo in Motion.delay(time: 1) {
+            .on(value: { celebInfo in Motion.delay(1) {
                     TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
             })
@@ -259,7 +259,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
-                Motion.delay(time: 0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
+                Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
 
@@ -268,28 +268,22 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         if open || (open == false && self.socialButton.isOpened == false){
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate(rotation: 1))
-            first?.setImage(image, for: .normal)
-            first?.setImage(image, for: .highlighted)
+            self.socialButton.fabButton?.motion([Motion.rotationAngle(45)])
+            self.socialButton.fabButton?.setImage(image, for: .normal)
+            self.socialButton.fabButton?.setImage(image, for: .highlighted)
         } else if self.socialButton.isOpened {
             self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            let first: Button? = self.socialButton.views.first as? Button
-            first?.animate(animation: Motion.rotate(rotation: 1))
-            first?.setImage(image, for: .normal)
-            first?.setImage(image, for: .highlighted)
+            self.socialButton.fabButton?.motion([Motion.rotationAngle(45)])
+            self.socialButton.fabButton?.setImage(image, for: .normal)
+            self.socialButton.fabButton?.setImage(image, for: .highlighted)
         }
     }
 
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? 0 : 70
         self.socialButton.close()
-        
-        self.socialButton.animate(animation: Motion.animate(group: [
-            Motion.rotate(rotation: 5),
-            Motion.translateY(by: y)
-        ]))
+        self.socialButton.fabButton?.motion([Motion.translateY(y),Motion.rotationAngle(45)])
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }
@@ -324,7 +318,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         let detailVC = DetailViewController(celebrityST: node.celebST)
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
-        Motion.delay(time: 0.2) { self.present(detailVC, animated: true, completion: nil) }
+        Motion.delay(0.2) { self.present(detailVC, animated: true, completion: nil) }
     }
     
     func showSearchBar() {
@@ -359,7 +353,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .on(failed: { _ in
                 self.diffCalculator.rows = []
                 self.changeList()
-                Motion.delay(time: 1.0) { self.movingSocialButton(onScreen: true)
+                Motion.delay(1.0) { self.movingSocialButton(onScreen: true)
                 }
             })
             .start()

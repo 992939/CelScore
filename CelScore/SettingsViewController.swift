@@ -163,7 +163,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         alertVC.addAction(PMAlertAction(title: "Continue", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal()
-                .on(value: { _ in Motion.delay(time: 1.0) { self.navigationDrawerController!.closeLeftView() } })
+                .on(value: { _ in Motion.delay(1.0) { self.navigationDrawerController!.closeLeftView() } })
                 .start()
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
@@ -202,7 +202,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: SFSafariViewControllerDelegate
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        Motion.delay(time: 0.75) {
+        Motion.delay(0.75) {
             self.navigationDrawerController!.isEnabled = true
             self.navigationDrawerController!.closeLeftView()
         }

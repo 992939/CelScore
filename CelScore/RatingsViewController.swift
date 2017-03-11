@@ -119,7 +119,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
             .observe(on: UIScheduler())
             .on(value: { first in let firstTime = first as! Bool
                 guard firstTime else { return }
-                Motion.delay(time: 0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
+                Motion.delay(0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
                 TAOverlay.setCompletionBlock({ _ in
                     SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstVoteDisable).start()
                 })

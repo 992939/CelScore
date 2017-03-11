@@ -13,6 +13,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import MessageUI
 import Material
+import Motion
 import Result
 import PMAlertController
 
@@ -25,7 +26,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let celscoreVC: CelScoreViewController
     fileprivate let voteButton: Button
     fileprivate let celebST: CelebrityStruct
-    fileprivate let socialButton: Menu
+    fileprivate let socialButton: FABMenu
     fileprivate var previousIndex: Int = 1
     internal let profilePicNode: ASNetworkImageNode
     
@@ -38,7 +39,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
         self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
         self.voteButton = Button()
-        self.socialButton = Menu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
+        self.socialButton = FABMenu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.profilePicNode = ASNetworkImageNode()
         super.init(nibName: nil, bundle: nil)
         
@@ -66,7 +67,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpVoteButton()
         
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
-        let first: Button? = self.socialButton.views.first as? Button
+        let first: Button? = self.socialButton.subviews.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
                 if (status as! Bool) == true {
@@ -89,7 +90,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
-                    Motion.delay(time: 1.5) { self.present(alertVC, animated: true, completion: nil) }
+                    Motion.delay(1.5) { self.present(alertVC, animated: true, completion: nil) }
                 }
                 return firstTime == false })
             .start()
@@ -129,12 +130,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-        self.voteButton.animate(animation: Motion.animate(group: [
+        self.voteButton.animate(Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: -(Constants.kFabDiameter + 100))
             ]))
         
-        self.socialButton.animate(animation: Motion.animate(group: [
+        self.socialButton.animate(Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: Constants.kPadding + 100)
             ]))
@@ -147,18 +148,18 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func hideButtons() {
-        let first: Button? = self.socialButton.views.first as? Button
-        first!.animate(animation: Motion.animate(group: [
+        
+        self.socialButton.fabButton.animate(Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: -(Constants.kPadding + 100))
             ]))
         
-        self.socialButton.animate(animation: Motion.animate(group: [
+        self.socialButton.animate(Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: -(Constants.kPadding + 100))
             ]))
         
-        self.voteButton.animate(animation: Motion.animate(group: [
+        self.voteButton.animate(Motion.animate(group: [
             Motion.rotate(rotation: 3),
             Motion.translateX(by: Constants.kFabDiameter + 100)
             ]))
@@ -167,7 +168,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func backAction() {
         self.hideButtons()
         RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
-        Motion.delay(time: 0.15){ self.dismiss(animated: true, completion: nil) }
+        Motion.delay(0.15){ self.dismiss(animated: true, completion: nil) }
     }
     
     func infoAction() {
@@ -190,26 +191,23 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                Motion.delay(time: 2.5) {
+                Motion.delay(2.5) {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                     self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
-                }}
-            .delay(2, on: QueueScheduler.main)
-            .flatMapError { _ in .empty }
-            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                return SettingsViewModel().getSettingSignal(settingType: .onCountdown)}
-            .map { value in let isConsensus = value as! Bool
-                let hours = self.getCountdownHours()
-                let message = isConsensus ? "Thank you for celebrating!\n\n\(hours) hour(s) left until the coronation." : "Thank you for celebrating!"
-                TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                }
+                Motion.delay(5) {
+                    let hours = self.getCountdownHours()
+                    let message = "Thank you for watching the throne!\n\n\(hours) hour(s) left until the coronation."
+                    TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
+                    TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                }
             }
             .start()
     }
     
     func trollAction() {
-        Motion.delay(time: 0.5) {
+        Motion.delay(0.5) {
             SettingsViewModel().calculateUserAverageCelScoreSignal()
                 .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
                 .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NoError> in
@@ -247,10 +245,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
 
     func openHandleMenu() {
-        let first: Button? = self.socialButton.views.first as? Button
+        let first: FABButton? = self.socialButton.views.first as? FABButton
         first?.backgroundColor = Constants.kBlueShade
         first?.pulseAnimation = .centerWithBacking
-        first?.animate(animation: Motion.rotate(rotation: 1))
+        first?.motion.rotate(rotation: 1)
         self.socialButton.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
         first?.setImage(image, for: .normal)
@@ -258,17 +256,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func closeHandleMenu() {
-        let first: Button? = self.socialButton.views.first as? Button
-        if self.socialButton.isOpened { first?.animate(animation: Motion.rotate(rotation: 1)) }
+        if self.socialButton.isOpened { self.socialButton.motion([.rotate(1)]) }
         self.socialButton.close()
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
                 if (status as! Bool) == true {
-                    first?.setImage(R.image.ic_add_black()!, for: .normal)
-                    first?.setImage(R.image.ic_add_black()!, for: .highlighted)
+                    self.socialButton.fabButton.setImage(R.image.ic_add_black()!, for: .normal)
+                    self.socialButton.fabButton.setImage(R.image.ic_add_black()!, for: .highlighted)
                 } else {
-                    first?.setImage(R.image.cross()!, for: .normal)
-                    first?.setImage(R.image.cross()!, for: .highlighted)
+                    self.socialButton.fabButton.setImage(R.image.cross()!, for: .normal)
+                    self.socialButton.fabButton.setImage(R.image.cross()!, for: .highlighted)
                 }
             }).start()
         
@@ -293,7 +290,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                         TAOverlay.show(withLabel: SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
                                        image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
                         return }
-                    self.present(socialVC, animated: true, completion: { Motion.delay(time: 2.0) { self.socialButton.close() }})
+                    self.present(socialVC, animated: true, completion: { Motion.delay(2.0) { self.socialButton.close() }})
                 }})
             .start()
     }
@@ -319,7 +316,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.removeTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
         
-        Motion.delay(time: 1) {
+        Motion.delay(1) {
             self.voteButton.pulseAnimation = .centerWithBacking
             self.voteButton.pulse()
         }
@@ -397,7 +394,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             self.voteButton.removeTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
             self.voteButton.addTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
-            completion: { _ in Motion.delay(time: 2) {
+            completion: { _ in Motion.delay(2) {
                 self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulse() }
         })

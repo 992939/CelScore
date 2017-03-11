@@ -63,7 +63,7 @@ extension Supportable where Self: UIViewController {
         mail.setToRecipients(["support@greyecology.io"])
         mail.setSubject("CelScore Issue")
         mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
-        Motion.delay(time: 0.5, execute: { self.present(mail, animated: true, completion: nil) })
+        Motion.delay(0.5, execute: { self.present(mail, animated: true, completion: nil) })
     }
     
     func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
@@ -71,7 +71,7 @@ extension Supportable where Self: UIViewController {
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
         alertVC.addAction(PMAlertAction(title: "Contact Us", style: .default, action: { _ in
-            self.dismiss(animated: true, completion: { _ in Motion.delay(time: 0.5) { self.sendEmail() }})
+            self.dismiss(animated: true, completion: { _ in Motion.delay(0.5) { self.sendEmail() }})
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
@@ -79,7 +79,7 @@ extension Supportable where Self: UIViewController {
     }
 }
 
-@objc protocol Sociable: HUDable, Supportable, MenuDelegate {
+@objc protocol Sociable: HUDable, Supportable, FABMenuDelegate {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
@@ -147,8 +147,8 @@ extension Sociable where Self: UIViewController {
         }
     }
     
-    func setUpSocialButton(menu: Menu, buttonColor: UIColor) {
-        let btn1: FabButton = FabButton()
+    func setUpSocialButton(menu: FABMenu, buttonColor: UIColor) {
+        let btn1: FABButton = FABButton()
         btn1.depthPreset = .depth2
         btn1.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
@@ -158,7 +158,7 @@ extension Sociable where Self: UIViewController {
         btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
         
         var image = R.image.facebooklogo()!
-        let btn2: FabButton = FabButton()
+        let btn2: FABButton = FABButton()
         btn2.tag = 1
         btn2.contentMode = .scaleToFill
         btn2.depthPreset = .depth1
@@ -170,7 +170,7 @@ extension Sociable where Self: UIViewController {
         btn2.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         image = R.image.twitterlogo()!
-        let btn3: FabButton = FabButton()
+        let btn3: FABButton = FABButton()
         btn3.tag = 2
         btn3.contentMode = .scaleToFill
         btn3.depthPreset = .depth1
@@ -181,8 +181,8 @@ extension Sociable where Self: UIViewController {
         btn3.image = image
         btn3.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
-        menu.direction = .up
+        //menu.direction = .up
         menu.delegate = self
-        menu.views = [btn1, btn2, btn3]
+        menu.subviews = [btn1, btn2, btn3]
     }
 }

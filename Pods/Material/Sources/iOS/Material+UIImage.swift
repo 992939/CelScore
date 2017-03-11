@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 - 2016, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.com>.
+ * Copyright (C) 2015 - 2017, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.com>.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -131,10 +131,20 @@ extension UIImage {
      - Returns: A UIImage that is the color passed in.
      */
     open class func image(with color: UIColor, size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, Screen.scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.translateBy(x: 0.0, y: -size.height)
+        
+        context.setBlendMode(.multiply)
+        
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
-        UIRectFill(rect)
+        context.fill(rect)
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image?.withRenderingMode(.alwaysOriginal)
@@ -168,7 +178,7 @@ extension UIImage {
 
 extension UIImage {
     /**
-     Creates an clear image.
+     Creates a clear image.
      - Returns: A UIImage that is clear.
      */
     open class func clear(size: CGSize = CGSize(width: 16, height: 16)) -> UIImage? {
