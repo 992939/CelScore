@@ -33,9 +33,6 @@ PODS:
   - Material (2.5.2):
     - Material/Core (= 2.5.2)
   - Material/Core (2.5.2)
-  - Motion (1.0.5):
-    - Motion/Core (= 1.0.5)
-  - Motion/Core (1.0.5)
   - PINCache (3.0.1-beta.2):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
     - PINCache/Core (= 3.0.1-beta.2)
@@ -91,7 +88,6 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.5)
-  - Motion (~> 1.0)
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
   - RateLimit (~> 2.1)
@@ -129,7 +125,6 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: 00ae261fa04dd3f3f8584d07e44ac658fa1bc6fd
-  Motion: 35d2c694cb62b0325c62504e15ffdf3cc3cc7d39
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
@@ -151,6 +146,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 480c62adad76f8288945bc3179df54ba75d7c9ef
+PODFILE CHECKSUM: 0707106031eb1ec18299edc85fdf385437e8c8a4
 
 COCOAPODS: 1.0.1

@@ -13,7 +13,6 @@ import ReactiveCocoa
 import ReactiveSwift
 import MessageUI
 import Material
-import Motion
 import Result
 import PMAlertController
 
@@ -131,16 +130,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func showingButtons() {
         self.voteButton.animate(Motion.animate(group: [
-            Motion.rotate(rotation: 3),
-            Motion.translateX(by: -(Constants.kFabDiameter + 100))
+            Motion.rotation(angle: 3),
+            Motion.translateX(to: -(Constants.kFabDiameter + 100))
             ]))
         
         self.socialButton.animate(Motion.animate(group: [
-            Motion.rotate(rotation: 3),
-            Motion.translateX(by: Constants.kPadding + 100)
+            Motion.rotation(angle: 3),
+            Motion.translateX(to: Constants.kPadding + 100)
             ]))
 
-        for subview in self.socialButton.views.enumerated() {
+        for subview in self.socialButton.subviews.enumerated() {
             if subview.element.tag == 1 || subview.element.tag == 2 {
                 subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
             }
@@ -149,19 +148,19 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func hideButtons() {
         
-        self.socialButton.fabButton.animate(Motion.animate(group: [
-            Motion.rotate(rotation: 3),
-            Motion.translateX(by: -(Constants.kPadding + 100))
+        self.socialButton.fabButton?.animate(Motion.animate(group: [
+            Motion.rotation(angle: 3),
+            Motion.translateX(to: -(Constants.kPadding + 100))
             ]))
         
         self.socialButton.animate(Motion.animate(group: [
-            Motion.rotate(rotation: 3),
-            Motion.translateX(by: -(Constants.kPadding + 100))
+            Motion.rotation(angle: 3),
+            Motion.translateX(to: -(Constants.kPadding + 100))
             ]))
         
         self.voteButton.animate(Motion.animate(group: [
-            Motion.rotate(rotation: 3),
-            Motion.translateX(by: Constants.kFabDiameter + 100)
+            Motion.rotation(angle: 3),
+            Motion.translateX(to: Constants.kFabDiameter + 100)
             ]))
     }
     
@@ -186,22 +185,21 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
             .map { userRatings in
-                let first: Button? = self.socialButton.views.first as? Button
-                first?.backgroundColor = Constants.kStarGoldShade
+                self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
                 self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
-                Motion.delay(2.5) {
+                Motion.delay(2.0, execute: {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
                     self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                     self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
-                }
-                Motion.delay(5) {
+                })
+                Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
                     let message = "Thank you for watching the throne!\n\n\(hours) hour(s) left until the coronation."
                     TAOverlay.show(withLabel: message, image: R.image.star_circle()!, options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
-                }
+                })
             }
             .start()
     }
@@ -245,33 +243,32 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
 
     func openHandleMenu() {
-        let first: FABButton? = self.socialButton.views.first as? FABButton
-        first?.backgroundColor = Constants.kBlueShade
-        first?.pulseAnimation = .centerWithBacking
-        first?.motion.rotate(rotation: 1)
+        self.socialButton.fabButton?.backgroundColor = Constants.kBlueShade
+        self.socialButton.fabButton?.pulseAnimation = .centerWithBacking
+        self.socialButton.fabButton?.layer.motion(MotionAnimation.rotationAngle(1))
         self.socialButton.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-        first?.setImage(image, for: .normal)
-        first?.setImage(image, for: .highlighted)
+        self.socialButton.fabButton?.setImage(image, for: .normal)
+        self.socialButton.fabButton?.setImage(image, for: .highlighted)
     }
     
     func closeHandleMenu() {
-        if self.socialButton.isOpened { self.socialButton.motion([.rotate(1)]) }
+        if self.socialButton.isOpened { self.socialButton.fabButton?.motion([MotionAnimation.rotationAngle(1)]) }
         self.socialButton.close()
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
                 if (status as! Bool) == true {
-                    self.socialButton.fabButton.setImage(R.image.ic_add_black()!, for: .normal)
-                    self.socialButton.fabButton.setImage(R.image.ic_add_black()!, for: .highlighted)
+                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
+                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
                 } else {
-                    self.socialButton.fabButton.setImage(R.image.cross()!, for: .normal)
-                    self.socialButton.fabButton.setImage(R.image.cross()!, for: .highlighted)
+                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .normal)
+                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
                 }
             }).start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in
-                first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+                self.socialButton.fabButton?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             }).start()
     }
     

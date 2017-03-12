@@ -125,7 +125,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableNode.view)
-        view.layout(socialButton).size(socialButton.baseSize).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
+        //view.layout(socialButton).size(socialButton.fabButton.).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -268,13 +268,13 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         if open || (open == false && self.socialButton.isOpened == false){
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            self.socialButton.fabButton?.motion([Motion.rotationAngle(45)])
+            self.socialButton.fabButton?.motionRotationAngle = 45.0
             self.socialButton.fabButton?.setImage(image, for: .normal)
             self.socialButton.fabButton?.setImage(image, for: .highlighted)
         } else if self.socialButton.isOpened {
             self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            self.socialButton.fabButton?.motion([Motion.rotationAngle(45)])
+            self.socialButton.fabButton?.motionRotationAngle = 45.0
             self.socialButton.fabButton?.setImage(image, for: .normal)
             self.socialButton.fabButton?.setImage(image, for: .highlighted)
         }
@@ -283,7 +283,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? 0 : 70
         self.socialButton.close()
-        self.socialButton.fabButton?.motion([Motion.translateY(y),Motion.rotationAngle(45)])
+        self.socialButton.fabButton?.motion([MotionAnimation.translateY(y), MotionAnimation.rotationAngle(45)])
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }

@@ -148,41 +148,41 @@ extension Sociable where Self: UIViewController {
     }
     
     func setUpSocialButton(menu: FABMenu, buttonColor: UIColor) {
-        let btn1: FABButton = FABButton()
+        let btn1: FABMenuItem = FABMenuItem()
         btn1.depthPreset = .depth2
-        btn1.pulseAnimation = .centerWithBacking
+        btn1.fabButton.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
-        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
+        btn1.fabButton.setImage(R.image.ic_add_black()!, for: .disabled)
         btn1.image = R.image.ic_add_white()!
-        btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
+        btn1.fabButton.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
         
         var image = R.image.facebooklogo()!
-        let btn2: FABButton = FABButton()
+        let btn2: FABMenuItem = FABMenuItem()
         btn2.tag = 1
         btn2.contentMode = .scaleToFill
         btn2.depthPreset = .depth1
-        btn2.pulseColor = Color.white
+        btn2.fabButton.pulseColor = Color.white
         btn2.backgroundColor = Color.indigo.darken1
         btn2.borderColor = Color.white
         btn2.borderWidth = 2
         btn2.image = image
-        btn2.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
+        btn2.fabButton.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         image = R.image.twitterlogo()!
-        let btn3: FABButton = FABButton()
+        let btn3: FABMenuItem = FABMenuItem()
         btn3.tag = 2
         btn3.contentMode = .scaleToFill
         btn3.depthPreset = .depth1
         btn3.backgroundColor = Color.lightBlue.base
-        btn3.pulseColor = Color.white
+        btn3.fabButton.pulseColor = Color.white
         btn3.borderColor = Color.white
         btn3.borderWidth = 2
         btn3.image = image
-        btn3.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
+        btn3.fabButton.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
-        //menu.direction = .up
+        menu.fabMenuDirection = .up
         menu.delegate = self
-        menu.subviews = [btn1, btn2, btn3]
+        menu.fabMenuItems = [btn1, btn2, btn3]
     }
 }
