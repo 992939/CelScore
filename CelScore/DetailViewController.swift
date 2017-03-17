@@ -68,7 +68,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                print("yaaaaaaaaas: \(self.socialButton.fabButton?.description)")
                 if (status as! Bool) == true {
                     self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
                     self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
@@ -147,12 +146,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func hideButtons() {
-        
-//        self.socialButton.fabButton?.animate(Motion.animate(group: [
-//            Motion.rotation(angle: 3),
-//            Motion.translateX(to: -(Constants.kPadding + 100))
-//            ]))
-        
         self.socialButton.animate(Motion.animate(group: [
             Motion.rotation(angle: 3),
             Motion.translateX(to: -(Constants.kPadding + 100))
