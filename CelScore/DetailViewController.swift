@@ -66,15 +66,15 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpVoteButton()
         
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
-        let first: Button? = self.socialButton.subviews.first as? Button
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
+                print("yaaaaaaaaas: \(self.socialButton.fabButton?.description)")
                 if (status as! Bool) == true {
-                    first?.setImage(R.image.ic_add_black()!, for: .normal)
-                    first?.setImage(R.image.ic_add_black()!, for: .highlighted)
+                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
+                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
                 } else {
-                    first?.setImage(R.image.cross()!, for: .normal)
-                    first?.setImage(R.image.cross()!, for: .highlighted)
+                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .normal)
+                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
                 }})
             .start()
         
@@ -95,7 +95,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .on(value: { hasRatings in first?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
+            .on(value: { hasRatings in self.socialButton.fabButton?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
             .start()
         
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
@@ -134,7 +134,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             Motion.translateX(to: -(Constants.kFabDiameter + 100))
             ]))
         
-        self.socialButton.animate(Motion.animate(group: [
+        self.socialButton.fabButton?.animate(Motion.animate(group: [
             Motion.rotation(angle: 3),
             Motion.translateX(to: Constants.kPadding + 100)
             ]))
@@ -148,10 +148,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func hideButtons() {
         
-        self.socialButton.fabButton?.animate(Motion.animate(group: [
-            Motion.rotation(angle: 3),
-            Motion.translateX(to: -(Constants.kPadding + 100))
-            ]))
+//        self.socialButton.fabButton?.animate(Motion.animate(group: [
+//            Motion.rotation(angle: 3),
+//            Motion.translateX(to: -(Constants.kPadding + 100))
+//            ]))
         
         self.socialButton.animate(Motion.animate(group: [
             Motion.rotation(angle: 3),

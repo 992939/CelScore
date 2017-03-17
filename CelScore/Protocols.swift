@@ -148,14 +148,14 @@ extension Sociable where Self: UIViewController {
     }
     
     func setUpSocialButton(menu: FABMenu, buttonColor: UIColor) {
-        let btn1: FABMenuItem = FABMenuItem()
+        let btn1 = FABButton()
         btn1.depthPreset = .depth2
-        btn1.fabButton.pulseAnimation = .centerWithBacking
+        btn1.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
         btn1.tintColor = Color.white
-        btn1.fabButton.setImage(R.image.ic_add_black()!, for: .disabled)
+        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
         btn1.image = R.image.ic_add_white()!
-        btn1.fabButton.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
+        btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
         
         var image = R.image.facebooklogo()!
         let btn2: FABMenuItem = FABMenuItem()
@@ -181,8 +181,9 @@ extension Sociable where Self: UIViewController {
         btn3.image = image
         btn3.fabButton.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
+        menu.fabButton = btn1
         menu.fabMenuDirection = .up
         menu.delegate = self
-        menu.fabMenuItems = [btn1, btn2, btn3]
+        menu.fabMenuItems = [btn2, btn3]
     }
 }
