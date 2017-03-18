@@ -59,7 +59,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
-        self.socialButton.delegate = self
         
         let navigationBarView: Toolbar = getNavigationView()
         let topView: View = getTopView()
@@ -217,6 +216,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: Sociable
+    func fabMenuWillOpen(fabMenu: FABMenu) { self.openHandleMenu() }
+    func fabMenuWillClose(fabMenu: FABMenu) { self.closeHandleMenu() }
+    
     func handleMenu(open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.isOpened { self.closeHandleMenu() }
@@ -228,14 +230,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.openHandleMenu()
                 }).start()
         }
-    }
-    
-    func fabMenuWillOpen(fabMenu: FABMenu) {
-        self.openHandleMenu()
-    }
-    
-    func fabMenuWillClose(fabMenu: FABMenu) {
-        self.closeHandleMenu()
     }
 
     func openHandleMenu() {
