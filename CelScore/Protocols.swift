@@ -148,37 +148,34 @@ extension Sociable where Self: UIViewController {
     }
     
     func setUpSocialButton(menu: FABMenu, buttonColor: UIColor) {
-        let btn1 = FABButton()
+        let btn1 = FABButton(image: R.image.ic_add_white()!, tintColor: .white)
         btn1.depthPreset = .depth2
         btn1.pulseAnimation = .centerWithBacking
         btn1.backgroundColor = buttonColor
-        btn1.tintColor = Color.white
-        btn1.setImage(R.image.ic_add_black()!, for: .disabled)
-        btn1.image = R.image.ic_add_white()!
-        btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
+        //btn1.addTarget(self, action: #selector(self.handleMenu(open:)), for: .touchUpInside)
         
         var image = R.image.facebooklogo()!
         let btn2: FABMenuItem = FABMenuItem()
         btn2.tag = 1
-        btn2.contentMode = .scaleToFill
+        //btn2.contentMode = .scaleToFill
         btn2.depthPreset = .depth1
         btn2.fabButton.pulseColor = Color.white
-        btn2.backgroundColor = Color.indigo.darken1
-        btn2.borderColor = Color.white
-        btn2.borderWidth = 2
-        btn2.image = image
+        btn2.fabButton.backgroundColor = Color.indigo.darken1
+        btn2.fabButton.borderColor = Color.white
+        btn2.fabButton.borderWidth = 2
+        btn2.fabButton.image = image
         btn2.fabButton.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         image = R.image.twitterlogo()!
         let btn3: FABMenuItem = FABMenuItem()
         btn3.tag = 2
-        btn3.contentMode = .scaleToFill
+        //btn3.contentMode = .scaleToFill
         btn3.depthPreset = .depth1
-        btn3.backgroundColor = Color.lightBlue.base
+        btn3.fabButton.backgroundColor = Color.lightBlue.base
         btn3.fabButton.pulseColor = Color.white
-        btn3.borderColor = Color.white
-        btn3.borderWidth = 2
-        btn3.image = image
+        btn3.fabButton.borderColor = Color.white
+        btn3.fabButton.borderWidth = 2
+        btn3.fabButton.image = image
         btn3.fabButton.addTarget(self, action: #selector(self.socialButton(button:)), for: .touchUpInside)
         
         menu.fabButton = btn1

@@ -59,6 +59,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.ratingsVC.delegate = self
         self.infoVC.delegate = self
         self.celscoreVC.delegate = self
+        self.socialButton.delegate = self
         
         let navigationBarView: Toolbar = getNavigationView()
         let topView: View = getTopView()
@@ -133,16 +134,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             Motion.translateX(to: -(Constants.kFabDiameter + 100))
             ]))
         
-        self.socialButton.fabButton?.animate(Motion.animate(group: [
+        self.socialButton.animate(Motion.animate(group: [
             Motion.rotation(angle: 3),
             Motion.translateX(to: Constants.kPadding + 100)
             ]))
-
-        for subview in self.socialButton.subviews.enumerated() {
-            if subview.element.tag == 1 || subview.element.tag == 2 {
-                subview.element.frame.offsetBy(dx: Constants.kPadding + 100, dy: 0)
-            }
-        }
     }
     
     func hideButtons() {
@@ -234,20 +229,26 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 }).start()
         }
     }
+    
+    func fabMenuWillOpen(fabMenu: FABMenu) {
+        self.openHandleMenu()
+    }
+    
+    func fabMenuWillClose(fabMenu: FABMenu) {
+        self.closeHandleMenu()
+    }
 
     func openHandleMenu() {
+        self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.25)])
         self.socialButton.fabButton?.backgroundColor = Constants.kBlueShade
         self.socialButton.fabButton?.pulseAnimation = .centerWithBacking
-        self.socialButton.fabButton?.layer.motion(MotionAnimation.rotationAngle(1))
-        self.socialButton.open()
         let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
         self.socialButton.fabButton?.setImage(image, for: .normal)
         self.socialButton.fabButton?.setImage(image, for: .highlighted)
+        self.socialButton.open()
     }
     
     func closeHandleMenu() {
-        if self.socialButton.isOpened { self.socialButton.fabButton?.motion([MotionAnimation.rotationAngle(1)]) }
-        self.socialButton.close()
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
                 if (status as! Bool) == true {
@@ -257,6 +258,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.socialButton.fabButton?.setImage(R.image.cross()!, for: .normal)
                     self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
                 }
+                self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
+                self.socialButton.close()
             }).start()
         
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)

@@ -125,7 +125,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableNode.view)
-        //view.layout(socialButton).size(socialButton.fabButton.).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
+
         try! self.setupData()
         
         NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -261,6 +261,10 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
                 Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
+    }
+    
+    func fabMenuDidOpen(fabMenu: FABMenu) {
+        print("Yelllllaaaaw!!!")
     }
 
     func handleMenu(open: Bool = false) {
