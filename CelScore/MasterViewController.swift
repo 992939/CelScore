@@ -21,7 +21,6 @@ import FBSDKCoreKit
 import MessageUI
 import Timepiece
 import Accounts
-import AWSPinpoint
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {

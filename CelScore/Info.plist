@@ -117,6 +117,17 @@
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>
+            <dict>
+                <key>KitInfo</key>
+                <dict>
+                    <key>AWSCognitoIdentityPoolId</key>
+                    <string>us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c</string>
+                    <key>AWSCognitoIdentityRegionType</key>
+                    <string>us-east-1</string>
+                </dict>
+                <key>KitName</key>
+                <string>AWSCognitoIdentity</string>
+            </dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
