@@ -181,8 +181,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
     
-    @nonobjc func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: @escaping () -> Void) {
-        
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         let mobileAnalytics = AWSMobileAnalytics.default()
         let eventClient = mobileAnalytics?.eventClient
         let pushNotificationEvent = eventClient?.createEvent(withEventType: "PushNotificationEvent")
@@ -203,14 +202,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
     
-    
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
-//    }
-//    
-//    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
-//    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
+    }
+
+    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+    }
     
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }
