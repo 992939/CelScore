@@ -12,6 +12,7 @@ import Fabric
 import TwitterKit
 import AWSCognito
 import AWSPinpoint
+import AWSMobileAnalytics
 import Material
 import RateLimit
 import Fabric
@@ -65,13 +66,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSLogger.default().logLevel = .verbose //.error
+        AWSLogger.default().logLevel = .error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
-        //let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "783417076", launchOptions: launchOptions)
-        //pinpoint = AWSPinpoint.init(configuration:pinpointConfig)
+        let analyticsConfig = AWSMobileAnalyticsConfiguration()
+        analyticsConfig.serviceConfiguration = configuration
+        _ = AWSMobileAnalytics.init(forAppId: "ef0864d6aecb4206b0a518b43bacb836", configuration: analyticsConfig)
         
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
@@ -93,8 +94,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
         
+        let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
+        pinpointConfig.serviceConfiguration = configuration
+        pinpoint = AWSPinpoint.init(configuration:pinpointConfig)
+        
+        let pinpointAnalyticsClient = pinpoint!.analyticsClient
+        let event = pinpointAnalyticsClient.createEvent(withEventType: "DemoCustomEvent")
+        event.addAttribute("MyAttributeValue1", forKey: "MyAttribute1")
+        event.addAttribute("MyAttributeValue2", forKey: "MyAttribute2")
+        event.addMetric(124, forKey: "DemoMetric")
+        pinpointAnalyticsClient.record(event)
+        pinpointAnalyticsClient.submitEvents()
+
         Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -167,14 +181,36 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
+    @nonobjc func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: @escaping () -> Void) {
+        
+        let mobileAnalytics = AWSMobileAnalytics.default()
+        let eventClient = mobileAnalytics?.eventClient
+        let pushNotificationEvent = eventClient?.createEvent(withEventType: "PushNotificationEvent")
+        
+        var action = "Undefined"
+        if identifier == "READ_IDENTIFIER" {
+            action = "Read"
+            print("User selected 'Read'")
+        } else if identifier == "DELETE_IDENTIFIER" {
+            action = "Deleted"
+            print("User selected 'Delete'")
+        } else {
+            action = "Undefined"
+        }
+        
+        pushNotificationEvent?.addAttribute(action, forKey: "Action")
+        eventClient?.record(pushNotificationEvent)
+        completionHandler()
     }
     
-    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
-    }
-
+    
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
+//    }
+//    
+//    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+//    }
     
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }

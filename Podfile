@@ -15,15 +15,16 @@ def shared_pods
     pod 'Realm', '~> 2.4'
     pod 'RealmSwift', '~> 2.4'
     pod 'AsyncDisplayKit', '~> 2.1'
-    pod 'AWSCognito', '~> 2.5'
-    pod 'AWSAPIGateway', '~> 2.5'
-    pod 'AWSPinpoint', '~> 2.5'
+    pod 'AWSCognito', '2.5.2'
+    pod 'AWSAPIGateway', '2.5.2'
+    pod 'AWSMobileAnalytics', '~> 2.4'
+    pod 'AWSPinpoint', '2.5.2'
     pod 'BEMCheckBox', '~> 1.4'
 end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 2.5'
+    pod 'Material', '~> 2.5.2'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'

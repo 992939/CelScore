@@ -11,6 +11,16 @@
 	</array>
 	<key>AWS</key>
 	<dict>
+		<key>MobileAnalytics</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+				<key>AppId</key>
+				<string>com.GreyEcology.CelebrityScore</string>
+			</dict>
+		</dict>
 		<key>CredentialsProvider</key>
 		<dict>
 			<key>CognitoIdentity</key>
@@ -29,7 +39,7 @@
 			<key>Default</key>
 			<dict>
 				<key>AppId</key>
-				<string>783417076</string>
+				<string>com.GreyEcology.CelebrityScore</string>
 				<key>Region</key>
 				<string>us-east-1</string>
 			</dict>
@@ -117,23 +127,23 @@
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>
-            <dict>
-                <key>KitInfo</key>
-                <dict>
-                    <key>AWSCognitoIdentityPoolId</key>
-                    <string>us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c</string>
-                    <key>AWSCognitoIdentityRegionType</key>
-                    <string>us-east-1</string>
-                </dict>
-                <key>KitName</key>
-                <string>AWSCognitoIdentity</string>
-            </dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>AWSCognitoIdentityPoolId</key>
+					<string>us-east-1:d08ddeeb-719b-4459-9a8f-91cb108a216c</string>
+					<key>AWSCognitoIdentityRegionType</key>
+					<string>us-east-1</string>
+				</dict>
+				<key>KitName</key>
+				<string>AWSCognitoIdentity</string>
+			</dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
 	<string>197662803702116</string>
 	<key>FacebookDisplayName</key>
-	<string>Celebs&amp;Nobles</string>
+	<string>Celeb&amp;Noble</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
