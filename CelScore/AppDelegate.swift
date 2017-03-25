@@ -70,10 +70,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        let analyticsConfig = AWSMobileAnalyticsConfiguration()
-        analyticsConfig.serviceConfiguration = configuration
-        _ = AWSMobileAnalytics.init(forAppId: "ef0864d6aecb4206b0a518b43bacb836", configuration: analyticsConfig)
-        
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
         }
@@ -94,7 +90,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
         
-        let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
+//        let analyticsConfig = AWSMobileAnalyticsConfiguration()
+//        analyticsConfig.serviceConfiguration = configuration
+//        analytics = AWSMobileAnalytics.init(forAppId: "ef0864d6aecb4206b0a518b43bacb836", configuration: analyticsConfig)
+        
+        let pinpointConfig = AWSPinpointConfiguration(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
         pinpointConfig.serviceConfiguration = configuration
         pinpoint = AWSPinpoint.init(configuration:pinpointConfig)
         
