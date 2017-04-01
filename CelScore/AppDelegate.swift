@@ -12,7 +12,6 @@ import Fabric
 import TwitterKit
 import AWSCognito
 import AWSPinpoint
-import AWSMobileAnalytics
 import Material
 import RateLimit
 import Fabric
@@ -89,10 +88,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
-        
-//        let analyticsConfig = AWSMobileAnalyticsConfiguration()
-//        analyticsConfig.serviceConfiguration = configuration
-//        analytics = AWSMobileAnalytics.init(forAppId: "ef0864d6aecb4206b0a518b43bacb836", configuration: analyticsConfig)
         
         let pinpointConfig = AWSPinpointConfiguration(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
         pinpointConfig.serviceConfiguration = configuration
@@ -179,27 +174,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
         _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
-    }
-    
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        let mobileAnalytics = AWSMobileAnalytics.default()
-        let eventClient = mobileAnalytics?.eventClient
-        let pushNotificationEvent = eventClient?.createEvent(withEventType: "PushNotificationEvent")
-        
-        var action = "Undefined"
-        if identifier == "READ_IDENTIFIER" {
-            action = "Read"
-            print("User selected 'Read'")
-        } else if identifier == "DELETE_IDENTIFIER" {
-            action = "Deleted"
-            print("User selected 'Delete'")
-        } else {
-            action = "Undefined"
-        }
-        
-        pushNotificationEvent?.addAttribute(action, forKey: "Action")
-        eventClient?.record(pushNotificationEvent)
-        completionHandler()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

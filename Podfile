@@ -17,7 +17,6 @@ def shared_pods
     pod 'AsyncDisplayKit', '~> 2.1'
     pod 'AWSCognito', '2.5.2'
     pod 'AWSAPIGateway', '2.5.2'
-    pod 'AWSMobileAnalytics', '~> 2.4'
     pod 'AWSPinpoint', '2.5.2'
     pod 'BEMCheckBox', '~> 1.4'
 end
