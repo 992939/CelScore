@@ -11,8 +11,6 @@ PODS:
   - AWSCognito (2.5.2):
     - AWSCore (= 2.5.2)
   - AWSCore (2.5.2)
-  - AWSMobileAnalytics (2.5.2):
-    - AWSCore (= 2.5.2)
   - AWSPinpoint (2.5.2):
     - AWSCore (= 2.5.2)
   - BEMCheckBox (1.4.0)
@@ -80,7 +78,6 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 2.1)
   - AWSAPIGateway (= 2.5.2)
   - AWSCognito (= 2.5.2)
-  - AWSMobileAnalytics (~> 2.4)
   - AWSPinpoint (= 2.5.2)
   - BEMCheckBox (~> 1.4)
   - Crashlytics (~> 3.8)
@@ -117,7 +114,6 @@ SPEC CHECKSUMS:
   AWSAPIGateway: 23636c080e2f11a160117745cbfae0bd4b15374f
   AWSCognito: a29c52e3a3d4988f01b449c8b229a51b73d1c1bf
   AWSCore: b2fe455c2c7d6653521238c5b0b0ddb67ec4f063
-  AWSMobileAnalytics: d0ce50be90fba6b1dfac20f66c18ac7dc3daf6b6
   AWSPinpoint: f33f4fed418034999d0708853b0889f6bdea676b
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -150,6 +146,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: f3358b0d1cae7769a962517b03e3391f7024b858
+PODFILE CHECKSUM: 68278464a2a54fd118c9399aa90634628664b96d
 
 COCOAPODS: 1.0.1
