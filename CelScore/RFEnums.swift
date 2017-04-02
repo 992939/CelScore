@@ -220,21 +220,6 @@ enum Qualities: Int {
         case .sexAppeal: return isMale == true ? "Handsome" : "Beauty"
         }
     }
-    
-    func text(isMale: Bool = true) -> String {
-        switch self {
-        case .talent: return "talent is"
-        case .originality: return "originality is"
-        case .authenticity: return "authenticity is"
-        case .generosity: return "generosity is"
-        case .roleModel: return "as a role model is"
-        case .hardWork: return "work ethic is"
-        case .smarts: return "smarts are"
-        case .charisma: return "charisma is"
-        case .elegance: return isMale == true ? "style is" : "elegance is"
-        case .sexAppeal: return isMale == true ? "handsomeness is" : "beauty is"
-        }
-    }
 }
 
 //MARK: ListInfo
