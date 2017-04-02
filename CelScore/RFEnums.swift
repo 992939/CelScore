@@ -79,7 +79,7 @@ enum OverlayInfo {
         case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou've now enabled the coronation countdown."
         case .socialSharing: return "Good fans share on social media.\nDiehard fans rule on social media.\n\nYou've now enabled social sharing."
         case .firstInterest: return "Your selection is automatically saved."
-        case .voteHelp: return "The voting button is for the star spangled banner view.\nEach vote must have all ten qualities."
+        case .voteHelp: return "Click on the right-side button of the segment view to vote.\nEach vote must have all ten qualities."
         case .infoSource: return "The profile view\n(middle in the menu)\nis based on search engine data.\n\nPlease fill out a report in the settings if you see any inaccuracy."
         case .noSharing: return "Good fans share on social media.\nDiehard fans rule social media.\n\nGo to settings to enable social sharing."
         case .firstVoteDisable: return "Registration is required to celebrate the stars."

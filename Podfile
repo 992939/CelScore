@@ -12,8 +12,8 @@ plugin 'cocoapods-keys', {
 def shared_pods
     pod 'ReactiveCocoa', '~> 5.0'
     pod 'Result', '~> 3.1.0'
-    pod 'Realm', '~> 2.4'
-    pod 'RealmSwift', '~> 2.4'
+    pod 'Realm', '~> 2.5'
+    pod 'RealmSwift', '~> 2.5'
     pod 'AsyncDisplayKit', '~> 2.1'
     pod 'AWSCognito', '2.5.2'
     pod 'AWSAPIGateway', '2.5.2'
@@ -23,7 +23,7 @@ end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '~> 2.5.2'
+    pod 'Material', '~> 2.6'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'SDWebImage', '~>3.8.1'
