@@ -34,9 +34,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
          UIApplication.shared.statusBarStyle = .lightContent
-        
-        //BuddyBuild
-        BuddyBuildSDK.setup()
        
         //Realm
         let config = Realm.Configuration(
@@ -81,7 +78,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
-        nav.contentViewController.view.backgroundColor = UIColor.clear
+        nav.contentViewController.view.backgroundColor = .clear
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
         statusView.backgroundColor = Constants.kBlueShade

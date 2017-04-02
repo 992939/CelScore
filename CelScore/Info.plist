@@ -196,9 +196,7 @@
 		<string>com.GreyEcology.CelebrityScore.Celebrity</string>
 	</array>
 	<key>UIAppFonts</key>
-	<array>
-		<string>icomoon2.ttf</string>
-	</array>
+	<array/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
