@@ -42,10 +42,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let maxWidth: CGFloat = Constants.kSettingsViewWidth - 2 * Constants.kPadding
         
         //Logo
-        let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 80 - 2 * UIDevice.getOffset()))
+        let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: 80))
         logoView.depthPreset = .none
-        let diameter = 60 - 2 * UIDevice.getOffset()
-        let logoCircle: Button = Button(frame: CGRect(x: (Constants.kSettingsViewWidth - diameter)/2 , y: 10 - UIDevice.getOffset()/2, width: diameter, height: diameter))
+        let diameter = 60
+        let logoCircle: Button = Button(frame: CGRect(x: (Int(Constants.kSettingsViewWidth) - diameter)/2, y: 10, width: diameter, height: diameter))
         logoCircle.setImage(R.image.mainstar()!, for: .normal)
         logoCircle.setImage(R.image.mainstar()!, for: .highlighted)
         logoCircle.shapePreset = .circle

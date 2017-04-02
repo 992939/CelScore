@@ -61,7 +61,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                 cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade })
             .start()
         
-        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: floor(UIDevice.getFollowCheckBoxPosition()), y: 30, width: 30, height: 30))
+        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: 80, y: 30, width: 30, height: 30))
         box.onAnimationType = .bounce
         box.offAnimationType = .bounce
         box.onCheckColor = Color.white

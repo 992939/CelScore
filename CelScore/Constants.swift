@@ -37,7 +37,6 @@ struct Constants {
     static let kVerticalStackPercent: CGFloat = 0.55
     static let kPositiveConsensus: Double = 70.0
     
-    static let kIPhone4_height: CGFloat = 480
     static let kIPhone5_height: CGFloat = 568
     static let kIPhone6_height: CGFloat = 667
     static let kIPhone6Plus_height: CGFloat = 736

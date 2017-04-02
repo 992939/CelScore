@@ -115,7 +115,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.celebSearchBar.delegate = self
         self.celebSearchBar.searchBarStyle = .minimal
         
-        
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kRedShade)
         setupSegmentedControl()

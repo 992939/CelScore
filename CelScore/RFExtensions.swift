@@ -126,17 +126,6 @@ extension UIDevice {
         case "iPhone7,1":                               return "iPhone 6 Plus"
         case "iPhone8,1":                               return "iPhone 6s"
         case "iPhone8,2":                               return "iPhone 6s Plus"
-        case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "iPad 2"
-        case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad 3"
-        case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad 4"
-        case "iPad4,1", "iPad4,2", "iPad4,3":           return "iPad Air"
-        case "iPad5,3", "iPad5,4":                      return "iPad Air 2"
-        case "iPad2,5", "iPad2,6", "iPad2,7":           return "iPad Mini"
-        case "iPad4,4", "iPad4,5", "iPad4,6":           return "iPad Mini 2"
-        case "iPad4,7", "iPad4,8", "iPad4,9":           return "iPad Mini 3"
-        case "iPad5,1", "iPad5,2":                      return "iPad Mini 4"
-        case "iPad6,7", "iPad6,8":                      return "iPad Pro"
-        case "AppleTV5,3":                              return "Apple TV"
         case "i386", "x86_64":                          return "Simulator"
         default:                                        return identifier
         }
@@ -145,7 +134,6 @@ extension UIDevice {
     static func getRowHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height =  70
         case Constants.kIPhone5_height: height = 70
         case Constants.kIPhone6_height: height = 80
         default: height = 80
@@ -156,7 +144,6 @@ extension UIDevice {
     static func getButtonExtraArea() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: position =  30
         case Constants.kIPhone5_height: position = 45
         case Constants.kIPhone6_height: position = 65
         default: position = 65
@@ -167,7 +154,6 @@ extension UIDevice {
     static func getPickerHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height =  65
         case Constants.kIPhone5_height: height = 80
         case Constants.kIPhone6_height: height = 160
         default: height = 180
@@ -175,32 +161,9 @@ extension UIDevice {
         return height
     }
     
-    static func getFollowCheckBoxPosition() -> CGFloat {
-        let position: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: position = Constants.kScreenWidth - 80
-        case Constants.kIPhone5_height: position = Constants.kScreenWidth - 80
-        case Constants.kIPhone6_height: position = Constants.kScreenWidth - 80
-        default: position = Constants.kScreenWidth - 80
-        }
-        return position
-    }
-    
-    static func getOffset() -> CGFloat {
-        let offset: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: offset = 30
-        case Constants.kIPhone5_height: offset = 0
-        case Constants.kIPhone6_height: offset = 0
-        default: offset = 0
-        }
-        return offset
-    }
-    
     static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 110.0
         case Constants.kIPhone5_height: diameter = 170.0
         case Constants.kIPhone6_height: diameter = 200.0
         default: diameter = 250.0
@@ -211,7 +174,6 @@ extension UIDevice {
     static func getProfilePadding() -> CGFloat {
         let padding: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: padding = 0.0
         case Constants.kIPhone5_height: padding = 0.0
         case Constants.kIPhone6_height: padding = 20.0
         default: padding = 20.0
@@ -222,7 +184,6 @@ extension UIDevice {
     static func getGaugeDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: diameter = 140.0
         case Constants.kIPhone5_height: diameter = 160.0
         case Constants.kIPhone6_height: diameter = 185.0
         default: diameter = 210.0
@@ -233,7 +194,6 @@ extension UIDevice {
     static func getSegmentHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 25.0
         case Constants.kIPhone5_height: height = 35.0
         case Constants.kIPhone6_height: height = 40.0
         default: height = 40.0
@@ -244,7 +204,6 @@ extension UIDevice {
     static func getPulseBarHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 25.0
         case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
         default: height = 30.0
@@ -255,7 +214,6 @@ extension UIDevice {
     static func getScreenshotPosition() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 95
         case Constants.kIPhone5_height: height = 65
         case Constants.kIPhone6_height: height = 80
         default: height = 75
@@ -266,7 +224,6 @@ extension UIDevice {
     static func getStarsWidth() -> CGFloat {
         let offset: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: offset = 110
         case Constants.kIPhone5_height: offset = 110
         case Constants.kIPhone6_height: offset = 140
         default: offset = 140
@@ -277,7 +234,6 @@ extension UIDevice {
     static func getFontSize() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone4_height: height = 14
         case Constants.kIPhone5_height: height = 14
         case Constants.kIPhone6_height: height = 16
         default: height = 16
