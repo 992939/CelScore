@@ -119,33 +119,6 @@ enum OverlayInfo {
     }
 }
 
-//MARK: GaugeFace
-enum GaugeFace: Int {
-    case grin
-    case bigSmile
-    case smile
-    case noSmile
-    case sadFace
-    case angry
-    case awaking
-    case tongueOut
-    case shades
-    
-    func emoji() -> String {
-        switch self {
-        case .grin: return ""
-        case .bigSmile: return ""
-        case .smile: return ""
-        case .noSmile: return ""
-        case .sadFace: return ""
-        case .angry: return ""
-        case .awaking: return ""
-        case .tongueOut: return ""
-        case .shades: return ""
-        }
-    }
-}
-
 //MARK: Info
 enum Info: Int {
     case firstName

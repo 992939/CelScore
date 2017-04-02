@@ -13,7 +13,6 @@ struct R: Rswift.Validatable {
   fileprivate static let hostingBundle = Bundle(for: R.Class.self)
   
   static func validate() throws {
-    try font.validate()
     try intern.validate()
   }
   
@@ -22,12 +21,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 2 files.
+  /// This `R.file` struct is generated, and contains static references to 1 files.
   struct file {
     /// Resource file `TAOverlay.bundle`.
     static let tAOverlayBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "TAOverlay", pathExtension: "bundle")
-    /// Resource file `icomoon2.ttf`.
-    static let icomoon2Ttf = Rswift.FileResource(bundle: R.hostingBundle, name: "icomoon2", pathExtension: "ttf")
     
     /// `bundle.url(forResource: "TAOverlay", withExtension: "bundle")`
     static func tAOverlayBundle(_: Void = ()) -> Foundation.URL? {
@@ -35,29 +32,11 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "icomoon2", withExtension: "ttf")`
-    static func icomoon2Ttf(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.icomoon2Ttf
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
     fileprivate init() {}
   }
   
-  /// This `R.font` struct is generated, and contains static references to 1 fonts.
-  struct font: Rswift.Validatable {
-    /// Font `icomoon`.
-    static let icomoon = Rswift.FontResource(fontName: "icomoon")
-    
-    /// `UIFont(name: "icomoon", size: ...)`
-    static func icomoon(size: CGFloat) -> UIKit.UIFont? {
-      return UIKit.UIFont(resource: icomoon, size: size)
-    }
-    
-    static func validate() throws {
-      if R.font.icomoon(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'icomoon' could not be loaded, is 'icomoon2.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-    }
-    
+  /// This `R.font` struct is generated, and contains static references to 0 fonts.
+  struct font {
     fileprivate init() {}
   }
   
