@@ -161,21 +161,6 @@ enum Info: Int {
         case .networth: return "Networth"
         }
     }
-    
-    func text() -> String {
-        switch self {
-        case .firstName: return "first name is"
-        case .middleName: return "middle name is"
-        case .lastName: return "last name is"
-        case .from: return "is from"
-        case .birthdate: return "was born"
-        case .height: return "height is"
-        case .zodiac: return "zodiac sign is"
-        case .status: return "relationship status is"
-        case .throne: return "day(s) on the throne are"
-        case .networth: return "networth is"
-        }
-    }
 }
 
 //MARK: Qualities
@@ -328,23 +313,6 @@ enum Zodiac : Int {
         case .capricorn: return "Capricorn"
         case .aquarius: return "Aquarius"
         case .pisces: return "Pisces"
-        }
-    }
-
-    func symbol() -> String {
-        switch self {
-            case .aries: return "♈"
-            case .taurus: return "♉"
-            case .gemini: return "♊"
-            case .cancer: return "♋"
-            case .leo: return "♌"
-            case .virgo: return "♍"
-            case .libra: return "♎"
-            case .scorpio: return "♏"
-            case .sagittarius: return "♐"
-            case .capricorn: return "♑"
-            case .aquarius: return "♒"
-            case .pisces: return "♓"
         }
     }
 }
