@@ -21,6 +21,7 @@ import MessageUI
 protocol DetailSubViewable {
     func enableVoteButton(positive: Bool)
     func rippleEffect(positive: Bool, gold: Bool)
+    func handleMenu(open: Bool)
 }
 
 @objc protocol HUDable{}
@@ -155,7 +156,7 @@ extension Sociable where Self: UIViewController {
         
         var image = R.image.facebooklogo()!
         let btn2: FABMenuItem = FABMenuItem()
-        btn2.tag = 1
+        btn2.fabButton.tag = 1
         btn2.depthPreset = .depth1
         btn2.fabButton.pulseColor = Color.white
         btn2.fabButton.backgroundColor = Color.indigo.darken1
@@ -166,7 +167,7 @@ extension Sociable where Self: UIViewController {
         
         image = R.image.twitterlogo()!
         let btn3: FABMenuItem = FABMenuItem()
-        btn3.tag = 2
+        btn3.fabButton.tag = 2
         btn3.depthPreset = .depth1
         btn3.fabButton.backgroundColor = Color.lightBlue.base
         btn3.fabButton.pulseColor = Color.white

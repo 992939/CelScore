@@ -56,11 +56,10 @@ enum OverlayInfo {
     case firstDetail
     case firstFollow
     case countdown
-    case socialSharing
+    case royalty
     case firstInterest
     case firstVoteDisable
     case firstTrollWarning
-    case noSharing
     case voteHelp
     case infoSource
     case loginError
@@ -76,18 +75,17 @@ enum OverlayInfo {
         case .loginSuccess: return "Your registration is successful!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
-        case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou've now enabled the coronation countdown."
-        case .socialSharing: return "Good fans share on social media.\nDiehard fans rule on social media.\n\nYou've now enabled social sharing."
-        case .firstInterest: return "Your selection is automatically saved."
+        case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification the results after each coronation."
+        case .royalty: return "All celebrities are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
+        case .firstInterest: return "Your selection is saved."
         case .voteHelp: return "Click on the right-side button of the segment view to vote.\nEach vote must have all ten qualities."
-        case .infoSource: return "The profile view\n(middle in the menu)\nis based on search engine data.\n\nPlease fill out a report in the settings if you see any inaccuracy."
-        case .noSharing: return "Good fans share on social media.\nDiehard fans rule social media.\n\nGo to settings to enable social sharing."
-        case .firstVoteDisable: return "Registration is required to celebrate the stars."
+        case .infoSource: return "A celeb profile info based on search engine data.\n\nPlease fill out a report in the settings in the case of inaccuracy."
+        case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
         case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
-        case .networkError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection.\n\nPlease contact us if the problem persists."
-        case .timeoutError: return "Unable to connect to the cloud.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
-        case .permissionError: return "Unable to authenticate using your \(social) account.\n\nIn Settings, check that the CelebrityScore is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .networkError: return "Unable to connect to the network.\n\nTry agian and please contact us if the problem persists."
+        case .timeoutError: return "Unable to connect to the network.\n\nCheck your network connection and that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .permissionError: return "Unable to authenticate using your \(social) account.\n\nCheck that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
     
@@ -100,11 +98,10 @@ enum OverlayInfo {
         case .firstFollow: return R.image.star_circle()!
         case .firstDetail: return R.image.medal_big_blue()!
         case .countdown: return R.image.crown_big_blue()!
-        case .socialSharing: return R.image.social_big_blue()!
+        case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.geometry_red()!
         case .voteHelp: return R.image.star_circle()!
         case .infoSource: return R.image.king()!
-        case .noSharing: return R.image.social()!
         case .firstVoteDisable: return R.image.star_circle()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!

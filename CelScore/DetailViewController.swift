@@ -178,8 +178,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(2.0, execute: {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
-                    self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-                    self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                    if userRatings.getCelScore() > 2 {
+                        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+                        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                    } else {
+                        self.voteButton.setImage(R.image.toilet()!, for: .normal)
+                        self.voteButton.setImage(R.image.toilet()!, for: .highlighted)
+                    }
+
                 })
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
@@ -222,14 +228,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func handleMenu(open: Bool = false) {
         if open { self.openHandleMenu() }
         else if self.socialButton.isOpened { self.closeHandleMenu() }
-        else {
-            SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-                .on(value: { status in
-                    guard (status as! Bool) == true else { return TAOverlay.show(withLabel: OverlayInfo.noSharing.message(), image: OverlayInfo.noSharing.logo(), options: OverlayInfo.getOptions())
-                    }
-                    self.openHandleMenu()
-                }).start()
-        }
     }
 
     func openHandleMenu() {

@@ -115,16 +115,8 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     }
     
     func requestLogin() {
-        SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable)
-            .observe(on: UIScheduler())
-            .on(value: { first in let firstTime = first as! Bool
-                guard firstTime else { return }
-                Motion.delay(0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
-                TAOverlay.setCompletionBlock({ _ in
-                    SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstVoteDisable).start()
-                })
-            })
-            .start()
+        Motion.delay(0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
+        TAOverlay.setCompletionBlock({ _ in self.delegate!.handleMenu(open: true) })
     }
     
     func isUserRatingMode() -> Bool {

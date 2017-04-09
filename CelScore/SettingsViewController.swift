@@ -95,13 +95,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Social Sharing", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty Notifications", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode) })
             .start()
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .on(value: { status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation Countdown", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notifications", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode) })
             .start()
         
@@ -236,7 +236,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .onSocialSharing : .onCountdown)).start()
         if checkBox.on {
             if checkBox.tag == 0 {
-                let alertVC = PMAlertController(title: "Social Sharing", description: OverlayInfo.socialSharing.message(), image: OverlayInfo.socialSharing.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Royalty Notifications", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
@@ -244,7 +244,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
             } else {
-                let alertVC = PMAlertController(title: "Coronation Countdown", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Coronation Notifications", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
