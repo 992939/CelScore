@@ -30,7 +30,7 @@
 #define kDefaultLimitDotRadius                  2
 #define kDefaultLimitDotColor                   [UIColor clearColor]
 
-#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:45]
+#define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:50]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
 #define kDefaultUnitOfMeasurement               @"%"

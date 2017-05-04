@@ -61,9 +61,9 @@ PODS:
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - RateLimit (2.1.0)
-  - ReactiveCocoa (5.0.0):
-    - ReactiveSwift (~> 1.0.0)
-  - ReactiveSwift (1.0.0):
+  - ReactiveCocoa (5.0.3):
+    - ReactiveSwift (~> 1.1)
+  - ReactiveSwift (1.1.0):
     - Result (~> 3.1)
   - Realm (2.5.0):
     - Realm/Headers (= 2.5.0)
@@ -102,7 +102,7 @@ DEPENDENCIES:
   - PMAlertController (~> 2.0)
   - R.swift (~> 3.2)
   - RateLimit (~> 2.1)
-  - ReactiveCocoa (~> 5.0)
+  - ReactiveCocoa (= 5.0.3)
   - Realm (~> 2.5)
   - RealmSwift (~> 2.5)
   - Result (~> 3.1.0)
@@ -146,8 +146,8 @@ SPEC CHECKSUMS:
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
-  ReactiveCocoa: 60ef0da915b4f70c34ebecc3f4fb8f96af0e53d6
-  ReactiveSwift: f391724ee318a2cfd3e37dfb041cd49ecf4e7869
+  ReactiveCocoa: 066a855f613fb72f68258771095805fdb10312d2
+  ReactiveSwift: 2f4e4a02e5a5c87ea63f5fe667163ce2a67cbb57
   Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
   RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
@@ -161,6 +161,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: a00ba5d4e3b89a4ef159ad570d8fa580de71e7af
+PODFILE CHECKSUM: 9d90bb4f63a502f433aac45b829d6f1e24f0654c
 
 COCOAPODS: 1.0.1

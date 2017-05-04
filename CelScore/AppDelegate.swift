@@ -154,14 +154,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
-    }
-
-    @nonobjc func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
-    }
-    
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
     func applicationDidEnterBackground(_ application: UIApplication) { }
     func applicationWillEnterForeground(_ application: UIApplication) { }

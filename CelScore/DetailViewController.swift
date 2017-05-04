@@ -174,7 +174,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .map { userRatings in
                 self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
                 self.enableUpdateButton()
-                self.rippleEffect(positive: false, gold: true)
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(2.0, execute: {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
@@ -215,7 +214,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func updateAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .on(value: { (userRatings:RatingsModel) in
-                self.rippleEffect(positive: false, gold: true)
                 self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
             }).start()
@@ -365,13 +363,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: RatingsViewDelegate
-    func rippleEffect(positive: Bool, gold: Bool = false) {
-        if gold { self.profilePicNode.view.rippleColor = Constants.kStarGoldShade }
-        else { self.profilePicNode.view.rippleColor = positive ? Constants.kBlueText : Constants.kRedText }
-        self.profilePicNode.view.rippleTrailColor = Color.clear
-        self.profilePicNode.view.dya_ripple(self.profilePicNode.view.bounds.center)
-    }
-    
     func enableVoteButton(positive: Bool) {
         UIView.animate(withDuration: 0.3, animations: {
             self.voteButton.setImage(R.image.whitestar()!, for: .normal)

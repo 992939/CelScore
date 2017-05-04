@@ -20,7 +20,6 @@ import MessageUI
 
 protocol DetailSubViewable {
     func enableVoteButton(positive: Bool)
-    func rippleEffect(positive: Bool, gold: Bool)
     func handleMenu(open: Bool)
 }
 

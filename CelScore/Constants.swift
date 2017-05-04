@@ -77,5 +77,5 @@ struct Constants {
     static let kMiddleVoteValue: CGFloat = 80.0
     
     //CelebrityTableVC
-    static let kMiniCircleDiameter: CGFloat = 15
+    static let kMiniCircleDiameter: CGFloat = 17
 }

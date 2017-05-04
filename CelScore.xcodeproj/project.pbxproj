@@ -17,7 +17,6 @@
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		00159AE01E0F7BAD00EEA05B /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
-		001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */; };
 		00252D791CC6EC6E007CA826 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00252D781CC6EC6E007CA826 /* R.generated.swift */; };
 		002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D18AA1E5030BE00E59DDF /* libz.tbd */; };
 		003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003387A11C631BC3008AB0D8 /* QuartzCore.framework */; };
@@ -44,6 +43,7 @@
 		006431901C6A66030062BBDB /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318F1C6A66030062BBDB /* CosmosView.swift */; };
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
+		007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
@@ -122,8 +122,6 @@
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		000EB6111CC6183B00704CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
-		001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DYARippleEffect.h"; sourceTree = "<group>"; };
-		001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DYARippleEffect.m"; sourceTree = "<group>"; };
 		00252D781CC6EC6E007CA826 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		002D18AA1E5030BE00E59DDF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		003387A11C631BC3008AB0D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -155,6 +153,7 @@
 		006431911C6A67430062BBDB /* StarLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarLayer.swift; sourceTree = "<group>"; };
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				006A61B71D0A561300D01CA0 /* Header.h */,
+				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
 				000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */,
 				000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */,
 				000215A51CFBA1B00004A8B9 /* CAEmpty.h */,
@@ -269,8 +269,6 @@
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
-				001703ED1C8FB4EC0070B811 /* UIView+DYARippleEffect.h */,
-				001703EE1C8FB4EC0070B811 /* UIView+DYARippleEffect.m */,
 				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
 				00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */,
 				004492171C3B272200FBCEFE /* Info.plist */,
@@ -540,7 +538,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Gareth.K.Mensah;
 				TargetAttributes = {
 					003AE6931D094FB70055EE56 = {
@@ -611,6 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
+				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);
@@ -1057,7 +1056,6 @@
 				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */,
-				001703EF1C8FB4EC0070B811 /* UIView+DYARippleEffect.m in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
 				0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */,
