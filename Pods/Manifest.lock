@@ -11,8 +11,6 @@ PODS:
   - AWSCognito (2.5.2):
     - AWSCore (= 2.5.2)
   - AWSCore (2.5.2)
-  - AWSPinpoint (2.5.2):
-    - AWSCore (= 2.5.2)
   - BEMCheckBox (1.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -28,6 +26,19 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.20.2):
     - FBSDKCoreKit
+  - Firebase/Core (3.15.0):
+    - FirebaseAnalytics (= 3.7.0)
+    - FirebaseCore (= 3.5.2)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.2):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - HMSegmentedControl (1.5.3)
   - Keys (1.0.0)
   - Material (2.6.3):
@@ -78,13 +89,13 @@ DEPENDENCIES:
   - AsyncDisplayKit (~> 2.1)
   - AWSAPIGateway (= 2.5.2)
   - AWSCognito (= 2.5.2)
-  - AWSPinpoint (= 2.5.2)
   - BEMCheckBox (~> 1.4)
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.7)
   - FBSDKCoreKit (~> 4.20)
   - FBSDKLoginKit (~> 4.20)
+  - Firebase/Core
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.6)
@@ -114,7 +125,6 @@ SPEC CHECKSUMS:
   AWSAPIGateway: 23636c080e2f11a160117745cbfae0bd4b15374f
   AWSCognito: a29c52e3a3d4988f01b449c8b229a51b73d1c1bf
   AWSCore: b2fe455c2c7d6653521238c5b0b0ddb67ec4f063
-  AWSPinpoint: f33f4fed418034999d0708853b0889f6bdea676b
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
@@ -122,6 +132,11 @@ SPEC CHECKSUMS:
   Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
   FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
+  Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
@@ -146,6 +161,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 72bbb5f6398553b18e56e9f92423bacf9997720d
+PODFILE CHECKSUM: a00ba5d4e3b89a4ef159ad570d8fa580de71e7af
 
 COCOAPODS: 1.0.1

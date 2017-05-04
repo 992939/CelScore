@@ -78,7 +78,7 @@ enum OverlayInfo {
         case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification the results after each coronation."
         case .royalty: return "All celebrities are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection is saved."
-        case .voteHelp: return "Click on the right-side button of the segment view to vote.\nEach vote must have all ten qualities."
+        case .voteHelp: return "Each vote must have all ten qualities."
         case .infoSource: return "A celeb profile info based on search engine data.\n\nPlease fill out a report in the settings in the case of inaccuracy."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."

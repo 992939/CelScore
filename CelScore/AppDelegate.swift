@@ -11,7 +11,6 @@ import RealmSwift
 import Fabric
 import TwitterKit
 import AWSCognito
-import AWSPinpoint
 import Material
 import RateLimit
 import Fabric
@@ -29,7 +28,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Property
     var window: UIWindow?
-    var pinpoint: AWSPinpoint?
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -66,11 +64,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-            // Enable or disable features based on authorization.
-        }
-        UIApplication.shared.registerForRemoteNotifications()
-        
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
         
@@ -85,18 +78,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
-        
-        let pinpointConfig = AWSPinpointConfiguration(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
-        pinpointConfig.serviceConfiguration = configuration
-        pinpoint = AWSPinpoint.init(configuration:pinpointConfig)
-        
-        let pinpointAnalyticsClient = pinpoint!.analyticsClient
-        let event = pinpointAnalyticsClient.createEvent(withEventType: "DemoCustomEvent")
-        event.addAttribute("MyAttributeValue1", forKey: "MyAttribute1")
-        event.addAttribute("MyAttributeValue2", forKey: "MyAttribute2")
-        event.addMetric(124, forKey: "DemoMetric")
-        pinpointAnalyticsClient.record(event)
-        pinpointAnalyticsClient.submitEvents()
 
         Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])

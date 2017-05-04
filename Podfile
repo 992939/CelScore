@@ -17,7 +17,6 @@ def shared_pods
     pod 'AsyncDisplayKit', '~> 2.1'
     pod 'AWSCognito', '2.5.2'
     pod 'AWSAPIGateway', '2.5.2'
-    pod 'AWSPinpoint', '2.5.2'
     pod 'BEMCheckBox', '~> 1.4'
 end
 
@@ -42,6 +41,7 @@ target 'CelScore' do
     pod 'RevealingSplashView', '~> 0.1'
     pod 'PMAlertController', '~> 2.0'
     pod 'Dwifft', '~> 0.5'
+    pod 'Firebase/Core'
 end
 
 target 'CelScoreTests' do
