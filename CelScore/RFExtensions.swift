@@ -224,9 +224,9 @@ extension UIDevice {
     static func getStarsWidth() -> CGFloat {
         let offset: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: offset = 110
-        case Constants.kIPhone6_height: offset = 140
-        default: offset = 140
+        case Constants.kIPhone5_height: offset = 130
+        case Constants.kIPhone6_height: offset = 160
+        default: offset = 160
         }
         return offset
     }

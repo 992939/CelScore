@@ -78,7 +78,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
             var attributedText = NSMutableAttributedString()
             let percent: Double = (celscore / value * 100 - 100).roundToPlaces(places: 1)
-            let percentage: String = "(" + (percent < 0 ? String(percent) : "+" + String(percent)) + "%) "
+            let percentage: String = "(" + String(percent) + "%) "
             let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
             attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
             let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : value >= 80 ? Constants.kBlueText : Constants.kRedText]

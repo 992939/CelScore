@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 78 images.
+  /// This `R.image` struct is generated, and contains static references to 80 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -142,6 +142,10 @@ struct R: Rswift.Validatable {
     static let mic_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_red")
     /// Image `mic_yellow`.
     static let mic_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_yellow")
+    /// Image `mini_crown_blue`.
+    static let mini_crown_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_blue")
+    /// Image `mini_crown_red`.
+    static let mini_crown_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_red")
     /// Image `nosmileFace`.
     static let nosmileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "nosmileFace")
     /// Image `nuclear_red`.
@@ -435,6 +439,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
     static func mic_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mic_yellow, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_crown_blue", bundle: ..., traitCollection: ...)`
+    static func mini_crown_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_crown_blue, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_crown_red", bundle: ..., traitCollection: ...)`
+    static func mini_crown_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_crown_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "nosmileFace", bundle: ..., traitCollection: ...)`

@@ -79,7 +79,7 @@ enum OverlayInfo {
         case .royalty: return "All celebrities are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection is saved."
         case .voteHelp: return "Each vote must have all ten qualities."
-        case .infoSource: return "A celeb profile info based on search engine data.\n\nPlease fill out a report in the settings in the case of inaccuracy."
+        case .infoSource: return "A profile is based on search engine data.\n\nPlease fill out a report in the settings in the case of inaccuracy."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negative votes, all your votes will be discarded."
         case .loginError: return "Unable to log in.\n\nIn Settings, check your network connection and that the CelebrityScore is enabled with your \(social) account.\n\nLog in again, and please contact us if the problem persists."
@@ -93,16 +93,16 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return R.image.crown_big_blue()!
         case .menuAccess: return R.image.swords_big_blue()!
-        case .loginSuccess: return R.image.star_circle()!
-        case .maxFollow: return R.image.star_circle()!
-        case .firstFollow: return R.image.star_circle()!
+        case .loginSuccess: return R.image.king()!
+        case .maxFollow: return R.image.king()!
+        case .firstFollow: return R.image.king()!
         case .firstDetail: return R.image.medal_big_blue()!
         case .countdown: return R.image.crown_big_blue()!
         case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.geometry_red()!
-        case .voteHelp: return R.image.star_circle()!
+        case .voteHelp: return R.image.king()!
         case .infoSource: return R.image.king()!
-        case .firstVoteDisable: return R.image.star_circle()!
+        case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
         case .networkError: return R.image.cloud_red()!
