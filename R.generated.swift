@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 80 images.
+  /// This `R.image` struct is generated, and contains static references to 81 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -130,6 +130,8 @@ struct R: Rswift.Validatable {
     static let info_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "info_white")
     /// Image `king_big_blue`.
     static let king_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_big_blue")
+    /// Image `king_white`.
+    static let king_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_white")
     /// Image `king`.
     static let king = Rswift.ImageResource(bundle: R.hostingBundle, name: "king")
     /// Image `mainstar`.
@@ -414,6 +416,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "king_big_blue", bundle: ..., traitCollection: ...)`
     static func king_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.king_big_blue, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "king_white", bundle: ..., traitCollection: ...)`
+    static func king_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.king_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mainstar", bundle: ..., traitCollection: ...)`

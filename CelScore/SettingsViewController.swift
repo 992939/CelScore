@@ -46,11 +46,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.depthPreset = .none
         let diameter = 60
         let logoCircle: Button = Button(frame: CGRect(x: (Int(Constants.kSettingsViewWidth) - diameter)/2, y: 10, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.mainstar()!, for: .normal)
-        logoCircle.setImage(R.image.mainstar()!, for: .highlighted)
+        logoCircle.setImage(R.image.king_white(), for: .normal)
+        logoCircle.setImage(R.image.king_white()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kRedLight
+        logoCircle.backgroundColor = Constants.kRedText
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
