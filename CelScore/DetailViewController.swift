@@ -80,7 +80,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         SettingsViewModel().getSettingSignal(settingType: .firstDetail)
             .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
                 if firstTime {
-                    let alertVC = PMAlertController(title: "To Celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
+                    let alertVC = PMAlertController(title: "to celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)

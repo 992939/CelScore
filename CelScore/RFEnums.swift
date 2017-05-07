@@ -69,9 +69,9 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "1. To give someone the power and title of a king.\n2. To declare or acknowledge someone as the best.\n3. To bring to a successful conclusion.\n\nEvery night at 9pm Pacific Time, we crown the King of Hollywood."
-        case .firstDetail: return "1. To honor or praise publicly.\n2. To perform a religious ceremony publicly.\n3. To observe a notable occasion with festivities.\n\nEveryday we celebrate the stars, every night we crown a monarch."
-        case .menuAccess: return "1. To bring together to form a unit.\n2. To enter into or engage in battle.\n3. To become a member of a group.\n\nRegistration to Celeb&Noble is for fans ready to join the coronation every night."
+        case .welcomeUser: return "At 9pm the night comes around,\nthe King of Hollywood is crowned."
+        case .firstDetail: return "Everyday we celebrate the stars,\nevery night we crown a monarch."
+        case .menuAccess: return "Join and live by the Golden Rule.\nThere are no other rules."
         case .loginSuccess: return "Your registration is successful!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "You will now get updates in the Today View.\n\nSwipe down from the top of your screen to display the view."
@@ -92,7 +92,7 @@ enum OverlayInfo {
     func logo() -> UIImage {
         switch self {
         case .welcomeUser: return R.image.crown_big_blue()!
-        case .menuAccess: return R.image.swords_big_blue()!
+        case .menuAccess: return R.image.contract_blue_big()!
         case .loginSuccess: return R.image.king()!
         case .maxFollow: return R.image.king()!
         case .firstFollow: return R.image.king()!
