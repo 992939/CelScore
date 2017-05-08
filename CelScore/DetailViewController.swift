@@ -15,6 +15,7 @@ import MessageUI
 import Material
 import Result
 import PMAlertController
+import Firebase
 
 
 final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate {
@@ -120,6 +121,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kBlueShade
+        
+        FIRAnalytics.logEvent(withName: "profile_page", parameters: [
+            "id": self.celebST.id as NSObject,
+            "name": self.celebST.nickname as NSObject
+            ])
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -42,6 +42,7 @@ target 'CelScore' do
     pod 'PMAlertController', '~> 2.0'
     pod 'Dwifft', '~> 0.5'
     pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
 end
 
 target 'CelScoreTests' do

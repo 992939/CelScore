@@ -21,6 +21,7 @@ import FBSDKCoreKit
 import MessageUI
 import Timepiece
 import Accounts
+import Firebase
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
@@ -264,6 +265,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     //MARK: Sociable
     func fabMenuWillOpen(fabMenu: FABMenu) {
+        FIRAnalytics.logEvent(withName: "login", parameters: [:])
         self.handleMenu(open: true)
     }
     

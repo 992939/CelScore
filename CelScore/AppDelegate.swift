@@ -19,6 +19,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
 import SafariServices
+import Firebase
 import UserNotifications
 
 
@@ -64,6 +65,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
+        //Firebase
+        connectToFcm()
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            
+            FIRMessaging.messaging().remoteMessageDelegate = self as? FIRMessagingDelegate
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+
+        FIRApp.configure()
+        
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
         
@@ -105,6 +127,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else { FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
         return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+            print("Message")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Message Fetched")
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("APNs token retrieved: \(deviceToken)")
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
@@ -155,6 +192,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
-    func applicationDidEnterBackground(_ application: UIApplication) { }
+    func applicationDidEnterBackground(_ application: UIApplication) { FIRMessaging.messaging().disconnect() }
     func applicationWillEnterForeground(_ application: UIApplication) { }
+    
+    func connectToFcm() {
+        FIRMessaging.messaging().connect { (error) in
+            if (error != nil) { print("Unable to connect with FCM. \(String(describing: error))")
+            } else { print("Connected to FCM.") }
+        }
+    }
 }

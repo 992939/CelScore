@@ -29,6 +29,9 @@ PODS:
   - Firebase/Core (3.15.0):
     - FirebaseAnalytics (= 3.7.0)
     - FirebaseCore (= 3.5.2)
+  - Firebase/Messaging (3.15.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 1.2.2)
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
@@ -36,7 +39,14 @@ PODS:
   - FirebaseCore (3.5.2):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
+  - FirebaseMessaging (1.2.2):
+    - FirebaseAnalytics (~> 3.7)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - HMSegmentedControl (1.5.3)
@@ -57,6 +67,7 @@ PODS:
     - PINCache (= 3.0.1-beta.2)
     - PINRemoteImage/Core
   - PMAlertController (2.0.1)
+  - Protobuf (3.3.0)
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
@@ -96,6 +107,7 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.20)
   - FBSDKLoginKit (~> 4.20)
   - Firebase/Core
+  - Firebase/Messaging
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.6)
@@ -136,6 +148,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
@@ -143,6 +156,7 @@ SPEC CHECKSUMS:
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
+  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
@@ -161,6 +175,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 9d90bb4f63a502f433aac45b829d6f1e24f0654c
+PODFILE CHECKSUM: 79e5682c8a5864a7ce53e5ffbec11c3ea7360829
 
 COCOAPODS: 1.0.1
