@@ -38,7 +38,7 @@ struct UserViewModel {
                 }))
             case .twitter:
                 Twitter.sharedInstance().logIn { (session, error) -> Void in
-                    guard error == nil else { return observer.send(error: error as! NSError) }
+                    guard error == nil else { return observer.send(error: error! as NSError) }
                     Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["api.twitter.com": String(session!.authToken + ";" + session!.authTokenSecret) as NSString]))
                     Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                         guard task.error == nil else {
@@ -97,7 +97,7 @@ struct UserViewModel {
             switch loginType {
             case .facebook:
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, age_range, gender"]).start { (FBSDKGraphRequestConnection, object: Any?, error: Error?) in
-                    guard error == nil else { print("fb error: \(error)"); return observer.send(error: error as! NSError) }
+                    guard error == nil else { print("fb error: \(String(describing: error))"); return observer.send(error: error! as NSError) }
                     observer.send(value: object as AnyObject)
                     observer.sendCompleted()
                 }
@@ -192,7 +192,7 @@ struct UserViewModel {
                     if error.code == 8 || error.code == 10 || error.code == 13 {
                         Constants.kCredentialsProvider.clearKeychain()
                     }
-                    observer.send(error: task.error as! NSError)
+                    observer.send(error: task.error! as NSError)
                     return task }
                 if case .userRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
@@ -208,7 +208,7 @@ struct UserViewModel {
             
             Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    observer.send(error: task.error as! NSError)
+                    observer.send(error: task.error! as NSError)
                     return task }
                 return nil }))
             
@@ -216,7 +216,7 @@ struct UserViewModel {
             let dataset: AWSCognitoDataset = syncClient.openOrCreateDataset(dataSetType == .userRatings ? "UserVotes" : dataSetType.rawValue )
             dataset.synchronize().continueWith(executor: AWSExecutor.mainThread(), block:{ (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else {
-                    observer.send(error: task.error as! NSError)
+                    observer.send(error: task.error! as NSError)
                     return task }
                 let realm = try! Realm()
                 switch dataSetType {
