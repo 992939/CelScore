@@ -194,7 +194,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 })
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
-                    let message = "Thank you for watching the throne.\nOnly \(hours) hour(s) left until the coronation."
+                    let thank = userRatings.getCelScore() > 4 ? "Bless" : "Thank"
+                    let message = "\(thank) you for watching the throne.\nOnly \(hours) hour(s) left until the coronation."
                     TAOverlay.show(withLabel: message, image: R.image.king()!, options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 })
@@ -271,7 +272,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id) }
             .on(value: { score in
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                                                      message: "Today on #CNN, \(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty.")
+                                                      message: "Live from #CNN: \(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty!")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
