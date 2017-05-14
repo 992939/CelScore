@@ -134,15 +134,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-        self.voteButton.animate(Motion.animate(group: [
-            Motion.rotation(angle: 3),
-            Motion.translateX(to: -(Constants.kFabDiameter + 100))
-            ]))
-        
-        self.socialButton.animate(Motion.animate(group: [
-            Motion.rotation(angle: 3),
-            Motion.translateX(to: Constants.kPadding + 100)
-            ]))
+        self.voteButton.animate(Motion.translateX(to: -(Constants.kFabDiameter + 100)))
+        self.socialButton.animate(Motion.translateX(to: Constants.kPadding + 100))
     }
     
     func hideButtons() {
