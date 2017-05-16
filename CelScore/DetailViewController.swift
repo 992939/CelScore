@@ -187,8 +187,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 })
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
-                    let thank = userRatings.getCelScore() > 4 ? "Bless" : "Thank"
-                    let message = "\(thank) you for watching the throne!\n\nOnly \(hours) hour(s) left until the coronation."
+                    let thank = userRatings.getCelScore() > 4 ? "Bless your soul" : "Thank you"
+                    let message = "\(thank) for watching the throne!\n\nOnly \(hours) hour(s) left until the coronation."
                     TAOverlay.show(withLabel: message, image: R.image.king()!, options: OverlayInfo.getOptions())
                     TAOverlay.setCompletionBlock({ _ in self.trollAction() })
                 })
