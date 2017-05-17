@@ -104,15 +104,15 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .start()
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
-            .on(failed: { _ in self.faceNode.image = R.image.emptyCircle()! })
+            .on(failed: { _ in self.faceNode.image = R.image.mini_empty()! })
             .on(value: { ratings in
                 switch ratings.getCelScore() {
-                case 90..<101: self.faceNode.image = R.image.happyFace()!
-                case 75..<90: self.faceNode.image = R.image.smileFace()!
-                case 60..<75: self.faceNode.image = R.image.nosmileFace()!
-                case 40..<60: self.faceNode.image = R.image.sadFace()!
-                case 20..<40: self.faceNode.image = R.image.angryFace()!
-                default: self.faceNode.image = R.image.emptyCircle()!
+                case 90..<101: self.faceNode.image = R.image.mini_happy()!
+                case 75..<90: self.faceNode.image = R.image.mini_smile()!
+                case 60..<75: self.faceNode.image = R.image.mini_nosmile()!
+                case 40..<60: self.faceNode.image = R.image.mini_sadFace()!
+                case 20..<40: self.faceNode.image = R.image.mini_angry()!
+                default: self.faceNode.image = R.image.mini_empty()!
                 } })
             .start()
         

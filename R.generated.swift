@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 82 images.
+  /// This `R.image` struct is generated, and contains static references to 88 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -146,10 +146,22 @@ struct R: Rswift.Validatable {
     static let mic_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_red")
     /// Image `mic_yellow`.
     static let mic_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_yellow")
+    /// Image `mini_angry`.
+    static let mini_angry = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_angry")
     /// Image `mini_crown_blue`.
     static let mini_crown_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_blue")
     /// Image `mini_crown_red`.
     static let mini_crown_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_red")
+    /// Image `mini_empty`.
+    static let mini_empty = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_empty")
+    /// Image `mini_happy`.
+    static let mini_happy = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_happy")
+    /// Image `mini_nosmile`.
+    static let mini_nosmile = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_nosmile")
+    /// Image `mini_sadFace`.
+    static let mini_sadFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_sadFace")
+    /// Image `mini_smile`.
+    static let mini_smile = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_smile")
     /// Image `nosmileFace`.
     static let nosmileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "nosmileFace")
     /// Image `nuclear_red`.
@@ -455,6 +467,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.mic_yellow, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "mini_angry", bundle: ..., traitCollection: ...)`
+    static func mini_angry(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_angry, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "mini_crown_blue", bundle: ..., traitCollection: ...)`
     static func mini_crown_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mini_crown_blue, compatibleWith: traitCollection)
@@ -463,6 +480,31 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "mini_crown_red", bundle: ..., traitCollection: ...)`
     static func mini_crown_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mini_crown_red, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_empty", bundle: ..., traitCollection: ...)`
+    static func mini_empty(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_empty, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_happy", bundle: ..., traitCollection: ...)`
+    static func mini_happy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_happy, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_nosmile", bundle: ..., traitCollection: ...)`
+    static func mini_nosmile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_nosmile, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_sadFace", bundle: ..., traitCollection: ...)`
+    static func mini_sadFace(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_sadFace, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_smile", bundle: ..., traitCollection: ...)`
+    static func mini_smile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_smile, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "nosmileFace", bundle: ..., traitCollection: ...)`
