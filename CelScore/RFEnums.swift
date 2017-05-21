@@ -69,7 +69,7 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "9pm when the night comes around,\nthe King of Hollywood is crowned."
+        case .welcomeUser: return "When 9pm comes around,\nthe King of Hollywood is crowned."
         case .firstDetail: return "Everyday we celebrate the stars,\nevery night we crown a monarch."
         case .menuAccess: return "Join to celebrate Hollywood,\nto judge her by the Golden Rule."
         case .loginSuccess: return "Your registration is complete."
