@@ -15,8 +15,8 @@ def shared_pods
     pod 'Realm', '~> 2.5'
     pod 'RealmSwift', '~> 2.5'
     pod 'AsyncDisplayKit', '~> 2.1'
-    pod 'AWSCognito', '2.5.2'
-    pod 'AWSAPIGateway', '2.5.2'
+    pod 'AWSCognito', '2.5.7'
+    pod 'AWSAPIGateway', '2.5.7'
     pod 'BEMCheckBox', '~> 1.4'
 end
 
