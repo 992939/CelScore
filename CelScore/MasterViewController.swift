@@ -71,6 +71,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             }
             
             SettingsViewModel().loggedInAsSignal()
+                .on(completed: { _ in self.movingSocialButton(onScreen: false) })
                 .on(failed: { _ in self.movingSocialButton(onScreen: true) })
                 .start()
         }

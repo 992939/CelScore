@@ -29,7 +29,7 @@ target 'CelScore' do
     pod 'R.swift', '~> 3.2'
     pod 'FBSDKLoginKit', '~> 4.20'
     pod 'FBSDKCoreKit', '~> 4.20'
-    pod 'Fabric', '~> 1.6.7'
+    pod 'Fabric', '~> 1.6.11'
     pod 'Crashlytics', '~> 3.8'
     pod 'TwitterKit', '~> 2.7'
     pod 'TwitterCore', '~> 2.7'

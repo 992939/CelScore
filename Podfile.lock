@@ -21,7 +21,7 @@ PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Dwifft (0.5)
-  - Fabric (1.6.9)
+  - Fabric (1.6.11)
   - FBSDKCoreKit (4.20.2):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.20.2):
@@ -103,7 +103,7 @@ DEPENDENCIES:
   - BEMCheckBox (~> 1.4)
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
-  - Fabric (~> 1.6.7)
+  - Fabric (~> 1.6.11)
   - FBSDKCoreKit (~> 4.20)
   - FBSDKLoginKit (~> 4.20)
   - Firebase/Core
@@ -141,7 +141,7 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
-  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
   FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
@@ -175,6 +175,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 8fb4456bc0f04618ea62701da52fef504fb0c7c4
+PODFILE CHECKSUM: 94a3c13203a83ab45c82e0f461d65fa05ed1210b
 
 COCOAPODS: 1.0.1

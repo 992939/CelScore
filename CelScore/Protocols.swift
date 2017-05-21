@@ -91,12 +91,12 @@ extension Sociable where Self: UIViewController {
         UserViewModel().loginSignal(token: token, with: loginType)
             .retry(upTo: Constants.kNetworkRetry)
             .observe(on: UIScheduler())
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+            .flatMap(.latest) { (myValue:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .facebook ? .facebook : .twitter) }
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return UserViewModel().updateCognitoSignal(object: value, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateUserNameSignal(username: (loginType == .facebook ? "name" : "screen_name")) }
+            .flatMap(.latest) { (myValue:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return UserViewModel().updateCognitoSignal(object: myValue, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
+            .flatMap(.latest) { (myValue:AnyObject) -> SignalProducer<SettingsModel, NSError> in
+                return SettingsViewModel().updateUserNameSignal(username: myValue.object(forKey: loginType == .facebook ? "name" : "screen_name") as! String) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().getFromCognitoSignal(dataSetType: .userRatings) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
@@ -114,7 +114,7 @@ extension Sociable where Self: UIViewController {
                 
                 let hours = self.getCountdownHours()
                 let plural = self.getCountdownHours() > 1 ? " hours " : " hour "
-                let registration = OverlayInfo.loginSuccess.message() + "\n\nOnly " + String(hours) + plural + "left until we crown the King of Hollywood."
+                let registration = OverlayInfo.loginSuccess.message() + "\n\nOnly " + String(hours) + plural + "left until we crown the\nKing of Hollywood."
                 TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
             })
