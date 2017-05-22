@@ -113,8 +113,8 @@ extension Sociable where Self: UIViewController {
                 self.handleMenu(open: false)
                 
                 let hours = self.getCountdownHours()
-                let plural = self.getCountdownHours() > 1 ? " hours " : " hour "
-                let registration = OverlayInfo.loginSuccess.message() + "\n\nOnly " + String(hours) + plural + "left until we crown the\nKing of Hollywood."
+                let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
+                let registration = "\(OverlayInfo.loginSuccess.message()) \n\nOnly \(hours) \(plural) left until the coronation."
                 TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
                 TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
             })

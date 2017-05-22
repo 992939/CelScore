@@ -95,13 +95,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty Notifications", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode) })
             .start()
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .on(value: { status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notifications", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode) })
             .start()
         
