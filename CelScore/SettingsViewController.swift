@@ -157,10 +157,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against undoing your registration, your votes and settings will be removed.\n\nAre you sure you want to continue?", image: R.image.tomb_big_red()!, style: .alert)
+        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against leaving the Kingdom, your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.tomb_big_red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kRedText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
-        alertVC.addAction(PMAlertAction(title: "Continue", style: .default, action: { _ in
+        alertVC.addAction(PMAlertAction(title: "Leave", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)
             UserViewModel().logoutSignal()
                 .on(value: { _ in Motion.delay(1.0) { self.navigationDrawerController!.closeLeftView() } })
