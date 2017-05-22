@@ -187,7 +187,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "to join", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     Motion.delay(0.5) { self.handleMenu(open: true) }

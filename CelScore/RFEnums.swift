@@ -71,7 +71,7 @@ enum OverlayInfo {
         switch self {
         case .welcomeUser: return "When 9pm comes around,\nthe King of Hollywood is crowned."
         case .firstDetail: return "Everyday we celebrate the stars,\nevery night we crown a monarch."
-        case .menuAccess: return "Join the Kingdom of Hollywood,\nlive by the Golden Rule."
+        case .menuAccess: return "Welcome to the\nKingdom of Hollywood\nWhere the Golden Rule\nis the only rule."
         case .loginSuccess: return "Welcome to the\nKingdom of Hollywood!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "Keep up with your favorite stars in the Today View.\n\nSwipe down from the top of your screen to display the view."
