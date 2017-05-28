@@ -111,12 +111,21 @@ extension Sociable where Self: UIViewController {
             .on(value: { _ in
                 self.dismissHUD()
                 self.handleMenu(open: false)
-                
                 let hours = self.getCountdownHours()
                 let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
                 let registration = "\(OverlayInfo.loginSuccess.message()) \n\nOnly \(hours) \(plural) left until the coronation!"
-                TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
-                TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
+                
+                let alertVC = PMAlertController(title: "Hollywood Kingdom", description: registration, image: OverlayInfo.loginSuccess.logo(), style: .alert)
+                alertVC.alertTitle.textColor = Constants.kBlueText
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                    self.socialRefresh()
+                }))
+                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                alertVC.view.isOpaque = false
+                self.present(alertVC, animated: true, completion: nil)
+                
+//                TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
+//                TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
             })
             .on(failed: { error in self.dismissHUD(); self.sendAlert(.loginError, with: loginType) })
             .start()
