@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, outOfBoundsVariance, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onSocialSharing, onCountdown, firstLaunch, firstDetail, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onSocialSharing, onCountdown, firstLaunch, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -53,7 +53,6 @@ enum OverlayInfo {
     case menuAccess
     case loginSuccess
     case maxFollow
-    case firstDetail
     case firstFollow
     case countdown
     case royalty
@@ -69,9 +68,8 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "When 9pm comes around,\nthe King of Hollywood is crowned."
-        case .firstDetail: return "Everyday we celebrate the stars,\nevery night we crown a monarch."
-        case .menuAccess: return "Welcome to the\nHollywood Kingdom\nWhere the Golden Rule\nis the only rule."
+        case .welcomeUser: return "Every time 9pm comes around,\nthe King of Hollywood is crowned."
+        case .menuAccess: return "Welcome to the\nHollywood Kingdom\nWhere the Golden Rule\nIs the only rule."
         case .loginSuccess: return "Welcome to the\nHollywood Kingdom!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "Keep up with your favorite stars in the Today View.\n\nSwipe down from the top of your screen to display the view."
@@ -79,24 +77,23 @@ enum OverlayInfo {
         case .royalty: return "All celebs are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection have been saved."
         case .voteHelp: return "Each vote must have all ten qualities."
-        case .infoSource: return "Each profile is based on search engine data.\n\nPlease fill out a report in the settings in the case of errors."
+        case .infoSource: return "Each profile is based on search engine data.\n\nPlease fill out a report in the settings if you see any errors."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
-        case .loginError: return "Unable to log in.\n\nCheck your network connection and that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
-        case .networkError: return "Unable to connect to the network.\n\nTry again and please contact us if the problem persists."
-        case .timeoutError: return "Unable to connect to the network.\n\nCheck your network connection and that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .networkError: return "Try again and please contact us if the problem persists."
+        case .timeoutError: return "settings check:\n- Network connection is on.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .permissionError: return "Unable to authenticate using your \(social) account.\n\nCheck that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
     
     func logo() -> UIImage {
         switch self {
-        case .welcomeUser: return R.image.crown_big_blue()!
-        case .menuAccess: return R.image.contract_blue_big()!
+        case .welcomeUser: return R.image.kindom_Blue()!
+        case .menuAccess: return R.image.kindom_Blue()!
         case .loginSuccess: return R.image.king_smile()!
         case .maxFollow: return R.image.king()!
         case .firstFollow: return R.image.king()!
-        case .firstDetail: return R.image.medal_big_blue()!
         case .countdown: return R.image.crown_big_blue()!
         case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.geometry_red()!

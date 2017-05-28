@@ -78,22 +78,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 }})
             .start()
         
-        SettingsViewModel().getSettingSignal(settingType: .firstDetail)
-            .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
-                if firstTime {
-                    let alertVC = PMAlertController(title: "to celebrate", description: OverlayInfo.firstDetail.message(), image: OverlayInfo.firstDetail.logo(), style: .alert)
-                    alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                        self.dismiss(animated: true, completion: nil)
-                        SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstDetail).start()
-                    }))
-                    alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                    alertVC.view.isOpaque = false
-                    Motion.delay(1.5) { self.present(alertVC, animated: true, completion: nil) }
-                }
-                return firstTime == false })
-            .start()
-        
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in self.socialButton.fabButton?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
             .start()

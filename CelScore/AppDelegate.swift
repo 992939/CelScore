@@ -36,7 +36,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 34,
+            schemaVersion: 35,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 30 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -61,7 +61,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSLogger.default().logLevel = .error
+        AWSDDLog().logLevel = .error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         

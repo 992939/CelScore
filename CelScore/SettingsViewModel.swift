@@ -90,7 +90,6 @@ struct SettingsViewModel {
             case .onSocialSharing: observer.send(value: settings.onSocialSharing as AnyObject)
             case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
             case .firstLaunch: observer.send(value: settings.isFirstLaunch as AnyObject)
-            case .firstDetail: observer.send(value: settings.isFirstDetail as AnyObject)
             case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
             case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
@@ -112,7 +111,6 @@ struct SettingsViewModel {
             case .onSocialSharing: settings.onSocialSharing = value as! Bool
             case .onCountdown: settings.onCountdown = value as! Bool
             case .firstLaunch: settings.isFirstLaunch = false
-            case .firstDetail: settings.isFirstDetail = false
             case .firstFollow: settings.isFirstFollow = false
             case .firstInterest: settings.isFirstInterest = false
             case .firstVoteDisable: settings.isFirstVoteDisabled = false

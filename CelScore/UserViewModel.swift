@@ -24,6 +24,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .facebook:
+                print("AYO")
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
                 Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
@@ -180,7 +181,6 @@ struct UserViewModel {
                 dataset.setString(String(settings.onSocialSharing), forKey: "onSocialSharing")
                 dataset.setString(String(settings.onCountdown), forKey: "onCountdown")
                 dataset.setString(String(settings.isFirstLaunch), forKey: "isFirstLaunch")
-                dataset.setString(String(settings.isFirstDetail), forKey: "isFirstDetail")
                 dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
                 dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
                 dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
@@ -242,7 +242,6 @@ struct UserViewModel {
                     settings.onSocialSharing = (dico["onSocialSharing"] as? NSString)?.boolValue ?? true
                     settings.onCountdown = (dico["onCountdown"] as? NSString)?.boolValue ?? true
                     settings.isFirstLaunch = (dico["isFirstLaunch"] as! NSString).boolValue
-                    settings.isFirstDetail = (dico["isFirstDetail"] as! NSString).boolValue
                     settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue
                     settings.isFirstInterest = (dico["isFirstInterest"] as! NSString).boolValue
                     settings.isFirstVoteDisabled = (dico["isFirstVoteDisabled"] as! NSString).boolValue
