@@ -159,12 +159,18 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.enableUpdateButton()
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(2.0, execute: {
-                    self.voteButton.backgroundColor = Constants.kStarGoldShade
                     let hours = self.getCountdownHours()
                     let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
                     let message = "Thank you for watching the throne!\n\nOnly \(hours) \(plural) left until the coronation!"
-                    TAOverlay.show(withLabel: message, image: R.image.king_smile()!, options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in self.trollAction() })
+                    
+                    let alertVC = PMAlertController(title: "Hollywood Kingdom", description: message, image: OverlayInfo.welcomeUser.logo(), style: .alert)
+                    alertVC.alertTitle.textColor = Constants.kBlueText
+                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                        self.voteButton.backgroundColor = Constants.kStarGoldShade
+                    }))
+                    alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+                    alertVC.view.isOpaque = false
+                    self.present(alertVC, animated: true, completion: nil)
                 })
             }
             .start()
