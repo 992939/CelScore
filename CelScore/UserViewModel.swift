@@ -16,7 +16,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
 import Result
-
+import AWSCore
 
 struct UserViewModel {
     
@@ -27,9 +27,11 @@ struct UserViewModel {
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
                 Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
+                        print("WTF \(String(describing: task.error?.localizedDescription))")
                         let error: NSError = task.error! as NSError
                         observer.send(error: error)
                         if error.code == 8 || error.code == 10 || error.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
+                        if error.code == 0 { print("Goosebump: \(NSDate.aws_clockSkewFixed())") }
                         return task
                     }
                     observer.send(value: task)
