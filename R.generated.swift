@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 91 images.
+  /// This `R.image` struct is generated, and contains static references to 86 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -66,8 +66,6 @@ struct R: Rswift.Validatable {
     static let arrow_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "arrow_white")
     /// Image `blackstar`.
     static let blackstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "blackstar")
-    /// Image `celebration_cup_blue`.
-    static let celebration_cup_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "celebration_cup_blue")
     /// Image `celscore_big_white`.
     static let celscore_big_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "celscore_big_white")
     /// Image `celscore_black`.
@@ -104,12 +102,8 @@ struct R: Rswift.Validatable {
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
     static let facebooklogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "facebooklogo")
-    /// Image `fireworks_big_blue`.
-    static let fireworks_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "fireworks_big_blue")
     /// Image `geometry_red`.
     static let geometry_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_red")
-    /// Image `guillotine_big_blue`.
-    static let guillotine_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "guillotine_big_blue")
     /// Image `happyFace`.
     static let happyFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "happyFace")
     /// Image `head_red`.
@@ -192,8 +186,6 @@ struct R: Rswift.Validatable {
     static let smileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "smileFace")
     /// Image `social_big_blue`.
     static let social_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "social_big_blue")
-    /// Image `social`.
-    static let social = Rswift.ImageResource(bundle: R.hostingBundle, name: "social")
     /// Image `sphere_blue_big`.
     static let sphere_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_blue_big")
     /// Image `sphere_blue_mini`.
@@ -218,8 +210,6 @@ struct R: Rswift.Validatable {
     static let star_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_icon")
     /// Image `swords_big_blue`.
     static let swords_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "swords_big_blue")
-    /// Image `toilet`.
-    static let toilet = Rswift.ImageResource(bundle: R.hostingBundle, name: "toilet")
     /// Image `tomb_big_blue`.
     static let tomb_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "tomb_big_blue")
     /// Image `tomb_big_red`.
@@ -271,11 +261,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "blackstar", bundle: ..., traitCollection: ...)`
     static func blackstar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.blackstar, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "celebration_cup_blue", bundle: ..., traitCollection: ...)`
-    static func celebration_cup_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.celebration_cup_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "celscore_big_white", bundle: ..., traitCollection: ...)`
@@ -368,19 +353,9 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.facebooklogo, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "fireworks_big_blue", bundle: ..., traitCollection: ...)`
-    static func fireworks_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.fireworks_big_blue, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "geometry_red", bundle: ..., traitCollection: ...)`
     static func geometry_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.geometry_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "guillotine_big_blue", bundle: ..., traitCollection: ...)`
-    static func guillotine_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.guillotine_big_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`
@@ -583,11 +558,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.smileFace, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "social", bundle: ..., traitCollection: ...)`
-    static func social(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.social, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "social_big_blue", bundle: ..., traitCollection: ...)`
     static func social_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.social_big_blue, compatibleWith: traitCollection)
@@ -651,11 +621,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "swords_big_blue", bundle: ..., traitCollection: ...)`
     static func swords_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.swords_big_blue, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "toilet", bundle: ..., traitCollection: ...)`
-    static func toilet(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.toilet, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "tomb_big_blue", bundle: ..., traitCollection: ...)`

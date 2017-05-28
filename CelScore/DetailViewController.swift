@@ -160,16 +160,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(2.0, execute: {
                     self.voteButton.backgroundColor = Constants.kStarGoldShade
-                    if userRatings.getCelScore() > 2 {
-                        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-                        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
-                    } else {
-                        self.voteButton.setImage(R.image.toilet()!, for: .normal)
-                        self.voteButton.setImage(R.image.toilet()!, for: .highlighted)
-                    }
-
-                })
-                Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
                     let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
                     let message = "Thank you for watching the throne!\n\nOnly \(hours) \(plural) left until the coronation!"

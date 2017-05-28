@@ -72,8 +72,8 @@ enum OverlayInfo {
         case .menuAccess: return "Welcome to the\nHollywood Kingdom\nWhere the Golden Rule\nIs the only rule."
         case .loginSuccess: return "Welcome to the\nHollywood Kingdom!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
-        case .firstFollow: return "Keep up with your favorite stars in the Today View.\n\nSwipe down from the top of your screen to display the view."
-        case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification the results after each coronation."
+        case .firstFollow: return "This celeb is now in your Today View!\n\nSwipe down from the top of your screen to display the view."
+        case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification after each coronation."
         case .royalty: return "All celebs are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection have been saved."
         case .voteHelp: return "Each vote must have all ten qualities."
@@ -96,7 +96,7 @@ enum OverlayInfo {
         case .firstFollow: return R.image.king()!
         case .countdown: return R.image.crown_big_blue()!
         case .royalty: return R.image.trophy_big_blue()!
-        case .firstInterest: return R.image.geometry_red()!
+        case .firstInterest: return R.image.sphere_blue()!
         case .voteHelp: return R.image.king()!
         case .infoSource: return R.image.king()!
         case .firstVoteDisable: return R.image.king()!
