@@ -71,7 +71,7 @@ struct CelebrityViewModel {
     func removeCelebsNotInPublicOpinionSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let list = realm.objects(ListsModel.self).filter("id = %@", ListInfo.publicOpinion.getId()).first
+            let list = realm.objects(ListsModel.self).filter("id = %@", ListInfo.hollywood.getId()).first
             guard let listModel = list else { return observer.sendCompleted() }
             guard listModel.celebList.count > 0 else { return observer.sendCompleted() }
             let celebIDsOnPublicOpinionList: [String] = listModel.celebList.map({ celeb in return celeb.id })

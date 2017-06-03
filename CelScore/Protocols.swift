@@ -123,9 +123,6 @@ extension Sociable where Self: UIViewController {
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
-                
-//                TAOverlay.show(withLabel: registration, image: OverlayInfo.loginSuccess.logo(), options: OverlayInfo.getOptions())
-//                TAOverlay.setCompletionBlock({ _ in self.socialRefresh() })
             })
             .on(failed: { error in self.dismissHUD(); self.sendAlert(.loginError, with: loginType) })
             .start()

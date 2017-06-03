@@ -141,7 +141,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func infoAction() {
-       TAOverlay.show(withLabel: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), options: OverlayInfo.getOptions())
+       //TAOverlay.show(withLabel: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), options: OverlayInfo.getOptions())
+        
+        let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), style: .alert)
+        alertVC.alertTitle.textColor = Constants.kBlueText
+        alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+            self.voteButton.backgroundColor = Constants.kStarGoldShade
+        }))
+        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+        alertVC.view.isOpaque = false
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     func helpAction() {

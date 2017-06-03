@@ -77,7 +77,7 @@ enum OverlayInfo {
         case .royalty: return "All celebs are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection have been saved."
         case .voteHelp: return "Each vote must have all ten qualities."
-        case .infoSource: return "Each profile is based on search engine data.\n\nPlease fill out a report in the settings if you see any errors."
+        case .infoSource: return "A King is a noble soul,\nA noble soul has virtues,\nAnd virtues are celebrated.\n\nHaving said that,\nall profiles are based on\nsearch engine data."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
         case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
@@ -98,7 +98,7 @@ enum OverlayInfo {
         case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
         case .voteHelp: return R.image.king()!
-        case .infoSource: return R.image.king()!
+        case .infoSource: return R.image.kindom_Blue()!
         case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
@@ -203,34 +203,28 @@ enum Qualities: Int {
 
 //MARK: ListInfo
 enum ListInfo : Int {
-    case publicOpinion
     case hollywood
     case hipHop
     case sports
     case music
-    case television
     case news
     
     static func getAllNames() -> [String] {
         return [
-            publicOpinion.name(),
             hollywood.name(),
-            hipHop.name(),
-            sports.name(),
             music.name(),
-            television.name(),
+            sports.name(),
+            hipHop.name(),
             news.name()
         ]
     }
     
     static func getAllIDs() -> [String] {
         return [
-            publicOpinion.getId(),
             hollywood.getId(),
             hipHop.getId(),
             sports.getId(),
             music.getId(),
-            television.getId(),
             news.getId()
         ]
     }
@@ -243,37 +237,31 @@ enum ListInfo : Int {
     
     func name() -> String {
         switch self {
-        case .publicOpinion: return "Public Opinion"
         case .hollywood: return "Hollywood"
-        case .hipHop: return "Hip Hop"
-        case .sports: return "Sports"
         case .music: return "Music"
-        case .television: return "Television"
+        case .sports: return "Sports"
+        case .hipHop: return "Hip Hop"
         case .news: return "New"
         }
     }
     
     func getId() -> String {
         switch self {
-        case .publicOpinion: return "0001"
-        case .hollywood: return "0004"
-        case .hipHop: return "0007"
-        case .sports: return "0002"
+        case .hollywood: return "0001"
         case .music: return "0003"
-        case .television: return "0005"
-        case .news: return "0006"
+        case .sports: return "0002"
+        case .hipHop: return "0004"
+        case .news: return "0005"
         }
     }
     
     func getIndex() -> Int {
         switch self {
-        case .publicOpinion: return 0
         case .hollywood: return 1
-        case .hipHop: return 2
+        case .music: return 2
         case .sports: return 3
-        case .music: return 4
-        case .television: return 5
-        case .news: return 6
+        case .hipHop: return 4
+        case .news: return 5
         }
     }
 }
