@@ -12,6 +12,7 @@ import BEMCheckBox
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import PMAlertController
 
 
 final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
@@ -183,7 +184,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                             let firstTime = first as! Bool
                             guard firstTime else { return }
                             TAOverlay.show(withLabel: OverlayInfo.firstFollow.message(), image: OverlayInfo.firstFollow.logo(), options: OverlayInfo.getOptions()) })
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstFollow).start() })
+                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstFollow).start() 
+                        })
                     }
                     else if count > 9 {
                         TAOverlay.show(withLabel: OverlayInfo.maxFollow.message(),

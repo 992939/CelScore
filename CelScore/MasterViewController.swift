@@ -312,6 +312,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     //MARK: ASTableView methods
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.diffCalculator.rows.count }
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
@@ -376,6 +377,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) { self.hideSearchBar() }
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool { return true }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

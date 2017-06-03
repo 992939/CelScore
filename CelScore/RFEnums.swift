@@ -76,8 +76,8 @@ enum OverlayInfo {
         case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification after each coronation."
         case .royalty: return "All celebs are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection have been saved."
-        case .voteHelp: return "Each vote must have all ten qualities."
-        case .infoSource: return "A King is a noble soul,\nA noble soul has virtues,\nAnd virtues are celebrated.\n\nHaving said that,\nall profiles are based on\nsearch engine data."
+        case .voteHelp: return "A King is a noble soul,\nA noble soul has virtues,\nVirtues must be celebrated.\n\nEach vote must have\nAll ten qualities."
+        case .infoSource: return "All profiles are based on\nsearch engine data.\n\nPlease go in the settings\nto report any error."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
         case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
@@ -97,7 +97,7 @@ enum OverlayInfo {
         case .countdown: return R.image.crown_big_blue()!
         case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
-        case .voteHelp: return R.image.king()!
+        case .voteHelp: return R.image.kindom_Blue()!
         case .infoSource: return R.image.kindom_Blue()!
         case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!
