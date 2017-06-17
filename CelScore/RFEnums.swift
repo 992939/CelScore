@@ -68,7 +68,7 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "Every time 9pm comes around,\nthe King of Hollywood is crowned."
+        case .welcomeUser: return "Every time 9pm comes around,\nThe King of Hollywood is crowned."
         case .menuAccess: return "Welcome to the\nHollywood Kingdom\nWhere the Golden Rule\nIs the only rule."
         case .loginSuccess: return "Welcome to the kingdom!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
@@ -77,7 +77,7 @@ enum OverlayInfo {
         case .royalty: return "All celebs are born equal, though some are more noble than others.\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Your selection have been saved."
         case .voteHelp: return "A King is a noble soul,\nA noble soul has virtues,\nVirtues must be celebrated.\n\nEach vote must have\nAll ten qualities."
-        case .infoSource: return "All profiles are based on\nsearch engine data.\n\nPlease go in the settings\nto report any error."
+        case .infoSource: return "This profile is based on\nsearch engine data.\n\nPlease go in the settings\nto report any error."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
         case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
