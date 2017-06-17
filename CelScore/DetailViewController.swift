@@ -144,8 +144,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-            self.voteButton.backgroundColor = Constants.kStarGoldShade
-        }))
+            self.dismiss(animated: true, completion: nil) }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
         self.present(alertVC, animated: true, completion: nil)
