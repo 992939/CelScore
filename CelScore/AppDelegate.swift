@@ -20,7 +20,6 @@ import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
 import SafariServices
-import Firebase
 import UserNotifications
 
 
@@ -205,13 +204,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
-    func applicationDidEnterBackground(_ application: UIApplication) { FIRMessaging.messaging().disconnect() }
+    func applicationDidEnterBackground(_ application: UIApplication) { }
     func applicationWillEnterForeground(_ application: UIApplication) { }
-    
-    func connectToFcm() {
-        FIRMessaging.messaging().connect { (error) in
-            if (error != nil) { print("Unable to connect with FCM. \(String(describing: error))")
-            } else { print("Connected to FCM.") }
-        }
-    }
 }
