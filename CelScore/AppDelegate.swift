@@ -11,6 +11,7 @@ import RealmSwift
 import Fabric
 import TwitterKit
 import AWSCognito
+import AWSPinpoint
 import Material
 import RateLimit
 import Fabric
@@ -29,6 +30,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Property
     var window: UIWindow?
+    var pinpoint: AWSPinpoint?
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -65,30 +67,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        //Firebase
-        connectToFcm()
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-            
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
-            FIRMessaging.messaging().remoteMessageDelegate = self as? FIRMessagingDelegate
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
+        pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
+        UIApplication.shared.registerForRemoteNotifications()
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-            // Enable or disable features based on authorization.
-        }
-        application.registerForRemoteNotifications()
-
-        FIRApp.configure()
+        let pinpointTargetingClient = pinpoint!.targetingClient
+        pinpointTargetingClient.addAttribute(["Lakers","Clippers"], forKey: "favoriteTeams")
+        pinpointTargetingClient.updateEndpointProfile()
+        
+        let pinpointAnalyticsClient = pinpoint!.analyticsClient
+        let event = pinpoint!.analyticsClient.createVirtualMonetizationEvent(withProductId: "PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
+        pinpointAnalyticsClient.record(event)
+        pinpointAnalyticsClient.submitEvents()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
@@ -109,6 +99,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken as Data)
+    }
+    
+    private func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+        pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(response.notification.request.content.userInfo) { (UIBackgroundFetchResult) in}
     }
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -133,26 +136,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-            print("Message")
-    }
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+//            print("Message")
+//    }
+//    
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        print("Message Fetched")
+//        completionHandler(UIBackgroundFetchResult.newData)
+//    }
+//    
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        print("APNs token retrieved: \(deviceToken)")
+//        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
+//    }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Message Fetched")
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNs token retrieved: \(deviceToken)")
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
-    }
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("Device Token:", deviceTokenString)
-    }
+//    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
+//        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+//        print("Device Token:", deviceTokenString)
+//    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {

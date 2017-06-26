@@ -6,11 +6,13 @@ PODS:
     - AsyncDisplayKit/Core
     - PINRemoteImage/iOS (= 3.0.0-beta.7)
     - PINRemoteImage/PINCache
-  - AWSAPIGateway (2.5.7):
-    - AWSCore (= 2.5.7)
-  - AWSCognito (2.5.7):
-    - AWSCore (= 2.5.7)
-  - AWSCore (2.5.7)
+  - AWSAPIGateway (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCognito (2.5.8):
+    - AWSCore (= 2.5.8)
+  - AWSCore (2.5.8)
+  - AWSPinpoint (2.5.8):
+    - AWSCore (= 2.5.8)
   - BEMCheckBox (1.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -26,29 +28,6 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.23.0):
     - FBSDKCoreKit
-  - Firebase/Core (3.15.0):
-    - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.2)
-  - Firebase/Messaging (3.15.0):
-    - Firebase/Core
-    - FirebaseMessaging (= 1.2.2)
-  - FirebaseAnalytics (3.7.0):
-    - FirebaseCore (~> 3.5)
-    - FirebaseInstanceID (~> 1.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.2):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (1.0.9)
-  - FirebaseMessaging (1.2.2):
-    - FirebaseAnalytics (~> 3.7)
-    - FirebaseInstanceID (~> 1.0)
-    - GoogleToolboxForMac/Logger (~> 2.1)
-    - Protobuf (~> 3.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/Logger (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
   - HMSegmentedControl (1.5.3)
   - Keys (1.0.0)
   - Material (2.6.3):
@@ -67,7 +46,6 @@ PODS:
     - PINCache (= 3.0.1-beta.2)
     - PINRemoteImage/Core
   - PMAlertController (2.0.1)
-  - Protobuf (3.3.0)
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
@@ -98,16 +76,15 @@ PODS:
 
 DEPENDENCIES:
   - AsyncDisplayKit (~> 2.1)
-  - AWSAPIGateway (= 2.5.7)
-  - AWSCognito (= 2.5.7)
+  - AWSAPIGateway (= 2.5.8)
+  - AWSCognito (= 2.5.8)
+  - AWSPinpoint (= 2.5.8)
   - BEMCheckBox (~> 1.4)
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.11)
   - FBSDKCoreKit (~> 4.23)
   - FBSDKLoginKit (~> 4.23)
-  - Firebase/Core
-  - Firebase/Messaging
   - HMSegmentedControl (~> 1.5.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.6)
@@ -134,9 +111,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
-  AWSAPIGateway: 7f348ed004998ccdafb6765e85d0b6e8284f72fe
-  AWSCognito: 833e56f35762648f551ca77f60240a5d7c615e13
-  AWSCore: 716d787cde0239b3e92f9b4151c052f55a117703
+  AWSAPIGateway: 8e652734914fdf10e3aa345127d261c7e36f8dec
+  AWSCognito: 8eb74039f4dc5f2d929999c4f531eeb4bd83e6cb
+  AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
+  AWSPinpoint: 30b5ef18bfa3a95558d14c85c4fa0457dc8667d3
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
@@ -144,19 +122,12 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
   FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
-  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
-  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
-  FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
-  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
@@ -175,6 +146,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: 56aa3a009fc367146999c8bf963e499ab0ae5155
+PODFILE CHECKSUM: 8591e522809bd22b76ccb5d0e27974c79312071a
 
 COCOAPODS: 1.0.1

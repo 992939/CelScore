@@ -15,8 +15,9 @@ def shared_pods
     pod 'Realm', '~> 2.5'
     pod 'RealmSwift', '~> 2.5'
     pod 'AsyncDisplayKit', '~> 2.1'
-    pod 'AWSCognito', '2.5.7'
-    pod 'AWSAPIGateway', '2.5.7'
+    pod 'AWSCognito', '2.5.8'
+    pod 'AWSAPIGateway', '2.5.8'
+    pod 'AWSPinpoint', '2.5.8'
     pod 'BEMCheckBox', '~> 1.4'
 end
 
@@ -41,8 +42,6 @@ target 'CelScore' do
     pod 'RevealingSplashView', '~> 0.1'
     pod 'PMAlertController', '~> 2.0'
     pod 'Dwifft', '~> 0.5'
-    pod 'Firebase/Core'
-    pod 'Firebase/Messaging'
 end
 
 target 'CelScoreTests' do
