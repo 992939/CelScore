@@ -317,7 +317,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         if segmentView.selectedSegmentIndex == 0 || (segmentView.selectedSegmentIndex == 1 && self.previousIndex == 2 ){ self.slide(right: false, newView: infoView, oldView: removingView) }
         else { self.slide(right: true, newView: infoView, oldView: removingView) }
-        self.closeHandleMenu()
+        if self.socialButton.isOpened { self.closeHandleMenu() }
         
         if segmentView.selectedSegmentIndex == 2 {
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
