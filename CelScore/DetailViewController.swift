@@ -395,8 +395,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         infoButton.pulseAnimation = .none
         infoButton.accessibilityLabel = "Info Button"
         infoButton.isAccessibilityElement = true
-        infoButton.setImage(R.image.info_button()!, for: .normal)
-        infoButton.setImage(R.image.info_button()!, for: .highlighted)
+        infoButton.setImage(R.image.news_icon()!, for: .normal)
+        infoButton.setImage(R.image.news_icon()!, for: .highlighted)
         infoButton.addTarget(self, action: #selector(self.openSafari), for: .touchUpInside)
         
         let navigationBarView: Toolbar = Toolbar()
