@@ -169,7 +169,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
                     let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
-                    let message = "Thank you for watching the throne!\n\nOnly \(hours) \(plural) left until the coronation!"
+                    let message = "Thank you for\nWatching the throne!\nOnly \(hours) \(plural) left\nUntil the coronation!"
                     let alertVC = PMAlertController(title: "Hollywood Kingdom", description: message, image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
