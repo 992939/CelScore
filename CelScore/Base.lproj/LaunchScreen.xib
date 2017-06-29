@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Kindom_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="celscore_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
                     <rect key="frame" x="140" y="140" width="200" height="200"/>
                     <color key="backgroundColor" red="0.31372549020000001" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -36,6 +36,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Kindom_big_white" width="16" height="16"/>
+        <image name="celscore_big_white" width="16" height="16"/>
     </resources>
 </document>

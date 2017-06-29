@@ -199,7 +199,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     }
     
     func setupData() throws {
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.kindom_big_white()!,iconInitialSize: CGSize(width: 200, height: 200), backgroundColor: Constants.kBlueShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 200, height: 200), backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
