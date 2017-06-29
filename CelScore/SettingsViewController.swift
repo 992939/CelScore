@@ -46,8 +46,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.depthPreset = .none
         let diameter = 60
         let logoCircle: Button = Button(frame: CGRect(x: (Int(Constants.kSettingsViewWidth) - diameter)/2, y: 10, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.king_white(), for: .normal)
-        logoCircle.setImage(R.image.king_white()!, for: .highlighted)
+        logoCircle.setImage(R.image.kindom_medium_white()!, for: .normal)
+        logoCircle.setImage(R.image.kindom_medium_white()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
         logoCircle.backgroundColor = Constants.kRedShade
@@ -265,7 +265,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
-        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 180, height: 40))
+        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 190, height: 40))
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
