@@ -14,10 +14,11 @@ import ReactiveSwift
 import MessageUI
 import Material
 import Result
+import SafariServices
 import PMAlertController
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
@@ -205,6 +206,19 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             }).start()
     }
     
+    //MARK: SFSafariViewControllerDelegate
+    func openSafari() {
+        let searchTerm = celebST.nickname.replacingOccurrences(of: " ", with: "+")
+        let searchString = String("https://www.google.com/search?q=\(searchTerm)")
+        let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
+        self.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = self
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: Sociable
     func fabMenuWillOpen(fabMenu: FABMenu) { self.openHandleMenu() }
     func fabMenuWillClose(fabMenu: FABMenu) { self.closeHandleMenu() }
@@ -250,8 +264,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (_) -> SignalProducer<Double, NoError> in
                 return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id) }
             .on(value: { score in
-                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                                                      message: "Live from #CNN: \(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty!")
+                CelScoreViewModel()
+                    .shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
+                        message: "\(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty! #CNN")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
@@ -382,7 +397,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         infoButton.isAccessibilityElement = true
         infoButton.setImage(R.image.info_button()!, for: .normal)
         infoButton.setImage(R.image.info_button()!, for: .highlighted)
-        infoButton.addTarget(self, action: #selector(self.infoAction), for: .touchUpInside)
+        infoButton.addTarget(self, action: #selector(self.openSafari), for: .touchUpInside)
         
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
