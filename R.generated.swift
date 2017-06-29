@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 87 images.
+  /// This `R.image` struct is generated, and contains static references to 88 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -56,6 +56,8 @@ struct R: Rswift.Validatable {
     static let kindom_Blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "Kindom_Blue")
     /// Image `Kindom_Red`.
     static let kindom_Red = Rswift.ImageResource(bundle: R.hostingBundle, name: "Kindom_Red")
+    /// Image `Kindom_big_white`.
+    static let kindom_big_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "Kindom_big_white")
     /// Image `angryFace`.
     static let angryFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "angryFace")
     /// Image `arrow_down`.
@@ -238,6 +240,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "Kindom_Red", bundle: ..., traitCollection: ...)`
     static func kindom_Red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.kindom_Red, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "Kindom_big_white", bundle: ..., traitCollection: ...)`
+    static func kindom_big_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.kindom_big_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "angryFace", bundle: ..., traitCollection: ...)`
@@ -728,7 +735,7 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "celscore_big_white") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'celscore_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Kindom_big_white") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Kindom_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
