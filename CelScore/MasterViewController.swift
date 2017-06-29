@@ -412,9 +412,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         navBar.leftViews = [menuButton]
         navBar.rightViews = [rightButton]
         navBar.backgroundColor = Constants.kRedShade
-        let celscoreImageView = UIImageView(image: R.image.score_white()!)
-        celscoreImageView.frame = CGRect(x: navBar.width/2 - 3, y: navBar.top/2, width: 25, height: 25)
-        navBar.addSubview(celscoreImageView)
+        navBar.title = "Celeb&Noble"
+        navBar.titleLabel.textColor = .white
         return navBar
     }
     
