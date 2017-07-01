@@ -31,6 +31,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
     fileprivate let socialButton: FABMenu
+    fileprivate var kingAlert: String = Constants.kAlertAction
     internal let celebrityTableNode: ASTableNode
     
     //MARK: Initializers
@@ -57,6 +58,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.navigationDrawerController?.isEnabled = false
         self.navigationDrawerController?.animationDuration = 0.4
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
+        CelebrityViewModel().longLiveTheChiefSignal()
+            .on(value: { message in self.kingAlert = message })
+            .start()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -157,6 +161,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         }
     }
     
+    func getKingAlert() -> String { return self.kingAlert }
+    
     func facebookToken() -> String {
         guard let current = FBSDKAccessToken.current() else {
             UserViewModel().refreshFacebookTokenSignal().start()
@@ -188,7 +194,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .on(failed: { _ in
                 let alertVC = PMAlertController(title: "Welcome", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                     Motion.delay(0.5) { self.handleMenu(open: true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
@@ -231,7 +237,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 if firstTime {
                     let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                         self.dismiss(animated: true, completion: nil)
                         SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch).start()
                         self.movingSocialButton(onScreen: true)

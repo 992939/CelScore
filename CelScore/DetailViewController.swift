@@ -28,6 +28,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let celebST: CelebrityStruct
     fileprivate let socialButton: FABMenu
     fileprivate var previousIndex: Int = 1
+    fileprivate var kingAlert: String = Constants.kAlertAction
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -54,6 +55,18 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     //MARK: Methods
     override var prefersStatusBarHidden : Bool { return true }
     override func updateUserActivityState(_ activity: NSUserActivity) { activity.becomeCurrent() }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        CelebrityViewModel().longLiveTheChiefSignal()
+            .on(value: { message in self.kingAlert = message })
+            .start()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showingButtons()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,10 +120,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.backgroundColor = Constants.kBlueShade
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.showingButtons()
-    }
+    func getKingAlert() -> String { return self.kingAlert }
     
     func showingButtons() {
         self.voteButton.animate(Motion.translateX(to: -(Constants.kFabDiameter + 100)))
@@ -138,7 +148,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func infoAction() {
         let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+        alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil) }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
@@ -148,7 +158,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func helpAction() {
         let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.voteHelp.message(), image: OverlayInfo.voteHelp.logo(), style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+        alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
             self.voteButton.backgroundColor = Constants.kStarGoldShade
         }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
@@ -172,7 +182,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     let message = "Thank you for\nWatching the throne!\nOnly \(hours) \(plural) left\nUntil the coronation!"
                     let alertVC = PMAlertController(title: "Hollywood Kingdom", description: message, image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                         self.voteButton.backgroundColor = Constants.kStarGoldShade
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)

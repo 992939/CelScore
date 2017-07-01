@@ -72,7 +72,8 @@ struct CelebrityViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celebList = realm.objects(CelebrityModel.self).filter("isKing = true")
-            observer.send(value: celebList[0].sex ? "Long Live the King!" : "Long Live the Queen!")
+            guard let celeb = celebList.first else { return observer.send(value: "Long Live the King!") }
+            observer.send(value: celeb.sex ? "Long Live the King!" : "Long Live the Queen!")
             observer.sendCompleted()
         }
     }

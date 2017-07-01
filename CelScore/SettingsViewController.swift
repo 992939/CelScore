@@ -24,6 +24,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     fileprivate let fact1Bar: YLProgressBar
     fileprivate let fact2Bar: YLProgressBar
     fileprivate let fact3Bar: YLProgressBar
+    fileprivate var kingAlert: String = Constants.kAlertAction
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -35,8 +36,16 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact3Bar = YLProgressBar()
         super.init(nibName: nil, bundle: nil)
     }
+
     
     //MARK: Method
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        CelebrityViewModel().longLiveTheChiefSignal()
+            .on(value: { message in self.kingAlert = message })
+            .start()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let maxWidth: CGFloat = Constants.kSettingsViewWidth - 2 * Constants.kPadding
@@ -238,7 +247,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             if checkBox.tag == 0 {
                 let alertVC = PMAlertController(title: "Royalty Notifications", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -246,7 +255,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             } else {
                 let alertVC = PMAlertController(title: "Coronation Notifications", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false

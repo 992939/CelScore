@@ -83,6 +83,7 @@ extension Supportable where Self: UIViewController {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
+    @objc func getKingAlert() -> String
 }
 
 extension Sociable where Self: UIViewController {
@@ -117,7 +118,7 @@ extension Sociable where Self: UIViewController {
                 
                 let alertVC = PMAlertController(title: "Hollywood Kingdom", description: registration, image: OverlayInfo.loginSuccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: self.getKingAlert(), style: .default, action: { _ in
                     self.socialRefresh()
                 }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
