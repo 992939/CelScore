@@ -49,7 +49,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             let barHeight = UIDevice.getPulseBarHeight()
                             let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
-                            let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
+                            let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 123, height: barHeight - 5))
                             
                             var infoLabelText: String = ""
                             switch quality {
