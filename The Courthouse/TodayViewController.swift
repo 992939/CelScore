@@ -58,7 +58,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         let cell: TodayTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CelebItem", for: indexPath) as! TodayTableViewCell
         let celebDictionary = items[(indexPath as NSIndexPath).row]
         cell.nickNameLabel.text = celebDictionary["nickName"] as? String
-        cell.celscoreLabel.text = String(format: "%.1f", (celebDictionary["currentScore"]! as! Double))
+        cell.celscoreLabel.text = String(format: "%.1f", (celebDictionary["currentScore"]! as! Double)) + "%"
         let percent: Double = (celebDictionary["currentScore"] as! Double) - ((celebDictionary["prevScore"] as! Double) * 20)
         let sign = percent >= 0 ? "+" : ""
         cell.changeLabel.text = sign + String(format: "%.f", percent) + "% "

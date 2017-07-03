@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="txK-Ax-Afw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="txK-Ax-Afw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,11 +24,11 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VKX-LW-FKN" id="h7m-7G-iqu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-qo-H5p">
-                                            <rect key="frame" x="61" y="14" width="183" height="21"/>
+                                            <rect key="frame" x="61" y="14" width="180" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -49,9 +49,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="key-P4-T6o">
-                                            <rect key="frame" x="252" y="14" width="45" height="21"/>
+                                            <rect key="frame" x="250" y="14" width="48" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="45" id="Pza-ea-w0H"/>
+                                                <constraint firstAttribute="width" constant="48" id="5vx-Cn-tO2"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -59,19 +59,19 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="baseline" secondItem="key-P4-T6o" secondAttribute="baseline" id="1t7-Ir-aOd"/>
-                                        <constraint firstItem="key-P4-T6o" firstAttribute="firstBaseline" secondItem="OSU-Na-h7a" secondAttribute="firstBaseline" id="9nt-g8-97T"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="firstBaseline" secondItem="OSU-Na-h7a" secondAttribute="firstBaseline" id="4r4-Px-xdL"/>
                                         <constraint firstItem="MdG-NN-iP2" firstAttribute="centerY" secondItem="ZkE-qo-H5p" secondAttribute="centerY" id="GwB-mH-HjL"/>
                                         <constraint firstItem="ZkE-qo-H5p" firstAttribute="leading" secondItem="MdG-NN-iP2" secondAttribute="trailing" constant="8" id="KAg-Vd-K4k"/>
-                                        <constraint firstItem="ZkE-qo-H5p" firstAttribute="firstBaseline" secondItem="key-P4-T6o" secondAttribute="firstBaseline" id="NuQ-uo-GAW"/>
                                         <constraint firstItem="MdG-NN-iP2" firstAttribute="leading" secondItem="h7m-7G-iqu" secondAttribute="leadingMargin" constant="7" id="Sim-l4-y7B"/>
-                                        <constraint firstItem="key-P4-T6o" firstAttribute="leading" secondItem="ZkE-qo-H5p" secondAttribute="trailing" constant="8" symbolic="YES" id="aR9-Ck-EIU"/>
-                                        <constraint firstItem="key-P4-T6o" firstAttribute="baseline" secondItem="OSU-Na-h7a" secondAttribute="baseline" id="gQ7-ks-kND"/>
-                                        <constraint firstItem="OSU-Na-h7a" firstAttribute="leading" secondItem="key-P4-T6o" secondAttribute="trailing" constant="8" symbolic="YES" id="r3C-Nv-ofn"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="baseline" secondItem="ZkE-qo-H5p" secondAttribute="baseline" id="niT-TF-Ixw"/>
                                         <constraint firstItem="ZkE-qo-H5p" firstAttribute="top" secondItem="h7m-7G-iqu" secondAttribute="topMargin" constant="6" id="rQv-VJ-Sc1"/>
                                         <constraint firstItem="MdG-NN-iP2" firstAttribute="top" secondItem="h7m-7G-iqu" secondAttribute="topMargin" constant="-3" id="rlC-Bo-G2R"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="firstBaseline" secondItem="ZkE-qo-H5p" secondAttribute="firstBaseline" id="siJ-3O-jR2"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="OSU-Na-h7a" secondAttribute="trailing" constant="12" id="spZ-qD-8En"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="leading" secondItem="ZkE-qo-H5p" secondAttribute="trailing" constant="9" id="uvi-Zv-XQt"/>
+                                        <constraint firstItem="OSU-Na-h7a" firstAttribute="leading" secondItem="key-P4-T6o" secondAttribute="trailing" constant="7" id="vyl-9X-phb"/>
                                         <constraint firstItem="MdG-NN-iP2" firstAttribute="centerY" secondItem="h7m-7G-iqu" secondAttribute="centerY" id="yLM-Ik-hhX"/>
+                                        <constraint firstItem="key-P4-T6o" firstAttribute="baseline" secondItem="OSU-Na-h7a" secondAttribute="baseline" id="zhF-P6-IkR"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
