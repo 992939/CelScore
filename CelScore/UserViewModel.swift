@@ -27,7 +27,6 @@ struct UserViewModel {
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
                 Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
-                        print("WTF \(String(describing: task.error?.localizedDescription))")
                         let error: NSError = task.error! as NSError
                         observer.send(error: error)
                         if error.code == 8 || error.code == 10 || error.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
@@ -190,15 +189,18 @@ struct UserViewModel {
             dataset.synchronize().continueWith(block:({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
                     let error: NSError = task.error! as NSError
-                    if error.code == 8 || error.code == 10 || error.code == 13 || error.code == -4000 {
-                        print("Update Cognito Error: \(task.error.debugDescription)")
+                    print("Update Cognito Error: \(task.error.debugDescription)")
+                    if error.code == 8 || error.code == 13 || error.code == -4000 { Constants.kCredentialsProvider.clearKeychain() }
+                    else if error.code == 10 {
                         Constants.kCredentialsProvider.clearKeychain()
+                        Constants.kCredentialsProvider.clearCredentials()
                     }
                     observer.send(error: task.error! as NSError)
                     return task }
                 if case .userRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
                 observer.send(value: object)
+                print("Update Cognito completed")
                 observer.sendCompleted()
                 return task
             }))

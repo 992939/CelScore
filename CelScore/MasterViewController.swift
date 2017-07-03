@@ -102,6 +102,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
+                        .retry(upTo: Constants.kNetworkRetry)
                         .start()
                 }
         }).start()
