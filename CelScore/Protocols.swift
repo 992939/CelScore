@@ -96,6 +96,7 @@ extension Sociable where Self: UIViewController {
                 return UserViewModel().getUserInfoFromSignal(loginType: loginType == .facebook ? .facebook : .twitter) }
             .flatMap(.latest) { (myValue:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: myValue, dataSetType: loginType == .facebook ? .facebookInfo : .twitterInfo) }
+            .retry(upTo: Constants.kNetworkRetry)
             .flatMap(.latest) { (myValue:AnyObject) -> SignalProducer<SettingsModel, NSError> in
                 return SettingsViewModel().updateUserNameSignal(username: myValue.object(forKey: loginType == .facebook ? "name" : "screen_name") as! String) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in

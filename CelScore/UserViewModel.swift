@@ -24,7 +24,6 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             switch loginType {
             case .facebook:
-                print("AYO")
                 Constants.kCredentialsProvider.setIdentityProviderManagerOnce(CustomIdentityProvider(tokens: ["graph.facebook.com": token as NSString] as [NSString: NSString]))
                 Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
                     guard task.error == nil else {
@@ -110,7 +109,7 @@ struct UserViewModel {
                 let params = ["user_id" : Twitter.sharedInstance().sessionStore.session()!.userID]
                 var clientError : NSError?
                 let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
-                guard clientError == nil else { return observer.send(error: clientError! as NSError) }
+                guard clientError == nil else { print("Get User Info Error"); return observer.send(error: clientError! as NSError) }
                 client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
                     guard connectionError == nil else { return observer.send(error: connectionError! as NSError) }
                     let json = JSON(data: data!)
@@ -191,7 +190,8 @@ struct UserViewModel {
             dataset.synchronize().continueWith(block:({ (task: AWSTask!) -> AnyObject in
                 guard task.error == nil else {
                     let error: NSError = task.error! as NSError
-                    if error.code == 8 || error.code == 10 || error.code == 13 {
+                    if error.code == 8 || error.code == 10 || error.code == 13 || error.code == -4000 {
+                        print("Update Cognito Error: \(task.error.debugDescription)")
                         Constants.kCredentialsProvider.clearKeychain()
                     }
                     observer.send(error: task.error! as NSError)
@@ -209,9 +209,7 @@ struct UserViewModel {
         return SignalProducer { observer, disposable in
             
             Constants.kCredentialsProvider.getIdentityId().continueWith(block: ({ (task: AWSTask!) -> AnyObject! in
-                guard task.error == nil else {
-                    observer.send(error: task.error! as NSError)
-                    return task }
+                guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 return nil }))
             
             let syncClient: AWSCognito = AWSCognito.default()

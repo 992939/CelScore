@@ -62,7 +62,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSDDLog().logLevel = .error
+        AWSDDLog().logLevel = .verbose
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
@@ -74,10 +74,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         pinpointTargetingClient.addAttribute(["Lakers","Clippers"], forKey: "favoriteTeams")
         pinpointTargetingClient.updateEndpointProfile()
         
-        let pinpointAnalyticsClient = pinpoint!.analyticsClient
-        let event = pinpoint!.analyticsClient.createVirtualMonetizationEvent(withProductId: "PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
-        pinpointAnalyticsClient.record(event)
-        pinpointAnalyticsClient.submitEvents()
+//        let pinpointAnalyticsClient = pinpoint!.analyticsClient
+//        let event = pinpoint!.analyticsClient.createVirtualMonetizationEvent(withProductId: "PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
+//        pinpointAnalyticsClient.record(event)
+//        pinpointAnalyticsClient.submitEvents()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
