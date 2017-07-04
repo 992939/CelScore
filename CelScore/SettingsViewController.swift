@@ -106,13 +106,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty Notifications", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty Notification", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(publicServiceNode) })
             .start()
         
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .on(value: { status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notifications", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notification", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode) })
             .start()
         
@@ -247,7 +247,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .onSocialSharing : .onCountdown)).start()
         if checkBox.on {
             if checkBox.tag == 0 {
-                let alertVC = PMAlertController(title: "Royalty Notifications", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Royalty Notification", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
@@ -255,7 +255,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
             } else {
-                let alertVC = PMAlertController(title: "Coronation Notifications", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
+                let alertVC = PMAlertController(title: "Coronation Notification", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
                 alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
@@ -276,7 +276,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
-        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: 190, height: 40))
+        let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - Constants.kPadding, height: 40))
+        publicServiceLabel.textAlignment = .center
+        publicServiceLabel.backgroundColor = .clear
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
         box.tag = tag
