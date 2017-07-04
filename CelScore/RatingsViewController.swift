@@ -103,7 +103,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
                                 let unrated = userRatings.filter{ (userRatings[$0] as! Int) == 0 }
-                                if unrated.isEmpty { self.delegate!.enableVoteButton(positive: userRatings.getCelScore() < 3 ? false : true) }}
+                                if unrated.isEmpty { self.delegate!.enableVoteButton(positive: userRatings.getCelScore() < 80 ? false : true) }}
                             .start()
                     }
                     qualityView.addSubview(qualityLabel)
