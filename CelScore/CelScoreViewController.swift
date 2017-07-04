@@ -34,9 +34,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 13.5, title: "Yesterday", value: celebST.prevScore.getRoyalty(), tag: 2))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 47.5, title: "Last Week", value: celebST.prevWeek.getRoyalty(), tag: 3))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 81.5, title: "Last Month", value: celebST.prevMonth.getRoyalty(), tag: 4))
+        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 14, title: "Yesterday", value: celebST.prevScore.getRoyalty(), tag: 2))
+        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 48, title: "Last Week", value: celebST.prevWeek.getRoyalty(), tag: 3))
+        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 82, title: "Last Month", value: celebST.prevMonth.getRoyalty(), tag: 4))
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
@@ -78,11 +78,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
             var attributedText = NSMutableAttributedString()
             let percent: Double = (celscore / value * 100 - 100).roundToPlaces(places: 1)
-            let percentage: String = "(" + String(percent) + "%) "
+            let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent)) + "% "
             let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
             attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
             let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : value >= 80 ? Constants.kBlueText : Constants.kRedText]
-            let attrString = NSAttributedString(string: String(value) + "%", attributes: attr2)
+            let attrString = NSAttributedString(string: " " + String(value) + "%", attributes: attr2)
             attributedText.append(attrString)
             infoLabel.attributedText = attributedText
         })
