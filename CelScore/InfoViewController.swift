@@ -51,6 +51,8 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             qualityView.tag = index+1
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 122, height: barHeight - 5))
                             
+                            let days = celeb.daysOnThrone == 1 ? " Day" : " Days"
+                            
                             var infoLabelText: String = ""
                             switch quality {
                             case Info.firstName.name(): infoLabelText = celeb.firstName
@@ -61,7 +63,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             case Info.height.name(): infoLabelText = celeb.height
                             case Info.zodiac.name(): infoLabelText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
                             case Info.status.name(): infoLabelText = celeb.status
-                            case Info.throne.name(): infoLabelText = String(celeb.daysOnThrone) + " Day(s)"
+                            case Info.throne.name(): infoLabelText = String(celeb.daysOnThrone) + days
                             case Info.networth.name(): infoLabelText = celeb.netWorth
                             default: infoLabelText = ""
                             }
