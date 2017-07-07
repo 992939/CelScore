@@ -20,6 +20,7 @@ struct Constants {
     static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
     static let kAlertAction: String = "Long Live The King!"
     
+    static let kRoyalty: Double = 80.0
     static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5
     static let kOneDay: TimeInterval = 86400.0

@@ -81,7 +81,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent)) + "% "
             let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
             attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : value >= 80 ? Constants.kBlueText : Constants.kRedText]
+            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : value >= Constants.kRoyalty ? Constants.kBlueText : Constants.kRedText]
             let attrString = NSAttributedString(string: " " + String(value) + "%", attributes: attr2)
             attributedText.append(attrString)
             infoLabel.attributedText = attributedText

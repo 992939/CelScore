@@ -95,7 +95,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
-                self.consensusNode.image = score >= 80 ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
+                self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
                 if self.celebST.isKing { self.consensusNode.image = R.image.mini_crown_yellow()! }
             })
             .start()
