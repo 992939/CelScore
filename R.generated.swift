@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 86 images.
+  /// This `R.image` struct is generated, and contains static references to 84 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -168,10 +168,6 @@ struct R: Rswift.Validatable {
     static let nosmileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "nosmileFace")
     /// Image `nuclear_red`.
     static let nuclear_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "nuclear_red")
-    /// Image `profile_black`.
-    static let profile_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "profile_black")
-    /// Image `profile_white`.
-    static let profile_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "profile_white")
     /// Image `sadFace`.
     static let sadFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "sadFace")
     /// Image `scale_black`.
@@ -516,16 +512,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "nuclear_red", bundle: ..., traitCollection: ...)`
     static func nuclear_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.nuclear_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "profile_black", bundle: ..., traitCollection: ...)`
-    static func profile_black(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.profile_black, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "profile_white", bundle: ..., traitCollection: ...)`
-    static func profile_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.profile_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sadFace", bundle: ..., traitCollection: ...)`
