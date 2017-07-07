@@ -299,7 +299,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     func movingSocialButton(onScreen: Bool) {
         let y: CGFloat = onScreen ? 0 : 70
         self.socialButton.close()
-        self.socialButton.animate(Motion.animate(group: [Motion.translateY(to: y)]))
+        self.socialButton.animate(Motion.animate(group: [Motion.translateY(to: y), Motion.spin(rotations: 1)]))
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }

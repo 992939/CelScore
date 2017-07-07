@@ -66,7 +66,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showingButtons()
-        print("is king \(self.celebST.isKing)")
     }
 
     override func viewDidLoad() {
@@ -124,18 +123,25 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func getKingAlert() -> String { return self.kingAlert }
     
     func showingButtons() {
-        self.voteButton.animate(Motion.translateX(to: -(Constants.kFabDiameter + 100)))
-        self.socialButton.animate(Motion.translateX(to: Constants.kPadding + 100))
+        self.voteButton.animate(Motion.animate(group: [
+            Motion.translateX(to: -(Constants.kFabDiameter + 100)),
+            Motion.spin(rotations: 1)
+            ]))
+        
+        self.socialButton.animate(Motion.animate(group: [
+            Motion.translateX(to: Constants.kPadding + 100),
+            Motion.spin(rotations: 1)
+            ]))
     }
     
     func hideButtons() {
         self.socialButton.animate(Motion.animate(group: [
-            Motion.rotation(angle: 3),
+            Motion.spin(rotations: 1),
             Motion.translateX(to: -(Constants.kPadding + 100))
             ]))
         
         self.voteButton.animate(Motion.animate(group: [
-            Motion.rotation(angle: 3),
+            Motion.spin(rotations: 1),
             Motion.translateX(to: Constants.kFabDiameter + 100)
             ]))
     }
