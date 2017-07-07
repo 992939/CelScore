@@ -33,7 +33,7 @@
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:50]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
 
-#define kDefaultUnitOfMeasurement               @"Royalty (%)"
+#define kDefaultUnitOfMeasurement               @"Royalty %"
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"Helvetica" size:10]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:0.7]
 
