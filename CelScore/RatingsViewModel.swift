@@ -91,16 +91,6 @@ struct RatingsViewModel {
         }
     }
     
-    func getConsensusSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
-        return SignalProducer { observer, disposable in
-        let realm = try! Realm()
-        let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", ratingsId).first!
-        let consensus = 100 - ( 20 * ratings.getAvgVariance())
-        observer.send(value: consensus)
-        observer.sendCompleted()
-        }
-    }
-    
     func getCelScoreSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

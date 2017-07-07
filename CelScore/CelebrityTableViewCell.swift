@@ -94,12 +94,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
-                self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()! })
-            .start()
-        
-        RatingsViewModel().getConsensusSignal(ratingsId: self.celebST.id)
-            .on(value: { consensus in
-                self.consensusNode.image = consensus >= Constants.kPositiveConsensus ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
+                self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
+                self.consensusNode.image = score >= 80 ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
                 if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! }
             })
             .start()
