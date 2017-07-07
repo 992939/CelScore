@@ -96,7 +96,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .on(value: { score in
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= 80 ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
-                if self.celebST.isKing { self.consensusNode.image = R.image.crown_filling_yellow()! }
+                if self.celebST.isKing { self.consensusNode.image = R.image.mini_crown_yellow()! }
             })
             .start()
         

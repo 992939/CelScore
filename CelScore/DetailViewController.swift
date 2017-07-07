@@ -66,6 +66,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showingButtons()
+        print("is king \(self.celebST.isKing)")
     }
 
     override func viewDidLoad() {

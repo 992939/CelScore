@@ -80,8 +80,8 @@ final class CelebrityModel: Object {
         self.prevWeek = json["prevWeek"].double!
         self.prevMonth = json["prevMonth"].double!
         self.sex = json["sex"].bool!
+        self.isKing = json["king"].bool!
         self.isSynced = true
-        self.isKing = false
         
         let realm = try! Realm()
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel.self).filter("id = %@", self.id).first

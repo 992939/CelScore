@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 90 images.
+  /// This `R.image` struct is generated, and contains static references to 86 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -94,12 +94,6 @@ struct R: Rswift.Validatable {
     static let crown_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_big_blue")
     /// Image `crown_black`.
     static let crown_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_black")
-    /// Image `crown_filling_blue`.
-    static let crown_filling_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_blue")
-    /// Image `crown_filling_red`.
-    static let crown_filling_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_red")
-    /// Image `crown_filling_yellow`.
-    static let crown_filling_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_filling_yellow")
     /// Image `crown_white`.
     static let crown_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_white")
     /// Image `emptyCircle`.
@@ -110,8 +104,6 @@ struct R: Rswift.Validatable {
     static let geometry_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_red")
     /// Image `happyFace`.
     static let happyFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "happyFace")
-    /// Image `head_red`.
-    static let head_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "head_red")
     /// Image `heart_black`.
     static let heart_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "heart_black")
     /// Image `heart_white`.
@@ -158,6 +150,8 @@ struct R: Rswift.Validatable {
     static let mini_crown_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_blue")
     /// Image `mini_crown_red`.
     static let mini_crown_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_red")
+    /// Image `mini_crown_yellow`.
+    static let mini_crown_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_yellow")
     /// Image `mini_empty`.
     static let mini_empty = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_empty")
     /// Image `mini_happy`.
@@ -192,8 +186,6 @@ struct R: Rswift.Validatable {
     static let score_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "score_white")
     /// Image `smileFace`.
     static let smileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "smileFace")
-    /// Image `social_big_blue`.
-    static let social_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "social_big_blue")
     /// Image `sphere_blue_big`.
     static let sphere_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_blue_big")
     /// Image `sphere_blue_mini`.
@@ -341,21 +333,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.crown_black, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "crown_filling_blue", bundle: ..., traitCollection: ...)`
-    static func crown_filling_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.crown_filling_blue, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "crown_filling_red", bundle: ..., traitCollection: ...)`
-    static func crown_filling_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.crown_filling_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "crown_filling_yellow", bundle: ..., traitCollection: ...)`
-    static func crown_filling_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.crown_filling_yellow, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "crown_white", bundle: ..., traitCollection: ...)`
     static func crown_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.crown_white, compatibleWith: traitCollection)
@@ -379,11 +356,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`
     static func happyFace(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.happyFace, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "head_red", bundle: ..., traitCollection: ...)`
-    static func head_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.head_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "heart_black", bundle: ..., traitCollection: ...)`
@@ -501,6 +473,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.mini_crown_red, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "mini_crown_yellow", bundle: ..., traitCollection: ...)`
+    static func mini_crown_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_crown_yellow, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "mini_empty", bundle: ..., traitCollection: ...)`
     static func mini_empty(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mini_empty, compatibleWith: traitCollection)
@@ -584,11 +561,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "smileFace", bundle: ..., traitCollection: ...)`
     static func smileFace(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.smileFace, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "social_big_blue", bundle: ..., traitCollection: ...)`
-    static func social_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.social_big_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sphere_blue", bundle: ..., traitCollection: ...)`
