@@ -11,9 +11,9 @@
 
 #import <CommonCrypto/CommonCrypto.h>
 #import "TAOverlay.h"
-#import "CACelScoreAPIClient.h"
+#import "AWSApiGatewayBridge.h"
 #import "LMGaugeView.h"
 #import <Keys/CelscoreKeys.h>
 
 #endif /* Header_h */
-#import <BuddyBuildSDK/BuddyBuildSDK.h>
+

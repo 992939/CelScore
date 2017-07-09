@@ -110,7 +110,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSLog("AAAAAAAAAAAAAAAA!!!!!!")
         
         self.celebrityTableNode.frame = Constants.kcelebrityTableNodeRect
         self.celebrityTableNode.backgroundColor = Color.clear
@@ -215,7 +214,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .on(value: { _ in
-                NSLog("WWWWWWWWWWWWWWWWW!!!!!!")
                 revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
                 revealingSplashView.startAnimation()
             })

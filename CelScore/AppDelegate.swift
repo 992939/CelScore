@@ -33,7 +33,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-         NSLog("OOOOOOOOOOOOOO!!!!!!")
          UIApplication.shared.statusBarStyle = .lightContent
        
         //Realm
@@ -64,14 +63,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //UIApplication.shared.registerForRemoteNotifications()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
-        CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
+        JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
         
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        NSLog("SSSSSSSSSSSSS!!!!!!")
+
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
-        NSLog("QQQQQQQQQQQQQQ!!!!!!")
         nav.contentViewController.view.backgroundColor = .clear
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)

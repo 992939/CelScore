@@ -23,13 +23,13 @@ struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let serviceClient = CACelScoreAPIClient(forKey: "anonymousAccess")!
+            let serviceClient = JUCelScoreAPIClient(configuration: AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider()))
             serviceClient.apiKey = Constants.kAPIKey
             let awsCall : AWSTask<AnyObject>
             switch dataType {
-            case .celebrity: awsCall = serviceClient.celebinfoscanservicePost()
-            case .list: awsCall = serviceClient.celeblistsservicePost()
-            case .ratings: awsCall = serviceClient.celebratingservicePost()
+            case .celebrity: awsCall = serviceClient.celebinfoscanservicePost() as! AWSTask<AnyObject>
+            case .list: awsCall = serviceClient.celeblistsservicePost() as! AWSTask<AnyObject>
+            case .ratings: awsCall = serviceClient.celebratingservicePost() as! AWSTask<AnyObject>
             }
             
             awsCall.continueWith(block: { (task: AWSTask!) -> AnyObject! in

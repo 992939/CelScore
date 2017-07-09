@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */; };
-		000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 000215A61CFBA1B00004A8B9 /* CAEmpty.m */; };
 		0003BDC21E11DE9300B931D4 /* SMSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBE1E11DE9300B931D4 /* SMSegment.swift */; };
 		0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */; };
 		0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */; };
@@ -47,6 +45,8 @@
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
+		00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9861F11DFC100F2D3D4 /* Empty.swift */; };
+		00BCB9891F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */; };
 		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
 		00C347A11C6016A000097089 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A01C6016A000097089 /* InfoViewController.swift */; };
 		00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A21C6016B000097089 /* RatingsViewController.swift */; };
@@ -108,10 +108,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACelScoreAPIClient.h; sourceTree = "<group>"; };
-		000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACelScoreAPIClient.m; sourceTree = "<group>"; };
-		000215A51CFBA1B00004A8B9 /* CAEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAEmpty.h; sourceTree = "<group>"; };
-		000215A61CFBA1B00004A8B9 /* CAEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAEmpty.m; sourceTree = "<group>"; };
 		0003BDBE1E11DE9300B931D4 /* SMSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegment.swift; path = SMSegment/SMSegment.swift; sourceTree = "<group>"; };
 		0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentAppearance.swift; path = SMSegment/SMSegmentAppearance.swift; sourceTree = "<group>"; };
 		0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSegment/SMSegmentView.swift; sourceTree = "<group>"; };
@@ -157,6 +153,9 @@
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
+		00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSApiGatewayBridge.h; sourceTree = "<group>"; };
+		00BCB9861F11DFC100F2D3D4 /* Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUCelScoreAPIClient.swift; sourceTree = "<group>"; };
 		00BF75271CA1F8D10061064C /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		00C347A01C6016A000097089 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		00C347A21C6016B000097089 /* RatingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
@@ -259,11 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				006A61B71D0A561300D01CA0 /* Header.h */,
+				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
 				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
-				000215A31CFBA1B00004A8B9 /* CACelScoreAPIClient.h */,
-				000215A41CFBA1B00004A8B9 /* CACelScoreAPIClient.m */,
-				000215A51CFBA1B00004A8B9 /* CAEmpty.h */,
-				000215A61CFBA1B00004A8B9 /* CAEmpty.m */,
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
@@ -341,6 +337,8 @@
 				0003BDBD1E11DE7800B931D4 /* SMSegment */,
 				006431861C6A63A10062BBDB /* CosmosStars */,
 				0036DD5A1C03A2F2000F533F /* Constants.swift */,
+				00BCB9861F11DFC100F2D3D4 /* Empty.swift */,
+				00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0099D4501CDB0C89008C1D6E /* Duration.swift */,
 				00252D781CC6EC6E007CA826 /* R.generated.swift */,
@@ -1050,6 +1048,7 @@
 				00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */,
 				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
+				00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
 				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
@@ -1057,13 +1056,12 @@
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,
 				006431901C6A66030062BBDB /* CosmosView.swift in Sources */,
 				0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */,
-				000215A71CFBA1B00004A8B9 /* CACelScoreAPIClient.m in Sources */,
 				0003BDC21E11DE9300B931D4 /* SMSegment.swift in Sources */,
 				0036DD5B1C03A2F2000F533F /* Constants.swift in Sources */,
 				0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */,
 				0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */,
-				000215A81CFBA1B00004A8B9 /* CAEmpty.m in Sources */,
 				0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */,
+				00BCB9891F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
 				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,

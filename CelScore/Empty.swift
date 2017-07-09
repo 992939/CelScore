@@ -14,14 +14,15 @@
  */
  
 
-#import "CAEmpty.h"
+import Foundation
+import AWSCore
 
-@implementation CAEmpty
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-
-             };
+ 
+public class Empty : AWSModel {
+    
+    
+   	public override static func jsonKeyPathsByPropertyKey() -> [AnyHashable : Any]!{
+		let params:[AnyHashable : Any] = [:]
+        return params
+	}
 }
-
-@end
