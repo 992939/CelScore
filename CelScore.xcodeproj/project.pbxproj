@@ -47,6 +47,7 @@
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9861F11DFC100F2D3D4 /* Empty.swift */; };
 		00BCB9891F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */; };
+		00BCB98F1F11E8E000F2D3D4 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */; };
 		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
 		00C347A11C6016A000097089 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A01C6016A000097089 /* InfoViewController.swift */; };
 		00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C347A21C6016B000097089 /* RatingsViewController.swift */; };
@@ -65,7 +66,6 @@
 		00F6C9DF1B3539480078CA6E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9DD1B3539480078CA6E /* MasterViewController.swift */; };
 		00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6C9E11B353A670078CA6E /* libsqlite3.dylib */; };
 		00F764821CBE15610012A581 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F764811CBE15610012A581 /* ModelTests.swift */; };
-		00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */; };
 		00FAB6551CD9556F00459B67 /* UserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */; };
 		00FAB6571CD9614900459B67 /* CelScoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */; };
 		06EAF43F5B4C30242F4E48FC /* Pods_CelScoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC9258E9FEEB6697E28EBC /* Pods_CelScoreTests.framework */; };
@@ -156,6 +156,8 @@
 		00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSApiGatewayBridge.h; sourceTree = "<group>"; };
 		00BCB9861F11DFC100F2D3D4 /* Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUCelScoreAPIClient.swift; sourceTree = "<group>"; };
+		00BCB98D1F11E8E000F2D3D4 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
+		00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
 		00BF75271CA1F8D10061064C /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		00C347A01C6016A000097089 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		00C347A21C6016B000097089 /* RatingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
@@ -176,8 +178,6 @@
 		00F6C9DD1B3539480078CA6E /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		00F6C9E11B353A670078CA6E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		00F764811CBE15610012A581 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
-		00F902191C8BC9A0009AD588 /* LMGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGaugeView.h; sourceTree = "<group>"; };
-		00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGaugeView.m; sourceTree = "<group>"; };
 		00FAB6541CD9556F00459B67 /* UserViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTests.swift; sourceTree = "<group>"; };
 		00FAB6561CD9614900459B67 /* CelScoreViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModelTests.swift; sourceTree = "<group>"; };
 		0A9015022509B4E7DEB44BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -263,8 +263,8 @@
 				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
 				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
 				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
-				00F902191C8BC9A0009AD588 /* LMGaugeView.h */,
-				00F9021A1C8BC9A0009AD588 /* LMGaugeView.m */,
+				00BCB98D1F11E8E000F2D3D4 /* LMGaugeView.h */,
+				00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */,
 				004492171C3B272200FBCEFE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -1036,6 +1036,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				006431921C6A67430062BBDB /* StarLayer.swift in Sources */,
+				00BCB98F1F11E8E000F2D3D4 /* LMGaugeView.m in Sources */,
 				0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */,
 				00F6C9DB1B35393C0078CA6E /* UserViewModel.swift in Sources */,
 				00404A961BEE71300009AD0E /* SettingsModel.swift in Sources */,
@@ -1064,7 +1065,6 @@
 				00BCB9891F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift in Sources */,
 				00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */,
 				0064318E1C6A65940062BBDB /* CosmosSettings.swift in Sources */,
-				00F9021B1C8BC9A0009AD588 /* LMGaugeView.m in Sources */,
 				0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */,
 				00BF75281CA1F8D10061064C /* Protocols.swift in Sources */,
 				00C347BB1C60902E00097089 /* SettingsViewController.swift in Sources */,

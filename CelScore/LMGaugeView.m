@@ -9,14 +9,14 @@
 #import "LMGaugeView.h"
 
 #define kDefaultStartAngle                      M_PI_4 * 3
-#define kDefaultEndAngle                        M_PI_4
+#define kDefaultEndAngle                        M_PI_4 + 2 * M_PI
 #define kDefaultMinValue                        20
-#define kDefaultMaxValue                        120
+#define kDefaultMaxValue                        100
 #define kDefaultLimitValue                      50
 #define kDefaultNumOfDivisions                  6
 #define kDefaultNumOfSubDivisions               10
 
-#define kDefaultRingThickness                   14
+#define kDefaultRingThickness                   15
 #define kDefaultRingBackgroundColor             [UIColor colorWithWhite:0.9 alpha:1]
 #define kDefaultRingColor                       [UIColor colorWithRed:76.0/255 green:217.0/255 blue:100.0/255 alpha:1]
 
@@ -28,16 +28,16 @@
 #define kDefaultSubDivisionsColor               [UIColor colorWithWhite:0.5 alpha:0.5]
 
 #define kDefaultLimitDotRadius                  2
-#define kDefaultLimitDotColor                   [UIColor clearColor]
+#define kDefaultLimitDotColor                   [UIColor redColor]
 
 #define kDefaultValueFont                       [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:50]
 #define kDefaultValueTextColor                  [UIColor colorWithWhite:0.1 alpha:1]
+#define kDefaultMinMaxValueFont                 [UIFont fontWithName:@"HelveticaNeue" size:12]
+#define kDefaultMinMaxValueTextColor            [UIColor colorWithWhite:0.3 alpha:0]
 
 #define kDefaultUnitOfMeasurement               @"Royalty %"
 #define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"Helvetica" size:10]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:0.7]
-
-#define kDefaultLabelBackgroundColor            [UIColor colorWithRed:238.0/255 green: 238.0/255 blue: 238.0/255 alpha: 1]
 
 @interface LMGaugeView ()
 
@@ -50,6 +50,8 @@
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) UILabel *valueLabel;
 @property (nonatomic, strong) UILabel *unitOfMeasurementLabel;
+@property (nonatomic, strong) UILabel *minValueLabel;
+@property (nonatomic, strong) UILabel *maxValueLabel;
 
 @end
 
@@ -113,6 +115,9 @@
     // Value Text
     _valueFont = kDefaultValueFont;
     _valueTextColor = kDefaultValueTextColor;
+    _showMinMaxValue = YES;
+    _minMaxValueFont = kDefaultMinMaxValueFont;
+    _minMaxValueTextColor = kDefaultMinMaxValueTextColor;
     
     // Unit Of Measurement
     _showUnitOfMeasurement = YES;
@@ -129,7 +134,7 @@
     /*!
      *  Set progress for ring layer
      */
-    CGFloat progress = self.maxValue ? (self.value - self.minValue)/self.maxValue : 0;
+    CGFloat progress = self.maxValue ? (self.value - self.minValue)/(self.maxValue - self.minValue) : 0;
     self.progressLayer.strokeEnd = progress;
     
     /*!
@@ -151,7 +156,7 @@
      *  Prepare drawing
      */
     self.divisionUnitValue = self.numOfDivisions ? (self.maxValue - self.minValue)/self.numOfDivisions : 0;
-    self.divisionUnitAngle = self.numOfDivisions ? (M_PI * 2 - ABS(self.endAngle - self.startAngle))/self.numOfDivisions : 0;
+    self.divisionUnitAngle = self.numOfDivisions ? ABS(self.endAngle - self.startAngle)/self.numOfDivisions : 0;
     CGPoint center = CGPointMake(CGRectGetWidth(self.bounds)/2, CGRectGetHeight(self.bounds)/2);
     CGFloat ringRadius = MIN(CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))/2 - self.ringThickness/2;
     CGFloat dotRadius = ringRadius - self.ringThickness/2 - self.divisionsPadding - self.divisionsRadius/2;
@@ -185,7 +190,7 @@
             for (int j = 0; j <= self.numOfSubDivisions && self.numOfSubDivisions != 0; j++)
             {
                 // Subdivisions
-                CGFloat value = i * self.divisionUnitValue + j * self.divisionUnitValue/self.numOfSubDivisions;
+                CGFloat value = i * self.divisionUnitValue + j * self.divisionUnitValue/self.numOfSubDivisions + self.minValue;
                 CGFloat angle = [self angleFromValue:value];
                 CGPoint dotCenter = CGPointMake(dotRadius * cos(angle) + center.x, dotRadius * sin(angle) + center.y);
                 [self drawDotAtContext:context
@@ -196,7 +201,7 @@
         }
         
         // Divisions
-        CGFloat value = i * self.divisionUnitValue;
+        CGFloat value = i * self.divisionUnitValue + self.minValue;
         CGFloat angle = [self angleFromValue:value];
         CGPoint dotCenter = CGPointMake(dotRadius * cos(angle) + center.x, dotRadius * sin(angle) + center.y);
         [self drawDotAtContext:context
@@ -250,19 +255,56 @@
     if (!self.valueLabel)
     {
         self.valueLabel = [[UILabel alloc] init];
-        self.valueLabel.backgroundColor = kDefaultLabelBackgroundColor;
+        self.valueLabel.backgroundColor = [UIColor clearColor];
         self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        self.valueLabel.text = [NSString stringWithFormat:@"%.2f", self.value];
+        self.valueLabel.text = [NSString stringWithFormat:@"%0.f", self.value];
         self.valueLabel.font = self.valueFont;
         self.valueLabel.adjustsFontSizeToFitWidth = YES;
         self.valueLabel.minimumScaleFactor = 10/self.valueLabel.font.pointSize;
         self.valueLabel.textColor = self.valueTextColor;
         [self addSubview:self.valueLabel];
     }
-    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2.7
-    + self.divisionsRadius;
+    CGFloat insetX = self.ringThickness + self.divisionsPadding * 2 + self.divisionsRadius;
     self.valueLabel.frame = CGRectInset(self.progressLayer.frame, insetX, insetX);
     self.valueLabel.frame = CGRectOffset(self.valueLabel.frame, 0, self.showUnitOfMeasurement ? -self.divisionsPadding/2 : 0);
+    
+    /*!
+     *  Min Value Label
+     */
+    if (!self.minValueLabel)
+    {
+        self.minValueLabel = [[UILabel alloc] init];
+        self.minValueLabel.backgroundColor = [UIColor clearColor];
+        self.minValueLabel.textAlignment = NSTextAlignmentLeft;
+        self.minValueLabel.adjustsFontSizeToFitWidth = YES;
+        [self addSubview:self.minValueLabel];
+    }
+    self.minValueLabel.text = [NSString stringWithFormat:@"%0.f", self.minValue];
+    self.minValueLabel.font = self.minMaxValueFont;
+    self.minValueLabel.minimumScaleFactor = 10/self.minValueLabel.font.pointSize;
+    self.minValueLabel.textColor = self.minMaxValueTextColor;
+    self.minValueLabel.hidden = !self.showMinMaxValue;
+    CGPoint minDotCenter = CGPointMake(dotRadius * cos(self.startAngle) + center.x, dotRadius * sin(self.startAngle) + center.y);
+    self.minValueLabel.frame = CGRectMake(minDotCenter.x + 8, minDotCenter.y - 20, 40, 20);
+    
+    /*!
+     *  Max Value Label
+     */
+    if (!self.maxValueLabel)
+    {
+        self.maxValueLabel = [[UILabel alloc] init];
+        self.maxValueLabel.backgroundColor = [UIColor clearColor];
+        self.maxValueLabel.textAlignment = NSTextAlignmentRight;
+        self.maxValueLabel.adjustsFontSizeToFitWidth = YES;
+        [self addSubview:self.maxValueLabel];
+    }
+    self.maxValueLabel.text = [NSString stringWithFormat:@"%0.f", self.maxValue];
+    self.maxValueLabel.font = self.minMaxValueFont;
+    self.maxValueLabel.minimumScaleFactor = 10/self.maxValueLabel.font.pointSize;
+    self.maxValueLabel.textColor = self.minMaxValueTextColor;
+    self.maxValueLabel.hidden = !self.showMinMaxValue;
+    CGPoint maxDotCenter = CGPointMake(dotRadius * cos(self.endAngle) + center.x, dotRadius * sin(self.endAngle) + center.y);
+    self.maxValueLabel.frame = CGRectMake(maxDotCenter.x - 8 - 40, maxDotCenter.y - 20, 40, 20);
     
     /*!
      *  Unit Of Measurement Label
@@ -270,7 +312,7 @@
     if (!self.unitOfMeasurementLabel)
     {
         self.unitOfMeasurementLabel = [[UILabel alloc] init];
-        self.unitOfMeasurementLabel.backgroundColor = kDefaultLabelBackgroundColor;
+        self.unitOfMeasurementLabel.backgroundColor = [UIColor clearColor];
         self.unitOfMeasurementLabel.textAlignment = NSTextAlignmentCenter;
         self.unitOfMeasurementLabel.text = self.unitOfMeasurement;
         self.unitOfMeasurementLabel.font = self.unitOfMeasurementFont;
@@ -281,7 +323,7 @@
         self.unitOfMeasurementLabel.hidden = !self.showUnitOfMeasurement;
     }
     self.unitOfMeasurementLabel.frame = CGRectMake(self.valueLabel.frame.origin.x,
-                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 6,
+                                                   self.valueLabel.frame.origin.y + CGRectGetHeight(self.valueLabel.frame) - 10,
                                                    CGRectGetWidth(self.valueLabel.frame),
                                                    20);
 }
@@ -318,7 +360,7 @@
     /*!
      *  Set text for value label
      */
-    self.valueLabel.text = [NSString stringWithFormat:@"%.1f", _value];
+    self.valueLabel.text = [NSString stringWithFormat:@"%0.f", _value];
 
     /*!
      *  Trigger the stoke animation of ring layer.
@@ -477,6 +519,33 @@
         _valueTextColor = valueTextColor;
         
         self.valueLabel.textColor = _valueTextColor;
+    }
+}
+
+- (void)setShowMinMaxValue:(BOOL)showMinMaxValue
+{
+    if (_showMinMaxValue != showMinMaxValue) {
+        _showMinMaxValue = showMinMaxValue;
+        
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setMinMaxValueFont:(UIFont *)minMaxValueFont
+{
+    if (_minMaxValueFont != minMaxValueFont) {
+        _minMaxValueFont = minMaxValueFont;
+        
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setMinMaxValueTextColor:(UIColor *)minMaxValueTextColor
+{
+    if (_minMaxValueTextColor != minMaxValueTextColor) {
+        _minMaxValueTextColor = minMaxValueTextColor;
+        
+        [self setNeedsDisplay];
     }
 }
 

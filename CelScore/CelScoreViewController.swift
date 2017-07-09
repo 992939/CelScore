@@ -49,8 +49,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gaugeView.pulseAnimation = .none
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in gauge.maxValue = CGFloat(celscore.roundToPlaces(places: 2)) })
-        gauge.limitValue = Constants.kMiddleVoteValue
+        gauge.maxValue = Constants.kMaximumVoteValue
+        gauge.limitValue = Constants.kMaximumVoteValue
         let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
         gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
         gauge.subDivisionsColor = Constants.kBlueShade
@@ -60,14 +60,19 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gauge.ringBackgroundColor = Constants.kBlueShade
         gauge.backgroundColor = Constants.kGreyBackground
         gauge.delegate = self
-        let firstSlow: CGFloat = (gauge.maxValue / 10) * 9
-        let secondSlow: CGFloat = (gauge.maxValue / 10) * 9.5
-        let thirdSlow: CGFloat = (gauge.maxValue / 10) * 9.8
-        let finalSlow: CGFloat = (gauge.maxValue / 10) * 9.9
-        
-        Timer.after(1.5.seconds) { _ in Timer.every(50.ms){ timer in self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, thirdSlow: thirdSlow, finalSlow: finalSlow) } }
-        
         gaugeView.addSubview(gauge)
+
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+            .startWithValues({ celscore in
+                let score = CGFloat(celscore.roundToPlaces(places: 2))
+                Timer.after(1.5, {
+                    let firstSlow: CGFloat = score * 0.8
+                    let secondSlow: CGFloat = score * 0.9
+                    Timer.every(0.01, { (timer: Timer) in
+                        self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, stopValue: score)
+                    })
+                })
+            })
         return gaugeView
     }
     
@@ -98,13 +103,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return taggedView
     }
     
-    func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, thirdSlow: CGFloat, finalSlow: CGFloat) {
-        if gaugeView.value > finalSlow { gaugeView.value += 0.05 }
-        else if gaugeView.value > thirdSlow { gaugeView.value += 0.1 }
-        else if gaugeView.value > secondSlow { gaugeView.value += 0.15 }
-        else if gaugeView.value > firstSlow { gaugeView.value += 0.25 }
-        else if gaugeView.value < gaugeView.maxValue { gaugeView.value += 0.75 }
-        else { timer.invalidate() }
+    func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, stopValue: CGFloat) {
+        if gaugeView.value > stopValue { timer.invalidate() }
+        else if gaugeView.value > secondSlow { gaugeView.value += 0.05 }
+        else if gaugeView.value > firstSlow { gaugeView.value += 0.1 }
+        else { gaugeView.value += 0.3 }
     }
     
     //MARK: LMGaugeViewDelegate
