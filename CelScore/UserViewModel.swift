@@ -199,7 +199,6 @@ struct UserViewModel {
                 if case .userRatings = dataSetType { dataset.clear() }
                 dataset.synchronize()
                 observer.send(value: object)
-                print("Update Cognito completed")
                 observer.sendCompleted()
                 return task
             }))
