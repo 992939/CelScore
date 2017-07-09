@@ -26,16 +26,6 @@ class RatingsModel: Object, Collection {
     dynamic var rating8: Double = 0
     dynamic var rating9: Double = 0
     dynamic var rating10: Double = 0
-    dynamic var variance1: Double = 0
-    dynamic var variance2: Double = 0
-    dynamic var variance3: Double = 0
-    dynamic var variance4: Double = 0
-    dynamic var variance5: Double = 0
-    dynamic var variance6: Double = 0
-    dynamic var variance7: Double = 0
-    dynamic var variance8: Double = 0
-    dynamic var variance9: Double = 0
-    dynamic var variance10: Double = 0
     dynamic var totalVotes: Int = 0
     dynamic var isSynced: Bool = true
     
@@ -55,16 +45,6 @@ class RatingsModel: Object, Collection {
         self.id = json["ratingID"].string!
         self.updatedAt = json["updatedAt"].string!
         self.totalVotes = json["totalVote"].int!
-        self.variance1 = json["variance1"].double!
-        self.variance2 = json["variance2"].double!
-        self.variance3 = json["variance3"].double!
-        self.variance4 = json["variance4"].double!
-        self.variance5 = json["variance5"].double!
-        self.variance6 = json["variance6"].double!
-        self.variance7 = json["variance7"].double!
-        self.variance8 = json["variance8"].double!
-        self.variance9 = json["variance9"].double!
-        self.variance10 = json["variance10"].double!
         for ratings in self.makeIterator() { self[ratings] = json[ratings].double! }
         self.isSynced = true
     }
@@ -80,12 +60,6 @@ class RatingsModel: Object, Collection {
         let total: Double = (self.rating1 + self.rating2 + self.rating3 + self.rating4 + self.rating5
             + self.rating6 + self.rating7 + self.rating8 + self.rating9 + self.rating10) * 2
         return total.roundToPlaces(places: 2)
-    }
-    
-    func getAvgVariance() -> Double {
-        let avgVariance: Double = (self.variance1 + self.variance2 + self.variance3 + self.variance4 + self.variance5
-        + self.variance6 + self.variance7 + self.variance8 + self.variance9 + self.variance10)/10
-        return avgVariance.roundToPlaces(places: 2)
     }
     
     subscript(i: Int) -> String {

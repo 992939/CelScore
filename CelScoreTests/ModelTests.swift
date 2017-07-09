@@ -26,16 +26,6 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(ratings.rating8, "RatingsModel().rating8 not nil")
         XCTAssertNotNil(ratings.rating9, "RatingsModel().rating9 not nil")
         XCTAssertNotNil(ratings.rating10, "RatingsModel().rating10 not nil")
-        XCTAssertNotNil(ratings.variance1, "RatingsModel().variance1 not nil")
-        XCTAssertNotNil(ratings.variance2, "RatingsModel().variance2 not nil")
-        XCTAssertNotNil(ratings.variance3, "RatingsModel().variance3 not nil")
-        XCTAssertNotNil(ratings.variance4, "RatingsModel().variance4 not nil")
-        XCTAssertNotNil(ratings.variance5, "RatingsModel().variance5 not nil")
-        XCTAssertNotNil(ratings.variance6, "RatingsModel().variance6 not nil")
-        XCTAssertNotNil(ratings.variance7, "RatingsModel().variance7 not nil")
-        XCTAssertNotNil(ratings.variance8, "RatingsModel().variance8 not nil")
-        XCTAssertNotNil(ratings.variance9, "RatingsModel().variance9 not nil")
-        XCTAssertNotNil(ratings.variance10, "RatingsModel().variance10 not nil")
         XCTAssertNotNil(ratings.totalVotes, "RatingsModel().totalVotes not nil")
         XCTAssertNotNil(ratings.isSynced, "RatingsModel().isSynced not nil")
         XCTAssertNotNil(ratings.startIndex, "RatingsModel().startIndex not nil")
@@ -56,16 +46,6 @@ class ModelTests: XCTestCase {
         XCTAssert((ratings.rating8 as Any) is Double, "RatingsModel().rating8 is Double")
         XCTAssert((ratings.rating9 as Any) is Double, "RatingsModel().rating9 is Double")
         XCTAssert((ratings.rating10 as Any) is Double, "RatingsModel().rating10 is Double")
-        XCTAssert((ratings.variance1 as Any) is Double, "RatingsModel().variance1 is Double")
-        XCTAssert((ratings.variance2 as Any) is Double, "RatingsModel().variance2 is Double")
-        XCTAssert((ratings.variance3 as Any) is Double, "RatingsModel().variance3 is Double")
-        XCTAssert((ratings.variance4 as Any) is Double, "RatingsModel().variance4 is Double")
-        XCTAssert((ratings.variance5 as Any) is Double, "RatingsModel().variance5 is Double")
-        XCTAssert((ratings.variance6 as Any) is Double, "RatingsModel().variance6 is Double")
-        XCTAssert((ratings.variance7 as Any) is Double, "RatingsModel().variance7 is Double")
-        XCTAssert((ratings.variance8 as Any) is Double, "RatingsModel().variance8 is Double")
-        XCTAssert((ratings.variance9 as Any) is Double, "RatingsModel().variance9 is Double")
-        XCTAssert((ratings.variance10 as Any) is Double, "RatingsModel().variance10 is Double")
         XCTAssert((ratings.totalVotes as Any) is Int, "RatingsModel().totalVotes is Int")
         XCTAssert((ratings.isSynced as Any) is Bool, "RatingsModel().isSynced is Bool")
         XCTAssert((ratings.updatedAt as Any) is String, "RatingsModel().updatedAt is String")
@@ -190,21 +170,6 @@ class ModelTests: XCTestCase {
     func testUserRatingsGetCelScore() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
         XCTAssertEqual(userRatings.getCelScore(), Double(20), "userRatings.getCelScore() error.")
-    }
-    
-    func testUserRatingsGetAverageVariance() {
-        let userRatings = UserRatingsModel()
-        userRatings.variance1 = 1
-        userRatings.variance2 = 1
-        userRatings.variance3 = 1
-        userRatings.variance4 = 1
-        userRatings.variance5 = 1
-        userRatings.variance6 = 1
-        userRatings.variance7 = 1
-        userRatings.variance8 = 1
-        userRatings.variance9 = 1
-        userRatings.variance10 = 1
-        XCTAssertEqual(userRatings.getAvgVariance(), Double(1.00), "userRatings.getAvgVariance() error.")
     }
     
     func testCelebrityStructEquality() {
