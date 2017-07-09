@@ -12,8 +12,8 @@ plugin 'cocoapods-keys', {
 def shared_pods
     pod 'ReactiveCocoa', '5.0.3'
     pod 'Result', '~> 3.1.0'
-    pod 'Realm', '~> 2.5'
-    pod 'RealmSwift', '~> 2.5'
+    pod 'Realm', '~> 2.8'
+    pod 'RealmSwift', '~> 2.8'
     pod 'AsyncDisplayKit', '~> 2.1'
     pod 'AWSCognito', '2.5.8'
     pod 'AWSAPIGateway', '2.5.8'
@@ -39,8 +39,8 @@ target 'CelScore' do
     pod 'YLProgressBar', '~> 3.10'
     pod 'HMSegmentedControl', '~> 1.5.3'
     pod 'SVProgressHUD', '~> 2.1'
-    pod 'RevealingSplashView', '~> 0.1'
-    pod 'PMAlertController', '~> 2.0'
+    pod 'RevealingSplashView', '~> 0.4'
+    pod 'PMAlertController', '~> 2.1'
     pod 'Dwifft', '~> 0.5'
 end
 

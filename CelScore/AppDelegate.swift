@@ -33,28 +33,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+         NSLog("OOOOOOOOOOOOOO!!!!!!")
          UIApplication.shared.statusBarStyle = .lightContent
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 35,
+            schemaVersion: 37,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 30 {
-                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["isKing"] = false
-                    }
-                }
-                if oldSchemaVersion < 32 {
-                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["prevWeek"] = 0
-                    }
-                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
-                        newObject!["prevMonth"] = 0
-                    }
-                }
                 if oldSchemaVersion < 33 {
                     migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
                         newObject!["onSocialSharing"] = false
+                    }
+                }
+                if oldSchemaVersion < 36 {
+                    migration.enumerateObjects(ofType: CelebId.className()) { oldObject, newObject in
+                        newObject!["index"] = 0
                     }
                 }
         })
@@ -62,22 +55,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSDDLog().logLevel = .verbose
+        AWSDDLog().logLevel = .error
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
-        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
-        UIApplication.shared.registerForRemoteNotifications()
-        
-        let pinpointTargetingClient = pinpoint!.targetingClient
-        pinpointTargetingClient.addAttribute(["Lakers","Clippers"], forKey: "favoriteTeams")
-        pinpointTargetingClient.updateEndpointProfile()
-        
-//        let pinpointAnalyticsClient = pinpoint!.analyticsClient
-//        let event = pinpoint!.analyticsClient.createVirtualMonetizationEvent(withProductId: "PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
-//        pinpointAnalyticsClient.record(event)
-//        pinpointAnalyticsClient.submitEvents()
+        //pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+        //UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
+        //UIApplication.shared.registerForRemoteNotifications()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         CACelScoreAPIClient.register(with: configurationAnonymous, forKey: "anonymousAccess")
@@ -85,7 +69,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        NSLog("SSSSSSSSSSSSS!!!!!!")
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
+        NSLog("QQQQQQQQQQQQQQ!!!!!!")
         nav.contentViewController.view.backgroundColor = .clear
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
@@ -97,6 +83,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
         
+        NSLog("XXXXXXXXXXXX!!!!!!")
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

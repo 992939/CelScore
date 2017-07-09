@@ -72,7 +72,6 @@ class RatingsModel: Object, Collection {
     //MARK: Methods
     
     public func index(after i: Int) -> Int {
-        print("i: \(i)")
         guard i < 9 else { return 0 }
         return i + 1
     }

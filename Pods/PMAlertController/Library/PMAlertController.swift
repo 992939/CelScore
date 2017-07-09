@@ -29,7 +29,24 @@ import UIKit
     open var ALERT_STACK_VIEW_HEIGHT : CGFloat = UIScreen.main.bounds.height < 568.0 ? 40 : 62 //if iphone 4 the stack_view_height is 40, else 62
     var animator : UIDynamicAnimator?
     
+    open var textFields: [UITextField] = []
+    
     open var gravityDismissAnimation = true
+    open var dismissWithBackgroudTouch = false // enable touch background to dismiss. Off by default.
+    
+    //MARK: - Lifecycle
+    
+    override open func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     
     
     //MARK: - Initialiser
@@ -52,6 +69,9 @@ import UIKit
         //if alert width = 270, else width = screen width - 36
         style == .alert ? (alertViewWidthConstraint.constant = 270) : (alertViewWidthConstraint.constant = UIScreen.main.bounds.width - 36)
         
+        //Gesture recognizer for background dismiss with background touch
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(dismissAlertControllerFromBackgroundTap))
+        alertMaskBackground.addGestureRecognizer(tapRecognizer)
         
         setShadowAlertView()
     }
@@ -60,7 +80,7 @@ import UIKit
     @objc open func addAction(_ alertAction: PMAlertAction){
         alertActionStackView.addArrangedSubview(alertAction)
         
-        if alertActionStackView.arrangedSubviews.count > 2{
+        if alertActionStackView.arrangedSubviews.count > 2 || hasTextFieldAdded(){
             alertStackViewHeightConstraint.constant = ALERT_STACK_VIEW_HEIGHT * CGFloat(alertActionStackView.arrangedSubviews.count)
             alertActionStackView.axis = .vertical
         }
@@ -76,6 +96,36 @@ import UIKit
     @objc fileprivate func dismissAlertController(_ sender: PMAlertAction){
         self.animateDismissWithGravity(sender.actionStyle)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func dismissAlertControllerFromBackgroundTap() {
+        if !dismissWithBackgroudTouch {
+            return
+        }
+        
+        self.animateDismissWithGravity(.cancel)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    //MARK: - Text Fields
+    @objc open func addTextField(_ configuration: (_ textField: UITextField?) -> Void){
+        let textField = UITextField()
+        textField.delegate = self
+        textField.returnKeyType = .done
+        textField.font = UIFont(name: "Avenir-Heavy", size: 17)
+        textField.textAlignment = .center
+        configuration (textField)
+        _addTextField(textField)
+    }
+    func _addTextField(_ textField: UITextField){
+        alertActionStackView.addArrangedSubview(textField)
+        alertStackViewHeightConstraint.constant = ALERT_STACK_VIEW_HEIGHT * CGFloat(alertActionStackView.arrangedSubviews.count)
+        alertActionStackView.axis = .vertical
+        textFields.append(textField)
+    }
+    
+    func hasTextFieldAdded () -> Bool{
+        return textFields.count > 0
     }
     
     //MARK: - Customizations
@@ -112,11 +162,11 @@ import UIKit
     
     @objc fileprivate func animateDismissWithGravity(_ style: PMAlertActionStyle){
         if gravityDismissAnimation == true{
-            var radian = M_PI
+            var radian = Double.pi
             if style == .default {
-                radian = 2 * M_PI
+                radian = 2 * Double.pi
             }else{
-                radian = -2 * M_PI
+                radian = -2 * Double.pi
             }
             animator = UIDynamicAnimator(referenceView: self.view)
             
@@ -129,5 +179,46 @@ import UIKit
             itemBehavior.addAngularVelocity(CGFloat(radian), for: alertView)
             animator?.addBehavior(itemBehavior)
         }
+    }
+    
+    //MARK: - Keyboard avoiding
+    
+    var tempFrameOrigin: CGPoint?
+    var keyboardHasBeenShown:Bool = false
+    
+    func keyboardWillShow(_ notification: Notification) {
+        keyboardHasBeenShown = true
+        
+        guard let userInfo = (notification as NSNotification).userInfo else {return}
+        guard let endKeyBoardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.minY else {return}
+        
+        if tempFrameOrigin == nil {
+            tempFrameOrigin = alertView.frame.origin
+        }
+        
+        var newContentViewFrameY = alertView.frame.maxY - endKeyBoardFrame
+        if newContentViewFrameY < 0 {
+            newContentViewFrameY = 0
+        }
+        alertView.frame.origin.y -= newContentViewFrameY
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        if (keyboardHasBeenShown) { // Only on the simulator (keyboard will be hidden)
+            if (tempFrameOrigin != nil){
+                alertView.frame.origin.y = tempFrameOrigin!.y
+                tempFrameOrigin = nil
+            }
+            
+            keyboardHasBeenShown = false
+        }
+    }
+}
+
+extension PMAlertController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }

@@ -73,34 +73,34 @@ struct ListViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             
-            let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
-            guard let celebList = list else { return }
+            let listModel = realm.objects(ListsModel.self).filter("id = %@", listId).first
+            guard let list = listModel else { return }
             let followed = realm.objects(CelebrityModel.self).filter("isFollowed = true")
             
             guard followed.count > 0 else { return observer.send(value: true) }
             var notFollowing: [(index: Int, celebId: CelebId)] = []
-            let following = celebList.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
+            let following = list.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
                 let isFollowing = followed.enumerated().contains(where: { (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id })
                 if !isFollowing { notFollowing.append(item) }
                 return isFollowing
             })
             
-            let listModel = ListsModel()
+            let newList = ListsModel()
             for (_, celeb) in following.enumerated() {
                 let celebId = CelebId()
                 celebId.id = celeb.element.id
-                listModel.celebList.append(celebId)
+                newList.celebList.append(celebId)
             }
             for (_, celeb) in notFollowing.enumerated() {
                 let celebId = CelebId()
                 celebId.id = celeb.celebId.id
-                listModel.celebList.append(celebId)
+                newList.celebList.append(celebId)
             }
             
             realm.beginWrite()
-            listModel.id = celebList.id
-            listModel.name = celebList.name
-            realm.add(listModel, update: true)
+            newList.id = list.id
+            newList.name = list.name
+            realm.add(newList, update: true)
             try! realm.commitWrite()
             
             observer.send(value: true)

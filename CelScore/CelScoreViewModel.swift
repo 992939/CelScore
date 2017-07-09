@@ -38,21 +38,18 @@ struct CelScoreViewModel {
                 
                 let myData = task.result as! String
                 let json = JSON(data: myData.data(using: String.Encoding.utf8)!)
+                let realm = try! Realm()
+                realm.beginWrite()
+                
                 json["Items"].arrayValue.forEach({ data in
-                    let awsObject : Object
                     switch dataType {
-                    case .celebrity: awsObject = CelebrityModel(json: data)
-                    case .list: awsObject = ListsModel(json: data)
-                    case .ratings: awsObject = RatingsModel(json: data)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        let realm = try! Realm()
-                        realm.beginWrite()
-                        realm.add(awsObject, update: true)
-                        try! realm.commitWrite()
+                    case .celebrity: realm.add(CelebrityModel(json: data), update: true)
+                    case .list: realm.add(ListsModel(json: data), update: true)
+                    case .ratings: realm.add(RatingsModel(json: data), update: true)
                     }
                 })
+                try! realm.commitWrite()
+                realm.refresh()
                 observer.send(value: task.result!)
                 observer.sendCompleted()
                 return task

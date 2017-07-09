@@ -15,7 +15,6 @@
 		0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
-		00159AE01E0F7BAD00EEA05B /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698A596AF657DCD4235FBE8A /* BuddyBuildSDK.framework */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		00252D791CC6EC6E007CA826 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00252D781CC6EC6E007CA826 /* R.generated.swift */; };
 		002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D18AA1E5030BE00E59DDF /* libz.tbd */; };
@@ -213,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */,
-				00159AE01E0F7BAD00EEA05B /* BuddyBuildSDK.framework in Frameworks */,
 				003387A21C631BC3008AB0D8 /* QuartzCore.framework in Frameworks */,
 				00F6C9E21B353A670078CA6E /* libsqlite3.dylib in Frameworks */,
 				E64E7E62C2B4F35A42F8B152 /* CoreText.framework in Frameworks */,
