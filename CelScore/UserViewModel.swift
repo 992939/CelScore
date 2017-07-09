@@ -30,7 +30,6 @@ struct UserViewModel {
                         let error: NSError = task.error! as NSError
                         observer.send(error: error)
                         if error.code == 8 || error.code == 10 || error.code == 11 { Constants.kCredentialsProvider.clearKeychain() }
-                        if error.code == 0 { print("Goosebump: \(NSDate.aws_clockSkewFixed())") }
                         return task
                     }
                     observer.send(value: task)

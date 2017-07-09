@@ -83,7 +83,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
         
-        NSLog("XXXXXXXXXXXX!!!!!!")
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

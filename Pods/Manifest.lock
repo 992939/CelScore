@@ -24,11 +24,11 @@ PODS:
     - Fabric (~> 1.6.3)
   - Dwifft (0.5)
   - Fabric (1.6.11)
-  - FBSDKCoreKit (4.23.0):
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
-  - HMSegmentedControl (1.5.3)
+  - HMSegmentedControl (1.5.4)
   - Keys (1.0.0)
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
@@ -83,9 +83,9 @@ DEPENDENCIES:
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.11)
-  - FBSDKCoreKit (~> 4.23)
-  - FBSDKLoginKit (~> 4.23)
-  - HMSegmentedControl (~> 1.5.3)
+  - FBSDKCoreKit (~> 4.24)
+  - FBSDKLoginKit (~> 4.24)
+  - HMSegmentedControl (~> 1.5.4)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.6)
   - PMAlertController (~> 2.1)
@@ -120,9 +120,9 @@ SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  HMSegmentedControl: b25bc4ec44766e073d62c473188fb354ee244b76
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
@@ -146,6 +146,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: a320fa95f35154bf2877b1485557387db97b5805
+PODFILE CHECKSUM: 66f23d3f4ebee0b4fd7278399459e5e72c91fe86
 
 COCOAPODS: 1.0.1
