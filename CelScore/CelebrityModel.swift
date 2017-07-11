@@ -37,6 +37,7 @@ final class CelebrityModel: Object {
     dynamic var lastName: String = ""
     dynamic var middleName: String = ""
     dynamic var nickName: String = ""
+    dynamic var googleName: String = ""
     dynamic var height: String = ""
     dynamic var netWorth: String = ""
     dynamic var status: String = ""
@@ -66,6 +67,7 @@ final class CelebrityModel: Object {
         self.lastName = json["lastName"].string!
         self.middleName = json["middleName"].string!
         self.nickName = json["nickname"].string!
+        self.googleName = json["google"].string!
         self.height = json["height"].string!
         self.birthdate = json["birthdate"].string!
         self.netWorth = json["netWorth"].string!
@@ -77,7 +79,7 @@ final class CelebrityModel: Object {
         self.status = json["status"].string!
         self.twitter = json["twitter"].string!
         self.daysOnThrone = json["daysOnThrone"].int!
-        self.index = 0
+        self.index = json["index"].int!
         self.prevScore = json["prevScore"].double!
         self.prevWeek = json["prevWeek"].double!
         self.prevMonth = json["prevMonth"].double!

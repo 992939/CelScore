@@ -225,13 +225,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     //MARK: SFSafariViewControllerDelegate
     func openSafari() {
-        let searchTerm = celebST.nickname.replacingOccurrences(of: " ", with: "+")
-        let searchString = String("https://www.google.com/search?q=\(searchTerm)")
-        let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
-        self.present(safariVC, animated: true, completion: nil)
-        safariVC.preferredBarTintColor = Constants.kBlueShade
-        safariVC.preferredControlTintColor = Color.white
-        safariVC.delegate = self
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
+            .on(value: { celeb in
+                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
+                let searchString = String("https://www.google.com/search?q=\(searchTerm)")
+                let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
+                self.present(safariVC, animated: true, completion: nil)
+                safariVC.preferredBarTintColor = Constants.kBlueShade
+                safariVC.preferredControlTintColor = Color.white
+                safariVC.delegate = self
+            }).start()
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
