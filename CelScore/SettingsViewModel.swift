@@ -51,7 +51,7 @@ struct SettingsViewModel {
                 case .LastMonth: return celebModel.prevMonth
                 }
             }
-            let average = royalties.reduce(0, { $0 + $1 }) / Double(celebs.count) * 20
+            let average = royalties.reduce(0, { $0 + $1 }) / Double(celebs.count)
             observer.send(value: CGFloat(average.roundToPlaces(places: 1) / 100))
             observer.sendCompleted()
         }

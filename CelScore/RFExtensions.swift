@@ -92,10 +92,6 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
-    
-    func getRoyalty() -> Double {
-        return (self * 20).roundToPlaces(places: 1)
-    }
 }
 
 extension Bundle {
