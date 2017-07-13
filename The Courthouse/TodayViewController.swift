@@ -59,7 +59,7 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         let celebDictionary = items[(indexPath as NSIndexPath).row]
         cell.nickNameLabel.text = celebDictionary["nickName"] as? String
         cell.celscoreLabel.text = String(format: "%.1f", (celebDictionary["currentScore"]! as! Double)) + "%"
-        let percent: Double = (celebDictionary["currentScore"] as! Double) - ((celebDictionary["prevScore"] as! Double) * 20)
+        let percent: Double = (celebDictionary["currentScore"] as! Double) - (celebDictionary["prevScore"] as! Double)
         let sign = percent >= 0 ? "+" : ""
         cell.changeLabel.text = sign + String(format: "%.f", percent) + "% "
         cell.changeLabel.textColor = percent < 0 ? UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1) : UIColor(red: 64/255, green: 196/255, blue: 255/255, alpha: 1)
