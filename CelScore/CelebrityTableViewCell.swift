@@ -75,9 +75,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode.style.preferredSize = box.frame.size
         
         self.rankingNode = ASImageNode()
-        self.rankingNode.style.preferredSize = CGSize(width: 40, height: 40)
-        self.rankingNode.image = R.image.black_wrath()!
-        //self.rankingNode.image = R.image.black_circle()!
+        self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
+        self.rankingNode.image = R.image.black_wreath()!
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -149,7 +148,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, self.ratingsNode, minisStack])
-        verticalStack.style.flexBasis = ASDimensionMake(.fraction, Constants.kVerticalStackPercent)
+        verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.kVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
         let horizontalStack = ASStackLayoutSpec(

@@ -137,6 +137,16 @@ extension UIDevice {
         return height
     }
     
+    static func kVerticalStackPercent() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 0.40
+        case Constants.kIPhone6_height: height = 0.45
+        default: height = 0.45
+        }
+        return height
+    }
+    
     static func getButtonExtraArea() -> CGFloat {
         let position: CGFloat
         switch Constants.kScreenHeight {

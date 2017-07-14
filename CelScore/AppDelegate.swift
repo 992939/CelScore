@@ -37,18 +37,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 39,
+            schemaVersion: 40,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 33 {
-                    migration.enumerateObjects(ofType: SettingsModel.className()) { oldObject, newObject in
-                        newObject!["onSocialSharing"] = false
-                    }
-                }
-                if oldSchemaVersion < 36 {
-                    migration.enumerateObjects(ofType: CelebId.className()) { oldObject, newObject in
-                        newObject!["index"] = 0
-                    }
-                }
                 if oldSchemaVersion < 39 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["googleName"] = ""

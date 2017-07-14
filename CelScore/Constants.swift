@@ -35,7 +35,6 @@ struct Constants {
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
-    static let kVerticalStackPercent: CGFloat = 0.45
     static let kPositiveConsensus: Double = 70.0
     
     static let kIPhone5_height: CGFloat = 568
