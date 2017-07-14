@@ -48,7 +48,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 84 images.
+  /// This `R.image` struct is generated, and contains static references to 87 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -68,6 +68,12 @@ struct R: Rswift.Validatable {
     static let arrow_up = Rswift.ImageResource(bundle: R.hostingBundle, name: "arrow_up")
     /// Image `arrow_white`.
     static let arrow_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "arrow_white")
+    /// Image `black_circle`.
+    static let black_circle = Rswift.ImageResource(bundle: R.hostingBundle, name: "black_circle")
+    /// Image `black_wrath`.
+    static let black_wrath = Rswift.ImageResource(bundle: R.hostingBundle, name: "black_wrath")
+    /// Image `black_wreath`.
+    static let black_wreath = Rswift.ImageResource(bundle: R.hostingBundle, name: "black_wreath")
     /// Image `blackstar`.
     static let blackstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "blackstar")
     /// Image `celscore_big_white`.
@@ -262,6 +268,21 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "arrow_white", bundle: ..., traitCollection: ...)`
     static func arrow_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.arrow_white, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "black_circle", bundle: ..., traitCollection: ...)`
+    static func black_circle(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.black_circle, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "black_wrath", bundle: ..., traitCollection: ...)`
+    static func black_wrath(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.black_wrath, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "black_wreath", bundle: ..., traitCollection: ...)`
+    static func black_wreath(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.black_wreath, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "blackstar", bundle: ..., traitCollection: ...)`

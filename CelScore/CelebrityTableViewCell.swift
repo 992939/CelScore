@@ -23,6 +23,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     fileprivate let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
+    internal let rankingNode: ASImageNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -73,6 +74,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
         
+        self.rankingNode = ASImageNode()
+        self.rankingNode.style.preferredSize = CGSize(width: 40, height: 40)
+        self.rankingNode.image = R.image.black_wrath()!
+        //self.rankingNode.image = R.image.black_circle()!
+        
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kBlueShade
@@ -114,6 +120,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .start()
         
         self.addSubnode(self.backgroundNode)
+        self.addSubnode(self.rankingNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
@@ -150,7 +157,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [self.profilePicNode, verticalStack, self.switchNode])
+            children: [self.rankingNode, self.profilePicNode, verticalStack, self.switchNode])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
