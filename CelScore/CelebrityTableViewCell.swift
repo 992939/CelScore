@@ -75,7 +75,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
         
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        let attr2 = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 2),
+                     NSForegroundColorAttributeName : Color.black,
+                     NSParagraphStyleAttributeName: style]
+        
         self.rankingTextNode = ASTextNode()
+        self.rankingTextNode.attributedText = NSAttributedString(string: "2", attributes: attr2)
         self.rankingTextNode.style.preferredSize = CGSize(width: 30, height: 30)
         
         self.rankingNode = ASImageNode()
