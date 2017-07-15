@@ -74,9 +74,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
         
+        let rankingTextNode = ASTextNode()
+        rankingTextNode.style.preferredSize = CGSize(width: 30, height: 30)
+        
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
         self.rankingNode.image = R.image.black_wreath()!
+        self.rankingNode.addSubnode(rankingTextNode)
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
