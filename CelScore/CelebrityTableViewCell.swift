@@ -24,6 +24,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
     internal let rankingNode: ASImageNode
+    internal let rankingTextNode: ASTextNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -74,13 +75,12 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
         
-        let rankingTextNode = ASTextNode()
-        rankingTextNode.style.preferredSize = CGSize(width: 30, height: 30)
+        self.rankingTextNode = ASTextNode()
+        self.rankingTextNode.style.preferredSize = CGSize(width: 30, height: 30)
         
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
         self.rankingNode.image = R.image.black_wreath()!
-        self.rankingNode.addSubnode(rankingTextNode)
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -124,6 +124,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.addSubnode(self.backgroundNode)
         self.addSubnode(self.rankingNode)
+        self.addSubnode(self.rankingTextNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
@@ -185,12 +186,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.kVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
+        let overlaySpec =  ASOverlayLayoutSpec(child: self.rankingTextNode, overlay: self.rankingNode)
+        
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [self.rankingNode, self.profilePicNode, verticalStack])
+            children: [overlaySpec, self.profilePicNode, verticalStack])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
