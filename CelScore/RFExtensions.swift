@@ -137,6 +137,16 @@ extension UIDevice {
         return height
     }
     
+    static func getSwitchDistance() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 60
+        case Constants.kIPhone6_height: height = 100
+        default: height = 140
+        }
+        return height
+    }
+    
     static func kVerticalStackPercent() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
