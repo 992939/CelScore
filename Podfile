@@ -15,7 +15,7 @@ def shared_pods
     pod 'Result', '~> 3.1.0'
     pod 'Realm', '~> 2.8'
     pod 'RealmSwift', '~> 2.8'
-    pod 'AsyncDisplayKit', '~> 2.1'
+    pod 'Texture', '~> 2.3'
     pod 'AWSCognito', '2.5.8'
     pod 'AWSAPIGateway', '2.5.8'
     pod 'AWSPinpoint', '2.5.8'

@@ -1,11 +1,4 @@
 PODS:
-  - AsyncDisplayKit (2.1):
-    - AsyncDisplayKit/PINRemoteImage (= 2.1)
-  - AsyncDisplayKit/Core (2.1)
-  - AsyncDisplayKit/PINRemoteImage (2.1):
-    - AsyncDisplayKit/Core
-    - PINRemoteImage/iOS (= 3.0.0-beta.7)
-    - PINRemoteImage/PINCache
   - AWSAPIGateway (2.5.8):
     - AWSCore (= 2.5.8)
   - AWSCognito (2.5.8):
@@ -33,17 +26,20 @@ PODS:
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
   - Material/Core (2.6.3)
-  - PINCache (3.0.1-beta.2):
-    - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
-    - PINCache/Core (= 3.0.1-beta.2)
-  - PINCache/Arc-exception-safe (3.0.1-beta.2):
+  - PINCache (3.0.1-beta.5):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.5)
+    - PINCache/Core (= 3.0.1-beta.5)
+  - PINCache/Arc-exception-safe (3.0.1-beta.5):
     - PINCache/Core
-  - PINCache/Core (3.0.1-beta.2)
-  - PINRemoteImage/Core (3.0.0-beta.7)
-  - PINRemoteImage/iOS (3.0.0-beta.7):
+  - PINCache/Core (3.0.1-beta.5):
+    - PINOperation (= 1.0.3)
+  - PINOperation (1.0.3)
+  - PINRemoteImage/Core (3.0.0-beta.11):
+    - PINOperation
+  - PINRemoteImage/iOS (3.0.0-beta.11):
     - PINRemoteImage/Core
-  - PINRemoteImage/PINCache (3.0.0-beta.7):
-    - PINCache (= 3.0.1-beta.2)
+  - PINRemoteImage/PINCache (3.0.0-beta.11):
+    - PINCache (= 3.0.1-beta.5)
     - PINRemoteImage/Core
   - PMAlertController (2.1.2)
   - R.swift (3.2.0):
@@ -67,6 +63,13 @@ PODS:
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.1)
   - SwiftyTimer (2.0.0)
+  - Texture (2.3.4):
+    - Texture/PINRemoteImage (= 2.3.4)
+  - Texture/Core (2.3.4)
+  - Texture/PINRemoteImage (2.3.4):
+    - PINRemoteImage/iOS (= 3.0.0-beta.11)
+    - PINRemoteImage/PINCache
+    - Texture/Core
   - Timepiece (1.0.1)
   - TwitterCore (2.7.0):
     - Fabric
@@ -75,7 +78,6 @@ PODS:
   - YLProgressBar (3.10.0)
 
 DEPENDENCIES:
-  - AsyncDisplayKit (~> 2.1)
   - AWSAPIGateway (= 2.5.8)
   - AWSCognito (= 2.5.8)
   - AWSPinpoint (= 2.5.8)
@@ -101,6 +103,7 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.1)
   - SwiftyJSON (~> 3.1)
   - SwiftyTimer (~> 2.0.0)
+  - Texture (~> 2.3)
   - Timepiece (~> 1.0)
   - TwitterCore (~> 2.7)
   - TwitterKit (~> 2.7)
@@ -111,7 +114,6 @@ EXTERNAL SOURCES:
     :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   AWSAPIGateway: 8e652734914fdf10e3aa345127d261c7e36f8dec
   AWSCognito: 8eb74039f4dc5f2d929999c4f531eeb4bd83e6cb
   AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
@@ -126,8 +128,9 @@ SPEC CHECKSUMS:
   HMSegmentedControl: b25bc4ec44766e073d62c473188fb354ee244b76
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
-  PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
-  PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
+  PINCache: 98e7b1ef782824ad231ade51987c218b758c30d8
+  PINOperation: ac23db44796d4a564ecf9b5ea7163510f579b71d
+  PINRemoteImage: d71988f11914a050d6d4cf51efc4ad1de8c0a9d8
   PMAlertController: 0fbcc3d1cee86ee0bd85f693ca85f6388e504ec8
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
@@ -142,11 +145,12 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+  Texture: 8cf0872fe33328c20d7e6c1fcbf1f23a82162f2f
   Timepiece: 59cdc48089645cce07803c15116293b346ca457d
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: cca62aa4588cd6ddc56f3d94a84c3d248545b38a
+PODFILE CHECKSUM: 1a0bc870b636b0512098736e93c29f35368478cd
 
 COCOAPODS: 1.0.1
