@@ -140,9 +140,9 @@ extension UIDevice {
     static func kVerticalStackPercent() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 0.40
-        case Constants.kIPhone6_height: height = 0.45
-        default: height = 0.45
+        case Constants.kIPhone5_height: height = 0.60
+        case Constants.kIPhone6_height: height = 0.65
+        default: height = 0.65
         }
         return height
     }
