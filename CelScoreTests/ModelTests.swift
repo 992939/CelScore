@@ -173,9 +173,9 @@ class ModelTests: XCTestCase {
     }
     
     func testCelebrityStructEquality() {
-        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, prevWeek: 0, prevMonth: 0, sex: false, isFollowed:false, isKing:true)
-        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, prevWeek: 2, prevMonth: 2, sex: true, isFollowed:true, isKing:false)
-        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, prevWeek: 1, prevMonth: 1, sex: false, isFollowed:false, isKing:false)
+        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickname:"A", prevScore: 0, prevWeek: 0, prevMonth: 0, index: 1, sex: false, isFollowed:false, isKing:true)
+        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickname:"A", prevScore: 2, prevWeek: 2, prevMonth: 2, index: 1, sex: true, isFollowed:true, isKing:false)
+        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickname:"A", prevScore: 0, prevWeek: 1, prevMonth: 1, index: 1, sex: false, isFollowed:false, isKing:false)
         XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
         XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
     }

@@ -36,6 +36,7 @@ struct CelebrityViewModel {
                                           prevScore: celeb.prevScore,
                                           prevWeek: celeb.prevWeek,
                                           prevMonth: celeb.prevMonth,
+                                          index: celeb.index,
                                           sex: celeb.sex,
                                           isFollowed: celeb.isFollowed,
                                           isKing: celeb.isKing)

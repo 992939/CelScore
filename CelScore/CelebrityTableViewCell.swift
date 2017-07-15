@@ -77,13 +77,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let attr2 = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 2),
+        let attr2 = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize()),
                      NSForegroundColorAttributeName : Color.black,
                      NSParagraphStyleAttributeName: style]
         
         self.rankingTextNode = ASTextNode()
-        self.rankingTextNode.attributedText = NSAttributedString(string: "2", attributes: attr2)
-        self.rankingTextNode.style.preferredSize = CGSize(width: 30, height: 30)
+        self.rankingTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
+        self.rankingTextNode.style.preferredSize = CGSize(width: 45, height: 40)
         
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
@@ -163,15 +163,15 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         middleStack.style.flexBasis = ASDimensionMake(.fraction, 0.2)
         middleStack.style.flexGrow = 1
         
-        let spacer = ASLayoutSpec()
-        spacer.style.flexGrow = 0.2
+        let switchSpacer = ASLayoutSpec()
+        switchSpacer.style.flexGrow = 0.2
         
         let switchStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: Constants.kPadding,
             justifyContent: .start,
             alignItems: .start,
-            children: [spacer, self.switchNode])
+            children: [switchSpacer, self.switchNode])
         switchStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         switchStack.style.flexGrow = 0.8
         
@@ -193,7 +193,19 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.kVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
-        let overlaySpec =  ASOverlayLayoutSpec(child: self.rankingTextNode, overlay: self.rankingNode)
+        let rankSpacer = ASLayoutSpec()
+        rankSpacer.style.flexGrow = 0.2
+        
+        let rankTextStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: Constants.kPadding * 1.2,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [rankSpacer, self.rankingTextNode])
+        rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 1)
+        rankTextStack.style.flexGrow = 1
+        
+        let overlaySpec =  ASOverlayLayoutSpec(child: rankTextStack, overlay: self.rankingNode)
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,

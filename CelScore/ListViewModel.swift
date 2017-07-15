@@ -116,7 +116,7 @@ struct ListViewModel {
             let celebId: CelebId = celebList.celebList[index]
             let celeb = realm.objects(CelebrityModel.self).filter("id = %@", celebId.id).first
             guard celeb?.id.isEmpty == false else { return observer.send(error: .emptyList) }
-            observer.send(value: CelebrityStruct(id: celeb!.id, imageURL: celeb!.isKing ? celeb!.gold3x : celeb!.picture3x, nickname:celeb!.nickName, prevScore: celeb!.prevScore, prevWeek: celeb!.prevWeek, prevMonth: celeb!.prevMonth, sex: celeb!.sex, isFollowed: celeb!.isFollowed, isKing: celeb!.isKing))
+            observer.send(value: CelebrityStruct(id: celeb!.id, imageURL: celeb!.isKing ? celeb!.gold3x : celeb!.picture3x, nickname:celeb!.nickName, prevScore: celeb!.prevScore, prevWeek: celeb!.prevWeek, prevMonth: celeb!.prevMonth, index: celeb!.index, sex: celeb!.sex, isFollowed: celeb!.isFollowed, isKing: celeb!.isKing))
             observer.sendCompleted()
         }
     }
