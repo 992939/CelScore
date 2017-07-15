@@ -163,7 +163,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         switchStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         switchStack.style.flexGrow = 0.8
         
-        
         let bottomRightStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: Constants.kPadding * 6,
