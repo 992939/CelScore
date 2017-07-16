@@ -78,33 +78,20 @@ struct ListViewModel {
             let celebrities = realm.objects(CelebrityModel.self).sorted(byKeyPath: "index", ascending: true)
             let followed = celebrities.filter("isFollowed = true")
             let others = celebrities.filter("isFollowed = false")
-            var following: [CelebId] = []
-            var notFollowing: [CelebId] = []
+            let newList = ListsModel()
             
             for (_, celeb) in followed.enumerated() {
                 let newCelebId = CelebId()
                 newCelebId.id = celeb.id
                 let isInTheList = list.celebList.contains(where: { (celebId: CelebId) -> Bool in return celeb.id == celebId.id })
-                if isInTheList { following.append(newCelebId) }
+                if isInTheList { newList.celebList.append(newCelebId) }
             }
             
             for (_, celeb) in others.enumerated() {
                 let newCelebId = CelebId()
                 newCelebId.id = celeb.id
                 let isInTheList = list.celebList.contains(where: { (celebId: CelebId) -> Bool in return celeb.id == celebId.id })
-                if isInTheList { notFollowing.append(newCelebId) }
-            }
-            
-            let newList = ListsModel()
-            for (_, celeb) in following.enumerated() {
-                let celebId = CelebId()
-                celebId.id = celeb.id
-                newList.celebList.append(celebId)
-            }
-            for (_, celeb) in notFollowing.enumerated() {
-                let celebId = CelebId()
-                celebId.id = celeb.id
-                newList.celebList.append(celebId)
+                if isInTheList { newList.celebList.append(newCelebId) }
             }
             
             realm.beginWrite()
