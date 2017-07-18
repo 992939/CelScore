@@ -23,6 +23,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     fileprivate let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
+    internal let newsNode: ASImageNode
     internal let rankingNode: ASImageNode
     internal let rankingTextNode: ASTextNode
     internal let consensusNode: ASImageNode
@@ -98,6 +99,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.trendNode = ASImageNode()
         self.trendNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
+        self.newsNode = ASImageNode()
+        self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.newsNode.image = R.image.mini_empty()!
+        
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)
         
@@ -137,6 +142,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
+        self.addSubnode(self.newsNode)
         self.addSubnode(self.consensusNode)
         self.addSubnode(self.faceNode)
     }
@@ -151,7 +157,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: Constants.kPadding/2,
             justifyContent: .start,
             alignItems: .start,
-            children: [self.trendNode, self.consensusNode, self.faceNode])
+            children: [self.consensusNode, self.trendNode, self.newsNode, self.faceNode])
         minisStack.style.flexGrow = 1
         
         let middleStack = ASStackLayoutSpec(

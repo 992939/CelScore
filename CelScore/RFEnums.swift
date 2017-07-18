@@ -241,7 +241,7 @@ enum ListInfo : Int {
         case .music: return "Music"
         case .sports: return "Sports"
         case .hipHop: return "Hip Hop"
-        case .news: return "New"
+        case .news: return "Trending"
         }
     }
     
