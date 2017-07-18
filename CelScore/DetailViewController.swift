@@ -423,13 +423,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        if self.celebST.nickName.characters.count > 13 {
-            let decomposedName = self.celebST.nickName.components(separatedBy: " ")
+        let celebName = self.celebST.isKing ? celebST.kingName : celebST.nickName
+        if celebName.characters.count > 13 {
+            let decomposedName = celebName.components(separatedBy: " ")
             let index = decomposedName[1].index(decomposedName[1].startIndex, offsetBy: 1)
             let lastName = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
-            let title = self.celebST.nickName.characters.count > 13 ? lastName : self.celebST.nickName
+            let title = celebName.characters.count > 13 ? lastName : celebName
             navigationBarView.title = "★ " + title! + " ★"
-        } else { navigationBarView.title = "★ " + self.celebST.nickName + " ★" }
+        } else { navigationBarView.title = "★ " + celebName + " ★" }
     
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
@@ -450,7 +451,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func getSegmentView() -> SMSegmentView {
-
         let appearance = SMSegmentAppearance()
         appearance.segmentOnSelectionColour = Constants.kRedShade
         appearance.segmentOffSelectionColour = Constants.kGreyBackground
