@@ -32,7 +32,8 @@ struct CelebrityViewModel {
             guard let celeb = celebrity else { return observer.send(error: .notFound) }
             let profile = CelebrityStruct(id: celeb.id,
                                           imageURL: celeb.picture3x,
-                                          nickname: celeb.nickName,
+                                          nickName: celeb.nickName,
+                                          kingName: celeb.kingName,
                                           prevScore: celeb.prevScore,
                                           prevWeek: celeb.prevWeek,
                                           prevMonth: celeb.prevMonth,

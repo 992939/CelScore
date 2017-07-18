@@ -14,7 +14,8 @@ import SwiftyJSON
 struct CelebrityStruct {
     let id: String
     let imageURL: String
-    let nickname: String
+    let nickName: String
+    let kingName: String
     let prevScore: Double
     let prevWeek: Double
     let prevMonth: Double
@@ -26,7 +27,7 @@ struct CelebrityStruct {
 
 extension CelebrityStruct: Equatable {}
 
-func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickname == rhs.nickname && lhs.id == rhs.id }
+func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickName == rhs.nickName && lhs.id == rhs.id }
 
 
 final class CelebrityModel: Object {
@@ -39,6 +40,7 @@ final class CelebrityModel: Object {
     dynamic var middleName: String = ""
     dynamic var nickName: String = ""
     dynamic var googleName: String = ""
+    dynamic var kingName: String = ""
     dynamic var height: String = ""
     dynamic var netWorth: String = ""
     dynamic var status: String = ""
@@ -69,6 +71,7 @@ final class CelebrityModel: Object {
         self.middleName = json["middleName"].string!
         self.nickName = json["nickname"].string!
         self.googleName = json["google"].string!
+        self.kingName = json["kingName"].string!
         self.height = json["height"].string!
         self.birthdate = json["birthdate"].string!
         self.netWorth = json["netWorth"].string!

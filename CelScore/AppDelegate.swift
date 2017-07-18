@@ -37,11 +37,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 40,
+            schemaVersion: 41,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 39 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
                         newObject!["googleName"] = ""
+                    }
+                }
+                if oldSchemaVersion < 41 {
+                    migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
+                        newObject!["kingName"] = ""
                     }
                 }
         })
@@ -100,7 +105,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
-                    nickname: celeb.nickName,
+                    nickName: celeb.nickName,
+                    kingName: celeb.kingName,
                     prevScore: celeb.prevScore,
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
@@ -144,7 +150,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
-                    nickname: celeb.nickName,
+                    nickName: celeb.nickName,
+                    kingName: celeb.kingName,
                     prevScore: celeb.prevScore,
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
@@ -167,7 +174,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let celebST = CelebrityStruct(
             id: id as! String,
             imageURL: userActivity.userInfo!["imageURL"] as! String,
-            nickname: userActivity.userInfo!["nickname"] as! String,
+            nickName: userActivity.userInfo!["nickname"] as! String,
+            kingName: userActivity.userInfo!["kingName"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
             prevWeek: userActivity.userInfo!["prevWeek"] as! Double,
             prevMonth: userActivity.userInfo!["prevMonth"] as! Double,

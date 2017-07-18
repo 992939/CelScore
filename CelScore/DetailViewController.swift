@@ -288,7 +288,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .on(value: { score in
                 CelScoreViewModel()
                     .shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                        message: "\(self.celebST.nickname) is \(String(format: "%.1f", score))% Hollywood Royalty! #CNN")
+                        message: "\(self.celebST.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty! #CNN")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
@@ -423,13 +423,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        if self.celebST.nickname.characters.count > 13 {
-            let decomposedName = self.celebST.nickname.components(separatedBy: " ")
+        if self.celebST.nickName.characters.count > 13 {
+            let decomposedName = self.celebST.nickName.components(separatedBy: " ")
             let index = decomposedName[1].index(decomposedName[1].startIndex, offsetBy: 1)
             let lastName = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
-            let title = self.celebST.nickname.characters.count > 13 ? lastName : self.celebST.nickname
+            let title = self.celebST.nickName.characters.count > 13 ? lastName : self.celebST.nickName
             navigationBarView.title = "★ " + title! + " ★"
-        } else { navigationBarView.title = "★ " + self.celebST.nickname + " ★" }
+        } else { navigationBarView.title = "★ " + self.celebST.nickName + " ★" }
     
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
