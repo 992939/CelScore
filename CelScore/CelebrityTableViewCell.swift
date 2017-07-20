@@ -206,7 +206,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kPadding * 0.7,
+            spacing: UIDevice.getRankingTextSpace(),
             justifyContent: .start,
             alignItems: .start,
             children: [rankSpacer, self.rankingTextNode])

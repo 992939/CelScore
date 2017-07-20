@@ -137,6 +137,16 @@ extension UIDevice {
         return height
     }
     
+    static func getRankingTextSpace() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 7
+        case Constants.kIPhone6_height: height = 4
+        default: height = 4
+        }
+        return height
+    }
+    
     static func getSwitchDistance() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
