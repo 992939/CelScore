@@ -36,7 +36,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.systemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
+        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
         let celebName = self.celebST.isKing ? celebST.kingName : celebST.nickName
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
@@ -79,13 +79,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let attr2 = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize()),
-                     NSForegroundColorAttributeName : Color.black,
+        let fontColor = self.celebST.isKing ? Color.clear : Color.black
+        let attr2 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 5)!,
+                     NSForegroundColorAttributeName : fontColor,
                      NSParagraphStyleAttributeName: style]
         
         self.rankingTextNode = ASTextNode()
         self.rankingTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
-        self.rankingTextNode.style.preferredSize = CGSize(width: 45, height: 40)
+        self.rankingTextNode.style.preferredSize = CGSize(width: 44, height: 40)
         
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
@@ -205,7 +206,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kPadding * 1.1,
+            spacing: Constants.kPadding * 0.7,
             justifyContent: .start,
             alignItems: .start,
             children: [rankSpacer, self.rankingTextNode])

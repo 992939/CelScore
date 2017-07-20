@@ -57,6 +57,7 @@
 		00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */; };
 		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
 		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
+		00F357851F207277008A2860 /* pricedown bl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F357841F207277008A2860 /* pricedown bl.ttf */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -169,6 +170,7 @@
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
+		00F357841F207277008A2860 /* pricedown bl.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pricedown bl.ttf"; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00F357841F207277008A2860 /* pricedown bl.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
 				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
@@ -604,6 +607,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F357851F207277008A2860 /* pricedown bl.ttf in Resources */,
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,

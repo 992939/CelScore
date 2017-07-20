@@ -196,7 +196,9 @@
 		<string>com.GreyEcology.CelebrityScore.Celebrity</string>
 	</array>
 	<key>UIAppFonts</key>
-	<array/>
+	<array>
+		<string>pricedown bl.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
