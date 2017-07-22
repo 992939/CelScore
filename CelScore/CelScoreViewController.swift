@@ -56,6 +56,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gauge.subDivisionsColor = Constants.kBlueShade
         gauge.divisionsColor = Color.black
         gauge.valueTextColor = Color.black
+        gauge.valueFont = UIFont(name: "HelveticaNeue-CondensedBold", size: UIDevice.getGaugeFontSize())
         gauge.unitOfMeasurementTextColor = Color.black
         gauge.ringBackgroundColor = Constants.kBlueShade
         gauge.backgroundColor = Constants.kGreyBackground

@@ -157,12 +157,22 @@ extension UIDevice {
         return height
     }
     
-    static func kVerticalStackPercent() -> CGFloat {
+    static func getVerticalStackPercent() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 0.60
         case Constants.kIPhone6_height: height = 0.65
         default: height = 0.65
+        }
+        return height
+    }
+    
+    static func getGaugeFontSize() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 50
+        case Constants.kIPhone6_height: height = 55
+        default: height = 65
         }
         return height
     }

@@ -198,7 +198,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, bottomRightStack])
-        verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.kVerticalStackPercent())
+        verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
         let rankSpacer = ASLayoutSpec()
