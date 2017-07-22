@@ -68,13 +68,13 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "Welcome to the Kingdom!\n6 hours left until the coronation."
+        case .welcomeUser: return "Welcome to the Kingdom!"
         case .menuAccess: return "To enter the blue castle upon a hill, login with Twitter or Facebook."
-        case .loginSuccess: return "Welcome to the kingdom!\n6 hours left until the coronation."
+        case .loginSuccess: return "Welcome to the kingdom!"
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "This celeb has been added to the Today View."
-        case .countdown: return "Every night at 9pm Pacific Time, we crown the King of Hollywood.\n\nYou will recieve a notification after the coronation."
-        case .royalty: return "We the fans can make Hollywood great again!\n\nYou will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
+        case .countdown: return "You will recieve a notification when a king of Hollywood is crowned."
+        case .royalty: return "You will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Saved."
         case .voteHelp: return "A King is a noble soul,\nA noble soul has virtues,\nVirtues must be celebrated."
         case .infoSource: return "This profile is based on\nsearch engine data.\n\nPlease go in the settings\nto report any error."

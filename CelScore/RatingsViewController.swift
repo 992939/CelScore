@@ -53,7 +53,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.pulseColor = Color.clear
                     let qualityLabel : UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                     qualityLabel.backgroundColor = UIColor.clear
-                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - UIDevice.getStarsWidth(), y: 3, width: UIDevice.getStarsWidth(), height: barHeight - 5))
+                    let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - UIDevice.getStarsWidth() + 5, y: 3, width: UIDevice.getStarsWidth(), height: barHeight - 5))
                     cosmosView.tag = index
                     switch quality {
                     case Qualities.talent.name(): cosmosView.rating = ratings.rating1
