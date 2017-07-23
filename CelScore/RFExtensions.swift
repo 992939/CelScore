@@ -171,8 +171,18 @@ extension UIDevice {
         let height: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 50
-        case Constants.kIPhone6_height: height = 55
-        default: height = 65
+        case Constants.kIPhone6_height: height = 60
+        default: height = 70
+        }
+        return height
+    }
+    
+    static func getGaugeLabelSize() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 11
+        case Constants.kIPhone6_height: height = 13
+        default: height = 15
         }
         return height
     }
