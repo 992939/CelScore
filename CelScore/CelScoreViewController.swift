@@ -69,7 +69,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
                 Timer.after(1.5, {
                     let firstSlow: CGFloat = score * 0.8
                     let secondSlow: CGFloat = score * 0.9
-                    Timer.every(0.01, { (timer: Timer) in
+                    Timer.every(0.05, { (timer: Timer) in
                         self.updateGauge(gauge, timer: timer, firstSlow: firstSlow, secondSlow: secondSlow, stopValue: score)
                     })
                 })
@@ -106,9 +106,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     func updateGauge(_ gaugeView: LMGaugeView, timer: Timer, firstSlow: CGFloat, secondSlow: CGFloat, stopValue: CGFloat) {
         if gaugeView.value > stopValue { timer.invalidate() }
-        else if gaugeView.value > secondSlow { gaugeView.value += 0.05 }
-        else if gaugeView.value > firstSlow { gaugeView.value += 0.1 }
-        else { gaugeView.value += 0.3 }
+        else if gaugeView.value > secondSlow { gaugeView.value += 0.25 }
+        else if gaugeView.value > firstSlow { gaugeView.value += 0.5 }
+        else { gaugeView.value += 1 }
     }
     
     //MARK: LMGaugeViewDelegate
