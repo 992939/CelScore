@@ -90,7 +90,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
-        self.rankingNode.image = self.celebST.isKing ? R.image.king_wreath()! : R.image.black_wreath()!
+        self.rankingNode.image = self.celebST.isKing ? R.image.king_wreath_gold()! : R.image.black_wreath()!
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
