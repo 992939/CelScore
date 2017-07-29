@@ -217,7 +217,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func updateAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .on(value: { (userRatings:RatingsModel) in
-                self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
+                self.updateVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
             }).start()
     }
@@ -361,8 +361,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 .flatMapError { _ in SignalProducer.empty }
                 .startWithValues({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
-                if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
-            })
+                if self.ratingsVC.isUserRatingMode() {
+                    let isPositive = userRatings.getCelScore() < Constants.kRoyalty ? false : true
+                    self.updateVoteButton(positive: isPositive)
+                    }
+                })
         } else { self.disableVoteButton(R.image.blackstar()!) }
         self.previousIndex = segmentView.selectedSegmentIndex
     }
@@ -385,7 +388,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     //MARK: RatingsViewDelegate
-    func enableVoteButton(positive: Bool) {
+    func updateVoteButton(positive: Bool) {
         UIView.animate(withDuration: 0.3, animations: {
             self.voteButton.setImage(R.image.whitestar()!, for: .normal)
             self.voteButton.setImage(R.image.whitestar()!, for: .highlighted)

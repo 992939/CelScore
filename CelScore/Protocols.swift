@@ -19,7 +19,7 @@ import MessageUI
 
 
 protocol DetailSubViewable {
-    func enableVoteButton(positive: Bool)
+    func updateVoteButton(positive: Bool)
     func handleMenu(open: Bool)
 }
 
