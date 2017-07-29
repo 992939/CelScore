@@ -181,7 +181,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .observe(on: UIScheduler())
             .map { userRatings in
                 self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
-                self.enableUpdateButton()
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
@@ -307,16 +306,15 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
-                self.enableUpdateButton()
                 self.voteButton.backgroundColor = Constants.kStarGoldShade
                 self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                 self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
             }).start()
     }
     
-    func enableUpdateButton() {
+    func enableVoteButton() {
+        self.voteButton.isEnabled = true
         self.voteButton.pulseAnimation = .centerWithBacking
-        self.voteButton.backgroundColor = Constants.kStarGoldShade
         self.voteButton.setImage(R.image.blackstar()!, for: .normal)
         self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
         self.voteButton.removeTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
@@ -329,6 +327,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
 
     func disableVoteButton(_ image: UIImage) {
+        self.voteButton.isEnabled = false
         self.voteButton.setImage(image, for: .normal)
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
@@ -357,14 +356,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         if self.socialButton.isOpened { self.closeHandleMenu() }
         
         if segmentView.selectedSegmentIndex == 2 {
+            self.enableVoteButton()
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
                 .flatMapError { _ in SignalProducer.empty }
                 .startWithValues({ userRatings in
                 guard userRatings.getCelScore() > 0 else { return }
                 if self.ratingsVC.isUserRatingMode() { self.enableVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true) }
-                else { self.enableUpdateButton() }
             })
-        } else { disableVoteButton(R.image.blackstar()!) }
+        } else { self.disableVoteButton(R.image.blackstar()!) }
         self.previousIndex = segmentView.selectedSegmentIndex
     }
     
