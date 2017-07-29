@@ -180,16 +180,18 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
             .map { userRatings in
-                self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
-                self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < 3 ? false : true)
+                self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
                 Motion.delay(2.0, execute: {
                     let hours = self.getCountdownHours()
-                    let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
+                    let plural = hours > 1 ? "hours" : "hour"
                     let message = "Thank you for\nWatching the throne!\nOnly \(hours) \(plural) left\nUntil the coronation!"
                     let alertVC = PMAlertController(title: "Hollywood Kingdom", description: message, image: OverlayInfo.welcomeUser.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
                         self.voteButton.backgroundColor = Constants.kStarGoldShade
+                        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+                        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                        self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
@@ -197,6 +199,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 })
             }
             .start()
+    }
+    
+    func updateAction() {
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+            .on(value: { (userRatings:RatingsModel) in
+                self.updateVoteButton(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
+                self.ratingsVC.displayUserRatings(userRatings)
+            }).start()
     }
     
     func trollAction() {
@@ -214,13 +224,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         }
     }
     
-    func updateAction() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
-            .on(value: { (userRatings:RatingsModel) in
-                self.updateVoteButton(positive: userRatings.getCelScore() < 3.0 ? false : true)
-                self.ratingsVC.displayUserRatings(userRatings)
-            }).start()
-    }
     
     //MARK: SFSafariViewControllerDelegate
     func openSafari() {
