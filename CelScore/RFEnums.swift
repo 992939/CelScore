@@ -59,8 +59,6 @@ enum OverlayInfo {
     case firstInterest
     case firstVoteDisable
     case firstTrollWarning
-    case voteHelp
-    case infoSource
     case loginError
     case networkError
     case timeoutError
@@ -76,8 +74,6 @@ enum OverlayInfo {
         case .countdown: return "You will recieve a notification when a king of Hollywood is crowned."
         case .royalty: return "You will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Saved."
-        case .voteHelp: return "A King is a noble soul,\nA noble soul has virtues,\nVirtues must be celebrated."
-        case .infoSource: return "This profile is based on\nsearch engine data.\n\nPlease go in the settings\nto report any error."
         case .firstVoteDisable: return "Registration is required."
         case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
         case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
@@ -97,8 +93,6 @@ enum OverlayInfo {
         case .countdown: return R.image.crown_big_blue()!
         case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
-        case .voteHelp: return R.image.kindom_Blue()!
-        case .infoSource: return R.image.kindom_Blue()!
         case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!

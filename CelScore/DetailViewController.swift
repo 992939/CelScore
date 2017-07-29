@@ -152,27 +152,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         Motion.delay(0.15){ self.dismiss(animated: true, completion: nil) }
     }
     
-    func infoAction() {
-        let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.infoSource.message(), image: OverlayInfo.infoSource.logo(), style: .alert)
-        alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
-            self.dismiss(animated: true, completion: nil) }))
-        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-        alertVC.view.isOpaque = false
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    
-    func helpAction() {
-        let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.voteHelp.message(), image: OverlayInfo.voteHelp.logo(), style: .alert)
-        alertVC.alertTitle.textColor = Constants.kBlueText
-        alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
-            self.voteButton.backgroundColor = Constants.kStarGoldShade
-        }))
-        alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-        alertVC.view.isOpaque = false
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    
     func voteAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
@@ -334,7 +313,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.setImage(image, for: .normal)
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
-        self.voteButton.addTarget(self, action: #selector(self.helpAction), for: .touchUpInside)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in
                 self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
