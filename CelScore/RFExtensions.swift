@@ -132,7 +132,17 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 70
         case Constants.kIPhone6_height: height = 80
-        default: height = 80
+        default: height = 95
+        }
+        return height
+    }
+    
+    static func getRankingSize() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 40
+        case Constants.kIPhone6_height: height = 40
+        default: height = 50
         }
         return height
     }
@@ -142,7 +152,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 7
         case Constants.kIPhone6_height: height = 4
-        default: height = 4
+        default: height = 8
         }
         return height
     }
@@ -152,7 +162,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 40
         case Constants.kIPhone6_height: height = 80
-        default: height = 120
+        default: height = 90
         }
         return height
     }
@@ -162,7 +172,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 0.60
         case Constants.kIPhone6_height: height = 0.65
-        default: height = 0.65
+        default: height = 0.60
         }
         return height
     }
@@ -282,7 +292,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 14
         case Constants.kIPhone6_height: height = 16
-        default: height = 16
+        default: height = 18
         }
         return height
     }

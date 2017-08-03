@@ -86,10 +86,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.rankingTextNode = ASTextNode()
         self.rankingTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
-        self.rankingTextNode.style.preferredSize = CGSize(width: 44, height: 40)
+        self.rankingTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.rankingNode = ASImageNode()
-        self.rankingNode.style.preferredSize = CGSize(width: 40, height: 43)
+        self.rankingNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         self.rankingNode.image = self.celebST.isKing ? R.image.king_wreath_gold()! : R.image.black_wreath()!
         
         let cardView: PulseView = PulseView()

@@ -54,7 +54,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = try! Realm()
         
         //AWS
-        AWSDDLog().logLevel = .error
+        AWSDDLog().logLevel = .info
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
@@ -85,15 +85,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+         print("didRegisterForRemoteNotificationsWithDeviceToken")
         pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     @nonobjc func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("didReceiveRemoteNotification")
         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
+        print("userNotificationCenter")
         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(response.notification.request.content.userInfo) { (UIBackgroundFetchResult) in}
     }
 
@@ -120,27 +123,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         else { FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
         return true
     }
-    
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-//            print("Message")
-//    }
-//    
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        print("Message Fetched")
-//        completionHandler(UIBackgroundFetchResult.newData)
-//    }
-//    
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        print("APNs token retrieved: \(deviceToken)")
-//        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
-//    }
-    
-//    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
-//        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-//        print("Device Token:", deviceTokenString)
-//    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {
