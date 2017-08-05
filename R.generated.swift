@@ -69,7 +69,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 90 images.
+  /// This `R.image` struct is generated, and contains static references to 95 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -213,6 +213,12 @@ struct R: Rswift.Validatable {
     static let score_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "score_logo")
     /// Image `score_white`.
     static let score_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "score_white")
+    /// Image `small_avatar`.
+    static let small_avatar = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_avatar")
+    /// Image `small_crown`.
+    static let small_crown = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_crown")
+    /// Image `small_profile`.
+    static let small_profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_profile")
     /// Image `smileFace`.
     static let smileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "smileFace")
     /// Image `sphere_blue_big`.
@@ -249,6 +255,10 @@ struct R: Rswift.Validatable {
     static let trophy_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "trophy_big_blue")
     /// Image `twitterlogo`.
     static let twitterlogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "twitterlogo")
+    /// Image `white_avatar`.
+    static let white_avatar = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_avatar")
+    /// Image `white_crown`.
+    static let white_crown = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_crown")
     /// Image `whitestar`.
     static let whitestar = Rswift.ImageResource(bundle: R.hostingBundle, name: "whitestar")
     
@@ -607,6 +617,21 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.score_white, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "small_avatar", bundle: ..., traitCollection: ...)`
+    static func small_avatar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.small_avatar, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "small_crown", bundle: ..., traitCollection: ...)`
+    static func small_crown(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.small_crown, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "small_profile", bundle: ..., traitCollection: ...)`
+    static func small_profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.small_profile, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "smileFace", bundle: ..., traitCollection: ...)`
     static func smileFace(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.smileFace, compatibleWith: traitCollection)
@@ -695,6 +720,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "twitterlogo", bundle: ..., traitCollection: ...)`
     static func twitterlogo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.twitterlogo, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "white_avatar", bundle: ..., traitCollection: ...)`
+    static func white_avatar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.white_avatar, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "white_crown", bundle: ..., traitCollection: ...)`
+    static func white_crown(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.white_crown, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "whitestar", bundle: ..., traitCollection: ...)`
