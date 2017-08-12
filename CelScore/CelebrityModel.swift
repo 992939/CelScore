@@ -23,6 +23,7 @@ struct CelebrityStruct {
     let sex: Bool
     let isFollowed: Bool
     let isKing: Bool
+    let isTrending: Bool
 }
 
 extension CelebrityStruct: Equatable {}
@@ -57,6 +58,7 @@ final class CelebrityModel: Object {
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
     dynamic var isNew: Bool = false
+    dynamic var isTrending: Bool = false
     dynamic var isKing: Bool = false
     
     //MARK: Initializer
@@ -85,6 +87,7 @@ final class CelebrityModel: Object {
         self.prevMonth = json["prevMonth"].double!
         self.sex = json["sex"].bool!
         self.isKing = json["king"].bool!
+        self.isTrending = json["trending"].bool!
         self.isSynced = true
         
         let realm = try! Realm()

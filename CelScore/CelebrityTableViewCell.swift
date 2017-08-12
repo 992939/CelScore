@@ -103,7 +103,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        self.newsNode.image = R.image.news_red()!   //R.image.mini_empty()!
+        self.newsNode.image = self.celebST.isTrending ? R.image.news_red()! : R.image.mini_empty()!
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)

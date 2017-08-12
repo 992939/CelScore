@@ -40,7 +40,8 @@ struct CelebrityViewModel {
                                           index: celeb.index,
                                           sex: celeb.sex,
                                           isFollowed: celeb.isFollowed,
-                                          isKing: celeb.isKing)
+                                          isKing: celeb.isKing,
+                                          isTrending: celeb.isTrending)
             profile.userActivity.addUserInfoEntries(from: profile.userActivityUserInfo)
             observer.send(value: profile.userActivity)
             observer.sendCompleted()
