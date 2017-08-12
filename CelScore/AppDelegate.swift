@@ -58,9 +58,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        pinpoint = AWSPinpoint.init(configuration:AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
-        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
+        let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
+        pinpoint = AWSPinpoint(configuration: pinpointConfig)
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
         UIApplication.shared.registerForRemoteNotifications()
+        print("is or not: \(UIApplication.shared.isRegisteredForRemoteNotifications)")
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
@@ -68,7 +74,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //UI
         CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
         nav.contentViewController.view.backgroundColor = .clear
         self.window!.rootViewController = nav
@@ -94,7 +99,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
     
-    @available(iOS 10.0, *)
     func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
         print("userNotificationCenter")
         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(response.notification.request.content.userInfo) { (UIBackgroundFetchResult) in}

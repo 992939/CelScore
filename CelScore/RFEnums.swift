@@ -66,19 +66,19 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "Welcome to the Kingdom!"
-        case .menuAccess: return "To enter the blue castle upon a hill, log in with Twitter or Facebook."
-        case .loginSuccess: return "Welcome to the kingdom!"
+        case .welcomeUser: return "Welcome to the blue castle upon a hill."
+        case .menuAccess: return "To enter the blue castle, log in with Twitter or Facebook."
+        case .loginSuccess: return "Your entrance to the blue castle has been granted."
         case .maxFollow: return "You've reached the maximum number of stars you can follow."
         case .firstFollow: return "This celeb has been added to the Today View."
-        case .countdown: return "You will recieve a notification when a king of Hollywood is crowned."
+        case .countdown: return "You will recieve a notification when a new king is crowned."
         case .royalty: return "You will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Saved."
         case .firstVoteDisable: return "Registration is required."
-        case .firstTrollWarning: return "Warning: below a certain level of negativity, all your votes will be discarded."
-        case .loginError: return "settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .firstTrollWarning: return "Below a level of negativity, all your votes will be discarded."
+        case .loginError: return "Settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .networkError: return "Try again and please contact us if the problem persists."
-        case .timeoutError: return "settings check:\n- Network connection is on.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .timeoutError: return "Settings check:\n- Network connection is on.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .permissionError: return "Unable to authenticate using your \(social) account.\n\nCheck that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
