@@ -148,9 +148,9 @@ extension UIDevice {
     static func getTransitionProfileX() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 60.0
-        case Constants.kIPhone6_height: height = 65.0
-        default: height = 75.0
+        case Constants.kIPhone5_height: height = 54.0
+        case Constants.kIPhone6_height: height = 59.0
+        default: height = 63.0
         }
         return height
     }
@@ -261,16 +261,6 @@ extension UIDevice {
         case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
         default: height = 30.0
-        }
-        return height
-    }
-    
-    static func getScreenshotPosition() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 65
-        case Constants.kIPhone6_height: height = 80
-        default: height = 75
         }
         return height
     }
