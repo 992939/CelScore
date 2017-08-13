@@ -164,25 +164,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             children: [self.ratingsNode, minisStack])
         middleStack.style.flexBasis = ASDimensionMake(.fraction, 0.2)
         middleStack.style.flexGrow = 1
-        
-        let switchSpacer = ASLayoutSpec()
-        switchSpacer.style.flexGrow = 0.2
-        
-        let switchStack = ASStackLayoutSpec(
-            direction: .vertical,
-            spacing: Constants.kPadding,
-            justifyContent: .start,
-            alignItems: .start,
-            children: [switchSpacer, self.switchNode])
-        switchStack.style.flexBasis = ASDimensionMake(.fraction, 1)
-        switchStack.style.flexGrow = 0.8
-        
+
         let bottomRightStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: UIDevice.getSwitchDistance(),
             justifyContent: .start,
             alignItems: .start,
-            children: [middleStack, switchStack])
+            children: [middleStack, self.switchNode])
         bottomRightStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         bottomRightStack.style.flexGrow = 1
         
@@ -195,15 +183,12 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
-        let rankSpacer = ASLayoutSpec()
-        rankSpacer.style.flexGrow = 0.2
-        
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: UIDevice.getRankingTextSpace(),
+            spacing: Constants.kPadding/2,
             justifyContent: .start,
             alignItems: .start,
-            children: [rankSpacer, self.rankTextNode])
+            children: [ASLayoutSpec(), self.rankTextNode])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         rankTextStack.style.flexGrow = 1
         
