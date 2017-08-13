@@ -125,7 +125,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.addSubview(navigationBarView)
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableNode.view)
-        self.view.layout(socialButton).size(CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)).bottom(2*Constants.kPadding).right(2*Constants.kPadding)
+        self.view.layout(socialButton).size(CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)).bottom(2*Constants.kPadding).right(2 * Constants.kPadding)
 
         try! self.setupData()
         
@@ -149,10 +149,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
                             return ListViewModel().getListSignal(listId: list.getId()) }
                         .map { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
-                        .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
-                        .observe(on:UIScheduler())
-                        .map { celebInfo in TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: NSData(contentsOf: NSURL(string: celebInfo.image)! as URL)! as Data), options: OverlayInfo.getOptions()) }
                         .start()
                 }
         }
@@ -221,16 +217,10 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
                 self.changeList()
             })
-            .flatMapError { error in
+            .on(failed: { _ in
                 revealingSplashView.startAnimation()
                 self.dismissHUD()
                 self.changeList()
-                return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in
-                return CelScoreViewModel().getNewCelebsSignal() }
-            .on(value: { celebInfo in Motion.delay(1) {
-                    TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
-                }
             })
             .start()
     }
