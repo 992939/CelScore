@@ -24,8 +24,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
     internal let newsNode: ASImageNode
-    internal let rankingNode: ASImageNode
-    internal let rankingTextNode: ASTextNode
+    internal let rankTextNode: ASTextNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -81,16 +80,12 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         let attr2 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 5)!,
-                     NSForegroundColorAttributeName : Color.black,
+                     NSForegroundColorAttributeName : Constants.kRedShade,
                      NSParagraphStyleAttributeName: style]
         
-        self.rankingTextNode = ASTextNode()
-        self.rankingTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
-        self.rankingTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
-        
-        self.rankingNode = ASImageNode()
-        self.rankingNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
-        self.rankingNode.image = R.image.black_wreath()!
+        self.rankTextNode = ASTextNode()
+        self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
+        self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -137,8 +132,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .start()
         
         self.addSubnode(self.backgroundNode)
-        self.addSubnode(self.rankingNode)
-        self.addSubnode(self.rankingTextNode)
+        self.addSubnode(self.rankTextNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.ratingsNode)
@@ -209,18 +203,16 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: UIDevice.getRankingTextSpace(),
             justifyContent: .start,
             alignItems: .start,
-            children: [rankSpacer, self.rankingTextNode])
-        rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 1)
+            children: [rankSpacer, self.rankTextNode])
+        rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         rankTextStack.style.flexGrow = 1
-        
-        let overlaySpec =  ASOverlayLayoutSpec(child: rankTextStack, overlay: self.rankingNode)
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [overlaySpec, self.profilePicNode, verticalStack])
+            children: [rankTextStack, self.profilePicNode, verticalStack])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
