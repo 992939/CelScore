@@ -79,7 +79,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let attr2 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 5)!,
+        let attr2 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 10)!,
                      NSForegroundColorAttributeName : Constants.kRedShade,
                      NSParagraphStyleAttributeName: style]
         
