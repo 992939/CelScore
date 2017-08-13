@@ -83,7 +83,6 @@ extension Supportable where Self: UIViewController {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
-    @objc func getKingAlert() -> String
 }
 
 extension Sociable where Self: UIViewController {
@@ -105,21 +104,15 @@ extension Sociable where Self: UIViewController {
                 return UserViewModel().getFromCognitoSignal(dataSetType: .userSettings) }
             .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                 return SettingsViewModel().updateSettingSignal(value: loginType.rawValue as AnyObject, settingType: .loginTypeIndex) }
-            .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
-                return SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch) }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
             .observe(on: UIScheduler())
             .on(value: { _ in
                 self.dismissHUD()
                 self.handleMenu(open: false)
-                let hours = self.getCountdownHours()
-                let plural = self.getCountdownHours() > 1 ? "hours" : "hour"
-                let registration = "\(OverlayInfo.loginSuccess.message()) \n\nOnly \(hours) \(plural) left until the coronation!"
-                
-                let alertVC = PMAlertController(title: "Hollywood Kingdom", description: registration, image: OverlayInfo.loginSuccess.logo(), style: .alert)
+                let alertVC = PMAlertController(title: Constants.kAlertName, description: OverlayInfo.loginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: self.getKingAlert(), style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.socialRefresh()
                 }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)

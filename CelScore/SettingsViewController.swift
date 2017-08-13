@@ -24,7 +24,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     fileprivate let fact1Bar: YLProgressBar
     fileprivate let fact2Bar: YLProgressBar
     fileprivate let fact3Bar: YLProgressBar
-    fileprivate var kingAlert: String = Constants.kAlertAction
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -39,13 +38,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     
     //MARK: Method
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        CelebrityViewModel().longLiveTheChiefSignal()
-            .on(value: { message in self.kingAlert = message })
-            .start()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let maxWidth: CGFloat = Constants.kSettingsViewWidth - 2 * Constants.kPadding
@@ -168,7 +160,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "We strongly recommend against leaving the Kingdom, your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.kindom_Red()!, style: .alert)
+        let alertVC = PMAlertController(title: "Warning", description: "By leaving the blue castle, your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.kindom_Red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kRedText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Leave", style: .default, action: { _ in
@@ -249,7 +241,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             if checkBox.tag == 0 {
                 let alertVC = PMAlertController(title: "Royalty Notification", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
@@ -257,7 +249,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             } else {
                 let alertVC = PMAlertController(title: "Coronation Notification", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false

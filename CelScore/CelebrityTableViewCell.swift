@@ -43,8 +43,9 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.nameNode.truncationMode = .byTruncatingTail
     
         self.profilePicNode = ASNetworkImageNode()
-        self.profilePicNode.url = URL(string: self.celebST.imageURL)
-        self.profilePicNode.defaultImage = R.image.anonymous()
+        //self.profilePicNode.url = URL(string: self.celebST.imageURL)
+        //self.profilePicNode.defaultImage = R.image.anonymous()
+        self.profilePicNode.defaultImage = R.image.jamie_blue()!
         self.profilePicNode.contentMode = .scaleAspectFill
         self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
@@ -79,9 +80,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let fontColor = self.celebST.isKing ? Color.clear : Color.black
         let attr2 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 5)!,
-                     NSForegroundColorAttributeName : fontColor,
+                     NSForegroundColorAttributeName : Color.black,
                      NSParagraphStyleAttributeName: style]
         
         self.rankingTextNode = ASTextNode()
@@ -90,7 +90,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.rankingNode = ASImageNode()
         self.rankingNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
-        self.rankingNode.image = self.celebST.isKing ? R.image.king_wreath_gold()! : R.image.black_wreath()!
+        self.rankingNode.image = R.image.black_wreath()!
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0

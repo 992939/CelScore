@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onSocialSharing, onCountdown, firstLaunch, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onSocialSharing, onCountdown, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -49,7 +49,6 @@ enum SocialLogin: Int {
 
 //MARK: OverlayInfo
 enum OverlayInfo {
-    case welcomeUser
     case menuAccess
     case loginSuccess
     case maxFollow
@@ -66,15 +65,14 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .welcomeUser: return "Welcome to the blue castle upon a hill."
-        case .menuAccess: return "To enter the blue castle, log in with Twitter or Facebook."
-        case .loginSuccess: return "Your entrance to the blue castle has been granted."
-        case .maxFollow: return "You've reached the maximum number of stars you can follow."
+        case .menuAccess: return "Log into the blue castle with Twitter or Facebook."
+        case .loginSuccess: return "Login was successful."
+        case .maxFollow: return "You've reached the maximum number of stars to watch."
         case .firstFollow: return "This celeb has been added to the Today View."
         case .countdown: return "You will recieve a notification when a new king is crowned."
         case .royalty: return "You will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
         case .firstInterest: return "Saved."
-        case .firstVoteDisable: return "Registration is required."
+        case .firstVoteDisable: return "Log into the blue castle with Twitter or Facebook."
         case .firstTrollWarning: return "Below a level of negativity, all your votes will be discarded."
         case .loginError: return "Settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .networkError: return "Try again and please contact us if the problem persists."
@@ -85,7 +83,6 @@ enum OverlayInfo {
     
     func logo() -> UIImage {
         switch self {
-        case .welcomeUser: return R.image.kindom_Blue()!
         case .menuAccess: return R.image.kindom_Blue()!
         case .loginSuccess: return R.image.kindom_Blue()!
         case .maxFollow: return R.image.king()!

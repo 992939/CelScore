@@ -63,12 +63,9 @@ struct CelScoreViewModel {
             let celebs = realm.objects(CelebrityModel.self).filter("isNew = %@", true)
             guard celebs.count > 0 else { return observer.send(error: .notFound) }
 
-            let message: String?
-            if celebs.count == 1 { message = celebs.first!.nickName + " has been added to the score.\n\n" }
-            else { message = celebs.first!.nickName + " and \(celebs.count-1) other celeb(s) have been added to the score. " }
-            let completeMessage = message! + "All the recently added celebs are available in the \"New\" section."
+            let message = celebs.count == 1 ? " has been added to Celeb&Noble." : " and many other celebs have been added to Celeb&Noble."
             guard celebs.count < 100 else { return observer.sendCompleted() }
-            observer.send(value: (completeMessage, celebs.first!.picture3x))
+            observer.send(value: ( celebs.first!.nickName + message, celebs.first!.picture3x))
             
             celebs.forEach({ celeb in
                 realm.beginWrite()

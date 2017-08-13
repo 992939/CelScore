@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 44,
+            schemaVersion: 45,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 41 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -60,13 +60,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
         pinpoint = AWSPinpoint(configuration: pinpointConfig)
-        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-            if !granted {
-                print("Something went wrong")
-            }
-        }
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
         UIApplication.shared.registerForRemoteNotifications()
-        print("is or not: \(UIApplication.shared.isRegisteredForRemoteNotifications)")
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
@@ -94,7 +89,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
-    @nonobjc func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("didReceiveRemoteNotification")
         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
@@ -183,6 +179,4 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
-    func applicationDidEnterBackground(_ application: UIApplication) { }
-    func applicationWillEnterForeground(_ application: UIApplication) { }
 }

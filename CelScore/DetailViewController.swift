@@ -28,7 +28,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let celebST: CelebrityStruct
     fileprivate let socialButton: FABMenu
     fileprivate var previousIndex: Int = 1
-    fileprivate var kingAlert: String = Constants.kAlertAction
     internal let profilePicNode: ASNetworkImageNode
     
     //MARK: Initializers
@@ -55,13 +54,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     //MARK: Methods
     override var prefersStatusBarHidden : Bool { return true }
     override func updateUserActivityState(_ activity: NSUserActivity) { activity.becomeCurrent() }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        CelebrityViewModel().longLiveTheChiefSignal()
-            .on(value: { message in self.kingAlert = message })
-            .start()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -98,7 +90,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kBlueShade
         
-        self.profilePicNode.url = URL(string: celebST.imageURL)
+        //self.profilePicNode.url = URL(string: celebST.imageURL)
+        self.profilePicNode.defaultImage = R.image.jamie_blue()!
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
                                            y: topView.centerY - UIDevice.getProfileDiameter()/2,
                                            width: UIDevice.getProfileDiameter(),
@@ -119,8 +112,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kBlueShade
     }
-    
-    func getKingAlert() -> String { return self.kingAlert }
     
     func showingButtons() {
         self.voteButton.animate(Motion.animate(group: [
@@ -161,12 +152,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .map { userRatings in
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
                 Motion.delay(2.0, execute: {
-                    let hours = self.getCountdownHours()
-                    let plural = hours > 1 ? "hours" : "hour"
-                    let message = "Thank you for\nWatching the throne!\nOnly \(hours) \(plural) left\nUntil the coronation!"
-                    let alertVC = PMAlertController(title: "Hollywood Kingdom", description: message, image: OverlayInfo.welcomeUser.logo(), style: .alert)
+                    let message = "Thank you for watching the throne!"
+                    let alertVC = PMAlertController(title: Constants.kAlertName, description: message, image: OverlayInfo.loginSuccess.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
+                    alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.backgroundColor = Constants.kStarGoldShade
                         self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                         self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
@@ -269,7 +258,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .on(value: { score in
                 CelScoreViewModel()
                     .shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                        message: "\(self.celebST.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty! #CNN")
+                        message: "\(self.celebST.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty. #CNN")
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)

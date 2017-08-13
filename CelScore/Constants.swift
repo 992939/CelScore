@@ -18,7 +18,8 @@ struct Constants {
     static let kAPIKey: String = CelscoreKeys().kAPIKey()
     static let kCredentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: kCognitoIdentityPoolId)
     static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
-    static let kAlertAction: String = "Long Live The King!"
+    static let kAlertAction: String = "Done"
+    static let kAlertName: String = "The Blue Castle"
     
     static let kRoyalty: Double = 80.0
     static let kTrollingWarning: CGFloat = 1.9

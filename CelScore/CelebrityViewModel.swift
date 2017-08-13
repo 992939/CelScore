@@ -71,16 +71,6 @@ struct CelebrityViewModel {
         }
     }
     
-    func longLiveTheChiefSignal() -> SignalProducer<String, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let celebList = realm.objects(CelebrityModel.self).filter("isKing = true")
-            guard let celeb = celebList.first else { return observer.send(value: Constants.kAlertAction) }
-            observer.send(value: celeb.sex ? Constants.kAlertAction : "Long Live The Queen!")
-            observer.sendCompleted()
-        }
-    }
-    
     func removeCelebsNotInPublicOpinionSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

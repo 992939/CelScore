@@ -31,7 +31,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
     fileprivate let socialButton: FABMenu
-    fileprivate var kingAlert: String = Constants.kAlertAction
     internal let celebrityTableNode: ASTableNode
     
     //MARK: Initializers
@@ -58,9 +57,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.navigationDrawerController?.isEnabled = false
         self.navigationDrawerController?.animationDuration = 0.4
         CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
-        CelebrityViewModel().longLiveTheChiefSignal()
-            .on(value: { message in self.kingAlert = message })
-            .start()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -162,8 +158,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         }
     }
     
-    func getKingAlert() -> String { return self.kingAlert }
-    
     func facebookToken() -> String {
         guard let current = FBSDKAccessToken.current() else {
             UserViewModel().refreshFacebookTokenSignal().start()
@@ -193,9 +187,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 self.navigationDrawerController!.setLeftViewWidth(width: Constants.kSettingsViewWidth, isHidden: true, animated: false)
                 self.navigationDrawerController!.openLeftView() })
             .on(failed: { _ in
-                let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
+                let alertVC = PMAlertController(title: Constants.kAlertName, description: OverlayInfo.menuAccess.message(), image: OverlayInfo.menuAccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                     Motion.delay(0.5) { self.handleMenu(open: true) }
                     self.dismiss(animated: true, completion: nil) }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
@@ -232,25 +226,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 self.dismissHUD()
                 self.changeList()
                 return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                return SettingsViewModel().getSettingSignal(settingType: .firstLaunch) }
-            .filter({ (first: AnyObject) -> Bool in let firstTime = first as! Bool
-                if firstTime {
-                    let alertVC = PMAlertController(title: "Hollywood Kingdom", description: OverlayInfo.welcomeUser.message(), image: OverlayInfo.welcomeUser.logo(), style: .alert)
-                    alertVC.alertTitle.textColor = Constants.kBlueText
-                    alertVC.addAction(PMAlertAction(title: self.kingAlert, style: .default, action: { _ in
-                        self.dismiss(animated: true, completion: nil)
-                        SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstLaunch).start()
-                        self.movingSocialButton(onScreen: true)
-                    }))
-                    alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                    alertVC.view.isOpaque = false
-                    Motion.delay(2) { self.present(alertVC, animated: true, completion: nil) }
-                }
-                return firstTime == false
-            })
-            .flatMapError { _ in SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in return CelScoreViewModel().getNewCelebsSignal() }
+            .flatMap(.latest) { (_) -> SignalProducer<NewCelebInfo, CelebrityError> in
+                return CelScoreViewModel().getNewCelebsSignal() }
             .on(value: { celebInfo in Motion.delay(1) {
                     TAOverlay.show(withLabel: celebInfo.text, image: UIImage(data: try! Data(contentsOf: URL(string: celebInfo.image)!)), options: OverlayInfo.getOptions())
                 }
