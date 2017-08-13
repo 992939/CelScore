@@ -22,14 +22,22 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 4 files.
   struct file {
+    /// Resource file `Capture it.ttf`.
+    static let captureItTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Capture it", pathExtension: "ttf")
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
     /// Resource file `TAOverlay.bundle`.
     static let tAOverlayBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "TAOverlay", pathExtension: "bundle")
     /// Resource file `pricedown bl.ttf`.
     static let pricedownBlTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "pricedown bl", pathExtension: "ttf")
+    
+    /// `bundle.url(forResource: "Capture it", withExtension: "ttf")`
+    static func captureItTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.captureItTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
     
     /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
     static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
@@ -52,10 +60,17 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.font` struct is generated, and contains static references to 1 fonts.
+  /// This `R.font` struct is generated, and contains static references to 2 fonts.
   struct font: Rswift.Validatable {
+    /// Font `Captureit`.
+    static let captureit = Rswift.FontResource(fontName: "Captureit")
     /// Font `PricedownBl-Regular`.
     static let pricedownBlRegular = Rswift.FontResource(fontName: "PricedownBl-Regular")
+    
+    /// `UIFont(name: "Captureit", size: ...)`
+    static func captureit(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: captureit, size: size)
+    }
     
     /// `UIFont(name: "PricedownBl-Regular", size: ...)`
     static func pricedownBlRegular(size: CGFloat) -> UIKit.UIFont? {
@@ -64,6 +79,7 @@ struct R: Rswift.Validatable {
     
     static func validate() throws {
       if R.font.pricedownBlRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'PricedownBl-Regular' could not be loaded, is 'pricedown bl.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.captureit(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Captureit' could not be loaded, is 'Capture it.ttf' added to the UIAppFonts array in this targets Info.plist?") }
     }
     
     fileprivate init() {}

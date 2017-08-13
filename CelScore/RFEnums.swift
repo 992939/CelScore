@@ -60,7 +60,6 @@ enum OverlayInfo {
     case firstTrollWarning
     case loginError
     case networkError
-    case timeoutError
     case permissionError
     
     func message(_ social: String = "") -> String {
@@ -76,7 +75,6 @@ enum OverlayInfo {
         case .firstTrollWarning: return "Below a level of negativity, all your votes will be discarded."
         case .loginError: return "Settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .networkError: return "Try again and please contact us if the problem persists."
-        case .timeoutError: return "Settings check:\n- Network connection is on.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         case .permissionError: return "Unable to authenticate using your \(social) account.\n\nCheck that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
         }
     }
@@ -94,7 +92,6 @@ enum OverlayInfo {
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
         case .networkError: return R.image.cloud_red()!
-        case .timeoutError: return R.image.cloud_red()!
         case .permissionError: return R.image.cloud_red()!
         }
     }

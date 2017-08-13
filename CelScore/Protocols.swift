@@ -112,9 +112,7 @@ extension Sociable where Self: UIViewController {
                 self.handleMenu(open: false)
                 let alertVC = PMAlertController(title: Constants.kAlertName, description: OverlayInfo.loginSuccess.message(), image: OverlayInfo.loginSuccess.logo(), style: .alert)
                 alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                    self.socialRefresh()
-                }))
+                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in self.socialRefresh() }))
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)

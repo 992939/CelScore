@@ -396,13 +396,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         let celebName = self.celebST.isKing ? celebST.kingName : celebST.nickName
-        if celebName.characters.count > 13 {
+        if celebName.characters.count > 16 {
             let decomposedName = celebName.components(separatedBy: " ")
             let index = decomposedName[1].index(decomposedName[1].startIndex, offsetBy: 1)
-            let lastName = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
-            let title = celebName.characters.count > 13 ? lastName : celebName
-            navigationBarView.title = "★ " + title! + " ★"
-        } else { navigationBarView.title = "★ " + celebName + " ★" }
+            navigationBarView.title = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
+        } else { navigationBarView.title = celebName }
     
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
