@@ -74,13 +74,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kGreyBackground)
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                if (status as! Bool) == true {
-                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
-                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
-                } else {
-                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .normal)
-                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
-                }})
+                let voteImage = (status as! Bool) == true ? R.image.ic_add_black()! : R.image.cross()!
+                self.socialButton.fabButton?.setImage(voteImage, for: .normal)
+                self.socialButton.fabButton?.setImage(voteImage, for: .highlighted)
+            })
             .start()
 
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
@@ -152,8 +149,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     let alertVC = PMAlertController(title: Constants.kAlertName, description: message, image: OverlayInfo.loginSuccess.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-                        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                        self.voteButton.setImage(R.image.goldstar()!, for: .normal)
+                        self.voteButton.setImage(R.image.goldstar()!, for: .highlighted)
+                        self.voteButton.backgroundColor = Constants.kGreyBackground
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
@@ -216,24 +214,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
     func openHandleMenu() {
         self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.25)])
-        self.socialButton.fabButton?.backgroundColor = Constants.kBlueShade
         self.socialButton.fabButton?.pulseAnimation = .centerWithBacking
-        let image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-        self.socialButton.fabButton?.setImage(image, for: .normal)
-        self.socialButton.fabButton?.setImage(image, for: .highlighted)
         self.socialButton.open()
     }
     
     func closeHandleMenu() {
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
-                if (status as! Bool) == true {
-                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
-                    self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
-                } else {
-                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .normal)
-                    self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
-                }
+                let voteImage = (status as! Bool) == true ? R.image.ic_add_black()! : R.image.cross()!
+                self.socialButton.fabButton?.setImage(voteImage, for: .normal)
+                self.socialButton.fabButton?.setImage(voteImage, for: .highlighted)
                 self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
                 self.socialButton.close()
             }).start()
@@ -265,9 +255,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .on(failed: { _ in self.ratingsVC.displayRatings() })
             .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
-                guard userRatings.getCelScore() > 0 else { return }
-                self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-                self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                let voteImage = userRatings.getCelScore() > 0 ? R.image.goldstar()! : R.image.blackstar()!
+                self.voteButton.setImage(voteImage, for: .normal)
+                self.voteButton.setImage(voteImage, for: .highlighted)
             }).start()
     }
     
@@ -291,13 +281,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in
-                if hasRatings {
-                    self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-                    self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
-                } else {
-                    self.voteButton.setImage(R.image.goldstar()!, for: .normal)
-                    self.voteButton.setImage(R.image.goldstar()!, for: .highlighted)
-                }
+                let voteImage = hasRatings ? R.image.goldstar()! : R.image.blackstar()!
+                self.voteButton.setImage(voteImage, for: .normal)
+                self.voteButton.setImage(voteImage, for: .highlighted)
             })
             .start()
     }
@@ -446,7 +432,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.pulseAnimation = .center
         self.voteButton.backgroundColor = Constants.kGreyBackground
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
-            //self.disableVoteButton(R.image.blackstar()!)
+            let voteImage = hasRatings ? R.image.goldstar()! : R.image.blackstar()!
+            self.voteButton.setImage(voteImage, for: .normal)
+            self.voteButton.setImage(voteImage, for: .highlighted)
         })
     }
 }

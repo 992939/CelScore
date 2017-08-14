@@ -65,7 +65,7 @@ enum OverlayInfo {
     func message(_ social: String = "") -> String {
         switch self {
         case .menuAccess: return "Log in with either Twitter or Facebook."
-        case .loginSuccess: return "Login was successful."
+        case .loginSuccess: return "Login was successful!"
         case .maxFollow: return "You've reached the maximum number of stars to watch."
         case .firstFollow: return "This celeb has been added to the Today View."
         case .countdown: return "You will recieve a notification when a new king is crowned."
