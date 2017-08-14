@@ -87,7 +87,6 @@ struct SettingsViewModel {
             switch settingType {
             case .defaultListIndex: observer.send(value: settings.defaultListIndex as AnyObject)
             case .loginTypeIndex: observer.send(value: settings.loginTypeIndex as AnyObject)
-            case .onSocialSharing: observer.send(value: settings.onSocialSharing as AnyObject)
             case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
             case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
@@ -107,7 +106,6 @@ struct SettingsViewModel {
             switch settingType {
             case .defaultListIndex: settings.defaultListIndex = value as! Int
             case .loginTypeIndex: settings.loginTypeIndex = value as! Int
-            case .onSocialSharing: settings.onSocialSharing = value as! Bool
             case .onCountdown: settings.onCountdown = value as! Bool
             case .firstFollow: settings.isFirstFollow = false
             case .firstInterest: settings.isFirstInterest = false

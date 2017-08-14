@@ -18,7 +18,6 @@ class SettingsModel: Object {
     dynamic var userName: String = ""
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 0
-    dynamic var onSocialSharing: Bool = false
     dynamic var onCountdown: Bool = false
     dynamic var isFirstFollow: Bool = true
     dynamic var isFirstInterest: Bool = true
@@ -33,7 +32,6 @@ class SettingsModel: Object {
         self.userName = json["userName"].string!
         self.defaultListIndex = json["defaultListIndex"].int!
         self.loginTypeIndex = json["loginTypeIndex"].int!
-        self.onSocialSharing = json["onSocialSharing"].bool!
         self.onCountdown = json["onCountdown"].bool!
         self.isFirstFollow = json["isFirstFollow"].bool!
         self.isFirstInterest = json["isFirstInterest"].bool!

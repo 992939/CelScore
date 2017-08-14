@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 45,
+            schemaVersion: 46,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 41 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in

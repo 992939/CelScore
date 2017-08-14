@@ -72,13 +72,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.setUpVoteButton()
         
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kGreyBackground)
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .on(value: { status in
-                let voteImage = (status as! Bool) == true ? R.image.ic_add_black()! : R.image.cross()!
-                self.socialButton.fabButton?.setImage(voteImage, for: .normal)
-                self.socialButton.fabButton?.setImage(voteImage, for: .highlighted)
-            })
-            .start()
+        self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
+        self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
 
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kBlueShade
@@ -219,14 +214,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func closeHandleMenu() {
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .on(value: { status in
-                let voteImage = (status as! Bool) == true ? R.image.ic_add_black()! : R.image.cross()!
-                self.socialButton.fabButton?.setImage(voteImage, for: .normal)
-                self.socialButton.fabButton?.setImage(voteImage, for: .highlighted)
-                self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
-                self.socialButton.close()
-            }).start()
+        self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
+        self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
+        self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
+        self.socialButton.close()
     }
     
     func socialButton(button: UIButton) {

@@ -175,7 +175,6 @@ struct UserViewModel {
                 
                 dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                 dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
-                dataset.setString(String(settings.onSocialSharing), forKey: "onSocialSharing")
                 dataset.setString(String(settings.onCountdown), forKey: "onCountdown")
                 dataset.setString(String(settings.isFirstFollow), forKey: "isFirstFollow")
                 dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
@@ -236,7 +235,6 @@ struct UserViewModel {
                     realm.beginWrite()
                     settings.defaultListIndex = (dico["defaultListIndex"] as! NSString).integerValue
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
-                    settings.onSocialSharing = (dico["onSocialSharing"] as? NSString)?.boolValue ?? true
                     settings.onCountdown = (dico["onCountdown"] as? NSString)?.boolValue ?? true
                     settings.isFirstFollow = (dico["isFirstFollow"] as! NSString).boolValue
                     settings.isFirstInterest = (dico["isFirstInterest"] as! NSString).boolValue

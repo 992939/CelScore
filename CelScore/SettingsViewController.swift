@@ -35,7 +35,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact3Bar = YLProgressBar()
         super.init(nibName: nil, bundle: nil)
     }
-
     
     //MARK: Method
     override func viewDidLayoutSubviews() {
@@ -47,19 +46,19 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         logoView.depthPreset = .none
         let diameter = Constants.kIsOriginalIphone ? 60 : 80
         let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
-        let logoCircle_y = Constants.kIsOriginalIphone ? 10 : 12
+        let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
         let logoCircle: Button = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
         logoCircle.setImage(R.image.kindom_medium_white()!, for: .normal)
         logoCircle.setImage(R.image.kindom_medium_white()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kRedShade
+        logoCircle.backgroundColor = Constants.kBlueShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
-        logoView.backgroundColor = Color.blue.lighten1
+        logoView.backgroundColor = Constants.kBlueLight //Color.blue.lighten1
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 
@@ -95,22 +94,15 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         //Check Boxes
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
-        
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
-            .on(value: { status in
-                let publicServiceNode = self.setupCheckBoxNode(title: "Royalty Notification", tag: 0, maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
-                self.view.addSubnode(publicServiceNode) })
-            .start()
-        
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .on(value: { status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notification", tag: 1, maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notification", maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
                 self.view.addSubnode(notificationNode) })
             .start()
         
         //Issue
-        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
-        let issueButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
+        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 45, width: maxWidth, height: 40))
+        let issueButton = FlatButton(frame: CGRect(x: 2 * Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         issueButton.setTitle("Report An Issue", for: .normal)
         issueButton.addTarget(self, action:#selector(self.support), for: .touchUpInside)
         issueButton.setTitleColor(Color.black, for: .normal)
@@ -122,7 +114,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(issueNode)
         
         //Privacy
-        let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 135, width: maxWidth, height: 40))
+        let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
         let privacyButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         privacyButton.setTitle("Privacy Policy", for: .normal)
         privacyButton.addTarget(self, action:#selector(self.showPolicy), for: .touchUpInside)
@@ -135,7 +127,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(privacyNode)
         
         //Logout
-        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 180, width: maxWidth, height: 40))
+        let logoutView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 135, width: maxWidth, height: 40))
         let logoutButton = FlatButton(frame: CGRect(x: 2*Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.addTarget(self, action: #selector(SettingsViewController.logout), for: .touchUpInside)
@@ -236,25 +228,15 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
-        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: (checkBox.tag == 0 ? .onSocialSharing : .onCountdown)).start()
+        SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: .onCountdown).start()
         if checkBox.on {
-            if checkBox.tag == 0 {
-                let alertVC = PMAlertController(title: "Royalty Notification", description: OverlayInfo.royalty.message(), image: OverlayInfo.royalty.logo(), style: .alert)
-                alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                    self.dismiss(animated: true, completion: nil) }))
-                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                alertVC.view.isOpaque = false
-                self.present(alertVC, animated: true, completion: nil)
-            } else {
-                let alertVC = PMAlertController(title: "Coronation Notification", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
-                alertVC.alertTitle.textColor = Constants.kBlueText
-                alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                    self.dismiss(animated: true, completion: nil) }))
-                alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
-                alertVC.view.isOpaque = false
-                self.present(alertVC, animated: true, completion: nil)
-            }
+            let alertVC = PMAlertController(title: "Coronation Notification", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
+            alertVC.alertTitle.textColor = Constants.kBlueText
+            alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
+                self.dismiss(animated: true, completion: nil) }))
+            alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
+            alertVC.view.isOpaque = false
+            self.present(alertVC, animated: true, completion: nil)
         }
     }
     
@@ -266,14 +248,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         return materialView
     }
     
-    func setupCheckBoxNode(title: String, tag: Int, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
+    func setupCheckBoxNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, status: Bool) -> ASDisplayNode {
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 40))
         let publicServiceLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - Constants.kPadding, height: 40))
         publicServiceLabel.textAlignment = .center
         publicServiceLabel.backgroundColor = .clear
         let box = BEMCheckBox(frame: CGRect(x: maxWidth - 40, y: 5, width: 30, height: 30))
         box.delegate = self
-        box.tag = tag
         box.onAnimationType = .bounce
         box.offAnimationType = .bounce
         box.onCheckColor = Color.white

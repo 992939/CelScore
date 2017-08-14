@@ -48,25 +48,11 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("LoginTypeIndex error: \(error)") } }
     }
     
-    func testGetPublicService() {
-        let expectation = self.expectation(description: "onSocialSharing returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .onSocialSharing).startWithValues { value in
-            XCTAssert((value as Any) is Bool); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("PublicService error: \(error)") } }
-    }
-    
     func testGetonCountdown() {
         let expectation = self.expectation(description: "onCountdown returns Bool")
         SettingsViewModel().getSettingSignal(settingType: .onCountdown).startWithValues { value in
             XCTAssert((value as Any) is Bool); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("onCountdown error: \(error)") } }
-    }
-    
-    func testGetFirstLaunch() {
-        let expectation = self.expectation(description: "FirstLaunch returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .firstLaunch).startWithValues { value in
-            XCTAssert((value as Any) is Bool); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstLaunch error: \(error)") } }
     }
     
     func testGetFirstFollow() {
@@ -124,16 +110,6 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set LoginTypeIndex error: \(error)") } }
     }
     
-    func testUpdatePublicService() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set onSocialSharing to true")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .onSocialSharing)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { settings in
-            XCTAssertEqual(settings.onSocialSharing, true); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set PublicService error: \(error)") } }
-    }
-    
     func testUpdateonCountdown() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
         let expectation = self.expectation(description: "set onCountdown to true")
@@ -142,16 +118,6 @@ class SettingsViewModelTests: XCTestCase {
             .startWithValues { settings in
             XCTAssertEqual(settings.onCountdown, true); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set onCountdown error: \(error)") } }
-    }
-    
-    func testUpdateFirstLaunch() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set FirstLaunch to false")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstLaunch)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { settings in
-            XCTAssertEqual(settings.isFirstLaunch, false); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstLaunch error: \(error)") } }
     }
     
     func testUpdateFirstFollow() {
