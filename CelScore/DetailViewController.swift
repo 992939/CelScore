@@ -364,7 +364,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             self.voteButton.setImage(R.image.whitestar()!, for: .highlighted)
             self.voteButton.removeTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
             self.voteButton.addTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
-            self.voteButton.backgroundColor = positive == true ? Constants.kBlueLight : Constants.kRedLight },
+            self.voteButton.backgroundColor = positive == true ? Constants.kBlueShade : Constants.kRedShade },
             completion: { _ in Motion.delay(2) {
                 self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulse() }

@@ -85,7 +85,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 96 images.
+  /// This `R.image` struct is generated, and contains static references to 95 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -261,8 +261,6 @@ struct R: Rswift.Validatable {
     static let star_circle = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_circle")
     /// Image `star_icon`.
     static let star_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_icon")
-    /// Image `swords_big_blue`.
-    static let swords_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "swords_big_blue")
     /// Image `tomb_big_blue`.
     static let tomb_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "tomb_big_blue")
     /// Image `tomb_big_red`.
@@ -713,11 +711,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "star_icon", bundle: ..., traitCollection: ...)`
     static func star_icon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.star_icon, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "swords_big_blue", bundle: ..., traitCollection: ...)`
-    static func swords_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.swords_big_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "tomb_big_blue", bundle: ..., traitCollection: ...)`
