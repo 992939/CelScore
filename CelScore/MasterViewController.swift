@@ -397,7 +397,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
         self.segmentedControl.selectionIndicatorLocation = .down
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : Color.white,
-                                                     NSFontAttributeName: UIFont.systemFont(ofSize: 18),
+                                                     NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18),
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = .textWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0
