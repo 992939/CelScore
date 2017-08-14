@@ -49,8 +49,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
         let cosmosView: CosmosView = CosmosView()
-        cosmosView.settings.starSize = 15
-        cosmosView.settings.starMargin = 1.0
+        cosmosView.settings.starSize = UIDevice.getStarsSize()
+        cosmosView.settings.starMargin = 1.1
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.style.preferredSize = CGSize(width: 10, height: 20)
@@ -150,7 +150,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let minisStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: Constants.kPadding/2,
+            spacing: 6.0,
             justifyContent: .start,
             alignItems: .start,
             children: [self.consensusNode, self.trendNode, self.newsNode, self.faceNode])
@@ -158,11 +158,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let middleStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kPadding/4,
+            spacing: 3.5,
             justifyContent: .start,
             alignItems: .start,
             children: [self.ratingsNode, minisStack])
-        middleStack.style.flexBasis = ASDimensionMake(.fraction, 0.2)
+        middleStack.style.flexBasis = ASDimensionMake(.fraction, 0.6)
         middleStack.style.flexGrow = 1
 
         let bottomRightStack = ASStackLayoutSpec(

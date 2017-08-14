@@ -148,9 +148,9 @@ extension UIDevice {
     static func getSwitchDistance() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 55
+        case Constants.kIPhone5_height: height = 40
         case Constants.kIPhone6_height: height = 85
-        default: height = 105
+        default: height = 95
         }
         return height
     }
@@ -159,8 +159,8 @@ extension UIDevice {
         let height: CGFloat
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 0.65
-        case Constants.kIPhone6_height: height = 0.65
-        default: height = 0.60
+        case Constants.kIPhone6_height: height = 0.75
+        default: height = 0.8
         }
         return height
     }
@@ -253,6 +253,16 @@ extension UIDevice {
         default: height = 30.0
         }
         return height
+    }
+    
+    static func getStarsSize() -> Double {
+        let offset: Double
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: offset = 18
+        case Constants.kIPhone6_height: offset = 21
+        default: offset = 23
+        }
+        return offset
     }
     
     static func getStarsWidth() -> CGFloat {
