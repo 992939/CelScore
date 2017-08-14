@@ -85,7 +85,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 78 images.
+  /// This `R.image` struct is generated, and contains static references to 77 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -119,8 +119,6 @@ struct R: Rswift.Validatable {
     static let cloud_big_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "cloud_big_red")
     /// Image `cloud_red`.
     static let cloud_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "cloud_red")
-    /// Image `contract_blue_big`.
-    static let contract_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "contract_blue_big")
     /// Image `cross`.
     static let cross = Rswift.ImageResource(bundle: R.hostingBundle, name: "cross")
     /// Image `crown_big_blue`.
@@ -322,11 +320,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "cloud_red", bundle: ..., traitCollection: ...)`
     static func cloud_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.cloud_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "contract_blue_big", bundle: ..., traitCollection: ...)`
-    static func contract_blue_big(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.contract_blue_big, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
