@@ -71,7 +71,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let segmentView: SMSegmentView = getSegmentView()
         self.setUpVoteButton()
         
-        self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kStarGoldShade)
+        self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kGreyBackground)
         SettingsViewModel().getSettingSignal(settingType: .onSocialSharing)
             .on(value: { status in
                 if (status as! Bool) == true {
@@ -82,11 +82,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.socialButton.fabButton?.setImage(R.image.cross()!, for: .highlighted)
                 }})
             .start()
-        
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .on(value: { hasRatings in self.socialButton.fabButton?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
-            .start()
-        
+
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Constants.kBlueShade
         
@@ -159,7 +155,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                         self.voteButton.backgroundColor = Constants.kStarGoldShade
                         self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                         self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
-                        self.socialButton.fabButton?.backgroundColor = Constants.kStarGoldShade
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
@@ -242,11 +237,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 }
                 self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
                 self.socialButton.close()
-            }).start()
-        
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .on(value: { hasRatings in
-                self.socialButton.fabButton?.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
             }).start()
     }
     
