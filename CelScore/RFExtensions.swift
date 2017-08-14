@@ -148,9 +148,9 @@ extension UIDevice {
     static func getSwitchDistance() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 42
-        case Constants.kIPhone6_height: height = 85
-        default: height = 95
+        case Constants.kIPhone5_height: height = 37
+        case Constants.kIPhone6_height: height = 75
+        default: height = 85
         }
         return height
     }
@@ -233,16 +233,6 @@ extension UIDevice {
         default: diameter = 210.0
         }
         return diameter
-    }
-    
-    static func getSegmentHeight() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 35.0
-        case Constants.kIPhone6_height: height = 40.0
-        default: height = 40.0
-        }
-        return height
     }
     
     static func getPulseBarHeight() -> CGFloat {

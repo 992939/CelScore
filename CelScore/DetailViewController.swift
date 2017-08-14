@@ -102,13 +102,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-        self.voteButton.animate(Motion.animate(group: [
-            Motion.translateX(to: -(Constants.kFabDiameter + 100)),
+        self.socialButton.animate(Motion.animate(group: [
+            Motion.translateX(to: Constants.kPadding + 110),
             Motion.spin(rotations: 1)
             ]))
         
-        self.socialButton.animate(Motion.animate(group: [
-            Motion.translateX(to: Constants.kPadding + 100),
+        self.voteButton.animate(Motion.animate(group: [
+            Motion.translateX(to: -(Constants.kFabDiameter + 100)),
             Motion.spin(rotations: 1)
             ]))
     }
@@ -116,7 +116,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func hideButtons() {
         self.socialButton.animate(Motion.animate(group: [
             Motion.spin(rotations: 1),
-            Motion.translateX(to: -(Constants.kPadding + 100))
+            Motion.translateX(to: -(Constants.kPadding + 110))
             ]))
         
         self.voteButton.animate(Motion.animate(group: [
@@ -384,6 +384,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func getTopView() -> View {
         let topView: View = View(frame: Constants.kTopViewRect)
         topView.depthPreset = .depth2
+        topView.layer.cornerRadius = Constants.kCornerRadius
         topView.backgroundColor = Constants.kBlueShade
         topView.isOpaque = true
         topView.image = R.image.topView()
@@ -399,8 +400,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         appearance.contentVerticalMargin = 5.0
         
         let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-                                                       dividerColour: Color.black,
-                                                       dividerWidth: 1,
+                                                       dividerColour: Constants.kBlueShade,
+                                                       dividerWidth: 4.0,
                                                        segmentAppearance: appearance)
         
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.white_crown()!, offSelectionImage: R.image.small_crown()!)
@@ -408,9 +409,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.star_icon()!, offSelectionImage: R.image.star_black()!)
         segmentView.addTarget(self, action: #selector(self.segmentView(_:)), for: .valueChanged)
         segmentView.selectedSegmentIndex = 0
-        segmentView.clipsToBounds = false
+        segmentView.layer.cornerRadius = 6.0
         segmentView.layer.shadowColor = Color.black.cgColor
-        segmentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        segmentView.layer.shadowOffset = CGSize(width: 0, height: 1.5)
         segmentView.layer.shadowOpacity = 0.3
         return segmentView
     }

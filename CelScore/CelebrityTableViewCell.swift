@@ -91,6 +91,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kBlueShade
         self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
+        self.backgroundNode.layer.cornerRadius = Constants.kCornerRadius
         self.backgroundNode.backgroundColor = Constants.kGreyBackground
         
         self.trendNode = ASImageNode()
@@ -201,7 +202,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: 2*Constants.kPadding),
+            insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: Constants.kPadding),
             child: horizontalStack),
             background: self.backgroundNode)
     }

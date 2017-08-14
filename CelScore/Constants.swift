@@ -22,6 +22,7 @@ struct Constants {
     static let kAlertName: String = "The Blue Castle"
     
     static let kRoyalty: Double = 80.0
+    static let kCornerRadius: CGFloat = 11.0
     static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5
     static let kOneDay: TimeInterval = 86400.0
@@ -32,7 +33,7 @@ struct Constants {
     static let kFontSize: CGFloat = UIDevice.getFontSize()
     static let kScreenWidth: CGFloat = UIScreen.main.bounds.width
     static let kScreenHeight: CGFloat = UIScreen.main.bounds.height
-    static let kMaxWidth: CGFloat = kScreenWidth - kPadding
+    static let kMaxWidth: CGFloat = kScreenWidth -  2 * kPadding
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
@@ -56,7 +57,7 @@ struct Constants {
     
     //MasterVC
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)
-    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding/2, y: 124, width: kMaxWidth, height: kScreenHeight - 124)
+    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: 120, width: kMaxWidth, height: kScreenHeight - (120 + kPadding))
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: 48)
     static let kSearchListId: String = "0099"
     
@@ -67,10 +68,10 @@ struct Constants {
     
     //DetailVC 
     static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)
-    static let kTopViewRect: CGRect = CGRect(x: kPadding/2, y: kDetailNavigationBarRect.bottom + 5, width: kMaxWidth, height: UIDevice.getProfileDiameter() + UIDevice.getProfilePadding())
-    static let kSegmentViewRect: CGRect = CGRect(x: kPadding/2, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: UIDevice.getSegmentHeight())
-    static let kBottomViewRect = CGRect(x: kPadding/2, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
-    static let kBottomHeight = kBottomViewRect.height - kPadding/2
+    static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kDetailNavigationBarRect.bottom + 5, width: kMaxWidth, height: UIDevice.getProfileDiameter() + UIDevice.getProfilePadding())
+    static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: 35)
+    static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
+    static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = UIDevice.getGaugeDiameter()
     

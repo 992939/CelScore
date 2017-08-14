@@ -46,6 +46,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gaugeView.depthPreset = .depth1
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
+        gaugeView.layer.cornerRadius = Constants.kCornerRadius
         gaugeView.pulseAnimation = .none
         let gauge: LMGaugeView = LMGaugeView()
         gauge.minValue = Constants.kMinimumVoteValue
@@ -98,6 +99,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
         taggedView.depthPreset = .depth1
         taggedView.tag = tag
+        taggedView.layer.cornerRadius = 5.0
         taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .centerWithBacking
         taggedView.addSubview(titleLabel)

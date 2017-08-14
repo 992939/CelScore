@@ -75,6 +75,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             }
                         
                             qualityView.depthPreset = .depth1
+                            qualityView.layer.cornerRadius = 5.0
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
                             qualityView.addSubview(infoLabel)
