@@ -152,7 +152,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     let alertVC = PMAlertController(title: Constants.kAlertName, description: message, image: OverlayInfo.loginSuccess.logo(), style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
-                        self.voteButton.backgroundColor = Constants.kStarGoldShade
                         self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                         self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
                     }))
@@ -267,7 +266,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 guard userRatings.getCelScore() > 0 else { return }
-                self.voteButton.backgroundColor = Constants.kStarGoldShade
                 self.voteButton.setImage(R.image.blackstar()!, for: .normal)
                 self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
             }).start()
@@ -276,8 +274,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func enableVoteButton() {
         self.voteButton.isEnabled = true
         self.voteButton.pulseAnimation = .centerWithBacking
-        self.voteButton.setImage(R.image.blackstar()!, for: .normal)
-        self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+        self.voteButton.backgroundColor = Constants.kGreyBackground
         self.voteButton.removeTarget(self, action: #selector(self.voteAction), for: .touchUpInside)
         self.voteButton.addTarget(self, action: #selector(self.updateAction), for: .touchUpInside)
         
@@ -294,8 +291,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in
-                self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
-                self.voteButton.backgroundColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground })
+                if hasRatings {
+                    self.voteButton.setImage(R.image.blackstar()!, for: .normal)
+                    self.voteButton.setImage(R.image.blackstar()!, for: .highlighted)
+                } else {
+                    self.voteButton.setImage(R.image.goldstar()!, for: .normal)
+                    self.voteButton.setImage(R.image.goldstar()!, for: .highlighted)
+                }
+            })
             .start()
     }
     
@@ -441,10 +444,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.shapePreset = .circle
         self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .center
-        self.voteButton.accessibilityLabel = "Vote Button"
-        self.disableVoteButton(R.image.blackstar()!)
+        self.voteButton.backgroundColor = Constants.kGreyBackground
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
-            self.voteButton.tintColor = hasRatings ? Constants.kStarGoldShade : Constants.kGreyBackground
+            //self.disableVoteButton(R.image.blackstar()!)
         })
     }
 }

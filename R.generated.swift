@@ -85,7 +85,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 79 images.
+  /// This `R.image` struct is generated, and contains static references to 78 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -131,6 +131,8 @@ struct R: Rswift.Validatable {
     static let facebooklogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "facebooklogo")
     /// Image `geometry_red`.
     static let geometry_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_red")
+    /// Image `goldstar`.
+    static let goldstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "goldstar")
     /// Image `happyFace`.
     static let happyFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "happyFace")
     /// Image `ic_add_black`.
@@ -149,8 +151,6 @@ struct R: Rswift.Validatable {
     static let kindom_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "kindom_white")
     /// Image `king_big_blue`.
     static let king_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_big_blue")
-    /// Image `king_smile`.
-    static let king_smile = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_smile")
     /// Image `king_white`.
     static let king_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_white")
     /// Image `king`.
@@ -203,8 +203,6 @@ struct R: Rswift.Validatable {
     static let small_avatar = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_avatar")
     /// Image `small_crown`.
     static let small_crown = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_crown")
-    /// Image `small_profile`.
-    static let small_profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "small_profile")
     /// Image `smileFace`.
     static let smileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "smileFace")
     /// Image `sphere_blue_big`.
@@ -356,6 +354,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.geometry_red, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "goldstar", bundle: ..., traitCollection: ...)`
+    static func goldstar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.goldstar, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`
     static func happyFace(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.happyFace, compatibleWith: traitCollection)
@@ -404,11 +407,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "king_big_blue", bundle: ..., traitCollection: ...)`
     static func king_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.king_big_blue, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "king_smile", bundle: ..., traitCollection: ...)`
-    static func king_smile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.king_smile, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "king_white", bundle: ..., traitCollection: ...)`
@@ -534,11 +532,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "small_crown", bundle: ..., traitCollection: ...)`
     static func small_crown(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.small_crown, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "small_profile", bundle: ..., traitCollection: ...)`
-    static func small_profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.small_profile, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "smileFace", bundle: ..., traitCollection: ...)`
