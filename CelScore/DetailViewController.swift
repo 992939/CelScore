@@ -359,7 +359,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         infoButton.setImage(bell_image, for: .normal)
         infoButton.setImage(bell_image, for: .highlighted)
         infoButton.addTarget(self, action: #selector(self.openSafari), for: .touchUpInside)
-        
+        if self.celebST.isTrending {
+            Motion.delay(1) {
+                infoButton.pulseAnimation = .centerWithBacking
+                infoButton.pulse()
+            }
+        }
+
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
         navigationBarView.title = self.celebST.isKing ? celebST.kingName : celebST.nickName
