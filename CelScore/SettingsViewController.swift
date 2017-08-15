@@ -278,6 +278,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         bar.isStripesAnimated = false
         bar.hideStripes = true
         bar.hideGloss = true
+        bar.uniformTintColor = true
         bar.progressTintColor = Constants.kBlueShade
         bar.trackTintColor = Constants.kRedShade
         bar.backgroundColor = Constants.kRedShade
