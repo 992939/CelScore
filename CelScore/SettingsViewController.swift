@@ -48,17 +48,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
         let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
         let logoCircle: Button = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.kindom_medium_white()!, for: .normal)
-        logoCircle.setImage(R.image.kindom_medium_white()!, for: .highlighted)
+        logoCircle.setImage(R.image.celscore_white()!, for: .normal)
+        logoCircle.setImage(R.image.celscore_white()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kBlueShade
+        logoCircle.backgroundColor = Constants.kRedShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
+        logoView.layer.cornerRadius = 0
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
-        logoView.backgroundColor = Constants.kBlueLight //Color.blue.lighten1
+        logoView.backgroundColor = Constants.kBlueShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 
@@ -152,7 +153,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: "Warning", description: "By leaving the blue castle, your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
+        let alertVC = PMAlertController(title: Constants.kAlertName, description: "Your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kRedText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Leave", style: .default, action: { _ in
@@ -244,6 +245,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func setupMaterialView(frame: CGRect) -> View {
         let materialView = View(frame: frame)
         materialView.depthPreset = .depth1
+        materialView.layer.cornerRadius = frame.height > 40 ? Constants.kCornerRadius : 5.0
         materialView.backgroundColor = Constants.kGreyBackground
         return materialView
     }
@@ -272,9 +274,12 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
         let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
-        bar.progressTintColors = [Constants.kRedShade, Constants.kRedShade]
-        bar.setProgress(value, animated: true)
         bar.type = .flat
+        bar.isStripesAnimated = false
+        bar.hideStripes = true
+        bar.hideGloss = true
+        bar.progressTintColor = Constants.kBlueShade
+        bar.trackTintColor = Constants.kRedShade
         bar.backgroundColor = Constants.kRedShade
         bar.indicatorTextDisplayMode = .progress
         materialView.addSubview(factsLabel)

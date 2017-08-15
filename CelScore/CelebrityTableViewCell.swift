@@ -99,7 +99,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        self.newsNode.image = self.celebST.isTrending ? R.image.news_red()! : R.image.mini_empty()!
+        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.mini_empty()!
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter + 0.5, height: Constants.kMiniCircleDiameter + 0.5)
@@ -200,7 +200,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             alignItems: .center,
             children: [rankTextStack, self.profilePicNode, verticalStack])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
-        
+
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: Constants.kPadding),
             child: horizontalStack),

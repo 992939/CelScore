@@ -54,7 +54,6 @@ enum OverlayInfo {
     case maxFollow
     case firstFollow
     case countdown
-    case royalty
     case firstInterest
     case firstVoteDisable
     case firstTrollWarning
@@ -66,10 +65,9 @@ enum OverlayInfo {
         switch self {
         case .menuAccess: return "Log in with either Twitter or Facebook."
         case .loginSuccess: return "Login was successful!"
-        case .maxFollow: return "You've reached the maximum number of stars to watch."
+        case .maxFollow: return "You've reached the maximum number of celebs to watch."
         case .firstFollow: return "This celeb has been added to the Today View."
-        case .countdown: return "You will recieve a notification when a new king is crowned."
-        case .royalty: return "You will recieve a notification when a celeb becomes or is no longer Hollywood Royalty."
+        case .countdown: return "You will recieve a notification when a new celeb is crowned."
         case .firstInterest: return "Saved."
         case .firstVoteDisable: return "Log into the blue castle with Twitter or Facebook."
         case .firstTrollWarning: return "Below a level of negativity, all your votes will be discarded."
@@ -86,7 +84,6 @@ enum OverlayInfo {
         case .maxFollow: return R.image.king()!
         case .firstFollow: return R.image.king()!
         case .countdown: return R.image.crown_big_blue()!
-        case .royalty: return R.image.trophy_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
         case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!

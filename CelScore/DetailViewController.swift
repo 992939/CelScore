@@ -348,8 +348,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         backButton.setTitle("BACK", for: .normal)
         backButton.setTitleColor(Color.clear, for: .normal)
         backButton.pulseAnimation = .none
-        backButton.accessibilityLabel = "Back Button"
-        backButton.isAccessibilityElement = true
         backButton.setImage(R.image.arrow_white()!, for: .normal)
         backButton.setImage(R.image.arrow_white()!, for: .highlighted)
         backButton.addTarget(self, action: #selector(self.backAction), for: .touchUpInside)
@@ -357,21 +355,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let infoButton: FlatButton = FlatButton()
         infoButton.pulseColor = Color.white
         infoButton.pulseAnimation = .none
-        infoButton.accessibilityLabel = "Info Button"
-        infoButton.isAccessibilityElement = true
-        infoButton.setImage(R.image.news_icon()!, for: .normal)
-        infoButton.setImage(R.image.news_icon()!, for: .highlighted)
+        let bell_image = self.celebST.isTrending ? R.image.bell_ring()! : R.image.bell()!
+        infoButton.setImage(bell_image, for: .normal)
+        infoButton.setImage(bell_image, for: .highlighted)
         infoButton.addTarget(self, action: #selector(self.openSafari), for: .touchUpInside)
         
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        let celebName = self.celebST.isKing ? celebST.kingName : celebST.nickName
-        if celebName.characters.count > 16 {
-            let decomposedName = celebName.components(separatedBy: " ")
-            let index = decomposedName[1].index(decomposedName[1].startIndex, offsetBy: 1)
-            navigationBarView.title = String("\(decomposedName[0]) \(decomposedName[1].substring(to: index)).")
-        } else { navigationBarView.title = celebName }
-    
+        navigationBarView.title = self.celebST.isKing ? celebST.kingName : celebST.nickName
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
         navigationBarView.leftViews = [backButton]
