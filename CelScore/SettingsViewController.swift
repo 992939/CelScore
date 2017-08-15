@@ -48,18 +48,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
         let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
         let logoCircle: Button = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.celscore_white()!, for: .normal)
-        logoCircle.setImage(R.image.celscore_white()!, for: .highlighted)
+        logoCircle.setImage(R.image.geometry_white()!, for: .normal)
+        logoCircle.setImage(R.image.geometry_white()!, for: .highlighted)
         logoCircle.shapePreset = .circle
         logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kRedShade
+        logoCircle.backgroundColor = Constants.kBlueShade
         logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.cornerRadius = 0
         logoView.layer.shadowOffset = CGSize(width: 0, height: 2)
         logoView.layer.shadowOpacity = 0.1
-        logoView.backgroundColor = Constants.kBlueShade
+        logoView.backgroundColor = Constants.kRedShade
         let logoNode = ASDisplayNode(viewBlock: { () -> UIView in return logoView })
         self.view.addSubnode(logoNode)
 

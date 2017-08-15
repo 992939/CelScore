@@ -89,8 +89,6 @@ struct R: Rswift.Validatable {
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
-    /// Image `Kindom_Blue_Settings`.
-    static let kindom_Blue_Settings = Rswift.ImageResource(bundle: R.hostingBundle, name: "Kindom_Blue_Settings")
     /// Image `Kindom_Blue`.
     static let kindom_Blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "Kindom_Blue")
     /// Image `Kindom_big_white`.
@@ -135,6 +133,8 @@ struct R: Rswift.Validatable {
     static let facebooklogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "facebooklogo")
     /// Image `geometry_red`.
     static let geometry_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_red")
+    /// Image `geometry_white`.
+    static let geometry_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_white")
     /// Image `goldstar`.
     static let goldstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "goldstar")
     /// Image `happyFace`.
@@ -250,11 +250,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.kindom_Blue, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "Kindom_Blue_Settings", bundle: ..., traitCollection: ...)`
-    static func kindom_Blue_Settings(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.kindom_Blue_Settings, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "Kindom_big_white", bundle: ..., traitCollection: ...)`
     static func kindom_big_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.kindom_big_white, compatibleWith: traitCollection)
@@ -358,6 +353,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "geometry_red", bundle: ..., traitCollection: ...)`
     static func geometry_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.geometry_red, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "geometry_white", bundle: ..., traitCollection: ...)`
+    static func geometry_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.geometry_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "goldstar", bundle: ..., traitCollection: ...)`
