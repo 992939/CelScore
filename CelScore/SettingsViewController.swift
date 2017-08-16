@@ -153,8 +153,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: Constants.kAlertName, description: "Your votes will be discarded.\n\nAre you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
-        alertVC.alertTitle.textColor = Constants.kRedText
+        let alertVC = PMAlertController(title: Constants.kAlertName, description: "All your votes will be discarded. Are you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
+        alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Leave", style: .default, action: { _ in
             self.dismiss(animated: true, completion: nil)

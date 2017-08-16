@@ -140,8 +140,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .map { userRatings in
                 self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
                 Motion.delay(2.0, execute: {
-                    let message = "Thank you for voting!"
-                    let alertVC = PMAlertController(title: Constants.kAlertName, description: message, image: OverlayInfo.loginSuccess.logo(), style: .alert)
+                    let message = "Your vote has been cast!"
+                    let alertVC = PMAlertController(title: "Star Spangled Ballot", description: message, image: R.image.big_blue_ballot()!, style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)
