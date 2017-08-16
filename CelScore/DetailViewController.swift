@@ -138,10 +138,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
             .map { userRatings in
-                self.ratingsVC.animateStarsToGold(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
+                self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
-                    let message = "Your vote has been cast!"
-                    let alertVC = PMAlertController(title: "Star Spangled Ballot", description: message, image: R.image.big_blue_ballot()!, style: .alert)
+                    let message = userRatings.totalVotes == 1 ? "Your vote has been cast!" : "Your vote has been updated!"
+                    let alertVC = PMAlertController(title: "The Star Spangled Ballot", description: message, image: R.image.big_blue_ballot()!, style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)

@@ -126,7 +126,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
         return cosmos.settings.userRatingMode
     }
     
-    func animateStarsToGold(positive: Bool) {
+    func animateStarsToGold() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
             .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
