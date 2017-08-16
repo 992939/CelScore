@@ -337,7 +337,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             self.voteButton.backgroundColor = positive == true ? Constants.kBlueShade : Constants.kRedShade },
             completion: { _ in Motion.delay(2) {
                 self.voteButton.pulseAnimation = .centerWithBacking
-                self.voteButton.pulse() }
+                self.voteButton.pulseColor = .white
+                self.voteButton.pulse()
+                }
         })
     }
     

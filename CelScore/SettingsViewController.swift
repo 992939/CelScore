@@ -24,6 +24,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     fileprivate let fact1Bar: YLProgressBar
     fileprivate let fact2Bar: YLProgressBar
     fileprivate let fact3Bar: YLProgressBar
+    fileprivate let logoCircle: Button
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -33,6 +34,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact1Bar = YLProgressBar()
         self.fact2Bar = YLProgressBar()
         self.fact3Bar = YLProgressBar()
+        let diameter = Constants.kIsOriginalIphone ? 60 : 80
+        let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
+        let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
+        self.logoCircle = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,16 +50,12 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: Constants.kLogoHeight))
         logoView.depthPreset = .none
-        let diameter = Constants.kIsOriginalIphone ? 60 : 80
-        let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
-        let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
-        let logoCircle: Button = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
-        logoCircle.setImage(R.image.geometry_white()!, for: .normal)
-        logoCircle.setImage(R.image.geometry_white()!, for: .highlighted)
-        logoCircle.shapePreset = .circle
-        logoCircle.depthPreset = .depth2
-        logoCircle.backgroundColor = Constants.kBlueShade
-        logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
+        self.logoCircle.setImage(R.image.geometry_white()!, for: .normal)
+        self.logoCircle.setImage(R.image.geometry_white()!, for: .highlighted)
+        self.logoCircle.shapePreset = .circle
+        self.logoCircle.depthPreset = .depth2
+        self.logoCircle.backgroundColor = Constants.kBlueShade
+        self.logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.cornerRadius = 0
@@ -150,6 +152,12 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
             .start()
+        
+        Motion.delay(1) {
+            self.logoCircle.pulseAnimation = .centerWithBacking
+            self.logoCircle.pulseColor = .white
+            self.logoCircle.pulse()
+        }
     }
     
     func logout() {
