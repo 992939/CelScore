@@ -50,9 +50,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                             qualityView.tag = index+1
                             let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 122, height: barHeight - 5))
-                            
                             let days = celeb.daysOnThrone == 1 ? " Day" : " Days"
-                            
                             var infoLabelText: String = ""
                             switch quality {
                             case Info.firstName.name(): infoLabelText = celeb.firstName
@@ -70,6 +68,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             
                             let infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
                             infoLabel.textAlignment = .right
+                            infoLabel.adjustsFontSizeToFitWidth = true
                             if case Info.throne.name() = quality {
                                 infoLabel.textColor = celeb.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
                             }
