@@ -51,7 +51,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.layer.cornerRadius = 5.0
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .centerWithBacking
-                    qualityView.pulseColor = Color.yellow.lighten4
                     let qualityLabel : UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                     qualityLabel.backgroundColor = UIColor.clear
                     let cosmosView = CosmosView(frame: CGRect(x: Constants.kMaxWidth - UIDevice.getStarsWidth() + 5, y: 3, width: UIDevice.getStarsWidth(), height: barHeight - 5))
@@ -86,7 +85,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                         .start()
                     
                     cosmosView.didTouchCosmos = { (rating:Double) in
-                        qualityView.pulseColor = rating > 3 ? Constants.kBlueShade : Constants.kRedShade
                         SettingsViewModel().loggedInAsSignal()
                             .observe(on: UIScheduler())
                             .on(failed: { _ in self.requestLogin() })
@@ -136,7 +134,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                 for (index, subview) in viewArray.enumerated() {
                     Timer.after(100.ms * Double(index)){ timer in
                         subview.pulse()
-                        subview.pulseAnimation = .centerWithBacking
                         let stars = subview.subviews.filter({ $0 is CosmosView })
                         let cosmos: CosmosView = stars.first as! CosmosView
                         cosmos.settings.colorFilled = Constants.kStarGoldShade
@@ -172,13 +169,16 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
             .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {
-                    let stars = subview.subviews.filter({ $0 is CosmosView })
-                    let cosmos: CosmosView = stars.first as! CosmosView
-                    cosmos.settings.updateOnTouch = true
-                    cosmos.settings.userRatingMode = true
-                    cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
-                    cosmos.rating = userRatings[userRatings[index]] as! Double
-                    cosmos.update()
+                    Timer.after(100.ms * Double(index)){ timer in
+                        subview.pulse()
+                        let stars = subview.subviews.filter({ $0 is CosmosView })
+                        let cosmos: CosmosView = stars.first as! CosmosView
+                        cosmos.settings.updateOnTouch = true
+                        cosmos.settings.userRatingMode = true
+                        cosmos.settings.borderColorEmpty = Constants.kStarGreyShade
+                        cosmos.rating = userRatings[userRatings[index]] as! Double
+                        cosmos.update()
+                    }
                 }
             }).start()
     }
