@@ -21,7 +21,7 @@ struct Constants {
     static let kAlertAction: String = "Done"
     static let kAlertName: String = "The Blue Castle"
     
-    static let kRoyalty: Double = 80.0
+    static let kRoyalty: Double = 75.0
     static let kCornerRadius: CGFloat = 11.0
     static let kTrollingWarning: CGFloat = 1.9
     static let kTrollingThreshold: CGFloat = 1.5

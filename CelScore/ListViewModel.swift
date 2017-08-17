@@ -73,6 +73,22 @@ struct ListViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             
+            if listId == ListInfo.news.getId() {
+                let trending_celebs = realm.objects(CelebrityModel.self).filter("isTrending = true")
+                let trending_list = ListsModel()
+                
+                for (_, celeb) in trending_celebs.enumerated() {
+                    let newCelebId = CelebId()
+                    newCelebId.id = celeb.id
+                    trending_list.celebList.append(newCelebId)
+                }
+                realm.beginWrite()
+                trending_list.id = ListInfo.news.getId()
+                trending_list.name = ListInfo.news.name()
+                realm.add(trending_list, update: true)
+                try! realm.commitWrite()
+            }
+            
             let listModel = realm.objects(ListsModel.self).filter("id = %@", listId).first
             guard let list = listModel else { return }
             let celebrities = realm.objects(CelebrityModel.self).sorted(byKeyPath: "index", ascending: true)
