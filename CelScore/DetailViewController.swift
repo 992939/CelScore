@@ -141,7 +141,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
                     let message = userRatings.totalVotes == 1 ? "Your vote has been cast!" : "Your vote has been updated!"
-                    let alertVC = PMAlertController(title: "Star Qualities", description: message, image: R.image.big_blue_ballot()!, style: .alert)
+                    let alertVC = PMAlertController(title: "The Star Qualities", description: message, image: R.image.big_blue_ballot()!, style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)
