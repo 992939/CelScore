@@ -205,9 +205,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func showPolicy() {
         let url = URL(string: Constants.kPolicyURL)
-        let vc = SFSafariViewController(url: url!, entersReaderIfAvailable: false)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
+        let safariVC = SFSafariViewController(url: url!, entersReaderIfAvailable: false)
+        safariVC.preferredBarTintColor = Constants.kRedShade
+        safariVC.preferredControlTintColor = Color.white
+        safariVC.delegate = self
+        present(safariVC, animated: true, completion: nil)
     }
     
     //MARK: SFSafariViewControllerDelegate

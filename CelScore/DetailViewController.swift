@@ -189,7 +189,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 let searchString = String("https://www.google.com/search?q=\(searchTerm)")
                 let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
                 self.present(safariVC, animated: true, completion: nil)
-                safariVC.preferredBarTintColor = Constants.kBlueShade
+                safariVC.preferredBarTintColor = Constants.kRedShade
                 safariVC.preferredControlTintColor = Color.white
                 safariVC.delegate = self
             }).start()
