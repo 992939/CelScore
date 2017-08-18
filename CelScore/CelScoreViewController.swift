@@ -43,7 +43,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
         let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
-        gaugeView.depthPreset = .depth1
+        gaugeView.depthPreset = .depth2
         gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
         gaugeView.layer.cornerRadius = Constants.kCornerRadius
@@ -97,7 +97,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         infoLabel.textAlignment = .right
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
-        taggedView.depthPreset = .depth1
+        taggedView.depthPreset = .depth2
         taggedView.tag = tag
         taggedView.layer.cornerRadius = 5.0
         taggedView.backgroundColor = Constants.kGreyBackground

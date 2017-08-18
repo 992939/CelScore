@@ -410,8 +410,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         segmentView.selectedSegmentIndex = 0
         segmentView.layer.cornerRadius = 6.0
         segmentView.layer.shadowColor = Color.black.cgColor
-        segmentView.layer.shadowOffset = CGSize(width: 0, height: 1.5)
-        segmentView.layer.shadowOpacity = 0.3
+        segmentView.layer.shadowOffset = CGSize(width: 0.5, height: 1.5)
+        segmentView.layer.shadowOpacity = 0.7
         return segmentView
     }
     

@@ -47,7 +47,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     let barHeight = UIDevice.getPulseBarHeight()
                     let qualityView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
-                    qualityView.depthPreset = .depth1
+                    qualityView.depthPreset = .depth2
                     qualityView.layer.cornerRadius = 5.0
                     qualityView.backgroundColor = Constants.kGreyBackground
                     qualityView.pulseAnimation = .centerWithBacking

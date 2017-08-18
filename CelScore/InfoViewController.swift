@@ -73,7 +73,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                                 infoLabel.textColor = celeb.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
                             }
                         
-                            qualityView.depthPreset = .depth1
+                            qualityView.depthPreset = .depth2
                             qualityView.layer.cornerRadius = 5.0
                             qualityView.backgroundColor = Constants.kGreyBackground
                             qualityView.addSubview(qualityLabel)
