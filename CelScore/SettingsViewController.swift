@@ -13,6 +13,8 @@ import BEMCheckBox
 import SwiftyTimer
 import PMAlertController
 import ReactiveCocoa
+import ReactiveSwift
+import Result
 import MessageUI
 import SafariServices
 
@@ -54,7 +56,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.logoCircle.shapePreset = .circle
         self.logoCircle.depthPreset = .depth2
         self.logoCircle.backgroundColor = Constants.kBlueShade
-        self.logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction), for: .touchUpInside)
+        self.logoCircle.addTarget(self, action: #selector(SettingsViewController.refreshAction(_:)), for: .touchUpInside)
         logoView.addSubview(logoCircle)
         logoView.layer.shadowColor = Color.black.cgColor
         logoView.layer.cornerRadius = 0
@@ -67,23 +69,14 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Progress Bars
         let progressNodeHeight: CGFloat = 60.0
         
-        SettingsViewModel().calculateAverageRoyaltySignal()
-            .on(value: { value in
-                let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: value, bar: self.fact1Bar)
-                self.view.addSubnode(consensusBarNode) })
-            .start()
+        let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: 20, bar: self.fact1Bar)
+        self.view.addSubnode(consensusBarNode)
         
-        SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek)
-            .on(value: { value in
-                let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: value, bar: self.fact2Bar)
-                self.view.addSubnode(publicOpinionBarNode) })
-            .start()
-        
-        SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth)
-            .on(value: { value in
-                let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: value, bar: self.fact3Bar)
-                self.view.addSubnode(positiveBarNode) })
-            .start()
+        let publicOpinionBarNode = self.setupProgressBarNode(title: "Last Week Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + progressNodeHeight + Constants.kPadding/2, value: 20, bar: self.fact2Bar)
+        self.view.addSubnode(publicOpinionBarNode)
+
+        let positiveBarNode = self.setupProgressBarNode(title: "Last Month Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + 2 * progressNodeHeight, value: 20, bar: self.fact3Bar)
+        self.view.addSubnode(positiveBarNode)
         
         //PickerView
         let pickerView: View = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + 3 * progressNodeHeight - Constants.kPadding/2), width: maxWidth, height: UIDevice.getPickerHeight()))
@@ -146,17 +139,30 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: Methods
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
+            .flatMapError { _ in return SignalProducer.empty }
+            .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                return SettingsViewModel().calculateAverageRoyaltySignal() }
+            .on(value: { value in self.fact1Bar.setProgress(value, animated: false) })
+            .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek) }
+            .on(value: { value in self.fact2Bar.setProgress(value, animated: false) })
+            .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
+            .on(value: { value in self.fact3Bar.setProgress(value, animated: false) })
             .start()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool = true) {
+        super.viewDidAppear(animated)
         Motion.delay(1) {
             self.logoCircle.pulseAnimation = .centerWithBacking
             self.logoCircle.pulseColor = .white
             self.logoCircle.pulse()
-            self.refreshAction(self.logoCircle)
         }
     }
     
@@ -180,18 +186,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact1Bar.setProgress(0, animated: true)
         self.fact2Bar.setProgress(0, animated: true)
         self.fact3Bar.setProgress(0, animated: true)
+        button.isEnabled = true
         
         Timer.after(2.seconds){ _ in
             SettingsViewModel().calculateAverageRoyaltySignal()
-                .on(value: { value in self.fact1Bar.setProgress(value, animated: true) })
+                .on(value: { value in self.fact1Bar.setProgress(value, animated: false) })
+                .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                    return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek) }
+                .on(value: { value in self.fact2Bar.setProgress(value, animated: false) })
+                .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+                    return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
+                .on(value: { value in self.fact3Bar.setProgress(value, animated: false) })
                 .start()
-            SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek)
-                .on(value: { value in self.fact2Bar.setProgress(value, animated: true) })
-                .start()
-            SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth)
-                .on(value: { value in self.fact3Bar.setProgress(value, animated: true) })
-                .start()
-            button.isEnabled = true
         }
     }
     
