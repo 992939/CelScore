@@ -36,7 +36,7 @@
 #define kDefaultMinMaxValueTextColor            [UIColor colorWithWhite:0.3 alpha:0]
 
 #define kDefaultUnitOfMeasurement               @"Royalty %"
-#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"Helvetica" size:11]
+#define kDefaultUnitOfMeasurementFont           [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:12]
 #define kDefaultUnitOfMeasurementTextColor      [UIColor colorWithWhite:0.3 alpha:0.7]
 
 @interface LMGaugeView ()

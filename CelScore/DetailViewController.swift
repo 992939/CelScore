@@ -146,7 +146,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)
                         self.voteButton.setImage(R.image.goldstar()!, for: .highlighted)
-                        self.voteButton.backgroundColor = Constants.kGreyBackground
+                        self.enableVoteButton()
                     }))
                     alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                     alertVC.view.isOpaque = false
@@ -158,6 +158,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func updateAction() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+            .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .on(value: { (userRatings:RatingsModel) in
                 self.updateVoteButton(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
                 self.ratingsVC.displayUserRatings(userRatings)
