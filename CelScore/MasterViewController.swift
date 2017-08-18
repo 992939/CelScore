@@ -56,7 +56,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.navigationDrawerController?.delegate = self
         self.navigationDrawerController?.isEnabled = false
         self.navigationDrawerController?.animationDuration = 0.4
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().start()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,7 +77,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         SettingsViewModel().loggedInAsSignal()
             .observe(on: UIScheduler())
             .on(completed: { _ in
-                let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
+                let refresh = TimedLimiter(limit: Constants.kOneMinute)
                 _ = refresh.execute {
                     CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
                         .flatMapError { _ in SignalProducer.empty }
@@ -98,6 +97,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
+                        .flatMapError { _ in SignalProducer.empty }
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Int, NoError> in
+                            return CelebrityViewModel().removeCelebsNotInPublicOpinionSignal() }
                         .retry(upTo: Constants.kNetworkRetry)
                         .start()
                 }
@@ -119,7 +121,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         
         let navigationBarView: Toolbar = self.getNavigationView()
         self.setUpSocialButton(menu: self.socialButton, buttonColor: Constants.kRedShade)
-        setupSegmentedControl()
+        self.setupSegmentedControl()
         
         self.view.backgroundColor = Constants.kBlueShade
         self.view.addSubview(navigationBarView)
@@ -128,30 +130,39 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.layout(socialButton).size(CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)).bottom(2*Constants.kPadding).right(2 * Constants.kPadding)
 
         try! self.setupData()
+    }
+    
+    func setupData() throws {
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 200, height: 200), backgroundColor: Constants.kBlueShade)
+        self.view.addSubview(revealingSplashView)
         
-        NotificationCenter.default.reactive.notifications(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-            .observeValues { _ in
-                
-                let refresh = TimedLimiter(limit: Constants.kOneDay)
-                _ = refresh.execute {
-                    let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-                    CelScoreViewModel().getFromAWSSignal(dataType: .celebrity)
-                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                            return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
-                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                            return CelScoreViewModel().getFromAWSSignal(dataType: .list) }
-                        .observe(on: UIScheduler())
-                        .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
-                            return ListViewModel().sanitizeListsSignal() }
-                        .flatMap(.latest) { (_) -> SignalProducer<Bool, NoError> in
-                            return ListViewModel().updateListSignal(listId: list.getId()) }
-                        .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                            return ListViewModel().getListSignal(listId: list.getId()) }
-                        .map { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) }
-                        .start()
-                }
-        }
+        CelScoreViewModel().getFromAWSSignal(dataType: .list)
+            .observe(on: UIScheduler())
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
+            .on(value: { _ in
+                revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
+                revealingSplashView.startAnimation()
+            })
+            .flatMapError { _ in return SignalProducer.empty }
+            .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
+                return ListViewModel().sanitizeListsSignal() }
+            .flatMapError { _ in return SignalProducer.empty }
+            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
+            .observe(on: UIScheduler())
+            .on(value: { index in
+                self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
+                self.changeList()
+            })
+            .on(failed: { _ in
+                revealingSplashView.startAnimation()
+                self.dismissHUD()
+                self.changeList()
+            })
+            .start()
     }
     
     func facebookToken() -> String {
@@ -191,36 +202,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
-            })
-            .start()
-    }
-    
-    func setupData() throws {
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 200, height: 200), backgroundColor: Constants.kBlueShade)
-        self.view.addSubview(revealingSplashView)
-        
-        CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
-            .observe(on: UIScheduler())
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
-            .on(value: { _ in
-                revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
-                revealingSplashView.startAnimation()
-            })
-            .flatMapError { _ in return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
-                return ListViewModel().sanitizeListsSignal() }
-            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
-            .observe(on: UIScheduler())
-            .on(value: { index in
-                self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
-                self.changeList()
-            })
-            .on(failed: { _ in
-                revealingSplashView.startAnimation()
-                self.dismissHUD()
-                self.changeList()
             })
             .start()
     }
@@ -291,6 +272,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         var node: ASCellNode = ASCellNode()
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
         ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
+            .observe(on: UIScheduler())
             .on(value: { value in node = celebrityTableNodeCell(celebrityStruct: value) })
             .start()
         return node

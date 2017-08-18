@@ -38,7 +38,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
         let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
         self.logoCircle = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -157,6 +156,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.logoCircle.pulseAnimation = .centerWithBacking
             self.logoCircle.pulseColor = .white
             self.logoCircle.pulse()
+            self.refreshAction(self.logoCircle)
         }
     }
     

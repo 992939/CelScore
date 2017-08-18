@@ -67,7 +67,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
         
         //UI
-        CelScoreViewModel().getFromAWSSignal(dataType: .list).start()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
         nav.contentViewController.view.backgroundColor = .clear
@@ -172,11 +171,4 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
         return true
     }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        let refresh = TimedLimiter(limit: Constants.kUpdateRatings)
-        _ = refresh.execute { CelScoreViewModel().getFromAWSSignal(dataType: .ratings).start() }
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) { FBSDKAppEvents.activateApp() }
 }
