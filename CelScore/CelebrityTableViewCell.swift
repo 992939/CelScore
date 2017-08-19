@@ -159,11 +159,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let middleStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 3.5,
+            spacing: Constants.kIsOriginalIphone ? 3 : 7,
             justifyContent: .start,
             alignItems: .start,
             children: [self.ratingsNode, minisStack])
-        middleStack.style.flexBasis = ASDimensionMake(.fraction, 0.6)
+        middleStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         middleStack.style.flexGrow = 1
 
         let bottomRightStack = ASStackLayoutSpec(
@@ -177,7 +177,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
-        spacing: Constants.kPadding/4,
+        spacing: Constants.kIsOriginalIphone ? 3 : 5,
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, bottomRightStack])
