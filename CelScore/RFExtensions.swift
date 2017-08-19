@@ -10,6 +10,7 @@ import UIKit
 
 
 extension UIView {
+    
     func slide(right: Bool, duration: TimeInterval = 1.0, completionDelegate: CAAnimationDelegate? = nil) {
         let transition = CATransition()
         if let delegate = completionDelegate { transition.delegate = delegate }
@@ -23,8 +24,7 @@ extension UIView {
 }
 
 extension Date {
-
-    //MARK: Methods
+    
     func zodiacSign() -> Zodiac {
         let dates = ["March 20", "April 19", "May 20", "June 20", "July 22", "August 22", "September 23", "October 22", "November 21", "December 21", "January 19", "February 18"]
         
@@ -138,9 +138,9 @@ extension UIDevice {
     static func getTransitionProfileX() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 53.0
-        case Constants.kIPhone6_height: height = 59.0
-        default: height = 63.0
+        case Constants.kIPhone5_height: height = 58.0
+        case Constants.kIPhone6_height: height = 64.0
+        default: height = 68.0
         }
         return height
     }
