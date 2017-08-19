@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 46,
+            schemaVersion: 47,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 41 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -115,7 +115,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     index: celeb.index,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
-                    isKing: celeb.isKing,
                     isTrending: celeb.isTrending)
                 application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
@@ -140,7 +139,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     index: celeb.index,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
-                    isKing: celeb.isKing,
                     isTrending: celeb.isTrending)
                 app.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
             })
@@ -165,7 +163,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             index: userActivity.userInfo!["index"] as! Int,
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"] as! Bool,
-            isKing: userActivity.userInfo!["isKing"] as! Bool,
             isTrending: userActivity.userInfo!["isTrending"] as! Bool)
         
         application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)

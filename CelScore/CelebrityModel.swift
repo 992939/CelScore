@@ -22,7 +22,6 @@ struct CelebrityStruct {
     let index: Int
     let sex: Bool
     let isFollowed: Bool
-    let isKing: Bool
     let isTrending: Bool
 }
 
@@ -59,7 +58,6 @@ final class CelebrityModel: Object {
     dynamic var isFollowed: Bool = false
     dynamic var isNew: Bool = false
     dynamic var isTrending: Bool = false
-    dynamic var isKing: Bool = false
     
     //MARK: Initializer
     convenience init(json: JSON) {
@@ -86,7 +84,6 @@ final class CelebrityModel: Object {
         self.prevWeek = json["prevWeek"].double!
         self.prevMonth = json["prevMonth"].double!
         self.sex = json["sex"].bool!
-        self.isKing = json["king"].bool!
         self.isTrending = json["trending"].bool!
         self.isSynced = true
         

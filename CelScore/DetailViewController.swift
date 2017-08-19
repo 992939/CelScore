@@ -140,8 +140,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .map { userRatings in
                 self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
-                    let message = userRatings.totalVotes == 1 ? "Your vote has been cast!" : "Your vote has been updated!"
-                    let alertVC = PMAlertController(title: "The Star Qualities", description: message, image: R.image.big_blue_ballot()!, style: .alert)
+                    let message = userRatings.totalVotes == 1 ? "Your vote is cast!" : "Your vote has been resent!"
+                    let alertVC = PMAlertController(title: "Star Qualities", description: message, image: R.image.big_blue_ballot()!, style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)
@@ -371,7 +371,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        navigationBarView.title = self.celebST.isKing ? celebST.kingName : celebST.nickName
+        navigationBarView.title = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
         navigationBarView.leftViews = [backButton]

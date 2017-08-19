@@ -36,7 +36,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.nameNode = ASTextNode()
         let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
-        let celebName = self.celebST.isKing ? celebST.kingName : celebST.nickName
+        let celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.truncationMode = .byTruncatingTail
@@ -84,7 +84,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                      NSParagraphStyleAttributeName: style]
         
         self.rankTextNode = ASTextNode()
-        self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index + 1)", attributes: attr2)
+        self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         let cardView: PulseView = PulseView()
@@ -115,7 +115,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .on(value: { score in
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
-                if self.celebST.isKing { self.consensusNode.image = R.image.mini_crown_yellow()! }
+                if self.celebST.index == 1 { self.consensusNode.image = R.image.mini_crown_yellow()! }
             })
             .start()
         
