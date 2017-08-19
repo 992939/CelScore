@@ -50,7 +50,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = UIDevice.getStarsSize()
-        cosmosView.settings.starMargin = 1.1
+        cosmosView.settings.starMargin = 1
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.style.preferredSize = CGSize(width: 10, height: 20)

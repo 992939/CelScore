@@ -160,7 +160,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 0.65
         case Constants.kIPhone6_height: height = 0.8
-        default: height = 0.8
+        default: height = 0.9
         }
         return height
     }
@@ -249,8 +249,8 @@ extension UIDevice {
         let offset: Double
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: offset = 18
-        case Constants.kIPhone6_height: offset = 21
-        default: offset = 23
+        case Constants.kIPhone6_height: offset = 20
+        default: offset = 22
         }
         return offset
     }
