@@ -175,26 +175,6 @@ extension UIDevice {
         return height
     }
     
-    static func getGaugeLabelSize() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 12
-        case Constants.kIPhone6_height: height = 14
-        default: height = 16
-        }
-        return height
-    }
-    
-    static func getButtonExtraArea() -> CGFloat {
-        let position: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: position = 45
-        case Constants.kIPhone6_height: position = 65
-        default: position = 65
-        }
-        return position
-    }
-    
     static func getPickerHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
@@ -213,16 +193,6 @@ extension UIDevice {
         default: diameter = 250.0
         }
         return diameter
-    }
-    
-    static func getProfilePadding() -> CGFloat {
-        let padding: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: padding = 0.0
-        case Constants.kIPhone6_height: padding = 20.0
-        default: padding = 20.0
-        }
-        return padding
     }
     
     static func getGaugeDiameter() -> CGFloat {
