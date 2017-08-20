@@ -69,17 +69,21 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             }
             
             SettingsViewModel().loggedInAsSignal()
-                .on(completed: { _ in self.movingSocialButton(onScreen: false) })
+                .on(value: { _ in self.movingSocialButton(onScreen: false) })
                 .on(failed: { _ in self.movingSocialButton(onScreen: true) })
                 .start()
         }
     
         SettingsViewModel().loggedInAsSignal()
             .observe(on: UIScheduler())
-            .on(completed: { _ in
-                let refresh = TimedLimiter(limit: Constants.kOneMinute)
+            .on(value: { _ in
+                let refresh = TimedLimiter(limit: 2 * Constants.kOneMinute)
                 _ = refresh.execute {
-                    CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
+                    CelScoreViewModel().getFromAWSSignal(dataType: .list)
+                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
+                            return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                             return SettingsViewModel().calculateUserAverageCelScoreSignal() }
