@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstFollow, firstInterest, firstVoteDisable, firstSocialDisable, firstTrollWarning }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstInterest, firstVoteDisable, firstTrollWarning }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -52,7 +52,6 @@ enum OverlayInfo {
     case menuAccess
     case loginSuccess
     case maxFollow
-    case firstFollow
     case countdown
     case firstInterest
     case firstVoteDisable
@@ -66,7 +65,6 @@ enum OverlayInfo {
         case .menuAccess: return "Log in with either Twitter or Facebook."
         case .loginSuccess: return "Login was successful!"
         case .maxFollow: return "You've reached the maximum number of celebs to watch."
-        case .firstFollow: return "This celeb has been added to the Today View."
         case .countdown: return "You will recieve a notification when a new celeb is crowned."
         case .firstInterest: return "Saved."
         case .firstVoteDisable: return "Log into the blue castle with Twitter or Facebook."
@@ -82,7 +80,6 @@ enum OverlayInfo {
         case .menuAccess: return R.image.kindom_Blue()!
         case .loginSuccess: return R.image.kindom_Blue()!
         case .maxFollow: return R.image.king()!
-        case .firstFollow: return R.image.king()!
         case .countdown: return R.image.crown_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
         case .firstVoteDisable: return R.image.king()!

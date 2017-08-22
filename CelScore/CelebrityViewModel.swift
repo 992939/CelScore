@@ -87,6 +87,7 @@ struct CelebrityViewModel {
             let removables: Set = set1.subtracting(set2)
             realm.beginWrite()
             removables.forEach({ id in
+                print("removeCelebsNotInPublicOpinionSignal")
                 let removable = realm.objects(CelebrityModel.self).filter("id = %@", id).first
                 realm.delete(removable!)
             })

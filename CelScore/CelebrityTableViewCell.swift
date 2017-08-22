@@ -222,21 +222,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
-                    if count == 0 {
-                        SettingsViewModel().getSettingSignal(settingType: .firstFollow).startWithValues({ first in
-                            CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
-                            let firstTime = first as! Bool
-                            guard firstTime else { return }
-                            TAOverlay.show(withLabel: OverlayInfo.firstFollow.message(), image: OverlayInfo.firstFollow.logo(), options: OverlayInfo.getOptions()) })
-                        TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstFollow).start() 
-                        })
-                    }
-                    else if count > 9 {
+                    if count > 9 {
                         TAOverlay.show(withLabel: OverlayInfo.maxFollow.message(),
                                        image: OverlayInfo.maxFollow.logo(),
                                        options: OverlayInfo.getOptions())
                         TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) })
-                    } else { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start() }
+                    } else {
+                        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
+                    }
                 }).start()
         }
     }

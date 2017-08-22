@@ -85,7 +85,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 78 images.
+  /// This `R.image` struct is generated, and contains static references to 69 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -133,8 +133,6 @@ struct R: Rswift.Validatable {
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
     static let facebooklogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "facebooklogo")
-    /// Image `formula_blue_big`.
-    static let formula_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "formula_blue_big")
     /// Image `geometry_red`.
     static let geometry_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_red")
     /// Image `geometry_white`.
@@ -165,12 +163,6 @@ struct R: Rswift.Validatable {
     static let king = Rswift.ImageResource(bundle: R.hostingBundle, name: "king")
     /// Image `mainstar`.
     static let mainstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "mainstar")
-    /// Image `mic_blue`.
-    static let mic_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_blue")
-    /// Image `mic_red`.
-    static let mic_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_red")
-    /// Image `mic_yellow`.
-    static let mic_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "mic_yellow")
     /// Image `mini_angry`.
     static let mini_angry = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_angry")
     /// Image `mini_crown_blue`.
@@ -209,18 +201,8 @@ struct R: Rswift.Validatable {
     static let smileFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "smileFace")
     /// Image `sphere_blue_big`.
     static let sphere_blue_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_blue_big")
-    /// Image `sphere_blue_mini`.
-    static let sphere_blue_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_blue_mini")
     /// Image `sphere_blue`.
     static let sphere_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_blue")
-    /// Image `sphere_red_big`.
-    static let sphere_red_big = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_red_big")
-    /// Image `sphere_red_mini`.
-    static let sphere_red_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_red_mini")
-    /// Image `sphere_red`.
-    static let sphere_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_red")
-    /// Image `sphere_yellow`.
-    static let sphere_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "sphere_yellow")
     /// Image `star_black`.
     static let star_black = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_black")
     /// Image `star_circle_blue`.
@@ -359,11 +341,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.facebooklogo, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "formula_blue_big", bundle: ..., traitCollection: ...)`
-    static func formula_blue_big(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.formula_blue_big, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "geometry_red", bundle: ..., traitCollection: ...)`
     static func geometry_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.geometry_red, compatibleWith: traitCollection)
@@ -437,21 +414,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "mainstar", bundle: ..., traitCollection: ...)`
     static func mainstar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mainstar, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "mic_blue", bundle: ..., traitCollection: ...)`
-    static func mic_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.mic_blue, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "mic_red", bundle: ..., traitCollection: ...)`
-    static func mic_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.mic_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "mic_yellow", bundle: ..., traitCollection: ...)`
-    static func mic_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.mic_yellow, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mini_angry", bundle: ..., traitCollection: ...)`
@@ -552,31 +514,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "sphere_blue_big", bundle: ..., traitCollection: ...)`
     static func sphere_blue_big(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.sphere_blue_big, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_blue_mini", bundle: ..., traitCollection: ...)`
-    static func sphere_blue_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sphere_blue_mini, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_red", bundle: ..., traitCollection: ...)`
-    static func sphere_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sphere_red, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_red_big", bundle: ..., traitCollection: ...)`
-    static func sphere_red_big(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sphere_red_big, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_red_mini", bundle: ..., traitCollection: ...)`
-    static func sphere_red_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sphere_red_mini, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "sphere_yellow", bundle: ..., traitCollection: ...)`
-    static func sphere_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sphere_yellow, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "star_black", bundle: ..., traitCollection: ...)`

@@ -19,10 +19,8 @@ class SettingsModel: Object {
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 0
     dynamic var onCountdown: Bool = false
-    dynamic var isFirstFollow: Bool = true
     dynamic var isFirstInterest: Bool = true
     dynamic var isFirstVoteDisabled: Bool = true
-    dynamic var isFirstSocialDisabled: Bool = true
     dynamic var isFirstTrollWarning: Bool = true
     dynamic var isSynced: Bool = true
     
@@ -33,10 +31,8 @@ class SettingsModel: Object {
         self.defaultListIndex = json["defaultListIndex"].int!
         self.loginTypeIndex = json["loginTypeIndex"].int!
         self.onCountdown = json["onCountdown"].bool!
-        self.isFirstFollow = json["isFirstFollow"].bool!
         self.isFirstInterest = json["isFirstInterest"].bool!
         self.isFirstVoteDisabled = json["isFirstVoteDisabled"].bool!
-        self.isFirstSocialDisabled = json["isFirstSocialDisabled"].bool!
         self.isFirstTrollWarning = json["isFirstTrollWarning"].bool!
         self.isSynced = true
     }

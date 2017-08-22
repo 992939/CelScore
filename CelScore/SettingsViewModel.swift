@@ -88,10 +88,8 @@ struct SettingsViewModel {
             case .defaultListIndex: observer.send(value: settings.defaultListIndex as AnyObject)
             case .loginTypeIndex: observer.send(value: settings.loginTypeIndex as AnyObject)
             case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
-            case .firstFollow: observer.send(value: settings.isFirstFollow as AnyObject)
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
             case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
-            case .firstSocialDisable: observer.send(value: settings.isFirstSocialDisabled as AnyObject)
             case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning as AnyObject)
             }
             observer.sendCompleted()
@@ -107,10 +105,8 @@ struct SettingsViewModel {
             case .defaultListIndex: settings.defaultListIndex = value as! Int
             case .loginTypeIndex: settings.loginTypeIndex = value as! Int
             case .onCountdown: settings.onCountdown = value as! Bool
-            case .firstFollow: settings.isFirstFollow = false
             case .firstInterest: settings.isFirstInterest = false
             case .firstVoteDisable: settings.isFirstVoteDisabled = false
-            case .firstSocialDisable: settings.isFirstSocialDisabled = false
             case .firstTrollWarning: settings.isFirstTrollWarning = false
             }
             settings.isSynced = false
