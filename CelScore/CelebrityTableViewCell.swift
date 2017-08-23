@@ -26,6 +26,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let newsNode: ASImageNode
     internal let rankTextNode: ASTextNode
     internal let pastNode: ASImageNode
+    internal let pastTextNode: ASTextNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -92,6 +93,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.pastNode.style.preferredSize = CGSize(width: 20, height: 20)
         self.pastNode.image = R.image.past_circle()!
         
+        let attr3 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() - 3)!,
+                     NSForegroundColorAttributeName : Constants.kRedShade,
+                     NSParagraphStyleAttributeName: style]
+        
+        self.pastTextNode = ASTextNode()
+        self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr3)
+        self.pastTextNode.style.preferredSize = CGSize(width: 20, height: 20)
+        
         self.trendNode = ASImageNode()
         self.trendNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
@@ -142,6 +151,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
         self.addSubnode(self.pastNode)
+        self.addSubnode(self.pastTextNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
@@ -190,12 +200,23 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         verticalStack.style.flexGrow = 1
         
+        let pastStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 2.5,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ASLayoutSpec(), self.pastTextNode])
+        verticalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
+        verticalStack.style.flexGrow = 1
+        
+        let pastOverlayStack = ASOverlayLayoutSpec(child: self.pastNode, overlay: pastStack)
+        
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 0,
+            spacing: 1,
             justifyContent: .start,
             alignItems: .center,
-            children: [self.rankTextNode, self.pastNode])
+            children: [self.rankTextNode, pastOverlayStack])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         rankTextStack.style.flexGrow = 1
         
