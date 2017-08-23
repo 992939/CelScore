@@ -25,6 +25,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let trendNode: ASImageNode
     internal let newsNode: ASImageNode
     internal let rankTextNode: ASTextNode
+    internal let pastNode: ASImageNode
     internal let consensusNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
@@ -87,12 +88,9 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
-        let cardView: PulseView = PulseView()
-        cardView.borderWidth = 2.0
-        cardView.borderColor = Constants.kBlueShade
-        self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
-        self.backgroundNode.layer.cornerRadius = Constants.kCornerRadius
-        self.backgroundNode.backgroundColor = Constants.kGreyBackground
+        self.pastNode = ASImageNode()
+        self.pastNode.style.preferredSize = CGSize(width: 20, height: 20)
+        self.pastNode.image = R.image.past_circle()!
         
         self.trendNode = ASImageNode()
         self.trendNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
@@ -106,6 +104,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.faceNode = ASImageNode()
         self.faceNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        let cardView: PulseView = PulseView()
+        cardView.borderWidth = 2.0
+        cardView.borderColor = Constants.kBlueShade
+        self.backgroundNode = ASDisplayNode(viewBlock: { () -> UIView in return cardView })
+        self.backgroundNode.layer.cornerRadius = Constants.kCornerRadius
+        self.backgroundNode.backgroundColor = Constants.kGreyBackground
         
         super.init()
         self.selectionStyle = .none
@@ -136,6 +141,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.rankTextNode)
         self.addSubnode(self.profilePicNode)
         self.addSubnode(self.nameNode)
+        self.addSubnode(self.pastNode)
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
@@ -186,10 +192,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kPadding/2,
+            spacing: 0,
             justifyContent: .start,
-            alignItems: .start,
-            children: [ASLayoutSpec(), self.rankTextNode])
+            alignItems: .center,
+            children: [self.rankTextNode, self.pastNode])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         rankTextStack.style.flexGrow = 1
         
