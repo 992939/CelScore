@@ -128,7 +128,7 @@ extension UIDevice {
     static func getRankingSize() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 40
+        case Constants.kIPhone5_height: height = 29
         case Constants.kIPhone6_height: height = 40
         default: height = 50
         }
@@ -138,7 +138,7 @@ extension UIDevice {
     static func getPastSize() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 20
+        case Constants.kIPhone5_height: height = 28
         case Constants.kIPhone6_height: height = 23
         default: height = 25
         }
