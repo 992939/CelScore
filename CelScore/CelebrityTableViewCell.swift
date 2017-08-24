@@ -90,7 +90,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.pastNode = ASImageNode()
-        self.pastNode.style.preferredSize = CGSize(width: 20, height: 20)
+        self.pastNode.style.preferredSize = CGSize(width: UIDevice.getPastSize(), height: UIDevice.getPastSize())
         self.pastNode.image = R.image.past_circle()!
         
         let attr3 = [NSFontAttributeName: R.font.pricedownBlRegular(size: UIDevice.getFontSize() - 3)!,
@@ -193,7 +193,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
-        spacing: Constants.kIsOriginalIphone ? 3 : 6,
+        spacing: Constants.kIsOriginalIphone ? 2.5 : 6,
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, bottomRightStack])
@@ -202,7 +202,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let pastStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 2.5,
+            spacing: Constants.kIsOriginalIphone ? 3 : 3,
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.pastTextNode])
@@ -213,7 +213,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 1,
+            spacing: 0,
             justifyContent: .start,
             alignItems: .center,
             children: [self.rankTextNode, pastOverlayStack])
