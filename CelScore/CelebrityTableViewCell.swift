@@ -210,7 +210,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 4,
+            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.rankTextNode])
@@ -219,7 +219,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let pastStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 4,
+            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.pastTextNode])
