@@ -80,8 +80,18 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func getView(positionY: CGFloat, title: String, value: Double, tag: Int) -> PulseView {
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 180, height: 25))
-        let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + Constants.kPadding), height: 25))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
+        let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: 25))
+        
+        let pastNode = ASImageNode()
+        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 4.5, width: 21, height: 21)
+        pastNode.image = R.image.past_circle()!
+        
+        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 3.5, width: 21, height: 21))
+        pastLabel.text = String(self.celebST.index)
+        pastLabel.textAlignment = .center
+        pastLabel.font = R.font.pricedownBlRegular(size: UIDevice.getFontSize() - 2)!
+        pastLabel.textColor = Constants.kRedShade
 
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
             var attributedText = NSMutableAttributedString()
@@ -104,6 +114,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         taggedView.pulseAnimation = .centerWithBacking
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
+        taggedView.addSubview(pastNode.view)
+        taggedView.addSubview(pastLabel)
         return taggedView
     }
     
