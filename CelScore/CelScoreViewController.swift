@@ -83,14 +83,16 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: 25))
         
+        let pastSize: CGFloat = Constants.kIsOriginalIphone ? 21 : 23
+        
         let pastNode = ASImageNode()
-        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 4.5, width: 21, height: 21)
+        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 4.5, width: pastSize, height: pastSize)
         pastNode.image = R.image.past_circle()!
         
-        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 3.5, width: 21, height: 21))
+        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 3.5, width: pastSize, height: pastSize))
         pastLabel.text = String(self.celebST.index)
         pastLabel.textAlignment = .center
-        pastLabel.font = R.font.pricedownBlRegular(size: UIDevice.getFontSize() - 2)!
+        pastLabel.font = R.font.pricedownBlRegular(size: 12)!
         pastLabel.textColor = Constants.kRedShade
 
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
