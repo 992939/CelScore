@@ -104,9 +104,10 @@ struct RatingsViewModel {
             }
             
             let totalVotes = newRatings?.totalVotes ?? 1
-            let message = totalVotes < 2 ? "Your vote is cast" : "Your vote is resent"
+            let message = totalVotes < 2 ? "sent" : "resent"
             
             let status: String
+            print("CelScore: \(celScore) PrevScore: \(celeb.prevScore)")
             switch (celScore, celeb.prevScore) {
             case (Constants.kRoyalty..<101, Constants.kRoyalty..<101): status = "is still"
             case (Constants.kRoyalty..<101, 0..<Constants.kRoyalty): status = "is now"
@@ -114,7 +115,7 @@ struct RatingsViewModel {
             default: status = "still ain't"
             }
             
-            let voteMessage = String("\(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
+            let voteMessage = String("Your vote has been \(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
             observer.send(value: voteMessage!)
             observer.sendCompleted()
         }

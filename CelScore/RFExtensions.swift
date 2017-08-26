@@ -128,7 +128,7 @@ extension UIDevice {
     static func getPastSpacing() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: diameter = 6
+        case Constants.kIPhone5_height: diameter = 6.5
         case Constants.kIPhone6_height: diameter = 7.5
         default: diameter = 8.5
         }

@@ -38,7 +38,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.fact3Bar = YLProgressBar()
         let diameter = Constants.kIsOriginalIphone ? 70 : 80
         let logoCircle_x = (Int(Constants.kSettingsViewWidth) - diameter)/2
-        let logoCircle_y = Constants.kIsOriginalIphone ? 15 : 18
+        let logoCircle_y = Constants.kIsOriginalIphone ? 12 : 18
         self.logoCircle = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
         super.init(nibName: nil, bundle: nil)
     }
