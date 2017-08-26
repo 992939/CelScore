@@ -83,7 +83,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode.style.preferredSize = box.frame.size
         
         self.wreathNode = ASImageNode()
-        self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 3, height: UIDevice.getPastSize() + 6)
+        self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 2, height: UIDevice.getPastSize() + 4)
         self.wreathNode.image = R.image.blue_wreath()!
         
         let style = NSMutableParagraphStyle()
@@ -231,7 +231,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rightStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 2.5,
+            spacing: 3,
             justifyContent: .start,
             alignItems: .center,
             children: [self.wreathNode, self.switchNode])
