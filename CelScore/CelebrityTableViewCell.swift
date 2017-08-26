@@ -29,6 +29,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let pastNode: ASImageNode
     internal let pastTextNode: ASTextNode
     internal let consensusNode: ASImageNode
+    internal let wreathNode: ASImageNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
@@ -69,17 +70,21 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                 cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade })
             .start()
         
-        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: 80, y: 30, width: 30, height: 30))
+        let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: 80, y: 30, width: UIDevice.getPastSize() - 5, height: UIDevice.getPastSize() - 5))
         box.onAnimationType = .bounce
         box.offAnimationType = .bounce
         box.onCheckColor = Color.white
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
         box.tintColor = Constants.kRedShade
-        box.lineWidth = 3.5
+        box.lineWidth = 2.5
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
+        
+        self.wreathNode = ASImageNode()
+        self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 3, height: UIDevice.getPastSize() + 6)
+        self.wreathNode.image = R.image.blue_wreath()!
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -164,6 +169,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
+        self.addSubnode(self.wreathNode)
         self.addSubnode(self.newsNode)
         self.addSubnode(self.consensusNode)
         self.addSubnode(self.faceNode)
@@ -223,12 +229,19 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             children: [rankOverlayStack, pastOverlayStack])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         
+        let rightStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 2.5,
+            justifyContent: .start,
+            alignItems: .center,
+            children: [self.wreathNode, self.switchNode])
+        
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: Constants.kIsOriginalIphone ? Constants.kPadding/2 : Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [rankTextStack, self.profilePicNode, verticalStack, self.switchNode])
+            children: [rankTextStack, self.profilePicNode, verticalStack, rightStack])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
 
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(

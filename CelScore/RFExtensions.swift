@@ -170,7 +170,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 0.48
         case Constants.kIPhone6_height: height = 0.46
-        default: height = 0.46
+        default: height = 0.47
         }
         return height
     }
