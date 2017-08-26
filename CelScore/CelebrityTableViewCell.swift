@@ -189,20 +189,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             children: [self.ratingsNode, minisStack])
         middleStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
 
-        let bottomRightStack = ASStackLayoutSpec(
-            direction: .horizontal,
-            spacing: UIDevice.getSwitchDistance(),
-            justifyContent: .start,
-            alignItems: .start,
-            children: [middleStack, self.switchNode])
-        bottomRightStack.style.flexBasis = ASDimensionMake(.fraction, 1)
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
         spacing: UIDevice.getPastSpacing(),
         justifyContent: .start,
         alignItems: .start,
-        children: [self.nameNode, bottomRightStack])
+        children: [self.nameNode, middleStack])
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         
         let rankStack = ASStackLayoutSpec(
@@ -235,7 +228,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: Constants.kIsOriginalIphone ? Constants.kPadding/2 : Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [ASLayoutSpec(), rankTextStack, self.profilePicNode, verticalStack])
+            children: [rankTextStack, self.profilePicNode, verticalStack, self.switchNode])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
 
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
