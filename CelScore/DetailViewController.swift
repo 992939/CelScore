@@ -137,11 +137,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
             .observe(on: UIScheduler())
-            .map { userRatings in
+            .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<String, NoError> in
+                return RatingsViewModel().getVoteMessage(celeb: self.celebST) }
+            .map { voteMessage in
                 self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
-                    let message = userRatings.totalVotes == 1 ? "Your vote is cast!" : "Your vote has been resent!"
-                    let alertVC = PMAlertController(title: "Got Star Qualities?", description: message, image: R.image.big_blue_ballot()!, style: .alert)
+                    let alertVC = PMAlertController(title: "Got Star Qualities?", description: voteMessage, image: R.image.big_blue_ballot()!, style: .alert)
                     alertVC.alertTitle.textColor = Constants.kBlueText
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)

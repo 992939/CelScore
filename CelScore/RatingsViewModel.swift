@@ -91,6 +91,35 @@ struct RatingsViewModel {
         }
     }
     
+    func getVoteMessage(celeb: CelebrityStruct) -> SignalProducer<String, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let ratings = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first
+            let newRatings = realm.objects(UserRatingsModel.self).filter("id = %@", celeb.id).first
+            
+            var celScore: Double = ratings!.getCelScore()
+            if let userRatings = newRatings {
+                celScore *= Double(ratings!.totalVotes)
+                celScore = (celScore + userRatings.getCelScore()) / Double(ratings!.totalVotes + 1)
+            }
+            
+            let totalVotes = newRatings?.totalVotes ?? 1
+            let message = totalVotes < 2 ? "Your vote is cast" : "Your vote is resent"
+            
+            let status: String
+            switch (celScore, celeb.prevScore) {
+            case (Constants.kRoyalty..<101, Constants.kRoyalty..<101): status = "is still"
+            case (Constants.kRoyalty..<101, 0..<Constants.kRoyalty): status = "is now"
+            case (0..<Constants.kRoyalty, Constants.kRoyalty..<101): status = "is no longer"
+            default: status = "still ain't"
+            }
+            
+            let voteMessage = String("\(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
+            observer.send(value: voteMessage!)
+            observer.sendCompleted()
+        }
+    }
+    
     func getCelScoreSignal(ratingsId: String) -> SignalProducer<Double, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
