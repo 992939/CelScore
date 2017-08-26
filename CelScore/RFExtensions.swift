@@ -168,9 +168,9 @@ extension UIDevice {
     static func getSwitchDistance() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 37
-        case Constants.kIPhone6_height: height = 75
-        default: height = 85
+        case Constants.kIPhone5_height: height = 40
+        case Constants.kIPhone6_height: height = 65
+        default: height = 75
         }
         return height
     }
@@ -210,7 +210,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: diameter = 170.0
         case Constants.kIPhone6_height: diameter = 200.0
-        default: diameter = 250.0
+        default: diameter = 240.0
         }
         return diameter
     }
@@ -220,7 +220,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: diameter = 160.0
         case Constants.kIPhone6_height: diameter = 185.0
-        default: diameter = 210.0
+        default: diameter = 190.0
         }
         return diameter
     }
@@ -230,7 +230,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
-        default: height = 30.0
+        default: height = 32.0
         }
         return height
     }

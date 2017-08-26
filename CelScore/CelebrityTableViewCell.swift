@@ -76,6 +76,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
         box.tintColor = Constants.kRedShade
+        box.lineWidth = 3.5
         box.setOn(self.celebST.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
@@ -113,7 +114,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.mini_empty()!
+        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
@@ -179,7 +180,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .start,
             children: [self.consensusNode, self.trendNode, self.newsNode, self.faceNode])
-        minisStack.style.flexGrow = 1
         
         let middleStack = ASStackLayoutSpec(
             direction: .vertical,
@@ -188,7 +188,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             alignItems: .start,
             children: [self.ratingsNode, minisStack])
         middleStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
-        middleStack.style.flexGrow = 1
 
         let bottomRightStack = ASStackLayoutSpec(
             direction: .horizontal,
@@ -197,7 +196,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             alignItems: .start,
             children: [middleStack, self.switchNode])
         bottomRightStack.style.flexBasis = ASDimensionMake(.fraction, 1)
-        bottomRightStack.style.flexGrow = 1
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
@@ -206,7 +204,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         alignItems: .start,
         children: [self.nameNode, bottomRightStack])
         verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
-        verticalStack.style.flexGrow = 1
         
         let rankStack = ASStackLayoutSpec(
             direction: .vertical,
@@ -214,8 +211,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.rankTextNode])
-        verticalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
-        verticalStack.style.flexGrow = 1
         
         let pastStack = ASStackLayoutSpec(
             direction: .vertical,
@@ -223,8 +218,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.pastTextNode])
-        verticalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
-        verticalStack.style.flexGrow = 1
         
         let rankOverlayStack = ASOverlayLayoutSpec(child: self.rankNode, overlay: rankStack)
         let pastOverlayStack = ASOverlayLayoutSpec(child: self.pastNode, overlay: pastStack)
@@ -236,14 +229,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             alignItems: .center,
             children: [rankOverlayStack, pastOverlayStack])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
-        rankTextStack.style.flexGrow = 1
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: Constants.kPadding,
+            spacing: Constants.kIsOriginalIphone ? Constants.kPadding/2 : Constants.kPadding,
             justifyContent: .start,
             alignItems: .center,
-            children: [rankTextStack, self.profilePicNode, verticalStack])
+            children: [ASLayoutSpec(), rankTextStack, self.profilePicNode, verticalStack])
         horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
 
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(

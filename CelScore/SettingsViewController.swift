@@ -279,6 +279,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         box.onFillColor = Constants.kRedShade
         box.onTintColor = Constants.kRedShade
         box.tintColor = Constants.kRedShade
+        box.lineWidth = 3.5
         box.backgroundColor = Constants.kGreyBackground
         box.setOn(status, animated: true)
         materialView.addSubview(publicServiceLabel)
