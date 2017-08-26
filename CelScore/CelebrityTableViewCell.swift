@@ -82,7 +82,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let rankFont = R.font.pricedownBlRegular(size: UIDevice.getFontSize() + 1)!
+        let rankFont = R.font.droidSerifBold(size: UIDevice.getFontSize())!
         
         let attr2 = [NSFontAttributeName: rankFont,
                      NSForegroundColorAttributeName : Constants.kBlueShade,
@@ -201,7 +201,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let verticalStack = ASStackLayoutSpec(
         direction: .vertical,
-        spacing: Constants.kIsOriginalIphone ? 2.5 : 6,
+        spacing: UIDevice.getPastSpacing(),
         justifyContent: .start,
         alignItems: .start,
         children: [self.nameNode, bottomRightStack])
@@ -210,7 +210,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rankStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
+            spacing: UIDevice.getPastSpacing(),
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.rankTextNode])
@@ -219,7 +219,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let pastStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
+            spacing: Constants.kIsOriginalIphone ? 6 : 8.5,
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.pastTextNode])

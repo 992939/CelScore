@@ -33,6 +33,7 @@
 		004B56DF1B35332A008A75EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B56DE1B35332A008A75EB /* AppDelegate.swift */; };
 		004B56E61B35332A008A75EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E51B35332A008A75EB /* Images.xcassets */; };
 		004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B56E71B35332A008A75EB /* LaunchScreen.xib */; };
+		00550C3D1F514AA200242143 /* DroidSerif-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */; };
 		006431821C694BA40062BBDB /* CelScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431811C694BA40062BBDB /* CelScoreViewController.swift */; };
 		0064318A1C6A64480062BBDB /* CosmosLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431891C6A64480062BBDB /* CosmosLayers.swift */; };
 		0064318C1C6A64DB0062BBDB /* CosmosRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0064318B1C6A64DB0062BBDB /* CosmosRating.swift */; };
@@ -142,6 +143,7 @@
 		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		004B56EE1B35332B008A75EB /* CelScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CelScoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56F31B35332B008A75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DroidSerif-Bold.ttf"; sourceTree = "<group>"; };
 		006431811C694BA40062BBDB /* CelScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewController.swift; sourceTree = "<group>"; };
 		006431891C6A64480062BBDB /* CosmosLayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosLayers.swift; sourceTree = "<group>"; };
 		0064318B1C6A64DB0062BBDB /* CosmosRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosRating.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				00F357841F207277008A2860 /* pricedown bl.ttf */,
+				00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */,
 				008E7EA31F40AE5F001E72FD /* Capture it.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
@@ -613,6 +616,7 @@
 				00F357851F207277008A2860 /* pricedown bl.ttf in Resources */,
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
+				00550C3D1F514AA200242143 /* DroidSerif-Bold.ttf in Resources */,
 				008E7EA41F40AE65001E72FD /* Capture it.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,

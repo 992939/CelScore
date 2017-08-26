@@ -198,6 +198,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>pricedown bl.ttf</string>
+		<string>DroidSerif-Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
