@@ -231,7 +231,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let rightStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 3,
+            spacing: 4,
             justifyContent: .start,
             alignItems: .center,
             children: [self.wreathNode, self.switchNode])
