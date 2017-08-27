@@ -84,7 +84,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.switchNode.style.preferredSize = box.frame.size
         
         self.wreathNode = ASImageNode()
-        self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 2, height: UIDevice.getPastSize() + 4)
+        self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 4, height: UIDevice.getPastSize() + 4)
         self.wreathNode.image = R.image.blue_wreath()!
         
         let style = NSMutableParagraphStyle()
@@ -100,7 +100,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.wreathTextNode = ASTextNode()
-        let days = self.celebST.daysOnThrone > 1 ? String(self.celebST.daysOnThrone) : "X"
+        let days = self.celebST.daysOnThrone > 1 ? String(self.celebST.daysOnThrone) : "∅"
         self.wreathTextNode.attributedText = NSAttributedString(string: "\(days)", attributes: attr2)
         self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
         
