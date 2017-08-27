@@ -100,7 +100,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.wreathTextNode = ASTextNode()
-        self.wreathTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
+        let days = self.celebST.daysOnThrone > 1 ? String(self.celebST.daysOnThrone) : "X"
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(days)", attributes: attr2)
         self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
         
         let attr3 = [NSFontAttributeName: rankFont,

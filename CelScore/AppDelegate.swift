@@ -113,6 +113,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
                     index: celeb.index,
+                    daysOnThrone: celeb.daysOnThrone,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
                     isTrending: celeb.isTrending)
@@ -137,6 +138,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
                     index: celeb.index,
+                    daysOnThrone: celeb.daysOnThrone,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
                     isTrending: celeb.isTrending)
@@ -161,6 +163,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             prevWeek: userActivity.userInfo!["prevWeek"] as! Double,
             prevMonth: userActivity.userInfo!["prevMonth"] as! Double,
             index: userActivity.userInfo!["index"] as! Int,
+            daysOnThrone: userActivity.userInfo!["daysOnThrone"] as! Int,
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"] as! Bool,
             isTrending: userActivity.userInfo!["isTrending"] as! Bool)

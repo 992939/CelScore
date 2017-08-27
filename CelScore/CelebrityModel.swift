@@ -20,6 +20,7 @@ struct CelebrityStruct {
     let prevWeek: Double
     let prevMonth: Double
     let index: Int
+    let daysOnThrone: Int
     let sex: Bool
     let isFollowed: Bool
     let isTrending: Bool
