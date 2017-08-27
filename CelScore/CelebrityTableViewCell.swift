@@ -30,6 +30,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let pastTextNode: ASTextNode
     internal let consensusNode: ASImageNode
     internal let wreathNode: ASImageNode
+    internal let wreathTextNode: ASTextNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
     internal let celebST: CelebrityStruct
@@ -97,6 +98,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode = ASTextNode()
         self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
+        
+        self.wreathTextNode = ASTextNode()
+        self.wreathTextNode.attributedText = NSAttributedString(string: "1", attributes: attr2)
+        self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
         
         let attr3 = [NSFontAttributeName: rankFont,
                      NSForegroundColorAttributeName : Constants.kRedShade,
@@ -170,6 +175,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
         self.addSubnode(self.wreathNode)
+        self.addSubnode(self.wreathTextNode)
         self.addSubnode(self.newsNode)
         self.addSubnode(self.consensusNode)
         self.addSubnode(self.faceNode)
@@ -221,6 +227,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         let rankOverlayStack = ASOverlayLayoutSpec(child: self.rankNode, overlay: rankStack)
         let pastOverlayStack = ASOverlayLayoutSpec(child: self.pastNode, overlay: pastStack)
         
+        let wreathStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ASLayoutSpec(), self.wreathTextNode])
+        
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 4,
@@ -229,12 +242,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             children: [rankOverlayStack, pastOverlayStack])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         
+         let wreathOverlayStack = ASOverlayLayoutSpec(child: self.wreathNode, overlay: wreathStack)
+        
         let rightStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 4,
             justifyContent: .start,
             alignItems: .center,
-            children: [self.wreathNode, self.switchNode])
+            children: [wreathOverlayStack, self.switchNode])
         
         let horizontalStack = ASStackLayoutSpec(
             direction: .horizontal,
