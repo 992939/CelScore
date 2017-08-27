@@ -100,7 +100,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.wreathTextNode = ASTextNode()
-        self.wreathTextNode.attributedText = NSAttributedString(string: "1", attributes: attr2)
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
         
         let attr3 = [NSFontAttributeName: rankFont,
@@ -229,7 +229,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let wreathStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kIsOriginalIphone ? 4 : 5.5,
+            spacing: Constants.kIsOriginalIphone ? 5 : 5.5,
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.wreathTextNode])
