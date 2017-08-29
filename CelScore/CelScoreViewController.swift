@@ -34,9 +34,13 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - 105
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 14, title: "Yesterday", value: celebST.prevScore, tag: 2))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 48, title: "Last Week", value: celebST.prevWeek, tag: 3))
-        self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 82, title: "Last Month", value: celebST.prevMonth, tag: 4))
+        
+        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
+            .on(value: { celebrity in
+                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 14, title: "Yesterday", value: self.celebST.prevScore, past: celebrity.y_index, tag: 2))
+                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 48, title: "Last Week", value: self.celebST.prevWeek, past: celebrity.w_index, tag: 3))
+                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 82, title: "Last Month", value: self.celebST.prevMonth, past: celebrity.m_index, tag: 4))
+            }).start()
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }
@@ -79,7 +83,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return gaugeView
     }
     
-    func getView(positionY: CGFloat, title: String, value: Double, tag: Int) -> PulseView {
+    func getView(positionY: CGFloat, title: String, value: Double, past: Int, tag: Int) -> PulseView {
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: 25))
         
@@ -90,7 +94,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         pastNode.image = R.image.past_circle()!
         
         let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding + 1, y: 4.5, width: pastSize, height: pastSize))
-        pastLabel.text = String(self.celebST.index)
+        pastLabel.text = String(past)
         pastLabel.textAlignment = .center
         pastLabel.font = R.font.droidSerifBold(size: 12)!
         pastLabel.textColor = Constants.kRedShade

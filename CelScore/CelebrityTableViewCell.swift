@@ -109,7 +109,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                      NSParagraphStyleAttributeName: style]
         
         self.pastTextNode = ASTextNode()
-        self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr3)
+        self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.y_index)", attributes: attr3)
         self.pastTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         
         self.rankNode = ASImageNode()

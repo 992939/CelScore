@@ -20,6 +20,7 @@ struct CelebrityStruct {
     let prevWeek: Double
     let prevMonth: Double
     let index: Int
+    let y_index: Int
     let daysOnThrone: Int
     let sex: Bool
     let isFollowed: Bool
@@ -54,6 +55,9 @@ final class CelebrityModel: Object {
     dynamic var prevMonth: Double = 0
     dynamic var daysOnThrone: Int = 0
     dynamic var index: Int = 0
+    dynamic var y_index: Int = 0
+    dynamic var w_index: Int = 0
+    dynamic var m_index: Int = 0
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
@@ -81,6 +85,9 @@ final class CelebrityModel: Object {
         self.twitter = json["twitter"].string!
         self.daysOnThrone = json["daysOnThrone"].int!
         self.index = json["index"].int!
+        self.y_index = json["y_index"].int!
+        self.w_index = json["w_index"].int!
+        self.m_index = json["m_index"].int!
         self.prevScore = json["prevScore"].double!
         self.prevWeek = json["prevWeek"].double!
         self.prevMonth = json["prevMonth"].double!

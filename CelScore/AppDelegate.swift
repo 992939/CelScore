@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 49,
+            schemaVersion: 51,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 41 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -113,6 +113,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
                     index: celeb.index,
+                    y_index: celeb.y_index,
                     daysOnThrone: celeb.daysOnThrone,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
@@ -138,6 +139,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     prevWeek: celeb.prevWeek,
                     prevMonth: celeb.prevMonth,
                     index: celeb.index,
+                    y_index: celeb.y_index,
                     daysOnThrone: celeb.daysOnThrone,
                     sex: celeb.sex,
                     isFollowed: celeb.isFollowed,
@@ -163,6 +165,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             prevWeek: userActivity.userInfo!["prevWeek"] as! Double,
             prevMonth: userActivity.userInfo!["prevMonth"] as! Double,
             index: userActivity.userInfo!["index"] as! Int,
+            y_index: userActivity.userInfo!["y_index"] as! Int,
             daysOnThrone: userActivity.userInfo!["daysOnThrone"] as! Int,
             sex: userActivity.userInfo!["sex"] as! Bool,
             isFollowed: userActivity.userInfo!["isFollowed"] as! Bool,
