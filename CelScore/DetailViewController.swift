@@ -372,7 +372,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        navigationBarView.title = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
+        let celebTitle = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
+        navigationBarView.title = String("\(self.celebST.index). \(celebTitle)")
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
         navigationBarView.leftViews = [backButton]
