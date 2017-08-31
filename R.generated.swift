@@ -101,7 +101,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 73 images.
+  /// This `R.image` struct is generated, and contains static references to 75 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -159,6 +159,10 @@ struct R: Rswift.Validatable {
     static let geometry_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "geometry_white")
     /// Image `goldstar`.
     static let goldstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "goldstar")
+    /// Image `half_circle_blue`.
+    static let half_circle_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "half_circle_blue")
+    /// Image `half_circle_red`.
+    static let half_circle_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "half_circle_red")
     /// Image `happyFace`.
     static let happyFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "happyFace")
     /// Image `ic_add_black`.
@@ -388,6 +392,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "goldstar", bundle: ..., traitCollection: ...)`
     static func goldstar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.goldstar, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "half_circle_blue", bundle: ..., traitCollection: ...)`
+    static func half_circle_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.half_circle_blue, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "half_circle_red", bundle: ..., traitCollection: ...)`
+    static func half_circle_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.half_circle_red, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "happyFace", bundle: ..., traitCollection: ...)`

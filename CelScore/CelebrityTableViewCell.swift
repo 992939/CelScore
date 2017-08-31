@@ -61,10 +61,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.ratingsNode.style.preferredSize = CGSize(width: 10, height: 20)
         self.ratingsNode.backgroundColor = UIColor.clear
         
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-            .on(value: { score in cosmosView.rating = score/20 })
-            .start()
-        
         RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
             .on(value: { hasRatings in
                 cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
@@ -125,7 +121,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
+        self.newsNode.image = self.celebST.isTrending ? R.image.half_circle_red()! : R.image.half_circle_blue()!
+            //? R.image.bell_red()! : R.image.bell_blue()!
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
@@ -146,6 +143,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
+                cosmosView.rating = score/20
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
                 if self.celebST.index == 1 { self.consensusNode.image = R.image.mini_crown_yellow()! }
