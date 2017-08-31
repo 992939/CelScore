@@ -56,16 +56,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = UIDevice.getStarsSize()
         cosmosView.settings.starMargin = 1
+        cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade
         cosmosView.settings.updateOnTouch = false
         self.ratingsNode = ASDisplayNode(viewBlock: { () -> UIView in return cosmosView })
         self.ratingsNode.style.preferredSize = CGSize(width: 10, height: 20)
         self.ratingsNode.backgroundColor = UIColor.clear
-        
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
-            .on(value: { hasRatings in
-                cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
-                cosmosView.settings.borderColorEmpty = Constants.kStarGreyShade })
-            .start()
         
         let box: BEMCheckBox = BEMCheckBox(frame: CGRect(x: 80, y: 30, width: UIDevice.getPastSize() - 5, height: UIDevice.getPastSize() - 5))
         box.onAnimationType = .bounce
@@ -151,8 +146,12 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .start()
         
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
-            .on(failed: { _ in self.faceNode.image = R.image.mini_empty()! })
+            .on(failed: { _ in
+                self.faceNode.image = R.image.mini_empty()!
+                cosmosView.settings.colorFilled = Constants.kStarGreyShade
+            })
             .on(value: { ratings in
+                cosmosView.settings.colorFilled = Constants.kStarGoldShade
                 switch ratings.getCelScore() {
                 case 90..<101: self.faceNode.image = R.image.mini_happy()!
                 case 75..<90: self.faceNode.image = R.image.mini_smile()!
@@ -273,9 +272,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     }
     
     func updateCheckBox(_ checkBox: BEMCheckBox) {
-        if checkBox.on == false { CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false)
-            .observe(on: UIScheduler())
-            .start()
+        if checkBox.on == false {
+            CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false).start()
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
