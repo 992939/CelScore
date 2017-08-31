@@ -113,20 +113,20 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.pastNode.image = R.image.past_circle()!
         
         self.trendNode = ASImageNode()
-        self.trendNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.trendNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
         self.newsNode = ASImageNode()
-        self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.newsNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
         
         self.consensusNode = ASImageNode()
-        self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.consensusNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
         self.faceNode = ASImageNode()
-        self.faceNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.faceNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
         self.averageNode = ASImageNode()
-        self.averageNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        self.averageNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -191,7 +191,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let minisStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: 5.0,
+            spacing: UIDevice.getBubbleSpace(),
             justifyContent: .start,
             alignItems: .start,
             children: [self.consensusNode, self.trendNode, self.averageNode, self.newsNode, self.faceNode])

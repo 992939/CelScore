@@ -125,6 +125,16 @@ extension UIDevice {
         return height
     }
     
+    static func getBubbleSpace() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 4.3
+        case Constants.kIPhone6_height: height = 4.5
+        default: height = 5.5
+        }
+        return height
+    }
+    
     static func getPastSpacing() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
@@ -171,6 +181,16 @@ extension UIDevice {
         case Constants.kIPhone5_height: height = 0.48
         case Constants.kIPhone6_height: height = 0.46
         default: height = 0.45
+        }
+        return height
+    }
+    
+    static func getMiniCircle() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 15
+        case Constants.kIPhone6_height: height = 17
+        default: height = 18
         }
         return height
     }
