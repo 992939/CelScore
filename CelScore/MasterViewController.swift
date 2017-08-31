@@ -84,6 +84,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
+                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<CGFloat, NoError> in
+                            return SettingsViewModel().calculateAverageRoyaltySignal() }
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                             return SettingsViewModel().calculateUserAverageCelScoreSignal() }

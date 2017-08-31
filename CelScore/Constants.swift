@@ -24,7 +24,7 @@ struct Constants {
     static let kRoyalty: Double = 75.0
     static let kCornerRadius: CGFloat = 11.0
     static let kTrollingWarning: CGFloat = 1.9
-    static let kTrollingThreshold: CGFloat = 1.5
+    static let kTrollingThreshold: CGFloat = 30.0
     static let kOneDay: TimeInterval = 86400.0
     static let kOneMinute: TimeInterval = 60.0
     static let kMaxFollowedCelebrities: Int = 10

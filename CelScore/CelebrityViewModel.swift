@@ -72,6 +72,15 @@ struct CelebrityViewModel {
         }
     }
     
+    func countCelebritiesSignal() -> SignalProducer<Int, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let celebList = realm.objects(CelebrityModel.self)
+            observer.send(value: celebList.count)
+            observer.sendCompleted()
+        }
+    }
+    
     func removeCelebsNotInPublicOpinionSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
@@ -89,7 +98,6 @@ struct CelebrityViewModel {
             let removables: Set = set1.subtracting(set2)
             realm.beginWrite()
             removables.forEach({ id in
-                print("removeCelebsNotInPublicOpinionSignal")
                 let removable = realm.objects(CelebrityModel.self).filter("id = %@", id).first
                 realm.delete(removable!)
             })

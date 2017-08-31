@@ -18,6 +18,7 @@ class SettingsModel: Object {
     dynamic var userName: String = ""
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 0
+    dynamic var averageRoyalty: Double = 0
     dynamic var onCountdown: Bool = false
     dynamic var isFirstInterest: Bool = true
     dynamic var isFirstVoteDisabled: Bool = true

@@ -22,7 +22,7 @@ struct SettingsViewModel {
             guard userRatings.count >= 10 else { observer.send(value: 5); return }
             let celscores: [Double] = userRatings.map({ (ratings:UserRatingsModel) -> Double in return ratings.getCelScore() })
             let average = celscores.reduce(0, { $0 + $1 }) / Double(celscores.count) * 20
-            observer.send(value: CGFloat(average) / 100)
+            observer.send(value: CGFloat(average))
             observer.sendCompleted()
         }
     }
@@ -34,7 +34,7 @@ struct SettingsViewModel {
             guard ratings.count > 0 else { observer.send(value: 60); return observer.sendCompleted() }
             let royalties: [Double] = ratings.map{ (ratingModel: RatingsModel) -> Double in return ratingModel.getCelScore() }
             let average = royalties.reduce(0, { $0 + $1 }) / Double(ratings.count)
-            observer.send(value: CGFloat(average.roundToPlaces(places: 1) / 100))
+            observer.send(value: CGFloat(average.roundToPlaces(places: 1)))
             observer.sendCompleted()
         }
     }
@@ -52,7 +52,7 @@ struct SettingsViewModel {
                 }
             }
             let average = royalties.reduce(0, { $0 + $1 }) / Double(celebs.count)
-            observer.send(value: CGFloat(average.roundToPlaces(places: 1) / 100))
+            observer.send(value: CGFloat(average.roundToPlaces(places: 1)))
             observer.sendCompleted()
         }
     }

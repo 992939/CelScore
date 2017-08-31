@@ -116,7 +116,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        self.newsNode.image = self.celebST.isTrending ? R.image.half_circle_red()! : R.image.half_circle_blue()!
+        //self.newsNode.image = self.celebST.isTrending ? R.image.half_circle_red()! : R.image.half_circle_blue()!
             //? R.image.bell_red()! : R.image.bell_blue()!
         
         self.consensusNode = ASImageNode()
@@ -141,15 +141,16 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                 cosmosView.rating = score/20
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
-                if self.celebST.index == 1 { self.consensusNode.image = R.image.mini_crown_yellow()! }
-            })
-            .start()
-        
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: RatingsType.userRatings)
+                if self.celebST.index == 1 { self.consensusNode.image = R.image.mini_crown_yellow()! } })
+            .flatMap(.latest) { (_) -> SignalProducer<Int, NoError> in
+                return CelebrityViewModel().countCelebritiesSignal() }
+            .on(value: { count in
+                self.newsNode.image = self.celebST.index < (count/2) ? R.image.half_circle_blue()! : R.image.half_circle_red()! })
+            .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
+                return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings) }
             .on(failed: { _ in
                 self.faceNode.image = R.image.mini_empty()!
-                cosmosView.settings.colorFilled = Constants.kStarGreyShade
-            })
+                cosmosView.settings.colorFilled = Constants.kStarGreyShade })
             .on(value: { ratings in
                 cosmosView.settings.colorFilled = Constants.kStarGoldShade
                 switch ratings.getCelScore() {

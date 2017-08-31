@@ -146,13 +146,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                 return SettingsViewModel().calculateAverageRoyaltySignal() }
-            .on(value: { value in self.fact1Bar.setProgress(value, animated: false) })
+            .on(value: { value in self.fact1Bar.setProgress(value/100, animated: false) })
             .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                 return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek) }
-            .on(value: { value in self.fact2Bar.setProgress(value, animated: false) })
+            .on(value: { value in self.fact2Bar.setProgress(value/100, animated: false) })
             .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                 return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
-            .on(value: { value in self.fact3Bar.setProgress(value, animated: false) })
+            .on(value: { value in self.fact3Bar.setProgress(value/100, animated: false) })
             .start()
         
     }
@@ -190,13 +190,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         Timer.after(2.seconds){ _ in
             SettingsViewModel().calculateAverageRoyaltySignal()
-                .on(value: { value in self.fact1Bar.setProgress(value, animated: false) })
+                .on(value: { value in self.fact1Bar.setProgress(value/100, animated: false) })
                 .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                     return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek) }
-                .on(value: { value in self.fact2Bar.setProgress(value, animated: false) })
+                .on(value: { value in self.fact2Bar.setProgress(value/100, animated: false) })
                 .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                     return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
-                .on(value: { value in self.fact3Bar.setProgress(value, animated: false) })
+                .on(value: { value in self.fact3Bar.setProgress(value/100, animated: false) })
                 .start()
         }
     }
