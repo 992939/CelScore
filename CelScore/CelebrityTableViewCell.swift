@@ -23,6 +23,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     fileprivate let backgroundNode: ASDisplayNode
     internal let nameNode: ASTextNode
     internal let trendNode: ASImageNode
+    internal let averageNode: ASImageNode
     internal let newsNode: ASImageNode
     internal let rankNode: ASImageNode
     internal let rankTextNode: ASTextNode
@@ -116,14 +117,16 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
-        //self.newsNode.image = self.celebST.isTrending ? R.image.half_circle_red()! : R.image.half_circle_blue()!
-            //? R.image.bell_red()! : R.image.bell_blue()!
+        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         self.faceNode = ASImageNode()
         self.faceNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
+        
+        self.averageNode = ASImageNode()
+        self.averageNode.style.preferredSize = CGSize(width: Constants.kMiniCircleDiameter, height: Constants.kMiniCircleDiameter)
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -145,7 +148,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             .flatMap(.latest) { (_) -> SignalProducer<Int, NoError> in
                 return CelebrityViewModel().countCelebritiesSignal() }
             .on(value: { count in
-                self.newsNode.image = self.celebST.index < (count/2) ? R.image.half_circle_blue()! : R.image.half_circle_red()! })
+                self.averageNode.image = self.celebST.index < (count/2) ? R.image.half_circle_blue()! : R.image.half_circle_red()! })
             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings) }
             .on(failed: { _ in
@@ -173,6 +176,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.ratingsNode)
         self.addSubnode(self.switchNode)
         self.addSubnode(self.trendNode)
+        self.addSubnode(self.averageNode)
         self.addSubnode(self.wreathNode)
         self.addSubnode(self.wreathTextNode)
         self.addSubnode(self.newsNode)
@@ -187,10 +191,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let minisStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: 6.0,
+            spacing: 5.0,
             justifyContent: .start,
             alignItems: .start,
-            children: [self.consensusNode, self.trendNode, self.newsNode, self.faceNode])
+            children: [self.consensusNode, self.trendNode, self.averageNode, self.newsNode, self.faceNode])
         
         let middleStack = ASStackLayoutSpec(
             direction: .vertical,
