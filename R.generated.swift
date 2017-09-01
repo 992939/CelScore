@@ -101,7 +101,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 75 images.
+  /// This `R.image` struct is generated, and contains static references to 76 images.
   struct image {
     /// Image `Anonymous`.
     static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
@@ -195,6 +195,8 @@ struct R: Rswift.Validatable {
     static let mini_crown_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_red")
     /// Image `mini_crown_yellow`.
     static let mini_crown_yellow = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_crown_yellow")
+    /// Image `mini_death`.
+    static let mini_death = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_death")
     /// Image `mini_empty`.
     static let mini_empty = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_empty")
     /// Image `mini_happy`.
@@ -482,6 +484,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "mini_crown_yellow", bundle: ..., traitCollection: ...)`
     static func mini_crown_yellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mini_crown_yellow, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "mini_death", bundle: ..., traitCollection: ...)`
+    static func mini_death(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mini_death, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mini_empty", bundle: ..., traitCollection: ...)`
