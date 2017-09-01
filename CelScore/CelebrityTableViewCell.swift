@@ -196,7 +196,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             spacing: UIDevice.getBubbleSpace(),
             justifyContent: .start,
             alignItems: .start,
-            children: [self.consensusNode, self.trendNode, self.averageNode, self.newsNode, self.faceNode])
+            children: [self.averageNode, self.consensusNode, self.trendNode, self.newsNode, self.faceNode])
         
         let middleStack = ASStackLayoutSpec(
             direction: .vertical,

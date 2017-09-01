@@ -13,6 +13,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CountdownLabel (2.0.1)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Dwifft (0.5)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - AWSCognito (= 2.5.9)
   - AWSPinpoint (= 2.5.9)
   - BEMCheckBox (~> 1.4)
+  - CountdownLabel (~> 2.0)
   - Crashlytics (~> 3.8)
   - Dwifft (~> 0.5)
   - Fabric (~> 1.6.11)
@@ -120,6 +122,7 @@ SPEC CHECKSUMS:
   AWSPinpoint: 2ab08b9eaeb77e3cb2d134908bd5706cff465d4f
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CountdownLabel: 1297533b42ef5c1a441cd458136c35ad93210da1
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -151,6 +154,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: ac190d138d1a7c5e87eb7c39ec9a679d97346b86
+PODFILE CHECKSUM: d6d5801c2d59250f5e7487eaf839a0b5358fbf1d
 
 COCOAPODS: 1.0.1
