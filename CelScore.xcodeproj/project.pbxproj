@@ -43,10 +43,10 @@
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */; };
 		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
-		008E7EA41F40AE65001E72FD /* Capture it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008E7EA31F40AE5F001E72FD /* Capture it.ttf */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
+		00BA33531F5928E400D83CA0 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BA33521F5928E400D83CA0 /* MZTimerLabel.m */; };
 		00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9861F11DFC100F2D3D4 /* Empty.swift */; };
 		00BCB9891F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */; };
 		00BCB98F1F11E8E000F2D3D4 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */; };
@@ -59,7 +59,6 @@
 		00CCFAE51CBF627A002E7E7E /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE41CBF627A002E7E7E /* RatingsViewModelTests.swift */; };
 		00CCFAE91CBF710F002E7E7E /* CelebrityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAE81CBF710F002E7E7E /* CelebrityViewModelTests.swift */; };
 		00CCFAEB1CBF79E8002E7E7E /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */; };
-		00F357851F207277008A2860 /* pricedown bl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F357841F207277008A2860 /* pricedown bl.ttf */; };
 		00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D21B35393C0078CA6E /* ListViewModel.swift */; };
 		00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */; };
 		00F6C9D91B35393C0078CA6E /* CelScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */; };
@@ -154,10 +153,11 @@
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
-		008E7EA31F40AE5F001E72FD /* Capture it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Capture it.ttf"; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
+		00BA33511F5928E400D83CA0 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
+		00BA33521F5928E400D83CA0 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
 		00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSApiGatewayBridge.h; sourceTree = "<group>"; };
 		00BCB9861F11DFC100F2D3D4 /* Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUCelScoreAPIClient.swift; sourceTree = "<group>"; };
@@ -174,7 +174,6 @@
 		00CCFAEA1CBF79E8002E7E7E /* ListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
 		00D01BB81BF322CD00EF8D0D /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayTableViewCell.swift; path = ../CelScoreWidget/TodayTableViewCell.swift; sourceTree = "<group>"; };
 		00D01BC61BF43AC400EF8D0D /* CelebrityScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CelebrityScore.entitlements; sourceTree = "<group>"; };
-		00F357841F207277008A2860 /* pricedown bl.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pricedown bl.ttf"; sourceTree = "<group>"; };
 		00F6C9D21B35393C0078CA6E /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D31B35393C0078CA6E /* CelebrityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityViewModel.swift; sourceTree = "<group>"; };
 		00F6C9D41B35393C0078CA6E /* CelScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelScoreViewModel.swift; sourceTree = "<group>"; };
@@ -263,9 +262,9 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				00F357841F207277008A2860 /* pricedown bl.ttf */,
+				00BA33511F5928E400D83CA0 /* MZTimerLabel.h */,
+				00BA33521F5928E400D83CA0 /* MZTimerLabel.m */,
 				00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */,
-				008E7EA31F40AE5F001E72FD /* Capture it.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
 				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
@@ -613,11 +612,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F357851F207277008A2860 /* pricedown bl.ttf in Resources */,
 				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
 				00550C3D1F514AA200242143 /* DroidSerif-Bold.ttf in Resources */,
-				008E7EA41F40AE65001E72FD /* Capture it.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,
 			);
@@ -1057,6 +1054,7 @@
 				0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */,
 				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
 				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
+				00BA33531F5928E400D83CA0 /* MZTimerLabel.m in Sources */,
 				00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */,
 				00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */,
 				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,

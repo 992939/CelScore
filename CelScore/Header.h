@@ -13,6 +13,7 @@
 #import "TAOverlay.h"
 #import "AWSApiGatewayBridge.h"
 #import "LMGaugeView.h"
+#import "MZTimerLabel.h"
 #import <Keys/CelscoreKeys.h>
 
 #endif /* Header_h */

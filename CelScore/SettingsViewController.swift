@@ -87,26 +87,30 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         self.view.addSubnode(pickerNode)
         
-        //Check Boxes
         let publicNodeHeight = logoView.bottom + UIDevice.getPickerHeight() + 3 * progressNodeHeight
+        
+        //Count Down
+        let countdownView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight, width: maxWidth, height: 40))
+        let clockLabel = self.setupLabel(title: "Coronation Clock: ", frame: CGRect(x: 2.5 * Constants.kPadding, y: Constants.kPadding/2, width: maxWidth/2, height: 30))
+        clockLabel.font = UIFont(name: clockLabel.font.fontName, size: Constants.kFontSize)
+        clockLabel.textAlignment = .right
+        clockLabel.backgroundColor = .clear
+        let countdownLabel = MZTimerLabel(frame: CGRect(x: maxWidth/2 + 3 * Constants.kPadding, y: Constants.kPadding * 0.6, width: maxWidth/2, height: 30))
+        countdownLabel.setCountDownTime(120)
+        countdownLabel.textAlignment = .left
+        countdownLabel.font = UIFont(name: countdownLabel.font.fontName, size: Constants.kFontSize)
+        countdownLabel.start()
+        countdownView.addSubview(clockLabel)
+        countdownView.addSubview(countdownLabel)
+        let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return countdownView })
+        self.view.addSubnode(issueNode)
+        
+        //Check Boxes
         SettingsViewModel().getSettingSignal(settingType: .onCountdown)
             .on(value: { status in
-                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notification", maxWidth: maxWidth, yPosition: publicNodeHeight, status: (status as! Bool))
+                let notificationNode = self.setupCheckBoxNode(title: "Coronation Notification", maxWidth: maxWidth, yPosition: publicNodeHeight + 45, status: (status as! Bool))
                 self.view.addSubnode(notificationNode) })
             .start()
-        
-        //Issue
-        let issueView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 45, width: maxWidth, height: 40))
-        let issueButton = FlatButton(frame: CGRect(x: 2 * Constants.kPadding, y: Constants.kPadding/2, width: maxWidth - 4 * Constants.kPadding, height: 30))
-        issueButton.setTitle("Report An Issue", for: .normal)
-        issueButton.addTarget(self, action:#selector(self.support), for: .touchUpInside)
-        issueButton.setTitleColor(Color.black, for: .normal)
-        issueButton.titleLabel!.textAlignment = .center
-        issueButton.pulseColor = Constants.kBlueShade
-        issueView.addSubview(issueButton)
-        issueButton.titleLabel!.font = UIFont(name: issueButton.titleLabel!.font.fontName, size: Constants.kFontSize)
-        let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return issueView })
-        self.view.addSubnode(issueNode)
         
         //Privacy
         let privacyView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight + 90, width: maxWidth, height: 40))
@@ -260,7 +264,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: DidLayoutSubviews Helpers
     func setupMaterialView(frame: CGRect) -> View {
         let materialView = View(frame: frame)
-        materialView.depthPreset = .depth1
+        materialView.depthPreset = .depth2
         materialView.layer.cornerRadius = frame.height > 40 ? Constants.kCornerRadius : 5.0
         materialView.backgroundColor = Constants.kGreyBackground
         return materialView

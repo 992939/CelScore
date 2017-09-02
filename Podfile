@@ -43,7 +43,6 @@ target 'CelScore' do
     pod 'RevealingSplashView', '~> 0.4'
     pod 'PMAlertController', '~> 2.1'
     pod 'Dwifft', '~> 0.5'
-    pod 'CountdownLabel', '~> 2.0'
 end
 
 target 'CelScoreTests' do
