@@ -91,11 +91,11 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         //Count Down
         let countdownView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: publicNodeHeight, width: maxWidth, height: 40))
-        let clockLabel = self.setupLabel(title: "Coronation Clock: ", frame: CGRect(x: 2.5 * Constants.kPadding, y: Constants.kPadding/2, width: maxWidth/2, height: 30))
+        let clockLabel = self.setupLabel(title: "Coronation Clock:", frame: CGRect(x: 2.5 * Constants.kPadding, y: Constants.kPadding/2, width: maxWidth * 0.55, height: 30))
         clockLabel.font = UIFont(name: clockLabel.font.fontName, size: Constants.kFontSize)
         clockLabel.textAlignment = .right
         clockLabel.backgroundColor = .clear
-        let countdownLabel = MZTimerLabel(frame: CGRect(x: maxWidth/2 + 3 * Constants.kPadding, y: Constants.kPadding * 0.6, width: maxWidth/2, height: 30))
+        let countdownLabel = MZTimerLabel(frame: CGRect(x: maxWidth * 0.55 + 3 * Constants.kPadding, y: Constants.kPadding * 0.55, width: maxWidth/2, height: 30))
         countdownLabel.setCountDownTime(120)
         countdownLabel.textAlignment = .left
         countdownLabel.font = UIFont(name: countdownLabel.font.fontName, size: Constants.kFontSize)

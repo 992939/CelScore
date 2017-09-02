@@ -41,7 +41,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 2), NSForegroundColorAttributeName : Color.black]
+        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1), NSForegroundColorAttributeName : Color.black]
         let celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
