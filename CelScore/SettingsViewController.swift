@@ -95,10 +95,23 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         clockLabel.font = UIFont(name: clockLabel.font.fontName, size: Constants.kFontSize)
         clockLabel.textAlignment = .right
         clockLabel.backgroundColor = .clear
-        let countdownLabel = MZTimerLabel(frame: CGRect(x: maxWidth * 0.55 + 3 * Constants.kPadding, y: Constants.kPadding * 0.55, width: maxWidth/2, height: 30))
-        countdownLabel.setCountDownTime(120)
+        
+        var calendar = NSCalendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour, .year, .minute, .second])
+        calendar.timeZone = TimeZone(identifier: "PST")!
+        let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
+        let hours = (components.hour! < 21 ? (20 - components.hour!) : (24 - (components.hour! - 20))) * 3600
+        let minutes = (60 - components.minute!) * 60
+        let seconds = 60 - components.second!
+        let totalTime = hours + minutes + seconds
+        
+        let countdownLabel = MZTimerLabel(timerType: MZTimerLabelTypeTimer)!
+        countdownLabel.frame = CGRect(x: maxWidth * 0.55 + 3 * Constants.kPadding, y: Constants.kPadding * 0.55, width: maxWidth/2, height: 30)
         countdownLabel.textAlignment = .left
         countdownLabel.font = UIFont(name: countdownLabel.font.fontName, size: Constants.kFontSize)
+        countdownLabel.setCountDownTime(TimeInterval(totalTime))
+        countdownLabel.resetTimerAfterFinish = true
+        countdownLabel.textColor = totalTime < 3600 ? Constants.kRedLight : Color.black
         countdownLabel.start()
         countdownView.addSubview(clockLabel)
         countdownView.addSubview(countdownLabel)
