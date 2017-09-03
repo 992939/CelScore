@@ -235,6 +235,16 @@ extension UIDevice {
         return diameter
     }
     
+    static func getLabelWidth() -> CGFloat {
+        let diameter: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: diameter = 122.0
+        case Constants.kIPhone6_height: diameter = 122.0
+        default: diameter = 140.0
+        }
+        return diameter
+    }
+    
     static func getPulseBarHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
