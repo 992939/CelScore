@@ -32,14 +32,17 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gaugeHeight = Constants.kBottomHeight - 105
+        let gaugeHeight = Constants.kBottomHeight - UIDevice.getGaugeHeightLimit()
         self.pulseView.addSubview(getGaugeView(gaugeHeight))
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(value: { celebrity in
-                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 14, title: "Yesterday", value: self.celebST.prevScore, past: celebrity.y_index, tag: 2))
-                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 48, title: "Last Week", value: self.celebST.prevWeek, past: celebrity.w_index, tag: 3))
-                self.pulseView.addSubview(self.getView(positionY: gaugeHeight + 82, title: "Last Month", value: self.celebST.prevMonth, past: celebrity.m_index, tag: 4))
+                let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Yesterday", value: self.celebST.prevScore, past: celebrity.y_index, tag: 2)
+                self.pulseView.addSubview(pulseView1)
+                let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Last Week", value: self.celebST.prevWeek, past: celebrity.w_index, tag: 3)
+                self.pulseView.addSubview(pulseView2)
+                let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Last Month", value: self.celebST.prevMonth, past: celebrity.m_index, tag: 4)
+                self.pulseView.addSubview(pulseView3)
             }).start()
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
@@ -84,11 +87,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func getView(positionY: CGFloat, title: String, value: Double, past: Int, tag: Int) -> PulseView {
+        
         let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
         let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: 25))
         
         let pastSize: CGFloat = Constants.kIsOriginalIphone ? 21 : 23
-        
         let pastNode = ASImageNode()
         pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 3.0, width: pastSize + 2, height: pastSize + 2)
         pastNode.image = R.image.past_circle()!
@@ -112,7 +115,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         })
         
         infoLabel.textAlignment = .right
-        let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: 30))
+        let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
         taggedView.depthPreset = .depth2
         taggedView.tag = tag
         taggedView.layer.cornerRadius = 5.0

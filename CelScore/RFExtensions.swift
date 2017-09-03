@@ -228,9 +228,19 @@ extension UIDevice {
     static func getGaugeDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: diameter = 160.0
+        case Constants.kIPhone5_height: diameter = 155.0
         case Constants.kIPhone6_height: diameter = 185.0
         default: diameter = 190.0
+        }
+        return diameter
+    }
+    
+    static func getGaugeHeightLimit() -> CGFloat {
+        let diameter: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: diameter = 105.0
+        case Constants.kIPhone6_height: diameter = 105.0
+        default: diameter = 120.0
         }
         return diameter
     }
@@ -251,6 +261,16 @@ extension UIDevice {
         case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
         default: height = 32.0
+        }
+        return height
+    }
+    
+    static func getCelScoreBarHeight() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 30.0
+        case Constants.kIPhone6_height: height = 30.0
+        default: height = 35.0
         }
         return height
     }
