@@ -27,6 +27,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     fileprivate let fact2Bar: YLProgressBar
     fileprivate let fact3Bar: YLProgressBar
     fileprivate let logoCircle: Button
+    fileprivate let countdownLabel = MZTimerLabel(timerType: MZTimerLabelTypeTimer)!
 
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
@@ -96,23 +97,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         clockLabel.textAlignment = .right
         clockLabel.backgroundColor = .clear
         
-        var calendar = NSCalendar.current
-        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour, .year, .minute, .second])
-        calendar.timeZone = TimeZone(identifier: "PST")!
-        let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
-        let hours = (components.hour! < 21 ? (20 - components.hour!) : (24 - (components.hour! - 20))) * 3600
-        let minutes = (60 - components.minute!) * 60
-        let seconds = 60 - components.second!
-        let totalTime = hours + minutes + seconds
-        
-        let countdownLabel = MZTimerLabel(timerType: MZTimerLabelTypeTimer)!
         countdownLabel.frame = CGRect(x: maxWidth * 0.55 + 3 * Constants.kPadding, y: Constants.kPadding * 0.55, width: maxWidth/2, height: 30)
         countdownLabel.textAlignment = .left
         countdownLabel.font = UIFont(name: countdownLabel.font.fontName, size: Constants.kFontSize)
-        countdownLabel.setCountDownTime(TimeInterval(totalTime))
         countdownLabel.resetTimerAfterFinish = true
-        countdownLabel.textColor = totalTime < 3600 ? Constants.kRedLight : Color.black
-        countdownLabel.start()
         countdownView.addSubview(clockLabel)
         countdownView.addSubview(countdownLabel)
         let issueNode = ASDisplayNode(viewBlock: { () -> UIView in return countdownView })
@@ -158,6 +146,19 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        var calendar = NSCalendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour, .year, .minute, .second])
+        calendar.timeZone = TimeZone(identifier: "PST")!
+        let components = calendar.dateComponents(unitFlags, from: NSDate() as Date)
+        let hours = (components.hour! < 21 ? (20 - components.hour!) : (24 - (components.hour! - 20))) * 3600
+        let minutes = (60 - components.minute!) * 60
+        let seconds = 60 - components.second!
+        let totalTime = hours + minutes + seconds
+        countdownLabel.setCountDownTime(TimeInterval(totalTime))
+        countdownLabel.textColor = totalTime < 3600 ? Constants.kRedLight : Color.black
+        countdownLabel.start()
+        
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })
             .flatMapError { _ in return SignalProducer.empty }
@@ -264,7 +265,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func didTap(_ checkBox: BEMCheckBox) {
         SettingsViewModel().updateSettingSignal(value: checkBox.on as AnyObject, settingType: .onCountdown).start()
         if checkBox.on {
-            let alertVC = PMAlertController(title: "Coronation Notification", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
+            let alertVC = PMAlertController(title: "The Coronation", description: OverlayInfo.countdown.message(), image: OverlayInfo.countdown.logo(), style: .alert)
             alertVC.alertTitle.textColor = Constants.kBlueText
             alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                 self.dismiss(animated: true, completion: nil) }))
