@@ -88,15 +88,15 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     func getView(positionY: CGFloat, title: String, value: Double, past: Int, tag: Int) -> PulseView {
         
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 3, width: 170, height: 25))
-        let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: 3, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: 25))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 170, height: UIDevice.getCelScoreBarHeight() - 5))
+        let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: UIDevice.getCelScoreBarHeight() * 0.1, width: Constants.kMaxWidth - (titleLabel.width + 3.5 * Constants.kPadding), height: UIDevice.getCelScoreBarHeight() - 5))
         
-        let pastSize: CGFloat = Constants.kIsOriginalIphone ? 21 : 23
+        let pastSize: CGFloat = UIDevice.getCelScorePast()
         let pastNode = ASImageNode()
-        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: 3.0, width: pastSize + 2, height: pastSize + 2)
+        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
         pastNode.image = R.image.past_circle()!
         
-        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding + 1, y: 4.5, width: pastSize, height: pastSize))
+        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding + 1, y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
         pastLabel.text = String(past)
         pastLabel.textAlignment = .center
         pastLabel.font = R.font.droidSerifBold(size: 12)!

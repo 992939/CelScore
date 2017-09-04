@@ -275,6 +275,16 @@ extension UIDevice {
         return height
     }
     
+    static func getCelScorePast() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 21.0
+        case Constants.kIPhone6_height: height = 23.0
+        default: height = 26.0
+        }
+        return height
+    }
+    
     static func getStarsSize() -> Double {
         let offset: Double
         switch Constants.kScreenHeight {
