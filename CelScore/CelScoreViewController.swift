@@ -93,10 +93,10 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         let pastSize: CGFloat = UIDevice.getCelScorePast()
         let pastNode = ASImageNode()
-        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
+        pastNode.frame = CGRect(x: Constants.kMaxWidth - 3.1 * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
         pastNode.image = R.image.past_circle()!
         
-        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding + 1, y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
+        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - 3 * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
         pastLabel.text = String(past)
         pastLabel.textAlignment = .center
         pastLabel.font = R.font.droidSerifBold(size: 12)!
