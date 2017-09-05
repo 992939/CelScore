@@ -71,7 +71,7 @@ final class CelebrityModel: Object {
         self.id = json["celebrityID"].string!
         self.firstName = json["firstName"].string!
         self.lastName = json["lastName"].string!
-        self.middleName = json["middleName"].string!
+        self.middleName = json["middleName"].string! == "n/a" ? "∅" : json["middleName"].string!
         self.nickName = json["nickname"].string!
         self.googleName = json["google"].string!
         self.kingName = json["kingName"].string!

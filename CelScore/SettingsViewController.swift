@@ -155,9 +155,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let minutes = (60 - components.minute!) * 60
         let seconds = 60 - components.second!
         let totalTime = hours + minutes + seconds
+        countdownLabel.reset()
         countdownLabel.setCountDownTime(TimeInterval(totalTime))
         countdownLabel.textColor = totalTime < 3600 ? Constants.kRedLight : Color.black
-        countdownLabel.start()
+        countdownLabel.start { _ in self.countdownLabel.textColor = Color.black }
         
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: true) })

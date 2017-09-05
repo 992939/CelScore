@@ -26,6 +26,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let averageNode: ASImageNode
     internal let newsNode: ASImageNode
     internal let rankNode: ASImageNode
+    internal let graphNode: ASImageNode
     internal let rankTextNode: ASTextNode
     internal let pastNode: ASImageNode
     internal let pastTextNode: ASTextNode
@@ -128,6 +129,10 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.averageNode = ASImageNode()
         self.averageNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
+        self.graphNode = ASImageNode()
+        self.graphNode.style.preferredSize = CGSize(width: 35, height: 35)
+        self.graphNode.image = R.image.graph_up()!
+        
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
         cardView.borderColor = Constants.kBlueShade
@@ -180,6 +185,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.addSubnode(self.trendNode)
         self.addSubnode(self.averageNode)
         self.addSubnode(self.wreathNode)
+        self.addSubnode(self.graphNode)
         self.addSubnode(self.wreathTextNode)
         self.addSubnode(self.newsNode)
         self.addSubnode(self.consensusNode)
@@ -205,15 +211,21 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             alignItems: .start,
             children: [self.ratingsNode, minisStack])
         middleStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
-
+        
+        let graphStack = ASStackLayoutSpec(
+            direction: .horizontal,
+            spacing: 10,
+            justifyContent: .start,
+            alignItems: .end,
+            children: [middleStack, self.graphNode])
         
         let verticalStack = ASStackLayoutSpec(
-        direction: .vertical,
-        spacing: UIDevice.getPastSpacing(),
-        justifyContent: .start,
-        alignItems: .start,
-        children: [self.nameNode, middleStack])
-        verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
+            direction: .vertical,
+            spacing: UIDevice.getPastSpacing(),
+            justifyContent: .start,
+            alignItems: .start,
+            children: [self.nameNode, graphStack])
+            verticalStack.style.flexBasis = ASDimensionMake(.fraction, UIDevice.getVerticalStackPercent())
         
         let rankStack = ASStackLayoutSpec(
             direction: .vertical,
