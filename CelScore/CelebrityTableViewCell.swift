@@ -48,6 +48,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.pointSizeScaleFactors = [0.95, 0.9]
         self.nameNode.truncationMode = .byTruncatingTail
+        self.nameNode.isLayerBacked = true
     
         self.profilePicNode = ASNetworkImageNode()
         //self.profilePicNode.url = URL(string: self.celebST.imageURL)
@@ -55,6 +56,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
         self.profilePicNode.contentMode = .scaleAspectFill
         self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
+        self.profilePicNode.isLayerBacked = true
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = UIDevice.getStarsSize()
@@ -80,6 +82,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.wreathNode = ASImageNode()
         self.wreathNode.style.preferredSize = CGSize(width: UIDevice.getPastSize() + 4, height: UIDevice.getPastSize() + 4)
         self.wreathNode.image = R.image.blue_wreath()!
+        self.wreathNode.isLayerBacked = true
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -92,11 +95,13 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.rankTextNode = ASTextNode()
         self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
+        self.rankTextNode.isLayerBacked = true
         
         self.wreathTextNode = ASTextNode()
         let days = self.celebST.daysOnThrone > 1 ? String(self.celebST.daysOnThrone) : "∅"
         self.wreathTextNode.attributedText = NSAttributedString(string: "\(days)", attributes: attr2)
         self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
+        self.wreathTextNode.isLayerBacked = true
         
         let attr3 = [NSFontAttributeName: rankFont,
                      NSForegroundColorAttributeName : Constants.kRedShade,
@@ -105,34 +110,43 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.pastTextNode = ASTextNode()
         self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.y_index)", attributes: attr3)
         self.pastTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
+        self.pastTextNode.isLayerBacked = true
         
         self.rankNode = ASImageNode()
         self.rankNode.style.preferredSize = CGSize(width: UIDevice.getPastSize(), height: UIDevice.getPastSize())
         self.rankNode.image = R.image.thin_circle()!
+        self.wreathTextNode.isLayerBacked = true
         
         self.pastNode = ASImageNode()
         self.pastNode.style.preferredSize = CGSize(width: UIDevice.getPastSize(), height: UIDevice.getPastSize())
         self.pastNode.image = R.image.past_circle()!
+        self.pastNode.isLayerBacked = true
         
         self.trendNode = ASImageNode()
         self.trendNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
+        self.trendNode.isLayerBacked = true
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
+        self.newsNode.isLayerBacked = true
         
         self.consensusNode = ASImageNode()
         self.consensusNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
+        self.consensusNode.isLayerBacked = true
         
         self.faceNode = ASImageNode()
         self.faceNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
+        self.faceNode.isLayerBacked = true
         
         self.averageNode = ASImageNode()
         self.averageNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
+        self.averageNode.isLayerBacked = true
         
         self.graphNode = ASImageNode()
         self.graphNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle() * 2.4, height: UIDevice.getMiniCircle() * 2.4)
         self.graphNode.image = R.image.graph_up()!
+        self.graphNode.isLayerBacked = true
         
         let cardView: PulseView = PulseView()
         cardView.borderWidth = 2.0
@@ -245,13 +259,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         let rankOverlayStack = ASOverlayLayoutSpec(child: self.rankNode, overlay: rankStack)
         let pastOverlayStack = ASOverlayLayoutSpec(child: self.pastNode, overlay: pastStack)
         
-        let wreathStack = ASStackLayoutSpec(
-            direction: .vertical,
-            spacing: Constants.kIsOriginalIphone ? 5 : 5.5,
-            justifyContent: .start,
-            alignItems: .start,
-            children: [ASLayoutSpec(), self.wreathTextNode])
-        
         let rankTextStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 4,
@@ -260,7 +267,14 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             children: [rankOverlayStack, pastOverlayStack])
         rankTextStack.style.flexBasis = ASDimensionMake(.fraction, 0.1)
         
-         let wreathOverlayStack = ASOverlayLayoutSpec(child: self.wreathNode, overlay: wreathStack)
+        let wreathStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: Constants.kIsOriginalIphone ? 5 : 5.5,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ASLayoutSpec(), self.wreathTextNode])
+        
+        let wreathOverlayStack = ASOverlayLayoutSpec(child: self.wreathNode, overlay: wreathStack)
         
         let rightStack = ASStackLayoutSpec(
             direction: .vertical,
@@ -275,7 +289,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             justifyContent: .start,
             alignItems: .center,
             children: [rankTextStack, self.profilePicNode, verticalStack, rightStack])
-        horizontalStack.style.flexBasis = ASDimensionMake(.fraction, 1)
 
         return ASBackgroundLayoutSpec(child: ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: Constants.kPadding, left: Constants.kPadding, bottom: Constants.kPadding, right: Constants.kPadding),
