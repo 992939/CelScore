@@ -46,6 +46,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         let celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
+        self.nameNode.pointSizeScaleFactors = [0.95, 0.9]
         self.nameNode.truncationMode = .byTruncatingTail
     
         self.profilePicNode = ASNetworkImageNode()
