@@ -56,7 +56,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
         self.profilePicNode.contentMode = .scaleAspectFill
         self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
-        self.profilePicNode.isLayerBacked = true
         
         let cosmosView: CosmosView = CosmosView()
         cosmosView.settings.starSize = UIDevice.getStarsSize()
