@@ -215,6 +215,16 @@ extension UIDevice {
         return height
     }
     
+    static func getCelScoreTitleWidth() -> CGFloat {
+        let height: CGFloat
+        switch Constants.kScreenHeight {
+        case Constants.kIPhone5_height: height = 150
+        case Constants.kIPhone6_height: height = 165
+        default: height = 180
+        }
+        return height
+    }
+    
     static func getProfileDiameter() -> CGFloat {
         let diameter: CGFloat
         switch Constants.kScreenHeight {

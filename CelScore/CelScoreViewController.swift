@@ -88,8 +88,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     
     func getView(positionY: CGFloat, title: String, value: Double, past: Int, tag: Int) -> PulseView {
         
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 172, height: UIDevice.getCelScoreBarHeight() - 5))
-        let infoLabel: UILabel = self.setupLabel(title: String(value), frame: CGRect(x: titleLabel.width, y: UIDevice.getCelScoreBarHeight() * 0.1, width: Constants.kMaxWidth - (titleLabel.width + 4 * Constants.kPadding), height: UIDevice.getCelScoreBarHeight() - 5))
+        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: UIDevice.getCelScoreTitleWidth(), height: UIDevice.getCelScoreBarHeight() - 5))
+        let infoLabel: UILabel = self.setupLabel(title: String(value) + "%", frame: CGRect(x: titleLabel.width, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 60, height: UIDevice.getCelScoreBarHeight() - 5))
         
         let paddingMultiplier: CGFloat = Constants.kIsOriginalIphone ? 3.0 : 3.5
         let pastSize: CGFloat = UIDevice.getCelScorePast()
@@ -103,19 +103,19 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         pastLabel.font = R.font.droidSerifBold(size: 12)!
         pastLabel.textColor = Constants.kRedShade
 
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
-            var attributedText = NSMutableAttributedString()
-            let percent: Double = (celscore - value).roundToPlaces(places: 1)
-            let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
-            let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
-            attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
-            let attrString = NSAttributedString(string: " " + String(value) + "%", attributes: attr2)
-            attributedText.append(attrString)
-            infoLabel.attributedText = attributedText
-        })
+//        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
+//            var attributedText = NSMutableAttributedString()
+//            let percent: Double = (celscore - value).roundToPlaces(places: 1)
+//            let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
+//            let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
+//            attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
+//            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
+//            let attrString = NSAttributedString(string: " " + String(value) + "%", attributes: attr2)
+//            attributedText.append(attrString)
+//            infoLabel.attributedText = attributedText
+//        })
         
-        infoLabel.textAlignment = .center
+        
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
         taggedView.depthPreset = .depth2
         taggedView.tag = tag
