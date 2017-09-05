@@ -37,11 +37,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(value: { celebrity in
-                let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: self.celebST.prevScore, past: celebrity.y_index, tag: 2)
+                let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: self.celebST.prevScore, past: celebrity.y_index)
                 self.pulseView.addSubview(pulseView1)
-                let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: self.celebST.prevWeek, past: celebrity.w_index, tag: 3)
+                let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: self.celebST.prevWeek, past: celebrity.w_index)
                 self.pulseView.addSubview(pulseView2)
-                let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: self.celebST.prevMonth, past: celebrity.m_index, tag: 4)
+                let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: self.celebST.prevMonth, past: celebrity.m_index)
                 self.pulseView.addSubview(pulseView3)
             }).start()
         self.pulseView.backgroundColor = Color.clear
@@ -51,7 +51,6 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     func getGaugeView(_ gaugeHeight: CGFloat) -> PulseView {
         let gaugeView: PulseView = PulseView(frame: CGRect(x: 0, y: Constants.kPadding, width: Constants.kMaxWidth, height: gaugeHeight))
         gaugeView.depthPreset = .depth2
-        gaugeView.tag = 1
         gaugeView.backgroundColor = Constants.kGreyBackground
         gaugeView.layer.cornerRadius = Constants.kCornerRadius
         gaugeView.pulseAnimation = .none
@@ -86,10 +85,18 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         return gaugeView
     }
     
-    func getView(positionY: CGFloat, title: String, value: Double, past: Int, tag: Int) -> PulseView {
+    func getView(positionY: CGFloat, title: String, value: Double, past: Int) -> PulseView {
         
-        let titleLabel: UILabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: UIDevice.getCelScoreTitleWidth(), height: UIDevice.getCelScoreBarHeight() - 5))
+        let titleLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: UIDevice.getCelScoreTitleWidth(), height: UIDevice.getCelScoreBarHeight() - 5))
         let infoLabel: UILabel = self.setupLabel(title: String(value) + "%", frame: CGRect(x: titleLabel.width, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 60, height: UIDevice.getCelScoreBarHeight() - 5))
+        
+        var changeLabel: UILabel?
+        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
+            let percent: Double = (celscore - value).roundToPlaces(places: 1)
+            let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
+            changeLabel = self.setupLabel(title: percentage, frame: CGRect(x: infoLabel.right + UIDevice.getCelScoreSpacing(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: 70, height: UIDevice.getCelScoreBarHeight() - 5))
+            changeLabel?.textColor = percent >= 0 ? Constants.kBlueLight : Constants.kRedLight
+        })
         
         let paddingMultiplier: CGFloat = Constants.kIsOriginalIphone ? 3.0 : 3.5
         let pastSize: CGFloat = UIDevice.getCelScorePast()
@@ -102,28 +109,15 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         pastLabel.textAlignment = .center
         pastLabel.font = R.font.droidSerifBold(size: 12)!
         pastLabel.textColor = Constants.kRedShade
-
-//        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
-//            var attributedText = NSMutableAttributedString()
-//            let percent: Double = (celscore - value).roundToPlaces(places: 1)
-//            let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
-//            let attr1 = [NSFontAttributeName: UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : percent >= 0 ? Constants.kBlueText : Constants.kRedText]
-//            attributedText = NSMutableAttributedString(string: percentage, attributes: attr1)
-//            let attr2 = [NSFontAttributeName: UIFont.systemFont(ofSize: Constants.kFontSize), NSForegroundColorAttributeName : Color.black]
-//            let attrString = NSAttributedString(string: " " + String(value) + "%", attributes: attr2)
-//            attributedText.append(attrString)
-//            infoLabel.attributedText = attributedText
-//        })
-        
         
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
         taggedView.depthPreset = .depth2
-        taggedView.tag = tag
         taggedView.layer.cornerRadius = 5.0
         taggedView.backgroundColor = Constants.kGreyBackground
         taggedView.pulseAnimation = .centerWithBacking
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
+        taggedView.addSubview(changeLabel!)
         taggedView.addSubview(pastNode.view)
         taggedView.addSubview(pastLabel)
         return taggedView
