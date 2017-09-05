@@ -130,7 +130,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.averageNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
         
         self.graphNode = ASImageNode()
-        self.graphNode.style.preferredSize = CGSize(width: 35, height: 35)
+        self.graphNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle() * 2.4, height: UIDevice.getMiniCircle() * 2.4)
         self.graphNode.image = R.image.graph_up()!
         
         let cardView: PulseView = PulseView()
@@ -214,7 +214,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let graphStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: 10,
+            spacing: Constants.kIsOriginalIphone ? 10 : 15,
             justifyContent: .start,
             alignItems: .end,
             children: [middleStack, self.graphNode])
