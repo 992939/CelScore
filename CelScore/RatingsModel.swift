@@ -62,6 +62,26 @@ class RatingsModel: Object, Collection {
         return total.roundToPlaces(places: 2)
     }
     
+    func getMax() -> String {
+        var max_element = "rating1"
+        for (_, rating) in self.makeIterator().enumerated() {
+            let element =  self[rating] as! Double
+            let max = self[max_element] as! Double
+            if element > max { max_element = rating }
+        }
+        return max_element
+    }
+    
+    func getMin() -> String {
+        var min_element = "rating1"
+        for (_, rating) in self.makeIterator().enumerated() {
+            let element =  self[rating] as! Double
+            let min = self[min_element] as! Double
+            if element < min { min_element = rating }
+        }
+        return min_element
+    }
+    
     subscript(i: Int) -> String {
         switch i {
         case 0: return ("rating1")
