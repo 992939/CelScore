@@ -68,7 +68,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.view.addSubnode(logoNode)
 
         //Progress Bars
-        let progressNodeHeight: CGFloat = 60.0
+        let progressNodeHeight: CGFloat = Constants.kIsOriginalIphone ? 60 : 70
         
         let consensusBarNode = self.setupProgressBarNode(title: "Hollywood Royalty (avg.)", maxWidth: maxWidth, yPosition: logoView.bottom + Constants.kPadding, value: 20, bar: self.fact1Bar)
         self.view.addSubnode(consensusBarNode)
@@ -307,9 +307,12 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func setupProgressBarNode(title: String, maxWidth: CGFloat, yPosition: CGFloat, value: CGFloat, bar: YLProgressBar) -> ASDisplayNode {
-        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: 50))
-        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: 0, width: maxWidth - 2 * Constants.kPadding, height: 25))
-        bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom, width: maxWidth - 2 * Constants.kPadding, height: 15)
+        let progressHeight: CGFloat = Constants.kIsOriginalIphone ? 50 : 60
+        let barHeight: CGFloat = Constants.kIsOriginalIphone ? 15 : 20
+        let padding: CGFloat = Constants.kIsOriginalIphone ? 1.5 : 2.5
+        let materialView = setupMaterialView(frame: CGRect(x: Constants.kPadding, y: yPosition, width: maxWidth, height: progressHeight))
+        let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: padding, width: maxWidth - 2 * Constants.kPadding, height: 25))
+        bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom + padding, width: maxWidth - 2 * Constants.kPadding, height: barHeight)
         bar.type = .flat
         bar.isStripesAnimated = false
         bar.hideStripes = true

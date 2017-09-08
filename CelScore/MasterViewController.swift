@@ -376,6 +376,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         navBar.backgroundColor = Constants.kRedShade
         navBar.title = "Celeb&Noble"
         navBar.titleLabel.textColor = .white
+        navBar.titleLabel.font = UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1)
         return navBar
     }
     
@@ -385,7 +386,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
         self.segmentedControl.selectionIndicatorLocation = .down
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : Color.white,
-                                                     NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18),
+                                                     NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize()),
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = .textWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0

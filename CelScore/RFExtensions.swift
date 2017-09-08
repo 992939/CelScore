@@ -218,7 +218,7 @@ extension UIDevice {
     static func getPickerHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 80
+        case Constants.kIPhone5_height: height = 110
         case Constants.kIPhone6_height: height = 160
         default: height = 180
         }

@@ -375,6 +375,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let celebTitle = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         navigationBarView.title = String("\(self.celebST.index). \(celebTitle)")
         navigationBarView.titleLabel.textColor = UIColor.white
+        navigationBarView.titleLabel.font = UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1)
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
         navigationBarView.leftViews = [backButton]
         navigationBarView.rightViews = [infoButton]

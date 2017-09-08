@@ -56,9 +56,10 @@ struct Constants {
     static let kStatusViewRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: 20)
     
     //MasterVC
-    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)
-    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: 120, width: kMaxWidth, height: kScreenHeight - (120 + kPadding))
-    static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: 48)
+    static let kTopHeight: CGFloat = kIsOriginalIphone ? 47 : 50
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: kTopHeight)
+    static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: kTopHeight + 3)
+    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentedControlRect.bottom + kPadding))
     static let kSearchListId: String = "0099"
     
     //SettingsVC
@@ -68,7 +69,7 @@ struct Constants {
     
     //DetailVC 
     static let kHeightPadding: CGFloat = kIsOriginalIphone ? 0 : 20
-    static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: 45)
+    static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: kTopHeight)
     static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kDetailNavigationBarRect.bottom + 5, width: kMaxWidth, height: UIDevice.getProfileDiameter() + kHeightPadding)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: 35)
     static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
