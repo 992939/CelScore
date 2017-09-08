@@ -76,7 +76,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
 
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
-        statusView.backgroundColor = Constants.kBlueShade
+        statusView.backgroundColor = Color.red.darken2
         
         //self.profilePicNode.url = URL(string: celebST.imageURL)
         self.profilePicNode.defaultImage = R.image.jamie_blue()!

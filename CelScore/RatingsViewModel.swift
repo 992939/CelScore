@@ -104,7 +104,7 @@ struct RatingsViewModel {
             }
             
             let totalVotes = newRatings?.totalVotes ?? 1
-            let message = totalVotes < 2 ? "sent" : "resent"
+            let message = totalVotes < 2 ? "cast" : "recast"
             
             let status: String
             print("CelScore: \(celScore) PrevScore: \(celeb.prevScore)")
@@ -115,7 +115,7 @@ struct RatingsViewModel {
             default: status = "still ain't"
             }
             
-            let voteMessage = String("Your vote has been \(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
+            let voteMessage = String("Your vote is \(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
             observer.send(value: voteMessage!)
             observer.sendCompleted()
         }

@@ -67,7 +67,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.contentViewController.view.backgroundColor = .clear
         self.window!.rootViewController = nav
         let statusView = UIView(frame: Constants.kStatusViewRect)
-        statusView.backgroundColor = Constants.kBlueShade
+        statusView.backgroundColor = Color.red.darken2
         window!.rootViewController!.view.addSubview(statusView)
         self.window!.backgroundColor = Constants.kBlueShade
         self.window!.makeKeyAndVisible()
