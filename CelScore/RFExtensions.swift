@@ -178,7 +178,7 @@ extension UIDevice {
     static func getTransitionProfileX() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 58.0
+        case Constants.kIPhone5_height: height = 53.0
         case Constants.kIPhone6_height: height = 64.0
         default: height = 68.0
         }

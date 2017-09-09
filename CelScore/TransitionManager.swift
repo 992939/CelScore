@@ -63,7 +63,8 @@ final class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, 
                 masterVC.view.transform = CGAffineTransform.identity
                 let rect = masterVC.celebrityTableNode.rectForRow(at: selectedRow)
                 let relativeRect = rect.offsetBy(dx: -masterVC.celebrityTableNode.view.contentOffset.x, dy: -masterVC.celebrityTableNode.view.contentOffset.y)
-                celebSnapshot.frame = CGRect(x: UIDevice.getTransitionProfileX(), y: relativeRect.origin.y + 130, width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
+                let xDelta: CGFloat = Constants.kIsOriginalIphone ? 137 : 143
+                celebSnapshot.frame = CGRect(x: UIDevice.getTransitionProfileX(), y: relativeRect.origin.y + xDelta, width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
             }
             }, completion: { _ in
                 detailVC.profilePicNode.isHidden = false
