@@ -148,7 +148,7 @@ extension UIDevice {
     static func getCelScoreSpacing() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 3.5
+        case Constants.kIPhone5_height: height = 5.0
         case Constants.kIPhone6_height: height = 25.0
         default: height = 30.0
         }
@@ -210,7 +210,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 50
         case Constants.kIPhone6_height: height = 60
-        default: height = 66
+        default: height = 70
         }
         return height
     }

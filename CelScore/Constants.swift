@@ -59,7 +59,7 @@ struct Constants {
     static let kTopHeight: CGFloat = kIsOriginalIphone ? 47 : 50
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: kTopHeight)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: kTopHeight + 3)
-    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentedControlRect.bottom + kPadding))
+    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentedControlRect.bottom + 2 * kPadding))
     static let kSearchListId: String = "0099"
     
     //SettingsVC
