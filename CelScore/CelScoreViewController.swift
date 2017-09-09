@@ -88,26 +88,26 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     func getView(positionY: CGFloat, title: String, value: Double, past: Int) -> PulseView {
         
         let titleLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: UIDevice.getCelScoreTitleWidth(), height: UIDevice.getCelScoreBarHeight() - 5))
-        let infoLabel: UILabel = self.setupLabel(title: String(value) + "%", frame: CGRect(x: titleLabel.width, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 60, height: UIDevice.getCelScoreBarHeight() - 5))
+        let infoLabel: UILabel = self.setupLabel(title: String(value) + "%", frame: CGRect(x: titleLabel.width + 3, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 55, height: UIDevice.getCelScoreBarHeight() - 5))
         
         var changeLabel: UILabel?
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
             let percent: Double = (celscore - value).roundToPlaces(places: 1)
             let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
-            changeLabel = self.setupLabel(title: percentage, frame: CGRect(x: infoLabel.right + UIDevice.getCelScoreSpacing(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: 70, height: UIDevice.getCelScoreBarHeight() - 5))
+            changeLabel = self.setupLabel(title: percentage, frame: CGRect(x: infoLabel.right + UIDevice.getCelScoreSpacing(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: 55, height: UIDevice.getCelScoreBarHeight() - 5))
             changeLabel?.textColor = percent >= 0 ? Constants.kBlueLight : Constants.kRedLight
         })
         
-        let paddingMultiplier: CGFloat = Constants.kIsOriginalIphone ? 3.0 : 3.5
         let pastSize: CGFloat = UIDevice.getCelScorePast()
         let pastNode = ASImageNode()
-        pastNode.frame = CGRect(x: Constants.kMaxWidth - paddingMultiplier * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
+        pastNode.frame = CGRect(x: Constants.kMaxWidth - UIDevice.getCelScorePadding(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
         pastNode.image = R.image.past_circle()!
         
-        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - (paddingMultiplier - 0.1) * Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
+        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - (UIDevice.getCelScorePadding() - 1), y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
         pastLabel.text = String(past)
         pastLabel.textAlignment = .center
-        pastLabel.font = R.font.droidSerifBold(size: 12)!
+        let pastFont = Constants.kIsOriginalIphone ? UIDevice.getFontSize()-2 : UIDevice.getFontSize()-3
+        pastLabel.font = R.font.droidSerifBold(size: pastFont)!
         pastLabel.textColor = Constants.kRedShade
         
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
