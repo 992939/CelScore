@@ -52,8 +52,8 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: Constants.kLogoHeight))
         logoView.depthPreset = .none
-        self.logoCircle.setImage(R.image.geometry_white()!, for: .normal)
-        self.logoCircle.setImage(R.image.geometry_white()!, for: .highlighted)
+        self.logoCircle.setImage(R.image.white_star_button()!, for: .normal) //R.image.geometry_white()!
+        self.logoCircle.setImage(R.image.white_star_button()!, for: .highlighted)
         self.logoCircle.shapePreset = .circle
         self.logoCircle.depthPreset = .depth2
         self.logoCircle.backgroundColor = Constants.kBlueShade
@@ -209,13 +209,13 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         Timer.after(2.seconds){ _ in
             SettingsViewModel().calculateAverageRoyaltySignal()
-                .on(value: { value in self.fact1Bar.setProgress(value/100, animated: false) })
+                .on(value: { value in self.fact1Bar.setProgress(value/100, animated: true) })
                 .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                     return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastWeek) }
-                .on(value: { value in self.fact2Bar.setProgress(value/100, animated: false) })
+                .on(value: { value in self.fact2Bar.setProgress(value/100, animated: true) })
                 .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                     return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
-                .on(value: { value in self.fact3Bar.setProgress(value/100, animated: false) })
+                .on(value: { value in self.fact3Bar.setProgress(value/100, animated: true) })
                 .start()
         }
     }
@@ -314,7 +314,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let factsLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: padding, width: maxWidth - 2 * Constants.kPadding, height: 25))
         bar.frame = CGRect(x: Constants.kPadding, y: factsLabel.bottom + padding, width: maxWidth - 2 * Constants.kPadding, height: barHeight)
         bar.type = .flat
-        bar.isStripesAnimated = false
         bar.hideStripes = true
         bar.hideGloss = true
         bar.uniformTintColor = true
