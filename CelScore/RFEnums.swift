@@ -183,6 +183,50 @@ enum Qualities: Int {
     }
 }
 
+//MARK: BarTrends
+enum BarTrend: String {
+    case BBBB
+    case BRBB
+    case BBRB
+    case BBBR
+    case BBRR
+    case BRRB
+    case BRBR
+    case BRRR
+    case RBBB
+    case RBBR
+    case RBRR
+    case RBRB
+    case RRRB
+    case RRBB
+    case RRBR
+    case RRRR
+    case ZZZZ
+    
+    func icon() -> UIImage {
+        switch self {
+        case .BBBB: return R.image.bBBB()!
+        case .BRBB: return R.image.bRBB()!
+        case .BBRB: return R.image.bBRB()!
+        case .BBBR: return R.image.bBBR()!
+        case .BBRR: return R.image.bBRR()!
+        case .BRRB: return R.image.bRRB()!
+        case .BRBR: return R.image.bRBR()!
+        case .BRRR: return R.image.bRRR()!
+        case .RBBB: return R.image.rBBB()!
+        case .RBBR: return R.image.rBBR()!
+        case .RBRR: return R.image.rBRR()!
+        case .RBRB: return R.image.rBRB()!
+        case .RRRB: return R.image.rRRB()!
+        case .RRBB: return R.image.rRBB()!
+        case .RRRR: return R.image.rRRR()!
+        case .RRBR: return R.image.rRBR()!
+        case .ZZZZ: return R.image.zZZZ()!
+        }
+    }
+}
+
+
 //MARK: ListInfo
 enum ListInfo : Int {
     case hollywood

@@ -144,7 +144,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.graphNode = ASImageNode()
         self.graphNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle() * 2.4, height: UIDevice.getMiniCircle() * 2.4)
-        self.graphNode.image = R.image.graph_up()!
+        self.graphNode.image = BarTrend(rawValue: "BRRB")?.icon()
         self.graphNode.isLayerBacked = true
         
         let cardView: PulseView = PulseView()
