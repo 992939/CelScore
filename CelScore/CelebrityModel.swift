@@ -14,6 +14,7 @@ import SwiftyJSON
 struct CelebrityStruct {
     let id: String
     let imageURL: String
+    let trend: String
     let nickName: String
     let kingName: String
     let prevScore: Double
@@ -49,6 +50,7 @@ final class CelebrityModel: Object {
     dynamic var twitter: String = ""
     dynamic var rank: String = ""
     dynamic var picture3x: String = ""
+    dynamic var trend: String = "ZZZZ"
     dynamic var from: String = ""
     dynamic var prevScore: Double = 0
     dynamic var prevWeek: Double = 0
@@ -79,6 +81,7 @@ final class CelebrityModel: Object {
         self.birthdate = json["birthdate"].string!
         self.netWorth = json["netWorth"].string!
         self.picture3x = json["picture3x"].string!
+        self.trend = json["trend"].string!
         self.from = json["from"].string!
         self.rank = json["rank"].string!
         self.status = json["status"].string!

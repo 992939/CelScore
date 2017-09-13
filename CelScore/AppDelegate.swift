@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration(
-            schemaVersion: 52,
+            schemaVersion: 53,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 43 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -102,6 +102,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
+                    trend: celeb.trend,
                     nickName: celeb.nickName,
                     kingName: celeb.kingName,
                     prevScore: celeb.prevScore,
@@ -128,6 +129,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 let celebST = CelebrityStruct(
                     id: celeb.id,
                     imageURL: celeb.picture3x,
+                    trend: celeb.trend,
                     nickName: celeb.nickName,
                     kingName: celeb.kingName,
                     prevScore: celeb.prevScore,
@@ -154,6 +156,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let celebST = CelebrityStruct(
             id: id as! String,
             imageURL: userActivity.userInfo!["imageURL"] as! String,
+            trend: userActivity.userInfo!["trend"] as! String,
             nickName: userActivity.userInfo!["nickname"] as! String,
             kingName: userActivity.userInfo!["kingName"] as! String,
             prevScore: userActivity.userInfo!["prevScore"] as! Double,
