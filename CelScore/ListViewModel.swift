@@ -120,19 +120,6 @@ struct ListViewModel {
             observer.sendCompleted()
         }
     }
-    
-    func getCelebrityStructSignal(listId: String, index: Int) -> SignalProducer<CelebrityStruct, ListError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
-            guard let celebList: ListsModel = list else { return observer.send(error: .emptyList) }
-            let celebId: CelebId = celebList.celebList[index]
-            let celeb = realm.objects(CelebrityModel.self).filter("id = %@", celebId.id).first
-            guard celeb?.id.isEmpty == false else { return observer.send(error: .emptyList) }
-            observer.send(value: CelebrityStruct(id: celeb!.id, imageURL: celeb!.picture3x, trend: celeb!.trend, nickName:celeb!.nickName, kingName: celeb!.kingName, prevScore: celeb!.prevScore, prevWeek: celeb!.prevWeek, prevMonth: celeb!.prevMonth, index: celeb!.index,                     y_index: celeb!.y_index, daysOnThrone: celeb!.daysOnThrone, sex: celeb!.sex, isFollowed: celeb!.isFollowed, isTrending: celeb!.isTrending))
-            observer.sendCompleted()
-        }
-    }
 }
 
 

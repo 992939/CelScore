@@ -150,8 +150,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .on(value: { _ in
                 revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
-                revealingSplashView.startAnimation()
-            })
+                revealingSplashView.startAnimation() })
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
@@ -161,13 +160,11 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .observe(on: UIScheduler())
             .on(value: { index in
                 self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
-                self.changeList()
-            })
+                self.changeList() })
             .on(failed: { _ in
                 revealingSplashView.startAnimation()
                 self.dismissHUD()
-                self.changeList()
-            })
+                self.changeList() })
             .start()
     }
     
@@ -276,8 +273,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         var node: ASCellNode = ASCellNode()
-        let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        ListViewModel().getCelebrityStructSignal(listId: (self.view.subviews as [UIView]).contains(self.celebSearchBar) ? Constants.kSearchListId : list.getId(), index: indexPath.row)
+        CelebrityViewModel().getCelebrityStructSignal(id: self.diffCalculator.rows[indexPath.row].id)
             .observe(on: UIScheduler())
             .on(value: { value in node = celebrityTableNodeCell(celebrityStruct: value) })
             .start()
@@ -386,7 +382,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.segmentedControl.selectionIndicatorColor = Constants.kRedShade
         self.segmentedControl.selectionIndicatorLocation = .down
         self.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : Color.white,
-                                                     NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize()),
+                                                     NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1),
                                                      NSBackgroundColorAttributeName : Constants.kBlueShade]
         self.segmentedControl.selectionStyle = .textWidthStripe
         self.segmentedControl.selectedSegmentIndex = 0

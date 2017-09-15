@@ -164,7 +164,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                 self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
                 if self.celebST.y_index == 1 && self.celebST.index != 1  { self.consensusNode.image = R.image.mini_death()! }
-                else if self.celebST.index == 1 { self.consensusNode.image = R.image.mini_crown_yellow()! }
+                else if self.celebST.index == 1 { self.consensusNode.image = self.celebST.sex ? R.image.king_mini()! : R.image.queen_mini()! }
             })
             .flatMap(.latest) { (_) -> SignalProducer<Int, NoError> in
                 return CelebrityViewModel().countCelebritiesSignal() }
