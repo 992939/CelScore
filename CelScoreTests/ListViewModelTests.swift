@@ -87,13 +87,4 @@ class ListViewModelTests: XCTestCase {
             expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateAllListsSignal error: \(error)") } }
     }
-    
-    func testGetCelebrityStructSignal() {
-        let expectation = self.expectation(description: "getCelebrityStructSignal callback")
-        ListViewModel().getCelebrityStructSignal(listId: "0001", index: 1)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { celeb in
-            XCTAssertEqual(celeb.id, "0002", "getCelebrityStructSignal returns second item."); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
-    }
 }

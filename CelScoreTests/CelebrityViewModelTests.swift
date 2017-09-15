@@ -24,10 +24,18 @@ class CelebrityViewModelTests: XCTestCase {
         celeb.id = "0001"
         celeb.picture3x = "https://imageURL.com/test@3x.png"
         celeb.isFollowed = true
-        celeb.isKing = true
         celeb.isNew = true
         realm.add(celeb, update: true)
         try! realm.commitWrite()
+    }
+    
+    func testGetCelebrityStructSignal() {
+        let expectation = self.expectation(description: "getCelebrityStructSignal callback")
+        CelebrityViewModel().getCelebrityStructSignal(id: "0001")
+            .flatMapError { _ in SignalProducer.empty }
+            .startWithValues { celeb in
+                XCTAssertEqual(celeb.id, "0001", "getCelebrityStructSignal returns celeb."); expectation.fulfill() }
+        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getCelebrityStructSignal error: \(error)") } }
     }
     
     func testGetCelebritySignal() {
@@ -55,21 +63,6 @@ class CelebrityViewModelTests: XCTestCase {
             .startWithValues  { celeb in
             XCTAssertEqual(celeb.isFollowed, false, "Celebrity isFollowed must be false."); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("followCebritySignal error: \(error)") } }
-    }
-    
-    func testGetNewCelebsSignal() {
-        let expectation = self.expectation(description: "getNewCelebsSignal callback")
-        CelScoreViewModel().getNewCelebsSignal()
-            .on(value: { celebInfo in
-            XCTAssert(celebInfo.text.characters.count > 0, "NewCelebInfo text String must be > 0")
-            XCTAssert(celebInfo.image.characters.count > 0, "NewCelebInfo image String must be > 0") })
-            .on(completed: {
-                let realm = try! Realm()
-                let celebs = realm.objects(CelebrityModel.self).filter("isNew = %@", true)
-                XCTAssertEqual(celebs.count, 0, "new celebs count must be 0")
-                expectation.fulfill() })
-            .start()
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getNewCelebsSignal error: \(error)") } }
     }
     
     func testCountFollowedCelebritiesSignal() {

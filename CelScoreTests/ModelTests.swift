@@ -161,9 +161,9 @@ class ModelTests: XCTestCase {
     }
     
     func testCelebrityStructEquality() {
-        let celebA = CelebrityStruct(id: "0001", imageURL:"", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 0, prevMonth: 0, index: 1, sex: false, isFollowed:false, isTrending: true)
-        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", nickName: "A", kingName: "B", prevScore: 2, prevWeek: 2, prevMonth: 2, index: 1, sex: true, isFollowed:true, isTrending: true)
-        let celebC = CelebrityStruct(id: "0000", imageURL:"", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 1, prevMonth: 1, index: 1, sex: false, isFollowed:false, isTrending: true)
+        let celebA = CelebrityStruct(id: "0001", imageURL:"", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 0, prevMonth: 0, index: 1, y_index: 1, daysOnThrone: 0, sex: false, isFollowed:false, isTrending: true)
+        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 2, prevWeek: 2, prevMonth: 2, index: 1, y_index: 1, daysOnThrone: 0, sex: true, isFollowed:true, isTrending: true)
+        let celebC = CelebrityStruct(id: "0000", imageURL:"", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 1, prevMonth: 1, index: 1, y_index: 1, daysOnThrone: 0, sex: false, isFollowed:false, isTrending: true)
         XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
         XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
     }
