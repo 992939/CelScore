@@ -42,9 +42,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.celebST = celebrityStruct
         
         self.nameNode = ASTextNode()
-        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1), NSForegroundColorAttributeName : Color.black]
-        let celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
-        self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.pointSizeScaleFactors = [0.95, 0.9]
         self.nameNode.truncationMode = .byTruncatingTail
@@ -87,24 +84,25 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         style.alignment = .center
         let rankFont = R.font.droidSerifBold(size: UIDevice.getFontSize())!
         
+        let attr = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1),
+                    NSForegroundColorAttributeName : Color.black]
+        
         let attr2 = [NSFontAttributeName: rankFont,
                      NSForegroundColorAttributeName : Constants.kBlueShade,
                      NSParagraphStyleAttributeName: style]
         
+        let attr3 = [NSFontAttributeName: rankFont,
+                     NSForegroundColorAttributeName : Constants.kRedShade,
+                     NSParagraphStyleAttributeName: style]
+    
         self.rankTextNode = ASTextNode()
         self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         self.rankTextNode.isLayerBacked = true
         
         self.wreathTextNode = ASTextNode()
-        let days = self.celebST.daysOnThrone > 1 ? String(self.celebST.daysOnThrone) : "∅"
-        self.wreathTextNode.attributedText = NSAttributedString(string: "\(days)", attributes: attr2)
         self.wreathTextNode.style.preferredSize = self.wreathNode.style.preferredSize
         self.wreathTextNode.isLayerBacked = true
-        
-        let attr3 = [NSFontAttributeName: rankFont,
-                     NSForegroundColorAttributeName : Constants.kRedShade,
-                     NSParagraphStyleAttributeName: style]
         
         self.pastTextNode = ASTextNode()
         self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.y_index)", attributes: attr3)
@@ -157,6 +155,18 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         super.init()
         self.selectionStyle = .none
         box.delegate = self
+        
+        var days = self.celebST.daysOnThrone < 2 ? "∅" : String(self.celebST.daysOnThrone)
+        var celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
+        
+        if self.celebST.daysOnThrone >= 100 {
+            let title: Int = self.celebST.daysOnThrone / 100
+            celebName = String("\(celebST.kingName) \(self.toRoman(number: title))")
+            days = String(self.celebST.daysOnThrone % 100)
+        }
+        
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: days))", attributes: attr2)
+        self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
@@ -319,5 +329,23 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                     }
                 }).start()
         }
+    }
+    
+    func toRoman(number: Int) -> String {
+        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        var romanValue = ""
+        var startingValue = number
+        
+        for (index, romanChar) in romanValues.enumerated() {
+            let arabicValue = arabicValues[index]
+            let div = startingValue / arabicValue
+            
+            if div > 0 {
+                for _ in 0..<div { romanValue += romanChar }
+                startingValue -= arabicValue * div
+            }
+        }
+        return romanValue
     }
 }

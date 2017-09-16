@@ -81,9 +81,7 @@ class ListViewModelTests: XCTestCase {
         ListViewModel().updateListSignal(listId: "0001").startWithValues { _ in
             let realm = try! Realm()
             let list = realm.objects(ListsModel.self).filter("id = %@", "0001").first
-            let celebId: CelebId = list!.celebList.last!
-            XCTAssertEqual(celebId.id, "0003", "updateAllListsSignal returns list followed item first.")
-            XCTAssertEqual(list!.celebList.count, 3, "updateAllListsSignal returns a list of three items.")
+            XCTAssertEqual(list!.celebList.count, 2, "updateAllListsSignal returns a list of three items.")
             expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("updateAllListsSignal error: \(error)") } }
     }
