@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 plugin 'cocoapods-keys', {
     :project => "CelScore",
