@@ -16,9 +16,9 @@ def shared_pods
     pod 'Realm', '~> 2.8'
     pod 'RealmSwift', '~> 2.8'
     pod 'Texture', '~> 2.3'
-    pod 'AWSCognito', '2.5.9'
-    pod 'AWSAPIGateway', '2.5.9'
-    pod 'AWSPinpoint', '2.5.9'
+    pod 'AWSCognito', '2.6'
+    pod 'AWSAPIGateway', '2.6'
+    pod 'AWSPinpoint', '2.6'
     pod 'BEMCheckBox', '~> 1.4'
 end
 

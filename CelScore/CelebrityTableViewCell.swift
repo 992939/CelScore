@@ -156,7 +156,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        var days = self.celebST.daysOnThrone < 2 ? "∅" : String(self.celebST.daysOnThrone)
+        var days = self.celebST.daysOnThrone < 1 ? "∅" : String(self.celebST.daysOnThrone)
         var celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
         
         if self.celebST.daysOnThrone >= 100 {
