@@ -80,6 +80,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         //self.profilePicNode.url = URL(string: celebST.imageURL)
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
+        //self.profilePicNode.defaultImage = self.celebST.sex ? R.image.pharaoh_blue()! : R.image.queen_blue()!
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
                                            y: topView.centerY - UIDevice.getProfileDiameter()/2,
                                            width: UIDevice.getProfileDiameter(),

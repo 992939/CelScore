@@ -69,10 +69,8 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 90 images.
+  /// This `R.image` struct is generated, and contains static references to 91 images.
   struct image {
-    /// Image `Anonymous`.
-    static let anonymous = Rswift.ImageResource(bundle: R.hostingBundle, name: "Anonymous")
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
     /// Image `BBBR`.
@@ -213,6 +211,10 @@ struct R: Rswift.Validatable {
     static let nuclear_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "nuclear_red")
     /// Image `past_circle`.
     static let past_circle = Rswift.ImageResource(bundle: R.hostingBundle, name: "past_circle")
+    /// Image `pharaoh_blue`.
+    static let pharaoh_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "pharaoh_blue")
+    /// Image `queen_blue`.
+    static let queen_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "queen_blue")
     /// Image `queen_mini`.
     static let queen_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "queen_mini")
     /// Image `score_logo`.
@@ -251,11 +253,6 @@ struct R: Rswift.Validatable {
     static let white_star_button = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_star_button")
     /// Image `whitestar`.
     static let whitestar = Rswift.ImageResource(bundle: R.hostingBundle, name: "whitestar")
-    
-    /// `UIImage(named: "Anonymous", bundle: ..., traitCollection: ...)`
-    static func anonymous(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.anonymous, compatibleWith: traitCollection)
-    }
     
     /// `UIImage(named: "BBBB", bundle: ..., traitCollection: ...)`
     static func bBBB(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
@@ -605,6 +602,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "past_circle", bundle: ..., traitCollection: ...)`
     static func past_circle(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.past_circle, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "pharaoh_blue", bundle: ..., traitCollection: ...)`
+    static func pharaoh_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.pharaoh_blue, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "queen_blue", bundle: ..., traitCollection: ...)`
+    static func queen_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.queen_blue, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "queen_mini", bundle: ..., traitCollection: ...)`
