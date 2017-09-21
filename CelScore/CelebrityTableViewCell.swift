@@ -50,7 +50,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.profilePicNode = ASNetworkImageNode()
         //self.profilePicNode.url = URL(string: self.celebST.imageURL)
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
-        //self.profilePicNode.defaultImage = self.celebST.sex ? R.image.pharaoh_blue()! : R.image.queen_blue()!
+        //self.profilePicNode.defaultImage = R.image.uncle_sam()!
         self.profilePicNode.contentMode = .scaleAspectFill
         self.profilePicNode.style.preferredSize = CGSize(width: UIDevice.getRowHeight(), height: UIDevice.getRowHeight())
         
