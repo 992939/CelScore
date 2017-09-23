@@ -8,7 +8,6 @@
 
 import AsyncDisplayKit
 import Material
-import Motion
 import Social
 import ReactiveCocoa
 import ReactiveSwift
@@ -103,27 +102,23 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func showingButtons() {
-        self.socialButton.animate(Motion.animate(group: [
-            Motion.translateX(to: Constants.kPadding + 110),
-            Motion.spin(rotations: 1)
-            ]))
+        self.socialButton.animate(
+            .translate(x: Constants.kPadding + 110, y: 0, z: 0),
+            .spin(z: 1.0))
         
-        self.voteButton.animate(Motion.animate(group: [
-            Motion.translateX(to: -(Constants.kFabDiameter + 100)),
-            Motion.spin(rotations: 1)
-            ]))
+        self.voteButton.animate(
+            .spin(z: 1.0),
+            .translate(x: -(Constants.kFabDiameter + 100), y: 0, z: 0))
     }
     
     func hideButtons() {
-        self.socialButton.animate(Motion.animate(group: [
-            Motion.spin(rotations: 1),
-            Motion.translateX(to: -(Constants.kPadding + 110))
-            ]))
+        self.socialButton.animate(
+            .spin(z: 1.0),
+            .translate(x: -(Constants.kPadding + 110), y: 0, z: 0))
         
-        self.voteButton.animate(Motion.animate(group: [
-            Motion.spin(rotations: 1),
-            Motion.translateX(to: Constants.kFabDiameter + 100)
-            ]))
+        self.voteButton.animate(
+            .spin(z: 1.0),
+            .translate(x: Constants.kFabDiameter + 100, y: 0, z: 0))
     }
     
     func backAction() {
@@ -221,7 +216,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
 
     func openHandleMenu() {
-        self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.25)])
+        self.socialButton.fabButton?.layer.animate(MotionAnimation.spin(z: 0.25))
         self.socialButton.fabButton?.pulseAnimation = .centerWithBacking
         self.socialButton.open()
     }
@@ -229,7 +224,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func closeHandleMenu() {
         self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .normal)
         self.socialButton.fabButton?.setImage(R.image.ic_add_black()!, for: .highlighted)
-        self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
+        self.socialButton.fabButton?.layer.animate(MotionAnimation.spin(z: 0.5))
         self.socialButton.close()
     }
     

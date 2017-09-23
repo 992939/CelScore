@@ -84,16 +84,8 @@ public class NavigationItem: NSObject {
         }
     }
 	
-    /// An optional reference to the NavigationBar.
     public var navigationBar: NavigationBar? {
-        var v = contentView.superview
-        while nil != v {
-            if let navigationBar = v as? NavigationBar {
-                return navigationBar
-            }
-            v = v?.superview
-        }
-        return nil
+        return contentView.superview?.superview as? NavigationBar
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

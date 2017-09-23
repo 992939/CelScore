@@ -252,7 +252,6 @@ open class CollectionViewCell: UICollectionViewCell, Pulseable, PulseableLayer {
 	open func prepare() {
         backgroundColor = .white
 		contentScaleFactor = Screen.scale
-        
 		prepareVisualLayer()
         preparePulse()
 	}

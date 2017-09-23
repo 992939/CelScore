@@ -235,22 +235,23 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         if open || (open == false && self.socialButton.isOpened == false){
             self.socialButton.open() { (v: UIView) in (v as? Button)?.pulse() }
             image = R.image.ic_close_white()?.withRenderingMode(.alwaysTemplate)
-            self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.25)])
+            self.socialButton.fabButton?.layer.animate(MotionAnimation.spin(z: 0.25))
             self.socialButton.fabButton?.setImage(image, for: .normal)
             self.socialButton.fabButton?.setImage(image, for: .highlighted)
         } else if self.socialButton.isOpened {
             self.socialButton.close()
             image = R.image.ic_add_white()?.withRenderingMode(.alwaysTemplate)
-            self.socialButton.fabButton?.layer.motion([MotionAnimation.spin(0.5)])
+            self.socialButton.fabButton?.layer.animate(MotionAnimation.spin(z: 0.5))
             self.socialButton.fabButton?.setImage(image, for: .normal)
             self.socialButton.fabButton?.setImage(image, for: .highlighted)
         }
     }
 
     func movingSocialButton(onScreen: Bool) {
-        let y: CGFloat = onScreen ? 0 : 70
-        self.socialButton.close()
-        self.socialButton.animate(Motion.animate(group: [Motion.translateY(to: y), Motion.spin(rotations: 1)]))
+        self.socialButton.animate(
+            .spin(z: 1.0),
+            .translate(x: 0, y: onScreen ? 0 : 70, z: 0),
+            .completion({ [weak self] in self?.socialButton.close() }))
     }
     
     func socialButton(button: UIButton) { self.socialButtonTapped(buttonTag: button.tag, hideButton: true) }

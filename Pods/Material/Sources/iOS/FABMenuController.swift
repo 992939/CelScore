@@ -43,11 +43,18 @@ extension UIViewController {
      through child UIViewControllers.
      */
     public var fabMenuController: FABMenuController? {
-        return traverseViewControllerHierarchyForClassType()
+        var viewController: UIViewController? = self
+        while nil != viewController {
+            if viewController is FABMenuController {
+                return viewController as? FABMenuController
+            }
+            viewController = viewController?.parent
+        }
+        return nil
     }
 }
 
-open class FABMenuController: TransitionController {
+open class FABMenuController: RootController {
     /// Reference to the MenuView.
     @IBInspectable
     open let fabMenu = FABMenu()
@@ -79,42 +86,29 @@ extension FABMenuController {
     fileprivate func prepareFABMenu() {
         fabMenu.delegate = self
         fabMenu.zPosition = 1000
-        
-        fabMenu.handleFABButtonCallback = { [weak self] in
-            self?.handleFABButtonCallback(button: $0)
-        }
-        
-        fabMenu.handleOpenCallback = { [weak self] in
-            self?.handleOpenCallback()
-        }
-        
-        fabMenu.handleCloseCallback = { [weak self] in
-            self?.handleCloseCallback()
-        }
-        
-        fabMenu.handleCompletionCallback = { [weak self] in
-            self?.handleCompletionCallback(view: $0)
-        }
-        
+        fabMenu.handleFABButtonCallback = handleFABButtonCallback
+        fabMenu.handleOpenCallback = handleOpenCallback
+        fabMenu.handleCloseCallback = handleCloseCallback
+        fabMenu.handleCompletionCallback = handleCompletionCallback
         view.addSubview(fabMenu)
     }
 }
 
-fileprivate extension FABMenuController {
+extension FABMenuController {
     /// Shows the fabMenuBacking.
-    func showFabMenuBacking() {
+    fileprivate func showFabMenuBacking() {
         showFade()
         showBlurView()
     }
     
     /// Hides the fabMenuBacking.
-    func hideFabMenuBacking() {
+    fileprivate func hideFabMenuBacking() {
         hideFade()
         hideBlurView()
     }
     
     /// Shows the blurView.
-    func showBlurView() {
+    fileprivate func showBlurView() {
         guard .blur == fabMenuBacking else {
             return
         }
@@ -135,7 +129,7 @@ fileprivate extension FABMenuController {
     }
     
     /// Hides the blurView.
-    func hideBlurView() {
+    fileprivate func hideBlurView() {
         guard .blur == fabMenuBacking else {
             return
         }
@@ -149,7 +143,7 @@ fileprivate extension FABMenuController {
     }
     
     /// Shows the fade.
-    func showFade() {
+    fileprivate func showFade() {
         guard .fade == fabMenuBacking else {
             return
         }
@@ -164,7 +158,7 @@ fileprivate extension FABMenuController {
     }
     
     /// Hides the fade.
-    func hideFade() {
+    fileprivate func hideFade() {
         guard .fade == fabMenuBacking else {
             return
         }
@@ -179,12 +173,13 @@ fileprivate extension FABMenuController {
     }
 }
 
-fileprivate extension FABMenuController {
+extension FABMenuController {
     /**
      Handler to toggle the FABMenu opened or closed.
      - Parameter button: A UIButton.
      */
-    func handleFABButtonCallback(button: UIButton) {
+    @objc
+    fileprivate func handleFABButtonCallback(button: UIButton) {
         guard fabMenu.isOpened else {
             fabMenu.open(isTriggeredByUserInteraction: true)
             return
@@ -194,13 +189,15 @@ fileprivate extension FABMenuController {
     }
     
     /// Handler for when the FABMenu.open function is called.
-    func handleOpenCallback() {
+    @objc
+    fileprivate func handleOpenCallback() {
         isUserInteractionEnabled = false
         showFabMenuBacking()
     }
     
     /// Handler for when the FABMenu.close function is called.
-    func handleCloseCallback() {
+    @objc
+    fileprivate func handleCloseCallback() {
         isUserInteractionEnabled = false
         hideFabMenuBacking()
     }
@@ -209,7 +206,7 @@ fileprivate extension FABMenuController {
      Completion handler for FABMenu open and close calls.
      - Parameter view: A UIView.
      */
-    func handleCompletionCallback(view: UIView) {
+    fileprivate func handleCompletionCallback(view: UIView) {
         if view == fabMenu.fabMenuItems.last {
             isUserInteractionEnabled = true
         }

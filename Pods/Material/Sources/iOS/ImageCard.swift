@@ -30,6 +30,12 @@
 
 import UIKit
 
+@objc(ToolbarAlignment)
+public enum ToolbarAlignment: Int {
+    case top
+    case bottom
+}
+
 open class ImageCard: Card {
     /**
      A Display value to indicate whether or not to

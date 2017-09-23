@@ -296,7 +296,6 @@ open class NavigationBar: UINavigationBar {
         contentEdgeInsetsPreset = .square1
         contentScaleFactor = Screen.scale
 		backButtonImage = Icon.cm.arrowBack
-        
         let image = UIImage()
         shadowImage = image
 		setBackgroundImage(image, for: .default)
