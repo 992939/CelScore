@@ -11,6 +11,8 @@
 		0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */; };
 		0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */; };
 		0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */; };
+		0004A1191F764858006A8ABA /* GDWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004A1171F764857006A8ABA /* GDWebViewController.swift */; };
+		0004A11A1F764858006A8ABA /* GDWebViewNavigationToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004A1181F764858006A8ABA /* GDWebViewNavigationToolbar.swift */; };
 		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
 		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
@@ -114,6 +116,8 @@
 		0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentAppearance.swift; path = SMSegment/SMSegmentAppearance.swift; sourceTree = "<group>"; };
 		0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSegment/SMSegmentView.swift; sourceTree = "<group>"; };
 		0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentViewConstants.swift; path = SMSegment/SMSegmentViewConstants.swift; sourceTree = "<group>"; };
+		0004A1171F764857006A8ABA /* GDWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDWebViewController.swift; sourceTree = "<group>"; };
+		0004A1181F764858006A8ABA /* GDWebViewNavigationToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDWebViewNavigationToolbar.swift; sourceTree = "<group>"; };
 		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
 		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
 		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
@@ -349,6 +353,8 @@
 				00BCB9871F11DFC100F2D3D4 /* JUCelScoreAPIClient.swift */,
 				0036DD561C01490C000F533F /* RFEnums.swift */,
 				0099D4501CDB0C89008C1D6E /* Duration.swift */,
+				0004A1171F764857006A8ABA /* GDWebViewController.swift */,
+				0004A1181F764858006A8ABA /* GDWebViewNavigationToolbar.swift */,
 				00252D781CC6EC6E007CA826 /* R.generated.swift */,
 				0036DD571C01490C000F533F /* RFExtensions.swift */,
 				00C347BF1C61A1BC00097089 /* UIView+Geometry.swift */,
@@ -749,6 +755,7 @@
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
@@ -783,6 +790,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
@@ -1125,6 +1133,7 @@
 				00417A051CB5B65900E47078 /* TransitionManager.swift in Sources */,
 				00C347A11C6016A000097089 /* InfoViewController.swift in Sources */,
 				0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */,
+				0004A1191F764858006A8ABA /* GDWebViewController.swift in Sources */,
 				00F6C9D81B35393C0078CA6E /* CelebrityViewModel.swift in Sources */,
 				00F6C9DA1B35393C0078CA6E /* RatingsViewModel.swift in Sources */,
 				00BA33531F5928E400D83CA0 /* MZTimerLabel.m in Sources */,
@@ -1134,6 +1143,7 @@
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
+				0004A11A1F764858006A8ABA /* GDWebViewNavigationToolbar.swift in Sources */,
 				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */,

@@ -8,17 +8,17 @@
 
 import AsyncDisplayKit
 import Material
+import Motion
 import Social
 import ReactiveCocoa
 import ReactiveSwift
-import MessageUI
-import Material
 import Result
 import SafariServices
 import PMAlertController
+import WebKit
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, MFMailComposeViewControllerDelegate, CAAnimationDelegate, SFSafariViewControllerDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, CAAnimationDelegate, GDWebViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
@@ -182,18 +182,28 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         }
     }
     
-    
     //MARK: SFSafariViewControllerDelegate
     func openSafari() {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(value: { celeb in
-                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
-                let searchString = String("https://www.google.com/search?q=\(searchTerm)")
-                let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
-                self.present(safariVC, animated: true, completion: nil)
-                safariVC.preferredBarTintColor = Constants.kRedShade
-                safariVC.preferredControlTintColor = Color.white
-                safariVC.delegate = self
+            
+//                let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+//                webView.uiDelegate = self
+//                self.prese = webView
+//
+//                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
+//                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)"))
+//                let myRequest = URLRequest(url: myURL!)
+//                webView.load(myRequest)
+                
+//                let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
+//                let statusView = UIView(frame: Constants.kStatusViewRect)
+//                statusView.backgroundColor = Color.red.darken2
+//                safariVC.view.addSubview(statusView)
+//                self.present(safariVC, animated: true, completion: nil)
+//                safariVC.preferredBarTintColor = Constants.kRedShade
+//                safariVC.preferredControlTintColor = Color.white
+//                safariVC.delegate = self
             }).start()
     }
     
@@ -281,12 +291,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             })
             .start()
     }
-    
-    //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
+
     //MARK: SMSegmentViewDelegate
     func segmentView(_ segmentView: SMSegmentView) {
         let infoView: UIView = self.getSubView(atIndex: segmentView.selectedSegmentIndex)
