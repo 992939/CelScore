@@ -770,7 +770,7 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "celscore_big_white") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'celscore_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "celscore_big_white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'celscore_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
