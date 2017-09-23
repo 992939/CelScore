@@ -26,9 +26,9 @@ target 'CelScore' do
     shared_pods
     pod 'Material', '~> 2.6'
     pod 'SwiftyTimer', '~> 2.0.0'
-    pod 'SwiftyJSON', '~> 3.1'
+    pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage', '~>3.8.1'
-    pod 'R.swift', '~> 3.2'
+    pod 'R.swift', '~> 3.3'
     pod 'FBSDKLoginKit', '~> 4.24'
     pod 'FBSDKCoreKit', '~> 4.24'
     pod 'Fabric', '~> 1.6.11'
@@ -42,7 +42,7 @@ target 'CelScore' do
     pod 'SVProgressHUD', '~> 2.1'
     pod 'RevealingSplashView', '~> 0.4'
     pod 'PMAlertController', '~> 2.1'
-    pod 'Dwifft', '~> 0.5'
+    pod 'Dwifft', '~> 0.6'
 end
 
 target 'CelScoreTests' do
