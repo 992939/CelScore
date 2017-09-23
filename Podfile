@@ -25,7 +25,6 @@ end
 target 'CelScore' do
     shared_pods
     pod 'Material', '~> 2.10'
-    pod 'Motion', '~> 1.1'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage', '~>3.8.1'
@@ -52,14 +51,6 @@ end
 
 target 'The Courthouse' do
     
-end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0'
-        end
-    end
 end
 
 
