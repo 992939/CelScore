@@ -16,6 +16,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSAPIGateway</string>
 			<key>Type</key>
@@ -25,6 +27,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Amazon Software License</string>
 			<key>Title</key>
 			<string>AWSCognito</string>
 			<key>Type</key>
@@ -34,6 +38,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSCore</string>
 			<key>Type</key>
@@ -43,6 +49,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSPinpoint</string>
 			<key>Type</key>
@@ -72,6 +80,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>BEMCheckBox</string>
 			<key>Type</key>
@@ -109,6 +119,8 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
+			<key>License</key>
+			<string>BSD</string>
 			<key>Title</key>
 			<string>Bolts</string>
 			<key>Type</key>
@@ -117,6 +129,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2016 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<key>License</key>
+			<string>Commercial</string>
 			<key>Title</key>
 			<string>Crashlytics</string>
 			<key>Type</key>
@@ -147,6 +161,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>Dwifft</string>
 			<key>Type</key>
@@ -172,6 +188,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>Facebook Platform License</string>
 			<key>Title</key>
 			<string>FBSDKCoreKit</string>
 			<key>Type</key>
@@ -197,6 +215,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>Facebook Platform License</string>
 			<key>Title</key>
 			<string>FBSDKLoginKit</string>
 			<key>Type</key>
@@ -205,6 +225,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<dict>
 			<key>FooterText</key>
 			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<key>License</key>
+			<string>Commercial</string>
 			<key>Title</key>
 			<string>Fabric</string>
 			<key>Type</key>
@@ -235,6 +257,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>HMSegmentedControl</string>
 			<key>Type</key>
@@ -243,6 +267,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>MIT LICENSE Found in the repo</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>Keys</string>
 			<key>Type</key>
@@ -267,6 +293,8 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </string>
+			<key>License</key>
+			<string>BSD-3-Clause</string>
 			<key>Title</key>
 			<string>Material</string>
 			<key>Type</key>
@@ -476,6 +504,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINCache</string>
 			<key>Type</key>
@@ -685,6 +715,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINOperation</string>
 			<key>Type</key>
@@ -869,6 +901,8 @@ limitations under the License.
 
    END OF TERMS AND CONDITIONS
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINRemoteImage</string>
 			<key>Type</key>
@@ -899,6 +933,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>PMAlertController</string>
 			<key>Type</key>
@@ -931,6 +967,8 @@ THE SOFTWARE.
 ---
 BE AWARE: This software includes Xcode.swift from Tom Lokhorst as a whole, the copyright notice and this permission notice of the MIT license from Xcode.swift should also be included. See: https://github.com/tomlokhorst/Xcode.swift/blob/develop/LICENSE
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>R.swift</string>
 			<key>Type</key>
@@ -960,6 +998,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>R.swift.Library</string>
 			<key>Type</key>
@@ -967,7 +1007,7 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (c) 2012&#8211;2016 Sam Soffes, http://soff.es
+			<string>Copyright (c) 2012–2016 Sam Soffes, http://soff.es
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -988,6 +1028,8 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>RateLimit</string>
 			<key>Type</key>
@@ -1015,6 +1057,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>ReactiveCocoa</string>
 			<key>Type</key>
@@ -1042,6 +1086,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>ReactiveSwift</string>
 			<key>Type</key>
@@ -1282,13 +1328,13 @@ EXPORT COMPLIANCE
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -1298,6 +1344,8 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>Realm</string>
 			<key>Type</key>
@@ -1538,13 +1586,13 @@ EXPORT COMPLIANCE
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -1554,6 +1602,8 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>RealmSwift</string>
 			<key>Type</key>
@@ -1582,6 +1632,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>Result</string>
 			<key>Type</key>
@@ -1611,6 +1663,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>RevealingSplashView</string>
 			<key>Type</key>
@@ -1639,6 +1693,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>SDWebImage</string>
 			<key>Type</key>
@@ -1673,6 +1729,8 @@ A different license may apply to other resources included in this package,
 including Freepik Icons. Please consult their 
 respective headers for the terms of their individual licenses.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>SVProgressHUD</string>
 			<key>Type</key>
@@ -1702,6 +1760,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>SwiftyJSON</string>
 			<key>Type</key>
@@ -1711,7 +1771,7 @@ THE SOFTWARE.
 			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
-Copyright (c) 2015-2016 Rados&#322;aw Pietruszewski
+Copyright (c) 2015-2016 Radosław Pietruszewski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1731,6 +1791,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>SwiftyTimer</string>
 			<key>Type</key>
@@ -1925,6 +1987,8 @@ Apache License
       of your accepting any such warranty or additional liability.
 
    END OF TERMS AND CONDITIONS</string>
+			<key>License</key>
+			<string>BSD and Apache 2</string>
 			<key>Title</key>
 			<string>Texture</string>
 			<key>Type</key>
@@ -1955,6 +2019,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>Timepiece</string>
 			<key>Type</key>
@@ -1963,6 +2029,8 @@ SOFTWARE.
 		<dict>
 			<key>FooterText</key>
 			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Twitter Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://fabric.io/terms/twitter and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. Digits Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Digits Kit Agreement located at https://fabric.io/terms/digits and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: http://get.fabric.io/terms/opensource.txt.</string>
+			<key>License</key>
+			<string>Commercial</string>
 			<key>Title</key>
 			<string>TwitterCore</string>
 			<key>Type</key>
@@ -1971,6 +2039,8 @@ SOFTWARE.
 		<dict>
 			<key>FooterText</key>
 			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms.  Twitter Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://fabric.io/terms/twitter and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: http://get.fabric.io/terms/opensource.txt</string>
+			<key>License</key>
+			<string>Commercial</string>
 			<key>Title</key>
 			<string>TwitterKit</string>
 			<key>Type</key>
@@ -2000,6 +2070,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>YLProgressBar</string>
 			<key>Type</key>

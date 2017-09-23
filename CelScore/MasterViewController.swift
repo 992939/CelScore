@@ -29,7 +29,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let segmentedControl: HMSegmentedControl
     fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
-    fileprivate let diffCalculator: TableViewDiffCalculator<CelebId>
+    fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<CelebId>
     fileprivate let socialButton: FABMenu
     internal let celebrityTableNode: ASTableNode
     
@@ -38,7 +38,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     init() {
         self.celebrityTableNode = ASTableNode()
-        self.diffCalculator = TableViewDiffCalculator<CelebId>(tableView: self.celebrityTableNode.view)
+        self.diffCalculator = SingleSectionTableViewDiffCalculator<CelebId>(tableView: self.celebrityTableNode.view)
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())

@@ -16,6 +16,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSAPIGateway</string>
 			<key>Type</key>
@@ -25,6 +27,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Amazon Software License</string>
 			<key>Title</key>
 			<string>AWSCognito</string>
 			<key>Type</key>
@@ -34,6 +38,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSCore</string>
 			<key>Type</key>
@@ -43,6 +49,8 @@
 			<key>FooterText</key>
 			<string>The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License and the AWSLex/Bluefront folder under the AWS Customer Agreement (https://aws.amazon.com/agreement/ ). 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>AWSPinpoint</string>
 			<key>Type</key>
@@ -72,6 +80,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>BEMCheckBox</string>
 			<key>Type</key>
@@ -281,6 +291,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINCache</string>
 			<key>Type</key>
@@ -490,6 +502,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINOperation</string>
 			<key>Type</key>
@@ -674,6 +688,8 @@ limitations under the License.
 
    END OF TERMS AND CONDITIONS
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>PINRemoteImage</string>
 			<key>Type</key>
@@ -701,6 +717,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>ReactiveCocoa</string>
 			<key>Type</key>
@@ -728,6 +746,8 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>ReactiveSwift</string>
 			<key>Type</key>
@@ -968,13 +988,13 @@ EXPORT COMPLIANCE
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -984,6 +1004,8 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>Realm</string>
 			<key>Type</key>
@@ -1224,13 +1246,13 @@ EXPORT COMPLIANCE
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
+sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
+(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -1240,6 +1262,8 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
+			<key>License</key>
+			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>RealmSwift</string>
 			<key>Type</key>
@@ -1268,6 +1292,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>Result</string>
 			<key>Type</key>
@@ -1462,6 +1488,8 @@ Apache License
       of your accepting any such warranty or additional liability.
 
    END OF TERMS AND CONDITIONS</string>
+			<key>License</key>
+			<string>BSD and Apache 2</string>
 			<key>Title</key>
 			<string>Texture</string>
 			<key>Type</key>

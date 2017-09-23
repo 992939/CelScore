@@ -15,7 +15,7 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - Dwifft (0.5)
+  - Dwifft (0.6.3)
   - Fabric (1.6.11)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
@@ -42,7 +42,7 @@ PODS:
     - PINCache (= 3.0.1-beta.5)
     - PINRemoteImage/Core
   - PMAlertController (2.1.2)
-  - R.swift (3.2.0):
+  - R.swift (3.3.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - RateLimit (2.1.0)
@@ -61,7 +61,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.1.2)
-  - SwiftyJSON (3.1.1)
+  - SwiftyJSON (3.1.4)
   - SwiftyTimer (2.0.0)
   - Texture (2.3.4):
     - Texture/PINRemoteImage (= 2.3.4)
@@ -83,7 +83,7 @@ DEPENDENCIES:
   - AWSPinpoint (= 2.6)
   - BEMCheckBox (~> 1.4)
   - Crashlytics (~> 3.8)
-  - Dwifft (~> 0.5)
+  - Dwifft (~> 0.6)
   - Fabric (~> 1.6.11)
   - FBSDKCoreKit (~> 4.24)
   - FBSDKLoginKit (~> 4.24)
@@ -91,7 +91,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Material (~> 2.6)
   - PMAlertController (~> 2.1)
-  - R.swift (~> 3.2)
+  - R.swift (~> 3.3)
   - RateLimit (~> 2.1)
   - ReactiveCocoa (= 5.0.4)
   - ReactiveSwift (~> 1.1)
@@ -101,7 +101,7 @@ DEPENDENCIES:
   - RevealingSplashView (~> 0.4)
   - SDWebImage (~> 3.8.1)
   - SVProgressHUD (~> 2.1)
-  - SwiftyJSON (~> 3.1)
+  - SwiftyJSON (= 3.1.4)
   - SwiftyTimer (~> 2.0.0)
   - Texture (~> 2.3)
   - Timepiece (~> 1.0)
@@ -121,7 +121,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: e18e4a148905b290bd03d98b767651c104f4eda3
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
-  Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
+  Dwifft: 37156d94c9da45d6cd12dbb9654670593152e89e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
@@ -132,7 +132,7 @@ SPEC CHECKSUMS:
   PINOperation: ac23db44796d4a564ecf9b5ea7163510f579b71d
   PINRemoteImage: d71988f11914a050d6d4cf51efc4ad1de8c0a9d8
   PMAlertController: 0fbcc3d1cee86ee0bd85f693ca85f6388e504ec8
-  R.swift: 207a372a2b5977caef440c696a368009460641d1
+  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RateLimit: 150d084ab1bc82a26ee4d13f00fd9b50091898fa
   ReactiveCocoa: b31e754d15937811ede648fc83cd68f5de70a3d4
@@ -143,7 +143,7 @@ SPEC CHECKSUMS:
   RevealingSplashView: 72be158ad5e1bc72713e8f78383dc3e1803ce4d1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
-  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   Texture: 8cf0872fe33328c20d7e6c1fcbf1f23a82162f2f
   Timepiece: 59cdc48089645cce07803c15116293b346ca457d
@@ -151,6 +151,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   YLProgressBar: 40a0627522dc1b536e02bf082a1b1ce3085b4668
 
-PODFILE CHECKSUM: f20ff1cd146dd107aaa204900c29c3b6cd3e5831
+PODFILE CHECKSUM: dd12354d3ec28ecaf69adb470efab94273268f40
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.3.1
