@@ -58,7 +58,10 @@ extension Snackable where Self: UIViewController {
         let snackbar = TTGSnackbar(message: message, duration: .long, actionText: "Ok", actionBlock: { (snackbar) in print("Click action!") })
         snackbar.actionTextColor = Constants.kBlueShade
         snackbar.messageTextColor = Color.white
-        snackbar.actionMaxWidth = 80
+        snackbar.actionMaxWidth = Constants.kMaxWidth
+        snackbar.leftMargin = Constants.kPadding
+        snackbar.rightMargin = Constants.kPadding
+        snackbar.bottomMargin = Constants.kPadding
         snackbar.messageTextFont = UIFont.systemFont(ofSize: UIDevice.getFontSize())
         snackbar.backgroundColor = Color.darkGray
         snackbar.icon = R.image.bell()!
