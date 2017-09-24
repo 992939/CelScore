@@ -17,7 +17,7 @@ import PMAlertController
 import WebKit
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, CAAnimationDelegate, GDWebViewControllerDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, CAAnimationDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
@@ -181,24 +181,16 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     func openSafari() {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(value: { celeb in
-            
-//                let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-//                webView.uiDelegate = self
-//                self.prese = webView
-//
-//                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
-//                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)"))
-//                let myRequest = URLRequest(url: myURL!)
-//                webView.load(myRequest)
-                
-//                let safariVC = SFSafariViewController(url: NSURL(string: searchString!)! as URL)
-//                let statusView = UIView(frame: Constants.kStatusViewRect)
-//                statusView.backgroundColor = Color.red.darken2
-//                safariVC.view.addSubview(statusView)
-//                self.present(safariVC, animated: true, completion: nil)
-//                safariVC.preferredBarTintColor = Constants.kRedShade
-//                safariVC.preferredControlTintColor = Color.white
-//                safariVC.delegate = self
+                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
+                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)"))
+                let safariVC = SFSafariViewController(url: myURL!)
+                let statusView = UIView(frame: Constants.kStatusViewRect)
+                statusView.backgroundColor = Color.red.darken2
+                safariVC.view.addSubview(statusView)
+                self.present(safariVC, animated: true, completion: nil)
+                safariVC.preferredBarTintColor = Constants.kRedShade
+                safariVC.preferredControlTintColor = Color.white
+                safariVC.delegate = self
             }).start()
     }
     

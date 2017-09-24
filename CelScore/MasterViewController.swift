@@ -18,7 +18,6 @@ import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
-import Timepiece
 import Accounts
 
 
@@ -172,8 +171,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             UserViewModel().refreshFacebookTokenSignal().start()
             return ""
         }
-        let expirationDate = current.expirationDate.stringMMddyyyyFormat().date(inFormat:"MM/dd/yyyy")!
-        if expirationDate < Date.today() { self.facebookLogin(hideButton: false) }
+        if current.expirationDate < Date() { self.facebookLogin(hideButton: false) }
         else { UserViewModel().refreshFacebookTokenSignal().start() }
         return current.tokenString
     }

@@ -33,7 +33,6 @@ target 'CelScore' do
     pod 'TwitterKit', '~> 3.1'
     pod 'TwitterCore', '~> 3.0'
     pod 'RateLimit', '~> 2.1'
-    pod 'Timepiece', '~> 1.0'
     pod 'YLProgressBar', '~> 3.10'
     pod 'HMSegmentedControl', '~> 1.5.4'
     pod 'BEMCheckBox', '~> 1.4'

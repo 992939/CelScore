@@ -37,8 +37,16 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
             .startWithValues({ celeb in
-                let birthdate: Date = celeb.birthdate.date(inFormat: "MM/dd/yyyy")!
-                let age: Int = (Date().month < birthdate.month || (Date().month == birthdate.month && Date().day < birthdate.day)) ? (Date().year - (birthdate.year+1)) : (Date().year - birthdate.year)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy"
+                let birthdate: Date = dateFormatter.date(from: celeb.birthdate)!
+                
+                let calendar = NSCalendar.current
+                let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour])
+                let components = calendar.dateComponents(unitFlags, from: birthdate)
+                let now = calendar.dateComponents(unitFlags, from: Date())
+                
+                let age: Int = (now.month! < components.month! || (now.month! == components.month! && now.day! < components.day!)) ? (now.year! - (components.year!+1)) : (now.year! - components.year!)
                 let formatter = DateFormatter()
                 formatter.dateStyle = DateFormatter.Style.long
                 
@@ -59,7 +67,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             case Info.from.name(): infoLabelText = celeb.from
                             case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
                             case Info.height.name(): infoLabelText = celeb.height
-                            case Info.zodiac.name(): infoLabelText = (celeb.birthdate.date(inFormat:"MM/dd/yyyy")?.zodiacSign().name())!
+                            case Info.zodiac.name(): infoLabelText = birthdate.zodiacSign().name()
                             case Info.status.name(): infoLabelText = celeb.status
                             case Info.throne.name(): infoLabelText = String(celeb.daysOnThrone) + days
                             case Info.networth.name(): infoLabelText = celeb.netWorth
