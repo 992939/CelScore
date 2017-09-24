@@ -15,11 +15,10 @@ import PMAlertController
 import ReactiveCocoa
 import ReactiveSwift
 import Result
-import MessageUI
 import SafariServices
 
 
-final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, MFMailComposeViewControllerDelegate, SFSafariViewControllerDelegate {
+final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, SFSafariViewControllerDelegate {
     
     //MARK: Property
     fileprivate let picker: UIPickerView
@@ -173,7 +172,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 return SettingsViewModel().calculatePrevAverageRoyaltySignal(day: .LastMonth) }
             .on(value: { value in self.fact3Bar.setProgress(value/100, animated: false) })
             .start()
-        
     }
     
     override func viewDidAppear(_ animated: Bool = true) {
@@ -220,8 +218,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func support() { self.sendEmail() }
-    
     func showPolicy() {
         let url = URL(string: Constants.kPolicyURL)
         let safariVC = SFSafariViewController(url: url!, entersReaderIfAvailable: false)
@@ -237,13 +233,6 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.navigationDrawerController!.isEnabled = true
             self.navigationDrawerController!.closeLeftView()
         }
-    }
-    
-    //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: { _ in
-            self.navigationDrawerController!.isEnabled = true
-        })
     }
     
     //MARK: UIPickerViewDelegate

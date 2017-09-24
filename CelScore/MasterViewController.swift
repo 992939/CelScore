@@ -18,12 +18,11 @@ import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
-import MessageUI
 import Timepiece
 import Accounts
 
 
-final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, MFMailComposeViewControllerDelegate {
+final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
@@ -260,11 +259,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.diffCalculator.rows = []
         self.changeList()
         self.movingSocialButton(onScreen: false)
-    }
-    
-    //MARK: MFMailComposeViewControllerDelegate
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
     }
     
     //MARK: ASTableView methods

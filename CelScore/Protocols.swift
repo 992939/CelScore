@@ -15,7 +15,6 @@ import ReactiveCocoa
 import ReactiveSwift
 import RevealingSplashView
 import PMAlertController
-import MessageUI
 
 
 protocol DetailSubViewable {
@@ -51,28 +50,13 @@ extension Labelable {
     }
 }
 
-@objc protocol Supportable: MFMailComposeViewControllerDelegate {}
+@objc protocol Supportable {}
 
 extension Supportable where Self: UIViewController {
-    func sendEmail() {
-        guard MFMailComposeViewController.canSendMail() else {
-            return TAOverlay.show(withLabel: "We are unable to verify that an email has been setup on this device.", image: OverlayInfo.networkError.logo(), options: OverlayInfo.getOptions())
-        }
-        let mail = MFMailComposeViewController()
-        mail.mailComposeDelegate = self
-        mail.setToRecipients(["support@greyecology.io"])
-        mail.setSubject("CelScore Issue")
-        mail.setMessageBody("voter: \(Constants.kCredentialsProvider.identityId!)\n\n***Please provide as much information as possible about the issue below and we'll try to address it in a timely manner. ***", isHTML: false)
-        Motion.delay(0.5, execute: { self.present(mail, animated: true, completion: nil) })
-    }
-    
     func sendAlert(_ info: OverlayInfo, with loginType: SocialLogin) {
         let alertVC = PMAlertController(title: "cloud error", description: info.message(loginType.getTitle()), image: R.image.cloud_big_red()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Ok", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) }))
-        alertVC.addAction(PMAlertAction(title: "Contact Us", style: .default, action: { _ in
-            self.dismiss(animated: true, completion: { _ in Motion.delay(0.5) { self.sendEmail() }})
-        }))
         alertVC.view.backgroundColor = UIColor.clear.withAlphaComponent(0.7)
         alertVC.view.isOpaque = false
         self.present(alertVC, animated: true, completion: nil)
@@ -117,7 +101,9 @@ extension Sociable where Self: UIViewController {
                 alertVC.view.isOpaque = false
                 self.present(alertVC, animated: true, completion: nil)
             })
-            .on(failed: { error in self.dismissHUD(); self.sendAlert(.loginError, with: loginType) })
+            .on(failed: { error in
+                self.dismissHUD()
+                self.sendAlert(.loginError, with: loginType) })
             .start()
     }
     
