@@ -179,10 +179,6 @@ open class Bar: View {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        layoutBarSubviews()
-    }
-    
-    open func layoutBarSubviews() {
         guard willLayout else {
             return
         }
@@ -269,6 +265,7 @@ open class Bar: View {
         autoresizingMask = .flexibleWidth
         interimSpacePreset = .interimSpace3
         contentEdgeInsetsPreset = .square1
+        
         prepareContentView()
     }
 }

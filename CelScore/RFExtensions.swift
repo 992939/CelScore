@@ -48,12 +48,6 @@ extension Date {
         return f.string(from: self)
     }
 
-    func stringMMMMddyyyyFormat()-> String {
-        let f = DateFormatter()
-        f.dateFormat = "MMMM dd, yyyy"
-        return f.string(from: self)
-    }
-    
     private init(anDate: Date) {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
@@ -68,11 +62,6 @@ extension Date {
         let date = formatter.date(from: aString)
         self.init(timeInterval: 0, since:date!)
     }
-}
-
-extension CGPoint {
-    func minus(_ p: CGPoint) -> CGPoint { return CGPoint(x: x - p.x, y: y - p.y) }
-    var length: CGFloat { return sqrt(x * x + y * y) }
 }
 
 extension Double {
@@ -101,8 +90,6 @@ extension UIDevice {
         switch identifier {
         case "iPod5,1":                                 return "iPod Touch 5"
         case "iPod7,1":                                 return "iPod Touch 6"
-        case "iPhone3,1", "iPhone3,2", "iPhone3,3":     return "iPhone 4"
-        case "iPhone4,1":                               return "iPhone 4s"
         case "iPhone5,1", "iPhone5,2":                  return "iPhone 5"
         case "iPhone5,3", "iPhone5,4":                  return "iPhone 5c"
         case "iPhone6,1", "iPhone6,2":                  return "iPhone 5s"

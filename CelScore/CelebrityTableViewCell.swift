@@ -12,7 +12,6 @@ import BEMCheckBox
 import ReactiveCocoa
 import ReactiveSwift
 import Result
-import PMAlertController
 
 
 final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {

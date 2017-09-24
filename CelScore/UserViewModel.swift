@@ -10,13 +10,13 @@ import AWSCore
 import AWSCognito
 import RealmSwift
 import TwitterKit
-import Timepiece
 import SwiftyJSON
 import ReactiveCocoa
 import ReactiveSwift
 import FBSDKCoreKit
 import Result
 import AWSCore
+
 
 struct UserViewModel {
     

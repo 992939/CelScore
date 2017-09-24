@@ -13,21 +13,18 @@ def shared_pods
     pod 'ReactiveCocoa', '5.0.4'
     pod 'ReactiveSwift', '~> 1.1'
     pod 'Result', '~> 3.1.0'
-    pod 'Realm', '~> 2.8'
-    pod 'RealmSwift', '~> 2.8'
+    pod 'RealmSwift', '~> 2.10'
     pod 'Texture', '~> 2.3'
     pod 'AWSCognito', '2.6'
     pod 'AWSAPIGateway', '2.6'
     pod 'AWSPinpoint', '2.6'
-    pod 'BEMCheckBox', '~> 1.4'
 end
 
 target 'CelScore' do
     shared_pods
-    pod 'Material', '2.7'
+    pod 'Material', '~> 2.10'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '3.1.4'
-    pod 'SDWebImage', '~>3.8.1'
     pod 'R.swift', '~> 3.3'
     pod 'FBSDKLoginKit', '~> 4.24'
     pod 'FBSDKCoreKit', '~> 4.24'
@@ -39,6 +36,7 @@ target 'CelScore' do
     pod 'Timepiece', '~> 1.0'
     pod 'YLProgressBar', '~> 3.10'
     pod 'HMSegmentedControl', '~> 1.5.4'
+    pod 'BEMCheckBox', '~> 1.4'
     pod 'SVProgressHUD', '~> 2.1'
     pod 'RevealingSplashView', '~> 0.4'
     pod 'PMAlertController', '~> 2.1'

@@ -95,8 +95,8 @@ open class Toolbar: Bar {
         contentViewAlignment = .center == titleLabel.textAlignment ? .center : .full
     }
     
-    open override func layoutBarSubviews() {
-        super.layoutBarSubviews()
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         guard willLayout else {
             return
         }
@@ -135,17 +135,11 @@ open class Toolbar: Bar {
         }
     }
 
-	/**
-     Prepares the view instance when intialized. When subclassing,
-     it is recommended to override the prepare method
-     to initialize property values and other setup operations.
-     The super.prepare method should always be called immediately
-     when subclassing.
-     */
 	open override func prepare() {
 		super.prepare()
         contentViewAlignment = .center
-		prepareTitleLabel()
+		
+        prepareTitleLabel()
 		prepareDetailLabel()
 	}
 }

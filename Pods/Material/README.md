@@ -2,7 +2,15 @@
 
 # Material
 
-Welcome to **Material,** a Material Design library used to create beautiful applications. Material's animation system has been completely reworked to take advantage of [Motion](https://github.com/CosmicMind/Motion), a library dedicated to animations and transitions. 
+Welcome to **Material,** a Material Design library used to create beautiful applications. Material's animation system has been completely reworked to take advantage of [Motion](https://github.com/CosmicMind/Motion), a library dedicated to animations and transitions.
+
+[![Carthage compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Version](https://img.shields.io/cocoapods/v/Material.svg?style=flat)](http://cocoapods.org/pods/Material)
+[![License](https://img.shields.io/cocoapods/l/Material.svg?style=flat)](https://github.com/lkzhao/Material/blob/master/LICENSE?raw=true)
+![Xcode 8.2+](https://img.shields.io/badge/Xcode-8.2%2B-blue.svg)
+![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
+![Swift 3.0+](https://img.shields.io/badge/Swift-3.0%2B-orange.svg)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9D6MURMLLUNQ2)
 
 ## Photos Sample
 
@@ -10,10 +18,8 @@ Take a look at a sample [Photos](https://github.com/CosmicMind/Samples/tree/mast
 
 ![Photos](http://www.cosmicmind.com/motion/projects/photos.gif)
 
-* [Photos Sample](https://github.com/CosmicMind/Samples/tree/master/Projects/Programmatic/Photos)
-
 ## Sample Projects
- 
+
 Take a look at [Sample Projects](https://github.com/CosmicMind/Samples) to get your projects started.
 
 ## Features
@@ -27,8 +33,8 @@ Take a look at [Sample Projects](https://github.com/CosmicMind/Samples) to get y
 - [x] Icons
 - [x] TextField
 - [X] Snackbar
-- [x] TabBar
-- [x] PageTabBar
+- [x] Tabs
+- [x] Chips
 - [X] SearchBar
 - [x] NavigationController
 - [x] NavigationDrawer
@@ -148,13 +154,13 @@ A SearchBar is a powerful navigation tool that allows for user's input with an i
 
 * [SearchBar Sample](https://github.com/CosmicMind/Samples/tree/master/Projects/Programmatic/Search)
 
-## PageTabBar
+## Tabs
 
-A PageTabBar is a new component that links a customizable TabBar to a UIPageViewController making a powerful and visually pleasing component to have in any application. The TabBar can be aligned at the top or bottom of the view controller.
+Tabs is a new component that links a customizable TabBar to a stack of view controllers making a powerful and visually pleasing component to have in any application.
 
-![PageTabBarController](http://www.cosmicmind.com/material/white/page-tab-bar-controller.gif)
+![Tabs](http://www.cosmicmind.com/material/white/page-tab-bar-controller.gif)
 
-* [PageTabBar Sample](https://github.com/CosmicMind/Samples/tree/master/Projects/Programmatic/PageTabBarController)
+* [Tabs Sample](https://github.com/CosmicMind/Samples/tree/master/Projects/Programmatic/TabsController)
 
 ## NavigationController
 

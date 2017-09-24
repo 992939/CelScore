@@ -16,9 +16,6 @@ import Result
 import Accounts
 
 
-public typealias NewCelebInfo = (text: String, image: String)
-
-
 struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
