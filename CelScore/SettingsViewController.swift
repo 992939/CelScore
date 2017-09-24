@@ -18,7 +18,7 @@ import Result
 import SafariServices
 
 
-final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, SFSafariViewControllerDelegate {
+final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, BEMCheckBoxDelegate, Labelable, Supportable, Snackable, SFSafariViewControllerDelegate {
     
     //MARK: Property
     fileprivate let picker: UIPickerView

@@ -39,6 +39,7 @@ target 'CelScore' do
     pod 'SVProgressHUD', '~> 2.1'
     pod 'RevealingSplashView', '~> 0.4'
     pod 'PMAlertController', '~> 2.1'
+    pod 'TTGSnackbar', '~> 1.5'
     pod 'Dwifft', '~> 0.6'
 end
 

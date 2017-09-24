@@ -21,7 +21,7 @@ import FBSDKCoreKit
 import Accounts
 
 
-final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
+final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, Snackable {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl
@@ -58,7 +58,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         Motion.delay(0.4) {
             if let index = self.celebrityTableNode.indexPathForSelectedRow {
                 self.celebrityTableNode.performBatchUpdates({ 
@@ -158,6 +157,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .observe(on: UIScheduler())
             .on(value: { index in
                 self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
+                self.displaySnack(message: "Day 6 of King Bieber's rule.")
                 self.changeList() })
             .on(failed: { _ in
                 revealingSplashView.startAnimation()

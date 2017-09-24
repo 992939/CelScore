@@ -15,6 +15,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import RevealingSplashView
 import PMAlertController
+import TTGSnackbar
 
 
 protocol DetailSubViewable {
@@ -37,7 +38,7 @@ extension HUDable{
     func dismissHUD() { SVProgressHUD.dismiss() }
 }
 
-protocol Labelable{}
+protocol Labelable {}
 
 extension Labelable {
     func setupLabel(title: String, frame: CGRect) -> UILabel {
@@ -47,6 +48,22 @@ extension Labelable {
         label.backgroundColor = Constants.kGreyBackground
         label.font = UIFont(name: label.font.fontName, size: Constants.kFontSize)
         return label
+    }
+}
+
+protocol Snackable {}
+
+extension Snackable where Self: UIViewController {
+    func displaySnack(message: String) {
+        let snackbar = TTGSnackbar(message: message, duration: .long, actionText: "Ok", actionBlock: { (snackbar) in print("Click action!") })
+        snackbar.actionTextColor = Constants.kBlueShade
+        snackbar.messageTextColor = Color.white
+        snackbar.actionMaxWidth = 80
+        snackbar.messageTextFont = UIFont.systemFont(ofSize: UIDevice.getFontSize())
+        snackbar.backgroundColor = Color.darkGray
+        snackbar.icon = R.image.bell()!
+        snackbar.animationType = .slideFromBottomBackToBottom
+        snackbar.show()
     }
 }
 

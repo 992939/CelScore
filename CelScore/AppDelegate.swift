@@ -33,10 +33,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-         UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.registerForRemoteNotifications()
        
         //Realm
-        let config = Realm.Configuration(
+        let config = Realm.Configuration (
             schemaVersion: 53,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 43 {
@@ -56,7 +57,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
         pinpoint = AWSPinpoint(configuration: pinpointConfig)
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
-        UIApplication.shared.registerForRemoteNotifications()
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
         JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")

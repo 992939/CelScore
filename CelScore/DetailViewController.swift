@@ -17,7 +17,7 @@ import PMAlertController
 import WebKit
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, CAAnimationDelegate, SFSafariViewControllerDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, Snackable, CAAnimationDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
