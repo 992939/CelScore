@@ -70,6 +70,29 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .observe(on: UIScheduler())
             .on(value: { _ in
                 self.movingSocialButton(onScreen: false)
+                
+                let hourly = TimedLimiter(limit: 1)// 60 * Constants.kOneMinute)
+                _ = hourly.execute {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MM/dd/yyyy"
+                    
+                    SettingsViewModel().getSettingSignal(settingType: .lastVisit)
+                        .filter({ lastVisit -> Bool in
+                            guard (lastVisit as! String).characters.count > 0 else { return true }
+                            let visit = dateFormatter.date(from: lastVisit as! String)!
+                            let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
+                            let isToday = visit.compare(today) == ComparisonResult.orderedAscending
+                            return isToday })
+                        .delay(2, on: QueueScheduler.main)
+                        .flatMap(.latest) { (_) -> SignalProducer<String, NoError> in
+                            return CelebrityViewModel().getWelcomeRuleMessage() }
+                        .on(value: { message in self.displaySnack(message: message) })
+                        .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
+                            let today = dateFormatter.string(from: Date()) as AnyObject
+                            return SettingsViewModel().updateSettingSignal(value: today, settingType: .lastVisit) }
+                        .start()
+                }
+                
                 let refresh = TimedLimiter(limit: 2 * Constants.kOneMinute)
                 _ = refresh.execute {
                     CelScoreViewModel().getFromAWSSignal(dataType: .list)
@@ -97,15 +120,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Int, NoError> in
                             return CelebrityViewModel().removeCelebsNotInPublicOpinionSignal() }
-                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                            return SettingsViewModel().getSettingSignal(settingType: .lastVisit) }
-                        .on(value: { lastVisit in
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MM/dd/yyyy"
-                            let visit = dateFormatter.date(from: lastVisit.string!)!
-                            let isToday = visit.compare(Date())
-                            print("isToday: \(isToday)")
-                        })
                         .start()
                 }})
             .on(failed: { _ in self.movingSocialButton(onScreen: true) })

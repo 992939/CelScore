@@ -63,6 +63,15 @@ struct CelebrityViewModel {
         }
     }
     
+    func getWelcomeRuleMessage() -> SignalProducer<String, NoError> {
+        return SignalProducer { observer, disposable in
+            let realm = try! Realm()
+            let celeb = realm.objects(CelebrityModel.self).filter("index = 1").first
+            observer.send(value: "YOLO")
+            observer.sendCompleted()
+        }
+    }
+    
     func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

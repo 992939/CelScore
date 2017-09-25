@@ -188,9 +188,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 safariVC.preferredBarTintColor = Constants.kRedShade
                 safariVC.preferredControlTintColor = Color.white
                 safariVC.delegate = self
-                let statusView = UIView(frame: Constants.kStatusViewRect)
-                statusView.backgroundColor = Color.red.darken2
-                self.presentedViewController?.view.addSubview(statusView)
             }).start()
     }
     
@@ -334,7 +331,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 self.voteButton.pulseAnimation = .centerWithBacking
                 self.voteButton.pulseColor = .white
                 self.voteButton.pulse()
-                }
+            }
         })
     }
     
@@ -426,7 +423,3 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         })
     }
 }
-
-
-
-
