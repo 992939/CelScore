@@ -73,6 +73,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 let refresh = TimedLimiter(limit: 2 * Constants.kOneMinute)
                 _ = refresh.execute {
                     CelScoreViewModel().getFromAWSSignal(dataType: .list)
+                        .observe(on: UIScheduler())
                         .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
@@ -182,7 +183,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     func twitterAccess() -> String {
         let account = ACAccountStore()
         let accountType = account.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-
         account.requestAccessToAccounts(with: accountType, options: nil) { (success: Bool, error: Error?) in
             if success == false { Motion.delay(3) { self.sendAlert(.permissionError, with: SocialLogin.twitter) }}
         }

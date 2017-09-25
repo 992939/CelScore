@@ -84,15 +84,17 @@ struct SettingsViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
+            var object: AnyObject?
             switch settingType {
-            case .defaultListIndex: observer.send(value: settings.defaultListIndex as AnyObject)
-            case .loginTypeIndex: observer.send(value: settings.loginTypeIndex as AnyObject)
-            case .onCountdown: observer.send(value: settings.onCountdown as AnyObject)
-            case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
-            case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
-            case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning as AnyObject)
-            case .lastVisit: observer.send(value: settings.lastVisit as AnyObject)
+            case .defaultListIndex: object = settings.defaultListIndex as AnyObject
+            case .loginTypeIndex: object = settings.loginTypeIndex as AnyObject
+            case .onCountdown: object = settings.onCountdown as AnyObject
+            case .firstInterest: object = settings.isFirstInterest as AnyObject
+            case .firstVoteDisable: object = settings.isFirstVoteDisabled as AnyObject
+            case .firstTrollWarning: object = settings.isFirstTrollWarning as AnyObject
+            case .lastVisit: object = settings.lastVisit as AnyObject
             }
+            observer.send(value: object!)
             observer.sendCompleted()
         }
     }
