@@ -76,6 +76,12 @@ extension Bundle {
     var buildVersionNumber: String? { return self.infoDictionary?["CFBundleVersion"] as? String }
 }
 
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
+
 extension UIDevice {
     
     var modelName: String {

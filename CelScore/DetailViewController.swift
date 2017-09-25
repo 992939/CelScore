@@ -184,13 +184,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
                 let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)"))
                 let safariVC = SFSafariViewController(url: myURL!)
-                let statusView = UIView(frame: Constants.kStatusViewRect)
-                statusView.backgroundColor = Color.red.darken2
-                safariVC.view.addSubview(statusView)
                 self.present(safariVC, animated: true, completion: nil)
                 safariVC.preferredBarTintColor = Constants.kRedShade
                 safariVC.preferredControlTintColor = Color.white
                 safariVC.delegate = self
+                let statusView = UIView(frame: Constants.kStatusViewRect)
+                statusView.backgroundColor = Color.red.darken2
+                self.presentedViewController?.view.addSubview(statusView)
             }).start()
     }
     

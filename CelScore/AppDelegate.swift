@@ -33,8 +33,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UIApplication.shared.statusBarStyle = .lightContent
-        UIApplication.shared.registerForRemoteNotifications()
        
         //Realm
         let config = Realm.Configuration (
@@ -54,7 +52,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: Constants.kCredentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        let pinpointConfig: AWSPinpointConfiguration = AWSPinpointConfiguration.init(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
+        let pinpointConfig = AWSPinpointConfiguration.init(appId: "ef0864d6aecb4206b0a518b43bacb836", launchOptions: launchOptions)
         pinpoint = AWSPinpoint(configuration: pinpointConfig)
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
         
@@ -62,15 +60,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
         
         //UI
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let nav: NavigationDrawerController = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let nav = NavigationDrawerController(rootViewController: MasterViewController(), leftViewController: SettingsViewController())
         nav.contentViewController.view.backgroundColor = .clear
-        self.window!.rootViewController = nav
-        let statusView = UIView(frame: Constants.kStatusViewRect)
-        statusView.backgroundColor = Color.red.darken2
-        window!.rootViewController!.view.addSubview(statusView)
-        self.window!.backgroundColor = Constants.kBlueShade
-        self.window!.makeKeyAndVisible()
+        window!.rootViewController = nav
+        window!.backgroundColor = Constants.kBlueShade
+        window!.makeKeyAndVisible()
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.registerForRemoteNotifications()
+        UIApplication.shared.statusBarView?.backgroundColor = Color.red.darken2
 
         Twitter.sharedInstance().start(withConsumerKey: "EKczkoEeUbMNkBplemTY7rypt", consumerSecret: "Vldif166LG2VOdgMBmlVqsS0XaN071JqEMZTXqut7cL7pVZPFm")
         Fabric.with([Twitter.self, AWSCognito.self, Crashlytics.self])
