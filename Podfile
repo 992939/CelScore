@@ -10,9 +10,8 @@ plugin 'cocoapods-keys', {
 }
 
 def shared_pods
-    pod 'ReactiveCocoa', '5.0.4'
-    pod 'ReactiveSwift', '~> 1.1'
-    pod 'Result', '~> 3.1.0'
+    pod 'ReactiveCocoa', '6.0'
+    pod 'ReactiveSwift', '~> 2.0'
     pod 'RealmSwift', '~> 2.10'
     pod 'Texture', '~> 2.3'
     pod 'AWSCognito', '2.6'

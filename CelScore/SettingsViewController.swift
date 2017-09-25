@@ -161,8 +161,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         SettingsViewModel().getSettingSignal(settingType: .defaultListIndex)
             .on(value: { index in self.picker.selectRow(index as! Int, inComponent: 0, animated: false) })
-            .flatMapError { _ in return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<CGFloat, NoError> in
                 return SettingsViewModel().calculateAverageRoyaltySignal() }
             .on(value: { value in self.fact1Bar.setProgress(value/100, animated: false) })
             .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in

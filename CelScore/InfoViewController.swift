@@ -51,8 +51,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                 formatter.dateStyle = DateFormatter.Style.long
                 
                 RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-                    .flatMapError { error -> SignalProducer<Double, NoError> in return .empty }
-                    .startWithValues({ score in
+                    .on(value: { score in
                         for (index, quality) in Info.getAll().enumerated() {
                             let barHeight = UIDevice.getPulseBarHeight()
                             let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
@@ -89,6 +88,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                             self.pulseView.addSubview(qualityView)
                         }
                     })
+                .start()
             })
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView

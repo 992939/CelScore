@@ -15,6 +15,7 @@ class SettingsModel: Object {
     
     //MARK: Properties
     dynamic var id: String = "1"
+    dynamic var lastVisit: String = ""
     dynamic var userName: String = ""
     dynamic var defaultListIndex: Int = 0
     dynamic var loginTypeIndex: Int = 0
@@ -29,6 +30,8 @@ class SettingsModel: Object {
     convenience init(json: JSON) {
         self.init()
         self.userName = json["userName"].string!
+        self.lastVisit = json["lastVisit"].string ?? Date().stringMMddyyyyFormat()
+        print("lastVisit: \(lastVisit)")
         self.defaultListIndex = json["defaultListIndex"].int!
         self.loginTypeIndex = json["loginTypeIndex"].int!
         self.onCountdown = json["onCountdown"].bool!

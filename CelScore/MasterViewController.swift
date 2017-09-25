@@ -10,11 +10,11 @@ import Foundation
 import AsyncDisplayKit
 import ReactiveCocoa
 import ReactiveSwift
+import Result
 import Material
 import HMSegmentedControl
 import RateLimit
 import Dwifft
-import Result
 import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
@@ -64,16 +64,12 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                    self.celebrityTableNode.reloadRows(at: [index], with: .fade)
                 }, completion: nil)
             }
-            
-            SettingsViewModel().loggedInAsSignal()
-                .on(value: { _ in self.movingSocialButton(onScreen: false) })
-                .on(failed: { _ in self.movingSocialButton(onScreen: true) })
-                .start()
         }
     
         SettingsViewModel().loggedInAsSignal()
             .observe(on: UIScheduler())
             .on(value: { _ in
+                self.movingSocialButton(onScreen: false)
                 let refresh = TimedLimiter(limit: 2 * Constants.kOneMinute)
                 _ = refresh.execute {
                     CelScoreViewModel().getFromAWSSignal(dataType: .list)
@@ -83,14 +79,11 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<CGFloat, NoError> in
                             return SettingsViewModel().calculateAverageRoyaltySignal() }
-                        .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.latest) { (_) -> SignalProducer<CGFloat, NoError> in
                             return SettingsViewModel().calculateUserAverageCelScoreSignal() }
-                        .filter({ (score:CGFloat) -> Bool in score > Constants.kTrollingThreshold })
-                        .flatMapError { _ in SignalProducer.empty }
+                        .filter({ (score: CGFloat) -> Bool in score > Constants.kTrollingThreshold })
                         .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
                             return SettingsViewModel().getSettingSignal(settingType: .loginTypeIndex) }
-                        .observe(on: UIScheduler())
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             let type = SocialLogin(rawValue:value as! Int)!
                             let token = type == .facebook ? self.facebookToken() : self.twitterAccess()
@@ -103,10 +96,19 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .flatMapError { _ in SignalProducer.empty }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Int, NoError> in
                             return CelebrityViewModel().removeCelebsNotInPublicOpinionSignal() }
-                        .retry(upTo: Constants.kNetworkRetry)
+                        .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
+                            return SettingsViewModel().getSettingSignal(settingType: .lastVisit) }
+                        .on(value: { lastVisit in
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MM/dd/yyyy"
+                            let visit = dateFormatter.date(from: lastVisit.string!)!
+                            let isToday = visit.compare(Date())
+                            print("isToday: \(isToday)")
+                        })
                         .start()
-                }
-        }).start()
+                }})
+            .on(failed: { _ in self.movingSocialButton(onScreen: true) })
+            .start()
     }
     
     override func viewDidLoad() {
@@ -136,7 +138,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     }
     
     func setupData() throws {
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,iconInitialSize: CGSize(width: 200, height: 200), backgroundColor: Constants.kBlueShade)
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,
+                                                      iconInitialSize: CGSize(width: 200, height: 200),
+                                                      backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .list)
@@ -148,8 +152,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .on(value: { _ in
                 revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
                 revealingSplashView.startAnimation() })
-            .flatMapError { _ in return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
+            .mapError({ (error: NSError) -> ListError in return ListError(rawValue: 1)! })
+            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Bool, ListError> in
                 return ListViewModel().sanitizeListsSignal() }
             .flatMapError { _ in return SignalProducer.empty }
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
@@ -157,7 +161,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .observe(on: UIScheduler())
             .on(value: { index in
                 self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
-                self.displaySnack(message: "Day 6 of King Bieber's rule.")
                 self.changeList() })
             .on(failed: { _ in
                 revealingSplashView.startAnimation()

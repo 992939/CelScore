@@ -100,7 +100,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                                     cosmosView.update()
                                 }
                                 return cosmosView.settings.userRatingMode == true }
-                            .flatMapError { _ in SignalProducer.empty }
+                            .promoteError(RatingsError.self)
                             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
                                 return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebST.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .map { userRatings in

@@ -91,6 +91,7 @@ struct SettingsViewModel {
             case .firstInterest: observer.send(value: settings.isFirstInterest as AnyObject)
             case .firstVoteDisable: observer.send(value: settings.isFirstVoteDisabled as AnyObject)
             case .firstTrollWarning: observer.send(value: settings.isFirstTrollWarning as AnyObject)
+            case .lastVisit: observer.send(value: settings.lastVisit as AnyObject)
             }
             observer.sendCompleted()
         }
@@ -108,6 +109,7 @@ struct SettingsViewModel {
             case .firstInterest: settings.isFirstInterest = false
             case .firstVoteDisable: settings.isFirstVoteDisabled = false
             case .firstTrollWarning: settings.isFirstTrollWarning = false
+            case .lastVisit: settings.lastVisit = value as! String
             }
             settings.isSynced = false
             realm.add(settings, update: true)

@@ -173,6 +173,7 @@ struct UserViewModel {
                 let settings = realm.objects(SettingsModel.self).isEmpty ? SettingsModel() : realm.objects(SettingsModel.self).first!
                 guard settings.isSynced == false else  { observer.send(value: settings); return observer.sendCompleted(); }
                 
+                dataset.setString(String(settings.lastVisit), forKey: "lastVisit")
                 dataset.setString(String(settings.defaultListIndex), forKey: "defaultListIndex")
                 dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 dataset.setString(String(settings.onCountdown), forKey: "onCountdown")
