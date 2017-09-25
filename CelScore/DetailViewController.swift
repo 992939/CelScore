@@ -182,7 +182,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
             .on(value: { celeb in
                 let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
-                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)"))
+                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)&tbm=nws"))
                 let safariVC = SFSafariViewController(url: myURL!)
                 self.present(safariVC, animated: true, completion: nil)
                 safariVC.preferredBarTintColor = Constants.kRedShade
