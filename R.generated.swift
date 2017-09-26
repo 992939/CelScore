@@ -69,7 +69,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 91 images.
+  /// This `R.image` struct is generated, and contains static references to 90 images.
   struct image {
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
@@ -147,8 +147,6 @@ struct R: Rswift.Validatable {
     static let cross = Rswift.ImageResource(bundle: R.hostingBundle, name: "cross")
     /// Image `crown_big_blue`.
     static let crown_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_big_blue")
-    /// Image `crown_white`.
-    static let crown_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_white")
     /// Image `emptyCircle`.
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
@@ -442,11 +440,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "crown_big_blue", bundle: ..., traitCollection: ...)`
     static func crown_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.crown_big_blue, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "crown_white", bundle: ..., traitCollection: ...)`
-    static func crown_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.crown_white, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "emptyCircle", bundle: ..., traitCollection: ...)`
