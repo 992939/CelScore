@@ -292,6 +292,21 @@ enum ListInfo : Int {
     }
 }
 
+//MARK: SnackIcon
+enum SnackIcon: Int {
+    case alert
+    case crown
+    case star
+    
+    func icon() -> UIImage {
+        switch self {
+        case .alert: return R.image.bell()!
+        case .crown: return R.image.white_wreath()!
+        case .star: return R.image.star_icon()!
+        }
+    }
+}
+
 //MARK: Zodiac
 enum Zodiac : Int {
     case aries

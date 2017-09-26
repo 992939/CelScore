@@ -67,7 +67,8 @@ struct CelebrityViewModel {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celeb = realm.objects(CelebrityModel.self).filter("index = 1").first
-            observer.send(value: "YOLO")
+            let message = "Day \(celeb!.daysOnThrone) of \(celeb!.kingName)'s era!"
+            observer.send(value: message)
             observer.sendCompleted()
         }
     }

@@ -54,9 +54,10 @@ extension Labelable {
 protocol Snackable {}
 
 extension Snackable where Self: UIViewController {
-    func displaySnack(message: String) {
+    func displaySnack(message: String, icon: SnackIcon) {
         let snackbar = TTGSnackbar(message: message, duration: .long, actionText: "Ok", actionBlock: { (snackbar) in print("Click action!") })
         snackbar.actionTextColor = Constants.kBlueShade
+        snackbar.actionTextNumberOfLines = 1
         snackbar.messageTextColor = Color.white
         snackbar.actionMaxWidth = Constants.kMaxWidth
         snackbar.leftMargin = Constants.kPadding
@@ -64,7 +65,7 @@ extension Snackable where Self: UIViewController {
         snackbar.bottomMargin = Constants.kPadding
         snackbar.messageTextFont = UIFont.systemFont(ofSize: UIDevice.getFontSize())
         snackbar.backgroundColor = Color.darkGray
-        snackbar.icon = R.image.bell()!
+        snackbar.icon = icon.icon()
         snackbar.animationType = .slideFromBottomBackToBottom
         snackbar.show()
     }

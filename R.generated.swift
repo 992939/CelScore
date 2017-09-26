@@ -69,7 +69,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 90 images.
+  /// This `R.image` struct is generated, and contains static references to 91 images.
   struct image {
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
@@ -147,6 +147,8 @@ struct R: Rswift.Validatable {
     static let cross = Rswift.ImageResource(bundle: R.hostingBundle, name: "cross")
     /// Image `crown_big_blue`.
     static let crown_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_big_blue")
+    /// Image `crown_white`.
+    static let crown_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "crown_white")
     /// Image `emptyCircle`.
     static let emptyCircle = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCircle")
     /// Image `facebooklogo`.
@@ -205,8 +207,6 @@ struct R: Rswift.Validatable {
     static let mini_sadFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_sadFace")
     /// Image `mini_smile`.
     static let mini_smile = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_smile")
-    /// Image `news_icon`.
-    static let news_icon = Rswift.ImageResource(bundle: R.hostingBundle, name: "news_icon")
     /// Image `nuclear_red`.
     static let nuclear_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "nuclear_red")
     /// Image `past_circle`.
@@ -249,6 +249,8 @@ struct R: Rswift.Validatable {
     static let white_crown = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_crown")
     /// Image `white_star_button`.
     static let white_star_button = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_star_button")
+    /// Image `white_wreath`.
+    static let white_wreath = Rswift.ImageResource(bundle: R.hostingBundle, name: "white_wreath")
     /// Image `whitestar`.
     static let whitestar = Rswift.ImageResource(bundle: R.hostingBundle, name: "whitestar")
     
@@ -442,6 +444,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.crown_big_blue, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "crown_white", bundle: ..., traitCollection: ...)`
+    static func crown_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.crown_white, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "emptyCircle", bundle: ..., traitCollection: ...)`
     static func emptyCircle(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.emptyCircle, compatibleWith: traitCollection)
@@ -587,11 +594,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.mini_smile, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "news_icon", bundle: ..., traitCollection: ...)`
-    static func news_icon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.news_icon, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "nuclear_red", bundle: ..., traitCollection: ...)`
     static func nuclear_red(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.nuclear_red, compatibleWith: traitCollection)
@@ -695,6 +697,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "white_star_button", bundle: ..., traitCollection: ...)`
     static func white_star_button(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.white_star_button, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "white_wreath", bundle: ..., traitCollection: ...)`
+    static func white_wreath(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.white_wreath, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "whitestar", bundle: ..., traitCollection: ...)`
