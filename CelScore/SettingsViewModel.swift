@@ -101,6 +101,7 @@ struct SettingsViewModel {
     
     func updateSettingSignal(value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
+            print("update: \(value.description)")
             let realm = try! Realm()
             realm.beginWrite()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()

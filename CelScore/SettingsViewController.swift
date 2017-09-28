@@ -41,6 +41,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let logoCircle_y = Constants.kIsOriginalIphone ? 12 : 18
         self.logoCircle = Button(frame: CGRect(x: logoCircle_x, y: logoCircle_y, width: diameter, height: diameter))
         super.init(nibName: nil, bundle: nil)
+        
+        self.picker.dataSource = self
+        self.picker.delegate = self
     }
     
     //MARK: Method
@@ -81,8 +84,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //PickerView
         let pickerView: View = self.setupMaterialView(frame: CGRect(x: Constants.kPadding, y: (logoView.bottom + 3 * progressNodeHeight - Constants.kPadding/2), width: maxWidth, height: UIDevice.getPickerHeight()))
         self.picker.frame = CGRect(x: Constants.kPadding, y: Constants.kPickerY, width: maxWidth - 2 * Constants.kPadding, height: 100)
-        self.picker.dataSource = self
-        self.picker.delegate = self
+        
         pickerView.addSubview(self.picker)
         let pickerNode = ASDisplayNode(viewBlock: { () -> UIView in return pickerView })
         self.view.addSubnode(pickerNode)
@@ -242,11 +244,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SettingsViewModel().updateSettingSignal(value: row as AnyObject, settingType: .defaultListIndex).start()
         SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithValues({ first in let firstTime = first as! Bool
             guard firstTime else { return }
-            TAOverlay.show(withLabel: OverlayInfo.firstInterest.message(), image: OverlayInfo.firstInterest.logo(), options: OverlayInfo.getOptions())
-            TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstInterest).start() })
+            self.displaySnack(message: "The default list has been updated.", icon: .alert)
+            SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstInterest).start()
         })
     }
     

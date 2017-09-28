@@ -74,7 +74,6 @@ final class TodayViewController: UITableViewController, NCWidgetProviding {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    @available(iOS 10.0, *)
     @available(iOSApplicationExtension 10.0, *)
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         self.preferredContentSize = (activeDisplayMode == .expanded) ? CGSize(width: 320, height: CGFloat(items.count)*121 + 44) : CGSize(width: maxSize.width, height: 110)

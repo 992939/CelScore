@@ -12,6 +12,7 @@ import BEMCheckBox
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import NotificationCenter
 
 
 final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
@@ -155,17 +156,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        var days = self.celebST.daysOnThrone < 1 ? "∅" : String(self.celebST.daysOnThrone)
-        var celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
-        
-        if self.celebST.daysOnThrone >= 100 {
-            let title: Int = self.celebST.daysOnThrone / 100
-            celebName = String("\(celebST.kingName) \(self.toRoman(number: title))")
-            days = String(self.celebST.daysOnThrone % 100)
-        }
-        
-        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: days))", attributes: attr2)
-        self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebName)", attributes: attr)
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: getDaysOnThrone()))", attributes: attr2)
+        self.nameNode.attributedText = NSMutableAttributedString(string: "\(getCelebName())", attributes: attr)
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
@@ -306,6 +298,23 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     
     func getId() -> String { return celebST.id }
     
+    func getCelebName() -> String {
+        var celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
+        if self.celebST.daysOnThrone >= 100 {
+            let title: Int = self.celebST.daysOnThrone / 100
+            celebName = String("\(celebST.kingName) \(self.toRoman(number: title))")
+        }
+        return celebName
+    }
+    
+    func getDaysOnThrone() -> String {
+        var days = self.celebST.daysOnThrone < 1 ? "∅" : String(self.celebST.daysOnThrone)
+        if self.celebST.daysOnThrone >= 100 {
+            days = String(self.celebST.daysOnThrone % 100)
+        }
+        return days
+    }
+    
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
         self.updateCheckBox(checkBox)
@@ -319,11 +328,12 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
                     if count > 9 {
-                        TAOverlay.show(withLabel: OverlayInfo.maxFollow.message(),
-                                       image: OverlayInfo.maxFollow.logo(),
-                                       options: OverlayInfo.getOptions())
-                        TAOverlay.setCompletionBlock({ _ in checkBox.setOn(false, animated: true) })
+                        let message = "Maximum of celebs reached!"
+                        NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
+                        Motion.delay(0.5){ checkBox.setOn(false, animated: true) }
                     } else {
+                        let message = "\(self.getCelebName()) is in your Today view!"
+                        NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                     }
                 }).start()

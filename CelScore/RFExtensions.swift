@@ -9,6 +9,10 @@
 import UIKit
 
 
+extension Notification.Name {
+    static let onSelectedBox = Notification.Name("on-sekected-box")
+}
+
 extension UIView {
     
     func slide(right: Bool, duration: TimeInterval = 1.0, completionDelegate: CAAnimationDelegate? = nil) {

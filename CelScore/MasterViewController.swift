@@ -19,6 +19,7 @@ import PMAlertController
 import RevealingSplashView
 import FBSDKCoreKit
 import Accounts
+import NotificationCenter
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, Snackable {
@@ -148,8 +149,14 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.celebrityTableNode.view)
         self.view.layout(socialButton).size(CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)).bottom(2*Constants.kPadding).right(2 * Constants.kPadding)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationCallback), name: .onSelectedBox, object: nil)
 
         try! self.setupData()
+    }
+    
+    func notificationCallback(withNotification notification: NSNotification) {
+        Motion.delay(0.8){ self.displaySnack(message: notification.userInfo!["message"] as! String, icon: .alert) }
     }
     
     func setupData() throws {
