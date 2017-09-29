@@ -328,11 +328,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
                     if count > 9 {
-                        let message = "Maximum of celebs reached!"
+                        let message = "Today View: maximum reached!"
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         Motion.delay(0.5){ checkBox.setOn(false, animated: true) }
                     } else {
-                        let message = "\(self.getCelebName()) is in your Today view!"
+                        let message = "Today View: \(self.getCelebName()) added!"
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                     }
