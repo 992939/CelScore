@@ -74,13 +74,15 @@ struct CelebrityViewModel {
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 let visit = dateFormatter.date(from: object.lastVisit)!
                 let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
-                let compare = visit.compare(today) != ComparisonResult.orderedAscending
+                let compare = visit.compare(today) == ComparisonResult.orderedAscending
+                print("lastVisit: \(visit) today: \(today) compare: \(compare)")
                 guard compare else { return }
             }
             realm.beginWrite()
             object.lastVisit = Date().stringMMddyyyyFormat()
             realm.add(object, update: true)
             try! realm.commitWrite()
+            realm.refresh()
             
             let ratings = realm.objects(RatingsModel.self).filter("id = %@", celebId).first
             observer.send(value: ratings!)
@@ -137,6 +139,7 @@ struct CelebrityViewModel {
                 realm.delete(removable!)
             })
             try! realm.commitWrite()
+            realm.refresh()
             observer.send(value: removables.count)
             observer.sendCompleted()
         }

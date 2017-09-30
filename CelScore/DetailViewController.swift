@@ -300,12 +300,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 .start()
 
              CelebrityViewModel().setLastVisitSignal(celebId: self.celebST.id)
+                .observe(on: UIScheduler())
                 .on(value: { ratings in
                     if self.celebST.isTrending {
-                        let message = "\(self.celebST.nickName) is making headlines."
+                        let message = "\(self.celebST.getCelebName()) is in the news!"
                         Motion.delay(2){ self.displaySnack(message: message, icon: .alert) }
                     } else {
-                         let message = "\(self.celebST.nickName) star quality: \(self.getQualityFromRating(rating: ratings.getMax()))"
+                        let message = "Main Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebST.sex))"
                         Motion.delay(2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })
@@ -315,7 +316,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.previousIndex = segmentView.selectedSegmentIndex
     }
     
-    func getQualityFromRating(rating: String) -> String {
+    func getQualityFromRating(rating: String, isMale: Bool = true) -> String {
         switch rating {
         case "rating1": return "Talent"
         case "rating2": return "Originality"
@@ -326,7 +327,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         case "rating7": return "Smarts"
         case "rating8": return "Charisma"
         case "rating9": return "Elegance"
-        case "rating10": return "Beauty"
+        case "rating10": return isMale == true ? "Good Looks" : "Beauty"
         default: return "none"
         }
     }
