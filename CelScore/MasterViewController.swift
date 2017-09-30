@@ -86,7 +86,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return isToday })
                         .delay(2, on: QueueScheduler.main)
                         .flatMap(.latest) { (_) -> SignalProducer<String, NoError> in
-                            return CelebrityViewModel().getWelcomeRuleMessage() }
+                            return CelebrityViewModel().getWelcomeRuleMessageSignal() }
                         .on(value: { message in self.displaySnack(message: message, icon: .crown) })
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                             let today = dateFormatter.string(from: Date()) as AnyObject

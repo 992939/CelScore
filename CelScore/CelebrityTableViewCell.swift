@@ -156,8 +156,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: getDaysOnThrone()))", attributes: attr2)
-        self.nameNode.attributedText = NSMutableAttributedString(string: "\(getCelebName())", attributes: attr)
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: self.celebST.getDaysOnThrone()))", attributes: attr2)
+        self.nameNode.attributedText = NSMutableAttributedString(string: "\(self.celebST.getCelebName())", attributes: attr)
         
         RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
             .on(value: { score in
@@ -298,23 +298,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     
     func getId() -> String { return celebST.id }
     
-    func getCelebName() -> String {
-        var celebName = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
-        if self.celebST.daysOnThrone >= 100 {
-            let title: Int = self.celebST.daysOnThrone / 100
-            celebName = String("\(celebST.kingName) \(self.toRoman(number: title))")
-        }
-        return celebName
-    }
-    
-    func getDaysOnThrone() -> String {
-        var days = self.celebST.daysOnThrone < 1 ? "∅" : String(self.celebST.daysOnThrone)
-        if self.celebST.daysOnThrone >= 100 {
-            days = String(self.celebST.daysOnThrone % 100)
-        }
-        return days
-    }
-    
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
         self.updateCheckBox(checkBox)
@@ -332,29 +315,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         Motion.delay(0.5){ checkBox.setOn(false, animated: true) }
                     } else {
-                        let message = "Today View: \(self.getCelebName()) added!"
+                        let message = "Today View: \(self.celebST.getCelebName()) added!"
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
                     }
                 }).start()
         }
-    }
-    
-    func toRoman(number: Int) -> String {
-        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-        var romanValue = ""
-        var startingValue = number
-        
-        for (index, romanChar) in romanValues.enumerated() {
-            let arabicValue = arabicValues[index]
-            let div = startingValue / arabicValue
-            
-            if div > 0 {
-                for _ in 0..<div { romanValue += romanChar }
-                startingValue -= arabicValue * div
-            }
-        }
-        return romanValue
     }
 }

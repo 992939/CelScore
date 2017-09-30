@@ -289,17 +289,46 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         
         if segmentView.selectedSegmentIndex == 2 {
             self.enableVoteButton()
+            
             RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
-                .flatMapError { _ in SignalProducer.empty }
-                .startWithValues({ userRatings in
-                guard userRatings.getCelScore() > 0 else { return }
-                if self.ratingsVC.isUserRatingMode() {
+                .observe(on: UIScheduler())
+                .on(value: { userRatings in
+                    guard userRatings.getCelScore() > 0 else { return }
+                    guard self.ratingsVC.isUserRatingMode() else { return }
                     let isPositive = userRatings.getCelScore() < Constants.kRoyalty ? false : true
-                    self.updateVoteButton(positive: isPositive)
+                    self.updateVoteButton(positive: isPositive) })
+                .start()
+
+             CelebrityViewModel().setLastVisitSignal(celebId: self.celebST.id)
+                .on(value: { ratings in
+                    if self.celebST.isTrending {
+                        let message = "\(self.celebST.nickName) is making headlines."
+                        Motion.delay(2){ self.displaySnack(message: message, icon: .alert) }
+                    } else {
+                         let message = "\(self.celebST.nickName) star quality: \(self.getQualityFromRating(rating: ratings.getMax()))"
+                        Motion.delay(2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })
+               .start()
+            
         } else { self.disableVoteButton(R.image.blackstar()!) }
         self.previousIndex = segmentView.selectedSegmentIndex
+    }
+    
+    func getQualityFromRating(rating: String) -> String {
+        switch rating {
+        case "rating1": return "Talent"
+        case "rating2": return "Originality"
+        case "rating3": return "Authenticity"
+        case "rating4": return "Generosity"
+        case "rating5": return "Role Model"
+        case "rating6": return "Work Ethic"
+        case "rating7": return "Smarts"
+        case "rating8": return "Charisma"
+        case "rating9": return "Elegance"
+        case "rating10": return "Beauty"
+        default: return "none"
+        }
     }
     
     func slide(right: Bool, newView: UIView, oldView: UIView) {

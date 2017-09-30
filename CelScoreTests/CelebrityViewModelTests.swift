@@ -24,7 +24,6 @@ class CelebrityViewModelTests: XCTestCase {
         celeb.id = "0001"
         celeb.picture3x = "https://imageURL.com/test@3x.png"
         celeb.isFollowed = true
-        celeb.isNew = true
         realm.add(celeb, update: true)
         try! realm.commitWrite()
     }

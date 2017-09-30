@@ -26,6 +26,41 @@ struct CelebrityStruct {
     let sex: Bool
     let isFollowed: Bool
     let isTrending: Bool
+
+    func getCelebName() -> String {
+        var celebName = index == 1 ? kingName : nickName
+        if daysOnThrone >= 100 {
+            let title: Int = daysOnThrone / 100
+            celebName = String("\(kingName) \(toRoman(number: title))")
+        }
+        return celebName
+    }
+    
+    func getDaysOnThrone() -> String {
+        var days = daysOnThrone < 1 ? "∅" : String(daysOnThrone)
+        if daysOnThrone >= 100 {
+            days = String(daysOnThrone % 100)
+        }
+        return days
+    }
+    
+    func toRoman(number: Int) -> String {
+        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        var romanValue = ""
+        var startingValue = number
+        
+        for (index, romanChar) in romanValues.enumerated() {
+            let arabicValue = arabicValues[index]
+            let div = startingValue / arabicValue
+            
+            if div > 0 {
+                for _ in 0..<div { romanValue += romanChar }
+                startingValue -= arabicValue * div
+            }
+        }
+        return romanValue
+    }
 }
 
 extension CelebrityStruct: Equatable {}
@@ -37,6 +72,7 @@ final class CelebrityModel: Object {
     
     //MARK: Properties
     dynamic var id: String = ""
+    dynamic var lastVisit: String = ""
     dynamic var birthdate: String = ""
     dynamic var firstName: String = ""
     dynamic var lastName: String = ""
@@ -63,7 +99,6 @@ final class CelebrityModel: Object {
     dynamic var sex: Bool = false
     dynamic var isSynced: Bool = true
     dynamic var isFollowed: Bool = false
-    dynamic var isNew: Bool = false
     dynamic var isTrending: Bool = false
     
     //MARK: Initializer
@@ -101,7 +136,6 @@ final class CelebrityModel: Object {
         let realm = try! Realm()
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel.self).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
-        else { self.isNew = true }
         
         let rating = realm.objects(RatingsModel.self).filter("id = %@", self.id).first
         guard rating?.isEmpty == false  else {
@@ -116,6 +150,3 @@ final class CelebrityModel: Object {
     //MARK: Method
     override class func primaryKey() -> String { return "id" }
 }
-
-
-
