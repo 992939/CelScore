@@ -22,7 +22,7 @@ import Accounts
 import NotificationCenter
 
 
-final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable, Snackable {
+final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
     
     //MARK: Properties
     fileprivate let segmentedControl: HMSegmentedControl

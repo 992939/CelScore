@@ -12,6 +12,7 @@ import SwiftyTimer
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import NotificationCenter
 
 
 final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
@@ -87,7 +88,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     cosmosView.didTouchCosmos = { (rating:Double) in
                         SettingsViewModel().loggedInAsSignal()
                             .observe(on: UIScheduler())
-                            .on(failed: { _ in self.requestLogin() })
+                            .on(failed: { _ in NotificationCenter.default.post(name: .onFirstLoginFail, object: nil, userInfo: nil) })
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
                                 return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
@@ -113,11 +114,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     self.pulseView.addSubview(qualityView)
                 }
             })
-    }
-    
-    func requestLogin() {
-        Motion.delay(0.5) { TAOverlay.show(withLabel: OverlayInfo.firstVoteDisable.message(), image: OverlayInfo.firstVoteDisable.logo(), options: OverlayInfo.getOptions()) }
-        TAOverlay.setCompletionBlock({ _ in self.delegate!.handleMenu(open: true) })
     }
     
     func isUserRatingMode() -> Bool {

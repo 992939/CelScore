@@ -32,9 +32,9 @@ enum SocialLogin: Int {
     
     func serviceUnavailable() -> String {
         switch self {
-        case .facebook: return "Sharing on Facebook is unavailable. Please check the settings and make sure your Facebook account is accessible."
-        case .twitter: return "Sharing on Twitter is unavailable. Please check the settings and make sure your Twitter account is accessible."
-        default: return "Social sharing is unavailable. Please check the settings and make sure your social accounts are accessible."
+        case .facebook: return "Sharing on Facebook is unavailable."
+        case .twitter: return "Sharing on Twitter is unavailable."
+        default: return "Social sharing is unavailable."
         }
     }
     
@@ -62,16 +62,16 @@ enum OverlayInfo {
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .menuAccess: return "Log in with either Twitter or Facebook."
+        case .menuAccess: return "Log in with Twitter or Facebook."
         case .loginSuccess: return "Login was successful!"
         case .maxFollow: return "You've reached the maximum number of celebs to watch."
         case .countdown: return "You will recieve a notification when a new celeb is crowned."
         case .firstInterest: return "Saved."
-        case .firstVoteDisable: return "Log into the blue castle with Twitter or Facebook."
-        case .firstTrollWarning: return "Below a level of negativity, all your votes will be discarded."
-        case .loginError: return "Settings check:\n- Network connection is on.\n- Date & Time is set automatically.\n- Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
-        case .networkError: return "Try again and please contact us if the problem persists."
-        case .permissionError: return "Unable to authenticate using your \(social) account.\n\nCheck that Celeb&Noble is enabled with your \(social) account.\n\nPlease contact us if the problem persists."
+        case .firstVoteDisable: return "Log in with Twitter or Facebook."
+        case .firstTrollWarning: return "Your votes could eventually be discarded."
+        case .loginError: return "\(social) login error: please try again."
+        case .networkError: return "Network Error: please try again."
+        case .permissionError: return "Unable to access your \(social) account."
         }
     }
     
@@ -88,10 +88,6 @@ enum OverlayInfo {
         case .networkError: return R.image.cloud_red()!
         case .permissionError: return R.image.cloud_red()!
         }
-    }
-    
-    static func getOptions() -> TAOverlayOptions {
-        return [.overlaySizeRoundedRect, .overlayDismissTap, .overlayAnimateTransistions, .overlayShadow]
     }
 }
 
@@ -298,6 +294,7 @@ enum SnackIcon: Int {
     case news
     case crown
     case star
+    case nuclear
     
     func icon() -> UIImage {
         switch self {
@@ -305,6 +302,7 @@ enum SnackIcon: Int {
         case .news: return R.image.bell_ring()!
         case .crown: return R.image.white_wreath()!
         case .star: return R.image.star_icon()!
+        case .nuclear: return R.image.nuclear_mini()!
         }
     }
 }

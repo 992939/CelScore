@@ -15,9 +15,10 @@ import Result
 import SafariServices
 import PMAlertController
 import WebKit
+import NotificationCenter
 
 
-final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, Snackable, CAAnimationDelegate, SFSafariViewControllerDelegate {
+final class DetailViewController: UIViewController, DetailSubViewable, Sociable, Labelable, CAAnimationDelegate, SFSafariViewControllerDelegate {
     
     //MARK: Properties
     fileprivate let infoVC: InfoViewController
@@ -99,6 +100,15 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.view.addSubview(self.ratingsVC.view)
         self.view.addSubview(self.celscoreVC.view)
         self.view.backgroundColor = Constants.kBlueShade
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationCallback), name: .onFirstLoginFail, object: nil)
+    }
+    
+    func notificationCallback(withNotification notification: NSNotification) {
+        Motion.delay(0.5){
+            self.displaySnack(message: OverlayInfo.firstVoteDisable.message(), icon: .alert)
+            self.handleMenu(open: true)
+        }
     }
     
     func showingButtons() {
@@ -162,21 +172,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             }).start()
     }
     
-    func trollAction() {
-        Motion.delay(0.5) {
-            SettingsViewModel().calculateUserAverageCelScoreSignal()
-                .filter({ (score:CGFloat) -> Bool in return score < Constants.kTrollingWarning })
-                .flatMap(.latest) { (score:CGFloat) -> SignalProducer<AnyObject, NoError> in
-                    return SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning) }
-                .map { first in let firstTime = first as! Bool
-                    guard firstTime else { return }
-                    TAOverlay.show(withLabel: OverlayInfo.firstTrollWarning.message(), image: OverlayInfo.firstTrollWarning.logo(), options: OverlayInfo.getOptions())
-                    TAOverlay.setCompletionBlock({ _ in SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstTrollWarning).start() })
-                    }
-                .start()
-        }
-    }
-    
     //MARK: SFSafariViewControllerDelegate
     func openSafari() {
         CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
@@ -230,9 +225,9 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
                     guard (button.tag == 1 ? isFacebookAvailable : isTwitterAvailable) == true else {
-                        TAOverlay.show(withLabel: SocialLogin(rawValue: button.tag)!.serviceUnavailable(),
-                                       image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
-                        return }
+                        self.displaySnack(message: SocialLogin(rawValue: button.tag)!.serviceUnavailable(), icon: .nuclear)
+                        return
+                    }
                     self.present(socialVC, animated: true, completion: { Motion.delay(2.0) { self.socialButton.close() }})
                 }})
             .start()
@@ -304,10 +299,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                 .on(value: { ratings in
                     if self.celebST.isTrending {
                         let message = "\(self.celebST.getCelebName()) is in the news!"
-                        Motion.delay(1){ self.displaySnack(message: message, icon: .news) }
+                        Motion.delay(1.2){ self.displaySnack(message: message, icon: .news) }
                     } else {
                         let message = "Main Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebST.sex))"
-                        Motion.delay(1){ self.displaySnack(message: message, icon: .star) }
+                        Motion.delay(1.2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })
                .start()

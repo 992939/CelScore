@@ -22,14 +22,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 2 files.
   struct file {
     /// Resource file `DroidSerif-Bold.ttf`.
     static let droidSerifBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "DroidSerif-Bold", pathExtension: "ttf")
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
-    /// Resource file `TAOverlay.bundle`.
-    static let tAOverlayBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "TAOverlay", pathExtension: "bundle")
     
     /// `bundle.url(forResource: "DroidSerif-Bold", withExtension: "ttf")`
     static func droidSerifBoldTtf(_: Void = ()) -> Foundation.URL? {
@@ -40,12 +38,6 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
     static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.googleServiceInfoPlist
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "TAOverlay", withExtension: "bundle")`
-    static func tAOverlayBundle(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.tAOverlayBundle
       return fileResource.bundle.url(forResource: fileResource)
     }
     
@@ -69,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 90 images.
+  /// This `R.image` struct is generated, and contains static references to 91 images.
   struct image {
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
@@ -205,6 +197,8 @@ struct R: Rswift.Validatable {
     static let mini_sadFace = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_sadFace")
     /// Image `mini_smile`.
     static let mini_smile = Rswift.ImageResource(bundle: R.hostingBundle, name: "mini_smile")
+    /// Image `nuclear_mini`.
+    static let nuclear_mini = Rswift.ImageResource(bundle: R.hostingBundle, name: "nuclear_mini")
     /// Image `nuclear_red`.
     static let nuclear_red = Rswift.ImageResource(bundle: R.hostingBundle, name: "nuclear_red")
     /// Image `past_circle`.
@@ -585,6 +579,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "mini_smile", bundle: ..., traitCollection: ...)`
     static func mini_smile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.mini_smile, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "nuclear_mini", bundle: ..., traitCollection: ...)`
+    static func nuclear_mini(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.nuclear_mini, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "nuclear_red", bundle: ..., traitCollection: ...)`

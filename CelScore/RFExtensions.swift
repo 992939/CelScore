@@ -10,7 +10,8 @@ import UIKit
 
 
 extension Notification.Name {
-    static let onSelectedBox = Notification.Name("on-sekected-box")
+    static let onSelectedBox = Notification.Name("on-selected-box")
+    static let onFirstLoginFail = Notification.Name("on-first-login-fail")
 }
 
 extension UIView {

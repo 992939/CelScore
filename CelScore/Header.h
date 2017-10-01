@@ -10,7 +10,6 @@
 #define Header_h
 
 #import <CommonCrypto/CommonCrypto.h>
-#import "TAOverlay.h"
 #import "AWSApiGatewayBridge.h"
 #import "LMGaugeView.h"
 #import "MZTimerLabel.h"

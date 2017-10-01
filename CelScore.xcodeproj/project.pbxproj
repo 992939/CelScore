@@ -11,8 +11,6 @@
 		0003BDC31E11DE9300B931D4 /* SMSegmentAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */; };
 		0003BDC41E11DE9300B931D4 /* SMSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */; };
 		0003BDC51E11DE9300B931D4 /* SMSegmentViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */; };
-		000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000E0EE21CB1C21400F021AA /* TAOverlay.bundle */; };
-		000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 000E0EE41CB1C21400F021AA /* TAOverlay.m */; };
 		0016DD231C547AC400021202 /* CosmosTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016DD221C547AC400021202 /* CosmosTouch.swift */; };
 		00252D791CC6EC6E007CA826 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00252D781CC6EC6E007CA826 /* R.generated.swift */; };
 		002D18AB1E5030BE00E59DDF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D18AA1E5030BE00E59DDF /* libz.tbd */; };
@@ -114,9 +112,6 @@
 		0003BDBF1E11DE9300B931D4 /* SMSegmentAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentAppearance.swift; path = SMSegment/SMSegmentAppearance.swift; sourceTree = "<group>"; };
 		0003BDC01E11DE9300B931D4 /* SMSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentView.swift; path = SMSegment/SMSegmentView.swift; sourceTree = "<group>"; };
 		0003BDC11E11DE9300B931D4 /* SMSegmentViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMSegmentViewConstants.swift; path = SMSegment/SMSegmentViewConstants.swift; sourceTree = "<group>"; };
-		000E0EE21CB1C21400F021AA /* TAOverlay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TAOverlay.bundle; sourceTree = "<group>"; };
-		000E0EE31CB1C21400F021AA /* TAOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlay.h; sourceTree = "<group>"; };
-		000E0EE41CB1C21400F021AA /* TAOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlay.m; sourceTree = "<group>"; };
 		000EB6111CC6183B00704CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		0016DD221C547AC400021202 /* CosmosTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosTouch.swift; sourceTree = "<group>"; };
 		00252D781CC6EC6E007CA826 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -267,9 +262,6 @@
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
 				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
-				000E0EE21CB1C21400F021AA /* TAOverlay.bundle */,
-				000E0EE31CB1C21400F021AA /* TAOverlay.h */,
-				000E0EE41CB1C21400F021AA /* TAOverlay.m */,
 				00BCB98D1F11E8E000F2D3D4 /* LMGaugeView.h */,
 				00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */,
 				004492171C3B272200FBCEFE /* Info.plist */,
@@ -609,7 +601,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000E0EE51CB1C21400F021AA /* TAOverlay.bundle in Resources */,
 				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
 				00550C3D1F514AA200242143 /* DroidSerif-Bold.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
@@ -1129,7 +1120,6 @@
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,
-				000E0EE61CB1C21400F021AA /* TAOverlay.m in Sources */,
 				0036DD581C01490C000F533F /* RFEnums.swift in Sources */,
 				00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */,
 				0036DD591C01490C000F533F /* RFExtensions.swift in Sources */,

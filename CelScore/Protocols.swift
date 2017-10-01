@@ -51,7 +51,7 @@ extension Labelable {
     }
 }
 
-protocol Snackable {}
+@objc protocol Snackable {}
 
 extension Snackable where Self: UIViewController {
     func displaySnack(message: String, icon: SnackIcon) {
@@ -85,7 +85,7 @@ extension Supportable where Self: UIViewController {
     }
 }
 
-@objc protocol Sociable: HUDable, Supportable, FABMenuDelegate {
+@objc protocol Sociable: HUDable, Supportable, FABMenuDelegate, Snackable {
     @objc func handleMenu(open: Bool)
     @objc func socialButton(button: UIButton)
     @objc func socialRefresh()
@@ -138,7 +138,7 @@ extension Sociable where Self: UIViewController {
         let readPermissions = ["public_profile", "email", "user_location", "user_birthday"]
         FBSDKLoginManager().logIn(withReadPermissions: readPermissions, from: self) { (result:FBSDKLoginManagerLoginResult?, error:Error?) in
             guard error == nil else {
-                return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Facebook"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
+                return self.displaySnack(message: OverlayInfo.loginError.message("Facebook"), icon: .nuclear)
             }
             guard result?.isCancelled == false else { return }
             FBSDKAccessToken.setCurrent(result?.token)
@@ -149,7 +149,7 @@ extension Sociable where Self: UIViewController {
     func twitterLogin(hideButton: Bool) {
         Twitter.sharedInstance().logIn { (session: TWTRSession?, error: Error?) -> Void in
             guard error == nil else {
-                return TAOverlay.show(withLabel: OverlayInfo.loginError.message("Twitter"), image: OverlayInfo.loginError.logo(), options: OverlayInfo.getOptions())
+                return self.displaySnack(message: OverlayInfo.loginError.message("Twitter"), icon: .nuclear)
             }
             self.loginFlow(token: "", with: .twitter, hide: hideButton)
         }
