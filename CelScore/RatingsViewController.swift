@@ -50,8 +50,6 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     qualityView.depthPreset = .depth2
                     qualityView.layer.cornerRadius = 5.0
                     qualityView.backgroundColor = Constants.kGreyBackground
-                    if ratings.totalVotes > 1 && ratings.getMax() == ratings[index] { qualityView.backgroundColor = Color.blue.lighten4 }
-                    else if ratings.totalVotes > 1 && ratings.getMin() == ratings[index] { qualityView.backgroundColor = Color.red.lighten4 }
                     qualityView.pulseAnimation = .centerWithBacking
                     let qualityLabel : UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: 120, height: barHeight - 5))
                     qualityLabel.backgroundColor = UIColor.clear

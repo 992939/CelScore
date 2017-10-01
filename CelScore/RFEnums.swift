@@ -295,12 +295,14 @@ enum ListInfo : Int {
 //MARK: SnackIcon
 enum SnackIcon: Int {
     case alert
+    case news
     case crown
     case star
     
     func icon() -> UIImage {
         switch self {
         case .alert: return R.image.bell()!
+        case .news: return R.image.bell_ring()!
         case .crown: return R.image.white_wreath()!
         case .star: return R.image.star_icon()!
         }
