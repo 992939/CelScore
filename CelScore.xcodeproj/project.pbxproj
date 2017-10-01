@@ -256,14 +256,14 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				00BA33511F5928E400D83CA0 /* MZTimerLabel.h */,
-				00BA33521F5928E400D83CA0 /* MZTimerLabel.m */,
 				00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
 				007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */,
 				00BCB98D1F11E8E000F2D3D4 /* LMGaugeView.h */,
 				00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */,
+				00BA33511F5928E400D83CA0 /* MZTimerLabel.h */,
+				00BA33521F5928E400D83CA0 /* MZTimerLabel.m */,
 				004492171C3B272200FBCEFE /* Info.plist */,
 			);
 			name = "Supporting Files";

@@ -20,7 +20,6 @@ import TTGSnackbar
 
 protocol DetailSubViewable {
     func updateVoteButton(positive: Bool)
-    func handleMenu(open: Bool)
 }
 
 @objc protocol HUDable{}
