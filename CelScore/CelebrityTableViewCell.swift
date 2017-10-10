@@ -116,7 +116,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.pastNode = ASImageNode()
         self.pastNode.style.preferredSize = CGSize(width: UIDevice.getPastSize(), height: UIDevice.getPastSize())
-        self.pastNode.image = R.image.past_circle()!
+        self.pastNode.image = R.image.thin_red()!
         self.pastNode.isLayerBacked = true
         
         self.trendNode = ASImageNode()
@@ -251,7 +251,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         let pastStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: Constants.kIsOriginalIphone ? 6 : 8.5,
+            spacing: UIDevice.getPastSpacing(),
             justifyContent: .start,
             alignItems: .start,
             children: [ASLayoutSpec(), self.pastTextNode])
