@@ -98,17 +98,10 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
             changeLabel?.textColor = percent >= 0 ? Constants.kBlueLight : Constants.kRedLight
         })
         
-        let pastSize: CGFloat = UIDevice.getCelScorePast()
-        let pastNode = ASImageNode()
-        pastNode.frame = CGRect(x: Constants.kMaxWidth - UIDevice.getCelScorePadding(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: pastSize + 2, height: pastSize + 2)
-        pastNode.image = R.image.past_circle()!
-        
-        let pastLabel = UILabel(frame: CGRect(x: Constants.kMaxWidth - (UIDevice.getCelScorePadding() - 1), y: UIDevice.getCelScoreBarHeight() * 0.15, width: pastSize, height: pastSize))
-        pastLabel.text = String(past)
-        pastLabel.textAlignment = .center
-        let pastFont = Constants.kIsOriginalIphone ? UIDevice.getFontSize()-2 : UIDevice.getFontSize()-3
-        pastLabel.font = R.font.droidSerifBold(size: pastFont)!
-        pastLabel.textColor = Constants.kRedShade
+        let pastSize: CGFloat = 45.0
+        let pastLabel = self.setupLabel(title: String("#\(past)"), frame: CGRect(x: Constants.kMaxWidth - pastSize, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 35, height: UIDevice.getCelScoreBarHeight() - 5))
+        pastLabel.textColor = Constants.kRedLight
+        pastLabel.textAlignment = .right
         
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
         taggedView.depthPreset = .depth2
@@ -118,7 +111,6 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         taggedView.addSubview(titleLabel)
         taggedView.addSubview(infoLabel)
         taggedView.addSubview(changeLabel!)
-        taggedView.addSubview(pastNode.view)
         taggedView.addSubview(pastLabel)
         return taggedView
     }
