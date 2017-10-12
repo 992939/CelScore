@@ -101,7 +101,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         let pastSize: CGFloat = 45.0
         let pastLabel = self.setupLabel(title: String("#\(past)"), frame: CGRect(x: Constants.kMaxWidth - pastSize, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 35, height: UIDevice.getCelScoreBarHeight() - 5))
         pastLabel.textColor = Constants.kRedLight
-        pastLabel.textAlignment = .right
+        pastLabel.textAlignment = .center
         
         let taggedView = PulseView(frame: CGRect(x: 0, y: positionY, width: Constants.kMaxWidth, height: UIDevice.getCelScoreBarHeight()))
         taggedView.depthPreset = .depth2
