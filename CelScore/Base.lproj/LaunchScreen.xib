@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="celscore_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_big_white" translatesAutoresizingMaskIntoConstraints="NO" id="Eav-iO-oZK">
                     <rect key="frame" x="40" y="40" width="400" height="400"/>
                     <color key="backgroundColor" red="0.31372549020000001" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -27,8 +27,8 @@
             <color key="backgroundColor" red="0.37647058823529411" green="0.70588235294117641" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.31372549020000001" green="0.63921568630000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="Eav-iO-oZK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8Kb-2y-UGB"/>
-                <constraint firstItem="Eav-iO-oZK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="r2l-3o-8Sy"/>
+                <constraint firstItem="Eav-iO-oZK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Q0U-hP-Hhq"/>
+                <constraint firstItem="Eav-iO-oZK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xGb-p5-Ju9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -36,6 +36,6 @@
         </view>
     </objects>
     <resources>
-        <image name="celscore_big_white" width="133" height="133"/>
+        <image name="logo_big_white" width="400" height="400"/>
     </resources>
 </document>

@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 91 images.
+  /// This `R.image` struct is generated, and contains static references to 89 images.
   struct image {
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
@@ -123,8 +123,6 @@ struct R: Rswift.Validatable {
     static let blackstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "blackstar")
     /// Image `blue_wreath`.
     static let blue_wreath = Rswift.ImageResource(bundle: R.hostingBundle, name: "blue_wreath")
-    /// Image `celscore_big_white`.
-    static let celscore_big_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "celscore_big_white")
     /// Image `cloud_big_blue`.
     static let cloud_big_blue = Rswift.ImageResource(bundle: R.hostingBundle, name: "cloud_big_blue")
     /// Image `cloud_big_red`.
@@ -171,8 +169,6 @@ struct R: Rswift.Validatable {
     static let king_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "king_white")
     /// Image `king`.
     static let king = Rswift.ImageResource(bundle: R.hostingBundle, name: "king")
-    /// Image `logo_big_white-1`.
-    static let logo_big_white1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo_big_white-1")
     /// Image `logo_big_white`.
     static let logo_big_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo_big_white")
     /// Image `mainstar`.
@@ -396,11 +392,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.blue_wreath, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "celscore_big_white", bundle: ..., traitCollection: ...)`
-    static func celscore_big_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.celscore_big_white, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "cloud_big_blue", bundle: ..., traitCollection: ...)`
     static func cloud_big_blue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.cloud_big_blue, compatibleWith: traitCollection)
@@ -519,11 +510,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "logo_big_white", bundle: ..., traitCollection: ...)`
     static func logo_big_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.logo_big_white, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "logo_big_white-1", bundle: ..., traitCollection: ...)`
-    static func logo_big_white1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.logo_big_white1, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "mainstar", bundle: ..., traitCollection: ...)`
@@ -769,7 +755,7 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "celscore_big_white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'celscore_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo_big_white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo_big_white' is used in nib 'LaunchScreen', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
