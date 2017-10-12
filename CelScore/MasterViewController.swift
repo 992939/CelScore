@@ -160,8 +160,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     }
     
     func setupData() throws {
-        let revealingSplashView = RevealingSplashView(iconImage: R.image.celscore_big_white()!,
-                                                      iconInitialSize: CGSize(width: 200, height: 200),
+        let revealingSplashView = RevealingSplashView(iconImage: R.image.logo_big_white()!,
+                                                      iconInitialSize: CGSize(width: 400, height: 400),
                                                       backgroundColor: Constants.kBlueShade)
         self.view.addSubview(revealingSplashView)
         
