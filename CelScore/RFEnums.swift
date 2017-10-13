@@ -11,7 +11,7 @@ import Foundation
 
 //MARK: Error
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, noUser }
-enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstInterest, firstVoteDisable, firstTrollWarning, lastVisit }
+enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstInterest, firstTrollWarning, lastVisit }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
@@ -51,10 +51,8 @@ enum SocialLogin: Int {
 enum OverlayInfo {
     case menuAccess
     case loginSuccess
-    case maxFollow
     case countdown
     case firstInterest
-    case firstVoteDisable
     case firstTrollWarning
     case loginError
     case networkError
@@ -64,10 +62,8 @@ enum OverlayInfo {
         switch self {
         case .menuAccess: return "Log in with Twitter or Facebook."
         case .loginSuccess: return "Login was successful!"
-        case .maxFollow: return "You've reached the maximum number of celebs to watch."
         case .countdown: return "You will recieve a notification when a new celeb is crowned."
         case .firstInterest: return "Saved."
-        case .firstVoteDisable: return "Log in with Twitter or Facebook."
         case .firstTrollWarning: return "Your votes could eventually be discarded."
         case .loginError: return "\(social) login error: please try again."
         case .networkError: return "Network Error: please try again."
@@ -79,10 +75,8 @@ enum OverlayInfo {
         switch self {
         case .menuAccess: return R.image.kindom_Blue()!
         case .loginSuccess: return R.image.kindom_Blue()!
-        case .maxFollow: return R.image.king()!
         case .countdown: return R.image.crown_big_blue()!
         case .firstInterest: return R.image.sphere_blue()!
-        case .firstVoteDisable: return R.image.king()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
         case .networkError: return R.image.cloud_red()!

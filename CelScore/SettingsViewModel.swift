@@ -90,7 +90,6 @@ struct SettingsViewModel {
             case .loginTypeIndex: object = settings.loginTypeIndex as AnyObject
             case .onCountdown: object = settings.onCountdown as AnyObject
             case .firstInterest: object = settings.isFirstInterest as AnyObject
-            case .firstVoteDisable: object = settings.isFirstVoteDisabled as AnyObject
             case .firstTrollWarning: object = settings.isFirstTrollWarning as AnyObject
             case .lastVisit: object = settings.lastVisit as AnyObject
             }
@@ -101,7 +100,6 @@ struct SettingsViewModel {
     
     func updateSettingSignal(value: AnyObject, settingType: SettingType) -> SignalProducer<SettingsModel, NSError> {
         return SignalProducer { observer, disposable in
-            print("update: \(value.description)")
             let realm = try! Realm()
             realm.beginWrite()
             let settings = realm.objects(SettingsModel.self).first ?? SettingsModel()
@@ -110,7 +108,6 @@ struct SettingsViewModel {
             case .loginTypeIndex: settings.loginTypeIndex = value as! Int
             case .onCountdown: settings.onCountdown = value as! Bool
             case .firstInterest: settings.isFirstInterest = false
-            case .firstVoteDisable: settings.isFirstVoteDisabled = false
             case .firstTrollWarning: settings.isFirstTrollWarning = false
             case .lastVisit: settings.lastVisit = value as! String
             }

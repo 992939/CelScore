@@ -62,13 +62,6 @@ class SettingsViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstInterest error: \(error)") } }
     }
     
-    func testGetFirstVoteDisable() {
-        let expectation = self.expectation(description: "FirstVoteDisable returns Bool")
-        SettingsViewModel().getSettingSignal(settingType: .firstVoteDisable).startWithValues { value in
-            XCTAssert((value as Any) is Bool); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("FirstVoteDisable error: \(error)") } }
-    }
-    
     func testGetFirstTrollWarning() {
         let expectation = self.expectation(description: "FirstTrollWarning returns Bool")
         SettingsViewModel().getSettingSignal(settingType: .firstTrollWarning).startWithValues { value in
@@ -114,16 +107,6 @@ class SettingsViewModelTests: XCTestCase {
             .startWithValues { settings in
             XCTAssertEqual(settings.isFirstInterest, false); expectation.fulfill() }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstInterest error: \(error)") } }
-    }
-    
-    func testUpdateFirstVoteDisable() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
-        let expectation = self.expectation(description: "set FirstVoteDisable to false")
-        SettingsViewModel().updateSettingSignal(value: true as AnyObject, settingType: .firstVoteDisable)
-            .flatMapError { _ in SignalProducer.empty }
-            .startWithValues { settings in
-            XCTAssertEqual(settings.isFirstVoteDisabled, false); expectation.fulfill() }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("set FirstVoteDisable error: \(error)") } }
     }
     
     func testUpdateFirstTrollWarning() {

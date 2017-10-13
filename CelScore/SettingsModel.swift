@@ -22,7 +22,6 @@ class SettingsModel: Object {
     dynamic var averageRoyalty: Double = 0
     dynamic var onCountdown: Bool = false
     dynamic var isFirstInterest: Bool = true
-    dynamic var isFirstVoteDisabled: Bool = true
     dynamic var isFirstTrollWarning: Bool = true
     dynamic var isSynced: Bool = true
     
@@ -31,12 +30,10 @@ class SettingsModel: Object {
         self.init()
         self.userName = json["userName"].string!
         self.lastVisit = json["lastVisit"].string ?? Date().stringMMddyyyyFormat()
-        print("lastVisit: \(lastVisit)")
         self.defaultListIndex = json["defaultListIndex"].int!
         self.loginTypeIndex = json["loginTypeIndex"].int!
         self.onCountdown = json["onCountdown"].bool!
         self.isFirstInterest = json["isFirstInterest"].bool!
-        self.isFirstVoteDisabled = json["isFirstVoteDisabled"].bool!
         self.isFirstTrollWarning = json["isFirstTrollWarning"].bool!
         self.isSynced = true
     }

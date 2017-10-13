@@ -178,7 +178,6 @@ struct UserViewModel {
                 dataset.setString(String(settings.loginTypeIndex), forKey: "loginTypeIndex")
                 dataset.setString(String(settings.onCountdown), forKey: "onCountdown")
                 dataset.setString(String(settings.isFirstInterest), forKey: "isFirstInterest")
-                dataset.setString(String(settings.isFirstVoteDisabled), forKey: "isFirstVoteDisabled")
                 dataset.setString(String(settings.isFirstTrollWarning), forKey: "isFirstTrollWarning")
             }
             
@@ -236,7 +235,6 @@ struct UserViewModel {
                     settings.loginTypeIndex =  (dico["loginTypeIndex"] as! NSString).integerValue
                     settings.onCountdown = (dico["onCountdown"] as? NSString)?.boolValue ?? true
                     settings.isFirstInterest = (dico["isFirstInterest"] as! NSString).boolValue
-                    settings.isFirstVoteDisabled = (dico["isFirstVoteDisabled"] as! NSString).boolValue
                     settings.isFirstTrollWarning = (dico["isFirstTrollWarning"] as! NSString).boolValue
                     settings.isSynced = true
                     realm.add(settings, update: true)

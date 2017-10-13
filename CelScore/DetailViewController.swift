@@ -106,7 +106,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func notificationCallback(withNotification notification: NSNotification) {
         Motion.delay(0.5){
-            self.displaySnack(message: OverlayInfo.firstVoteDisable.message(), icon: .alert)
+            self.displaySnack(message: Constants.kNoLogin, icon: .alert)
             self.handleMenu(open: true)
         }
     }

@@ -104,7 +104,6 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(settings.loginTypeIndex, "SettingsModel().loginTypeIndex not nil")
         XCTAssertNotNil(settings.onCountdown, "SettingsModel().onCountdown not nil")
         XCTAssertNotNil(settings.isFirstInterest, "SettingsModel().isFirstInterest not nil")
-        XCTAssertNotNil(settings.isFirstVoteDisabled, "SettingsModel().isFirstVoteDisabled not nil")
         XCTAssertNotNil(settings.isFirstTrollWarning, "SettingsModel().isFirstTrollWarning not nil")
         XCTAssertNotNil(settings.isSynced, "SettingsModel().isSynced not nil")
     }
@@ -116,7 +115,6 @@ class ModelTests: XCTestCase {
         XCTAssert((settings.loginTypeIndex as Any) is Int, "SettingsModel().loginTypeIndex is Int")
         XCTAssert((settings.onCountdown as Any) is Bool, "SettingsModel().onCountdown is Bool")
         XCTAssert((settings.isFirstInterest as Any) is Bool, "SettingsModel().isFirstInterest is Bool")
-        XCTAssert((settings.isFirstVoteDisabled as Any) is Bool, "SettingsModel().isFirstVoteDisabled is Bool")
         XCTAssert((settings.isFirstTrollWarning as Any) is Bool, "SettingsModel().isFirstTrollWarning is Bool")
         XCTAssert((settings.isSynced as Any) is Bool, "SettingsModel().isSynced is Bool")
     }
