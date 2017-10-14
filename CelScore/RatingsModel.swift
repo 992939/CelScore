@@ -9,9 +9,10 @@
 import Foundation
 import RealmSwift
 import SwiftyJSON
+import ObjectMapper
 
 
-class RatingsModel: Object, Collection {
+class RatingsModel: Object, Collection, Mappable {
 
     //MARK: Properties
     dynamic var id: String = ""
@@ -37,19 +38,34 @@ class RatingsModel: Object, Collection {
     typealias Iterator = AnyIterator<String>
     
     //MARK: Initializers
-    override class func primaryKey() -> String { return "id" }
-    convenience init(id: String) { self.init(); self.id = id }
-    convenience init(json: JSON) {
+    convenience init(id: String) {
         self.init()
-        
-        self.id = json["ratingID"].string!
-        self.updatedAt = json["updatedAt"].string!
-        self.totalVotes = json["totalVote"].int!
-        for ratings in self.makeIterator() { self[ratings] = json[ratings].double! }
+        self.id = id
+    }
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        self.id <- map["ratingID"]
+        self.updatedAt <- map["updatedAt"]
+        self.totalVotes <- map["totalVote"]
+        self.rating1 <- map["rating1"]
+        self.rating2 <- map["rating2"]
+        self.rating3 <- map["rating3"]
+        self.rating4 <- map["rating4"]
+        self.rating5 <- map["rating5"]
+        self.rating6 <- map["rating6"]
+        self.rating7 <- map["rating7"]
+        self.rating8 <- map["rating8"]
+        self.rating9 <- map["rating9"]
+        self.rating10 <- map["rating10"]
         self.isSynced = true
     }
     
     //MARK: Methods
+    override class func primaryKey() -> String { return "id" }
     
     public func index(after i: Int) -> Int {
         guard i < 9 else { return 0 }
@@ -122,6 +138,11 @@ class RatingsModel: Object, Collection {
 final class UserRatingsModel: RatingsModel {
     
     //MARK: Initializers
+    convenience init(id: String) {
+        self.init()
+        self.id = id
+    }
+    
     internal convenience init(id: String, joinedString: String) {
         self.init()
         self.id = id

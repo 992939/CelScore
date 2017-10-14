@@ -9,12 +9,23 @@
 import Foundation
 import RealmSwift
 import SwiftyJSON
+import ObjectMapper
+import ObjectMapper_RealmSwift
 
 
-final class CelebId: Object { dynamic var id: String = "" }
+final class CelebId: Object, Mappable {
+    dynamic var id: String = ""
+    
+    //MARK: Initializer
+    required convenience init?(map: Map) { self.init(map: map) }
+    
+    func mapping(map: Map) {
+        self.id <- map["listID"]
+    }
+}
 
 
-final class ListsModel: Object {
+final class ListsModel: Object, Mappable {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -23,17 +34,18 @@ final class ListsModel: Object {
     var celebList = List<CelebId>()
     
     //MARK: Initializer
-    convenience init(json: JSON) {
-        self.init()
-        self.id = json["listID"].string!
-        self.name = json["name"].string!
-        let items = json["list"].array!
+    required convenience init?(map: Map) { self.init(map: map) }
+    
+    func mapping(map: Map) {
+        self.id <- map["listID"]
+        self.name <- map["name"]
+        self.celebList <- map["list"]
         
-        for (index, _) in items.enumerated() {
-            let celebId = CelebId()
-            celebId.id = items[index].string!
-            self.celebList.append(celebId)
-        }
+//        for (index, _) in items.enumerated() {
+//            let celebId = CelebId()
+//            celebId.id = items[index].string!
+//            self.celebList.append(celebId)
+//        }
         self.isSynced = true
     }
     

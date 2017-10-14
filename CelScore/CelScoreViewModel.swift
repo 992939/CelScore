@@ -8,6 +8,7 @@
 
 import AWSCore
 import SwiftyJSON
+import ObjectMapper
 import RealmSwift
 import ReactiveCocoa
 import ReactiveSwift
@@ -40,9 +41,9 @@ struct CelScoreViewModel {
                 
                 json["Items"].arrayValue.forEach({ data in
                     switch dataType {
-                    case .celebrity: realm.add(CelebrityModel(json: data), update: true)
-                    case .list: realm.add(ListsModel(json: data), update: true)
-                    case .ratings: realm.add(RatingsModel(json: data), update: true)
+                    case .celebrity: realm.add(CelebrityModel(map: data), update: true)
+                    case .list: realm.add(ListsModel(map: data), update: true)
+                    case .ratings: realm.add(RatingsModel(map: data), update: true)
                     }
                 })
                 try! realm.commitWrite()

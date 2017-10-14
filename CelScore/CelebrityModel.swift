@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import SwiftyJSON
+import ObjectMapper
 
 
 struct CelebrityStruct {
@@ -68,7 +69,7 @@ extension CelebrityStruct: Equatable {}
 func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickName == rhs.nickName && lhs.id == rhs.id }
 
 
-final class CelebrityModel: Object {
+final class CelebrityModel: Object, Mappable {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -101,36 +102,35 @@ final class CelebrityModel: Object {
     dynamic var isFollowed: Bool = false
     dynamic var isTrending: Bool = false
     
-    //MARK: Initializer
-    convenience init(json: JSON) {
-        self.init()
-        
-        self.id = json["celebrityID"].string!
-        self.firstName = json["firstName"].string!
-        self.lastName = json["lastName"].string!
-        self.middleName = json["middleName"].string! == "n/a" ? "∅" : json["middleName"].string!
-        self.nickName = json["nickname"].string!
-        self.googleName = json["google"].string!
-        self.kingName = json["kingName"].string!
-        self.height = json["height"].string!
-        self.birthdate = json["birthdate"].string!
-        self.netWorth = json["netWorth"].string!
-        self.picture3x = json["picture3x"].string!
-        self.trend = json["trend"].string!
-        self.from = json["from"].string!
-        self.rank = json["rank"].string!
-        self.status = json["status"].string!
-        self.twitter = json["twitter"].string!
-        self.daysOnThrone = json["daysOnThrone"].int!
-        self.index = json["index"].int!
-        self.y_index = json["y_index"].int!
-        self.w_index = json["w_index"].int!
-        self.m_index = json["m_index"].int!
-        self.prevScore = json["prevScore"].double!
-        self.prevWeek = json["prevWeek"].double!
-        self.prevMonth = json["prevMonth"].double!
-        self.sex = json["sex"].bool!
-        self.isTrending = json["trending"].bool!
+    required convenience init?(map: Map) { self.init(map: map) }
+    
+    func mapping(map: Map) {
+        self.id <- map["celebrityID"]
+        self.firstName <- map["firstName"]
+        self.lastName <- map["lastName"]
+        self.middleName <- map["middleName"] // == "n/a" ? "∅"
+        self.nickName <- map["nickname"]
+        self.googleName <- map["google"]
+        self.kingName <- map["kingName"]
+        self.height <- map["height"]
+        self.birthdate <- map["birthdate"]
+        self.netWorth <- map["netWorth"]
+        self.picture3x <- map["picture3x"]
+        self.trend <- map["trend"]
+        self.from <- map["from"]
+        self.rank <- map["rank"]
+        self.status <- map["status"]
+        self.twitter <- map["twitter"]
+        self.daysOnThrone <- map["daysOnThrone"]
+        self.index <- map["index"]
+        self.y_index <- map["y_index"]
+        self.w_index <- map["w_index"]
+        self.m_index <- map["m_index"]
+        self.prevScore <- map["prevScore"]
+        self.prevWeek <- map["prevWeek"]
+        self.prevMonth <- map["prevMonth"]
+        self.sex <- map["sex"]
+        self.isTrending <- map["trending"]
         self.isSynced = true
         
         let realm = try! Realm()

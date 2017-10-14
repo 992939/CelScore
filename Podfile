@@ -24,6 +24,8 @@ target 'CelScore' do
     pod 'Material', '~> 2.10'
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '3.1.4'
+    pod 'ObjectMapper', '2.2'
+    pod 'ObjectMapper_RealmSwift'
     pod 'R.swift', '~> 3.3'
     pod 'FBSDKLoginKit', '~> 4.24'
     pod 'FBSDKCoreKit', '~> 4.24'
