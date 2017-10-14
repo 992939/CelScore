@@ -154,11 +154,10 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         self.view.layout(socialButton).size(CGSize(width: Constants.kFabDiameter, height: Constants.kFabDiameter)).bottom(2*Constants.kPadding).right(2 * Constants.kPadding)
         
         NotificationCenter.default.addObserver(self, selector: #selector(notificationCallback), name: .onSelectedBox, object: nil)
-
-        try! self.setupData()
+        self.setupData()
     }
     
-    func setupData() throws {
+    func setupData() {
         let revealingSplashView = RevealingSplashView(iconImage: R.image.logo_big_white()!,
                                                       iconInitialSize: CGSize(width: 400, height: 400),
                                                       backgroundColor: Constants.kBlueShade)
