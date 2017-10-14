@@ -301,7 +301,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                         let message = "\(self.celebST.getCelebName()) is in the news!"
                         Motion.delay(1.2){ self.displaySnack(message: message, icon: .news) }
                     } else {
-                        let message = "Main Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebST.sex))"
+                        let message = "Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebST.sex))"
                         Motion.delay(1.2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })

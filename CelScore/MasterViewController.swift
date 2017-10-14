@@ -72,7 +72,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .on(value: { _ in
                 self.movingSocialButton(onScreen: false)
                 
-                let hourly = TimedLimiter(limit: 1)// 60 * Constants.kOneMinute)
+                let hourly = TimedLimiter(limit: 60 * Constants.kOneMinute)
                 _ = hourly.execute {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -91,6 +91,9 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                             let today = dateFormatter.string(from: Date()) as AnyObject
                             return SettingsViewModel().updateSettingSignal(value: today, settingType: .lastVisit) }
+                        .mapError({ (error: NSError) -> ListError in return ListError(rawValue: 1)! })
+                        .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
+                            return ListViewModel().sanitizeListsSignal() }
                         .start()
                 }
                 
@@ -155,40 +158,31 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         try! self.setupData()
     }
     
-    func notificationCallback(withNotification notification: NSNotification) {
-        Motion.delay(0.8){ self.displaySnack(message: notification.userInfo!["message"] as! String, icon: .alert) }
-    }
-    
     func setupData() throws {
         let revealingSplashView = RevealingSplashView(iconImage: R.image.logo_big_white()!,
                                                       iconInitialSize: CGSize(width: 400, height: 400),
                                                       backgroundColor: Constants.kBlueShade)
+        revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
         self.view.addSubview(revealingSplashView)
         
         CelScoreViewModel().getFromAWSSignal(dataType: .list)
-            .observe(on: UIScheduler())
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
             .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
-            .on(value: { _ in
-                revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
-                revealingSplashView.startAnimation() })
-            .mapError({ (error: NSError) -> ListError in return ListError(rawValue: 1)! })
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Bool, ListError> in
-                return ListViewModel().sanitizeListsSignal() }
-            .flatMapError { _ in return SignalProducer.empty }
-            .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NoError> in
-                return SettingsViewModel().getSettingSignal(settingType: .defaultListIndex) }
             .observe(on: UIScheduler())
-            .on(value: { index in
-                self.segmentedControl.setSelectedSegmentIndex(UInt(index as! NSNumber), animated: true)
+            .on(value: { _ in
+                revealingSplashView.startAnimation()
+                self.segmentedControl.setSelectedSegmentIndex(0, animated: true)
                 self.changeList() })
             .on(failed: { _ in
                 revealingSplashView.startAnimation()
-                self.dismissHUD()
                 self.changeList() })
             .start()
+    }
+    
+    func notificationCallback(withNotification notification: NSNotification) {
+        Motion.delay(0.8){ self.displaySnack(message: notification.userInfo!["message"] as! String, icon: .alert) }
     }
     
     func facebookToken() -> String {

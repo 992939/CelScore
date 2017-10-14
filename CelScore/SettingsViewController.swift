@@ -54,7 +54,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //Logo
         let logoView: View = setupMaterialView(frame: CGRect(x: 0, y: 0, width: Constants.kSettingsViewWidth, height: Constants.kLogoHeight))
         logoView.depthPreset = .none
-        self.logoCircle.setImage(R.image.white_star_button()!, for: .normal) //R.image.geometry_white()!
+        self.logoCircle.setImage(R.image.white_star_button()!, for: .normal)
         self.logoCircle.setImage(R.image.white_star_button()!, for: .highlighted)
         self.logoCircle.shapePreset = .circle
         self.logoCircle.depthPreset = .depth2
