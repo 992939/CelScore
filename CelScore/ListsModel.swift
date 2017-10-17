@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 import ObjectMapper
-import ObjectMapper_RealmSwift
+import ObjectMapper_Realm
 
 
 final class CelebId: Object, Mappable {
@@ -40,15 +40,20 @@ final class ListsModel: Object, Mappable {
         self.id <- map["listID"]
         self.name <- map["name"]
         self.celebList <- map["list"]
-        
-//        for (index, _) in items.enumerated() {
-//            let celebId = CelebId()
-//            celebId.id = items[index].string!
-//            self.celebList.append(celebId)
-//        }
         self.isSynced = true
     }
     
     //MARK: Method
     override class func primaryKey() -> String { return "id" }
+}
+
+
+final class ListsService: NSObject, Mappable {
+    var items: [ListsModel]?
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        items <- map["Items"]
+    }
 }

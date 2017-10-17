@@ -34,18 +34,20 @@ struct CelScoreViewModel {
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 guard task.isCancelled == false else { observer.sendInterrupted(); return task }
                 
-                let myData = task.result as! String
-                let json = JSON(data: myData.data(using: String.Encoding.utf8)!)
                 let realm = try! Realm()
                 realm.beginWrite()
                 
-                json["Items"].arrayValue.forEach({ data in
-                    switch dataType {
-                    case .celebrity: realm.add(CelebrityModel(map: data), update: true)
-                    case .list: realm.add(ListsModel(map: data), update: true)
-                    case .ratings: realm.add(RatingsModel(map: data), update: true)
-                    }
-                })
+                switch dataType {
+                case .celebrity:
+                    let celebService: CelebrityService = task.result as! CelebrityService
+                    realm.add(celebService.items!, update: true)
+                case .list:
+                    let celebService: ListsService = task.result as! ListsService
+                    realm.add(celebService.items!, update: true)
+                case .ratings:
+                    let celebService: RatingsService = task.result as! RatingsService
+                    realm.add(celebService.items!, update: true)
+                }
                 try! realm.commitWrite()
                 realm.refresh()
                 observer.send(value: task.result!)

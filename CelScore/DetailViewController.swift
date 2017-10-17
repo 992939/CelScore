@@ -235,7 +235,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func socialRefresh() {
         RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
-            .on(failed: { _ in self.ratingsVC.displayRatings() })
+            //.on(failed: { _ in self.ratingsVC.displayRatings() })
             .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
                 let voteImage = userRatings.getCelScore() > 0 ? R.image.goldstar()! : R.image.blackstar()!

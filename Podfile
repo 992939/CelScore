@@ -25,7 +25,7 @@ target 'CelScore' do
     pod 'SwiftyTimer', '~> 2.0.0'
     pod 'SwiftyJSON', '3.1.4'
     pod 'ObjectMapper', '2.2'
-    pod 'ObjectMapper_RealmSwift'
+    pod 'ObjectMapper+Realm', :git => 'https://github.com/jakenberg/ObjectMapper-Realm'
     pod 'R.swift', '~> 3.3'
     pod 'FBSDKLoginKit', '~> 4.24'
     pod 'FBSDKCoreKit', '~> 4.24'

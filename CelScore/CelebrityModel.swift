@@ -102,6 +102,8 @@ final class CelebrityModel: Object, Mappable {
     dynamic var isFollowed: Bool = false
     dynamic var isTrending: Bool = false
     
+    
+    //MARK: Initializer
     required convenience init?(map: Map) { self.init(map: map) }
     
     func mapping(map: Map) {
@@ -136,17 +138,19 @@ final class CelebrityModel: Object, Mappable {
         let realm = try! Realm()
         let celebrity: CelebrityModel? = realm.objects(CelebrityModel.self).filter("id = %@", self.id).first
         if let object = celebrity { self.isFollowed = object.isFollowed }
-        
-        let rating = realm.objects(RatingsModel.self).filter("id = %@", self.id).first
-        guard rating?.isEmpty == false  else {
-            realm.beginWrite()
-            let newRating = RatingsModel(id: self.id)
-            realm.add(newRating, update: false)
-            try! realm.commitWrite()
-            return
-        }
     }
     
     //MARK: Method
     override class func primaryKey() -> String { return "id" }
+}
+
+
+final class CelebrityService: NSObject, Mappable {
+    var items: [CelebrityModel]?
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        items <- map["Items"]
+    }
 }

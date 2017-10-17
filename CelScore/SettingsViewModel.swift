@@ -127,7 +127,7 @@ struct SettingsViewModel {
             let userDefaults: UserDefaults = UserDefaults(suiteName:"group.NotificationApp")!
             if celebList.count > 0 {
                 for (index, celeb) in celebList.enumerated() {
-                    let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first ?? RatingsModel(id: celeb.id)
+                    let ratings: RatingsModel = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first!
                     let today:[String: AnyObject] = ["id": celeb.id as AnyObject, "nickName": celeb.nickName as AnyObject, "image": celeb.picture3x as AnyObject, "prevScore": celeb.prevScore as AnyObject, "currentScore": ratings.getCelScore() as AnyObject]
                     userDefaults.set(today, forKey: String(index))
                 }

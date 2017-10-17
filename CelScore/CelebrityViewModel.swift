@@ -75,7 +75,6 @@ struct CelebrityViewModel {
                 let visit = dateFormatter.date(from: object.lastVisit)!
                 let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                 let compare = visit.compare(today) == ComparisonResult.orderedAscending
-                print("lastVisit: \(visit) today: \(today) compare: \(compare)")
                 guard compare else { return }
             }
             realm.beginWrite()

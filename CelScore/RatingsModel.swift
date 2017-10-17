@@ -10,9 +10,10 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 import ObjectMapper
+import ObjectMapper_Realm
 
 
-class RatingsModel: Object, Collection, Mappable {
+class RatingsModel: Object, Collection, StaticMappable {
 
     //MARK: Properties
     dynamic var id: String = ""
@@ -36,15 +37,11 @@ class RatingsModel: Object, Collection, Mappable {
     typealias Index = Int
     typealias KeyIndex = (key: String, value: Int)
     typealias Iterator = AnyIterator<String>
+
     
-    //MARK: Initializers
-    convenience init(id: String) {
-        self.init()
-        self.id = id
-    }
-    
-    required convenience init?(map: Map) {
-        self.init()
+    //MARK: Methods
+    static func objectForMapping(map: Map) -> BaseMappable? {
+        return RatingsModel()
     }
     
     func mapping(map: Map) {
@@ -64,7 +61,6 @@ class RatingsModel: Object, Collection, Mappable {
         self.isSynced = true
     }
     
-    //MARK: Methods
     override class func primaryKey() -> String { return "id" }
     
     public func index(after i: Int) -> Int {
@@ -155,5 +151,16 @@ final class UserRatingsModel: RatingsModel {
     func interpolation() -> String {
         let allValues: [String] = self.makeIterator().flatMap{ String(describing: self[$0]!) }
         return allValues.joined(separator: "/")
+    }
+}
+
+
+final class RatingsService: NSObject, Mappable {
+    var items: [RatingsModel]?
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        items <- map["Items"]
     }
 }
