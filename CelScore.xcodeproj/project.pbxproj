@@ -40,7 +40,6 @@
 		006431921C6A67430062BBDB /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006431911C6A67430062BBDB /* StarLayer.swift */; };
 		0067F49D1BCA37FD006994F5 /* CelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */; };
 		007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */; };
-		008488361BCCA44000B11659 /* ListsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008488351BCCA44000B11659 /* ListsModel.swift */; };
 		0099D4511CDB0C8A008C1D6E /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099D4501CDB0C89008C1D6E /* Duration.swift */; };
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
@@ -147,7 +146,6 @@
 		0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityModel.swift; sourceTree = "<group>"; };
 		006A61B71D0A561300D01CA0 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		007E7B3E1EBAF549007E815C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		008488351BCCA44000B11659 /* ListsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsModel.swift; sourceTree = "<group>"; };
 		0099D4501CDB0C89008C1D6E /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 			children = (
 				00B404291B4A465200B7627E /* RatingsModel.swift */,
 				0067F49C1BCA37FD006994F5 /* CelebrityModel.swift */,
-				008488351BCCA44000B11659 /* ListsModel.swift */,
 				00404A951BEE71300009AD0E /* SettingsModel.swift */,
 			);
 			name = Models;
@@ -1120,7 +1117,6 @@
 				00BA33531F5928E400D83CA0 /* MZTimerLabel.m in Sources */,
 				00C347A31C6016B000097089 /* RatingsViewController.swift in Sources */,
 				00F6C9D71B35393C0078CA6E /* ListViewModel.swift in Sources */,
-				008488361BCCA44000B11659 /* ListsModel.swift in Sources */,
 				0036DD5D1C03FEBE000F533F /* CelebritySearch.swift in Sources */,
 				00BCB9881F11DFC100F2D3D4 /* Empty.swift in Sources */,
 				00F6C9DE1B3539480078CA6E /* CelebrityTableViewCell.swift in Sources */,

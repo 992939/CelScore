@@ -13,7 +13,6 @@ import Foundation
 enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserRatingsModel, noUser }
 enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstInterest, firstTrollWarning, lastVisit }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
-enum ListError: Int, Error { case emptyList = 0, indexOutOfBounds, noLists }
 enum CelebrityError: Int, Error { case notFound = 0 }
 enum NetworkError: Int, Error { case notConnected = 1 }
 enum PrevDay: Int { case Yesterday = 0, LastWeek, LastMonth }
@@ -21,7 +20,7 @@ enum PrevDay: Int { case Yesterday = 0, LastWeek, LastMonth }
 
 //MARK: Misc.
 enum RatingsType { case ratings, userRatings }
-enum AWSDataType { case celebrity, list, ratings }
+enum AWSDataType { case celebrity, ratings }
 enum CognitoDataSet: String { case facebookInfo, twitterInfo, userRatings, userSettings }
 
 //MARK: SocialLogin
@@ -220,7 +219,6 @@ enum BarTrend: String {
 //MARK: ListInfo
 enum ListInfo : Int {
     case hollywood
-    case hipHop
     case sports
     case music
     case news
@@ -228,7 +226,6 @@ enum ListInfo : Int {
     static func getAllNames() -> [String] {
         return [
             hollywood.name(),
-            music.name(),
             sports.name(),
             hipHop.name(),
             news.name()
@@ -238,7 +235,6 @@ enum ListInfo : Int {
     static func getAllIDs() -> [String] {
         return [
             hollywood.getId(),
-            hipHop.getId(),
             sports.getId(),
             music.getId(),
             news.getId()
@@ -256,7 +252,6 @@ enum ListInfo : Int {
         case .hollywood: return "Hollywood"
         case .music: return "Music"
         case .sports: return "Sports"
-        case .hipHop: return "Hip Hop"
         case .news: return "Trending"
         }
     }
@@ -266,18 +261,16 @@ enum ListInfo : Int {
         case .hollywood: return "0001"
         case .music: return "0003"
         case .sports: return "0002"
-        case .hipHop: return "0004"
         case .news: return "0005"
         }
     }
     
     func getIndex() -> Int {
         switch self {
-        case .hollywood: return 1
-        case .music: return 2
-        case .sports: return 3
-        case .hipHop: return 4
-        case .news: return 5
+        case .hollywood: return 0
+        case .music: return 1
+        case .sports: return 2
+        case .news: return 3
         }
     }
 }

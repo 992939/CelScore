@@ -69,7 +69,7 @@ extension CelebrityStruct: Equatable {}
 func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickName == rhs.nickName && lhs.id == rhs.id }
 
 
-final class CelebrityModel: Object, Mappable {
+final class CelebrityModel: Object, StaticMappable {
     
     //MARK: Properties
     dynamic var id: String = ""
@@ -93,6 +93,7 @@ final class CelebrityModel: Object, Mappable {
     dynamic var prevWeek: Double = 0
     dynamic var prevMonth: Double = 0
     dynamic var daysOnThrone: Int = 0
+    dynamic var listType: Int = 0
     dynamic var index: Int = 0
     dynamic var y_index: Int = 0
     dynamic var w_index: Int = 0
@@ -104,7 +105,9 @@ final class CelebrityModel: Object, Mappable {
     
     
     //MARK: Initializer
-    required convenience init?(map: Map) { self.init(map: map) }
+    static func objectForMapping(map: Map) -> BaseMappable? {
+        return CelebrityModel()
+    }
     
     func mapping(map: Map) {
         self.id <- map["celebrityID"]
@@ -128,6 +131,7 @@ final class CelebrityModel: Object, Mappable {
         self.y_index <- map["y_index"]
         self.w_index <- map["w_index"]
         self.m_index <- map["m_index"]
+        self.listType <- map["list_type"]
         self.prevScore <- map["prevScore"]
         self.prevWeek <- map["prevWeek"]
         self.prevMonth <- map["prevMonth"]

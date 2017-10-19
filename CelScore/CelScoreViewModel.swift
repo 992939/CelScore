@@ -26,7 +26,6 @@ struct CelScoreViewModel {
             let awsCall : AWSTask<AnyObject>
             switch dataType {
             case .celebrity: awsCall = serviceClient.celebinfoscanservicePost() as! AWSTask<AnyObject>
-            case .list: awsCall = serviceClient.celeblistsservicePost() as! AWSTask<AnyObject>
             case .ratings: awsCall = serviceClient.celebratingservicePost() as! AWSTask<AnyObject>
             }
             
@@ -34,20 +33,22 @@ struct CelScoreViewModel {
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 guard task.isCancelled == false else { observer.sendInterrupted(); return task }
                 
+                let myData = task.result as! String
+                
                 let realm = try! Realm()
                 realm.beginWrite()
-                
+        
                 switch dataType {
                 case .celebrity:
-                    let celebService: CelebrityService = task.result as! CelebrityService
-                    realm.add(celebService.items!, update: true)
-                case .list:
-                    let celebService: ListsService = task.result as! ListsService
-                    realm.add(celebService.items!, update: true)
+                    let service = CelebrityService(JSONString: myData)
+                    print("celebs: \(service!.items!.count)")
+                    realm.add(service!.items!, update: true)
                 case .ratings:
-                    let celebService: RatingsService = task.result as! RatingsService
-                    realm.add(celebService.items!, update: true)
+                    let service = RatingsService(JSONString: myData)
+                    print("ratings: \(service!.items!.count)")
+                    realm.add(service!.items!, update: true)
                 }
+
                 try! realm.commitWrite()
                 realm.refresh()
                 observer.send(value: task.result!)

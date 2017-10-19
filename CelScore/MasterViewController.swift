@@ -91,19 +91,14 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                             let today = dateFormatter.string(from: Date()) as AnyObject
                             return SettingsViewModel().updateSettingSignal(value: today, settingType: .lastVisit) }
-                        .mapError({ (error: NSError) -> ListError in return ListError(rawValue: 1)! })
-                        .flatMap(.latest) { (_) -> SignalProducer<Bool, ListError> in
-                            return ListViewModel().sanitizeListsSignal() }
                         .start()
                 }
                 
                 let refresh = TimedLimiter(limit: 2 * Constants.kOneMinute)
                 _ = refresh.execute {
-                    CelScoreViewModel().getFromAWSSignal(dataType: .list)
+                    CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
                         .observe(on: UIScheduler())
                         .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                            return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
-                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<CGFloat, NoError> in
                             return SettingsViewModel().calculateAverageRoyaltySignal() }
@@ -164,10 +159,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
         self.view.addSubview(revealingSplashView)
         
-        CelScoreViewModel().getFromAWSSignal(dataType: .list)
+        CelScoreViewModel().getFromAWSSignal(dataType: .ratings)
             .flatMap(.latest) { (_) -> SignalProducer<AnyObject, NSError> in
-                return CelScoreViewModel().getFromAWSSignal(dataType: .ratings) }
-            .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                 return CelScoreViewModel().getFromAWSSignal(dataType: .celebrity) }
             .observe(on: UIScheduler())
             .on(value: { _ in

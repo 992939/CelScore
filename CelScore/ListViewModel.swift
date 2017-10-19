@@ -47,28 +47,6 @@ struct ListViewModel {
         }
     }
     
-    func sanitizeListsSignal() -> SignalProducer<Bool, ListError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            ListInfo.getAllIDs().forEach({ (listId:String) in
-                let list = realm.objects(ListsModel.self).filter("id = %@", listId).first
-                guard let celebList = list else { return }
-                
-                let current = realm.objects(CelebrityModel.self)
-                let notExisting = celebList.celebList.enumerated().filter({ (item: (index: Int, celebId: CelebId)) -> Bool in
-                    return !current.enumerated().contains(where: { (_, celebrity: CelebrityModel) -> Bool in return celebrity.id == item.celebId.id }) })
-                guard notExisting.count > 0 else { return }
-                
-                realm.beginWrite()
-                for (index, _) in notExisting.enumerated() { celebList.celebList.remove(at: index) }
-                realm.add(celebList, update: true)
-                try! realm.commitWrite()
-            })
-            observer.send(value: true)
-            observer.sendCompleted()
-        }
-    }
-    
     func updateListSignal(listId: String) -> SignalProducer<Bool, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
