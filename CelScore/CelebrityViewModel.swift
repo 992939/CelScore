@@ -117,33 +117,6 @@ struct CelebrityViewModel {
         }
     }
     
-    func removeCelebsNotInPublicOpinionSignal() -> SignalProducer<Int, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let list = realm.objects(ListsModel.self).filter("id = %@", ListInfo.hollywood.getId()).first
-            guard let listModel = list else { return observer.sendCompleted() }
-            guard listModel.celebList.count > 0 else { return observer.sendCompleted() }
-            let celebIDsOnPublicOpinionList: [String] = listModel.celebList.map({ celeb in return celeb.id })
-            
-            let celebList = realm.objects(CelebrityModel.self)
-            let celebIDsList: [String] = celebList.map({ celeb in return celeb.id })
-            guard celebIDsList.count > 0 else { return observer.sendCompleted() }
-            
-            let set1 = Set(celebIDsList)
-            let set2 = Set(celebIDsOnPublicOpinionList)
-            let removables: Set = set1.subtracting(set2)
-            realm.beginWrite()
-            removables.forEach({ id in
-                let removable = realm.objects(CelebrityModel.self).filter("id = %@", id).first
-                realm.delete(removable!)
-            })
-            try! realm.commitWrite()
-            realm.refresh()
-            observer.send(value: removables.count)
-            observer.sendCompleted()
-        }
-    }
-    
     func getCelebrityStructSignal(id: String) -> SignalProducer<CelebrityStruct, ListError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

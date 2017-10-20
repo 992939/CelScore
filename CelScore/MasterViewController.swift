@@ -20,6 +20,7 @@ import RevealingSplashView
 import FBSDKCoreKit
 import Accounts
 import NotificationCenter
+import Result
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
@@ -28,7 +29,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let segmentedControl: HMSegmentedControl
     fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
-    fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<CelebId>
+    fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<Results<CelebrityModel>>
     fileprivate let socialButton: FABMenu
     internal let celebrityTableNode: ASTableNode
     
@@ -37,7 +38,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     init() {
         self.celebrityTableNode = ASTableNode()
-        self.diffCalculator = SingleSectionTableViewDiffCalculator<CelebId>(tableView: self.celebrityTableNode.view)
+        self.diffCalculator = SingleSectionTableViewDiffCalculator<Results<CelebrityModel>>(tableView: self.celebrityTableNode.view)
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
@@ -116,9 +117,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userRatings) }
                         .flatMap(.latest) { (value:AnyObject) -> SignalProducer<AnyObject, NSError> in
                             return UserViewModel().updateCognitoSignal(object: "" as AnyObject!, dataSetType: .userSettings) }
-                        .flatMapError { _ in SignalProducer.empty }
-                        .flatMap(.latest) { (value:AnyObject) -> SignalProducer<Int, NoError> in
-                            return CelebrityViewModel().removeCelebsNotInPublicOpinionSignal() }
                         .start()
                 }})
             .on(failed: { _ in self.movingSocialButton(onScreen: true) })
@@ -218,10 +216,8 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     func changeList() {
         let list: ListInfo = ListInfo(rawValue: self.segmentedControl.selectedSegmentIndex)!
-        ListViewModel().updateListSignal(listId: list.getId())
+        ListViewModel().getListSignal(listId: list.getId())
             .observe(on: UIScheduler())
-            .flatMap(.latest) { (_) -> SignalProducer<ListsModel, ListError> in
-                return ListViewModel().getListSignal(listId: list.getId()) }
             .on(value: { list in
                 self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
                 Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})

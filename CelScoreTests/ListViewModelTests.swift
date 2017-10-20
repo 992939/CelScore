@@ -55,20 +55,6 @@ class ListViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("getListSignal error: \(error)") } }
     }
     
-    func testSanitizeListsSignal() {
-        let realm = try! Realm()
-        let initialList = realm.objects(ListsModel.self).filter("id = %@", "0001").first
-        XCTAssertEqual(initialList?.celebList.count, 3, "sanitizeListsSignal: ListViewModel starts with 3 CelebIds.")
-        
-        let expectation = self.expectation(description: "sanitizeListsSignal callback")
-        ListViewModel().sanitizeListsSignal().startWithCompleted {
-            let list = realm.objects(ListsModel.self).filter("id = %@", "0001").first
-            XCTAssertEqual(list?.celebList.count, 2, "sanitizeListsSignal returns a list with 2 CelebIds.")
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("sanitizeListsSignal error: \(error)") } }
-    }
-    
     func testSearchSignal() {
         let expectation = self.expectation(description: "searchSignal callback")
         ListViewModel().searchSignal(searchToken: "test").startWithValues { list in

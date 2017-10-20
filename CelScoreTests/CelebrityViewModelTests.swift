@@ -83,28 +83,4 @@ class CelebrityViewModelTests: XCTestCase {
         }
         waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("testUpdateWidgetSignal error: \(error)") } }
     }
-    
-    func testRemoveCelebsNotInPublicOpinionSignal() {
-        let realm = try! Realm()
-        realm.beginWrite()
-        let celebId2 = CelebId()
-        celebId2.id = "0002"
-        let celebId3 = CelebId()
-        celebId3.id = "0003"
-        let list = ListsModel()
-        list.id = "0001"
-        list.celebList.append(celebId2)
-        list.celebList.append(celebId3)
-        realm.add(list, update: true)
-        try! realm.commitWrite()
-        
-        let count = realm.objects(CelebrityModel.self).count
-        XCTAssertEqual(count, 1, "count of CelebrityModel must return 0.")
-        let expectation = self.expectation(description: "remove the CelebrityModel instance")
-        CelebrityViewModel().removeCelebsNotInPublicOpinionSignal().startWithValues { removedCount in
-            XCTAssertEqual(removedCount, 1, "count of CelebrityModel must return 1.")
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 1) { error in if let error = error { XCTFail("removeCelebsNotInPublicOpinionSignal error: \(error)") } }
-    }
 }
