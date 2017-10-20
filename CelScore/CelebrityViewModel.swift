@@ -117,11 +117,11 @@ struct CelebrityViewModel {
         }
     }
     
-    func getCelebrityStructSignal(id: String) -> SignalProducer<CelebrityStruct, ListError> {
+    func getCelebrityStructSignal(id: String) -> SignalProducer<CelebrityStruct, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let celeb = realm.objects(CelebrityModel.self).filter("id = %@", id).first
-            guard celeb?.id.isEmpty == false else { return observer.send(error: .emptyList) }
+            guard celeb?.id.isEmpty == false else { return }
             observer.send(value: CelebrityStruct(id: celeb!.id, imageURL: celeb!.picture3x, trend: celeb!.trend, nickName:celeb!.nickName, kingName: celeb!.kingName, prevScore: celeb!.prevScore, prevWeek: celeb!.prevWeek, prevMonth: celeb!.prevMonth, index: celeb!.index, y_index: celeb!.y_index, daysOnThrone: celeb!.daysOnThrone, sex: celeb!.sex, isFollowed: celeb!.isFollowed, isTrending: celeb!.isTrending))
             observer.sendCompleted()
         }

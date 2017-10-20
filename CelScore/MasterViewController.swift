@@ -20,7 +20,7 @@ import RevealingSplashView
 import FBSDKCoreKit
 import Accounts
 import NotificationCenter
-import Result
+import RealmSwift
 
 
 final class MasterViewController: UIViewController, ASTableDataSource, ASTableDelegate, UISearchBarDelegate, NavigationDrawerControllerDelegate, Sociable {
@@ -219,7 +219,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         ListViewModel().getListSignal(listId: list.getId())
             .observe(on: UIScheduler())
             .on(value: { list in
-                self.diffCalculator.rows = list.celebList.flatMap{ return $0 }
+                self.diffCalculator.rows = [list]
                 Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }

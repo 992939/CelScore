@@ -227,7 +227,6 @@ enum ListInfo : Int {
         return [
             hollywood.name(),
             sports.name(),
-            hipHop.name(),
             news.name()
         ]
     }
