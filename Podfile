@@ -13,7 +13,7 @@ def shared_pods
     pod 'ReactiveCocoa', '6.0'
     pod 'ReactiveSwift', '~> 2.0'
     pod 'RealmSwift', '~> 2.10'
-    pod 'Texture', '~> 2.3'
+    pod 'Texture', '~> 2.5'
     pod 'AWSCognito', '2.6'
     pod 'AWSAPIGateway', '2.6'
     pod 'AWSPinpoint', '2.6'

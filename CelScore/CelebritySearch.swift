@@ -11,20 +11,20 @@ import CoreSpotlight
 import MobileCoreServices
 
 
-extension CelebrityStruct {
+extension CelebrityModel {
     
     static let domainIdentifier = "com.GreyEcology.CelebrityScore.Celebrity"
     
     var userActivityUserInfo: [String: AnyObject] {
         return ["id": id as AnyObject,
-         "imageURL": imageURL as AnyObject,
+         "imageURL": picture3x as AnyObject,
          "nickName": nickName as AnyObject,
          "prevScore": prevScore as AnyObject,
          "sex": sex as AnyObject,
          "isFollowed": isFollowed as AnyObject] }
     
     var userActivity: NSUserActivity {
-        let activity = NSUserActivity(activityType: CelebrityStruct.domainIdentifier)
+        let activity = NSUserActivity(activityType: CelebrityModel.domainIdentifier)
         activity.title = nickName
         activity.userInfo = userActivityUserInfo
         activity.keywords = [nickName, "celebrity", "stars", "crown", "king", "news", "score"]
@@ -38,7 +38,7 @@ extension CelebrityStruct {
         attributeSet.title = nickName
         let gender: String = sex == true ? "him" : "her"
         attributeSet.contentDescription = "CelScore:\(prevScore.roundToPlaces(places: 2)).\nVote for \(gender) on the Courthouse of Public Opinion."
-        attributeSet.thumbnailData = try? Data(contentsOf: URL(string: imageURL)!)
+        attributeSet.thumbnailData = try? Data(contentsOf: URL(string: picture3x)!)
         attributeSet.supportsPhoneCall = false
         attributeSet.keywords = [String(prevScore)]
         return attributeSet

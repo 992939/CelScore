@@ -29,22 +29,8 @@ struct CelebrityViewModel {
             let realm = try! Realm()
             let celebrity = realm.objects(CelebrityModel.self).filter("id = %@", id).first
             guard let celeb = celebrity else { return observer.send(error: .notFound) }
-            let profile = CelebrityStruct(id: celeb.id,
-                                          imageURL: celeb.picture3x,
-                                          trend: celeb.trend,
-                                          nickName: celeb.nickName,
-                                          kingName: celeb.kingName,
-                                          prevScore: celeb.prevScore,
-                                          prevWeek: celeb.prevWeek,
-                                          prevMonth: celeb.prevMonth,
-                                          index: celeb.index,
-                                          y_index: celeb.y_index,
-                                          daysOnThrone: celeb.daysOnThrone,
-                                          sex: celeb.sex,
-                                          isFollowed: celeb.isFollowed,
-                                          isTrending: celeb.isTrending)
-            profile.userActivity.addUserInfoEntries(from: profile.userActivityUserInfo)
-            observer.send(value: profile.userActivity)
+            celeb.userActivity.addUserInfoEntries(from: celeb.userActivityUserInfo)
+            observer.send(value: celeb.userActivity)
             observer.sendCompleted()
         }
     }
@@ -113,16 +99,6 @@ struct CelebrityViewModel {
             let realm = try! Realm()
             let celebList = realm.objects(CelebrityModel.self)
             observer.send(value: celebList.count)
-            observer.sendCompleted()
-        }
-    }
-    
-    func getCelebrityStructSignal(id: String) -> SignalProducer<CelebrityStruct, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let celeb = realm.objects(CelebrityModel.self).filter("id = %@", id).first
-            guard celeb?.id.isEmpty == false else { return }
-            observer.send(value: CelebrityStruct(id: celeb!.id, imageURL: celeb!.picture3x, trend: celeb!.trend, nickName:celeb!.nickName, kingName: celeb!.kingName, prevScore: celeb!.prevScore, prevWeek: celeb!.prevWeek, prevMonth: celeb!.prevMonth, index: celeb!.index, y_index: celeb!.y_index, daysOnThrone: celeb!.daysOnThrone, sex: celeb!.sex, isFollowed: celeb!.isFollowed, isTrending: celeb!.isTrending))
             observer.sendCompleted()
         }
     }

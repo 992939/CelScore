@@ -115,7 +115,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return true }
+        guard userActivity.activityType == CelebrityModel.domainIdentifier else { return true }
         guard let id = userActivity.userInfo!["id"] else { return true }
         CelebrityViewModel().getCelebritySignal(id: id as! String)
             .on(value: { celeb in
