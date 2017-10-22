@@ -17,15 +17,15 @@ import Result
 final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     
     //MARK: Properties
-    fileprivate let celebST: CelebrityStruct
+    fileprivate let celebrity: CelebrityModel
     fileprivate let pulseView: View
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct) {
-        self.celebST = celebrityST
+    init(celebrity: CelebrityModel) {
+        self.celebrity = celebrity
         self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.isHidden = true
@@ -34,62 +34,58 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .flatMapError { error -> SignalProducer<CelebrityModel, NoError> in return .empty }
-            .startWithValues({ celeb in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yyyy"
-                let birthdate: Date = dateFormatter.date(from: celeb.birthdate)!
-                
-                let calendar = NSCalendar.current
-                let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour])
-                let components = calendar.dateComponents(unitFlags, from: birthdate)
-                let now = calendar.dateComponents(unitFlags, from: Date())
-                
-                let age: Int = (now.month! < components.month! || (now.month! == components.month! && now.day! < components.day!)) ? (now.year! - (components.year!+1)) : (now.year! - components.year!)
-                let formatter = DateFormatter()
-                formatter.dateStyle = DateFormatter.Style.long
-                
-                RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
-                    .on(value: { score in
-                        for (index, quality) in Info.getAll().enumerated() {
-                            let barHeight = UIDevice.getPulseBarHeight()
-                            let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
-                            qualityView.tag = index+1
-                            let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: UIDevice.getLabelWidth(), height: barHeight - 5))
-                            let days = celeb.daysOnThrone == 1 ? " Day" : " Days"
-                            var infoLabelText: String = ""
-                            switch quality {
-                            case Info.firstName.name(): infoLabelText = celeb.firstName
-                            case Info.middleName.name(): infoLabelText = celeb.middleName
-                            case Info.lastName.name(): infoLabelText = celeb.lastName
-                            case Info.from.name(): infoLabelText = celeb.from
-                            case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
-                            case Info.height.name(): infoLabelText = celeb.height
-                            case Info.zodiac.name(): infoLabelText = birthdate.zodiacSign().name()
-                            case Info.status.name(): infoLabelText = celeb.status
-                            case Info.throne.name(): infoLabelText = String(celeb.daysOnThrone) + days
-                            case Info.networth.name(): infoLabelText = celeb.netWorth
-                            default: infoLabelText = ""
-                            }
-                            
-                            let infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
-                            infoLabel.textAlignment = .right
-                            infoLabel.adjustsFontSizeToFitWidth = true
-                            if case Info.throne.name() = quality {
-                                infoLabel.textColor = celeb.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
-                            }
-                        
-                            qualityView.depthPreset = .depth2
-                            qualityView.layer.cornerRadius = 5.0
-                            qualityView.backgroundColor = Constants.kGreyBackground
-                            qualityView.addSubview(qualityLabel)
-                            qualityView.addSubview(infoLabel)
-                            self.pulseView.addSubview(qualityView)
-                        }
-                    })
-                .start()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let birthdate: Date = dateFormatter.date(from: celeb.birthdate)!
+        
+        let calendar = NSCalendar.current
+        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour])
+        let components = calendar.dateComponents(unitFlags, from: birthdate)
+        let now = calendar.dateComponents(unitFlags, from: Date())
+        
+        let age: Int = (now.month! < components.month! || (now.month! == components.month! && now.day! < components.day!)) ? (now.year! - (components.year!+1)) : (now.year! - components.year!)
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.long
+        
+        RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id)
+            .on(value: { score in
+                for (index, quality) in Info.getAll().enumerated() {
+                    let barHeight = UIDevice.getPulseBarHeight()
+                    let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
+                    qualityView.tag = index+1
+                    let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: UIDevice.getLabelWidth(), height: barHeight - 5))
+                    let days = celeb.daysOnThrone == 1 ? " Day" : " Days"
+                    var infoLabelText: String = ""
+                    switch quality {
+                    case Info.firstName.name(): infoLabelText = celebrity.firstName
+                    case Info.middleName.name(): infoLabelText = celebrity.middleName
+                    case Info.lastName.name(): infoLabelText = celebrity.lastName
+                    case Info.from.name(): infoLabelText = celebrity.from
+                    case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
+                    case Info.height.name(): infoLabelText = celebrity.height
+                    case Info.zodiac.name(): infoLabelText = birthdate.zodiacSign().name()
+                    case Info.status.name(): infoLabelText = celebrity.status
+                    case Info.throne.name(): infoLabelText = String(celebrity.daysOnThrone) + days
+                    case Info.networth.name(): infoLabelText = celebrity.netWorth
+                    default: infoLabelText = ""
+                    }
+                    
+                    let infoLabel = self.setupLabel(title: infoLabelText, frame: CGRect(x: qualityLabel.width, y: 3, width: Constants.kMaxWidth - (qualityLabel.width + Constants.kPadding), height: barHeight - 5))
+                    infoLabel.textAlignment = .right
+                    infoLabel.adjustsFontSizeToFitWidth = true
+                    if case Info.throne.name() = quality {
+                        infoLabel.textColor = celebrity.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
+                    }
+                    
+                    qualityView.depthPreset = .depth2
+                    qualityView.layer.cornerRadius = 5.0
+                    qualityView.backgroundColor = Constants.kGreyBackground
+                    qualityView.addSubview(qualityLabel)
+                    qualityView.addSubview(infoLabel)
+                    self.pulseView.addSubview(qualityView)
+                }
             })
+            .start()
         self.pulseView.backgroundColor = Color.clear
         self.view = self.pulseView
     }

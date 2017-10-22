@@ -25,7 +25,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     fileprivate let ratingsVC: RatingsViewController
     fileprivate let celscoreVC: CelScoreViewController
     fileprivate let voteButton: Button
-    fileprivate let celebST: CelebrityStruct
+    fileprivate let celebrity: CelebrityModel
     fileprivate let socialButton: FABMenu
     fileprivate var previousIndex: Int = 1
     internal let profilePicNode: ASNetworkImageNode
@@ -33,22 +33,22 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct) {
-        self.celebST = celebrityST
-        self.infoVC = InfoViewController(celebrityST: self.celebST)
-        self.ratingsVC = RatingsViewController(celebrityST: self.celebST)
-        self.celscoreVC = CelScoreViewController(celebrityST: self.celebST)
+    init(celebrity: CelebrityViewModel) {
+        self.celebrity = celebrity
+        self.infoVC = InfoViewController(celebrity: celebrity)
+        self.ratingsVC = RatingsViewController(celebrity: celebrity)
+        self.celscoreVC = CelScoreViewController(celebrity: celebrity)
         self.voteButton = Button()
         self.socialButton = FABMenu(frame: CGRect(x: -100, y: Constants.kTopViewRect.bottom - 35, width: Constants.kFabDiameter, height: Constants.kFabDiameter))
         self.profilePicNode = ASNetworkImageNode()
         super.init(nibName: nil, bundle: nil)
         
-        CelebrityViewModel().updateUserActivitySignal(id: self.celebST.id)
+        CelebrityViewModel().updateUserActivitySignal(id: celebrity.id)
             .on(value: { activity in self.userActivity = activity })
             .start(on: QueueScheduler())
             .start()
         
-        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: celebrity.id).start()
     }
     
     //MARK: Methods

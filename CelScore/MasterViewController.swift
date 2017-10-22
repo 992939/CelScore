@@ -29,7 +29,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let segmentedControl: HMSegmentedControl
     fileprivate let celebSearchBar: UISearchBar
     fileprivate let transitionManager: TransitionManager = TransitionManager()
-    fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<Results<CelebrityModel>>
+    fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<CelebrityModel>
     fileprivate let socialButton: FABMenu
     internal let celebrityTableNode: ASTableNode
     
@@ -38,7 +38,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     init() {
         self.celebrityTableNode = ASTableNode()
-        self.diffCalculator = SingleSectionTableViewDiffCalculator<Results<CelebrityModel>>(tableView: self.celebrityTableNode.view)
+        self.diffCalculator = SingleSectionTableViewDiffCalculator<CelebrityModel>(tableView: self.celebrityTableNode.view)
         self.diffCalculator.insertionAnimation = .fade
         self.diffCalculator.deletionAnimation = .fade
         self.segmentedControl = HMSegmentedControl(sectionTitles: ListInfo.getAllNames())
@@ -219,7 +219,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         ListViewModel().getListSignal(listId: list.getId())
             .observe(on: UIScheduler())
             .on(value: { list in
-                self.diffCalculator.rows = [list]
+                self.diffCalculator.rows = list
                 Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
             .start()
     }
@@ -268,21 +268,18 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     //MARK: ASTableView methods
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.diffCalculator.rows.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.diffCalculator.rows.count
+    }
     
     func tableView(_ tableView: ASTableView, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        var node: ASCellNode = ASCellNode()
-        CelebrityViewModel().getCelebrityStructSignal(id: self.diffCalculator.rows[indexPath.row].id)
-            .observe(on: UIScheduler())
-            .on(value: { value in node = celebrityTableNodeCell(celebrityStruct: value) })
-            .start()
-        return node
+        return celebrityTableNodeCell(celebrity: self.diffCalculator.rows[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movingSocialButton(onScreen: false)
         let node = self.celebrityTableNode.nodeForRow(at: indexPath) as! celebrityTableNodeCell
-        let detailVC = DetailViewController(celebrityST: node.celebST)
+        let detailVC = DetailViewController(celebrity: self.diffCalculator.rows[indexPath.row])
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
         Motion.delay(0.2) { self.present(detailVC, animated: true, completion: nil) }

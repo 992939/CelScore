@@ -16,15 +16,15 @@ import ReactiveSwift
 final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeViewDelegate, Labelable {
     
     //MARK: Properties
-    fileprivate let celebST: CelebrityStruct
+    fileprivate let celebrity: CelebrityModel
     fileprivate let pulseView: View
     internal var delegate: DetailSubViewable?
     
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrityST: CelebrityStruct) {
-        self.celebST = celebrityST
+    init(celebrity: CelebrityModel) {
+        self.celebrity = celebrity
         self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
     }
@@ -33,18 +33,15 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     override func viewDidLoad() {
         super.viewDidLoad()
         let gaugeHeight = Constants.kBottomHeight - UIDevice.getGaugeHeightLimit()
-        self.pulseView.addSubview(getGaugeView(gaugeHeight))
+        let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: celebrity.prevScore, past: celebrity.y_index)
+        let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: celebrity.prevWeek, past: celebrity.w_index)
+        let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: celebrity.prevMonth, past: celebrity.m_index)
         
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(value: { celebrity in
-                let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: self.celebST.prevScore, past: celebrity.y_index)
-                self.pulseView.addSubview(pulseView1)
-                let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: self.celebST.prevWeek, past: celebrity.w_index)
-                self.pulseView.addSubview(pulseView2)
-                let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: self.celebST.prevMonth, past: celebrity.m_index)
-                self.pulseView.addSubview(pulseView3)
-            }).start()
         self.pulseView.backgroundColor = Color.clear
+        self.pulseView.addSubview(pulseView1)
+        self.pulseView.addSubview(pulseView2)
+        self.pulseView.addSubview(pulseView3)
+        self.pulseView.addSubview(getGaugeView(gaugeHeight))
         self.view = self.pulseView
     }
     
@@ -71,7 +68,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gauge.delegate = self
         gaugeView.addSubview(gauge)
 
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+        RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id)
             .startWithValues({ celscore in
                 let score = CGFloat(celscore.roundToPlaces(places: 2))
                 Timer.after(1.5, {
@@ -86,12 +83,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     }
     
     func getView(positionY: CGFloat, title: String, value: Double, past: Int) -> PulseView {
-        
         let titleLabel = self.setupLabel(title: title, frame: CGRect(x: Constants.kPadding, y: UIDevice.getCelScoreBarHeight() * 0.1, width: UIDevice.getCelScoreTitleWidth(), height: UIDevice.getCelScoreBarHeight() - 5))
         let infoLabel: UILabel = self.setupLabel(title: String(value) + "%", frame: CGRect(x: titleLabel.width + 3, y: UIDevice.getCelScoreBarHeight() * 0.1, width: 55, height: UIDevice.getCelScoreBarHeight() - 5))
         
         var changeLabel: UILabel?
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id).startWithValues({ celscore in
+        RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id).startWithValues({ celscore in
             let percent: Double = (celscore - value).roundToPlaces(places: 1)
             let percentage: String = (percent >= 0 ? "+" + String(percent) : String(percent))
             changeLabel = self.setupLabel(title: percentage, frame: CGRect(x: infoLabel.right + UIDevice.getCelScoreSpacing(), y: UIDevice.getCelScoreBarHeight() * 0.1, width: 55, height: UIDevice.getCelScoreBarHeight() - 5))

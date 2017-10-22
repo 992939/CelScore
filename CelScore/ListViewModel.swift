@@ -14,14 +14,13 @@ import Result
 
 struct ListViewModel {
     
-    func getListSignal(listId: String) -> SignalProducer<Results<CelebrityModel>, NoError> {
+    func getListSignal(listId: String) -> SignalProducer<[CelebrityModel], NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(CelebrityModel.self).filter("listType = %@", 0)
             guard list.count > 0 else { return }
-            //let orderedList = list.sorted(by: { (celebA, celebB) -> Bool in
-            //})
-            observer.send(value: list)
+            //let orderedList = list.sorted(by: { (celebA, celebB) -> Bool in })
+            observer.send(value: Array(list))
             observer.sendCompleted()
         }
     }

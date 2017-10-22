@@ -35,12 +35,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let wreathTextNode: ASTextNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
-    internal let celebST: CelebrityStruct
+    internal let id: String
     
     //MARK: Initializer
-    init(celebrityStruct: CelebrityStruct) {
-        self.celebST = celebrityStruct
-        
+    init(celebrity: CelebrityModel) {
+        self.id = celebrity.id
         self.nameNode = ASTextNode()
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.pointSizeScaleFactors = [0.95, 0.9]
@@ -71,7 +70,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         box.onTintColor = Constants.kRedShade
         box.tintColor = Constants.kRedShade
         box.lineWidth = 2.5
-        box.setOn(self.celebST.isFollowed, animated: true)
+        box.setOn(celebrity.isFollowed, animated: true)
         self.switchNode = ASDisplayNode(viewBlock: { () -> UIView in return box })
         self.switchNode.style.preferredSize = box.frame.size
         
@@ -142,7 +141,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.graphNode = ASImageNode()
         self.graphNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle() * 2.4, height: UIDevice.getMiniCircle() * 2.4)
-        self.graphNode.image = BarTrend(rawValue: self.celebST.trend)?.icon()
+        self.graphNode.image = BarTrend(rawValue: celebrity.trend)?.icon()
         self.graphNode.isLayerBacked = true
         
         let cardView: PulseView = PulseView()
@@ -159,20 +158,20 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: self.celebST.getDaysOnThrone()))", attributes: attr2)
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(self.celebST.getCelebName())", attributes: attr)
         
-        RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id)
+        RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id)
             .on(value: { score in
                 cosmosView.rating = score/20
-                self.trendNode.image = score >= self.celebST.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
+                self.trendNode.image = score >= celebrity.prevScore ? R.image.arrow_up()! : R.image.arrow_down()!
                 self.consensusNode.image = score >= Constants.kRoyalty ? R.image.mini_crown_blue()! : R.image.mini_crown_red()!
-                if self.celebST.y_index == 1 && self.celebST.index != 1  { self.consensusNode.image = R.image.mini_death()! }
-                else if self.celebST.index == 1 { self.consensusNode.image = self.celebST.sex ? R.image.king_mini()! : R.image.queen_mini()! }
+                if celebrity.y_index == 1 && celebrity.index != 1  { self.consensusNode.image = R.image.mini_death()! }
+                else if celebrity.index == 1 { self.consensusNode.image = celebrity.sex ? R.image.king_mini()! : R.image.queen_mini()! }
             })
             .flatMap(.latest) { (_) -> SignalProducer<Int, NoError> in
                 return CelebrityViewModel().countCelebritiesSignal() }
             .on(value: { count in
-                self.averageNode.image = self.celebST.index < (count/2) ? R.image.half_circle_blue()! : R.image.half_circle_red()! })
+                self.averageNode.image = celebrity.index < (count/2) ? R.image.half_circle_blue()! : R.image.half_circle_red()! })
             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
-                return RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings) }
+                return RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .userRatings) }
             .on(failed: { _ in
                 self.faceNode.image = R.image.mini_empty()!
                 cosmosView.settings.colorFilled = Constants.kStarGreyShade })
@@ -296,8 +295,6 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
             background: self.backgroundNode)
     }
     
-    func getId() -> String { return celebST.id }
-    
     //MARK: BEMCheckBoxDelegate
     func didTap(_ checkBox: BEMCheckBox) {
         self.updateCheckBox(checkBox)
@@ -306,7 +303,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     
     func updateCheckBox(_ checkBox: BEMCheckBox) {
         if checkBox.on == false {
-            CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: false).start()
+            CelebrityViewModel().followCebritySignal(id: self.id, isFollowing: false).start()
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
@@ -317,7 +314,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                     } else {
                         let message = "Today View: \(self.celebST.getCelebName()) added!"
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
-                        CelebrityViewModel().followCebritySignal(id: self.celebST.id, isFollowing: true).start()
+                        CelebrityViewModel().followCebritySignal(id: self.id, isFollowing: true).start()
                     }
                 }).start()
         }
