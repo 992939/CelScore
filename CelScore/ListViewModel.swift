@@ -25,12 +25,12 @@ struct ListViewModel {
         }
     }
     
-    func searchSignal(searchToken: String) -> SignalProducer<Results<CelebrityModel>, NoError> {
+    func searchSignal(searchToken: String) -> SignalProducer<[CelebrityModel], NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let list = realm.objects(CelebrityModel.self).filter("nickName contains[c] %@", searchToken)
             guard list.count > 0 else { return observer.sendCompleted() }
-            observer.send(value: list)
+            observer.send(value: Array(list))
             observer.sendCompleted()
         }
     }

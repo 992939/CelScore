@@ -36,7 +36,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //Realm
         let config = Realm.Configuration (
-            schemaVersion: 60,
+            schemaVersion: 61,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 43 {
                     migration.enumerateObjects(ofType: CelebrityModel.className()) { oldObject, newObject in
@@ -92,25 +92,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!)
-                .flatMapError { _ in .empty }
-                .startWithValues({ celeb in
-                let celebST = CelebrityStruct(
-                    id: celeb.id,
-                    imageURL: celeb.picture3x,
-                    trend: celeb.trend,
-                    nickName: celeb.nickName,
-                    kingName: celeb.kingName,
-                    prevScore: celeb.prevScore,
-                    prevWeek: celeb.prevWeek,
-                    prevMonth: celeb.prevMonth,
-                    index: celeb.index,
-                    y_index: celeb.y_index,
-                    daysOnThrone: celeb.daysOnThrone,
-                    sex: celeb.sex,
-                    isFollowed: celeb.isFollowed,
-                    isTrending: celeb.isTrending)
-                application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+            .on(value: { celeb in
+                application.keyWindow!.rootViewController!.present(DetailViewController(celebrity: celeb), animated: false, completion: nil)
             })
+            .start()
         }
         else { FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
         return true
@@ -119,25 +104,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         if url.absoluteString.contains("TheScore://") {
             CelebrityViewModel().getCelebritySignal(id: url.query!)
-                .flatMapError { _ in .empty }
-                .startWithValues({ celeb in
-                let celebST = CelebrityStruct(
-                    id: celeb.id,
-                    imageURL: celeb.picture3x,
-                    trend: celeb.trend,
-                    nickName: celeb.nickName,
-                    kingName: celeb.kingName,
-                    prevScore: celeb.prevScore,
-                    prevWeek: celeb.prevWeek,
-                    prevMonth: celeb.prevMonth,
-                    index: celeb.index,
-                    y_index: celeb.y_index,
-                    daysOnThrone: celeb.daysOnThrone,
-                    sex: celeb.sex,
-                    isFollowed: celeb.isFollowed,
-                    isTrending: celeb.isTrending)
-                app.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
-            })
+                .on(value: { celeb in
+                    app.keyWindow!.rootViewController!.present(DetailViewController(celebrity: celeb), animated: false, completion: nil)
+                })
+                .start()
         }
         else if Twitter.sharedInstance().application(app, open:url, options: options) { return true }
         else if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: nil) { return true }
@@ -147,24 +117,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         guard userActivity.activityType == CelebrityStruct.domainIdentifier else { return true }
         guard let id = userActivity.userInfo!["id"] else { return true }
-        
-        let celebST = CelebrityStruct(
-            id: id as! String,
-            imageURL: userActivity.userInfo!["imageURL"] as! String,
-            trend: userActivity.userInfo!["trend"] as! String,
-            nickName: userActivity.userInfo!["nickname"] as! String,
-            kingName: userActivity.userInfo!["kingName"] as! String,
-            prevScore: userActivity.userInfo!["prevScore"] as! Double,
-            prevWeek: userActivity.userInfo!["prevWeek"] as! Double,
-            prevMonth: userActivity.userInfo!["prevMonth"] as! Double,
-            index: userActivity.userInfo!["index"] as! Int,
-            y_index: userActivity.userInfo!["y_index"] as! Int,
-            daysOnThrone: userActivity.userInfo!["daysOnThrone"] as! Int,
-            sex: userActivity.userInfo!["sex"] as! Bool,
-            isFollowed: userActivity.userInfo!["isFollowed"] as! Bool,
-            isTrending: userActivity.userInfo!["isTrending"] as! Bool)
-        
-        application.keyWindow!.rootViewController!.present(DetailViewController(celebrityST: celebST), animated: false, completion: nil)
+        CelebrityViewModel().getCelebritySignal(id: id as! String)
+            .on(value: { celeb in
+                application.keyWindow!.rootViewController!.present(DetailViewController(celebrity: celeb), animated: false, completion: nil)
+            })
+            .start()
         return true
     }
 }

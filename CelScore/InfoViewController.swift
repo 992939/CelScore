@@ -36,7 +36,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
         super.viewDidLoad()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        let birthdate: Date = dateFormatter.date(from: celeb.birthdate)!
+        let birthdate: Date = dateFormatter.date(from: self.celebrity.birthdate)!
         
         let calendar = NSCalendar.current
         let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour])
@@ -54,19 +54,19 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                     let qualityView: PulseView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
                     let qualityLabel: UILabel = self.setupLabel(title: quality, frame: CGRect(x: Constants.kPadding, y: 3, width: UIDevice.getLabelWidth(), height: barHeight - 5))
-                    let days = celeb.daysOnThrone == 1 ? " Day" : " Days"
+                    let days = self.celebrity.daysOnThrone == 1 ? " Day" : " Days"
                     var infoLabelText: String = ""
                     switch quality {
-                    case Info.firstName.name(): infoLabelText = celebrity.firstName
-                    case Info.middleName.name(): infoLabelText = celebrity.middleName
-                    case Info.lastName.name(): infoLabelText = celebrity.lastName
-                    case Info.from.name(): infoLabelText = celebrity.from
+                    case Info.firstName.name(): infoLabelText = self.celebrity.firstName
+                    case Info.middleName.name(): infoLabelText = self.celebrity.middleName
+                    case Info.lastName.name(): infoLabelText = self.celebrity.lastName
+                    case Info.from.name(): infoLabelText = self.celebrity.from
                     case Info.birthdate.name(): infoLabelText = formatter.string(from: birthdate as Date) + String(" (\(age))")
-                    case Info.height.name(): infoLabelText = celebrity.height
+                    case Info.height.name(): infoLabelText = self.celebrity.height
                     case Info.zodiac.name(): infoLabelText = birthdate.zodiacSign().name()
-                    case Info.status.name(): infoLabelText = celebrity.status
-                    case Info.throne.name(): infoLabelText = String(celebrity.daysOnThrone) + days
-                    case Info.networth.name(): infoLabelText = celebrity.netWorth
+                    case Info.status.name(): infoLabelText = self.celebrity.status
+                    case Info.throne.name(): infoLabelText = String(self.celebrity.daysOnThrone) + days
+                    case Info.networth.name(): infoLabelText = self.celebrity.netWorth
                     default: infoLabelText = ""
                     }
                     
@@ -74,7 +74,7 @@ final class InfoViewController: ASViewController<ASDisplayNode>, Labelable {
                     infoLabel.textAlignment = .right
                     infoLabel.adjustsFontSizeToFitWidth = true
                     if case Info.throne.name() = quality {
-                        infoLabel.textColor = celebrity.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
+                        infoLabel.textColor = self.celebrity.daysOnThrone > 0 ? Constants.kBlueLight : Constants.kRedLight
                     }
                     
                     qualityView.depthPreset = .depth2

@@ -35,11 +35,11 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     internal let wreathTextNode: ASTextNode
     internal let faceNode: ASImageNode
     internal let profilePicNode: ASNetworkImageNode
-    internal let id: String
+    fileprivate let celebrity: CelebrityModel
     
     //MARK: Initializer
     init(celebrity: CelebrityModel) {
-        self.id = celebrity.id
+        self.celebrity = celebrity
         self.nameNode = ASTextNode()
         self.nameNode.maximumNumberOfLines = 1
         self.nameNode.pointSizeScaleFactors = [0.95, 0.9]
@@ -47,7 +47,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.nameNode.isLayerBacked = true
     
         self.profilePicNode = ASNetworkImageNode()
-        //self.profilePicNode.url = URL(string: self.celebST.imageURL)
+        //self.profilePicNode.url = URL(string: celebrity.imageURL)
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
         //self.profilePicNode.defaultImage = R.image.uncle_sam()!
         self.profilePicNode.contentMode = .scaleAspectFill
@@ -95,7 +95,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                      NSParagraphStyleAttributeName: style]
     
         self.rankTextNode = ASTextNode()
-        self.rankTextNode.attributedText = NSAttributedString(string: "\(self.celebST.index)", attributes: attr2)
+        self.rankTextNode.attributedText = NSAttributedString(string: "\(celebrity.index)", attributes: attr2)
         self.rankTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         self.rankTextNode.isLayerBacked = true
         
@@ -104,7 +104,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.wreathTextNode.isLayerBacked = true
         
         self.pastTextNode = ASTextNode()
-        self.pastTextNode.attributedText = NSAttributedString(string: "\(self.celebST.y_index)", attributes: attr3)
+        self.pastTextNode.attributedText = NSAttributedString(string: "\(celebrity.y_index)", attributes: attr3)
         self.pastTextNode.style.preferredSize = CGSize(width: UIDevice.getRankingSize(), height: UIDevice.getRankingSize())
         self.pastTextNode.isLayerBacked = true
         
@@ -124,7 +124,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         
         self.newsNode = ASImageNode()
         self.newsNode.style.preferredSize = CGSize(width: UIDevice.getMiniCircle(), height: UIDevice.getMiniCircle())
-        self.newsNode.image = self.celebST.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
+        self.newsNode.image = celebrity.isTrending ? R.image.bell_red()! : R.image.bell_blue()!
         self.newsNode.isLayerBacked = true
         
         self.consensusNode = ASImageNode()
@@ -155,8 +155,8 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: self.celebST.getDaysOnThrone()))", attributes: attr2)
-        self.nameNode.attributedText = NSMutableAttributedString(string: "\(self.celebST.getCelebName())", attributes: attr)
+        self.wreathTextNode.attributedText = NSAttributedString(string: "\(String(describing: celebrity.getDaysOnThrone()))", attributes: attr2)
+        self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebrity.getCelebName())", attributes: attr)
         
         RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id)
             .on(value: { score in
@@ -303,7 +303,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
     
     func updateCheckBox(_ checkBox: BEMCheckBox) {
         if checkBox.on == false {
-            CelebrityViewModel().followCebritySignal(id: self.id, isFollowing: false).start()
+            CelebrityViewModel().followCebritySignal(id: self.celebrity.id, isFollowing: false).start()
         } else {
             CelebrityViewModel().countFollowedCelebritiesSignal()
                 .on(value: { count in
@@ -312,9 +312,9 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
                         Motion.delay(0.5){ checkBox.setOn(false, animated: true) }
                     } else {
-                        let message = "Today View: \(self.celebST.getCelebName()) added!"
+                        let message = "Today View: \(self.celebrity.getCelebName()) added!"
                         NotificationCenter.default.post(name: .onSelectedBox, object: checkBox, userInfo: ["message": message])
-                        CelebrityViewModel().followCebritySignal(id: self.id, isFollowing: true).start()
+                        CelebrityViewModel().followCebritySignal(id: self.celebrity.id, isFollowing: true).start()
                     }
                 }).start()
         }

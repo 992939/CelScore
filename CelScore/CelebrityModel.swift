@@ -12,63 +12,6 @@ import SwiftyJSON
 import ObjectMapper
 
 
-struct CelebrityStruct {
-    let id: String
-    let imageURL: String
-    let trend: String
-    let nickName: String
-    let kingName: String
-    let prevScore: Double
-    let prevWeek: Double
-    let prevMonth: Double
-    let index: Int
-    let y_index: Int
-    let daysOnThrone: Int
-    let sex: Bool
-    let isFollowed: Bool
-    let isTrending: Bool
-
-    func getCelebName() -> String {
-        var celebName = index == 1 ? kingName : nickName
-        if daysOnThrone >= 100 {
-            let title: Int = daysOnThrone / 100
-            celebName = String("\(kingName) \(toRoman(number: title))")
-        }
-        return celebName
-    }
-    
-    func getDaysOnThrone() -> String {
-        var days = daysOnThrone < 1 ? "∅" : String(daysOnThrone)
-        if daysOnThrone >= 100 {
-            days = String(daysOnThrone % 100)
-        }
-        return days
-    }
-    
-    func toRoman(number: Int) -> String {
-        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-        var romanValue = ""
-        var startingValue = number
-        
-        for (index, romanChar) in romanValues.enumerated() {
-            let arabicValue = arabicValues[index]
-            let div = startingValue / arabicValue
-            
-            if div > 0 {
-                for _ in 0..<div { romanValue += romanChar }
-                startingValue -= arabicValue * div
-            }
-        }
-        return romanValue
-    }
-}
-
-extension CelebrityStruct: Equatable {}
-
-func == (lhs: CelebrityStruct, rhs: CelebrityStruct) -> Bool { return lhs.nickName == rhs.nickName && lhs.id == rhs.id }
-
-
 final class CelebrityModel: Object, StaticMappable {
     
     //MARK: Properties
@@ -146,6 +89,41 @@ final class CelebrityModel: Object, StaticMappable {
     
     //MARK: Method
     override class func primaryKey() -> String { return "id" }
+
+    func getCelebName() -> String {
+        var celebName = index == 1 ? kingName : nickName
+        if daysOnThrone >= 100 {
+            let title: Int = daysOnThrone / 100
+            celebName = String("\(kingName) \(toRoman(number: title))")
+        }
+        return celebName
+    }
+    
+    func getDaysOnThrone() -> String {
+        var days = daysOnThrone < 1 ? "∅" : String(daysOnThrone)
+        if daysOnThrone >= 100 {
+            days = String(daysOnThrone % 100)
+        }
+        return days
+    }
+    
+    func toRoman(number: Int) -> String {
+        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        var romanValue = ""
+        var startingValue = number
+        
+        for (index, romanChar) in romanValues.enumerated() {
+            let arabicValue = arabicValues[index]
+            let div = startingValue / arabicValue
+            
+            if div > 0 {
+                for _ in 0..<div { romanValue += romanChar }
+                startingValue -= arabicValue * div
+            }
+        }
+        return romanValue
+    }
 }
 
 

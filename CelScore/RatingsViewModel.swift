@@ -91,7 +91,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getVoteMessage(celeb: CelebrityStruct) -> SignalProducer<String, NoError> {
+    func getVoteMessageSignal(celeb: CelebrityModel) -> SignalProducer<String, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first

@@ -26,7 +26,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
     init(celebrity: CelebrityModel) {
-        self.celebST = celebrityST
+        self.celebrity = celebrity
         self.pulseView = View(frame: Constants.kBottomViewRect)
         super.init(node: ASDisplayNode())
         self.view.isHidden = true
@@ -44,7 +44,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
         RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .ratings)
             .flatMapError { error -> SignalProducer<RatingsModel, NoError> in return .empty }
             .startWithValues({ ratings in
-                for (index, quality) in Qualities.getAll(isMale: celebrity.sex).enumerated() {
+                for (index, quality) in Qualities.getAll(isMale: self.celebrity.sex).enumerated() {
                     let barHeight = UIDevice.getPulseBarHeight()
                     let qualityView = PulseView(frame: CGRect(x: 0, y: CGFloat(index) * (Constants.kBottomHeight / 10) + Constants.kPadding, width: Constants.kMaxWidth, height: barHeight))
                     qualityView.tag = index+1
@@ -77,7 +77,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                     SettingsViewModel().loggedInAsSignal()
                         .on(value: { _ in cosmosView.settings.updateOnTouch = true })
                         .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
-                            return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
+                            return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebrity.id) }
                         .flatMapError { error -> SignalProducer<Bool, NoError> in return .empty }
                         .map { hasRatings in
                             cosmosView.settings.colorFilled = hasRatings ? Constants.kStarGoldShade : Constants.kStarGreyShade
@@ -91,7 +91,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                             .on(failed: { _ in NotificationCenter.default.post(name: .onFirstLoginFail, object: nil, userInfo: nil) })
                             .flatMapError { _ in SignalProducer.empty }
                             .flatMap(.latest){ (_) -> SignalProducer<Bool, NoError> in
-                                return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id) }
+                                return RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebrity.id) }
                             .filter{ hasUserRatings in
                                 if hasUserRatings == false {
                                     cosmosView.settings.userRatingMode = true
@@ -101,7 +101,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
                                 return cosmosView.settings.userRatingMode == true }
                             .promoteError(RatingsError.self)
                             .flatMap(.latest) { (_) -> SignalProducer<RatingsModel, RatingsError> in
-                                return RatingsViewModel().updateUserRatingSignal(ratingsId: celebrity.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
+                                return RatingsViewModel().updateUserRatingSignal(ratingsId: self.celebrity.id, ratingIndex: cosmosView.tag, newRating: Int(rating))}
                             .map { userRatings in
                                 cosmosView.settings.updateOnTouch = true
                                 cosmosView.settings.userRatingMode = true
@@ -124,7 +124,7 @@ final class RatingsViewController: ASViewController<ASDisplayNode>, Labelable {
     }
     
     func animateStarsToGold() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .ratings)
+        RatingsViewModel().getRatingsSignal(ratingsId: self.celebrity.id, ratingType: .ratings)
             .on(value: { ratings in
                 let viewArray: [PulseView] = self.view.subviews.sorted(by: { $0.tag < $1.tag }) as! [PulseView]
                 for (index, subview) in viewArray.enumerated() {

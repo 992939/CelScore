@@ -278,7 +278,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.movingSocialButton(onScreen: false)
-        let node = self.celebrityTableNode.nodeForRow(at: indexPath) as! celebrityTableNodeCell
         let detailVC = DetailViewController(celebrity: self.diffCalculator.rows[indexPath.row])
         detailVC.transitioningDelegate = self.transitionManager
         self.transitionManager.setIndexedCell(index: (indexPath as NSIndexPath).row)
@@ -336,7 +335,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
         if searchText.characters.count > 2 {
             ListViewModel().searchSignal(searchToken: searchText)
                 .observe(on: UIScheduler())
-                .on(value: { list in self.diffCalculator.rows = list.celebList.flatMap({ celebId in return celebId }) })
+                .on(value: { list in self.diffCalculator.rows = list })
                 .start()
         }
     }

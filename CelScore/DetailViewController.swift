@@ -33,7 +33,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     //MARK: Initializers
     required init(coder aDecoder: NSCoder) { fatalError("storyboards are incompatible with truth and beauty") }
     
-    init(celebrity: CelebrityViewModel) {
+    init(celebrity: CelebrityModel) {
         self.celebrity = celebrity
         self.infoVC = InfoViewController(celebrity: celebrity)
         self.ratingsVC = RatingsViewController(celebrity: celebrity)
@@ -78,7 +78,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let statusView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.kScreenWidth, height: 20))
         statusView.backgroundColor = Color.red.darken2
         
-        //self.profilePicNode.url = URL(string: celebST.imageURL)
+        //self.profilePicNode.url = URL(string: celebrity.imageURL)
         self.profilePicNode.defaultImage = R.image.jamie_blue()!
         //self.profilePicNode.defaultImage = R.image.uncle_sam()!
         self.profilePicNode.frame = CGRect(x: self.view.centerX - UIDevice.getProfileDiameter()/2,
@@ -133,18 +133,18 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     func backAction() {
         self.hideButtons()
-        RatingsViewModel().cleanUpRatingsSignal(ratingsId: self.celebST.id).start()
+        RatingsViewModel().cleanUpRatingsSignal(ratingsId: celebrity.id).start()
         Motion.delay(0.15){ self.dismiss(animated: true, completion: nil) }
     }
     
     func voteAction() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+        RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .userRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
-                return RatingsViewModel().voteSignal(ratingsId: self.celebST.id) }
+                return RatingsViewModel().voteSignal(ratingsId: self.celebrity.id) }
             .observe(on: UIScheduler())
             .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<String, NoError> in
-                return RatingsViewModel().getVoteMessage(celeb: self.celebST) }
+                return RatingsViewModel().getVoteMessageSignal(celeb: self.celebrity) }
             .map { voteMessage in
                 self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
@@ -164,7 +164,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func updateAction() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+        RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .userRatings)
             .filter({ (ratings: RatingsModel) -> Bool in return ratings.filter{ (ratings[$0] as! Int) == 0 }.isEmpty })
             .on(value: { (userRatings:RatingsModel) in
                 self.updateVoteButton(positive: userRatings.getCelScore() < Constants.kRoyalty ? false : true)
@@ -174,16 +174,13 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     
     //MARK: SFSafariViewControllerDelegate
     func openSafari() {
-        CelebrityViewModel().getCelebritySignal(id: self.celebST.id)
-            .on(value: { celeb in
-                let searchTerm = celeb.googleName.replacingOccurrences(of: " ", with: "+")
-                let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)&tbm=nws"))
-                let safariVC = SFSafariViewController(url: myURL!)
-                self.present(safariVC, animated: true, completion: nil)
-                safariVC.preferredBarTintColor = Constants.kRedShade
-                safariVC.preferredControlTintColor = Color.white
-                safariVC.delegate = self
-            }).start()
+        let searchTerm = celebrity.googleName.replacingOccurrences(of: " ", with: "+")
+        let myURL = URL(string: String("https://www.google.com/search?q=\(searchTerm)&tbm=nws"))
+        let safariVC = SFSafariViewController(url: myURL!)
+        self.present(safariVC, animated: true, completion: nil)
+        safariVC.preferredBarTintColor = Constants.kRedShade
+        safariVC.preferredControlTintColor = Color.white
+        safariVC.delegate = self
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
@@ -216,11 +213,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         SettingsViewModel().loggedInAsSignal()
             .on(failed: { _ in self.socialButtonTapped(buttonTag: button.tag, hideButton: false) })
             .flatMap(.latest) { (_) -> SignalProducer<Double, NoError> in
-                return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebST.id) }
+                return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebrity.id) }
             .on(value: { score in
-                CelScoreViewModel()
-                    .shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter),
-                        message: "\(self.celebST.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty. #CNN")
+                let message = "\(self.celebrity.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty. #CNN"
+                CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: message)
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
                     let isTwitterAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)
@@ -234,7 +230,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
     }
     
     func socialRefresh() {
-        RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+        RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .userRatings)
             //.on(failed: { _ in self.ratingsVC.displayRatings() })
             .on(value: { userRatings in
                 self.ratingsVC.displayRatings(userRatings)
@@ -262,7 +258,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.setImage(image, for: .normal)
         self.voteButton.setImage(image, for: .highlighted)
         self.voteButton.removeTarget(self, action: nil, for: .touchUpInside)
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id)
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: celebrity.id)
             .on(value: { hasRatings in
                 let voteImage = hasRatings ? R.image.goldstar()! : R.image.blackstar()!
                 self.voteButton.setImage(voteImage, for: .normal)
@@ -285,7 +281,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         if segmentView.selectedSegmentIndex == 2 {
             self.enableVoteButton()
             
-            RatingsViewModel().getRatingsSignal(ratingsId: self.celebST.id, ratingType: .userRatings)
+            RatingsViewModel().getRatingsSignal(ratingsId: celebrity.id, ratingType: .userRatings)
                 .observe(on: UIScheduler())
                 .on(value: { userRatings in
                     guard userRatings.getCelScore() > 0 else { return }
@@ -294,14 +290,14 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     self.updateVoteButton(positive: isPositive) })
                 .start()
 
-             CelebrityViewModel().setLastVisitSignal(celebId: self.celebST.id)
+             CelebrityViewModel().setLastVisitSignal(celebId: celebrity.id)
                 .observe(on: UIScheduler())
                 .on(value: { ratings in
-                    if self.celebST.isTrending {
-                        let message = "\(self.celebST.getCelebName()) is in the news!"
+                    if self.celebrity.isTrending {
+                        let message = "\(self.celebrity.getCelebName()) is in the news!"
                         Motion.delay(1.2){ self.displaySnack(message: message, icon: .news) }
                     } else {
-                        let message = "Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebST.sex))"
+                        let message = "Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebrity.sex))"
                         Motion.delay(1.2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })
@@ -374,11 +370,11 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         let infoButton: FlatButton = FlatButton()
         infoButton.pulseColor = Color.white
         infoButton.pulseAnimation = .none
-        let bell_image = self.celebST.isTrending ? R.image.bell_ring()! : R.image.bell()!
+        let bell_image = celebrity.isTrending ? R.image.bell_ring()! : R.image.bell()!
         infoButton.setImage(bell_image, for: .normal)
         infoButton.setImage(bell_image, for: .highlighted)
         infoButton.addTarget(self, action: #selector(self.openSafari), for: .touchUpInside)
-        if self.celebST.isTrending {
+        if celebrity.isTrending {
             Motion.delay(1) {
                 infoButton.pulseAnimation = .centerWithBacking
                 infoButton.pulse()
@@ -387,8 +383,8 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
 
         let navigationBarView: Toolbar = Toolbar()
         navigationBarView.frame = Constants.kDetailNavigationBarRect
-        let celebTitle = self.celebST.index == 1 ? celebST.kingName : celebST.nickName
-        navigationBarView.title = String("\(self.celebST.index). \(celebTitle)")
+        let celebTitle = celebrity.index == 1 ? celebrity.kingName : celebrity.nickName
+        navigationBarView.title = String("\(celebrity.index). \(celebTitle)")
         navigationBarView.titleLabel.textColor = UIColor.white
         navigationBarView.titleLabel.font = UIFont.boldSystemFont(ofSize: UIDevice.getFontSize() + 1)
         navigationBarView.titleLabel.adjustsFontSizeToFitWidth = true
@@ -417,10 +413,10 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         appearance.titleOffSelectionFont = UIFont.systemFont(ofSize: 0)
         appearance.contentVerticalMargin = 5.0
         
-        let segmentView: SMSegmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
-                                                       dividerColour: Constants.kBlueShade,
-                                                       dividerWidth: 4.0,
-                                                       segmentAppearance: appearance)
+        let segmentView = SMSegmentView(frame: Constants.kSegmentViewRect,
+                                       dividerColour: Constants.kBlueShade,
+                                       dividerWidth: 4.0,
+                                       segmentAppearance: appearance)
         
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.white_crown()!, offSelectionImage: R.image.small_crown()!)
         segmentView.addSegmentWithTitle(nil, onSelectionImage: R.image.white_avatar()!, offSelectionImage: R.image.small_avatar()!)
@@ -441,7 +437,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.voteButton.depthPreset = .depth2
         self.voteButton.pulseAnimation = .center
         self.voteButton.backgroundColor = Constants.kGreyBackground
-        RatingsViewModel().hasUserRatingsSignal(ratingsId: self.celebST.id).startWithValues({ hasRatings in
+        RatingsViewModel().hasUserRatingsSignal(ratingsId: celebrity.id).startWithValues({ hasRatings in
             let voteImage = hasRatings ? R.image.goldstar()! : R.image.blackstar()!
             self.voteButton.setImage(voteImage, for: .normal)
             self.voteButton.setImage(voteImage, for: .highlighted)
