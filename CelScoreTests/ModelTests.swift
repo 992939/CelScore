@@ -119,34 +119,6 @@ class ModelTests: XCTestCase {
         XCTAssert((settings.isSynced as Any) is Bool, "SettingsModel().isSynced is Bool")
     }
     
-    func testListsModelNil() {
-        let list = ListsModel()
-        XCTAssertNotNil(list, "ListsModel() not nil")
-        XCTAssertNotNil(list.id, "ListsModel().id not nil")
-        XCTAssertNotNil(list.name, "ListsModel().name not nil")
-        XCTAssertNotNil(list.isSynced, "ListsModel().isSynced not nil")
-        XCTAssertNotNil(list.celebList, "ListsModel().celebList not nil")
-    }
-    
-    func testListsModelType() {
-        let list = ListsModel()
-        XCTAssert((list.id as Any) is String, "ListsModel().id is String")
-        XCTAssert((list.name as Any) is String, "ListsModel().name is String")
-        XCTAssert((list.isSynced as Any) is Bool, "ListsModel().name is Bool")
-        XCTAssert((list.celebList as Any) is List<CelebId>, "ListsModel().id is List<CelebId>")
-    }
-    
-    func testCelebIdNil() {
-        let celebId = CelebId()
-        XCTAssertNotNil(celebId, "CelebId() not nil")
-        XCTAssertNotNil(celebId.id, "CelebId().id not nil")
-    }
-    
-    func testCelebIdType() {
-        let celebId = CelebId()
-        XCTAssert((celebId.id as Any) is String, "CelebId().id is String")
-    }
-    
     func testUserRatingsInterpolation() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/2/1/1/1/1/1/1/1/1")
         XCTAssertEqual(userRatings.rating2, Double(2.00), "UserRatingsModel().interpolation() error1.")
@@ -156,14 +128,6 @@ class ModelTests: XCTestCase {
     func testUserRatingsGetCelScore() {
         let userRatings = UserRatingsModel(id: "0001", joinedString: "1/1/1/1/1/1/1/1/1/1")
         XCTAssertEqual(userRatings.getCelScore(), Double(20), "userRatings.getCelScore() error.")
-    }
-    
-    func testCelebrityStructEquality() {
-        let celebA = CelebrityStruct(id: "0001", imageURL:"", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 0, prevMonth: 0, index: 1, y_index: 1, daysOnThrone: 0, sex: false, isFollowed:false, isTrending: true)
-        let celebB = CelebrityStruct(id: "0001", imageURL:"@3x", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 2, prevWeek: 2, prevMonth: 2, index: 1, y_index: 1, daysOnThrone: 0, sex: true, isFollowed:true, isTrending: true)
-        let celebC = CelebrityStruct(id: "0000", imageURL:"", trend: "ZZZZ", nickName: "A", kingName: "B", prevScore: 0, prevWeek: 1, prevMonth: 1, index: 1, y_index: 1, daysOnThrone: 0, sex: false, isFollowed:false, isTrending: true)
-        XCTAssertEqual(celebA, celebB, "CelebrityStruct equality error.")
-        XCTAssertNotEqual(celebA, celebC, "CelebrityStruct unequality error.")
     }
 }
 
