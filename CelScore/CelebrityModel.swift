@@ -99,15 +99,10 @@ final class CelebrityModel: Object, StaticMappable {
         return celebName
     }
     
-//    func getDaysOnThrone() -> String {
-////        var days = daysOnThrone < 1 ? "0" : String(daysOnThrone)
-////        if daysOnThrone >= 100 {
-////            days = String(daysOnThrone % 100)
-////        }
-////        return days
-//        print("prick: \(daysOnThrone)")
-//        return String(daysOnThrone)
-//    }
+    func getDaysOnThrone() -> String {
+        if daysOnThrone >= 100 { return String(daysOnThrone % 100) }
+        return String(daysOnThrone)
+    }
     
     func toRoman(number: Int) -> String {
         let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
