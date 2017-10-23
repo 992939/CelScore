@@ -227,16 +227,8 @@ enum ListInfo : Int {
         return [
             hollywood.name(),
             sports.name(),
+            music.name(),
             news.name()
-        ]
-    }
-    
-    static func getAllIDs() -> [String] {
-        return [
-            hollywood.getId(),
-            sports.getId(),
-            music.getId(),
-            news.getId()
         ]
     }
     
@@ -255,21 +247,12 @@ enum ListInfo : Int {
         }
     }
     
-    func getId() -> String {
-        switch self {
-        case .hollywood: return "0001"
-        case .music: return "0003"
-        case .sports: return "0002"
-        case .news: return "0005"
-        }
-    }
-    
-    func getIndex() -> Int {
+    func getId() -> Int {
         switch self {
         case .hollywood: return 0
         case .music: return 1
         case .sports: return 2
-        case .news: return 3
+        case .news: return 4
         }
     }
 }
