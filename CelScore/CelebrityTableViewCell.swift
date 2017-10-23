@@ -155,7 +155,7 @@ final class celebrityTableNodeCell: ASCellNode, BEMCheckBoxDelegate {
         self.selectionStyle = .none
         box.delegate = self
         
-        self.wreathTextNode.attributedText = NSAttributedString(string: "1", attributes: attr2) //celebrity.getDaysOnThrone()
+        self.wreathTextNode.attributedText = NSAttributedString(string: celebrity.getDays(), attributes: attr2) 
         self.nameNode.attributedText = NSMutableAttributedString(string: "\(celebrity.getCelebName())", attributes: attr)
         
         RatingsViewModel().getCelScoreSignal(ratingsId: celebrity.id)

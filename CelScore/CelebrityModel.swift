@@ -99,7 +99,7 @@ final class CelebrityModel: Object, StaticMappable {
         return celebName
     }
     
-    func getDaysOnThrone() -> String {
+    func getDays() -> String {
         if daysOnThrone >= 100 { return String(daysOnThrone % 100) }
         return String(daysOnThrone)
     }
