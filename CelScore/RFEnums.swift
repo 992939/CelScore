@@ -219,15 +219,15 @@ enum BarTrend: String {
 //MARK: ListInfo
 enum ListInfo : Int {
     case hollywood
-    case sports
     case music
+    case sports
     case news
     
     static func getAllNames() -> [String] {
         return [
             hollywood.name(),
-            sports.name(),
             music.name(),
+            sports.name(),
             news.name()
         ]
     }
