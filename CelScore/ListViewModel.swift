@@ -17,12 +17,16 @@ struct ListViewModel {
     func getListSignal(listId: Int) -> SignalProducer<[CelebrityModel], NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
-            let filter = listId == 4 ? String("isTrending = true") : String("listType = \(listId)")
-            print("id: \(listId); filter: \(filter!)")
-            let list = realm.objects(CelebrityModel.self).filter(filter!)
+            var list = realm.objects(CelebrityModel.self)
+            if listId > 0 {
+                let filter = listId == 4 ? String("isTrending = true") : String("listType = \(listId)")
+                list = list.filter(filter!)
+            }
             guard list.count > 0 else { return }
-            //let orderedList = list.sorted(by: { (celebA, celebB) -> Bool in })
-            observer.send(value: Array(list))
+            let orderedList = list.sorted(by: { (celebA, celebB) -> Bool in
+                return celebA.index < celebB.index
+            })
+            observer.send(value: Array(orderedList))
             observer.sendCompleted()
         }
     }
