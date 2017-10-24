@@ -23,8 +23,8 @@ struct ListViewModel {
                 list = list.filter(filter!)
             }
             guard list.count > 0 else { return }
-            let followed = realm.objects(CelebrityModel.self).filter("isFollowed = true").sorted(byKeyPath: "index", ascending: true)
-            let notFollowed = realm.objects(CelebrityModel.self).filter("isFollowed = false").sorted(byKeyPath: "index", ascending: true)
+            let followed = list.filter("isFollowed = true").sorted(byKeyPath: "index", ascending: true)
+            let notFollowed = list.filter("isFollowed = false").sorted(byKeyPath: "index", ascending: true)
             let combined = Array(followed) + Array(notFollowed)
             observer.send(value: combined)
             observer.sendCompleted()
