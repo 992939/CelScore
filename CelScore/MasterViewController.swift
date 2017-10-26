@@ -220,7 +220,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .observe(on: UIScheduler())
             .on(value: { list in
                 self.diffCalculator.rows = list
-                Motion.delay(0.7){ self.celebrityTableNode.view.setContentOffset(CGPoint.zero, animated:true) }})
+                Motion.delay(0.7){ self.celebrityTableNode.setContentOffset(CGPoint.zero, animated: true) }})
             .start()
     }
     
