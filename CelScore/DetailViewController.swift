@@ -295,9 +295,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
                     if self.celebrity.isTrending {
                         let message = "\(self.celebrity.getCelebName()) is in the news!"
                         Motion.delay(1.2){ self.displaySnack(message: message, icon: .news) }
-                    } else {
-                        let message = "Star Quality: \(self.getQualityFromRating(rating: ratings.getMax(), isMale: self.celebrity.sex))"
-                        Motion.delay(1.2){ self.displaySnack(message: message, icon: .star) }
                     }
                 })
                .start()
