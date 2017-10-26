@@ -261,6 +261,7 @@ enum ListInfo : Int {
 enum SnackIcon: Int {
     case alert
     case news
+    case lion
     case crown
     case star
     case nuclear
@@ -270,6 +271,7 @@ enum SnackIcon: Int {
         case .alert: return R.image.bell()!
         case .news: return R.image.bell_ring()!
         case .crown: return R.image.white_wreath()!
+        case .lion: return R.image.white_lion()!
         case .star: return R.image.star_icon()!
         case .nuclear: return R.image.nuclear_mini()!
         }

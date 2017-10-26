@@ -20,7 +20,6 @@ extension CelebrityModel {
          "imageURL": picture3x as AnyObject,
          "nickName": nickName as AnyObject,
          "prevScore": prevScore as AnyObject,
-         "sex": sex as AnyObject,
          "isFollowed": isFollowed as AnyObject] }
     
     var userActivity: NSUserActivity {
@@ -36,8 +35,7 @@ extension CelebrityModel {
     var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContact as String)
         attributeSet.title = nickName
-        let gender: String = sex == true ? "him" : "her"
-        attributeSet.contentDescription = "CelScore:\(prevScore.roundToPlaces(places: 2)).\nVote for \(gender) on the Courthouse of Public Opinion."
+        attributeSet.contentDescription = "Celeb&Noble: \(nickName) is \(prevScore.roundToPlaces(places: 1)) Hollywood Royalty."
         attributeSet.thumbnailData = try? Data(contentsOf: URL(string: picture3x)!)
         attributeSet.supportsPhoneCall = false
         attributeSet.keywords = [String(prevScore)]
