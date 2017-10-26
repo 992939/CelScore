@@ -88,7 +88,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                         .delay(2, on: QueueScheduler.main)
                         .flatMap(.latest) { (_) -> SignalProducer<String, NoError> in
                             return CelebrityViewModel().getWelcomeRuleMessageSignal() }
-                        .on(value: { message in self.displaySnack(message: message, icon: .crown) })
+                        .on(value: { message in self.displaySnack(message: message, icon: .lion) })
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
                             let today = dateFormatter.string(from: Date()) as AnyObject
                             return SettingsViewModel().updateSettingSignal(value: today, settingType: .lastVisit) }
