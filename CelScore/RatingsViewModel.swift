@@ -11,6 +11,7 @@ import RealmSwift
 import Result
 import ReactiveCocoa
 import ReactiveSwift
+import PMAlertController
 
 
 struct RatingsViewModel {
@@ -91,7 +92,7 @@ struct RatingsViewModel {
         }
     }
     
-    func getVoteMessageSignal(celeb: CelebrityModel) -> SignalProducer<String, NoError> {
+    func getVoteMessageSignal(celeb: CelebrityModel) -> SignalProducer<PMAlertController, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()
             let ratings = realm.objects(RatingsModel.self).filter("id = %@", celeb.id).first
@@ -103,11 +104,7 @@ struct RatingsViewModel {
                 celScore = (celScore + userRatings.getCelScore()) / Double(ratings!.totalVotes + 1)
             }
             
-            let totalVotes = newRatings?.totalVotes ?? 1
-            let message = totalVotes < 2 ? "is cast" : "has been recast"
-            
             let status: String
-            print("CelScore: \(celScore) PrevScore: \(celeb.prevScore)")
             switch (celScore, celeb.prevScore) {
             case (Constants.kRoyalty..<101, Constants.kRoyalty..<101): status = "is still"
             case (Constants.kRoyalty..<101, 0..<Constants.kRoyalty): status = "is now"
@@ -115,8 +112,13 @@ struct RatingsViewModel {
             default: status = "still ain't"
             }
             
-            let voteMessage = String("Your vote \(message):\n\(celeb.nickName) \(status)\nHollywood Royalty!")
-            observer.send(value: voteMessage!)
+            let title = celScore >= Constants.kRoyalty ? "Blue Blooded" : "Red Blooded"
+            let logo = celScore >= Constants.kRoyalty ? R.image.big_blue_logo()! : R.image.big_red_logo()!
+            let voteMessage = String("\(celeb.nickName) \(status)\nHollywood Royalty!\n\nThank you for\nWatching the throne!")
+            let voteAlert = PMAlertController(title: title, description: voteMessage!, image: logo, style: .alert)
+            voteAlert.alertTitle.textColor = celScore >= Constants.kRoyalty ? Constants.kBlueText : Constants.kRedText
+            
+            observer.send(value: voteAlert)
             observer.sendCompleted()
         }
     }

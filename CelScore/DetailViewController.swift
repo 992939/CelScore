@@ -143,13 +143,12 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<RatingsModel, RatingsError> in
                 return RatingsViewModel().voteSignal(ratingsId: self.celebrity.id) }
             .observe(on: UIScheduler())
-            .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<String, NoError> in
+            .flatMap(.latest) { (ratings: RatingsModel) -> SignalProducer<PMAlertController, NoError> in
                 return RatingsViewModel().getVoteMessageSignal(celeb: self.celebrity) }
-            .map { voteMessage in
+            .map { voteAlert in
                 self.ratingsVC.animateStarsToGold()
                 Motion.delay(2.0, execute: {
-                    let alertVC = PMAlertController(title: "Star Qualities Ballot", description: voteMessage, image: R.image.big_blue_ballot()!, style: .alert)
-                    alertVC.alertTitle.textColor = Constants.kBlueText
+                    let alertVC = voteAlert
                     alertVC.addAction(PMAlertAction(title: Constants.kAlertAction, style: .default, action: { _ in
                         self.voteButton.setImage(R.image.goldstar()!, for: .normal)
                         self.voteButton.setImage(R.image.goldstar()!, for: .highlighted)
@@ -215,7 +214,7 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
             .flatMap(.latest) { (_) -> SignalProducer<Double, NoError> in
                 return RatingsViewModel().getCelScoreSignal(ratingsId: self.celebrity.id) }
             .on(value: { score in
-                let message = "\(self.celebrity.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty. #CNN"
+                let message = "\(self.celebrity.nickName) is \(String(format: "%.1f", score))% Hollywood Royalty! #CNN"
                 CelScoreViewModel().shareVoteOnSignal(socialLogin: (button.tag == 1 ? .facebook: .twitter), message: message)
                     .startWithValues { socialVC in
                     let isFacebookAvailable: Bool = SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)

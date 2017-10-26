@@ -61,7 +61,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 84 images.
+  /// This `R.image` struct is generated, and contains static references to 86 images.
   struct image {
     /// Image `BBBB`.
     static let bBBB = Rswift.ImageResource(bundle: R.hostingBundle, name: "BBBB")
@@ -119,6 +119,10 @@ struct R: Rswift.Validatable {
     static let bell = Rswift.ImageResource(bundle: R.hostingBundle, name: "bell")
     /// Image `big_blue_ballot`.
     static let big_blue_ballot = Rswift.ImageResource(bundle: R.hostingBundle, name: "big_blue_ballot")
+    /// Image `big_blue_logo`.
+    static let big_blue_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "big_blue_logo")
+    /// Image `big_red_logo`.
+    static let big_red_logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "big_red_logo")
     /// Image `blackstar`.
     static let blackstar = Rswift.ImageResource(bundle: R.hostingBundle, name: "blackstar")
     /// Image `blue_wreath`.
@@ -370,6 +374,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "big_blue_ballot", bundle: ..., traitCollection: ...)`
     static func big_blue_ballot(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.big_blue_ballot, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "big_blue_logo", bundle: ..., traitCollection: ...)`
+    static func big_blue_logo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.big_blue_logo, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "big_red_logo", bundle: ..., traitCollection: ...)`
+    static func big_red_logo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.big_red_logo, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "blackstar", bundle: ..., traitCollection: ...)`

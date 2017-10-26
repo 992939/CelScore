@@ -35,7 +35,7 @@ extension CelebrityModel {
     var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContact as String)
         attributeSet.title = nickName
-        attributeSet.contentDescription = "Celeb&Noble: \(nickName) is \(prevScore.roundToPlaces(places: 1)) Hollywood Royalty."
+        attributeSet.contentDescription = "Celeb&Noble: \(nickName) is \(prevScore.roundToPlaces(places: 1))% Hollywood Royalty."
         attributeSet.thumbnailData = try? Data(contentsOf: URL(string: picture3x)!)
         attributeSet.supportsPhoneCall = false
         attributeSet.keywords = [String(prevScore)]
