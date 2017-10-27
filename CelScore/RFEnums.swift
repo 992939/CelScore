@@ -14,7 +14,6 @@ enum SettingsError: Int, Error { case noCelebrityModels, noRatingsModel, noUserR
 enum SettingType: Int { case defaultListIndex = 0, loginTypeIndex, onCountdown, firstInterest, firstTrollWarning, lastVisit }
 enum RatingsError: Int, Error { case ratingsNotFound = 0, userRatingsNotFound, ratingValueOutOfBounds, ratingIndexOutOfBounds }
 enum CelebrityError: Int, Error { case notFound = 0 }
-enum NetworkError: Int, Error { case notConnected = 1 }
 enum PrevDay: Int { case Yesterday = 0, LastWeek, LastMonth }
 
 
@@ -51,34 +50,28 @@ enum OverlayInfo {
     case menuAccess
     case loginSuccess
     case countdown
-    case firstInterest
     case firstTrollWarning
     case loginError
-    case networkError
     case permissionError
     
     func message(_ social: String = "") -> String {
         switch self {
-        case .menuAccess: return "Log in with Twitter or Facebook."
-        case .loginSuccess: return "Login was successful!"
-        case .countdown: return "You will recieve a notification when a new celeb is crowned."
-        case .firstInterest: return "Saved."
-        case .firstTrollWarning: return "Your votes could eventually be discarded."
-        case .loginError: return "\(social) login error: please try again."
-        case .networkError: return "Network Error: please try again."
-        case .permissionError: return "Unable to access your \(social) account."
+        case .menuAccess: return "Use Facebook or Twitter\nTo enter."
+        case .loginSuccess: return "Your entrance\nHas been granted!\n\nWelcome to round VI\nOf the Game of Fame!"
+        case .countdown: return "You will recieve a notification when a celebrity is crowned."
+        case .firstTrollWarning: return "Trolling will discard your votes."
+        case .loginError: return "Your access was denied. Please try again later."
+        case .permissionError: return "We are unable to access your \(social) account."
         }
     }
     
     func logo() -> UIImage {
         switch self {
         case .menuAccess: return R.image.kindom_Blue()!
-        case .loginSuccess: return R.image.kindom_Blue()!
+        case .loginSuccess: return R.image.big_blue_logo()!
         case .countdown: return R.image.crown_big_blue()!
-        case .firstInterest: return R.image.sphere_blue()!
         case .firstTrollWarning: return R.image.nuclear_red()!
         case .loginError: return R.image.cloud_red()!
-        case .networkError: return R.image.cloud_red()!
         case .permissionError: return R.image.cloud_red()!
         }
     }
