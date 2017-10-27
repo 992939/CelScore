@@ -113,7 +113,7 @@ struct RatingsViewModel {
             }
             
             let title = celScore >= Constants.kRoyalty ? "Blue Blooded" : "Red Blooded"
-            let logo = celScore >= Constants.kRoyalty ? R.image.big_blue_logo()! : R.image.big_red_logo()!
+            let logo = celScore >= Constants.kRoyalty ? R.image.big_blue_fans()! : R.image.big_red_fans()!
             let voteMessage = String("\(celeb.nickName) \(status)\nHollywood Royalty!\n\nThank you for\nWatching the throne!")
             let voteAlert = PMAlertController(title: title, description: voteMessage!, image: logo, style: .alert)
             voteAlert.alertTitle.textColor = celScore >= Constants.kRoyalty ? Constants.kBlueText : Constants.kRedText

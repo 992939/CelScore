@@ -185,7 +185,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func logout() {
-        let alertVC = PMAlertController(title: Constants.kAlertName, description: "All your votes will be discarded. Are you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
+        let alertVC = PMAlertController(title: Constants.kAlertName, description: "Your votes will be discarded. Are you sure you want to leave?", image: R.image.kindom_Blue()!, style: .alert)
         alertVC.alertTitle.textColor = Constants.kBlueText
         alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { _ in self.dismiss(animated: true, completion: nil) } ))
         alertVC.addAction(PMAlertAction(title: "Leave", style: .default, action: { _ in
@@ -246,7 +246,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         SettingsViewModel().getSettingSignal(settingType: .firstInterest).startWithValues({ first in let firstTime = first as! Bool
             guard firstTime else { return }
-            self.displaySnack(message: "The default list has been updated.", icon: .alert)
+            self.displaySnack(message: "Your default list has been updated.", icon: .alert)
             SettingsViewModel().updateSettingSignal(value: false as AnyObject, settingType: .firstInterest).start()
         })
     }

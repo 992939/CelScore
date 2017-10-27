@@ -59,7 +59,7 @@ enum OverlayInfo {
         case .menuAccess: return "Use Facebook or Twitter\nTo enter."
         case .loginSuccess: return "Your entrance\nHas been granted!\n\nWelcome to round VI\nOf the Game of Fame!"
         case .countdown: return "You will recieve a notification when a celebrity is crowned."
-        case .firstTrollWarning: return "Trolling will discard your votes."
+        case .firstTrollWarning: return "Trolling will void all your votes."
         case .loginError: return "Your access was denied. Please try again later."
         case .permissionError: return "We are unable to access your \(social) account."
         }
