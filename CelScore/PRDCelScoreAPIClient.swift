@@ -17,12 +17,12 @@
 import AWSCore
 import AWSAPIGateway
 
-public class JUCelScoreAPIClient: AWSAPIGatewayClient {
+public class PRDCelScoreAPIClient: AWSAPIGatewayClient {
 
-	static let AWSInfoClientKey = "JUCelScoreAPIClient"
+	static let AWSInfoClientKey = "PRDCelScoreAPIClient"
 
 	private static let _serviceClients = AWSSynchronizedMutableDictionary()
-	private static let _defaultClient:JUCelScoreAPIClient = {
+	private static let _defaultClient:PRDCelScoreAPIClient = {
 		var serviceConfiguration: AWSServiceConfiguration? = nil
         let serviceInfo = AWSInfo.default().defaultServiceInfo(AWSInfoClientKey)
         if let serviceInfo = serviceInfo {
@@ -33,7 +33,7 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
             serviceConfiguration = AWSServiceConfiguration(region: .Unknown, credentialsProvider: nil)
         }
         
-        return JUCelScoreAPIClient(configuration: serviceConfiguration!)
+        return PRDCelScoreAPIClient(configuration: serviceConfiguration!)
 	}()
     
 	/**
@@ -51,14 +51,14 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	
 	 Then call the following to get the default service client:
 	
-	     let serviceClient = JUCelScoreAPIClient.default()
+	     let serviceClient = PRDCelScoreAPIClient.default()
 
-     Alternatively, this configuration could also be set in the `info.plist` file of your app under `AWS` dictionary with a configuration dictionary by name `JUCelScoreAPIClient`.
+     Alternatively, this configuration could also be set in the `info.plist` file of your app under `AWS` dictionary with a configuration dictionary by name `PRDCelScoreAPIClient`.
 	
 	 @return The default service client.
 	 */ 
 	 
-	public class func `default`() -> JUCelScoreAPIClient{
+	public class func `default`() -> PRDCelScoreAPIClient{
 		return _defaultClient
 	}
 
@@ -70,7 +70,7 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 	         let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
 	         let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-	         JUCelScoreAPIClient.registerClient(withConfiguration: configuration, forKey: "USWest2JUCelScoreAPIClient")
+	         PRDCelScoreAPIClient.registerClient(withConfiguration: configuration, forKey: "USWest2PRDCelScoreAPIClient")
 	
 	         return true
 	     }
@@ -78,7 +78,7 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	 Then call the following to get the service client:
 	
 	
-	     let serviceClient = JUCelScoreAPIClient.client(forKey: "USWest2JUCelScoreAPIClient")
+	     let serviceClient = PRDCelScoreAPIClient.client(forKey: "USWest2PRDCelScoreAPIClient")
 	
 	 @warning After calling this method, do not modify the configuration object. It may cause unspecified behaviors.
 	
@@ -87,7 +87,7 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	 */
 	
 	public class func registerClient(withConfiguration configuration: AWSServiceConfiguration, forKey key: String){
-		_serviceClients.setObject(JUCelScoreAPIClient(configuration: configuration), forKey: key  as NSString);
+		_serviceClients.setObject(PRDCelScoreAPIClient(configuration: configuration), forKey: key  as NSString);
 	}
 
 	/**
@@ -98,21 +98,21 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 	         let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "YourIdentityPoolId")
 	         let configuration = AWSServiceConfiguration(region: .USWest2, credentialsProvider: credentialProvider)
-	         JUCelScoreAPIClient.registerClient(withConfiguration: configuration, forKey: "USWest2JUCelScoreAPIClient")
+	         PRDCelScoreAPIClient.registerClient(withConfiguration: configuration, forKey: "USWest2PRDCelScoreAPIClient")
 	
 	         return true
 	     }
 	
 	 Then call the following to get the service client:
 	 
-	 	let serviceClient = JUCelScoreAPIClient.client(forKey: "USWest2JUCelScoreAPIClient")
+	 	let serviceClient = PRDCelScoreAPIClient.client(forKey: "USWest2PRDCelScoreAPIClient")
 	 
 	 @param key A string to identify the service client.
 	 @return An instance of the service client.
 	 */
-	public class func client(forKey key: String) -> JUCelScoreAPIClient {
+	public class func client(forKey key: String) -> PRDCelScoreAPIClient {
 		objc_sync_enter(self)
-		if let client: JUCelScoreAPIClient = _serviceClients.object(forKey: key) as? JUCelScoreAPIClient {
+		if let client: PRDCelScoreAPIClient = _serviceClients.object(forKey: key) as? PRDCelScoreAPIClient {
 			objc_sync_exit(self)
 		    return client
 		}
@@ -120,10 +120,10 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 		let serviceInfo = AWSInfo.default().defaultServiceInfo(AWSInfoClientKey)
 		if let serviceInfo = serviceInfo {
 			let serviceConfiguration = AWSServiceConfiguration(region: serviceInfo.region, credentialsProvider: serviceInfo.cognitoCredentialsProvider)
-			JUCelScoreAPIClient.registerClient(withConfiguration: serviceConfiguration!, forKey: key)
+			PRDCelScoreAPIClient.registerClient(withConfiguration: serviceConfiguration!, forKey: key)
 		}
 		objc_sync_exit(self)
-		return _serviceClients.object(forKey: key) as! JUCelScoreAPIClient;
+		return _serviceClients.object(forKey: key) as! PRDCelScoreAPIClient;
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	    super.init()
 	
 	    self.configuration = configuration.copy() as! AWSServiceConfiguration
-	    var URLString: String = "https://o8sryy34vk.execute-api.us-east-1.amazonaws.com/May29th"
+	    var URLString: String = "https://o8sryy34vk.execute-api.us-east-1.amazonaws.com/Oct17"
 	    if URLString.hasSuffix("/") {
 	        URLString = URLString.substring(to: URLString.index(before: URLString.endIndex))
 	    }
@@ -181,27 +181,6 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
      
      return type: Empty
      */
-    public func celeblistsservicePost() -> AWSTask<Empty> {
-	    let headerParameters = [
-                   "Content-Type": "application/json",
-                   "Accept": "application/json",
-                   
-	            ]
-	    
-	    let queryParameters:[String:Any] = [:]
-	    
-	    let pathParameters:[String:Any] = [:]
-	    
-	    return self.invokeHTTPRequest("POST", urlString: "/celeblistsservice", pathParameters: pathParameters, queryParameters: queryParameters, headerParameters: headerParameters, body: nil, responseClass: Empty.self) as! AWSTask<Empty>
-	}
-
-	
-    /*
-     
-     
-     
-     return type: Empty
-     */
     public func celebratingservicePost() -> AWSTask<Empty> {
 	    let headerParameters = [
                    "Content-Type": "application/json",
@@ -214,6 +193,27 @@ public class JUCelScoreAPIClient: AWSAPIGatewayClient {
 	    let pathParameters:[String:Any] = [:]
 	    
 	    return self.invokeHTTPRequest("POST", urlString: "/celebratingservice", pathParameters: pathParameters, queryParameters: queryParameters, headerParameters: headerParameters, body: nil, responseClass: Empty.self) as! AWSTask<Empty>
+	}
+
+	
+    /*
+     
+     
+     
+     return type: Empty
+     */
+    public func roundservicePost() -> AWSTask<Empty> {
+	    let headerParameters = [
+                   "Content-Type": "application/json",
+                   "Accept": "application/json",
+                   
+	            ]
+	    
+	    let queryParameters:[String:Any] = [:]
+	    
+	    let pathParameters:[String:Any] = [:]
+	    
+	    return self.invokeHTTPRequest("POST", urlString: "/roundservice", pathParameters: pathParameters, queryParameters: queryParameters, headerParameters: headerParameters, body: nil, responseClass: Empty.self) as! AWSTask<Empty>
 	}
 
 

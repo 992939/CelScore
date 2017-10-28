@@ -57,7 +57,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
         
         let configurationAnonymous = AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider())
-        JUCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
+        PRDCelScoreAPIClient.registerClient(withConfiguration: configurationAnonymous!, forKey: "anonymousAccess")
         
         //UI
         window = UIWindow(frame: UIScreen.main.bounds)

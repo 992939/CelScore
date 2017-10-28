@@ -21,7 +21,7 @@ struct CelScoreViewModel {
     
     func getFromAWSSignal(dataType: AWSDataType) -> SignalProducer<AnyObject, NSError> {
         return SignalProducer { observer, disposable in
-            let serviceClient = JUCelScoreAPIClient(configuration: AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider()))
+            let serviceClient = PRDCelScoreAPIClient(configuration: AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider()))
             serviceClient.apiKey = Constants.kAPIKey
             let awsCall : AWSTask<AnyObject>
             switch dataType {
