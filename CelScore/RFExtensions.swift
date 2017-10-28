@@ -47,7 +47,7 @@ extension Date {
         return firstDate.compare(self) == self.compare(secondDate)
     }
 
-    func stringMMddyyyyFormat()-> String {
+    func stringMMddyyyyFormat() -> String {
         let f = DateFormatter()
         f.dateFormat = "MM/dd/yyyy"
         return f.string(from: self)

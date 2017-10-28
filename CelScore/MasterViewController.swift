@@ -77,12 +77,12 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 _ = hourly.execute {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "MM/dd/yyyy"
+                    let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                     
                     SettingsViewModel().getSettingSignal(settingType: .lastVisit)
                         .filter({ lastVisit -> Bool in
                             guard (lastVisit as! String).characters.count > 0 else { return true }
                             let visit = dateFormatter.date(from: lastVisit as! String)!
-                            let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                             let isToday = visit.compare(today) != ComparisonResult.orderedAscending
                             return isToday })
                         .delay(2, on: QueueScheduler.main)
@@ -90,8 +90,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             return CelebrityViewModel().getWelcomeRuleMessageSignal() }
                         .on(value: { message in self.displaySnack(message: message, icon: .lion) })
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
-                            let today = dateFormatter.string(from: Date()) as AnyObject
-                            return SettingsViewModel().updateSettingSignal(value: today, settingType: .lastVisit) }
+                            return SettingsViewModel().updateSettingSignal(value: today as AnyObject, settingType: .lastVisit) }
                         .start()
                 }
                 

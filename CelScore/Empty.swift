@@ -20,10 +20,8 @@ import AWSCore
  
 public class Empty : AWSModel {
     
-    
    	public override static func jsonKeyPathsByPropertyKey() -> [AnyHashable : Any]!{
 		let params:[AnyHashable : Any] = [:]
-		
         return params
 	}
 }
