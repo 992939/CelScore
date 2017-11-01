@@ -75,16 +75,6 @@ struct CelebrityViewModel {
         }
     }
     
-    func getWelcomeRuleMessageSignal() -> SignalProducer<String, NoError> {
-        return SignalProducer { observer, disposable in
-            let realm = try! Realm()
-            let celeb = realm.objects(CelebrityModel.self).filter("index = 1").first
-            let message = "Day \(celeb!.daysOnThrone) of \(celeb!.kingName)'s era!"
-            observer.send(value: message)
-            observer.sendCompleted()
-        }
-    }
-    
     func countFollowedCelebritiesSignal() -> SignalProducer<Int, NoError> {
         return SignalProducer { observer, disposable in
             let realm = try! Realm()

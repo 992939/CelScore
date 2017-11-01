@@ -94,7 +94,7 @@ final class CelebrityModel: Object, StaticMappable {
         var celebName = index == 1 ? kingName : nickName
         if daysOnThrone >= 100 {
             let title: Int = daysOnThrone / 100
-            celebName = String("\(kingName) \(toRoman(number: title))")
+            celebName = String("\(kingName) \(title.toRoman())")
         }
         return celebName
     }
@@ -102,34 +102,5 @@ final class CelebrityModel: Object, StaticMappable {
     func getDays() -> String {
         if daysOnThrone >= 100 { return String(daysOnThrone % 100) }
         return String(daysOnThrone)
-    }
-    
-    func toRoman(number: Int) -> String {
-        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-        var romanValue = ""
-        var startingValue = number
-        
-        for (index, romanChar) in romanValues.enumerated() {
-            let arabicValue = arabicValues[index]
-            let div = startingValue / arabicValue
-            
-            if div > 0 {
-                for _ in 0..<div { romanValue += romanChar }
-                startingValue -= arabicValue * div
-            }
-        }
-        return romanValue
-    }
-}
-
-
-final class CelebrityService: NSObject, Mappable {
-    var items: [CelebrityModel]?
-    
-    required init?(map: Map) {}
-    
-    func mapping(map: Map) {
-        items <- map["Items"]
     }
 }

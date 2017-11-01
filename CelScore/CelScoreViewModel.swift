@@ -32,7 +32,6 @@ struct CelScoreViewModel {
             awsCall.continueWith(block: { (task: AWSTask!) -> AnyObject! in
                 guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
                 guard task.isCancelled == false else { observer.sendInterrupted(); return task }
-                
                 let myData = task.result as! String
                 
                 let realm = try! Realm()
@@ -52,6 +51,23 @@ struct CelScoreViewModel {
                 try! realm.commitWrite()
                 realm.refresh()
                 observer.send(value: task.result!)
+                observer.sendCompleted()
+                return task
+            })
+        }
+    }
+    
+    func getWelcomeRuleMessageSignal() -> SignalProducer<String, NSError> {
+        return SignalProducer { observer, disposable in
+            let serviceClient = PRDCelScoreAPIClient(configuration: AWSServiceConfiguration(region: .USEast1, credentialsProvider: AWSAnonymousCredentialsProvider()))
+            serviceClient.apiKey = Constants.kAPIKey
+            let awsCall = serviceClient.roundservicePost() as! AWSTask<AnyObject>
+            awsCall.continueWith(block: { (task: AWSTask!) -> AnyObject! in
+                guard task.error == nil else { observer.send(error: task.error! as NSError); return task }
+                guard task.isCancelled == false else { observer.sendInterrupted(); return task }
+                let myData = task.result as! String
+                
+                observer.send(value: "Round \(Int(myData)!.toRoman()) of the Game of Fame")
                 observer.sendCompleted()
                 return task
             })

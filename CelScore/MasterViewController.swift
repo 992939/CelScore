@@ -77,20 +77,22 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                 _ = hourly.execute {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "MM/dd/yyyy"
-                    let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                     
                     SettingsViewModel().getSettingSignal(settingType: .lastVisit)
                         .filter({ lastVisit -> Bool in
                             guard (lastVisit as! String).characters.count > 0 else { return true }
+                            let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                             let visit = dateFormatter.date(from: lastVisit as! String)!
-                            let isToday = visit.compare(today) != ComparisonResult.orderedAscending
+                            let isToday = visit.compare(today) != ComparisonResult.orderedSame
+                            print("today: \(today) visit: \(visit) compare: \(isToday)")
                             return isToday })
                         .delay(2, on: QueueScheduler.main)
-                        .flatMap(.latest) { (_) -> SignalProducer<String, NoError> in
-                            return CelebrityViewModel().getWelcomeRuleMessageSignal() }
+                        .flatMap(.latest) { (_) -> SignalProducer<String, NSError> in
+                            return CelScoreViewModel().getWelcomeRuleMessageSignal() }
+                        .observe(on: UIScheduler())
                         .on(value: { message in self.displaySnack(message: message, icon: .lion) })
                         .flatMap(.latest) { (_) -> SignalProducer<SettingsModel, NSError> in
-                            return SettingsViewModel().updateSettingSignal(value: today as AnyObject, settingType: .lastVisit) }
+                            return SettingsViewModel().updateSettingSignal(value: Date().stringMMddyyyyFormat() as AnyObject, settingType: .lastVisit) }
                         .start()
                 }
                 

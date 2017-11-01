@@ -153,14 +153,3 @@ final class UserRatingsModel: RatingsModel {
         return allValues.joined(separator: "/")
     }
 }
-
-
-final class RatingsService: NSObject, Mappable {
-    var items: [RatingsModel]?
-    
-    required init?(map: Map) {}
-    
-    func mapping(map: Map) {
-        items <- map["Items"]
-    }
-}

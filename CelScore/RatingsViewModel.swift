@@ -106,10 +106,10 @@ struct RatingsViewModel {
             
             let status: String
             switch (celScore, celeb.prevScore) {
-            case (Constants.kRoyalty..<101, Constants.kRoyalty..<101): status = "is still"
-            case (Constants.kRoyalty..<101, 0..<Constants.kRoyalty): status = "is now"
+            case (Constants.kRoyalty..<101, Constants.kRoyalty..<101): status = "is"
+            case (Constants.kRoyalty..<101, 0..<Constants.kRoyalty): status = "is"
             case (0..<Constants.kRoyalty, Constants.kRoyalty..<101): status = "is no longer"
-            default: status = "still ain't"
+            default: status = "is no"
             }
             
             let title = celScore >= Constants.kRoyalty ? "Blue Blooded" : "Red Blooded"
