@@ -303,22 +303,6 @@ final class DetailViewController: UIViewController, DetailSubViewable, Sociable,
         self.previousIndex = segmentView.selectedSegmentIndex
     }
     
-    func getQualityFromRating(rating: String, isMale: Bool = true) -> String {
-        switch rating {
-        case "rating1": return "Talent"
-        case "rating2": return "Originality"
-        case "rating3": return "Authenticity"
-        case "rating4": return "Generosity"
-        case "rating5": return "Role Model"
-        case "rating6": return "Work Ethic"
-        case "rating7": return "Smarts"
-        case "rating8": return "Charisma"
-        case "rating9": return "Elegance"
-        case "rating10": return isMale == true ? "Good Looks" : "Beauty"
-        default: return "none"
-        }
-    }
-    
     func slide(right: Bool, newView: UIView, oldView: UIView) {
         UIView.animate(withDuration: 1.0, animations: { _ in
             if right { oldView.left = -newView.width; newView.slide(right: true, duration: 1.0, completionDelegate: self) }
