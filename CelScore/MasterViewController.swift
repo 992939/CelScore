@@ -8,6 +8,7 @@
 
 import Foundation
 import AsyncDisplayKit
+import AVFoundation
 import ReactiveCocoa
 import ReactiveSwift
 import Result
@@ -31,6 +32,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
     fileprivate let transitionManager: TransitionManager = TransitionManager()
     fileprivate let diffCalculator: SingleSectionTableViewDiffCalculator<CelebrityModel>
     fileprivate let socialButton: FABMenu
+    fileprivate var player: AVAudioPlayer?
     internal let celebrityTableNode: ASTableNode
     
     //MARK: Initializers
@@ -84,7 +86,6 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
                             let today = dateFormatter.date(from: Date().stringMMddyyyyFormat())!
                             let visit = dateFormatter.date(from: lastVisit as! String)!
                             let isToday = visit.compare(today) != ComparisonResult.orderedSame
-                            print("today: \(today) visit: \(visit) compare: \(isToday)")
                             return isToday })
                         .delay(2, on: QueueScheduler.main)
                         .flatMap(.latest) { (_) -> SignalProducer<String, NSError> in
@@ -165,11 +166,28 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             .on(value: { _ in
                 revealingSplashView.startAnimation()
                 self.segmentedControl.setSelectedSegmentIndex(0, animated: true)
-                self.changeList() })
+                self.changeList()
+                self.roar()
+            })
             .on(failed: { _ in
                 revealingSplashView.startAnimation()
-                self.changeList() })
+                self.changeList()
+                self.roar()
+            })
             .start()
+    }
+    
+    func roar() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            player = try AVAudioPlayer(contentsOf: R.file.roarMp3()!)
+            player!.prepareToPlay()
+            player!.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     func notificationCallback(withNotification notification: NSNotification) {

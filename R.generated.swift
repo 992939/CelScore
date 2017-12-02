@@ -22,12 +22,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 2 files.
+  /// This `R.file` struct is generated, and contains static references to 3 files.
   struct file {
     /// Resource file `DroidSerif-Bold.ttf`.
     static let droidSerifBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "DroidSerif-Bold", pathExtension: "ttf")
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
+    /// Resource file `roar.mp3`.
+    static let roarMp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "roar", pathExtension: "mp3")
     
     /// `bundle.url(forResource: "DroidSerif-Bold", withExtension: "ttf")`
     static func droidSerifBoldTtf(_: Void = ()) -> Foundation.URL? {
@@ -38,6 +40,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
     static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.googleServiceInfoPlist
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "roar", withExtension: "mp3")`
+    static func roarMp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.roarMp3
       return fileResource.bundle.url(forResource: fileResource)
     }
     
