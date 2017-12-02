@@ -182,7 +182,7 @@ final class MasterViewController: UIViewController, ASTableDataSource, ASTableDe
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
 
-            player = try AVAudioPlayer(contentsOf: R.file.roarMp3()!)
+            player = try AVAudioPlayer(contentsOf: R.file.lionRoarMp3()!)
             player!.prepareToPlay()
             player!.play()
         } catch let error {

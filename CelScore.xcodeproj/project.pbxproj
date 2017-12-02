@@ -45,7 +45,7 @@
 		00B2232C1D0A9D1E000A5572 /* CustomIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */; };
 		00B4042A1B4A465200B7627E /* RatingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B404291B4A465200B7627E /* RatingsModel.swift */; };
 		00B8ABD51FCE890B00A22AA1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B8ABD41FCE890B00A22AA1 /* AVFoundation.framework */; };
-		00B8ABD71FCE902700A22AA1 /* roar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00B8ABD61FCE8D0E00A22AA1 /* roar.mp3 */; };
+		00B8ABD91FD292F100A22AA1 /* lionRoar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00B8ABD81FD2928F00A22AA1 /* lionRoar.mp3 */; };
 		00BA33531F5928E400D83CA0 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BA33521F5928E400D83CA0 /* MZTimerLabel.m */; };
 		00BCB98F1F11E8E000F2D3D4 /* LMGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB98E1F11E8E000F2D3D4 /* LMGaugeView.m */; };
 		00BF75281CA1F8D10061064C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF75271CA1F8D10061064C /* Protocols.swift */; };
@@ -154,7 +154,7 @@
 		00B2232B1D0A9D1E000A5572 /* CustomIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIdentityProvider.swift; sourceTree = "<group>"; };
 		00B404291B4A465200B7627E /* RatingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsModel.swift; sourceTree = "<group>"; };
 		00B8ABD41FCE890B00A22AA1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		00B8ABD61FCE8D0E00A22AA1 /* roar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = roar.mp3; sourceTree = "<group>"; };
+		00B8ABD81FD2928F00A22AA1 /* lionRoar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lionRoar.mp3; sourceTree = "<group>"; };
 		00BA33511F5928E400D83CA0 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
 		00BA33521F5928E400D83CA0 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
 		00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSApiGatewayBridge.h; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		004492161C3B26E000FBCEFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				00B8ABD61FCE8D0E00A22AA1 /* roar.mp3 */,
+				00B8ABD81FD2928F00A22AA1 /* lionRoar.mp3 */,
 				00550C3C1F514A9500242143 /* DroidSerif-Bold.ttf */,
 				006A61B71D0A561300D01CA0 /* Header.h */,
 				00BCB9851F11DFB200F2D3D4 /* AWSApiGatewayBridge.h */,
@@ -609,7 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				007E7B3F1EBAF549007E815C /* GoogleService-Info.plist in Resources */,
-				00B8ABD71FCE902700A22AA1 /* roar.mp3 in Resources */,
+				00B8ABD91FD292F100A22AA1 /* lionRoar.mp3 in Resources */,
 				00550C3D1F514AA200242143 /* DroidSerif-Bold.ttf in Resources */,
 				004B56E91B35332A008A75EB /* LaunchScreen.xib in Resources */,
 				004B56E61B35332A008A75EB /* Images.xcassets in Resources */,

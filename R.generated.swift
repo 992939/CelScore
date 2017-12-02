@@ -28,8 +28,8 @@ struct R: Rswift.Validatable {
     static let droidSerifBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "DroidSerif-Bold", pathExtension: "ttf")
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
-    /// Resource file `roar.mp3`.
-    static let roarMp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "roar", pathExtension: "mp3")
+    /// Resource file `lionRoar.mp3`.
+    static let lionRoarMp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "lionRoar", pathExtension: "mp3")
     
     /// `bundle.url(forResource: "DroidSerif-Bold", withExtension: "ttf")`
     static func droidSerifBoldTtf(_: Void = ()) -> Foundation.URL? {
@@ -43,9 +43,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "roar", withExtension: "mp3")`
-    static func roarMp3(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.roarMp3
+    /// `bundle.url(forResource: "lionRoar", withExtension: "mp3")`
+    static func lionRoarMp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.lionRoarMp3
       return fileResource.bundle.url(forResource: fileResource)
     }
     
