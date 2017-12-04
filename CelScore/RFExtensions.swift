@@ -270,7 +270,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 170.0
         case Constants.kIPhone6_height: height = 200.0
-        case Constants.kIPhoneX: height = 240.0
+        case Constants.kIPhoneX: height = 250.0
         default: height = 240.0
         }
         return height
@@ -281,8 +281,8 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 155.0
         case Constants.kIPhone6_height: height = 185.0
-        case Constants.kIPhoneX: height = 185.0
-        default: height = 190.0
+        case Constants.kIPhoneX: height = 195.0
+        default: height = 195.0
         }
         return height
     }
@@ -292,7 +292,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 105.0
         case Constants.kIPhone6_height: height = 105.0
-        case Constants.kIPhoneX: height = 105.0
+        case Constants.kIPhoneX: height = 120.0
         default: height = 130.0
         }
         return height
@@ -314,7 +314,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 25.0
         case Constants.kIPhone6_height: height = 30.0
-        case Constants.kIPhoneX: height = 30.0
+        case Constants.kIPhoneX: height = 33.0
         default: height = 32.0
         }
         return height
@@ -327,28 +327,6 @@ extension UIDevice {
         case Constants.kIPhone6_height: height = 30.0
         case Constants.kIPhoneX: height = 30.0
         default: height = 38.0
-        }
-        return height
-    }
-    
-    static func getCelScorePast() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 21.0
-        case Constants.kIPhone6_height: height = 23.0
-        case Constants.kIPhoneX: height = 23.0
-        default: height = 28.0
-        }
-        return height
-    }
-    
-    static func getCelScorePadding() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 30
-        case Constants.kIPhone6_height: height = 35
-        case Constants.kIPhoneX: height = 35
-        default: height = 40
         }
         return height
     }
@@ -369,7 +347,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 120
         case Constants.kIPhone6_height: height = 150
-        case Constants.kIPhoneX: height = 150.0
+        case Constants.kIPhoneX: height = 140.0
         default: height = 150
         }
         return height
