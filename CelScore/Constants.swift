@@ -20,7 +20,7 @@ struct Constants {
     static let kPolicyURL: String = "https://www.iubenda.com/privacy-policy/7872365"
     static let kNoLogin: String = "Log in with Twitter or Facebook."
     static let kAlertAction: String = "Done"
-    static let kAlertName: String = "The Blue Castle"
+    static let kAlertName: String = "Blue Castle"
     
     static let kRoyalty: Double = 75.0
     static let kCornerRadius: CGFloat = 11.0
@@ -32,13 +32,17 @@ struct Constants {
     static let kTimeout: TimeInterval = 10.0
     static let kNetworkRetry: Int = 7
     static let kFontSize: CGFloat = UIDevice.getFontSize()
+    
     static let kScreenWidth: CGFloat = UIScreen.main.bounds.width
     static let kScreenHeight: CGFloat = UIScreen.main.bounds.height
-    static let kMaxWidth: CGFloat = kScreenWidth -  2 * kPadding
-    static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
-    static let kPadding: CGFloat = 10.0
+    
     static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
     static let kIsIphoneX: Bool = kScreenHeight == 812 ? true : false
+    
+    static let kMaxWidth: CGFloat = kScreenWidth -  2 * kPadding
+    static let kMaxHeight: CGFloat = kIsIphoneX ? kScreenHeight - 3 * kPadding : kScreenHeight - 2 * kPadding
+    
+    static let kPadding: CGFloat = 10.0
     static let kPositiveConsensus: Double = 70.0
     
     static let kIPhone5_height: CGFloat = 568
@@ -63,7 +67,7 @@ struct Constants {
     static let kNavigationBarY: CGFloat = kIsIphoneX ? 44.0 : kStatusViewRect.bottom
     static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kNavigationBarY, width: kScreenWidth, height: kTopHeight)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: kTopHeight + 3)
-    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentedControlRect.bottom + 2 * kPadding))
+    static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kMaxHeight - kSegmentedControlRect.bottom)
     static let kSearchListId: String = "0099"
     
     //SettingsVC
@@ -80,6 +84,7 @@ struct Constants {
     static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = UIDevice.getGaugeDiameter()
+    
     static let kMinimumVoteValue: CGFloat = 20.0
     static let kMaximumVoteValue: CGFloat = 100.0
     static let kMiddleVoteValue: CGFloat = 80.0
