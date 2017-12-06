@@ -134,7 +134,7 @@
 		00404A9E1BF093540009AD0E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		00417A041CB5B65900E47078 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		004492171C3B272200FBCEFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		004B56D91B35332A008A75EB /* CelebrityScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CelebrityScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		004B56D91B35332A008A75EB /* BlueCastle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueCastle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B56DE1B35332A008A75EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		004B56E51B35332A008A75EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		004B56E81B35332A008A75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 		004B56DA1B35332A008A75EB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				004B56D91B35332A008A75EB /* CelebrityScore.app */,
+				004B56D91B35332A008A75EB /* BlueCastle.app */,
 				004B56EE1B35332B008A75EB /* CelScoreTests.xctest */,
 				003AE6941D094FB70055EE56 /* The Courthouse.appex */,
 			);
@@ -472,9 +472,9 @@
 			productReference = 003AE6941D094FB70055EE56 /* The Courthouse.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		004B56D81B35332A008A75EB /* CelScore */ = {
+		004B56D81B35332A008A75EB /* BlueCastle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */;
+			buildConfigurationList = 004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "BlueCastle" */;
 			buildPhases = (
 				98418748EA3EBC9F55B57A84 /* [CP] Check Pods Manifest.lock */,
 				4DE2E50E5747E5F1012537A0 /* [CP] Check Pods Manifest.lock */,
@@ -498,9 +498,9 @@
 			dependencies = (
 				003AE69E1D094FB70055EE56 /* PBXTargetDependency */,
 			);
-			name = CelScore;
+			name = BlueCastle;
 			productName = CelScore;
-			productReference = 004B56D91B35332A008A75EB /* CelebrityScore.app */;
+			productReference = 004B56D91B35332A008A75EB /* BlueCastle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		004B56ED1B35332B008A75EB /* CelScoreTests */ = {
@@ -588,7 +588,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				004B56D81B35332A008A75EB /* CelScore */,
+				004B56D81B35332A008A75EB /* BlueCastle */,
 				004B56ED1B35332B008A75EB /* CelScoreTests */,
 				003AE6931D094FB70055EE56 /* The Courthouse */,
 			);
@@ -1184,7 +1184,7 @@
 		};
 		004B56F01B35332B008A75EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 004B56D81B35332A008A75EB /* CelScore */;
+			target = 004B56D81B35332A008A75EB /* BlueCastle */;
 			targetProxy = 004B56EF1B35332B008A75EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1224,7 +1224,7 @@
 				INFOPLIST_FILE = "The Courthouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.CelebrityScore.The-Courthouse";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.BlueCastle.The-Courthouse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1247,7 +1247,7 @@
 				INFOPLIST_FILE = "The Courthouse/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.CelebrityScore.The-Courthouse";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.BlueCastle.The-Courthouse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1308,6 +1308,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = BlueCastle;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1358,6 +1359,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = BlueCastle;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1387,8 +1389,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CelebrityScore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.BlueCastle;
+				PRODUCT_NAME = BlueCastle;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -1420,8 +1422,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.GreyEcology.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CelebrityScore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreyEcology.BlueCastle;
+				PRODUCT_NAME = BlueCastle;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -1519,7 +1521,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "CelScore" */ = {
+		004B56F81B35332B008A75EB /* Build configuration list for PBXNativeTarget "BlueCastle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				004B56F91B35332B008A75EB /* Debug */,

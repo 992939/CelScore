@@ -2,25 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fbauth2</string>
-		<string>http</string>
-		<string>https</string>
-	</array>
 	<key>AWS</key>
 	<dict>
-		<key>MobileAnalytics</key>
-		<dict>
-			<key>Default</key>
-			<dict>
-				<key>Region</key>
-				<string>us-east-1</string>
-				<key>AppId</key>
-				<string>ef0864d6aecb4206b0a518b43bacb836</string>
-			</dict>
-		</dict>
 		<key>CredentialsProvider</key>
 		<dict>
 			<key>CognitoIdentity</key>
@@ -32,6 +15,16 @@
 					<key>Region</key>
 					<string>us-east-1</string>
 				</dict>
+			</dict>
+		</dict>
+		<key>MobileAnalytics</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>AppId</key>
+				<string>ef0864d6aecb4206b0a518b43bacb836</string>
+				<key>Region</key>
+				<string>us-east-1</string>
 			</dict>
 		</dict>
 		<key>PinpointAnalytics</key>
@@ -62,7 +55,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Celeb&amp;Noble</string>
+	<string>BlueCastle</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -143,7 +136,14 @@
 	<key>FacebookAppID</key>
 	<string>197662803702116</string>
 	<key>FacebookDisplayName</key>
-	<string>Celeb&amp;Noble</string>
+	<string>BlueCastle</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+		<string>http</string>
+		<string>https</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

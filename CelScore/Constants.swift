@@ -38,6 +38,7 @@ struct Constants {
     static let kMaxHeight: CGFloat = kScreenHeight - 2 * kPadding
     static let kPadding: CGFloat = 10.0
     static let kIsOriginalIphone: Bool = kScreenWidth > 320 ? false : true
+    static let kIsIphoneX: Bool = kScreenHeight == 812 ? true : false
     static let kPositiveConsensus: Double = 70.0
     
     static let kIPhone5_height: CGFloat = 568
@@ -59,7 +60,8 @@ struct Constants {
     
     //MasterVC
     static let kTopHeight: CGFloat = kIsOriginalIphone ? 47 : 50
-    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: kTopHeight)
+    static let kNavigationBarY: CGFloat = kIsIphoneX ? 44.0 : kStatusViewRect.bottom
+    static let kNavigationBarRect: CGRect = CGRect(x: 0, y: kNavigationBarY, width: kScreenWidth, height: kTopHeight)
     static let kSegmentedControlRect: CGRect = CGRect(x: 0, y: kNavigationBarRect.bottom, width: kScreenWidth, height: kTopHeight + 3)
     static let kcelebrityTableNodeRect: CGRect = CGRect(x: kPadding, y: kSegmentedControlRect.bottom + kPadding, width: kMaxWidth, height: kScreenHeight - (kSegmentedControlRect.bottom + 2 * kPadding))
     static let kSearchListId: String = "0099"
@@ -71,14 +73,13 @@ struct Constants {
     
     //DetailVC 
     static let kHeightPadding: CGFloat = kIsOriginalIphone ? 0 : 20
-    static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kStatusViewRect.height, width: kScreenWidth, height: kTopHeight)
+    static let kDetailNavigationBarRect: CGRect = CGRect(x: 0, y: kNavigationBarY, width: kScreenWidth, height: kTopHeight)
     static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kDetailNavigationBarRect.bottom + 5, width: kMaxWidth, height: UIDevice.getProfileDiameter() + kHeightPadding)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: 35)
     static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
     static let kBottomHeight = kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = UIDevice.getGaugeDiameter()
-    
     static let kMinimumVoteValue: CGFloat = 20.0
     static let kMaximumVoteValue: CGFloat = 100.0
     static let kMiddleVoteValue: CGFloat = 80.0
