@@ -32,7 +32,9 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     //MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let gaugeHeight = Constants.kBottomHeight - UIDevice.getGaugeHeightLimit()
+        let gaugeView = getGaugeView(gaugeHeight)
         let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: celebrity.prevScore, past: celebrity.y_index)
         let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: celebrity.prevWeek, past: celebrity.w_index)
         let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: celebrity.prevMonth, past: celebrity.m_index)
@@ -41,7 +43,7 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         self.pulseView.addSubview(pulseView1)
         self.pulseView.addSubview(pulseView2)
         self.pulseView.addSubview(pulseView3)
-        self.pulseView.addSubview(getGaugeView(gaugeHeight))
+        self.pulseView.addSubview(gaugeView)
         self.view = self.pulseView
     }
     

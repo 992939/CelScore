@@ -336,7 +336,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 18
         case Constants.kIPhone6_height: height = 20
-        case Constants.kIPhoneX: height = 20
+        case Constants.kIPhoneX: height = 19
         default: height = 22
         }
         return height
@@ -347,7 +347,7 @@ extension UIDevice {
         switch Constants.kScreenHeight {
         case Constants.kIPhone5_height: height = 120
         case Constants.kIPhone6_height: height = 150
-        case Constants.kIPhoneX: height = 140.0
+        case Constants.kIPhoneX: height = 160.0
         default: height = 150
         }
         return height
