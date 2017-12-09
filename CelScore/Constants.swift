@@ -81,7 +81,7 @@ struct Constants {
     static let kTopViewRect: CGRect = CGRect(x: kPadding, y: kDetailNavigationBarRect.bottom + 5, width: kMaxWidth, height: UIDevice.getProfileDiameter() + kHeightPadding)
     static let kSegmentViewRect: CGRect = CGRect(x: kPadding, y: kTopViewRect.bottom + 5, width: kMaxWidth, height: 35)
     static let kBottomViewRect = CGRect(x: kPadding, y: kSegmentViewRect.bottom - 5, width: kMaxWidth, height: kScreenHeight - kSegmentViewRect.bottom)
-    static let kBottomHeight = kBottomViewRect.height - kPadding
+    static let kBottomHeight = kIsIphoneX ? kBottomViewRect.height - 2 * kPadding : kBottomViewRect.height - kPadding
     static let kFabDiameter: CGFloat = 50.0
     static let kCircleWidth: CGFloat = UIDevice.getGaugeDiameter()
     
