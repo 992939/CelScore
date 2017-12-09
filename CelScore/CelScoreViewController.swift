@@ -33,11 +33,11 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gaugeHeight = Constants.kBottomHeight - UIDevice.getGaugeHeightLimit()
-        let gaugeView = getGaugeView(gaugeHeight)
-        let pulseView1 = self.getView(positionY: gaugeHeight + 14, title: "Royalty Yesterday", value: celebrity.prevScore, past: celebrity.y_index)
-        let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Week", value: celebrity.prevWeek, past: celebrity.w_index)
-        let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding * 0.4, title: "Royalty Last Month", value: celebrity.prevMonth, past: celebrity.m_index)
+        let gaugeSpace = Constants.kBottomHeight - (UIDevice.getCelScoreBarHeight() * 3 + Constants.kPadding * 2)
+        let gaugeView = getGaugeView(gaugeSpace)
+        let pulseView1 = self.getView(positionY: gaugeView.bottom + Constants.kPadding/2, title: "Royalty Yesterday", value: celebrity.prevScore, past: celebrity.y_index)
+        let pulseView2 = self.getView(positionY: pulseView1.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding/2, title: "Royalty Last Week", value: celebrity.prevWeek, past: celebrity.w_index)
+        let pulseView3 = self.getView(positionY: pulseView2.y + UIDevice.getCelScoreBarHeight() + Constants.kPadding/2, title: "Royalty Last Month", value: celebrity.prevMonth, past: celebrity.m_index)
         
         self.pulseView.backgroundColor = Color.clear
         self.pulseView.addSubview(pulseView1)
@@ -57,8 +57,8 @@ final class CelScoreViewController: ASViewController<ASDisplayNode>, LMGaugeView
         gauge.minValue = Constants.kMinimumVoteValue
         gauge.maxValue = Constants.kMaximumVoteValue
         gauge.limitValue = Constants.kMaximumVoteValue
-        let gaugeWidth: CGFloat = UIDevice.getGaugeDiameter()
-        gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeWidth)/2, y: (gaugeView.height - gaugeWidth)/2, width: gaugeWidth, height: gaugeWidth)
+        let gaugeDiam: CGFloat = UIDevice.getGaugeDiameter()
+        gauge.frame = CGRect(x: (Constants.kMaxWidth - gaugeDiam)/2, y: (gaugeView.height - gaugeDiam)/2, width: gaugeDiam, height: gaugeDiam)
         gauge.subDivisionsColor = Constants.kBlueShade
         gauge.divisionsColor = Color.black
         gauge.valueTextColor = Color.black

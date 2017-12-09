@@ -232,17 +232,6 @@ extension UIDevice {
         return height
     }
     
-    static func getGaugeFontSize() -> CGFloat {
-        let height: CGFloat
-        switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 50
-        case Constants.kIPhone6_height: height = 60
-        case Constants.kIPhoneX: height = 60
-        default: height = 70
-        }
-        return height
-    }
-    
     static func getPickerHeight() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
@@ -276,24 +265,24 @@ extension UIDevice {
         return height
     }
     
-    static func getGaugeDiameter() -> CGFloat {
+    static func getGaugeFontSize() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 155.0
-        case Constants.kIPhone6_height: height = 185.0
-        case Constants.kIPhoneX: height = 195.0
-        default: height = 195.0
+        case Constants.kIPhone5_height: height = 45
+        case Constants.kIPhone6_height: height = 60
+        case Constants.kIPhoneX: height = 60
+        default: height = 70
         }
         return height
     }
     
-    static func getGaugeHeightLimit() -> CGFloat {
+    static func getGaugeDiameter() -> CGFloat {
         let height: CGFloat
         switch Constants.kScreenHeight {
-        case Constants.kIPhone5_height: height = 105.0
-        case Constants.kIPhone6_height: height = 105.0
-        case Constants.kIPhoneX: height = 120.0
-        default: height = 130.0
+        case Constants.kIPhone5_height: height = 145.0
+        case Constants.kIPhone6_height: height = 185.0
+        case Constants.kIPhoneX: height = 195.0
+        default: height = 195.0
         }
         return height
     }
